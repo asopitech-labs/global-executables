@@ -1,0 +1,29 @@
+{
+  "snapshot": "2026-08-14",
+  "generated_at": "2026-08-14T00:00:00+00:00",
+  "unique_executables": 4,
+  "canonical": "data/executables",
+  "indexes_derived": true,
+  "checked_sources": [
+    "debian",
+    "npm",
+    "pypi"
+  ],
+  "coverage": {
+    "debian": {
+      "status": "success",
+      "records": 2,
+      "source": "fixtures/intermediate/debian.jsonl"
+    },
+    "npm": {
+      "status": "success",
+      "records": 2,
+      "source": "fixtures/intermediate/npm.jsonl"
+    },
+    "pypi": {
+      "status": "success",
+      "records": 1,
+      "source": "fixtures/intermediate/pypi.jsonl"
+    }
+  }
+}
