@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "global-executables"
+version = "0.1.0"
+description = "Git-native executable-name dataset and MCP search layer"
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.20", "mcp>=1.9,<2"]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+global-executables = "global_executables.cli:main"
+global-executables-mcp = "global_executables.mcp_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/global_executables"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = ["live: downloads and inspects real upstream registry artifacts"]
+addopts = "-m 'not live'"

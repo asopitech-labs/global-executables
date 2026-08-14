@@ -479,3 +479,40 @@ The value of Global Executables is not tied to a particular server implementatio
 The durable asset is the openly available, reproducible, cross-ecosystem executable-name dataset.
 
 MCP makes that dataset immediately useful to agents.
+
+## Current implementation
+
+The schemas, deterministic builder, derived prefix/length/ecosystem/trigram
+indexes, fixture-driven parser prototypes, read-only local/HTTP MCP server,
+and CI checks are implemented in this repository. Parser prototypes are not
+described as production collectors until full-crawl work is completed. See
+[`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) for exact naming, sharding, alias, and
+history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
+commands and honest measured coverage limitations.
+
+Install and query a checked-out snapshot without network access:
+
+```sh
+python -m pip install -e .
+global-executables-mcp --root .
+```
+
+Use `--transport streamable-http` for remote access. Both modes expose
+`check_executable`, `check_executables`, `get_executable`,
+`search_executables`, `search_similar_executables`, and `get_coverage`; neither
+mode exposes writes. Data is reusable under the repository license by reading
+the canonical JSON directly, without running MCP.
+See [`docs/MCP.md`](docs/MCP.md) for local client configuration, the remote
+endpoint, resources, health visibility, and the survivor-only agent workflow.
+
+The scheduled job is currently an upstream-content smoke check, not a dataset
+refresh. Coverage is snapshot-specific and reported by `get_coverage`. The
+checked-in initial snapshot is a deterministic test corpus;
+it is **not** full ecosystem coverage, so consumers must preserve
+`clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
+
+Successful collection does not by itself permit a negative collision claim.
+Fixture, smoke, and partial snapshots return `unknown` for absent names;
+`clear_in_index` requires metadata explicitly marking the complete queried
+snapshot exhaustive. Derived search indexes are integrity-pinned in metadata
+and are used directly by prefix, length, ecosystem, and similarity queries.

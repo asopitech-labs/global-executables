@@ -1,0 +1,88 @@
+{
+  "probed_at": "2026-08-14T15:05:51Z",
+  "results": [
+    {
+      "downloaded_bytes": 12617073,
+      "duration_seconds": 0.41,
+      "ecosystem": "debian",
+      "evidence": "usr/bin/git                                             vcs/git",
+      "evidence_kind": "filesystem-index",
+      "final_url": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "rate_limit": {},
+      "status": 200,
+      "url": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz"
+    },
+    {
+      "downloaded_bytes": 51301092,
+      "duration_seconds": 2.416,
+      "ecosystem": "ubuntu",
+      "evidence": "usr/bin/git\t\t\t\t\t\t    vcs/git",
+      "evidence_kind": "filesystem-index",
+      "final_url": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "rate_limit": {},
+      "status": 200,
+      "url": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz"
+    },
+    {
+      "downloaded_bytes": 1520471,
+      "duration_seconds": 1.13,
+      "ecosystem": "arch",
+      "evidence": "pacman-7.1.0.r9.g54d9411-2/files:usr/bin/pacman",
+      "evidence_kind": "filesystem-index",
+      "final_url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "rate_limit": {},
+      "status": 200,
+      "url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files"
+    },
+    {
+      "artifact_downloaded_bytes": 441057,
+      "downloaded_bytes": 3809,
+      "duration_seconds": 0.077,
+      "ecosystem": "homebrew",
+      "evidence": "jq@1.8.2:jq/1.8.2/bin/jq",
+      "evidence_kind": "bottle-filesystem",
+      "final_url": "https://formulae.brew.sh/api/formula/jq.json",
+      "rate_limit": {},
+      "status": 200,
+      "url": "https://formulae.brew.sh/api/formula/jq.json"
+    },
+    {
+      "artifact_downloaded_bytes": 365612,
+      "downloaded_bytes": 4833,
+      "duration_seconds": 0.066,
+      "ecosystem": "npm",
+      "evidence": "typescript@7.0.2:tsc->bin/tsc",
+      "evidence_kind": "declared-and-artifact",
+      "final_url": "https://registry.npmjs.org/typescript/latest",
+      "rate_limit": {},
+      "status": 200,
+      "url": "https://registry.npmjs.org/typescript/latest"
+    },
+    {
+      "artifact_downloaded_bytes": 1816632,
+      "downloaded_bytes": 228494,
+      "duration_seconds": 0.082,
+      "ecosystem": "pypi",
+      "evidence": "pip==26.2.1:pip-26.2.1.dist-info/entry_points.txt:pip",
+      "evidence_kind": "declared-and-artifact",
+      "final_url": "https://pypi.org/pypi/pip/json",
+      "rate_limit": {},
+      "status": 200,
+      "url": "https://pypi.org/pypi/pip/json"
+    },
+    {
+      "artifact_downloaded_bytes": 223476,
+      "downloaded_bytes": 91741,
+      "duration_seconds": 0.374,
+      "ecosystem": "crates",
+      "evidence": "ripgrep@15.2.0:rg",
+      "evidence_kind": "cargo-metadata-and-artifact",
+      "final_url": "https://crates.io/api/v1/crates/ripgrep",
+      "rate_limit": {},
+      "status": 200,
+      "url": "https://crates.io/api/v1/crates/ripgrep"
+    }
+  ],
+  "status": "success",
+  "total_downloaded_bytes": 68614290
+}

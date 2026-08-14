@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://global-executables.dev/schema/provider.schema.json",
+  "title": "Executable provider",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ecosystem", "package", "version", "repository", "source", "confidence"],
+  "properties": {
+    "ecosystem": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"},
+    "package": {"type": "string", "minLength": 1},
+    "version": {"type": ["string", "null"]},
+    "repository": {"type": ["string", "null"], "format": "uri"},
+    "source": {"type": "string", "minLength": 1},
+    "confidence": {"enum": ["direct", "filesystem", "inferred"]},
+    "alias_of": {"type": "string", "minLength": 1}
+  }
+}
