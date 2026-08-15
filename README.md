@@ -156,18 +156,18 @@ global-executables/
 │   │
 │   └── metadata.json
 │
-├── collectors/
-│   ├── debian/
-│   ├── ubuntu/
-│   ├── arch/
-│   ├── homebrew/
-│   ├── npm/
-│   ├── pypi/
-│   ├── crates/
-│   └── go/
-│
+├── fixtures/
 ├── schema/
-├── mcp/
+├── src/
+│   └── global_executables/
+│       ├── collectors.py
+│       ├── pipeline.py
+│       ├── search.py
+│       ├── assessment.py
+│       ├── freshness.py
+│       └── mcp_server.py
+├── tools/
+├── docs/
 └── .github/
     └── workflows/
 ```
@@ -252,7 +252,7 @@ Global Executables is intended to be directly usable by AI agents.
 
 The MCP interface provides structured access to the public dataset.
 
-Expected tools include:
+The current read-only tools are:
 
 ### `check_executable`
 
@@ -295,6 +295,13 @@ Find potentially confusing existing names using lexical similarity.
 
 Return dataset sources, freshness, and current coverage.
 
+### `assess_executable` / `assess_executables`
+
+Return optional freshness, activity, popularity, and collision-risk
+assessments while preserving the factual existence result and provider
+evidence. All lookup, search, and assessment tools accept an optional
+multi-axis `scope` filter such as `distribution`, `language`, or `registry`.
+
 ---
 
 ## Agent Workflow
@@ -310,10 +317,10 @@ Generate candidate names internally
      check_executables
             │
             ▼
- Remove known collisions
+ Separate `found:true` collisions from `found:false` observations
             │
             ▼
- search_similar_executables
+ search_similar_executables for not-found candidates
             │
             ▼
  Remove confusing candidates
@@ -332,7 +339,8 @@ The purpose of the service is to make collision checking part of the agent's nor
 
 Absence from the dataset does **not** prove that an executable name has never been used.
 
-Results should therefore distinguish between:
+Results therefore distinguish the factual observation from confidence in
+absence:
 
 ```text
 collision
@@ -345,20 +353,58 @@ For example:
 ```json
 {
   "name": "evpk",
-  "status": "clear_in_index",
+  "found": false,
+  "status": "unknown",
+  "absence": {
+    "status": "not_found_in_current_index",
+    "confidence": "insufficient_coverage",
+    "searched_sources": [
+      "arch",
+      "crates",
+      "debian",
+      "go",
+      "homebrew",
+      "npm",
+      "pypi",
+      "ubuntu"
+    ]
+  },
+  "coverage_scope": "unknown",
   "checked_sources": [
-    "debian",
     "arch",
+    "crates",
+    "debian",
+    "go",
     "homebrew",
     "npm",
     "pypi",
-    "crates"
+    "ubuntu"
   ],
-  "snapshot": "2026-08-14"
+  "coverage": {
+    "arch": {
+      "status": "success",
+      "coverage_kind": "exhaustive",
+      "records": 1647
+    },
+    "npm": {
+      "status": "success",
+      "coverage_kind": "partial",
+      "records": 2
+    }
+  },
+  "snapshot": "2026-08-15"
 }
 ```
 
-`clear_in_index` means that no collision was found within the stated dataset coverage.
+`found:false` means that the name was not found in the current index. `unknown`
+means the available coverage is insufficient to make an exhaustive absence
+claim; it does not mean that the query was unavailable. `clear_in_index` is
+returned only when the queried snapshot is explicitly exhaustive.
+
+The `coverage` object reports the per-source collection status, coverage kind,
+and record count. The example shows two representative sources; the live
+response includes all sources in the snapshot (and may also include each
+source's input path).
 
 It does not mean that the name is legally or globally guaranteed to be available.
 

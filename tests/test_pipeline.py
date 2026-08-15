@@ -16,11 +16,20 @@ def test_build_merge_indexes_and_incremental_equivalence(tmp_path):
     rebuild(tmp_path,INPUTS,"2026-08-14")
     first={p.relative_to(tmp_path):p.read_text() for p in (tmp_path/"data").glob("**/*") if p.is_file() and p.name!="metadata.json"}
     records=load_canonical(tmp_path)
+    metadata=json.loads((tmp_path/"data/metadata.json").read_text())
+    assert metadata["unique_executables"] == len(records)
+    assert metadata["unique_executables"] == sum(1 for p in (tmp_path/"data/executables").glob("**/*.json"))
     assert len(records["envcp"]["providers"])==2
     assert records["foocli"]["providers"][0]["package"]=="foo-tool"
     rebuild(tmp_path,INPUTS,"2026-08-14")
     second={p.relative_to(tmp_path):p.read_text() for p in (tmp_path/"data").glob("**/*") if p.is_file() and p.name!="metadata.json"}
     assert first==second
+
+def test_checked_in_metadata_matches_canonical_data():
+    metadata=json.loads((ROOT/"data/metadata.json").read_text())
+    canonical=load_canonical(ROOT)
+    files=sum(1 for p in (ROOT/"data/executables").glob("**/*.json"))
+    assert metadata["unique_executables"] == len(canonical) == files
 
 def test_search_semantics_and_similarity(tmp_path):
     rebuild(tmp_path,INPUTS,"2026-08-14"); d=Dataset(tmp_path)

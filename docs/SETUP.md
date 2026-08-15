@@ -27,9 +27,22 @@ Configure an MCP client with:
 }
 ```
 
-Call `check_executables` with `{"names":["envcp","evpk"]}`. The fixture
-snapshot returns `collision` for `envcp` and `unknown` plus
-`found:false`/`not_found_in_current_index` for `evpk`.
+Call `check_executables` with `{"names":["envcp","evpk"]}`. The checked-in
+2026-08-15 snapshot returns `collision`/`found:true` for `envcp`. For `evpk`,
+it returns `found:false`, `status:"unknown"`, and
+`absence.status:"not_found_in_current_index"` with
+`absence.confidence:"insufficient_coverage"`; this is expected because the
+snapshot has partial registry coverage.
+
+To reproduce the small deterministic fixture separately, build it into a
+temporary root and point the server at that root:
+
+```sh
+global-executables build fixtures/intermediate/*.jsonl \
+  --root /tmp/global-executables-fixture \
+  --snapshot 2026-08-14 --coverage-kind fixture
+global-executables-mcp --root /tmp/global-executables-fixture
+```
 
 ## Streamable HTTP
 
