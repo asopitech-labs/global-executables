@@ -380,6 +380,18 @@ For example:
     "pypi",
     "ubuntu"
   ],
+  "coverage": {
+    "arch": {
+      "status": "success",
+      "coverage_kind": "exhaustive",
+      "records": 1647
+    },
+    "npm": {
+      "status": "success",
+      "coverage_kind": "partial",
+      "records": 2
+    }
+  },
   "snapshot": "2026-08-15"
 }
 ```
@@ -388,6 +400,11 @@ For example:
 means the available coverage is insufficient to make an exhaustive absence
 claim; it does not mean that the query was unavailable. `clear_in_index` is
 returned only when the queried snapshot is explicitly exhaustive.
+
+The `coverage` object reports the per-source collection status, coverage kind,
+and record count. The example shows two representative sources; the live
+response includes all sources in the snapshot (and may also include each
+source's input path).
 
 It does not mean that the name is legally or globally guaranteed to be available.
 
