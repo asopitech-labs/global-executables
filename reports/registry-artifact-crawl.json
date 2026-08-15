@@ -1,17 +1,48 @@
 {
-  "byte_budget": 500000000,
+  "byte_budget": 5000000000,
   "coverage_kind": "partial",
-  "package_budget": 25,
+  "package_budget": 1000,
   "sources": {
+    "crates": {
+      "budget_exhausted": false,
+      "complete": false,
+      "coverage_kind": "partial",
+      "downloaded_bytes": 216227128,
+      "failures": 74,
+      "page": 13,
+      "processed": 1000,
+      "records": 390
+    },
     "go": {
       "budget_exhausted": false,
       "complete": false,
       "coverage_kind": "partial",
-      "downloaded_bytes": 48549626,
-      "failures": 3,
-      "processed": 25,
-      "records": 139,
-      "since": "2019-04-11T14:31:40.612357Z"
+      "downloaded_bytes": 875957234,
+      "failures": 71,
+      "processed": 1000,
+      "records": 3003,
+      "since": "2019-04-15T13:49:05.510753Z"
+    },
+    "npm": {
+      "budget_exhausted": false,
+      "complete": false,
+      "coverage_kind": "partial",
+      "downloaded_bytes": 345749,
+      "failures": 1,
+      "processed": 1000,
+      "records": 0,
+      "since": 2496572
+    },
+    "pypi": {
+      "budget_exhausted": false,
+      "catalog_size": 870264,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 1102,
+      "downloaded_bytes": 438364557,
+      "failures": 349,
+      "processed": 1000,
+      "records": 263
     }
   },
   "state": "data/production/registry-state.json",
