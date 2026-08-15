@@ -82,6 +82,6 @@ jobs:
           cp reports/registry-artifact-crawl.json /tmp/artifact-publish/reports/registry-artifact-crawl.json
           git -C /tmp/artifact-publish config user.name github-actions[bot]
           git -C /tmp/artifact-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git -C /tmp/artifact-publish add data/production reports/registry-artifact-crawl.json
+          git -C /tmp/artifact-publish add -f data/production reports/registry-artifact-crawl.json
           git -C /tmp/artifact-publish diff --cached --quiet || git -C /tmp/artifact-publish commit -m "Record registry artifact crawl"
           git -C /tmp/artifact-publish push origin HEAD:artifact-data
