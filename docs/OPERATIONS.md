@@ -1,8 +1,9 @@
 # Operations and measured baseline
 
 The current main snapshot includes a measured production OS crawl plus
-explicitly partial language-registry and Homebrew inputs. The 2026-08-15
-snapshot contains 63,701 unique names, 113,352 provider observations, 63,617
+explicitly partial language-registry inputs. Homebrew's complete formula
+catalog is exhaustive for the supported API scope. The 2026-08-15 snapshot
+contains 63,617 unique names, 113,352 provider observations, 63,617
 canonical files, and 23,714 derived index files. Debian stable, Ubuntu noble,
 and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
@@ -100,10 +101,13 @@ Remote Streamable HTTP:
 global-executables-mcp --root . --transport streamable-http --host 0.0.0.0 --port 8000
 ```
 
-An agent should generate candidates privately, call `check_executables`, discard
-`collision` and `unknown`, similarity-check survivors, and show only survivors.
-`clear_in_index` is limited to the listed snapshot and successful coverage; it
-never means globally or legally available.
+An agent should generate candidates privately and call `check_executables`. It
+should discard factual collisions, retain `found:false` candidates together
+with their absence confidence, similarity-check those not-found candidates,
+and show only survivors with snapshot and coverage caveats. `unknown` means
+insufficient coverage, not an unavailable query. `clear_in_index` requires an
+explicitly exhaustive queried snapshot; it never means globally or legally
+available.
 
 Collector execution status and negative-query completeness are separate.
 Coverage entries are marked `fixture`, `smoke`, `partial`, or `exhaustive`.
@@ -112,9 +116,10 @@ successful and explicitly exhaustive; fixture/smoke/partial snapshots return
 `unknown`. A matching record always returns `collision`.
 
 Search reads the reproducible JSON indexes rather than scanning canonical
-records. Each index is SHA-256 pinned in `data/metadata.json`. A required
-manifested index that is missing or whose bytes do not match fails closed with
-an index error; regenerate it with `global-executables build`.
+records. Each index is SHA-256 pinned in `data/metadata.json`. An index listed
+in the manifest that is missing or whose bytes do not match fails closed with
+an index error; a filter value with no corresponding index produces no
+candidates. Regenerate indexes with `global-executables build`.
 
 Provider scope dimensions are independent: OS records may include
 `source_type`, `package_system`, `distribution_family`, `distribution`, and
