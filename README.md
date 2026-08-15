@@ -517,6 +517,12 @@ checked-in snapshot contains production OS/Homebrew coverage plus explicitly
 partial registry coverage; it is **not** full ecosystem coverage, so consumers must preserve
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
 
+Registry artifact inspection is separately resumable. Every six hours the
+artifact crawler advances npm, PyPI, and crates.io cursors on the
+`artifact-data` branch, retaining executable evidence and failures. A registry
+is promoted to `exhaustive` only after its catalog and required artifact
+inspections complete successfully.
+
 Successful collection does not by itself permit a negative collision claim.
 Every valid query returns a factual `found` observation. Fixture, smoke, and
 partial snapshots return insufficient absence confidence for absent names;

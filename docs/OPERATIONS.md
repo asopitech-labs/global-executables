@@ -2,12 +2,21 @@
 
 The current main snapshot includes a measured production OS crawl plus
 explicitly partial language-registry and Homebrew inputs. The 2026-08-15
-snapshot contains 63,618 unique names, 113,152 provider observations, 63,534
-canonical files, and 23,692 derived index files. Debian stable, Ubuntu noble,
+snapshot contains 63,644 unique names, 113,182 provider observations, 63,560
+canonical files, and 23,706 derived index files. Debian stable, Ubuntu noble,
 and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
 official API supplies the executable inventory. npm, PyPI, and crates.io remain
 `partial` until their package artifacts are exhaustively inspected.
+
+The registry artifact crawler is resumable and budgeted. It enumerates the
+PyPI simple catalog, follows npm's replication change cursor, and pages the
+crates.io catalog. For each selected package it downloads an artifact and
+extracts declared console scripts, npm bins, or Cargo binary targets. The
+`registry-artifacts.yml` workflow runs every six hours and persists its cursor,
+failures, normalized observations, and report on the `artifact-data` branch.
+It cannot mark a source exhaustive while any cursor, artifact, or failure
+remains unresolved.
 
 The scheduled refresh now downloads the production OS indexes with
 `tools/production_crawl.py`, merges them with the currently available registry
@@ -47,8 +56,8 @@ python tools/refresh.py \
   data/production/intermediate/debian.jsonl \
   data/production/intermediate/homebrew.jsonl \
   data/production/intermediate/ubuntu.jsonl \
-  fixtures/intermediate/crates.jsonl fixtures/intermediate/homebrew.jsonl \
-  fixtures/intermediate/npm.jsonl fixtures/intermediate/pypi.jsonl \
+  data/production/intermediate/crates.jsonl \
+  data/production/intermediate/npm.jsonl data/production/intermediate/pypi.jsonl \
   --snapshot "$(date -u +%F)" \
   --coverage-map data/production/coverage-map.json \
   --report reports/production-refresh.json
