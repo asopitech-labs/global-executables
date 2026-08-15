@@ -10,3 +10,5 @@ def test_generated_records_validate(tmp_path):
     registry=Registry().with_resource(provider["$id"],Resource.from_contents(provider))
     validator=Draft202012Validator(executable,registry=registry,format_checker=FormatChecker())
     for path in (tmp_path/"data/executables").glob("**/*.json"): validator.validate(json.loads(path.read_text()))
+    metadata=json.loads((ROOT/"schema/metadata.schema.json").read_text())
+    Draft202012Validator(metadata,format_checker=FormatChecker()).validate(json.loads((tmp_path/"data/metadata.json").read_text()))

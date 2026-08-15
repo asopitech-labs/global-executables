@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://global-executables.dev/schema/metadata.schema.json",
+  "title": "Dataset metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["snapshot", "generated_at", "unique_executables", "canonical", "indexes_derived", "checked_sources", "negative_lookup", "coverage", "index_manifest"],
+  "properties": {
+    "snapshot": {"type": "string", "format": "date"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "unique_executables": {"type": "integer", "minimum": 0},
+    "canonical": {"const": "data/executables"},
+    "indexes_derived": {"const": true},
+    "checked_sources": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "negative_lookup": {"enum": ["unknown", "exhaustive"]},
+    "coverage": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["status", "coverage_kind", "records", "source"],
+        "properties": {
+          "status": {"enum": ["success", "failed"]},
+          "coverage_kind": {"enum": ["fixture", "smoke", "partial", "exhaustive"]},
+          "records": {"type": "integer", "minimum": 0},
+          "source": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "index_manifest": {
+      "type": "object",
+      "propertyNames": {"pattern": "^indexes/(prefix|length|ecosystem|trigram)/[^/]+\\.json$"},
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    }
+  }
+}

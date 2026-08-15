@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import shutil
 from collections import defaultdict
 from datetime import date
@@ -56,21 +57,26 @@ def publish(root: Path, records: list[dict[str, Any]], coverage: dict[str, Any],
             safe = str(key) if group != "trigram" else key.encode().hex()
             path = data / "indexes" / group / f"{safe}.json"
             path.parent.mkdir(parents=True, exist_ok=True); path.write_text(dumps(sorted(names, key=lambda x:(x.casefold(),x))))
+    manifest = {}
+    for path in sorted((data / "indexes").glob("**/*.json")):
+        relative = path.relative_to(data).as_posix()
+        manifest[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
     successful = [k for k,v in coverage.items() if v.get("status") == "success"]
     # A snapshot identifier determines serialized output. Wall-clock collection
     # timings belong in collector coverage, never in reproducible canonical output.
     metadata = {"snapshot": snapshot, "generated_at": f"{snapshot}T00:00:00+00:00",
                 "unique_executables": len(records), "canonical": "data/executables", "indexes_derived": True,
-                "checked_sources": sorted(successful), "coverage": coverage}
+                "checked_sources": sorted(successful), "negative_lookup": "exhaustive" if coverage and all(v.get("coverage_kind") == "exhaustive" and v.get("status") == "success" for v in coverage.values()) else "unknown",
+                "coverage": coverage, "index_manifest": manifest}
     data.mkdir(exist_ok=True); (data / "metadata.json").write_text(dumps(metadata))
 
 
-def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None) -> None:
+def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None, coverage_kind: str = "fixture") -> None:
     snapshot = snapshot or date.today().isoformat()
     previous = load_canonical(root)
     rows = []; coverage = {}
     for path in inputs:
         current = [json.loads(line) for line in path.read_text().splitlines() if line]
         rows.extend(current); eco = path.stem
-        coverage[eco] = {"status": "success", "records": len(current), "source": str(path)}
+        coverage[eco] = {"status": "success", "coverage_kind": coverage_kind, "records": len(current), "source": str(path)}
     publish(root, merge(rows, previous, snapshot), coverage, snapshot)

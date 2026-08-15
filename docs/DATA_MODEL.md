@@ -25,3 +25,10 @@ state is available; release history provides the durable audit trail.
 Confidence means: `direct` (declared executable metadata), `filesystem`
 (executable installation path or bottle inventory), or `inferred` (indirect
 evidence). Package names are never substituted for executable names.
+
+`metadata.coverage[*].status` reports whether an attempted collector succeeded;
+`coverage_kind` reports whether its scope is `fixture`, `smoke`, `partial`, or
+`exhaustive`. These fields are intentionally independent. `negative_lookup` is
+`exhaustive` only when every declared source has both exhaustive scope and a
+successful run. `index_manifest` pins every derived index by SHA-256 so readers
+can reject missing or stale index files without making indexes canonical.

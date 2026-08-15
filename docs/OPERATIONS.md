@@ -56,3 +56,14 @@ An agent should generate candidates privately, call `check_executables`, discard
 `collision` and `unknown`, similarity-check survivors, and show only survivors.
 `clear_in_index` is limited to the listed snapshot and successful coverage; it
 never means globally or legally available.
+
+Collector execution status and negative-query completeness are separate.
+Coverage entries are marked `fixture`, `smoke`, `partial`, or `exhaustive`.
+An absent name returns `clear_in_index` only when every declared source is both
+successful and explicitly exhaustive; fixture/smoke/partial snapshots return
+`unknown`. A matching record always returns `collision`.
+
+Search reads the reproducible JSON indexes rather than scanning canonical
+records. Each index is SHA-256 pinned in `data/metadata.json`. A required
+manifested index that is missing or whose bytes do not match fails closed with
+an index error; regenerate it with `global-executables build`.
