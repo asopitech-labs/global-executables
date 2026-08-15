@@ -1,0 +1,87 @@
+name: Registry artifact crawl
+
+on:
+  schedule:
+    - cron: "47 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      package_budget:
+        description: "Maximum packages/crates per source for this run"
+        required: false
+        default: "1000"
+      byte_budget:
+        description: "Maximum downloaded artifact bytes for this run"
+        required: false
+        default: "5000000000"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: registry-artifact-crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[test]'
+      - name: Restore resumable registry state
+        run: |
+          git fetch origin artifact-data || true
+          mkdir -p data/production/intermediate
+          if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
+            git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
+          fi
+          if git cat-file -e origin/artifact-data:data/production/pypi-projects.txt 2>/dev/null; then
+            git show origin/artifact-data:data/production/pypi-projects.txt > data/production/pypi-projects.txt
+          fi
+          for source in npm pypi crates; do
+            if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
+              git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
+            fi
+          done
+      - name: Run bounded artifact inspection
+        env:
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '1000' }}
+          BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
+        run: |
+          python tools/registry_artifact_crawl.py \
+            --source npm --source pypi --source crates \
+            --state data/production/registry-state.json \
+            --output-dir data/production/intermediate \
+            --report reports/registry-artifact-crawl.json \
+            --package-budget "$PACKAGE_BUDGET" \
+            --byte-budget "$BYTE_BUDGET"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: registry-artifact-crawl-report
+          path: reports/registry-artifact-crawl.json
+      - name: Publish resumable state and normalized observations
+        run: |
+          rm -rf /tmp/artifact-publish
+          if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
+            git worktree add /tmp/artifact-publish origin/artifact-data
+          else
+            git worktree add -b artifact-data /tmp/artifact-publish HEAD
+          fi
+          mkdir -p /tmp/artifact-publish/data/production/intermediate /tmp/artifact-publish/reports
+          cp data/production/registry-state.json /tmp/artifact-publish/data/production/registry-state.json
+          if test -f data/production/pypi-projects.txt; then
+            cp data/production/pypi-projects.txt /tmp/artifact-publish/data/production/pypi-projects.txt
+          fi
+          cp data/production/intermediate/*.jsonl /tmp/artifact-publish/data/production/intermediate/ || true
+          cp reports/registry-artifact-crawl.json /tmp/artifact-publish/reports/registry-artifact-crawl.json
+          git -C /tmp/artifact-publish config user.name github-actions[bot]
+          git -C /tmp/artifact-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/artifact-publish add data/production reports/registry-artifact-crawl.json
+          git -C /tmp/artifact-publish diff --cached --quiet || git -C /tmp/artifact-publish commit -m "Record registry artifact crawl"
+          git -C /tmp/artifact-publish push origin HEAD:artifact-data

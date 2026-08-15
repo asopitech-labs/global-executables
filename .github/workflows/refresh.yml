@@ -20,6 +20,16 @@ jobs:
             --source debian --source ubuntu --source arch --source homebrew \
             --output-dir data/production/intermediate \
             --report reports/production-crawl.json
+      - name: Restore latest registry artifact observations
+        run: |
+          git fetch origin artifact-data || true
+          for source in npm pypi crates; do
+            if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
+              git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
+            else
+              cp fixtures/intermediate/$source.jsonl data/production/intermediate/$source.jsonl
+            fi
+          done
       - name: Rebuild from production and registry inputs
         run: |
           python tools/refresh.py \
@@ -27,10 +37,9 @@ jobs:
             data/production/intermediate/debian.jsonl \
             data/production/intermediate/homebrew.jsonl \
             data/production/intermediate/ubuntu.jsonl \
-            fixtures/intermediate/crates.jsonl \
-            fixtures/intermediate/homebrew.jsonl \
-            fixtures/intermediate/npm.jsonl \
-            fixtures/intermediate/pypi.jsonl \
+            data/production/intermediate/crates.jsonl \
+            data/production/intermediate/npm.jsonl \
+            data/production/intermediate/pypi.jsonl \
             --snapshot "$(date -u +%F)" \
             --coverage-map data/production/coverage-map.json \
             --report reports/production-refresh.json
