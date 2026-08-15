@@ -483,9 +483,10 @@ MCP makes that dataset immediately useful to agents.
 ## Current implementation
 
 The schemas, deterministic builder, derived prefix/length/ecosystem/trigram
-indexes, fixture-driven parser prototypes, read-only local/HTTP MCP server,
-and CI checks are implemented in this repository. Parser prototypes are not
-described as production collectors until full-crawl work is completed. See
+and logical-scope indexes, collector parsers, read-only local/HTTP MCP server,
+assessment API, and CI checks are implemented in this repository. Full-crawl
+coverage remains explicitly measured as partial until each upstream source is
+exhaustively collected. See
 [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) for exact naming, sharding, alias, and
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
 commands and honest measured coverage limitations.
@@ -499,7 +500,8 @@ global-executables-mcp --root .
 
 Use `--transport streamable-http` for remote access. Both modes expose
 `check_executable`, `check_executables`, `get_executable`,
-`search_executables`, `search_similar_executables`, and `get_coverage`; neither
+`search_executables`, `search_similar_executables`, `get_coverage`,
+`assess_executable`, and `assess_executables`; neither
 mode exposes writes. Data is reusable under the repository license by reading
 the canonical JSON directly, without running MCP.
 See [`docs/MCP.md`](docs/MCP.md) for local client configuration, the remote
@@ -512,7 +514,14 @@ it is **not** full ecosystem coverage, so consumers must preserve
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
 
 Successful collection does not by itself permit a negative collision claim.
-Fixture, smoke, and partial snapshots return `unknown` for absent names;
+Every valid query returns a factual `found` observation. Fixture, smoke, and
+partial snapshots return insufficient absence confidence for absent names;
 `clear_in_index` requires metadata explicitly marking the complete queried
 snapshot exhaustive. Derived search indexes are integrity-pinned in metadata
 and are used directly by prefix, length, ecosystem, and similarity queries.
+
+For a clean-checkout setup, client configuration, expected responses, and
+verification steps, see [`docs/SETUP.md`](docs/SETUP.md).
+
+Issue completion and release evidence follow [`docs/RELEASE.md`](docs/RELEASE.md);
+implementation claims alone do not close work.

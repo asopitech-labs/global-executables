@@ -32,3 +32,14 @@ evidence). Package names are never substituted for executable names.
 `exhaustive` only when every declared source has both exhaustive scope and a
 successful run. `index_manifest` pins every derived index by SHA-256 so readers
 can reject missing or stale index files without making indexes canonical.
+
+Provider records may carry independent logical dimensions for scoped queries:
+`source_type`, `package_system`, `distribution_family`, `distribution`,
+`distribution_release`, `language`, and `registry`. These dimensions remain
+metadata on a provider; they are never encoded as deeper canonical directories.
+
+Freshness and usage fields (`latest_release_at`, `last_observed_at`,
+`release_history`, and `usage_metrics`) are factual observations with source,
+period, count, and observation time preserved. Missing observations are
+`unknown`, not zero. Derived risk classifications belong to the assessment API,
+not canonical existence records.

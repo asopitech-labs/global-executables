@@ -8,6 +8,12 @@
     "ecosystem": {"type": "string"}, "package": {"type": "string", "minLength": 1},
     "version": {"type": ["string", "null"]}, "repository": {"type": ["string", "null"]},
     "source": {"type": "string"}, "confidence": {"enum": ["direct", "filesystem", "inferred"]},
-    "alias_of": {"type": "string"}
+    "alias_of": {"type": "string"},
+    "source_type": {"type": "string"}, "package_system": {"type": "string"},
+    "distribution_family": {"type": "string"}, "distribution": {"type": "string"},
+    "distribution_release": {"type": "string"}, "language": {"type": "string"},
+    "registry": {"type": "string"}, "latest_release_at": {"type": ["string", "null"]},
+    "latest_version": {"type": ["string", "null"]}, "last_observed_at": {"type": ["string", "null"]},
+    "release_history": {"type": "array"}, "usage_metrics": {"type": "array"}
   }
 }

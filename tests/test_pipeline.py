@@ -67,3 +67,22 @@ def test_failed_coverage_is_unknown(tmp_path):
 def test_bad_record_fails(tmp_path):
     bad=tmp_path/"bad.jsonl"; bad.write_text('{"command":"bad/name","ecosystem":"npm","package":"x","version":null,"repository":null,"source":"x","confidence":"direct"}\n')
     with pytest.raises(ValueError): rebuild(tmp_path,[bad],"2026-08-14")
+
+
+def test_disappearing_and_reappearing_provider_preserves_first_seen(tmp_path):
+    first=tmp_path/"first.jsonl"; first.write_text(json.dumps({"command":"returnx","ecosystem":"npm","package":"returnx","version":"1","repository":None,"source":"fixture","confidence":"direct"})+"\n")
+    rebuild(tmp_path,[first],"2026-08-14")
+    disappeared=tmp_path/"disappeared.jsonl"; disappeared.write_text("")
+    rebuild(tmp_path,[disappeared],"2026-08-15")
+    assert Dataset(tmp_path).get("returnx") is None
+    rebuild(tmp_path,[first],"2026-08-16")
+    record=Dataset(tmp_path).get("returnx")
+    assert record["first_seen"] == "2026-08-14" and record["last_seen"] == "2026-08-16"
+
+
+def test_scope_indexes_filter_logical_provider_dimensions(tmp_path):
+    rebuild(tmp_path,INPUTS,"2026-08-14")
+    dataset=Dataset(tmp_path)
+    assert dataset.search(scope={"language":"javascript"}) == ["envcp", "foocli"]
+    assert dataset.check("envcp", {"language":"javascript", "distribution":"debian"})["found"] is False
+    assert dataset.check("envcp", {"registry":"npm"})["found"] is True

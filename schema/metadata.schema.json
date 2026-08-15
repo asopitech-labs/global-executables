@@ -29,7 +29,7 @@
     },
     "index_manifest": {
       "type": "object",
-      "propertyNames": {"pattern": "^indexes/(prefix|length|ecosystem|trigram)/[^/]+\\.json$"},
+      "propertyNames": {"pattern": "^indexes/(prefix|length|ecosystem|trigram|scope/[^/]+)/[^/]+\\.json$"},
       "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
     }
   }

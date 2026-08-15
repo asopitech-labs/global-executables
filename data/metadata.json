@@ -13,19 +13,19 @@
   "coverage": {
     "debian": {
       "status": "success",
-      "coverage_kind": "fixture",
+      "coverage_kind": "partial",
       "records": 2,
       "source": "fixtures/intermediate/debian.jsonl"
     },
     "npm": {
       "status": "success",
-      "coverage_kind": "fixture",
+      "coverage_kind": "partial",
       "records": 2,
       "source": "fixtures/intermediate/npm.jsonl"
     },
     "pypi": {
       "status": "success",
-      "coverage_kind": "fixture",
+      "coverage_kind": "partial",
       "records": 1,
       "source": "fixtures/intermediate/pypi.jsonl"
     }
@@ -42,6 +42,18 @@
     "indexes/prefix/fo.json": "ff0d276ae6279badb6dce1851abe150d5af64560296c0901a89b7115ff26bb43",
     "indexes/prefix/gi.json": "6029168a2f40192763ee6b47a5fefa7e15db2ac4e94c6587327e90452c363164",
     "indexes/prefix/py.json": "b9900ab219812c04b4476b92e4d4b2daee02bfd7a8d649fcbc33a6bb569c7e0b",
+    "indexes/scope/distribution/debian.json": "11b1e66ae79cc0d21d262e9889cb280f93db56fce59a83c6bf20d3d7799f3267",
+    "indexes/scope/distribution_family/debian.json": "11b1e66ae79cc0d21d262e9889cb280f93db56fce59a83c6bf20d3d7799f3267",
+    "indexes/scope/ecosystem/debian.json": "11b1e66ae79cc0d21d262e9889cb280f93db56fce59a83c6bf20d3d7799f3267",
+    "indexes/scope/ecosystem/npm.json": "b565e03637e804605d4d278524653192ca31845af53ba9aa2fc4f9bc895113a0",
+    "indexes/scope/ecosystem/pypi.json": "b9900ab219812c04b4476b92e4d4b2daee02bfd7a8d649fcbc33a6bb569c7e0b",
+    "indexes/scope/language/javascript.json": "b565e03637e804605d4d278524653192ca31845af53ba9aa2fc4f9bc895113a0",
+    "indexes/scope/language/python.json": "b9900ab219812c04b4476b92e4d4b2daee02bfd7a8d649fcbc33a6bb569c7e0b",
+    "indexes/scope/package_system/deb.json": "11b1e66ae79cc0d21d262e9889cb280f93db56fce59a83c6bf20d3d7799f3267",
+    "indexes/scope/registry/npm.json": "b565e03637e804605d4d278524653192ca31845af53ba9aa2fc4f9bc895113a0",
+    "indexes/scope/registry/pypi.json": "b9900ab219812c04b4476b92e4d4b2daee02bfd7a8d649fcbc33a6bb569c7e0b",
+    "indexes/scope/source_type/language_package.json": "4334db056febc7b6593bf9afa54baefd79183dd017a011ec53069c32924e5fb1",
+    "indexes/scope/source_type/os_package.json": "11b1e66ae79cc0d21d262e9889cb280f93db56fce59a83c6bf20d3d7799f3267",
     "indexes/trigram/202065.json": "9592939e060c432e3dda29cc5dcb4b174f23128b7a7cc4f57cbc44eb016a6de8",
     "indexes/trigram/202066.json": "ff0d276ae6279badb6dce1851abe150d5af64560296c0901a89b7115ff26bb43",
     "indexes/trigram/202067.json": "6029168a2f40192763ee6b47a5fefa7e15db2ac4e94c6587327e90452c363164",
