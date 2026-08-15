@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a bounded, resumable artifact crawl for npm, PyPI, and crates.io."""
+"""Run a bounded, resumable artifact crawl for npm, PyPI, crates.io, and Go."""
 from __future__ import annotations
 
 import argparse
@@ -9,7 +9,7 @@ from pathlib import Path
 from global_executables.registry_artifact import crawl_registry_sources
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--source", action="append", choices=["npm", "pypi", "crates"], required=True)
+parser.add_argument("--source", action="append", choices=["npm", "pypi", "crates", "go"], required=True)
 parser.add_argument("--state", type=Path, default=Path("data/production/registry-state.json"))
 parser.add_argument("--output-dir", type=Path, default=Path("data/production/intermediate"))
 parser.add_argument("--report", type=Path, default=Path("reports/registry-artifact-crawl.json"))

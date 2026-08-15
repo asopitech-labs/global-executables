@@ -23,11 +23,15 @@ jobs:
       - name: Restore latest registry artifact observations
         run: |
           git fetch origin artifact-data || true
-          for source in npm pypi crates; do
+          for source in npm pypi crates go; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             else
-              cp fixtures/intermediate/$source.jsonl data/production/intermediate/$source.jsonl
+              if test -f fixtures/intermediate/$source.jsonl; then
+                cp fixtures/intermediate/$source.jsonl data/production/intermediate/$source.jsonl
+              else
+                : > data/production/intermediate/$source.jsonl
+              fi
             fi
           done
       - name: Rebuild from production and registry inputs
@@ -38,6 +42,7 @@ jobs:
             data/production/intermediate/homebrew.jsonl \
             data/production/intermediate/ubuntu.jsonl \
             data/production/intermediate/crates.jsonl \
+            data/production/intermediate/go.jsonl \
             data/production/intermediate/npm.jsonl \
             data/production/intermediate/pypi.jsonl \
             --snapshot "$(date -u +%F)" \

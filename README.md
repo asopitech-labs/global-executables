@@ -80,6 +80,7 @@ Package ecosystems
         ├── npm
         ├── PyPI
         ├── crates.io
+        ├── Go modules
         └── others
                 │
                 ▼
@@ -162,7 +163,8 @@ global-executables/
 │   ├── homebrew/
 │   ├── npm/
 │   ├── pypi/
-│   └── crates/
+│   ├── crates/
+│   └── go/
 │
 ├── schema/
 ├── mcp/
@@ -215,6 +217,7 @@ Potential sources include:
 | npm | `bin` metadata |
 | PyPI | distribution entry points / `console_scripts` |
 | crates.io | Rust binary targets |
+| Go modules | `package main` directories in module archives |
 | others | ecosystem-specific executable metadata |
 
 The project records how each executable was discovered rather than treating all observations as equally authoritative.
@@ -518,7 +521,7 @@ partial registry coverage; it is **not** full ecosystem coverage, so consumers m
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
 
 Registry artifact inspection is separately resumable. Every six hours the
-artifact crawler advances npm, PyPI, and crates.io cursors on the
+artifact crawler advances npm, PyPI, crates.io, and Go module cursors on the
 `artifact-data` branch, retaining executable evidence and failures. A registry
 is promoted to `exhaustive` only after its catalog and required artifact
 inspections complete successfully.

@@ -82,6 +82,28 @@ def _wheel_rows(body: bytes, package: str, version: str, repository: str | None,
     return rows
 
 
+def _go_rows(body: bytes, module: str, version: str, source: str) -> list[dict[str, Any]]:
+    """Extract one executable name for each Go directory containing package main."""
+    root = f"{module}@{version}"
+    main_directories: set[str] = set()
+    with zipfile.ZipFile(BytesIO(body)) as archive:
+        for name in archive.namelist():
+            if not name.startswith(root + "/") or not name.endswith(".go") or name.endswith("_test.go"):
+                continue
+            if "/vendor/" in f"/{name}" or "/testdata/" in f"/{name}":
+                continue
+            text = archive.read(name).decode("utf-8", "replace")
+            if re.search(r"(?m)^\s*package\s+main\b", text):
+                main_directories.add(name.rsplit("/", 1)[0])
+    rows: list[dict[str, Any]] = []
+    for directory in sorted(main_directories):
+        command = directory.rsplit("/", 1)[-1] if directory != root else module.rsplit("/", 1)[-1]
+        rows.append(record(command, "go", module, version, None, source,
+                           source_type="language_package", language="go", registry="go",
+                           latest_version=version))
+    return rows
+
+
 def _pypi_projects(body: bytes) -> list[str]:
     names = {html.unescape(value).strip() for value in PROJECT_LINK.findall(body.decode("utf-8", "replace"))}
     return sorted(name for name in names if name)
@@ -224,12 +246,59 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             "coverage_kind": "exhaustive" if complete else "partial"}
 
 
+def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+    since = state.get("since", "2019-01-01T00:00:00Z")
+    processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
+    failures = state.setdefault("failures", {})
+    budget_exhausted = False
+    while processed < budget:
+        query = urllib.parse.urlencode({"limit": min(1000, budget - processed), "since": since})
+        body, _ = fetch(f"https://index.golang.org/index?{query}", timeout)
+        entries = [json.loads(line) for line in body.decode("utf-8", "replace").splitlines() if line.strip()]
+        if not entries:
+            state["complete"] = True
+            break
+        for entry in entries:
+            module = entry.get("Path", ""); version = entry.get("Version", ""); timestamp = entry.get("Timestamp", since)
+            key = f"{module}@{version}"
+            try:
+                escaped_module = urllib.parse.quote(module, safe="/@")
+                escaped_version = urllib.parse.quote(version, safe="")
+                url = f"https://proxy.golang.org/{escaped_module}/@v/{escaped_version}.zip"
+                artifact, transfer = fetch(url, timeout); downloaded += transfer["downloaded_bytes"]
+                if downloaded > byte_budget:
+                    budget_exhausted = True
+                    break
+                rows.extend(_go_rows(artifact, module, version, url))
+                failures.pop(key, None)
+            except Exception as error:
+                failures[key] = str(error)
+            since = timestamp
+            processed += 1
+            if processed >= budget:
+                break
+        if budget_exhausted:
+            break
+        if len(entries) < min(1000, budget):
+            state["complete"] = True
+            break
+    state["since"] = since
+    _append_rows(output, rows)
+    complete = bool(state.get("complete")) and not failures
+    return {"since": since, "processed": processed, "records": len(rows),
+            "downloaded_bytes": downloaded, "failures": len(failures),
+            "budget_exhausted": budget_exhausted, "complete": complete,
+            "coverage_kind": "exhaustive" if complete else "partial"}
+
+
 def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Path, report_path: Path,
                            package_budget: int = 100, byte_budget: int = 500_000_000,
                            timeout: int = 120) -> dict[str, Any]:
     state = _load_json(state_path, {"version": 1, "sources": {}})
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
-    runners: dict[str, Callable[..., dict[str, Any]]] = {"pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates}
+    runners: dict[str, Callable[..., dict[str, Any]]] = {
+        "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates, "go": _crawl_go,
+    }
     for source in sources:
         if source not in runners:
             raise RegistryCrawlError(f"unsupported registry source: {source}")

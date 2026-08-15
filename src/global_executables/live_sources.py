@@ -126,6 +126,23 @@ def probe_crates() -> dict[str, Any]:
     return result
 
 
+def probe_go() -> dict[str, Any]:
+    versions_body, result = fetch("https://proxy.golang.org/golang.org/x/tools/@v/list")
+    versions = [line.strip() for line in versions_body.decode("utf-8", "replace").splitlines() if line.strip()]
+    version = versions[-1]
+    artifact, artifact_result = fetch(f"https://proxy.golang.org/golang.org/x/tools/@v/{urllib.parse.quote(version, safe='')}.zip")
+    with zipfile.ZipFile(io.BytesIO(artifact)) as archive:
+        candidates = [name for name in archive.namelist()
+                      if f"golang.org/x/tools@{version}/cmd/goimports/" in name
+                      and name.endswith(".go") and not name.endswith("_test.go")]
+        evidence_file = next((name for name in candidates if b"package main" in archive.read(name)), None)
+        if evidence_file is None:
+            raise RuntimeError("go: x/tools goimports main package absent from module archive")
+    result.update(ecosystem="go", evidence=f"golang.org/x/tools@{version}:goimports:{evidence_file}", evidence_kind="declared-and-artifact",
+                  artifact_downloaded_bytes=artifact_result["downloaded_bytes"])
+    return result
+
+
 def probe_homebrew() -> dict[str, Any]:
     body, result = fetch("https://formulae.brew.sh/api/formula/jq.json")
     metadata = json.loads(body); stable = metadata["versions"]["stable"]
@@ -146,7 +163,7 @@ def run_all() -> dict[str, Any]:
     probes = [
         lambda: probe_contents("debian", "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz", "usr/bin/git"),
         lambda: probe_contents("ubuntu", "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz", "usr/bin/git"),
-        probe_arch, probe_homebrew, probe_npm, probe_pypi, probe_crates,
+        probe_arch, probe_homebrew, probe_npm, probe_pypi, probe_crates, probe_go,
     ]
     results = [probe() for probe in probes]
     return {"status": "success", "probed_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "results": results,

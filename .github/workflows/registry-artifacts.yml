@@ -55,7 +55,7 @@ jobs:
           BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
         run: |
           python tools/registry_artifact_crawl.py \
-            --source npm --source pypi --source crates \
+            --source npm --source pypi --source crates --source go \
             --state data/production/registry-state.json \
             --output-dir data/production/intermediate \
             --report reports/registry-artifact-crawl.json \
