@@ -1,10 +1,11 @@
 # Operations and measured baseline
 
 The repository currently publishes a deterministic fixture snapshot, not a
-claim of full registry coverage. The fixture baseline contains 4 unique names,
-5 providers, 1 cross-ecosystem collision, 4 canonical files, and 3 successful
-ecosystem inputs. It exists to make protocol and pipeline verification
-repeatable. Full PyPI/crates/npm and distribution crawls remain operational
+claim of full registry coverage. The expanded fixture baseline contains 7
+unique names, 9 provider observations, 2 cross-ecosystem collisions, 7
+canonical files, and 6 successful ecosystem inputs. It exists to make
+collector, protocol, and pipeline verification repeatable. Full
+PyPI/crates/npm and distribution crawls remain operational
 coverage work; their bandwidth, duration, rate limits, invalid records, Git file
 count, and Actions duration must be measured in a scheduled run before calling
 the first snapshot comprehensive.
