@@ -1,0 +1,43 @@
+{
+  "command": "yarnpkg",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "corepack",
+      "version": "0.35.0",
+      "repository": "https://github.com/nodejs/corepack",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "yarn",
+      "version": "1.22.22",
+      "repository": "https://yarnpkg.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "yarnpkg",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-15"
+}

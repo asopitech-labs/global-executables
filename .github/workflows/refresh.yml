@@ -14,8 +14,26 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.12", cache: pip}
       - run: pip install -e '.[test]'
-      - name: Rebuild from normalized collector outputs
-        run: python tools/refresh.py fixtures/intermediate/*.jsonl --snapshot 2026-08-14 --coverage-kind partial
+      - name: Acquire production OS indexes
+        run: |
+          python tools/production_crawl.py \
+            --source debian --source ubuntu --source arch --source homebrew \
+            --output-dir data/production/intermediate \
+            --report reports/production-crawl.json
+      - name: Rebuild from production and registry inputs
+        run: |
+          python tools/refresh.py \
+            data/production/intermediate/arch.jsonl \
+            data/production/intermediate/debian.jsonl \
+            data/production/intermediate/homebrew.jsonl \
+            data/production/intermediate/ubuntu.jsonl \
+            fixtures/intermediate/crates.jsonl \
+            fixtures/intermediate/homebrew.jsonl \
+            fixtures/intermediate/npm.jsonl \
+            fixtures/intermediate/pypi.jsonl \
+            --snapshot "$(date -u +%F)" \
+            --coverage-map data/production/coverage-map.json \
+            --report reports/production-refresh.json
       - run: pytest -q
       - run: git diff --check
       - uses: actions/upload-artifact@v4
@@ -26,6 +44,6 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add data reports/refresh.json
+          git add data/executables data/indexes data/metadata.json data/history.json reports/production-crawl.json reports/production-refresh.json
           git diff --cached --quiet || git commit -m "Refresh generated dataset"
           git push origin HEAD:generated-data

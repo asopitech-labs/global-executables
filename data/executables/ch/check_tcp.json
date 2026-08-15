@@ -1,0 +1,31 @@
+{
+  "command": "check_tcp",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "monitoring-plugins",
+      "version": "3.0.3",
+      "repository": "https://www.monitoring-plugins.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nagios-plugins",
+      "version": "2.5",
+      "repository": "https://www.nagios-plugins.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-15"
+}

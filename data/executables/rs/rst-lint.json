@@ -1,0 +1,31 @@
+{
+  "command": "rst-lint",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "rst-lint",
+      "version": "2.0.2",
+      "repository": "https://github.com/twolfson/restructuredtext-lint",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-restructuredtext-lint",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-15"
+}

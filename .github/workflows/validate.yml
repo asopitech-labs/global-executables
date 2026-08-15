@@ -11,5 +11,5 @@ jobs:
         with: {python-version: "3.12", cache: pip}
       - run: pip install -e '.[test]'
       - run: pytest
-      - run: global-executables build fixtures/intermediate/*.jsonl --snapshot 2026-08-14 --coverage-kind partial
-      - run: git diff --exit-code data
+      - run: global-executables build fixtures/intermediate/*.jsonl --root /tmp/fixture-validation --snapshot 2026-08-14 --coverage-kind partial
+      - run: test -s /tmp/fixture-validation/data/metadata.json

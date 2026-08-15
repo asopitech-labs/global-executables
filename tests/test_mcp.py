@@ -14,6 +14,7 @@ from mcp.client.streamable_http import streamable_http_client
 from global_executables.mcp_server import create_server
 
 ROOT = Path(__file__).parents[1]
+SNAPSHOT = json.loads((ROOT / "data/metadata.json").read_text())["snapshot"]
 EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage", "assess_executable", "assess_executables"}
 
 
@@ -30,7 +31,7 @@ async def _assert_protocol(session: ClientSession):
     assert [item["status"] for item in payload["results"]] == ["collision", "unknown"]
     assert payload["results"][1]["found"] is False
     assert payload["results"][1]["absence"]["status"] == "not_found_in_current_index"
-    assert payload["snapshot"] == "2026-08-14" and payload["coverage_scope"] == "unknown"
+    assert payload["snapshot"] == SNAPSHOT and payload["coverage_scope"] == "unknown"
     assessment = await session.call_tool("assess_executables", {"names": ["envcp", "evpk"]})
     assert not assessment.isError
     assert assessment.structuredContent["results"][0]["found"] is True
@@ -45,7 +46,7 @@ async def _assert_protocol(session: ClientSession):
         "global-executables://metadata", "global-executables://coverage"
     }
     metadata = await session.read_resource("global-executables://metadata")
-    assert json.loads(metadata.contents[0].text)["snapshot"] == "2026-08-14"
+    assert json.loads(metadata.contents[0].text)["snapshot"] == SNAPSHOT
     schema = await session.read_resource("global-executables://schema/executable")
     assert json.loads(schema.contents[0].text)["title"] == "Canonical executable record"
     executable = await session.read_resource("global-executables://executables/envcp")
@@ -82,7 +83,7 @@ async def test_streamable_http_protocol_and_health():
                 if process.poll() is not None:
                     raise AssertionError(process.stderr.read().decode())
                 await asyncio.sleep(.05)
-        assert health == {"status": "ok", "service_version": "1.2.0", "snapshot": "2026-08-14", "coverage_scope": "unknown", "read_only": True}
+        assert health == {"status": "ok", "service_version": "1.2.0", "snapshot": SNAPSHOT, "coverage_scope": "unknown", "read_only": True}
         async with streamable_http_client(f"http://127.0.0.1:{port}/mcp") as (read, write, _):
             async with ClientSession(read, write) as session:
                 await _assert_protocol(session)

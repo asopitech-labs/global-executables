@@ -1,0 +1,43 @@
+{
+  "command": "xbstream",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "percona-xtrabackup",
+      "version": "8.4.0-6",
+      "repository": "https://www.percona.com/software/mysql-database/percona-xtrabackup",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "percona-xtrabackup@8.0",
+      "version": "8.0.35-36",
+      "repository": "https://www.percona.com/software/mysql-database/percona-xtrabackup",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "percona-xtrabackup",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-15"
+}

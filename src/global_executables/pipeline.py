@@ -100,7 +100,8 @@ def publish(root: Path, records: list[dict[str, Any]], coverage: dict[str, Any],
     (data / "history.json").write_text(dumps(dict(sorted(durable_history.items()))))
 
 
-def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None, coverage_kind: str = "fixture") -> None:
+def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
+            coverage_kind: str | dict[str, str] = "fixture") -> None:
     snapshot = snapshot or date.today().isoformat()
     previous = load_canonical(root)
     history = load_history(root)
@@ -108,5 +109,6 @@ def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None, coverag
     for path in inputs:
         current = [json.loads(line) for line in path.read_text().splitlines() if line]
         rows.extend(current); eco = path.stem
-        coverage[eco] = {"status": "success", "coverage_kind": coverage_kind, "records": len(current), "source": str(path)}
+        kind = coverage_kind.get(eco, "partial") if isinstance(coverage_kind, dict) else coverage_kind
+        coverage[eco] = {"status": "success", "coverage_kind": kind, "records": len(current), "source": str(path)}
     publish(root, merge(rows, previous, snapshot, history), coverage, snapshot, history)
