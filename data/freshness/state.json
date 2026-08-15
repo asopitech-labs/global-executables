@@ -1,5 +1,5 @@
 {
-  "next_partition": 1,
+  "next_partition": 2,
   "partitions": {
     "debian/fixture": {
       "cursor": 0,
@@ -14,8 +14,22 @@
         "{\"command\":\"git\",\"ecosystem\":\"debian\",\"package\":\"git\",\"scope\":null,\"source\":\"fixture\"}": "9e07d32b02233081ffe2dcd2258da9fce60f98a18cba8adb7f694bd6a5acab8b"
       },
       "source_checksum": "73a35c4af33ed443f52a53fe19051731d55f1272940d04290e903914c04b3573"
+    },
+    "npm/fixture": {
+      "cursor": 0,
+      "cycle_observations": {},
+      "cycles_completed": 1,
+      "last_checked_at": "2026-08-15T13:01:26Z",
+      "last_error": null,
+      "last_status": "success",
+      "last_success_at": "2026-08-15T13:01:26Z",
+      "observations": {
+        "{\"command\":\"envcp\",\"ecosystem\":\"npm\",\"package\":\"envcp\",\"scope\":null,\"source\":\"fixture\"}": "fa219696cf7a17fe25147c69bde3fb77359841d7bd389ef8b7179fda7af38bbd",
+        "{\"command\":\"foocli\",\"ecosystem\":\"npm\",\"package\":\"foo-tool\",\"scope\":null,\"source\":\"fixture\"}": "3576f453b829960faf5e0a743d783a0f7dd745355f47708847458f5b1b4a8fec"
+      },
+      "source_checksum": "ee4062eda2a84af0202f4f9f6e54ffc8c590afd3fb56e24e126a8ecd6f3e5152"
     }
   },
-  "updated_at": "2026-08-15T07:00:42Z",
+  "updated_at": "2026-08-15T13:01:26Z",
   "version": 1
 }
