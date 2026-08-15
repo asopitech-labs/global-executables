@@ -482,11 +482,12 @@ MCP makes that dataset immediately useful to agents.
 
 ## Current implementation
 
-The schemas, deterministic builder, derived prefix/length/ecosystem/trigram
-and logical-scope indexes, collector parsers, read-only local/HTTP MCP server,
-assessment API, incremental partial freshness scans, and CI checks are implemented in this repository. Full-crawl
-coverage remains explicitly measured as partial until each upstream source is
-exhaustively collected. See
+The schemas, deterministic builder, production OS index collector, derived
+prefix/length/ecosystem/trigram and logical-scope indexes, collector parsers,
+read-only local/HTTP MCP server, assessment API, incremental partial freshness
+scans, and CI checks are implemented in this repository. Full-crawl coverage
+remains explicitly measured per source; registry sources stay partial until
+their package artifacts are exhaustively collected. See
 [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) for exact naming, sharding, alias, and
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
 commands, rolling freshness scans, and honest measured coverage limitations.
@@ -512,8 +513,8 @@ through declared source partitions, persists a cursor and last successful
 observations on the `freshness-data` branch, and publishes a machine-readable
 report. It is a freshness signal, not a full dataset refresh. Coverage is
 snapshot-specific and reported by `get_coverage`. The
-checked-in initial snapshot is a deterministic test corpus;
-it is **not** full ecosystem coverage, so consumers must preserve
+checked-in snapshot contains production OS/Homebrew coverage plus explicitly
+partial registry coverage; it is **not** full ecosystem coverage, so consumers must preserve
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
 
 Successful collection does not by itself permit a negative collision claim.

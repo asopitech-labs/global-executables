@@ -33,6 +33,13 @@ def test_only_explicitly_exhaustive_snapshot_supports_negative_result(tmp_path):
     rebuild(tmp_path,INPUTS,"2026-08-14",coverage_kind="exhaustive")
     assert Dataset(tmp_path).check("evpk")["status"]=="clear_in_index"
 
+def test_rebuild_accepts_per_source_coverage_kinds(tmp_path):
+    rebuild(tmp_path, INPUTS, "2026-08-14", coverage_kind={"debian": "exhaustive", "npm": "partial"})
+    metadata = json.loads((tmp_path / "data/metadata.json").read_text())
+    assert metadata["coverage"]["debian"]["coverage_kind"] == "exhaustive"
+    assert metadata["coverage"]["npm"]["coverage_kind"] == "partial"
+    assert metadata["negative_lookup"] == "unknown"
+
 def test_indexed_search_matches_reference_scan_and_intersects_filters(tmp_path):
     rebuild(tmp_path,INPUTS,"2026-08-14")
     dataset=Dataset(tmp_path)

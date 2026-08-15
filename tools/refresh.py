@@ -15,6 +15,7 @@ parser.add_argument("inputs", nargs="+", type=Path)
 parser.add_argument("--root", type=Path, default=Path.cwd())
 parser.add_argument("--snapshot", default=date.today().isoformat())
 parser.add_argument("--coverage-kind", choices=["fixture", "smoke", "partial", "exhaustive"], default="partial")
+parser.add_argument("--coverage-map", type=Path, help="JSON object mapping input stem to coverage kind")
 parser.add_argument("--report", type=Path, default=Path("reports/refresh.json"))
 args = parser.parse_args()
 
@@ -25,7 +26,10 @@ if missing:
     args.report.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     raise SystemExit(f"refresh blocked; missing collector inputs: {', '.join(missing)}")
 
-rebuild(args.root, args.inputs, args.snapshot, args.coverage_kind)
+coverage = json.loads(args.coverage_map.read_text()) if args.coverage_map else args.coverage_kind
+if not isinstance(coverage, (str, dict)):
+    raise SystemExit("coverage map must be a JSON object")
+rebuild(args.root, args.inputs, args.snapshot, coverage)
 report["status"] = "success"
 report["records"] = sum(1 for path in args.inputs for line in path.read_text().splitlines() if line.strip())
 args.report.parent.mkdir(parents=True, exist_ok=True)

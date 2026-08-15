@@ -1,0 +1,55 @@
+{
+  "command": "toolbox",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "podman-toolbox",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kahip",
+      "version": "3.25",
+      "repository": "https://algo2.iti.kit.edu/documents/kahip/index.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mcp-toolbox",
+      "version": "1.9.0",
+      "repository": "https://github.com/googleapis/mcp-toolbox",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "podman-toolbox",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-15"
+}

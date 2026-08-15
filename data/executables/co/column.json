@@ -1,0 +1,55 @@
+{
+  "command": "column",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "util-linux-2.42.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bsdextrautils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "util-linux",
+      "version": "2.42.2",
+      "repository": "https://github.com/util-linux/util-linux",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "bsdextrautils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-15"
+}

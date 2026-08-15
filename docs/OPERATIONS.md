@@ -1,18 +1,19 @@
 # Operations and measured baseline
 
-The repository currently publishes a deterministic fixture snapshot, not a
-claim of full registry coverage. The expanded fixture baseline contains 7
-unique names, 9 provider observations, 2 cross-ecosystem collisions, 7
-canonical files, and 6 successful ecosystem inputs. It exists to make
-collector, protocol, and pipeline verification repeatable. Full
-PyPI/crates/npm and distribution crawls remain operational
-coverage work; their bandwidth, duration, rate limits, invalid records, Git file
-count, and Actions duration must be measured in a scheduled run before calling
-the first snapshot comprehensive.
+The current main snapshot includes a measured production OS crawl plus
+explicitly partial language-registry and Homebrew inputs. The 2026-08-15
+snapshot contains 63,618 unique names, 113,152 provider observations, 63,534
+canonical files, and 23,692 derived index files. Debian stable, Ubuntu noble,
+and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
+Homebrew's complete formula catalog is also marked `exhaustive` because its
+official API supplies the executable inventory. npm, PyPI, and crates.io remain
+`partial` until their package artifacts are exhaustively inspected.
 
-The repository does **not** publish fixture collector output from a scheduled
-workflow. The earlier fixture-based publish workflow was removed because a
-fixture proves parser behavior, not upstream feasibility. `upstream-smoke.yml`
+The scheduled refresh now downloads the production OS indexes with
+`tools/production_crawl.py`, merges them with the currently available registry
+inputs, and publishes only canonical data and reports to the `generated-data`
+branch. The fixture inputs remain in the tree for parser and protocol tests;
+they are not presented as exhaustive upstream coverage. `upstream-smoke.yml`
 downloads representative real indexes/packages from every planned ecosystem,
 inspects executable evidence inside them, and retains a measured report. It
 does not claim to be a full collector or publish canonical data.
@@ -34,8 +35,29 @@ global-executables build fixtures/intermediate/*.jsonl --snapshot 2026-08-14
 pytest
 ```
 
-The scheduled refresh uses the same fail-closed command without developer
-state:
+Production-source rebuild:
+
+```sh
+python tools/production_crawl.py \
+  --source debian --source ubuntu --source arch --source homebrew \
+  --output-dir data/production/intermediate \
+  --report reports/production-crawl.json
+python tools/refresh.py \
+  data/production/intermediate/arch.jsonl \
+  data/production/intermediate/debian.jsonl \
+  data/production/intermediate/homebrew.jsonl \
+  data/production/intermediate/ubuntu.jsonl \
+  fixtures/intermediate/crates.jsonl fixtures/intermediate/homebrew.jsonl \
+  fixtures/intermediate/npm.jsonl fixtures/intermediate/pypi.jsonl \
+  --snapshot "$(date -u +%F)" \
+  --coverage-map data/production/coverage-map.json \
+  --report reports/production-refresh.json
+```
+
+The scheduled refresh uses the same fail-closed production command without
+developer state. It refuses a failed production source and records transfer
+bytes, URL, HTTP status, duration, and per-source coverage in
+`reports/production-crawl.json`.
 
 ```sh
 python tools/refresh.py fixtures/intermediate/*.jsonl \

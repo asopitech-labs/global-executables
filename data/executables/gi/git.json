@@ -4,38 +4,40 @@
     {
       "ecosystem": "debian",
       "package": "git",
-      "version": "2.0",
-      "repository": "https://git-scm.com",
-      "source": "fixture",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
-      "distribution": "debian",
-      "latest_release_at": "2026-01-01T00:00:00Z",
-      "last_observed_at": "2026-08-14T00:00:00Z",
-      "usage_metrics": [
-        {
-          "source": "debian-popcon",
-          "period": "30d",
-          "count": 5000,
-          "observed_at": "2026-08-14T00:00:00Z"
-        }
-      ]
+      "distribution": "debian"
     },
     {
       "ecosystem": "homebrew",
       "package": "git",
-      "version": "2.0",
+      "version": "2.55.0",
       "repository": "https://git-scm.com",
-      "source": "fixtures/collectors/homebrew.json",
+      "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "git",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
     }
   ],
   "first_seen": "2026-08-14",
-  "last_seen": "2026-08-14"
+  "last_seen": "2026-08-15"
 }

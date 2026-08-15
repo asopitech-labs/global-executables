@@ -84,6 +84,11 @@ def homebrew_metadata(value, source="homebrew-api"):
         # bottle inspection stage; aliases preserve explicit symlink provenance.
         for command in formula.get("executables",[]): out.append(record(command,"homebrew",package,version,formula.get("homepage"),source,"filesystem",
             source_type="os_package", package_system="homebrew", distribution_family="macos", distribution="macos"))
-        for alias,target in formula.get("aliases",{}).items(): out.append(record(alias,"homebrew",package,version,formula.get("homepage"),source,"filesystem",target,
-            source_type="os_package", package_system="homebrew", distribution_family="macos", distribution="macos"))
+        aliases = formula.get("aliases", {})
+        # Homebrew's production API uses a list for formula aliases; those are
+        # package names, not executable symlinks.  Only the normalized fixture
+        # shape with explicit alias->target mappings contributes alias records.
+        if isinstance(aliases, dict):
+            for alias,target in aliases.items(): out.append(record(alias,"homebrew",package,version,formula.get("homepage"),source,"filesystem",target,
+                source_type="os_package", package_system="homebrew", distribution_family="macos", distribution="macos"))
     return out
