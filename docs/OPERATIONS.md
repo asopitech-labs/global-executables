@@ -2,17 +2,19 @@
 
 The current main snapshot includes a measured production OS crawl plus
 explicitly partial language-registry and Homebrew inputs. The 2026-08-15
-snapshot contains 63,644 unique names, 113,182 provider observations, 63,560
-canonical files, and 23,706 derived index files. Debian stable, Ubuntu noble,
+snapshot contains 63,669 unique names, 113,213 provider observations, 63,585
+canonical files, and 23,710 derived index files. Debian stable, Ubuntu noble,
 and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
-official API supplies the executable inventory. npm, PyPI, and crates.io remain
+official API supplies the executable inventory. npm, PyPI, crates.io, and Go
+modules remain
 `partial` until their package artifacts are exhaustively inspected.
 
 The registry artifact crawler is resumable and budgeted. It enumerates the
-PyPI simple catalog, follows npm's replication change cursor, and pages the
-crates.io catalog. For each selected package it downloads an artifact and
-extracts declared console scripts, npm bins, or Cargo binary targets. The
+PyPI simple catalog, follows npm's replication change cursor, pages the
+crates.io catalog, and follows Go's module index cursor. For each selected
+package it downloads an artifact and extracts declared console scripts, npm
+bins, Cargo binary targets, or Go `package main` directories. The
 `registry-artifacts.yml` workflow runs every six hours and persists its cursor,
 failures, normalized observations, and report on the `artifact-data` branch.
 It cannot mark a source exhaustive while any cursor, artifact, or failure
@@ -29,8 +31,8 @@ does not claim to be a full collector or publish canonical data.
 
 On 2026-08-14 the probe successfully downloaded and inspected Debian stable and
 Ubuntu noble Contents indexes, the Arch core files database, a Homebrew bottle,
-an npm tarball, a PyPI wheel, and a crates.io crate. It transferred 68,614,290
-bytes in total and found the expected executable evidence in all seven sources.
+an npm tarball, a PyPI wheel, a crates.io crate, and a Go module archive. It
+found the expected executable evidence in all eight sources.
 The machine-readable observation is checked in at
 [`reports/upstream-smoke.json`](../reports/upstream-smoke.json). This establishes
 representative content accessibility only; it does not establish full-crawl
@@ -57,6 +59,7 @@ python tools/refresh.py \
   data/production/intermediate/homebrew.jsonl \
   data/production/intermediate/ubuntu.jsonl \
   data/production/intermediate/crates.jsonl \
+  data/production/intermediate/go.jsonl \
   data/production/intermediate/npm.jsonl data/production/intermediate/pypi.jsonl \
   --snapshot "$(date -u +%F)" \
   --coverage-map data/production/coverage-map.json \
