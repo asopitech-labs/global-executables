@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://global-executables.dev/schema/freshness-manifest.schema.json",
+  "title": "Freshness partition manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "partitions"],
+  "properties": {
+    "version": {"const": 1},
+    "partitions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "source", "input"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "source": {"type": "string", "minLength": 1},
+          "input": {"type": "string", "minLength": 1},
+          "enabled": {"type": "boolean"},
+          "scope": {"type": "object", "additionalProperties": {"type": "string"}},
+          "source_snapshot": {"type": "string"},
+          "rate_limit": {"type": ["object", "null"]}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "partitions": [
+    {
+      "id": "debian/fixture",
+      "source": "debian",
+      "input": "fixtures/intermediate/debian.jsonl",
+      "scope": {
+        "ecosystem": "debian"
+      },
+      "source_snapshot": "fixture-2026-08-14"
+    },
+    {
+      "id": "npm/fixture",
+      "source": "npm",
+      "input": "fixtures/intermediate/npm.jsonl",
+      "scope": {
+        "ecosystem": "npm",
+        "registry": "npm"
+      },
+      "source_snapshot": "fixture-2026-08-14"
+    },
+    {
+      "id": "pypi/fixture",
+      "source": "pypi",
+      "input": "fixtures/intermediate/pypi.jsonl",
+      "scope": {
+        "ecosystem": "pypi",
+        "registry": "pypi"
+      },
+      "source_snapshot": "fixture-2026-08-14"
+    }
+  ]
+}

@@ -18,3 +18,11 @@ For each milestone:
 Fixture, smoke, and partial snapshots cannot justify `clear_in_index` or an
 exhaustive-coverage claim. Failed collectors remain visible in coverage
 metadata and block a release that requires exhaustive data.
+
+For an incremental freshness release, the release notes must also link the
+freshness report and state the partition budget, record/byte budget, scheduler
+cursor, source checksums, selected/skipped/failed partitions, changes,
+removals, and staleness. A freshness release is a `partial` observation and
+must not be described as an exhaustive registry crawl. The report/state may be
+published on the dedicated `freshness-data` branch; canonical executable data
+must not be replaced by a failed or incomplete partial scan.

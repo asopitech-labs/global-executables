@@ -21,6 +21,17 @@ class Dataset:
     def metadata(self) -> dict[str, Any]:
         return json.loads((self.data / "metadata.json").read_text())
 
+    @property
+    def freshness(self) -> dict[str, Any]:
+        """Return the latest partial-scan report without changing canonical metadata."""
+        path = self.root / "reports/freshness.json"
+        if not path.is_file():
+            return {"status": "unavailable", "coverage_kind": "partial"}
+        try:
+            return json.loads(path.read_text())
+        except json.JSONDecodeError:
+            return {"status": "invalid", "coverage_kind": "partial"}
+
     def get(self, name: str, scope: dict[str, str] | None = None) -> dict[str, Any] | None:
         if not valid_command(name):
             return None
@@ -51,7 +62,8 @@ class Dataset:
                   "coverage_scope": coverage_scope,
                   "checked_sources": meta.get("checked_sources", []),
                   "searched_sources": meta.get("checked_sources", []),
-                  "coverage": coverage}
+                  "coverage": coverage,
+                  "freshness": self.freshness.get("status", "unavailable")}
         if record:
             result["providers"] = record["providers"]
         else:

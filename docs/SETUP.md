@@ -54,3 +54,11 @@ Troubleshooting: a missing `data/metadata.json` means `--root` is wrong; a
 transport mismatch means the client endpoint and server transport differ; and
 fixture/partial coverage intentionally produces `unknown`, not
 `clear_in_index`.
+
+## Freshness report
+
+The `get_coverage` MCP tool and `global-executables://coverage` resource also
+expose the latest incremental freshness report when `reports/freshness.json`
+is present. It describes the partitions checked by the latest bounded run;
+unvisited or failed partitions remain stale/unknown and do not change the
+negative-lookup contract.

@@ -88,3 +88,42 @@ Freshness and usage observations are provider facts. Missing metrics are
 `unknown`, not zero, and cross-ecosystem counts are never compared without a
 documented normalization method. `assess_executable` exposes derived risk with
 methodology version `1.0.0` while preserving the underlying observations.
+
+## Incremental freshness scans
+
+Full crawls are not required for every freshness observation. A partition
+manifest under `fixtures/freshness/manifest.json` declares the source units to
+visit. A bounded run advances a persisted round-robin cursor, scans a limited
+number of partitions and normalized records, and writes:
+
+- `data/freshness/state.json` — cursor, source checksums, completed cycles,
+  last successful observations, and staleness state;
+- `reports/freshness.json` — run ID, selected/skipped/failed partitions,
+  source checksum, cursor, bytes, changes, removals, and rate-limit metadata.
+
+Run it locally with:
+
+```sh
+global-executables freshness \
+  --root . \
+  --manifest fixtures/freshness/manifest.json \
+  --state data/freshness/state.json \
+  --report reports/freshness.json \
+  --partition-budget 1 \
+  --record-budget 1000
+```
+
+The scheduler is deterministic and fair: every enabled partition is selected
+in manifest order over successive runs, including partitions skipped by a
+previous run budget. A source checksum change starts a new cycle. New and
+changed observations are reported immediately; removals are reported only when
+the changed source partition completes a full cycle. A missing or malformed
+source preserves the last successful observation and marks the partition
+stale/unavailable.
+
+Freshness output is intentionally separate from `data/executables`. A partial
+scan always remains `coverage_kind=partial`, cannot make an absence
+`clear_in_index`, and cannot set dataset metadata to exhaustive. The scheduled
+workflow publishes only state and the report to the `freshness-data` branch;
+failed partitions remain visible and fail the workflow after the report is
+published. The workflow is a freshness signal, not a full-coverage claim.
