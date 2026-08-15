@@ -33,6 +33,19 @@ global-executables build fixtures/intermediate/*.jsonl --snapshot 2026-08-14
 pytest
 ```
 
+The scheduled refresh uses the same fail-closed command without developer
+state:
+
+```sh
+python tools/refresh.py fixtures/intermediate/*.jsonl \
+  --snapshot 2026-08-14 --coverage-kind partial
+```
+
+It writes `reports/refresh.json`, refuses missing collector inputs, validates
+the generated tree, and publishes only the complete generated diff to the
+`generated-data` branch. A failed source is recorded as failed and cannot be
+represented as successful coverage.
+
 Real-content smoke test (network, substantial downloads, and Cargo required):
 
 ```sh
@@ -67,3 +80,11 @@ Search reads the reproducible JSON indexes rather than scanning canonical
 records. Each index is SHA-256 pinned in `data/metadata.json`. A required
 manifested index that is missing or whose bytes do not match fails closed with
 an index error; regenerate it with `global-executables build`.
+
+Provider scope dimensions are independent: OS records may include
+`source_type`, `package_system`, `distribution_family`, `distribution`, and
+`distribution_release`; language records may include `language` and `registry`.
+Freshness and usage observations are provider facts. Missing metrics are
+`unknown`, not zero, and cross-ecosystem counts are never compared without a
+documented normalization method. `assess_executable` exposes derived risk with
+methodology version `1.0.0` while preserving the underlying observations.

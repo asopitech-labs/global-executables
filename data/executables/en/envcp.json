@@ -7,7 +7,11 @@
       "version": "1.0",
       "repository": null,
       "source": "fixture",
-      "confidence": "filesystem"
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
     },
     {
       "ecosystem": "npm",
@@ -15,7 +19,13 @@
       "version": "2.0",
       "repository": "https://example.test/envcp",
       "source": "fixture",
-      "confidence": "direct"
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_release_at": "2026-07-01T00:00:00Z",
+      "latest_version": "2.0",
+      "last_observed_at": "2026-08-14T00:00:00Z"
     }
   ],
   "first_seen": "2026-08-14",

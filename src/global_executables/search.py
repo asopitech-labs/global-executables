@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .model import filename, shard, valid_command
+from .model import filename, provider_matches_scope, shard, valid_command
 
 
 class DatasetIndexError(RuntimeError):
@@ -21,30 +21,47 @@ class Dataset:
     def metadata(self) -> dict[str, Any]:
         return json.loads((self.data / "metadata.json").read_text())
 
-    def get(self, name: str) -> dict[str, Any] | None:
+    def get(self, name: str, scope: dict[str, str] | None = None) -> dict[str, Any] | None:
         if not valid_command(name):
             return None
         path = self.data / "executables" / shard(name) / filename(name)
         if not path.exists():
             return None
         value = json.loads(path.read_text())
-        return value if value["command"] == name else None
+        if value["command"] != name:
+            return None
+        if scope:
+            providers = [p for p in value["providers"] if provider_matches_scope(p, scope)]
+            if not providers:
+                return None
+            value = {**value, "providers": providers}
+        return value
 
-    def check(self, name: str) -> dict[str, Any]:
+    def check(self, name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
         meta = self.metadata
-        record = self.get(name)
+        record = self.get(name, scope)
         coverage = meta.get("coverage", {})
         exhaustive = meta.get("negative_lookup") == "exhaustive" and bool(coverage) and all(
             source.get("status") == "success" and source.get("coverage_kind") == "exhaustive"
             for source in coverage.values()
         )
-        scope = "exhaustive" if exhaustive else "unknown"
+        coverage_scope = "exhaustive" if exhaustive else "unknown"
         status = "collision" if record else ("clear_in_index" if exhaustive else "unknown")
-        result = {"name": name, "status": status, "snapshot": meta["snapshot"],
-                  "coverage_scope": scope,
-                  "checked_sources": meta.get("checked_sources", [])}
+        result = {"name": name, "found": bool(record), "status": status, "snapshot": meta["snapshot"],
+                  "coverage_scope": coverage_scope,
+                  "checked_sources": meta.get("checked_sources", []),
+                  "searched_sources": meta.get("checked_sources", []),
+                  "coverage": coverage}
         if record:
             result["providers"] = record["providers"]
+        else:
+            result["absence"] = {
+                "status": "not_found_in_current_index",
+                "confidence": "exhaustive" if exhaustive else "insufficient_coverage",
+                "searched_sources": meta.get("checked_sources", []),
+            }
+        if scope:
+            result["scope"] = scope
         return result
 
     def _read_index(self, relative: str) -> set[str]:
@@ -75,7 +92,8 @@ class Dataset:
             return set()
         return self._read_index(relative)
 
-    def search(self, prefix: str = "", length: int | None = None, ecosystem: str | None = None, limit: int = 100) -> list[str]:
+    def search(self, prefix: str = "", length: int | None = None, ecosystem: str | None = None,
+               limit: int = 100, scope: dict[str, str] | None = None) -> list[str]:
         candidates: list[set[str]] = []
         if prefix:
             # Two-character safe prefixes map to one shard. One-character and
@@ -88,11 +106,14 @@ class Dataset:
             candidates.append(self._read_optional_index(f"indexes/length/{length}.json"))
         if ecosystem:
             candidates.append(self._read_optional_index(f"indexes/ecosystem/{ecosystem}.json"))
+        if scope:
+            for dimension, value in scope.items():
+                candidates.append(self._read_optional_index(f"indexes/scope/{dimension}/{value}.json"))
         names = set.intersection(*candidates) if candidates else self._all_from_group("prefix")
         filtered = (name for name in names if (not prefix or name.startswith(prefix)) and (length is None or len(name) == length))
         return sorted(filtered, key=lambda value: (value.casefold(), value))[:limit]
 
-    def similar(self, name: str, limit: int = 20) -> list[dict[str, Any]]:
+    def similar(self, name: str, limit: int = 20, scope: dict[str, str] | None = None) -> list[dict[str, Any]]:
         def distance(a: str, b: str) -> int:
             row = list(range(len(b) + 1))
             for i, left in enumerate(a, 1):
@@ -114,6 +135,10 @@ class Dataset:
             if relative in manifest:
                 postings.append(self._read_index(relative))
         candidates = set().union(*postings) if postings else set()
+        if scope:
+            scope_sets = [self._read_optional_index(f"indexes/scope/{dimension}/{value}.json")
+                          for dimension, value in scope.items()]
+            candidates &= set.intersection(*scope_sets) if scope_sets else candidates
         found = []
         for candidate in candidates:
             candidate_grams = grams(candidate)

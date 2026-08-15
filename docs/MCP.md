@@ -45,8 +45,17 @@ The agent should keep rejected names internal:
 
 1. Generate candidate names internally.
 2. Call `check_executables` once for the batch.
-3. Remove every `collision`; do not treat `unknown` as proven clear.
-4. Call `search_similar_executables` for remaining candidates.
+3. Keep the explicit `found` observation separate from absence confidence;
+   `unknown` means insufficient coverage, not an unavailable query.
+4. Call `search_similar_executables` for not-found candidates.
 5. Remove confusing names and present only survivors, with snapshot/coverage caveats.
 
 There are no write tools or write HTTP routes.
+
+`assess_executable` and `assess_executables` add freshness, activity,
+popularity, and collision-risk dimensions. They preserve provider evidence and
+expose the assessment methodology version; they do not change a stale provider
+into a negative existence result.
+
+See [`SETUP.md`](SETUP.md) for a clean-checkout verification guide and the
+tested MCP client version.

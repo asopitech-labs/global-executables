@@ -12,6 +12,36 @@
     "repository": {"type": ["string", "null"], "format": "uri"},
     "source": {"type": "string", "minLength": 1},
     "confidence": {"enum": ["direct", "filesystem", "inferred"]},
-    "alias_of": {"type": "string", "minLength": 1}
+    "alias_of": {"type": "string", "minLength": 1},
+    "source_type": {"enum": ["os_package", "language_package", "container", "other"]},
+    "package_system": {"type": "string", "minLength": 1},
+    "distribution_family": {"type": "string", "minLength": 1},
+    "distribution": {"type": "string", "minLength": 1},
+    "distribution_release": {"type": "string", "minLength": 1},
+    "language": {"type": "string", "minLength": 1},
+    "registry": {"type": "string", "minLength": 1},
+    "latest_release_at": {"type": ["string", "null"], "format": "date-time"},
+    "latest_version": {"type": ["string", "null"]},
+    "last_observed_at": {"type": ["string", "null"], "format": "date-time"},
+    "release_history": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false,
+        "required": ["version", "released_at"],
+        "properties": {
+          "version": {"type": "string", "minLength": 1},
+          "released_at": {"type": "string", "format": "date-time"}
+        }}
+    },
+    "usage_metrics": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false,
+        "required": ["source", "period", "count", "observed_at"],
+        "properties": {
+          "source": {"type": "string", "minLength": 1},
+          "period": {"type": "string", "minLength": 1},
+          "count": {"type": "integer", "minimum": 0},
+          "observed_at": {"type": "string", "format": "date-time"}
+        }}
+    }
   }
 }

@@ -12,6 +12,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from . import __version__
+from .assessment import assess
 from .search import Dataset
 
 
@@ -35,38 +36,49 @@ def create_server(root: str | Path) -> FastMCP:
     ), json_response=True)
 
     @mcp.tool()
-    def check_executable(name: str) -> dict[str, Any]:
+    def check_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Check one exact, case-sensitive executable name."""
-        return dataset.check(name)
+        return dataset.check(name, scope)
 
     @mcp.tool()
-    def check_executables(names: list[str]) -> dict[str, Any]:
+    def check_executables(names: list[str], scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Batch-check naming candidates; this is the preferred agent path."""
         metadata = dataset.metadata
-        return {"results": [dataset.check(name) for name in names], "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata)}
+        return {"results": [dataset.check(name, scope) for name in names], "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata)}
 
     @mcp.tool()
-    def get_executable(name: str) -> dict[str, Any]:
+    def get_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Return one canonical record, with snapshot context, if it exists."""
         metadata = dataset.metadata
-        return {"record": dataset.get(name), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata)}
+        return {"record": dataset.get(name, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata), "scope": scope}
 
     @mcp.tool()
-    def search_executables(prefix: str = "", length: int | None = None, ecosystem: str | None = None, limit: int = 100) -> dict[str, Any]:
+    def search_executables(prefix: str = "", length: int | None = None, ecosystem: str | None = None, limit: int = 100, scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Search derived indexes by prefix, length, and/or ecosystem."""
         metadata = dataset.metadata
-        return {"executables": dataset.search(prefix, length, ecosystem, limit), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata)}
+        return {"executables": dataset.search(prefix, length, ecosystem, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata), "scope": scope}
 
     @mcp.tool()
-    def search_similar_executables(name: str, limit: int = 20) -> dict[str, Any]:
+    def search_similar_executables(name: str, limit: int = 20, scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Find typo/confusion candidates using trigram postings and edit distance."""
         metadata = dataset.metadata
-        return {"matches": dataset.similar(name, limit), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata)}
+        return {"matches": dataset.similar(name, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata), "scope": scope}
 
     @mcp.tool()
     def get_coverage() -> dict[str, Any]:
         """Return snapshot provenance and negative-query completeness."""
         return dataset.metadata
+
+    @mcp.tool()
+    def assess_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
+        """Assess factual freshness/activity signals separately from existence."""
+        return assess(dataset, name, scope)
+
+    @mcp.tool()
+    def assess_executables(names: list[str], scope: dict[str, str] | None = None) -> dict[str, Any]:
+        """Batch-assess candidate names while preserving the simple check contract."""
+        return {"results": [assess(dataset, name, scope) for name in names],
+                "snapshot": dataset.metadata["snapshot"], "coverage_scope": _scope(dataset.metadata)}
 
     @mcp.resource("global-executables://metadata", mime_type="application/json")
     def metadata_resource() -> str:

@@ -7,7 +7,16 @@ from pathlib import Path
 from typing import Any, Iterable
 
 COMMAND = re.compile(r"^[^/\\\x00-\x1f\x7f]{1,255}$")
-PROVIDER_KEYS = ("ecosystem", "package", "version", "repository", "source", "confidence", "alias_of")
+PROVIDER_KEYS = (
+    "ecosystem", "package", "version", "repository", "source", "confidence", "alias_of",
+    "source_type", "package_system", "distribution_family", "distribution",
+    "distribution_release", "language", "registry", "latest_release_at",
+    "latest_version", "last_observed_at", "release_history", "usage_metrics",
+)
+SCOPE_KEYS = (
+    "source_type", "package_system", "distribution_family", "distribution",
+    "distribution_release", "language", "registry", "ecosystem",
+)
 
 
 def valid_command(command: str) -> bool:
@@ -29,7 +38,20 @@ def filename(command: str) -> str:
 
 
 def provider_key(p: dict[str, Any]) -> tuple[str, ...]:
-    return tuple("" if p.get(k) is None else str(p.get(k, "")) for k in PROVIDER_KEYS)
+    def stable(value: Any) -> str:
+        if value is None:
+            return ""
+        if isinstance(value, (dict, list)):
+            return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        return str(value)
+    return tuple(stable(p.get(k)) for k in PROVIDER_KEYS)
+
+
+def provider_matches_scope(provider: dict[str, Any], scope: dict[str, str] | None) -> bool:
+    """Return whether every requested logical dimension matches a provider."""
+    if not scope:
+        return True
+    return all(provider.get(key) == value for key, value in scope.items())
 
 
 def dumps(value: Any) -> str:

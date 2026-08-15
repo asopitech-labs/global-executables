@@ -14,7 +14,7 @@ from mcp.client.streamable_http import streamable_http_client
 from global_executables.mcp_server import create_server
 
 ROOT = Path(__file__).parents[1]
-EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage"}
+EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage", "assess_executable", "assess_executables"}
 
 
 async def _assert_protocol(session: ClientSession):
@@ -28,7 +28,14 @@ async def _assert_protocol(session: ClientSession):
     assert not batch.isError
     payload = batch.structuredContent
     assert [item["status"] for item in payload["results"]] == ["collision", "unknown"]
+    assert payload["results"][1]["found"] is False
+    assert payload["results"][1]["absence"]["status"] == "not_found_in_current_index"
     assert payload["snapshot"] == "2026-08-14" and payload["coverage_scope"] == "unknown"
+    assessment = await session.call_tool("assess_executables", {"names": ["envcp", "evpk"]})
+    assert not assessment.isError
+    assert assessment.structuredContent["results"][0]["found"] is True
+    unknown_tool = await session.call_tool("does_not_exist", {})
+    assert unknown_tool.isError
 
     resources = await session.list_resources()
     assert {str(resource.uri) for resource in resources.resources} >= {
@@ -40,6 +47,12 @@ async def _assert_protocol(session: ClientSession):
     assert json.loads(schema.contents[0].text)["title"] == "Canonical executable record"
     executable = await session.read_resource("global-executables://executables/envcp")
     assert json.loads(executable.contents[0].text)["command"] == "envcp"
+    try:
+        await session.read_resource("global-executables://unknown-resource")
+    except Exception:
+        pass
+    else:
+        raise AssertionError("unknown resource should fail")
 
 
 async def test_local_stdio_protocol_works_without_network():
@@ -66,7 +79,7 @@ async def test_streamable_http_protocol_and_health():
                 if process.poll() is not None:
                     raise AssertionError(process.stderr.read().decode())
                 await asyncio.sleep(.05)
-        assert health == {"status": "ok", "service_version": "0.1.0", "snapshot": "2026-08-14", "coverage_scope": "unknown", "read_only": True}
+        assert health == {"status": "ok", "service_version": "1.1.0", "snapshot": "2026-08-14", "coverage_scope": "unknown", "read_only": True}
         async with streamable_http_client(f"http://127.0.0.1:{port}/mcp") as (read, write, _):
             async with ClientSession(read, write) as session:
                 await _assert_protocol(session)
@@ -82,3 +95,9 @@ async def test_server_exposes_no_write_contract_directly():
     server = create_server(ROOT)
     names = {tool.name for tool in await server.list_tools()}
     assert names == EXPECTED_TOOLS
+
+
+async def test_server_fails_closed_for_missing_dataset(tmp_path):
+    import pytest
+    with pytest.raises(FileNotFoundError):
+        create_server(tmp_path)
