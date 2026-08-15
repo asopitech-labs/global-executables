@@ -2,8 +2,8 @@
 
 The current main snapshot includes a measured production OS crawl plus
 explicitly partial language-registry and Homebrew inputs. The 2026-08-15
-snapshot contains 63,669 unique names, 113,213 provider observations, 63,585
-canonical files, and 23,710 derived index files. Debian stable, Ubuntu noble,
+snapshot contains 63,701 unique names, 113,352 provider observations, 63,617
+canonical files, and 23,714 derived index files. Debian stable, Ubuntu noble,
 and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
 official API supplies the executable inventory. npm, PyPI, crates.io, and Go
