@@ -34,6 +34,9 @@ async def _assert_protocol(session: ClientSession):
     assessment = await session.call_tool("assess_executables", {"names": ["envcp", "evpk"]})
     assert not assessment.isError
     assert assessment.structuredContent["results"][0]["found"] is True
+    coverage = await session.call_tool("get_coverage", {})
+    assert not coverage.isError
+    assert coverage.structuredContent["freshness"]["status"] == "unavailable"
     unknown_tool = await session.call_tool("does_not_exist", {})
     assert unknown_tool.isError
 
@@ -79,7 +82,7 @@ async def test_streamable_http_protocol_and_health():
                 if process.poll() is not None:
                     raise AssertionError(process.stderr.read().decode())
                 await asyncio.sleep(.05)
-        assert health == {"status": "ok", "service_version": "1.1.0", "snapshot": "2026-08-14", "coverage_scope": "unknown", "read_only": True}
+        assert health == {"status": "ok", "service_version": "1.2.0", "snapshot": "2026-08-14", "coverage_scope": "unknown", "read_only": True}
         async with streamable_http_client(f"http://127.0.0.1:{port}/mcp") as (read, write, _):
             async with ClientSession(read, write) as session:
                 await _assert_protocol(session)

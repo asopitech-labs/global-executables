@@ -12,3 +12,24 @@ def test_generated_records_validate(tmp_path):
     for path in (tmp_path/"data/executables").glob("**/*.json"): validator.validate(json.loads(path.read_text()))
     metadata=json.loads((ROOT/"schema/metadata.schema.json").read_text())
     Draft202012Validator(metadata,format_checker=FormatChecker()).validate(json.loads((tmp_path/"data/metadata.json").read_text()))
+
+
+def test_freshness_manifest_and_report_validate(tmp_path):
+    from datetime import datetime, timezone
+    from global_executables.freshness import run_scan
+
+    source = tmp_path / "source.jsonl"
+    source.write_text(json.dumps({"command": "fresh", "ecosystem": "fixture", "package": "fresh",
+                                  "version": "1", "repository": None, "source": "fixture",
+                                  "confidence": "direct"}) + "\n")
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(json.dumps({"version": 1, "partitions": [
+        {"id": "fixture/all", "source": "fixture", "input": "source.jsonl"}
+    ]}))
+    report_path = tmp_path / "reports/freshness.json"
+    run_scan(tmp_path, manifest, tmp_path / "data/freshness/state.json", report_path,
+             observed_at=datetime(2026, 8, 15, tzinfo=timezone.utc))
+    manifest_schema = json.loads((ROOT/"schema/freshness-manifest.schema.json").read_text())
+    report_schema = json.loads((ROOT/"schema/freshness-report.schema.json").read_text())
+    Draft202012Validator(manifest_schema, format_checker=FormatChecker()).validate(json.loads(manifest.read_text()))
+    Draft202012Validator(report_schema, format_checker=FormatChecker()).validate(json.loads(report_path.read_text()))

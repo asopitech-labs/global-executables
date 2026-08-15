@@ -484,12 +484,12 @@ MCP makes that dataset immediately useful to agents.
 
 The schemas, deterministic builder, derived prefix/length/ecosystem/trigram
 and logical-scope indexes, collector parsers, read-only local/HTTP MCP server,
-assessment API, and CI checks are implemented in this repository. Full-crawl
+assessment API, incremental partial freshness scans, and CI checks are implemented in this repository. Full-crawl
 coverage remains explicitly measured as partial until each upstream source is
 exhaustively collected. See
 [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) for exact naming, sharding, alias, and
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
-commands and honest measured coverage limitations.
+commands, rolling freshness scans, and honest measured coverage limitations.
 
 Install and query a checked-out snapshot without network access:
 
@@ -507,8 +507,11 @@ the canonical JSON directly, without running MCP.
 See [`docs/MCP.md`](docs/MCP.md) for local client configuration, the remote
 endpoint, resources, health visibility, and the survivor-only agent workflow.
 
-The scheduled job is currently an upstream-content smoke check, not a dataset
-refresh. Coverage is snapshot-specific and reported by `get_coverage`. The
+The scheduled job includes a bounded incremental freshness scan. It rotates
+through declared source partitions, persists a cursor and last successful
+observations on the `freshness-data` branch, and publishes a machine-readable
+report. It is a freshness signal, not a full dataset refresh. Coverage is
+snapshot-specific and reported by `get_coverage`. The
 checked-in initial snapshot is a deterministic test corpus;
 it is **not** full ecosystem coverage, so consumers must preserve
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.

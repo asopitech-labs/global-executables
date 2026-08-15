@@ -67,7 +67,7 @@ def create_server(root: str | Path) -> FastMCP:
     @mcp.tool()
     def get_coverage() -> dict[str, Any]:
         """Return snapshot provenance and negative-query completeness."""
-        return dataset.metadata
+        return {**dataset.metadata, "freshness": dataset.freshness}
 
     @mcp.tool()
     def assess_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
@@ -88,7 +88,8 @@ def create_server(root: str | Path) -> FastMCP:
     def coverage_resource() -> str:
         metadata = dataset.metadata
         return json.dumps({"snapshot": metadata["snapshot"], "negative_lookup": _scope(metadata),
-                           "checked_sources": metadata.get("checked_sources", []), "coverage": metadata.get("coverage", {})})
+                           "checked_sources": metadata.get("checked_sources", []), "coverage": metadata.get("coverage", {}),
+                           "freshness": dataset.freshness})
 
     @mcp.resource("global-executables://schema/{name}", mime_type="application/schema+json")
     def schema_resource(name: str) -> str:

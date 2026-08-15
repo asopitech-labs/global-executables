@@ -1,0 +1,83 @@
+name: Incremental freshness scan
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      partition_budget:
+        description: "Maximum partitions to scan"
+        required: false
+        default: "1"
+      record_budget:
+        description: "Maximum normalized records to scan"
+        required: false
+        default: "1000"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: incremental-freshness
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[test]'
+      - name: Restore persisted freshness state
+        run: |
+          git fetch origin freshness-data || true
+          mkdir -p data/freshness
+          if git cat-file -e origin/freshness-data:data/freshness/state.json 2>/dev/null; then
+            git show origin/freshness-data:data/freshness/state.json > data/freshness/state.json
+          fi
+      - name: Run bounded partial scan
+        id: scan
+        continue-on-error: true
+        env:
+          PARTITION_BUDGET: ${{ inputs.partition_budget || '1' }}
+          RECORD_BUDGET: ${{ inputs.record_budget || '1000' }}
+        run: |
+          python tools/freshness.py \
+            --root . \
+            --manifest fixtures/freshness/manifest.json \
+            --state data/freshness/state.json \
+            --report reports/freshness.json \
+            --partition-budget "$PARTITION_BUDGET" \
+            --record-budget "$RECORD_BUDGET"
+      - name: Upload freshness report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-report
+          path: reports/freshness.json
+      - name: Publish freshness state and report
+        if: always()
+        run: |
+          rm -rf /tmp/freshness-publish
+          if git show-ref --verify --quiet refs/remotes/origin/freshness-data; then
+            git worktree add /tmp/freshness-publish origin/freshness-data
+          else
+            git worktree add -b freshness-data /tmp/freshness-publish HEAD
+          fi
+          mkdir -p /tmp/freshness-publish/data/freshness /tmp/freshness-publish/reports
+          cp data/freshness/state.json /tmp/freshness-publish/data/freshness/state.json
+          cp reports/freshness.json /tmp/freshness-publish/reports/freshness.json
+          git -C /tmp/freshness-publish config user.name github-actions[bot]
+          git -C /tmp/freshness-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/freshness-publish add data/freshness/state.json reports/freshness.json
+          git -C /tmp/freshness-publish diff --cached --quiet || git -C /tmp/freshness-publish commit -m "Record incremental freshness scan"
+          git -C /tmp/freshness-publish push origin HEAD:freshness-data
+      - name: Fail the run when a partition failed
+        if: steps.scan.outcome == 'failure'
+        run: exit 1
