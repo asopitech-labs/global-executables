@@ -2,6 +2,18 @@
   "command": "filebeat",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v7.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v7.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.0.0+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "filebeat",
       "version": "9.5.1",

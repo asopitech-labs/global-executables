@@ -2,6 +2,30 @@
   "command": "bench",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "acto-rs",
+      "version": "0.5.2",
+      "repository": "https://github.com/dbeck/acto-rs",
+      "source": "https://crates.io/api/v1/crates/acto-rs/0.5.2/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fzzy/radix",
+      "version": "v0.5.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fzzy/radix/@v/v0.5.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bench",
       "version": "1.0.13",

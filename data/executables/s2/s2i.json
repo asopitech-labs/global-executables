@@ -2,6 +2,18 @@
   "command": "s2i",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/openshift/source-to-image",
+      "version": "v1.1.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/source-to-image/@v/v1.1.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.13"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "source-to-image",
       "version": "1.6.3",
