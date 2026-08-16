@@ -44,12 +44,14 @@ jobs:
           if git cat-file -e origin/artifact-data:data/production/pypi-projects.txt 2>/dev/null; then
             git show origin/artifact-data:data/production/pypi-projects.txt > data/production/pypi-projects.txt
           fi
-          for source in npm pypi crates; do
+          for source in npm pypi crates go; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             fi
           done
       - name: Run bounded artifact inspection
+        id: crawl
+        continue-on-error: true
         env:
           PACKAGE_BUDGET: ${{ inputs.package_budget || '1000' }}
           BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
@@ -62,10 +64,12 @@ jobs:
             --package-budget "$PACKAGE_BUDGET" \
             --byte-budget "$BYTE_BUDGET"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: registry-artifact-crawl-report
           path: reports/registry-artifact-crawl.json
       - name: Publish resumable state and normalized observations
+        if: always()
         run: |
           rm -rf /tmp/artifact-publish
           if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
@@ -79,9 +83,17 @@ jobs:
             cp data/production/pypi-projects.txt /tmp/artifact-publish/data/production/pypi-projects.txt
           fi
           cp data/production/intermediate/*.jsonl /tmp/artifact-publish/data/production/intermediate/ || true
-          cp reports/registry-artifact-crawl.json /tmp/artifact-publish/reports/registry-artifact-crawl.json
+          if test -f reports/registry-artifact-crawl.json; then
+            cp reports/registry-artifact-crawl.json /tmp/artifact-publish/reports/registry-artifact-crawl.json
+          fi
           git -C /tmp/artifact-publish config user.name github-actions[bot]
           git -C /tmp/artifact-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git -C /tmp/artifact-publish add -f data/production reports/registry-artifact-crawl.json
+          git -C /tmp/artifact-publish add -f data/production
+          if test -f /tmp/artifact-publish/reports/registry-artifact-crawl.json; then
+            git -C /tmp/artifact-publish add -f reports/registry-artifact-crawl.json
+          fi
           git -C /tmp/artifact-publish diff --cached --quiet || git -C /tmp/artifact-publish commit -m "Record registry artifact crawl"
           git -C /tmp/artifact-publish push origin HEAD:artifact-data
+      - name: Fail after publishing partial progress
+        if: steps.crawl.outcome == 'failure'
+        run: exit 1

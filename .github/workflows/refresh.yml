@@ -5,8 +5,14 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+
+concurrency:
+  group: generated-dataset-refresh
+  cancel-in-progress: false
+
 jobs:
   refresh:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -22,7 +28,16 @@ jobs:
             --report reports/production-crawl.json
       - name: Restore latest registry artifact observations
         run: |
-          git fetch origin artifact-data || true
+          if artifact_ref=$(git ls-remote --heads origin artifact-data); then
+            if test -n "$artifact_ref"; then
+              git fetch origin artifact-data
+            else
+              echo "artifact-data does not exist yet; using fixture inputs for the initial refresh"
+            fi
+          else
+            echo "::error::Unable to inspect the artifact-data branch; refusing to refresh with incomplete inputs"
+            exit 1
+          fi
           for source in npm pypi crates go; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
@@ -53,11 +68,13 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: refresh-report
-          path: reports/refresh.json
+          path: reports/production-refresh.json
       - name: Publish idempotent generated state
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add data/executables data/indexes data/metadata.json data/history.json reports/production-crawl.json reports/production-refresh.json
           git diff --cached --quiet || git commit -m "Refresh generated dataset"
-          git push origin HEAD:generated-data
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
