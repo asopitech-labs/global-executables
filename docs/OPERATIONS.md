@@ -77,10 +77,11 @@ python tools/refresh.py fixtures/intermediate/*.jsonl \
   --snapshot 2026-08-14 --coverage-kind partial
 ```
 
-It writes `reports/refresh.json`, refuses missing collector inputs, validates
-the generated tree, and publishes only the complete generated diff to `main`.
-A failed source is recorded as failed and cannot be
-represented as successful coverage.
+It writes `reports/refresh.json`, refuses missing collector inputs, and
+validates the generated tree. This local command does not publish to GitHub;
+the scheduled `refresh.yml` workflow runs the production equivalent and
+publishes the complete generated diff to `main`. A failed source is recorded
+as failed and cannot be represented as successful coverage.
 
 Real-content smoke test (network, substantial downloads, and Cargo required):
 

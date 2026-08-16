@@ -44,7 +44,7 @@ jobs:
           if git cat-file -e origin/artifact-data:data/production/pypi-projects.txt 2>/dev/null; then
             git show origin/artifact-data:data/production/pypi-projects.txt > data/production/pypi-projects.txt
           fi
-          for source in npm pypi crates; do
+          for source in npm pypi crates go; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             fi

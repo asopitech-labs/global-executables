@@ -308,6 +308,8 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
         except Exception as error:
             report["sources"][source] = {"status": "failed", "error": str(error), "coverage_kind": "partial"}
             report["status"] = "failed"
+        if report["sources"].get(source, {}).get("failures", 0):
+            report["status"] = "failed"
     report["coverage_kind"] = "exhaustive" if report["status"] == "success" and all(v.get("coverage_kind") == "exhaustive" for v in report["sources"].values()) else "partial"
     report["state"] = str(state_path); report["package_budget"] = package_budget; report["byte_budget"] = byte_budget
     _save_json(state_path, state)
