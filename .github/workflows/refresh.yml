@@ -28,7 +28,16 @@ jobs:
             --report reports/production-crawl.json
       - name: Restore latest registry artifact observations
         run: |
-          git fetch origin artifact-data || true
+          if artifact_ref=$(git ls-remote --heads origin artifact-data); then
+            if test -n "$artifact_ref"; then
+              git fetch origin artifact-data
+            else
+              echo "artifact-data does not exist yet; using fixture inputs for the initial refresh"
+            fi
+          else
+            echo "::error::Unable to inspect the artifact-data branch; refusing to refresh with incomplete inputs"
+            exit 1
+          fi
           for source in npm pypi crates go; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
