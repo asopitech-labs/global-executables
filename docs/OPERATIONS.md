@@ -23,8 +23,8 @@ remains unresolved.
 
 The scheduled refresh now downloads the production OS indexes with
 `tools/production_crawl.py`, merges them with the currently available registry
-inputs, and publishes only canonical data and reports to the `generated-data`
-branch. The fixture inputs remain in the tree for parser and protocol tests;
+inputs, and publishes only canonical data and reports to `main`. The fixture
+inputs remain in the tree for parser and protocol tests;
 they are not presented as exhaustive upstream coverage. `upstream-smoke.yml`
 downloads representative real indexes/packages from every planned ecosystem,
 inspects executable evidence inside them, and retains a measured report. It
@@ -78,8 +78,8 @@ python tools/refresh.py fixtures/intermediate/*.jsonl \
 ```
 
 It writes `reports/refresh.json`, refuses missing collector inputs, validates
-the generated tree, and publishes only the complete generated diff to the
-`generated-data` branch. A failed source is recorded as failed and cannot be
+the generated tree, and publishes only the complete generated diff to `main`.
+A failed source is recorded as failed and cannot be
 represented as successful coverage.
 
 Real-content smoke test (network, substantial downloads, and Cargo required):
