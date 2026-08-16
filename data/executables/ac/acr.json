@@ -2,6 +2,18 @@
   "command": "acr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "acr-cli",
+      "version": "0.7.0",
+      "repository": "https://github.com/t-seki/acr",
+      "source": "https://crates.io/api/v1/crates/acr-cli/0.7.0/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "acr",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-15"
+  "last_seen": "2026-08-16"
 }

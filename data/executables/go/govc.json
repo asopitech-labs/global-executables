@@ -2,6 +2,18 @@
   "command": "govc",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/vmware/govmomi",
+      "version": "v0.20.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/govmomi/@v/v0.20.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.20.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "govc",
       "version": "0.55.1",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-15"
+  "last_seen": "2026-08-16"
 }

@@ -2,6 +2,18 @@
   "command": "dnet",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/docker/libnetwork",
+      "version": "v0.0.0-20180830151422-a9cd636e3789",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/libnetwork/@v/v0.0.0-20180830151422-a9cd636e3789.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180830151422-a9cd636e3789"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "libdnet",
       "version": "1.18.2",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-15"
+  "last_seen": "2026-08-16"
 }

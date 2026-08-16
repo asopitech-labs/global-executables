@@ -1,9 +1,9 @@
 {
-  "command": "ident",
+  "command": "Ident",
   "providers": [
     {
       "ecosystem": "debian",
-      "package": "rcs",
+      "package": "afterstep",
       "version": null,
       "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
@@ -14,20 +14,8 @@
       "distribution": "debian"
     },
     {
-      "ecosystem": "homebrew",
-      "package": "rcs",
-      "version": "5.10.1",
-      "repository": "https://www.gnu.org/software/rcs/",
-      "source": "https://formulae.brew.sh/api/formula.json",
-      "confidence": "filesystem",
-      "source_type": "os_package",
-      "package_system": "homebrew",
-      "distribution_family": "macos",
-      "distribution": "macos"
-    },
-    {
       "ecosystem": "ubuntu",
-      "package": "rcs",
+      "package": "afterstep",
       "version": null,
       "repository": null,
       "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
@@ -39,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-15"
+  "last_seen": "2026-08-16"
 }
