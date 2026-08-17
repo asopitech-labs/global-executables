@@ -248,6 +248,40 @@ def _rubygems_names(body: bytes) -> list[str]:
     return sorted(names)
 
 
+def _crate_index_path(name: str) -> str:
+    lowered = name.lower()
+    if len(lowered) == 1:
+        return f"1/{lowered}"
+    if len(lowered) == 2:
+        return f"2/{lowered}"
+    if len(lowered) == 3:
+        return f"3/{lowered[0]}/{lowered}"
+    return f"{lowered[:2]}/{lowered[2:4]}/{lowered}"
+
+
+def _crate_latest_version(name: str, timeout: int) -> str:
+    body, _ = fetch(f"https://index.crates.io/{_crate_index_path(name)}", timeout)
+    for line in reversed(body.decode("utf-8", "replace").splitlines()):
+        if line.strip():
+            value = json.loads(line)
+            if not value.get("yanked"):
+                return value["vers"]
+    raise RegistryCrawlError(f"crate has no non-yanked version: {name}")
+
+
+def _crate_download(name: str, version: str, timeout: int) -> tuple[bytes, dict[str, Any], str]:
+    api_url = f"https://crates.io/api/v1/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(version)}/download"
+    try:
+        artifact, transfer = fetch(api_url, timeout)
+        return artifact, transfer, api_url
+    except urllib.error.HTTPError as error:
+        if error.code not in {403, 429, 500, 502, 503, 504}:
+            raise
+        url = f"https://static.crates.io/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(name)}-{urllib.parse.quote(version)}.crate"
+        artifact, transfer = fetch(url, timeout)
+        return artifact, transfer, url
+
+
 def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     project_file = Path(state.setdefault("projects_file", "data/production/pypi-projects.txt"))
     if not project_file.is_file():
@@ -271,7 +305,9 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
             candidates.sort(key=lambda item: (item.get("packagetype") != "bdist_wheel",
                                               "none-any" not in item.get("filename", ""), item.get("filename", "")))
             if not candidates:
-                raise RegistryCrawlError("latest release has no wheel or sdist")
+                unavailable[project] = "latest release has no wheel or sdist"
+                failures.pop(project, None)
+                continue
             url = candidates[0]["url"]
             artifact, transfer = fetch(url, timeout)
             downloaded += transfer["downloaded_bytes"]
@@ -304,8 +340,32 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
 def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     since = state.get("since", 0); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
     failures, unavailable = _failure_state(state)
+    retry_packages = state.setdefault("retry_packages", [])
+    for package in failures:
+        if package not in retry_packages:
+            retry_packages.append(package)
+    retry_budget = len(retry_packages)
     budget_exhausted = False
     while processed < budget:
+        if retry_budget:
+            retry_budget -= 1
+            name = retry_packages.pop(0)
+            try:
+                metadata_url = "https://registry.npmjs.org/" + urllib.parse.quote(name, safe="@")
+                metadata_body, transfer = fetch(metadata_url, timeout)
+                downloaded += transfer["downloaded_bytes"]
+                if downloaded > byte_budget:
+                    budget_exhausted = True
+                    break
+                rows.extend(npm_metadata(json.loads(metadata_body), metadata_url))
+                failures.pop(name, None)
+            except Exception as error:
+                _record_failure(failures, unavailable, name, error)
+                retry_packages.append(name)
+            processed += 1
+            if budget_exhausted:
+                break
+            continue
         query = urllib.parse.urlencode({"since": since, "limit": min(100, budget - processed)})
         body, _ = fetch(f"https://replicate.npmjs.com/_changes?{query}", timeout)
         page = json.loads(body); results = page.get("results", [])
@@ -339,18 +399,46 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             break
     state["since"] = since
     _append_rows(output, rows)
-    complete = bool(state.get("complete")) and not failures
+    complete = bool(state.get("complete")) and not failures and not retry_packages
     return {"since": since, "processed": processed, "records": len(rows),
             "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
-            "budget_exhausted": budget_exhausted, "complete": complete,
+            "retry_pending": len(retry_packages), "budget_exhausted": budget_exhausted, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}
 
 
 def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     page = int(state.get("page", 1)); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
     failures, unavailable = _failure_state(state)
+    retry_crates = state.setdefault("retry_crates", [])
+    for crate_name in failures:
+        if crate_name not in retry_crates:
+            retry_crates.append(crate_name)
+    retry_budget = len(retry_crates)
     budget_exhausted = False
     while processed < budget:
+        if retry_budget:
+            retry_budget -= 1
+            name = retry_crates.pop(0)
+            try:
+                version = _crate_latest_version(name, timeout)
+                artifact, transfer, url = _crate_download(name, version, timeout)
+                downloaded += transfer["downloaded_bytes"]
+                if downloaded > byte_budget:
+                    budget_exhausted = True
+                    break
+                with tarfile.open(fileobj=BytesIO(artifact), mode="r:gz") as archive:
+                    manifest_name = next(member for member in archive.getnames()
+                                         if member.count("/") == 1 and member.endswith("/Cargo.toml"))
+                    manifest = archive.extractfile(manifest_name).read().decode("utf-8", "replace")
+                    rows.extend(crates_manifest(manifest, name, version, None, url))
+                failures.pop(name, None)
+            except Exception as error:
+                _record_failure(failures, unavailable, name, error)
+                retry_crates.append(name)
+            processed += 1
+            if budget_exhausted:
+                break
+            continue
         body, _ = fetch(f"https://crates.io/api/v1/crates?page={page}&per_page=100", timeout)
         crates = json.loads(body).get("crates", [])
         if not crates:
@@ -360,15 +448,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
         for crate in crates:
             name = crate["name"]; version = crate.get("max_stable_version") or crate.get("newest_version")
             try:
-                api_url = f"https://crates.io/api/v1/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(version)}/download"
-                try:
-                    artifact, transfer = fetch(api_url, timeout)
-                    url = api_url
-                except urllib.error.HTTPError as error:
-                    if error.code not in {403, 429, 500, 502, 503, 504}:
-                        raise
-                    url = f"https://static.crates.io/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(name)}-{urllib.parse.quote(version)}.crate"
-                    artifact, transfer = fetch(url, timeout)
+                artifact, transfer, url = _crate_download(name, version, timeout)
                 downloaded += transfer["downloaded_bytes"]
                 if downloaded > byte_budget:
                     budget_exhausted = True
@@ -397,10 +477,10 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             break
     state["page"] = page
     _append_rows(output, rows)
-    complete = bool(state.get("complete")) and not failures
+    complete = bool(state.get("complete")) and not failures and not retry_crates
     return {"page": page, "processed": processed, "records": len(rows),
             "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
-            "budget_exhausted": budget_exhausted, "complete": complete,
+            "retry_pending": len(retry_crates), "budget_exhausted": budget_exhausted, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}
 
 
