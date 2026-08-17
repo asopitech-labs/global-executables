@@ -70,9 +70,15 @@ def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str
     """Return retryable failures and preserve permanent 404s separately."""
     failures = state.setdefault("failures", {})
     unavailable = state.setdefault("unavailable", {})
+    retry_projects = state.setdefault("retry_projects", [])
     for key, message in list(failures.items()):
-        if "HTTP Error 404" in str(message):
-            unavailable[key] = str(message)
+        text = str(message)
+        if text == "latest release has no wheel; sdist inspection required":
+            if key not in retry_projects:
+                retry_projects.append(key)
+            failures.pop(key, None)
+        elif "HTTP Error 404" in text:
+            unavailable[key] = text
             failures.pop(key, None)
     return failures, unavailable
 
@@ -210,10 +216,12 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
     projects = [line.strip() for line in project_file.read_text().splitlines() if line.strip()]
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
+    retry_projects = state.setdefault("retry_projects", [])
     rows: list[dict[str, Any]] = []
     budget_exhausted = False
-    while cursor < len(projects) and processed < budget:
-        project = projects[cursor]
+    while (retry_projects or cursor < len(projects)) and processed < budget:
+        retrying = bool(retry_projects)
+        project = retry_projects.pop(0) if retrying else projects[cursor]
         try:
             metadata_body, _ = fetch(f"https://pypi.org/pypi/{urllib.parse.quote(project)}/json", timeout)
             metadata = json.loads(metadata_body); info = metadata.get("info", {})
@@ -236,7 +244,9 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
             failures.pop(project, None)
         except Exception as error:  # keep the cursor moving; failures block exhaustive status
             _record_failure(failures, unavailable, project, error)
-        cursor += 1; processed += 1
+        if not retrying:
+            cursor += 1
+        processed += 1
         if budget_exhausted:
             break
     state["cursor"] = cursor
@@ -244,8 +254,9 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
     return {"cursor": cursor, "catalog_size": len(projects), "processed": processed,
             "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
             "budget_exhausted": budget_exhausted,
-            "unavailable": len(unavailable), "complete": cursor >= len(projects) and not failures,
-            "coverage_kind": "exhaustive" if cursor >= len(projects) and not failures else "partial"}
+            "unavailable": len(unavailable), "retry_pending": len(retry_projects),
+            "complete": cursor >= len(projects) and not failures and not retry_projects,
+            "coverage_kind": "exhaustive" if cursor >= len(projects) and not failures and not retry_projects else "partial"}
 
 
 def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
