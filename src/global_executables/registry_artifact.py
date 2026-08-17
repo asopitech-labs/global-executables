@@ -360,8 +360,16 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
         for crate in crates:
             name = crate["name"]; version = crate.get("max_stable_version") or crate.get("newest_version")
             try:
-                url = f"https://crates.io/api/v1/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(version)}/download"
-                artifact, transfer = fetch(url, timeout); downloaded += transfer["downloaded_bytes"]
+                api_url = f"https://crates.io/api/v1/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(version)}/download"
+                try:
+                    artifact, transfer = fetch(api_url, timeout)
+                    url = api_url
+                except urllib.error.HTTPError as error:
+                    if error.code not in {403, 429, 500, 502, 503, 504}:
+                        raise
+                    url = f"https://static.crates.io/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(name)}-{urllib.parse.quote(version)}.crate"
+                    artifact, transfer = fetch(url, timeout)
+                downloaded += transfer["downloaded_bytes"]
                 if downloaded > byte_budget:
                     budget_exhausted = True
                     break
