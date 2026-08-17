@@ -2,6 +2,30 @@
   "command": "air",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ai-registry-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/your-org/ai-agent-registry",
+      "source": "https://crates.io/api/v1/crates/ai-registry-cli/0.1.0/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "air",
+      "version": "1.0.2",
+      "repository": "https://github.com/ramp-stack/air.git",
+      "source": "https://crates.io/api/v1/crates/air/1.0.2/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "air",
       "version": "0.11.0",

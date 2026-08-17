@@ -2,6 +2,18 @@
   "command": "gosec",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/alecthomas/gometalinter",
+      "version": "v3.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alecthomas/gometalinter/@v/v3.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gosec",
       "version": "2.28.0",
