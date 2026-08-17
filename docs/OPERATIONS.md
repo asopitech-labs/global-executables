@@ -8,15 +8,19 @@ canonical files, and 23,714 derived index files. Debian stable, Ubuntu noble,
 and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
 official API supplies the executable inventory. npm, PyPI, crates.io, Go
-modules, and RubyGems remain
+modules, RubyGems, and Packagist remain
 `partial` until their package artifacts are exhaustively inspected.
 
 The registry artifact crawler is resumable and budgeted. It enumerates the
 PyPI simple catalog, follows npm's replication change cursor, pages the
-crates.io catalog, follows Go's module index cursor, and enumerates RubyGems'
-compact-index names catalog. For each selected package it downloads an artifact
-and extracts declared console scripts, npm bins, Cargo binary targets, Go
-`package main` directories, or RubyGems gemspec executables. The
+crates.io catalog, follows Go's module index cursor, enumerates RubyGems'
+compact-index names catalog, and enumerates Packagist's package catalog. For
+each selected package it downloads an artifact or reads authoritative package
+metadata and extracts declared console scripts, npm bins, Cargo binary targets,
+Go `package main` directories, RubyGems gemspec executables, or Composer
+`bin` declarations. Packagist rows are emitted only when the newest package
+metadata contains `bin`; the command is the basename Composer exposes through
+`vendor/bin`. The
 `registry-artifacts.yml` workflow runs every six hours and persists its cursor,
 failures, normalized observations, and report on the `artifact-data` branch.
 It cannot mark a source exhaustive while any cursor, artifact, or failure
@@ -64,6 +68,7 @@ python tools/refresh.py \
   data/production/intermediate/go.jsonl \
   data/production/intermediate/npm.jsonl data/production/intermediate/pypi.jsonl \
   data/production/intermediate/rubygems.jsonl \
+  data/production/intermediate/packagist.jsonl \
   --snapshot "$(date -u +%F)" \
   --coverage-map data/production/coverage-map.json \
   --report reports/production-refresh.json

@@ -5,7 +5,9 @@ import tarfile
 import zipfile
 
 import global_executables.registry_artifact as registry_artifact
-from global_executables.registry_artifact import _go_rows, _pypi_projects, _ruby_gem_rows, _rubygems_names, _sdist_rows, _wheel_rows
+from global_executables.registry_artifact import (_go_rows, _packagist_packages, _packagist_rows,
+                                                   _pypi_projects, _ruby_gem_rows, _rubygems_names,
+                                                   _sdist_rows, _wheel_rows)
 
 
 def test_pypi_simple_catalog_is_normalized_and_sorted():
@@ -57,6 +59,24 @@ def test_rubygems_catalog_and_gem_metadata_are_artifact_evidence():
     rows = _ruby_gem_rows(stream.getvalue(), "demo", "1.0.0", "https://example.test", "https://example.test/demo.gem")
     assert [row["command"] for row in rows] == ["demo", "demo-admin"]
     assert rows[0]["language"] == "ruby" and rows[0]["registry"] == "rubygems"
+
+
+def test_packagist_only_emits_composer_bin_declarations():
+    body = json.dumps({
+        "packages": {
+            "demo/tool": [{
+                "name": "demo/tool", "version": "1.0.0",
+                "bin": ["bin/demo", "tools/admin"],
+                "source": {"url": "https://example.test/demo/tool"},
+            }],
+            "demo/library": [{"name": "demo/library", "version": "1.0.0"}],
+        }
+    }).encode()
+    assert _packagist_packages(b'{"packageNames":["demo/tool","demo/library"]}') == ["demo/library", "demo/tool"]
+    rows = _packagist_rows(json.loads(body), "demo/tool", "https://repo.packagist.org/p2/demo/tool.json")
+    assert [row["command"] for row in rows] == ["admin", "demo"]
+    assert all(row["language"] == "php" and row["registry"] == "packagist" for row in rows)
+    assert _packagist_rows(json.loads(body), "demo/library", "https://example.test") == []
 
 
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):

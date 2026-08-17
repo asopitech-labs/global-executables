@@ -18,7 +18,7 @@ import urllib.error
 import urllib.request
 import zipfile
 from io import BytesIO
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
 from .collectors import crates_manifest, npm_metadata, record
@@ -246,6 +246,34 @@ def _rubygems_names(body: bytes) -> list[str]:
         if name and name != "---" and not name.endswith(":") and " " not in name:
             names.add(name)
     return sorted(names)
+
+
+def _packagist_packages(body: bytes) -> list[str]:
+    value = json.loads(body)
+    names = value.get("packageNames", []) if isinstance(value, dict) else []
+    return sorted(name.strip() for name in names if isinstance(name, str) and name.strip())
+
+
+def _packagist_rows(value: dict[str, Any], package: str, source: str) -> list[dict[str, Any]]:
+    """Extract Composer ``bin`` declarations from the newest Packagist version."""
+    versions = value.get("packages", {}).get(package, [])
+    if not isinstance(versions, list) or not versions:
+        return []
+    metadata = versions[0]
+    bins = metadata.get("bin", []) if isinstance(metadata, dict) else []
+    if isinstance(bins, str):
+        bins = [bins]
+    if not isinstance(bins, list):
+        return []
+    version = metadata.get("version", "unknown")
+    repository = metadata.get("source") or metadata.get("homepage")
+    if isinstance(repository, dict):
+        repository = repository.get("url")
+    commands = {PurePosixPath(entry).name for entry in bins if isinstance(entry, str) and entry.strip()}
+    return [record(command, "packagist", package, version, repository, source,
+                   source_type="language_package", language="php", registry="packagist",
+                   latest_version=version)
+            for command in sorted(commands) if command]
 
 
 def _crate_index_path(name: str) -> str:
@@ -567,6 +595,52 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
+def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+    catalog_file = Path(state.setdefault("packages_file", "data/production/packagist-packages.txt"))
+    if not catalog_file.is_file():
+        body, transfer = fetch("https://packagist.org/packages/list.json", timeout)
+        catalog_file.parent.mkdir(parents=True, exist_ok=True)
+        catalog_file.write_text("\n".join(_packagist_packages(body)) + "\n")
+        state["catalog_bytes"] = transfer["downloaded_bytes"]
+    packages = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
+    failures, unavailable = _failure_state(state)
+    retry_packages = state.setdefault("retry_packagist", [])
+    for package in failures:
+        if package not in retry_packages:
+            retry_packages.append(package)
+    rows: list[dict[str, Any]] = []; budget_exhausted = False
+    while (retry_packages or cursor < len(packages)) and processed < budget:
+        retrying = bool(retry_packages)
+        package = retry_packages.pop(0) if retrying else packages[cursor]
+        try:
+            metadata_url = "https://repo.packagist.org/p2/" + urllib.parse.quote(package, safe="/") + ".json"
+            metadata_body, transfer = fetch(metadata_url, timeout)
+            downloaded += transfer["downloaded_bytes"]
+            if downloaded > byte_budget:
+                budget_exhausted = True
+                break
+            rows.extend(_packagist_rows(json.loads(metadata_body), package, metadata_url))
+            failures.pop(package, None)
+        except Exception as error:
+            _record_failure(failures, unavailable, package, error)
+            if retrying and package not in retry_packages:
+                retry_packages.append(package)
+        if not retrying:
+            cursor += 1
+        processed += 1
+        if budget_exhausted:
+            break
+    state["cursor"] = cursor
+    _append_rows(output, rows)
+    complete = cursor >= len(packages) and not failures and not retry_packages
+    return {"cursor": cursor, "catalog_size": len(packages), "processed": processed,
+            "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
+            "unavailable": len(unavailable), "retry_pending": len(retry_packages),
+            "budget_exhausted": budget_exhausted, "complete": complete,
+            "coverage_kind": "exhaustive" if complete else "partial"}
+
+
 def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Path, report_path: Path,
                            package_budget: int = 100, byte_budget: int = 500_000_000,
                            timeout: int = 120) -> dict[str, Any]:
@@ -574,7 +648,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
         "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates, "go": _crawl_go,
-        "rubygems": _crawl_rubygems,
+        "rubygems": _crawl_rubygems, "packagist": _crawl_packagist,
     }
     for source in sources:
         if source not in runners:
