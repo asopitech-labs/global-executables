@@ -2,6 +2,30 @@
   "command": "tsdb",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/tsdb",
+      "version": "v0.0.0-20190402121629-4f204dcbc150",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/tsdb/@v/v0.0.0-20190402121629-4f204dcbc150.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190402121629-4f204dcbc150"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/tsdb",
+      "version": "v0.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/tsdb/@v/v0.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "opentsdb",
       "version": "2.4.1",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-16"
+  "last_seen": "2026-08-17"
 }

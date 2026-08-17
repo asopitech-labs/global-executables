@@ -2,6 +2,18 @@
   "command": "notify",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "agent-notify",
+      "version": "0.3.0",
+      "repository": "https://github.com/neuwcodebox/agent-notify",
+      "source": "https://crates.io/api/v1/crates/agent-notify/0.3.0/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "notify",
       "version": "1.0.7",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-16"
+  "last_seen": "2026-08-17"
 }

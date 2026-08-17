@@ -2,6 +2,18 @@
   "command": "http-server",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "aex",
+      "version": "0.1.21",
+      "repository": "https://github.com/Free-Web-Movement/aex",
+      "source": "https://crates.io/api/v1/crates/aex/0.1.21/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.21"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "http-server",
       "version": "14.1.1",
@@ -39,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-16"
+  "last_seen": "2026-08-17"
 }

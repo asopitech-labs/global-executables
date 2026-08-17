@@ -2,6 +2,30 @@
   "command": "clair",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/coreos/clair",
+      "version": "v2.0.4+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/clair/@v/v2.0.4%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.4+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/clair",
+      "version": "v2.0.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/clair/@v/v2.0.8%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.8+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "clair",
       "version": "4.8.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-16"
+  "last_seen": "2026-08-17"
 }

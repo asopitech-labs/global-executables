@@ -2,6 +2,18 @@
   "command": "bosh-cli",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/cloudfoundry/bosh-cli",
+      "version": "v3.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudfoundry/bosh-cli/@v/v3.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.1+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bosh-cli",
       "version": "7.10.9",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-16"
+  "last_seen": "2026-08-17"
 }

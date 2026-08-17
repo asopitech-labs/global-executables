@@ -2,6 +2,18 @@
   "command": "task",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "agent-task",
+      "version": "0.3.2",
+      "repository": "https://github.com/nyosegawa/agent-task",
+      "source": "https://crates.io/api/v1/crates/agent-task/0.3.2/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.2"
+    },
+    {
       "ecosystem": "debian",
       "package": "taskwarrior",
       "version": null,
@@ -28,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "task",
-      "version": "3.4.2",
+      "version": "3.5.0",
       "repository": "https://taskwarrior.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -63,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-16"
+  "last_seen": "2026-08-17"
 }
