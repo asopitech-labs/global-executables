@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
@@ -26,14 +27,25 @@ def _scope(metadata: dict[str, Any]) -> str:
     return "unknown"
 
 
-def create_server(root: str | Path) -> FastMCP:
+def create_server(
+    root: str | Path,
+    *,
+    host: str = "127.0.0.1",
+    port: int = 8000,
+    allowed_hosts: list[str] | None = None,
+) -> FastMCP:
     root = Path(root).resolve()
     dataset = Dataset(root)
     dataset.metadata  # Fail at startup if the checkout has no dataset.
+    transport_security = None
+    if allowed_hosts is None and host not in {"127.0.0.1", "localhost", "::1"}:
+        allowed_hosts = [f"{host}:{port}", f"127.0.0.1:{port}", f"localhost:{port}"]
+    if allowed_hosts is not None:
+        transport_security = TransportSecuritySettings(allowed_hosts=allowed_hosts)
     mcp = FastMCP("Global Executables", instructions=(
         "Read-only executable collision lookup over the checked-out Git JSON dataset. "
         "Absence is clear_in_index only for explicitly exhaustive snapshots; otherwise unknown."
-    ), json_response=True)
+    ), host=host, port=port, json_response=True, transport_security=transport_security)
 
     @mcp.tool()
     def check_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
@@ -124,8 +136,9 @@ def main() -> None:
     parser.add_argument("--transport", choices=["stdio", "streamable-http"], default="stdio")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--allowed-host", action="append", default=None)
     args = parser.parse_args()
-    server = create_server(args.root)
+    server = create_server(args.root, host=args.host, port=args.port, allowed_hosts=args.allowed_host)
     if args.transport == "streamable-http":
         server.settings.host = args.host
         server.settings.port = args.port

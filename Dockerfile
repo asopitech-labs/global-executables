@@ -7,4 +7,4 @@ COPY data ./data
 RUN pip install --no-cache-dir .
 EXPOSE 8000
 ENV GLOBAL_EXECUTABLES_ROOT=/app
-CMD ["global-executables-mcp", "--transport", "streamable-http", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["global-executables-mcp", "--transport", "streamable-http", "--host", "0.0.0.0", "--port", "8000", "--allowed-host", "mcp:8000", "--allowed-host", "127.0.0.1:8000", "--allowed-host", "localhost:8000", "--allowed-host", "0.0.0.0:8000"]

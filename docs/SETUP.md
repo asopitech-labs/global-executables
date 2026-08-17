@@ -6,6 +6,9 @@ tests in this repository.
 
 ## Local stdio
 
+For the Codex-specific setup and verification flow, see
+[`CODEX_MCP_TUTORIAL.md`](CODEX_MCP_TUTORIAL.md).
+
 ```sh
 git clone https://github.com/asopitech-labs/global-executables.git
 cd global-executables
@@ -54,6 +57,21 @@ curl http://127.0.0.1:8000/health
 
 Configure the client endpoint as `http://127.0.0.1:8000/mcp`. The health
 response includes service version, snapshot, coverage scope, and `read_only`.
+
+## Container Codex smoke test
+
+The repository includes a reproducible container test. It builds the MCP
+server, starts it on an isolated Docker network, registers it in Codex inside
+a separate test container, and calls the MCP health endpoint, tools, and
+resources:
+
+```sh
+tools/test_container_mcp.sh
+```
+
+The test image pins the Codex CLI with `CODEX_VERSION` (default `0.147.0`). It
+only verifies MCP registration and protocol behavior; it does not make a
+model/API request or require an OpenAI login.
 
 ## Agent verification workflow
 

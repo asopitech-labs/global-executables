@@ -1,5 +1,8 @@
 # MCP access and agent integration
 
+For a step-by-step Codex CLI setup, see
+[`CODEX_MCP_TUTORIAL.md`](CODEX_MCP_TUTORIAL.md).
+
 The server is a read-only view of a checked-out `data/` tree. It does not copy
 records into a database and requires no network access in local stdio mode.
 
