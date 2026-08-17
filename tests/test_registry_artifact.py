@@ -1,9 +1,10 @@
 from io import BytesIO
 import json
+import tarfile
 import zipfile
 
 import global_executables.registry_artifact as registry_artifact
-from global_executables.registry_artifact import _go_rows, _pypi_projects, _wheel_rows
+from global_executables.registry_artifact import _go_rows, _pypi_projects, _sdist_rows, _wheel_rows
 
 
 def test_pypi_simple_catalog_is_normalized_and_sorted():
@@ -18,6 +19,18 @@ def test_wheel_console_scripts_are_artifact_evidence():
     rows = _wheel_rows(stream.getvalue(), "demo", "1.0", "https://example.test", "https://example.test/demo.whl")
     assert rows[0]["command"] == "demo"
     assert rows[0]["confidence"] == "direct"
+    assert rows[0]["registry"] == "pypi"
+
+
+def test_pypi_sdist_project_scripts_are_artifact_evidence():
+    stream = BytesIO()
+    with tarfile.open(fileobj=stream, mode="w:gz") as archive:
+        body = b"[project]\nname = 'demo'\n[project.scripts]\ndemo = 'demo:main'\n"
+        info = tarfile.TarInfo("demo-1.0/pyproject.toml")
+        info.size = len(body)
+        archive.addfile(info, BytesIO(body))
+    rows = _sdist_rows(stream.getvalue(), "demo", "1.0", "https://example.test", "https://example.test/demo.tar.gz")
+    assert rows[0]["command"] == "demo"
     assert rows[0]["registry"] == "pypi"
 
 

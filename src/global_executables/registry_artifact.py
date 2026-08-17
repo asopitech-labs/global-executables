@@ -11,7 +11,9 @@ import json
 import re
 import tarfile
 import time
+import tomllib
 import urllib.parse
+import urllib.error
 import urllib.request
 import zipfile
 from io import BytesIO
@@ -62,6 +64,95 @@ def _append_rows(path: Path, rows: list[dict[str, Any]]) -> None:
     with path.open("a", encoding="utf-8") as handle:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+
+
+def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str]]:
+    """Return retryable failures and preserve permanent 404s separately."""
+    failures = state.setdefault("failures", {})
+    unavailable = state.setdefault("unavailable", {})
+    for key, message in list(failures.items()):
+        if "HTTP Error 404" in str(message):
+            unavailable[key] = str(message)
+            failures.pop(key, None)
+    return failures, unavailable
+
+
+def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: str, error: Exception) -> None:
+    message = str(error)
+    if isinstance(error, urllib.error.HTTPError) and error.code == 404:
+        unavailable[key] = message
+        failures.pop(key, None)
+    else:
+        failures[key] = message
+
+
+def _archive_files(body: bytes) -> dict[str, bytes]:
+    files: dict[str, bytes] = {}
+    try:
+        with tarfile.open(fileobj=BytesIO(body), mode="r:*") as archive:
+            for member in archive.getmembers():
+                if member.isfile() and member.name not in files:
+                    handle = archive.extractfile(member)
+                    if handle is not None:
+                        files[member.name] = handle.read()
+        return files
+    except tarfile.TarError:
+        pass
+    with zipfile.ZipFile(BytesIO(body)) as archive:
+        return {name: archive.read(name) for name in archive.namelist() if not name.endswith("/")}
+
+
+def _entry_point_rows(files: dict[str, bytes], package: str, version: str,
+                      repository: str | None, source: str, artifact: str) -> list[dict[str, Any]]:
+    commands: set[str] = set()
+
+    def add_lines(value: str) -> None:
+        for line in value.splitlines():
+            line = line.strip()
+            if line and not line.startswith(("#", "[")) and "=" in line:
+                commands.add(line.split("=", 1)[0].strip())
+
+    for name, body in files.items():
+        if name.endswith(".dist-info/entry_points.txt") or name.endswith(".egg-info/entry_points.txt"):
+            section = None
+            for raw in body.decode("utf-8", "replace").splitlines():
+                line = raw.strip()
+                if line.startswith("["):
+                    section = line
+                elif section == "[console_scripts]" and "=" in line:
+                    commands.add(line.split("=", 1)[0].strip())
+
+    for name, body in files.items():
+        text = body.decode("utf-8", "replace")
+        if name.endswith("pyproject.toml"):
+            try:
+                document = tomllib.loads(text)
+                project = document.get("project", {})
+                commands.update(project.get("scripts", {}).keys())
+                commands.update(project.get("entry-points", {}).get("console_scripts", {}).keys())
+                poetry = document.get("tool", {}).get("poetry", {}).get("scripts", {})
+                commands.update(poetry.keys())
+            except (tomllib.TOMLDecodeError, AttributeError):
+                pass
+        elif name.endswith("setup.cfg"):
+            in_console = False
+            for raw in text.splitlines():
+                line = raw.strip()
+                if line.startswith("["):
+                    in_console = line.lower() == "[options.entry_points]"
+                elif in_console and "=" in line:
+                    add_lines(line)
+        elif name.endswith("setup.py"):
+            for match in re.finditer(r"console_scripts[^\[\(]*[\[\(](.*?)[\]\)]", text, re.S):
+                add_lines(match.group(1).replace(",", "\n"))
+
+    return [record(command, "pypi", package, version, repository, artifact,
+                   source_type="language_package", language="python", registry="pypi",
+                   latest_version=version) for command in sorted(commands)]
+
+
+def _sdist_rows(body: bytes, package: str, version: str, repository: str | None, source: str) -> list[dict[str, Any]]:
+    return _entry_point_rows(_archive_files(body), package, version, repository, source, source)
 
 
 def _wheel_rows(body: bytes, package: str, version: str, repository: str | None, source: str) -> list[dict[str, Any]]:
@@ -117,7 +208,8 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
         project_file.write_text("\n".join(_pypi_projects(body)) + "\n")
         state["catalog_bytes"] = transfer["downloaded_bytes"]
     projects = [line.strip() for line in project_file.read_text().splitlines() if line.strip()]
-    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0; failures = state.setdefault("failures", {})
+    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
+    failures, unavailable = _failure_state(state)
     rows: list[dict[str, Any]] = []
     budget_exhausted = False
     while cursor < len(projects) and processed < budget:
@@ -125,20 +217,25 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
         try:
             metadata_body, _ = fetch(f"https://pypi.org/pypi/{urllib.parse.quote(project)}/json", timeout)
             metadata = json.loads(metadata_body); info = metadata.get("info", {})
-            candidates = [item for item in metadata.get("urls", []) if item.get("packagetype") == "bdist_wheel"]
-            candidates.sort(key=lambda item: ("none-any" not in item.get("filename", ""), item.get("filename", "")))
+            candidates = [item for item in metadata.get("urls", []) if item.get("packagetype") in {"bdist_wheel", "sdist"}]
+            candidates.sort(key=lambda item: (item.get("packagetype") != "bdist_wheel",
+                                              "none-any" not in item.get("filename", ""), item.get("filename", "")))
             if not candidates:
-                raise RegistryCrawlError("latest release has no wheel; sdist inspection required")
+                raise RegistryCrawlError("latest release has no wheel or sdist")
             url = candidates[0]["url"]
             artifact, transfer = fetch(url, timeout)
             downloaded += transfer["downloaded_bytes"]
             if downloaded > byte_budget:
                 budget_exhausted = True
                 break
-            rows.extend(_wheel_rows(artifact, info.get("name", project), info.get("version", "unknown"), info.get("home_page"), url))
+            package = info.get("name", project); version = info.get("version", "unknown")
+            if candidates[0].get("packagetype") == "bdist_wheel":
+                rows.extend(_wheel_rows(artifact, package, version, info.get("home_page"), url))
+            else:
+                rows.extend(_sdist_rows(artifact, package, version, info.get("home_page"), url))
             failures.pop(project, None)
         except Exception as error:  # keep the cursor moving; failures block exhaustive status
-            failures[project] = str(error)
+            _record_failure(failures, unavailable, project, error)
         cursor += 1; processed += 1
         if budget_exhausted:
             break
@@ -147,13 +244,13 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
     return {"cursor": cursor, "catalog_size": len(projects), "processed": processed,
             "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
             "budget_exhausted": budget_exhausted,
-            "complete": cursor >= len(projects) and not failures,
+            "unavailable": len(unavailable), "complete": cursor >= len(projects) and not failures,
             "coverage_kind": "exhaustive" if cursor >= len(projects) and not failures else "partial"}
 
 
 def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     since = state.get("since", 0); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
-    failures = state.setdefault("failures", {})
+    failures, unavailable = _failure_state(state)
     budget_exhausted = False
     while processed < budget:
         query = urllib.parse.urlencode({"since": since, "limit": min(100, budget - processed)})
@@ -177,7 +274,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
                 rows.extend(npm_metadata(json.loads(metadata_body), metadata_url))
                 failures.pop(name, None)
             except Exception as error:
-                failures[name] = str(error)
+                _record_failure(failures, unavailable, name, error)
             since = change_since
             processed += 1
             if processed >= budget:
@@ -191,14 +288,14 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
     _append_rows(output, rows)
     complete = bool(state.get("complete")) and not failures
     return {"since": since, "processed": processed, "records": len(rows),
-            "downloaded_bytes": downloaded, "failures": len(failures),
+            "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
             "budget_exhausted": budget_exhausted, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}
 
 
 def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     page = int(state.get("page", 1)); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
-    failures = state.setdefault("failures", {})
+    failures, unavailable = _failure_state(state)
     budget_exhausted = False
     while processed < budget:
         body, _ = fetch(f"https://crates.io/api/v1/crates?page={page}&per_page=100", timeout)
@@ -228,7 +325,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
                                                language="rust", registry="crates.io", latest_version=version))
                 failures.pop(name, None)
             except Exception as error:
-                failures[name] = str(error)
+                _record_failure(failures, unavailable, name, error)
             processed += 1
             page_processed += 1
             if processed >= budget:
@@ -241,7 +338,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     _append_rows(output, rows)
     complete = bool(state.get("complete")) and not failures
     return {"page": page, "processed": processed, "records": len(rows),
-            "downloaded_bytes": downloaded, "failures": len(failures),
+            "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
             "budget_exhausted": budget_exhausted, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}
 
@@ -249,7 +346,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
 def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     since = state.get("since", "2019-01-01T00:00:00Z")
     processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
-    failures = state.setdefault("failures", {})
+    failures, unavailable = _failure_state(state)
     budget_exhausted = False
     while processed < budget:
         query = urllib.parse.urlencode({"limit": min(1000, budget - processed), "since": since})
@@ -272,7 +369,7 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
                 rows.extend(_go_rows(artifact, module, version, url))
                 failures.pop(key, None)
             except Exception as error:
-                failures[key] = str(error)
+                _record_failure(failures, unavailable, key, error)
             since = timestamp
             processed += 1
             if processed >= budget:
@@ -286,7 +383,7 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
     _append_rows(output, rows)
     complete = bool(state.get("complete")) and not failures
     return {"since": since, "processed": processed, "records": len(rows),
-            "downloaded_bytes": downloaded, "failures": len(failures),
+            "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
             "budget_exhausted": budget_exhausted, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}
 
