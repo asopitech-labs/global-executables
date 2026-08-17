@@ -1,19 +1,67 @@
 {
-  "byte_budget": 500000000,
+  "byte_budget": 5000000000,
   "coverage_kind": "partial",
-  "package_budget": 25,
+  "package_budget": 1000,
   "sources": {
+    "crates": {
+      "budget_exhausted": false,
+      "complete": false,
+      "coverage_kind": "partial",
+      "downloaded_bytes": 138900335,
+      "failures": 264,
+      "page": 103,
+      "processed": 1000,
+      "records": 237,
+      "unavailable": 0
+    },
     "go": {
       "budget_exhausted": false,
       "complete": false,
       "coverage_kind": "partial",
-      "downloaded_bytes": 48549626,
+      "downloaded_bytes": 1207692750,
+      "failures": 0,
+      "processed": 1000,
+      "records": 4358,
+      "since": "2019-05-03T14:47:11.884681Z",
+      "unavailable": 814
+    },
+    "npm": {
+      "budget_exhausted": false,
+      "complete": false,
+      "coverage_kind": "partial",
+      "downloaded_bytes": 410483,
       "failures": 3,
-      "processed": 25,
-      "records": 139,
-      "since": "2019-04-11T14:31:40.612357Z"
+      "processed": 1000,
+      "records": 0,
+      "since": 2510293,
+      "unavailable": 1
+    },
+    "pypi": {
+      "budget_exhausted": false,
+      "catalog_size": 870264,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 12102,
+      "downloaded_bytes": 749732621,
+      "failures": 108,
+      "processed": 1000,
+      "records": 301,
+      "retry_pending": 1958,
+      "unavailable": 742
+    },
+    "rubygems": {
+      "budget_exhausted": false,
+      "catalog_size": 196039,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 1000,
+      "downloaded_bytes": 501623036,
+      "failures": 0,
+      "processed": 1000,
+      "records": 278,
+      "unavailable": 0
     }
   },
   "state": "data/production/registry-state.json",
-  "status": "success"
+  "status": "failed"
 }
