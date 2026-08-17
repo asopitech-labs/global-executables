@@ -1,10 +1,11 @@
 from io import BytesIO
+import gzip
 import json
 import tarfile
 import zipfile
 
 import global_executables.registry_artifact as registry_artifact
-from global_executables.registry_artifact import _go_rows, _pypi_projects, _sdist_rows, _wheel_rows
+from global_executables.registry_artifact import _go_rows, _pypi_projects, _ruby_gem_rows, _rubygems_names, _sdist_rows, _wheel_rows
 
 
 def test_pypi_simple_catalog_is_normalized_and_sorted():
@@ -43,6 +44,19 @@ def test_go_main_packages_are_artifact_evidence():
     rows = _go_rows(stream.getvalue(), "example.com/demo", "v1.0.0", "https://proxy.golang.org/demo.zip")
     assert [row["command"] for row in rows] == ["demo", "tool"]
     assert all(row["language"] == "go" and row["registry"] == "go" for row in rows)
+
+
+def test_rubygems_catalog_and_gem_metadata_are_artifact_evidence():
+    assert _rubygems_names(b"---\nalpha\nBeta Gem\n") == ["alpha"]
+    metadata = b"---\nname: demo\nversion: 1.0.0\nexecutables:\n- demo\n- demo-admin\n"
+    stream = BytesIO()
+    with tarfile.open(fileobj=stream, mode="w") as archive:
+        payload = gzip.compress(metadata)
+        info = tarfile.TarInfo("metadata.gz"); info.size = len(payload)
+        archive.addfile(info, BytesIO(payload))
+    rows = _ruby_gem_rows(stream.getvalue(), "demo", "1.0.0", "https://example.test", "https://example.test/demo.gem")
+    assert [row["command"] for row in rows] == ["demo", "demo-admin"]
+    assert rows[0]["language"] == "ruby" and rows[0]["registry"] == "rubygems"
 
 
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):

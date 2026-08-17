@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import html
 import json
+import gzip
 import re
 import tarfile
 import time
@@ -201,9 +202,50 @@ def _go_rows(body: bytes, module: str, version: str, source: str) -> list[dict[s
     return rows
 
 
+def _ruby_gem_rows(body: bytes, package: str, version: str, repository: str | None,
+                   source: str) -> list[dict[str, Any]]:
+    """Extract RubyGems' declared executables from the gemspec metadata."""
+    with tarfile.open(fileobj=BytesIO(body), mode="r:*") as archive:
+        metadata_name = next(name for name in archive.getnames() if name == "metadata.gz")
+        handle = archive.extractfile(metadata_name)
+        if handle is None:
+            return []
+        metadata = gzip.decompress(handle.read()).decode("utf-8", "replace")
+
+    commands: set[str] = set()
+    lines = metadata.splitlines()
+    for index, raw in enumerate(lines):
+        if not re.match(r"^executables:\s*(?:\[\s*\]|)$", raw.strip()):
+            continue
+        remainder = raw.split(":", 1)[1].strip()
+        if remainder and remainder != "[]":
+            commands.update(value.strip(" \\\"'") for value in remainder.strip("[]").split(",") if value.strip())
+        for child in lines[index + 1:]:
+            stripped = child.strip()
+            if stripped.startswith("-"):
+                value = stripped[1:].strip().strip("\\\"'")
+                if value:
+                    commands.add(value)
+            elif stripped and not child.startswith((" ", "\t")):
+                break
+        break
+    return [record(command, "rubygems", package, version, repository, source,
+                   source_type="language_package", language="ruby", registry="rubygems",
+                   latest_version=version) for command in sorted(commands)]
+
+
 def _pypi_projects(body: bytes) -> list[str]:
     names = {html.unescape(value).strip() for value in PROJECT_LINK.findall(body.decode("utf-8", "replace"))}
     return sorted(name for name in names if name)
+
+
+def _rubygems_names(body: bytes) -> list[str]:
+    names = set()
+    for line in body.decode("utf-8", "replace").splitlines():
+        name = line.strip()
+        if name and name != "---" and not name.endswith(":") and " " not in name:
+            names.add(name)
+    return sorted(names)
 
 
 def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
@@ -399,6 +441,44 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
             "coverage_kind": "exhaustive" if complete else "partial"}
 
 
+def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+    catalog_file = Path(state.setdefault("names_file", "data/production/rubygems-names.txt"))
+    if not catalog_file.is_file():
+        body, transfer = fetch("https://rubygems.org/names", timeout)
+        catalog_file.parent.mkdir(parents=True, exist_ok=True)
+        catalog_file.write_text("\n".join(_rubygems_names(body)) + "\n")
+        state["catalog_bytes"] = transfer["downloaded_bytes"]
+    gems = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
+    failures, unavailable = _failure_state(state)
+    rows: list[dict[str, Any]] = []; budget_exhausted = False
+    while cursor < len(gems) and processed < budget:
+        package = gems[cursor]
+        try:
+            metadata_url = "https://rubygems.org/api/v1/gems/" + urllib.parse.quote(package, safe="") + ".json"
+            metadata_body, _ = fetch(metadata_url, timeout)
+            metadata = json.loads(metadata_body)
+            version = metadata.get("version", "unknown")
+            artifact_url = metadata.get("gem_uri") or f"https://rubygems.org/gems/{urllib.parse.quote(package, safe='')}-{urllib.parse.quote(version, safe='')}.gem"
+            artifact, transfer = fetch(artifact_url, timeout); downloaded += transfer["downloaded_bytes"]
+            if downloaded > byte_budget:
+                budget_exhausted = True
+                break
+            repository = metadata.get("source_code_uri") or metadata.get("homepage_uri")
+            rows.extend(_ruby_gem_rows(artifact, metadata.get("name", package), version, repository, artifact_url))
+            failures.pop(package, None)
+        except Exception as error:
+            _record_failure(failures, unavailable, package, error)
+        cursor += 1; processed += 1
+    state["cursor"] = cursor
+    _append_rows(output, rows)
+    complete = cursor >= len(gems) and not failures
+    return {"cursor": cursor, "catalog_size": len(gems), "processed": processed,
+            "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
+            "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
+            "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
+
+
 def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Path, report_path: Path,
                            package_budget: int = 100, byte_budget: int = 500_000_000,
                            timeout: int = 120) -> dict[str, Any]:
@@ -406,6 +486,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
         "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates, "go": _crawl_go,
+        "rubygems": _crawl_rubygems,
     }
     for source in sources:
         if source not in runners:

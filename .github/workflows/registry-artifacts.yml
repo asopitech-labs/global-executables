@@ -44,7 +44,7 @@ jobs:
           if git cat-file -e origin/artifact-data:data/production/pypi-projects.txt 2>/dev/null; then
             git show origin/artifact-data:data/production/pypi-projects.txt > data/production/pypi-projects.txt
           fi
-          for source in npm pypi crates go; do
+          for source in npm pypi crates go rubygems; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             fi
@@ -57,7 +57,7 @@ jobs:
           BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
         run: |
           python tools/registry_artifact_crawl.py \
-            --source npm --source pypi --source crates --source go \
+            --source npm --source pypi --source crates --source go --source rubygems \
             --state data/production/registry-state.json \
             --output-dir data/production/intermediate \
             --report reports/registry-artifact-crawl.json \
@@ -81,6 +81,9 @@ jobs:
           cp data/production/registry-state.json /tmp/artifact-publish/data/production/registry-state.json
           if test -f data/production/pypi-projects.txt; then
             cp data/production/pypi-projects.txt /tmp/artifact-publish/data/production/pypi-projects.txt
+          fi
+          if test -f data/production/rubygems-names.txt; then
+            cp data/production/rubygems-names.txt /tmp/artifact-publish/data/production/rubygems-names.txt
           fi
           cp data/production/intermediate/*.jsonl /tmp/artifact-publish/data/production/intermediate/ || true
           if test -f reports/registry-artifact-crawl.json; then
