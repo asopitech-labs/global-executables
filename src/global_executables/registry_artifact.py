@@ -78,15 +78,25 @@ def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str
             if key not in retry_projects:
                 retry_projects.append(key)
             failures.pop(key, None)
+        elif text == "latest release has no wheel or sdist":
+            unavailable[key] = text
+            failures.pop(key, None)
+        elif text.startswith("crate has no non-yanked version:"):
+            unavailable[key] = text
+            failures.pop(key, None)
         elif "HTTP Error 404" in text:
             unavailable[key] = text
             failures.pop(key, None)
+    retry_projects[:] = [key for key in retry_projects if key not in unavailable]
     return failures, unavailable
 
 
 def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: str, error: Exception) -> None:
     message = str(error)
     if isinstance(error, urllib.error.HTTPError) and error.code == 404:
+        unavailable[key] = message
+        failures.pop(key, None)
+    elif message.startswith("crate has no non-yanked version:"):
         unavailable[key] = message
         failures.pop(key, None)
     else:
@@ -321,10 +331,13 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
     retry_projects = state.setdefault("retry_projects", [])
+    retry_projects[:] = [project for project in retry_projects if project not in unavailable]
     rows: list[dict[str, Any]] = []
     budget_exhausted = False
+    retry_quota = max(1, budget // 2)
+    retry_used = 0
     while (retry_projects or cursor < len(projects)) and processed < budget:
-        retrying = bool(retry_projects)
+        retrying = bool(retry_projects) and (retry_used < retry_quota or cursor >= len(projects))
         project = retry_projects.pop(0) if retrying else projects[cursor]
         try:
             metadata_body, _ = fetch(f"https://pypi.org/pypi/{urllib.parse.quote(project)}/json", timeout)
@@ -335,23 +348,38 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
             if not candidates:
                 unavailable[project] = "latest release has no wheel or sdist"
                 failures.pop(project, None)
-                continue
-            url = candidates[0]["url"]
-            artifact, transfer = fetch(url, timeout)
-            downloaded += transfer["downloaded_bytes"]
-            if downloaded > byte_budget:
-                budget_exhausted = True
-                break
-            package = info.get("name", project); version = info.get("version", "unknown")
-            if candidates[0].get("packagetype") == "bdist_wheel":
-                rows.extend(_wheel_rows(artifact, package, version, info.get("home_page"), url))
             else:
-                rows.extend(_sdist_rows(artifact, package, version, info.get("home_page"), url))
-            failures.pop(project, None)
+                package = info.get("name", project); version = info.get("version", "unknown")
+                selected = False; last_error: Exception | None = None
+                for candidate in candidates:
+                    url = candidate["url"]
+                    try:
+                        artifact, transfer = fetch(url, timeout)
+                        downloaded += transfer["downloaded_bytes"]
+                        if downloaded > byte_budget:
+                            budget_exhausted = True
+                            break
+                        if candidate.get("packagetype") == "bdist_wheel":
+                            rows.extend(_wheel_rows(artifact, package, version, info.get("home_page"), url))
+                        else:
+                            rows.extend(_sdist_rows(artifact, package, version, info.get("home_page"), url))
+                        selected = True
+                        break
+                    except Exception as error:
+                        last_error = error
+                if budget_exhausted:
+                    if retrying:
+                        retry_projects.insert(0, project)
+                    break
+                if not selected:
+                    raise last_error or RegistryCrawlError("no usable wheel or sdist")
+                failures.pop(project, None)
         except Exception as error:  # keep the cursor moving; failures block exhaustive status
             _record_failure(failures, unavailable, project, error)
         if not retrying:
             cursor += 1
+        else:
+            retry_used += 1
         processed += 1
         if budget_exhausted:
             break
@@ -438,14 +466,15 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     page = int(state.get("page", 1)); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
     failures, unavailable = _failure_state(state)
     retry_crates = state.setdefault("retry_crates", [])
+    retry_crates[:] = [crate for crate in retry_crates if crate not in unavailable]
     for crate_name in failures:
         if crate_name not in retry_crates:
             retry_crates.append(crate_name)
-    retry_budget = len(retry_crates)
+    retry_quota = max(1, budget // 2)
+    retry_used = 0
     budget_exhausted = False
     while processed < budget:
-        if retry_budget:
-            retry_budget -= 1
+        if retry_crates and (retry_used < retry_quota or state.get("complete")):
             name = retry_crates.pop(0)
             try:
                 version = _crate_latest_version(name, timeout)
@@ -462,8 +491,10 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
                 failures.pop(name, None)
             except Exception as error:
                 _record_failure(failures, unavailable, name, error)
-                retry_crates.append(name)
+                if name in failures:
+                    retry_crates.append(name)
             processed += 1
+            retry_used += 1
             if budget_exhausted:
                 break
             continue

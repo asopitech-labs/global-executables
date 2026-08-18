@@ -6,8 +6,9 @@ import zipfile
 
 import global_executables.registry_artifact as registry_artifact
 from global_executables.registry_artifact import (_go_rows, _packagist_packages, _packagist_rows,
-                                                   _pypi_projects, _ruby_gem_rows, _rubygems_names,
-                                                   _sdist_rows, _wheel_rows)
+                                                   _crawl_pypi, _failure_state, _pypi_projects,
+                                                   _ruby_gem_rows, _rubygems_names, _sdist_rows,
+                                                   _wheel_rows)
 
 
 def test_pypi_simple_catalog_is_normalized_and_sorted():
@@ -77,6 +78,39 @@ def test_packagist_only_emits_composer_bin_declarations():
     assert [row["command"] for row in rows] == ["admin", "demo"]
     assert all(row["language"] == "php" and row["registry"] == "packagist" for row in rows)
     assert _packagist_rows(json.loads(body), "demo/library", "https://example.test") == []
+
+
+def test_permanent_registry_conditions_are_not_retryable_failures():
+    state = {
+        "failures": {
+            "no-dist": "latest release has no wheel or sdist",
+            "yanked": "crate has no non-yanked version: yanked",
+            "transient": "HTTP Error 503: first byte timeout",
+        },
+        "retry_projects": ["no-dist", "old-source"],
+        "retry_crates": ["yanked", "transient"],
+    }
+    failures, unavailable = _failure_state(state)
+    assert set(unavailable) == {"no-dist", "yanked"}
+    assert set(failures) == {"transient"}
+    assert state["retry_projects"] == ["old-source"]
+
+
+def test_pypi_no_distribution_advances_cursor_and_is_unavailable(tmp_path, monkeypatch):
+    catalog = tmp_path / "projects.txt"
+    catalog.write_text("empty-one\nempty-two\n")
+
+    def fake_fetch(url, timeout=120):
+        project = url.rsplit("/", 1)[-1]
+        return json.dumps({"info": {"name": project, "version": "1.0.0"}, "urls": []}).encode(), {}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    state = {"projects_file": str(catalog)}
+    report = _crawl_pypi(state, tmp_path / "pypi.jsonl", 2, 1024, 120)
+    assert report["cursor"] == 2
+    assert report["processed"] == 2
+    assert report["failures"] == 0
+    assert report["unavailable"] == 2
 
 
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):
