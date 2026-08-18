@@ -3,17 +3,80 @@
   "coverage_kind": "partial",
   "package_budget": 25,
   "sources": {
+    "crates": {
+      "budget_exhausted": false,
+      "complete": false,
+      "coverage_kind": "partial",
+      "downloaded_bytes": 1756555,
+      "failures": 142,
+      "page": 113,
+      "processed": 25,
+      "records": 2,
+      "retry_pending": 142,
+      "unavailable": 135
+    },
     "go": {
       "budget_exhausted": false,
       "complete": false,
       "coverage_kind": "partial",
-      "downloaded_bytes": 48549626,
-      "failures": 3,
+      "downloaded_bytes": 8958604,
+      "failures": 0,
       "processed": 25,
-      "records": 139,
-      "since": "2019-04-11T14:31:40.612357Z"
+      "records": 36,
+      "since": "2019-05-11T23:06:06.439271Z",
+      "unavailable": 887
+    },
+    "npm": {
+      "budget_exhausted": false,
+      "complete": true,
+      "coverage_kind": "exhaustive",
+      "downloaded_bytes": 8890,
+      "failures": 0,
+      "processed": 25,
+      "records": 0,
+      "retry_pending": 0,
+      "since": 2511662,
+      "unavailable": 1
+    },
+    "packagist": {
+      "budget_exhausted": false,
+      "catalog_size": 458160,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 150,
+      "downloaded_bytes": 90074,
+      "failures": 0,
+      "processed": 25,
+      "records": 9,
+      "retry_pending": 0,
+      "unavailable": 0
+    },
+    "pypi": {
+      "budget_exhausted": false,
+      "catalog_size": 870264,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 12115,
+      "downloaded_bytes": 987126,
+      "failures": 2,
+      "processed": 25,
+      "records": 0,
+      "retry_pending": 810,
+      "unavailable": 948
+    },
+    "rubygems": {
+      "budget_exhausted": false,
+      "catalog_size": 196049,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 2150,
+      "downloaded_bytes": 5621760,
+      "failures": 2,
+      "processed": 25,
+      "records": 6,
+      "unavailable": 0
     }
   },
   "state": "data/production/registry-state.json",
-  "status": "success"
+  "status": "failed"
 }
