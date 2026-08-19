@@ -29,19 +29,52 @@ USER_AGENT = "global-executables-registry-crawl/1.0 (+https://github.com/asopite
 PROJECT_LINK = re.compile(r"<a\b[^>]*href=[\"'][^\"']+[\"'][^>]*>([^<]+)</a>", re.I)
 CRATES_CATALOG = "https://crates.io/api/v1/crates?per_page=100&sort=alpha"
 CRATES_PAGE_SIZE = 100
+# crates.io asks crawlers for at most one request per second and answers 429 well before
+# a CI runner's natural pace.  Only the API host is paced; its CDN mirrors are not.
+HOST_MIN_INTERVAL = {"crates.io": 1.0}
+RETRY_AFTER_CAP = 60.0
+_last_request: dict[str, float] = {}
 
 
 class RegistryCrawlError(RuntimeError):
     pass
 
 
-def fetch(url: str, timeout: int = 120) -> tuple[bytes, dict[str, Any]]:
+def _throttle(url: str) -> None:
+    host = urllib.parse.urlsplit(url).hostname or ""
+    interval = HOST_MIN_INTERVAL.get(host)
+    if interval is None:
+        return
+    pause = interval - (time.monotonic() - _last_request.get(host, float("-inf")))
+    if pause > 0:
+        time.sleep(pause)
+    _last_request[host] = time.monotonic()
+
+
+def _retry_after_seconds(error: urllib.error.HTTPError, attempt: int) -> float:
+    advertised = (error.headers or {}).get("Retry-After") if hasattr(error, "headers") else None
+    try:
+        return min(float(advertised), RETRY_AFTER_CAP)
+    except (TypeError, ValueError):
+        return min(2.0 ** attempt, RETRY_AFTER_CAP)
+
+
+def fetch(url: str, timeout: int = 120, attempts: int = 4) -> tuple[bytes, dict[str, Any]]:
     started = time.monotonic()
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        body = response.read()
-        return body, {"url": url, "status_code": response.status, "downloaded_bytes": len(body),
-                      "duration_seconds": round(time.monotonic() - started, 3)}
+    for attempt in range(1, attempts + 1):
+        _throttle(url)
+        request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                body = response.read()
+                return body, {"url": url, "status_code": response.status, "downloaded_bytes": len(body),
+                              "duration_seconds": round(time.monotonic() - started, 3)}
+        except urllib.error.HTTPError as error:
+            # Back off on rate limiting rather than losing the rest of the source's budget.
+            if error.code != 429 or attempt == attempts:
+                raise
+            time.sleep(_retry_after_seconds(error, attempt))
+    raise RegistryCrawlError(f"unreachable retry loop: {url}")
 
 
 def _load_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:

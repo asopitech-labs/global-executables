@@ -6,6 +6,8 @@ import urllib.error
 import urllib.parse
 import zipfile
 
+import pytest
+
 import global_executables.registry_artifact as registry_artifact
 from global_executables.registry_artifact import (_crates_catalog_page, _crawl_crates, _go_rows,
                                                    _packagist_packages, _packagist_rows,
@@ -255,6 +257,63 @@ def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch
 
     assert seen == {"npm": 1000, "crates": 10_000}
     assert report["sources"]["crates"]["package_budget"] == 10_000
+
+
+def test_crates_api_requests_are_paced_but_other_hosts_are_not(monkeypatch):
+    slept = []
+    monkeypatch.setattr(registry_artifact.time, "sleep", slept.append)
+    monkeypatch.setattr(registry_artifact, "_last_request", {})
+
+    registry_artifact._throttle("https://crates.io/api/v1/crates?per_page=100")
+    assert slept == []  # the first request never waits
+    registry_artifact._throttle("https://crates.io/api/v1/crates/demo/1.0.0/download")
+    assert len(slept) == 1 and 0 < slept[0] <= 1.0
+
+    registry_artifact._throttle("https://static.crates.io/crates/demo/demo-1.0.0.crate")
+    registry_artifact._throttle("https://pypi.org/simple/")
+    assert len(slept) == 1  # CDN mirrors and other registries keep their own pace
+
+
+def test_fetch_backs_off_on_rate_limiting_instead_of_failing(monkeypatch):
+    monkeypatch.setattr(registry_artifact, "_last_request", {})
+    monkeypatch.setattr(registry_artifact.time, "sleep", lambda seconds: None)
+    responses = [urllib.error.HTTPError("https://crates.io/x", 429, "Too Many Requests",
+                                        {"Retry-After": "7"}, None)]
+
+    class _Response:
+        status = 200
+        def read(self): return b"ok"
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    def fake_urlopen(request, timeout=None):
+        if responses:
+            raise responses.pop(0)
+        return _Response()
+
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", fake_urlopen)
+    body, transfer = registry_artifact.fetch("https://crates.io/x", 120)
+
+    assert body == b"ok" and transfer["status_code"] == 200
+    assert registry_artifact._retry_after_seconds(
+        urllib.error.HTTPError("u", 429, "", {"Retry-After": "7"}, None), 1) == 7.0
+    assert registry_artifact._retry_after_seconds(
+        urllib.error.HTTPError("u", 429, "", {}, None), 3) == 8.0
+
+
+def test_fetch_surfaces_rate_limiting_once_the_attempts_run_out(monkeypatch):
+    monkeypatch.setattr(registry_artifact, "_last_request", {})
+    monkeypatch.setattr(registry_artifact.time, "sleep", lambda seconds: None)
+    attempts = []
+
+    def always_limited(request, timeout=None):
+        attempts.append(1)
+        raise urllib.error.HTTPError("https://crates.io/x", 429, "Too Many Requests", {}, None)
+
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", always_limited)
+    with pytest.raises(urllib.error.HTTPError):
+        registry_artifact.fetch("https://crates.io/x", 120, attempts=3)
+    assert len(attempts) == 3
 
 
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):

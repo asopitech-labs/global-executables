@@ -38,10 +38,13 @@ version `0.0.0`, which has no artifact.
 
 Sustained crates.io catch-up needs more budget than the other registries, so
 `--source-package-budget crates=N` raises the per-run package budget for a
-single source; `crates_package_budget` is the workflow input for it. The crawl
-holds roughly one crate per second, so the full 319,000-crate catalog is a
-multi-day sweep. Each run queues its successor, so runs chain back to back
-instead of waiting for the six-hourly schedule.
+single source; `crates_package_budget` is the workflow input for it. Requests to the crates.io
+API host are paced to one per second, the rate crates.io asks crawlers to hold;
+a CI runner is fast enough to earn `HTTP Error 429` without it, and a rate-limited
+catalog page ends the source for that run. `fetch` also retries 429 with the
+advertised `Retry-After` before giving up. That pacing puts the full
+319,000-crate catalog at a multi-day sweep. Each run queues its successor, so
+runs chain back to back instead of waiting for the six-hourly schedule.
 
 The scheduled refresh now downloads the production OS indexes with
 `tools/production_crawl.py`, merges them with the currently available registry
