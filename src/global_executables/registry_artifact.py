@@ -33,6 +33,9 @@ CRATES_PAGE_SIZE = 100
 # a CI runner's natural pace.  Only the API host is paced; its CDN mirrors are not.
 HOST_MIN_INTERVAL = {"crates.io": 1.0}
 RETRY_AFTER_CAP = 60.0
+# Crate conditions no later run can resolve; retrying them forever would hold the
+# source below exhaustive.
+PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:")
 _last_request: dict[str, float] = {}
 
 
@@ -116,7 +119,7 @@ def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str
         elif text == "latest release has no wheel or sdist":
             unavailable[key] = text
             failures.pop(key, None)
-        elif text.startswith("crate has no non-yanked version:"):
+        elif text.startswith(PERMANENT_CRATE_CONDITIONS):
             unavailable[key] = text
             failures.pop(key, None)
         elif "HTTP Error 404" in text:
@@ -131,7 +134,7 @@ def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: 
     if isinstance(error, urllib.error.HTTPError) and error.code == 404:
         unavailable[key] = message
         failures.pop(key, None)
-    elif message.startswith("crate has no non-yanked version:"):
+    elif message.startswith(PERMANENT_CRATE_CONDITIONS):
         unavailable[key] = message
         failures.pop(key, None)
     else:
@@ -342,6 +345,24 @@ def _crate_latest_version(name: str, timeout: int) -> str:
     raise RegistryCrawlError(f"crate has no non-yanked version: {name}")
 
 
+def _crate_manifest(archive: tarfile.TarFile, name: str) -> tuple[str, str]:
+    """Return the shallowest Cargo.toml in a .crate archive, and its text.
+
+    Nearly every crate holds exactly ``<name>-<version>/Cargo.toml``, but a few are
+    packed one directory deeper or name the file ``cargo.toml``.  Matching only the
+    conventional path raised a bare ``StopIteration``, whose empty message was then
+    recorded as a retryable failure that could never succeed.
+    """
+    manifests = [member for member in archive.getnames()
+                 if PurePosixPath(member).name.lower() == "cargo.toml"]
+    manifests.sort(key=lambda member: (member.count("/"), member))
+    for manifest in manifests:
+        handle = archive.extractfile(manifest)
+        if handle is not None:
+            return manifest, handle.read().decode("utf-8", "replace")
+    raise RegistryCrawlError(f"crate archive has no readable Cargo.toml: {name}")
+
+
 def _crate_download(name: str, version: str, timeout: int) -> tuple[bytes, dict[str, Any], str]:
     api_url = f"https://crates.io/api/v1/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(version)}/download"
     try:
@@ -546,9 +567,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
                     budget_exhausted = True
                     break
                 with tarfile.open(fileobj=BytesIO(artifact), mode="r:gz") as archive:
-                    manifest_name = next(member for member in archive.getnames()
-                                         if member.count("/") == 1 and member.endswith("/Cargo.toml"))
-                    manifest = archive.extractfile(manifest_name).read().decode("utf-8", "replace")
+                    _, manifest = _crate_manifest(archive, name)
                     rows.extend(crates_manifest(manifest, name, version, None, url))
                 failures.pop(name, None)
             except Exception as error:
@@ -593,12 +612,11 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
                     budget_exhausted = True
                     break
                 with tarfile.open(fileobj=BytesIO(artifact), mode="r:gz") as archive:
-                    manifest_name = next(name for name in archive.getnames() if name.count("/") == 1 and name.endswith("/Cargo.toml"))
-                    manifest = archive.extractfile(manifest_name).read().decode("utf-8", "replace")
+                    manifest_name, manifest = _crate_manifest(archive, name)
                     before_rows = len(rows)
                     rows.extend(crates_manifest(manifest, name, version, crate.get("repository"), url))
                     if len(rows) == before_rows:
-                        root = manifest_name.split("/", 1)[0]
+                        root = PurePosixPath(manifest_name).parent
                         if f"{root}/src/main.rs" in archive.getnames():
                             rows.append(record(name, "crates", name, version, crate.get("repository"), url,
                                                confidence="inferred", source_type="language_package",

@@ -259,6 +259,43 @@ def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch
     assert report["sources"]["crates"]["package_budget"] == 10_000
 
 
+def _tar_of(members):
+    stream = BytesIO()
+    with tarfile.open(fileobj=stream, mode="w:gz") as archive:
+        for path, text in members.items():
+            info = tarfile.TarInfo(path); info.size = len(text.encode())
+            archive.addfile(info, BytesIO(text.encode()))
+    return tarfile.open(fileobj=BytesIO(stream.getvalue()), mode="r:gz")
+
+
+def test_crate_manifest_tolerates_nested_and_lowercase_packing():
+    manifest = '[package]\nname = "demo"\n\n[[bin]]\nname = "demo"\n'
+    # betabear-0.1.1 is packed a directory deeper than the convention
+    nested = _tar_of({"12653346157/demo-0.1.1/Cargo.toml": manifest, "12653345612/demo-0.1.1/.gitignore": ""})
+    assert registry_artifact._crate_manifest(nested, "demo") == ("12653346157/demo-0.1.1/Cargo.toml", manifest)
+    # beam_bvm_interface-7.1.13107 names it cargo.toml
+    lowercase = _tar_of({"demo-1.0/cargo.toml": manifest, "demo-1.0/src/lib.rs": ""})
+    assert registry_artifact._crate_manifest(lowercase, "demo")[1] == manifest
+    # the shallowest manifest wins over a vendored one
+    vendored = _tar_of({"demo-1.0/vendor/dep/Cargo.toml": "[package]\nname='dep'\n",
+                        "demo-1.0/Cargo.toml": manifest})
+    assert registry_artifact._crate_manifest(vendored, "demo")[0] == "demo-1.0/Cargo.toml"
+
+
+def test_crate_without_a_manifest_is_permanent_not_retryable():
+    with pytest.raises(registry_artifact.RegistryCrawlError) as raised:
+        registry_artifact._crate_manifest(_tar_of({"demo-1.0/README.md": "hi"}), "demo")
+    assert "no readable Cargo.toml" in str(raised.value)
+
+    failures, unavailable = {}, {}
+    registry_artifact._record_failure(failures, unavailable, "demo", raised.value)
+    assert failures == {} and "demo" in unavailable
+
+    state = {"failures": {"demo": str(raised.value)}, "retry_crates": ["demo"]}
+    kept, permanent = _failure_state(state)
+    assert kept == {} and "demo" in permanent
+
+
 def test_crates_api_requests_are_paced_but_other_hosts_are_not(monkeypatch):
     slept = []
     monkeypatch.setattr(registry_artifact.time, "sleep", slept.append)

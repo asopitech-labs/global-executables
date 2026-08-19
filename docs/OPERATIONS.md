@@ -34,7 +34,10 @@ through the seek stream without re-downloading artifacts. A catalog outage now
 records the error on the source, keeps the run's rows and cursor, and fails the
 run rather than discarding the progress. Crates the catalog marks `yanked` are
 recorded as permanently unavailable without a download: crates.io names their
-version `0.0.0`, which has no artifact.
+version `0.0.0`, which has no artifact. Manifest lookup takes the shallowest
+`Cargo.toml` in the archive under either casing, because a few crates are packed
+a directory deeper than the convention; a crate with no readable manifest at all
+is permanently unavailable rather than retried.
 
 Sustained crates.io catch-up needs more budget than the other registries, so
 `--source-package-budget crates=N` raises the per-run package budget for a
