@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore the Global Executables index and test its read-only query API.">
+    <title>Global Executables · Index Playground</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="https://github.com/asopitech-labs/global-executables">
+          <span class="brand-mark">GE</span>
+          <span>Global Executables</span>
+        </a>
+        <nav class="top-links" aria-label="Project links">
+          <a href="https://github.com/asopitech-labs/global-executables">GitHub</a>
+          <a href="https://github.com/asopitech-labs/global-executables/blob/main/docs/MCP.md">API guide</a>
+          <a href="./openapi.json">OpenAPI</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow"><span class="live-dot"></span> PUBLIC INDEX · READ-ONLY PLAYGROUND</div>
+        <h1>Find out whether a command name is already in use.</h1>
+        <p class="hero-copy">Query the same executable evidence that powers the MCP server. Watch registry coverage move forward, then test a lookup without installing anything.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#playground">Try a query <span>↘</span></a>
+          <a class="button button-quiet" href="https://raw.githubusercontent.com/asopitech-labs/global-executables/main/data/metadata.json">View dataset metadata</a>
+        </div>
+      </section>
+
+      <section class="metric-grid" id="metrics" aria-live="polite">
+        <article class="metric-card"><span class="metric-label">Snapshot</span><strong id="metric-snapshot">Loading…</strong><span class="metric-note">canonical dataset</span></article>
+        <article class="metric-card"><span class="metric-label">Executable names</span><strong id="metric-count">Loading…</strong><span class="metric-note">indexed canonical names</span></article>
+        <article class="metric-card"><span class="metric-label">Registry sweep</span><strong id="metric-sweep">Loading…</strong><span class="metric-note" id="metric-sweep-note">latest crawl status</span></article>
+        <article class="metric-card"><span class="metric-label">Next scheduled crawl</span><strong id="metric-next">Loading…</strong><span class="metric-note" id="metric-next-note">UTC · every six hours</span></article>
+      </section>
+
+      <section class="panel status-panel" id="status">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">01 / COVERAGE CONTROL ROOM</div>
+            <h2>Registry progress</h2>
+          </div>
+          <div class="status-meta" id="status-meta">Loading crawl report…</div>
+        </div>
+        <div class="schedule-strip">
+          <span class="schedule-icon">◷</span>
+          <div><strong id="schedule-title">Next crawl is scheduled every six hours</strong><span id="schedule-detail">The page refreshes after each published crawl report.</span></div>
+        </div>
+        <div class="source-grid" id="source-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="playground-layout" id="playground">
+        <aside class="panel operation-panel">
+          <div class="section-kicker">02 / API PLAYGROUND</div>
+          <h2>Choose an operation</h2>
+          <p class="muted">These browser queries mirror the read-only MCP tools over the public JSON dataset.</p>
+          <div class="operation-list" role="tablist" aria-label="API operations">
+            <button class="operation active" data-operation="check_executable" role="tab"><span>⌕</span><span><b>check_executable</b><small>Exact collision check</small></span></button>
+            <button class="operation" data-operation="check_executables" role="tab"><span>≋</span><span><b>check_executables</b><small>Batch candidate check</small></span></button>
+            <button class="operation" data-operation="get_executable" role="tab"><span>◈</span><span><b>get_executable</b><small>Read providers</small></span></button>
+            <button class="operation" data-operation="search_executables" role="tab"><span>⌕</span><span><b>search_executables</b><small>Prefix / scope search</small></span></button>
+            <button class="operation" data-operation="search_similar_executables" role="tab"><span>≈</span><span><b>search_similar_executables</b><small>Find close names</small></span></button>
+            <button class="operation" data-operation="assess_executable" role="tab"><span>◒</span><span><b>assess_executable</b><small>Freshness signals</small></span></button>
+            <button class="operation" data-operation="get_coverage" role="tab"><span>◎</span><span><b>get_coverage</b><small>Dataset context</small></span></button>
+          </div>
+        </aside>
+
+        <section class="panel query-panel">
+          <div class="query-header"><div><div class="section-kicker">LIVE REQUEST</div><h2 id="operation-title">check_executable</h2></div><span class="method-pill">STATIC JSON</span></div>
+          <form id="query-form"></form>
+          <div class="result-heading"><span>Response</span><button class="copy-button" id="copy-result" type="button">Copy JSON</button></div>
+          <pre class="result" id="result" aria-live="polite">Select an operation and run a query.</pre>
+        </section>
+      </section>
+
+      <footer class="footer">
+        <span>Global Executables is public data first, MCP second.</span>
+        <span id="footer-build">Built from the main dataset.</span>
+      </footer>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

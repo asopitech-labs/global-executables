@@ -67,6 +67,12 @@ The dataset itself is the primary artifact.
 
 The MCP server is an access layer over that public data, not the source of truth.
 
+Try the live [Index Playground](https://asopitech-labs.github.io/global-executables/)
+to inspect crawl progress and run read-only `check`, `search`, `similar`,
+`coverage`, and `assess` queries directly in a browser. The playground is a
+static GitHub Pages client over the public JSON dataset; no query data is sent
+to a third-party API.
+
 ---
 
 ## Architecture

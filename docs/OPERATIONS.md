@@ -79,6 +79,21 @@ developer state. It refuses a failed production source and records transfer
 bytes, URL, HTTP status, duration, and per-source coverage in
 `reports/production-crawl.json`.
 
+## GitHub Pages playground
+
+The `pages.yml` workflow builds the static index playground and deploys it with
+the GitHub Pages artifact/deploy actions. It runs after pushes to `main`, after
+registry crawls, and after generated refreshes. During the build it snapshots
+the latest `artifact-data` crawl report into `status.json`, including the next
+scheduled crawl time, source cursors, failures, and coverage kind.
+
+The browser client reads canonical metadata and executable/index shards from
+the public `main` JSON tree. It implements the read-only query surface for
+exact checks, batch checks, provider reads, bounded prefix/scope searches,
+similar-name searches, coverage, and freshness assessment. No query payload is
+sent to an application server. The repository Pages setting must use
+**GitHub Actions** as its source the first time the workflow is enabled.
+
 ```sh
 python tools/refresh.py fixtures/intermediate/*.jsonl \
   --snapshot 2026-08-14 --coverage-kind partial

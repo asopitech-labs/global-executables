@@ -55,6 +55,15 @@ The agent should keep rejected names internal:
 
 There are no write tools or write HTTP routes.
 
+## Browser playground
+
+The [Index Playground](https://asopitech-labs.github.io/global-executables/)
+is a static GitHub Pages client for experimenting with the same read-only
+operations in a browser. It displays the latest registry crawl report,
+scheduled next crawl, source cursors, failures, and coverage status. Queries
+are resolved against the public `main` JSON dataset, while crawl status is
+published from the `artifact-data` branch after each crawl.
+
 `assess_executable` and `assess_executables` add freshness, activity,
 popularity, and collision-risk dimensions. They preserve provider evidence and
 expose the assessment methodology version; they do not change a stale provider

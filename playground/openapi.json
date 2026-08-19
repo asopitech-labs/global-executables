@@ -1,0 +1,16 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Global Executables static query contract",
+    "version": "1.0.0",
+    "description": "The Pages playground implements these read-only operations over the public GitHub JSON dataset. For MCP transport, use the tools documented in docs/MCP.md."
+  },
+  "servers": [{"url": "https://raw.githubusercontent.com/asopitech-labs/global-executables/main"}],
+  "paths": {
+    "/data/metadata.json": {"get": {"summary": "Dataset metadata", "responses": {"200": {"description": "Dataset metadata JSON"}}}},
+    "/reports/registry-artifact-crawl.json": {"get": {"summary": "Latest crawl report", "description": "The live report is published on the artifact-data branch; the Pages build snapshots it into status.json.", "responses": {"200": {"description": "Crawler progress JSON"}}}},
+    "/data/executables/{shard}/{name}.json": {"get": {"summary": "Get one executable record", "parameters": [{"name": "shard", "in": "path", "required": true, "schema": {"type": "string"}}, {"name": "name", "in": "path", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"description": "Canonical executable record"}, "404": {"description": "Not found"}}}},
+    "/data/indexes/prefix/{prefix}.json": {"get": {"summary": "Search a bounded prefix index", "parameters": [{"name": "prefix", "in": "path", "required": true, "schema": {"type": "string", "minLength": 2}}], "responses": {"200": {"description": "Executable names"}}}}
+  },
+  "x-playground-operations": ["check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "assess_executable", "get_coverage"]
+}

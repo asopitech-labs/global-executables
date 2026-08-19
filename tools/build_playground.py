@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Assemble the small GitHub Pages shell and its crawl-status snapshot."""
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+
+def next_crawl(now: datetime) -> datetime:
+    candidates = []
+    for day in range(3):
+        date = (now + timedelta(days=day)).date()
+        for hour in (0, 6, 12, 18):
+            candidates.append(datetime(date.year, date.month, date.day, hour, 47, tzinfo=timezone.utc))
+    return next(value for value in candidates if value > now)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--crawl-report", type=Path, required=True)
+    parser.add_argument("--artifact-data-commit", default="")
+    parser.add_argument("--main-commit", default="")
+    args = parser.parse_args()
+    args.output.mkdir(parents=True, exist_ok=True)
+    for source in (Path("playground/index.html"), Path("playground/styles.css"), Path("playground/app.js"), Path("playground/openapi.json")):
+        shutil.copy2(source, args.output / source.name)
+    report = json.loads(args.crawl_report.read_text()) if args.crawl_report.is_file() else {
+        "status": "unavailable", "coverage_kind": "partial", "sources": {}
+    }
+    now = datetime.now(timezone.utc)
+    status = {
+        "generated_at": now.isoformat().replace("+00:00", "Z"),
+        "next_crawl_at": next_crawl(now).isoformat().replace("+00:00", "Z"),
+        "schedule": "47 */6 * * *",
+        "artifact_data_commit": args.artifact_data_commit,
+        "main_commit": args.main_commit,
+        "crawl_report": report,
+        "freshness": {"status": "published", "coverage_kind": report.get("coverage_kind", "partial")},
+    }
+    (args.output / "status.json").write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n")
+
+
+if __name__ == "__main__":
+    main()
