@@ -12,8 +12,8 @@ modules, RubyGems, and Packagist remain
 `partial` until their package artifacts are exhaustively inspected.
 
 The registry artifact crawler is resumable and budgeted. It enumerates the
-PyPI simple catalog, follows npm's replication change cursor, pages the
-crates.io catalog, follows Go's module index cursor, enumerates RubyGems'
+PyPI simple catalog, follows npm's replication change cursor, follows the
+crates.io alphabetical seek cursor, follows Go's module index cursor, enumerates RubyGems'
 compact-index names catalog, and enumerates Packagist's package catalog. For
 each selected package it downloads an artifact or reads authoritative package
 metadata and extracts declared console scripts, npm bins, Cargo binary targets,
@@ -25,6 +25,14 @@ metadata contains `bin`; the command is the basename Composer exposes through
 failures, normalized observations, and report on the `artifact-data` branch.
 It cannot mark a source exhaustive while any cursor, artifact, or failure
 remains unresolved.
+
+crates.io must be enumerated through the `seek` cursor its catalog returns in
+`meta.next_page`: offset pagination is rejected with `HTTP Error 400` past
+20,000 records, under 7% of the registry. A stored legacy `page` cursor is
+migrated once into an equivalent record offset that the crawler fast-forwards
+through the seek stream without re-downloading artifacts. A catalog outage now
+records the error on the source, keeps the run's rows and cursor, and fails the
+run rather than discarding the progress.
 
 The scheduled refresh now downloads the production OS indexes with
 `tools/production_crawl.py`, merges them with the currently available registry

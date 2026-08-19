@@ -62,7 +62,7 @@ function renderOverview() {
     card.className = "source-card";
     const complete = source.coverage_kind === "exhaustive" || source.complete;
     const progress = source.catalog_size ? Math.min(100, (Number(source.cursor || 0) / Number(source.catalog_size)) * 100) : complete ? 100 : 3;
-    const position = source.catalog_size ? `${formatNumber(source.cursor || 0)} / ${formatNumber(source.catalog_size)}` : source.page ? `catalog page ${formatNumber(source.page)}` : source.since ? `through ${String(source.since).slice(0, 10)}` : complete ? "catalog complete" : "in progress";
+    const position = source.catalog_size ? `${formatNumber(source.cursor || 0)} / ${formatNumber(source.catalog_size)}` : source.since ? `through ${String(source.since).slice(0, 10)}` : complete ? "catalog complete" : "in progress";
     const errors = Number(source.failures || 0);
     card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${complete ? "exhaustive" : statusLabel(source.coverage_kind)}</span></div><div class="source-bar"><i style="width:${progress}%"></i></div><div class="source-stats"><span>${position}</span><span>${errors ? `${formatNumber(errors)} failures` : `${formatNumber(source.records || 0)} records`}</span></div>`;
     grid.append(card);

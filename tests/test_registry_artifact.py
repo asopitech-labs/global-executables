@@ -2,13 +2,50 @@ from io import BytesIO
 import gzip
 import json
 import tarfile
+import urllib.error
+import urllib.parse
 import zipfile
 
 import global_executables.registry_artifact as registry_artifact
-from global_executables.registry_artifact import (_go_rows, _packagist_packages, _packagist_rows,
+from global_executables.registry_artifact import (_crates_catalog_page, _crawl_crates, _go_rows,
+                                                   _packagist_packages, _packagist_rows,
                                                    _crawl_pypi, _failure_state, _pypi_projects,
                                                    _ruby_gem_rows, _rubygems_names, _sdist_rows,
                                                    _wheel_rows)
+
+
+def _crate_archive(name, version, binary="demo"):
+    stream = BytesIO()
+    with tarfile.open(fileobj=stream, mode="w:gz") as archive:
+        manifest = f'[package]\nname = "{name}"\nversion = "{version}"\n\n[[bin]]\nname = "{binary}"\n'
+        info = tarfile.TarInfo(f"{name}-{version}/Cargo.toml")
+        info.size = len(manifest.encode())
+        archive.addfile(info, BytesIO(manifest.encode()))
+    return stream.getvalue()
+
+
+def _fake_crates_registry(catalog, downloads=None):
+    """Serve crates.io seek pagination from an in-memory alphabetical catalog."""
+    requests = []
+
+    def fake_fetch(url, timeout=120):
+        requests.append(url)
+        if url.startswith("https://crates.io/api/v1/crates?"):
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
+            start = int(query.get("seek", ["0"])[0])
+            size = int(query["per_page"][0])
+            window = catalog[start:start + size]
+            end = start + len(window)
+            meta = {"total": len(catalog)}
+            if end < len(catalog):
+                meta["next_page"] = f"?per_page={size}&sort=alpha&seek={end}"
+            return json.dumps({"crates": window, "meta": meta}).encode(), {"downloaded_bytes": 0}
+        name = url.rsplit("/", 3)[1]
+        if downloads is not None and name in downloads:
+            raise downloads[name]
+        return _crate_archive(name, "1.0.0"), {"downloaded_bytes": 1}
+
+    return fake_fetch, requests
 
 
 def test_pypi_simple_catalog_is_normalized_and_sorted():
@@ -111,6 +148,78 @@ def test_pypi_no_distribution_advances_cursor_and_is_unavailable(tmp_path, monke
     assert report["processed"] == 2
     assert report["failures"] == 0
     assert report["unavailable"] == 2
+
+
+def test_crates_catalog_reads_the_seek_cursor_not_a_page_number(monkeypatch):
+    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
+    fake_fetch, requests = _fake_crates_registry(catalog)
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+
+    crates, next_seek, total = _crates_catalog_page(None, 120)
+    assert [crate["name"] for crate in crates][:1] == ["crate-000"]
+    assert next_seek == "100" and total == 250
+    query = urllib.parse.parse_qs(urllib.parse.urlsplit(requests[0]).query)
+    assert "page" not in query and query["sort"] == ["alpha"]
+
+    crates, next_seek, _ = _crates_catalog_page(next_seek, 120)
+    assert crates[0]["name"] == "crate-100" and next_seek == "200"
+    assert _crates_catalog_page("200", 120)[1] is None
+
+
+def test_crates_seek_cursor_resumes_mid_page_without_reprocessing(tmp_path, monkeypatch):
+    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
+    fake_fetch, _ = _fake_crates_registry(catalog)
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    output = tmp_path / "crates.jsonl"
+    state = {}
+
+    first = _crawl_crates(state, output, 30, 1_000_000, 120)
+    assert first["cursor"] == 30 and first["records"] == 30
+    assert state["seek"] is None and state["page_offset"] == 30
+
+    second = _crawl_crates(state, output, 30, 1_000_000, 120)
+    assert second["cursor"] == 60 and state["page_offset"] == 60 and state["seek"] is None
+    names = [json.loads(line)["package"] for line in output.read_text().splitlines()]
+    assert names == [f"crate-{index:03d}" for index in range(60)]
+    assert len(names) == len(set(names))
+
+
+def test_crates_reaches_records_beyond_the_offset_pagination_cap(tmp_path, monkeypatch):
+    catalog = [{"name": f"crate-{index:05d}", "max_stable_version": "1.0.0"} for index in range(20_150)]
+    fake_fetch, _ = _fake_crates_registry(catalog)
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    state = {"page": 201}  # a legacy cursor crates.io answers with HTTP 400
+
+    report = _crawl_crates(state, tmp_path / "crates.jsonl", 50, 1_000_000, 120)
+
+    assert "page" not in state and report["skip_remaining"] == 0
+    assert report["cursor"] == 20_050 and report["catalog_size"] == 20_150
+    packages = [json.loads(line)["package"] for line in (tmp_path / "crates.jsonl").read_text().splitlines()]
+    assert packages[0] == "crate-20000"  # the first crate offset pagination could never reach
+
+
+def test_crates_catalog_outage_keeps_progress_and_fails_the_run(tmp_path, monkeypatch):
+    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
+    fake_fetch, _ = _fake_crates_registry(catalog)
+    calls = {"count": 0}
+
+    def flaky_fetch(url, timeout=120):
+        if url.startswith("https://crates.io/api/v1/crates?"):
+            calls["count"] += 1
+            if calls["count"] > 1:
+                raise urllib.error.HTTPError(url, 503, "Service Unavailable", {}, None)
+        return fake_fetch(url, timeout)
+
+    monkeypatch.setattr(registry_artifact, "fetch", flaky_fetch)
+    output = tmp_path / "crates.jsonl"
+    state = {}
+
+    report = _crawl_crates(state, output, 200, 1_000_000, 120)
+
+    assert report["error"].startswith("HTTP Error 503")
+    assert report["complete"] is False and report["coverage_kind"] == "partial"
+    assert report["cursor"] == 100 and state["cursor"] == 100 and state["seek"] == "100"
+    assert len(output.read_text().splitlines()) == 100
 
 
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):

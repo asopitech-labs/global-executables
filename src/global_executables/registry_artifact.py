@@ -27,6 +27,8 @@ from .model import write_jsonl
 
 USER_AGENT = "global-executables-registry-crawl/1.0 (+https://github.com/asopitech-labs/global-executables)"
 PROJECT_LINK = re.compile(r"<a\b[^>]*href=[\"'][^\"']+[\"'][^>]*>([^<]+)</a>", re.I)
+CRATES_CATALOG = "https://crates.io/api/v1/crates?per_page=100&sort=alpha"
+CRATES_PAGE_SIZE = 100
 
 
 class RegistryCrawlError(RuntimeError):
@@ -320,6 +322,27 @@ def _crate_download(name: str, version: str, timeout: int) -> tuple[bytes, dict[
         return artifact, transfer, url
 
 
+def _crates_catalog_page(seek: str | None, timeout: int) -> tuple[list[dict[str, Any]], str | None, int]:
+    """Read one alphabetical catalog page through crates.io seek pagination.
+
+    Offset pagination rejects everything past 20,000 records with ``HTTP Error
+    400`` ("Page N is unavailable for performance reasons"), which is under 7%
+    of the registry, so the cursor has to be the opaque ``seek`` token that
+    crates.io returns in ``meta.next_page``.
+    """
+    url = CRATES_CATALOG if seek is None else f"{CRATES_CATALOG}&seek={urllib.parse.quote(seek)}"
+    body, _ = fetch(url, timeout)
+    value = json.loads(body)
+    meta = value.get("meta", {})
+    next_page = meta.get("next_page")
+    next_seek = None
+    if next_page:
+        next_seek = urllib.parse.parse_qs(urllib.parse.urlsplit(next_page).query).get("seek", [None])[0]
+        if next_seek is None:
+            raise RegistryCrawlError(f"crates.io catalog page carries no seek cursor: {next_page}")
+    return value.get("crates", []), next_seek, int(meta.get("total", 0))
+
+
 def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     project_file = Path(state.setdefault("projects_file", "data/production/pypi-projects.txt"))
     if not project_file.is_file():
@@ -463,7 +486,13 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
 
 
 def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
-    page = int(state.get("page", 1)); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
+    if "page" in state:  # migrate the offset cursor that crates.io no longer serves
+        state["skip"] = max(0, (int(state.pop("page")) - 1) * CRATES_PAGE_SIZE)
+        state["cursor"] = state["skip"]
+    seek = state.get("seek"); page_offset = int(state.get("page_offset", 0))
+    skip = int(state.get("skip", 0)); cursor = int(state.get("cursor", 0))
+    catalog_size = int(state.get("catalog_size", 0)); catalog_error: str | None = None
+    processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
     failures, unavailable = _failure_state(state)
     retry_crates = state.setdefault("retry_crates", [])
     retry_crates[:] = [crate for crate in retry_crates if crate not in unavailable]
@@ -498,13 +527,20 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             if budget_exhausted:
                 break
             continue
-        body, _ = fetch(f"https://crates.io/api/v1/crates?page={page}&per_page=100", timeout)
-        crates = json.loads(body).get("crates", [])
+        try:
+            crates, next_seek, total = _crates_catalog_page(seek, timeout)
+        except Exception as error:  # keep this run's rows and cursor instead of discarding them
+            catalog_error = str(error)
+            break
+        catalog_size = total or catalog_size
         if not crates:
             state["complete"] = True
             break
-        page_processed = 0
-        for crate in crates:
+        if skip:  # fast-forward the migrated offset without re-downloading artifacts
+            consumed = min(skip, len(crates) - page_offset)
+            skip -= consumed
+            page_offset += consumed
+        for crate in crates[page_offset:]:
             name = crate["name"]; version = crate.get("max_stable_version") or crate.get("newest_version")
             try:
                 artifact, transfer, url = _crate_download(name, version, timeout)
@@ -527,20 +563,30 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             except Exception as error:
                 _record_failure(failures, unavailable, name, error)
             processed += 1
-            page_processed += 1
+            page_offset += 1
+            cursor += 1
             if processed >= budget:
                 break
-        if page_processed == len(crates):
-            page += 1
         if budget_exhausted:
             break
-    state["page"] = page
+        if page_offset >= len(crates):  # the page is spent; otherwise resume it from page_offset
+            if next_seek is None:
+                state["complete"] = True
+                break
+            seek = next_seek
+            page_offset = 0
+    state["seek"] = seek; state["page_offset"] = page_offset
+    state["skip"] = skip; state["cursor"] = cursor; state["catalog_size"] = catalog_size
     _append_rows(output, rows)
     complete = bool(state.get("complete")) and not failures and not retry_crates
-    return {"page": page, "processed": processed, "records": len(rows),
-            "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
-            "retry_pending": len(retry_crates), "budget_exhausted": budget_exhausted, "complete": complete,
-            "coverage_kind": "exhaustive" if complete else "partial"}
+    report = {"cursor": cursor, "catalog_size": catalog_size, "seek": seek,
+              "skip_remaining": skip, "processed": processed, "records": len(rows),
+              "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
+              "retry_pending": len(retry_crates), "budget_exhausted": budget_exhausted, "complete": complete,
+              "coverage_kind": "exhaustive" if complete else "partial"}
+    if catalog_error is not None:
+        report.update({"error": catalog_error, "complete": False, "coverage_kind": "partial"})
+    return report
 
 
 def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
@@ -690,7 +736,8 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
         except Exception as error:
             report["sources"][source] = {"status": "failed", "error": str(error), "coverage_kind": "partial"}
             report["status"] = "failed"
-        if report["sources"].get(source, {}).get("failures", 0):
+        result = report["sources"].get(source, {})
+        if result.get("failures", 0) or result.get("error"):
             report["status"] = "failed"
     report["coverage_kind"] = "exhaustive" if report["status"] == "success" and all(v.get("coverage_kind") == "exhaustive" for v in report["sources"].values()) else "partial"
     report["state"] = str(state_path); report["package_budget"] = package_budget; report["byte_budget"] = byte_budget
