@@ -32,7 +32,16 @@ crates.io must be enumerated through the `seek` cursor its catalog returns in
 migrated once into an equivalent record offset that the crawler fast-forwards
 through the seek stream without re-downloading artifacts. A catalog outage now
 records the error on the source, keeps the run's rows and cursor, and fails the
-run rather than discarding the progress.
+run rather than discarding the progress. Crates the catalog marks `yanked` are
+recorded as permanently unavailable without a download: crates.io names their
+version `0.0.0`, which has no artifact.
+
+Sustained crates.io catch-up needs more budget than the other registries, so
+`--source-package-budget crates=N` raises the per-run package budget for a
+single source; `crates_package_budget` is the workflow input for it. The crawl
+holds roughly one crate per second, so the full 319,000-crate catalog is a
+multi-day sweep. Each run queues its successor, so runs chain back to back
+instead of waiting for the six-hourly schedule.
 
 The scheduled refresh now downloads the production OS indexes with
 `tools/production_crawl.py`, merges them with the currently available registry

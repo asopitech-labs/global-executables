@@ -222,6 +222,41 @@ def test_crates_catalog_outage_keeps_progress_and_fails_the_run(tmp_path, monkey
     assert len(output.read_text().splitlines()) == 100
 
 
+def test_crates_yanked_crates_are_unavailable_and_never_downloaded(tmp_path, monkeypatch):
+    catalog = [{"name": "live", "max_stable_version": "1.0.0", "yanked": False},
+               {"name": "gone", "max_stable_version": None, "newest_version": "0.0.0", "yanked": True}]
+    fake_fetch, requests = _fake_crates_registry(catalog)
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    state = {}
+
+    report = _crawl_crates(state, tmp_path / "crates.jsonl", 2, 1_000_000, 120)
+
+    assert report["processed"] == 2 and report["cursor"] == 2
+    assert report["failures"] == 0 and report["unavailable"] == 1
+    assert state["unavailable"]["gone"] == "all versions are yanked"
+    assert not any("/gone/" in url for url in requests)  # 0.0.0 has no artifact to fetch
+
+
+def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch):
+    seen = {}
+
+    def spy(name):
+        def runner(state, output, budget, byte_budget, timeout):
+            seen[name] = budget
+            return {"coverage_kind": "partial", "complete": False}
+        return runner
+
+    monkeypatch.setattr(registry_artifact, "_crawl_crates", spy("crates"))
+    monkeypatch.setattr(registry_artifact, "_crawl_npm", spy("npm"))
+    report = registry_artifact.crawl_registry_sources(
+        ["npm", "crates"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json",
+        package_budget=1000, source_budgets={"crates": 10_000},
+    )
+
+    assert seen == {"npm": 1000, "crates": 10_000}
+    assert report["sources"]["crates"]["package_budget"] == 10_000
+
+
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):
     def failed_source(*args):
         return {"failures": 1, "coverage_kind": "partial"}

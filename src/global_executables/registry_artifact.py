@@ -542,6 +542,17 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             page_offset += consumed
         for crate in crates[page_offset:]:
             name = crate["name"]; version = crate.get("max_stable_version") or crate.get("newest_version")
+            if crate.get("yanked"):
+                # A fully yanked crate is already permanently unavailable here, the same
+                # verdict _crate_latest_version reaches from the index.  The catalog names
+                # its version 0.0.0, which has no artifact, so attempting the download only
+                # buys a 403 that is retried on every later run.
+                unavailable[name] = "all versions are yanked"
+                failures.pop(name, None)
+                processed += 1; page_offset += 1; cursor += 1
+                if processed >= budget:
+                    break
+                continue
             try:
                 artifact, transfer, url = _crate_download(name, version, timeout)
                 downloaded += transfer["downloaded_bytes"]
@@ -720,19 +731,22 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
 
 def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Path, report_path: Path,
                            package_budget: int = 100, byte_budget: int = 500_000_000,
-                           timeout: int = 120) -> dict[str, Any]:
+                           timeout: int = 120, source_budgets: dict[str, int] | None = None) -> dict[str, Any]:
     state = _load_json(state_path, {"version": 1, "sources": {}})
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
         "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates, "go": _crawl_go,
         "rubygems": _crawl_rubygems, "packagist": _crawl_packagist,
     }
+    source_budgets = source_budgets or {}
     for source in sources:
         if source not in runners:
             raise RegistryCrawlError(f"unsupported registry source: {source}")
         source_state = state["sources"].setdefault(source, {})
+        budget = int(source_budgets.get(source, package_budget))
         try:
-            report["sources"][source] = runners[source](source_state, output_dir / f"{source}.jsonl", package_budget, byte_budget, timeout)
+            report["sources"][source] = runners[source](source_state, output_dir / f"{source}.jsonl", budget, byte_budget, timeout)
+            report["sources"][source]["package_budget"] = budget
         except Exception as error:
             report["sources"][source] = {"status": "failed", "error": str(error), "coverage_kind": "partial"}
             report["status"] = "failed"
