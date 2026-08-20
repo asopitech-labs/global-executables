@@ -33,6 +33,15 @@ for name, source in sorted(report.get("sources", {}).items()):
 PY
 }
 
+processed_nothing() {
+  python - <<'PYIDLE'
+import json, pathlib, sys
+report = json.loads(pathlib.Path("reports/registry-artifact-crawl.json").read_text())
+sources = report.get("sources", {}).values()
+sys.exit(0 if sources and all((s.get("processed") or 0) == 0 for s in sources) else 1)
+PYIDLE
+}
+
 exhaustive() {
   python - <<'PY'
 import json, pathlib, sys
@@ -42,6 +51,7 @@ PY
 }
 
 pass=0
+idle=0
 while :; do
   pass=$((pass + 1))
   printf '=== pass %s  %s ===\n' "${pass}" "$(date -u +%FT%TZ)"
@@ -65,6 +75,19 @@ while :; do
     echo "=== every selected source is exhaustive ==="
     break
   fi
+  # A source whose cursor has reached the end of its catalog returns instantly having
+  # processed nothing.  Retrying that every few seconds is a busy loop, so back off and
+  # stop once it is clear no further pass can achieve anything.
+  if processed_nothing; then
+    idle=$((idle + 1))
+    if [ "${idle}" -ge "${IDLE_PASSES:-5}" ]; then
+      printf '=== no pass processed anything in %s attempts; stopping ===\n' "${idle}"
+      break
+    fi
+    sleep $((PAUSE_SECONDS * idle * 6))
+    continue
+  fi
+  idle=0
   if [ "${PASSES}" -ne 0 ] && [ "${pass}" -ge "${PASSES}" ]; then
     printf '=== stopping after %s passes ===\n' "${pass}"
     break

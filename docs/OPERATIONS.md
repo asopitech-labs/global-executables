@@ -178,6 +178,11 @@ because the work is entirely I/O. Every container gets its own state directory �
 shared one would put four writers on a single cursor file — and `merge` folds the
 per-source states back into one publishable tree.
 
+A pass whose cursor has reached the end of its catalog returns instantly having
+processed nothing, so the loop backs off rather than retrying every few seconds, and
+stops once several consecutive passes have achieved nothing. NuGet reached that state
+after 4,000 tools and was spinning through a pass every five seconds.
+
 Each pass is budgeted so the resumable state is checkpointed between passes;
 stopping the container loses at most the pass in flight. Measured on the local
 runtime, crates.io reaches `exhaustive` in a single pass — 319,466 crates, 88,610

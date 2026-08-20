@@ -715,3 +715,26 @@ def test_a_catalog_written_uncompressed_is_still_readable(tmp_path):
     assert not plain.exists()  # the plain copy is replaced, not left to drift
     assert registry_artifact.read_catalog(plain) == ["delta", "epsilon"]
     assert registry_artifact.read_catalog(tmp_path / "absent.txt") == []
+
+
+def test_nuget_derives_truncation_for_a_catalog_built_before_the_check(tmp_path, monkeypatch):
+    """The catalog carried no verdict, so the source was about to claim a sample as complete."""
+    catalog = tmp_path / "tools.txt"
+    registry_artifact.write_catalog(catalog, [f"tool-{i}" for i in range(4000)])
+    asked = []
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        asked.append(url)
+        if url.startswith(registry_artifact.NUGET_SEARCH):
+            return json.dumps({"totalHits": 8619, "data": []}).encode(), {"downloaded_bytes": 1}
+        return json.dumps({"versions": ["1.0.0"]}).encode(), {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_nuget_tool_commands", lambda url, timeout: ([], 1))
+    state = {"tools_file": str(catalog), "cursor": 4000}  # cursor already at the end
+
+    report = registry_artifact._crawl_nuget(state, tmp_path / "nuget.jsonl", 10, 1_000_000, 120)
+
+    assert state["catalog_advertised"] == 8619 and state["catalog_truncated"] is True
+    assert report["complete"] is False and report["coverage_kind"] == "partial"
+    assert any(url.startswith(registry_artifact.NUGET_SEARCH) for url in asked)

@@ -1193,6 +1193,18 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         state["catalog_advertised"] = advertised
         state["catalog_truncated"] = len(set(identifiers)) < advertised
     tools = read_catalog(catalog_file)
+    if state.get("catalog_advertised") is None and tools:
+        # A catalog built before this check existed carries no verdict, and without one
+        # the source would present a sample of the tool list as the whole of it.
+        query = urllib.parse.urlencode({"q": "", "packageType": "DotnetTool", "take": 1,
+                                        "skip": 0, "prerelease": "false"})
+        try:
+            body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
+            advertised = int(json.loads(body).get("totalHits") or 0)
+        except Exception:
+            advertised = 0
+        state["catalog_advertised"] = advertised
+        state["catalog_truncated"] = bool(advertised) and len(tools) < advertised
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
     rows: list[dict[str, Any]] = []; budget_exhausted = False
