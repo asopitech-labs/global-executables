@@ -97,8 +97,20 @@ lower case there: the images ship `ARP.EXE` beside `attrib.exe`, and on a
 case-insensitive filesystem the command a user types has to collide with the `arp`
 every Linux index already carries.
 
-Still uncovered: the macOS base command set, which Apple neither packages nor
-publishes a manifest for. Chocolatey was investigated and rejected — its feed answers 504 to
+What makes a file a command is that its directory is on the default PATH, which is
+wider than System32: `Wbem` holds WMIC, and PowerShell and the bundled OpenSSH client
+each sit in their own directory. Reading System32 alone missed all of them.
+servercore ltsc2022 yields 347 commands, 295 of them new to the dataset.
+
+Two gaps remain, and neither is reachable by inspecting a filesystem:
+
+* **Shell built-ins and aliases.** `path`, `dir`, `copy` and `set` are cmd.exe
+  built-ins, and `ls`, `cat` and `curl` are PowerShell aliases; none exists as a file.
+  The same is true of `cd`, `echo` and `test` under bash. The count is small but the
+  names are short and heavily contested, so their weight is not proportional to it.
+* **The macOS base command set**, which Apple neither packages nor publishes a
+  manifest for. Enumerating a local `/usr/bin` finds 585 names the dataset lacks, but
+  that describes one machine rather than a published release. Chocolatey was investigated and rejected — its feed answers 504 to
 repeated requests, its metadata never names an executable, and its packages often
 contain no binary at all because the install script downloads one.
 

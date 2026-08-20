@@ -131,8 +131,13 @@ def _crawl_os(source: str, body: bytes, source_url: str) -> tuple[list[dict[str,
 MCR = "https://mcr.microsoft.com/v2"
 MANIFEST_ACCEPT = ("application/vnd.docker.distribution.manifest.v2+json,"
                    "application/vnd.oci.image.manifest.v1+json")
-# Windows layers store the filesystem under Files/, and a command is what a user types.
-WINDOWS_EXEC_DIRS = ("files/windows/system32/", "files/windows/", "files/windows/syswow64/")
+# Windows layers store the filesystem under Files/.  These are the directories on the
+# default PATH, which is what makes a file a command a user can type: System32 alone
+# misses WMIC under Wbem, powershell, and the bundled OpenSSH client.
+WINDOWS_EXEC_DIRS = ("files/windows/system32/", "files/windows/", "files/windows/syswow64/",
+                     "files/windows/system32/wbem/",
+                     "files/windows/system32/windowspowershell/v1.0/",
+                     "files/windows/system32/openssh/")
 WINDOWS_EXEC_SUFFIXES = (".exe", ".com", ".bat", ".cmd")
 
 
@@ -162,6 +167,8 @@ def _windows_image_rows(repository: str, tag: str, timeout: int) -> tuple[list[d
                         continue
                     normalised = member.name.replace("\\", "/")
                     path = normalised.lower()
+                    if not path.startswith("files/"):
+                        continue  # the image also carries a nested UtilityVM tree
                     # A command sits directly in one of these directories, not in a subtree.
                     if path.rsplit("/", 1)[0] + "/" not in WINDOWS_EXEC_DIRS:
                         continue
