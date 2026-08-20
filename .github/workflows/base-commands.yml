@@ -31,7 +31,7 @@ jobs:
       - name: Observe this runner's base command set
         run: |
           mkdir -p data/production/intermediate
-          python tools/production_crawl.py --source macos \
+          python tools/production_crawl.py --source macos --source shell \
             --output-dir data/production/intermediate \
             --report reports/base-commands-${{ matrix.runner }}.json
           python - <<'PY'
@@ -44,6 +44,7 @@ jobs:
           name: base-commands-${{ matrix.runner }}
           path: |
             data/production/intermediate/macos.jsonl
+            data/production/intermediate/shell.jsonl
             reports/base-commands-${{ matrix.runner }}.json
 
   publish:

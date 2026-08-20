@@ -39,7 +39,7 @@ jobs:
             echo "::error::Unable to inspect the artifact-data branch; refusing to refresh with incomplete inputs"
             exit 1
           fi
-          for source in npm pypi crates go rubygems packagist nuget macos; do
+          for source in npm pypi crates go rubygems packagist nuget macos shell; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             else
@@ -69,6 +69,7 @@ jobs:
             data/production/intermediate/winget.jsonl \
             data/production/intermediate/windows.jsonl \
             data/production/intermediate/macos.jsonl \
+            data/production/intermediate/shell.jsonl \
             --snapshot "$(date -u +%F)" \
             --coverage-map data/production/coverage-map.json \
             --report reports/production-refresh.json

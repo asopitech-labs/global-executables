@@ -71,6 +71,8 @@ SOURCE_INDEXES = {
     # Apple publishes no manifest for the base command set, so it is read from an
     # installed system root and pinned to that system's build version.
     "macos": ["/"],
+    # Built-ins are never files, so nothing else in this crawler can reach them.
+    "shell": ["bash", "zsh", "ksh", "fish", "sh", "cmd"],
     "windows": [f"{repository}:{tag}" for repository, tag in (
         ("windows/servercore", "ltsc2025-amd64"), ("windows/servercore", "ltsc2022-amd64"),
         ("windows/nanoserver", "ltsc2025-amd64"), ("windows/nanoserver", "ltsc2022-amd64"))],
@@ -80,12 +82,12 @@ SOURCE_INDEXES = {
 }
 SOURCE_URLS = {source: urls[0] for source, urls in SOURCE_INDEXES.items()}
 FILE_INDEX_SOURCES = {"debian", "ubuntu", "arch", "msys2"}
-COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "windows", "macos"}
+COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "windows", "macos", "shell"}
 PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 # There is no privileged observation of a base command set: every run samples one
 # installed system.  Those samples accumulate rather than replace each other, so a
 # second machine, architecture or release widens the coverage instead of erasing it.
-ACCUMULATING_SOURCES = {"macos"}
+ACCUMULATING_SOURCES = {"macos", "shell"}
 
 
 def _merge_observations(rows: list[dict[str, Any]], output: Path) -> list[dict[str, Any]]:
@@ -271,6 +273,69 @@ def _macos_rows(root: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                   "url": reference, "final_url": reference, "status_code": 200, "duration_seconds": 0.0}
 
 
+# A built-in is a name a user types that is never a file, so no filesystem or registry
+# scan can reach it.  The set is fixed per shell release, and most shells will list it.
+SHELL_INTROSPECTION = {
+    "bash": (["-c", "compgen -b"], ["-c", 'printf %s "$BASH_VERSION"']),
+    "zsh": (["-c", "print -l ${(ok)builtins}"], ["-c", 'printf %s "$ZSH_VERSION"']),
+    "fish": (["-c", "builtin --names"], ["-c", "echo $version"]),
+    "ksh": (["-c", "builtin"], ["-c", 'echo ${.sh.version}']),
+}
+# dash and cmd.exe cannot be asked, so their sets come from the specification and the
+# vendor's own reference instead.  Both are stable and small.
+DOCUMENTED_BUILTINS = {
+    "sh": ("https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html", "POSIX.1-2017", (
+        "break", ":", "continue", ".", "eval", "exec", "exit", "export", "readonly", "return",
+        "set", "shift", "times", "trap", "unset", "alias", "bg", "cd", "command", "false", "fc",
+        "fg", "getopts", "hash", "jobs", "kill", "newgrp", "pwd", "read", "true", "umask",
+        "unalias", "wait", "type", "ulimit")),
+    "cmd": ("https://learn.microsoft.com/windows-server/administration/windows-commands/cmd", "Windows", (
+        "assoc", "break", "call", "cd", "chdir", "cls", "color", "copy", "date", "del", "dir",
+        "dpath", "echo", "endlocal", "erase", "exit", "for", "ftype", "goto", "if", "keys", "md",
+        "mkdir", "mklink", "move", "path", "pause", "popd", "prompt", "pushd", "rd", "rem", "ren",
+        "rename", "rmdir", "set", "setlocal", "shift", "start", "time", "title", "type", "ver",
+        "verify", "vol")),
+}
+
+
+def _shell_builtin_rows(shell: str, executable: str | None = None) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Record a shell's built-in commands, pinned to the shell release that defines them.
+
+    Asking the shell is preferable to transcribing a manual: it is verifiable, and the
+    set moves between releases — macOS' bash 3.2 declares 58 built-ins where Debian's
+    bash 5.2 declares 61.
+    """
+    import shutil
+    import subprocess
+    if shell in DOCUMENTED_BUILTINS:
+        reference, release, names = DOCUMENTED_BUILTINS[shell]
+        version = release
+    else:
+        binary = executable or shutil.which(shell)
+        if not binary:
+            raise ProductionSourceError(f"shell is not installed here: {shell}")
+        listing, probe = SHELL_INTROSPECTION[shell]
+        names = [line.strip() for line in
+                 subprocess.run([binary, *listing], capture_output=True, text=True,
+                                timeout=60).stdout.splitlines() if line.strip()]
+        # ksh lists absolute paths for its bundled utilities beside the true built-ins.
+        names = [name for name in names if "/" not in name]
+        version = subprocess.run([binary, *probe], capture_output=True, text=True,
+                                 timeout=60).stdout.strip() or "unknown"
+        reference = f"{shell}@{version}"
+    commands = sorted({name for name in names if name})
+    if not commands:
+        raise ProductionSourceError(f"shell reported no built-ins: {shell}")
+    rows = [record(command, "shell", shell, version, None, reference,
+                   confidence="direct", source_type="shell_builtin",
+                   package_system="shell-builtin", shell=shell, shell_version=version)
+            for command in commands]
+    return rows, {"status": "success", "coverage_kind": "exhaustive", "records": len(rows),
+                  "source": reference, "shell": shell, "shell_version": version,
+                  "downloaded_bytes": 0, "url": reference, "final_url": reference,
+                  "status_code": 200, "duration_seconds": 0.0}
+
+
 def _crawl_scoop(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Read a Scoop bucket's manifests from its repository tarball."""
     manifests: list[tuple[str, dict[str, Any]]] = []
@@ -352,7 +417,17 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
     downloaded = 0
     coverage_kind = "exhaustive"
     for source_url in SOURCE_INDEXES[source]:
-        if source == "macos":
+        if source == "shell":
+            try:
+                index_rows, index_coverage = _shell_builtin_rows(source_url)
+            except ProductionSourceError as error:
+                # A shell absent from this machine is simply not observed here.
+                indexes.append({"status": "skipped", "coverage_kind": "partial",
+                                "records": 0, "source": source_url, "reason": str(error)})
+                coverage_kind = "partial"
+                continue
+            transfer = {"downloaded_bytes": 0}
+        elif source == "macos":
             index_rows, index_coverage = _macos_rows(Path(source_url))
             transfer = {"downloaded_bytes": 0}
         elif source == "windows":

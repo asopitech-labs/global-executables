@@ -546,3 +546,53 @@ def test_base_command_observations_accumulate_across_builds(tmp_path, monkeypatc
     # the report cites the build this run observed, not the filesystem root it read
     assert coverage["source"] == "macos@26.5.2-25F84-arm64"
     assert coverage["observed"] == ["macos@26.5.2-25F84-arm64"]
+
+
+def test_shell_builtins_are_pinned_to_the_release_that_defines_them(monkeypatch):
+    """The set moves between releases: macOS bash 3.2 has 58, Debian bash 5.2 has 61."""
+    from global_executables import production
+
+    class _Result:
+        def __init__(self, stdout): self.stdout = stdout
+
+    def fake_run(argv, **kwargs):
+        return _Result("5.2.37(1)-release" if "BASH_VERSION" in argv[-1] else "cd\nexport\n\n[\n")
+
+    monkeypatch.setattr(production.__dict__["__builtins__"]["__import__"]("shutil"), "which",
+                        lambda name: f"/bin/{name}")
+    monkeypatch.setattr(production.__dict__["__builtins__"]["__import__"]("subprocess"), "run", fake_run)
+    rows, coverage = production._shell_builtin_rows("bash")
+
+    assert [row["command"] for row in rows] == ["[", "cd", "export"]
+    assert coverage["source"] == "bash@5.2.37(1)-release"
+    assert rows[0]["source_type"] == "shell_builtin" and rows[0]["shell_version"] == "5.2.37(1)-release"
+
+
+def test_shells_that_cannot_be_asked_come_from_their_specification():
+    from global_executables import production
+    rows, coverage = production._shell_builtin_rows("cmd")
+    commands = {row["command"] for row in rows}
+    # exactly the names no filesystem scan reaches
+    assert {"path", "dir", "set", "copy", "del", "echo"} <= commands
+    assert coverage["source"].startswith("https://learn.microsoft.com/")
+    posix, _ = production._shell_builtin_rows("sh")
+    assert {"cd", "export", "trap", ":"} <= {row["command"] for row in posix}
+
+
+def test_a_shell_absent_from_this_machine_is_not_observed_here(tmp_path, monkeypatch):
+    from global_executables import production
+
+    def only_bash(shell, executable=None):
+        if shell != "bash":
+            raise production.ProductionSourceError(f"shell is not installed here: {shell}")
+        return ([{"command": "cd", "ecosystem": "shell", "package": "bash", "source": "bash@5"}],
+                {"status": "success", "coverage_kind": "exhaustive", "records": 1,
+                 "source": "bash@5", "downloaded_bytes": 0})
+
+    monkeypatch.setattr(production, "_shell_builtin_rows", only_bash)
+    monkeypatch.setitem(production.SOURCE_INDEXES, "shell", ["bash", "fish"])
+    coverage = production.crawl_source("shell", tmp_path / "shell.jsonl", 60)
+
+    assert coverage["records"] == 1
+    assert coverage["coverage_kind"] == "partial"  # an unobserved shell is not a covered one
+    assert [index["status"] for index in coverage["indexes"]] == ["success", "skipped"]

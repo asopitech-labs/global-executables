@@ -211,6 +211,7 @@ python tools/refresh.py \
   data/production/intermediate/winget.jsonl \
   data/production/intermediate/windows.jsonl \
   data/production/intermediate/macos.jsonl \
+  data/production/intermediate/shell.jsonl \
   data/production/intermediate/nuget.jsonl \
   --snapshot "$(date -u +%F)" \
   --coverage-map data/production/coverage-map.json \
