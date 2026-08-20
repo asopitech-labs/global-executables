@@ -40,7 +40,7 @@ RETRY_AFTER_CAP = 60.0
 # Crate conditions no later run can resolve; retrying them forever would hold the
 # source below exhaustive.
 PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:",
-                              "module has no latest version:")
+                              "module has no latest version:", "gem is yanked")
 # Bumped when an npm parsing fix invalidates the coverage an earlier cursor claimed.
 NPM_PARSER_GENERATION = 3
 NPM_ALL_DOCS = "https://replicate.npmjs.com/_all_docs"
@@ -1134,6 +1134,16 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             metadata_url = "https://rubygems.org/api/v1/gems/" + urllib.parse.quote(package, safe="") + ".json"
             metadata_body, _ = fetch(metadata_url, timeout)
             metadata = json.loads(metadata_body)
+            if metadata.get("yanked"):
+                # RubyGems still lists a yanked gem but its CDN answers AccessDenied for
+                # the artifact, so fetching it buys a 403 that is retried on every run.
+                unavailable[package] = "gem is yanked"
+                failures.pop(package, None)
+                cursor += 1; processed += 1
+                if processed % CHECKPOINT_INTERVAL == 0:
+                    collected += len(rows)
+                    checkpoint(rows, cursor=cursor)
+                continue
             version = metadata.get("version", "unknown")
             artifact_url = metadata.get("gem_uri") or f"https://rubygems.org/gems/{urllib.parse.quote(package, safe='')}-{urllib.parse.quote(version, safe='')}.gem"
             compressed, spent = _gem_metadata(artifact_url, timeout); downloaded += spent
@@ -1146,11 +1156,7 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             failures.pop(package, None)
         except Exception as error:
             _record_failure(failures, unavailable, package, error)
-            if package in failures and package not in retry_tools:
-                retry_tools.append(package)  # queued for the next run, not this one
-        if not retrying:
-            cursor += 1
-        processed += 1
+        cursor += 1; processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
             collected += len(rows)
             checkpoint(rows, cursor=cursor)

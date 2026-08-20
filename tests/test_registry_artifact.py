@@ -900,3 +900,30 @@ def test_a_finished_catalogue_still_retries_what_failed(tmp_path, monkeypatch):
     assert report["failures"] == 0 and report["retry_pending"] == 0
     assert report["complete"] is True and report["coverage_kind"] == "exhaustive"
     assert report["cursor"] == 2  # a retry does not advance the catalogue cursor
+
+
+def test_a_yanked_gem_is_not_fetched_or_retried(tmp_path, monkeypatch):
+    """RubyGems keeps listing a yanked gem while its CDN answers AccessDenied, so 38 of
+    them sat in `failures` being retried forever."""
+    catalog = tmp_path / "names.txt"
+    registry_artifact.write_catalog(catalog, ["live", "spam"])
+    fetched = []
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        fetched.append(url)
+        name = url.rsplit("/", 1)[-1].removesuffix(".json")
+        return json.dumps({"name": name, "version": "1.0.0", "yanked": name == "spam",
+                           "gem_uri": f"https://rubygems.org/gems/{name}-1.0.0.gem"}).encode(), \
+               {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_gem_metadata",
+                        lambda url, timeout: (gzip.compress(b"executables:\n- live\n"), 1))
+    state = {"names_file": str(catalog)}
+
+    report = registry_artifact._crawl_rubygems(state, tmp_path / "rubygems.jsonl", 10, 1_000_000, 120)
+
+    assert not any("spam-1.0.0.gem" in url for url in fetched)   # never asked for
+    assert report["failures"] == 0 and report["unavailable"] == 1
+    assert state["unavailable"]["spam"] == "gem is yanked"
+    assert report["cursor"] == 2 and report["coverage_kind"] == "exhaustive"
