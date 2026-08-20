@@ -42,7 +42,9 @@ RETRY_AFTER_CAP = 60.0
 PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:",
                               "module has no latest version:")
 # Bumped when an npm parsing fix invalidates the coverage an earlier cursor claimed.
-NPM_PARSER_GENERATION = 2
+NPM_PARSER_GENERATION = 3
+NPM_ALL_DOCS = "https://replicate.npmjs.com/_all_docs"
+NPM_CATALOG_PAGE = 10000
 GO_INDEX = "https://index.golang.org/index"
 GO_INDEX_EPOCH = "2019-01-01T00:00:00Z"
 GO_INDEX_PAGE = 2000
@@ -738,83 +740,68 @@ def _npm_release_url(name: str) -> str:
 
 def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
+    """Inspect every npm package once, from the registry's own package list.
+
+    The changes feed carries every revision — over 126 million of them against 4.3
+    million packages — so walking it to reach each package once costs thirty times
+    what enumerating the packages does.
+    """
     if int(state.get("parser_generation", 1)) < NPM_PARSER_GENERATION:
-        # Everything the previous parser walked produced no commands at all, so the
-        # cursor it left behind describes coverage that was never collected.
-        state.update({"parser_generation": NPM_PARSER_GENERATION, "since": 0})
-        state.pop("complete", None)
-    since = state.get("since", 0); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
+        state.update({"parser_generation": NPM_PARSER_GENERATION, "cursor": 0})
+        for retired in ("since", "complete", "retry_packages"):
+            state.pop(retired, None)
+    catalog_file = Path(state.setdefault("packages_file", "data/production/npm-packages.txt"))
+    catalog_file.parent.mkdir(parents=True, exist_ok=True)
+    downloaded = 0
+    if not catalog_file.is_file():
+        names: list[str] = []
+        start_key = ""
+        while True:
+            query = {"limit": NPM_CATALOG_PAGE}
+            if start_key:
+                query["startkey"] = json.dumps(start_key)
+            body, transfer = fetch(f"{NPM_ALL_DOCS}?{urllib.parse.urlencode(query)}", timeout)
+            downloaded += transfer["downloaded_bytes"]
+            rows = json.loads(body).get("rows", [])
+            if start_key:
+                rows = [row for row in rows if row.get("id") != start_key]
+            if not rows:
+                break
+            names.extend(row["id"] for row in rows if row.get("id") and not row["id"].startswith("_"))
+            start_key = rows[-1]["id"]
+            if interrupted():
+                break
+        catalog_file.write_text("\n".join(names) + "\n")
+    packages = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+    cursor = int(state.get("cursor", 0)); processed = 0
     failures, unavailable = _failure_state(state)
-    retry_packages = state.setdefault("retry_packages", [])
-    for package in failures:
-        if package not in retry_packages:
-            retry_packages.append(package)
-    retry_budget = len(retry_packages)
+    rows_out: list[dict[str, Any]] = []
     budget_exhausted = False
-    while processed < budget:
-        if retry_budget:
-            retry_budget -= 1
-            name = retry_packages.pop(0)
-            try:
-                metadata_url = _npm_release_url(name)
-                metadata_body, transfer = fetch(metadata_url, timeout)
-                downloaded += transfer["downloaded_bytes"]
-                if downloaded > byte_budget:
-                    budget_exhausted = True
-                    break
-                rows.extend(npm_metadata(json.loads(metadata_body), metadata_url))
-                failures.pop(name, None)
-            except Exception as error:
-                _record_failure(failures, unavailable, name, error)
-                retry_packages.append(name)
-            processed += 1
-            if budget_exhausted:
+    while cursor < len(packages) and processed < budget:
+        name = packages[cursor]
+        try:
+            metadata_url = _npm_release_url(name)
+            metadata_body, transfer = fetch(metadata_url, timeout)
+            downloaded += transfer["downloaded_bytes"]
+            if downloaded > byte_budget:
+                budget_exhausted = True
                 break
-            continue
-        limit = min(100, budget - processed)
-        query = urllib.parse.urlencode({"since": since, "limit": limit})
-        body, _ = fetch(f"https://replicate.npmjs.com/_changes?{query}", timeout)
-        page = json.loads(body); results = page.get("results", [])
-        if not results:
-            state["complete"] = True
+            rows_out.extend(npm_metadata(json.loads(metadata_body), metadata_url))
+            failures.pop(name, None)
+        except Exception as error:
+            _record_failure(failures, unavailable, name, error)
+        cursor += 1; processed += 1
+        if processed % CHECKPOINT_INTERVAL == 0:
+            checkpoint(rows_out, cursor=cursor)
+        if interrupted():
             break
-        for change in results:
-            change_since = change.get("seq", since); name = change.get("id", "")
-            if name.startswith("_"):
-                since = change_since
-                continue
-            try:
-                metadata_url = _npm_release_url(name)
-                metadata_body, transfer = fetch(metadata_url, timeout)
-                downloaded += transfer["downloaded_bytes"]
-                if downloaded > byte_budget:
-                    budget_exhausted = True
-                    break
-                rows.extend(npm_metadata(json.loads(metadata_body), metadata_url))
-                failures.pop(name, None)
-            except Exception as error:
-                _record_failure(failures, unavailable, name, error)
-            since = change_since
-            processed += 1
-            if processed % CHECKPOINT_INTERVAL == 0:
-                checkpoint(rows, since=since)
-            if processed >= budget or interrupted():
-                break
-        if budget_exhausted:
-            break
-        # Short of the limit that was actually requested means the feed is caught up.
-        # Comparing against the whole budget declared npm complete as soon as a run's
-        # remaining budget shrank the last page below 100.
-        if len(results) < limit:
-            state["complete"] = True
-            break
-    state["since"] = since
-    _append_rows(output, rows)
-    complete = bool(state.get("complete")) and not failures and not retry_packages
-    return {"since": since, "processed": processed, "records": len(rows),
-            "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
-            "retry_pending": len(retry_packages), "budget_exhausted": budget_exhausted, "complete": complete,
-            "coverage_kind": "exhaustive" if complete else "partial"}
+    state["cursor"] = cursor
+    _append_rows(output, rows_out)
+    complete = cursor >= len(packages) and not failures
+    return {"cursor": cursor, "catalog_size": len(packages), "processed": processed,
+            "records": len(rows_out), "downloaded_bytes": downloaded, "failures": len(failures),
+            "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
+            "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
 def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
@@ -828,6 +815,11 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     """
     for legacy in ("page", "seek", "page_offset", "skip", "cursor", "retry_crates"):
         state.pop(legacy, None)
+    # The dump is a whole-registry snapshot, so a verdict the retired per-crate path
+    # left behind is not evidence about it.  One stale IncompleteRead was holding a
+    # complete crates.io at partial with no way to ever clear.
+    state.pop("failures", None)
+    state.pop("unavailable", None)
     failures, unavailable = _failure_state(state)
     # The dump is republished daily and the observations replace rather than extend, so
     # re-reading an unchanged one costs 1.7GB to rewrite the same file.

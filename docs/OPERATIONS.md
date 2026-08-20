@@ -34,7 +34,12 @@ artifact, because most of them already publish the answer.
   backfilled — in one request, which is the bulk access route crates.io points
   crawlers to when they hit the API's pagination limit. crates.io reaches
   `exhaustive` in a single run.
-* npm and Packagist already answered from registry metadata (`bin`).
+* npm answers from registry metadata, but only from the release document: a bare
+  package name returns every version ever published, where `bin` never appears at the
+  top level. Packages are enumerated once from `_all_docs` — the changes feed carries
+  126 million revisions against 4.3 million packages, so reaching each package through
+  it costs thirty times what listing them does.
+* Packagist already answered from registry metadata (`bin`).
 * PyPI does not expose console scripts in its JSON API, so a wheel still has to be
   read — but a wheel is a ZIP, so `RemoteZip` reads the trailing central directory
   and then the one small member that names the commands. Wheels that ship a

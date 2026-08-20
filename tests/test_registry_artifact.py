@@ -203,57 +203,6 @@ def test_go_catalog_records_each_module_once(tmp_path, monkeypatch):
     assert "since" not in state  # the download cursor is not a catalog cursor
 
 
-def test_npm_reads_the_release_document_not_the_packument(tmp_path, monkeypatch):
-    """`bin` lives in versions[...]; reading the packument top level found nothing."""
-    packument = {"name": "demo", "dist-tags": {"latest": "1.0.0"},
-                 "versions": {"1.0.0": {"name": "demo", "version": "1.0.0", "bin": {"demo": "cli.js"}}}}
-    release = packument["versions"]["1.0.0"]
-    assert npm_metadata(packument, "https://registry.npmjs.org/demo") == []
-    assert [row["command"] for row in npm_metadata(release, "x")] == ["demo"]
-
-    asked = []
-
-    def fake_fetch(url, timeout=120, attempts=4):
-        asked.append(url)
-        if "_changes" in url:
-            return json.dumps({"results": [{"seq": 7, "id": "demo"}]}).encode(), {"downloaded_bytes": 1}
-        return json.dumps(release).encode(), {"downloaded_bytes": 2}
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    output = tmp_path / "npm.jsonl"
-    report = registry_artifact._crawl_npm({}, output, 1, 1_000_000, 120)
-
-    assert report["records"] == 1
-    assert asked[-1].endswith("/demo/latest")
-    assert json.loads(output.read_text().strip())["command"] == "demo"
-
-
-def test_npm_is_only_complete_when_the_feed_runs_short_of_its_own_limit(tmp_path, monkeypatch):
-    """A page shortened by the remaining budget used to be read as the end of the feed."""
-    def fake_fetch(url, timeout=120, attempts=4):
-        if "_changes" in url:
-            limit = int(urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)["limit"][0])
-            results = [{"seq": index, "id": f"pkg-{index}"} for index in range(1, limit + 1)]
-            return json.dumps({"results": results}).encode(), {"downloaded_bytes": 1}
-        return json.dumps({"name": "pkg", "version": "1.0.0"}).encode(), {"downloaded_bytes": 1}
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    state = {"parser_generation": registry_artifact.NPM_PARSER_GENERATION}
-    report = registry_artifact._crawl_npm(state, tmp_path / "npm.jsonl", 150, 1_000_000, 120)
-
-    assert report["processed"] == 150
-    assert report["complete"] is False and report["coverage_kind"] == "partial"
-
-
-def test_npm_cursor_from_the_broken_parser_is_not_trusted(tmp_path, monkeypatch):
-    monkeypatch.setattr(registry_artifact, "fetch",
-                        lambda *a, **k: (json.dumps({"results": []}).encode(), {"downloaded_bytes": 0}))
-    state = {"since": 2548252, "complete": True}
-    registry_artifact._crawl_npm(state, tmp_path / "npm.jsonl", 1, 1_000_000, 120)
-    assert state["parser_generation"] == registry_artifact.NPM_PARSER_GENERATION
-    assert state["since"] == 0  # the walk is redone now that it can record anything
-
-
 def test_go_catalog_cursor_survives_an_interrupted_sweep(tmp_path, monkeypatch):
     """Run-level state is only written when a pass returns; the catalog phase outlives that."""
     pages = [
@@ -703,3 +652,53 @@ def test_every_crawler_can_actually_call_its_checkpoint(tmp_path, monkeypatch):
                  "_crawl_rubygems", "_crawl_packagist", "_crawl_nuget"):
         source = inspect.getsource(getattr(registry_artifact, name))
         assert "\n    checkpoint = " not in source, f"{name} rebinds its checkpoint parameter"
+
+
+
+def test_npm_enumerates_packages_once_instead_of_every_revision(tmp_path, monkeypatch):
+    """The changes feed carries 126M revisions against 4.3M packages."""
+    release = {"name": "demo", "version": "1.0.0", "bin": {"demo": "cli.js"}}
+    asked = []
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        asked.append(url)
+        if url.startswith(registry_artifact.NPM_ALL_DOCS):
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
+            start = json.loads(query["startkey"][0]) if "startkey" in query else ""
+            names = ["alpha", "beta", "gamma"]
+            rows = [{"id": n} for n in names if n >= start]
+            return json.dumps({"rows": rows, "total_rows": 3}).encode(), {"downloaded_bytes": 5}
+        return json.dumps(release).encode(), {"downloaded_bytes": 2}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    catalog = tmp_path / "npm-packages.txt"
+    state = {"packages_file": str(catalog), "since": 2548252, "complete": True}
+
+    report = registry_artifact._crawl_npm(state, tmp_path / "npm.jsonl", 10, 1_000_000, 120)
+
+    assert catalog.read_text().split() == ["alpha", "beta", "gamma"]
+    assert report["catalog_size"] == 3 and report["cursor"] == 3 and report["records"] == 3
+    assert report["coverage_kind"] == "exhaustive"
+    assert "since" not in state  # the revision cursor described coverage never collected
+    assert not any("_changes" in url for url in asked)
+    assert asked[-1].endswith("/gamma/latest")
+
+
+def test_the_crates_dump_clears_verdicts_the_retired_path_left(tmp_path, monkeypatch):
+    """One stale IncompleteRead held a complete crates.io at partial forever."""
+    class _Head:
+        headers = {"Last-Modified": "Thu, 21 Aug 2026 02:00:00 GMT", "Content-Length": "10"}
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    output = tmp_path / "crates.jsonl"
+    output.write_text('{"command": "rg"}\n')
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", lambda request, timeout=None: _Head())
+    state = {"dump_last_modified": "Thu, 21 Aug 2026 02:00:00 GMT", "catalog_size": 319466,
+             "failures": {"civ_map_generator": "IncompleteRead(0 bytes read)"},
+             "unavailable": {"yanked-crate": "all versions are yanked"}}
+
+    report = registry_artifact._crawl_crates(state, output, 10, 5_000_000_000, 120)
+
+    assert report["failures"] == 0 and report["coverage_kind"] == "exhaustive"
+    assert "failures" not in state or not state["failures"]
