@@ -1,5 +1,8 @@
 name: Registry artifact crawl
 
+# PyPI, RubyGems, Packagist and NuGet are being filled from a local container, which
+# has neither the six-hour job limit nor the one-run-at-a-time group.  Both writers
+# share the artifact-data branch, so they must not share a source.
 on:
   schedule:
     - cron: "47 */6 * * *"
@@ -70,7 +73,7 @@ jobs:
           # branch's real progress.
           rm -f reports/registry-artifact-crawl.json
           python tools/registry_artifact_crawl.py \
-            --source npm --source pypi --source crates --source go --source rubygems --source packagist --source nuget \
+            --source npm --source crates --source go \
             --state data/production/registry-state.json \
             --output-dir data/production/intermediate \
             --report reports/registry-artifact-crawl.json \
