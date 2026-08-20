@@ -22,6 +22,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--crawl-report", type=Path, required=True)
+    # The OS indexes are crawled by a separate pipeline, so their coverage never
+    # reached the page even though it is the exhaustive half of the dataset.
+    parser.add_argument("--production-report", type=Path, default=Path("reports/production-crawl.json"))
     parser.add_argument("--artifact-data-commit", default="")
     parser.add_argument("--main-commit", default="")
     args = parser.parse_args()
@@ -29,6 +32,9 @@ def main() -> None:
     for source in (Path("playground/index.html"), Path("playground/styles.css"), Path("playground/app.js"), Path("playground/openapi.json")):
         shutil.copy2(source, args.output / source.name)
     report = json.loads(args.crawl_report.read_text()) if args.crawl_report.is_file() else {
+        "status": "unavailable", "coverage_kind": "partial", "sources": {}
+    }
+    production = json.loads(args.production_report.read_text()) if args.production_report.is_file() else {
         "status": "unavailable", "coverage_kind": "partial", "sources": {}
     }
     now = datetime.now(timezone.utc)
@@ -39,6 +45,7 @@ def main() -> None:
         "artifact_data_commit": args.artifact_data_commit,
         "main_commit": args.main_commit,
         "crawl_report": report,
+        "production_report": production,
         "freshness": {"status": "published", "coverage_kind": report.get("coverage_kind", "partial")},
     }
     (args.output / "status.json").write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n")

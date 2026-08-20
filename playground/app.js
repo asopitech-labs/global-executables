@@ -57,6 +57,22 @@ function renderOverview() {
   $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "47 */6 * * *"} UTC at the latest · runs chain back to back while a registry is still partial.`;
   $("footer-build").textContent = `Main snapshot ${metadata.snapshot || "unknown"} · data served from GitHub raw content.`;
 
+  // The OS indexes come from their own pipeline: each run takes a whole file index,
+  // so they have records and a coverage kind but never a cursor to advance.
+  const osGrid = $("os-grid");
+  osGrid.replaceChildren();
+  const osSources = state.status?.production_report?.sources || {};
+  for (const name of ["debian", "ubuntu", "arch", "homebrew"]) {
+    const source = osSources[name];
+    const card = document.createElement("article");
+    card.className = "source-card";
+    const complete = source?.coverage_kind === "exhaustive";
+    const label = source ? (complete ? "exhaustive" : statusLabel(source.coverage_kind)) : "pending";
+    const position = source?.status === "success" ? "index taken whole" : source ? statusLabel(source.status) : "not yet crawled";
+    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${label}</span></div><div class="source-bar"><i style="width:${complete ? 100 : 3}%"></i></div><div class="source-stats"><span>${position}</span><span>${formatNumber(source?.records || 0)} records</span></div>`;
+    osGrid.append(card);
+  }
+
   const grid = $("source-grid");
   grid.replaceChildren();
   const order = ["npm", "pypi", "crates", "go", "rubygems", "packagist"];
