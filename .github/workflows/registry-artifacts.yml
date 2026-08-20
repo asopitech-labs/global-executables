@@ -45,6 +45,7 @@ jobs:
       - name: Restore resumable registry state
         run: |
           git fetch origin artifact-data || true
+          mkdir -p /tmp/before
           mkdir -p data/production/intermediate
           if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
@@ -60,6 +61,11 @@ jobs:
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             fi
           done
+      - name: Record where each cursor started
+        run: |
+          # "Published" has to mean "something advanced", so the starting cursors are
+          # kept and the publish step reports the difference rather than a bare commit.
+          cp data/production/registry-state.json /tmp/before/registry-state.json 2>/dev/null || echo '{}' > /tmp/before/registry-state.json
       - name: Run bounded artifact inspection
         id: crawl
         continue-on-error: true
@@ -112,7 +118,39 @@ jobs:
           if test -f /tmp/artifact-publish/reports/registry-artifact-crawl.json; then
             git -C /tmp/artifact-publish add -f reports/registry-artifact-crawl.json
           fi
-          git -C /tmp/artifact-publish diff --cached --quiet || git -C /tmp/artifact-publish commit -m "Record registry artifact crawl"
+          summary=$(python - <<'PY'
+          import json, pathlib
+          # Go carries one cursor for its catalog phase and another for inspection, so
+          # reporting only the first would hide half of what a pass did.
+          TRACKED = ("cursor", "since", "catalog_since")
+          def cursors(path):
+              try:
+                  state = json.loads(pathlib.Path(path).read_text())
+              except Exception:
+                  return {}
+              return {(name, key): source[key]
+                      for name, source in (state.get("sources") or {}).items()
+                      for key in TRACKED if key in source}
+          before, after = cursors("/tmp/before/registry-state.json"), cursors("data/production/registry-state.json")
+          moved = []
+          for slot in sorted(set(before) | set(after)):
+              a, b = before.get(slot), after.get(slot)
+              if a == b:
+                  continue
+              name, key = slot
+              label = name if key == "cursor" else f"{name}/{key}"
+              if a is None and isinstance(b, int):
+                  a = 0  # a cursor appearing for the first time started from nothing
+              if isinstance(a, int) and isinstance(b, int):
+                  moved.append(f"{label} +{b - a:,}")
+              else:
+                  moved.append(f"{label} -> {str(b)[:19]}")
+          print(", ".join(moved) if moved else "no cursor advanced")
+          PY
+          )
+          echo "progress: $summary"
+          git -C /tmp/artifact-publish diff --cached --quiet || \
+            git -C /tmp/artifact-publish commit -m "Record registry artifact crawl: $summary"
           git -C /tmp/artifact-publish push origin HEAD:artifact-data
       - name: Queue the next crawl or the generated refresh
         if: always()
