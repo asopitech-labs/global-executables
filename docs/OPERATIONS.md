@@ -169,7 +169,9 @@ SOURCES=crates PASSES=1 tools/crawl_container.sh           # one source, one pas
 SOURCES="go npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
 ```
 
-`tools/crawl_parallel.sh` runs one container per registry instead. Each registry
+`tools/crawl_parallel.sh` runs one container per registry instead. Every
+catalog-walking source is filled this way; CI keeps only crates.io, whose whole
+registry arrives in a single dump and therefore finishes inside a job. Each registry
 answers from its own hosts, so crawling them serially spends most of the wall clock
 waiting on one of them; four containers together held 16% of the VM's two cores,
 because the work is entirely I/O. Every container gets its own state directory — a

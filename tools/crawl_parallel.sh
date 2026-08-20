@@ -10,7 +10,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 IMAGE="${IMAGE:-global-executables-crawl:local}"
 BASE="${BASE:-${HOME}/.ge-crawl}"
-SOURCES="${SOURCES:-pypi rubygems packagist nuget}"
+SOURCES="${SOURCES:-pypi rubygems packagist nuget npm go}"
 PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
 BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
 
