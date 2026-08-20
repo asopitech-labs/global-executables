@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-from global_executables.registry_artifact import crawl_registry_sources
+from global_executables.registry_artifact import crawl_registry_sources, install_interrupt_handlers
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--source", action="append", choices=["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget"], required=True)
@@ -19,6 +19,9 @@ parser.add_argument("--source-package-budget", action="append", default=[], meta
 parser.add_argument("--byte-budget", type=int, default=500_000_000)
 parser.add_argument("--timeout", type=int, default=120)
 args = parser.parse_args()
+# A stop signal should end the crawl at its next checkpoint rather than kill it
+# between checkpoints, which is when the unsaved work is largest.
+install_interrupt_handlers()
 source_budgets = {}
 for override in args.source_package_budget:
     source, _, value = override.partition("=")
@@ -28,5 +31,7 @@ for override in args.source_package_budget:
 report = crawl_registry_sources(args.source, args.state, args.output_dir, args.report,
                                 args.package_budget, args.byte_budget, args.timeout, source_budgets)
 print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
+if report.get("interrupted"):
+    print("stopped on a signal; progress is checkpointed", flush=True)
 if report["status"] != "success":
     raise SystemExit(1)

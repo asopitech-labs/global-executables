@@ -127,6 +127,29 @@ name occupies a PATH directory, and dropping it would turn "could not read" into
 repeated requests, its metadata never names an executable, and its packages often
 contain no binary at all because the install script downloads one.
 
+## Interruption and resume
+
+A crawl is expected to be stopped: a job hits six hours, a container is stopped, a
+run is cancelled. What matters is what an interruption costs.
+
+State used to be written once, after every source in the run had finished, so a kill
+anywhere discarded the cursors of the sources that had already completed as well as
+the work in flight — and because rows are appended per source, those sources would
+re-crawl and write their observations twice. State is now saved after each source,
+and every 200 packages inside a source, together with the rows collected so far, so
+the cursor and the observations always agree.
+
+`SIGTERM` and `SIGINT` no longer kill the process between checkpoints, which is when
+the unsaved work is largest. They set a flag the crawl loops check, so the run stops
+at its next checkpoint and reports `interrupted`.
+
+The Go catalog phase keeps its own cursor beside the catalog file, because it can run
+for thousands of index pages before the pass returns.
+
+crates.io is asked for the dump's `Last-Modified` before downloading it. The dump is
+republished daily and its observations replace rather than extend, so re-reading an
+unchanged one spent 1.7GB to rewrite an identical file on every run.
+
 ## Crawling in a container
 
 A CI job stops at six hours and the workflow runs one at a time, so a long sweep

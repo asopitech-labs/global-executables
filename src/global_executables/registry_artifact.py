@@ -11,6 +11,7 @@ import html
 import json
 import gzip
 import re
+import signal
 import struct
 import sys
 import tarfile
@@ -52,7 +53,37 @@ GO_CATALOG_REQUESTS = 3000
 # module is better taken whole than probed, however cheap each probe is.
 GO_SMALL_ZIP_BYTES = 262144
 GO_DIRECTORY_PROBES = 512
+# Progress is persisted this often inside a pass.  State used to be written once, after
+# every source finished, so an interruption discarded the cursors of sources that had
+# already completed along with the work in flight.
+CHECKPOINT_INTERVAL = 200
 _last_request: dict[str, float] = {}
+_interrupted = False
+
+
+def interrupted() -> bool:
+    return _interrupted
+
+
+def install_interrupt_handlers() -> None:
+    """Turn a stop signal into a clean stop at the next checkpoint.
+
+    A container stop or a cancelled job otherwise kills the process between
+    checkpoints, which is exactly when the unsaved work is largest.
+    """
+    def handle(signum, frame):  # noqa: ARG001
+        global _interrupted
+        _interrupted = True
+
+    for number in (signal.SIGTERM, signal.SIGINT):
+        try:
+            signal.signal(number, handle)
+        except (ValueError, OSError):  # not the main thread, or unsupported
+            pass
+
+
+def _no_checkpoint(buffer: list[dict[str, Any]] | None = None, **updates: Any) -> None:
+    return None
 
 
 class RegistryCrawlError(RuntimeError):
@@ -613,7 +644,8 @@ def _dump_rows(archive: tarfile.TarFile, member: tarfile.TarInfo):
     yield from csv.DictReader(TextIOWrapper(_UnseekableMember(handle), encoding="utf-8", newline=""))
 
 
-def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+                checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     project_file = Path(state.setdefault("projects_file", "data/production/pypi-projects.txt"))
     if not project_file.is_file():
         body, transfer = fetch("https://pypi.org/simple/", timeout)
@@ -679,7 +711,9 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
         else:
             retry_used += 1
         processed += 1
-        if budget_exhausted:
+        if processed % CHECKPOINT_INTERVAL == 0:
+            checkpoint(rows, cursor=cursor)
+        if budget_exhausted or interrupted():
             break
     state["cursor"] = cursor
     _append_rows(output, rows)
@@ -702,7 +736,8 @@ def _npm_release_url(name: str) -> str:
     return "https://registry.npmjs.org/" + urllib.parse.quote(name, safe="@") + "/latest"
 
 
-def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+               checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     if int(state.get("parser_generation", 1)) < NPM_PARSER_GENERATION:
         # Everything the previous parser walked produced no commands at all, so the
         # cursor it left behind describes coverage that was never collected.
@@ -761,7 +796,9 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
                 _record_failure(failures, unavailable, name, error)
             since = change_since
             processed += 1
-            if processed >= budget:
+            if processed % CHECKPOINT_INTERVAL == 0:
+                checkpoint(rows, since=since)
+            if processed >= budget or interrupted():
                 break
         if budget_exhausted:
             break
@@ -780,7 +817,8 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             "coverage_kind": "exhaustive" if complete else "partial"}
 
 
-def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+                  checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Read every crate's declared binaries from the crates.io database dump.
 
     crates.io publishes ``bin_names`` per version, so an executable name never
@@ -788,15 +826,32 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     in one request and is the bulk access route crates.io points crawlers to when
     they hit the API's pagination limit.
     """
-    for legacy in ("page", "seek", "page_offset", "skip", "cursor", "catalog_size", "retry_crates"):
+    for legacy in ("page", "seek", "page_offset", "skip", "cursor", "retry_crates"):
         state.pop(legacy, None)
     failures, unavailable = _failure_state(state)
-    size = content_length(CRATES_DB_DUMP, timeout)
+    # The dump is republished daily and the observations replace rather than extend, so
+    # re-reading an unchanged one costs 1.7GB to rewrite the same file.
+    _throttle(CRATES_DB_DUMP)
+    head = urllib.request.Request(CRATES_DB_DUMP, method="HEAD", headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(head, timeout=timeout) as response:
+        published = response.headers.get("Last-Modified", "")
+        size = int(response.headers.get("Content-Length") or 0)
+    published_header = published
+    if published and published == state.get("dump_last_modified") and output.is_file():
+        collected = sum(1 for line in output.open(encoding="utf-8") if line.strip())
+        complete = not failures
+        return {"dump_timestamp": state.get("dump_timestamp"), "dump_last_modified": published,
+                "catalog_size": state.get("catalog_size", 0), "cursor": state.get("catalog_size", 0),
+                "processed": 0, "records": collected, "downloaded_bytes": 0, "dump_bytes": size,
+                "failures": len(failures), "unavailable": len(unavailable),
+                "budget_exhausted": False, "complete": complete, "unchanged": True,
+                "coverage_kind": "exhaustive" if complete else "partial"}
     if size > byte_budget:
         return {"records": 0, "processed": 0, "downloaded_bytes": 0, "dump_bytes": size,
                 "failures": len(failures), "unavailable": len(unavailable),
                 "budget_exhausted": True, "complete": False, "coverage_kind": "partial"}
 
+    last_modified = published_header
     crates: dict[str, tuple[str, str | None]] = {}
     defaults: dict[str, str] = {}
     binaries: dict[str, tuple[str, list[str]]] = {}
@@ -849,6 +904,8 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     output.write_text("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in rows),
                       encoding="utf-8")
     state["dump_timestamp"] = published
+    state["dump_last_modified"] = last_modified
+    state["catalog_size"] = len(crates)
     state["complete"] = True
     complete = not failures
     return {"dump_timestamp": published, "catalog_size": len(crates), "cursor": len(crates),
@@ -922,7 +979,8 @@ def _go_module_rows(url: str, module: str, version: str, timeout: int) -> tuple[
     return _go_rows(body, module, version, url), transfer["downloaded_bytes"]
 
 
-def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+              checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Inspect each Go module once, at its current version.
 
     The module index lists every version of every module — tens of millions of entries,
@@ -976,6 +1034,8 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
             # so an interrupted sweep resumes instead of re-walking the index.
             handle.flush()
             _save_catalog_cursor(cursor_file, since, catalog_complete)
+            if interrupted():
+                break
     state["catalog_since"] = since
     state["catalog_complete"] = catalog_complete
 
@@ -1008,6 +1068,10 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
         if not retrying:
             cursor += 1
         processed += 1
+        if processed % CHECKPOINT_INTERVAL == 0:
+            checkpoint(rows, cursor=cursor)
+        if interrupted():
+            break
     state["cursor"] = cursor
     _append_rows(output, rows)
     complete = catalog_complete and cursor >= len(modules) and not failures and not retry_modules
@@ -1019,7 +1083,8 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
-def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+                    checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     catalog_file = Path(state.setdefault("names_file", "data/production/rubygems-names.txt"))
     if not catalog_file.is_file():
         body, transfer = fetch("https://rubygems.org/names", timeout)
@@ -1049,6 +1114,10 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
         except Exception as error:
             _record_failure(failures, unavailable, package, error)
         cursor += 1; processed += 1
+        if processed % CHECKPOINT_INTERVAL == 0:
+            checkpoint(rows, cursor=cursor)
+        if interrupted():
+            break
     state["cursor"] = cursor
     _append_rows(output, rows)
     complete = cursor >= len(gems) and not failures
@@ -1083,7 +1152,8 @@ def _nuget_tool_commands(url: str, timeout: int) -> tuple[list[str], int]:
         return TOOL_COMMAND.findall(text), transfer["downloaded_bytes"]
 
 
-def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+                 checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Inspect NuGet's .NET tool packages, the only NuGet packages that ship commands."""
     catalog_file = Path(state.setdefault("tools_file", "data/production/nuget-tools.txt"))
     catalog_file.parent.mkdir(parents=True, exist_ok=True)
@@ -1134,6 +1204,10 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         except Exception as error:
             _record_failure(failures, unavailable, package, error)
         cursor += 1; processed += 1
+        if processed % CHECKPOINT_INTERVAL == 0:
+            checkpoint(rows, cursor=cursor)
+        if interrupted():
+            break
     state["cursor"] = cursor
     _append_rows(output, rows)
     truncated = bool(state.get("catalog_truncated"))
@@ -1148,7 +1222,8 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     return report
 
 
-def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+                     checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     catalog_file = Path(state.setdefault("packages_file", "data/production/packagist-packages.txt"))
     if not catalog_file.is_file():
         body, transfer = fetch("https://packagist.org/packages/list.json", timeout)
@@ -1185,7 +1260,9 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
         if not retrying:
             cursor += 1
         processed += 1
-        if budget_exhausted:
+        if processed % CHECKPOINT_INTERVAL == 0:
+            checkpoint(rows, cursor=cursor)
+        if budget_exhausted or interrupted():
             break
     state["cursor"] = cursor
     _append_rows(output, rows)
@@ -1227,16 +1304,29 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
         source_state = state["sources"].setdefault(source, {})
         budget = int(source_budgets.get(source, package_budget))
         observations = output_dir / f"{source}.jsonl"
+        def checkpoint(buffer: list[dict[str, Any]] | None = None, _state: dict[str, Any] = source_state,
+                       _observations: Path = observations, **updates: Any) -> None:
+            _state.update(updates)
+            if buffer:
+                _append_rows(_observations, buffer)
+                buffer.clear()
+            _save_json(state_path, state)
+
         try:
-            report["sources"][source] = runners[source](source_state, observations, budget, byte_budget, timeout)
+            report["sources"][source] = runners[source](source_state, observations, budget,
+                                                        byte_budget, timeout, checkpoint)
             report["sources"][source]["package_budget"] = budget
             _refuse_empty_exhaustive(report["sources"][source], observations)
         except Exception as error:
             report["sources"][source] = {"status": "failed", "error": str(error), "coverage_kind": "partial"}
             report["status"] = "failed"
+        _save_json(state_path, state)  # a later source must not cost this one its cursor
         result = report["sources"].get(source, {})
         if result.get("failures", 0) or result.get("error"):
             report["status"] = "failed"
+        if interrupted():
+            report["interrupted"] = True
+            break
     report["coverage_kind"] = "exhaustive" if report["status"] == "success" and all(v.get("coverage_kind") == "exhaustive" for v in report["sources"].values()) else "partial"
     report["state"] = str(state_path); report["package_budget"] = package_budget; report["byte_budget"] = byte_budget
     _save_json(state_path, state)

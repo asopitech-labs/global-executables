@@ -105,6 +105,7 @@ def test_crates_binaries_come_from_the_dump_not_from_downloads(tmp_path, monkeyp
     payload = dump.getvalue()
 
     class _Response:
+        headers = {"Last-Modified": "Wed, 19 Aug 2026 02:00:00 GMT", "Content-Length": str(len(payload))}
         def __init__(self): self._stream = BytesIO(payload)
         def read(self, size=-1): return self._stream.read(size)
         def __enter__(self): return self
@@ -123,7 +124,7 @@ def test_crates_binaries_come_from_the_dump_not_from_downloads(tmp_path, monkeyp
 
     assert report["coverage_kind"] == "exhaustive" and report["complete"] is True
     assert report["catalog_size"] == 2 and report["crates_with_binaries"] == 1
-    assert requested == [registry_artifact.CRATES_DB_DUMP]
+    assert requested == [registry_artifact.CRATES_DB_DUMP, registry_artifact.CRATES_DB_DUMP]
     assert "page" not in state and "seek" not in state  # the retired cursor is dropped
     rows = [json.loads(line) for line in output.read_text().splitlines()]
     assert [(row["command"], row["package"], row["version"]) for row in rows] == [("rg", "ripgrep", "15.2.0")]
@@ -325,7 +326,7 @@ def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch
     seen = {}
 
     def spy(name):
-        def runner(state, output, budget, byte_budget, timeout):
+        def runner(state, output, budget, byte_budget, timeout, checkpoint=None):
             seen[name] = budget
             return {"coverage_kind": "partial", "complete": False}
         return runner
@@ -400,10 +401,10 @@ def test_fetch_surfaces_rate_limiting_once_the_attempts_run_out(monkeypatch):
 
 def test_a_source_cannot_claim_exhaustive_with_nothing_on_file(tmp_path, monkeypatch):
     """npm claimed completeness for its whole history while recording no commands."""
-    def empty_but_confident(state, output, budget, byte_budget, timeout):
+    def empty_but_confident(state, output, budget, byte_budget, timeout, checkpoint=None):
         return {"coverage_kind": "exhaustive", "complete": True, "records": 0}
 
-    def productive(state, output, budget, byte_budget, timeout):
+    def productive(state, output, budget, byte_budget, timeout, checkpoint=None):
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text('{"command": "demo"}\n')
         return {"coverage_kind": "exhaustive", "complete": True, "records": 1}
@@ -423,7 +424,7 @@ def test_a_source_cannot_claim_exhaustive_with_nothing_on_file(tmp_path, monkeyp
 
 
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):
-    def failed_source(*args):
+    def failed_source(*args, **kwargs):
         return {"failures": 1, "coverage_kind": "partial"}
 
     monkeypatch.setattr(registry_artifact, "_crawl_pypi", failed_source)
@@ -596,3 +597,82 @@ def test_a_shell_absent_from_this_machine_is_not_observed_here(tmp_path, monkeyp
     assert coverage["records"] == 1
     assert coverage["coverage_kind"] == "partial"  # an unobserved shell is not a covered one
     assert [index["status"] for index in coverage["indexes"]] == ["success", "skipped"]
+
+
+def test_progress_survives_an_interruption_mid_pass(tmp_path, monkeypatch):
+    """State was written once, after every source finished, so a kill lost the lot."""
+    catalog = tmp_path / "projects.txt"
+    catalog.write_text("\n".join(f"pkg-{i}" for i in range(1000)) + "\n")
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({"version": 1, "sources": {
+        "pypi": {"projects_file": str(catalog)}}}) + "\n")
+
+    seen = {"count": 0}
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        seen["count"] += 1
+        if seen["count"] > 250:          # the process is killed part-way through the pass
+            registry_artifact._interrupted = True
+        project = url.rsplit("/", 2)[-2]
+        return json.dumps({"info": {"name": project, "version": "1.0.0"},
+                           "urls": [{"packagetype": "bdist_wheel", "url": f"https://x/{project}.whl",
+                                     "filename": f"{project}-none-any.whl"}]}).encode(), {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_wheel_commands", lambda url, timeout: ([url.rsplit("/", 1)[-1][:-4]], 1))
+    monkeypatch.setattr(registry_artifact, "_interrupted", False)
+    try:
+        report = registry_artifact.crawl_registry_sources(
+            ["pypi"], state_path, tmp_path / "intermediate", tmp_path / "report.json", package_budget=1000)
+    finally:
+        registry_artifact._interrupted = False
+
+    saved = json.loads(state_path.read_text())["sources"]["pypi"]
+    observations = (tmp_path / "intermediate" / "pypi.jsonl").read_text().splitlines()
+    # the cursor and the rows both survive, and they agree with each other
+    assert saved["cursor"] >= registry_artifact.CHECKPOINT_INTERVAL
+    assert saved["cursor"] == len(observations)
+    assert report["sources"]["pypi"]["cursor"] == saved["cursor"]
+
+
+def test_a_finished_source_keeps_its_cursor_when_a_later_one_dies(tmp_path, monkeypatch):
+    state_path = tmp_path / "state.json"
+
+    def finished(state, output, budget, byte_budget, timeout, checkpoint=None):
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text('{"command": "demo"}\n')
+        state["cursor"] = 4242
+        return {"coverage_kind": "partial", "complete": False, "cursor": 4242, "records": 1}
+
+    def explodes(state, output, budget, byte_budget, timeout, checkpoint=None):
+        raise RuntimeError("killed mid-pass")
+
+    monkeypatch.setattr(registry_artifact, "_crawl_npm", finished)
+    monkeypatch.setattr(registry_artifact, "_crawl_go", explodes)
+    registry_artifact.crawl_registry_sources(
+        ["npm", "go"], state_path, tmp_path / "intermediate", tmp_path / "report.json")
+
+    assert json.loads(state_path.read_text())["sources"]["npm"]["cursor"] == 4242
+
+
+def test_an_unchanged_crates_dump_is_not_downloaded_again(tmp_path, monkeypatch):
+    """The dump is republished daily; re-reading it costs 1.7GB to rewrite one file."""
+    output = tmp_path / "crates.jsonl"
+    output.write_text('{"command": "rg", "package": "ripgrep"}\n')
+
+    class _Head:
+        headers = {"Last-Modified": "Wed, 20 Aug 2026 02:00:00 GMT", "Content-Length": "1750000000"}
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", lambda request, timeout=None: _Head())
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda *a, **k: pytest.fail("an unchanged dump must not be fetched"))
+    state = {"dump_last_modified": "Wed, 20 Aug 2026 02:00:00 GMT", "catalog_size": 319466,
+             "dump_timestamp": "2026-08-20T02:00:21Z"}
+
+    report = registry_artifact._crawl_crates(state, output, 10, 5_000_000_000, 120)
+
+    assert report["unchanged"] is True and report["downloaded_bytes"] == 0
+    assert report["coverage_kind"] == "exhaustive" and report["records"] == 1
+    assert report["cursor"] == 319466
