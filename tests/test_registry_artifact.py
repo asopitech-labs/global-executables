@@ -814,3 +814,22 @@ def test_no_crawler_builds_a_catalogue_without_persisting_it(tmp_path):
         if "checkpoint()" not in window and "_save_catalog_cursor(" not in window:
             unguarded.append(name)
     assert unguarded == [], f"catalogue discarded on failure: {unguarded}"
+
+
+def test_a_declared_entry_becomes_the_command_an_install_creates():
+    """Live data carried '../bin/code-labs', '/arake', '' and '@scope/tool' as commands."""
+    from global_executables.collectors import declared_command
+    assert declared_command("../bin/code-labs") == "code-labs"
+    assert declared_command("/arake") == "arake"
+    assert declared_command("@scope/ivue-cli") == "ivue-cli"
+    assert declared_command("bin\\tool.exe") == "tool.exe"
+    assert declared_command("rg") == "rg"
+    for nothing in ("", "   ", ".", "..", "/", None, 7):
+        assert declared_command(nothing) is None
+
+    # npm bin keys and gemspec executables are declarations, not filesystem entries
+    rows = npm_metadata({"name": "@a/b", "version": "1.0",
+                         "bin": {"": "x", "@a/ivue-cli": "y", "ok": "z"}}, "s")
+    assert sorted(row["command"] for row in rows) == ["ivue-cli", "ok"]
+    gem = _gem_rows("executables:\n- ../bin/code-labs\n- /arake\n- rake\n", "g", "1.0", None, "s")
+    assert [row["command"] for row in gem] == ["arake", "code-labs", "rake"]

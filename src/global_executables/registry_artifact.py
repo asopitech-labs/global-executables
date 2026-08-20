@@ -26,7 +26,7 @@ from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
-from .collectors import crates_manifest, npm_metadata, record
+from .collectors import crates_manifest, declared_command, npm_metadata, record
 from .model import write_jsonl
 
 
@@ -522,9 +522,10 @@ def _gem_rows(metadata: str, package: str, version: str, repository: str | None,
             elif stripped and not child.startswith((" ", "\t")):
                 break
         break
+    named = {declared_command(command) for command in commands}
     return [record(command, "rubygems", package, version, repository, source,
                    source_type="language_package", language="ruby", registry="rubygems",
-                   latest_version=version) for command in sorted(commands)]
+                   latest_version=version) for command in sorted(name for name in named if name)]
 
 
 GEM_HEAD_BYTES = 65536

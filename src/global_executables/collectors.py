@@ -47,6 +47,18 @@ COMMAND_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._+@-]*\Z")
 # point of a cross-ecosystem index is that `curl.exe` collides with `curl`.
 WINDOWS_SUFFIXES = (".exe", ".com", ".bat", ".cmd", ".ps1")
 
+def declared_command(value):
+    """Reduce a declared entry to the command an install would actually create.
+
+    A manifest may name its executable by path — RubyGems has `../bin/code-labs`, npm
+    has scoped keys like `@scope/tool` — and an installer shims the basename.  An entry
+    that is empty or is only path punctuation names nothing.
+    """
+    if not isinstance(value, str):
+        return None
+    name = value.replace("\\", "/").rsplit("/", 1)[-1].strip()
+    return name if name and name not in {".", ".."} else None
+
 def windows_command(name):
     lowered = name.lower()
     for suffix in WINDOWS_SUFFIXES:
@@ -113,7 +125,9 @@ def npm_metadata(value, source="npm"):
         times = p.get("time", {})
         latest_release_at = times.get(latest_version) if isinstance(times, dict) else None
         usage = p.get("downloads") or p.get("download_stats")
-        for command in bins:
+        for raw in bins:
+            command = declared_command(raw)
+            if not command: continue
             out.append(record(command,"npm",p["name"],latest_version,
                               p.get("repository",{}).get("url") if isinstance(p.get("repository"),dict) else p.get("repository"),
                               source, source_type="language_package", language="javascript", registry="npm",
