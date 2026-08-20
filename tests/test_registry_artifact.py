@@ -875,3 +875,28 @@ def test_a_pass_reports_every_row_it_flushed_not_the_leftover(tmp_path, monkeypa
     written = len((tmp_path / "intermediate" / "pypi.jsonl").read_text().splitlines())
     assert written == 350
     assert report["sources"]["pypi"]["records"] == written  # not 50, the residual buffer
+
+
+def test_a_finished_catalogue_still_retries_what_failed(tmp_path, monkeypatch):
+    """Six DNS blips held a fully-walked NuGet at partial with nothing left to walk."""
+    catalog = tmp_path / "tools.txt"
+    registry_artifact.write_catalog(catalog, ["alpha", "beta"])
+    attempted = []
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        attempted.append(url)
+        return json.dumps({"versions": ["1.0.0"]}).encode(), {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_nuget_tool_commands", lambda url, timeout: (["cmd"], 1))
+    # the catalogue is already walked and two tools failed on a transient error
+    state = {"tools_file": str(catalog), "cursor": 2, "catalog_advertised": 2,
+             "catalog_truncated": False,
+             "failures": {"alpha": "<urlopen error [Errno -3] Temporary failure in name resolution>"}}
+
+    report = registry_artifact._crawl_nuget(state, tmp_path / "nuget.jsonl", 10, 1_000_000, 120)
+
+    assert any("alpha" in url for url in attempted)   # it was reachable again
+    assert report["failures"] == 0 and report["retry_pending"] == 0
+    assert report["complete"] is True and report["coverage_kind"] == "exhaustive"
+    assert report["cursor"] == 2  # a retry does not advance the catalogue cursor

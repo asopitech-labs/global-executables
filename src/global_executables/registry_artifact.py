@@ -1146,7 +1146,11 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             failures.pop(package, None)
         except Exception as error:
             _record_failure(failures, unavailable, package, error)
-        cursor += 1; processed += 1
+            if package in failures and package not in retry_tools:
+                retry_tools.append(package)  # queued for the next run, not this one
+        if not retrying:
+            cursor += 1
+        processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
@@ -1238,9 +1242,21 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         state["catalog_truncated"] = bool(advertised) and len(tools) < advertised
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
+    # Reaching the end of the catalogue is not the end of the work: a tool that failed
+    # on a DNS blip has no other way back, and six of them held a finished NuGet at
+    # partial with nothing left to walk.
+    retry_tools = state.setdefault("retry_tools", [])
+    retry_tools[:] = [name for name in retry_tools if name not in unavailable]
+    for name in failures:
+        if name not in retry_tools:
+            retry_tools.append(name)
+    retry_budget = len(retry_tools)
     rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
-    while cursor < len(tools) and processed < budget:
-        package = tools[cursor]
+    while (retry_budget or cursor < len(tools)) and processed < budget:
+        retrying = retry_budget > 0
+        if retrying:
+            retry_budget -= 1
+        package = retry_tools.pop(0) if retrying else tools[cursor]
         lowered = urllib.parse.quote(package.lower(), safe="")
         try:
             body, _ = fetch(f"{NUGET_FLAT}/{lowered}/index.json", timeout)
@@ -1261,7 +1277,11 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             failures.pop(package, None)
         except Exception as error:
             _record_failure(failures, unavailable, package, error)
-        cursor += 1; processed += 1
+            if package in failures and package not in retry_tools:
+                retry_tools.append(package)  # queued for the next run, not this one
+        if not retrying:
+            cursor += 1
+        processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
@@ -1271,11 +1291,12 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     collected += len(rows)
     _append_rows(output, rows)
     truncated = bool(state.get("catalog_truncated"))
-    complete = cursor >= len(tools) and not failures and not truncated
+    complete = cursor >= len(tools) and not failures and not retry_tools and not truncated
     report = {"cursor": cursor, "catalog_size": len(tools), "processed": processed,
               "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
               "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
               "catalog_truncated": truncated, "catalog_advertised": state.get("catalog_advertised"),
+              "retry_pending": len(retry_tools),
               "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
     if truncated:
         report["note"] = "NuGet search paging stops short of totalHits; this is a sample of .NET tools"
