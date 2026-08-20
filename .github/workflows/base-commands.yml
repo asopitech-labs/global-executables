@@ -47,8 +47,59 @@ jobs:
             data/production/intermediate/shell.jsonl
             reports/base-commands-${{ matrix.runner }}.json
 
+  # Shells absent from a maintainer's machine are present in a container.  Each
+  # distribution image is one more sample, and the samples accumulate.
+  shells:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # A package missing from one distribution must not abort the whole install,
+          # so each shell is attempted on its own and an absent one stays unobserved.
+          - image: debian:stable-slim
+            install: >-
+              apt-get -qq update;
+              for p in python3 bash zsh ksh mksh yash fish tcsh busybox posh dash;
+              do apt-get -qq install -y --no-install-recommends "$p" || true; done
+          - image: alpine:latest
+            install: >-
+              for p in python3 bash zsh mksh fish tcsh busybox;
+              do apk add --no-cache "$p" || true; done
+          - image: fedora:latest
+            install: >-
+              for p in python3 bash zsh ksh mksh fish tcsh;
+              do dnf -q install -y "$p" || true; done
+    container:
+      image: ${{ matrix.image }}
+    steps:
+      - name: Install the shells this image can provide
+        run: ${{ matrix.install }}
+        continue-on-error: true
+      - uses: actions/checkout@v4
+      - name: Observe every shell present
+        run: |
+          python3 -m venv /tmp/venv || true
+          /tmp/venv/bin/pip install -q -e . || pip install -q -e . --break-system-packages
+          PY=/tmp/venv/bin/python; test -x "$PY" || PY=python3
+          mkdir -p data/production/intermediate
+          "$PY" tools/production_crawl.py --source shell \
+            --output-dir data/production/intermediate \
+            --report reports/base-commands-shells.json
+          "$PY" - <<'PYEOF'
+          import json, pathlib
+          report = json.loads(pathlib.Path("reports/base-commands-shells.json").read_text())
+          for index in report["sources"]["shell"].get("indexes", []):
+              print(f"{index.get('shell', index.get('source')):8} {index.get('status'):8} "
+                    f"{index.get('records', 0):4} {index.get('shell_version', '')}")
+          PYEOF
+      - uses: actions/upload-artifact@v4
+        with:
+          name: base-commands-shells-${{ strategy.job-index }}
+          path: data/production/intermediate/shell.jsonl
+
   publish:
-    needs: macos
+    needs: [macos, shells]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -71,9 +122,16 @@ jobs:
           target=/tmp/artifact-publish/data/production/intermediate/macos.jsonl
           touch "$target"
           # Each observation cites its own build, so the union is the coverage.
-          cat "$target" /tmp/observations/*/data/production/intermediate/macos.jsonl 2>/dev/null \
+          cat "$target" /tmp/observations/*/data/production/intermediate/macos.jsonl \
+                        /tmp/observations/*/macos.jsonl 2>/dev/null \
             | grep -v '^$' | sort -u > /tmp/macos-merged.jsonl
           mv /tmp/macos-merged.jsonl "$target"
+          shells=/tmp/artifact-publish/data/production/intermediate/shell.jsonl
+          touch "$shells"
+          cat "$shells" /tmp/observations/*/shell.jsonl \
+                        /tmp/observations/*/data/production/intermediate/shell.jsonl 2>/dev/null \
+            | grep -v '^$' | sort -u > /tmp/shell-merged.jsonl
+          mv /tmp/shell-merged.jsonl "$shells"
           python - <<'PY'
           import json, pathlib
           rows = [json.loads(l) for l in pathlib.Path("/tmp/artifact-publish/data/production/intermediate/macos.jsonl").read_text().splitlines() if l.strip()]
@@ -82,7 +140,8 @@ jobs:
           PY
           git -C /tmp/artifact-publish config user.name github-actions[bot]
           git -C /tmp/artifact-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git -C /tmp/artifact-publish add -f data/production/intermediate/macos.jsonl
+          git -C /tmp/artifact-publish add -f data/production/intermediate/macos.jsonl \
+            data/production/intermediate/shell.jsonl
           git -C /tmp/artifact-publish diff --cached --quiet || \
-            git -C /tmp/artifact-publish commit -m "Observe macOS base command sets"
+            git -C /tmp/artifact-publish commit -m "Observe base command sets and shell built-ins"
           git -C /tmp/artifact-publish push origin HEAD:artifact-data

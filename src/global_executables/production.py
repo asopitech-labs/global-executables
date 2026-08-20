@@ -23,8 +23,6 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
-import zstandard
-
 from .collectors import (homebrew_metadata, package_files, record, scoop_manifests,
                          winget_commands, windows_command)
 from .model import write_jsonl
@@ -127,6 +125,8 @@ def fetch(url: str, timeout: int = 300) -> tuple[bytes, dict[str, Any]]:
 
 def _arch_text(body: bytes) -> str:
     if body[:4] == b"\x28\xb5\x2f\xfd":  # MSYS2 publishes its pacman databases zstd-compressed
+        # Imported here so a collector that never meets zstd does not need the library.
+        import zstandard
         body = zstandard.ZstdDecompressor().stream_reader(io.BytesIO(body)).read()
     blocks: list[str] = []
     with tarfile.open(fileobj=io.BytesIO(body), mode="r:*") as archive:
