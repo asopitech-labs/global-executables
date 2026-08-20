@@ -1145,6 +1145,9 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
 NUGET_SEARCH = "https://azuresearch-usnc.nuget.org/query"
 NUGET_FLAT = "https://api.nuget.org/v3-flatcontainer"
 NUGET_PAGE = 1000
+# One query stops paging at 4,000 of the 9,190 tools it advertises, but the cap is per
+# query: partitioning the term space reaches every one of them.
+NUGET_TERMS = ("", *"abcdefghijklmnopqrstuvwxyz", *"0123456789")
 TOOL_COMMAND = re.compile(r"<Command\b[^>]*\bName\s*=\s*\"([^\"]+)\"", re.I)
 
 
@@ -1173,25 +1176,26 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     catalog_file = Path(state.setdefault("tools_file", "data/production/nuget-tools.txt"))
     catalog_file.parent.mkdir(parents=True, exist_ok=True)
     if not read_catalog(catalog_file):
-        identifiers: list[str] = []
-        skip = 0
+        identifiers: set[str] = set()
         advertised = 0
-        while True:
-            query = urllib.parse.urlencode({"q": "", "packageType": "DotnetTool",
-                                            "take": NUGET_PAGE, "skip": skip, "prerelease": "false"})
-            body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
-            value = json.loads(body)
-            advertised = max(advertised, int(value.get("totalHits") or 0))
-            page = value.get("data", [])
-            if not page:
+        for term in NUGET_TERMS:
+            skip = 0
+            while True:
+                query = urllib.parse.urlencode({"q": term, "packageType": "DotnetTool",
+                                                "take": NUGET_PAGE, "skip": skip, "prerelease": "true"})
+                body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
+                value = json.loads(body)
+                advertised = max(advertised, int(value.get("totalHits") or 0))
+                page = value.get("data", [])
+                if not page:
+                    break
+                identifiers.update(item["id"] for item in page if item.get("id"))
+                skip += len(page)
+            if interrupted():
                 break
-            identifiers.extend(item["id"] for item in page if item.get("id"))
-            skip += len(page)
-        write_catalog(catalog_file, sorted(set(identifiers)))
-        # The search endpoint stops paging well before totalHits, so the catalog it
-        # yields is a sample, not the tool list; the source must never claim otherwise.
+        write_catalog(catalog_file, sorted(identifiers))
         state["catalog_advertised"] = advertised
-        state["catalog_truncated"] = len(set(identifiers)) < advertised
+        state["catalog_truncated"] = len(identifiers) < advertised
     tools = read_catalog(catalog_file)
     if state.get("catalog_advertised") is None and tools:
         # A catalog built before this check existed carries no verdict, and without one

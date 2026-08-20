@@ -81,8 +81,11 @@ that gap:
   `Commands`, and the table also carries silent-install switches like `/VERYSILENT`,
   which are rejected as command names.
 * **NuGet** exposes .NET tools, whose `DotnetToolSettings.xml` names the command; a
-  `.nupkg` is a ZIP, so that declaration costs a range read. It stays `partial`
-  because the search endpoint stops paging well short of its own `totalHits`.
+  `.nupkg` is a ZIP, so that declaration costs a range read. One search query stops
+  paging at 4,000 of the 9,190 tools it advertises, but that cap is per query rather
+  than per catalogue: the empty term plus a–z and 0–9 reach every one of them, and the
+  union matches the advertised count exactly. Pre-release-only tools are included,
+  since a command name is taken either way.
 
 Windows command names are recorded without the extension the filesystem carries.
 `curl.exe` has to collide with `curl` or a cross-ecosystem index cannot answer the

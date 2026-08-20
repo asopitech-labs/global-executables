@@ -738,3 +738,32 @@ def test_nuget_derives_truncation_for_a_catalog_built_before_the_check(tmp_path,
     assert state["catalog_advertised"] == 8619 and state["catalog_truncated"] is True
     assert report["complete"] is False and report["coverage_kind"] == "partial"
     assert any(url.startswith(registry_artifact.NUGET_SEARCH) for url in asked)
+
+
+def test_nuget_partitions_the_term_space_to_pass_the_paging_cap(tmp_path, monkeypatch):
+    """One query stops at 4,000 of 9,190 tools; the cap is per query, not per catalogue."""
+    universe = {f"{letter}-tool-{index}": letter
+                for letter in "abc" for index in range(3000)}
+    asked = []
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        asked.append(url)
+        # parse_qs drops blank values by default, and the empty term is a real query
+        query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query, keep_blank_values=True)
+        term, skip = query["q"][0], int(query["skip"][0])
+        matching = sorted(name for name, letter in universe.items() if not term or letter == term)
+        page = matching[skip:skip + 1000][:4000 - skip] if skip < 4000 else []
+        return json.dumps({"totalHits": len(universe), "data": [{"id": n} for n in page]}).encode(), \
+               {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_nuget_tool_commands", lambda url, timeout: ([], 0))
+    catalog = tmp_path / "tools.txt"
+    state = {"tools_file": str(catalog)}
+
+    registry_artifact._crawl_nuget(state, tmp_path / "nuget.jsonl", 0, 1_000_000, 120)
+
+    # the empty query alone would have stopped at 4,000 of 9,000
+    assert len(registry_artifact.read_catalog(catalog)) == len(universe)
+    assert state["catalog_truncated"] is False
+    assert sum(1 for url in asked if "q=a&" in url or "q=a%26" in url) > 0
