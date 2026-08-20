@@ -783,7 +783,10 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             query = {"limit": NPM_CATALOG_PAGE}
             if start_key:
                 query["startkey"] = json.dumps(start_key)
-            body, transfer = fetch(f"{NPM_ALL_DOCS}?{urllib.parse.urlencode(query)}", timeout)
+            try:
+                body, transfer = fetch(f"{NPM_ALL_DOCS}?{urllib.parse.urlencode(query)}", timeout)
+            except Exception:
+                break  # keep the names already listed rather than losing the whole walk
             downloaded += transfer["downloaded_bytes"]
             rows = json.loads(body).get("rows", [])
             if start_key:
@@ -795,6 +798,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             if interrupted():
                 break
         write_catalog(catalog_file, names)
+        checkpoint()  # 431 requests went into this list; do not risk it on a later step
     packages = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0
     failures, unavailable = _failure_state(state)
@@ -1183,7 +1187,11 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             while True:
                 query = urllib.parse.urlencode({"q": term, "packageType": "DotnetTool",
                                                 "take": NUGET_PAGE, "skip": skip, "prerelease": "true"})
-                body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
+                try:
+                    body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
+                except Exception:
+                    # One truncated response must not discard every term already collected.
+                    break
                 value = json.loads(body)
                 advertised = max(advertised, int(value.get("totalHits") or 0))
                 page = value.get("data", [])
@@ -1196,6 +1204,9 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         write_catalog(catalog_file, sorted(identifiers))
         state["catalog_advertised"] = advertised
         state["catalog_truncated"] = len(identifiers) < advertised
+        # Building the catalogue is the expensive part of the pass; persist its verdict
+        # before inspecting anything, so a later failure cannot discard it.
+        checkpoint()
     tools = read_catalog(catalog_file)
     if state.get("catalog_advertised") is None and tools:
         # A catalog built before this check existed carries no verdict, and without one

@@ -767,3 +767,33 @@ def test_nuget_partitions_the_term_space_to_pass_the_paging_cap(tmp_path, monkey
     assert len(registry_artifact.read_catalog(catalog)) == len(universe)
     assert state["catalog_truncated"] is False
     assert sum(1 for url in asked if "q=a&" in url or "q=a%26" in url) > 0
+
+
+def test_a_built_catalogue_survives_a_later_failure_in_the_same_pass(tmp_path, monkeypatch):
+    """The catalogue is the expensive part of a pass; a hiccup after it must not undo it."""
+    saved = []
+
+    def spy(buffer=None, **updates):
+        saved.append(dict(updates))
+
+    calls = {"n": 0}
+
+    def flaky(url, timeout=120, attempts=4):
+        calls["n"] += 1
+        if url.startswith(registry_artifact.NUGET_SEARCH):
+            term = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query, keep_blank_values=True)["q"][0]
+            page = [{"id": f"{term or '(empty)'}-tool"}] if int(
+                urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)["skip"][0]) == 0 else []
+            return json.dumps({"totalHits": 37, "data": page}).encode(), {"downloaded_bytes": 1}
+        raise OSError("IncompleteRead(846266 bytes read)")   # every inspection fails
+
+    monkeypatch.setattr(registry_artifact, "fetch", flaky)
+    catalog = tmp_path / "tools.txt"
+    state = {"tools_file": str(catalog)}
+
+    registry_artifact._crawl_nuget(state, tmp_path / "nuget.jsonl", 5, 1_000_000, 120, spy)
+
+    # the verdict was checkpointed before any tool was inspected
+    assert saved and saved[0] == {}
+    assert state["catalog_advertised"] == 37
+    assert len(registry_artifact.read_catalog(catalog)) == 37
