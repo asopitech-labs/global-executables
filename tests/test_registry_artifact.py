@@ -797,3 +797,20 @@ def test_a_built_catalogue_survives_a_later_failure_in_the_same_pass(tmp_path, m
     assert saved and saved[0] == {}
     assert state["catalog_advertised"] == 37
     assert len(registry_artifact.read_catalog(catalog)) == 37
+
+
+def test_no_crawler_builds_a_catalogue_without_persisting_it(tmp_path):
+    """A catalogue costs hundreds of requests; losing it to a later hiccup is the bug
+    that hit Go, then NuGet, then npm, and was still open for three more sources."""
+    import inspect
+    unguarded = []
+    for name in ("_crawl_pypi", "_crawl_rubygems", "_crawl_packagist",
+                 "_crawl_nuget", "_crawl_npm", "_crawl_go"):
+        body = inspect.getsource(getattr(registry_artifact, name))
+        built = max(body.find("write_catalog("), body.find("_save_catalog_cursor("))
+        if built < 0:
+            continue
+        window = body[built:built + 400]
+        if "checkpoint()" not in window and "_save_catalog_cursor(" not in window:
+            unguarded.append(name)
+    assert unguarded == [], f"catalogue discarded on failure: {unguarded}"

@@ -677,6 +677,8 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
         project_file.parent.mkdir(parents=True, exist_ok=True)
         write_catalog(project_file, _pypi_projects(body))
         state["catalog_bytes"] = transfer["downloaded_bytes"]
+        # The catalogue is what the pass cannot cheaply redo; persist it first.
+        checkpoint()
     projects = read_catalog(project_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
@@ -1110,6 +1112,7 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
         catalog_file.parent.mkdir(parents=True, exist_ok=True)
         write_catalog(catalog_file, _rubygems_names(body))
         state["catalog_bytes"] = transfer["downloaded_bytes"]
+        checkpoint()  # persist the catalogue before anything can unwind the pass
     gems = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
@@ -1272,6 +1275,7 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
         catalog_file.parent.mkdir(parents=True, exist_ok=True)
         write_catalog(catalog_file, _packagist_packages(body))
         state["catalog_bytes"] = transfer["downloaded_bytes"]
+        checkpoint()  # persist the catalogue before anything can unwind the pass
     packages = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)

@@ -151,8 +151,12 @@ the cursor and the observations always agree.
 the unsaved work is largest. They set a flag the crawl loops check, so the run stops
 at its next checkpoint and reports `interrupted`.
 
-The Go catalog phase keeps its own cursor beside the catalog file, because it can run
-for thousands of index pages before the pass returns.
+A catalogue is what a pass cannot cheaply redo — npm's costs 431 requests, NuGet's
+37 queries, Go's thousands of index pages — so each is persisted the moment it is
+built rather than when the pass returns. Without that, a truncated response during
+inspection unwound the pass and discarded a catalogue that was already complete on
+disk. A test asserts every crawler does this, because the same gap was found and
+closed three separate times.
 
 crates.io is asked for the dump's `Last-Modified` before downloading it. The dump is
 republished daily and its observations replace rather than extend, so re-reading an
