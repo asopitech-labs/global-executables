@@ -1084,6 +1084,20 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
             "coverage_kind": "exhaustive" if complete else "partial"}
 
 
+def _refuse_empty_exhaustive(result: dict[str, Any], observations: Path) -> None:
+    """A registry that has yielded nothing has not been surveyed, whatever its cursor says.
+
+    npm reported `exhaustive` for its whole history while its parser read the wrong
+    object and recorded no commands at all.  Completeness is the claim that licenses a
+    negative answer, so it has to be backed by evidence on file, not by a cursor.
+    """
+    collected = sum(1 for line in observations.open(encoding="utf-8") if line.strip()) if observations.is_file() else 0
+    result["observations"] = collected
+    if result.get("coverage_kind") == "exhaustive" and collected == 0:
+        result.update({"coverage_kind": "partial", "complete": False,
+                       "error": "claimed exhaustive with no observations on file"})
+
+
 def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Path, report_path: Path,
                            package_budget: int = 100, byte_budget: int = 500_000_000,
                            timeout: int = 120, source_budgets: dict[str, int] | None = None) -> dict[str, Any]:
@@ -1099,9 +1113,11 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
             raise RegistryCrawlError(f"unsupported registry source: {source}")
         source_state = state["sources"].setdefault(source, {})
         budget = int(source_budgets.get(source, package_budget))
+        observations = output_dir / f"{source}.jsonl"
         try:
-            report["sources"][source] = runners[source](source_state, output_dir / f"{source}.jsonl", budget, byte_budget, timeout)
+            report["sources"][source] = runners[source](source_state, observations, budget, byte_budget, timeout)
             report["sources"][source]["package_budget"] = budget
+            _refuse_empty_exhaustive(report["sources"][source], observations)
         except Exception as error:
             report["sources"][source] = {"status": "failed", "error": str(error), "coverage_kind": "partial"}
             report["status"] = "failed"

@@ -363,6 +363,30 @@ def test_fetch_surfaces_rate_limiting_once_the_attempts_run_out(monkeypatch):
     assert len(attempts) == 3
 
 
+def test_a_source_cannot_claim_exhaustive_with_nothing_on_file(tmp_path, monkeypatch):
+    """npm claimed completeness for its whole history while recording no commands."""
+    def empty_but_confident(state, output, budget, byte_budget, timeout):
+        return {"coverage_kind": "exhaustive", "complete": True, "records": 0}
+
+    def productive(state, output, budget, byte_budget, timeout):
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text('{"command": "demo"}\n')
+        return {"coverage_kind": "exhaustive", "complete": True, "records": 1}
+
+    monkeypatch.setattr(registry_artifact, "_crawl_npm", empty_but_confident)
+    monkeypatch.setattr(registry_artifact, "_crawl_crates", productive)
+    report = registry_artifact.crawl_registry_sources(
+        ["npm", "crates"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json")
+
+    npm = report["sources"]["npm"]
+    assert npm["coverage_kind"] == "partial" and npm["complete"] is False
+    assert npm["observations"] == 0 and "no observations" in npm["error"]
+    assert report["status"] == "failed"
+    # A source that actually collected something keeps its claim.
+    assert report["sources"]["crates"]["coverage_kind"] == "exhaustive"
+    assert report["sources"]["crates"]["observations"] == 1
+
+
 def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):
     def failed_source(*args):
         return {"failures": 1, "coverage_kind": "partial"}
