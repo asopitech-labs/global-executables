@@ -1058,6 +1058,96 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
+NUGET_SEARCH = "https://azuresearch-usnc.nuget.org/query"
+NUGET_FLAT = "https://api.nuget.org/v3-flatcontainer"
+NUGET_PAGE = 1000
+TOOL_COMMAND = re.compile(r"<Command\b[^>]*\bName\s*=\s*\"([^\"]+)\"", re.I)
+
+
+def _nuget_tool_commands(url: str, timeout: int) -> tuple[list[str], int]:
+    """Read a .NET tool's declared commands from DotnetToolSettings.xml.
+
+    A tool package states its commands in that one small file, and a .nupkg is a ZIP,
+    so the declaration costs a range read rather than the whole package.
+    """
+    try:
+        archive = RemoteZip(url, timeout)
+        members = [name for name in archive.names if name.rsplit("/", 1)[-1].lower() == "dotnettoolsettings.xml"]
+        text = archive.read(members[0]).decode("utf-8", "replace") if members else ""
+        return TOOL_COMMAND.findall(text), archive.downloaded
+    except (RegistryCrawlError, urllib.error.HTTPError, OSError, struct.error, zlib.error, KeyError):
+        body, transfer = fetch(url, timeout)
+        with zipfile.ZipFile(BytesIO(body)) as whole:
+            members = [name for name in whole.namelist() if name.rsplit("/", 1)[-1].lower() == "dotnettoolsettings.xml"]
+            text = whole.read(members[0]).decode("utf-8", "replace") if members else ""
+        return TOOL_COMMAND.findall(text), transfer["downloaded_bytes"]
+
+
+def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+    """Inspect NuGet's .NET tool packages, the only NuGet packages that ship commands."""
+    catalog_file = Path(state.setdefault("tools_file", "data/production/nuget-tools.txt"))
+    catalog_file.parent.mkdir(parents=True, exist_ok=True)
+    if not catalog_file.is_file():
+        identifiers: list[str] = []
+        skip = 0
+        advertised = 0
+        while True:
+            query = urllib.parse.urlencode({"q": "", "packageType": "DotnetTool",
+                                            "take": NUGET_PAGE, "skip": skip, "prerelease": "false"})
+            body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
+            value = json.loads(body)
+            advertised = max(advertised, int(value.get("totalHits") or 0))
+            page = value.get("data", [])
+            if not page:
+                break
+            identifiers.extend(item["id"] for item in page if item.get("id"))
+            skip += len(page)
+        catalog_file.write_text("\n".join(sorted(set(identifiers))) + "\n")
+        # The search endpoint stops paging well before totalHits, so the catalog it
+        # yields is a sample, not the tool list; the source must never claim otherwise.
+        state["catalog_advertised"] = advertised
+        state["catalog_truncated"] = len(set(identifiers)) < advertised
+    tools = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
+    failures, unavailable = _failure_state(state)
+    rows: list[dict[str, Any]] = []; budget_exhausted = False
+    while cursor < len(tools) and processed < budget:
+        package = tools[cursor]
+        lowered = urllib.parse.quote(package.lower(), safe="")
+        try:
+            body, _ = fetch(f"{NUGET_FLAT}/{lowered}/index.json", timeout)
+            versions = json.loads(body).get("versions", [])
+            if not versions:
+                raise RegistryCrawlError(f"tool has no published version: {package}")
+            version = versions[-1]
+            url = f"{NUGET_FLAT}/{lowered}/{urllib.parse.quote(version, safe='')}/{lowered}.{urllib.parse.quote(version, safe='')}.nupkg"
+            commands, spent = _nuget_tool_commands(url, timeout)
+            downloaded += spent
+            if downloaded > byte_budget:
+                budget_exhausted = True
+                break
+            rows.extend(record(command, "nuget", package, version, None, url,
+                               source_type="language_package", language="dotnet",
+                               registry="nuget", latest_version=version)
+                        for command in sorted(set(commands)))
+            failures.pop(package, None)
+        except Exception as error:
+            _record_failure(failures, unavailable, package, error)
+        cursor += 1; processed += 1
+    state["cursor"] = cursor
+    _append_rows(output, rows)
+    truncated = bool(state.get("catalog_truncated"))
+    complete = cursor >= len(tools) and not failures and not truncated
+    report = {"cursor": cursor, "catalog_size": len(tools), "processed": processed,
+              "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
+              "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
+              "catalog_truncated": truncated, "catalog_advertised": state.get("catalog_advertised"),
+              "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
+    if truncated:
+        report["note"] = "NuGet search paging stops short of totalHits; this is a sample of .NET tools"
+    return report
+
+
 def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
     catalog_file = Path(state.setdefault("packages_file", "data/production/packagist-packages.txt"))
     if not catalog_file.is_file():
@@ -1128,7 +1218,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
         "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates, "go": _crawl_go,
-        "rubygems": _crawl_rubygems, "packagist": _crawl_packagist,
+        "rubygems": _crawl_rubygems, "packagist": _crawl_packagist, "nuget": _crawl_nuget,
     }
     source_budgets = source_budgets or {}
     for source in sources:

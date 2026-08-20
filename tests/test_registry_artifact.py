@@ -433,3 +433,53 @@ def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):
 
     assert report["status"] == "failed"
     assert json.loads((tmp_path / "report.json").read_text())["status"] == "failed"
+
+
+def test_windows_command_names_drop_the_extension_users_never_type():
+    """`curl.exe` has to collide with `curl` or the cross-ecosystem index is useless."""
+    from global_executables.collectors import windows_command, scoop_manifests, winget_commands
+    assert windows_command("curl.exe") == "curl"
+    assert windows_command("BASH.EXE") == "BASH"
+    assert windows_command("run.cmd") == "run"
+    assert windows_command(".exe") == ".exe"  # not an extension on its own
+    assert windows_command("tar") == "tar"
+
+    manifests = [
+        ("ripgrep", {"version": "1.0", "bin": "rg.exe"}),
+        ("aliased", {"version": "2.0", "bin": [["bin\\tool.exe", "mytool.exe"]]}),
+        ("library", {"version": "3.0"}),
+    ]
+    rows = scoop_manifests(manifests, "https://example.test/bucket")
+    assert [(r["command"], r["package"]) for r in rows] == [("rg", "ripgrep"), ("mytool", "aliased")]
+    assert rows[0]["distribution_family"] == "windows"
+
+    # winget's index carries silent-install switches beside real commands
+    pairs = [("rg", "BurntSushi.ripgrep"), ("/VERYSILENT", "Some.Installer"), ("gh.exe", "GitHub.cli")]
+    assert [r["command"] for r in winget_commands(pairs, "x")] == ["gh", "rg"]
+
+
+def test_msys2_reuses_the_pacman_reader_with_a_windows_identity():
+    from global_executables.collectors import package_files
+    text = "%NAME%\nmsys2-runtime\n%FILES%\nusr/bin/bash.exe\nusr/bin/tar.exe\n"
+    rows = package_files(text, "msys2", "https://repo.msys2.org/msys.files",
+                         family="windows", distribution="msys2")
+    assert [r["command"] for r in rows] == ["bash", "tar"]
+    assert rows[0]["distribution_family"] == "windows" and rows[0]["distribution"] == "msys2"
+    # the same reader keeps Arch's identity and its extensions
+    arch = package_files("%NAME%\ncoreutils\n%FILES%\nusr/bin/ls\n", "arch", "x")
+    assert arch[0]["distribution"] == "archlinux"
+
+
+def test_nuget_never_claims_exhaustive_from_a_truncated_catalog(tmp_path, monkeypatch):
+    catalog = tmp_path / "tools.txt"
+    catalog.write_text("demo.tool\n")
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda url, timeout=120, attempts=4: (json.dumps({"versions": ["1.0.0"]}).encode(), {"downloaded_bytes": 1}))
+    monkeypatch.setattr(registry_artifact, "_nuget_tool_commands", lambda url, timeout: (["demo"], 5))
+    state = {"tools_file": str(catalog), "catalog_truncated": True, "catalog_advertised": 8619}
+
+    report = registry_artifact._crawl_nuget(state, tmp_path / "nuget.jsonl", 10, 1_000_000, 120)
+
+    assert report["cursor"] == 1 and report["records"] == 1
+    assert report["complete"] is False and report["coverage_kind"] == "partial"
+    assert report["catalog_truncated"] is True and "sample" in report["note"]

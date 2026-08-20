@@ -11,28 +11,66 @@ from __future__ import annotations
 import gzip
 import io
 import json
+import sqlite3
 import tarfile
+import tempfile
 import time
 import urllib.error
 import urllib.request
+import zipfile
 from pathlib import Path
 from typing import Any
 
-from .collectors import homebrew_metadata, package_files
+import zstandard
+
+from .collectors import homebrew_metadata, package_files, scoop_manifests, winget_commands
 from .model import write_jsonl
 
 
 USER_AGENT = "global-executables-production/1.0 (+https://github.com/asopitech-labs/global-executables)"
 
-SOURCE_URLS = {
-    "debian": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
-    "ubuntu": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
-    "arch": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
-    "homebrew": "https://formulae.brew.sh/api/formula.json",
-    "npm": "https://replicate.npmjs.com/_all_docs",
-    "pypi": "https://pypi.org/simple/",
-    "crates": "https://index.crates.io/config.json",
+# A distribution is not one index.  Arch keeps almost everything outside `core`, and
+# Debian's stable/main is a fraction of what the archive ships.
+SOURCE_INDEXES = {
+    "debian": [
+        "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/stable/non-free-firmware/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+    ],
+    "ubuntu": ["https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz"],
+    "arch": [
+        "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+        "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+        "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.files",
+    ],
+    # MSYS2 ships Windows binaries through pacman databases, so the Arch reader applies.
+    "msys2": [
+        "https://repo.msys2.org/msys/x86_64/msys.files",
+        "https://repo.msys2.org/mingw/mingw64/mingw64.files",
+        "https://repo.msys2.org/mingw/ucrt64/ucrt64.files",
+        "https://repo.msys2.org/mingw/clang64/clang64.files",
+    ],
+    "homebrew": ["https://formulae.brew.sh/api/formula.json"],
+    # The official bucket list points at three third-party repositories, so the
+    # owner cannot be assumed, and two of them default to `main` rather than `master`.
+    "scoop": [f"https://codeload.github.com/{repository}/tar.gz/refs/heads/{branch}"
+              for repository, branch in (
+                  ("ScoopInstaller/Main", "master"), ("ScoopInstaller/Extras", "master"),
+                  ("ScoopInstaller/Versions", "master"), ("ScoopInstaller/Nirsoft", "master"),
+                  ("ScoopInstaller/PHP", "master"), ("ScoopInstaller/Java", "master"),
+                  ("ScoopInstaller/Nonportable", "master"), ("niheaven/scoop-sysinternals", "main"),
+                  ("matthewjberger/scoop-nerd-fonts", "master"), ("Calinou/scoop-games", "master"))],
+    "winget": ["https://cdn.winget.microsoft.com/cache/source.msix"],
+    "npm": ["https://replicate.npmjs.com/_all_docs"],
+    "pypi": ["https://pypi.org/simple/"],
+    "crates": ["https://index.crates.io/config.json"],
 }
+SOURCE_URLS = {source: urls[0] for source, urls in SOURCE_INDEXES.items()}
+FILE_INDEX_SOURCES = {"debian", "ubuntu", "arch", "msys2"}
+COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget"}
+PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 
 
 class ProductionSourceError(RuntimeError):
@@ -57,6 +95,8 @@ def fetch(url: str, timeout: int = 300) -> tuple[bytes, dict[str, Any]]:
 
 
 def _arch_text(body: bytes) -> str:
+    if body[:4] == b"\x28\xb5\x2f\xfd":  # MSYS2 publishes its pacman databases zstd-compressed
+        body = zstandard.ZstdDecompressor().stream_reader(io.BytesIO(body)).read()
     blocks: list[str] = []
     with tarfile.open(fileobj=io.BytesIO(body), mode="r:*") as archive:
         for member in archive:
@@ -74,10 +114,59 @@ def _arch_text(body: bytes) -> str:
 def _crawl_os(source: str, body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     if source in {"debian", "ubuntu"}:
         text = gzip.decompress(body).decode("utf-8", "replace")
+        rows = package_files(text, source, source_url)
     else:
-        text = _arch_text(body)
-    rows = package_files(text, source, source_url)
+        family, distribution = PACMAN_IDENTITY[source]
+        rows = package_files(_arch_text(body), source, source_url,
+                             family=family, distribution=distribution)
     return rows, {"status": "success", "coverage_kind": "exhaustive", "records": len(rows), "source": source_url}
+
+
+def _crawl_scoop(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Read a Scoop bucket's manifests from its repository tarball."""
+    manifests: list[tuple[str, dict[str, Any]]] = []
+    with tarfile.open(fileobj=io.BytesIO(body), mode="r:gz") as archive:
+        for member in archive:
+            if "/bucket/" not in member.name or not member.name.endswith(".json"):
+                continue
+            handle = archive.extractfile(member)
+            if handle is None:
+                continue
+            try:
+                manifests.append((member.name.rsplit("/", 1)[-1][:-5],
+                                  json.loads(handle.read().decode("utf-8", "replace"))))
+            except json.JSONDecodeError:
+                continue
+    if not manifests:
+        raise ProductionSourceError(f"scoop bucket carried no manifests: {source_url}")
+    rows = scoop_manifests(manifests, source_url)
+    return rows, {"status": "success", "coverage_kind": "exhaustive", "records": len(rows),
+                  "packages": len(manifests), "source": source_url}
+
+
+def _crawl_winget(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Read winget's declared commands from the published source index."""
+    with zipfile.ZipFile(io.BytesIO(body)) as archive:
+        members = [name for name in archive.namelist() if name.lower().endswith("index.db")]
+        if not members:
+            raise ProductionSourceError(f"winget source carries no index: {source_url}")
+        payload = archive.read(members[0])
+    with tempfile.NamedTemporaryFile(suffix=".db") as handle:
+        handle.write(payload)
+        handle.flush()
+        connection = sqlite3.connect(handle.name)
+        try:
+            pairs = list(connection.execute(
+                "select commands.command, ids.id from commands_map"
+                " join commands on commands.rowid = commands_map.command"
+                " join manifest on manifest.rowid = commands_map.manifest"
+                " join ids on ids.rowid = manifest.id"))
+        finally:
+            connection.close()
+    rows = winget_commands(pairs, source_url)
+    return rows, {"status": "success", "coverage_kind": "partial", "records": len(rows),
+                  "packages": len({package for _, package in pairs}), "source": source_url,
+                  "note": "winget declares Commands only for manifests that opt in"}
 
 
 def _crawl_homebrew(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -92,28 +181,48 @@ def _crawl_homebrew(body: bytes, source_url: str) -> tuple[list[dict[str, Any]],
     }
 
 
+def _crawl_index(source: str, body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    if source == "homebrew":
+        return _crawl_homebrew(body, source_url)
+    if source == "scoop":
+        return _crawl_scoop(body, source_url)
+    if source == "winget":
+        return _crawl_winget(body, source_url)
+    return _crawl_os(source, body, source_url)
+
+
 def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any]:
-    if source not in SOURCE_URLS:
+    if source not in SOURCE_INDEXES:
         raise ProductionSourceError(f"unknown production source: {source}")
-    source_url = SOURCE_URLS[source]
-    if source not in {"debian", "ubuntu", "arch", "homebrew"}:
+    if source not in COLLECTED_SOURCES:
         raise ProductionSourceError(
             f"{source} requires a package-artifact inventory adapter; HTTP metadata alone is not executable evidence"
         )
-    body, transfer = fetch(source_url, timeout)
-    if source == "homebrew":
-        rows, coverage = _crawl_homebrew(body, source_url)
-    else:
-        rows, coverage = _crawl_os(source, body, source_url)
+    rows: list[dict[str, Any]] = []
+    indexes: list[dict[str, Any]] = []
+    downloaded = 0
+    coverage_kind = "exhaustive"
+    for source_url in SOURCE_INDEXES[source]:
+        body, transfer = fetch(source_url, timeout)
+        index_rows, index_coverage = _crawl_index(source, body, source_url)
+        rows.extend(index_rows)
+        downloaded += transfer["downloaded_bytes"]
+        if index_coverage.get("coverage_kind") != "exhaustive":
+            coverage_kind = index_coverage["coverage_kind"]
+        indexes.append({**index_coverage, **transfer})
     write_jsonl(sorted(rows, key=lambda row: (row["command"], row["package"])), output)
-    coverage.update(transfer)
-    return coverage
+    return {"status": "success", "coverage_kind": coverage_kind, "records": len(rows),
+            "indexes": indexes, "index_count": len(indexes), "downloaded_bytes": downloaded,
+            "source": SOURCE_INDEXES[source][0],
+            "url": SOURCE_INDEXES[source][0], "final_url": indexes[-1].get("final_url"),
+            "status_code": indexes[-1].get("status_code"),
+            "duration_seconds": round(sum(i.get("duration_seconds", 0) for i in indexes), 3)}
 
 
 def crawl_sources(sources: list[str], output_dir: Path, report_path: Path, timeout: int = 300) -> dict[str, Any]:
     report: dict[str, Any] = {
         "status": "success",
-        "coverage_kind": "exhaustive" if set(sources) <= {"debian", "ubuntu", "arch", "homebrew"} else "partial",
+        "coverage_kind": "exhaustive" if set(sources) <= (COLLECTED_SOURCES - {"winget"}) else "partial",
         "declared_sources": sorted(SOURCE_URLS),
         "requested_sources": sorted(sources),
         "sources": {},

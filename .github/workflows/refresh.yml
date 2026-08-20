@@ -24,6 +24,7 @@ jobs:
         run: |
           python tools/production_crawl.py \
             --source debian --source ubuntu --source arch --source homebrew \
+            --source msys2 --source scoop --source winget \
             --output-dir data/production/intermediate \
             --report reports/production-crawl.json
       - name: Restore latest registry artifact observations
@@ -38,7 +39,7 @@ jobs:
             echo "::error::Unable to inspect the artifact-data branch; refusing to refresh with incomplete inputs"
             exit 1
           fi
-          for source in npm pypi crates go rubygems packagist; do
+          for source in npm pypi crates go rubygems packagist nuget; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             else
@@ -62,6 +63,10 @@ jobs:
             data/production/intermediate/pypi.jsonl \
             data/production/intermediate/rubygems.jsonl \
             data/production/intermediate/packagist.jsonl \
+            data/production/intermediate/nuget.jsonl \
+            data/production/intermediate/msys2.jsonl \
+            data/production/intermediate/scoop.jsonl \
+            data/production/intermediate/winget.jsonl \
             --snapshot "$(date -u +%F)" \
             --coverage-map data/production/coverage-map.json \
             --report reports/production-refresh.json

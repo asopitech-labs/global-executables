@@ -60,6 +60,39 @@ source, exposed as the `go_package_budget` workflow input. Each run queues its
 successor and an explicit Pages deploy, because a run dispatched with
 `GITHUB_TOKEN` does not emit the `workflow_run` event `pages.yml` listens for.
 
+## Windows and .NET coverage
+
+Linux's base command set is packaged, so Debian and Ubuntu carry it. Windows' and
+macOS' are not, which is why a package-manager-only index answers "not in use" for
+commands that exist on every machine of those platforms. Four sources close part of
+that gap:
+
+* **Scoop** states each package's shims in the manifest `bin` field, so ten bucket
+  repositories — 1.9MB of tarballs — are read without touching an artifact.
+* **MSYS2** publishes pacman databases, so the Arch reader applies unchanged; its
+  databases are zstd-compressed rather than gzip.
+* **winget** ships a SQLite source index whose `commands` table covers the whole
+  catalog in one download. It stays `partial`: only manifests that opt in declare
+  `Commands`, and the table also carries silent-install switches like `/VERYSILENT`,
+  which are rejected as command names.
+* **NuGet** exposes .NET tools, whose `DotnetToolSettings.xml` names the command; a
+  `.nupkg` is a ZIP, so that declaration costs a range read. It stays `partial`
+  because the search endpoint stops paging well short of its own `totalHits`.
+
+Windows command names are recorded without the extension the filesystem carries.
+`curl.exe` has to collide with `curl` or a cross-ecosystem index cannot answer the
+question it exists for; before that normalisation MSYS2 appeared to contribute 1,426
+new names, of which only 474 were genuinely new.
+
+Distributions are not one index either. Arch keeps almost everything outside `core`,
+which was the only repository being read, and Debian's `stable/main` is a fraction of
+the archive; both now read every pool.
+
+Still uncovered: the Windows System32 and macOS base command sets, which no package
+manager ships. Chocolatey was investigated and rejected — its feed answers 504 to
+repeated requests, its metadata never names an executable, and its packages often
+contain no binary at all because the install script downloads one.
+
 ## Crawling in a container
 
 A CI job stops at six hours and the workflow runs one at a time, so a long sweep
@@ -126,6 +159,7 @@ Production-source rebuild:
 ```sh
 python tools/production_crawl.py \
   --source debian --source ubuntu --source arch --source homebrew \
+  --source msys2 --source scoop --source winget \
   --output-dir data/production/intermediate \
   --report reports/production-crawl.json
 python tools/refresh.py \
@@ -138,6 +172,10 @@ python tools/refresh.py \
   data/production/intermediate/npm.jsonl data/production/intermediate/pypi.jsonl \
   data/production/intermediate/rubygems.jsonl \
   data/production/intermediate/packagist.jsonl \
+  data/production/intermediate/msys2.jsonl \
+  data/production/intermediate/scoop.jsonl \
+  data/production/intermediate/winget.jsonl \
+  data/production/intermediate/nuget.jsonl \
   --snapshot "$(date -u +%F)" \
   --coverage-map data/production/coverage-map.json \
   --report reports/production-refresh.json

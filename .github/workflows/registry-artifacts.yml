@@ -47,12 +47,12 @@ jobs:
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
           fi
           for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
-                         go-modules.txt go-modules.cursor.json; do
+                         go-modules.txt go-modules.cursor.json nuget-tools.txt; do
             if git cat-file -e origin/artifact-data:data/production/$catalog 2>/dev/null; then
               git show origin/artifact-data:data/production/$catalog > data/production/$catalog
             fi
           done
-          for source in npm pypi crates go rubygems packagist; do
+          for source in npm pypi crates go rubygems packagist nuget; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             fi
@@ -66,7 +66,7 @@ jobs:
           BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
         run: |
           python tools/registry_artifact_crawl.py \
-            --source npm --source pypi --source crates --source go --source rubygems --source packagist \
+            --source npm --source pypi --source crates --source go --source rubygems --source packagist --source nuget \
             --state data/production/registry-state.json \
             --output-dir data/production/intermediate \
             --report reports/registry-artifact-crawl.json \
@@ -90,7 +90,7 @@ jobs:
           mkdir -p /tmp/artifact-publish/data/production/intermediate /tmp/artifact-publish/reports
           cp data/production/registry-state.json /tmp/artifact-publish/data/production/registry-state.json
           for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
-                         go-modules.txt go-modules.cursor.json; do
+                         go-modules.txt go-modules.cursor.json nuget-tools.txt; do
             if test -f data/production/$catalog; then
               cp data/production/$catalog /tmp/artifact-publish/data/production/$catalog
             fi

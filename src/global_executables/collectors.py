@@ -11,8 +11,12 @@ def record(command, ecosystem, package, version=None, repository=None, source="f
     r.update({key: value for key, value in attributes.items() if value is not None})
     return r
 
-def package_files(text: str, ecosystem: str, source: str):
-    """Parse Debian Contents (`path package`) or Arch `%NAME%/%FILES%` fixture data."""
+def package_files(text: str, ecosystem: str, source: str, *, family=None, distribution=None):
+    """Parse Debian Contents (`path package`) or Arch `%NAME%/%FILES%` fixture data.
+
+    `family`/`distribution` let a caller reuse the pacman format for a platform that
+    is not Arch — MSYS2 ships Windows binaries through the same database layout.
+    """
     out=[]
     if "%NAME%" in text:
         blocks=text.split("\n\n")
@@ -21,9 +25,12 @@ def package_files(text: str, ecosystem: str, source: str):
             for p in lines[lines.index("%FILES%")+1:] if pkg and "%FILES%" in lines else []:
                 full="/"+p.lstrip("/")
                 if any(full.startswith(d) for d in EXEC_DIRS) and not full.endswith("/"):
-                    out.append(record(Path(full).name,ecosystem,pkg,source=source,confidence="filesystem",
+                    command=Path(full).name
+                    if family == "windows": command=windows_command(command)
+                    out.append(record(command,ecosystem,pkg,source=source,confidence="filesystem",
                                       source_type="os_package", package_system="pacman",
-                                      distribution_family="arch", distribution="archlinux"))
+                                      distribution_family=family or "arch",
+                                      distribution=distribution or "archlinux"))
     else:
         for line in text.splitlines():
             parts=line.rsplit(maxsplit=1)
@@ -34,6 +41,68 @@ def package_files(text: str, ecosystem: str, source: str):
                                   source_type="os_package", package_system="deb",
                                   distribution_family="debian", distribution=ecosystem))
     return out
+
+COMMAND_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._+@-]*\Z")
+# What a Windows user types omits the extension the filesystem carries, and the whole
+# point of a cross-ecosystem index is that `curl.exe` collides with `curl`.
+WINDOWS_SUFFIXES = (".exe", ".com", ".bat", ".cmd", ".ps1")
+
+def windows_command(name):
+    lowered = name.lower()
+    for suffix in WINDOWS_SUFFIXES:
+        if lowered.endswith(suffix) and len(name) > len(suffix):
+            return name[: -len(suffix)]
+    return name
+
+def _is_command_name(value):
+    """Reject the installer switches manifest authors put in command fields.
+
+    winget's published index carries entries like `/VERYSILENT` and `/qn` beside real
+    command names; they are silent-install flags, not executables.
+    """
+    return bool(value) and bool(COMMAND_NAME.fullmatch(value))
+
+def scoop_manifests(manifests, source="scoop"):
+    """Read Scoop's declared executables.
+
+    A bucket manifest states its commands in `bin`, which is a string, a list of
+    strings, or a list where a nested `[target, alias]` pair renames the shim.  The
+    alias is what the user types, so it wins.
+    """
+    out=[]
+    for package, value in manifests:
+        entries=value.get("bin")
+        if entries is None: continue
+        if isinstance(entries,str): entries=[entries]
+        if not isinstance(entries,list): continue
+        version=value.get("version")
+        homepage=value.get("homepage")
+        commands=[]
+        for entry in entries:
+            if isinstance(entry,str): shim=entry
+            elif isinstance(entry,list) and entry:
+                shim=entry[1] if len(entry)>1 and isinstance(entry[1],str) and entry[1] else entry[0]
+            else: continue
+            if not isinstance(shim,str): continue
+            name=windows_command(shim.replace("\\","/").rsplit("/",1)[-1].strip())
+            if _is_command_name(name): commands.append(name)
+        for command in sorted(set(commands)):
+            out.append(record(command,"scoop",package,version,homepage,source,
+                              source_type="os_package", package_system="scoop",
+                              distribution_family="windows", distribution="windows",
+                              latest_version=version))
+    return out
+
+def winget_commands(pairs, source="winget"):
+    """Read winget's declared command aliases from its source index.
+
+    The published source index carries a `commands` table joined to package
+    identifiers, so the whole catalog's declared commands arrive in one download.
+    """
+    return [record(windows_command(command),"winget",package,None,None,source,
+                   source_type="os_package", package_system="winget",
+                   distribution_family="windows", distribution="windows")
+            for command, package in sorted(set(pairs)) if _is_command_name(command) and package]
 
 def npm_metadata(value, source="npm"):
     packages=value if isinstance(value,list) else [value]; out=[]
