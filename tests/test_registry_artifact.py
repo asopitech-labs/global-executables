@@ -296,6 +296,27 @@ def test_crate_without_a_manifest_is_permanent_not_retryable():
     assert kept == {} and "demo" in permanent
 
 
+def test_a_persistently_failing_crate_costs_one_attempt_per_run(tmp_path, monkeypatch):
+    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
+    fake_fetch, _ = _fake_crates_registry(catalog)
+    attempts = []
+
+    def flaky_fetch(url, timeout=120):
+        if url.startswith("https://index.crates.io/"):
+            attempts.append(url)
+            raise urllib.error.HTTPError(url, 503, "Service Unavailable", {}, None)
+        return fake_fetch(url, timeout)
+
+    monkeypatch.setattr(registry_artifact, "fetch", flaky_fetch)
+    state = {"failures": {"broken-one": "HTTP Error 503: x", "broken-two": "HTTP Error 503: x"}}
+
+    report = _crawl_crates(state, tmp_path / "crates.jsonl", 20, 1_000_000, 120)
+
+    assert len(attempts) == 2  # not once per unit of remaining budget
+    assert report["cursor"] == 18 and report["processed"] == 20
+    assert sorted(state["retry_crates"]) == ["broken-one", "broken-two"]
+
+
 def test_crates_api_requests_are_paced_but_other_hosts_are_not(monkeypatch):
     slept = []
     monkeypatch.setattr(registry_artifact.time, "sleep", slept.append)

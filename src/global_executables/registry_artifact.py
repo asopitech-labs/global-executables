@@ -553,11 +553,13 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     for crate_name in failures:
         if crate_name not in retry_crates:
             retry_crates.append(crate_name)
-    retry_quota = max(1, budget // 2)
-    retry_used = 0
+    # One attempt per queued crate per run.  Re-queueing inside the run let two crates
+    # that always fail spend half a 10,000 budget on themselves before the catalog moved.
+    retry_budget = len(retry_crates)
     budget_exhausted = False
     while processed < budget:
-        if retry_crates and (retry_used < retry_quota or state.get("complete")):
+        if retry_budget:
+            retry_budget -= 1
             name = retry_crates.pop(0)
             try:
                 version = _crate_latest_version(name, timeout)
@@ -573,9 +575,8 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             except Exception as error:
                 _record_failure(failures, unavailable, name, error)
                 if name in failures:
-                    retry_crates.append(name)
+                    retry_crates.append(name)  # queued for the next run, not this one
             processed += 1
-            retry_used += 1
             if budget_exhausted:
                 break
             continue
@@ -748,9 +749,12 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
     for package in failures:
         if package not in retry_packages:
             retry_packages.append(package)
+    retry_budget = len(retry_packages)  # one attempt per queued package per run
     rows: list[dict[str, Any]] = []; budget_exhausted = False
-    while (retry_packages or cursor < len(packages)) and processed < budget:
-        retrying = bool(retry_packages)
+    while (retry_budget or cursor < len(packages)) and processed < budget:
+        retrying = retry_budget > 0
+        if retrying:
+            retry_budget -= 1
         package = retry_packages.pop(0) if retrying else packages[cursor]
         try:
             metadata_url = "https://repo.packagist.org/p2/" + urllib.parse.quote(package, safe="/") + ".json"
