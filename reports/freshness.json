@@ -1,44 +1,43 @@
 {
   "attempted_partitions": [
-    "pypi/fixture"
+    "debian/fixture"
   ],
   "budget": {
     "bytes": null,
     "partitions": 1,
     "records": 1000
   },
-  "checked_at": "2026-08-20T07:09:27Z",
+  "checked_at": "2026-08-20T13:14:31Z",
   "coverage_kind": "partial",
-  "duration_seconds": 0.000583,
+  "duration_seconds": 0.000663,
   "failed_partitions": [],
   "partition_staleness": {
-    "debian/fixture": 43982,
-    "npm/fixture": 18907,
-    "pypi/fixture": 0
+    "debian/fixture": 0,
+    "npm/fixture": 40811,
+    "pypi/fixture": 21904
   },
   "partitions": [
     {
       "attempts": 1,
       "changed_records": 0,
-      "checked_at": "2026-08-20T07:09:27Z",
+      "checked_at": "2026-08-20T13:14:31Z",
       "cursor_after": 0,
       "cursor_before": 0,
       "cycle_completed": true,
-      "id": "pypi/fixture",
-      "last_success_at": "2026-08-20T07:09:27Z",
+      "id": "debian/fixture",
+      "last_success_at": "2026-08-20T13:14:31Z",
       "new_records": 0,
       "rate_limit": null,
       "removed_records": 0,
       "retries": 0,
-      "scanned_bytes": 441,
-      "scanned_records": 1,
+      "scanned_bytes": 698,
+      "scanned_records": 2,
       "scope": {
-        "ecosystem": "pypi",
-        "registry": "pypi"
+        "ecosystem": "debian"
       },
-      "source": "pypi",
-      "source_bytes": 441,
-      "source_checksum": "9f2996f2818c22bdd1eaaa18c7a3a11daa2a3c15ef8b487a05ad98c055816163",
+      "source": "debian",
+      "source_bytes": 698,
+      "source_checksum": "73a35c4af33ed443f52a53fe19051731d55f1272940d04290e903914c04b3573",
       "source_snapshot": "fixture-2026-08-14",
       "staleness_seconds": 0,
       "status": "success"
@@ -49,33 +48,33 @@
     "canonical_publish": false,
     "failure_blocks_exhaustive": true
   },
-  "run_id": "2026-08-20T07:09:27Z",
+  "run_id": "2026-08-20T13:14:31Z",
   "scheduler": {
-    "next_partition_after": 0,
-    "next_partition_before": 2,
+    "next_partition_after": 1,
+    "next_partition_before": 0,
     "selected": [
-      "pypi/fixture"
+      "debian/fixture"
     ],
     "skipped": [
-      "debian/fixture",
-      "npm/fixture"
+      "npm/fixture",
+      "pypi/fixture"
     ]
   },
   "skipped_partitions": [
-    "debian/fixture",
-    "npm/fixture"
+    "npm/fixture",
+    "pypi/fixture"
   ],
   "status": "success",
   "succeeded_partitions": [
-    "pypi/fixture"
+    "debian/fixture"
   ],
   "summary": {
     "changed_records": 0,
     "failed_partitions": 0,
     "new_records": 0,
     "removed_records": 0,
-    "scanned_bytes": 441,
-    "scanned_records": 1,
+    "scanned_bytes": 698,
+    "scanned_records": 2,
     "skipped_partitions": 2,
     "unavailable_partitions": 0
   },
