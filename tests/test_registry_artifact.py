@@ -9,45 +9,11 @@ import zipfile
 import pytest
 
 import global_executables.registry_artifact as registry_artifact
-from global_executables.registry_artifact import (_crates_catalog_page, _crawl_crates, _go_rows,
+from global_executables.registry_artifact import (_console_scripts, _go_rows, _gem_rows,
                                                    _packagist_packages, _packagist_rows,
-                                                   _crawl_pypi, _failure_state, _pypi_projects,
-                                                   _ruby_gem_rows, _rubygems_names, _sdist_rows,
-                                                   _wheel_rows)
-
-
-def _crate_archive(name, version, binary="demo"):
-    stream = BytesIO()
-    with tarfile.open(fileobj=stream, mode="w:gz") as archive:
-        manifest = f'[package]\nname = "{name}"\nversion = "{version}"\n\n[[bin]]\nname = "{binary}"\n'
-        info = tarfile.TarInfo(f"{name}-{version}/Cargo.toml")
-        info.size = len(manifest.encode())
-        archive.addfile(info, BytesIO(manifest.encode()))
-    return stream.getvalue()
-
-
-def _fake_crates_registry(catalog, downloads=None):
-    """Serve crates.io seek pagination from an in-memory alphabetical catalog."""
-    requests = []
-
-    def fake_fetch(url, timeout=120):
-        requests.append(url)
-        if url.startswith("https://crates.io/api/v1/crates?"):
-            query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
-            start = int(query.get("seek", ["0"])[0])
-            size = int(query["per_page"][0])
-            window = catalog[start:start + size]
-            end = start + len(window)
-            meta = {"total": len(catalog)}
-            if end < len(catalog):
-                meta["next_page"] = f"?per_page={size}&sort=alpha&seek={end}"
-            return json.dumps({"crates": window, "meta": meta}).encode(), {"downloaded_bytes": 0}
-        name = url.rsplit("/", 3)[1]
-        if downloads is not None and name in downloads:
-            raise downloads[name]
-        return _crate_archive(name, "1.0.0"), {"downloaded_bytes": 1}
-
-    return fake_fetch, requests
+                                                   _crawl_pypi, _failure_state, _postgres_array,
+                                                   _pypi_projects, _ruby_gem_rows, _rubygems_names,
+                                                   _sdist_rows, _wheel_commands_from, _wheel_rows)
 
 
 def test_pypi_simple_catalog_is_normalized_and_sorted():
@@ -119,6 +85,122 @@ def test_packagist_only_emits_composer_bin_declarations():
     assert _packagist_rows(json.loads(body), "demo/library", "https://example.test") == []
 
 
+def test_crates_binaries_come_from_the_dump_not_from_downloads(tmp_path, monkeypatch):
+    """crates.io states bin_names per version, so no .crate is ever fetched."""
+    dump = BytesIO()
+    files = {
+        "2026-08-19/metadata.json": b'{"timestamp": "2026-08-19T02:00:27Z"}',
+        "2026-08-19/data/crates.csv": b"id,name,repository\n1,ripgrep,https://example.test/rg\n2,serde,\n",
+        "2026-08-19/data/default_versions.csv": b"crate_id,version_id\n1,11\n2,22\n",
+        "2026-08-19/data/versions.csv": (b"id,crate_id,num,yanked,bin_names\n"
+                                         b'11,1,15.2.0,f,"{rg}"\n'
+                                         b'22,2,1.0.229,f,{}\n'
+                                         b'33,1,0.1.0,t,"{old-rg}"\n'),
+    }
+    with tarfile.open(fileobj=dump, mode="w:gz") as archive:
+        for name, body in files.items():
+            info = tarfile.TarInfo(name); info.size = len(body)
+            archive.addfile(info, BytesIO(body))
+    payload = dump.getvalue()
+
+    class _Response:
+        def __init__(self): self._stream = BytesIO(payload)
+        def read(self, size=-1): return self._stream.read(size)
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    requested = []
+    monkeypatch.setattr(registry_artifact, "content_length", lambda url, timeout=120: len(payload))
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen",
+                        lambda request, timeout=None: requested.append(request.full_url) or _Response())
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda *a, **k: pytest.fail("the dump must not trigger artifact downloads"))
+    output = tmp_path / "crates.jsonl"
+    state = {"page": 194, "seek": "abc", "cursor": 19300}
+
+    report = registry_artifact._crawl_crates(state, output, 10, 10_000_000, 120)
+
+    assert report["coverage_kind"] == "exhaustive" and report["complete"] is True
+    assert report["catalog_size"] == 2 and report["crates_with_binaries"] == 1
+    assert requested == [registry_artifact.CRATES_DB_DUMP]
+    assert "page" not in state and "seek" not in state  # the retired cursor is dropped
+    rows = [json.loads(line) for line in output.read_text().splitlines()]
+    assert [(row["command"], row["package"], row["version"]) for row in rows] == [("rg", "ripgrep", "15.2.0")]
+
+
+def test_postgres_array_literals_from_the_dump():
+    assert _postgres_array("{rg}") == ["rg"]
+    assert _postgres_array("{}") == []
+    assert _postgres_array('{"cargo-add","cargo-rm"}') == ["cargo-add", "cargo-rm"]
+    assert _postgres_array('{"with,comma"}') == ["with,comma"]
+    assert _postgres_array("") == []
+
+
+def test_wheel_commands_cover_data_scripts_as_well_as_entry_points():
+    """A wheel shipping a prebuilt binary declares it as a data script."""
+    members = {
+        "demo-1.0.dist-info/entry_points.txt": b"[console_scripts]\ndemo = demo:main\n",
+        "demo-1.0.data/scripts/demo-bin": b"#!/bin/sh\n",
+        "demo/__init__.py": b"",
+    }
+    commands = _wheel_commands_from(list(members), members.__getitem__)
+    assert sorted(commands) == ["demo", "demo-bin"]
+    assert _console_scripts("[console_scripts]\na = x\n[gui_scripts]\nb = y\n") == ["a"]
+
+
+def test_gem_executables_are_read_from_the_head_of_the_archive(monkeypatch):
+    metadata = b"---\nname: demo\nversion: 1.0.0\nexecutables:\n- demo\n"
+    gem = BytesIO()
+    with tarfile.open(fileobj=gem, mode="w") as archive:
+        payload = gzip.compress(metadata)
+        info = tarfile.TarInfo("metadata.gz"); info.size = len(payload)
+        archive.addfile(info, BytesIO(payload))
+        filler = b"x" * 500_000
+        info = tarfile.TarInfo("data.tar.gz"); info.size = len(filler)
+        archive.addfile(info, BytesIO(filler))
+    body = gem.getvalue()
+
+    monkeypatch.setattr(registry_artifact, "content_length", lambda url, timeout=120: len(body))
+    monkeypatch.setattr(registry_artifact, "fetch_range",
+                        lambda url, start, end, timeout=120: (body[start:end + 1], {"downloaded_bytes": end - start + 1}))
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda *a, **k: pytest.fail("the head read must cover the gemspec"))
+
+    blob, spent = registry_artifact._gem_metadata("https://example.test/demo.gem", 120)
+    assert spent == registry_artifact.GEM_HEAD_BYTES and spent < len(body)
+    rows = _gem_rows(gzip.decompress(blob).decode(), "demo", "1.0.0", None, "https://example.test/demo.gem")
+    assert [row["command"] for row in rows] == ["demo"]
+
+
+def test_go_catalog_records_each_module_once(tmp_path, monkeypatch):
+    """The index republishes a module per version; the catalog keeps one entry."""
+    pages = [
+        b'{"Path":"example.com/a","Version":"v1.0.0","Timestamp":"2019-01-02T00:00:00Z"}\n'
+        b'{"Path":"example.com/a","Version":"v1.1.0","Timestamp":"2019-01-03T00:00:00Z"}\n'
+        b'{"Path":"example.com/b","Version":"v1.0.0","Timestamp":"2019-01-04T00:00:00Z"}\n',
+    ]
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        if url.startswith(registry_artifact.GO_INDEX):
+            return (pages.pop(0) if pages else b""), {"downloaded_bytes": 10}
+        if url.endswith("/@latest"):
+            return b'{"Version":"v1.1.0"}', {"downloaded_bytes": 20}
+        raise AssertionError(f"unexpected fetch {url}")
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_go_module_rows",
+                        lambda url, module, version, timeout: ([], 5))
+    catalog = tmp_path / "go-modules.txt"
+    state = {"modules_file": str(catalog), "since": "2019-06-18T00:00:00Z"}
+
+    report = registry_artifact._crawl_go(state, tmp_path / "go.jsonl", 10, 1_000_000, 120)
+
+    assert catalog.read_text().split() == ["example.com/a", "example.com/b"]
+    assert report["catalog_size"] == 2 and report["discovered"] == 2
+    assert report["processed"] == 2 and report["catalog_complete"] is True
+    assert "since" not in state  # the download cursor is not a catalog cursor
+
+
 def test_permanent_registry_conditions_are_not_retryable_failures():
     state = {
         "failures": {
@@ -152,93 +234,6 @@ def test_pypi_no_distribution_advances_cursor_and_is_unavailable(tmp_path, monke
     assert report["unavailable"] == 2
 
 
-def test_crates_catalog_reads_the_seek_cursor_not_a_page_number(monkeypatch):
-    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
-    fake_fetch, requests = _fake_crates_registry(catalog)
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-
-    crates, next_seek, total = _crates_catalog_page(None, 120)
-    assert [crate["name"] for crate in crates][:1] == ["crate-000"]
-    assert next_seek == "100" and total == 250
-    query = urllib.parse.parse_qs(urllib.parse.urlsplit(requests[0]).query)
-    assert "page" not in query and query["sort"] == ["alpha"]
-
-    crates, next_seek, _ = _crates_catalog_page(next_seek, 120)
-    assert crates[0]["name"] == "crate-100" and next_seek == "200"
-    assert _crates_catalog_page("200", 120)[1] is None
-
-
-def test_crates_seek_cursor_resumes_mid_page_without_reprocessing(tmp_path, monkeypatch):
-    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
-    fake_fetch, _ = _fake_crates_registry(catalog)
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    output = tmp_path / "crates.jsonl"
-    state = {}
-
-    first = _crawl_crates(state, output, 30, 1_000_000, 120)
-    assert first["cursor"] == 30 and first["records"] == 30
-    assert state["seek"] is None and state["page_offset"] == 30
-
-    second = _crawl_crates(state, output, 30, 1_000_000, 120)
-    assert second["cursor"] == 60 and state["page_offset"] == 60 and state["seek"] is None
-    names = [json.loads(line)["package"] for line in output.read_text().splitlines()]
-    assert names == [f"crate-{index:03d}" for index in range(60)]
-    assert len(names) == len(set(names))
-
-
-def test_crates_reaches_records_beyond_the_offset_pagination_cap(tmp_path, monkeypatch):
-    catalog = [{"name": f"crate-{index:05d}", "max_stable_version": "1.0.0"} for index in range(20_150)]
-    fake_fetch, _ = _fake_crates_registry(catalog)
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    state = {"page": 201}  # a legacy cursor crates.io answers with HTTP 400
-
-    report = _crawl_crates(state, tmp_path / "crates.jsonl", 50, 1_000_000, 120)
-
-    assert "page" not in state and report["skip_remaining"] == 0
-    assert report["cursor"] == 20_050 and report["catalog_size"] == 20_150
-    packages = [json.loads(line)["package"] for line in (tmp_path / "crates.jsonl").read_text().splitlines()]
-    assert packages[0] == "crate-20000"  # the first crate offset pagination could never reach
-
-
-def test_crates_catalog_outage_keeps_progress_and_fails_the_run(tmp_path, monkeypatch):
-    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
-    fake_fetch, _ = _fake_crates_registry(catalog)
-    calls = {"count": 0}
-
-    def flaky_fetch(url, timeout=120):
-        if url.startswith("https://crates.io/api/v1/crates?"):
-            calls["count"] += 1
-            if calls["count"] > 1:
-                raise urllib.error.HTTPError(url, 503, "Service Unavailable", {}, None)
-        return fake_fetch(url, timeout)
-
-    monkeypatch.setattr(registry_artifact, "fetch", flaky_fetch)
-    output = tmp_path / "crates.jsonl"
-    state = {}
-
-    report = _crawl_crates(state, output, 200, 1_000_000, 120)
-
-    assert report["error"].startswith("HTTP Error 503")
-    assert report["complete"] is False and report["coverage_kind"] == "partial"
-    assert report["cursor"] == 100 and state["cursor"] == 100 and state["seek"] == "100"
-    assert len(output.read_text().splitlines()) == 100
-
-
-def test_crates_yanked_crates_are_unavailable_and_never_downloaded(tmp_path, monkeypatch):
-    catalog = [{"name": "live", "max_stable_version": "1.0.0", "yanked": False},
-               {"name": "gone", "max_stable_version": None, "newest_version": "0.0.0", "yanked": True}]
-    fake_fetch, requests = _fake_crates_registry(catalog)
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    state = {}
-
-    report = _crawl_crates(state, tmp_path / "crates.jsonl", 2, 1_000_000, 120)
-
-    assert report["processed"] == 2 and report["cursor"] == 2
-    assert report["failures"] == 0 and report["unavailable"] == 1
-    assert state["unavailable"]["gone"] == "all versions are yanked"
-    assert not any("/gone/" in url for url in requests)  # 0.0.0 has no artifact to fetch
-
-
 def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch):
     seen = {}
 
@@ -257,64 +252,6 @@ def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch
 
     assert seen == {"npm": 1000, "crates": 10_000}
     assert report["sources"]["crates"]["package_budget"] == 10_000
-
-
-def _tar_of(members):
-    stream = BytesIO()
-    with tarfile.open(fileobj=stream, mode="w:gz") as archive:
-        for path, text in members.items():
-            info = tarfile.TarInfo(path); info.size = len(text.encode())
-            archive.addfile(info, BytesIO(text.encode()))
-    return tarfile.open(fileobj=BytesIO(stream.getvalue()), mode="r:gz")
-
-
-def test_crate_manifest_tolerates_nested_and_lowercase_packing():
-    manifest = '[package]\nname = "demo"\n\n[[bin]]\nname = "demo"\n'
-    # betabear-0.1.1 is packed a directory deeper than the convention
-    nested = _tar_of({"12653346157/demo-0.1.1/Cargo.toml": manifest, "12653345612/demo-0.1.1/.gitignore": ""})
-    assert registry_artifact._crate_manifest(nested, "demo") == ("12653346157/demo-0.1.1/Cargo.toml", manifest)
-    # beam_bvm_interface-7.1.13107 names it cargo.toml
-    lowercase = _tar_of({"demo-1.0/cargo.toml": manifest, "demo-1.0/src/lib.rs": ""})
-    assert registry_artifact._crate_manifest(lowercase, "demo")[1] == manifest
-    # the shallowest manifest wins over a vendored one
-    vendored = _tar_of({"demo-1.0/vendor/dep/Cargo.toml": "[package]\nname='dep'\n",
-                        "demo-1.0/Cargo.toml": manifest})
-    assert registry_artifact._crate_manifest(vendored, "demo")[0] == "demo-1.0/Cargo.toml"
-
-
-def test_crate_without_a_manifest_is_permanent_not_retryable():
-    with pytest.raises(registry_artifact.RegistryCrawlError) as raised:
-        registry_artifact._crate_manifest(_tar_of({"demo-1.0/README.md": "hi"}), "demo")
-    assert "no readable Cargo.toml" in str(raised.value)
-
-    failures, unavailable = {}, {}
-    registry_artifact._record_failure(failures, unavailable, "demo", raised.value)
-    assert failures == {} and "demo" in unavailable
-
-    state = {"failures": {"demo": str(raised.value)}, "retry_crates": ["demo"]}
-    kept, permanent = _failure_state(state)
-    assert kept == {} and "demo" in permanent
-
-
-def test_a_persistently_failing_crate_costs_one_attempt_per_run(tmp_path, monkeypatch):
-    catalog = [{"name": f"crate-{index:03d}", "max_stable_version": "1.0.0"} for index in range(250)]
-    fake_fetch, _ = _fake_crates_registry(catalog)
-    attempts = []
-
-    def flaky_fetch(url, timeout=120):
-        if url.startswith("https://index.crates.io/"):
-            attempts.append(url)
-            raise urllib.error.HTTPError(url, 503, "Service Unavailable", {}, None)
-        return fake_fetch(url, timeout)
-
-    monkeypatch.setattr(registry_artifact, "fetch", flaky_fetch)
-    state = {"failures": {"broken-one": "HTTP Error 503: x", "broken-two": "HTTP Error 503: x"}}
-
-    report = _crawl_crates(state, tmp_path / "crates.jsonl", 20, 1_000_000, 120)
-
-    assert len(attempts) == 2  # not once per unit of remaining budget
-    assert report["cursor"] == 18 and report["processed"] == 20
-    assert sorted(state["retry_crates"]) == ["broken-one", "broken-two"]
 
 
 def test_crates_api_requests_are_paced_but_other_hosts_are_not(monkeypatch):

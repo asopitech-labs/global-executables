@@ -12,13 +12,13 @@ modules, RubyGems, and Packagist remain
 `partial` until their package artifacts are exhaustively inspected.
 
 The registry artifact crawler is resumable and budgeted. It enumerates the
-PyPI simple catalog, follows npm's replication change cursor, follows the
-crates.io alphabetical seek cursor, follows Go's module index cursor, enumerates RubyGems'
+PyPI simple catalog, follows npm's replication change cursor, reads the crates.io
+database dump, distils Go's module index into a module catalog, enumerates RubyGems'
 compact-index names catalog, and enumerates Packagist's package catalog. For
-each selected package it downloads an artifact or reads authoritative package
-metadata and extracts declared console scripts, npm bins, Cargo binary targets,
-Go `package main` directories, RubyGems gemspec executables, or Composer
-`bin` declarations. Packagist rows are emitted only when the newest package
+each selected package it reads authoritative package metadata, or the smallest
+part of an artifact that can carry the answer, and extracts declared console
+scripts, npm bins, Cargo binary targets, Go `package main` directories, RubyGems
+gemspec executables, or Composer `bin` declarations. Packagist rows are emitted only when the newest package
 metadata contains `bin`; the command is the basename Composer exposes through
 `vendor/bin`. The
 `registry-artifacts.yml` workflow runs every six hours and persists its cursor,
@@ -26,28 +26,39 @@ failures, normalized observations, and report on the `artifact-data` branch.
 It cannot mark a source exhaustive while any cursor, artifact, or failure
 remains unresolved.
 
-crates.io must be enumerated through the `seek` cursor its catalog returns in
-`meta.next_page`: offset pagination is rejected with `HTTP Error 400` past
-20,000 records, under 7% of the registry. A stored legacy `page` cursor is
-migrated once into an equivalent record offset that the crawler fast-forwards
-through the seek stream without re-downloading artifacts. A catalog outage now
-records the error on the source, keeps the run's rows and cursor, and fails the
-run rather than discarding the progress. Crates the catalog marks `yanked` are
-recorded as permanently unavailable without a download: crates.io names their
-version `0.0.0`, which has no artifact. Manifest lookup takes the shallowest
-`Cargo.toml` in the archive under either casing, because a few crates are packed
-a directory deeper than the convention; a crate with no readable manifest at all
-is permanently unavailable rather than retried.
+The crawler asks each registry for the executable names before it asks for an
+artifact, because most of them already publish the answer.
 
-Sustained crates.io catch-up needs more budget than the other registries, so
-`--source-package-budget crates=N` raises the per-run package budget for a
-single source; `crates_package_budget` is the workflow input for it. Requests to the crates.io
-API host are paced to one per second, the rate crates.io asks crawlers to hold;
-a CI runner is fast enough to earn `HTTP Error 429` without it, and a rate-limited
-catalog page ends the source for that run. `fetch` also retries 429 with the
-advertised `Retry-After` before giving up. That pacing puts the full
-319,000-crate catalog at a multi-day sweep. Each run queues its successor, so
-runs chain back to back instead of waiting for the six-hourly schedule.
+* crates.io states `bin_names` per version, so no `.crate` is downloaded at all.
+  The database dump carries the whole registry — every crate, every version, fully
+  backfilled — in one request, which is the bulk access route crates.io points
+  crawlers to when they hit the API's pagination limit. crates.io reaches
+  `exhaustive` in a single run.
+* npm and Packagist already answered from registry metadata (`bin`).
+* PyPI does not expose console scripts in its JSON API, so a wheel still has to be
+  read — but a wheel is a ZIP, so `RemoteZip` reads the trailing central directory
+  and then the one small member that names the commands. Wheels that ship a
+  prebuilt binary declare it under `.data/scripts/` rather than as a console
+  script; both are collected.
+* RubyGems does not expose executables in its API and its "quick" gemspec omits
+  them, so the `.gem` is still needed — but its `metadata.gz` sits at the front of
+  an uncompressed tar, so the first 64KB usually suffices.
+* Go needs the module source to see which directories declare `package main`.
+  Every `.go` file in a directory must declare the same package, so one file per
+  directory decides it, and those files are read from the archive by range.
+
+The Go module index lists every version of every module — tens of millions of
+entries, overwhelmingly republished copies of modules already inspected. Reading
+the index is cheap, so a catalog phase distils the feed into distinct module paths
+in `data/production/go-modules.txt` and the inspection phase spends the artifact
+budget on one archive per module, at the version `@latest` reports.
+
+Requests to the crates.io API host are paced to one per second, the rate crates.io
+asks crawlers to hold; `fetch` also retries 429 with the advertised `Retry-After`.
+`--source-package-budget SOURCE=N` raises the per-run package budget for a single
+source, exposed as the `go_package_budget` workflow input. Each run queues its
+successor and an explicit Pages deploy, because a run dispatched with
+`GITHUB_TOKEN` does not emit the `workflow_run` event `pages.yml` listens for.
 
 The scheduled refresh now downloads the production OS indexes with
 `tools/production_crawl.py`, merges them with the currently available registry

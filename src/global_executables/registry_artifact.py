@@ -6,10 +6,13 @@ and no failures remain.  A stopped or rate-limited run remains partial.
 """
 from __future__ import annotations
 
+import csv
 import html
 import json
 import gzip
 import re
+import struct
+import sys
 import tarfile
 import time
 import tomllib
@@ -17,7 +20,8 @@ import urllib.parse
 import urllib.error
 import urllib.request
 import zipfile
-from io import BytesIO
+import zlib
+from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
@@ -27,15 +31,25 @@ from .model import write_jsonl
 
 USER_AGENT = "global-executables-registry-crawl/1.0 (+https://github.com/asopitech-labs/global-executables)"
 PROJECT_LINK = re.compile(r"<a\b[^>]*href=[\"'][^\"']+[\"'][^>]*>([^<]+)</a>", re.I)
-CRATES_CATALOG = "https://crates.io/api/v1/crates?per_page=100&sort=alpha"
-CRATES_PAGE_SIZE = 100
+CRATES_DB_DUMP = "https://static.crates.io/db-dump.tar.gz"
 # crates.io asks crawlers for at most one request per second and answers 429 well before
 # a CI runner's natural pace.  Only the API host is paced; its CDN mirrors are not.
 HOST_MIN_INTERVAL = {"crates.io": 1.0}
 RETRY_AFTER_CAP = 60.0
 # Crate conditions no later run can resolve; retrying them forever would hold the
 # source below exhaustive.
-PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:")
+PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:",
+                              "module has no latest version:")
+GO_INDEX = "https://index.golang.org/index"
+GO_INDEX_EPOCH = "2019-01-01T00:00:00Z"
+GO_INDEX_PAGE = 2000
+# Index pages are cheap — roughly 240KB per 2,000 entries — but a run still has to
+# leave time to inspect modules.
+GO_CATALOG_REQUESTS = 3000
+# Below this, one download beats several range requests.  Above this many directories a
+# module is better taken whole than probed, however cheap each probe is.
+GO_SMALL_ZIP_BYTES = 262144
+GO_DIRECTORY_PROBES = 512
 _last_request: dict[str, float] = {}
 
 
@@ -78,6 +92,127 @@ def fetch(url: str, timeout: int = 120, attempts: int = 4) -> tuple[bytes, dict[
                 raise
             time.sleep(_retry_after_seconds(error, attempt))
     raise RegistryCrawlError(f"unreachable retry loop: {url}")
+
+
+def fetch_range(url: str, start: int, end: int, timeout: int = 120) -> tuple[bytes, dict[str, Any]]:
+    """Fetch one inclusive byte range, refusing a server that ignores the request."""
+    started = time.monotonic()
+    _throttle(url)
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Range": f"bytes={start}-{end}"})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        if response.status != 206:
+            raise RegistryCrawlError(f"host ignored the range request: {url}")
+        body = response.read()
+    return body, {"url": url, "status_code": 206, "downloaded_bytes": len(body),
+                  "duration_seconds": round(time.monotonic() - started, 3)}
+
+
+def content_length(url: str, timeout: int = 120) -> int:
+    _throttle(url)
+    request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        length = response.headers.get("Content-Length")
+    if length is None:
+        raise RegistryCrawlError(f"artifact does not advertise a length: {url}")
+    return int(length)
+
+
+def _zip64_values(extra: bytes, uncompressed: int, compressed: int, offset: int) -> tuple[int, int, int]:
+    position = 0
+    while position + 4 <= len(extra):
+        tag, size = struct.unpack("<HH", extra[position:position + 4])
+        body = extra[position + 4:position + 4 + size]
+        if tag == 0x0001:
+            cursor = 0
+            for name, value in (("uncompressed", uncompressed), ("compressed", compressed), ("offset", offset)):
+                if value == 0xFFFFFFFF and cursor + 8 <= len(body):
+                    replacement = struct.unpack("<Q", body[cursor:cursor + 8])[0]
+                    cursor += 8
+                    if name == "uncompressed":
+                        uncompressed = replacement
+                    elif name == "compressed":
+                        compressed = replacement
+                    else:
+                        offset = replacement
+            break
+        position += 4 + size
+    return uncompressed, compressed, offset
+
+
+class RemoteZip:
+    """Read a ZIP over HTTP ranges instead of downloading the whole artifact.
+
+    A wheel or a Go module archive is almost entirely payload the crawler never reads.
+    The file list lives in the trailing central directory and any single member can be
+    inflated from its own byte range, so the evidence costs kilobytes rather than the
+    whole download.
+    """
+
+    def __init__(self, url: str, timeout: int = 120) -> None:
+        self.url = url
+        self.timeout = timeout
+        self.downloaded = 0
+        self.size = content_length(url, timeout)
+        self.entries = self._central_directory()
+
+    def _range(self, start: int, end: int) -> bytes:
+        body, transfer = fetch_range(self.url, max(0, start), min(end, self.size - 1), self.timeout)
+        self.downloaded += transfer["downloaded_bytes"]
+        return body
+
+    def _central_directory(self) -> dict[str, tuple[int, int, int]]:
+        window = min(65557, self.size)
+        tail = self._range(self.size - window, self.size - 1)
+        marker = tail.rfind(b"PK\x05\x06")
+        if marker < 0:
+            raise RegistryCrawlError(f"no zip end-of-directory record: {self.url}")
+        count, size, offset = struct.unpack("<HII", tail[marker + 10:marker + 20])
+        if count == 0xFFFF or size == 0xFFFFFFFF or offset == 0xFFFFFFFF:
+            locator = tail.rfind(b"PK\x06\x07")
+            if locator < 0:
+                raise RegistryCrawlError(f"no zip64 locator: {self.url}")
+            record_offset = struct.unpack("<Q", tail[locator + 8:locator + 16])[0]
+            record = self._range(record_offset, record_offset + 55)
+            if record[:4] != b"PK\x06\x06":
+                raise RegistryCrawlError(f"no zip64 end-of-directory record: {self.url}")
+            count, size, offset = struct.unpack("<QQQ", record[32:56])
+        if offset >= self.size - window:
+            data = tail[offset - (self.size - window):][:size]
+        else:
+            data = self._range(offset, offset + size - 1)
+        entries: dict[str, tuple[int, int, int]] = {}
+        position = 0
+        while position + 46 <= len(data) and data[position:position + 4] == b"PK\x01\x02":
+            method = struct.unpack("<H", data[position + 10:position + 12])[0]
+            compressed, uncompressed = struct.unpack("<II", data[position + 20:position + 28])
+            name_length, extra_length, comment_length = struct.unpack("<HHH", data[position + 28:position + 34])
+            local = struct.unpack("<I", data[position + 42:position + 46])[0]
+            name = data[position + 46:position + 46 + name_length].decode("utf-8", "replace")
+            extra = data[position + 46 + name_length:position + 46 + name_length + extra_length]
+            _, compressed, local = _zip64_values(extra, uncompressed, compressed, local)
+            entries[name] = (method, compressed, local)
+            position += 46 + name_length + extra_length + comment_length
+        if not entries:
+            raise RegistryCrawlError(f"zip central directory is unreadable: {self.url}")
+        return entries
+
+    @property
+    def names(self) -> list[str]:
+        return list(self.entries)
+
+    def read(self, name: str) -> bytes:
+        method, compressed, local = self.entries[name]
+        header = self._range(local, local + 29)
+        if header[:4] != b"PK\x03\x04":
+            raise RegistryCrawlError(f"zip member header is unreadable: {name}")
+        name_length, extra_length = struct.unpack("<HH", header[26:30])
+        start = local + 30 + name_length + extra_length
+        payload = self._range(start, start + compressed - 1) if compressed else b""
+        if method == 0:
+            return payload
+        if method == 8:
+            return zlib.decompress(payload, -15)
+        raise RegistryCrawlError(f"unsupported zip compression {method}: {name}")
 
 
 def _load_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:
@@ -210,6 +345,54 @@ def _sdist_rows(body: bytes, package: str, version: str, repository: str | None,
     return _entry_point_rows(_archive_files(body), package, version, repository, source, source)
 
 
+def _console_scripts(text: str) -> list[str]:
+    commands = []
+    section = None
+    for raw in text.splitlines():
+        line = raw.strip()
+        if line.startswith("["):
+            section = line
+        elif section == "[console_scripts]" and "=" in line:
+            commands.append(line.split("=", 1)[0].strip())
+    return commands
+
+
+def _console_script_rows(commands: list[str], package: str, version: str, repository: str | None,
+                         source: str) -> list[dict[str, Any]]:
+    return [record(command, "pypi", package, version, repository, source,
+                   source_type="language_package", language="python", registry="pypi",
+                   latest_version=version) for command in sorted(set(commands))]
+
+
+def _wheel_commands_from(names: list[str], read: Callable[[str], bytes]) -> list[str]:
+    commands: list[str] = []
+    for name in names:
+        if name.endswith(".dist-info/entry_points.txt"):
+            commands.extend(_console_scripts(read(name).decode("utf-8", "replace")))
+        # A wheel shipping a prebuilt binary declares it as a data script, not a
+        # console script; ruff and friends were invisible while only entry points were read.
+        elif ".data/scripts/" in name and not name.endswith("/"):
+            commands.append(name.rsplit("/", 1)[-1])
+    return commands
+
+
+def _wheel_commands(url: str, timeout: int) -> tuple[list[str], int]:
+    """Read a wheel's declared commands over HTTP ranges rather than downloading it.
+
+    A wheel is a ZIP whose file list sits in the trailing central directory, and the
+    commands live in one small member; the rest of a multi-megabyte wheel is payload
+    the crawler never reads.  Falls back to the whole file when the host or the archive
+    will not cooperate.
+    """
+    try:
+        archive = RemoteZip(url, timeout)
+        return _wheel_commands_from(archive.names, archive.read), archive.downloaded
+    except (RegistryCrawlError, urllib.error.HTTPError, OSError, struct.error, zlib.error, KeyError):
+        body, transfer = fetch(url, timeout)
+        with zipfile.ZipFile(BytesIO(body)) as whole:
+            return _wheel_commands_from(whole.namelist(), whole.read), transfer["downloaded_bytes"]
+
+
 def _wheel_rows(body: bytes, package: str, version: str, repository: str | None, source: str) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     with zipfile.ZipFile(BytesIO(body)) as archive:
@@ -259,7 +442,11 @@ def _ruby_gem_rows(body: bytes, package: str, version: str, repository: str | No
         if handle is None:
             return []
         metadata = gzip.decompress(handle.read()).decode("utf-8", "replace")
+    return _gem_rows(metadata, package, version, repository, source)
 
+
+def _gem_rows(metadata: str, package: str, version: str, repository: str | None,
+              source: str) -> list[dict[str, Any]]:
     commands: set[str] = set()
     lines = metadata.splitlines()
     for index, raw in enumerate(lines):
@@ -280,6 +467,36 @@ def _ruby_gem_rows(body: bytes, package: str, version: str, repository: str | No
     return [record(command, "rubygems", package, version, repository, source,
                    source_type="language_package", language="ruby", registry="rubygems",
                    latest_version=version) for command in sorted(commands)]
+
+
+GEM_HEAD_BYTES = 65536
+
+
+def _gem_metadata(url: str, timeout: int) -> tuple[bytes, int]:
+    """Fetch just enough of a .gem to reach its metadata.gz member.
+
+    A .gem is an uncompressed tar whose gemspec sits near the front, so the declared
+    executables are readable from the first few blocks instead of the whole gem.
+    Falls back to the whole file when the member is not in the head.
+    """
+    try:
+        size = content_length(url, timeout)
+        if size > GEM_HEAD_BYTES:
+            head, transfer = fetch_range(url, 0, GEM_HEAD_BYTES - 1, timeout)
+            padded = head + b"\0" * 1024
+            with tarfile.open(fileobj=BytesIO(padded), mode="r|") as archive:
+                for member in archive:
+                    if member.name == "metadata.gz":
+                        handle = archive.extractfile(member)
+                        if handle is not None:
+                            return handle.read(), transfer["downloaded_bytes"]
+                    break  # metadata.gz is the first member when the layout is conventional
+    except (RegistryCrawlError, urllib.error.HTTPError, OSError, tarfile.TarError, EOFError):
+        pass
+    body, transfer = fetch(url, timeout)
+    with tarfile.open(fileobj=BytesIO(body), mode="r:*") as archive:
+        handle = archive.extractfile("metadata.gz")
+        return (handle.read() if handle is not None else b""), transfer["downloaded_bytes"]
 
 
 def _pypi_projects(body: bytes) -> list[str]:
@@ -324,77 +541,74 @@ def _packagist_rows(value: dict[str, Any], package: str, source: str) -> list[di
             for command in sorted(commands) if command]
 
 
-def _crate_index_path(name: str) -> str:
-    lowered = name.lower()
-    if len(lowered) == 1:
-        return f"1/{lowered}"
-    if len(lowered) == 2:
-        return f"2/{lowered}"
-    if len(lowered) == 3:
-        return f"3/{lowered[0]}/{lowered}"
-    return f"{lowered[:2]}/{lowered[2:4]}/{lowered}"
+def _postgres_array(value: str) -> list[str]:
+    """Parse a Postgres ``text[]`` literal the way the database dump writes it."""
+    value = value.strip()
+    if not value.startswith("{") or not value.endswith("}"):
+        return []
+    body = value[1:-1]
+    if not body:
+        return []
+    items: list[str] = []
+    current: list[str] = []
+    quoted = False
+    escaped = False
+    for char in body:
+        if escaped:
+            current.append(char)
+            escaped = False
+        elif char == "\\":
+            escaped = True
+        elif char == '"':
+            quoted = not quoted
+        elif char == "," and not quoted:
+            items.append("".join(current))
+            current = []
+        else:
+            current.append(char)
+    items.append("".join(current))
+    return [item.strip() for item in items if item.strip()]
 
 
-def _crate_latest_version(name: str, timeout: int) -> str:
-    body, _ = fetch(f"https://index.crates.io/{_crate_index_path(name)}", timeout)
-    for line in reversed(body.decode("utf-8", "replace").splitlines()):
-        if line.strip():
-            value = json.loads(line)
-            if not value.get("yanked"):
-                return value["vers"]
-    raise RegistryCrawlError(f"crate has no non-yanked version: {name}")
+class _CountingReader:
+    """Count the compressed bytes a streaming tar actually pulls off the socket."""
+
+    def __init__(self, stream: Any) -> None:
+        self.stream = stream
+        self.count = 0
+
+    def read(self, size: int = -1) -> bytes:
+        chunk = self.stream.read(size)
+        self.count += len(chunk)
+        return chunk
 
 
-def _crate_manifest(archive: tarfile.TarFile, name: str) -> tuple[str, str]:
-    """Return the shallowest Cargo.toml in a .crate archive, and its text.
+class _UnseekableMember(RawIOBase):
+    """Present a streamed tar member as a plain readable file.
 
-    Nearly every crate holds exactly ``<name>-<version>/Cargo.toml``, but a few are
-    packed one directory deeper or name the file ``cargo.toml``.  Matching only the
-    conventional path raised a bare ``StopIteration``, whose empty message was then
-    recorded as a retryable failure that could never succeed.
+    Members of a ``r|gz`` tar cannot answer ``seekable()``, which TextIOWrapper asks for.
     """
-    manifests = [member for member in archive.getnames()
-                 if PurePosixPath(member).name.lower() == "cargo.toml"]
-    manifests.sort(key=lambda member: (member.count("/"), member))
-    for manifest in manifests:
-        handle = archive.extractfile(manifest)
-        if handle is not None:
-            return manifest, handle.read().decode("utf-8", "replace")
-    raise RegistryCrawlError(f"crate archive has no readable Cargo.toml: {name}")
+
+    def __init__(self, handle: Any) -> None:
+        self.handle = handle
+
+    def readable(self) -> bool:
+        return True
+
+    def seekable(self) -> bool:
+        return False
+
+    def readinto(self, buffer) -> int:  # type: ignore[override]
+        chunk = self.handle.read(len(buffer))
+        buffer[:len(chunk)] = chunk
+        return len(chunk)
 
 
-def _crate_download(name: str, version: str, timeout: int) -> tuple[bytes, dict[str, Any], str]:
-    api_url = f"https://crates.io/api/v1/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(version)}/download"
-    try:
-        artifact, transfer = fetch(api_url, timeout)
-        return artifact, transfer, api_url
-    except urllib.error.HTTPError as error:
-        if error.code not in {403, 429, 500, 502, 503, 504}:
-            raise
-        url = f"https://static.crates.io/crates/{urllib.parse.quote(name)}/{urllib.parse.quote(name)}-{urllib.parse.quote(version)}.crate"
-        artifact, transfer = fetch(url, timeout)
-        return artifact, transfer, url
-
-
-def _crates_catalog_page(seek: str | None, timeout: int) -> tuple[list[dict[str, Any]], str | None, int]:
-    """Read one alphabetical catalog page through crates.io seek pagination.
-
-    Offset pagination rejects everything past 20,000 records with ``HTTP Error
-    400`` ("Page N is unavailable for performance reasons"), which is under 7%
-    of the registry, so the cursor has to be the opaque ``seek`` token that
-    crates.io returns in ``meta.next_page``.
-    """
-    url = CRATES_CATALOG if seek is None else f"{CRATES_CATALOG}&seek={urllib.parse.quote(seek)}"
-    body, _ = fetch(url, timeout)
-    value = json.loads(body)
-    meta = value.get("meta", {})
-    next_page = meta.get("next_page")
-    next_seek = None
-    if next_page:
-        next_seek = urllib.parse.parse_qs(urllib.parse.urlsplit(next_page).query).get("seek", [None])[0]
-        if next_seek is None:
-            raise RegistryCrawlError(f"crates.io catalog page carries no seek cursor: {next_page}")
-    return value.get("crates", []), next_seek, int(meta.get("total", 0))
+def _dump_rows(archive: tarfile.TarFile, member: tarfile.TarInfo):
+    handle = archive.extractfile(member)
+    if handle is None:
+        return
+    yield from csv.DictReader(TextIOWrapper(_UnseekableMember(handle), encoding="utf-8", newline=""))
 
 
 def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
@@ -431,14 +645,19 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
                 for candidate in candidates:
                     url = candidate["url"]
                     try:
-                        artifact, transfer = fetch(url, timeout)
-                        downloaded += transfer["downloaded_bytes"]
-                        if downloaded > byte_budget:
-                            budget_exhausted = True
-                            break
                         if candidate.get("packagetype") == "bdist_wheel":
-                            rows.extend(_wheel_rows(artifact, package, version, info.get("home_page"), url))
+                            commands, spent = _wheel_commands(url, timeout)
+                            downloaded += spent
+                            if downloaded > byte_budget:
+                                budget_exhausted = True
+                                break
+                            rows.extend(_console_script_rows(commands, package, version, info.get("home_page"), url))
                         else:
+                            artifact, transfer = fetch(url, timeout)
+                            downloaded += transfer["downloaded_bytes"]
+                            if downloaded > byte_budget:
+                                budget_exhausted = True
+                                break
                             rows.extend(_sdist_rows(artifact, package, version, info.get("home_page"), url))
                         selected = True
                         break
@@ -540,161 +759,219 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
 
 
 def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
-    if "page" in state:  # migrate the offset cursor that crates.io no longer serves
-        state["skip"] = max(0, (int(state.pop("page")) - 1) * CRATES_PAGE_SIZE)
-        state["cursor"] = state["skip"]
-    seek = state.get("seek"); page_offset = int(state.get("page_offset", 0))
-    skip = int(state.get("skip", 0)); cursor = int(state.get("cursor", 0))
-    catalog_size = int(state.get("catalog_size", 0)); catalog_error: str | None = None
-    processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
+    """Read every crate's declared binaries from the crates.io database dump.
+
+    crates.io publishes ``bin_names`` per version, so an executable name never
+    required downloading a ``.crate`` at all.  The dump carries the whole registry
+    in one request and is the bulk access route crates.io points crawlers to when
+    they hit the API's pagination limit.
+    """
+    for legacy in ("page", "seek", "page_offset", "skip", "cursor", "catalog_size", "retry_crates"):
+        state.pop(legacy, None)
     failures, unavailable = _failure_state(state)
-    retry_crates = state.setdefault("retry_crates", [])
-    retry_crates[:] = [crate for crate in retry_crates if crate not in unavailable]
-    for crate_name in failures:
-        if crate_name not in retry_crates:
-            retry_crates.append(crate_name)
-    # One attempt per queued crate per run.  Re-queueing inside the run let two crates
-    # that always fail spend half a 10,000 budget on themselves before the catalog moved.
-    retry_budget = len(retry_crates)
-    budget_exhausted = False
-    while processed < budget:
-        if retry_budget:
-            retry_budget -= 1
-            name = retry_crates.pop(0)
-            try:
-                version = _crate_latest_version(name, timeout)
-                artifact, transfer, url = _crate_download(name, version, timeout)
-                downloaded += transfer["downloaded_bytes"]
-                if downloaded > byte_budget:
-                    budget_exhausted = True
-                    break
-                with tarfile.open(fileobj=BytesIO(artifact), mode="r:gz") as archive:
-                    _, manifest = _crate_manifest(archive, name)
-                    rows.extend(crates_manifest(manifest, name, version, None, url))
-                failures.pop(name, None)
-            except Exception as error:
-                _record_failure(failures, unavailable, name, error)
-                if name in failures:
-                    retry_crates.append(name)  # queued for the next run, not this one
-            processed += 1
-            if budget_exhausted:
-                break
+    size = content_length(CRATES_DB_DUMP, timeout)
+    if size > byte_budget:
+        return {"records": 0, "processed": 0, "downloaded_bytes": 0, "dump_bytes": size,
+                "failures": len(failures), "unavailable": len(unavailable),
+                "budget_exhausted": True, "complete": False, "coverage_kind": "partial"}
+
+    crates: dict[str, tuple[str, str | None]] = {}
+    defaults: dict[str, str] = {}
+    binaries: dict[str, tuple[str, list[str]]] = {}
+    published = ""
+    csv.field_size_limit(min(sys.maxsize, 2 ** 31 - 1))
+    _throttle(CRATES_DB_DUMP)
+    request = urllib.request.Request(CRATES_DB_DUMP, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        counter = _CountingReader(response)
+        with tarfile.open(fileobj=counter, mode="r|gz") as archive:  # type: ignore[arg-type]
+            for member in archive:
+                name = PurePosixPath(member.name).name
+                if name == "metadata.json":
+                    handle = archive.extractfile(member)
+                    if handle is not None:
+                        published = json.loads(handle.read()).get("timestamp", "")
+                elif name == "crates.csv":
+                    for row in _dump_rows(archive, member):
+                        crates[row["id"]] = (row["name"], row.get("repository") or None)
+                elif name == "default_versions.csv":
+                    for row in _dump_rows(archive, member):
+                        defaults[row["crate_id"]] = row["version_id"]
+                elif name == "versions.csv":
+                    for row in _dump_rows(archive, member):
+                        if row.get("yanked") in ("t", "true", "True"):
+                            continue
+                        commands = _postgres_array(row.get("bin_names") or "")
+                        if commands:
+                            binaries[row["id"]] = (row["num"], commands)
+        downloaded = counter.count
+
+    rows: list[dict[str, Any]] = []
+    with_binaries = 0
+    for crate_id, (name, repository) in sorted(crates.items(), key=lambda item: item[1][0]):
+        entry = binaries.get(defaults.get(crate_id, ""))
+        if entry is None:
             continue
-        try:
-            crates, next_seek, total = _crates_catalog_page(seek, timeout)
-        except Exception as error:  # keep this run's rows and cursor instead of discarding them
-            catalog_error = str(error)
-            break
-        catalog_size = total or catalog_size
-        if not crates:
-            state["complete"] = True
-            break
-        if skip:  # fast-forward the migrated offset without re-downloading artifacts
-            consumed = min(skip, len(crates) - page_offset)
-            skip -= consumed
-            page_offset += consumed
-        for crate in crates[page_offset:]:
-            name = crate["name"]; version = crate.get("max_stable_version") or crate.get("newest_version")
-            if crate.get("yanked"):
-                # A fully yanked crate is already permanently unavailable here, the same
-                # verdict _crate_latest_version reaches from the index.  The catalog names
-                # its version 0.0.0, which has no artifact, so attempting the download only
-                # buys a 403 that is retried on every later run.
-                unavailable[name] = "all versions are yanked"
-                failures.pop(name, None)
-                processed += 1; page_offset += 1; cursor += 1
-                if processed >= budget:
-                    break
-                continue
-            try:
-                artifact, transfer, url = _crate_download(name, version, timeout)
-                downloaded += transfer["downloaded_bytes"]
-                if downloaded > byte_budget:
-                    budget_exhausted = True
-                    break
-                with tarfile.open(fileobj=BytesIO(artifact), mode="r:gz") as archive:
-                    manifest_name, manifest = _crate_manifest(archive, name)
-                    before_rows = len(rows)
-                    rows.extend(crates_manifest(manifest, name, version, crate.get("repository"), url))
-                    if len(rows) == before_rows:
-                        root = PurePosixPath(manifest_name).parent
-                        if f"{root}/src/main.rs" in archive.getnames():
-                            rows.append(record(name, "crates", name, version, crate.get("repository"), url,
-                                               confidence="inferred", source_type="language_package",
-                                               language="rust", registry="crates.io", latest_version=version))
-                failures.pop(name, None)
-            except Exception as error:
-                _record_failure(failures, unavailable, name, error)
-            processed += 1
-            page_offset += 1
-            cursor += 1
-            if processed >= budget:
-                break
-        if budget_exhausted:
-            break
-        if page_offset >= len(crates):  # the page is spent; otherwise resume it from page_offset
-            if next_seek is None:
-                state["complete"] = True
-                break
-            seek = next_seek
-            page_offset = 0
-    state["seek"] = seek; state["page_offset"] = page_offset
-    state["skip"] = skip; state["cursor"] = cursor; state["catalog_size"] = catalog_size
-    _append_rows(output, rows)
-    complete = bool(state.get("complete")) and not failures and not retry_crates
-    report = {"cursor": cursor, "catalog_size": catalog_size, "seek": seek,
-              "skip_remaining": skip, "processed": processed, "records": len(rows),
-              "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
-              "retry_pending": len(retry_crates), "budget_exhausted": budget_exhausted, "complete": complete,
-              "coverage_kind": "exhaustive" if complete else "partial"}
-    if catalog_error is not None:
-        report.update({"error": catalog_error, "complete": False, "coverage_kind": "partial"})
-    return report
+        with_binaries += 1
+        version, commands = entry
+        for command in sorted(set(commands)):
+            rows.append(record(command, "crates", name, version, repository, CRATES_DB_DUMP,
+                               source_type="language_package", language="rust",
+                               registry="crates.io", latest_version=version))
+    if not crates:
+        raise RegistryCrawlError("crates.io database dump carried no crates table")
+
+    # The dump is a whole-registry snapshot, so the observations replace rather than
+    # extend what an earlier snapshot wrote.
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in rows),
+                      encoding="utf-8")
+    state["dump_timestamp"] = published
+    state["complete"] = True
+    complete = not failures
+    return {"dump_timestamp": published, "catalog_size": len(crates), "cursor": len(crates),
+            "crates_with_binaries": with_binaries, "processed": len(crates), "records": len(rows),
+            "downloaded_bytes": downloaded, "dump_bytes": size,
+            "failures": len(failures), "unavailable": len(unavailable),
+            "budget_exhausted": False, "complete": complete,
+            "coverage_kind": "exhaustive" if complete else "partial"}
+
+
+
+def _go_latest_version(module: str, timeout: int) -> str:
+    escaped = urllib.parse.quote(module, safe="/@")
+    body, _ = fetch(f"https://proxy.golang.org/{escaped}/@latest", timeout)
+    version = json.loads(body).get("Version")
+    if not version:
+        raise RegistryCrawlError(f"module has no latest version: {module}")
+    return version
+
+
+def _go_module_rows(url: str, module: str, version: str, timeout: int) -> tuple[list[dict[str, Any]], int]:
+    """Read a module's command names from the parts of the archive that can hold them.
+
+    Every ``.go`` file in a directory must declare the same package, so one file per
+    directory decides whether that directory is a command.  Small archives, and ones
+    with more directories than probes would be worth, are still taken whole.
+    """
+    try:
+        archive = RemoteZip(url, timeout)
+        if archive.size > GO_SMALL_ZIP_BYTES:
+            root = f"{module}@{version}/"
+            directories: dict[str, str] = {}
+            for name in archive.names:
+                if not name.startswith(root) or not name.endswith(".go") or name.endswith("_test.go"):
+                    continue
+                relative = name[len(root):]
+                if "vendor/" in f"/{relative}" or "testdata/" in f"/{relative}":
+                    continue
+                directories.setdefault(relative.rsplit("/", 1)[0] if "/" in relative else "", name)
+            # The central directory already states each member's compressed size, so the
+            # probe cost is known before spending it.
+            probe_bytes = sum(archive.entries[member][1] for member in directories.values())
+            if len(directories) <= GO_DIRECTORY_PROBES and probe_bytes * 2 < archive.size:
+                commands: list[str] = []
+                for directory, member in sorted(directories.items()):
+                    text = archive.read(member).decode("utf-8", "replace")
+                    if re.search(r"(?m)^\s*package\s+main\b", text):
+                        commands.append(directory.rsplit("/", 1)[-1] if directory else module.rsplit("/", 1)[-1])
+                return [record(command, "go", module, version, None, url,
+                               source_type="language_package", language="go", registry="go",
+                               latest_version=version) for command in sorted(set(commands))], archive.downloaded
+    except (RegistryCrawlError, urllib.error.HTTPError, OSError, struct.error, zlib.error, KeyError):
+        pass
+    body, transfer = fetch(url, timeout)
+    return _go_rows(body, module, version, url), transfer["downloaded_bytes"]
 
 
 def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
-    since = state.get("since", "2019-01-01T00:00:00Z")
-    processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
+    """Inspect each Go module once, at its current version.
+
+    The module index lists every version of every module — tens of millions of entries,
+    overwhelmingly republished copies of modules already inspected.  Reading the index
+    is cheap, so the catalog phase distils the feed down to distinct module paths and
+    the inspection phase spends the artifact budget on one archive per module.
+    """
+    state.pop("since", None)  # the old cursor tracked downloads, not catalog coverage
+    catalog_file = Path(state.setdefault("modules_file", "data/production/go-modules.txt"))
+    catalog_file.parent.mkdir(parents=True, exist_ok=True)
+    modules = ([line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+               if catalog_file.is_file() else [])
+    seen = set(modules)
+    since = state.get("catalog_since", GO_INDEX_EPOCH)
+    catalog_complete = bool(state.get("catalog_complete"))
     failures, unavailable = _failure_state(state)
-    budget_exhausted = False
-    while processed < budget:
-        query = urllib.parse.urlencode({"limit": min(1000, budget - processed), "since": since})
-        body, _ = fetch(f"https://index.golang.org/index?{query}", timeout)
-        entries = [json.loads(line) for line in body.decode("utf-8", "replace").splitlines() if line.strip()]
-        if not entries:
-            state["complete"] = True
-            break
-        for entry in entries:
-            module = entry.get("Path", ""); version = entry.get("Version", ""); timestamp = entry.get("Timestamp", since)
-            key = f"{module}@{version}"
-            try:
-                escaped_module = urllib.parse.quote(module, safe="/@")
-                escaped_version = urllib.parse.quote(version, safe="")
-                url = f"https://proxy.golang.org/{escaped_module}/@v/{escaped_version}.zip"
-                artifact, transfer = fetch(url, timeout); downloaded += transfer["downloaded_bytes"]
-                if downloaded > byte_budget:
-                    budget_exhausted = True
-                    break
-                rows.extend(_go_rows(artifact, module, version, url))
-                failures.pop(key, None)
-            except Exception as error:
-                _record_failure(failures, unavailable, key, error)
-            since = timestamp
-            processed += 1
-            if processed >= budget:
+    retry_modules = state.setdefault("retry_modules", [])
+    retry_modules[:] = [name for name in retry_modules if name not in unavailable]
+    for name in failures:
+        if name not in retry_modules:
+            retry_modules.append(name)
+    retry_budget = len(retry_modules)
+    downloaded = 0
+    discovered = 0
+    index_requests = 0
+
+    with catalog_file.open("a", encoding="utf-8") as handle:
+        while not catalog_complete and index_requests < GO_CATALOG_REQUESTS:
+            query = urllib.parse.urlencode({"limit": GO_INDEX_PAGE, "since": since})
+            body, transfer = fetch(f"{GO_INDEX}?{query}", timeout)
+            downloaded += transfer["downloaded_bytes"]
+            index_requests += 1
+            entries = [json.loads(line) for line in body.decode("utf-8", "replace").splitlines() if line.strip()]
+            if not entries:
+                catalog_complete = True
                 break
-        if budget_exhausted:
-            break
-        if len(entries) < min(1000, budget):
-            state["complete"] = True
-            break
-    state["since"] = since
+            for entry in entries:
+                path = entry.get("Path", "")
+                since = entry.get("Timestamp", since)
+                if path and path not in seen:
+                    seen.add(path)
+                    modules.append(path)
+                    handle.write(path + "\n")
+                    discovered += 1
+            if len(entries) < GO_INDEX_PAGE:
+                catalog_complete = True
+    state["catalog_since"] = since
+    state["catalog_complete"] = catalog_complete
+
+    cursor = int(state.get("cursor", 0))
+    processed = 0
+    rows: list[dict[str, Any]] = []
+    budget_exhausted = False
+    while (retry_budget or cursor < len(modules)) and processed < budget:
+        retrying = retry_budget > 0
+        if retrying:
+            retry_budget -= 1
+        module = retry_modules.pop(0) if retrying else modules[cursor]
+        try:
+            version = _go_latest_version(module, timeout)
+            escaped = urllib.parse.quote(module, safe="/@")
+            url = f"https://proxy.golang.org/{escaped}/@v/{urllib.parse.quote(version, safe='')}.zip"
+            module_rows, spent = _go_module_rows(url, module, version, timeout)
+            downloaded += spent
+            if downloaded > byte_budget:
+                budget_exhausted = True
+                if retrying:
+                    retry_modules.insert(0, module)
+                break
+            rows.extend(module_rows)
+            failures.pop(module, None)
+        except Exception as error:
+            _record_failure(failures, unavailable, module, error)
+            if module in failures and module not in retry_modules:
+                retry_modules.append(module)  # queued for the next run, not this one
+        if not retrying:
+            cursor += 1
+        processed += 1
+    state["cursor"] = cursor
     _append_rows(output, rows)
-    complete = bool(state.get("complete")) and not failures
-    return {"since": since, "processed": processed, "records": len(rows),
-            "downloaded_bytes": downloaded, "failures": len(failures), "unavailable": len(unavailable),
-            "budget_exhausted": budget_exhausted, "complete": complete,
-            "coverage_kind": "exhaustive" if complete else "partial"}
+    complete = catalog_complete and cursor >= len(modules) and not failures and not retry_modules
+    return {"cursor": cursor, "catalog_size": len(modules), "catalog_complete": catalog_complete,
+            "catalog_since": since, "discovered": discovered, "index_requests": index_requests,
+            "processed": processed, "records": len(rows), "downloaded_bytes": downloaded,
+            "failures": len(failures), "unavailable": len(unavailable),
+            "retry_pending": len(retry_modules), "budget_exhausted": budget_exhausted,
+            "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
 def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
@@ -716,12 +993,13 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             metadata = json.loads(metadata_body)
             version = metadata.get("version", "unknown")
             artifact_url = metadata.get("gem_uri") or f"https://rubygems.org/gems/{urllib.parse.quote(package, safe='')}-{urllib.parse.quote(version, safe='')}.gem"
-            artifact, transfer = fetch(artifact_url, timeout); downloaded += transfer["downloaded_bytes"]
+            compressed, spent = _gem_metadata(artifact_url, timeout); downloaded += spent
             if downloaded > byte_budget:
                 budget_exhausted = True
                 break
             repository = metadata.get("source_code_uri") or metadata.get("homepage_uri")
-            rows.extend(_ruby_gem_rows(artifact, metadata.get("name", package), version, repository, artifact_url))
+            gemspec = gzip.decompress(compressed).decode("utf-8", "replace") if compressed else ""
+            rows.extend(_gem_rows(gemspec, metadata.get("name", package), version, repository, artifact_url))
             failures.pop(package, None)
         except Exception as error:
             _record_failure(failures, unavailable, package, error)
