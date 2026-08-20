@@ -45,12 +45,16 @@ function renderOverview() {
   $("metric-count").textContent = formatNumber(metadata.unique_executables);
   $("metric-sweep").textContent = statusLabel(report.coverage_kind || "partial");
   $("metric-sweep-note").textContent = report.status === "success" ? "latest crawl published" : "partial progress published";
-  const next = state.status?.next_crawl_at || nextScheduled().toISOString();
+  // next_crawl_at is baked at build time, so it turns into a past date as soon as the
+  // page outlives it.  Fall back to the live schedule rather than advertising a time
+  // that has already gone by.
+  const baked = state.status?.next_crawl_at;
+  const next = baked && new Date(baked) > new Date() ? baked : nextScheduled().toISOString();
   $("metric-next").textContent = formatDate(next, false);
   $("metric-next-note").textContent = `${new Intl.DateTimeFormat(undefined, { timeStyle: "short" }).format(new Date(next))} · local time`;
   $("status-meta").textContent = `Report observed ${formatDate(state.status?.generated_at)} · ${state.status?.artifact_data_commit ? state.status.artifact_data_commit.slice(0, 8) : "live"}`;
   $("schedule-title").textContent = `Next scheduled crawl · ${formatDate(next)}`;
-  $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "47 */6 * * *"} UTC · Pages redeploys after the report is published.`;
+  $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "47 */6 * * *"} UTC at the latest · runs chain back to back while a registry is still partial.`;
   $("footer-build").textContent = `Main snapshot ${metadata.snapshot || "unknown"} · data served from GitHub raw content.`;
 
   const grid = $("source-grid");
@@ -62,9 +66,19 @@ function renderOverview() {
     card.className = "source-card";
     const complete = source.coverage_kind === "exhaustive" || source.complete;
     const progress = source.catalog_size ? Math.min(100, (Number(source.cursor || 0) / Number(source.catalog_size)) * 100) : complete ? 100 : 3;
-    const position = source.catalog_size ? `${formatNumber(source.cursor || 0)} / ${formatNumber(source.catalog_size)}` : source.since ? `through ${String(source.since).slice(0, 10)}` : complete ? "catalog complete" : "in progress";
+    // npm's cursor is a replication sequence, Go's is a timestamp; "through 2537341"
+    // read like a truncated date.
+    const cursorLabel = Number.isFinite(Number(source.since))
+      ? `change ${formatNumber(Number(source.since))}`
+      : `through ${String(source.since).slice(0, 10)}`;
+    const position = source.catalog_size ? `${formatNumber(source.cursor || 0)} / ${formatNumber(source.catalog_size)}`
+      : source.since ? cursorLabel : complete ? "catalog complete" : "in progress";
     const errors = Number(source.failures || 0);
-    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${complete ? "exhaustive" : statusLabel(source.coverage_kind)}</span></div><div class="source-bar"><i style="width:${progress}%"></i></div><div class="source-stats"><span>${position}</span><span>${errors ? `${formatNumber(errors)} failures` : `${formatNumber(source.records || 0)} records`}</span></div>`;
+    // Records and failures are separate facts: a run that collected thousands of records
+    // alongside two failures used to report only the failures.
+    const stats = [`${formatNumber(source.records || 0)} records`];
+    if (errors) stats.push(`${formatNumber(errors)} failures`);
+    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${complete ? "exhaustive" : statusLabel(source.coverage_kind)}</span></div><div class="source-bar"><i style="width:${progress}%"></i></div><div class="source-stats"><span>${position}</span><span>${stats.join(" · ")}</span></div>`;
     grid.append(card);
   }
 }

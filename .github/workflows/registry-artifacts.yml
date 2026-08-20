@@ -119,6 +119,9 @@ jobs:
             echo "::warning::No crawl report was produced; not queueing a follow-up."
             exit 0
           fi
+          # A run this workflow dispatched with GITHUB_TOKEN does not emit the
+          # workflow_run event pages.yml listens for, so publish the page explicitly.
+          gh workflow run pages.yml --ref main || echo "::warning::Could not queue the Pages deploy."
           if jq -e '.coverage_kind == "exhaustive" and .status == "success"' reports/registry-artifact-crawl.json >/dev/null; then
             gh workflow run refresh.yml --ref main
           else
