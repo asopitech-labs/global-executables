@@ -108,9 +108,22 @@ Two gaps remain, and neither is reachable by inspecting a filesystem:
   built-ins, and `ls`, `cat` and `curl` are PowerShell aliases; none exists as a file.
   The same is true of `cd`, `echo` and `test` under bash. The count is small but the
   names are short and heavily contested, so their weight is not proportional to it.
-* **The macOS base command set**, which Apple neither packages nor publishes a
-  manifest for. Enumerating a local `/usr/bin` finds 585 names the dataset lacks, but
-  that describes one machine rather than a published release. Chocolatey was investigated and rejected — its feed answers 504 to
+macOS' base command set is read the same way, from an installed system rather than a
+published artifact, because Apple publishes no manifest for it. `/etc/paths` states
+the default PATH, `/usr/local/bin` is excluded as a third-party prefix that Homebrew
+already covers, and the observation is pinned to `ProductBuildVersion` and the
+architecture — a build identifies a release as precisely as a digest does, and the
+command set differs between Apple Silicon and Intel.
+
+No observation of a base command set is privileged: a maintainer's laptop and a CI
+runner are both single samples, so `base-commands.yml` adds runner images to whatever
+is observed locally and the samples accumulate. Every record cites the build it came
+from, so a second machine, architecture or release widens coverage rather than
+replacing it. macOS 26.5.2 (25F84, arm64) contributes 1,258 commands, 586 of them new.
+
+A system binary that refuses `stat` to an unprivileged reader is still recorded: the
+name occupies a PATH directory, and dropping it would turn "could not read" into
+"name is free". Chocolatey was investigated and rejected — its feed answers 504 to
 repeated requests, its metadata never names an executable, and its packages often
 contain no binary at all because the install script downloads one.
 
@@ -197,6 +210,7 @@ python tools/refresh.py \
   data/production/intermediate/scoop.jsonl \
   data/production/intermediate/winget.jsonl \
   data/production/intermediate/windows.jsonl \
+  data/production/intermediate/macos.jsonl \
   data/production/intermediate/nuget.jsonl \
   --snapshot "$(date -u +%F)" \
   --coverage-map data/production/coverage-map.json \

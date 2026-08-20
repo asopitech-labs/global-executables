@@ -1,0 +1,87 @@
+name: Observe base command sets
+
+# A base command set is not published anywhere, so it is sampled from installed
+# systems.  No single observation is privileged — this workflow adds runner images
+# to whatever the maintainers observe locally, and the samples accumulate.
+on:
+  schedule:
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: base-commands
+  cancel-in-progress: false
+
+jobs:
+  macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-14, macos-13]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e '.[test]'
+      - name: Observe this runner's base command set
+        run: |
+          mkdir -p data/production/intermediate
+          python tools/production_crawl.py --source macos \
+            --output-dir data/production/intermediate \
+            --report reports/base-commands-${{ matrix.runner }}.json
+          python - <<'PY'
+          import json, pathlib
+          report = json.loads(pathlib.Path("reports/base-commands-${{ matrix.runner }}.json").read_text())
+          print(json.dumps(report["sources"]["macos"], indent=1)[:600])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: base-commands-${{ matrix.runner }}
+          path: |
+            data/production/intermediate/macos.jsonl
+            reports/base-commands-${{ matrix.runner }}.json
+
+  publish:
+    needs: macos
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          path: /tmp/observations
+      - name: Merge every runner's observations into artifact-data
+        run: |
+          git fetch origin artifact-data || true
+          rm -rf /tmp/artifact-publish
+          if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
+            git worktree add /tmp/artifact-publish origin/artifact-data
+          else
+            git worktree add -b artifact-data /tmp/artifact-publish HEAD
+          fi
+          mkdir -p /tmp/artifact-publish/data/production/intermediate
+          target=/tmp/artifact-publish/data/production/intermediate/macos.jsonl
+          touch "$target"
+          # Each observation cites its own build, so the union is the coverage.
+          cat "$target" /tmp/observations/*/data/production/intermediate/macos.jsonl 2>/dev/null \
+            | grep -v '^$' | sort -u > /tmp/macos-merged.jsonl
+          mv /tmp/macos-merged.jsonl "$target"
+          python - <<'PY'
+          import json, pathlib
+          rows = [json.loads(l) for l in pathlib.Path("/tmp/artifact-publish/data/production/intermediate/macos.jsonl").read_text().splitlines() if l.strip()]
+          builds = sorted({r.get("source") for r in rows})
+          print(f"{len(rows)} observations, {len({r['command'] for r in rows})} distinct commands, builds: {builds}")
+          PY
+          git -C /tmp/artifact-publish config user.name github-actions[bot]
+          git -C /tmp/artifact-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/artifact-publish add -f data/production/intermediate/macos.jsonl
+          git -C /tmp/artifact-publish diff --cached --quiet || \
+            git -C /tmp/artifact-publish commit -m "Observe macOS base command sets"
+          git -C /tmp/artifact-publish push origin HEAD:artifact-data

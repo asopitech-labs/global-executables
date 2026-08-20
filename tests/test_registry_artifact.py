@@ -520,3 +520,29 @@ def test_windows_image_commands_fold_case_and_cite_the_digest(monkeypatch):
     # the tag moves, the digest does not, so the evidence cites the digest
     assert rows[0]["source"] == "windows/nanoserver@sha256:pinned"
     assert rows[0]["shipped_as"] == "ARP.EXE" and rows[0]["version"] == "ltsc2022-amd64"
+
+
+def test_base_command_observations_accumulate_across_builds(tmp_path, monkeypatch):
+    """No observation of a base command set is privileged; samples widen coverage."""
+    from global_executables import production
+
+    output = tmp_path / "macos.jsonl"
+    output.write_text(json.dumps({"command": "only-on-intel", "package": "macos-base",
+                                  "source": "macos@14.7.1-23H222-x86_64"}) + "\n")
+
+    def observe(root):
+        rows = [{"command": name, "package": "macos-base", "source": "macos@26.5.2-25F84-arm64"}
+                for name in ("ls", "launchctl")]
+        return rows, {"status": "success", "coverage_kind": "exhaustive", "records": len(rows),
+                      "source": "macos@26.5.2-25F84-arm64", "downloaded_bytes": 0}
+
+    monkeypatch.setattr(production, "_macos_rows", observe)
+    coverage = production.crawl_source("macos", output, 60)
+
+    rows = [json.loads(line) for line in output.read_text().splitlines()]
+    assert {row["command"] for row in rows} == {"only-on-intel", "ls", "launchctl"}
+    assert sorted({row["source"] for row in rows}) == ["macos@14.7.1-23H222-x86_64",
+                                                       "macos@26.5.2-25F84-arm64"]
+    # the report cites the build this run observed, not the filesystem root it read
+    assert coverage["source"] == "macos@26.5.2-25F84-arm64"
+    assert coverage["observed"] == ["macos@26.5.2-25F84-arm64"]

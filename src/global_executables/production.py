@@ -11,6 +11,8 @@ from __future__ import annotations
 import gzip
 import io
 import json
+import os
+import platform
 import sqlite3
 import tarfile
 import tempfile
@@ -66,6 +68,9 @@ SOURCE_INDEXES = {
     "winget": ["https://cdn.winget.microsoft.com/cache/source.msix"],
     # Official Windows images, read as archives rather than run.  Pinned by digest at
     # crawl time so the shipped command set of each release stays reproducible.
+    # Apple publishes no manifest for the base command set, so it is read from an
+    # installed system root and pinned to that system's build version.
+    "macos": ["/"],
     "windows": [f"{repository}:{tag}" for repository, tag in (
         ("windows/servercore", "ltsc2025-amd64"), ("windows/servercore", "ltsc2022-amd64"),
         ("windows/nanoserver", "ltsc2025-amd64"), ("windows/nanoserver", "ltsc2022-amd64"))],
@@ -75,8 +80,26 @@ SOURCE_INDEXES = {
 }
 SOURCE_URLS = {source: urls[0] for source, urls in SOURCE_INDEXES.items()}
 FILE_INDEX_SOURCES = {"debian", "ubuntu", "arch", "msys2"}
-COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "windows"}
+COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "windows", "macos"}
 PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
+# There is no privileged observation of a base command set: every run samples one
+# installed system.  Those samples accumulate rather than replace each other, so a
+# second machine, architecture or release widens the coverage instead of erasing it.
+ACCUMULATING_SOURCES = {"macos"}
+
+
+def _merge_observations(rows: list[dict[str, Any]], output: Path) -> list[dict[str, Any]]:
+    merged = {(row["command"], row["source"]): row for row in rows}
+    if output.is_file():
+        for line in output.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                previous = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            merged.setdefault((previous.get("command"), previous.get("source")), previous)
+    return list(merged.values())
 
 
 class ProductionSourceError(RuntimeError):
@@ -191,6 +214,63 @@ def _windows_image_rows(repository: str, tag: str, timeout: int) -> tuple[list[d
                   "status_code": 200, "duration_seconds": 0.0}
 
 
+MACOS_SYSTEM_VERSION = "System/Library/CoreServices/SystemVersion.plist"
+MACOS_PATH_FILE = "etc/paths"
+# Everything Apple ships lives under these; /usr/local/bin is where third-party
+# installers land and Homebrew is collected as its own source.
+MACOS_VENDOR_PREFIXES = ("/usr/bin", "/bin", "/usr/sbin", "/sbin", "/System/")
+
+
+def _macos_rows(root: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Enumerate the base command set Apple ships, pinned to the OS build.
+
+    Apple neither packages this set nor publishes a manifest for it, so it has to be
+    read from an installed system.  The build version identifies the release as
+    precisely as an image digest does for Windows, so that is what the evidence cites.
+    """
+    version_file = root / MACOS_SYSTEM_VERSION
+    if not version_file.is_file():
+        raise ProductionSourceError(f"not a macOS system root: {root}")
+    import plistlib
+    version = plistlib.loads(version_file.read_bytes())
+    product = version.get("ProductVersion", "unknown")
+    build = version.get("ProductBuildVersion", "unknown")
+    machine = platform.machine()
+    reference = f"macos@{product}-{build}-{machine}"
+
+    path_file = root / MACOS_PATH_FILE
+    declared = [line.strip() for line in path_file.read_text().splitlines()] if path_file.is_file() else []
+    directories = [entry for entry in declared if entry.startswith(MACOS_VENDOR_PREFIXES)]
+    commands: dict[str, str] = {}
+    for entry in directories:
+        directory = root / entry.lstrip("/")
+        if not directory.is_dir():
+            continue
+        for name in os.listdir(directory):
+            item = directory / name
+            try:
+                if item.is_dir():
+                    continue
+                executable = os.access(item, os.X_OK)
+            except OSError:
+                # Some system binaries refuse stat to an unprivileged reader; the name
+                # still occupies a PATH directory, which is the evidence being collected.
+                executable = True
+            if executable:
+                commands.setdefault(name, entry)
+    if not commands:
+        raise ProductionSourceError(f"no commands found under {directories}")
+    rows = [record(command, "macos", "macos-base", product, None, reference,
+                   confidence="filesystem", source_type="os_package", package_system="macos-base",
+                   distribution_family="macos", distribution="macos",
+                   os_build=build, os_arch=machine, shipped_in=directory)
+            for command, directory in sorted(commands.items())]
+    return rows, {"status": "success", "coverage_kind": "exhaustive", "records": len(rows),
+                  "source": reference, "os_version": product, "os_build": build, "os_arch": machine,
+                  "directories": directories, "downloaded_bytes": 0,
+                  "url": reference, "final_url": reference, "status_code": 200, "duration_seconds": 0.0}
+
+
 def _crawl_scoop(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Read a Scoop bucket's manifests from its repository tarball."""
     manifests: list[tuple[str, dict[str, Any]]] = []
@@ -272,7 +352,10 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
     downloaded = 0
     coverage_kind = "exhaustive"
     for source_url in SOURCE_INDEXES[source]:
-        if source == "windows":
+        if source == "macos":
+            index_rows, index_coverage = _macos_rows(Path(source_url))
+            transfer = {"downloaded_bytes": 0}
+        elif source == "windows":
             repository, _, tag = source_url.rpartition(":")
             index_rows, index_coverage = _windows_image_rows(repository, tag, timeout)
             transfer = {"downloaded_bytes": index_coverage["downloaded_bytes"]}
@@ -284,10 +367,13 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
         if index_coverage.get("coverage_kind") != "exhaustive":
             coverage_kind = index_coverage["coverage_kind"]
         indexes.append({**index_coverage, **transfer})
-    write_jsonl(sorted(rows, key=lambda row: (row["command"], row["package"])), output)
+    if source in ACCUMULATING_SOURCES:
+        rows = _merge_observations(rows, output)
+    write_jsonl(sorted(rows, key=lambda row: (row["command"], row["package"], row["source"])), output)
     return {"status": "success", "coverage_kind": coverage_kind, "records": len(rows),
             "indexes": indexes, "index_count": len(indexes), "downloaded_bytes": downloaded,
-            "source": SOURCE_INDEXES[source][0],
+            "source": indexes[-1].get("source", SOURCE_INDEXES[source][0]),
+            "observed": [index.get("source") for index in indexes],
             "url": SOURCE_INDEXES[source][0], "final_url": indexes[-1].get("final_url"),
             "status_code": indexes[-1].get("status_code"),
             "duration_seconds": round(sum(i.get("duration_seconds", 0) for i in indexes), 3)}
