@@ -17,12 +17,12 @@ BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
 # Catalogs are per source, so each container carries only the one it reads.
 catalog_for() {
   case "$1" in
-    pypi) echo "pypi-projects.txt" ;;
-    rubygems) echo "rubygems-names.txt" ;;
-    packagist) echo "packagist-packages.txt" ;;
-    nuget) echo "nuget-tools.txt" ;;
-    npm) echo "npm-packages.txt" ;;
-    go) echo "go-modules.txt go-modules.cursor.json" ;;
+    pypi) echo "pypi-projects.txt pypi-projects.txt.gz" ;;
+    rubygems) echo "rubygems-names.txt rubygems-names.txt.gz" ;;
+    packagist) echo "packagist-packages.txt packagist-packages.txt.gz" ;;
+    nuget) echo "nuget-tools.txt nuget-tools.txt.gz" ;;
+    npm) echo "npm-packages.txt npm-packages.txt.gz" ;;
+    go) echo "go-modules.txt go-modules.txt.gz go-modules.cursor.json" ;;
     *) echo "" ;;
   esac
 }
@@ -103,10 +103,65 @@ PY
   done
 }
 
+# Publish only the sources this machine owns.  CI writes crates.io to the same branch,
+# so replacing the whole state would overwrite whichever writer published second — the
+# mistake that nearly rolled Go's catalog back fifteen months.
+publish() {
+  local worktree=/tmp/ge-artifact-publish
+  cd "${ROOT_DIR}"
+  git fetch origin artifact-data --quiet
+  rm -rf "${worktree}"
+  git worktree add --quiet "${worktree}" origin/artifact-data
+  mkdir -p "${worktree}/data/production/intermediate"
+  python3 - "${worktree}" "${BASE}" "${SOURCES}" <<'PYPUB'
+import json, pathlib, sys
+worktree, base, sources = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2]), sys.argv[3].split()
+target = worktree / "data/production/registry-state.json"
+published = json.loads(target.read_text()) if target.is_file() else {"version": 1, "sources": {}}
+moved = []
+for source in sources:
+    mine = base.parent / f"{base.name}-{source}/data/production/registry-state.json"
+    if not mine.is_file():
+        continue
+    slice_ = json.loads(mine.read_text()).get("sources", {}).get(source)
+    if not slice_:
+        continue
+    before = (published.get("sources", {}).get(source) or {}).get("cursor")
+    after = slice_.get("cursor")
+    # A local cursor behind the published one means the other writer got further; taking
+    # it would publish a regression, which is how Go nearly lost fifteen months.
+    if isinstance(before, int) and isinstance(after, int) and after < before:
+        print(f"  refusing {source}: local {after:,} is behind published {before:,}")
+        continue
+    published.setdefault("sources", {})[source] = slice_
+    if before != after:
+        moved.append(f"{source} {before} -> {after}")
+target.write_text(json.dumps(published, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+print("  " + ("; ".join(moved) if moved else "no cursor advanced"))
+PYPUB
+  for source in ${SOURCES}; do
+    local dir="${BASE}-${source}"
+    for name in $(catalog_for "${source}"); do
+      [ -f "${dir}/data/production/${name}" ] && cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
+    done
+    [ -f "${dir}/data/production/intermediate/${source}.jsonl" ] && \
+      cp "${dir}/data/production/intermediate/${source}.jsonl" "${worktree}/data/production/intermediate/${source}.jsonl"
+  done
+  git -C "${worktree}" add -f data/production
+  if git -C "${worktree}" diff --cached --quiet; then
+    echo "nothing to publish"
+  else
+    git -C "${worktree}" commit --quiet -m "Record local registry crawl: ${SOURCES}"
+    git -C "${worktree}" push --quiet origin HEAD:artifact-data && echo "published"
+  fi
+  git worktree remove "${worktree}" --force
+}
+
 case "${1:-start}" in
   start) start ;;
   status) status ;;
   merge) merge ;;
+  publish) publish ;;
   stop) for source in ${SOURCES}; do docker stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
-  *) echo "usage: $0 {start|status|merge|stop}" >&2; exit 2 ;;
+  *) echo "usage: $0 {start|status|merge|publish|stop}" >&2; exit 2 ;;
 esac

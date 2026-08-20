@@ -25,6 +25,7 @@ if [ "${SEED}" = "1" ] && [ ! -f "${STATE_DIR}/data/production/registry-state.js
               data/production/go-modules.txt \
               data/production/go-modules.cursor.json \
               data/production/npm-packages.txt \
+              data/production/npm-packages.txt.gz \
               reports/registry-artifact-crawl.json; do
     if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
       git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"

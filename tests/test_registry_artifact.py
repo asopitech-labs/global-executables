@@ -676,7 +676,8 @@ def test_npm_enumerates_packages_once_instead_of_every_revision(tmp_path, monkey
 
     report = registry_artifact._crawl_npm(state, tmp_path / "npm.jsonl", 10, 1_000_000, 120)
 
-    assert catalog.read_text().split() == ["alpha", "beta", "gamma"]
+    assert registry_artifact.read_catalog(catalog) == ["alpha", "beta", "gamma"]
+    assert catalog.with_suffix(".txt.gz").is_file()  # 85MB of names does not belong uncompressed
     assert report["catalog_size"] == 3 and report["cursor"] == 3 and report["records"] == 3
     assert report["coverage_kind"] == "exhaustive"
     assert "since" not in state  # the revision cursor described coverage never collected
@@ -702,3 +703,15 @@ def test_the_crates_dump_clears_verdicts_the_retired_path_left(tmp_path, monkeyp
 
     assert report["failures"] == 0 and report["coverage_kind"] == "exhaustive"
     assert "failures" not in state or not state["failures"]
+
+
+def test_a_catalog_written_uncompressed_is_still_readable(tmp_path):
+    """Catalogs already published as plain text must keep working after the change."""
+    plain = tmp_path / "names.txt"
+    plain.write_text("alpha\nbeta\n\ngamma\n")
+    assert registry_artifact.read_catalog(plain) == ["alpha", "beta", "gamma"]
+
+    registry_artifact.write_catalog(plain, ["delta", "epsilon"])
+    assert not plain.exists()  # the plain copy is replaced, not left to drift
+    assert registry_artifact.read_catalog(plain) == ["delta", "epsilon"]
+    assert registry_artifact.read_catalog(tmp_path / "absent.txt") == []

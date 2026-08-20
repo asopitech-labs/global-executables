@@ -266,6 +266,29 @@ def _save_json(path: Path, value: dict[str, Any]) -> None:
     temporary.replace(path)
 
 
+def read_catalog(path: Path) -> list[str]:
+    """Read a name catalog, preferring the compressed copy.
+
+    npm's catalog alone is 85MB of package names, past what GitHub will accept
+    without complaint, and these files compress to roughly a quarter.
+    """
+    packed = path.with_suffix(path.suffix + ".gz")
+    if packed.is_file():
+        with gzip.open(packed, "rt", encoding="utf-8") as handle:
+            return [line.strip() for line in handle if line.strip()]
+    if path.is_file():
+        return [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return []
+
+
+def write_catalog(path: Path, names: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    packed = path.with_suffix(path.suffix + ".gz")
+    with gzip.open(packed, "wt", encoding="utf-8") as handle:
+        handle.write("\n".join(names) + "\n")
+    path.unlink(missing_ok=True)
+
+
 def _append_rows(path: Path, rows: list[dict[str, Any]]) -> None:
     if not rows:
         return
@@ -649,12 +672,12 @@ def _dump_rows(archive: tarfile.TarFile, member: tarfile.TarInfo):
 def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                 checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     project_file = Path(state.setdefault("projects_file", "data/production/pypi-projects.txt"))
-    if not project_file.is_file():
+    if not read_catalog(project_file):
         body, transfer = fetch("https://pypi.org/simple/", timeout)
         project_file.parent.mkdir(parents=True, exist_ok=True)
-        project_file.write_text("\n".join(_pypi_projects(body)) + "\n")
+        write_catalog(project_file, _pypi_projects(body))
         state["catalog_bytes"] = transfer["downloaded_bytes"]
-    projects = [line.strip() for line in project_file.read_text().splitlines() if line.strip()]
+    projects = read_catalog(project_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
     retry_projects = state.setdefault("retry_projects", [])
@@ -753,7 +776,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
     catalog_file = Path(state.setdefault("packages_file", "data/production/npm-packages.txt"))
     catalog_file.parent.mkdir(parents=True, exist_ok=True)
     downloaded = 0
-    if not catalog_file.is_file():
+    if not read_catalog(catalog_file):
         names: list[str] = []
         start_key = ""
         while True:
@@ -771,8 +794,8 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             start_key = rows[-1]["id"]
             if interrupted():
                 break
-        catalog_file.write_text("\n".join(names) + "\n")
-    packages = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+        write_catalog(catalog_file, names)
+    packages = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0
     failures, unavailable = _failure_state(state)
     rows_out: list[dict[str, Any]] = []
@@ -1078,12 +1101,12 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
 def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                     checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     catalog_file = Path(state.setdefault("names_file", "data/production/rubygems-names.txt"))
-    if not catalog_file.is_file():
+    if not read_catalog(catalog_file):
         body, transfer = fetch("https://rubygems.org/names", timeout)
         catalog_file.parent.mkdir(parents=True, exist_ok=True)
-        catalog_file.write_text("\n".join(_rubygems_names(body)) + "\n")
+        write_catalog(catalog_file, _rubygems_names(body))
         state["catalog_bytes"] = transfer["downloaded_bytes"]
-    gems = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+    gems = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
     rows: list[dict[str, Any]] = []; budget_exhausted = False
@@ -1149,7 +1172,7 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     """Inspect NuGet's .NET tool packages, the only NuGet packages that ship commands."""
     catalog_file = Path(state.setdefault("tools_file", "data/production/nuget-tools.txt"))
     catalog_file.parent.mkdir(parents=True, exist_ok=True)
-    if not catalog_file.is_file():
+    if not read_catalog(catalog_file):
         identifiers: list[str] = []
         skip = 0
         advertised = 0
@@ -1164,12 +1187,12 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
                 break
             identifiers.extend(item["id"] for item in page if item.get("id"))
             skip += len(page)
-        catalog_file.write_text("\n".join(sorted(set(identifiers))) + "\n")
+        write_catalog(catalog_file, sorted(set(identifiers)))
         # The search endpoint stops paging well before totalHits, so the catalog it
         # yields is a sample, not the tool list; the source must never claim otherwise.
         state["catalog_advertised"] = advertised
         state["catalog_truncated"] = len(set(identifiers)) < advertised
-    tools = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+    tools = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
     rows: list[dict[str, Any]] = []; budget_exhausted = False
@@ -1217,12 +1240,12 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
 def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                      checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     catalog_file = Path(state.setdefault("packages_file", "data/production/packagist-packages.txt"))
-    if not catalog_file.is_file():
+    if not read_catalog(catalog_file):
         body, transfer = fetch("https://packagist.org/packages/list.json", timeout)
         catalog_file.parent.mkdir(parents=True, exist_ok=True)
-        catalog_file.write_text("\n".join(_packagist_packages(body)) + "\n")
+        write_catalog(catalog_file, _packagist_packages(body))
         state["catalog_bytes"] = transfer["downloaded_bytes"]
-    packages = [line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
+    packages = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
     retry_packages = state.setdefault("retry_packagist", [])
