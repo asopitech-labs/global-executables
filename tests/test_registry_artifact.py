@@ -676,3 +676,30 @@ def test_an_unchanged_crates_dump_is_not_downloaded_again(tmp_path, monkeypatch)
     assert report["unchanged"] is True and report["downloaded_bytes"] == 0
     assert report["coverage_kind"] == "exhaustive" and report["records"] == 1
     assert report["cursor"] == 319466
+
+
+def test_every_crawler_can_actually_call_its_checkpoint(tmp_path, monkeypatch):
+    """A local name shadowed the checkpoint parameter, so Go failed the moment it fired."""
+    import inspect
+    calls = []
+
+    def spy(buffer=None, **updates):
+        calls.append(updates)
+
+    # Go reaches its checkpoint after CHECKPOINT_INTERVAL modules, so make that one module.
+    monkeypatch.setattr(registry_artifact, "CHECKPOINT_INTERVAL", 1)
+    catalog = tmp_path / "go-modules.txt"
+    catalog.write_text("example.com/a\nexample.com/b\n")
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda url, timeout=120, attempts=4: (b'{"Version":"v1"}', {"downloaded_bytes": 1}))
+    monkeypatch.setattr(registry_artifact, "_go_module_rows", lambda *a: ([], 0))
+    state = {"modules_file": str(catalog), "catalog_complete": True}
+
+    registry_artifact._crawl_go(state, tmp_path / "go.jsonl", 2, 1_000_000, 120, spy)
+
+    assert [update["cursor"] for update in calls] == [1, 2]
+    # and no crawler may shadow the parameter it was handed
+    for name in ("_crawl_pypi", "_crawl_npm", "_crawl_crates", "_crawl_go",
+                 "_crawl_rubygems", "_crawl_packagist", "_crawl_nuget"):
+        source = inspect.getsource(getattr(registry_artifact, name))
+        assert "\n    checkpoint = " not in source, f"{name} rebinds its checkpoint parameter"

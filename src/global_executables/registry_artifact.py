@@ -995,9 +995,9 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
                if catalog_file.is_file() else [])
     seen = set(modules)
     cursor_file = catalog_file.with_suffix(".cursor.json")
-    checkpoint = _load_catalog_cursor(cursor_file)
-    since = checkpoint.get("since") or state.get("catalog_since", GO_INDEX_EPOCH)
-    catalog_complete = bool(checkpoint.get("complete") or state.get("catalog_complete"))
+    catalog_cursor = _load_catalog_cursor(cursor_file)
+    since = catalog_cursor.get("since") or state.get("catalog_since", GO_INDEX_EPOCH)
+    catalog_complete = bool(catalog_cursor.get("complete") or state.get("catalog_complete"))
     failures, unavailable = _failure_state(state)
     retry_modules = state.setdefault("retry_modules", [])
     retry_modules[:] = [name for name in retry_modules if name not in unavailable]
