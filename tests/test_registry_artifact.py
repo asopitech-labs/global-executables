@@ -855,6 +855,9 @@ def test_a_pass_reports_every_row_it_flushed_not_the_leftover(tmp_path, monkeypa
     last one — NuGet reported 0 records for passes that wrote thousands of rows."""
     catalog = tmp_path / "projects.txt"
     catalog.write_text("\n".join(f"pkg-{i}" for i in range(500)) + "\n")
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps(
+        {"version": 1, "sources": {"pypi": {"projects_file": str(catalog)}}}) + "\n")
     monkeypatch.setattr(registry_artifact, "CHECKPOINT_INTERVAL", 100)
 
     def fake_fetch(url, timeout=120, attempts=4):
@@ -866,7 +869,7 @@ def test_a_pass_reports_every_row_it_flushed_not_the_leftover(tmp_path, monkeypa
     monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
     monkeypatch.setattr(registry_artifact, "_wheel_commands", lambda url, timeout: (["cmd"], 1))
     report = registry_artifact.crawl_registry_sources(
-        ["pypi"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json",
+        ["pypi"], state_path, tmp_path / "intermediate", tmp_path / "report.json",
         package_budget=350)
 
     written = len((tmp_path / "intermediate" / "pypi.jsonl").read_text().splitlines())
