@@ -60,6 +60,41 @@ source, exposed as the `go_package_budget` workflow input. Each run queues its
 successor and an explicit Pages deploy, because a run dispatched with
 `GITHUB_TOKEN` does not emit the `workflow_run` event `pages.yml` listens for.
 
+## Crawling in a container
+
+A CI job stops at six hours and the workflow runs one at a time, so a long sweep
+(Go's module catalog, npm's changes feed) is better driven locally. `Dockerfile.crawl`
+builds a thin image — the package and the crawl entry point, no dataset — and
+`tools/crawl_container.sh` seeds a state directory from `artifact-data`, builds the
+image, and runs passes back to back until every selected source is exhaustive.
+
+```sh
+tools/crawl_container.sh                                   # every source
+SOURCES=crates PASSES=1 tools/crawl_container.sh           # one source, one pass
+SOURCES="go npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
+```
+
+Each pass is budgeted so the resumable state is checkpointed between passes;
+stopping the container loses at most the pass in flight. Measured on the local
+runtime, crates.io reaches `exhaustive` in a single pass — 319,466 crates, 88,610
+executable names — at a peak of 347MB.
+
+The container holds no credentials and never pushes. `STATE_DIR` is laid out
+exactly like the `artifact-data` branch, so publishing a local run is a copy into a
+worktree of that branch. Do it deliberately: the scheduled workflow writes the same
+branch, and two writers produce a rejected push rather than a merge. Stop the
+chained CI runs first, or crawl a source locally that CI is not advancing.
+
+This machine runs Colima, not Docker Desktop. Two consequences:
+
+* **Lima only shares `$HOME`.** A bind mount of any other host path silently becomes
+  a directory inside the VM — writable, and invisible to the host. Keep `STATE_DIR`
+  under `$HOME`; the default `.local-crawl` in the repository already is.
+* `docker` needs `docker-credential-osxkeychain` on `PATH` to pull base images. If it
+  is missing, point `DOCKER_CONFIG` at a directory whose `config.json` is `{}` and
+  set `DOCKER_HOST=unix://$HOME/.colima/default/docker.sock`, because a replacement
+  config also drops the `colima` context.
+
 The scheduled refresh now downloads the production OS indexes with
 `tools/production_crawl.py`, merges them with the currently available registry
 inputs, and publishes only canonical data and reports to `main`. The fixture

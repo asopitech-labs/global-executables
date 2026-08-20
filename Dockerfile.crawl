@@ -1,0 +1,22 @@
+# Run the registry artifact crawl outside CI, where the six-hour job limit and the
+# one-run-at-a-time concurrency group do not apply.
+#
+# State and observations live on a mounted volume laid out exactly like the
+# artifact-data branch, so publishing a local run is a copy rather than a merge.
+# The image carries no credentials and never pushes.
+FROM python:3.12-slim
+
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY pyproject.toml README.md LICENSE ./
+COPY src ./src
+COPY tools/registry_artifact_crawl.py ./tools/registry_artifact_crawl.py
+COPY tools/crawl_loop.sh /usr/local/bin/crawl-loop
+RUN pip install --no-cache-dir . && chmod +x /usr/local/bin/crawl-loop
+
+# Relative paths then resolve inside the volume, matching the repository layout.
+WORKDIR /state
+ENTRYPOINT ["/usr/local/bin/crawl-loop"]
