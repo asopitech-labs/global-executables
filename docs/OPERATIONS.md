@@ -169,6 +169,13 @@ SOURCES=crates PASSES=1 tools/crawl_container.sh           # one source, one pas
 SOURCES="go npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
 ```
 
+`tools/crawl_parallel.sh` runs one container per registry instead. Each registry
+answers from its own hosts, so crawling them serially spends most of the wall clock
+waiting on one of them; four containers together held 16% of the VM's two cores,
+because the work is entirely I/O. Every container gets its own state directory — a
+shared one would put four writers on a single cursor file — and `merge` folds the
+per-source states back into one publishable tree.
+
 Each pass is budgeted so the resumable state is checkpointed between passes;
 stopping the container loses at most the pass in flight. Measured on the local
 runtime, crates.io reaches `exhaustive` in a single pass — 319,466 crates, 88,610
