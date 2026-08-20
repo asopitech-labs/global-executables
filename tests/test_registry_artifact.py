@@ -2,6 +2,7 @@ from io import BytesIO
 import gzip
 import json
 import tarfile
+import pathlib
 import urllib.error
 import urllib.parse
 import zipfile
@@ -833,3 +834,17 @@ def test_a_declared_entry_becomes_the_command_an_install_creates():
     assert sorted(row["command"] for row in rows) == ["ivue-cli", "ok"]
     gem = _gem_rows("executables:\n- ../bin/code-labs\n- /arake\n- rake\n", "g", "1.0", None, "s")
     assert [row["command"] for row in gem] == ["arake", "code-labs", "rake"]
+
+
+def test_a_budget_for_an_unselected_source_is_rejected(tmp_path):
+    """CI kept --source-package-budget go=10000 after Go moved to local containers, and
+    every run then died at argument parsing rather than crawling crates."""
+    import subprocess, sys
+    result = subprocess.run(
+        [sys.executable, "tools/registry_artifact_crawl.py", "--source", "crates",
+         "--source-package-budget", "go=10000", "--state", str(tmp_path / "s.json"),
+         "--output-dir", str(tmp_path), "--report", str(tmp_path / "r.json")],
+        capture_output=True, text=True, cwd=pathlib.Path(__file__).resolve().parents[1],
+        env={"PYTHONPATH": "src", "PATH": "/usr/bin:/bin"})
+    assert result.returncode == 2
+    assert "for a selected source" in result.stderr
