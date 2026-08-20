@@ -686,6 +686,7 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
     retry_projects = state.setdefault("retry_projects", [])
     retry_projects[:] = [project for project in retry_projects if project not in unavailable]
     rows: list[dict[str, Any]] = []
+    collected = 0
     budget_exhausted = False
     retry_quota = max(1, budget // 2)
     retry_used = 0
@@ -740,13 +741,15 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
             retry_used += 1
         processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
+            collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if budget_exhausted or interrupted():
             break
     state["cursor"] = cursor
+    collected += len(rows)
     _append_rows(output, rows)
     return {"cursor": cursor, "catalog_size": len(projects), "processed": processed,
-            "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
+            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
             "budget_exhausted": budget_exhausted,
             "unavailable": len(unavailable), "retry_pending": len(retry_projects),
             "complete": cursor >= len(projects) and not failures and not retry_projects,
@@ -806,6 +809,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
     cursor = int(state.get("cursor", 0)); processed = 0
     failures, unavailable = _failure_state(state)
     rows_out: list[dict[str, Any]] = []
+    collected = 0
     budget_exhausted = False
     while cursor < len(packages) and processed < budget:
         name = packages[cursor]
@@ -822,14 +826,16 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             _record_failure(failures, unavailable, name, error)
         cursor += 1; processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
+            collected += len(rows_out)
             checkpoint(rows_out, cursor=cursor)
         if interrupted():
             break
     state["cursor"] = cursor
+    collected += len(rows_out)
     _append_rows(output, rows_out)
     complete = cursor >= len(packages) and not failures
     return {"cursor": cursor, "catalog_size": len(packages), "processed": processed,
-            "records": len(rows_out), "downloaded_bytes": downloaded, "failures": len(failures),
+            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
             "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
@@ -925,13 +931,14 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in rows),
                       encoding="utf-8")
+    collected = len(rows)
     state["dump_timestamp"] = published
     state["dump_last_modified"] = last_modified
     state["catalog_size"] = len(crates)
     state["complete"] = True
     complete = not failures
     return {"dump_timestamp": published, "catalog_size": len(crates), "cursor": len(crates),
-            "crates_with_binaries": with_binaries, "processed": len(crates), "records": len(rows),
+            "crates_with_binaries": with_binaries, "processed": len(crates), "records": collected,
             "downloaded_bytes": downloaded, "dump_bytes": size,
             "failures": len(failures), "unavailable": len(unavailable),
             "budget_exhausted": False, "complete": complete,
@@ -1064,6 +1071,7 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
     cursor = int(state.get("cursor", 0))
     processed = 0
     rows: list[dict[str, Any]] = []
+    collected = 0
     budget_exhausted = False
     while (retry_budget or cursor < len(modules)) and processed < budget:
         retrying = retry_budget > 0
@@ -1091,15 +1099,17 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
             cursor += 1
         processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
+            collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if interrupted():
             break
     state["cursor"] = cursor
+    collected += len(rows)
     _append_rows(output, rows)
     complete = catalog_complete and cursor >= len(modules) and not failures and not retry_modules
     return {"cursor": cursor, "catalog_size": len(modules), "catalog_complete": catalog_complete,
             "catalog_since": since, "discovered": discovered, "index_requests": index_requests,
-            "processed": processed, "records": len(rows), "downloaded_bytes": downloaded,
+            "processed": processed, "records": collected, "downloaded_bytes": downloaded,
             "failures": len(failures), "unavailable": len(unavailable),
             "retry_pending": len(retry_modules), "budget_exhausted": budget_exhausted,
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
@@ -1117,7 +1127,7 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
     gems = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
-    rows: list[dict[str, Any]] = []; budget_exhausted = False
+    rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
     while cursor < len(gems) and processed < budget:
         package = gems[cursor]
         try:
@@ -1138,14 +1148,16 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             _record_failure(failures, unavailable, package, error)
         cursor += 1; processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
+            collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if interrupted():
             break
     state["cursor"] = cursor
+    collected += len(rows)
     _append_rows(output, rows)
     complete = cursor >= len(gems) and not failures
     return {"cursor": cursor, "catalog_size": len(gems), "processed": processed,
-            "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
+            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
             "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
@@ -1226,7 +1238,7 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         state["catalog_truncated"] = bool(advertised) and len(tools) < advertised
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
     failures, unavailable = _failure_state(state)
-    rows: list[dict[str, Any]] = []; budget_exhausted = False
+    rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
     while cursor < len(tools) and processed < budget:
         package = tools[cursor]
         lowered = urllib.parse.quote(package.lower(), safe="")
@@ -1251,15 +1263,17 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             _record_failure(failures, unavailable, package, error)
         cursor += 1; processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
+            collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if interrupted():
             break
     state["cursor"] = cursor
+    collected += len(rows)
     _append_rows(output, rows)
     truncated = bool(state.get("catalog_truncated"))
     complete = cursor >= len(tools) and not failures and not truncated
     report = {"cursor": cursor, "catalog_size": len(tools), "processed": processed,
-              "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
+              "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
               "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
               "catalog_truncated": truncated, "catalog_advertised": state.get("catalog_advertised"),
               "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
@@ -1285,7 +1299,7 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
         if package not in retry_packages:
             retry_packages.append(package)
     retry_budget = len(retry_packages)  # one attempt per queued package per run
-    rows: list[dict[str, Any]] = []; budget_exhausted = False
+    rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
     while (retry_budget or cursor < len(packages)) and processed < budget:
         retrying = retry_budget > 0
         if retrying:
@@ -1308,14 +1322,16 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
             cursor += 1
         processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
+            collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if budget_exhausted or interrupted():
             break
     state["cursor"] = cursor
+    collected += len(rows)
     _append_rows(output, rows)
     complete = cursor >= len(packages) and not failures and not retry_packages
     return {"cursor": cursor, "catalog_size": len(packages), "processed": processed,
-            "records": len(rows), "downloaded_bytes": downloaded, "failures": len(failures),
+            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
             "unavailable": len(unavailable), "retry_pending": len(retry_packages),
             "budget_exhausted": budget_exhausted, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}

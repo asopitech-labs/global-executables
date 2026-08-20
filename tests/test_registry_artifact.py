@@ -848,3 +848,27 @@ def test_a_budget_for_an_unselected_source_is_rejected(tmp_path):
         env={"PYTHONPATH": "src", "PATH": "/usr/bin:/bin"})
     assert result.returncode == 2
     assert "for a selected source" in result.stderr
+
+
+def test_a_pass_reports_every_row_it_flushed_not_the_leftover(tmp_path, monkeypatch):
+    """Checkpointing empties the buffer, so `records` counted only the tail since the
+    last one — NuGet reported 0 records for passes that wrote thousands of rows."""
+    catalog = tmp_path / "projects.txt"
+    catalog.write_text("\n".join(f"pkg-{i}" for i in range(500)) + "\n")
+    monkeypatch.setattr(registry_artifact, "CHECKPOINT_INTERVAL", 100)
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        project = url.rsplit("/", 2)[-2]
+        return json.dumps({"info": {"name": project, "version": "1.0.0"},
+                           "urls": [{"packagetype": "bdist_wheel", "url": f"https://x/{project}.whl",
+                                     "filename": f"{project}-none-any.whl"}]}).encode(), {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_wheel_commands", lambda url, timeout: (["cmd"], 1))
+    report = registry_artifact.crawl_registry_sources(
+        ["pypi"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json",
+        package_budget=350)
+
+    written = len((tmp_path / "intermediate" / "pypi.jsonl").read_text().splitlines())
+    assert written == 350
+    assert report["sources"]["pypi"]["records"] == written  # not 50, the residual buffer
