@@ -1,45 +1,27 @@
 {
   "byte_budget": 5000000000,
-  "coverage_kind": "partial",
+  "coverage_kind": "exhaustive",
   "package_budget": 1000,
   "sources": {
     "crates": {
       "budget_exhausted": false,
       "catalog_size": 319466,
-      "complete": false,
-      "coverage_kind": "partial",
-      "crates_with_binaries": 76115,
+      "complete": true,
+      "coverage_kind": "exhaustive",
       "cursor": 319466,
-      "downloaded_bytes": 1750164606,
+      "downloaded_bytes": 0,
       "dump_bytes": 1750164606,
+      "dump_last_modified": "Thu, 20 Aug 2026 02:10:11 GMT",
       "dump_timestamp": "2026-08-20T02:00:21.810126238Z",
-      "failures": 1,
+      "failures": 0,
       "observations": 88610,
       "package_budget": 1000,
-      "processed": 319466,
+      "processed": 0,
       "records": 88610,
-      "unavailable": 1321
-    },
-    "go": {
-      "coverage_kind": "partial",
-      "error": "'dict' object is not callable",
-      "status": "failed"
-    },
-    "npm": {
-      "budget_exhausted": false,
-      "complete": false,
-      "coverage_kind": "partial",
-      "downloaded_bytes": 761171,
-      "failures": 0,
-      "observations": 0,
-      "package_budget": 1000,
-      "processed": 1000,
-      "records": 0,
-      "retry_pending": 0,
-      "since": 2496418,
-      "unavailable": 1000
+      "unavailable": 0,
+      "unchanged": true
     }
   },
   "state": "data/production/registry-state.json",
-  "status": "failed"
+  "status": "success"
 }
