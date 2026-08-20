@@ -9,6 +9,7 @@ import zipfile
 import pytest
 
 import global_executables.registry_artifact as registry_artifact
+from global_executables.collectors import npm_metadata
 from global_executables.registry_artifact import (_console_scripts, _go_rows, _gem_rows,
                                                    _packagist_packages, _packagist_rows,
                                                    _crawl_pypi, _failure_state, _postgres_array,
@@ -199,6 +200,57 @@ def test_go_catalog_records_each_module_once(tmp_path, monkeypatch):
     assert report["catalog_size"] == 2 and report["discovered"] == 2
     assert report["processed"] == 2 and report["catalog_complete"] is True
     assert "since" not in state  # the download cursor is not a catalog cursor
+
+
+def test_npm_reads_the_release_document_not_the_packument(tmp_path, monkeypatch):
+    """`bin` lives in versions[...]; reading the packument top level found nothing."""
+    packument = {"name": "demo", "dist-tags": {"latest": "1.0.0"},
+                 "versions": {"1.0.0": {"name": "demo", "version": "1.0.0", "bin": {"demo": "cli.js"}}}}
+    release = packument["versions"]["1.0.0"]
+    assert npm_metadata(packument, "https://registry.npmjs.org/demo") == []
+    assert [row["command"] for row in npm_metadata(release, "x")] == ["demo"]
+
+    asked = []
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        asked.append(url)
+        if "_changes" in url:
+            return json.dumps({"results": [{"seq": 7, "id": "demo"}]}).encode(), {"downloaded_bytes": 1}
+        return json.dumps(release).encode(), {"downloaded_bytes": 2}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    output = tmp_path / "npm.jsonl"
+    report = registry_artifact._crawl_npm({}, output, 1, 1_000_000, 120)
+
+    assert report["records"] == 1
+    assert asked[-1].endswith("/demo/latest")
+    assert json.loads(output.read_text().strip())["command"] == "demo"
+
+
+def test_npm_is_only_complete_when_the_feed_runs_short_of_its_own_limit(tmp_path, monkeypatch):
+    """A page shortened by the remaining budget used to be read as the end of the feed."""
+    def fake_fetch(url, timeout=120, attempts=4):
+        if "_changes" in url:
+            limit = int(urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)["limit"][0])
+            results = [{"seq": index, "id": f"pkg-{index}"} for index in range(1, limit + 1)]
+            return json.dumps({"results": results}).encode(), {"downloaded_bytes": 1}
+        return json.dumps({"name": "pkg", "version": "1.0.0"}).encode(), {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    state = {"parser_generation": registry_artifact.NPM_PARSER_GENERATION}
+    report = registry_artifact._crawl_npm(state, tmp_path / "npm.jsonl", 150, 1_000_000, 120)
+
+    assert report["processed"] == 150
+    assert report["complete"] is False and report["coverage_kind"] == "partial"
+
+
+def test_npm_cursor_from_the_broken_parser_is_not_trusted(tmp_path, monkeypatch):
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda *a, **k: (json.dumps({"results": []}).encode(), {"downloaded_bytes": 0}))
+    state = {"since": 2548252, "complete": True}
+    registry_artifact._crawl_npm(state, tmp_path / "npm.jsonl", 1, 1_000_000, 120)
+    assert state["parser_generation"] == registry_artifact.NPM_PARSER_GENERATION
+    assert state["since"] == 0  # the walk is redone now that it can record anything
 
 
 def test_permanent_registry_conditions_are_not_retryable_failures():

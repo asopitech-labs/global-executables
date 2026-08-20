@@ -40,6 +40,8 @@ RETRY_AFTER_CAP = 60.0
 # source below exhaustive.
 PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:",
                               "module has no latest version:")
+# Bumped when an npm parsing fix invalidates the coverage an earlier cursor claimed.
+NPM_PARSER_GENERATION = 2
 GO_INDEX = "https://index.golang.org/index"
 GO_INDEX_EPOCH = "2019-01-01T00:00:00Z"
 GO_INDEX_PAGE = 2000
@@ -689,7 +691,23 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
             "coverage_kind": "exhaustive" if cursor >= len(projects) and not failures and not retry_projects else "partial"}
 
 
+def _npm_release_url(name: str) -> str:
+    """Address the latest release, not the packument.
+
+    registry.npmjs.org answers a bare package name with every version it ever
+    published, and `bin` lives inside `versions[...]` — never at the top level, which
+    is where the parser looked.  The `/latest` document is the shape the parser
+    expects and is a few kilobytes rather than megabytes.
+    """
+    return "https://registry.npmjs.org/" + urllib.parse.quote(name, safe="@") + "/latest"
+
+
 def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int) -> dict[str, Any]:
+    if int(state.get("parser_generation", 1)) < NPM_PARSER_GENERATION:
+        # Everything the previous parser walked produced no commands at all, so the
+        # cursor it left behind describes coverage that was never collected.
+        state.update({"parser_generation": NPM_PARSER_GENERATION, "since": 0})
+        state.pop("complete", None)
     since = state.get("since", 0); processed = 0; downloaded = 0; rows: list[dict[str, Any]] = []
     failures, unavailable = _failure_state(state)
     retry_packages = state.setdefault("retry_packages", [])
@@ -703,7 +721,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             retry_budget -= 1
             name = retry_packages.pop(0)
             try:
-                metadata_url = "https://registry.npmjs.org/" + urllib.parse.quote(name, safe="@")
+                metadata_url = _npm_release_url(name)
                 metadata_body, transfer = fetch(metadata_url, timeout)
                 downloaded += transfer["downloaded_bytes"]
                 if downloaded > byte_budget:
@@ -718,7 +736,8 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             if budget_exhausted:
                 break
             continue
-        query = urllib.parse.urlencode({"since": since, "limit": min(100, budget - processed)})
+        limit = min(100, budget - processed)
+        query = urllib.parse.urlencode({"since": since, "limit": limit})
         body, _ = fetch(f"https://replicate.npmjs.com/_changes?{query}", timeout)
         page = json.loads(body); results = page.get("results", [])
         if not results:
@@ -730,7 +749,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
                 since = change_since
                 continue
             try:
-                metadata_url = "https://registry.npmjs.org/" + urllib.parse.quote(name, safe="@")
+                metadata_url = _npm_release_url(name)
                 metadata_body, transfer = fetch(metadata_url, timeout)
                 downloaded += transfer["downloaded_bytes"]
                 if downloaded > byte_budget:
@@ -746,7 +765,10 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
                 break
         if budget_exhausted:
             break
-        if len(results) < min(100, budget):
+        # Short of the limit that was actually requested means the feed is caught up.
+        # Comparing against the whole budget declared npm complete as soon as a run's
+        # remaining budget shrank the last page below 100.
+        if len(results) < limit:
             state["complete"] = True
             break
     state["since"] = since
