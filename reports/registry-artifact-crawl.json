@@ -1,19 +1,91 @@
 {
-  "byte_budget": 500000000,
+  "byte_budget": 5000000000,
   "coverage_kind": "partial",
-  "package_budget": 25,
+  "package_budget": 1000,
   "sources": {
+    "crates": {
+      "budget_exhausted": false,
+      "catalog_size": 319499,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 53600,
+      "downloaded_bytes": 1402347047,
+      "failures": 1,
+      "package_budget": 10000,
+      "processed": 10000,
+      "records": 3462,
+      "retry_pending": 0,
+      "seek": "Mjc0NTE4OA",
+      "skip_remaining": 0,
+      "unavailable": 1321
+    },
     "go": {
       "budget_exhausted": false,
       "complete": false,
       "coverage_kind": "partial",
-      "downloaded_bytes": 48549626,
+      "downloaded_bytes": 1215845345,
+      "failures": 0,
+      "package_budget": 1000,
+      "processed": 1000,
+      "records": 3422,
+      "since": "2019-06-21T10:45:34.179532Z",
+      "unavailable": 4113
+    },
+    "npm": {
+      "budget_exhausted": false,
+      "complete": true,
+      "coverage_kind": "exhaustive",
+      "downloaded_bytes": 354396,
+      "failures": 0,
+      "package_budget": 1000,
+      "processed": 1000,
+      "records": 0,
+      "retry_pending": 0,
+      "since": 2571856,
+      "unavailable": 2
+    },
+    "packagist": {
+      "budget_exhausted": false,
+      "catalog_size": 458432,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 19250,
+      "downloaded_bytes": 7396894,
+      "failures": 0,
+      "package_budget": 1000,
+      "processed": 1000,
+      "records": 35,
+      "retry_pending": 0,
+      "unavailable": 0
+    },
+    "pypi": {
+      "budget_exhausted": false,
+      "catalog_size": 870264,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 30405,
+      "downloaded_bytes": 1001229863,
       "failures": 3,
-      "processed": 25,
-      "records": 139,
-      "since": "2019-04-11T14:31:40.612357Z"
+      "package_budget": 1000,
+      "processed": 1000,
+      "records": 262,
+      "retry_pending": 0,
+      "unavailable": 2393
+    },
+    "rubygems": {
+      "budget_exhausted": false,
+      "catalog_size": 196126,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 21250,
+      "downloaded_bytes": 195758080,
+      "failures": 10,
+      "package_budget": 1000,
+      "processed": 1000,
+      "records": 294,
+      "unavailable": 0
     }
   },
   "state": "data/production/registry-state.json",
-  "status": "success"
+  "status": "failed"
 }
