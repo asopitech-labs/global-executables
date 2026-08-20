@@ -860,6 +860,22 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
 
 
 
+def _load_catalog_cursor(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        return {}
+    try:
+        value = json.loads(path.read_text())
+    except json.JSONDecodeError:
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def _save_catalog_cursor(path: Path, since: str, complete: bool) -> None:
+    temporary = path.with_name(f".{path.name}.tmp")
+    temporary.write_text(json.dumps({"since": since, "complete": complete}) + "\n")
+    temporary.replace(path)
+
+
 def _go_latest_version(module: str, timeout: int) -> str:
     escaped = urllib.parse.quote(module, safe="/@")
     body, _ = fetch(f"https://proxy.golang.org/{escaped}/@latest", timeout)
@@ -920,8 +936,10 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
     modules = ([line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
                if catalog_file.is_file() else [])
     seen = set(modules)
-    since = state.get("catalog_since", GO_INDEX_EPOCH)
-    catalog_complete = bool(state.get("catalog_complete"))
+    cursor_file = catalog_file.with_suffix(".cursor.json")
+    checkpoint = _load_catalog_cursor(cursor_file)
+    since = checkpoint.get("since") or state.get("catalog_since", GO_INDEX_EPOCH)
+    catalog_complete = bool(checkpoint.get("complete") or state.get("catalog_complete"))
     failures, unavailable = _failure_state(state)
     retry_modules = state.setdefault("retry_modules", [])
     retry_modules[:] = [name for name in retry_modules if name not in unavailable]
@@ -953,6 +971,11 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
                     discovered += 1
             if len(entries) < GO_INDEX_PAGE:
                 catalog_complete = True
+            # The catalog phase is long enough to be interrupted, and the run-level state
+            # is only written when the whole pass returns.  Checkpoint beside the catalog
+            # so an interrupted sweep resumes instead of re-walking the index.
+            handle.flush()
+            _save_catalog_cursor(cursor_file, since, catalog_complete)
     state["catalog_since"] = since
     state["catalog_complete"] = catalog_complete
 

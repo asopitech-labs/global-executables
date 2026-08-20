@@ -46,9 +46,10 @@ jobs:
           if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
           fi
-          for catalog in pypi-projects rubygems-names packagist-packages go-modules; do
-            if git cat-file -e origin/artifact-data:data/production/$catalog.txt 2>/dev/null; then
-              git show origin/artifact-data:data/production/$catalog.txt > data/production/$catalog.txt
+          for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
+                         go-modules.txt go-modules.cursor.json; do
+            if git cat-file -e origin/artifact-data:data/production/$catalog 2>/dev/null; then
+              git show origin/artifact-data:data/production/$catalog > data/production/$catalog
             fi
           done
           for source in npm pypi crates go rubygems packagist; do
@@ -88,9 +89,10 @@ jobs:
           fi
           mkdir -p /tmp/artifact-publish/data/production/intermediate /tmp/artifact-publish/reports
           cp data/production/registry-state.json /tmp/artifact-publish/data/production/registry-state.json
-          for catalog in pypi-projects rubygems-names packagist-packages go-modules; do
-            if test -f data/production/$catalog.txt; then
-              cp data/production/$catalog.txt /tmp/artifact-publish/data/production/$catalog.txt
+          for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
+                         go-modules.txt go-modules.cursor.json; do
+            if test -f data/production/$catalog; then
+              cp data/production/$catalog /tmp/artifact-publish/data/production/$catalog
             fi
           done
           cp data/production/intermediate/*.jsonl /tmp/artifact-publish/data/production/intermediate/ || true

@@ -253,6 +253,41 @@ def test_npm_cursor_from_the_broken_parser_is_not_trusted(tmp_path, monkeypatch)
     assert state["since"] == 0  # the walk is redone now that it can record anything
 
 
+def test_go_catalog_cursor_survives_an_interrupted_sweep(tmp_path, monkeypatch):
+    """Run-level state is only written when a pass returns; the catalog phase outlives that."""
+    pages = [
+        b'{"Path":"example.com/a","Version":"v1","Timestamp":"2019-01-02T00:00:00Z"}\n',
+        b'{"Path":"example.com/b","Version":"v1","Timestamp":"2019-01-03T00:00:00Z"}\n',
+    ]
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        if url.startswith(registry_artifact.GO_INDEX):
+            if not pages:
+                raise urllib.error.HTTPError(url, 503, "Service Unavailable", {}, None)
+            return pages.pop(0), {"downloaded_bytes": 1}
+        return b'{"Version":"v1"}', {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "GO_INDEX_PAGE", 1)
+    monkeypatch.setattr(registry_artifact, "_go_module_rows", lambda *a: ([], 0))
+    catalog = tmp_path / "go-modules.txt"
+
+    # The third index page raises, so the pass never reaches its own state write.
+    with pytest.raises(urllib.error.HTTPError):
+        registry_artifact._crawl_go({"modules_file": str(catalog)}, tmp_path / "go.jsonl", 0, 1_000, 120)
+
+    cursor = json.loads(catalog.with_suffix(".cursor.json").read_text())
+    assert cursor["since"] == "2019-01-03T00:00:00Z" and cursor["complete"] is False
+    assert catalog.read_text().split() == ["example.com/a", "example.com/b"]
+
+    # A fresh state with no catalog_since still resumes from the checkpoint.
+    seen = []
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda url, timeout=120, attempts=4: (seen.append(url), (b"", {"downloaded_bytes": 0}))[1])
+    registry_artifact._crawl_go({"modules_file": str(catalog)}, tmp_path / "go.jsonl", 0, 1_000, 120)
+    assert "2019-01-03" in seen[0]
+
+
 def test_permanent_registry_conditions_are_not_retryable_failures():
     state = {
         "failures": {
