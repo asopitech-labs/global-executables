@@ -23,7 +23,8 @@ from typing import Any
 
 import zstandard
 
-from .collectors import homebrew_metadata, package_files, scoop_manifests, winget_commands
+from .collectors import (homebrew_metadata, package_files, record, scoop_manifests,
+                         winget_commands, windows_command)
 from .model import write_jsonl
 
 
@@ -63,13 +64,18 @@ SOURCE_INDEXES = {
                   ("ScoopInstaller/Nonportable", "master"), ("niheaven/scoop-sysinternals", "main"),
                   ("matthewjberger/scoop-nerd-fonts", "master"), ("Calinou/scoop-games", "master"))],
     "winget": ["https://cdn.winget.microsoft.com/cache/source.msix"],
+    # Official Windows images, read as archives rather than run.  Pinned by digest at
+    # crawl time so the shipped command set of each release stays reproducible.
+    "windows": [f"{repository}:{tag}" for repository, tag in (
+        ("windows/servercore", "ltsc2025-amd64"), ("windows/servercore", "ltsc2022-amd64"),
+        ("windows/nanoserver", "ltsc2025-amd64"), ("windows/nanoserver", "ltsc2022-amd64"))],
     "npm": ["https://replicate.npmjs.com/_all_docs"],
     "pypi": ["https://pypi.org/simple/"],
     "crates": ["https://index.crates.io/config.json"],
 }
 SOURCE_URLS = {source: urls[0] for source, urls in SOURCE_INDEXES.items()}
 FILE_INDEX_SOURCES = {"debian", "ubuntu", "arch", "msys2"}
-COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget"}
+COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "windows"}
 PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 
 
@@ -120,6 +126,62 @@ def _crawl_os(source: str, body: bytes, source_url: str) -> tuple[list[dict[str,
         rows = package_files(_arch_text(body), source, source_url,
                              family=family, distribution=distribution)
     return rows, {"status": "success", "coverage_kind": "exhaustive", "records": len(rows), "source": source_url}
+
+
+MCR = "https://mcr.microsoft.com/v2"
+MANIFEST_ACCEPT = ("application/vnd.docker.distribution.manifest.v2+json,"
+                   "application/vnd.oci.image.manifest.v1+json")
+# Windows layers store the filesystem under Files/, and a command is what a user types.
+WINDOWS_EXEC_DIRS = ("files/windows/system32/", "files/windows/", "files/windows/syswow64/")
+WINDOWS_EXEC_SUFFIXES = (".exe", ".com", ".bat", ".cmd")
+
+
+def _windows_image_rows(repository: str, tag: str, timeout: int) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """List the commands an official Windows image ships, pinned to its digest.
+
+    The base command set is not packaged by anything, so it cannot be read from a
+    registry — but a container layer is an ordinary tar, so the image can be inspected
+    without running Windows.  The tag moves and the digest does not, so the digest is
+    what the evidence cites.
+    """
+    request = urllib.request.Request(f"{MCR}/{repository}/manifests/{tag}",
+                                     headers={"User-Agent": USER_AGENT, "Accept": MANIFEST_ACCEPT})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        manifest = json.load(response)
+        digest = response.headers.get("Docker-Content-Digest", "")
+    reference = f"{repository}@{digest}" if digest else f"{repository}:{tag}"
+    commands: dict[str, str] = {}
+    downloaded = 0
+    for layer in manifest.get("layers", []):
+        blob = urllib.request.Request(f"{MCR}/{repository}/blobs/{layer['digest']}",
+                                      headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(blob, timeout=timeout) as stream:
+            with tarfile.open(fileobj=gzip.GzipFile(fileobj=stream), mode="r|") as archive:
+                for member in archive:
+                    if not member.isfile():
+                        continue
+                    normalised = member.name.replace("\\", "/")
+                    path = normalised.lower()
+                    # A command sits directly in one of these directories, not in a subtree.
+                    if path.rsplit("/", 1)[0] + "/" not in WINDOWS_EXEC_DIRS:
+                        continue
+                    if not path.endswith(WINDOWS_EXEC_SUFFIXES):
+                        continue
+                    filename = normalised.rsplit("/", 1)[-1]
+                    # The image ships ARP.EXE beside attrib.exe; NTFS is case-insensitive,
+                    # so the command a user types folds to one name and must collide with
+                    # the `arp` every Linux index already carries.
+                    commands.setdefault(windows_command(filename).lower(), filename)
+        downloaded += layer.get("size", 0)
+    rows = [record(command, "windows", repository.rsplit("/", 1)[-1], tag, None, reference,
+                   confidence="filesystem", source_type="os_package", package_system="windows-image",
+                   distribution_family="windows", distribution=repository.rsplit("/", 1)[-1],
+                   image_digest=digest or None, shipped_as=filename)
+            for command, filename in sorted(commands.items())]
+    return rows, {"status": "success", "coverage_kind": "exhaustive", "records": len(rows),
+                  "source": reference, "image_digest": digest, "downloaded_bytes": downloaded,
+                  "url": f"{MCR}/{repository}/manifests/{tag}", "final_url": reference,
+                  "status_code": 200, "duration_seconds": 0.0}
 
 
 def _crawl_scoop(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -203,8 +265,13 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
     downloaded = 0
     coverage_kind = "exhaustive"
     for source_url in SOURCE_INDEXES[source]:
-        body, transfer = fetch(source_url, timeout)
-        index_rows, index_coverage = _crawl_index(source, body, source_url)
+        if source == "windows":
+            repository, _, tag = source_url.rpartition(":")
+            index_rows, index_coverage = _windows_image_rows(repository, tag, timeout)
+            transfer = {"downloaded_bytes": index_coverage["downloaded_bytes"]}
+        else:
+            body, transfer = fetch(source_url, timeout)
+            index_rows, index_coverage = _crawl_index(source, body, source_url)
         rows.extend(index_rows)
         downloaded += transfer["downloaded_bytes"]
         if index_coverage.get("coverage_kind") != "exhaustive":

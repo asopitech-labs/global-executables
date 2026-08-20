@@ -24,7 +24,7 @@ jobs:
         run: |
           python tools/production_crawl.py \
             --source debian --source ubuntu --source arch --source homebrew \
-            --source msys2 --source scoop --source winget \
+            --source msys2 --source scoop --source winget --source windows \
             --output-dir data/production/intermediate \
             --report reports/production-crawl.json
       - name: Restore latest registry artifact observations
@@ -67,6 +67,7 @@ jobs:
             data/production/intermediate/msys2.jsonl \
             data/production/intermediate/scoop.jsonl \
             data/production/intermediate/winget.jsonl \
+            data/production/intermediate/windows.jsonl \
             --snapshot "$(date -u +%F)" \
             --coverage-map data/production/coverage-map.json \
             --report reports/production-refresh.json

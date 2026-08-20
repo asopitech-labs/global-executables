@@ -88,8 +88,17 @@ Distributions are not one index either. Arch keeps almost everything outside `co
 which was the only repository being read, and Debian's `stable/main` is a fraction of
 the archive; both now read every pool.
 
-Still uncovered: the Windows System32 and macOS base command sets, which no package
-manager ships. Chocolatey was investigated and rejected — its feed answers 504 to
+The Windows base command set is not packaged by anything, so it is read from the
+official images instead — a container layer is an ordinary tar, so Microsoft's
+`servercore` and `nanoserver` images are inspected without running Windows. The tag
+moves and the digest does not, so each record cites the image digest and the release
+it was shipped in, which pins that release's command set reproducibly. Names fold to
+lower case there: the images ship `ARP.EXE` beside `attrib.exe`, and on a
+case-insensitive filesystem the command a user types has to collide with the `arp`
+every Linux index already carries.
+
+Still uncovered: the macOS base command set, which Apple neither packages nor
+publishes a manifest for. Chocolatey was investigated and rejected — its feed answers 504 to
 repeated requests, its metadata never names an executable, and its packages often
 contain no binary at all because the install script downloads one.
 
@@ -159,7 +168,7 @@ Production-source rebuild:
 ```sh
 python tools/production_crawl.py \
   --source debian --source ubuntu --source arch --source homebrew \
-  --source msys2 --source scoop --source winget \
+  --source msys2 --source scoop --source winget --source windows \
   --output-dir data/production/intermediate \
   --report reports/production-crawl.json
 python tools/refresh.py \
@@ -175,6 +184,7 @@ python tools/refresh.py \
   data/production/intermediate/msys2.jsonl \
   data/production/intermediate/scoop.jsonl \
   data/production/intermediate/winget.jsonl \
+  data/production/intermediate/windows.jsonl \
   data/production/intermediate/nuget.jsonl \
   --snapshot "$(date -u +%F)" \
   --coverage-map data/production/coverage-map.json \

@@ -483,3 +483,40 @@ def test_nuget_never_claims_exhaustive_from_a_truncated_catalog(tmp_path, monkey
     assert report["cursor"] == 1 and report["records"] == 1
     assert report["complete"] is False and report["coverage_kind"] == "partial"
     assert report["catalog_truncated"] is True and "sample" in report["note"]
+
+
+def test_windows_image_commands_fold_case_and_cite_the_digest(monkeypatch):
+    """The image ships ARP.EXE beside attrib.exe; both fold to what a user types."""
+    import gzip as gziplib, io as iolib, tarfile as tarlib
+    from global_executables import production
+
+    stream = iolib.BytesIO()
+    with tarlib.open(fileobj=stream, mode="w") as archive:
+        for path in ("Files/Windows/System32/ARP.EXE", "Files/Windows/System32/attrib.exe",
+                     "Files/Windows/System32/drivers/etc/hosts", "Files/Windows/System32/en-US/nested.exe",
+                     "Files/Windows/notepad.exe", "Files/Windows/System32/readme.txt"):
+            info = tarlib.TarInfo(path); info.size = 0
+            archive.addfile(info, iolib.BytesIO(b""))
+    layer = gziplib.compress(stream.getvalue())
+
+    class _Response:
+        def __init__(self, payload, headers=None):
+            self._stream = iolib.BytesIO(payload); self.headers = headers or {}
+        def read(self, size=-1): return self._stream.read(size)
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    manifest = json.dumps({"layers": [{"digest": "sha256:layer", "size": len(layer)}]}).encode()
+    def fake_urlopen(request, timeout=None):
+        if "manifests" in request.full_url:
+            return _Response(manifest, {"Docker-Content-Digest": "sha256:pinned"})
+        return _Response(layer)
+
+    monkeypatch.setattr(production.urllib.request, "urlopen", fake_urlopen)
+    rows, coverage = production._windows_image_rows("windows/nanoserver", "ltsc2022-amd64", 60)
+
+    assert [row["command"] for row in rows] == ["arp", "attrib", "notepad"]
+    assert coverage["image_digest"] == "sha256:pinned"
+    # the tag moves, the digest does not, so the evidence cites the digest
+    assert rows[0]["source"] == "windows/nanoserver@sha256:pinned"
+    assert rows[0]["shipped_as"] == "ARP.EXE" and rows[0]["version"] == "ltsc2022-amd64"
