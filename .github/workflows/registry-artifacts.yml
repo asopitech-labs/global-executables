@@ -65,6 +65,10 @@ jobs:
           GO_PACKAGE_BUDGET: ${{ inputs.go_package_budget || '10000' }}
           BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
         run: |
+          # The report is checked in, so a crawl that dies before writing one would
+          # otherwise leave the repository's stale copy to be published over the
+          # branch's real progress.
+          rm -f reports/registry-artifact-crawl.json
           python tools/registry_artifact_crawl.py \
             --source npm --source pypi --source crates --source go --source rubygems --source packagist --source nuget \
             --state data/production/registry-state.json \
