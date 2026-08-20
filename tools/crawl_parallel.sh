@@ -157,11 +157,29 @@ PYPUB
   git worktree remove "${worktree}" --force
 }
 
+# Publishing by hand means the crawl's progress lives only on this machine until
+# someone remembers.  `watch` keeps publishing while the containers run, so stopping
+# the session strands nothing.
+watch() {
+  local interval="${PUBLISH_INTERVAL:-1800}"
+  while :; do
+    sleep "${interval}"
+    if ! docker ps --format '{{.Names}}' | grep -q '^ge-'; then
+      echo "$(date -u +%FT%TZ) no crawl containers left; stopping the publisher"
+      break
+    fi
+    printf '%s ' "$(date -u +%FT%TZ)"
+    publish 2>&1 | grep -vE '^remote:' | tr '\n' ' '
+    echo
+  done
+}
+
 case "${1:-start}" in
   start) start ;;
   status) status ;;
   merge) merge ;;
   publish) publish ;;
+  watch) watch ;;
   stop) for source in ${SOURCES}; do docker stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
-  *) echo "usage: $0 {start|status|merge|publish|stop}" >&2; exit 2 ;;
+  *) echo "usage: $0 {start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
 esac

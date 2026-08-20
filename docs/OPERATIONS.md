@@ -195,7 +195,12 @@ stopping the container loses at most the pass in flight. Measured on the local
 runtime, crates.io reaches `exhaustive` in a single pass — 319,466 crates, 88,610
 executable names — at a peak of 347MB.
 
-The container holds no credentials and never pushes. `STATE_DIR` is laid out
+`crawl_parallel.sh publish` writes only the sources this machine owns, and refuses a
+source whose local cursor is behind the published one — the check that stopped Go's
+catalogue being rolled back fifteen months. `watch` runs it on an interval, because
+publishing by hand leaves the crawl's progress on one machine until someone remembers.
+
+The single-source container holds no credentials and never pushes. `STATE_DIR` is laid out
 exactly like the `artifact-data` branch, so publishing a local run is a copy into a
 worktree of that branch. Do it deliberately: the scheduled workflow writes the same
 branch, and two writers produce a rejected push rather than a merge. Stop the
