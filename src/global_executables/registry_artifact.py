@@ -37,6 +37,9 @@ CRATES_DB_DUMP = "https://static.crates.io/db-dump.tar.gz"
 # a CI runner's natural pace.  Only the API host is paced; its CDN mirrors are not.
 HOST_MIN_INTERVAL = {"crates.io": 1.0}
 RETRY_AFTER_CAP = 60.0
+# A lost name lookup is worth a short retry; a lost network is not worth one per request.
+NETWORK_BACKOFF_CAP = 8.0
+NETWORK_OUTAGE_STREAK = 8
 # Crate conditions no later run can resolve; retrying them forever would hold the
 # source below exhaustive.
 PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:",
@@ -69,6 +72,7 @@ GO_DIRECTORY_PROBES = 512
 # already completed along with the work in flight.
 CHECKPOINT_INTERVAL = 200
 _last_request: dict[str, float] = {}
+_network_failure_streak = 0
 _interrupted = False
 
 
@@ -121,13 +125,19 @@ def _retry_after_seconds(error: urllib.error.HTTPError, attempt: int) -> float:
 
 
 def fetch(url: str, timeout: int = 120, attempts: int = 4) -> tuple[bytes, dict[str, Any]]:
+    global _network_failure_streak
     started = time.monotonic()
+    # Retrying a lost name lookup rescues a hiccup, but paying the backoff on every
+    # request once the host has simply lost the network turns a short outage into hours.
+    # So retry until the failures stop looking isolated, then fail fast until one lands.
+    outage = _network_failure_streak >= NETWORK_OUTAGE_STREAK
     for attempt in range(1, attempts + 1):
         _throttle(url)
         request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
                 body = response.read()
+                _network_failure_streak = 0
                 return body, {"url": url, "status_code": response.status, "downloaded_bytes": len(body),
                               "duration_seconds": round(time.monotonic() - started, 3)}
         except urllib.error.HTTPError as error:
@@ -135,6 +145,13 @@ def fetch(url: str, timeout: int = 120, attempts: int = 4) -> tuple[bytes, dict[
             if error.code != 429 or attempt == attempts:
                 raise
             time.sleep(_retry_after_seconds(error, attempt))
+        except OSError:
+            # A resolver hiccup is not an answer about the package.  One that lasted
+            # seconds once failed 3,000 Go modules in a burst, because nothing retried.
+            if outage or attempt == attempts:
+                _network_failure_streak += 1
+                raise
+            time.sleep(min(2.0 ** attempt, NETWORK_BACKOFF_CAP))
     raise RegistryCrawlError(f"unreachable retry loop: {url}")
 
 

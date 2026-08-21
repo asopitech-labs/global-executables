@@ -325,6 +325,41 @@ def test_a_tarball_declared_as_a_wheel_is_read_as_a_sdist(tmp_path, monkeypatch)
     assert [json.loads(line)["command"] for line in output.read_text().splitlines()] == ["allocate"]
 
 
+def test_fetch_retries_a_lost_lookup_but_gives_up_during_an_outage(monkeypatch):
+    """3,000 Go modules once failed in a burst because nothing retried a name lookup."""
+    monkeypatch.setattr(registry_artifact, "_network_failure_streak", 0)
+    monkeypatch.setattr(registry_artifact.time, "sleep", lambda _seconds: None)
+    calls = []
+
+    def flaky(request, timeout=None):
+        calls.append(request.full_url)
+        if len(calls) < 3:
+            raise urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
+        class _Response:
+            status = 200
+            def read(self): return b"ok"
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+        return _Response()
+
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", flaky)
+    body, _ = registry_artifact.fetch("https://example.invalid/a", timeout=5)
+    assert body == b"ok" and len(calls) == 3  # two blips absorbed
+    assert registry_artifact._network_failure_streak == 0  # a success clears the streak
+
+    # Once the failures stop looking isolated, a request costs one attempt, not four.
+    always_down = lambda request, timeout=None: (_ for _ in ()).throw(
+        urllib.error.URLError("[Errno -2] Name or service not known"))
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", always_down)
+    for _ in range(registry_artifact.NETWORK_OUTAGE_STREAK):
+        with pytest.raises(urllib.error.URLError):
+            registry_artifact.fetch("https://example.invalid/b", timeout=5)
+    attempts_before = registry_artifact._network_failure_streak
+    with pytest.raises(urllib.error.URLError):
+        registry_artifact.fetch("https://example.invalid/c", timeout=5)
+    assert registry_artifact._network_failure_streak == attempts_before + 1
+
+
 def test_a_go_index_blip_does_not_cost_the_inspection_phase(tmp_path, monkeypatch):
     """The catalogue cursor is saved per page, so a lost lookup ends that phase, not the pass."""
     catalog = tmp_path / "go-modules.txt"
