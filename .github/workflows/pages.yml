@@ -6,10 +6,8 @@ on:
     paths:
       - "playground/**"
       - "tools/build_playground.py"
-      - "data/metadata.json"
-      - "reports/production-refresh.json"
   workflow_run:
-    workflows: ["Registry artifact crawl", "Refresh generated dataset"]
+    workflows: ["Registry artifact crawl"]
     types: [completed]
   workflow_dispatch:
 
@@ -33,9 +31,9 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - name: Restore latest crawl report
+      - name: Restore published reports
         run: |
-          git fetch origin artifact-data
+          git fetch origin artifact-data dictionary
           if git cat-file -e origin/artifact-data:reports/registry-artifact-crawl.json 2>/dev/null; then
             git show origin/artifact-data:reports/registry-artifact-crawl.json > /tmp/registry-artifact-crawl.json
             ARTIFACT_DATA_COMMIT=$(git rev-parse origin/artifact-data)
@@ -43,14 +41,23 @@ jobs:
             printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/registry-artifact-crawl.json
             ARTIFACT_DATA_COMMIT=
           fi
+          if git cat-file -e origin/dictionary:reports/production-crawl.json 2>/dev/null; then
+            git show origin/dictionary:reports/production-crawl.json > /tmp/production-crawl.json
+          else
+            printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/production-crawl.json
+          fi
+          DICTIONARY_COMMIT=$(git rev-parse origin/dictionary)
           echo "ARTIFACT_DATA_COMMIT=$ARTIFACT_DATA_COMMIT" >> "$GITHUB_ENV"
+          echo "DICTIONARY_COMMIT=$DICTIONARY_COMMIT" >> "$GITHUB_ENV"
       - name: Build static playground
         run: |
           rm -rf _site
           python tools/build_playground.py \
             --output _site \
             --crawl-report /tmp/registry-artifact-crawl.json \
+            --production-report /tmp/production-crawl.json \
             --artifact-data-commit "$ARTIFACT_DATA_COMMIT" \
+            --dictionary-commit "$DICTIONARY_COMMIT" \
             --main-commit "$GITHUB_SHA"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

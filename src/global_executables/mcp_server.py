@@ -30,12 +30,14 @@ def _scope(metadata: dict[str, Any]) -> str:
 def create_server(
     root: str | Path,
     *,
+    dataset_root: str | Path | None = None,
     host: str = "127.0.0.1",
     port: int = 8000,
     allowed_hosts: list[str] | None = None,
 ) -> FastMCP:
     root = Path(root).resolve()
-    dataset = Dataset(root)
+    dataset_root = Path(dataset_root).resolve() if dataset_root is not None else root
+    dataset = Dataset(dataset_root)
     dataset.metadata  # Fail at startup if the checkout has no dataset.
     transport_security = None
     if allowed_hosts is None and host not in {"127.0.0.1", "localhost", "::1"}:
@@ -43,7 +45,7 @@ def create_server(
     if allowed_hosts is not None:
         transport_security = TransportSecuritySettings(allowed_hosts=allowed_hosts)
     mcp = FastMCP("Global Executables", instructions=(
-        "Read-only executable collision lookup over the checked-out Git JSON dataset. "
+        "Read-only executable collision lookup over the published Git JSON dataset. "
         "Absence is clear_in_index only for explicitly exhaustive snapshots; otherwise unknown."
     ), host=host, port=port, json_response=True, transport_security=transport_security)
 
@@ -127,18 +129,32 @@ def create_server(
 
 def create_app():
     """ASGI factory for uvicorn and container deployments."""
-    return create_server(os.getenv("GLOBAL_EXECUTABLES_ROOT", Path.cwd())).streamable_http_app()
+    return create_server(
+        os.getenv("GLOBAL_EXECUTABLES_ROOT", Path.cwd()),
+        dataset_root=os.getenv("GLOBAL_EXECUTABLES_DATASET_ROOT"),
+    ).streamable_http_app()
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=os.getenv("GLOBAL_EXECUTABLES_ROOT", Path.cwd()))
+    parser.add_argument(
+        "--dataset-root",
+        default=os.getenv("GLOBAL_EXECUTABLES_DATASET_ROOT"),
+        help="checkout or extracted archive of the dictionary branch; defaults to --root",
+    )
     parser.add_argument("--transport", choices=["stdio", "streamable-http"], default="stdio")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--allowed-host", action="append", default=None)
     args = parser.parse_args()
-    server = create_server(args.root, host=args.host, port=args.port, allowed_hosts=args.allowed_host)
+    server = create_server(
+        args.root,
+        dataset_root=args.dataset_root,
+        host=args.host,
+        port=args.port,
+        allowed_hosts=args.allowed_host,
+    )
     if args.transport == "streamable-http":
         server.settings.host = args.host
         server.settings.port = args.port

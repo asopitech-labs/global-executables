@@ -13,3 +13,14 @@ jobs:
       - run: pytest
       - run: global-executables build fixtures/intermediate/*.jsonl --root /tmp/fixture-validation --snapshot 2026-08-14 --coverage-kind partial
       - run: test -s /tmp/fixture-validation/data/metadata.json
+      - name: Validate published dictionary integrity separately
+        run: |
+          set -o pipefail
+          git fetch origin dictionary
+          mkdir -p /tmp/published-dictionary
+          git archive origin/dictionary data | tar -x -C /tmp/published-dictionary
+          test -s /tmp/published-dictionary/data/metadata.json
+          python tools/validate_dictionary.py \
+            --root /tmp/published-dictionary \
+            --schema-root . \
+            --integrity-only

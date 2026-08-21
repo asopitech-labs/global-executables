@@ -26,6 +26,7 @@ def main() -> None:
     # reached the page even though it is the exhaustive half of the dataset.
     parser.add_argument("--production-report", type=Path, default=Path("reports/production-crawl.json"))
     parser.add_argument("--artifact-data-commit", default="")
+    parser.add_argument("--dictionary-commit", default="")
     parser.add_argument("--main-commit", default="")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
@@ -43,6 +44,7 @@ def main() -> None:
         "next_crawl_at": next_crawl(now).isoformat().replace("+00:00", "Z"),
         "schedule": "47 */6 * * *",
         "artifact_data_commit": args.artifact_data_commit,
+        "dictionary_commit": args.dictionary_commit,
         "main_commit": args.main_commit,
         "crawl_report": report,
         "production_report": production,
