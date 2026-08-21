@@ -48,8 +48,11 @@ jobs:
           if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
           fi
+          # go-modules.txt has no .gz twin on purpose: the catalogue is appended page by
+          # page so an interrupted sweep resumes, and read_catalog prefers a compressed
+          # copy -- a stale one beside it is read in place of the live list.
           for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
-                         go-modules.txt go-modules.txt.gz go-modules.cursor.json \
+                         go-modules.txt go-modules.cursor.json \
                          nuget-tools.txt nuget-tools.txt.gz npm-packages.txt npm-packages.txt.gz \
                          pypi-projects.txt.gz rubygems-names.txt.gz packagist-packages.txt.gz; do
             if git cat-file -e origin/artifact-data:data/production/$catalog 2>/dev/null; then
@@ -101,7 +104,7 @@ jobs:
           mkdir -p /tmp/artifact-publish/data/production/intermediate /tmp/artifact-publish/reports
           cp data/production/registry-state.json /tmp/artifact-publish/data/production/registry-state.json
           for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
-                         go-modules.txt go-modules.txt.gz go-modules.cursor.json \
+                         go-modules.txt go-modules.cursor.json \
                          nuget-tools.txt nuget-tools.txt.gz npm-packages.txt npm-packages.txt.gz \
                          pypi-projects.txt.gz rubygems-names.txt.gz packagist-packages.txt.gz; do
             if test -f data/production/$catalog; then
