@@ -13,10 +13,12 @@ import json
 import gzip
 import re
 import signal
+import socket
 import struct
 import sys
 import tarfile
 import time
+import threading
 import tomllib
 import urllib.parse
 import urllib.error
@@ -42,6 +44,9 @@ RETRY_AFTER_CAP = 60.0
 # A lost name lookup is worth a short retry; a lost network is not worth one per request.
 NETWORK_BACKOFF_CAP = 8.0
 NETWORK_OUTAGE_STREAK = 8
+# Long enough that a pass stops resolving the same handful of hosts, short enough
+# that a registry moving its addresses costs one interval rather than the run.
+DNS_CACHE_SECONDS = 300.0
 # Crate conditions no later run can resolve; retrying them forever would hold the
 # source below exhaustive.
 PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:",
@@ -73,7 +78,7 @@ GO_DIRECTORY_PROBES = 512
 # flight measured five times the throughput of one at a time.  Eight left the VM at a
 # load average of 0.45 across two cores, so the ceiling is the proxy's patience rather
 # than this machine's; `fetch` still backs off on 429 if that turns out to be the limit.
-GO_INSPECTION_WORKERS = 16
+GO_INSPECTION_WORKERS = 8
 # Progress is persisted this often inside a pass.  State used to be written once, after
 # every source finished, so an interruption discarded the cursors of sources that had
 # already completed along with the work in flight.
@@ -133,6 +138,37 @@ def _due_for_checkpoint(processed: int) -> bool:
 
 class RegistryCrawlError(RuntimeError):
     pass
+
+
+def install_dns_cache() -> None:
+    """Resolve each registry host once every few minutes rather than once per request.
+
+    Every request opens its own connection, so a pass makes one name lookup per package.
+    The resolver in a container is the first thing to give way under that: sixteen
+    modules in flight answered "Name or service not known" 1,474 times and ran slower
+    than eight did.  A crawl talks to a handful of hosts whose addresses do not move, so
+    the answers are worth keeping.
+    """
+    if getattr(socket.getaddrinfo, "_ge_cached", False):
+        return
+    resolve = socket.getaddrinfo
+    cache: dict[tuple[Any, ...], tuple[float, list[Any]]] = {}
+    guard = threading.Lock()
+
+    def cached(host, port, family=0, type=0, proto=0, flags=0):  # noqa: A002 - socket's own names
+        key = (host, port, family, type, proto, flags)
+        now = time.monotonic()
+        with guard:
+            entry = cache.get(key)
+            if entry is not None and now - entry[0] < DNS_CACHE_SECONDS:
+                return entry[1]
+        answer = resolve(host, port, family, type, proto, flags)
+        with guard:
+            cache[key] = (now, answer)
+        return answer
+
+    cached._ge_cached = True  # type: ignore[attr-defined]
+    socket.getaddrinfo = cached  # type: ignore[assignment]
 
 
 def _throttle(url: str) -> None:
@@ -1634,6 +1670,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
             _save_json(state_path, state)
 
         try:
+            install_dns_cache()  # a lookup per package is what the resolver gives way under
             _start_checkpoint_clock()  # each source gets its own two minutes, not the last one's
             report["sources"][source] = runners[source](source_state, observations, budget,
                                                         byte_budget, timeout, checkpoint)

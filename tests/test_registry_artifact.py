@@ -369,6 +369,27 @@ def test_fetch_retries_a_lost_lookup_but_gives_up_during_an_outage(monkeypatch):
     assert registry_artifact._network_failure_streak == attempts_before + 1
 
 
+def test_a_host_is_resolved_once_per_interval_not_once_per_request(monkeypatch):
+    """A lookup per package is what the container's resolver gives way under."""
+    import socket as socket_module
+
+    lookups = []
+    monkeypatch.setattr(socket_module, "getaddrinfo",
+                        lambda host, port, *a: lookups.append(host) or [("fam", "type", 0, "", (host, port))])
+    clock = [500.0]
+    monkeypatch.setattr(registry_artifact.time, "monotonic", lambda: clock[0])
+
+    registry_artifact.install_dns_cache()
+    for _ in range(20):
+        socket_module.getaddrinfo("proxy.golang.org", 443)
+    assert lookups == ["proxy.golang.org"], "twenty requests must cost one lookup"
+
+    socket_module.getaddrinfo("pypi.org", 443)  # a different host is its own entry
+    clock[0] += registry_artifact.DNS_CACHE_SECONDS + 1
+    socket_module.getaddrinfo("proxy.golang.org", 443)
+    assert lookups == ["proxy.golang.org", "pypi.org", "proxy.golang.org"]
+
+
 def test_a_slow_source_still_checkpoints_on_the_clock(monkeypatch):
     """200 Go modules can outlast the pass, and a pass killed before a checkpoint wrote nothing."""
     clock = [1000.0]
