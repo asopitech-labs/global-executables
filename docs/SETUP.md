@@ -12,9 +12,11 @@ For the Codex-specific setup and verification flow, see
 ```sh
 git clone https://github.com/asopitech-labs/global-executables.git
 cd global-executables
+git fetch origin dictionary
+git worktree add .dictionary origin/dictionary
 python -m venv .venv && . .venv/bin/activate
 pip install -e '.[test]'
-global-executables-mcp --root .
+global-executables-mcp --root . --dataset-root .dictionary
 ```
 
 Configure an MCP client with:
@@ -24,13 +26,16 @@ Configure an MCP client with:
   "mcpServers": {
     "global-executables": {
       "command": "global-executables-mcp",
-      "args": ["--root", "/absolute/path/to/global-executables"]
+      "args": [
+        "--root", "/absolute/path/to/global-executables",
+        "--dataset-root", "/absolute/path/to/global-executables/.dictionary"
+      ]
     }
   }
 }
 ```
 
-Call `check_executables` with `{"names":["envcp","evpk"]}`. The checked-in
+Call `check_executables` with `{"names":["envcp","evpk"]}`. The published
 2026-08-15 snapshot returns `collision`/`found:true` for `envcp`. For `evpk`,
 it returns `found:false`, `status:"unknown"`, and
 `absence.status:"not_found_in_current_index"` with
@@ -44,13 +49,15 @@ temporary root and point the server at that root:
 global-executables build fixtures/intermediate/*.jsonl \
   --root /tmp/global-executables-fixture \
   --snapshot 2026-08-14 --coverage-kind fixture
-global-executables-mcp --root /tmp/global-executables-fixture
+global-executables-mcp --root . \
+  --dataset-root /tmp/global-executables-fixture
 ```
 
 ## Streamable HTTP
 
 ```sh
-global-executables-mcp --root . --transport streamable-http \
+global-executables-mcp --root . --dataset-root .dictionary \
+  --transport streamable-http \
   --host 127.0.0.1 --port 8000
 curl http://127.0.0.1:8000/health
 ```
@@ -81,7 +88,9 @@ absence confidence, call `search_similar_executables`, then show survivors
 with snapshot and coverage caveats. For richer evidence, call
 `assess_executables`; it never turns a stale provider into `found:false`.
 
-Troubleshooting: a missing `data/metadata.json` means `--root` is wrong; a
+Troubleshooting: a missing `data/metadata.json` means `--dataset-root` does not
+point at a materialized `dictionary` branch; a missing schema means `--root`
+does not point at the program checkout. A
 transport mismatch means the client endpoint and server transport differ; and
 fixture/partial coverage intentionally produces `unknown`, not
 `clear_in_index`.
@@ -89,7 +98,9 @@ fixture/partial coverage intentionally produces `unknown`, not
 ## Freshness report
 
 The `get_coverage` MCP tool and `global-executables://coverage` resource also
-expose the latest incremental freshness report when `reports/freshness.json`
-is present. It describes the partitions checked by the latest bounded run;
+expose an incremental freshness report when `reports/freshness.json` is
+materialized in the dataset root. The `dictionary` branch does not copy the
+separately published `freshness-data` report automatically, so the default is
+`unavailable`. When supplied, it describes the partitions checked by the latest bounded run;
 unvisited or failed partitions remain stale/unknown and do not change the
 negative-lookup contract.

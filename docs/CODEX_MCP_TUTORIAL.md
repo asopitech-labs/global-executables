@@ -15,6 +15,8 @@ Codex CLI の MCP サーバーとして登録し、登録状態と実際のツ�
 ```sh
 export GLOBAL_EXECUTABLES_DIR=/absolute/path/to/global-executables
 cd "$GLOBAL_EXECUTABLES_DIR"
+git fetch origin dictionary
+git worktree add .dictionary origin/dictionary
 ```
 
 ## 1. MCP サーバーを準備する
@@ -30,7 +32,9 @@ python -m pip install -e .
 インストール後、サーバーが起動できることを確認します。
 
 ```sh
-global-executables-mcp --root "$GLOBAL_EXECUTABLES_DIR"
+global-executables-mcp \
+  --root "$GLOBAL_EXECUTABLES_DIR" \
+  --dataset-root "$GLOBAL_EXECUTABLES_DIR/.dictionary"
 ```
 
 stdio サーバーは起動すると MCP 通信を待ち受けます。確認後は `Ctrl-C` で
@@ -43,7 +47,8 @@ stdio サーバーは起動すると MCP 通信を待ち受けます。確認後
 ```sh
 codex mcp add global-executables -- \
   "$GLOBAL_EXECUTABLES_DIR/.venv/bin/global-executables-mcp" \
-  --root "$GLOBAL_EXECUTABLES_DIR"
+  --root "$GLOBAL_EXECUTABLES_DIR" \
+  --dataset-root "$GLOBAL_EXECUTABLES_DIR/.dictionary"
 ```
 
 `--` は、これ以降が Codex のオプションではなく MCP サーバーの起動
@@ -56,7 +61,8 @@ codex mcp add global-executables -- \
 codex mcp add global-executables \
   --env PYTHONPATH="$GLOBAL_EXECUTABLES_DIR/src" \
   -- python -m global_executables.mcp_server \
-  --root "$GLOBAL_EXECUTABLES_DIR"
+  --root "$GLOBAL_EXECUTABLES_DIR" \
+  --dataset-root "$GLOBAL_EXECUTABLES_DIR/.dictionary"
 ```
 
 ## 3. 登録状態を確認する
@@ -77,7 +83,8 @@ global-executables
 ```
 
 `codex mcp get` で、コマンドが `global-executables-mcp` または
-`python`、引数に `--root <リポジトリの絶対パス>` が含まれていることも
+`python`、引数に `--root <リポジトリの絶対パス>` と
+`--dataset-root <リポジトリの絶対パス>/.dictionary` が含まれていることも
 確認してください。
 
 ## 4. Codex を再起動する
@@ -157,8 +164,9 @@ Codex の新しいセッションを開始するか、Codex アプリを再起�
 
 ### `data/metadata.json` がないというエラーになる
 
-`--root` がリポジトリのルートを指しているか確認してください。`src` や
-`data` ディレクトリを `--root` に指定してはいけません。
+`--dataset-root` が `dictionary` ブランチを materialize した `.dictionary`
+を指しているか確認してください。`--root` は program/schema のある `main`
+チェックアウトを指します。2つの root を入れ替えないでください。
 
 ### 登録を解除する
 

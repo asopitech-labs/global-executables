@@ -73,6 +73,17 @@ to inspect crawl progress and run read-only `check`, `search`, `similar`,
 static GitHub Pages client over the public JSON dataset; no query data is sent
 to a third-party API.
 
+The program and published data have independent lifecycles. Program source,
+schemas, tests, and documentation live on `main`; the generated JSON dictionary
+lives on the orphan `dictionary` branch. The stable raw-data base URL is:
+
+```text
+https://raw.githubusercontent.com/asopitech-labs/global-executables/dictionary
+```
+
+See [the dictionary branch migration note](docs/DICTIONARY_BRANCH.md) for the
+branch contract, local setup, and the `main` URL cutover.
+
 ---
 
 ## Architecture
@@ -92,12 +103,12 @@ Package ecosystems
         └── others
                 │
                 ▼
-          GitHub Actions
+          GitHub Actions (`main`)
                 │
        collect / normalize
                 │
                 ▼
-        Structured dataset
+  `dictionary` branch dataset
                 │
         ┌───────┴────────┐
         │                │
@@ -144,10 +155,10 @@ A single executable may have multiple providers across multiple ecosystems.
 
 ## Repository Layout
 
-The intended repository structure is:
+The `dictionary` branch contains only published artifacts:
 
 ```text
-global-executables/
+dictionary/
 ├── data/
 │   ├── executables/
 │   │   ├── en/
@@ -162,25 +173,17 @@ global-executables/
 │   │   ├── ecosystem/
 │   │   └── trigram/
 │   │
-│   └── metadata.json
-│
-├── fixtures/
-├── schema/
-├── src/
-│   └── global_executables/
-│       ├── collectors.py
-│       ├── pipeline.py
-│       ├── search.py
-│       ├── assessment.py
-│       ├── freshness.py
-│       └── mcp_server.py
-├── tools/
-├── docs/
-└── .github/
-    └── workflows/
+│   ├── metadata.json
+│   └── history.json
+└── reports/
+    ├── production-crawl.json
+    └── production-refresh.json
 ```
 
-The canonical dataset uses ordinary structured files rather than requiring a database server.
+The `main` branch separately keeps `fixtures/`, `schema/`, `src/`, `tools/`,
+`tests/`, `docs/`, `playground/`, and `.github/workflows/`; it does not track
+the generated paths above. The canonical dataset uses ordinary structured
+files rather than requiring a database server.
 
 Derived indexes are reproducible and may be regenerated from the canonical executable records.
 
@@ -439,7 +442,8 @@ Agents can therefore evaluate the strength of a lookup result instead of treatin
 
 ## GitHub as the Source of Truth
 
-Global Executables deliberately keeps its canonical data in the repository.
+Global Executables deliberately keeps its canonical data in the repository's
+orphan `dictionary` branch.
 
 This provides:
 
@@ -551,11 +555,14 @@ their package artifacts are exhaustively collected. See
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
 commands, rolling freshness scans, and honest measured coverage limitations.
 
-Install and query a checked-out snapshot without network access:
+Install the program, materialize the published branch in a separate worktree,
+and query that snapshot without network access:
 
 ```sh
 python -m pip install -e .
-global-executables-mcp --root .
+git fetch origin dictionary
+git worktree add .dictionary origin/dictionary
+global-executables-mcp --root . --dataset-root .dictionary
 ```
 
 Use `--transport streamable-http` for remote access. Both modes expose
@@ -563,7 +570,7 @@ Use `--transport streamable-http` for remote access. Both modes expose
 `search_executables`, `search_similar_executables`, `get_coverage`,
 `assess_executable`, and `assess_executables`; neither
 mode exposes writes. Data is reusable under the repository license by reading
-the canonical JSON directly, without running MCP.
+the canonical JSON directly from the `dictionary` branch, without running MCP.
 See [`docs/MCP.md`](docs/MCP.md) for local client configuration, the remote
 endpoint, resources, health visibility, and the survivor-only agent workflow.
 
@@ -572,7 +579,7 @@ through declared source partitions, persists a cursor and last successful
 observations on the `freshness-data` branch, and publishes a machine-readable
 report. It is a freshness signal, not a full dataset refresh. Coverage is
 snapshot-specific and reported by `get_coverage`. The
-checked-in snapshot contains production OS/Homebrew coverage plus explicitly
+published snapshot contains production OS/Homebrew coverage plus explicitly
 partial registry coverage; it is **not** full ecosystem coverage, so consumers must preserve
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
 

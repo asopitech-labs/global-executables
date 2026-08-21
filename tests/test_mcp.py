@@ -7,15 +7,24 @@ import time
 import urllib.request
 from pathlib import Path
 
+import pytest
 from mcp import ClientSession
 from mcp.client.stdio import StdioServerParameters, stdio_client
 from mcp.client.streamable_http import streamable_http_client
 
 from global_executables.mcp_server import create_server
+from global_executables.pipeline import rebuild
 
 ROOT = Path(__file__).parents[1]
-SNAPSHOT = json.loads((ROOT / "data/metadata.json").read_text())["snapshot"]
+SNAPSHOT = "2026-08-14"
 EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage", "assess_executable", "assess_executables"}
+
+
+@pytest.fixture(scope="module")
+def dictionary_root(tmp_path_factory):
+    root = tmp_path_factory.mktemp("mcp-dictionary")
+    rebuild(root, sorted((ROOT / "fixtures/intermediate").glob("*.jsonl")), SNAPSHOT)
+    return root
 
 
 async def _assert_protocol(session: ClientSession):
@@ -59,23 +68,27 @@ async def _assert_protocol(session: ClientSession):
         raise AssertionError("unknown resource should fail")
 
 
-async def test_local_stdio_protocol_works_without_network():
-    parameters = StdioServerParameters(command=sys.executable, args=["-m", "global_executables.mcp_server", "--root", str(ROOT)])
+async def test_local_stdio_protocol_works_without_network(dictionary_root):
+    parameters = StdioServerParameters(command=sys.executable, args=[
+        "-m", "global_executables.mcp_server", "--root", str(ROOT),
+        "--dataset-root", str(dictionary_root),
+    ])
     async with stdio_client(parameters) as (read, write):
         async with ClientSession(read, write) as session:
             await _assert_protocol(session)
 
 
-async def test_streamable_http_protocol_and_health():
+async def test_streamable_http_protocol_and_health(dictionary_root):
     with socket.socket() as candidate:
         candidate.bind(("127.0.0.1", 0)); port = candidate.getsockname()[1]
     process = subprocess.Popen([
         sys.executable, "-m", "global_executables.mcp_server", "--root", str(ROOT),
+        "--dataset-root", str(dictionary_root),
         "--transport", "streamable-http", "--host", "127.0.0.1", "--port", str(port)
     ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         health = None
-        for _ in range(100):
+        for _ in range(300):
             try:
                 with urllib.request.urlopen(f"http://127.0.0.1:{port}/health", timeout=.2) as response:
                     health = json.load(response); break
@@ -95,13 +108,25 @@ async def test_streamable_http_protocol_and_health():
             process.kill()
 
 
-async def test_server_exposes_no_write_contract_directly():
-    server = create_server(ROOT)
+async def test_server_exposes_no_write_contract_directly(dictionary_root):
+    server = create_server(ROOT, dataset_root=dictionary_root)
     names = {tool.name for tool in await server.list_tools()}
     assert names == EXPECTED_TOOLS
 
 
 async def test_server_fails_closed_for_missing_dataset(tmp_path):
-    import pytest
     with pytest.raises(FileNotFoundError):
-        create_server(tmp_path)
+        create_server(ROOT, dataset_root=tmp_path)
+
+
+async def test_server_accepts_a_dataset_root_separate_from_program_files(tmp_path):
+    dataset_root = tmp_path / "dictionary"
+    rebuild(dataset_root, sorted((ROOT / "fixtures/intermediate").glob("*.jsonl")),
+            "2026-08-14")
+
+    server = create_server(ROOT, dataset_root=dataset_root)
+
+    metadata = await server.read_resource("global-executables://metadata")
+    assert json.loads(metadata[0].content)["snapshot"] == "2026-08-14"
+    schema = await server.read_resource("global-executables://schema/executable")
+    assert json.loads(schema[0].content)["title"] == "Canonical executable record"

@@ -1,8 +1,8 @@
 # Operations and measured baseline
 
-The durable operating model has two sources of truth: normalized observations and
+The durable operating model has separate sources of truth: normalized observations and
 crawl state live on `artifact-data`; the queryable dictionary and its derived indexes
-live on `main`. A refresh seeds every observation before collecting, preserves stored
+live on the orphan `dictionary` branch; program source lives on `main`. A refresh seeds every observation before collecting, preserves stored
 evidence when an upstream source fails, and refuses an unexplained decrease in unique
 names. Invalid individual command names are quarantined in the refresh report rather
 than stopping publication; malformed input and unexplained shrinkage still block it.
@@ -404,7 +404,7 @@ The scheduled refresh performs the lifecycle in this order:
 5. Refuse to replace the dictionary when the new unique-name count is lower. An
    intentional removal requires `--allow-shrink-reason "..."`, which is recorded in
    the refresh report.
-6. Publish canonical data and reports to `main`. A failed scheduled refresh opens or
+6. Publish canonical data and reports to `dictionary`. A failed scheduled refresh opens or
    updates a GitHub issue with the failed run URL.
 
 For a local OS crawl, seed first so the collector extends durable evidence, then
@@ -481,13 +481,14 @@ there is neither a successful observation nor a readable stored fallback.
 ## GitHub Pages playground
 
 The `pages.yml` workflow builds the static index playground and deploys it with
-the GitHub Pages artifact/deploy actions. It runs after pushes to `main`, after
-registry crawls, and after generated refreshes. During the build it snapshots
+the GitHub Pages artifact/deploy actions. It runs after relevant pushes to
+`main`, after registry crawls, and when a changed dictionary is published.
+During the build it snapshots
 the latest `artifact-data` crawl report into `status.json`, including the next
 scheduled crawl time, source cursors, failures, and coverage kind.
 
 The browser client reads canonical metadata and executable/index shards from
-the public `main` JSON tree. It implements the read-only query surface for
+the public `dictionary` JSON tree. It implements the read-only query surface for
 exact checks, batch checks, provider reads, bounded prefix/scope searches,
 similar-name searches, coverage, and freshness assessment. No query payload is
 sent to an application server. The repository Pages setting must use
@@ -503,7 +504,7 @@ python tools/refresh.py fixtures/intermediate/*.jsonl \
 It writes the requested refresh report, refuses missing collector inputs, and
 validates the generated tree. This local command does not publish to GitHub;
 the scheduled `refresh.yml` workflow runs the production equivalent and
-publishes the complete generated diff to `main`. A source using stored evidence
+publishes the complete generated replacement to `dictionary`. A source using stored evidence
 is recorded as a fallback with unknown current coverage; a source with no usable
 fallback fails and cannot be represented as successful coverage.
 
@@ -517,13 +518,16 @@ python tools/live_smoke.py --output reports/upstream-smoke.json
 Local MCP (no network):
 
 ```sh
-global-executables-mcp --root .
+git fetch origin dictionary
+git worktree add .dictionary origin/dictionary
+global-executables-mcp --root . --dataset-root .dictionary
 ```
 
 Remote Streamable HTTP:
 
 ```sh
-global-executables-mcp --root . --transport streamable-http --host 0.0.0.0 --port 8000
+global-executables-mcp --root . --dataset-root .dictionary \
+  --transport streamable-http --host 0.0.0.0 --port 8000
 ```
 
 An agent should generate candidates privately and call `check_executables`. It
