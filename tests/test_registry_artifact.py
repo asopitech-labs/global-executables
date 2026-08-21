@@ -347,6 +347,15 @@ def test_fetch_retries_a_lost_lookup_but_gives_up_during_an_outage(monkeypatch):
     assert body == b"ok" and len(calls) == 3  # two blips absorbed
     assert registry_artifact._network_failure_streak == 0  # a success clears the streak
 
+    # A timeout already spent the whole budget, so retrying it only multiplies the wait.
+    for reason in (TimeoutError("timed out"), urllib.error.URLError(TimeoutError("timed out"))):
+        attempted = []
+        monkeypatch.setattr(registry_artifact.urllib.request, "urlopen",
+                            lambda request, timeout=None, _r=reason: (attempted.append(1), (_ for _ in ()).throw(_r))[0])
+        with pytest.raises((TimeoutError, urllib.error.URLError)):
+            registry_artifact.fetch("https://example.invalid/slow", timeout=5)
+        assert attempted == [1], f"a {type(reason).__name__} must cost one attempt, not four"
+
     # Once the failures stop looking isolated, a request costs one attempt, not four.
     always_down = lambda request, timeout=None: (_ for _ in ()).throw(
         urllib.error.URLError("[Errno -2] Name or service not known"))

@@ -145,10 +145,16 @@ def fetch(url: str, timeout: int = 120, attempts: int = 4) -> tuple[bytes, dict[
             if error.code != 429 or attempt == attempts:
                 raise
             time.sleep(_retry_after_seconds(error, attempt))
-        except OSError:
+        except OSError as error:
             # A resolver hiccup is not an answer about the package.  One that lasted
             # seconds once failed 3,000 Go modules in a burst, because nothing retried.
-            if outage or attempt == attempts:
+            #
+            # But retry only what failed fast.  A timeout has already spent the whole
+            # budget waiting, so retrying multiplies it: four attempts against a dropped
+            # SYN at a 300-second timeout is twenty minutes stuck on one module, which is
+            # exactly what this retry did to Go before the exemption was added.
+            timed_out = isinstance(error, TimeoutError) or isinstance(getattr(error, "reason", None), TimeoutError)
+            if timed_out or outage or attempt == attempts:
                 _network_failure_streak += 1
                 raise
             time.sleep(min(2.0 ** attempt, NETWORK_BACKOFF_CAP))

@@ -12,7 +12,12 @@ BYTE_BUDGET=${BYTE_BUDGET:-5000000000}
 SOURCE_PACKAGE_BUDGETS=${SOURCE_PACKAGE_BUDGETS:-}
 PASSES=${PASSES:-0}
 PAUSE_SECONDS=${PAUSE_SECONDS:-5}
-TIMEOUT=${TIMEOUT:-300}
+# One socket timeout is the ceiling on a single stalled request, and a dropped SYN costs
+# the whole of it.  A registry that has sent nothing for ninety seconds is not answering.
+TIMEOUT=${TIMEOUT:-90}
+# A pass that stops making progress still holds the container.  State is checkpointed
+# every 200 packages, so ending a stuck pass costs at most that and the next one resumes.
+PASS_TIMEOUT=${PASS_TIMEOUT:-5400}
 
 mkdir -p data/production/intermediate reports
 
@@ -56,7 +61,10 @@ while :; do
   pass=$((pass + 1))
   printf '=== pass %s  %s ===\n' "${pass}" "$(date -u +%FT%TZ)"
   # A failed pass still publishes its progress, so keep going rather than unwinding.
-  python /app/tools/registry_artifact_crawl.py "$@" \
+  # SIGTERM asks for a clean stop at the next checkpoint; a pass wedged in a syscall
+  # cannot answer that, so the kill after it is what actually ends a hang.
+  timeout --signal=TERM --kill-after=120 "${PASS_TIMEOUT}" \
+    python /app/tools/registry_artifact_crawl.py "$@" \
     --state data/production/registry-state.json \
     --output-dir data/production/intermediate \
     --report reports/registry-artifact-crawl.json \
