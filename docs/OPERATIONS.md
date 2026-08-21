@@ -347,6 +347,14 @@ An entry in `unavailable` beginning `gave up after` is a package the crawler cou
 read after `FAILURE_ATTEMPT_LIMIT` tries; those are worth reading occasionally, because
 a cluster of them sharing one reason is a parser gap rather than a set of bad packages.
 
+The first four to appear were all PyPI projects reading `File is not a zip file`, and
+they split three to one. `Abr1k0s` is 21 bytes of SVG and `Jeiji` is a RAR archive named
+`.tar.gz` — genuine rubbish, correctly settled. `Task_allocator` is a well-formed
+tarball that PyPI records as a `bdist_wheel`, so the crawler read it as a ZIP and failed
+on an artifact whose commands an sdist read finds immediately. The reader is now chosen
+by the filename rather than by the declared type. Reading the give-up list is how that
+was found; the count alone said nothing.
+
 Before trusting any of it, confirm the containers are on the build you think they are.
 A state file written by the previous container survives the restart, so reading it too
 early shows the old shape and looks like the fix did not take:

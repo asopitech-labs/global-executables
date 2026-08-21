@@ -703,6 +703,16 @@ def _dump_rows(archive: tarfile.TarFile, member: tarfile.TarInfo):
     yield from csv.DictReader(TextIOWrapper(_UnseekableMember(handle), encoding="utf-8", newline=""))
 
 
+def _is_wheel(candidate: dict[str, Any]) -> bool:
+    """Decide by the filename, not by the type PyPI records.
+
+    A few uploads declare ``bdist_wheel`` and ship a tarball.  Reading one as a ZIP
+    fails on an artifact whose commands a sdist read would have found: `Task_allocator`
+    is a well-formed tar.gz that spent three attempts failing as `File is not a zip file`.
+    """
+    return candidate.get("filename", "").endswith(".whl")
+
+
 def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                 checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     project_file = Path(state.setdefault("projects_file", "data/production/pypi-projects.txt"))
@@ -736,7 +746,7 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
             metadata_body, _ = fetch(f"https://pypi.org/pypi/{urllib.parse.quote(project)}/json", timeout)
             metadata = json.loads(metadata_body); info = metadata.get("info", {})
             candidates = [item for item in metadata.get("urls", []) if item.get("packagetype") in {"bdist_wheel", "sdist"}]
-            candidates.sort(key=lambda item: (item.get("packagetype") != "bdist_wheel",
+            candidates.sort(key=lambda item: (not _is_wheel(item),
                                               "none-any" not in item.get("filename", ""), item.get("filename", "")))
             if not candidates:
                 unavailable[project] = "latest release has no wheel or sdist"
@@ -747,7 +757,7 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
                 for candidate in candidates:
                     url = candidate["url"]
                     try:
-                        if candidate.get("packagetype") == "bdist_wheel":
+                        if _is_wheel(candidate):
                             commands, spent = _wheel_commands(url, timeout)
                             downloaded += spent
                             if downloaded > byte_budget:

@@ -295,6 +295,35 @@ def test_network_blips_never_exhaust_the_attempt_budget():
     assert set(failures) == {"fine"} and unavailable == {} and attempts == {}
 
 
+def test_a_tarball_declared_as_a_wheel_is_read_as_a_sdist(tmp_path, monkeypatch):
+    """PyPI records the type the uploader claimed, so the filename is the honest signal."""
+    catalog = tmp_path / "projects.txt"
+    catalog.write_text("mislabelled\n")
+    stream = BytesIO()
+    with tarfile.open(fileobj=stream, mode="w:gz") as archive:
+        body = b"[project]\nname = 'mislabelled'\n[project.scripts]\nallocate = 'app:main'\n"
+        info = tarfile.TarInfo("mislabelled-1.0/pyproject.toml"); info.size = len(body)
+        archive.addfile(info, BytesIO(body))
+    tarball = stream.getvalue()
+
+    def fake_fetch(url, timeout=120):
+        if url.endswith(".tar.gz"):
+            return tarball, {"downloaded_bytes": len(tarball)}
+        return json.dumps({
+            "info": {"name": "mislabelled", "version": "1.0"},
+            "urls": [{"packagetype": "bdist_wheel", "filename": "mislabelled.tar.gz",
+                      "url": "https://example.invalid/mislabelled.tar.gz"}],
+        }).encode(), {}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_wheel_commands",
+                        lambda url, timeout: pytest.fail("a .tar.gz must not be read as a wheel"))
+    output = tmp_path / "out.jsonl"
+    report = registry_artifact._crawl_pypi({"projects_file": str(catalog)}, output, 10, 10**9, 5)
+    assert report["failures"] == 0
+    assert [json.loads(line)["command"] for line in output.read_text().splitlines()] == ["allocate"]
+
+
 def test_every_crawler_that_blocks_on_failures_can_revisit_one():
     """A source that refuses `exhaustive` while a failure stands must be able to retry it.
 
