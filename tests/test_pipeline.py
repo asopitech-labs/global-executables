@@ -1,8 +1,11 @@
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 import pytest
 from global_executables.model import shard, valid_command
-from global_executables.pipeline import load_canonical, rebuild
+from global_executables.pipeline import DatasetShrinkError, RebuildPolicy, load_canonical, rebuild
 from global_executables.search import Dataset, DatasetIndexError
 
 ROOT=Path(__file__).parents[1]
@@ -80,16 +83,66 @@ def test_failed_coverage_is_unknown(tmp_path):
     p=tmp_path/"data/metadata.json"; m=json.loads(p.read_text()); m["coverage"]["pypi"]["status"]="failed"; p.write_text(json.dumps(m))
     assert Dataset(tmp_path).check("newx")["status"]=="unknown"
 
-def test_bad_record_fails(tmp_path):
+def test_bad_record_is_skipped_and_reported(tmp_path):
     bad=tmp_path/"bad.jsonl"; bad.write_text('{"command":"bad/name","ecosystem":"npm","package":"x","version":null,"repository":null,"source":"x","confidence":"direct"}\n')
-    with pytest.raises(ValueError): rebuild(tmp_path,[bad],"2026-08-14")
+    result = rebuild(tmp_path,[bad],"2026-08-14")
+
+    assert result.input_records == 1
+    assert result.unique_executables == 0
+    assert result.rejected_records == 1
+    assert result.rejected == ({"command": "bad/name", "ecosystem": "npm", "package": "x",
+                                "reason": "invalid executable name"},)
+
+
+def test_refresh_report_counts_rejected_records(tmp_path):
+    bad=tmp_path/"bad.jsonl"; bad.write_text('{"command":".","ecosystem":"shell","package":"sh","source":"fixture"}\n')
+    report=tmp_path/"refresh.json"
+    environment = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
+
+    completed = subprocess.run(
+        [sys.executable, str(ROOT / "tools/refresh.py"), str(bad), "--root", str(tmp_path),
+         "--snapshot", "2026-08-21", "--report", str(report)],
+        capture_output=True, text=True, env=environment,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    value = json.loads(report.read_text())
+    assert value["status"] == "success"
+    assert value["records"] == 1 and value["accepted_records"] == 0
+    assert value["rejected_records"] == 1
+    assert value["rejected"][0]["reason"] == "invalid executable name"
+
+
+def test_structurally_corrupt_input_still_fails(tmp_path):
+    bad=tmp_path/"bad.jsonl"; bad.write_text('{not json}\n')
+    with pytest.raises(json.JSONDecodeError):
+        rebuild(tmp_path,[bad],"2026-08-14")
+
+
+def test_rebuild_refuses_an_unexplained_dictionary_shrink(tmp_path):
+    first=tmp_path/"first.jsonl"
+    first.write_text(json.dumps({"command":"keepme","ecosystem":"npm","package":"keepme",
+                                 "version":"1","repository":None,"source":"fixture",
+                                 "confidence":"direct"})+"\n")
+    rebuild(tmp_path,[first],"2026-08-14")
+    empty=tmp_path/"empty.jsonl"; empty.write_text("")
+
+    with pytest.raises(DatasetShrinkError, match="1 to 0"):
+        rebuild(tmp_path,[empty],"2026-08-15")
+    assert load_canonical(tmp_path)["keepme"]["last_seen"] == "2026-08-14"
+
+    result = rebuild(tmp_path,[empty],"2026-08-15",
+                     policy=RebuildPolicy(shrink_reason="source retired in issue #123"))
+    assert result.shrink_reason == "source retired in issue #123"
+    assert result.unique_executables == 0
 
 
 def test_disappearing_and_reappearing_provider_preserves_first_seen(tmp_path):
     first=tmp_path/"first.jsonl"; first.write_text(json.dumps({"command":"returnx","ecosystem":"npm","package":"returnx","version":"1","repository":None,"source":"fixture","confidence":"direct"})+"\n")
     rebuild(tmp_path,[first],"2026-08-14")
     disappeared=tmp_path/"disappeared.jsonl"; disappeared.write_text("")
-    rebuild(tmp_path,[disappeared],"2026-08-15")
+    rebuild(tmp_path,[disappeared],"2026-08-15",
+            policy=RebuildPolicy(shrink_reason="test provider disappearance"))
     assert Dataset(tmp_path).get("returnx") is None
     rebuild(tmp_path,[first],"2026-08-16")
     record=Dataset(tmp_path).get("returnx")

@@ -782,7 +782,7 @@ def test_shell_builtins_are_pinned_to_the_release_that_defines_them(monkeypatch)
         def __init__(self, stdout): self.stdout = stdout
 
     def fake_run(argv, **kwargs):
-        return _Result("5.2.37(1)-release" if "BASH_VERSION" in argv[-1] else "cd\nexport\n\n[\n")
+        return _Result("5.2.37(1)-release" if "BASH_VERSION" in argv[-1] else ".\n..\ncd\nexport\n\n[\n")
 
     monkeypatch.setattr(production.__dict__["__builtins__"]["__import__"]("shutil"), "which",
                         lambda name: f"/bin/{name}")
@@ -802,7 +802,9 @@ def test_shells_that_cannot_be_asked_come_from_their_specification():
     assert {"path", "dir", "set", "copy", "del", "echo"} <= commands
     assert coverage["source"].startswith("https://learn.microsoft.com/")
     posix, _ = production._shell_builtin_rows("sh")
-    assert {"cd", "export", "trap", ":"} <= {row["command"] for row in posix}
+    commands = {row["command"] for row in posix}
+    assert {"cd", "export", "trap", ":"} <= commands
+    assert "." not in commands and ".." not in commands
 
 
 def test_a_shell_absent_from_this_machine_is_not_observed_here(tmp_path, monkeypatch):

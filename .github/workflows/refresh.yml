@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: generated-dataset-refresh
@@ -20,14 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.12", cache: pip}
       - run: pip install -e '.[test]'
-      - name: Acquire production OS indexes
-        run: |
-          python tools/production_crawl.py \
-            --source debian --source ubuntu --source arch --source homebrew \
-            --source msys2 --source scoop --source winget --source windows \
-            --output-dir data/production/intermediate \
-            --report reports/production-crawl.json
-      - name: Restore latest registry artifact observations
+      - name: Restore latest durable observations
         run: |
           if artifact_ref=$(git ls-remote --heads origin artifact-data); then
             if test -n "$artifact_ref"; then
@@ -39,7 +33,10 @@ jobs:
             echo "::error::Unable to inspect the artifact-data branch; refusing to refresh with incomplete inputs"
             exit 1
           fi
-          for source in npm pypi crates go rubygems packagist nuget macos shell; do
+          mkdir -p data/production/intermediate
+          for source in \
+            arch debian ubuntu homebrew msys2 scoop winget windows \
+            npm pypi crates go rubygems packagist nuget macos shell; do
             if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             else
@@ -49,6 +46,53 @@ jobs:
                 : > data/production/intermediate/$source.jsonl
               fi
             fi
+          done
+      - name: Acquire production OS indexes
+        run: |
+          python tools/production_crawl.py \
+            --source debian --source ubuntu --source arch --source homebrew \
+            --source msys2 --source scoop --source winget --source windows \
+            --output-dir data/production/intermediate \
+            --report reports/production-crawl.json
+      - name: Publish refreshed OS observations
+        run: |
+          git fetch origin artifact-data || true
+          rm -rf /tmp/os-observation-publish
+          if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
+            git worktree add /tmp/os-observation-publish origin/artifact-data
+          else
+            git worktree add -b artifact-data /tmp/os-observation-publish HEAD
+          fi
+          mkdir -p /tmp/os-observation-publish/data/production/intermediate
+          for source in arch debian ubuntu homebrew msys2 scoop winget windows; do
+            cp data/production/intermediate/${source}.jsonl \
+              /tmp/os-observation-publish/data/production/intermediate/${source}.jsonl
+          done
+          git -C /tmp/os-observation-publish config user.name github-actions[bot]
+          git -C /tmp/os-observation-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/os-observation-publish add -f \
+            data/production/intermediate/arch.jsonl \
+            data/production/intermediate/debian.jsonl \
+            data/production/intermediate/ubuntu.jsonl \
+            data/production/intermediate/homebrew.jsonl \
+            data/production/intermediate/msys2.jsonl \
+            data/production/intermediate/scoop.jsonl \
+            data/production/intermediate/winget.jsonl \
+            data/production/intermediate/windows.jsonl
+          git -C /tmp/os-observation-publish diff --cached --quiet || \
+            git -C /tmp/os-observation-publish commit -m "Preserve production OS observations"
+          for attempt in 1 2 3; do
+            if git -C /tmp/os-observation-publish fetch origin artifact-data; then
+              git -C /tmp/os-observation-publish rebase origin/artifact-data
+            fi
+            if git -C /tmp/os-observation-publish push origin HEAD:artifact-data; then
+              break
+            fi
+            if test "$attempt" = 3; then
+              echo "::error::Unable to publish OS observations after three attempts"
+              exit 1
+            fi
+            sleep 5
           done
       - name: Rebuild from production and registry inputs
         run: |
@@ -88,3 +132,23 @@ jobs:
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
+
+  alert-refresh-failure:
+    needs: refresh
+    if: always() && needs.refresh.result == 'failure'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open or update the refresh failure alert
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Alert: generated dataset refresh failed"
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          body="The scheduled dataset refresh failed: ${run_url}"
+          issue=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --search "$title in:title" --json number --jq '.[0].number // empty')
+          if test -n "$issue"; then
+            gh issue comment "$issue" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
+          fi

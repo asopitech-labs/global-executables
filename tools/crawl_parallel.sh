@@ -10,7 +10,12 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 IMAGE="${IMAGE:-global-executables-crawl:local}"
 BASE="${BASE:-${HOME}/.ge-crawl}"
-SOURCES="${SOURCES:-pypi rubygems packagist nuget npm go}"
+# An explicitly empty value is useful when publishing checkout observations only.
+SOURCES="${SOURCES-pypi rubygems packagist nuget npm go}"
+# Non-registry observations are produced in the checkout by production_crawl.py.  They
+# share artifact-data as their durable source of truth even though they have no cursor
+# state or per-source crawl container.
+OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 scoop winget windows macos shell}"
 PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
 BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
 
@@ -48,6 +53,13 @@ seed() {
     local rows="data/production/intermediate/${source}.jsonl"
     if git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
       git show "origin/artifact-data:${rows}" > "${BASE}/${rows}"
+    fi
+  done
+  mkdir -p "${ROOT_DIR}/data/production/intermediate"
+  for source in ${OBSERVATION_SOURCES}; do
+    local rows="data/production/intermediate/${source}.jsonl"
+    if [ ! -f "${ROOT_DIR}/${rows}" ] && git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
+      git show "origin/artifact-data:${rows}" > "${ROOT_DIR}/${rows}"
     fi
   done
   # Report from the seeded base: the per-source directories `status` reads do not exist
@@ -192,11 +204,40 @@ PYPUB
     [ -f "${dir}/data/production/intermediate/${source}.jsonl" ] && \
       cp "${dir}/data/production/intermediate/${source}.jsonl" "${worktree}/data/production/intermediate/${source}.jsonl"
   done
+  for source in ${OBSERVATION_SOURCES}; do
+    local rows="data/production/intermediate/${source}.jsonl"
+    local observed="${ROOT_DIR}/${rows}"
+    local target="${worktree}/${rows}"
+    if [ -f "${observed}" ]; then
+      # Moving package indexes are evidence over time.  Merge by provider identity so
+      # a newly observed version wins without deleting a command that disappeared.
+      python3 - "${observed}" "${target}" <<'PYOBS'
+import json, pathlib, sys
+observed, target = map(pathlib.Path, sys.argv[1:])
+
+def rows(path):
+    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()] if path.is_file() else []
+
+def identity(row):
+    return row.get("command"), row.get("ecosystem"), row.get("package"), row.get("source")
+
+merged = {identity(row): row for row in rows(observed)}
+for row in rows(target):
+    merged.setdefault(identity(row), row)
+ordered = sorted(merged.values(), key=lambda row: (row.get("command", ""), row.get("package", ""), row.get("source", "")))
+target.parent.mkdir(parents=True, exist_ok=True)
+target.write_text("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in ordered))
+PYOBS
+    fi
+  done
   git -C "${worktree}" add -f data/production
   if git -C "${worktree}" diff --cached --quiet; then
     echo "nothing to publish"
   else
-    git -C "${worktree}" commit --quiet -m "Record local registry crawl: ${SOURCES}"
+    local message="Record crawl data"
+    [ -n "${SOURCES}" ] && message="${message}; registries: ${SOURCES}"
+    [ -n "${OBSERVATION_SOURCES}" ] && message="${message}; observations: ${OBSERVATION_SOURCES}"
+    git -C "${worktree}" commit --quiet -m "${message}"
     git -C "${worktree}" push --quiet origin HEAD:artifact-data && echo "published"
   fi
   git worktree remove "${worktree}" --force
