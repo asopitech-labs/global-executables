@@ -249,10 +249,73 @@ def test_permanent_registry_conditions_are_not_retryable_failures():
         "retry_projects": ["no-dist", "old-source"],
         "retry_crates": ["yanked", "transient"],
     }
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, _attempts = _failure_state(state)
     assert set(unavailable) == {"no-dist", "yanked"}
     assert set(failures) == {"transient"}
     assert state["retry_projects"] == ["old-source"]
+
+
+def _http_error(code: str | int) -> urllib.error.HTTPError:
+    return urllib.error.HTTPError("https://example.invalid/x", int(code), "gone", {}, None)
+
+
+def test_withdrawn_and_route_collision_answers_are_permanent():
+    """410 and 451 mean withdrawn; 405 is npm's answer for the package named "-"."""
+    failures: dict[str, str] = {}
+    unavailable: dict[str, str] = {}
+    attempts: dict[str, int] = {}
+    for name, code in (("gone", 410), ("legal", 451), ("-", 405), ("missing", 404)):
+        registry_artifact._record_failure(failures, unavailable, name, _http_error(code), attempts)
+    assert set(unavailable) == {"gone", "legal", "-", "missing"}
+    assert failures == {} and attempts == {}
+
+
+def test_an_unreadable_artifact_stops_being_retried_but_stays_on_the_record():
+    failures: dict[str, str] = {}
+    unavailable: dict[str, str] = {}
+    attempts: dict[str, int] = {}
+    error = zipfile.BadZipFile("File is not a zip file")
+    for _ in range(registry_artifact.FAILURE_ATTEMPT_LIMIT - 1):
+        registry_artifact._record_failure(failures, unavailable, "broken", error, attempts)
+        assert "broken" in failures and "broken" not in unavailable
+    registry_artifact._record_failure(failures, unavailable, "broken", error, attempts)
+    assert failures == {} and attempts == {}
+    assert unavailable["broken"].startswith("gave up after 3 attempts:")
+
+
+def test_network_blips_never_exhaust_the_attempt_budget():
+    """A DNS outage says nothing about the package, so it must not bury one."""
+    failures: dict[str, str] = {}
+    unavailable: dict[str, str] = {}
+    attempts: dict[str, int] = {}
+    blip = urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
+    for _ in range(registry_artifact.FAILURE_ATTEMPT_LIMIT * 3):
+        registry_artifact._record_failure(failures, unavailable, "fine", blip, attempts)
+    assert set(failures) == {"fine"} and unavailable == {} and attempts == {}
+
+
+def test_rubygems_revisits_a_gem_that_failed_on_a_blip(tmp_path, monkeypatch):
+    catalog = tmp_path / "names.txt"
+    catalog.write_text("good\nflaky\n")
+    refused = {"flaky"}
+
+    def fake_fetch(url, timeout=120):
+        name = url.rsplit("/", 1)[-1].removesuffix(".json")
+        if name in refused:
+            raise urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
+        return json.dumps({"name": name, "version": "1.0.0", "gem_uri": "https://example.invalid/g.gem"}).encode(), {}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "_gem_metadata", lambda url, timeout: (b"", 0))
+    state = {"names_file": str(catalog)}
+    first = registry_artifact._crawl_rubygems(state, tmp_path / "out.jsonl", 10, 10**9, 5)
+    assert first["cursor"] == 2 and state["retry_gems"] == ["flaky"]
+    assert first["coverage_kind"] == "partial"  # the cursor is at the end but one gem is owed
+
+    refused.clear()  # the outage passes
+    second = registry_artifact._crawl_rubygems(state, tmp_path / "out.jsonl", 10, 10**9, 5)
+    assert state["retry_gems"] == [] and second["failures"] == 0
+    assert second["coverage_kind"] == "exhaustive"
 
 
 def test_pypi_no_distribution_advances_cursor_and_is_unavailable(tmp_path, monkeypatch):

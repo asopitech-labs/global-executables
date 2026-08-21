@@ -41,6 +41,15 @@ RETRY_AFTER_CAP = 60.0
 # source below exhaustive.
 PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive has no readable Cargo.toml:",
                               "module has no latest version:", "gem is yanked")
+# Answers that mean the package is gone for good.  404 is the usual one; 410 and 451 are
+# how a registry reports a withdrawal or a legal takedown, and 405 is what npm returns for
+# the package literally named "-", whose path collides with the registry's own API space.
+PERMANENT_HTTP_CODES = (404, 405, 410, 451)
+# A failure that is neither a clean "gone" answer nor a network blip still has to stop
+# somewhere, or one unreadable artifact holds a source below exhaustive forever.  Network
+# errors are deliberately exempt: they self-heal, and a DNS outage spanning a few passes
+# would otherwise bury packages that are perfectly fine.
+FAILURE_ATTEMPT_LIMIT = 3
 # Bumped when an npm parsing fix invalidates the coverage an earlier cursor claimed.
 NPM_PARSER_GENERATION = 3
 NPM_ALL_DOCS = "https://replicate.npmjs.com/_all_docs"
@@ -298,10 +307,20 @@ def _append_rows(path: Path, rows: list[dict[str, Any]]) -> None:
             handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
 
-def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str]]:
-    """Return retryable failures and preserve permanent 404s separately."""
+def _permanently_gone(text: str) -> bool:
+    return any(f"HTTP Error {code}" in text for code in PERMANENT_HTTP_CODES)
+
+
+def _network_blip(error: Exception) -> bool:
+    """True for errors that say nothing about the package, only about the connection."""
+    return isinstance(error, OSError) and not isinstance(error, urllib.error.HTTPError)
+
+
+def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str], dict[str, int]]:
+    """Return retryable failures, permanent verdicts, and how often each has been tried."""
     failures = state.setdefault("failures", {})
     unavailable = state.setdefault("unavailable", {})
+    attempts = state.setdefault("failure_attempts", {})
     retry_projects = state.setdefault("retry_projects", [])
     for key, message in list(failures.items()):
         text = str(message)
@@ -315,23 +334,37 @@ def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str
         elif text.startswith(PERMANENT_CRATE_CONDITIONS):
             unavailable[key] = text
             failures.pop(key, None)
-        elif "HTTP Error 404" in text:
+        elif _permanently_gone(text):
             unavailable[key] = text
             failures.pop(key, None)
     retry_projects[:] = [key for key in retry_projects if key not in unavailable]
-    return failures, unavailable
+    for key in list(attempts):  # a key that cleared or was decided keeps no tally
+        if key not in failures:
+            attempts.pop(key, None)
+    return failures, unavailable, attempts
 
 
-def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: str, error: Exception) -> None:
+def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: str, error: Exception,
+                    attempts: dict[str, int] | None = None) -> None:
     message = str(error)
-    if isinstance(error, urllib.error.HTTPError) and error.code == 404:
+    gone = isinstance(error, urllib.error.HTTPError) and error.code in PERMANENT_HTTP_CODES
+    if gone or message.startswith(PERMANENT_CRATE_CONDITIONS):
         unavailable[key] = message
         failures.pop(key, None)
-    elif message.startswith(PERMANENT_CRATE_CONDITIONS):
-        unavailable[key] = message
-        failures.pop(key, None)
-    else:
-        failures[key] = message
+        if attempts is not None:
+            attempts.pop(key, None)
+        return
+    if attempts is not None and not _network_blip(error):
+        tried = attempts.get(key, 0) + 1
+        if tried >= FAILURE_ATTEMPT_LIMIT:
+            # Recorded as a negative answer rather than dropped: the source may now claim
+            # exhaustive, and the reason it could not read this one stays on the record.
+            unavailable[key] = f"gave up after {tried} attempts: {message}"
+            failures.pop(key, None)
+            attempts.pop(key, None)
+            return
+        attempts[key] = tried
+    failures[key] = message
 
 
 def _archive_files(body: bytes) -> dict[str, bytes]:
@@ -682,7 +715,7 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
         checkpoint()
     projects = read_catalog(project_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, attempts = _failure_state(state)
     retry_projects = state.setdefault("retry_projects", [])
     retry_projects[:] = [project for project in retry_projects if project not in unavailable]
     rows: list[dict[str, Any]] = []
@@ -734,7 +767,7 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
                     raise last_error or RegistryCrawlError("no usable wheel or sdist")
                 failures.pop(project, None)
         except Exception as error:  # keep the cursor moving; failures block exhaustive status
-            _record_failure(failures, unavailable, project, error)
+            _record_failure(failures, unavailable, project, error, attempts)
         if not retrying:
             cursor += 1
         else:
@@ -807,7 +840,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
         checkpoint()  # 431 requests went into this list; do not risk it on a later step
     packages = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, attempts = _failure_state(state)
     rows_out: list[dict[str, Any]] = []
     collected = 0
     budget_exhausted = False
@@ -823,7 +856,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
             rows_out.extend(npm_metadata(json.loads(metadata_body), metadata_url))
             failures.pop(name, None)
         except Exception as error:
-            _record_failure(failures, unavailable, name, error)
+            _record_failure(failures, unavailable, name, error, attempts)
         cursor += 1; processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
             collected += len(rows_out)
@@ -856,7 +889,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     # complete crates.io at partial with no way to ever clear.
     state.pop("failures", None)
     state.pop("unavailable", None)
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, attempts = _failure_state(state)
     # The dump is republished daily and the observations replace rather than extend, so
     # re-reading an unchanged one costs 1.7GB to rewrite the same file.
     _throttle(CRATES_DB_DUMP)
@@ -1027,7 +1060,7 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
     catalog_cursor = _load_catalog_cursor(cursor_file)
     since = catalog_cursor.get("since") or state.get("catalog_since", GO_INDEX_EPOCH)
     catalog_complete = bool(catalog_cursor.get("complete") or state.get("catalog_complete"))
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, attempts = _failure_state(state)
     retry_modules = state.setdefault("retry_modules", [])
     retry_modules[:] = [name for name in retry_modules if name not in unavailable]
     for name in failures:
@@ -1092,7 +1125,7 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
             rows.extend(module_rows)
             failures.pop(module, None)
         except Exception as error:
-            _record_failure(failures, unavailable, module, error)
+            _record_failure(failures, unavailable, module, error, attempts)
             if module in failures and module not in retry_modules:
                 retry_modules.append(module)  # queued for the next run, not this one
         if not retrying:
@@ -1126,10 +1159,23 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
         checkpoint()  # persist the catalogue before anything can unwind the pass
     gems = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, attempts = _failure_state(state)
     rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
-    while cursor < len(gems) and processed < budget:
-        package = gems[cursor]
+    # Without a queue the cursor walks past a gem that failed on a network blip and never
+    # comes back, so the source finishes permanently short of what it could read.  The
+    # queue is bounded to its length at the start of the pass: a gem that fails again is
+    # revisited next pass instead of consuming this pass's budget over and over.
+    retry_gems = state.setdefault("retry_gems", [])
+    retry_gems[:] = [name for name in retry_gems if name not in unavailable]
+    for name in failures:
+        if name not in retry_gems:
+            retry_gems.append(name)
+    retry_budget = len(retry_gems)
+    while (retry_budget or cursor < len(gems)) and processed < budget:
+        retrying = retry_budget > 0
+        if retrying:
+            retry_budget -= 1
+        package = retry_gems.pop(0) if retrying else gems[cursor]
         try:
             metadata_url = "https://rubygems.org/api/v1/gems/" + urllib.parse.quote(package, safe="") + ".json"
             metadata_body, _ = fetch(metadata_url, timeout)
@@ -1137,26 +1183,26 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
             if metadata.get("yanked"):
                 # RubyGems still lists a yanked gem but its CDN answers AccessDenied for
                 # the artifact, so fetching it buys a 403 that is retried on every run.
-                unavailable[package] = "gem is yanked"
-                failures.pop(package, None)
-                cursor += 1; processed += 1
-                if processed % CHECKPOINT_INTERVAL == 0:
-                    collected += len(rows)
-                    checkpoint(rows, cursor=cursor)
-                continue
+                raise RegistryCrawlError("gem is yanked")
             version = metadata.get("version", "unknown")
             artifact_url = metadata.get("gem_uri") or f"https://rubygems.org/gems/{urllib.parse.quote(package, safe='')}-{urllib.parse.quote(version, safe='')}.gem"
             compressed, spent = _gem_metadata(artifact_url, timeout); downloaded += spent
             if downloaded > byte_budget:
                 budget_exhausted = True
+                if retrying:
+                    retry_gems.insert(0, package)
                 break
             repository = metadata.get("source_code_uri") or metadata.get("homepage_uri")
             gemspec = gzip.decompress(compressed).decode("utf-8", "replace") if compressed else ""
             rows.extend(_gem_rows(gemspec, metadata.get("name", package), version, repository, artifact_url))
             failures.pop(package, None)
         except Exception as error:
-            _record_failure(failures, unavailable, package, error)
-        cursor += 1; processed += 1
+            _record_failure(failures, unavailable, package, error, attempts)
+            if package in failures and package not in retry_gems:
+                retry_gems.append(package)  # queued for the next pass, not this one
+        if not retrying:
+            cursor += 1
+        processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
@@ -1165,10 +1211,11 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
     state["cursor"] = cursor
     collected += len(rows)
     _append_rows(output, rows)
-    complete = cursor >= len(gems) and not failures
+    complete = cursor >= len(gems) and not failures and not retry_gems
     return {"cursor": cursor, "catalog_size": len(gems), "processed": processed,
             "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
-            "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
+            "unavailable": len(unavailable), "retry_pending": len(retry_gems),
+            "budget_exhausted": budget_exhausted,
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
@@ -1247,7 +1294,7 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         state["catalog_advertised"] = advertised
         state["catalog_truncated"] = bool(advertised) and len(tools) < advertised
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, attempts = _failure_state(state)
     # Reaching the end of the catalogue is not the end of the work: a tool that failed
     # on a DNS blip has no other way back, and six of them held a finished NuGet at
     # partial with nothing left to walk.
@@ -1282,7 +1329,7 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
                         for command in sorted(set(commands)))
             failures.pop(package, None)
         except Exception as error:
-            _record_failure(failures, unavailable, package, error)
+            _record_failure(failures, unavailable, package, error, attempts)
             if package in failures and package not in retry_tools:
                 retry_tools.append(package)  # queued for the next run, not this one
         if not retrying:
@@ -1320,7 +1367,7 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
         checkpoint()  # persist the catalogue before anything can unwind the pass
     packages = read_catalog(catalog_file)
     cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
-    failures, unavailable = _failure_state(state)
+    failures, unavailable, attempts = _failure_state(state)
     retry_packages = state.setdefault("retry_packagist", [])
     for package in failures:
         if package not in retry_packages:
@@ -1342,7 +1389,7 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
             rows.extend(_packagist_rows(json.loads(metadata_body), package, metadata_url))
             failures.pop(package, None)
         except Exception as error:
-            _record_failure(failures, unavailable, package, error)
+            _record_failure(failures, unavailable, package, error, attempts)
             if retrying and package not in retry_packages:
                 retry_packages.append(package)
         if not retrying:
