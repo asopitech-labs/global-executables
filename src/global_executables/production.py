@@ -25,7 +25,7 @@ from typing import Any
 
 from .collectors import (homebrew_metadata, package_files, record, scoop_manifests,
                          winget_commands, windows_command)
-from .model import write_jsonl
+from .model import read_jsonl, valid_command, write_jsonl
 
 
 USER_AGENT = "global-executables-production/1.0 (+https://github.com/asopitech-labs/global-executables)"
@@ -85,20 +85,20 @@ PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 # There is no privileged observation of a base command set: every run samples one
 # installed system.  Those samples accumulate rather than replace each other, so a
 # second machine, architecture or release widens the coverage instead of erasing it.
-ACCUMULATING_SOURCES = {"macos", "shell"}
+ACCUMULATING_SOURCES = COLLECTED_SOURCES
 
 
 def _merge_observations(rows: list[dict[str, Any]], output: Path) -> list[dict[str, Any]]:
-    merged = {(row["command"], row["source"]): row for row in rows}
+    # A stable provider identity replaces its older metadata, while an executable that
+    # disappeared from a moving upstream index remains durable evidence that the name
+    # has been published before.
+    def identity(row: dict[str, Any]) -> tuple[Any, ...]:
+        return row.get("command"), row.get("ecosystem"), row.get("package"), row.get("source")
+
+    merged = {identity(row): row for row in rows}
     if output.is_file():
-        for line in output.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            try:
-                previous = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            merged.setdefault((previous.get("command"), previous.get("source")), previous)
+        for previous in read_jsonl(output):
+            merged.setdefault(identity(previous), previous)
     return list(merged.values())
 
 
@@ -323,7 +323,9 @@ def _shell_builtin_rows(shell: str, executable: str | None = None) -> tuple[list
         version = subprocess.run([binary, *probe], capture_output=True, text=True,
                                  timeout=60).stdout.strip() or "unknown"
         reference = f"{shell}@{version}"
-    commands = sorted({name for name in names if name})
+    # `.` and `..` are directory entries once converted to canonical file paths, and
+    # any other name rejected by the model is equally unusable as published evidence.
+    commands = sorted({name for name in names if valid_command(name)})
     if not commands:
         raise ProductionSourceError(f"shell reported no built-ins: {shell}")
     rows = [record(command, "shell", shell, version, None, reference,
@@ -468,15 +470,34 @@ def crawl_sources(sources: list[str], output_dir: Path, report_path: Path, timeo
         try:
             report["sources"][source] = crawl_source(source, output, timeout)
         except ProductionSourceError as error:
-            report["sources"][source] = {
-                "status": "failed",
-                "coverage_kind": "unknown",
-                "records": 0,
-                "source": SOURCE_URLS.get(source, source),
-                "error": str(error),
-            }
-            report["status"] = "failed"
-    report["failed"] = sorted(source for source, value in report["sources"].items() if value["status"] != "success")
+            try:
+                stored = read_jsonl(output) if output.is_file() else []
+            except (json.JSONDecodeError, OSError) as stored_error:
+                stored = []
+                error = ProductionSourceError(f"{error}; stored fallback is unreadable: {stored_error}")
+            if stored:
+                report["sources"][source] = {
+                    "status": "fallback",
+                    "coverage_kind": "unknown",
+                    "records": len(stored),
+                    "source": SOURCE_URLS.get(source, source),
+                    "stored_source": str(output),
+                    "error": str(error),
+                }
+                if report["status"] == "success":
+                    report["status"] = "degraded"
+                report["coverage_kind"] = "partial"
+            else:
+                report["sources"][source] = {
+                    "status": "failed",
+                    "coverage_kind": "unknown",
+                    "records": 0,
+                    "source": SOURCE_URLS.get(source, source),
+                    "error": str(error),
+                }
+                report["status"] = "failed"
+    report["failed"] = sorted(source for source, value in report["sources"].items() if value["status"] == "failed")
+    report["fallbacks"] = sorted(source for source, value in report["sources"].items() if value["status"] == "fallback")
     report["uncollected"] = sorted(set(SOURCE_URLS) - set(report["sources"]))
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n")

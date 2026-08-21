@@ -4,6 +4,7 @@ import json
 import hashlib
 import shutil
 from collections import defaultdict
+from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 from typing import Any, Iterable
@@ -11,13 +12,53 @@ from typing import Any, Iterable
 from .model import dumps, filename, provider_key, shard, valid_command
 
 
+@dataclass(frozen=True)
+class RebuildPolicy:
+    """Explicit exceptions to the default safe publication policy."""
+
+    shrink_reason: str | None = None
+
+
+@dataclass(frozen=True)
+class MergeResult:
+    records: list[dict[str, Any]]
+    rejected: tuple[dict[str, Any], ...]
+
+
+@dataclass(frozen=True)
+class RebuildResult:
+    input_records: int
+    unique_executables: int
+    previous_unique_executables: int
+    rejected_records: int
+    rejected: tuple[dict[str, Any], ...]
+    shrink_reason: str | None
+
+
+class DatasetShrinkError(ValueError):
+    def __init__(self, previous: int, current: int):
+        self.previous = previous
+        self.current = current
+        super().__init__(
+            f"refusing to shrink the dictionary from {previous} to {current} unique executables; "
+            "pass an explicit shrink reason when the drop is intentional"
+        )
+
+
 def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]] | None, seen: str,
-          history: dict[str, str] | None = None) -> list[dict[str, Any]]:
+          history: dict[str, str] | None = None) -> MergeResult:
     grouped: dict[str, dict[tuple[str, ...], dict[str, Any]]] = defaultdict(dict)
+    rejected: list[dict[str, Any]] = []
     for raw in records:
         command = raw["command"]
-        if not valid_command(command):
-            raise ValueError(f"invalid executable name: {command!r}")
+        if not isinstance(command, str) or not valid_command(command):
+            rejected.append({
+                "command": command,
+                "ecosystem": raw.get("ecosystem"),
+                "package": raw.get("package"),
+                "reason": "invalid executable name",
+            })
+            continue
         provider = {k: raw.get(k) for k in ("ecosystem", "package", "version", "repository", "source", "confidence")}
         for key in (
             "alias_of", "source_type", "package_system", "distribution_family", "distribution",
@@ -34,7 +75,7 @@ def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]]
         old = previous.get(command, {})
         output.append({"command": command, "providers": sorted(grouped[command].values(), key=provider_key),
                        "first_seen": old.get("first_seen", history.get(command, seen)), "last_seen": seen})
-    return output
+    return MergeResult(output, tuple(rejected))
 
 
 def load_canonical(root: Path) -> dict[str, dict[str, Any]]:
@@ -101,7 +142,8 @@ def publish(root: Path, records: list[dict[str, Any]], coverage: dict[str, Any],
 
 
 def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
-            coverage_kind: str | dict[str, str] = "fixture") -> None:
+            coverage_kind: str | dict[str, str] = "fixture", *,
+            policy: RebuildPolicy = RebuildPolicy()) -> RebuildResult:
     snapshot = snapshot or date.today().isoformat()
     previous = load_canonical(root)
     history = load_history(root)
@@ -111,4 +153,15 @@ def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
         rows.extend(current); eco = path.stem
         kind = coverage_kind.get(eco, "partial") if isinstance(coverage_kind, dict) else coverage_kind
         coverage[eco] = {"status": "success", "coverage_kind": kind, "records": len(current), "source": str(path)}
-    publish(root, merge(rows, previous, snapshot, history), coverage, snapshot, history)
+    merged = merge(rows, previous, snapshot, history)
+    if len(merged.records) < len(previous) and not policy.shrink_reason:
+        raise DatasetShrinkError(len(previous), len(merged.records))
+    publish(root, merged.records, coverage, snapshot, history)
+    return RebuildResult(
+        input_records=len(rows),
+        unique_executables=len(merged.records),
+        previous_unique_executables=len(previous),
+        rejected_records=len(merged.rejected),
+        rejected=merged.rejected,
+        shrink_reason=policy.shrink_reason,
+    )

@@ -18,5 +18,5 @@ args = parser.parse_args()
 sources = args.sources or sorted(SOURCE_URLS)
 report = crawl_sources(sources, args.output_dir, args.report, args.timeout)
 print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
-if report["status"] != "success":
+if report["status"] == "failed":
     raise SystemExit(1)
