@@ -373,9 +373,12 @@ def test_a_slow_source_still_checkpoints_on_the_clock(monkeypatch):
     """200 Go modules can outlast the pass, and a pass killed before a checkpoint wrote nothing."""
     clock = [1000.0]
     monkeypatch.setattr(registry_artifact.time, "monotonic", lambda: clock[0])
+    # The clock is module state; leaving a fake reading behind makes the next test see a
+    # two-minute gap against the real clock and checkpoint when it should not.
     monkeypatch.setattr(registry_artifact, "_last_checkpoint", 0.0)
+    registry_artifact._start_checkpoint_clock()
 
-    assert registry_artifact._due_for_checkpoint(1) is False  # first call only starts the clock
+    assert registry_artifact._due_for_checkpoint(1) is False
     assert registry_artifact._due_for_checkpoint(2) is False
     clock[0] += registry_artifact.CHECKPOINT_SECONDS - 1
     assert registry_artifact._due_for_checkpoint(3) is False
@@ -898,7 +901,9 @@ def test_every_crawler_can_actually_call_its_checkpoint(tmp_path, monkeypatch):
 
     registry_artifact._crawl_go(state, tmp_path / "go.jsonl", 2, 1_000_000, 120, spy)
 
-    assert [update["cursor"] for update in calls] == [1, 2]
+    # Go inspects a window of modules at a time, so the checkpoint follows the window
+    # rather than each module -- what matters is that it fires and carries the cursor.
+    assert [update["cursor"] for update in calls] == [2]
     # and no crawler may shadow the parameter it was handed
     for name in ("_crawl_pypi", "_crawl_npm", "_crawl_crates", "_crawl_go",
                  "_crawl_rubygems", "_crawl_packagist", "_crawl_nuget"):

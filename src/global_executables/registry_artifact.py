@@ -23,6 +23,7 @@ import urllib.error
 import urllib.request
 import zipfile
 import zlib
+from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
@@ -68,6 +69,9 @@ GO_CATALOG_REQUESTS = 3000
 # module is better taken whole than probed, however cheap each probe is.
 GO_SMALL_ZIP_BYTES = 262144
 GO_DIRECTORY_PROBES = 512
+# Inspection waits on the proxy far more than it computes, so a window of modules
+# in flight measured five times the throughput of one at a time.
+GO_INSPECTION_WORKERS = 8
 # Progress is persisted this often inside a pass.  State used to be written once, after
 # every source finished, so an interruption discarded the cursors of sources that had
 # already completed along with the work in flight.
@@ -108,13 +112,17 @@ def _no_checkpoint(buffer: list[dict[str, Any]] | None = None, **updates: Any) -
     return None
 
 
+def _start_checkpoint_clock() -> None:
+    global _last_checkpoint
+    _last_checkpoint = time.monotonic()
+
+
 def _due_for_checkpoint(processed: int) -> bool:
     """True when the pass has done enough packages, or waited long enough, to persist."""
     global _last_checkpoint
     now = time.monotonic()
-    if not _last_checkpoint:
+    if not _last_checkpoint:  # a crawler called directly starts its clock here, not at zero
         _last_checkpoint = now
-        return False
     if processed % CHECKPOINT_INTERVAL == 0 or now - _last_checkpoint >= CHECKPOINT_SECONDS:
         _last_checkpoint = now
         return True
@@ -1257,36 +1265,58 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
     rows: list[dict[str, Any]] = []
     collected = 0
     budget_exhausted = False
-    while (retry_budget or cursor < len(modules)) and processed < budget:
-        retrying = retry_budget > 0
-        if retrying:
-            retry_budget -= 1
-        module = retry_modules.pop(0) if retrying else modules[cursor]
+    def inspect(module: str) -> tuple[list[dict[str, Any]], int, Exception | None]:
+        """Read one module.  Never raises: the caller records the verdict in order."""
         try:
             version = _go_latest_version(module, timeout)
             escaped = urllib.parse.quote(module, safe="/@")
             url = f"https://proxy.golang.org/{escaped}/@v/{urllib.parse.quote(version, safe='')}.zip"
             module_rows, spent = _go_module_rows(url, module, version, timeout)
-            downloaded += spent
+            return module_rows, spent, None
+        except Exception as error:  # noqa: BLE001 - a module never ends the pass
+            return [], 0, error
+
+    # A module costs about four seconds, nearly all of it waiting on the proxy, and Go
+    # has close to two million of them.  Inspecting a window at a time measured five
+    # times the throughput; the results are applied in order afterwards, so the cursor
+    # still only passes modules that were actually answered for.
+    with ThreadPoolExecutor(max_workers=GO_INSPECTION_WORKERS) as pool:
+        while (retry_budget or cursor < len(modules)) and processed < budget and not budget_exhausted:
+            window: list[tuple[str, bool]] = []
+            lookahead = cursor
+            while len(window) < min(GO_INSPECTION_WORKERS, budget - processed):
+                if retry_budget > 0:
+                    retry_budget -= 1
+                    window.append((retry_modules.pop(0), True))
+                elif lookahead < len(modules):
+                    window.append((modules[lookahead], False))
+                    lookahead += 1
+                else:
+                    break
+            if not window:
+                break
+            for (module, retrying), (module_rows, spent, error) in zip(
+                    window, pool.map(inspect, [name for name, _ in window])):
+                downloaded += spent
+                if error is not None:
+                    _record_failure(failures, unavailable, module, error, attempts)
+                    if module in failures and module not in retry_modules:
+                        retry_modules.append(module)  # queued for the next run, not this one
+                else:
+                    rows.extend(module_rows)
+                    failures.pop(module, None)
+                if not retrying:
+                    cursor += 1
+                processed += 1
+            # Checked per window rather than per module, so a pass can overshoot the byte
+            # budget by one window.  The alternative is discarding work already paid for.
             if downloaded > byte_budget:
                 budget_exhausted = True
-                if retrying:
-                    retry_modules.insert(0, module)
+            if _due_for_checkpoint(processed):
+                collected += len(rows)
+                checkpoint(rows, cursor=cursor)
+            if interrupted():
                 break
-            rows.extend(module_rows)
-            failures.pop(module, None)
-        except Exception as error:
-            _record_failure(failures, unavailable, module, error, attempts)
-            if module in failures and module not in retry_modules:
-                retry_modules.append(module)  # queued for the next run, not this one
-        if not retrying:
-            cursor += 1
-        processed += 1
-        if _due_for_checkpoint(processed):
-            collected += len(rows)
-            checkpoint(rows, cursor=cursor)
-        if interrupted():
-            break
     state["cursor"] = cursor
     collected += len(rows)
     _append_rows(output, rows)
@@ -1602,6 +1632,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
             _save_json(state_path, state)
 
         try:
+            _start_checkpoint_clock()  # each source gets its own two minutes, not the last one's
             report["sources"][source] = runners[source](source_state, observations, budget,
                                                         byte_budget, timeout, checkpoint)
             report["sources"][source]["package_budget"] = budget
