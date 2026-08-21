@@ -50,8 +50,21 @@ seed() {
       git show "origin/artifact-data:${rows}" > "${BASE}/${rows}"
     fi
   done
+  # Report from the seeded base: the per-source directories `status` reads do not exist
+  # until `start` slices them, so asking it here answers "cursor=None" for everything.
   echo "seeded ${BASE} from origin/artifact-data"
-  SOURCES="${SOURCES}" BASE="${BASE}" status
+  python3 - "${BASE}" "${SOURCES}" <<'PY'
+import json, pathlib, sys
+base, sources = pathlib.Path(sys.argv[1]), sys.argv[2].split()
+state = json.loads((base / "data/production/registry-state.json").read_text()).get("sources", {})
+for source in sources:
+    entry = state.get(source) or {}
+    queued = next((len(v) for k, v in entry.items() if k.startswith("retry_") and isinstance(v, list)), 0)
+    rows = base / f"data/production/intermediate/{source}.jsonl"
+    counted = sum(1 for _ in rows.open()) if rows.is_file() else 0
+    print(f"  {source:10} cursor={entry.get('cursor', 0):>9,}  rows={counted:<8} "
+          f"failures={len(entry.get('failures', {})):<5} queued={queued}")
+PY
 }
 
 start() {
