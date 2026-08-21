@@ -1,0 +1,79 @@
+{
+  "command": "retry",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "retry",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "bitbucket.org/creachadair/misctools",
+      "version": "v0.0.0-20181229163233-2f153e67488f",
+      "repository": null,
+      "source": "https://proxy.golang.org/bitbucket.org/creachadair/misctools/@v/v0.0.0-20181229163233-2f153e67488f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181229163233-2f153e67488f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "bitbucket.org/creachadair/misctools",
+      "version": "v0.0.0-20190425221819-351705624552",
+      "repository": null,
+      "source": "https://proxy.golang.org/bitbucket.org/creachadair/misctools/@v/v0.0.0-20190425221819-351705624552.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190425221819-351705624552"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kamilsk/retry",
+      "version": "v0.0.0-20181229152359-495c1d672c93",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kamilsk/retry/@v/v0.0.0-20181229152359-495c1d672c93.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181229152359-495c1d672c93"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "retry",
+      "version": "1.0.6",
+      "repository": "https://github.com/minfrin/retry",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "retry",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

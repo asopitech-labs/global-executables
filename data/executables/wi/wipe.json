@@ -1,0 +1,43 @@
+{
+  "command": "wipe",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "wipe",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "bitbucket.org/rj/goey",
+      "version": "v0.0.0-20190201215322-ef3e778e1b0e",
+      "repository": null,
+      "source": "https://proxy.golang.org/bitbucket.org/rj/goey/@v/v0.0.0-20190201215322-ef3e778e1b0e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190201215322-ef3e778e1b0e"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "wipe",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

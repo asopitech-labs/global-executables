@@ -1,0 +1,31 @@
+{
+  "command": "juju-metadata",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/juju/juju",
+      "version": "v0.0.0-20190423185429-8412c5a35bf6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/juju/juju/@v/v0.0.0-20190423185429-8412c5a35bf6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190423185429-8412c5a35bf6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "juju",
+      "version": "4.0.14",
+      "repository": "https://canonical.com/juju",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

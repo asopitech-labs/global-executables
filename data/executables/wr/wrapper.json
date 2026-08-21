@@ -1,0 +1,91 @@
+{
+  "command": "wrapper",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "service-wrapper",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/iris-contrib/middleware",
+      "version": "v0.0.0-20181021162728-8bd5d51b3c2e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/iris-contrib/middleware/@v/v0.0.0-20181021162728-8bd5d51b3c2e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181021162728-8bd5d51b3c2e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v11.1.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v11.1.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v11.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/pio",
+      "version": "v0.0.0-20190103105442-ea782b38602d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/pio/@v/v0.0.0-20190103105442-ea782b38602d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190103105442-ea782b38602d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.0.0-20190130075939-4c88706279b7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.0.0-20190130075939-4c88706279b7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190130075939-4c88706279b7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "service-wrapper",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

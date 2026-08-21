@@ -1,0 +1,43 @@
+{
+  "command": "dnstap",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "golang-github-dnstap-golang-dnstap-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dnstap/golang-dnstap",
+      "version": "v0.0.0-20190405013208-138dafefc483",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dnstap/golang-dnstap/@v/v0.0.0-20190405013208-138dafefc483.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190405013208-138dafefc483"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "golang-github-dnstap-golang-dnstap-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

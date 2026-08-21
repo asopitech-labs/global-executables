@@ -1,0 +1,31 @@
+{
+  "command": "mpif77",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "mpich",
+      "version": "5.0.1",
+      "repository": "https://www.mpich.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "open-mpi",
+      "version": "5.0.9",
+      "repository": "https://www.open-mpi.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

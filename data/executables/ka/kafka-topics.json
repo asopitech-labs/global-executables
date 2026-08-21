@@ -1,0 +1,31 @@
+{
+  "command": "kafka-topics",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/wvanbergen/kazoo-go",
+      "version": "v0.0.0-20180202103751-f72d8611297a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wvanbergen/kazoo-go/@v/v0.0.0-20180202103751-f72d8611297a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180202103751-f72d8611297a"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kafka",
+      "version": "4.3.1",
+      "repository": "https://kafka.apache.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

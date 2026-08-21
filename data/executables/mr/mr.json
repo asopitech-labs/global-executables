@@ -1,0 +1,43 @@
+{
+  "command": "mr",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "mr",
+      "version": "1.20180726",
+      "repository": "https://myrepos.branchable.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "77mr",
+      "version": "1.0.3",
+      "repository": "https://github.com/linrol/mr",
+      "source": "https://files.pythonhosted.org/packages/cc/8e/50a0645892ba32835e3af8ed3391669d5f159068ac410b8903b73d5a14da/77mr-1.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "myrepos",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

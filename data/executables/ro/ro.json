@@ -1,0 +1,55 @@
+{
+  "command": "ro",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "golang-redoctober",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudflare/redoctober",
+      "version": "v0.0.0-20171127175943-746a508df14c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudflare/redoctober/@v/v0.0.0-20171127175943-746a508df14c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171127175943-746a508df14c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudflare/redoctober",
+      "version": "v0.0.0-20180928214028-3f826eedb692",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudflare/redoctober/@v/v0.0.0-20180928214028-3f826eedb692.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180928214028-3f826eedb692"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "golang-redoctober",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "cmctl",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "agntcy-slim-channel-manager",
+      "version": "2.3.0",
+      "repository": "https://github.com/agntcy/slim",
+      "source": "https://crates.io/api/v1/crates/agntcy-slim-channel-manager/2.3.0/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.3.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cmctl",
+      "version": "2.5.0",
+      "repository": "https://cert-manager.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

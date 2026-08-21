@@ -1,0 +1,103 @@
+{
+  "command": "ps",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "procps-ng-4.0.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "procps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/gosigar",
+      "version": "v0.0.0-20180330100440-37f05ff46ffa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/gosigar/@v/v0.0.0-20180330100440-37f05ff46ffa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180330100440-37f05ff46ffa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/gosigar",
+      "version": "v0.10.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/gosigar/@v/v0.10.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/gosigar",
+      "version": "v0.10.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/gosigar/@v/v0.10.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/gosigar",
+      "version": "v0.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/gosigar/@v/v0.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "procps",
+      "version": "4.0.7",
+      "repository": "https://gitlab.com/procps-ng/procps",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "procps",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "python",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-3.14.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/niean/gotools",
+      "version": "v0.0.0-20151221085310-ff3f51fc5c60",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/niean/gotools/@v/v0.0.0-20151221085310-ff3f51fc5c60.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20151221085310-ff3f51fc5c60"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python-is-python3",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

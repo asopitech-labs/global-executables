@@ -1,0 +1,127 @@
+{
+  "command": "init",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "systemd-sysvcompat-261.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "runit-init",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/rkt",
+      "version": "v1.25.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v1.25.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.25.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/rkt",
+      "version": "v1.30.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v1.30.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.30.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/rkt",
+      "version": "v1.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v1.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rkt/rkt",
+      "version": "v1.28.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rkt/rkt/@v/v1.28.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.28.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rkt/rkt",
+      "version": "v1.30.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rkt/rkt/@v/v1.30.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.30.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "systemd",
+      "version": "261.2",
+      "repository": "https://systemd.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "finit-sysv",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "systemd-sysv",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,91 @@
+{
+  "command": "sql-migrate",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "sql-migrate",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rubenv/sql-migrate",
+      "version": "v0.0.0-20150713140751-53184e1edfb4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rubenv/sql-migrate/@v/v0.0.0-20150713140751-53184e1edfb4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150713140751-53184e1edfb4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rubenv/sql-migrate",
+      "version": "v0.0.0-20160620083229-6f4757563362",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rubenv/sql-migrate/@v/v0.0.0-20160620083229-6f4757563362.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160620083229-6f4757563362"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rubenv/sql-migrate",
+      "version": "v0.0.0-20180217203553-081fe17d19ff",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rubenv/sql-migrate/@v/v0.0.0-20180217203553-081fe17d19ff.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180217203553-081fe17d19ff"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rubenv/sql-migrate",
+      "version": "v0.0.0-20190327083759-54bad0a9b051",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rubenv/sql-migrate/@v/v0.0.0-20190327083759-54bad0a9b051.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190327083759-54bad0a9b051"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "sql-migrate",
+      "version": "1.8.1",
+      "repository": "https://github.com/rubenv/sql-migrate",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "sql-migrate",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "siggen",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "tripwire",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stretchr/signature",
+      "version": "v0.0.0-20160104132143-168b2a1e1b56",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stretchr/signature/@v/v0.0.0-20160104132143-168b2a1e1b56.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160104132143-168b2a1e1b56"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "siggen",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "tripwire",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

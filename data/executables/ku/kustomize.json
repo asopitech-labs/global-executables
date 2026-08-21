@@ -1,0 +1,43 @@
+{
+  "command": "kustomize",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "kustomize",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/kustomize",
+      "version": "v2.0.3+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/kustomize/@v/v2.0.3%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.3+incompatible"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kustomize",
+      "version": "5.8.1",
+      "repository": "https://github.com/kubernetes-sigs/kustomize",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

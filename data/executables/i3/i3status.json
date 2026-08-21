@@ -1,0 +1,55 @@
+{
+  "command": "i3status",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "i3status",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "barista.run",
+      "version": "v0.0.0-20190104204300-c0445ee4b4f4",
+      "repository": null,
+      "source": "https://proxy.golang.org/barista.run/@v/v0.0.0-20190104204300-c0445ee4b4f4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190104204300-c0445ee4b4f4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "barista.run",
+      "version": "v0.0.0-20190323043534-37c751aa67f9",
+      "repository": null,
+      "source": "https://proxy.golang.org/barista.run/@v/v0.0.0-20190323043534-37c751aa67f9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190323043534-37c751aa67f9"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "i3status",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "sum",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "coreutils-9.11-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "add-calc",
+      "version": "0.0.4",
+      "repository": "https://gitcode.com/hzqd/add-calc",
+      "source": "https://crates.io/api/v1/crates/add-calc/0.0.4/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "coreutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dhowden/tag",
+      "version": "v0.0.0-20181104225729-a9f04c2798ca",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dhowden/tag/@v/v0.0.0-20181104225729-a9f04c2798ca.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181104225729-a9f04c2798ca"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "coreutils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

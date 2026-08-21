@@ -1,0 +1,55 @@
+{
+  "command": "gopher",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "gopher",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/chsc/gogl",
+      "version": "v0.0.0-20131111203533-c411acc846b6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/chsc/gogl/@v/v0.0.0-20131111203533-c411acc846b6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20131111203533-c411acc846b6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/qml.v1",
+      "version": "v1.0.0-20150209141031-2ee7e5ff7370",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/qml.v1/@v/v1.0.0-20150209141031-2ee7e5ff7370.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0-20150209141031-2ee7e5ff7370"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gopher",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

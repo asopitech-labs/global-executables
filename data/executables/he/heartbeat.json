@@ -1,0 +1,55 @@
+{
+  "command": "heartbeat",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v7.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v7.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.0.0-20190130075939-4c88706279b7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.0.0-20190130075939-4c88706279b7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190130075939-4c88706279b7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "heartbeat",
+      "version": "9.5.1",
+      "repository": "https://www.elastic.co/beats/heartbeat",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "tcs",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "tcs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rogpeppe/go-charset",
+      "version": "v0.0.0-20150615172532-e9ff06f347d3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rogpeppe/go-charset/@v/v0.0.0-20150615172532-e9ff06f347d3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150615172532-e9ff06f347d3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rogpeppe/go-charset",
+      "version": "v0.0.0-20180617210344-2471d30d28b4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rogpeppe/go-charset/@v/v0.0.0-20180617210344-2471d30d28b4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180617210344-2471d30d28b4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "tcs",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

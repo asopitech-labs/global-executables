@@ -1,0 +1,79 @@
+{
+  "command": "jp",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "jp",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yudai/gojsondiff",
+      "version": "v0.0.0-20170107030110-7b1b7adf999d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yudai/gojsondiff/@v/v0.0.0-20170107030110-7b1b7adf999d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170107030110-7b1b7adf999d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yudai/gojsondiff",
+      "version": "v0.0.0-20170626131258-081cda2ee950",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yudai/gojsondiff/@v/v0.0.0-20170626131258-081cda2ee950.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170626131258-081cda2ee950"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yudai/gojsondiff",
+      "version": "v0.0.0-20180504020246-0525c875b75c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yudai/gojsondiff/@v/v0.0.0-20180504020246-0525c875b75c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180504020246-0525c875b75c"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "jp",
+      "version": "1.1.12",
+      "repository": "https://github.com/sgreben/jp",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "jp",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

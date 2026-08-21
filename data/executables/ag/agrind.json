@@ -1,0 +1,31 @@
+{
+  "command": "agrind",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ag",
+      "version": "0.19.5",
+      "repository": "https://github.com/rcoh/angle-grinder",
+      "source": "https://crates.io/api/v1/crates/ag/0.19.5/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.19.5"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "angle-grinder",
+      "version": "0.19.6",
+      "repository": "https://github.com/rcoh/angle-grinder",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

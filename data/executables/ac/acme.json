@@ -1,0 +1,67 @@
+{
+  "command": "acme",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "acme-sdk",
+      "version": "0.1.46",
+      "repository": "https://github.com/scattered-systems/acme.git",
+      "source": "https://crates.io/api/v1/crates/acme-sdk/0.1.46/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.46"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "acme",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/performancecopilot/speed",
+      "version": "v0.0.0-20180614024626-d49dd9b77adc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/performancecopilot/speed/@v/v0.0.0-20180614024626-d49dd9b77adc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180614024626-d49dd9b77adc"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "acme",
+      "version": "0.97",
+      "repository": "https://sourceforge.net/projects/acme-crossass/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "acme",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

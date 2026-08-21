@@ -1,0 +1,91 @@
+{
+  "command": "protoc",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "protobuf-compiler",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cockroachdb/c-protobuf",
+      "version": "v0.0.0-20170222192355-323984796a7b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cockroachdb/c-protobuf/@v/v0.0.0-20170222192355-323984796a7b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170222192355-323984796a7b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "myitcv.io",
+      "version": "v0.0.0-20190417155434-88ab9413bcc2",
+      "repository": null,
+      "source": "https://proxy.golang.org/myitcv.io/@v/v0.0.0-20190417155434-88ab9413bcc2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190417155434-88ab9413bcc2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "protobuf",
+      "version": "35.1",
+      "repository": "https://protobuf.dev/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "protobuf@29",
+      "version": "29.6",
+      "repository": "https://protobuf.dev/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "protobuf@33",
+      "version": "33.6",
+      "repository": "https://protobuf.dev/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "protobuf-compiler",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

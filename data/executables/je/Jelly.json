@@ -1,0 +1,31 @@
+{
+  "command": "Jelly",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "Jelly",
+      "version": "0.2.1",
+      "repository": "https://github.com/teufelchen1/jelly",
+      "source": "https://crates.io/api/v1/crates/Jelly/0.2.1/download",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pbjelly",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

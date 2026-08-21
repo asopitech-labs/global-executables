@@ -1,0 +1,43 @@
+{
+  "command": "https",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/contrib",
+      "version": "v0.0.0-20190411182844-89f6948e2457",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/contrib/@v/v0.0.0-20190411182844-89f6948e2457.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190411182844-89f6948e2457"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "httpie",
+      "version": "3.2.4",
+      "repository": "https://httpie.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "httpie",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

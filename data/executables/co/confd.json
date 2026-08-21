@@ -1,0 +1,31 @@
+{
+  "command": "confd",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/kelseyhightower/confd",
+      "version": "v0.16.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kelseyhightower/confd/@v/v0.16.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.16.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "confd",
+      "version": "0.16.0",
+      "repository": "https://github.com/kelseyhightower/confd",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,91 @@
+{
+  "command": "filter",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "filter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-bexpr",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-bexpr/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mgutz/logxi",
+      "version": "v0.0.0-20160416165908-7d364cab682d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mgutz/logxi/@v/v0.0.0-20160416165908-7d364cab682d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160416165908-7d364cab682d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mgutz/logxi",
+      "version": "v0.0.0-20161027140823-aebf8a7d67ab",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mgutz/logxi/@v/v0.0.0-20161027140823-aebf8a7d67ab.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161027140823-aebf8a7d67ab"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.0.0-20190130075939-4c88706279b7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.0.0-20190130075939-4c88706279b7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190130075939-4c88706279b7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "filter",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

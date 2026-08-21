@@ -1,0 +1,103 @@
+{
+  "command": "minify",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "minify",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tdewolff/minify",
+      "version": "v0.0.0-20180913035026-a8ba821b5bd8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tdewolff/minify/@v/v0.0.0-20180913035026-a8ba821b5bd8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180913035026-a8ba821b5bd8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tdewolff/minify",
+      "version": "v2.3.5+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tdewolff/minify/@v/v2.3.5%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.5+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tdewolff/minify",
+      "version": "v2.3.6+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tdewolff/minify/@v/v2.3.6%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.6+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tdewolff/minify/v2",
+      "version": "v2.3.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tdewolff/minify/v2/@v/v2.3.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tdewolff/minify/v2",
+      "version": "v2.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tdewolff/minify/v2/@v/v2.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.4.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "minify",
+      "version": "2.24.17",
+      "repository": "https://go.tacodewolff.nl/minify",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "minify",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

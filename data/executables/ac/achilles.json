@@ -1,0 +1,43 @@
+{
+  "command": "achilles",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "achilles",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "AchillesGen",
+      "version": "0.3.0.dev20260710",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a5/0b/c0d2adf7dd41b7eb6203bc8f5c2c0bde2d139138f81cf597c8ccf23bfa19/achillesgen-0.3.0.dev20260710-cp310-cp310-macosx_15_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0.dev20260710"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "achilles",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

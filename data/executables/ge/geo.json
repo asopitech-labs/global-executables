@@ -1,0 +1,91 @@
+{
+  "command": "geo",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "rheolef",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.0.0-20190130075939-4c88706279b7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.0.0-20190130075939-4c88706279b7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190130075939-4c88706279b7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sendgrid/sendgrid-go",
+      "version": "v0.0.0-20180207000556-588320a74327",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sendgrid/sendgrid-go/@v/v0.0.0-20180207000556-588320a74327.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180207000556-588320a74327"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sendgrid/sendgrid-go",
+      "version": "v3.4.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sendgrid/sendgrid-go/@v/v3.4.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.4.1+incompatible"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "bash-snippets",
+      "version": "1.23.0",
+      "repository": "https://github.com/alexanderepstein/Bash-Snippets",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "rheolef",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "strawberry",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "strawberry",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "564bff00ff-strawberry-graphql",
+      "version": "0.168.2",
+      "repository": "https://strawberry.rocks/",
+      "source": "https://files.pythonhosted.org/packages/30/24/e35428c8613d59617d038a56573e33808414317f3ca26ec8dd1c1b0bbcb3/564bff00ff_strawberry_graphql-0.168.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.168.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "strawberry",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

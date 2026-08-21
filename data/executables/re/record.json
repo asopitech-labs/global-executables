@@ -1,0 +1,43 @@
+{
+  "command": "record",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "xawtv-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yobert/alsa",
+      "version": "v0.0.0-20180630182551-d38d89fa843e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yobert/alsa/@v/v0.0.0-20180630182551-d38d89fa843e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180630182551-d38d89fa843e"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "xawtv-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

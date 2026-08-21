@@ -1,0 +1,67 @@
+{
+  "command": "tree",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "tree",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/a8m/tree",
+      "version": "v0.0.0-20181222104329-6a0b80129de4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/a8m/tree/@v/v0.0.0-20181222104329-6a0b80129de4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181222104329-6a0b80129de4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/gxui",
+      "version": "v0.0.0-20151028112939-f85e0a97b3a4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/gxui/@v/v0.0.0-20151028112939-f85e0a97b3a4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20151028112939-f85e0a97b3a4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "tree",
+      "version": "2.3.2",
+      "repository": "https://oldmanprogrammer.net/source.php?dir=projects/tree",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "tree",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

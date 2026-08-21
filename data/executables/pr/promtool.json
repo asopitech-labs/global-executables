@@ -1,0 +1,67 @@
+{
+  "command": "promtool",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "promtool",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/prometheus",
+      "version": "v0.0.0-20190115191339-5358f76c5c28",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/prometheus/@v/v0.0.0-20190115191339-5358f76c5c28.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190115191339-5358f76c5c28"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/prometheus",
+      "version": "v2.5.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/prometheus/@v/v2.5.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.5.0+incompatible"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "prometheus",
+      "version": "3.13.2",
+      "repository": "https://prometheus.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "prometheus",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}

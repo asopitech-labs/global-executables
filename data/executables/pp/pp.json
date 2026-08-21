@@ -1,0 +1,91 @@
+{
+  "command": "pp",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "libpar-packer-perl",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v0.0.0-20170227222818-25bcac0d793c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v0.0.0-20170227222818-25bcac0d793c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170227222818-25bcac0d793c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v0.0.0-20171209025017-c0182c169410",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v0.0.0-20171209025017-c0182c169410.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171209025017-c0182c169410"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v1.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v1.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nss",
+      "version": "3.126.1",
+      "repository": "https://firefox-source-docs.mozilla.org/security/nss/index.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "resty",
+      "version": "3.0",
+      "repository": "https://github.com/micha/resty",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "libpar-packer-perl",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-17"
+}
