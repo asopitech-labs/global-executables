@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import csv
 import html
+import http.client
 import json
 import gzip
 import re
@@ -225,6 +226,65 @@ def _zip64_values(extra: bytes, uncompressed: int, compressed: int, offset: int)
     return uncompressed, compressed, offset
 
 
+class _RangeReader:
+    """One connection reused for every range read of a single archive.
+
+    Each range used to open its own TCP and TLS connection.  Deciding which directories
+    of ``knative.dev/eventing`` are commands takes 884 of them, which cost five minutes
+    to move 0.8MB: the bytes were never the price, the handshakes were.
+    """
+
+    def __init__(self, url: str, timeout: int) -> None:
+        self.url = url
+        self.timeout = timeout
+        self._connection: http.client.HTTPConnection | None = None
+        self._path = ""
+
+    def _connect(self) -> tuple[http.client.HTTPConnection, str]:
+        if self._connection is None:
+            split = urllib.parse.urlsplit(self.url)
+            factory = http.client.HTTPSConnection if split.scheme == "https" else http.client.HTTPConnection
+            self._connection = factory(split.netloc, timeout=self.timeout)
+            self._path = urllib.parse.urlunsplit(("", "", split.path or "/", split.query, ""))
+        return self._connection, self._path
+
+    def read(self, start: int, end: int) -> bytes:
+        for attempt in (1, 2, 3):  # a pooled connection can be closed by the peer
+            connection, path = self._connect()
+            try:
+                _throttle(self.url)
+                connection.request("GET", path, headers={"User-Agent": USER_AGENT,
+                                                         "Range": f"bytes={start}-{end}"})
+                response = connection.getresponse()
+                body = response.read()  # drained in full, or the connection cannot be reused
+            except (http.client.HTTPException, OSError):
+                self.close()
+                if attempt == 3:
+                    raise
+                continue
+            if response.status in (301, 302, 303, 307, 308) and attempt < 3:
+                location = response.getheader("Location")
+                if location:
+                    self.url = urllib.parse.urljoin(self.url, location)
+                    self.close()
+                    continue
+            if response.status != 206:
+                raise RegistryCrawlError(f"host ignored the range request: {self.url}")
+            return body
+        raise RegistryCrawlError(f"range request never settled: {self.url}")
+
+    def close(self) -> None:
+        if self._connection is not None:
+            try:
+                self._connection.close()
+            except Exception:  # noqa: BLE001 - closing must not mask the real error
+                pass
+            self._connection = None
+
+    def __del__(self) -> None:
+        self.close()
+
+
 class RemoteZip:
     """Read a ZIP over HTTP ranges instead of downloading the whole artifact.
 
@@ -239,12 +299,16 @@ class RemoteZip:
         self.timeout = timeout
         self.downloaded = 0
         self.size = content_length(url, timeout)
+        self._reader = _RangeReader(url, timeout)
         self.entries = self._central_directory()
 
     def _range(self, start: int, end: int) -> bytes:
-        body, transfer = fetch_range(self.url, max(0, start), min(end, self.size - 1), self.timeout)
-        self.downloaded += transfer["downloaded_bytes"]
+        body = self._reader.read(max(0, start), min(end, self.size - 1))
+        self.downloaded += len(body)
         return body
+
+    def close(self) -> None:
+        self._reader.close()
 
     def _central_directory(self) -> dict[str, tuple[int, int, int]]:
         window = min(65557, self.size)
