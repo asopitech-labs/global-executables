@@ -718,6 +718,12 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
     failures, unavailable, attempts = _failure_state(state)
     retry_projects = state.setdefault("retry_projects", [])
     retry_projects[:] = [project for project in retry_projects if project not in unavailable]
+    # The queue used to hold only projects owed an sdist read, so any other failure was
+    # left behind the cursor with nothing to bring it back — and `complete` refuses to
+    # call the source exhaustive while a failure stands, which made the state permanent.
+    for project in failures:
+        if project not in retry_projects:
+            retry_projects.append(project)
     rows: list[dict[str, Any]] = []
     collected = 0
     budget_exhausted = False
@@ -768,6 +774,8 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
                 failures.pop(project, None)
         except Exception as error:  # keep the cursor moving; failures block exhaustive status
             _record_failure(failures, unavailable, project, error, attempts)
+            if project in failures and project not in retry_projects:
+                retry_projects.append(project)
         if not retrying:
             cursor += 1
         else:
@@ -844,20 +852,37 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
     rows_out: list[dict[str, Any]] = []
     collected = 0
     budget_exhausted = False
-    while cursor < len(packages) and processed < budget:
-        name = packages[cursor]
+    # `complete` requires an empty failure list, so a package the cursor walked past
+    # after a network blip would keep npm `partial` for good with no way back to it.
+    retry_names = state.setdefault("retry_npm", [])
+    retry_names[:] = [name for name in retry_names if name not in unavailable]
+    for name in failures:
+        if name not in retry_names:
+            retry_names.append(name)
+    retry_budget = len(retry_names)  # one attempt per queued package per pass
+    while (retry_budget or cursor < len(packages)) and processed < budget:
+        retrying = retry_budget > 0
+        if retrying:
+            retry_budget -= 1
+        name = retry_names.pop(0) if retrying else packages[cursor]
         try:
             metadata_url = _npm_release_url(name)
             metadata_body, transfer = fetch(metadata_url, timeout)
             downloaded += transfer["downloaded_bytes"]
             if downloaded > byte_budget:
                 budget_exhausted = True
+                if retrying:
+                    retry_names.insert(0, name)
                 break
             rows_out.extend(npm_metadata(json.loads(metadata_body), metadata_url))
             failures.pop(name, None)
         except Exception as error:
             _record_failure(failures, unavailable, name, error, attempts)
-        cursor += 1; processed += 1
+            if name in failures and name not in retry_names:
+                retry_names.append(name)  # queued for the next pass, not this one
+        if not retrying:
+            cursor += 1
+        processed += 1
         if processed % CHECKPOINT_INTERVAL == 0:
             collected += len(rows_out)
             checkpoint(rows_out, cursor=cursor)
@@ -866,10 +891,11 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
     state["cursor"] = cursor
     collected += len(rows_out)
     _append_rows(output, rows_out)
-    complete = cursor >= len(packages) and not failures
+    complete = cursor >= len(packages) and not failures and not retry_names
     return {"cursor": cursor, "catalog_size": len(packages), "processed": processed,
             "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
-            "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
+            "unavailable": len(unavailable), "retry_pending": len(retry_names),
+            "budget_exhausted": budget_exhausted,
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 

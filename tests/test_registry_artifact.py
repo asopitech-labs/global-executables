@@ -1,6 +1,7 @@
 from io import BytesIO
 import gzip
 import json
+import re
 import tarfile
 import pathlib
 import urllib.error
@@ -292,6 +293,76 @@ def test_network_blips_never_exhaust_the_attempt_budget():
     for _ in range(registry_artifact.FAILURE_ATTEMPT_LIMIT * 3):
         registry_artifact._record_failure(failures, unavailable, "fine", blip, attempts)
     assert set(failures) == {"fine"} and unavailable == {} and attempts == {}
+
+
+def test_every_crawler_that_blocks_on_failures_can_revisit_one():
+    """A source that refuses `exhaustive` while a failure stands must be able to retry it.
+
+    Otherwise the cursor walks past a package that lost a DNS lookup, nothing ever
+    brings it back, and the source is `partial` for good.  Found separately in
+    RubyGems, npm and PyPI, so it is asserted rather than remembered.
+    """
+    import inspect
+
+    source = inspect.getsource(registry_artifact)
+    for name, function in vars(registry_artifact).items():
+        if not name.startswith("_crawl_") or not callable(function):
+            continue
+        body = inspect.getsource(function)
+        if "not failures" not in body or "_record_failure(" not in body:
+            continue  # cannot strand a failure it never records, or never gates on one
+        # Either shape works: queue it the moment it fails, or seed the queue from the
+        # outstanding failures when the next pass starts.
+        requeued = re.search(r"in failures and \w+ not in retry_\w+", body)
+        seeded = re.search(r"for \w+ in failures:\s*\n\s*if \w+ not in retry_\w+:", body)
+        assert requeued or seeded, (
+            f"{name} blocks exhaustive on failures but never queues one for retry")
+    assert source.count("not in retry_") >= 5
+
+
+def test_npm_revisits_a_package_that_failed_on_a_blip(tmp_path, monkeypatch):
+    catalog = tmp_path / "npm-packages.txt"
+    catalog.write_text("good\nflaky\n")
+    refused = {"flaky"}
+
+    def fake_fetch(url, timeout=120):
+        name = url.rstrip("/").rsplit("/", 2)[-2]
+        if name in refused:
+            raise urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
+        return json.dumps({"name": name, "version": "1.0.0", "bin": {name: "cli.js"}}).encode(), \
+            {"downloaded_bytes": 10}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    state = {"packages_file": str(catalog), "parser_generation": registry_artifact.NPM_PARSER_GENERATION}
+    first = registry_artifact._crawl_npm(state, tmp_path / "out.jsonl", 10, 10**9, 5)
+    assert state["retry_npm"] == ["flaky"] and first["coverage_kind"] == "partial"
+
+    refused.clear()
+    second = registry_artifact._crawl_npm(state, tmp_path / "out.jsonl", 10, 10**9, 5)
+    assert state["retry_npm"] == [] and second["failures"] == 0
+    assert second["coverage_kind"] == "exhaustive"
+
+
+def test_pypi_revisits_a_project_that_failed_on_a_blip(tmp_path, monkeypatch):
+    catalog = tmp_path / "projects.txt"
+    catalog.write_text("good\nflaky\n")
+    refused = {"flaky"}
+
+    def fake_fetch(url, timeout=120):
+        project = url.rsplit("/", 2)[-2]
+        if project in refused:
+            raise urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
+        return json.dumps({"info": {"name": project, "version": "1.0.0"}, "urls": []}).encode(), {}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    state = {"projects_file": str(catalog)}
+    first = registry_artifact._crawl_pypi(state, tmp_path / "out.jsonl", 10, 10**9, 5)
+    assert state["retry_projects"] == ["flaky"] and first["coverage_kind"] == "partial"
+
+    refused.clear()
+    second = registry_artifact._crawl_pypi(state, tmp_path / "out.jsonl", 10, 10**9, 5)
+    assert state["retry_projects"] == [] and second["failures"] == 0
+    assert second["coverage_kind"] == "exhaustive"
 
 
 def test_rubygems_revisits_a_gem_that_failed_on_a_blip(tmp_path, monkeypatch):

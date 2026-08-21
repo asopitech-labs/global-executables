@@ -65,6 +65,32 @@ source, exposed as the `go_package_budget` workflow input. Each run queues its
 successor and an explicit Pages deploy, because a run dispatched with
 `GITHUB_TOKEN` does not emit the `workflow_run` event `pages.yml` listens for.
 
+## Registry crawl status
+
+Where the artifact crawl stood on 2026-08-21. The catalogue percentage is the cursor
+against the enumerated name list, not against rows collected — most packages ship no
+executable, so rows grow far more slowly than the cursor.
+
+| Source | Coverage | Cursor | Rows | Runs on |
+| --- | --- | --- | --- | --- |
+| crates.io | `exhaustive` | 319,466 / 319,466 | 88,610 | CI, one dump per run |
+| NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
+| RubyGems | `partial` | 77,438 / 196,126 (39.5%) | 20,617 | local container |
+| Packagist | `partial` | 145,017 / 458,432 (31.6%) | 4,269 | local container |
+| PyPI | `partial` | 88,205 / 870,264 (10.1%) | 34,666 | local container |
+| npm | `partial` | 96,000 / 4,311,362 (2.2%) | 15,506 | local container |
+| Go | `partial` | 4,793 / 993,468 modules (0.5%) | 127,786 | local container |
+
+Only crates.io runs in CI: its whole registry arrives in one dump, so it finishes
+inside a job. Every catalogue-walking source is filled by `crawl_parallel.sh` on a
+local machine, because a CI job stops at six hours and the workflow runs one at a
+time. `watch` publishes to `artifact-data` on an interval so the progress does not
+live on one machine.
+
+Go's row count is large against its cursor because a module contributes one row per
+`package main` directory, and because the catalogue phase ran long before the
+inspection phase started.
+
 ## Windows and .NET coverage
 
 Linux's base command set is packaged, so Debian and Ubuntu carry it. Windows' and
@@ -162,6 +188,61 @@ crates.io is asked for the dump's `Last-Modified` before downloading it. The dum
 republished daily and its observations replace rather than extend, so re-reading an
 unchanged one spent 1.7GB to rewrite an identical file on every run.
 
+## When a package is gone
+
+A registry keeps listing packages it will no longer serve. Every one of them is a
+failure that no retry can resolve, and a source cannot reach `exhaustive` while a
+failure is outstanding — so misclassifying one holds a whole registry back forever.
+Failures are therefore split in two: `failures` are worth another attempt,
+`unavailable` records a settled negative answer and is a result, not a loss.
+
+Each registry expresses withdrawal differently, and the difference was measured
+rather than assumed:
+
+| Registry | How withdrawal appears | Handling |
+| --- | --- | --- |
+| crates.io | `yanked` per version in the dump | yanked versions are filtered before a crate is considered |
+| RubyGems | API reports `yanked: true`, CDN answers `403 AccessDenied` for the artifact | the flag is read first, so the artifact is never requested |
+| npm | unpublished packages 404 on `/<name>/latest` | permanent on the first answer |
+| PyPI | yanked releases keep serving their files; `info.version` already skips them | nothing to skip; a release with no wheel or sdist is permanent |
+| Go | the proxy excludes retracted versions from `@latest` | nothing to skip; unknown modules 404 |
+| NuGet | the search catalogue omits unlisted packages; deleted ones 404 | permanent on the first answer |
+| Packagist | removed packages 404 | permanent on the first answer |
+
+The two that need the flag read first are the two where metadata answers `200` while
+the artifact host refuses. Fetching those bought a `403` on every pass: 38 yanked gems
+were retried indefinitely before the flag was consulted.
+
+`404` was once the only answer treated as final. Three more are:
+
+* `410` and `451` — how a registry reports a withdrawal or a legal takedown.
+* `405` — what npm returns for the package literally named `-`, whose path collides
+  with the registry's own `/-/` API namespace.
+
+Anything else that is not a network error gives up after `FAILURE_ATTEMPT_LIMIT`
+attempts and is recorded as `gave up after N attempts: <reason>`. Without a bound, one
+truncated artifact keeps a source `partial` permanently. Network errors are exempt on
+purpose: they say nothing about the package, and a DNS outage spanning a few passes
+would otherwise bury packages that are perfectly readable. That exemption is not
+theoretical — of twelve RubyGems failures outstanding at one restart, eleven were
+transient name-resolution errors that succeeded on the next attempt.
+
+Which is also why every crawler now revisits its failures. Three did not. RubyGems and
+npm had no queue at all, and PyPI's held only projects owed an sdist read, so any other
+failure was left behind the cursor with nothing to bring it back. Since completion is
+refused while a failure stands, that was not merely lost data — those sources could
+never have reached `exhaustive` at all, and nothing in the report said so.
+
+Each retry queue is bounded to its length at the start of the pass, so a package that
+fails again is revisited next pass rather than consuming this pass's budget over and
+over. The bound and the queue are a pair: without the queue an unreadable artifact is
+never re-attempted, so the attempt limit never fires and the deadlock stands.
+
+`test_every_crawler_that_blocks_on_failures_can_revisit_one` asserts the invariant
+directly — a crawler that gates completion on `not failures` must put a recorded
+failure back on a retry queue. It is a test rather than a note because the same gap was
+found in three crawlers separately, each time by reading one of them for another reason.
+
 ## Crawling in a container
 
 A CI job stops at six hours and the workflow runs one at a time, so a long sweep
@@ -205,6 +286,75 @@ exactly like the `artifact-data` branch, so publishing a local run is a copy int
 worktree of that branch. Do it deliberately: the scheduled workflow writes the same
 branch, and two writers produce a rejected push rather than a merge. Stop the
 chained CI runs first, or crawl a source locally that CI is not advancing.
+
+## Checking a running crawl
+
+`tools/crawl_parallel.sh status` gives the cursor per source. Everything else is read
+from the state files, which are the authoritative record — the report is a summary of
+the last pass, the state is what the next pass will resume from.
+
+```sh
+tools/crawl_parallel.sh status                    # container status and cursor
+docker logs --tail 20 ge-rubygems                 # per-pass summary lines
+git show origin/artifact-data:reports/registry-artifact-crawl.json | jq '.sources'
+```
+
+Progress against the catalogue, which `status` cannot show because the catalogue size
+lives in the catalogue file rather than the state:
+
+```sh
+python3 - <<'PY'
+import gzip, json, pathlib
+for src, cat in (("pypi", "pypi-projects"), ("npm", "npm-packages"), ("go", "go-modules"),
+                 ("rubygems", "rubygems-names"), ("packagist", "packagist-packages")):
+    d = pathlib.Path.home() / f".ge-crawl-{src}/data/production"
+    f = next((d / f"{cat}{e}" for e in (".txt.gz", ".txt") if (d / f"{cat}{e}").is_file()), None)
+    if not f:
+        continue
+    total = sum(1 for _ in (gzip.open if f.suffix == ".gz" else open)(f, "rt"))
+    s = json.loads((d / "registry-state.json").read_text())["sources"][src]
+    print(f"{src:10} {s.get('cursor', 0):>9,}/{total:<9,} {s.get('cursor', 0) / total:6.1%}")
+PY
+```
+
+To check that withdrawals are being classified rather than retried, group the
+outstanding failures by kind. A kind that recurs across passes without changing is a
+condition the crawler is not recognising — that is how the RubyGems `403` storm and
+npm's `405` were found:
+
+```sh
+python3 - <<'PY'
+import collections, json, pathlib, re
+for p in sorted(pathlib.Path.home().glob(".ge-crawl-*/data/production/registry-state.json")):
+    for name, s in json.loads(p.read_text()).get("sources", {}).items():
+        f = s.get("failures", {})
+        if not f:
+            continue
+        print(f"{name:10} failures={len(f):<4} unavailable={len(s.get('unavailable', {})):<6} "
+              f"attempts={len(s.get('failure_attempts', {})):<4} "
+              f"queued={len(s.get('retry_gems') or s.get('retry_projects') or s.get('retry_modules') or [])}")
+        kinds = collections.Counter(
+            (m.group(0) if (m := re.search(r"HTTP Error \d{3}", v)) else v.split("(")[0][:40])
+            for v in f.values())
+        for kind, n in kinds.most_common(5):
+            print(f"           {n:>4}  {kind}")
+PY
+```
+
+`failure_attempts` counts only failures that are neither settled nor network errors, so
+a healthy source has it at or near zero while `failures` fluctuates with connectivity.
+An entry in `unavailable` beginning `gave up after` is a package the crawler could not
+read after `FAILURE_ATTEMPT_LIMIT` tries; those are worth reading occasionally, because
+a cluster of them sharing one reason is a parser gap rather than a set of bad packages.
+
+Before trusting any of it, confirm the containers are on the build you think they are.
+A state file written by the previous container survives the restart, so reading it too
+early shows the old shape and looks like the fix did not take:
+
+```sh
+docker inspect ge-rubygems --format '{{.Image}} {{.State.StartedAt}}'
+docker images global-executables-crawl:local --format '{{.ID}} {{.CreatedSince}}'
+```
 
 This machine runs Colima, not Docker Desktop. Two consequences:
 
