@@ -30,20 +30,49 @@ catalog_for() {
   esac
 }
 
+# `start` slices each container's state out of ${BASE}.  On a machine that has never run
+# a crawl that file does not exist, so every source would begin at cursor zero and
+# re-crawl what the branch already records.  Seeding is therefore part of starting.
+seed() {
+  cd "${ROOT_DIR}"
+  mkdir -p "${BASE}/data/production/intermediate" "${BASE}/reports"
+  git fetch origin artifact-data --quiet
+  git show origin/artifact-data:data/production/registry-state.json \
+    > "${BASE}/data/production/registry-state.json"
+  for source in ${SOURCES}; do
+    for name in $(catalog_for "${source}"); do
+      if git cat-file -e "origin/artifact-data:data/production/${name}" 2>/dev/null; then
+        git show "origin/artifact-data:data/production/${name}" > "${BASE}/data/production/${name}"
+      fi
+    done
+    local rows="data/production/intermediate/${source}.jsonl"
+    if git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
+      git show "origin/artifact-data:${rows}" > "${BASE}/${rows}"
+    fi
+  done
+  echo "seeded ${BASE} from origin/artifact-data"
+  SOURCES="${SOURCES}" BASE="${BASE}" status
+}
+
 start() {
   cd "${ROOT_DIR}"
+  if [ ! -f "${BASE}/data/production/registry-state.json" ]; then
+    echo "no state at ${BASE}; seeding from origin/artifact-data first"
+    seed
+  fi
   docker build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
     mkdir -p "${dir}/data/production/intermediate" "${dir}/reports"
     # Split this source's slice out of the combined state rather than re-seeding it.
-    python3 - "$dir" "$source" <<'PY'
+    python3 - "$dir" "$source" "$BASE" <<'PY'
 import json, pathlib, sys
 directory, source = pathlib.Path(sys.argv[1]), sys.argv[2]
 target = directory / "data/production/registry-state.json"
 if target.is_file():
     raise SystemExit(0)
-combined = pathlib.Path.home() / ".ge-crawl/data/production/registry-state.json"
+# Read the base this run was told to use; hardcoding the default silently ignored BASE.
+combined = pathlib.Path(sys.argv[3]) / "data/production/registry-state.json"
 state = json.loads(combined.read_text()) if combined.is_file() else {"version": 1, "sources": {}}
 slice_ = {"version": 1, "sources": {source: state.get("sources", {}).get(source, {})}}
 target.write_text(json.dumps(slice_, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
@@ -179,10 +208,11 @@ watch() {
 
 case "${1:-start}" in
   start) start ;;
+  seed) seed ;;
   status) status ;;
   merge) merge ;;
   publish) publish ;;
   watch) watch ;;
   stop) for source in ${SOURCES}; do docker stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
-  *) echo "usage: $0 {start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
+  *) echo "usage: $0 {seed|start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
 esac
