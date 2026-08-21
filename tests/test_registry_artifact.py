@@ -224,9 +224,10 @@ def test_go_catalog_cursor_survives_an_interrupted_sweep(tmp_path, monkeypatch):
     monkeypatch.setattr(registry_artifact, "_go_module_rows", lambda *a: ([], 0))
     catalog = tmp_path / "go-modules.txt"
 
-    # The third index page raises, so the pass never reaches its own state write.
-    with pytest.raises(urllib.error.HTTPError):
-        registry_artifact._crawl_go({"modules_file": str(catalog)}, tmp_path / "go.jsonl", 0, 1_000, 120)
+    # The third index page fails.  The pass reports it and returns rather than unwinding,
+    # because unwinding would also discard the inspection phase.
+    report = registry_artifact._crawl_go({"modules_file": str(catalog)}, tmp_path / "go.jsonl", 0, 1_000, 120)
+    assert "503" in report["catalog_error"]
 
     cursor = json.loads(catalog.with_suffix(".cursor.json").read_text())
     assert cursor["since"] == "2019-01-03T00:00:00Z" and cursor["complete"] is False
@@ -322,6 +323,33 @@ def test_a_tarball_declared_as_a_wheel_is_read_as_a_sdist(tmp_path, monkeypatch)
     report = registry_artifact._crawl_pypi({"projects_file": str(catalog)}, output, 10, 10**9, 5)
     assert report["failures"] == 0
     assert [json.loads(line)["command"] for line in output.read_text().splitlines()] == ["allocate"]
+
+
+def test_a_go_index_blip_does_not_cost_the_inspection_phase(tmp_path, monkeypatch):
+    """The catalogue cursor is saved per page, so a lost lookup ends that phase, not the pass."""
+    catalog = tmp_path / "go-modules.txt"
+    catalog.write_text("example.com/demo\n")
+    stream = BytesIO()
+    with zipfile.ZipFile(stream, "w") as archive:
+        archive.writestr("example.com/demo@v1.0.0/cmd/demo/main.go", "package main\nfunc main() {}\n")
+    module_zip = stream.getvalue()
+
+    def fake_fetch(url, timeout=120):
+        if url.startswith(registry_artifact.GO_INDEX):
+            raise urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
+        if url.endswith("/@latest"):
+            return json.dumps({"Version": "v1.0.0"}).encode(), {"downloaded_bytes": 10}
+        return module_zip, {"downloaded_bytes": len(module_zip)}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    monkeypatch.setattr(registry_artifact, "RemoteZip",
+                        lambda *a, **k: (_ for _ in ()).throw(registry_artifact.RegistryCrawlError("no range")))
+    output = tmp_path / "go.jsonl"
+    report = registry_artifact._crawl_go({"modules_file": str(catalog)}, output, 10, 10**9, 5)
+
+    assert "Temporary failure" in report["catalog_error"]
+    assert report["records"] == 1 and report["cursor"] == 1  # the inspection phase still ran
+    assert json.loads(output.read_text().splitlines()[0])["command"] == "demo"
 
 
 def test_every_crawler_that_blocks_on_failures_can_revisit_one():

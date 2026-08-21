@@ -22,7 +22,10 @@ catalog_for() {
     packagist) echo "packagist-packages.txt packagist-packages.txt.gz" ;;
     nuget) echo "nuget-tools.txt nuget-tools.txt.gz" ;;
     npm) echo "npm-packages.txt npm-packages.txt.gz" ;;
-    go) echo "go-modules.txt go-modules.txt.gz go-modules.cursor.json" ;;
+    # Go's catalogue is appended to page by page so an interrupted sweep resumes, so it
+    # has no gzip twin: one left beside it goes stale the moment the sweep continues, and
+    # `read_catalog` prefers the compressed copy — 993,468 stale names over 1.4M live ones.
+    go) echo "go-modules.txt go-modules.cursor.json" ;;
     *) echo "" ;;
   esac
 }

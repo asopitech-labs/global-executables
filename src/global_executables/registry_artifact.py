@@ -1107,10 +1107,19 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
     discovered = 0
     index_requests = 0
 
+    catalog_error = ""
     with catalog_file.open("a", encoding="utf-8") as handle:
         while not catalog_complete and index_requests < GO_CATALOG_REQUESTS:
             query = urllib.parse.urlencode({"limit": GO_INDEX_PAGE, "since": since})
-            body, transfer = fetch(f"{GO_INDEX}?{query}", timeout)
+            try:
+                body, transfer = fetch(f"{GO_INDEX}?{query}", timeout)
+            except Exception as error:
+                # The cursor is saved after every page, so the sweep resumes here on the
+                # next pass.  Letting this unwind the pass instead would also skip the
+                # inspection phase, which has its own budget and its own work to do —
+                # one lost name lookup was costing Go every record in the run.
+                catalog_error = str(error)
+                break
             downloaded += transfer["downloaded_bytes"]
             index_requests += 1
             entries = [json.loads(line) for line in body.decode("utf-8", "replace").splitlines() if line.strip()]
@@ -1181,6 +1190,7 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
             "processed": processed, "records": collected, "downloaded_bytes": downloaded,
             "failures": len(failures), "unavailable": len(unavailable),
             "retry_pending": len(retry_modules), "budget_exhausted": budget_exhausted,
+            "catalog_error": catalog_error,
             "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
