@@ -69,9 +69,11 @@ GO_CATALOG_REQUESTS = 3000
 # module is better taken whole than probed, however cheap each probe is.
 GO_SMALL_ZIP_BYTES = 262144
 GO_DIRECTORY_PROBES = 512
-# Inspection waits on the proxy far more than it computes, so a window of modules
-# in flight measured five times the throughput of one at a time.
-GO_INSPECTION_WORKERS = 8
+# Inspection waits on the proxy far more than it computes, so a window of modules in
+# flight measured five times the throughput of one at a time.  Eight left the VM at a
+# load average of 0.45 across two cores, so the ceiling is the proxy's patience rather
+# than this machine's; `fetch` still backs off on 429 if that turns out to be the limit.
+GO_INSPECTION_WORKERS = 16
 # Progress is persisted this often inside a pass.  State used to be written once, after
 # every source finished, so an interruption discarded the cursors of sources that had
 # already completed along with the work in flight.
