@@ -369,6 +369,22 @@ def test_fetch_retries_a_lost_lookup_but_gives_up_during_an_outage(monkeypatch):
     assert registry_artifact._network_failure_streak == attempts_before + 1
 
 
+def test_a_slow_source_still_checkpoints_on_the_clock(monkeypatch):
+    """200 Go modules can outlast the pass, and a pass killed before a checkpoint wrote nothing."""
+    clock = [1000.0]
+    monkeypatch.setattr(registry_artifact.time, "monotonic", lambda: clock[0])
+    monkeypatch.setattr(registry_artifact, "_last_checkpoint", 0.0)
+
+    assert registry_artifact._due_for_checkpoint(1) is False  # first call only starts the clock
+    assert registry_artifact._due_for_checkpoint(2) is False
+    clock[0] += registry_artifact.CHECKPOINT_SECONDS - 1
+    assert registry_artifact._due_for_checkpoint(3) is False
+    clock[0] += 2
+    assert registry_artifact._due_for_checkpoint(4) is True, "the clock alone must be enough"
+    # And the count still fires for a fast source that never waits.
+    assert registry_artifact._due_for_checkpoint(registry_artifact.CHECKPOINT_INTERVAL) is True
+
+
 def test_a_go_index_blip_does_not_cost_the_inspection_phase(tmp_path, monkeypatch):
     """The catalogue cursor is saved per page, so a lost lookup ends that phase, not the pass."""
     catalog = tmp_path / "go-modules.txt"

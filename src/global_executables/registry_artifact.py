@@ -71,8 +71,14 @@ GO_DIRECTORY_PROBES = 512
 # every source finished, so an interruption discarded the cursors of sources that had
 # already completed along with the work in flight.
 CHECKPOINT_INTERVAL = 200
+# Counting packages assumes packages are quick.  A Go module costs a request per source
+# directory, so 200 of them can outlast the pass itself: one pass spent twenty-one
+# minutes inspecting and was killed having written nothing, leaving the next pass to
+# redo all of it.  Persist on a count or a clock, whichever comes first.
+CHECKPOINT_SECONDS = 120.0
 _last_request: dict[str, float] = {}
 _network_failure_streak = 0
+_last_checkpoint = 0.0
 _interrupted = False
 
 
@@ -99,6 +105,19 @@ def install_interrupt_handlers() -> None:
 
 def _no_checkpoint(buffer: list[dict[str, Any]] | None = None, **updates: Any) -> None:
     return None
+
+
+def _due_for_checkpoint(processed: int) -> bool:
+    """True when the pass has done enough packages, or waited long enough, to persist."""
+    global _last_checkpoint
+    now = time.monotonic()
+    if not _last_checkpoint:
+        _last_checkpoint = now
+        return False
+    if processed % CHECKPOINT_INTERVAL == 0 or now - _last_checkpoint >= CHECKPOINT_SECONDS:
+        _last_checkpoint = now
+        return True
+    return False
 
 
 class RegistryCrawlError(RuntimeError):
@@ -814,7 +833,7 @@ def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: i
         else:
             retry_used += 1
         processed += 1
-        if processed % CHECKPOINT_INTERVAL == 0:
+        if _due_for_checkpoint(processed):
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if budget_exhausted or interrupted():
@@ -916,7 +935,7 @@ def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: in
         if not retrying:
             cursor += 1
         processed += 1
-        if processed % CHECKPOINT_INTERVAL == 0:
+        if _due_for_checkpoint(processed):
             collected += len(rows_out)
             checkpoint(rows_out, cursor=cursor)
         if interrupted():
@@ -1199,7 +1218,7 @@ def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int
         if not retrying:
             cursor += 1
         processed += 1
-        if processed % CHECKPOINT_INTERVAL == 0:
+        if _due_for_checkpoint(processed):
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if interrupted():
@@ -1272,7 +1291,7 @@ def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budge
         if not retrying:
             cursor += 1
         processed += 1
-        if processed % CHECKPOINT_INTERVAL == 0:
+        if _due_for_checkpoint(processed):
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if interrupted():
@@ -1404,7 +1423,7 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         if not retrying:
             cursor += 1
         processed += 1
-        if processed % CHECKPOINT_INTERVAL == 0:
+        if _due_for_checkpoint(processed):
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if interrupted():
@@ -1464,7 +1483,7 @@ def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budg
         if not retrying:
             cursor += 1
         processed += 1
-        if processed % CHECKPOINT_INTERVAL == 0:
+        if _due_for_checkpoint(processed):
             collected += len(rows)
             checkpoint(rows, cursor=cursor)
         if budget_exhausted or interrupted():
