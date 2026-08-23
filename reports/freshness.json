@@ -1,43 +1,44 @@
 {
   "attempted_partitions": [
-    "debian/fixture"
+    "npm/fixture"
   ],
   "budget": {
     "bytes": null,
     "partitions": 1,
     "records": 1000
   },
-  "checked_at": "2026-08-22T18:51:35Z",
+  "checked_at": "2026-08-23T02:02:39Z",
   "coverage_kind": "partial",
-  "duration_seconds": 0.00069,
+  "duration_seconds": 0.000687,
   "failed_partitions": [],
   "partition_staleness": {
-    "debian/fixture": 0,
-    "npm/fixture": 42518,
-    "pypi/fixture": 20869
+    "debian/fixture": 25864,
+    "npm/fixture": 0,
+    "pypi/fixture": 46733
   },
   "partitions": [
     {
       "attempts": 1,
       "changed_records": 0,
-      "checked_at": "2026-08-22T18:51:35Z",
+      "checked_at": "2026-08-23T02:02:39Z",
       "cursor_after": 0,
       "cursor_before": 0,
       "cycle_completed": true,
-      "id": "debian/fixture",
-      "last_success_at": "2026-08-22T18:51:35Z",
+      "id": "npm/fixture",
+      "last_success_at": "2026-08-23T02:02:39Z",
       "new_records": 0,
       "rate_limit": null,
       "removed_records": 0,
       "retries": 0,
-      "scanned_bytes": 698,
+      "scanned_bytes": 676,
       "scanned_records": 2,
       "scope": {
-        "ecosystem": "debian"
+        "ecosystem": "npm",
+        "registry": "npm"
       },
-      "source": "debian",
-      "source_bytes": 698,
-      "source_checksum": "73a35c4af33ed443f52a53fe19051731d55f1272940d04290e903914c04b3573",
+      "source": "npm",
+      "source_bytes": 676,
+      "source_checksum": "ee4062eda2a84af0202f4f9f6e54ffc8c590afd3fb56e24e126a8ecd6f3e5152",
       "source_snapshot": "fixture-2026-08-14",
       "staleness_seconds": 0,
       "status": "success"
@@ -48,32 +49,32 @@
     "canonical_publish": false,
     "failure_blocks_exhaustive": true
   },
-  "run_id": "2026-08-22T18:51:35Z",
+  "run_id": "2026-08-23T02:02:39Z",
   "scheduler": {
-    "next_partition_after": 1,
-    "next_partition_before": 0,
+    "next_partition_after": 2,
+    "next_partition_before": 1,
     "selected": [
-      "debian/fixture"
+      "npm/fixture"
     ],
     "skipped": [
-      "npm/fixture",
+      "debian/fixture",
       "pypi/fixture"
     ]
   },
   "skipped_partitions": [
-    "npm/fixture",
+    "debian/fixture",
     "pypi/fixture"
   ],
   "status": "success",
   "succeeded_partitions": [
-    "debian/fixture"
+    "npm/fixture"
   ],
   "summary": {
     "changed_records": 0,
     "failed_partitions": 0,
     "new_records": 0,
     "removed_records": 0,
-    "scanned_bytes": 698,
+    "scanned_bytes": 676,
     "scanned_records": 2,
     "skipped_partitions": 2,
     "unavailable_partitions": 0
