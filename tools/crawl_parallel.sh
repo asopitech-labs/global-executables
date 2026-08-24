@@ -177,37 +177,29 @@ publish() {
   local worktree=/tmp/ge-artifact-publish
   cd "${ROOT_DIR}"
   git fetch origin artifact-data --quiet
+  git worktree remove "${worktree}" --force >/dev/null 2>&1 || true
   rm -rf "${worktree}"
+  git worktree prune
   git worktree add --quiet "${worktree}" origin/artifact-data
-  mkdir -p "${worktree}/data/production/intermediate"
-  python3 - "${worktree}" "${BASE}" "${SOURCES}" <<'PYPUB'
-import json, pathlib, sys
-worktree, base, sources = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2]), sys.argv[3].split()
-target = worktree / "data/production/registry-state.json"
-published = json.loads(target.read_text()) if target.is_file() else {"version": 1, "sources": {}}
-moved = []
-for source in sources:
-    mine = base.parent / f"{base.name}-{source}/data/production/registry-state.json"
-    if not mine.is_file():
-        continue
-    slice_ = json.loads(mine.read_text()).get("sources", {}).get(source)
-    if not slice_:
-        continue
-    before = (published.get("sources", {}).get(source) or {}).get("cursor")
-    after = slice_.get("cursor")
-    # A local cursor behind the published one means the other writer got further; taking
-    # it would publish a regression, which is how Go nearly lost fifteen months.
-    if isinstance(before, int) and isinstance(after, int) and after < before:
-        print(f"  refusing {source}: local {after:,} is behind published {before:,}")
-        continue
-    published.setdefault("sources", {})[source] = slice_
-    if before != after:
-        moved.append(f"{source} {before} -> {after}")
-target.write_text(json.dumps(published, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
-print("  " + ("; ".join(moved) if moved else "no cursor advanced"))
-PYPUB
+  mkdir -p "${worktree}/data/production/intermediate" "${worktree}/reports"
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
+    local state="${dir}/data/production/registry-state.json"
+    [ -f "${state}" ] || continue
+    if python3 "${ROOT_DIR}/tools/merge_registry_publication.py" \
+        --source "${source}" \
+        --published-state "${worktree}/data/production/registry-state.json" \
+        --local-state "${state}" \
+        --published-report "${worktree}/reports/registry-artifact-crawl.json" \
+        --local-report "${dir}/reports/registry-artifact-crawl.json"; then
+      :
+    else
+      local merge_status=$?
+      if [ "${merge_status}" -eq 3 ]; then
+        continue
+      fi
+      return "${merge_status}"
+    fi
     for name in $(catalog_for "${source}"); do
       [ -f "${dir}/data/production/${name}" ] && cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
     done
@@ -241,6 +233,9 @@ PYOBS
     fi
   done
   git -C "${worktree}" add -f data/production
+  if [ -f "${worktree}/reports/registry-artifact-crawl.json" ]; then
+    git -C "${worktree}" add -f reports/registry-artifact-crawl.json
+  fi
   if git -C "${worktree}" diff --cached --quiet; then
     echo "nothing to publish"
   else

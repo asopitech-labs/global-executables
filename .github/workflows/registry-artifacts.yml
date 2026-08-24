@@ -95,6 +95,7 @@ jobs:
       - name: Publish resumable state and normalized observations
         if: always()
         run: |
+          git fetch origin artifact-data --quiet
           rm -rf /tmp/artifact-publish
           if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
             git worktree add /tmp/artifact-publish origin/artifact-data
@@ -102,22 +103,22 @@ jobs:
             git worktree add -b artifact-data /tmp/artifact-publish HEAD
           fi
           mkdir -p /tmp/artifact-publish/data/production/intermediate /tmp/artifact-publish/reports
-          cp data/production/registry-state.json /tmp/artifact-publish/data/production/registry-state.json
-          for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
-                         go-modules.txt go-modules.cursor.json \
-                         nuget-tools.txt nuget-tools.txt.gz npm-packages.txt npm-packages.txt.gz \
-                         pypi-projects.txt.gz rubygems-names.txt.gz packagist-packages.txt.gz; do
-            if test -f data/production/$catalog; then
-              cp data/production/$catalog /tmp/artifact-publish/data/production/$catalog
-            fi
-          done
-          cp data/production/intermediate/*.jsonl /tmp/artifact-publish/data/production/intermediate/ || true
-          if test -f reports/registry-artifact-crawl.json; then
-            cp reports/registry-artifact-crawl.json /tmp/artifact-publish/reports/registry-artifact-crawl.json
+          python tools/merge_registry_publication.py \
+            --source crates \
+            --published-state /tmp/artifact-publish/data/production/registry-state.json \
+            --local-state data/production/registry-state.json \
+            --published-report /tmp/artifact-publish/reports/registry-artifact-crawl.json \
+            --local-report reports/registry-artifact-crawl.json
+          if test -f data/production/intermediate/crates.jsonl; then
+            cp data/production/intermediate/crates.jsonl \
+              /tmp/artifact-publish/data/production/intermediate/crates.jsonl
           fi
           git -C /tmp/artifact-publish config user.name github-actions[bot]
           git -C /tmp/artifact-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git -C /tmp/artifact-publish add -f data/production
+          git -C /tmp/artifact-publish add -f data/production/registry-state.json
+          if test -f /tmp/artifact-publish/data/production/intermediate/crates.jsonl; then
+            git -C /tmp/artifact-publish add -f data/production/intermediate/crates.jsonl
+          fi
           if test -f /tmp/artifact-publish/reports/registry-artifact-crawl.json; then
             git -C /tmp/artifact-publish add -f reports/registry-artifact-crawl.json
           fi

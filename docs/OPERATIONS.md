@@ -305,10 +305,14 @@ catalog is replaced atomically when new names arrive from `index.golang.org`; a 
 between catalog replacement and DB metadata commit is reconciled from the file tail on
 restart.
 
-`crawl_parallel.sh publish` writes only the sources this machine owns, and refuses a
-source whose local cursor is behind the published one — the check that stopped Go's
-catalogue being rolled back fifteen months. `watch` runs it on an interval, because
-publishing by hand leaves the crawl's progress on one machine until someone remembers.
+`crawl_parallel.sh publish` merges only the state and crawl-report entries this machine
+owns, and refuses a source whose local cursor is behind the published one — the check
+that stopped Go's catalogue being rolled back fifteen months. The scheduled crates
+writer uses the same source-owned merge and publishes only `crates.jsonl`; it must not
+copy a stale whole-state or whole-report snapshot over other writers. `watch` runs the
+publisher on an interval, because publishing by hand leaves the crawl's progress on one
+machine until someone remembers. The merged report is what Pages exposes as
+`status.json`, so a published cursor and its public progress display advance together.
 
 The single-source container holds no credentials and never pushes. `STATE_DIR` is laid out
 exactly like the `artifact-data` branch, so publishing a local run is a copy into a
@@ -329,8 +333,8 @@ docker logs --tail 20 ge-go                       # transactional Go passes
 git show origin/artifact-data:reports/registry-artifact-crawl.json | jq '.sources'
 ```
 
-Progress against the catalogue, which `status` cannot show because the catalogue size
-lives in the catalogue file rather than the state:
+`status` shows `cursor/catalog_size` when the collector exports both values. For older
+source snapshots without `catalog_size`, compare the cursor with the catalogue file:
 
 ```sh
 python3 - <<'PY'
