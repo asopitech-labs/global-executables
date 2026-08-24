@@ -2,6 +2,18 @@
   "command": "terser",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@bazel/terser",
+      "version": "5.8.1",
+      "repository": "git+https://github.com/bazelbuild/rules_nodejs.git",
+      "source": "https://registry.npmjs.org/@bazel%2Fterser/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.8.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "terser",
       "version": null,
