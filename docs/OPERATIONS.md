@@ -67,10 +67,8 @@ budget on one archive per module, at the version `@latest` reports.
 
 Requests to the crates.io API host are paced to one per second, the rate crates.io
 asks crawlers to hold; `fetch` also retries 429 with the advertised `Retry-After`.
-`--source-package-budget SOURCE=N` raises the per-run package budget for a single
-source, exposed as the `go_package_budget` workflow input. Each run queues its
-successor and an explicit Pages deploy, because a run dispatched with
-`GITHUB_TOKEN` does not emit the `workflow_run` event `pages.yml` listens for.
+`--source-package-budget SOURCE=N` raises the per-run package budget for one selected
+Python source. Go has its own `--package-budget` flag in the transactional runtime.
 
 ## Registry crawl status
 
@@ -260,7 +258,7 @@ registries. Go uses `Dockerfile.go-crawler`, a dedicated transactional runtime.
 `tools/crawl_parallel.sh` routes each source to its correct image.
 
 ```sh
-tools/crawl_container.sh                                   # every source
+tools/crawl_container.sh                                   # every Python source
 SOURCES=crates PASSES=1 tools/crawl_container.sh           # one source, one pass
 SOURCES="npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
 ```
@@ -364,27 +362,18 @@ Go refreshes its denominator from the chronological module index before each pas
 `catalog_complete` means the index reader reached the current edge for that snapshot;
 new module versions may make it grow on a later pass.
 
-## Go cutover and rollback
+## Go recovery
 
-Cut over only after the shared Go pipeline, Go test/runtime image stages, a copied-state
-shadow run, restart test, and Python dictionary rebuild all pass.
+Go has one supported crawler: the transactional runtime started with
+`SOURCES=go tools/crawl_parallel.sh start`. The retired Python Go implementation is
+not kept as an alternate execution path; Git already preserves its history.
 
-1. Publish or copy the final Python checkpoint and record its cursor, JSONL row count,
-   failure count, container image, and timestamp.
-2. Stop only `ge-go`; leave every other registry container running.
-3. Preserve the compatibility state, Go JSONL, catalog, and previous image as the
-   rollback snapshot.
-4. Start Go through `SOURCES=go tools/crawl_parallel.sh start` against that same source
-   directory. The first pass imports the compatibility snapshot into a new DB.
-5. Verify that the first exported cursor is not below the recorded cursor, generated
-   files are owned by the host user, failures do not persist, and `docker logs ge-go`
-   reports nonzero processing.
-6. Publish only after `tools/crawl_parallel.sh publish` passes its no-regression check.
-
-Rollback stops `ge-go`, restores the recorded compatibility snapshot, and starts the
-previous Python crawl image with `SOURCES=go`. Do not copy a partially written DB into
-the rollback directory. Keep the Go DB separately for diagnosis; Python does not need
-or read it.
+If the local Go database is unusable, stop only `ge-go`, preserve the database for
+diagnosis, and restore the last published compatibility snapshot from
+`artifact-data`. Start the Go runtime against that source directory so it imports the
+published cursor and observations into a new database. Before publishing, verify that
+the exported cursor is not below the published cursor and let the source-owned merge
+perform its normal no-regression check.
 
 To check that withdrawals are being classified rather than retried, group the
 outstanding failures by kind. A kind that recurs across passes without changing is a

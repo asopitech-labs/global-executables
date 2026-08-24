@@ -25,7 +25,6 @@ import urllib.error
 import urllib.request
 import zipfile
 import zlib
-from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
@@ -64,21 +63,6 @@ FAILURE_ATTEMPT_LIMIT = 3
 NPM_PARSER_GENERATION = 3
 NPM_ALL_DOCS = "https://replicate.npmjs.com/_all_docs"
 NPM_CATALOG_PAGE = 10000
-GO_INDEX = "https://index.golang.org/index"
-GO_INDEX_EPOCH = "2019-01-01T00:00:00Z"
-GO_INDEX_PAGE = 2000
-# Index pages are cheap — roughly 240KB per 2,000 entries — but a run still has to
-# leave time to inspect modules.
-GO_CATALOG_REQUESTS = 3000
-# Below this, one download beats several range requests.  Above this many directories a
-# module is better taken whole than probed, however cheap each probe is.
-GO_SMALL_ZIP_BYTES = 262144
-GO_DIRECTORY_PROBES = 512
-# Inspection waits on the proxy far more than it computes, so a window of modules in
-# flight measured five times the throughput of one at a time.  Eight left the VM at a
-# load average of 0.45 across two cores, so the ceiling is the proxy's patience rather
-# than this machine's; `fetch` still backs off on 429 if that turns out to be the limit.
-GO_INSPECTION_WORKERS = 8
 # Progress is persisted this often inside a pass.  State used to be written once, after
 # every source finished, so an interruption discarded the cursors of sources that had
 # already completed along with the work in flight.
@@ -654,28 +638,6 @@ def _wheel_rows(body: bytes, package: str, version: str, repository: str | None,
     return rows
 
 
-def _go_rows(body: bytes, module: str, version: str, source: str) -> list[dict[str, Any]]:
-    """Extract one executable name for each Go directory containing package main."""
-    root = f"{module}@{version}"
-    main_directories: set[str] = set()
-    with zipfile.ZipFile(BytesIO(body)) as archive:
-        for name in archive.namelist():
-            if not name.startswith(root + "/") or not name.endswith(".go") or name.endswith("_test.go"):
-                continue
-            if "/vendor/" in f"/{name}" or "/testdata/" in f"/{name}":
-                continue
-            text = archive.read(name).decode("utf-8", "replace")
-            if re.search(r"(?m)^\s*package\s+main\b", text):
-                main_directories.add(name.rsplit("/", 1)[0])
-    rows: list[dict[str, Any]] = []
-    for directory in sorted(main_directories):
-        command = directory.rsplit("/", 1)[-1] if directory != root else module.rsplit("/", 1)[-1]
-        rows.append(record(command, "go", module, version, None, source,
-                           source_type="language_package", language="go", registry="go",
-                           latest_version=version))
-    return rows
-
-
 def _ruby_gem_rows(body: bytes, package: str, version: str, repository: str | None,
                    source: str) -> list[dict[str, Any]]:
     """Extract RubyGems' declared executables from the gemspec metadata."""
@@ -1165,209 +1127,6 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             "budget_exhausted": False, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}
 
-
-
-def _load_catalog_cursor(path: Path) -> dict[str, Any]:
-    if not path.is_file():
-        return {}
-    try:
-        value = json.loads(path.read_text())
-    except json.JSONDecodeError:
-        return {}
-    return value if isinstance(value, dict) else {}
-
-
-def _save_catalog_cursor(path: Path, since: str, complete: bool) -> None:
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_text(json.dumps({"since": since, "complete": complete}) + "\n")
-    temporary.replace(path)
-
-
-def _go_latest_version(module: str, timeout: int) -> str:
-    escaped = urllib.parse.quote(module, safe="/@")
-    body, _ = fetch(f"https://proxy.golang.org/{escaped}/@latest", timeout)
-    version = json.loads(body).get("Version")
-    if not version:
-        raise RegistryCrawlError(f"module has no latest version: {module}")
-    return version
-
-
-def _go_module_rows(url: str, module: str, version: str, timeout: int) -> tuple[list[dict[str, Any]], int]:
-    """Read a module's command names from the parts of the archive that can hold them.
-
-    Every ``.go`` file in a directory must declare the same package, so one file per
-    directory decides whether that directory is a command.  Small archives, and ones
-    with more directories than probes would be worth, are still taken whole.
-    """
-    try:
-        archive = RemoteZip(url, timeout)
-        if archive.size > GO_SMALL_ZIP_BYTES:
-            root = f"{module}@{version}/"
-            directories: dict[str, str] = {}
-            for name in archive.names:
-                if not name.startswith(root) or not name.endswith(".go") or name.endswith("_test.go"):
-                    continue
-                relative = name[len(root):]
-                if "vendor/" in f"/{relative}" or "testdata/" in f"/{relative}":
-                    continue
-                directories.setdefault(relative.rsplit("/", 1)[0] if "/" in relative else "", name)
-            # The central directory already states each member's compressed size, so the
-            # probe cost is known before spending it.
-            probe_bytes = sum(archive.entries[member][1] for member in directories.values())
-            if len(directories) <= GO_DIRECTORY_PROBES and probe_bytes * 2 < archive.size:
-                commands: list[str] = []
-                for directory, member in sorted(directories.items()):
-                    text = archive.read(member).decode("utf-8", "replace")
-                    if re.search(r"(?m)^\s*package\s+main\b", text):
-                        commands.append(directory.rsplit("/", 1)[-1] if directory else module.rsplit("/", 1)[-1])
-                return [record(command, "go", module, version, None, url,
-                               source_type="language_package", language="go", registry="go",
-                               latest_version=version) for command in sorted(set(commands))], archive.downloaded
-    except (RegistryCrawlError, urllib.error.HTTPError, OSError, struct.error, zlib.error, KeyError):
-        pass
-    body, transfer = fetch(url, timeout)
-    return _go_rows(body, module, version, url), transfer["downloaded_bytes"]
-
-
-def _crawl_go(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
-              checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
-    """Inspect each Go module once, at its current version.
-
-    The module index lists every version of every module — tens of millions of entries,
-    overwhelmingly republished copies of modules already inspected.  Reading the index
-    is cheap, so the catalog phase distils the feed down to distinct module paths and
-    the inspection phase spends the artifact budget on one archive per module.
-    """
-    state.pop("since", None)  # the old cursor tracked downloads, not catalog coverage
-    catalog_file = Path(state.setdefault("modules_file", "data/production/go-modules.txt"))
-    catalog_file.parent.mkdir(parents=True, exist_ok=True)
-    modules = ([line.strip() for line in catalog_file.read_text().splitlines() if line.strip()]
-               if catalog_file.is_file() else [])
-    seen = set(modules)
-    cursor_file = catalog_file.with_suffix(".cursor.json")
-    catalog_cursor = _load_catalog_cursor(cursor_file)
-    since = catalog_cursor.get("since") or state.get("catalog_since", GO_INDEX_EPOCH)
-    catalog_complete = bool(catalog_cursor.get("complete") or state.get("catalog_complete"))
-    failures, unavailable, attempts = _failure_state(state)
-    retry_modules = state.setdefault("retry_modules", [])
-    retry_modules[:] = [name for name in retry_modules if name not in unavailable]
-    for name in failures:
-        if name not in retry_modules:
-            retry_modules.append(name)
-    retry_budget = len(retry_modules)
-    downloaded = 0
-    discovered = 0
-    index_requests = 0
-
-    catalog_error = ""
-    with catalog_file.open("a", encoding="utf-8") as handle:
-        while not catalog_complete and index_requests < GO_CATALOG_REQUESTS:
-            query = urllib.parse.urlencode({"limit": GO_INDEX_PAGE, "since": since})
-            try:
-                body, transfer = fetch(f"{GO_INDEX}?{query}", timeout)
-            except Exception as error:
-                # The cursor is saved after every page, so the sweep resumes here on the
-                # next pass.  Letting this unwind the pass instead would also skip the
-                # inspection phase, which has its own budget and its own work to do —
-                # one lost name lookup was costing Go every record in the run.
-                catalog_error = str(error)
-                break
-            downloaded += transfer["downloaded_bytes"]
-            index_requests += 1
-            entries = [json.loads(line) for line in body.decode("utf-8", "replace").splitlines() if line.strip()]
-            if not entries:
-                catalog_complete = True
-                break
-            for entry in entries:
-                path = entry.get("Path", "")
-                since = entry.get("Timestamp", since)
-                if path and path not in seen:
-                    seen.add(path)
-                    modules.append(path)
-                    handle.write(path + "\n")
-                    discovered += 1
-            if len(entries) < GO_INDEX_PAGE:
-                catalog_complete = True
-            # The catalog phase is long enough to be interrupted, and the run-level state
-            # is only written when the whole pass returns.  Checkpoint beside the catalog
-            # so an interrupted sweep resumes instead of re-walking the index.
-            handle.flush()
-            _save_catalog_cursor(cursor_file, since, catalog_complete)
-            if interrupted():
-                break
-    state["catalog_since"] = since
-    state["catalog_complete"] = catalog_complete
-
-    cursor = int(state.get("cursor", 0))
-    processed = 0
-    rows: list[dict[str, Any]] = []
-    collected = 0
-    budget_exhausted = False
-    def inspect(module: str) -> tuple[list[dict[str, Any]], int, Exception | None]:
-        """Read one module.  Never raises: the caller records the verdict in order."""
-        try:
-            version = _go_latest_version(module, timeout)
-            escaped = urllib.parse.quote(module, safe="/@")
-            url = f"https://proxy.golang.org/{escaped}/@v/{urllib.parse.quote(version, safe='')}.zip"
-            module_rows, spent = _go_module_rows(url, module, version, timeout)
-            return module_rows, spent, None
-        except Exception as error:  # noqa: BLE001 - a module never ends the pass
-            return [], 0, error
-
-    # A module costs about four seconds, nearly all of it waiting on the proxy, and Go
-    # has close to two million of them.  Inspecting a window at a time measured five
-    # times the throughput; the results are applied in order afterwards, so the cursor
-    # still only passes modules that were actually answered for.
-    with ThreadPoolExecutor(max_workers=GO_INSPECTION_WORKERS) as pool:
-        while (retry_budget or cursor < len(modules)) and processed < budget and not budget_exhausted:
-            window: list[tuple[str, bool]] = []
-            lookahead = cursor
-            while len(window) < min(GO_INSPECTION_WORKERS, budget - processed):
-                if retry_budget > 0:
-                    retry_budget -= 1
-                    window.append((retry_modules.pop(0), True))
-                elif lookahead < len(modules):
-                    window.append((modules[lookahead], False))
-                    lookahead += 1
-                else:
-                    break
-            if not window:
-                break
-            for (module, retrying), (module_rows, spent, error) in zip(
-                    window, pool.map(inspect, [name for name, _ in window])):
-                downloaded += spent
-                if error is not None:
-                    _record_failure(failures, unavailable, module, error, attempts)
-                    if module in failures and module not in retry_modules:
-                        retry_modules.append(module)  # queued for the next run, not this one
-                else:
-                    rows.extend(module_rows)
-                    failures.pop(module, None)
-                if not retrying:
-                    cursor += 1
-                processed += 1
-            # Checked per window rather than per module, so a pass can overshoot the byte
-            # budget by one window.  The alternative is discarding work already paid for.
-            if downloaded > byte_budget:
-                budget_exhausted = True
-            if _due_for_checkpoint(processed):
-                collected += len(rows)
-                checkpoint(rows, cursor=cursor)
-            if interrupted():
-                break
-    state["cursor"] = cursor
-    collected += len(rows)
-    _append_rows(output, rows)
-    complete = catalog_complete and cursor >= len(modules) and not failures and not retry_modules
-    return {"cursor": cursor, "catalog_size": len(modules), "catalog_complete": catalog_complete,
-            "catalog_since": since, "discovered": discovered, "index_requests": index_requests,
-            "processed": processed, "records": collected, "downloaded_bytes": downloaded,
-            "failures": len(failures), "unavailable": len(unavailable),
-            "retry_pending": len(retry_modules), "budget_exhausted": budget_exhausted,
-            "catalog_error": catalog_error,
-            "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
-
-
 def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                     checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     catalog_file = Path(state.setdefault("names_file", "data/production/rubygems-names.txt"))
@@ -1651,7 +1410,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
     state = _load_json(state_path, {"version": 1, "sources": {}})
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
-        "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates, "go": _crawl_go,
+        "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates,
         "rubygems": _crawl_rubygems, "packagist": _crawl_packagist, "nuget": _crawl_nuget,
     }
     source_budgets = source_budgets or {}

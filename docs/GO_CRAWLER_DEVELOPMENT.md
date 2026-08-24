@@ -8,7 +8,7 @@ so a successful build is not just compilation: the same source must pass the sam
 dependency, concurrency, security, and container checks locally and in CI.
 
 The target is `linux/amd64`, matching the rootless Podman host. Python continues to
-own every other registry and remains the Go rollback path through the cutover window.
+own every other registry; Go has a single supported implementation.
 
 ## At a glance
 
@@ -18,7 +18,7 @@ own every other registry and remains the Go rollback path through the cutover wi
 - Runtime: dedicated scratch image and an explicit `crawl` subcommand.
 - Durable state: bbolt commits observations, retries, cursor, and generation together.
 - Compatibility: state, JSONL, and report are streamed from one database snapshot.
-- Rollback: the Python image can consume the last compatibility export without a DB conversion.
+- Recovery: a new Go database can import the last published compatibility export.
 
 ## Quick start
 
@@ -199,23 +199,13 @@ Every dependency update includes the `go.mod` and `go.sum` diff, tests, race che
 and vulnerability scan. The official Go base image is pinned by digest in the
 Dockerfile. Updating it is an explicit reviewed change that reruns both CI boundaries.
 
-## Migration and rollback boundary
+## Recovery boundary
 
-Environment completion does not authorize a live cutover. The sequence is:
-
-1. Make this environment and its placeholder binary green.
-2. Add crawler behavior through failing tests and dependency-injected boundaries.
-3. Import a copy of Python state into a new Go-owned store; never mutate the only
-   rollback copy.
-4. Shadow the Python crawler against a bounded catalog and compare commands,
-   package identity, retry classification, cursor movement, and restart behavior.
-5. Route only the Go source to the Go image. Other ecosystems remain on Python.
-6. Keep the Python Go path available for one rollback window, then delete it after
-   the acceptance criteria in issue #40 are satisfied.
-
-Rollback stops the Go container and restarts the Python Go source from its last
-known-good state. A rollback must not translate a partially committed Go transaction
-back into the Python state file.
+The Go cutover is complete and the Python Go path has been removed. Other ecosystems
+remain on Python. A recovery stops only the Go container, preserves the failed database
+for diagnosis, and imports the last published compatibility export into a new Go-owned
+store. Never translate a partially committed Go transaction back into the JSON state
+file or publish a cursor below the shared branch.
 
 ## Troubleshooting
 

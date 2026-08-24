@@ -12,7 +12,7 @@ import pytest
 
 import global_executables.registry_artifact as registry_artifact
 from global_executables.collectors import npm_metadata
-from global_executables.registry_artifact import (_console_scripts, _go_rows, _gem_rows,
+from global_executables.registry_artifact import (_console_scripts, _gem_rows,
                                                    _packagist_packages, _packagist_rows,
                                                    _crawl_pypi, _failure_state, _postgres_array,
                                                    _pypi_projects, _ruby_gem_rows, _rubygems_names,
@@ -44,17 +44,6 @@ def test_pypi_sdist_project_scripts_are_artifact_evidence():
     rows = _sdist_rows(stream.getvalue(), "demo", "1.0", "https://example.test", "https://example.test/demo.tar.gz")
     assert rows[0]["command"] == "demo"
     assert rows[0]["registry"] == "pypi"
-
-
-def test_go_main_packages_are_artifact_evidence():
-    stream = BytesIO()
-    with zipfile.ZipFile(stream, "w") as archive:
-        archive.writestr("example.com/demo@v1.0.0/cmd/demo/main.go", "package main\nfunc main() {}\n")
-        archive.writestr("example.com/demo@v1.0.0/internal/tool/main.go", "package main\nfunc main() {}\n")
-        archive.writestr("example.com/demo@v1.0.0/cmd/demo/main_test.go", "package main\n")
-    rows = _go_rows(stream.getvalue(), "example.com/demo", "v1.0.0", "https://proxy.golang.org/demo.zip")
-    assert [row["command"] for row in rows] == ["demo", "tool"]
-    assert all(row["language"] == "go" and row["registry"] == "go" for row in rows)
 
 
 def test_rubygems_catalog_and_gem_metadata_are_artifact_evidence():
@@ -174,71 +163,6 @@ def test_gem_executables_are_read_from_the_head_of_the_archive(monkeypatch):
     assert spent == registry_artifact.GEM_HEAD_BYTES and spent < len(body)
     rows = _gem_rows(gzip.decompress(blob).decode(), "demo", "1.0.0", None, "https://example.test/demo.gem")
     assert [row["command"] for row in rows] == ["demo"]
-
-
-def test_go_catalog_records_each_module_once(tmp_path, monkeypatch):
-    """The index republishes a module per version; the catalog keeps one entry."""
-    pages = [
-        b'{"Path":"example.com/a","Version":"v1.0.0","Timestamp":"2019-01-02T00:00:00Z"}\n'
-        b'{"Path":"example.com/a","Version":"v1.1.0","Timestamp":"2019-01-03T00:00:00Z"}\n'
-        b'{"Path":"example.com/b","Version":"v1.0.0","Timestamp":"2019-01-04T00:00:00Z"}\n',
-    ]
-
-    def fake_fetch(url, timeout=120, attempts=4):
-        if url.startswith(registry_artifact.GO_INDEX):
-            return (pages.pop(0) if pages else b""), {"downloaded_bytes": 10}
-        if url.endswith("/@latest"):
-            return b'{"Version":"v1.1.0"}', {"downloaded_bytes": 20}
-        raise AssertionError(f"unexpected fetch {url}")
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    monkeypatch.setattr(registry_artifact, "_go_module_rows",
-                        lambda url, module, version, timeout: ([], 5))
-    catalog = tmp_path / "go-modules.txt"
-    state = {"modules_file": str(catalog), "since": "2019-06-18T00:00:00Z"}
-
-    report = registry_artifact._crawl_go(state, tmp_path / "go.jsonl", 10, 1_000_000, 120)
-
-    assert catalog.read_text().split() == ["example.com/a", "example.com/b"]
-    assert report["catalog_size"] == 2 and report["discovered"] == 2
-    assert report["processed"] == 2 and report["catalog_complete"] is True
-    assert "since" not in state  # the download cursor is not a catalog cursor
-
-
-def test_go_catalog_cursor_survives_an_interrupted_sweep(tmp_path, monkeypatch):
-    """Run-level state is only written when a pass returns; the catalog phase outlives that."""
-    pages = [
-        b'{"Path":"example.com/a","Version":"v1","Timestamp":"2019-01-02T00:00:00Z"}\n',
-        b'{"Path":"example.com/b","Version":"v1","Timestamp":"2019-01-03T00:00:00Z"}\n',
-    ]
-
-    def fake_fetch(url, timeout=120, attempts=4):
-        if url.startswith(registry_artifact.GO_INDEX):
-            if not pages:
-                raise urllib.error.HTTPError(url, 503, "Service Unavailable", {}, None)
-            return pages.pop(0), {"downloaded_bytes": 1}
-        return b'{"Version":"v1"}', {"downloaded_bytes": 1}
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    monkeypatch.setattr(registry_artifact, "GO_INDEX_PAGE", 1)
-    monkeypatch.setattr(registry_artifact, "_go_module_rows", lambda *a: ([], 0))
-    catalog = tmp_path / "go-modules.txt"
-
-    # The third index page fails.  The pass reports it and returns rather than unwinding,
-    # because unwinding would also discard the inspection phase.
-    report = registry_artifact._crawl_go({"modules_file": str(catalog)}, tmp_path / "go.jsonl", 0, 1_000, 120)
-    assert "503" in report["catalog_error"]
-
-    cursor = json.loads(catalog.with_suffix(".cursor.json").read_text())
-    assert cursor["since"] == "2019-01-03T00:00:00Z" and cursor["complete"] is False
-    assert catalog.read_text().split() == ["example.com/a", "example.com/b"]
-
-    # A fresh state with no catalog_since still resumes from the checkpoint.
-    seen = []
-    monkeypatch.setattr(registry_artifact, "fetch",
-                        lambda url, timeout=120, attempts=4: (seen.append(url), (b"", {"downloaded_bytes": 0}))[1])
-    registry_artifact._crawl_go({"modules_file": str(catalog)}, tmp_path / "go.jsonl", 0, 1_000, 120)
-    assert "2019-01-03" in seen[0]
 
 
 def test_permanent_registry_conditions_are_not_retryable_failures():
@@ -407,33 +331,6 @@ def test_a_slow_source_still_checkpoints_on_the_clock(monkeypatch):
     assert registry_artifact._due_for_checkpoint(4) is True, "the clock alone must be enough"
     # And the count still fires for a fast source that never waits.
     assert registry_artifact._due_for_checkpoint(registry_artifact.CHECKPOINT_INTERVAL) is True
-
-
-def test_a_go_index_blip_does_not_cost_the_inspection_phase(tmp_path, monkeypatch):
-    """The catalogue cursor is saved per page, so a lost lookup ends that phase, not the pass."""
-    catalog = tmp_path / "go-modules.txt"
-    catalog.write_text("example.com/demo\n")
-    stream = BytesIO()
-    with zipfile.ZipFile(stream, "w") as archive:
-        archive.writestr("example.com/demo@v1.0.0/cmd/demo/main.go", "package main\nfunc main() {}\n")
-    module_zip = stream.getvalue()
-
-    def fake_fetch(url, timeout=120):
-        if url.startswith(registry_artifact.GO_INDEX):
-            raise urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
-        if url.endswith("/@latest"):
-            return json.dumps({"Version": "v1.0.0"}).encode(), {"downloaded_bytes": 10}
-        return module_zip, {"downloaded_bytes": len(module_zip)}
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    monkeypatch.setattr(registry_artifact, "RemoteZip",
-                        lambda *a, **k: (_ for _ in ()).throw(registry_artifact.RegistryCrawlError("no range")))
-    output = tmp_path / "go.jsonl"
-    report = registry_artifact._crawl_go({"modules_file": str(catalog)}, output, 10, 10**9, 5)
-
-    assert "Temporary failure" in report["catalog_error"]
-    assert report["records"] == 1 and report["cursor"] == 1  # the inspection phase still ran
-    assert json.loads(output.read_text().splitlines()[0])["command"] == "demo"
 
 
 def test_every_crawler_that_blocks_on_failures_can_revisit_one():
@@ -875,9 +772,9 @@ def test_a_finished_source_keeps_its_cursor_when_a_later_one_dies(tmp_path, monk
         raise RuntimeError("killed mid-pass")
 
     monkeypatch.setattr(registry_artifact, "_crawl_npm", finished)
-    monkeypatch.setattr(registry_artifact, "_crawl_go", explodes)
+    monkeypatch.setattr(registry_artifact, "_crawl_rubygems", explodes)
     registry_artifact.crawl_registry_sources(
-        ["npm", "go"], state_path, tmp_path / "intermediate", tmp_path / "report.json")
+        ["npm", "rubygems"], state_path, tmp_path / "intermediate", tmp_path / "report.json")
 
     assert json.loads(state_path.read_text())["sources"]["npm"]["cursor"] == 4242
 
@@ -905,30 +802,11 @@ def test_an_unchanged_crates_dump_is_not_downloaded_again(tmp_path, monkeypatch)
     assert report["cursor"] == 319466
 
 
-def test_every_crawler_can_actually_call_its_checkpoint(tmp_path, monkeypatch):
-    """A local name shadowed the checkpoint parameter, so Go failed the moment it fired."""
+def test_no_crawler_shadows_its_checkpoint_callback():
+    """Every crawler must retain the checkpoint callback handed to it."""
     import inspect
-    calls = []
 
-    def spy(buffer=None, **updates):
-        calls.append(updates)
-
-    # Go reaches its checkpoint after CHECKPOINT_INTERVAL modules, so make that one module.
-    monkeypatch.setattr(registry_artifact, "CHECKPOINT_INTERVAL", 1)
-    catalog = tmp_path / "go-modules.txt"
-    catalog.write_text("example.com/a\nexample.com/b\n")
-    monkeypatch.setattr(registry_artifact, "fetch",
-                        lambda url, timeout=120, attempts=4: (b'{"Version":"v1"}', {"downloaded_bytes": 1}))
-    monkeypatch.setattr(registry_artifact, "_go_module_rows", lambda *a: ([], 0))
-    state = {"modules_file": str(catalog), "catalog_complete": True}
-
-    registry_artifact._crawl_go(state, tmp_path / "go.jsonl", 2, 1_000_000, 120, spy)
-
-    # Go inspects a window of modules at a time, so the checkpoint follows the window
-    # rather than each module -- what matters is that it fires and carries the cursor.
-    assert [update["cursor"] for update in calls] == [2]
-    # and no crawler may shadow the parameter it was handed
-    for name in ("_crawl_pypi", "_crawl_npm", "_crawl_crates", "_crawl_go",
+    for name in ("_crawl_pypi", "_crawl_npm", "_crawl_crates",
                  "_crawl_rubygems", "_crawl_packagist", "_crawl_nuget"):
         source = inspect.getsource(getattr(registry_artifact, name))
         assert "\n    checkpoint = " not in source, f"{name} rebinds its checkpoint parameter"
@@ -1081,17 +959,17 @@ def test_a_built_catalogue_survives_a_later_failure_in_the_same_pass(tmp_path, m
 
 def test_no_crawler_builds_a_catalogue_without_persisting_it(tmp_path):
     """A catalogue costs hundreds of requests; losing it to a later hiccup is the bug
-    that hit Go, then NuGet, then npm, and was still open for three more sources."""
+    that hit multiple registries and was still open for three more sources."""
     import inspect
     unguarded = []
     for name in ("_crawl_pypi", "_crawl_rubygems", "_crawl_packagist",
-                 "_crawl_nuget", "_crawl_npm", "_crawl_go"):
+                 "_crawl_nuget", "_crawl_npm"):
         body = inspect.getsource(getattr(registry_artifact, name))
-        built = max(body.find("write_catalog("), body.find("_save_catalog_cursor("))
+        built = body.find("write_catalog(")
         if built < 0:
             continue
         window = body[built:built + 400]
-        if "checkpoint()" not in window and "_save_catalog_cursor(" not in window:
+        if "checkpoint()" not in window:
             unguarded.append(name)
     assert unguarded == [], f"catalogue discarded on failure: {unguarded}"
 
@@ -1127,6 +1005,21 @@ def test_a_budget_for_an_unselected_source_is_rejected(tmp_path):
         env={"PYTHONPATH": "src", "PATH": "/usr/bin:/bin"})
     assert result.returncode == 2
     assert "for a selected source" in result.stderr
+
+
+def test_python_registry_runtime_rejects_go(tmp_path):
+    """Go has one supported runtime; the retired Python path must not be selectable."""
+    catalog = tmp_path / "go-modules.txt"
+    catalog.write_text("")
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({
+        "version": 1,
+        "sources": {"go": {"modules_file": str(catalog), "catalog_complete": True}},
+    }))
+
+    with pytest.raises(registry_artifact.RegistryCrawlError, match="unsupported registry source: go"):
+        registry_artifact.crawl_registry_sources(
+            ["go"], state_path, tmp_path / "intermediate", tmp_path / "report.json", package_budget=0)
 
 
 def test_a_pass_reports_every_row_it_flushed_not_the_leftover(tmp_path, monkeypatch):

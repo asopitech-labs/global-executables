@@ -1,3 +1,5 @@
+import os
+import subprocess
 from pathlib import Path
 
 
@@ -37,3 +39,13 @@ def test_local_go_source_uses_dedicated_go_runtime_with_failure_restart():
     assert 'global-executables-go-crawler:local' in PARALLEL_CRAWL
     assert "--restart on-failure:5" in PARALLEL_CRAWL
     assert "crawl --passes 0" in PARALLEL_CRAWL
+
+
+def test_python_crawl_loop_rejects_go():
+    result = subprocess.run(
+        ["sh", "tools/crawl_loop.sh"], cwd=ROOT, capture_output=True, text=True,
+        env={**os.environ, "SOURCES": "go"},
+    )
+
+    assert result.returncode == 2
+    assert "dedicated Go runtime" in result.stderr
