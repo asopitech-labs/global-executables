@@ -2,15 +2,23 @@
 
 ## Purpose
 
-This document defines the development environment and build pipeline that must be
-in place before the Go registry crawler is implemented. The crawler is a durable,
-network-heavy pipeline, so a successful build is not just compilation: the same
-source must pass the same dependency, concurrency, security, and container checks
-locally and in CI.
+This document defines the development, build, and runtime contract for the
+transactional Go registry crawler. The crawler is a durable, network-heavy pipeline,
+so a successful build is not just compilation: the same source must pass the same
+dependency, concurrency, security, and container checks locally and in CI.
 
-The initial target is `linux/amd64`, matching the rootless Podman host that runs the
-existing local crawler. The Python crawler remains the rollback path until a shadow
-run proves state and observation compatibility.
+The target is `linux/amd64`, matching the rootless Podman host. Python continues to
+own every other registry and remains the Go rollback path through the cutover window.
+
+## At a glance
+
+- Exact compiler: Go 1.26.7 with `GOTOOLCHAIN=local`.
+- Development: digest-pinned official container; host Go is optional.
+- Validation: one shared format, vet, test, race, vulnerability, and build pipeline.
+- Runtime: dedicated scratch image and an explicit `crawl` subcommand.
+- Durable state: bbolt commits observations, retries, cursor, and generation together.
+- Compatibility: state, JSONL, and report are streamed from one database snapshot.
+- Rollback: the Python image can consume the last compatibility export without a DB conversion.
 
 ## Quick start
 
@@ -21,6 +29,7 @@ No host Go installation is required. Podman is preferred; Docker is supported.
 ./tools/go_container.sh ./tools/go_pipeline.sh build
 ./tools/go_image.sh go-test global-executables-go-test:local
 ./tools/go_image.sh runtime global-executables-go-crawler:local
+podman run --rm global-executables-go-crawler:local --version
 ```
 
 Native Go development is also supported when the installed toolchain exactly
@@ -33,9 +42,10 @@ GOTOOLCHAIN=local ./tools/go_pipeline.sh check
 `go.mod` is the canonical Go version and dependency contract. The development
 container, CI setup, and pipeline version check must all agree with it.
 
-## Definition of ready for crawler code
+## Implementation gate
 
-Crawler behavior may be implemented only after all of these are true:
+Crawler behavior was allowed only after all of these became true, and these remain
+release gates:
 
 - the digest-pinned development image reports the exact `go.mod` toolchain;
 - the native and container pipeline entrypoints both pass;
@@ -45,12 +55,16 @@ Crawler behavior may be implemented only after all of these are true:
 - the placeholder binary is not routed to production; and
 - issue #40 records the environment contract and validation evidence.
 
+The gate passed before crawler behavior was added. Any toolchain or dependency update
+must pass it again; Go 1.26.5 was replaced by 1.26.7 when `govulncheck` found reachable
+standard-library vulnerabilities, rather than weakening the security gate.
+
 ## Environment decision
 
 | Concern | Contract | Reason |
 | --- | --- | --- |
 | Language | Go, not Java | The workload is dominated by HTTP, ZIP inspection, bounded concurrency, and a static local executable. Go fits the repository and deployment footprint without introducing a JVM. |
-| Toolchain | Go 1.26.5, exact patch | This is the current stable Go release as of 2026-08-25. Patch-level pinning prevents developer and CI drift. |
+| Toolchain | Go 1.26.7, exact patch | This is the maintained Go 1.26 patch release as of 2026-08-25. Patch-level pinning prevents developer and CI drift. |
 | Toolchain switching | `GOTOOLCHAIN=local` | A build must fail on a mismatched toolchain instead of silently downloading a different compiler. |
 | Local setup | Digest-pinned official Go container | The host currently has no Go installation. Container-first setup makes onboarding reproducible and avoids root-owned repository files. |
 | Deployment target | `linux/amd64`, `CGO_ENABLED=0` | This matches the current crawler host and produces a portable static crawler binary. |
@@ -78,6 +92,48 @@ go.mod + go.sum
               |-- go-build        static, trimpath binary
               `-- runtime         binary + CA certificates only
 ```
+
+## Runtime topology and recovery
+
+```text
+index.golang.org --> atomic append-only catalog --> bounded work coordinator
+proxy.golang.org --> module inspectors ----------> ordered result buffer
+                                                  |
+                                                  v
+                         bbolt transaction: observations + retry verdict + cursor
+                                                  |
+                                                  v
+                         one read generation --> JSONL + state + report
+```
+
+Workers do not write files or mutable state. Results may finish out of order, but the
+coordinator commits only the largest contiguous catalog prefix. A process stop can
+waste HTTP work; it cannot move the cursor past an uncommitted module.
+
+The first migration imports the Python JSONL/state into `go-crawl.db`. The database is
+then canonical locally. Compatibility files remain the durable publish/rollback
+contract and can rebuild a missing database. The catalog uses a fixed-record derived
+index for the immutable prefix and keeps only post-index additions in bbolt; this
+avoids duplicating roughly two million module-path strings in the database. Both the
+derived index and database stay in the mounted state directory and are not built into
+or published with the image.
+
+Every module has a whole-inspection deadline in addition to each HTTP-attempt deadline.
+Transient failures return to the durable retry queue; permanent proxy responses and a
+failure that reaches the attempt limit move to `unavailable`. Cancellation never
+crosses a missing ordered result.
+
+Run one bounded pass explicitly:
+
+```console
+podman run --rm --init --userns=keep-id --user "$(id -u):$(id -g)" \
+  --volume /path/to/go-state:/state \
+  global-executables-go-crawler:local crawl --passes 1
+```
+
+`--passes 0` continues until the catalog is current, the committed cursor reaches its
+end, and no retry remains. Starting the image without `crawl` is intentionally an
+error, so merely building or pulling it cannot mutate production state.
 
 The Python crawler image remains separate. During migration, orchestration sends
 only the `go` source to the Go image. Rollback sends it back to the existing Python
@@ -173,6 +229,12 @@ back into the Python state file.
   exact development image; do not disable `-race` for the package.
 - **Container build sends crawl data:** stop the build and fix `.dockerignore`; runtime
   state must never be part of the context.
+- **Catalog index is missing or corrupt:** leave the module catalog intact; the derived
+  `.index` file is rebuilt atomically on the next pass.
+- **Compatibility export is interrupted:** restart the same Go state directory. The
+  database is canonical and regenerates all compatibility views from one generation.
+- **Crawler repeatedly exits nonzero:** inspect `docker logs ge-go`, preserve the DB and
+  compatibility files, then use the rollback procedure in `docs/OPERATIONS.md`.
 
 ## Primary references
 

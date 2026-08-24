@@ -9,6 +9,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 IMAGE="${IMAGE:-global-executables-crawl:local}"
+GO_IMAGE="${GO_IMAGE:-global-executables-go-crawler:local}"
 BASE="${BASE:-${HOME}/.ge-crawl}"
 # An explicitly empty value is useful when publishing checkout observations only.
 SOURCES="${SOURCES-pypi rubygems packagist nuget npm go}"
@@ -86,6 +87,9 @@ start() {
     seed
   fi
   docker build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
+  if [[ " ${SOURCES} " == *" go "* ]]; then
+    tools/go_image.sh runtime "${GO_IMAGE}" >/dev/null
+  fi
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
     mkdir -p "${dir}/data/production/intermediate" "${dir}/reports"
@@ -112,9 +116,15 @@ PY
       cp "${BASE}/data/production/intermediate/${source}.jsonl" "${dir}/data/production/intermediate/${source}.jsonl"
     fi
     docker rm -f "ge-${source}" >/dev/null 2>&1 || true
-    docker run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
-      -e "SOURCES=${source}" -e "PACKAGE_BUDGET=${PACKAGE_BUDGET}" \
-      -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" "${IMAGE}" >/dev/null
+    if [ "${source}" = go ]; then
+      docker run --detach --init --name "ge-${source}" --restart on-failure:5 \
+        -v "${dir}:/state" "${GO_IMAGE}" crawl --passes 0 \
+        --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}" >/dev/null
+    else
+      docker run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
+        -e "SOURCES=${source}" -e "PACKAGE_BUDGET=${PACKAGE_BUDGET}" \
+        -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" "${IMAGE}" >/dev/null
+    fi
     echo "started ge-${source} against ${dir}"
   done
 }

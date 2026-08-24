@@ -253,16 +253,16 @@ found in three crawlers separately, each time by reading one of them for another
 
 ## Crawling in a container
 
-A CI job stops at six hours and the workflow runs one at a time, so a long sweep
-(Go's module catalog, npm's changes feed) is better driven locally. `Dockerfile.crawl`
-builds a thin image — the package and the crawl entry point, no dataset — and
-`tools/crawl_container.sh` seeds a state directory from `artifact-data`, builds the
-image, and runs passes back to back until every selected source is exhaustive.
+A CI job stops at six hours and the workflow runs one at a time, so long catalog
+sweeps are driven locally. `Dockerfile.crawl` remains the Python runtime for non-Go
+registries. Go uses `Dockerfile.go-crawler`, a dedicated transactional runtime.
+`tools/crawl_container.sh` is the single Python-container path;
+`tools/crawl_parallel.sh` routes each source to its correct image.
 
 ```sh
 tools/crawl_container.sh                                   # every source
 SOURCES=crates PASSES=1 tools/crawl_container.sh           # one source, one pass
-SOURCES="go npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
+SOURCES="npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
 ```
 
 `tools/crawl_parallel.sh` runs one container per registry instead. Every
@@ -279,10 +279,31 @@ processed nothing, so the loop backs off rather than retrying every few seconds,
 stops once several consecutive passes have achieved nothing. NuGet reached that state
 after 4,000 tools and was spinning through a pass every five seconds.
 
-Each pass is budgeted so the resumable state is checkpointed between passes;
-stopping the container loses at most the pass in flight. Measured on the local
-runtime, crates.io reaches `exhaustive` in a single pass — 319,466 crates, 88,610
-executable names — at a peak of 347MB.
+Each pass is budgeted. Python sources checkpoint on their existing cadence. The Go
+runtime commits ordered batches transactionally, so stopping it loses only uncommitted
+HTTP work, not the entire pass. Measured on the local runtime, crates.io reaches
+`exhaustive` in a single pass — 319,466 crates, 88,610 executable names — at a peak of
+347MB.
+
+### Transactional Go runtime
+
+`SOURCES=go tools/crawl_parallel.sh start` builds the shared Python image and the
+dedicated Go runtime, then starts `ge-go` with `crawl --passes 0`. A nonzero local
+failure is restarted up to five times; reaching exhaustive exits zero and is not
+restarted. Other `ge-*` containers still run Python.
+
+The mounted Go state directory contains:
+
+- `registry-state.json`, `intermediate/go.jsonl`, and the report: publishable,
+  Python-compatible snapshot views;
+- `go-crawl.db`: the canonical local transaction store; and
+- `go-modules.txt.index`: a rebuildable exact membership index for the immutable
+  catalog prefix.
+
+The DB and derived index are local operational state and are not published. The module
+catalog is replaced atomically when new names arrive from `index.golang.org`; a stop
+between catalog replacement and DB metadata commit is reconciled from the file tail on
+restart.
 
 `crawl_parallel.sh publish` writes only the sources this machine owns, and refuses a
 source whose local cursor is behind the published one — the check that stopped Go's
@@ -297,13 +318,14 @@ chained CI runs first, or crawl a source locally that CI is not advancing.
 
 ## Checking a running crawl
 
-`tools/crawl_parallel.sh status` gives the cursor per source. Everything else is read
-from the state files, which are the authoritative record — the report is a summary of
-the last pass, the state is what the next pass will resume from.
+`tools/crawl_parallel.sh status` gives the cursor per source. Python sources resume
+from their state files. Go resumes from bbolt and regenerates its state file as the
+publishable view; the report is only a summary of the last pass.
 
 ```sh
 tools/crawl_parallel.sh status                    # container status and cursor
 docker logs --tail 20 ge-rubygems                 # per-pass summary lines
+docker logs --tail 20 ge-go                       # transactional Go passes
 git show origin/artifact-data:reports/registry-artifact-crawl.json | jq '.sources'
 ```
 
@@ -316,8 +338,8 @@ import gzip, json, pathlib
 for src, cat in (("pypi", "pypi-projects"), ("npm", "npm-packages"), ("go", "go-modules"),
                  ("rubygems", "rubygems-names"), ("packagist", "packagist-packages")):
     d = pathlib.Path.home() / f".ge-crawl-{src}/data/production"
-    # Every source but Go reads the compressed copy first; Go appends to the plain file
-    # page by page and never gzips it, so a .gz beside it would be stale by definition.
+    # Every source but Go reads the compressed copy first; Go updates the plain file
+    # atomically and never gzips it, so a .gz beside it would be stale by definition.
     order = (".txt",) if src == "go" else (".txt.gz", ".txt")
     f = next((d / f"{cat}{e}" for e in order if (d / f"{cat}{e}").is_file()), None)
     if not f:
@@ -328,9 +350,31 @@ for src, cat in (("pypi", "pypi-projects"), ("npm", "npm-packages"), ("go", "go-
 PY
 ```
 
-Go's catalogue is still being built, so its denominator grows as you watch: the index
-sweep resumes from a timestamp cursor and was thirteen months behind at the time of
-writing. `catalog_complete` in its state says whether the denominator is final.
+Go refreshes its denominator from the chronological module index before each pass.
+`catalog_complete` means the index reader reached the current edge for that snapshot;
+new module versions may make it grow on a later pass.
+
+## Go cutover and rollback
+
+Cut over only after the shared Go pipeline, Go test/runtime image stages, a copied-state
+shadow run, restart test, and Python dictionary rebuild all pass.
+
+1. Publish or copy the final Python checkpoint and record its cursor, JSONL row count,
+   failure count, container image, and timestamp.
+2. Stop only `ge-go`; leave every other registry container running.
+3. Preserve the compatibility state, Go JSONL, catalog, and previous image as the
+   rollback snapshot.
+4. Start Go through `SOURCES=go tools/crawl_parallel.sh start` against that same source
+   directory. The first pass imports the compatibility snapshot into a new DB.
+5. Verify that the first exported cursor is not below the recorded cursor, generated
+   files are owned by the host user, failures do not persist, and `docker logs ge-go`
+   reports nonzero processing.
+6. Publish only after `tools/crawl_parallel.sh publish` passes its no-regression check.
+
+Rollback stops `ge-go`, restores the recorded compatibility snapshot, and starts the
+previous Python crawl image with `SOURCES=go`. Do not copy a partially written DB into
+the rollback directory. Keep the Go DB separately for diagnosis; Python does not need
+or read it.
 
 To check that withdrawals are being classified rather than retried, group the
 outstanding failures by kind. A kind that recurs across passes without changing is a

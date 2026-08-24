@@ -29,3 +29,11 @@ def test_local_publish_includes_os_observations_from_the_checkout():
     assert 'OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 scoop winget windows macos shell}"' in PARALLEL_CRAWL
     assert 'local rows="data/production/intermediate/${source}.jsonl"' in PARALLEL_CRAWL
     assert 'local observed="${ROOT_DIR}/${rows}"' in PARALLEL_CRAWL
+
+
+def test_local_go_source_uses_dedicated_go_runtime_with_failure_restart():
+    assert "tools/go_image.sh" in PARALLEL_CRAWL
+    assert 'if [ "${source}" = go ]; then' in PARALLEL_CRAWL
+    assert 'global-executables-go-crawler:local' in PARALLEL_CRAWL
+    assert "--restart on-failure:5" in PARALLEL_CRAWL
+    assert "crawl --passes 0" in PARALLEL_CRAWL

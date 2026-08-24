@@ -2,7 +2,7 @@
 
 # The tag documents the human-readable patch release; the digest makes the
 # compiler and base filesystem immutable until a reviewed update changes it.
-ARG GO_IMAGE=docker.io/library/golang:1.26.5-bookworm@sha256:0d327c83532d3cdeeeebab56ce85962bf09cb89545355b10207c7771b0c3713f
+ARG GO_IMAGE=docker.io/library/golang:1.26.7-bookworm@sha256:02f9f70beba7aa222cc739ab3935d1d948b80d154159ae00e885811d11d443bf
 
 FROM ${GO_IMAGE} AS go-development
 ENV GOTOOLCHAIN=local \
