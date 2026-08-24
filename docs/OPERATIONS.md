@@ -1,5 +1,12 @@
 # Operations and measured baseline
 
+The durable operating model has two sources of truth: normalized observations and
+crawl state live on `artifact-data`; the queryable dictionary and its derived indexes
+live on `main`. A refresh seeds every observation before collecting, preserves stored
+evidence when an upstream source fails, and refuses an unexplained decrease in unique
+names. Invalid individual command names are quarantined in the refresh report rather
+than stopping publication; malformed input and unexplained shrinkage still block it.
+
 The current main snapshot includes a measured production OS crawl plus
 explicitly partial language-registry inputs. Homebrew's complete formula
 catalog is exhaustive for the supported API scope. The 2026-08-15 snapshot
@@ -73,13 +80,13 @@ executable, so rows grow far more slowly than the cursor.
 
 | Source | Coverage | Cursor | Rows | Runs on |
 | --- | --- | --- | --- | --- |
-| crates.io | `exhaustive` | 319,466 / 319,466 | 88,610 | CI, one dump per run |
+| crates.io | `exhaustive` | 319,955 / 319,955 | 88,771 | CI, one dump per run |
 | NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
-| RubyGems | `partial` | 77,438 / 196,126 (39.5%) | 20,617 | local container |
-| Packagist | `partial` | 145,017 / 458,432 (31.6%) | 4,269 | local container |
-| PyPI | `partial` | 88,205 / 870,264 (10.1%) | 34,666 | local container |
-| npm | `partial` | 96,000 / 4,311,362 (2.2%) | 15,506 | local container |
-| Go | `partial` | 4,793 / 1,415,906 modules, catalogue still building | 127,786 | local container |
+| RubyGems | `partial` | 104,790 / 196,126 (53.4%) | 27,298 | local container |
+| Packagist | `partial` | 225,856 / 458,432 (49.3%) | 6,698 | local container |
+| PyPI | `partial` | 116,963 / 870,264 (13.4%) | 47,060 | local container |
+| npm | `partial` | 155,181 / 4,311,362 (3.6%) | 23,957 | local container |
+| Go | `partial` | 7,792 / 1,965,638 (0.4%) | 132,911 | local container |
 
 Only crates.io runs in CI: its whole registry arrives in one dump, so it finishes
 inside a job. Every catalogue-walking source is filled by `crawl_parallel.sh` on a
@@ -87,8 +94,9 @@ local machine, because a CI job stops at six hours and the workflow runs one at 
 time. `watch` publishes to `artifact-data` on an interval so the progress does not
 live on one machine.
 
-Go's row count is large against its cursor because a module contributes one row per
-`package main` directory, and because the catalogue phase ran long before the
+Go's catalogue phase is complete. Every new pass now spends its budget on inspecting
+modules. Its row count is large against its cursor because a module contributes one row
+per `package main` directory, and because the catalogue phase ran long before the
 inspection phase started.
 
 ## Windows and .NET coverage
@@ -381,10 +389,38 @@ This machine runs Colima, not Docker Desktop. Two consequences:
   set `DOCKER_HOST=unix://$HOME/.colima/default/docker.sock`, because a replacement
   config also drops the `colima` context.
 
-The scheduled refresh now downloads the production OS indexes with
-`tools/production_crawl.py`, merges them with the currently available registry
-inputs, and publishes only canonical data and reports to `main`. The fixture
-inputs remain in the tree for parser and protocol tests;
+## Durable observation lifecycle
+
+The scheduled refresh performs the lifecycle in this order:
+
+1. Restore every OS, registry, macOS, and shell observation from `artifact-data`.
+2. Collect the production OS indexes. A successful observation is merged into the
+   stored evidence; if an upstream source fails, a non-empty stored copy is retained
+   and the crawl report is marked `degraded`. A missing fallback remains a hard failure.
+3. Publish the refreshed OS observations back to `artifact-data`.
+4. Rebuild the dictionary. Unusable command names are counted under
+   `rejected_records` in `reports/production-refresh.json`; malformed JSON remains a
+   hard failure.
+5. Refuse to replace the dictionary when the new unique-name count is lower. An
+   intentional removal requires `--allow-shrink-reason "..."`, which is recorded in
+   the refresh report.
+6. Publish canonical data and reports to `main`. A failed scheduled refresh opens or
+   updates a GitHub issue with the failed run URL.
+
+For a local OS crawl, seed first so the collector extends durable evidence, then
+publish the result:
+
+```sh
+tools/crawl_parallel.sh seed
+python tools/production_crawl.py \
+  --source debian --source ubuntu --source arch --source homebrew \
+  --source msys2 --source scoop --source winget --source windows \
+  --output-dir data/production/intermediate \
+  --report reports/production-crawl.json
+tools/crawl_parallel.sh publish
+```
+
+The fixture inputs remain in the tree for parser and protocol tests;
 they are not presented as exhaustive upstream coverage. `upstream-smoke.yml`
 downloads representative real indexes/packages from every planned ecosystem,
 inspects executable evidence inside them, and retains a measured report. It
@@ -403,7 +439,8 @@ Local rebuild:
 
 ```sh
 pip install -e '.[test]'
-global-executables build fixtures/intermediate/*.jsonl --snapshot 2026-08-14
+global-executables build fixtures/intermediate/*.jsonl \
+  --root /tmp/global-executables-fixture --snapshot 2026-08-14
 pytest
 ```
 
@@ -437,10 +474,9 @@ python tools/refresh.py \
   --report reports/production-refresh.json
 ```
 
-The scheduled refresh uses the same fail-closed production command without
-developer state. It refuses a failed production source and records transfer
-bytes, URL, HTTP status, duration, and per-source coverage in
-`reports/production-crawl.json`.
+The scheduled refresh records transfer bytes, URL, HTTP status, duration, fallback
+use, and per-source coverage in `reports/production-crawl.json`. It fails closed when
+there is neither a successful observation nor a readable stored fallback.
 
 ## GitHub Pages playground
 
@@ -459,14 +495,17 @@ sent to an application server. The repository Pages setting must use
 
 ```sh
 python tools/refresh.py fixtures/intermediate/*.jsonl \
-  --snapshot 2026-08-14 --coverage-kind partial
+  --root /tmp/global-executables-fixture \
+  --snapshot 2026-08-14 --coverage-kind partial \
+  --report /tmp/global-executables-fixture/refresh.json
 ```
 
-It writes `reports/refresh.json`, refuses missing collector inputs, and
+It writes the requested refresh report, refuses missing collector inputs, and
 validates the generated tree. This local command does not publish to GitHub;
 the scheduled `refresh.yml` workflow runs the production equivalent and
-publishes the complete generated diff to `main`. A failed source is recorded
-as failed and cannot be represented as successful coverage.
+publishes the complete generated diff to `main`. A source using stored evidence
+is recorded as a fallback with unknown current coverage; a source with no usable
+fallback fails and cannot be represented as successful coverage.
 
 Real-content smoke test (network, substantial downloads, and Cargo required):
 
