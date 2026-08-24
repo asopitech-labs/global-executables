@@ -3,6 +3,12 @@ on:
   schedule:
     - cron: "31 3 * * 1"
   workflow_dispatch:
+    inputs:
+      refresh_os_samples:
+        description: "Explicitly reacquire and publish the sampled OS package indexes"
+        required: false
+        default: false
+        type: boolean
 permissions:
   actions: write
   contents: write
@@ -27,6 +33,12 @@ jobs:
           set -o pipefail
           git fetch origin dictionary
           git archive origin/dictionary data | tar -x -C .
+          mkdir -p reports
+          if git cat-file -e origin/dictionary:reports/production-crawl.json; then
+            git show origin/dictionary:reports/production-crawl.json > reports/production-crawl.json
+          else
+            printf '%s\n' '{"coverage_kind":"partial","note":"OS samples have not been acquired yet","status":"unavailable"}' > reports/production-crawl.json
+          fi
           test -s data/metadata.json
           test -d data/executables
           test -d data/indexes
@@ -57,6 +69,7 @@ jobs:
             fi
           done
       - name: Acquire production OS indexes
+        if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples
         run: |
           python tools/production_crawl.py \
             --source debian --source ubuntu --source arch --source homebrew \
@@ -64,6 +77,7 @@ jobs:
             --output-dir data/production/intermediate \
             --report reports/production-crawl.json
       - name: Publish refreshed OS observations
+        if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples
         run: |
           git fetch origin artifact-data || true
           rm -rf /tmp/os-observation-publish

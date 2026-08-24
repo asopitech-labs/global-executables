@@ -10,16 +10,25 @@ PARALLEL_CRAWL = (ROOT / "tools/crawl_parallel.sh").read_text()
 OS_SOURCES = {"arch", "debian", "ubuntu", "homebrew", "msys2", "scoop", "winget", "windows"}
 
 
-def test_refresh_seeds_every_observation_before_collecting():
-    assert REFRESH.index("Restore latest durable observations") < REFRESH.index("Acquire production OS indexes")
+def test_refresh_reuses_durable_os_samples_by_default():
+    assert "refresh_os_samples:" in REFRESH
+    os_input = REFRESH.split("refresh_os_samples:", 1)[1].split("permissions:", 1)[0]
+    assert "default: false" in os_input
+
+    assert REFRESH.index("Restore latest durable observations") < REFRESH.index("Rebuild from production and registry inputs")
     restore = REFRESH.split("Restore latest durable observations", 1)[1].split("Acquire production OS indexes", 1)[0]
     for source in OS_SOURCES | {"npm", "pypi", "crates", "go", "rubygems", "packagist",
                                 "nuget", "macos", "shell"}:
         assert source in restore
+    assert "origin/dictionary:reports/production-crawl.json" in REFRESH
+
+    acquire = REFRESH.split("Acquire production OS indexes", 1)[1].split("Publish refreshed OS observations", 1)[0]
+    assert "if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples" in acquire
 
 
 def test_refresh_publishes_os_observations_and_alerts_on_failure():
     publish = REFRESH.split("Publish refreshed OS observations", 1)[1]
+    assert "if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples" in publish
     for source in OS_SOURCES:
         assert f"${{source}}.jsonl" in publish
     assert "Unable to publish OS observations after three attempts" in publish

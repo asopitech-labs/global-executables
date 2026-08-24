@@ -314,9 +314,9 @@ machine until someone remembers. The merged report is what Pages exposes as
 If another writer wins the push race, the shared publisher discards its temporary
 worktree, fetches the new branch head, and rebuilds the source-owned merge up to three
 times. It does not rebase a stale combined JSON snapshot. Pass `OBSERVATION_SOURCES`
-explicitly: a registry-only supervisor should leave it blank when the refresh workflow
-owns the OS observations, which shortens the conflict window and avoids reprocessing
-large unchanged files.
+explicitly: a registry-only supervisor should leave it blank because OS observations
+are durable samples, which shortens the conflict window and avoids reprocessing large
+unchanged files.
 
 The single-source container holds no credentials and never pushes. `STATE_DIR` is laid out
 exactly like the `artifact-data` branch, so publishing a local run is a copy into a
@@ -434,21 +434,31 @@ This machine runs Colima, not Docker Desktop. Two consequences:
 
 ## Durable observation lifecycle
 
-The scheduled refresh performs the lifecycle in this order:
+Normal registry-triggered and scheduled refreshes perform the lifecycle in this order:
 
 1. Restore every OS, registry, macOS, and shell observation from `artifact-data`.
-2. Collect the production OS indexes. A successful observation is merged into the
-   stored evidence; if an upstream source fails, a non-empty stored copy is retained
-   and the crawl report is marked `degraded`. A missing fallback remains a hard failure.
-3. Publish the refreshed OS observations back to `artifact-data`.
-4. Rebuild the dictionary. Unusable command names are counted under
+2. Reuse the durable OS observations as environment/package-set samples. They are not
+   reacquired just because a registry cursor advanced.
+3. Rebuild the dictionary. Unusable command names are counted under
    `rejected_records` in `reports/production-refresh.json`; malformed JSON remains a
    hard failure.
-5. Refuse to replace the dictionary when the new unique-name count is lower. An
+4. Refuse to replace the dictionary when the new unique-name count is lower. An
    intentional removal requires `--allow-shrink-reason "..."`, which is recorded in
    the refresh report.
-6. Publish canonical data and reports to `dictionary`. A failed scheduled refresh opens or
+5. Publish canonical data and reports to `dictionary`. A failed scheduled refresh opens or
    updates a GitHub issue with the failed run URL.
+
+OS sampling is an explicit maintenance operation, not part of normal dictionary
+publication. Run it only when the environment sample intentionally needs to change:
+
+```sh
+gh workflow run refresh.yml --ref main -f refresh_os_samples=true
+```
+
+That opt-in run reacquires the eight production OS indexes, publishes the refreshed
+observations to `artifact-data`, and then rebuilds the dictionary. Without the input,
+`refresh.yml` restores the last production crawl report from `dictionary` and performs
+no OS network acquisition.
 
 For a local OS crawl, seed first so the collector extends durable evidence, then
 publish the result:
