@@ -2,6 +2,18 @@
   "command": "run-tests",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@aws/universal-test-runner",
+      "version": "0.5.0",
+      "repository": "git+https://github.com/aws/universal-test-runner.git",
+      "source": "https://registry.npmjs.org/@aws%2Funiversal-test-runner/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "packagist",
       "package": "antstudiocz/testbench",
       "version": "v2.8.2",
