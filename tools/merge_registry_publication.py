@@ -68,10 +68,10 @@ def aggregate_report(report: dict[str, Any]) -> None:
     sources = report.get("sources", {})
     entries = list(sources.values()) if isinstance(sources, dict) else []
     statuses = {entry.get("status") for entry in entries if isinstance(entry, dict)}
-    if entries and statuses == {"success"}:
-        report["status"] = "success"
-    elif statuses & {"failure", "failed", "error"}:
+    if statuses & {"failure", "failed", "error"}:
         report["status"] = "failure"
+    elif entries and statuses <= {None, "success"}:
+        report["status"] = "success"
     else:
         report["status"] = "partial"
     report["coverage_kind"] = (

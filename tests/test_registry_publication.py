@@ -37,7 +37,9 @@ def run_merge(
             "status": "success",
             "coverage_kind": "partial",
             "sources": {
-                "crates": {"cursor": 100, "status": "success", "coverage_kind": "exhaustive"},
+                # Older source reports predate the per-source status field. Missing
+                # means no reported failure, not a failed aggregate publication.
+                "crates": {"cursor": 100, "coverage_kind": "exhaustive"},
                 source: {"cursor": published_cursor, "status": "success", "coverage_kind": "partial"},
             },
         },
