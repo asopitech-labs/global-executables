@@ -2,6 +2,18 @@
   "command": "earthly",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/earthly/earthly",
+      "version": "v0.8.16",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/earthly/earthly/@v/v0.8.16.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.16"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "earthly",
       "version": "0.8.16",
