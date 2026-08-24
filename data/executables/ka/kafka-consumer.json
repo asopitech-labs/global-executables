@@ -2,6 +2,18 @@
   "command": "kafka-consumer",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "knative.dev/eventing-kafka-broker",
+      "version": "v0.50.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/knative.dev/eventing-kafka-broker/@v/v0.50.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.50.0"
+    },
+    {
       "ecosystem": "rubygems",
       "package": "kafka-rb",
       "version": "0.0.15",
