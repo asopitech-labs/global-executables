@@ -1,8 +1,8 @@
 {
-  "accepted_records": 644111,
+  "accepted_records": 652595,
   "coverage_kind": "partial",
   "failed": [],
-  "input_records": 644111,
+  "input_records": 652596,
   "inputs": [
     "data/production/intermediate/arch.jsonl",
     "data/production/intermediate/debian.jsonl",
@@ -22,12 +22,19 @@
     "data/production/intermediate/macos.jsonl",
     "data/production/intermediate/shell.jsonl"
   ],
-  "previous_unique_executables": 312141,
-  "records": 644111,
-  "rejected": [],
-  "rejected_records": 0,
+  "previous_unique_executables": 314317,
+  "records": 652596,
+  "rejected": [
+    {
+      "command": "",
+      "ecosystem": "pypi",
+      "package": "bmlx",
+      "reason": "invalid executable name"
+    }
+  ],
+  "rejected_records": 1,
   "shrink_reason": null,
   "snapshot": "2026-08-24",
   "status": "success",
-  "unique_executables": 314317
+  "unique_executables": 316357
 }

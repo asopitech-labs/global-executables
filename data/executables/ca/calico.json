@@ -2,6 +2,18 @@
   "command": "calico",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/projectcalico/cni-plugin",
+      "version": "v3.9.0-0.dev+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/projectcalico/cni-plugin/@v/v3.9.0-0.dev+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.9.0-0.dev+incompatible"
+    },
+    {
       "ecosystem": "npm",
       "package": "@alexcatdad/calico-cli",
       "version": "1.1.0",
