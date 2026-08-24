@@ -108,8 +108,15 @@ def test_merger_refuses_state_and_report_regression(tmp_path):
 
 
 def test_both_publishers_use_source_owned_merge():
-    assert "tools/merge_registry_publication.py" in WORKFLOW
-    assert "--source crates" in WORKFLOW
+    assert "bash tools/crawl_parallel.sh publish" in WORKFLOW
+    assert "SOURCES=crates" in WORKFLOW
     assert "cp data/production/registry-state.json /tmp/artifact-publish" not in WORKFLOW
     assert "merge_registry_publication.py" in PARALLEL
     assert "merge_status" in PARALLEL
+
+
+def test_shared_publisher_retries_from_a_fresh_remote_snapshot():
+    assert 'PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"' in PARALLEL
+    assert 'local attempt="${PUBLISH_ATTEMPT:-1}"' in PARALLEL
+    assert 'PUBLISH_ATTEMPT=$((attempt + 1)) publish' in PARALLEL
+    assert 'PUBLISH_MAX_ATTEMPTS=3' in WORKFLOW

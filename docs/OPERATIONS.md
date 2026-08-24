@@ -313,6 +313,12 @@ copy a stale whole-state or whole-report snapshot over other writers. `watch` ru
 publisher on an interval, because publishing by hand leaves the crawl's progress on one
 machine until someone remembers. The merged report is what Pages exposes as
 `status.json`, so a published cursor and its public progress display advance together.
+If another writer wins the push race, the shared publisher discards its temporary
+worktree, fetches the new branch head, and rebuilds the source-owned merge up to three
+times. It does not rebase a stale combined JSON snapshot. Pass `OBSERVATION_SOURCES`
+explicitly: a registry-only supervisor should leave it blank when the refresh workflow
+owns the OS observations, which shortens the conflict window and avoids reprocessing
+large unchanged files.
 
 The single-source container holds no credentials and never pushes. `STATE_DIR` is laid out
 exactly like the `artifact-data` branch, so publishing a local run is a copy into a

@@ -95,67 +95,23 @@ jobs:
       - name: Publish resumable state and normalized observations
         if: always()
         run: |
-          git fetch origin artifact-data --quiet
-          rm -rf /tmp/artifact-publish
-          if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
-            git worktree add /tmp/artifact-publish origin/artifact-data
-          else
-            git worktree add -b artifact-data /tmp/artifact-publish HEAD
-          fi
-          mkdir -p /tmp/artifact-publish/data/production/intermediate /tmp/artifact-publish/reports
-          python tools/merge_registry_publication.py \
-            --source crates \
-            --published-state /tmp/artifact-publish/data/production/registry-state.json \
-            --local-state data/production/registry-state.json \
-            --published-report /tmp/artifact-publish/reports/registry-artifact-crawl.json \
-            --local-report reports/registry-artifact-crawl.json
+          rm -rf /tmp/ci-registry-crates
+          mkdir -p /tmp/ci-registry-crates/data/production/intermediate \
+            /tmp/ci-registry-crates/reports
+          cp data/production/registry-state.json \
+            /tmp/ci-registry-crates/data/production/registry-state.json
           if test -f data/production/intermediate/crates.jsonl; then
             cp data/production/intermediate/crates.jsonl \
-              /tmp/artifact-publish/data/production/intermediate/crates.jsonl
+              /tmp/ci-registry-crates/data/production/intermediate/crates.jsonl
           fi
-          git -C /tmp/artifact-publish config user.name github-actions[bot]
-          git -C /tmp/artifact-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git -C /tmp/artifact-publish add -f data/production/registry-state.json
-          if test -f /tmp/artifact-publish/data/production/intermediate/crates.jsonl; then
-            git -C /tmp/artifact-publish add -f data/production/intermediate/crates.jsonl
+          if test -f reports/registry-artifact-crawl.json; then
+            cp reports/registry-artifact-crawl.json \
+              /tmp/ci-registry-crates/reports/registry-artifact-crawl.json
           fi
-          if test -f /tmp/artifact-publish/reports/registry-artifact-crawl.json; then
-            git -C /tmp/artifact-publish add -f reports/registry-artifact-crawl.json
-          fi
-          summary=$(python - <<'PY'
-          import json, pathlib
-          # Go carries one cursor for its catalog phase and another for inspection, so
-          # reporting only the first would hide half of what a pass did.
-          TRACKED = ("cursor", "since", "catalog_since")
-          def cursors(path):
-              try:
-                  state = json.loads(pathlib.Path(path).read_text())
-              except Exception:
-                  return {}
-              return {(name, key): source[key]
-                      for name, source in (state.get("sources") or {}).items()
-                      for key in TRACKED if key in source}
-          before, after = cursors("/tmp/before/registry-state.json"), cursors("data/production/registry-state.json")
-          moved = []
-          for slot in sorted(set(before) | set(after)):
-              a, b = before.get(slot), after.get(slot)
-              if a == b:
-                  continue
-              name, key = slot
-              label = name if key == "cursor" else f"{name}/{key}"
-              if a is None and isinstance(b, int):
-                  a = 0  # a cursor appearing for the first time started from nothing
-              if isinstance(a, int) and isinstance(b, int):
-                  moved.append(f"{label} +{b - a:,}")
-              else:
-                  moved.append(f"{label} -> {str(b)[:19]}")
-          print(", ".join(moved) if moved else "no cursor advanced")
-          PY
-          )
-          echo "progress: $summary"
-          git -C /tmp/artifact-publish diff --cached --quiet || \
-            git -C /tmp/artifact-publish commit -m "Record registry artifact crawl: $summary"
-          git -C /tmp/artifact-publish push origin HEAD:artifact-data
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          BASE=/tmp/ci-registry SOURCES=crates OBSERVATION_SOURCES=' ' \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish
       - name: Queue the next crawl or the generated refresh
         if: always()
         env:

@@ -19,6 +19,7 @@ SOURCES="${SOURCES-pypi rubygems packagist nuget npm go}"
 OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 scoop winget windows macos shell}"
 PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
 BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
+PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"
 
 # Catalogs are per source, so each container carries only the one it reads.
 catalog_for() {
@@ -175,6 +176,8 @@ PY
 # mistake that nearly rolled Go's catalog back fifteen months.
 publish() {
   local worktree=/tmp/ge-artifact-publish
+  local attempt="${PUBLISH_ATTEMPT:-1}"
+  local push_status=0
   cd "${ROOT_DIR}"
   git fetch origin artifact-data --quiet
   git worktree remove "${worktree}" --force >/dev/null 2>&1 || true
@@ -243,9 +246,22 @@ PYOBS
     [ -n "${SOURCES}" ] && message="${message}; registries: ${SOURCES}"
     [ -n "${OBSERVATION_SOURCES}" ] && message="${message}; observations: ${OBSERVATION_SOURCES}"
     git -C "${worktree}" commit --quiet -m "${message}"
-    git -C "${worktree}" push --quiet origin HEAD:artifact-data && echo "published"
+    if git -C "${worktree}" push --quiet origin HEAD:artifact-data; then
+      echo "published"
+    else
+      push_status=$?
+    fi
   fi
-  git worktree remove "${worktree}" --force
+  git worktree remove "${worktree}" --force || true
+  if [ "${push_status}" -ne 0 ]; then
+    if [ "${attempt}" -ge "${PUBLISH_MAX_ATTEMPTS}" ]; then
+      echo "artifact-data publish failed after ${attempt} attempts" >&2
+      return "${push_status}"
+    fi
+    echo "artifact-data advanced concurrently; rebuilding from the latest branch (attempt $((attempt + 1))/${PUBLISH_MAX_ATTEMPTS})" >&2
+    sleep "$((attempt * 5))"
+    PUBLISH_ATTEMPT=$((attempt + 1)) publish
+  fi
 }
 
 # Publishing by hand means the crawl's progress lives only on this machine until
