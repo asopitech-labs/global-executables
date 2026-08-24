@@ -13,7 +13,7 @@
     "source": {"type": "string", "minLength": 1},
     "confidence": {"enum": ["direct", "filesystem", "inferred"]},
     "alias_of": {"type": "string", "minLength": 1},
-    "source_type": {"enum": ["os_package", "language_package", "container", "other"]},
+    "source_type": {"enum": ["os_package", "language_package", "shell_builtin", "container", "other"]},
     "package_system": {"type": "string", "minLength": 1},
     "distribution_family": {"type": "string", "minLength": 1},
     "distribution": {"type": "string", "minLength": 1},
