@@ -1,3 +1,4 @@
+import fcntl
 import os
 import subprocess
 from pathlib import Path
@@ -39,6 +40,25 @@ def test_local_go_source_uses_dedicated_go_runtime_with_failure_restart():
     assert 'global-executables-go-crawler:local' in PARALLEL_CRAWL
     assert "--restart on-failure:5" in PARALLEL_CRAWL
     assert "crawl --passes 0" in PARALLEL_CRAWL
+
+
+def test_manual_and_watched_publication_share_one_exclusive_lock(tmp_path):
+    assert "publish_locked()" in PARALLEL_CRAWL
+    assert "flock -n 9" in PARALLEL_CRAWL
+    assert "publish_locked 2>&1" in PARALLEL_CRAWL
+    assert "publish) publish_locked ;;" in PARALLEL_CRAWL
+
+    base = tmp_path / "crawl"
+    with open(f"{base}.publish.lock", "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        result = subprocess.run(
+            ["bash", "tools/crawl_parallel.sh", "publish"], cwd=ROOT,
+            capture_output=True, text=True,
+            env={**os.environ, "BASE": str(base), "SOURCES": "", "OBSERVATION_SOURCES": ""},
+        )
+
+    assert result.returncode == 0
+    assert "publication already in progress" in result.stdout
 
 
 def test_python_crawl_loop_rejects_go():

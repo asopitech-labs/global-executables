@@ -264,6 +264,19 @@ PYOBS
   fi
 }
 
+# The manual command and the long-running supervisor share BASE and therefore the
+# same temporary worktree.  Serialise the entire publication, not just the push: two
+# writers racing in worktree cleanup can remove the checkout while the other is
+# preparing its commit.  A skipped manual run is safe because the active publisher
+# already owns the same local source snapshots.
+publish_locked() (
+  if ! flock -n 9; then
+    echo "publication already in progress for ${BASE}; skipping"
+    return 0
+  fi
+  publish
+) 9>"${BASE}.publish.lock"
+
 # Publishing by hand means the crawl's progress lives only on this machine until
 # someone remembers.  `watch` keeps publishing while the containers run, so stopping
 # the session strands nothing.
@@ -276,7 +289,7 @@ watch() {
       break
     fi
     printf '%s ' "$(date -u +%FT%TZ)"
-    publish 2>&1 | grep -vE '^remote:' | tr '\n' ' '
+    publish_locked 2>&1 | grep -vE '^remote:' | tr '\n' ' '
     echo
   done
 }
@@ -286,7 +299,7 @@ case "${1:-start}" in
   seed) seed ;;
   status) status ;;
   merge) merge ;;
-  publish) publish ;;
+  publish) publish_locked ;;
   watch) watch ;;
   stop) for source in ${SOURCES}; do docker stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
   *) echo "usage: $0 {seed|start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
