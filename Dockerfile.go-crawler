@@ -1,0 +1,29 @@
+# syntax=docker/dockerfile:1
+
+# The tag documents the human-readable patch release; the digest makes the
+# compiler and base filesystem immutable until a reviewed update changes it.
+ARG GO_IMAGE=docker.io/library/golang:1.26.5-bookworm@sha256:0d327c83532d3cdeeeebab56ce85962bf09cb89545355b10207c7771b0c3713f
+
+FROM ${GO_IMAGE} AS go-development
+ENV GOTOOLCHAIN=local \
+    CGO_ENABLED=0
+WORKDIR /workspace
+
+FROM go-development AS go-source
+COPY go.mod go.sum ./
+RUN go mod download
+COPY cmd ./cmd
+COPY internal ./internal
+COPY tools/go_pipeline.sh ./tools/go_pipeline.sh
+
+FROM go-source AS go-test
+RUN ./tools/go_pipeline.sh check
+
+FROM go-source AS go-build
+RUN ./tools/go_pipeline.sh build
+
+FROM scratch AS runtime
+COPY --from=go-development /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=go-build /workspace/dist/go-registry-crawler /usr/local/bin/go-registry-crawler
+WORKDIR /state
+ENTRYPOINT ["/usr/local/bin/go-registry-crawler"]
