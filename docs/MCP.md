@@ -3,19 +3,28 @@
 For a step-by-step Codex CLI setup, see
 [`CODEX_MCP_TUTORIAL.md`](CODEX_MCP_TUTORIAL.md).
 
-The server is a read-only view of a checked-out `data/` tree. It does not copy
-records into a database and requires no network access in local stdio mode.
+The server is a read-only view of a materialized `dictionary` branch. Program
+schemas and published data have separate roots; the server does not copy records
+into a database and requires no network access after both roots are present.
 
 ## Local stdio
 
 After `pip install .`, use this generic MCP client configuration:
+
+```sh
+git fetch origin dictionary
+git worktree add .dictionary origin/dictionary
+```
 
 ```json
 {
   "mcpServers": {
     "global-executables": {
       "command": "global-executables-mcp",
-      "args": ["--root", "/absolute/path/to/global-executables"]
+      "args": [
+        "--root", "/absolute/path/to/global-executables",
+        "--dataset-root", "/absolute/path/to/global-executables/.dictionary"
+      ]
     }
   }
 }
@@ -27,7 +36,8 @@ Clients whose configuration uses `type` may additionally require
 ## Streamable HTTP
 
 ```sh
-global-executables-mcp --root . --transport streamable-http \
+global-executables-mcp --root . --dataset-root .dictionary \
+  --transport streamable-http \
   --host 0.0.0.0 --port 8000
 curl http://127.0.0.1:8000/health
 ```
@@ -61,8 +71,17 @@ The [Index Playground](https://asopitech-labs.github.io/global-executables/)
 is a static GitHub Pages client for experimenting with the same read-only
 operations in a browser. It displays the latest registry crawl report,
 scheduled next crawl, source cursors, failures, and coverage status. Queries
-are resolved against the public `main` JSON dataset, while crawl status is
+are resolved against the public `dictionary` JSON dataset, while crawl status is
 published from the `artifact-data` branch after each crawl.
+
+The raw-data base URL is
+`https://raw.githubusercontent.com/asopitech-labs/global-executables/dictionary`.
+The previous `main/data/...` URLs do not redirect; see
+[`DICTIONARY_BRANCH.md`](DICTIONARY_BRANCH.md) for the cutover note.
+
+Freshness state is published independently on `freshness-data`. A plain
+`dictionary` worktree therefore reports freshness as `unavailable` unless
+`reports/freshness.json` is materialized into that dataset root.
 
 `assess_executable` and `assess_executables` add freshness, activity,
 popularity, and collision-risk dimensions. They preserve provider evidence and

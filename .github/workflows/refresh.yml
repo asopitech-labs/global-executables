@@ -4,6 +4,7 @@ on:
     - cron: "31 3 * * 1"
   workflow_dispatch:
 permissions:
+  actions: write
   contents: write
   issues: write
 
@@ -21,6 +22,14 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.12", cache: pip}
       - run: pip install -e '.[test]'
+      - name: Restore published dictionary
+        run: |
+          set -o pipefail
+          git fetch origin dictionary
+          git archive origin/dictionary data | tar -x -C .
+          test -s data/metadata.json
+          test -d data/executables
+          test -d data/indexes
       - name: Restore latest durable observations
         run: |
           if artifact_ref=$(git ls-remote --heads origin artifact-data); then
@@ -123,15 +132,41 @@ jobs:
         with:
           name: refresh-report
           path: reports/production-refresh.json
-      - name: Publish idempotent generated state
+      - name: Publish generated dictionary
+        id: publish_dictionary
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add data/executables data/indexes data/metadata.json data/history.json reports/production-crawl.json reports/production-refresh.json
-          git diff --cached --quiet || git commit -m "Refresh generated dataset"
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          git fetch origin dictionary
+          rm -rf /tmp/dictionary-publish
+          git worktree add /tmp/dictionary-publish origin/dictionary
+          rm -rf \
+            /tmp/dictionary-publish/data/executables \
+            /tmp/dictionary-publish/data/indexes
+          mkdir -p /tmp/dictionary-publish/data /tmp/dictionary-publish/reports
+          cp -a data/executables /tmp/dictionary-publish/data/executables
+          cp -a data/indexes /tmp/dictionary-publish/data/indexes
+          cp data/metadata.json data/history.json /tmp/dictionary-publish/data/
+          cp reports/production-crawl.json reports/production-refresh.json \
+            /tmp/dictionary-publish/reports/
+          python tools/validate_dictionary.py \
+            --root /tmp/dictionary-publish \
+            --schema-root "$GITHUB_WORKSPACE"
+          git -C /tmp/dictionary-publish config user.name github-actions[bot]
+          git -C /tmp/dictionary-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/dictionary-publish add \
+            data/executables data/indexes data/metadata.json data/history.json \
+            reports/production-crawl.json reports/production-refresh.json
+          if git -C /tmp/dictionary-publish diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git -C /tmp/dictionary-publish commit -m "Refresh generated dictionary"
+            git -C /tmp/dictionary-publish push origin HEAD:dictionary
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Deploy Pages for the new dictionary
+        if: steps.publish_dictionary.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
 
   alert-refresh-failure:
     needs: refresh

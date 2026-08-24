@@ -1,4 +1,4 @@
-const RAW_BASE = "https://raw.githubusercontent.com/asopitech-labs/global-executables/main";
+const RAW_BASE = "https://raw.githubusercontent.com/asopitech-labs/global-executables/dictionary";
 const DATA_BASE = `${RAW_BASE}/data`;
 const state = { metadata: null, status: null, operation: "check_executable", result: null };
 const $ = (id) => document.getElementById(id);
@@ -55,7 +55,8 @@ function renderOverview() {
   $("status-meta").textContent = `Report observed ${formatDate(state.status?.generated_at)} · ${state.status?.artifact_data_commit ? state.status.artifact_data_commit.slice(0, 8) : "live"}`;
   $("schedule-title").textContent = `Next scheduled crawl · ${formatDate(next)}`;
   $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "47 */6 * * *"} UTC at the latest · runs chain back to back while a registry is still partial.`;
-  $("footer-build").textContent = `Main snapshot ${metadata.snapshot || "unknown"} · data served from GitHub raw content.`;
+  const dictionaryCommit = state.status?.dictionary_commit?.slice(0, 8) || "live";
+  $("footer-build").textContent = `Dictionary ${dictionaryCommit} · snapshot ${metadata.snapshot || "unknown"} · data served from GitHub raw content.`;
 
   // The OS indexes come from their own pipeline: each run takes a whole file index,
   // so they have records and a coverage kind but never a cursor to advance.
