@@ -96,6 +96,25 @@ def test_published_dictionary_validator_checks_generated_contract(tmp_path):
         validate_dictionary(tmp_path, ROOT)
 
 
+def test_published_dictionary_validator_accepts_shell_builtins(tmp_path):
+    source = tmp_path / "shell.jsonl"
+    source.write_text(json.dumps({
+        "command": "printf",
+        "confidence": "direct",
+        "ecosystem": "shell",
+        "package": "bash",
+        "repository": None,
+        "source": "bash builtin",
+        "source_type": "shell_builtin",
+        "version": "5.2",
+    }) + "\n")
+    rebuild(tmp_path, [source], "2026-08-24")
+
+    result = validate_dictionary(tmp_path, ROOT)
+    assert result["executables"] == 1
+    assert result["indexes"] > 0
+
+
 def test_published_dictionary_validator_rejects_corruption_and_empty_data(tmp_path):
     populated = tmp_path / "populated"
     rebuild(populated, sorted((ROOT / "fixtures/intermediate").glob("*.jsonl")),
