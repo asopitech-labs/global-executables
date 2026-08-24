@@ -1,7 +1,7 @@
 {
-  "byte_budget": 5000000000,
-  "coverage_kind": "exhaustive",
-  "package_budget": 1000,
+  "aggregate": true,
+  "coverage_kind": "partial",
+  "finished_at": "2026-08-24T19:10:58.46199638Z",
   "sources": {
     "crates": {
       "budget_exhausted": false,
@@ -20,8 +20,30 @@
       "records": 89212,
       "unavailable": 0,
       "unchanged": true
+    },
+    "go": {
+      "budget_exhausted": false,
+      "catalog_complete": false,
+      "catalog_discovered": 654,
+      "catalog_error": "",
+      "catalog_requests": 10,
+      "catalog_size": 1971721,
+      "complete": false,
+      "coverage_kind": "partial",
+      "cursor": 41554,
+      "downloaded_bytes": 750803920,
+      "duration_seconds": 149.145797396,
+      "error": "",
+      "failures": 19,
+      "modules_per_minute": 1206.8727590230276,
+      "processed": 3000,
+      "records": 680,
+      "retry_pending": 19,
+      "snapshot_generation": 849,
+      "status": "success",
+      "unavailable": 19875,
+      "workers": 32
     }
   },
-  "state": "data/production/registry-state.json",
-  "status": "success"
+  "status": "partial"
 }
