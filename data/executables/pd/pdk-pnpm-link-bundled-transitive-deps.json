@@ -2,6 +2,18 @@
   "command": "pdk-pnpm-link-bundled-transitive-deps",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@aws-prototyping-sdk/nx-monorepo",
+      "version": "0.19.68",
+      "repository": "git+https://github.com/aws/aws-prototyping-sdk.git",
+      "source": "https://registry.npmjs.org/@aws-prototyping-sdk%2Fnx-monorepo/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.19.68"
+    },
+    {
       "ecosystem": "pypi",
       "package": "aws-prototyping-sdk.nx-monorepo",
       "version": "0.19.68",
