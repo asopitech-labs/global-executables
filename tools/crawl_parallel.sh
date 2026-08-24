@@ -9,6 +9,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 IMAGE="${IMAGE:-global-executables-crawl:local}"
+GO_IMAGE="${GO_IMAGE:-global-executables-go-crawler:local}"
 BASE="${BASE:-${HOME}/.ge-crawl}"
 # An explicitly empty value is useful when publishing checkout observations only.
 SOURCES="${SOURCES-pypi rubygems packagist nuget npm go}"
@@ -18,6 +19,7 @@ SOURCES="${SOURCES-pypi rubygems packagist nuget npm go}"
 OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 scoop winget windows macos shell}"
 PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
 BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
+PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"
 
 # Catalogs are per source, so each container carries only the one it reads.
 catalog_for() {
@@ -86,6 +88,9 @@ start() {
     seed
   fi
   docker build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
+  if [[ " ${SOURCES} " == *" go "* ]]; then
+    tools/go_image.sh runtime "${GO_IMAGE}" >/dev/null
+  fi
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
     mkdir -p "${dir}/data/production/intermediate" "${dir}/reports"
@@ -112,9 +117,15 @@ PY
       cp "${BASE}/data/production/intermediate/${source}.jsonl" "${dir}/data/production/intermediate/${source}.jsonl"
     fi
     docker rm -f "ge-${source}" >/dev/null 2>&1 || true
-    docker run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
-      -e "SOURCES=${source}" -e "PACKAGE_BUDGET=${PACKAGE_BUDGET}" \
-      -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" "${IMAGE}" >/dev/null
+    if [ "${source}" = go ]; then
+      docker run --detach --init --name "ge-${source}" --restart on-failure:5 \
+        -v "${dir}:/state" "${GO_IMAGE}" crawl --passes 0 \
+        --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}" >/dev/null
+    else
+      docker run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
+        -e "SOURCES=${source}" -e "PACKAGE_BUDGET=${PACKAGE_BUDGET}" \
+        -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" "${IMAGE}" >/dev/null
+    fi
     echo "started ge-${source} against ${dir}"
   done
 }
@@ -165,39 +176,33 @@ PY
 # mistake that nearly rolled Go's catalog back fifteen months.
 publish() {
   local worktree=/tmp/ge-artifact-publish
+  local attempt="${PUBLISH_ATTEMPT:-1}"
+  local push_status=0
   cd "${ROOT_DIR}"
   git fetch origin artifact-data --quiet
+  git worktree remove "${worktree}" --force >/dev/null 2>&1 || true
   rm -rf "${worktree}"
+  git worktree prune
   git worktree add --quiet "${worktree}" origin/artifact-data
-  mkdir -p "${worktree}/data/production/intermediate"
-  python3 - "${worktree}" "${BASE}" "${SOURCES}" <<'PYPUB'
-import json, pathlib, sys
-worktree, base, sources = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2]), sys.argv[3].split()
-target = worktree / "data/production/registry-state.json"
-published = json.loads(target.read_text()) if target.is_file() else {"version": 1, "sources": {}}
-moved = []
-for source in sources:
-    mine = base.parent / f"{base.name}-{source}/data/production/registry-state.json"
-    if not mine.is_file():
-        continue
-    slice_ = json.loads(mine.read_text()).get("sources", {}).get(source)
-    if not slice_:
-        continue
-    before = (published.get("sources", {}).get(source) or {}).get("cursor")
-    after = slice_.get("cursor")
-    # A local cursor behind the published one means the other writer got further; taking
-    # it would publish a regression, which is how Go nearly lost fifteen months.
-    if isinstance(before, int) and isinstance(after, int) and after < before:
-        print(f"  refusing {source}: local {after:,} is behind published {before:,}")
-        continue
-    published.setdefault("sources", {})[source] = slice_
-    if before != after:
-        moved.append(f"{source} {before} -> {after}")
-target.write_text(json.dumps(published, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
-print("  " + ("; ".join(moved) if moved else "no cursor advanced"))
-PYPUB
+  mkdir -p "${worktree}/data/production/intermediate" "${worktree}/reports"
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
+    local state="${dir}/data/production/registry-state.json"
+    [ -f "${state}" ] || continue
+    if python3 "${ROOT_DIR}/tools/merge_registry_publication.py" \
+        --source "${source}" \
+        --published-state "${worktree}/data/production/registry-state.json" \
+        --local-state "${state}" \
+        --published-report "${worktree}/reports/registry-artifact-crawl.json" \
+        --local-report "${dir}/reports/registry-artifact-crawl.json"; then
+      :
+    else
+      local merge_status=$?
+      if [ "${merge_status}" -eq 3 ]; then
+        continue
+      fi
+      return "${merge_status}"
+    fi
     for name in $(catalog_for "${source}"); do
       [ -f "${dir}/data/production/${name}" ] && cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
     done
@@ -231,6 +236,9 @@ PYOBS
     fi
   done
   git -C "${worktree}" add -f data/production
+  if [ -f "${worktree}/reports/registry-artifact-crawl.json" ]; then
+    git -C "${worktree}" add -f reports/registry-artifact-crawl.json
+  fi
   if git -C "${worktree}" diff --cached --quiet; then
     echo "nothing to publish"
   else
@@ -238,10 +246,36 @@ PYOBS
     [ -n "${SOURCES}" ] && message="${message}; registries: ${SOURCES}"
     [ -n "${OBSERVATION_SOURCES}" ] && message="${message}; observations: ${OBSERVATION_SOURCES}"
     git -C "${worktree}" commit --quiet -m "${message}"
-    git -C "${worktree}" push --quiet origin HEAD:artifact-data && echo "published"
+    if git -C "${worktree}" push --quiet origin HEAD:artifact-data; then
+      echo "published"
+    else
+      push_status=$?
+    fi
   fi
-  git worktree remove "${worktree}" --force
+  git worktree remove "${worktree}" --force || true
+  if [ "${push_status}" -ne 0 ]; then
+    if [ "${attempt}" -ge "${PUBLISH_MAX_ATTEMPTS}" ]; then
+      echo "artifact-data publish failed after ${attempt} attempts" >&2
+      return "${push_status}"
+    fi
+    echo "artifact-data advanced concurrently; rebuilding from the latest branch (attempt $((attempt + 1))/${PUBLISH_MAX_ATTEMPTS})" >&2
+    sleep "$((attempt * 5))"
+    PUBLISH_ATTEMPT=$((attempt + 1)) publish
+  fi
 }
+
+# The manual command and the long-running supervisor share BASE and therefore the
+# same temporary worktree.  Serialise the entire publication, not just the push: two
+# writers racing in worktree cleanup can remove the checkout while the other is
+# preparing its commit.  A skipped manual run is safe because the active publisher
+# already owns the same local source snapshots.
+publish_locked() (
+  if ! flock -n 9; then
+    echo "publication already in progress for ${BASE}; skipping"
+    return 0
+  fi
+  publish
+) 9>"${BASE}.publish.lock"
 
 # Publishing by hand means the crawl's progress lives only on this machine until
 # someone remembers.  `watch` keeps publishing while the containers run, so stopping
@@ -255,7 +289,7 @@ watch() {
       break
     fi
     printf '%s ' "$(date -u +%FT%TZ)"
-    publish 2>&1 | grep -vE '^remote:' | tr '\n' ' '
+    publish_locked 2>&1 | grep -vE '^remote:' | tr '\n' ' '
     echo
   done
 }
@@ -265,7 +299,7 @@ case "${1:-start}" in
   seed) seed ;;
   status) status ;;
   merge) merge ;;
-  publish) publish ;;
+  publish) publish_locked ;;
   watch) watch ;;
   stop) for source in ${SOURCES}; do docker stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
   *) echo "usage: $0 {seed|start|status|merge|publish|watch|stop}" >&2; exit 2 ;;

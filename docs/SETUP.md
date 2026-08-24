@@ -4,6 +4,11 @@ This guide verifies the read-only service from a clean checkout. The examples
 use the Python MCP client SDK `mcp==1.29.0`, the version used by the protocol
 tests in this repository.
 
+Developing the transactional Go registry crawler has a separate, container-first
+toolchain and build contract. A host Go installation is optional; see
+[`GO_CRAWLER_DEVELOPMENT.md`](GO_CRAWLER_DEVELOPMENT.md) before changing crawler
+code.
+
 ## Local stdio
 
 For the Codex-specific setup and verification flow, see

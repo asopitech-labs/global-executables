@@ -2,11 +2,14 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+.cache/
 *.egg-info/
 dist/
 build/
 data/production/intermediate/
 data/production/registry-state.json
+data/production/go-crawl.db
+data/production/go-modules.txt.index
 data/production/pypi-projects.txt
 .local-crawl/
 .dictionary/
@@ -16,3 +19,4 @@ data/metadata.json
 data/history.json
 reports/production-crawl.json
 reports/production-refresh.json
+reports/registry-artifact-crawl.json

@@ -6,7 +6,7 @@
 # mounted working directory, which mirrors the artifact-data branch layout.
 set -eu
 
-SOURCES=${SOURCES:-"npm pypi crates go rubygems packagist"}
+SOURCES=${SOURCES:-"npm pypi crates rubygems packagist"}
 PACKAGE_BUDGET=${PACKAGE_BUDGET:-2000}
 BYTE_BUDGET=${BYTE_BUDGET:-5000000000}
 SOURCE_PACKAGE_BUDGETS=${SOURCE_PACKAGE_BUDGETS:-}
@@ -18,6 +18,13 @@ TIMEOUT=${TIMEOUT:-90}
 # A pass that stops making progress still holds the container.  State is checkpointed
 # every 200 packages, so ending a stuck pass costs at most that and the next one resumes.
 PASS_TIMEOUT=${PASS_TIMEOUT:-5400}
+
+case " ${SOURCES} " in
+  *" go "*)
+    echo "Go is not supported by the Python crawl loop; use the dedicated Go runtime via tools/crawl_parallel.sh" >&2
+    exit 2
+    ;;
+esac
 
 mkdir -p data/production/intermediate reports
 

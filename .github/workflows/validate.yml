@@ -2,6 +2,8 @@ name: Validate
 on:
   push:
   pull_request:
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,3 +26,28 @@ jobs:
             --root /tmp/published-dictionary \
             --schema-root . \
             --integrity-only
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+          check-latest: false
+          cache: true
+          cache-dependency-path: go.sum
+      - name: Validate and build Go crawler bootstrap
+        env:
+          GOTOOLCHAIN: local
+        run: ./tools/go_pipeline.sh check
+  go-container:
+    runs-on: ubuntu-latest
+    needs: go
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Go test stage
+        run: CONTAINER_RUNTIME=docker ./tools/go_image.sh go-test global-executables-go-test
+      - name: Build and smoke-test minimal Go runtime image
+        run: |
+          CONTAINER_RUNTIME=docker ./tools/go_image.sh runtime global-executables-go-crawler:test
+          docker run --rm global-executables-go-crawler:test --version

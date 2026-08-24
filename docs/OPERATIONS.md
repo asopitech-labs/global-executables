@@ -67,10 +67,8 @@ budget on one archive per module, at the version `@latest` reports.
 
 Requests to the crates.io API host are paced to one per second, the rate crates.io
 asks crawlers to hold; `fetch` also retries 429 with the advertised `Retry-After`.
-`--source-package-budget SOURCE=N` raises the per-run package budget for a single
-source, exposed as the `go_package_budget` workflow input. Each run queues its
-successor and an explicit Pages deploy, because a run dispatched with
-`GITHUB_TOKEN` does not emit the `workflow_run` event `pages.yml` listens for.
+`--source-package-budget SOURCE=N` raises the per-run package budget for one selected
+Python source. Go has its own `--package-budget` flag in the transactional runtime.
 
 ## Registry crawl status
 
@@ -253,16 +251,16 @@ found in three crawlers separately, each time by reading one of them for another
 
 ## Crawling in a container
 
-A CI job stops at six hours and the workflow runs one at a time, so a long sweep
-(Go's module catalog, npm's changes feed) is better driven locally. `Dockerfile.crawl`
-builds a thin image — the package and the crawl entry point, no dataset — and
-`tools/crawl_container.sh` seeds a state directory from `artifact-data`, builds the
-image, and runs passes back to back until every selected source is exhaustive.
+A CI job stops at six hours and the workflow runs one at a time, so long catalog
+sweeps are driven locally. `Dockerfile.crawl` remains the Python runtime for non-Go
+registries. Go uses `Dockerfile.go-crawler`, a dedicated transactional runtime.
+`tools/crawl_container.sh` is the single Python-container path;
+`tools/crawl_parallel.sh` routes each source to its correct image.
 
 ```sh
-tools/crawl_container.sh                                   # every source
+tools/crawl_container.sh                                   # every Python source
 SOURCES=crates PASSES=1 tools/crawl_container.sh           # one source, one pass
-SOURCES="go npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
+SOURCES="npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
 ```
 
 `tools/crawl_parallel.sh` runs one container per registry instead. Every
@@ -279,15 +277,46 @@ processed nothing, so the loop backs off rather than retrying every few seconds,
 stops once several consecutive passes have achieved nothing. NuGet reached that state
 after 4,000 tools and was spinning through a pass every five seconds.
 
-Each pass is budgeted so the resumable state is checkpointed between passes;
-stopping the container loses at most the pass in flight. Measured on the local
-runtime, crates.io reaches `exhaustive` in a single pass — 319,466 crates, 88,610
-executable names — at a peak of 347MB.
+Each pass is budgeted. Python sources checkpoint on their existing cadence. The Go
+runtime commits ordered batches transactionally, so stopping it loses only uncommitted
+HTTP work, not the entire pass. Measured on the local runtime, crates.io reaches
+`exhaustive` in a single pass — 319,466 crates, 88,610 executable names — at a peak of
+347MB.
 
-`crawl_parallel.sh publish` writes only the sources this machine owns, and refuses a
-source whose local cursor is behind the published one — the check that stopped Go's
-catalogue being rolled back fifteen months. `watch` runs it on an interval, because
-publishing by hand leaves the crawl's progress on one machine until someone remembers.
+### Transactional Go runtime
+
+`SOURCES=go tools/crawl_parallel.sh start` builds the shared Python image and the
+dedicated Go runtime, then starts `ge-go` with `crawl --passes 0`. A nonzero local
+failure is restarted up to five times; reaching exhaustive exits zero and is not
+restarted. Other `ge-*` containers still run Python.
+
+The mounted Go state directory contains:
+
+- `registry-state.json`, `intermediate/go.jsonl`, and the report: publishable,
+  Python-compatible snapshot views;
+- `go-crawl.db`: the canonical local transaction store; and
+- `go-modules.txt.index`: a rebuildable exact membership index for the immutable
+  catalog prefix.
+
+The DB and derived index are local operational state and are not published. The module
+catalog is replaced atomically when new names arrive from `index.golang.org`; a stop
+between catalog replacement and DB metadata commit is reconciled from the file tail on
+restart.
+
+`crawl_parallel.sh publish` merges only the state and crawl-report entries this machine
+owns, and refuses a source whose local cursor is behind the published one — the check
+that stopped Go's catalogue being rolled back fifteen months. The scheduled crates
+writer uses the same source-owned merge and publishes only `crates.jsonl`; it must not
+copy a stale whole-state or whole-report snapshot over other writers. `watch` runs the
+publisher on an interval, because publishing by hand leaves the crawl's progress on one
+machine until someone remembers. The merged report is what Pages exposes as
+`status.json`, so a published cursor and its public progress display advance together.
+If another writer wins the push race, the shared publisher discards its temporary
+worktree, fetches the new branch head, and rebuilds the source-owned merge up to three
+times. It does not rebase a stale combined JSON snapshot. Pass `OBSERVATION_SOURCES`
+explicitly: a registry-only supervisor should leave it blank because OS observations
+are durable samples, which shortens the conflict window and avoids reprocessing large
+unchanged files.
 
 The single-source container holds no credentials and never pushes. `STATE_DIR` is laid out
 exactly like the `artifact-data` branch, so publishing a local run is a copy into a
@@ -297,18 +326,19 @@ chained CI runs first, or crawl a source locally that CI is not advancing.
 
 ## Checking a running crawl
 
-`tools/crawl_parallel.sh status` gives the cursor per source. Everything else is read
-from the state files, which are the authoritative record — the report is a summary of
-the last pass, the state is what the next pass will resume from.
+`tools/crawl_parallel.sh status` gives the cursor per source. Python sources resume
+from their state files. Go resumes from bbolt and regenerates its state file as the
+publishable view; the report is only a summary of the last pass.
 
 ```sh
 tools/crawl_parallel.sh status                    # container status and cursor
 docker logs --tail 20 ge-rubygems                 # per-pass summary lines
+docker logs --tail 20 ge-go                       # transactional Go passes
 git show origin/artifact-data:reports/registry-artifact-crawl.json | jq '.sources'
 ```
 
-Progress against the catalogue, which `status` cannot show because the catalogue size
-lives in the catalogue file rather than the state:
+`status` shows `cursor/catalog_size` when the collector exports both values. For older
+source snapshots without `catalog_size`, compare the cursor with the catalogue file:
 
 ```sh
 python3 - <<'PY'
@@ -316,8 +346,8 @@ import gzip, json, pathlib
 for src, cat in (("pypi", "pypi-projects"), ("npm", "npm-packages"), ("go", "go-modules"),
                  ("rubygems", "rubygems-names"), ("packagist", "packagist-packages")):
     d = pathlib.Path.home() / f".ge-crawl-{src}/data/production"
-    # Every source but Go reads the compressed copy first; Go appends to the plain file
-    # page by page and never gzips it, so a .gz beside it would be stale by definition.
+    # Every source but Go reads the compressed copy first; Go updates the plain file
+    # atomically and never gzips it, so a .gz beside it would be stale by definition.
     order = (".txt",) if src == "go" else (".txt.gz", ".txt")
     f = next((d / f"{cat}{e}" for e in order if (d / f"{cat}{e}").is_file()), None)
     if not f:
@@ -328,9 +358,22 @@ for src, cat in (("pypi", "pypi-projects"), ("npm", "npm-packages"), ("go", "go-
 PY
 ```
 
-Go's catalogue is still being built, so its denominator grows as you watch: the index
-sweep resumes from a timestamp cursor and was thirteen months behind at the time of
-writing. `catalog_complete` in its state says whether the denominator is final.
+Go refreshes its denominator from the chronological module index before each pass.
+`catalog_complete` means the index reader reached the current edge for that snapshot;
+new module versions may make it grow on a later pass.
+
+## Go recovery
+
+Go has one supported crawler: the transactional runtime started with
+`SOURCES=go tools/crawl_parallel.sh start`. The retired Python Go implementation is
+not kept as an alternate execution path; Git already preserves its history.
+
+If the local Go database is unusable, stop only `ge-go`, preserve the database for
+diagnosis, and restore the last published compatibility snapshot from
+`artifact-data`. Start the Go runtime against that source directory so it imports the
+published cursor and observations into a new database. Before publishing, verify that
+the exported cursor is not below the published cursor and let the source-owned merge
+perform its normal no-regression check.
 
 To check that withdrawals are being classified rather than retried, group the
 outstanding failures by kind. A kind that recurs across passes without changing is a
@@ -391,21 +434,31 @@ This machine runs Colima, not Docker Desktop. Two consequences:
 
 ## Durable observation lifecycle
 
-The scheduled refresh performs the lifecycle in this order:
+Normal registry-triggered and scheduled refreshes perform the lifecycle in this order:
 
 1. Restore every OS, registry, macOS, and shell observation from `artifact-data`.
-2. Collect the production OS indexes. A successful observation is merged into the
-   stored evidence; if an upstream source fails, a non-empty stored copy is retained
-   and the crawl report is marked `degraded`. A missing fallback remains a hard failure.
-3. Publish the refreshed OS observations back to `artifact-data`.
-4. Rebuild the dictionary. Unusable command names are counted under
+2. Reuse the durable OS observations as environment/package-set samples. They are not
+   reacquired just because a registry cursor advanced.
+3. Rebuild the dictionary. Unusable command names are counted under
    `rejected_records` in `reports/production-refresh.json`; malformed JSON remains a
    hard failure.
-5. Refuse to replace the dictionary when the new unique-name count is lower. An
+4. Refuse to replace the dictionary when the new unique-name count is lower. An
    intentional removal requires `--allow-shrink-reason "..."`, which is recorded in
    the refresh report.
-6. Publish canonical data and reports to `dictionary`. A failed scheduled refresh opens or
+5. Publish canonical data and reports to `dictionary`. A failed scheduled refresh opens or
    updates a GitHub issue with the failed run URL.
+
+OS sampling is an explicit maintenance operation, not part of normal dictionary
+publication. Run it only when the environment sample intentionally needs to change:
+
+```sh
+gh workflow run refresh.yml --ref main -f refresh_os_samples=true
+```
+
+That opt-in run reacquires the eight production OS indexes, publishes the refreshed
+observations to `artifact-data`, and then rebuilds the dictionary. Without the input,
+`refresh.yml` restores the last production crawl report from `dictionary` and performs
+no OS network acquisition.
 
 For a local OS crawl, seed first so the collector extends durable evidence, then
 publish the result:
