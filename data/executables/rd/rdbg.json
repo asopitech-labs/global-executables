@@ -2,6 +2,30 @@
   "command": "rdbg",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-debug-1.11.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ruby",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ruby",
       "version": null,
@@ -72,8 +96,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "ruby-3.4.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "debug",
+      "version": "1.11.1",
+      "repository": "https://github.com/ruby/debug",
+      "source": "https://rubygems.org/gems/debug-1.11.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.11.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ed-precompiled_debug",
+      "version": "1.11.0",
+      "repository": "https://github.com/ruby/debug",
+      "source": "https://rubygems.org/gems/ed-precompiled_debug-1.11.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.11.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ed2-precompiled_debug",
+      "version": "1.11.0",
+      "repository": "https://github.com/ruby/debug",
+      "source": "https://rubygems.org/gems/ed2-precompiled_debug-1.11.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.11.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

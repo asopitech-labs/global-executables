@@ -2,6 +2,30 @@
   "command": "cake",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "coffeescript-2.7.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cake-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/evilsocket/cake",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cake",
       "version": "6.2.0",
@@ -24,8 +48,117 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acaelum/cake",
+      "version": "0.0.17",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@acaelum%2Fcake/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.17"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "anklimsk/internal-ldap-based-phonebook",
+      "version": "v1.0.10",
+      "repository": "https://github.com/anklimsk/internal-ldap-based-phonebook.git",
+      "source": "https://repo.packagist.org/p2/anklimsk/internal-ldap-based-phonebook.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.10"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "anklimsk/wpkg-express-2",
+      "version": "v1.1.0-rc.1",
+      "repository": "https://github.com/anklimsk/wpkg-express-2.git",
+      "source": "https://repo.packagist.org/p2/anklimsk/wpkg-express-2.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.0-rc.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "flug/concoction",
+      "version": "1.0.3",
+      "repository": "https://github.com/flug/concoction.git",
+      "source": "https://repo.packagist.org/p2/flug/concoction.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kba-team/cakephp",
+      "version": "2.11.0",
+      "repository": "https://github.com/the-kbA-team/cakephp2-php8.git",
+      "source": "https://repo.packagist.org/p2/kba-team/cakephp.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.11.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kilbiller/cakephp",
+      "version": "v2.11.1034",
+      "repository": "https://github.com/kilbiller/cakephp.git",
+      "source": "https://repo.packagist.org/p2/kilbiller/cakephp.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.11.1034"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cake",
+      "version": "0.6.3",
+      "repository": "http://github.com/ninjudd/cake",
+      "source": "https://rubygems.org/gems/cake-0.6.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cake-tester",
+      "version": "0.2.1",
+      "repository": "https://github.com/Polyhedra-Studio/Cake-Ruby",
+      "source": "https://rubygems.org/gems/cake-tester-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "cake",
+      "version": "1.3.0",
+      "repository": "https://cakebuild.net/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.3.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "csc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mono-6.12.0.206-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "csc",
+      "version": "0.1.9",
+      "repository": "https://github.com/zahash/csc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "chicken-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "chicken-bin",
       "version": null,
@@ -24,6 +60,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171026153342-83f15105815b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/thecodeteam/gocsi",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/thecodeteam/gocsi/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
     },
     {
       "ecosystem": "homebrew",
@@ -50,6 +98,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "nuget",
+      "package": "CSCompiler",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cscompiler/1.0.0/cscompiler.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "csc",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/csc/1.0.0/csc.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "chicken-bin",
       "version": null,
@@ -63,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

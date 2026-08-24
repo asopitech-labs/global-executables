@@ -2,6 +2,30 @@
   "command": "pandoc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pandoc-cli-3.10.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pandoc",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "pandoc",
       "version": null,
@@ -26,6 +50,31 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "nuget",
+      "package": "DemaConsulting.PandocTool",
+      "version": "3.10.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/demaconsulting.pandoctool/3.10.1/demaconsulting.pandoctool.3.10.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.10.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pandoc",
+      "version": "3.10.2",
+      "repository": "https://pandoc.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.10.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "pandoc",
       "version": null,
@@ -39,5 +88,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

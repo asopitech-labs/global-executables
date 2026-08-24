@@ -2,6 +2,42 @@
   "command": "cmark",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cmark-0.31.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cmark",
+      "version": "0.0.2",
+      "repository": "https://github.com/FuGangqiang/cmark.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cmark",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cmark",
       "version": null,
@@ -26,6 +62,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "AI4SS",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/a6/94/9ec02b565895e4d8a920b905c1655010dbf6f72770824022b348a63f659f/AI4SS-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ALClassifier4SS",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/14/7d/1d1f545a656383ad9b57836f3b2008e5adb1d0dc52d92e615f61be8786b0/ALClassifier4SS-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "AoZhangCalculator",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/8d/dc/cfcc8c4231a5e590902341e9f0f47451dae130514515ca0e34eea3bf067e/AoZhangCalculator-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "CalcBasic",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/23/3f/9564d8e7bc5919d07f7b577529e701a6ed9c36ae3d6e1190e8ff5927c4e4/CalcBasic-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Forge-Games",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/a5/e0/632a5d4ea1763fa5985f6535f668d42b176635f3806a75c9fa170995e1ec/Forge-Games-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "cmark",
       "version": null,
@@ -39,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

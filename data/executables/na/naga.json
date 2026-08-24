@@ -2,6 +2,18 @@
   "command": "naga",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "naga-cli",
+      "version": "30.0.1",
+      "repository": "https://github.com/gfx-rs/wgpu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "30.0.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "naga",
       "version": "1.0",
@@ -16,7 +28,7 @@
     {
       "ecosystem": "homebrew",
       "package": "naga-cli",
-      "version": "30.0.0",
+      "version": "30.0.1",
       "repository": "https://wgpu.rs/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

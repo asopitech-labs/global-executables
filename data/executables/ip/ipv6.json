@@ -2,6 +2,30 @@
   "command": "ipv6",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ipv6",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "force-ip-protocol",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "force-ip-protocol",
       "version": null,
@@ -12,6 +36,66 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.k2software.com.cn/go/net",
+      "version": "v0.0.0-20190301231341-16b79f2e4e95",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.k2software.com.cn/go/net/@v/v0.0.0-20190301231341-16b79f2e4e95.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190301231341-16b79f2e4e95"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20180120141536-44b7c21cbf19",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20180120141536-44b7c21cbf19.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180120141536-44b7c21cbf19"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20180218175443-cbe0f9307d01",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20180218175443-cbe0f9307d01.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180218175443-cbe0f9307d01"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20180404174746-b3c676e531a6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20180404174746-b3c676e531a6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180404174746-b3c676e531a6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20180530234432-1e491301e022",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20180530234432-1e491301e022.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180530234432-1e491301e022"
     },
     {
       "ecosystem": "go",
@@ -27,6 +111,378 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20180824152047-4bcd98cce591",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20180824152047-4bcd98cce591.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180824152047-4bcd98cce591"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20180826012351-8a410e7b638d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20180826012351-8a410e7b638d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180826012351-8a410e7b638d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20181017193950-04a2e542c03f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20181017193950-04a2e542c03f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181017193950-04a2e542c03f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20181029044818-c44066c5c816",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20181029044818-c44066c5c816.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181029044818-c44066c5c816"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20181102091132-c10e9556a7bc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20181102091132-c10e9556a7bc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181102091132-c10e9556a7bc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20181106065722-10aee1819953",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20181106065722-10aee1819953.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181106065722-10aee1819953"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20181201002055-351d144fa1fc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20181201002055-351d144fa1fc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181201002055-351d144fa1fc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20181213202711-891ebc4b82d6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20181213202711-891ebc4b82d6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181213202711-891ebc4b82d6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20181217023233-e147a9138326",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20181217023233-e147a9138326.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181217023233-e147a9138326"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190125091013-d26f9f9a57f3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190125091013-d26f9f9a57f3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190125091013-d26f9f9a57f3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190206173232-65e2d4e15006",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190206173232-65e2d4e15006.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190206173232-65e2d4e15006"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190228165749-92fc7df08ae7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190228165749-92fc7df08ae7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190228165749-92fc7df08ae7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190301231341-16b79f2e4e95",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190301231341-16b79f2e4e95.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190301231341-16b79f2e4e95"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190311183353-d8887717615a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190311183353-d8887717615a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190311183353-d8887717615a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190313220215-9f648a60d977",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190313220215-9f648a60d977.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190313220215-9f648a60d977"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190327025741-74e053c68e29",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190327025741-74e053c68e29.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190327025741-74e053c68e29"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190327214358-63eda1eb0650",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190327214358-63eda1eb0650.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190327214358-63eda1eb0650"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190328230028-74de082e2cca",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190328230028-74de082e2cca.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190328230028-74de082e2cca"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190404232315-eb5bcb51f2a3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190404232315-eb5bcb51f2a3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190404232315-eb5bcb51f2a3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190415214537-1da14a5a36f2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190415214537-1da14a5a36f2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190415214537-1da14a5a36f2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190420063019-afa5a82059c6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190420063019-afa5a82059c6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190420063019-afa5a82059c6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190424024845-afe8014c977f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190424024845-afe8014c977f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190424024845-afe8014c977f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190501004415-9ce7a6920f09",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190501004415-9ce7a6920f09.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190501004415-9ce7a6920f09"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190509222800-a4d6f7feada5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190509222800-a4d6f7feada5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190509222800-a4d6f7feada5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190514140710-3ec191127204",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190514140710-3ec191127204.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190514140710-3ec191127204"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190606173856-1492cefac77f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190606173856-1492cefac77f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606173856-1492cefac77f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190607181551-461777fb6f67",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190607181551-461777fb6f67.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607181551-461777fb6f67"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190611141213-3f473d35a33a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190611141213-3f473d35a33a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190611141213-3f473d35a33a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190613194153-d28f0bde5980",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190613194153-d28f0bde5980.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613194153-d28f0bde5980"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.0.0-20190619014844-b5b0513f8c1b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.0.0-20190619014844-b5b0513f8c1b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190619014844-b5b0513f8c1b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/net",
+      "version": "v0.58.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/net/@v/v0.58.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.58.0"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/hashicorp/go.net",
       "version": "v0.0.0-20151006203346-104dcad90073",
       "repository": null,
@@ -36,6 +492,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20151006203346-104dcad90073"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nictuku/dht",
+      "version": "v0.0.0-20190424204932-20d30c21bd4c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nictuku/dht/@v/v0.0.0-20190424204932-20d30c21bd4c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190424204932-20d30c21bd4c"
     },
     {
       "ecosystem": "go",
@@ -52,6 +520,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20150320034621-7dbad50ab5b3",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20150320034621-7dbad50ab5b3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150320034621-7dbad50ab5b3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20150522234727-621fff363a1d",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20150522234727-621fff363a1d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150522234727-621fff363a1d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20150629084131-d9558e5c97f8",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20150629084131-d9558e5c97f8.zip",
@@ -64,6 +556,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20150721022738-446d52dd4018",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20150721022738-446d52dd4018.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150721022738-446d52dd4018"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20150829230318-ea47fc708ee3",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20150829230318-ea47fc708ee3.zip",
@@ -72,6 +576,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20150829230318-ea47fc708ee3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20150927182833-c2528b2dd835",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20150927182833-c2528b2dd835.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150927182833-c2528b2dd835"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20151022140915-2cba614e8ff9",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20151022140915-2cba614e8ff9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20151022140915-2cba614e8ff9"
     },
     {
       "ecosystem": "go",
@@ -108,6 +636,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160111061236-4fd4a9fed55e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20160126033523-f315505cf334",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20160126033523-f315505cf334.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160126033523-f315505cf334"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20160213020329-62685c2d7ca2",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20160213020329-62685c2d7ca2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160213020329-62685c2d7ca2"
     },
     {
       "ecosystem": "go",
@@ -160,6 +712,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20160324044138-991d3e32f76f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20160324044138-991d3e32f76f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160324044138-991d3e32f76f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20160331214825-3e8a7b0329d5",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20160331214825-3e8a7b0329d5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160331214825-3e8a7b0329d5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20160526042037-dfd9ed699ea1",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20160526042037-dfd9ed699ea1.zip",
@@ -168,6 +744,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160526042037-dfd9ed699ea1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20160609051231-3f122ce3dbbe",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20160609051231-3f122ce3dbbe.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160609051231-3f122ce3dbbe"
     },
     {
       "ecosystem": "go",
@@ -268,6 +856,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20161103004354-569280fa63be",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20161103004354-569280fa63be.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161103004354-569280fa63be"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20161104230106-55a3084c9119",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20161104230106-55a3084c9119.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161104230106-55a3084c9119"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20161114202835-0dd7c8d7c3a5",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20161114202835-0dd7c8d7c3a5.zip",
@@ -280,6 +892,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20161116075034-4971afdc2f16",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20161116075034-4971afdc2f16.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161116075034-4971afdc2f16"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20161215194249-45e771701b81",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20161215194249-45e771701b81.zip",
@@ -288,6 +912,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20161215194249-45e771701b81"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20161229225711-8fd7f2595553",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20161229225711-8fd7f2595553.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161229225711-8fd7f2595553"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170108160505-da2b4fa28524",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170108160505-da2b4fa28524.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170108160505-da2b4fa28524"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170110034938-60c41d1de8da",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170110034938-60c41d1de8da.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170110034938-60c41d1de8da"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170113083403-2497afe52899",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170113083403-2497afe52899.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170113083403-2497afe52899"
     },
     {
       "ecosystem": "go",
@@ -328,6 +1000,42 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20170201222659-007e530097ad",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170201222659-007e530097ad.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170201222659-007e530097ad"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170211013127-61557ac0112b",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170211013127-61557ac0112b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170211013127-61557ac0112b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170218080159-6b27048ae5e6",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170218080159-6b27048ae5e6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170218080159-6b27048ae5e6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20170223224822-dd2d9a67c97d",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170223224822-dd2d9a67c97d.zip",
@@ -336,6 +1044,78 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170223224822-dd2d9a67c97d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170308210134-a6577fac2d73",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170308210134-a6577fac2d73.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170308210134-a6577fac2d73"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170324220409-6c2325251549",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170324220409-6c2325251549.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170324220409-6c2325251549"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170329044632-05d3205156cb",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170329044632-05d3205156cb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170329044632-05d3205156cb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170329170435-ffcf1bedda3b",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170329170435-ffcf1bedda3b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170329170435-ffcf1bedda3b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170413175226-5602c733f70a",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170413175226-5602c733f70a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170413175226-5602c733f70a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170424220842-da118f7b8e59",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170424220842-da118f7b8e59.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170424220842-da118f7b8e59"
     },
     {
       "ecosystem": "go",
@@ -364,6 +1144,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20170523201210-186fd3fc8194",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170523201210-186fd3fc8194.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170523201210-186fd3fc8194"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20170525011637-7dcfb8076726",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170525011637-7dcfb8076726.zip",
@@ -372,6 +1164,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170525011637-7dcfb8076726"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170526154659-06b2bf2f1484",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170526154659-06b2bf2f1484.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170526154659-06b2bf2f1484"
     },
     {
       "ecosystem": "go",
@@ -400,6 +1204,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20170629033346-c81e7f25cb61",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170629033346-c81e7f25cb61.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170629033346-c81e7f25cb61"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170704091438-570fa1c91359",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170704091438-570fa1c91359.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170704091438-570fa1c91359"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20170706005753-054b33e65271",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170706005753-054b33e65271.zip",
@@ -424,6 +1252,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20170719084000-02ac38e2528f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170719084000-02ac38e2528f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170719084000-02ac38e2528f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20170721033204-ab5485076ff3",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170721033204-ab5485076ff3.zip",
@@ -432,6 +1272,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170721033204-ab5485076ff3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170726083632-f5079bd7f6f7",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170726083632-f5079bd7f6f7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170726083632-f5079bd7f6f7"
     },
     {
       "ecosystem": "go",
@@ -460,6 +1312,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20170915142106-8351a756f30f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170915142106-8351a756f30f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170915142106-8351a756f30f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20170920234330-b60f3a92103d",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170920234330-b60f3a92103d.zip",
@@ -480,6 +1344,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170922011244-0744d001aa84"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20170927055102-0a9397675ba3",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20170927055102-0a9397675ba3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170927055102-0a9397675ba3"
     },
     {
       "ecosystem": "go",
@@ -556,6 +1432,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20171115151908-9dfe39835686",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20171115151908-9dfe39835686.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171115151908-9dfe39835686"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20171122214705-fb018015d54f",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20171122214705-fb018015d54f.zip",
@@ -568,6 +1456,54 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20171123081856-c7086645de24",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20171123081856-c7086645de24.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171123081856-c7086645de24"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20171128222910-894f8ed5849b",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20171128222910-894f8ed5849b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171128222910-894f8ed5849b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20171129192339-a8b929477797",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20171129192339-a8b929477797.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171129192339-a8b929477797"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20171207222016-dc871a5d77e2",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20171207222016-dc871a5d77e2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171207222016-dc871a5d77e2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20171212005608-d866cfc389ce",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20171212005608-d866cfc389ce.zip",
@@ -576,6 +1512,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171212005608-d866cfc389ce"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180108090419-434ec0c7fe37",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180108090419-434ec0c7fe37.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180108090419-434ec0c7fe37"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180112015858-5ccada7d0a7b",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180112015858-5ccada7d0a7b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180112015858-5ccada7d0a7b"
     },
     {
       "ecosystem": "go",
@@ -604,6 +1564,42 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20180201030042-309822c5b9b9",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180201030042-309822c5b9b9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180201030042-309822c5b9b9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180201232540-b417086c80e9",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180201232540-b417086c80e9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180201232540-b417086c80e9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180202180947-2fb46b16b8dd",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180202180947-2fb46b16b8dd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180202180947-2fb46b16b8dd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20180208041118-f5dfe339be1d",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180208041118-f5dfe339be1d.zip",
@@ -612,6 +1608,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180208041118-f5dfe339be1d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180215212450-dc948dff8834",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180215212450-dc948dff8834.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180215212450-dc948dff8834"
     },
     {
       "ecosystem": "go",
@@ -652,6 +1660,42 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20180313215339-892bf7b0c6e2",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180313215339-892bf7b0c6e2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180313215339-892bf7b0c6e2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180317175401-24dd3780ca4f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180317175401-24dd3780ca4f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180317175401-24dd3780ca4f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180319151425-92b859f39abd",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180319151425-92b859f39abd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180319151425-92b859f39abd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20180320002117-6078986fec03",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180320002117-6078986fec03.zip",
@@ -660,6 +1704,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180320002117-6078986fec03"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180330215511-b68f30494add",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180330215511-b68f30494add.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180330215511-b68f30494add"
     },
     {
       "ecosystem": "go",
@@ -688,6 +1744,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20180417003750-8d16fa6dc9a8",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180417003750-8d16fa6dc9a8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180417003750-8d16fa6dc9a8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20180420171651-5f9ae10d9af5",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180420171651-5f9ae10d9af5.zip",
@@ -708,6 +1776,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180502164142-640f4622ab69"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180509002218-f73e4c9ed3b7",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180509002218-f73e4c9ed3b7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180509002218-f73e4c9ed3b7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180511174649-2491c5de3490",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180511174649-2491c5de3490.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180511174649-2491c5de3490"
     },
     {
       "ecosystem": "go",
@@ -748,6 +1840,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20180530034148-89e543239a64",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180530034148-89e543239a64.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180530034148-89e543239a64"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180530175207-75944861c751",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180530175207-75944861c751.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180530175207-75944861c751"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20180611182652-db08ff08e862",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180611182652-db08ff08e862.zip",
@@ -772,6 +1888,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20180629035331-4cb1c02c05b0",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180629035331-4cb1c02c05b0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180629035331-4cb1c02c05b0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180702212446-ed29d75add3d",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180702212446-ed29d75add3d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180702212446-ed29d75add3d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20180706051357-32a936f46389",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180706051357-32a936f46389.zip",
@@ -780,6 +1920,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180706051357-32a936f46389"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180709222322-6a8eb5e2b181",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180709222322-6a8eb5e2b181.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180709222322-6a8eb5e2b181"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180710023853-292b43bbf7cb",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180710023853-292b43bbf7cb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180710023853-292b43bbf7cb"
     },
     {
       "ecosystem": "go",
@@ -796,6 +1960,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20180712202826-d0887baf81f4",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180712202826-d0887baf81f4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180712202826-d0887baf81f4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20180719180050-a680a1efc54d",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180719180050-a680a1efc54d.zip",
@@ -804,6 +1980,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180719180050-a680a1efc54d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180731172858-49c15d80dfbc",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180731172858-49c15d80dfbc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180731172858-49c15d80dfbc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180801174033-32f9bdbd7df1",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180801174033-32f9bdbd7df1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180801174033-32f9bdbd7df1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180801183431-22bb95c5e783",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180801183431-22bb95c5e783.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180801183431-22bb95c5e783"
     },
     {
       "ecosystem": "go",
@@ -856,6 +2068,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20180824152047-4bcd98cce591",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180824152047-4bcd98cce591.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180824152047-4bcd98cce591"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20180911220305-26e67e76b6c3",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180911220305-26e67e76b6c3.zip",
@@ -876,6 +2100,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180921000356-2f5d2388922f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20180925072008-f04abc6bdfa7",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20180925072008-f04abc6bdfa7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180925072008-f04abc6bdfa7"
     },
     {
       "ecosystem": "go",
@@ -952,6 +2188,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20181107093936-a544f70c90f1",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20181107093936-a544f70c90f1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181107093936-a544f70c90f1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20181107234226-1c5f79cfb164",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20181107234226-1c5f79cfb164.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181107234226-1c5f79cfb164"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20181108082009-03003ca0c849",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20181108082009-03003ca0c849.zip",
@@ -960,6 +2220,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181108082009-03003ca0c849"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20181113165502-88d92db4c548",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20181113165502-88d92db4c548.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181113165502-88d92db4c548"
     },
     {
       "ecosystem": "go",
@@ -988,6 +2260,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20181214192244-a4630153038d",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20181214192244-a4630153038d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181214192244-a4630153038d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20181217023233-e147a9138326",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20181217023233-e147a9138326.zip",
@@ -1000,6 +2284,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20190107210223-45ffb0cd1ba0",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190107210223-45ffb0cd1ba0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190107210223-45ffb0cd1ba0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190108155000-395948e2f546",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190108155000-395948e2f546.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190108155000-395948e2f546"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20190110200230-915654e7eabc",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190110200230-915654e7eabc.zip",
@@ -1008,6 +2316,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190110200230-915654e7eabc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190125002852-4b62a64f59f7",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190125002852-4b62a64f59f7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190125002852-4b62a64f59f7"
     },
     {
       "ecosystem": "go",
@@ -1032,6 +2352,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190225153610-fe579d43d832"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190227022144-312bce6e941f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190227022144-312bce6e941f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190227022144-312bce6e941f"
     },
     {
       "ecosystem": "go",
@@ -1072,6 +2404,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20190310014029-b774fd8d5c0f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190310014029-b774fd8d5c0f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190310014029-b774fd8d5c0f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20190310074541-c10a0554eabf",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190310074541-c10a0554eabf.zip",
@@ -1080,6 +2424,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190310074541-c10a0554eabf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190311031020-56fb01167e7d",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190311031020-56fb01167e7d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190311031020-56fb01167e7d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190311175648-12eef18f757f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190311175648-12eef18f757f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190311175648-12eef18f757f"
     },
     {
       "ecosystem": "go",
@@ -1116,6 +2484,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190318221613-d196dffd7c2b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190320061253-77544e6953d8",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190320061253-77544e6953d8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190320061253-77544e6953d8"
     },
     {
       "ecosystem": "go",
@@ -1164,6 +2544,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190326090315-15845e8f865b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190327025741-74e053c68e29",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190327025741-74e053c68e29.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190327025741-74e053c68e29"
     },
     {
       "ecosystem": "go",
@@ -1264,6 +2656,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/net",
+      "version": "v0.0.0-20190424024845-afe8014c977f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190424024845-afe8014c977f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190424024845-afe8014c977f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
       "version": "v0.0.0-20190424112056-4829fb13d2c6",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190424112056-4829fb13d2c6.zip",
@@ -1272,6 +2676,234 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190424112056-4829fb13d2c6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190501004415-9ce7a6920f09",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190501004415-9ce7a6920f09.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190501004415-9ce7a6920f09"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190502183928-7f726cade0ab",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190502183928-7f726cade0ab.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190502183928-7f726cade0ab"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190503192946-f4e77d36d62c",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190503192946-f4e77d36d62c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190503192946-f4e77d36d62c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190509222800-a4d6f7feada5",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190509222800-a4d6f7feada5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190509222800-a4d6f7feada5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190514140710-3ec191127204",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190514140710-3ec191127204.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190514140710-3ec191127204"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190520210107-018c4d40a106",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190520210107-018c4d40a106.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190520210107-018c4d40a106"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190522135303-fa69b94a3b58",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190522135303-fa69b94a3b58.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190522135303-fa69b94a3b58"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190522155817-f3200d17e092",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190522155817-f3200d17e092.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190522155817-f3200d17e092"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190603091049-60506f45cf65",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190603091049-60506f45cf65.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190603091049-60506f45cf65"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190606173856-1492cefac77f",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190606173856-1492cefac77f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606173856-1492cefac77f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190607171731-27ecd3f315a1",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190607171731-27ecd3f315a1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607171731-27ecd3f315a1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190607172144-d5cec3884524",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190607172144-d5cec3884524.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607172144-d5cec3884524"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190607175257-26fcbda1b1be",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190607175257-26fcbda1b1be.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607175257-26fcbda1b1be"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190607181551-461777fb6f67",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190607181551-461777fb6f67.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607181551-461777fb6f67"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190611141213-3f473d35a33a",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190611141213-3f473d35a33a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190611141213-3f473d35a33a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190613194153-d28f0bde5980",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190613194153-d28f0bde5980.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613194153-d28f0bde5980"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190619014844-b5b0513f8c1b",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190619014844-b5b0513f8c1b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190619014844-b5b0513f8c1b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/net",
+      "version": "v0.0.0-20190620200207-3b0461eec859",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.0.0-20190620200207-3b0461eec859.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190620200207-3b0461eec859"
+    },
+    {
+      "ecosystem": "go",
+      "package": "myitcv.io",
+      "version": "v0.0.0-20180717150903-bf2c84553c78",
+      "repository": null,
+      "source": "https://proxy.golang.org/myitcv.io/@v/v0.0.0-20180717150903-bf2c84553c78.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180717150903-bf2c84553c78"
     },
     {
       "ecosystem": "ubuntu",
@@ -1287,5 +2919,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

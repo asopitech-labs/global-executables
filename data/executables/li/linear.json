@@ -2,6 +2,18 @@
   "command": "linear",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "push-packet-ebpf",
+      "version": "0.1.0",
+      "repository": "https://github.com/ct-b/push-packet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mna/pigeon",
       "version": "v1.0.0",
@@ -12,8 +24,80 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0xbigboss/linear-cli",
+      "version": "0.2.11",
+      "repository": "git+https://github.com/0xbigboss/linear-cli.git",
+      "source": "https://registry.npmjs.org/@0xbigboss%2Flinear-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.11"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abrowne2/lr",
+      "version": "0.20.1",
+      "repository": "git+https://github.com/abrowne2/linear-cli.git",
+      "source": "https://registry.npmjs.org/@abrowne2%2Flr/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.20.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aiosbrain/aios",
+      "version": "0.11.1",
+      "repository": "git+https://github.com/aiosbrain/aios-workspace.git",
+      "source": "https://registry.npmjs.org/@aiosbrain%2Faios/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.11.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alavida/linear-cli",
+      "version": "1.12.6",
+      "repository": "git+https://github.com/alavida-ai/linear-cli.git",
+      "source": "https://registry.npmjs.org/@alavida%2Flinear-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.12.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@asazutaiga/linear-cli",
+      "version": "0.1.0-beta.3",
+      "repository": "git+https://github.com/asazutaiga/linear-cli.git",
+      "source": "https://registry.npmjs.org/@asazutaiga%2Flinear-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0-beta.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "linear-rb",
+      "version": "0.4.0",
+      "repository": "https://github.com/davekinkead/linear-rb",
+      "source": "https://rubygems.org/gems/linear-rb-0.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,9 +2,21 @@
   "command": "gradle",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gradle-9.7.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gradle",
-      "version": "9.7.0",
+      "version": "9.7.1",
       "repository": "https://www.gradle.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -38,6 +50,84 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "gradle",
+      "version": "9.7.1",
+      "repository": "https://gradle.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.7.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gradle-bin",
+      "version": "9.7.1",
+      "repository": "https://gradle.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.7.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gradle4",
+      "version": "4.10.3",
+      "repository": "https://gradle.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.10.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gradle5",
+      "version": "5.6.4",
+      "repository": "https://gradle.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.6.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gradle6",
+      "version": "6.9.2",
+      "repository": "https://gradle.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "6.9.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gradle7",
+      "version": "7.6.6",
+      "repository": "https://gradle.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.6.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "gradle",
       "version": null,
@@ -51,5 +141,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "dnsname",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "drdns",
+      "version": "0.0.0",
+      "repository": "https://github.com/oxidizers/drdns/tree/master/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "djbdns-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "djbdns-utils",
       "version": null,
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

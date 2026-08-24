@@ -2,11 +2,59 @@
   "command": "gorilla",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rng-entropy",
+      "version": "0.5.0",
+      "repository": "https://github.com/darrelllong/entropy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/cozy/echo",
       "version": "v3.1.0+incompatible",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/cozy/echo/@v/v3.1.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.1.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/franciscoescher/gosimplerest",
+      "version": "v1.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/franciscoescher/gosimplerest/@v/v1.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/labstack/echo",
+      "version": "v2.2.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/labstack/echo/@v/v2.2.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/labstack/echo",
+      "version": "v3.1.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/labstack/echo/@v/v3.1.0%2Bincompatible.zip",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "go",
@@ -28,6 +76,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/rs/cors",
+      "version": "v0.0.0-20170727213201-7af7a1e09ba3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rs/cors/@v/v0.0.0-20170727213201-7af7a1e09ba3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170727213201-7af7a1e09ba3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rs/cors",
       "version": "v0.0.0-20170801073201-eabcc6af4bbe",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/rs/cors/@v/v0.0.0-20170801073201-eabcc6af4bbe.zip",
@@ -36,6 +96,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170801073201-eabcc6af4bbe"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rs/cors",
+      "version": "v0.0.0-20180731071213-15587285ef6b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rs/cors/@v/v0.0.0-20180731071213-15587285ef6b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180731071213-15587285ef6b"
     },
     {
       "ecosystem": "go",
@@ -64,6 +136,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/rs/cors",
+      "version": "v1.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rs/cors/@v/v1.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rs/cors",
       "version": "v1.4.0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/rs/cors/@v/v1.4.0.zip",
@@ -72,6 +156,90 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rs/cors",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rs/cors/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/segmentio/glue",
+      "version": "v0.0.0-20181207014941-d5c547719374",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/segmentio/glue/@v/v0.0.0-20181207014941-d5c547719374.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181207014941-d5c547719374"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/swaggo/http-swagger",
+      "version": "v0.0.0-20190108015318-d870181109f4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/swaggo/http-swagger/@v/v0.0.0-20190108015318-d870181109f4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190108015318-d870181109f4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/swaggo/http-swagger",
+      "version": "v0.0.0-20190219123516-d2bf002bf65b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/swaggo/http-swagger/@v/v0.0.0-20190219123516-d2bf002bf65b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190219123516-d2bf002bf65b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/swaggo/http-swagger",
+      "version": "v0.0.0-20190324132102-654001218d89",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/swaggo/http-swagger/@v/v0.0.0-20190324132102-654001218d89.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190324132102-654001218d89"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/swaggo/http-swagger",
+      "version": "v0.0.0-20190506005510-79126c07518e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/swaggo/http-swagger/@v/v0.0.0-20190506005510-79126c07518e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190506005510-79126c07518e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/swaggo/http-swagger",
+      "version": "v0.0.0-20190614090009-c2865af9083e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/swaggo/http-swagger/@v/v0.0.0-20190614090009-c2865af9083e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190614090009-c2865af9083e"
     },
     {
       "ecosystem": "homebrew",
@@ -84,8 +252,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aps.king/gorilla",
+      "version": "0.1.3",
+      "repository": "git+https://github.com/apsking/gorilla.git",
+      "source": "https://registry.npmjs.org/@aps.king%2Fgorilla/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

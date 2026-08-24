@@ -2,6 +2,42 @@
   "command": "jd",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jotdown-rs",
+      "version": "0.2.0",
+      "repository": "https://github.com/bgreenwell/jotdown-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jump-to-directory",
+      "version": "0.3.4",
+      "repository": "https://gitlab.com/NigelGreenway/jump-to-directory",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "jdim",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "jdim",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/josephburnett/jd",
+      "version": "v0.0.0-20190523064723-9cd4cea55d7d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/josephburnett/jd/@v/v0.0.0-20190523064723-9cd4cea55d7d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190523064723-9cd4cea55d7d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/josephburnett/jd",
+      "version": "v0.0.0-20190531151850-1f9071c800e7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/josephburnett/jd/@v/v0.0.0-20190531151850-1f9071c800e7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190531151850-1f9071c800e7"
     },
     {
       "ecosystem": "go",
@@ -50,6 +110,18 @@
       "latest_version": "v0.0.0-20180504020246-0525c875b75c"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/yudai/gojsondiff",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yudai/gojsondiff/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jd",
       "version": "2.5.0",
@@ -62,6 +134,43 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@actualjob/cli",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/capitalthought/actualjob.git",
+      "source": "https://registry.npmjs.org/@actualjob%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-jobdeploy",
+      "version": "0.0.1.dev19",
+      "repository": "https://github.com/lf1-io/jobdeploy",
+      "source": "https://files.pythonhosted.org/packages/9c/6b/507f73b468fd12a8133606f2589d8b67151b6428df80239318694f1076b6/ai-jobdeploy-0.0.1.dev19.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1.dev19"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "jd",
+      "version": "2.5.0",
+      "repository": "https://github.com/josephburnett/jd",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.5.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "jdim",
       "version": null,
@@ -72,8 +181,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "josephburnett.jd",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

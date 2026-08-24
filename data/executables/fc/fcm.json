@@ -2,6 +2,30 @@
   "command": "fcm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "xorc-notifications",
+      "version": "0.1.0",
+      "repository": "https://github.com/xray-tech/xorc-notifications",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atomic-ehr/fhir-canonical-manager",
+      "version": "0.0.25",
+      "repository": "git+https://github.com/atomic-ehr/fhir-canonical-manager.git",
+      "source": "https://registry.npmjs.org/@atomic-ehr%2Ffhir-canonical-manager/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.25"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "fcm",
       "version": null,
@@ -12,8 +36,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "DuckStudio.FCM",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

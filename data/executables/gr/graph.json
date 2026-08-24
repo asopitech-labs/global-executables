@@ -2,6 +2,42 @@
   "command": "graph",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "plotutils-2.6-12",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "unicode_graph",
+      "version": "0.9.11",
+      "repository": "https://github.com/Celti/unicode_graph",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.11"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "plotutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "plotutils",
       "version": null,
@@ -14,6 +50,42 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/99designs/gqlgen-contrib",
+      "version": "v0.0.0-20190222015228-c654377d611c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/99designs/gqlgen-contrib/@v/v0.0.0-20190222015228-c654377d611c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190222015228-c654377d611c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/owncloud/ocis/v2",
+      "version": "v2.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/owncloud/ocis/v2/@v/v2.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopl.io",
+      "version": "v0.0.0-20161206225729-b725d6015f98",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopl.io/@v/v0.0.0-20161206225729-b725d6015f98.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161206225729-b725d6015f98"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "plotutils",
       "version": "2.6",
@@ -24,6 +96,66 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aidevkit/graph",
+      "version": "0.2.7",
+      "repository": "git+https://github.com/semihkayan/aidevkit-graph.git",
+      "source": "https://registry.npmjs.org/@aidevkit%2Fgraph/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alvan/graph-cli",
+      "version": "0.21.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alvan%2Fgraph-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.21.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ananiaslitz/state-machine",
+      "version": "v0.0.1",
+      "repository": "https://github.com/Ananiaslitz/state-machine.git",
+      "source": "https://repo.packagist.org/p2/ananiaslitz/state-machine.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cloudbuildviz",
+      "version": "0.1.3",
+      "repository": "https://github.com/weiyuan-lane/cloudbuildviz",
+      "source": "https://rubygems.org/gems/cloudbuildviz-0.1.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "graph",
+      "version": "2.11.1",
+      "repository": "https://github.com/seattlerb/graph",
+      "source": "https://rubygems.org/gems/graph-2.11.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.11.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +171,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

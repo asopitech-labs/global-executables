@@ -2,6 +2,18 @@
   "command": "guards",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "quilt-0.69-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "quilt",
       "version": "0.69",
@@ -12,6 +24,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "quilt-0.69-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

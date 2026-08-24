@@ -2,16 +2,52 @@
   "command": "al",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mono-6.12.0.206-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "albert",
       "version": "0.1.8",
       "repository": "https://github.com/meysam81/albert",
-      "source": "https://crates.io/api/v1/crates/albert/0.1.8/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "almoxarife",
+      "version": "1.0.0",
+      "repository": "https://github.com/gustavo-hms/almoxarife",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mono-devel",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
     },
     {
       "ecosystem": "homebrew",
@@ -24,6 +60,186 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@action-llama/action-llama",
+      "version": "0.29.1",
+      "repository": "git+https://github.com/Action-Llama/action-llama.git",
+      "source": "https://registry.npmjs.org/@action-llama%2Faction-llama/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.29.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agentlattice/cli",
+      "version": "1.2.7",
+      "repository": "git+https://github.com/inder/agentlattice.git",
+      "source": "https://registry.npmjs.org/@agentlattice%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alrale/cli",
+      "version": "1.0.36",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alrale%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.36"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@altest/cli",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@altest%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@answerlayer/cli",
+      "version": "0.1.17",
+      "repository": "git+https://github.com/AnswerLayer/answerlayer-cli.git",
+      "source": "https://registry.npmjs.org/@answerlayer%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.17"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aolie/cli",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aolie%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Microsoft.Dynamics.BusinessCentral.Development.Tools",
+      "version": "18.0.40.43394-beta",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/microsoft.dynamics.businesscentral.development.tools/18.0.40.43394-beta/microsoft.dynamics.businesscentral.development.tools.18.0.40.43394-beta.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "18.0.40.43394-beta"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "atarilynx",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/atarilynx/0.1.0/atarilynx.0.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-lighthouse",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/61/b0/4c7b93b2de351d197bd1d20b1f60473abd850d802fe7313f45db3c6e1c7a/agent_lighthouse-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agentslock",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f9/fc/7f1f1ab88d1cd1b91024ec3dda2f89b7dc84b68d00cc96d153f658a3304a/agentslock-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "al-alias-manager",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/81/ec/ee4f7f1c13bedf695b90204086a3266245858506f18ca727c08145252883/al_alias_manager-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alation-cli",
+      "version": "0.0.1",
+      "repository": "https://github.com/jojitech/alation-cli",
+      "source": "https://files.pythonhosted.org/packages/5d/d4/e900ac4ee89f520b9a8e20e4f70a1982a62985328dbceb815f4cd85a78c3/alation_cli-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alfredcmd",
+      "version": "0.1.7",
+      "repository": "https://github.com/GustavoKatel/alfredcmd",
+      "source": "https://files.pythonhosted.org/packages/43/76/a0dd59ad793cb9e6a680953b5c91ddba484af73b6b13a6d91921ae9e4aa4/alfredcmd-0.1.7-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "almos-kit",
+      "version": "1.1.1",
+      "repository": "https://github.com/MiguelMartzFdez/almos",
+      "source": "https://files.pythonhosted.org/packages/b6/fd/4d791e34c4e9e0764f7e96db369006d9ad542ec013c8ad220a075daf70f8/almos_kit-1.1.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "arraylake",
+      "version": "1.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b1/05/000950a7c1056a9ecfe7631d3bd1f15cb94d9a9f266e8ed5dc3f3240436a/arraylake-1.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +255,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

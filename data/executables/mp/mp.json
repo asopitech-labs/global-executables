@@ -2,6 +2,42 @@
   "command": "mp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "moshpit",
+      "version": "0.11.2",
+      "repository": "https://git.jasonozias.com/moshpit.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mp",
+      "version": "0.1.0",
+      "repository": "https://github.com/kerryeon/mp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mpcli",
+      "version": "0.1.1",
+      "repository": "https://github.com/mjdescy/mp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "microplane",
       "version": "0.0.37",
@@ -12,6 +48,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "apinstein/mp",
+      "version": "v1.0.3",
+      "repository": "https://github.com/apinstein/mp.git",
+      "source": "https://repo.packagist.org/p2/apinstein/mp.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MultiPlanarUNet",
+      "version": "0.2.3",
+      "repository": "https://github.com/perslev/MultiPlanarUNet",
+      "source": "https://files.pythonhosted.org/packages/5d/36/5c44a7c22301875039c0eb3363289545e6293904a1a20942360e1f0fc714/MultiPlanarUNet-0.2.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "auto-media-platform",
+      "version": "0.0.3",
+      "repository": "https://github.com/idlewith/auto_media_platform",
+      "source": "https://files.pythonhosted.org/packages/76/a5/8d184c7f0afeb47feb8351adfa4a1e21b3d7926c74420b81cb75628c589e/auto_media_platform-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mapa",
+      "version": "0.0.8",
+      "repository": "http://rubygems.org/gems/mapa",
+      "source": "https://rubygems.org/gems/mapa-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

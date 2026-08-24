@@ -2,6 +2,102 @@
   "command": "analyze",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hunspell-1.7.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "analyze",
+      "version": "0.0.1",
+      "repository": "https://github.com/base/montana",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chess-vector-engine",
+      "version": "0.5.1",
+      "repository": "https://github.com/chessvector/chess-vector-engine",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "code-analyze",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "qr_benchmark",
+      "version": "0.1.0",
+      "repository": "https://github.com/cypressf/qr_benchmark",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tja",
+      "version": "0.5.0",
+      "repository": "https://github.com/JacobLinCool/tja-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "toraniko",
+      "version": "0.2.0",
+      "repository": "https://github.com/factordynamics/toraniko-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/tools",
+      "version": "v0.0.0-20181017214349-06f26fdaaa28",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/tools/@v/v0.0.0-20181017214349-06f26fdaaa28.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181017214349-06f26fdaaa28"
+    },
+    {
       "ecosystem": "go",
       "package": "golang.org/x/tools",
       "version": "v0.0.0-20180928123317-84988e2dba31",
@@ -12,6 +108,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180928123317-84988e2dba31"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20180928164045-7b71b077e1f4",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20180928164045-7b71b077e1f4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180928164045-7b71b077e1f4"
     },
     {
       "ecosystem": "go",
@@ -28,6 +136,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181001222327-b71db7f417f1",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181001222327-b71db7f417f1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181001222327-b71db7f417f1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
       "version": "v0.0.0-20181003024731-2f84ea8ef872",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181003024731-2f84ea8ef872.zip",
@@ -36,6 +156,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181003024731-2f84ea8ef872"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181003164445-c930a8531daf",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181003164445-c930a8531daf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181003164445-c930a8531daf"
     },
     {
       "ecosystem": "go",
@@ -64,6 +196,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181008203909-a2cab1077b72",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181008203909-a2cab1077b72.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181008203909-a2cab1077b72"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
       "version": "v0.0.0-20181008205924-a2b3f7f249e9",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181008205924-a2b3f7f249e9.zip",
@@ -84,6 +228,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181009172131-6d96510a3a1c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181011021141-0e57ebad1d6b",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181011021141-0e57ebad1d6b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181011021141-0e57ebad1d6b"
     },
     {
       "ecosystem": "go",
@@ -148,6 +304,42 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181015201034-8919434dde1e",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181015201034-8919434dde1e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181015201034-8919434dde1e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181015221341-5d4988d199e2",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181015221341-5d4988d199e2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181015221341-5d4988d199e2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181016152912-4fd33079060a",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181016152912-4fd33079060a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181016152912-4fd33079060a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
       "version": "v0.0.0-20181019005945-6adeb8aab2de",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181019005945-6adeb8aab2de.zip",
@@ -182,6 +374,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@accord_33/react-dep-analyzer",
+      "version": "1.0.2",
+      "repository": "git+https://github.com/Accord33/react-dep-analyzer.git",
+      "source": "https://registry.npmjs.org/@accord_33%2Freact-dep-analyzer/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.2"
+    },
+    {
       "ecosystem": "pypi",
       "package": "AEI",
       "version": "1.4.0",
@@ -192,8 +396,56 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MiMSI",
+      "version": "0.4.1",
+      "repository": "https://github.com/mskcc/mimsi",
+      "source": "https://files.pythonhosted.org/packages/ce/62/d1419ab016ba03b7379aa24bbd470e3fb8786fb113740dd209810ecd44bb/MiMSI-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "auto-doc-utils",
+      "version": "0.1.0",
+      "repository": "https://github.com/yourusername/auto-doc-utils",
+      "source": "https://files.pythonhosted.org/packages/5d/11/6f07e0a9603a3e904c12b18becef6e5ba36b2a751fcf25dc3b3d78dba9d5/auto_doc_utils-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "analyzer",
+      "version": "1.0.5",
+      "repository": "https://github.com/malomalo/analyzer",
+      "source": "https://rubygems.org/gems/analyzer-1.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "claws-scan",
+      "version": "0.9.0",
+      "repository": "https://github.com/Betterment/claws",
+      "source": "https://rubygems.org/gems/claws-scan-0.9.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

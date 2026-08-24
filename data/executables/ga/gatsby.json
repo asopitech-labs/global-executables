@@ -2,6 +2,18 @@
   "command": "gatsby",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gatsby",
+      "version": "0.0.0",
+      "repository": "https://github.com/rusty-ssg/rusty-ssg",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gatsby-cli",
       "version": "5.16.0",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@7hci/gatsby-pge",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/gatsbyjs/gatsby.git",
+      "source": "https://registry.npmjs.org/@7hci%2Fgatsby-pge/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ascorbic/gatsby",
+      "version": "4.14.1",
+      "repository": "git+https://github.com/gatsbyjs/gatsby.git",
+      "source": "https://registry.npmjs.org/@ascorbic%2Fgatsby/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.14.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "goreleaser",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "goreleaser-2.14.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.101.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.101.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.101.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/goreleaser/goreleaser",
       "version": "v0.103.1",
@@ -28,6 +52,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.105.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.105.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.105.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
       "version": "v0.106.0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.106.0.zip",
@@ -36,6 +72,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.106.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.107.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.107.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.107.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.108.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.108.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.108.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.109.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.109.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.109.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.110.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.110.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.110.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.84.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.84.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.84.0"
     },
     {
       "ecosystem": "go",
@@ -60,6 +156,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.91.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v0.97.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v0.97.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.97.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goreleaser/goreleaser",
+      "version": "v1.26.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goreleaser/goreleaser/@v/v1.26.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.26.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/goreleaser",
+      "version": "v0.86.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/goreleaser/@v/v0.86.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.86.1"
     },
     {
       "ecosystem": "go",
@@ -88,7 +220,7 @@
     {
       "ecosystem": "homebrew",
       "package": "goreleaser",
-      "version": "2.17.1",
+      "version": "2.18.0",
       "repository": "https://goreleaser.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -96,8 +228,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "goreleaser",
+      "version": "2.18.0",
+      "repository": "https://goreleaser.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.18.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "reml",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "reductionml-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/jackgerrits/reductionml",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mlkit",
       "version": "4.7.22",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Reml.Cli",
+      "version": "0.1.0-alpha",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/reml.cli/0.1.0-alpha/reml.cli.0.1.0-alpha.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0-alpha"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

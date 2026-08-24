@@ -2,6 +2,66 @@
   "command": "bunyan",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bunyan",
+      "version": "0.1.9",
+      "repository": "https://github.com/LukeMathWalker/bunyan",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bunyan_view",
+      "version": "0.3.3",
+      "repository": "https://github.com/dekobon/bunyan-view",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@537/bunyan",
+      "version": "2.0.2",
+      "repository": "git://github.com/53seven/node-bunyan.git",
+      "source": "https://registry.npmjs.org/@537%2Fbunyan/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aaa-backend-stack/logger",
+      "version": "2.4.4",
+      "repository": "git+ssh://git@github.com/allaboutapps/aaa-backend-stack.git",
+      "source": "https://registry.npmjs.org/@aaa-backend-stack%2Flogger/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.4.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amccarthy1/bunyan",
+      "version": "2.0.6",
+      "repository": "git://github.com/amccarthy1/node-bunyan.git",
+      "source": "https://registry.npmjs.org/@amccarthy1%2Fbunyan/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "node-bunyan",
       "version": null,
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

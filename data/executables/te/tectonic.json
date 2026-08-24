@@ -2,6 +2,54 @@
   "command": "tectonic",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "tectonic-0.17.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "aware-tectonic",
+      "version": "0.16.12",
+      "repository": "https://github.com/ikhomyakov/tectonic/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.12"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jxoesneon-tectonic",
+      "version": "0.17.3",
+      "repository": "https://github.com/tectonic-typesetting/tectonic/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tectonic",
+      "version": "0.17.0",
+      "repository": "https://github.com/tectonic-typesetting/tectonic/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tectonic",
       "version": "0.17.0",
@@ -12,8 +60,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tectonic",
+      "version": "0.17.0",
+      "repository": "https://tectonic-typesetting.github.io/en-US/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.17.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

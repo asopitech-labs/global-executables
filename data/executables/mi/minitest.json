@@ -2,6 +2,18 @@
   "command": "minitest",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-minitest-sprint-1.5.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ruby",
       "version": "4.0.6",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "Narnach-minitest",
+      "version": "0.3.3",
+      "repository": "http://www.github.com/Narnach/minitest",
+      "source": "https://rubygems.org/gems/Narnach-minitest-0.3.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

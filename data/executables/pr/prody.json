@@ -1,0 +1,31 @@
+{
+  "command": "prody",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-prody",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ProDy",
+      "version": "2.6.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0b/0a/740b528d15a5eddd5d8e0106c8311cce50b20ab16859a1bb068f3068eff3/prody-2.6.1-cp312-cp312-manylinux_2_35_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.6.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

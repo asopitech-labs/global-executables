@@ -2,6 +2,30 @@
   "command": "anubis",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "anubis-1.27.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "anubis",
+      "version": "0.0.2",
+      "repository": "https://github.com/qhua948/anubis",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "anubis",
       "version": "1.27.0",
@@ -12,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anubis-cli",
+      "version": "0.0.18",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1c/18/c49eb842fdf55cc731a559fbcdcf5677122246c860c99450ccfd585e4e84/anubis_cli-0.0.18-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.18"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anubis-ipsw",
+      "version": "0.0.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f7/7f/08df64c924224637eb9b63ef57fe98ad5577390504ad63f9f528eb37e151/anubis_ipsw-0.0.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anubis-netsec",
+      "version": "1.3.1",
+      "repository": "https://github.com/jonluca/anubis",
+      "source": "https://files.pythonhosted.org/packages/37/a7/8c377554da684ece0dd16b0346e9f0645a84f9ff5b9a2e2864c2f6cbb92f/anubis_netsec-1.3.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

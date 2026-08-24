@@ -2,6 +2,54 @@
   "command": "quest",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "quest-cli",
+      "version": "0.4.0",
+      "repository": "https://github.com/theelderbeever/quest-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "urd-quest",
+      "version": "0.1.0",
+      "repository": "https://github.com/metdxt/urd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vibequest",
+      "version": "0.1.13",
+      "repository": "https://github.com/lolsborn/quest",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.13"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xapian-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "xapian-tools",
       "version": null,
@@ -12,6 +60,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apiquest/fracture",
+      "version": "1.1.0",
+      "repository": "git+https://github.com/hh-apiquest/fracture.git",
+      "source": "https://registry.npmjs.org/@apiquest%2Ffracture/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

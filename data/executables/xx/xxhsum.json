@@ -2,6 +2,30 @@
   "command": "xxhsum",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "xxhash-0.8.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xxhash",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "xxhash",
       "version": null,
@@ -16,6 +40,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/cespare/xxhash",
+      "version": "v0.0.0-20161118035902-4a94f899c20b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/xxhash/@v/v0.0.0-20161118035902-4a94f899c20b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161118035902-4a94f899c20b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/xxhash",
+      "version": "v0.0.0-20181017004759-096ff4a8a059",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/xxhash/@v/v0.0.0-20181017004759-096ff4a8a059.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181017004759-096ff4a8a059"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/xxhash",
       "version": "v1.0.0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/cespare/xxhash/@v/v1.0.0.zip",
@@ -24,6 +72,78 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/xxhash",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/xxhash/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/xxhash",
+      "version": "v1.1.1-0.20190104011926-30d0e5bcb75d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/xxhash/@v/v1.1.1-0.20190104011926-30d0e5bcb75d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.1-0.20190104011926-30d0e5bcb75d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/xxhash/v2",
+      "version": "v2.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/xxhash/v2/@v/v2.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/xxhash/v2",
+      "version": "v2.0.1-0.20190104013014-3767db7a7e18",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/xxhash/v2/@v/v2.0.1-0.20190104013014-3767db7a7e18.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.1-0.20190104013014-3767db7a7e18"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/xxhash/v2",
+      "version": "v2.0.1-0.20190612164807-32f3a100fff2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/xxhash/v2/@v/v2.0.1-0.20190612164807-32f3a100fff2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.1-0.20190612164807-32f3a100fff2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/m3db/prometheus_client_golang",
+      "version": "v1.12.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/m3db/prometheus_client_golang/@v/v1.12.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.12.8"
     },
     {
       "ecosystem": "homebrew",
@@ -38,6 +158,31 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "xxhash-0.8.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "xxhash",
+      "version": "0.8.3",
+      "repository": "https://xxhash.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "xxhash",
       "version": null,
@@ -48,8 +193,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Cyan4973.xxhsum",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

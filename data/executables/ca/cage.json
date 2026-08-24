@@ -2,6 +2,42 @@
   "command": "cage",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cage-0.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cage",
+      "version": "0.3.6",
+      "repository": "https://github.com/faradayio/cage",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.6"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cage",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cage",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PYCage",
+      "version": "0.2.0",
+      "repository": "https://github.com/macostea/cage",
+      "source": "https://files.pythonhosted.org/packages/b7/a0/6e0fe66c39c2023d9236ec48f79a3942e53adcc2d47537b63502781209f5/PYCage-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cage",
+      "version": "0.1.2",
+      "repository": "https://github.com/nuclearsandwich/cage",
+      "source": "https://rubygems.org/gems/cage-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

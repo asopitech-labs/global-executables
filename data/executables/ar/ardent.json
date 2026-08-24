@@ -1,0 +1,31 @@
+{
+  "command": "ardent",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ardent",
+      "version": "0.13.0",
+      "repository": "https://github.com/idleberg/ardent",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "idleberg.ardent",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

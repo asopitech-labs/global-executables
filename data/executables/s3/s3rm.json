@@ -2,6 +2,30 @@
   "command": "s3rm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "s3rm",
+      "version": "0.1.0",
+      "repository": "https://git.sr.ht/~jpastuszek/s3rm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "s3rm-rs",
+      "version": "1.6.2",
+      "repository": "https://github.com/nidor1998/s3rm-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.6.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libnet-amazon-s3-tools-perl",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

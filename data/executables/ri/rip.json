@@ -2,6 +2,42 @@
   "command": "rip",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rip-cli",
+      "version": "0.7.0",
+      "repository": "https://github.com/cesarferreira/rip",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rip2",
+      "version": "0.9.6",
+      "repository": "https://github.com/MilesCranmer/rip",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.6"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rm-improved",
+      "version": "0.13.1",
+      "repository": "https://github.com/nivekuil/rip",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rip2",
       "version": "0.9.6",
@@ -36,8 +72,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "rip",
+      "version": "0.9.6",
+      "repository": "https://github.com/MilesCranmer/rip2",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.9.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

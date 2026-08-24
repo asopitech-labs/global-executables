@@ -2,6 +2,42 @@
   "command": "grab",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "grab-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/anwitars/grab",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rusht",
+      "version": "1.3.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "grab",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "grab",
       "version": null,
@@ -12,6 +48,78 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cavaliercoder/grab",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cavaliercoder/grab/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Gsuuon.Tool.Grab",
+      "version": "0.0.14",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gsuuon.tool.grab/0.0.14/gsuuon.tool.grab.0.0.14.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.14"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-grab",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-grab/0.1.1/dotnet-grab.0.1.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "aural",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://rubygems.org/gems/aural-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "filegrabber",
+      "version": "0.1.0",
+      "repository": "http://github.com/mcantor/filegrabber",
+      "source": "https://rubygems.org/gems/filegrabber-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "grabber",
+      "version": "0.0.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/grabber-0.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "interval",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/throttled/throttled",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/throttled/throttled/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "num-utils",
       "version": "0.5",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gaddygaddy",
+      "version": "0.1.92",
+      "repository": "http://www.gaddygaddy.com/",
+      "source": "https://rubygems.org/gems/gaddygaddy-0.1.92.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.92"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

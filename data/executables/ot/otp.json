@@ -2,6 +2,42 @@
   "command": "otp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "open_texture_packer",
+      "version": "0.2.5",
+      "repository": "https://github.com/webcyou-org/open-texture-packer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "otp-cipher",
+      "version": "0.1.2",
+      "repository": "https://github.com/EvenYouBrutus/otp-cipher",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "heimdal-clients",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "heimdal-clients",
       "version": null,
@@ -26,6 +62,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "heimdal-7.8.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Mjcheetham.Otp.Tool",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/mjcheetham.otp.tool/0.2.0/mjcheetham.otp.tool.0.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Prov-Exscript",
+      "version": "2.0",
+      "repository": "https://github.com/Prov-RafaelSavoy/prov_exscript/",
+      "source": "https://files.pythonhosted.org/packages/d4/5c/1349313063c12059f3ed7055754bd39c328479dbed07fc98ea815d1e3087/Prov_Exscript-2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "heimdal-clients",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

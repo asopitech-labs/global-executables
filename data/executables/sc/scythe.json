@@ -2,6 +2,30 @@
   "command": "scythe",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "scythe-cli",
+      "version": "0.18.1",
+      "repository": "https://github.com/Goldziher/scythe",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.18.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scythe",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "scythe",
       "version": null,
@@ -12,6 +36,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artifact-scythe",
+      "version": "0.7.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/43/ed/9aff2bef0cf5873ff5447879424138f07c7ff37da6062060d69350f1654f/artifact_scythe-0.7.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,43 @@
+{
+  "command": "krew",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes-sigs/krew",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes-sigs/krew/@v/v0.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/krew",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/krew/@v/v0.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Kubernetes.krew",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

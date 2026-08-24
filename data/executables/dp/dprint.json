@@ -2,9 +2,45 @@
   "command": "dprint",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dprint-0.56.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "dprint-0.56.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dprint",
+      "version": "0.56.1",
+      "repository": "https://github.com/dprint/dprint",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.56.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dprint",
-      "version": "0.55.2",
+      "version": "0.56.1",
       "repository": "https://dprint.dev/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dprint",
+      "version": "0.56.1",
+      "repository": "https://dprint.dev",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.56.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

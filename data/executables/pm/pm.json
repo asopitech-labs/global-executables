@@ -2,6 +2,114 @@
   "command": "pm",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "festival-2.5.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "claps",
+      "version": "0.2.0",
+      "repository": "https://github.com/liblaf/claps",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mtos-pm",
+      "version": "0.3.0",
+      "repository": "https://gitlab.com/MatuushOS/pm-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "port-manager",
+      "version": "1.1.0",
+      "repository": "https://github.com/gorgeguy/port-manager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "postmodern-cli",
+      "version": "0.5.1",
+      "repository": "https://github.com/mbr/postmodern",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pressure-measurement",
+      "version": "0.1.7",
+      "repository": "https://gitee.com/itao007/pressure-measurement.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "project_management",
+      "version": "0.9.3",
+      "repository": "https://github.com/pbower/project_management",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "projectman",
+      "version": "0.1.6",
+      "repository": "https://github.com/hskang9/projectman-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "powerman",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "powerman",
       "version": null,
@@ -26,6 +134,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@akala/pm",
+      "version": "15.11.39",
+      "repository": "git+https://github.com/npenin/akala.git",
+      "source": "https://registry.npmjs.org/@akala%2Fpm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "15.11.39"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atools/pm",
+      "version": "1.0.12",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@atools%2Fpm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.12"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SecureO",
+      "version": "0.9",
+      "repository": "https://github.com/yash-k-jain/password-manager",
+      "source": "https://files.pythonhosted.org/packages/b6/7f/c7c90386daae7d878da5b6e14557686c62ebd67baab5baf3cb9a960e7cb3/SecureO-0.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "powerman",
       "version": null,
@@ -39,5 +183,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,31 @@
+{
+  "command": "zoekt",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "zoekt-r1921.893a523-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sourcegraph/zoekt",
+      "version": "v0.0.0-20190604124741-8479bbcbe671",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sourcegraph/zoekt/@v/v0.0.0-20190604124741-8479bbcbe671.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190604124741-8479bbcbe671"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

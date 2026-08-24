@@ -2,6 +2,42 @@
   "command": "hivemind",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hivemind",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hivemind-core",
+      "version": "0.1.27",
+      "repository": "https://github.com/Antonio7098/hivemind",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.27"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "oxhivemind",
+      "version": "0.14.3",
+      "repository": "https://github.com/oxhive/hivemind",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hivemind",
       "version": "1.1.0",
@@ -12,8 +48,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ai2aim.ai/hivemind-sdk",
+      "version": "3.2.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ai2aim.ai%2Fhivemind-sdk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andrewhopper/hivemind",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/andrewhopper/hivemind.git",
+      "source": "https://registry.npmjs.org/@andrewhopper%2Fhivemind/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@awi-24/hivemind-cli",
+      "version": "0.2.1",
+      "repository": "git+https://github.com/Awi-24/hivemind-cli.git",
+      "source": "https://registry.npmjs.org/@awi-24%2Fhivemind-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hivemind",
+      "version": "0.1",
+      "repository": "http://github.com/alehander42/hivemind",
+      "source": "https://rubygems.org/gems/hivemind-0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

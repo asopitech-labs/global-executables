@@ -2,6 +2,30 @@
   "command": "bom",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bom",
+      "version": "0.1.2",
+      "repository": "https://github.com/uma0317/bom",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/bom",
+      "version": "v0.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/bom/@v/v0.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bom",
       "version": "0.7.1",
@@ -12,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "bom",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/bom/0.1.2/bom.0.1.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "bom",
+      "version": "0.7.1",
+      "repository": "https://kubernetes-sigs.github.io/bom/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.7.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

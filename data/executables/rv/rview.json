@@ -2,9 +2,33 @@
   "command": "rview",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gvim-9.2.0849-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "vim-9.2.0849-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "vim",
-      "version": "9.2.0950",
+      "version": "9.2.1000",
       "repository": "https://www.vim.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +48,71 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "vim-9.2.0858-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "vim",
+      "version": "9.2.1001",
+      "repository": "https://www.vim.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.2.1001"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "vim-nightly",
+      "version": "9.2.1001",
+      "repository": "https://www.vim.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.2.1001"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "vim-tux",
+      "version": "9.2.0699_20260622",
+      "repository": "https://tuxproject.de/projects/vim",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.2.0699_20260622"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

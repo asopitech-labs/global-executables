@@ -1,0 +1,43 @@
+{
+  "command": "auth-server",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ate-auth",
+      "version": "1.9.0",
+      "repository": "https://github.com/john-sharratt/ate/auth",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.9.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "blueprint-auth",
+      "version": "0.2.0-alpha.11",
+      "repository": "https://github.com/tangle-network/blueprint",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0-alpha.11"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "auth",
+      "version": "3.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/de/f8/f75f4c995c1958c1b3d31fa3dd0c6a13d0f4ba139df656beec229066b0de/auth-3.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,30 @@
   "command": "openapi-diff",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "openapi-diff-2.1.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nifi-openapi-gen",
+      "version": "0.15.0",
+      "repository": "https://github.com/maltesander/nifi-rust-client",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "openapi-diff",
       "version": "2.1.7",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "LimeFlight.OpenAPI.Diff.CLI",
+      "version": "3.0.10-preview.8",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/limeflight.openapi.diff.cli/3.0.10-preview.8/limeflight.openapi.diff.cli.3.0.10-preview.8.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.0.10-preview.8"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "yaos.OpenAPI.Diff.CLI",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/yaos.openapi.diff.cli/1.1.0/yaos.openapi.diff.cli.1.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

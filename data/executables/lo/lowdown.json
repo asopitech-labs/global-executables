@@ -2,6 +2,42 @@
   "command": "lowdown",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "lowdown-3.1.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lowdown",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lowdown",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "lowdown",
       "version": null,
@@ -26,6 +62,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "packagist",
+      "package": "datashaman/lowdown",
+      "version": "0.1.0",
+      "repository": "https://github.com/datashaman/lowdown.git",
+      "source": "https://repo.packagist.org/p2/datashaman/lowdown.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lowdown",
+      "version": "1.0.0",
+      "repository": "https://github.com/alloy/lowdown",
+      "source": "https://rubygems.org/gems/lowdown-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "lowdown",
       "version": null,
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

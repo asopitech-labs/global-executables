@@ -14,6 +14,42 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "yacc",
+      "version": "0.1.4",
+      "repository": "https://github.com/Ns2Kracy/yacc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cznic/parser",
+      "version": "v0.0.0-20160622100904-31edd927e5b1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cznic/parser/@v/v0.0.0-20160622100904-31edd927e5b1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160622100904-31edd927e5b1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cznic/parser",
+      "version": "v0.0.0-20181122101858-d773202d5b1f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cznic/parser/@v/v0.0.0-20181122101858-d773202d5b1f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181122101858-d773202d5b1f"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bison",
       "version": "3.8.2",
@@ -24,8 +60,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "bison-3.8.2-5",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "byacc",
+      "version": "1.9-1",
+      "repository": "https://gnuwin32.sourceforge.net/packages/byacc.htm",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.9-1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

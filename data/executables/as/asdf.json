@@ -2,6 +2,18 @@
   "command": "asdf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "asdf",
+      "version": "0.1.0",
+      "repository": "https://github.com/anthonynguyen/asdf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "asdf",
       "version": "0.20.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "asdf",
+      "version": "0.5.0",
+      "repository": "http://github.com/wycats/asdf",
+      "source": "https://rubygems.org/gems/asdf-0.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "plutil",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gnustep-base-1.31.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "plutil",
+      "version": "0.1.0",
+      "repository": "https://github.com/anayw2001/plutil-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gnustep-base-runtime",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "gnustep-base-runtime",
       "version": null,
@@ -12,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

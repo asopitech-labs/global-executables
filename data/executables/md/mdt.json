@@ -2,6 +2,66 @@
   "command": "mdt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "md-tui-0.10.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "md-tui",
+      "version": "0.10.3",
+      "repository": "https://github.com/henriklovhaug/md-tui",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdt",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdt_cli",
+      "version": "0.9.1",
+      "repository": "https://github.com/ifiokjr/mdt/tree/main/mdt_cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdtui",
+      "version": "0.3.0",
+      "repository": "https://github.com/PPRAMANIK62/mdt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "md-tui",
       "version": "0.10.3",
@@ -24,8 +84,93 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@1-/mdt",
+      "version": "0.1.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@1-%2Fmdt/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@3-/mdt",
+      "version": "0.1.5",
+      "repository": "https://atomgit.com/i18n/lib.git",
+      "source": "https://registry.npmjs.org/@3-%2Fmdt/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Duotify.MarkdownTranslator",
+      "version": "1.5.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/duotify.markdowntranslator/1.5.0/duotify.markdowntranslator.1.5.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MDTransport",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/38/a3/cb1914a338c6195f9d4fcd43e4da6cfdbb07ee756c0d58eeef9e5296d757/mdtransport-1.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "md2cnblog",
+      "version": "0.0.1",
+      "repository": "http://github.com/easonhan007/md2cnblog",
+      "source": "https://rubygems.org/gems/md2cnblog-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdt-core",
+      "version": "0.2",
+      "repository": "https://github.com/Phitherek/mdt-core",
+      "source": "https://rubygems.org/gems/mdt-core-0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "md-tui",
+      "version": "0.10.3",
+      "repository": "https://github.com/henriklovhaug/md-tui",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.10.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

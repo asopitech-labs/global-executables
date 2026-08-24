@@ -2,6 +2,18 @@
   "command": "amon",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "silicon-monitor",
+      "version": "5.1.0",
+      "repository": "https://github.com/nervosys/SiliconMonitor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "5.1.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "AMON-bio",
       "version": "1.1.0",
@@ -12,8 +24,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amon-bb",
+      "version": "0.8.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c3/63/2a3d39c77e58160c3213e7e29c062b5171dceeaa59a28094da822cd7cd75/amon_bb-0.8.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,67 @@
+{
+  "command": "mimir",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mimir-3.1.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mimir-harness",
+      "version": "0.1.0",
+      "repository": "https://github.com/buildepicshit/Mimir",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mimir-mem",
+      "version": "0.16.0",
+      "repository": "https://github.com/MakerViking/mimir",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@2bad/mimir-cli",
+      "version": "2.0.0",
+      "repository": "git+https://github.com/2BAD/mimir.git",
+      "source": "https://registry.npmjs.org/@2bad%2Fmimir-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MimirNotes",
+      "version": "0.6.5",
+      "repository": "https://github.com/jcerise/mimir",
+      "source": "https://files.pythonhosted.org/packages/89/8e/d9b084de7a4a97ef7b668fdb894c457fcd0a2384e2f8c10fabfd46d6cd14/MimirNotes-0.6.5.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.5"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "agent-town",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "m2m-protocol",
+      "version": "0.4.0",
+      "repository": "https://github.com/infernet-org/m2m-protocol",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agent-town/cli",
+      "version": "0.2.8",
+      "repository": "git+https://github.com/the-noname-devs/agent-town.git",
+      "source": "https://registry.npmjs.org/@agent-town%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.8"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

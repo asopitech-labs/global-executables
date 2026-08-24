@@ -2,6 +2,90 @@
   "command": "clusterctl",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/pharmer/cluster-api",
+      "version": "v0.0.0-20190516113055-efd9b156f6d2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pharmer/cluster-api/@v/v0.0.0-20190516113055-efd9b156f6d2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190516113055-efd9b156f6d2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sbueringer/cluster-api",
+      "version": "v1.2.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sbueringer/cluster-api/@v/v1.2.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/cluster-api",
+      "version": "v0.0.0-20190418151011-abfd18620fd0",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/cluster-api/@v/v0.0.0-20190418151011-abfd18620fd0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190418151011-abfd18620fd0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/cluster-api",
+      "version": "v0.0.0-20190610203311-5ed76e24e031",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/cluster-api/@v/v0.0.0-20190610203311-5ed76e24e031.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190610203311-5ed76e24e031"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/cluster-api",
+      "version": "v0.0.0-20190619234248-f1461325ef33",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/cluster-api/@v/v0.0.0-20190619234248-f1461325ef33.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190619234248-f1461325ef33"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/cluster-api",
+      "version": "v0.0.0-20190620184450-1cb3deba7ad6",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/cluster-api/@v/v0.0.0-20190620184450-1cb3deba7ad6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190620184450-1cb3deba7ad6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/cluster-api-provider-aws",
+      "version": "v0.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/cluster-api-provider-aws/@v/v0.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "clusterctl",
       "version": "1.14.0",
@@ -12,8 +96,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Kubernetes.clusterctl",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

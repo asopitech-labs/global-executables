@@ -2,6 +2,30 @@
   "command": "xspect",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "spectemu-x11",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "XspecT",
+      "version": "0.7.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a8/21/facbe6d6cbc9f4115f039cb6319a618a864a1c5596503872dc65cdb74c8d/xspect-0.7.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "spectemu-x11",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

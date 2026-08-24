@@ -2,6 +2,30 @@
   "command": "cde",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cde_cli",
+      "version": "0.3.1",
+      "repository": "https://github.com/cryptidtech/cde",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cde",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cde",
       "version": null,
@@ -24,6 +48,18 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ChemDataExtractor-IDE",
+      "version": "1.3.2",
+      "repository": "https://github.com/edbeard/chemdataextractor-ide.git",
+      "source": "https://files.pythonhosted.org/packages/00/a1/703176f1dca0a4815c3627c45ae05086228502d213be32836b398d49a565/ChemDataExtractor-IDE-1.3.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.2"
     },
     {
       "ecosystem": "pypi",
@@ -51,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

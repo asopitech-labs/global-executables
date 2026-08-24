@@ -2,6 +2,78 @@
   "command": "chronicle",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "chronicle-api",
+      "version": "0.4.3",
+      "repository": "https://github.com/dimfeld/chronicle",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chronicle-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/antoinehoriot/chronicle",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexdx/chronicle-mcp",
+      "version": "0.16.0",
+      "repository": "git+https://github.com/alexdx2/chronicle.git",
+      "source": "https://registry.npmjs.org/@alexdx%2Fchronicle-mcp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atybdot/chronicle",
+      "version": "1.2.0",
+      "repository": "git+https://github.com/atybdot/chronicle.git",
+      "source": "https://registry.npmjs.org/@atybdot%2Fchronicle/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "horus/chronicles",
+      "version": "v1.7.8",
+      "repository": "https://github.com/rael017/Chronicles.git",
+      "source": "https://repo.packagist.org/p2/horus/chronicles.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.7.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-chronicle",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f6/cb/8d0db0f97c5d5245955bde1edb9105d355c8b2679bd6b8a57169a88ad2af/agent_chronicle-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "chronicle",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

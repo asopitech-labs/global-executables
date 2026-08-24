@@ -2,6 +2,150 @@
   "command": "editor",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pioneer-20250501-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bevy_editor_iris",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "button-game",
+      "version": "1.0.5",
+      "repository": "https://github.com/132ikl/game",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "game",
+      "version": "1.0.8",
+      "repository": "https://git.ikl.sh/132ikl/game",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.8"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "orbutils",
+      "version": "0.1.10",
+      "repository": "https://github.com/redox-os/orbutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "simple-text-editor",
+      "version": "0.2.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vir",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jmigpin/editor",
+      "version": "v0.0.0-20190521224628-c0e3d767cac4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jmigpin/editor/@v/v0.0.0-20190521224628-c0e3d767cac4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190521224628-c0e3d767cac4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v0.0.0-20190322173422-7fa1f5672fa4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v0.0.0-20190322173422-7fa1f5672fa4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190322173422-7fa1f5672fa4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v0.0.0-20190606200517-a4fbbd31483d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v0.0.0-20190606200517-a4fbbd31483d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606200517-a4fbbd31483d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v0.0.0-20190612190628-656492266168",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v0.0.0-20190612190628-656492266168.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190612190628-656492266168"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v11.1.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v11.1.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v11.1.0+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/kataras/iris",
       "version": "v11.1.1+incompatible",
@@ -12,6 +156,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v11.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v8.5.9+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v8.5.9%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v8.5.9+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/marcusolsson/tui-go",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/marcusolsson/tui-go/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
     },
     {
       "ecosystem": "homebrew",
@@ -27,5 +195,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

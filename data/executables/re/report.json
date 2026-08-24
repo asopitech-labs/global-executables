@@ -2,6 +2,102 @@
   "command": "report",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cem",
+      "version": "0.1.0",
+      "repository": "https://github.com/coderbot16/cem",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "smsdev",
+      "version": "0.1.0",
+      "repository": "https://github.com/guibranco/smsdev-sdk-rs.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ziskemu",
+      "version": "1.1.0-alpha",
+      "repository": "https://github.com/0xPolygonHermez/zisk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0-alpha"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aakash4dev/cometbft",
+      "version": "v0.0.0-20240418134253-e9490ed05277",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aakash4dev/cometbft/@v/v0.0.0-20240418134253-e9490ed05277.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240418134253-e9490ed05277"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cometbft/cometbft",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cometbft/cometbft/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dapr/dapr",
+      "version": "v1.18.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dapr/dapr/@v/v1.18.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.18.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/efipay/sdk-go-apis-efi",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/efipay/sdk-go-apis-efi/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/enigmampc/tendermint",
+      "version": "v0.38.12",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/enigmampc/tendermint/@v/v0.38.12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.38.12"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20170426233943-68f4ded48ba9",
@@ -16,6 +112,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20170717235551-e4f56557df62",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20170717235551-e4f56557df62.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170717235551-e4f56557df62"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20170729233727-0c5108395e2d",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20170729233727-0c5108395e2d.zip",
@@ -24,6 +132,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170729233727-0c5108395e2d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20170807220725-57b029087370",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20170807220725-57b029087370.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170807220725-57b029087370"
     },
     {
       "ecosystem": "go",
@@ -52,6 +172,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20180218235700-15cf44e552f9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180218235700-15cf44e552f9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180218235700-15cf44e552f9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20180419025854-664776a3b48a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180419025854-664776a3b48a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180419025854-664776a3b48a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20180520015035-48a0ecefe2e4",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180520015035-48a0ecefe2e4.zip",
@@ -72,8 +216,140 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/noooblien/cometbft",
+      "version": "v0.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/noooblien/cometbft/@v/v0.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openacid/slim",
+      "version": "v0.5.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openacid/slim/@v/v0.5.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openacid/slim",
+      "version": "v0.5.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openacid/slim/@v/v0.5.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rust-ninja/cometbft",
+      "version": "v0.38.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rust-ninja/cometbft/@v/v0.38.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.38.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "oss.terrastruct.com/d2",
+      "version": "v0.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/oss.terrastruct.com/d2/@v/v0.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SquadDailyReport",
+      "version": "3.0.0.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/squaddailyreport/3.0.0.4/squaddailyreport.3.0.0.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.0.0.4"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "devert/phpunit-reporter",
+      "version": "1.4",
+      "repository": "https://github.com/akongnwi02/junit-xml-processor.git",
+      "source": "https://repo.packagist.org/p2/devert/phpunit-reporter.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.4"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "grafite/mission-control-laravel",
+      "version": "v3.10.0",
+      "repository": "https://github.com/GrafiteInc/Mission-Control-Laravel-Package.git",
+      "source": "https://repo.packagist.org/p2/grafite/mission-control-laravel.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.10.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hybrid_platforms_conductor",
+      "version": "34.0.0",
+      "repository": null,
+      "source": "https://rubygems.org/gems/hybrid_platforms_conductor-34.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "34.0.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

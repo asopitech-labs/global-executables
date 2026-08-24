@@ -2,6 +2,30 @@
   "command": "ocp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "output-copy",
+      "version": "0.1.1",
+      "repository": "https://github.com/fa993/output-copy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "opencubicplayer",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "opencubicplayer",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@acrontum/oas-codegen-parser",
+      "version": "1.2.6",
+      "repository": "git+https://github.com/acrontum/oas-codegen.git",
+      "source": "https://registry.npmjs.org/@acrontum%2Foas-codegen-parser/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "opencubicplayer",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

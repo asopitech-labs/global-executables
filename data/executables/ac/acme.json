@@ -2,16 +2,52 @@
   "command": "acme",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "acme-2025.07.11-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "plan9port-20260711-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "acme-sdk",
       "version": "0.1.46",
       "repository": "https://github.com/scattered-systems/acme.git",
-      "source": "https://crates.io/api/v1/crates/acme-sdk/0.1.46/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.1.46"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "acme",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
     },
     {
       "ecosystem": "debian",
@@ -38,6 +74,18 @@
       "latest_version": "v0.0.0-20180614024626-d49dd9b77adc"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/performancecopilot/speed",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/performancecopilot/speed/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "acme",
       "version": "0.97",
@@ -48,6 +96,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "acmephp/acmephp",
+      "version": "2.1.0",
+      "repository": "https://github.com/acmephp/acmephp.git",
+      "source": "https://repo.packagist.org/p2/acmephp/acmephp.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "acme-exercise",
+      "version": "0.0.6",
+      "repository": "https://github.com/israteneda/acme",
+      "source": "https://files.pythonhosted.org/packages/c0/84/1db3e053627921345aa3c72e4032e835426281ef0ed4345b4e97ef60436c/acme_exercise-0.0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -63,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

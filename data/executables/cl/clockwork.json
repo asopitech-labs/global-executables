@@ -2,6 +2,42 @@
   "command": "clockwork",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "clockwork-cli",
+      "version": "2.0.19",
+      "repository": "https://github.com/clockwork-xyz/cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.19"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "clockwork",
+      "version": "4.0.1",
+      "repository": "https://github.com/Rykian/clockwork",
+      "source": "https://rubygems.org/gems/clockwork-4.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "daeltar-clockwork",
+      "version": "0.2.4",
+      "repository": "http://github.com/adamwiggins/clockwork",
+      "source": "https://rubygems.org/gems/daeltar-clockwork-0.2.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-clockwork",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

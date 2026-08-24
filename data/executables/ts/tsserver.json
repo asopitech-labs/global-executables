@@ -2,6 +2,66 @@
   "command": "tsserver",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "typescript-6.0.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ab6wu25r1n/typescript",
+      "version": "5.0.0-alpha.7",
+      "repository": "git+https://github.com/Microsoft/TypeScript.git",
+      "source": "https://registry.npmjs.org/@ab6wu25r1n%2Ftypescript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.0.0-alpha.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agoric/typescript",
+      "version": "3.8.0",
+      "repository": "git+https://github.com/Microsoft/TypeScript.git",
+      "source": "https://registry.npmjs.org/@agoric%2Ftypescript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.8.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@allex/typescript",
+      "version": "3.2.1",
+      "repository": "git+https://github.com/Microsoft/TypeScript.git",
+      "source": "https://registry.npmjs.org/@allex%2Ftypescript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.2.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@angular/typescript",
+      "version": "2.0.0-5d0e199",
+      "repository": "git+https://github.com/Microsoft/TypeScript.git",
+      "source": "https://registry.npmjs.org/@angular%2Ftypescript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.0-5d0e199"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "node-typescript",
       "version": null,
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

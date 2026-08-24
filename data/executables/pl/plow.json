@@ -2,6 +2,18 @@
   "command": "plow",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "plow_cli",
+      "version": "0.5.2",
+      "repository": "https://github.com/field33/plow/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "plow",
       "version": "1.4.0",
@@ -12,8 +24,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andywer/plow",
+      "version": "1.2.0",
+      "repository": "git+https://github.com/andywer/plow.git",
+      "source": "https://registry.npmjs.org/@andywer%2Fplow/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "firehed/plow",
+      "version": "0.0.2",
+      "repository": "https://github.com/Firehed/plow.git",
+      "source": "https://repo.packagist.org/p2/firehed/plow.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "plow",
+      "version": "1.4.0",
+      "repository": "https://deepwiki.com/six-ddc/plow",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.4.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

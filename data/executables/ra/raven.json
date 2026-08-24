@@ -2,6 +2,30 @@
   "command": "raven",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "raven-osint",
+      "version": "0.2.0",
+      "repository": "https://github.com/evildevill/Raven",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "raventhemer",
+      "version": "1.5.3",
+      "repository": "https://git.sr.ht/~nicohman/raven",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.5.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "raven",
       "version": "1.0.9",
@@ -12,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "gfilipiak/raven",
+      "version": "0.7.1",
+      "repository": "https://github.com/gfilipiak/raven-php.git",
+      "source": "https://repo.packagist.org/p2/gfilipiak/raven.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "alec-gem",
+      "version": "2.7.2",
+      "repository": "https://github.com/alecj1240/gem",
+      "source": "https://rubygems.org/gems/alec-gem-2.7.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.7.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jones-gem",
+      "version": "2.7.2",
+      "repository": "https://github.com/alecj1240/jones-gem",
+      "source": "https://rubygems.org/gems/jones-gem-2.7.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.7.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

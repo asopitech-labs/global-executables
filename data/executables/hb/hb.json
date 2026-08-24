@@ -2,6 +2,30 @@
   "command": "hb",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hb",
+      "version": "0.0.13",
+      "repository": "https://github.com/sile/hb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.13"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "human_bytes",
+      "version": "0.4.3",
+      "repository": "https://git.sr.ht/~nkeor/human_bytes",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "humanbound",
       "version": "2.9.0",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@a634691481/hb-cli",
+      "version": "1.0.54",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@a634691481%2Fhb-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.54"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PoLab-analyzer",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f5/53/4a220c100ba318453dee8cfe7b3408052745a1e7a03ff8ca049e36f89302/polab_analyzer-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "git-tracker",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-tracker",
+      "version": "0.3.1",
+      "repository": "https://github.com/xandkar/git-tracker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "git-tracker",
       "version": "2.0.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git_tracker",
+      "version": "2.0.0",
+      "repository": "https://github.com/stevenharman/git_tracker",
+      "source": "https://rubygems.org/gems/git_tracker-2.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

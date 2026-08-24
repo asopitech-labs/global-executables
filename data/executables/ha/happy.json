@@ -2,6 +2,30 @@
   "command": "happy",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "happy-2.1.6-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "happy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "happy",
       "version": null,
@@ -26,6 +50,54 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "2-21zuoye",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/2-21zuoye/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akameco/happy-monday",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@akameco%2Fhappy-monday/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Harambe",
+      "version": "0.10.0",
+      "repository": "https://github.com/mardix/harambe",
+      "source": "https://files.pythonhosted.org/packages/46/52/8029e5919fb800817d275248575d60bf6c479b0add201770f839c6547c7b/Harambe-0.10.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "happy-cli",
+      "version": "0.0.2",
+      "repository": "https://github.com/hmans/happy-cli",
+      "source": "https://rubygems.org/gems/happy-cli-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "happy",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

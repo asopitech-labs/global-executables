@@ -1,0 +1,31 @@
+{
+  "command": "smtp-test-tool",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "smtp-test-tool",
+      "version": "0.2.1",
+      "repository": "https://github.com/StruisICT/smtp-test-tool",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "StruisICT.SmtpTestTool",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

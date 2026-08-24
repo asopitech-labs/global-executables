@@ -2,6 +2,42 @@
   "command": "cowthink",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cowsay-3.8.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/code-hex/neo-cowsay",
+      "version": "v0.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/code-hex/neo-cowsay/@v/v0.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/code-hex/neo-cowsay",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/code-hex/neo-cowsay/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cowsay",
       "version": "3.8.4",
@@ -12,8 +48,46 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "cowthink-dotnet",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cowthink-dotnet/1.0.0/cowthink-dotnet.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "cowsay",
+      "version": "0.2013.07.19",
+      "repository": "https://github.com/lukesampson/cowsay-psh",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.2013.07.19"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "neo-cowsay",
+      "version": "2.0.4",
+      "repository": "https://github.com/Code-Hex/Neo-cowsay",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.0.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

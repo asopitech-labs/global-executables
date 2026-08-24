@@ -2,6 +2,30 @@
   "command": "ledger",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ledger-3.4.1-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ledger",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ledger",
       "version": null,
@@ -26,6 +50,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@anishhs/ledger",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/anishhs-gh/ledger.git",
+      "source": "https://registry.npmjs.org/@anishhs%2Fledger/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aperdomoll90/ledger-ai",
+      "version": "1.4.2",
+      "repository": "git+https://github.com/aperdomoll90/ledger.git",
+      "source": "https://registry.npmjs.org/@aperdomoll90%2Fledger-ai/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "FamilyLedger",
+      "version": "0.2.0",
+      "repository": "https://github.com/fondlez/familyledger",
+      "source": "https://files.pythonhosted.org/packages/82/de/808962a6e63984634bf1280c327250b8e5513bc2a32aba4c8020862d2647/FamilyLedger-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ledger",
       "version": null,
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

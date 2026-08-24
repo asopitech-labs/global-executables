@@ -2,6 +2,18 @@
   "command": "projects",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "projects",
+      "version": "1.1.2",
+      "repository": "https://github.com/webdesserts/projects-cli.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/bugagazavr/go-gitlab-client",
       "version": "v0.0.0-20150830002541-e5999f934dc4",
@@ -12,8 +24,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20150830002541-e5999f934dc4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/buildkite/go-buildkite",
+      "version": "v2.2.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/buildkite/go-buildkite/@v/v2.2.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.0+incompatible"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "intent",
+      "version": "0.8.1",
+      "repository": "http://maetl.net",
+      "source": "https://rubygems.org/gems/intent-0.8.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.1"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "tldextract",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-tldextract-5.3.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/joeguo/tldextract",
+      "version": "v0.0.0-20180214020933-b623e0574407",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/joeguo/tldextract/@v/v0.0.0-20180214020933-b623e0574407.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180214020933-b623e0574407"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ProductDetailFinder",
+      "version": "1.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/b5/53/9ac94cc021f122135cecc5af7b96f629362a1d795b2a12a420b7a4c62c6e/ProductDetailFinder-1.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "WordPressAutoPost",
+      "version": "1.0.4",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/45/a4/74894e2a7ffbee5c52e38f1efc858059cda49aed9435cf11b9fde8472a4d/WordPressAutoPost-1.0.4.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "tldextract",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

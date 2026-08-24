@@ -2,6 +2,42 @@
   "command": "mailman",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mailman3-3.3.10-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mailman",
+      "version": "0.2.0",
+      "repository": "https://github.com/bytebury/mailman",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mailman",
+      "version": "0.7.3",
+      "repository": "http://github.com/titanous/mailman",
+      "source": "https://rubygems.org/gems/mailman-0.7.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.7.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "mailman3",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

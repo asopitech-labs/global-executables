@@ -2,9 +2,93 @@
   "command": "code",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "code-1.131.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "code",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/deck",
+      "version": "v0.0.0-20190526003814-edf08d731d5a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/deck/@v/v0.0.0-20190526003814-edf08d731d5a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190526003814-edf08d731d5a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/deck",
+      "version": "v0.0.0-20260813115908-cf66d92af9e7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/deck/@v/v0.0.0-20260813115908-cf66d92af9e7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260813115908-cf66d92af9e7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/campoy/whispering-gophers",
+      "version": "v0.0.0-20170829193756-05474ebaae6d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/campoy/whispering-gophers/@v/v0.0.0-20170829193756-05474ebaae6d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170829193756-05474ebaae6d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/codemachine0121/go-lan-learning",
+      "version": "v0.0.0-20211028175059-b2752f426b80",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/codemachine0121/go-lan-learning/@v/v0.0.0-20211028175059-b2752f426b80.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211028175059-b2752f426b80"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/younglucky/go-web-foundation",
+      "version": "v0.0.0-20140106072506-5d09fa75b5c9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/younglucky/go-web-foundation/@v/v0.0.0-20140106072506-5d09fa75b5c9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20140106072506-5d09fa75b5c9"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "code-cli",
-      "version": "1.133.0",
+      "version": "1.134.0",
       "repository": "https://code.visualstudio.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,6 +96,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alo-labs/kay",
+      "version": "0.9.12",
+      "repository": "git+https://github.com/alo-labs/kay.git",
+      "source": "https://registry.npmjs.org/@alo-labs%2Fkay/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.9.12"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "codecraft.development",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/codecraft.development/1.0.2/codecraft.development.1.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.2"
     },
     {
       "ecosystem": "pypi",
@@ -24,8 +132,32 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "code-ruby",
+      "version": "5.0.1",
+      "repository": "https://github.com/dorianmariecom/code-ruby",
+      "source": "https://rubygems.org/gems/code-ruby-5.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "5.0.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Microsoft.VisualStudioCode",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -14,6 +14,54 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "meet",
+      "version": "0.2.0",
+      "repository": "https://github.com/kriry/meet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "procutils-watch",
+      "version": "0.2.0",
+      "repository": "https://gitlab.com/rustutils/procutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "unix-watch",
+      "version": "0.1.0",
+      "repository": "https://github.com/MilesCranmer/unix-watch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "procps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "procps",
       "version": null,
@@ -36,6 +84,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160912024957-a6de66e7e470"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/thrawn01/args",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/thrawn01/args/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
     },
     {
       "ecosystem": "homebrew",
@@ -74,6 +134,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "procps-ng-4.0.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@activescott/watch",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/activescott/watch.git",
+      "source": "https://registry.npmjs.org/@activescott%2Fwatch/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "watch",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/watch/1.0.1/watch.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "brash/phpwatcher",
+      "version": "v1.0.2",
+      "repository": "https://github.com/BrashPHP/phpwatcher.git",
+      "source": "https://repo.packagist.org/p2/brash/phpwatcher.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "directory_monitor",
+      "version": "0.0.5",
+      "repository": "https://github.com/DALove1025/directory_monitor#directorymonitor",
+      "source": "https://rubygems.org/gems/directory_monitor-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "procps",
       "version": null,
@@ -84,8 +204,32 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "54145a.145watch",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "echocat.watch",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

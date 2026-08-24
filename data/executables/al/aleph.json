@@ -2,6 +2,42 @@
   "command": "aleph",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "texlive-bin-2026.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "aleph-cli",
+      "version": "0.16.0",
+      "repository": "https://github.com/aleph-im/aleph-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "texlive-binaries",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "texlive-binaries",
       "version": null,
@@ -26,6 +62,78 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@aleph-ai/cli",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/aleph-prime/cli.git",
+      "source": "https://registry.npmjs.org/@aleph-ai%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aleph",
+      "version": "1.6.0",
+      "repository": "http://chango.ibmb.csic.es/ALEPH",
+      "source": "https://files.pythonhosted.org/packages/07/b5/37303a8d743744632ce92dfd853361d5489b2a002035ccf6b24f3a741a7a/aleph-1.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aleph-client",
+      "version": "1.9.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1d/5e/81bab02a60705b63e53b4def25f1f2d482bbcfd464522db3d60864c43b19/aleph_client-1.9.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.9.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aleph-compiler",
+      "version": "1.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c7/d2/1087e85e726d9cce0aea7863b8c2ef3c2654b513745ce1b160ddd5a641b4/aleph_compiler-1.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aleph-rlm",
+      "version": "0.9.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1d/55/768db2d275eb50a1a2fe4d8df997f0f9f21a70edf6e44f7e4de28d9b76d5/aleph_rlm-0.9.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "aleph_analytics",
+      "version": "0.4.8",
+      "repository": "https://github.com/lumoslabs/aleph",
+      "source": "https://rubygems.org/gems/aleph_analytics-0.4.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.8"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "texlive-binaries",
       "version": null,
@@ -39,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

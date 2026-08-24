@@ -2,6 +2,18 @@
   "command": "git2",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "libgit2-1:1.9.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "libgit2",
       "version": "1.9.7",
@@ -24,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "libgit2-1.9.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git2",
+      "version": "0.2.0",
+      "repository": "https://github.com/pmq20/git2",
+      "source": "https://rubygems.org/gems/git2-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

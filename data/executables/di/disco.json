@@ -2,6 +2,78 @@
   "command": "disco",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mono-6.12.0.206-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "disco-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/ankane/disco-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "disco-rpc",
+      "version": "0.2.1",
+      "repository": "https://github.com/KaitlynEthylia/Disco",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "discovery",
+      "version": "0.1.5",
+      "repository": "https://github.com/wavey-ai/discovery",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mono-devel",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20170807220725-57b029087370",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20170807220725-57b029087370.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170807220725-57b029087370"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20171106233303-41d03372f44f",
@@ -28,6 +100,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20180218235700-15cf44e552f9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180218235700-15cf44e552f9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180218235700-15cf44e552f9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20180419025854-664776a3b48a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180419025854-664776a3b48a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180419025854-664776a3b48a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20180520015035-48a0ecefe2e4",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180520015035-48a0ecefe2e4.zip",
@@ -50,6 +146,30 @@
       "latest_version": "v0.1.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mono",
       "version": "6.14.1",
@@ -60,6 +180,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@auto-ml-skills/disco",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/VectorSpaceLab/Auto-ML-Skills.git",
+      "source": "https://registry.npmjs.org/@auto-ml-skills%2Fdisco/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "NREL-disco",
+      "version": "0.6.0",
+      "repository": "https://github.com/NatLabRockies/disco",
+      "source": "https://files.pythonhosted.org/packages/29/f2/2cd6898922bd79998a9bd03f4777892dbf0d818bd853d3184743b4986717/nrel_disco-0.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "disco-railties",
+      "version": "0.5.3",
+      "repository": "https://github.com/hicknhack-software/rails-disco",
+      "source": "https://rubygems.org/gems/disco-railties-0.5.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +231,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

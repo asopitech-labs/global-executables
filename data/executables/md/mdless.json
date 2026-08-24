@@ -2,6 +2,30 @@
   "command": "mdless",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mdcat-ng",
+      "version": "0.2.1",
+      "repository": "https://github.com/pawelb0/mdcat-ng",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdless",
+      "version": "0.2.6",
+      "repository": "https://github.com/raykrueger/mdless",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mdless",
       "version": "2.1.68",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdless",
+      "version": "2.1.68",
+      "repository": "http://brettterpstra.com/project/mdless/",
+      "source": "https://rubygems.org/gems/mdless-2.1.68.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.1.68"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

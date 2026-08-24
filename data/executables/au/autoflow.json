@@ -1,0 +1,31 @@
+{
+  "command": "autoflow",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "autoflow-cli",
+      "version": "0.1.10",
+      "repository": "https://github.com/ddunford/autoflow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@autoflow-mcp/autoflow",
+      "version": "10.8.22",
+      "repository": "git+https://github.com/duckflow-tools/auto-flow-nano-banana.git",
+      "source": "https://registry.npmjs.org/@autoflow-mcp%2Fautoflow/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "10.8.22"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

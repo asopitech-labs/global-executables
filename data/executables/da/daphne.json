@@ -2,6 +2,30 @@
   "command": "daphne",
   "providers": [
     {
+      "ecosystem": "pypi",
+      "package": "adam-daphne",
+      "version": "3.0.15",
+      "repository": "https://github.com/django/daphne",
+      "source": "https://files.pythonhosted.org/packages/58/57/87b26ff554ee8c1b07e9b7298a99ee306371069dd1a8d8f888a1a6a054d8/adam_daphne-3.0.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.0.15"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "daphne_util",
+      "version": "0.2.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/daphne_util-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "daphne",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

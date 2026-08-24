@@ -2,6 +2,30 @@
   "command": "reflex",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "reflex-server",
+      "version": "0.2.2",
+      "repository": "https://github.com/rawcontext/reflex",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "reflex",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "reflex",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cespare/reflex",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cespare/reflex/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shaxbee/reflex",
+      "version": "v0.2.1-0.20190502100534-c281b3b19500",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/shaxbee/reflex/@v/v0.2.1-0.20190502100534-c281b3b19500.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1-0.20190502100534-c281b3b19500"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shaxbee/reflex",
+      "version": "v0.2.1-0.20190512201957-4b25b49abd36",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/shaxbee/reflex/@v/v0.2.1-0.20190512201957-4b25b49abd36.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1-0.20190512201957-4b25b49abd36"
     },
     {
       "ecosystem": "homebrew",
@@ -38,6 +98,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "reflex-20260131-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "reflex",
       "version": null,
@@ -51,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

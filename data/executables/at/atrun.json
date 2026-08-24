@@ -1,0 +1,43 @@
+{
+  "command": "atrun",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "at-3.2.5-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "arm-toolchain",
+      "version": "0.1.0",
+      "repository": "https://github.com/vexide/arm-toolchain",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "atrun",
+      "version": "0.17.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b8/b4/f82d53e76ebe0a9ddf4120bd7fc93c0507194dd5a29fc340cc35f48b5329/atrun-0.17.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.17.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,42 @@
   "command": "atd",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "at-3.2.5-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "atd-cli",
+      "version": "1.1.0",
+      "repository": "https://github.com/downsea/atd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "at",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "at",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-trackdown-pytools",
+      "version": "1.5.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/79/db/128f95acdb4786df13e579896f006890260daff4d5779e2fa0cae9a38e87/ai_trackdown_pytools-1.5.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.11"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "allthedots",
+      "version": "0.2.0",
+      "repository": "https://github.com/cjrk/AllTheDots",
+      "source": "https://files.pythonhosted.org/packages/1f/23/540246d6a6ff1f6543498744d25c51a1b3abaf6c8961fa4fc99e2a9882e4/allthedots-0.2.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

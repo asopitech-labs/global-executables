@@ -2,6 +2,42 @@
   "command": "borg",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "borg-1.4.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "borg",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "borgbackup",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "borgbackup",
       "version": null,
@@ -26,6 +62,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "agent-borg",
+      "version": "3.3.20",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a5/d6/4f07ecf50cbb9bec94cc9e77f6a36ae2051e8f81d33eb4abbbd223c670ae/agent_borg-3.3.20-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3.20"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "borg-rb",
+      "version": "0.1.5",
+      "repository": "https://github.com/B0RG/borg",
+      "source": "https://rubygems.org/gems/borg-rb-0.1.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "borgbackup",
       "version": null,
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

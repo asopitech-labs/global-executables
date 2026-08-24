@@ -6,6 +6,18 @@
       "package": "direwolf",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "direwolf",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -26,6 +38,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "appserver",
+      "version": "0.4.6",
+      "repository": "https://github.com/appstore-zencore/appserver",
+      "source": "https://files.pythonhosted.org/packages/1e/e3/1286419dceb9c9d085922c6217987068fee30d9a67c98d8277151a5a1866/appserver-0.4.6.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "appserver",
+      "version": "0.0.2",
+      "repository": "http://github.com/zargony/appserver/tree/master",
+      "source": "https://rubygems.org/gems/appserver-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "direwolf",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

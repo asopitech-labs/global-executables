@@ -2,6 +2,30 @@
   "command": "terraform",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "terraform-1.15.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.0.0-20180810183207-bb37637a1391",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.0.0-20180810183207-bb37637a1391.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180810183207-bb37637a1391"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/hashicorp/terraform",
       "version": "v0.0.0-20181217204359-4596c44c05ca",
@@ -12,6 +36,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181217204359-4596c44c05ca"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.11.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.11.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.11.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.11.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.11"
     },
     {
       "ecosystem": "go",
@@ -40,6 +88,54 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/terraform",
+      "version": "v0.11.14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.11.14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.14"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.11.14-0.20190313165547-28810e6c0c0a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.11.14-0.20190313165547-28810e6c0c0a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.14-0.20190313165547-28810e6c0c0a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.11.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.11.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.11.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.11.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
       "version": "v0.11.9-beta1",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.11.9-beta1.zip",
@@ -48,6 +144,150 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.11.9-beta1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.0-alpha4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.0-alpha4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0-alpha4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.0-alpha4.0.20190424121927-9327eedb0417",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.0-alpha4.0.20190424121927-9327eedb0417.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0-alpha4.0.20190424121927-9327eedb0417"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.0-beta1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.0-beta1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0-beta1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.0-beta2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.0-beta2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0-beta2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.0-rc1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.0-rc1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0-rc1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v0.12.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v0.12.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform",
+      "version": "v1.15.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform/@v/v1.15.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.15.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubevela/kubevela",
+      "version": "v1.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubevela/kubevela/@v/v1.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
     },
     {
       "ecosystem": "homebrew",
@@ -72,8 +312,59 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tenv",
+      "version": "4.15.1",
+      "repository": "https://tofuutils.github.io/tenv/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.15.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "terraform",
+      "version": "1.15.9",
+      "repository": "https://www.terraform.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.15.9"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "terraform011",
+      "version": "0.11.15",
+      "repository": "https://www.terraform.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.11.15"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Hashicorp.Terraform",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

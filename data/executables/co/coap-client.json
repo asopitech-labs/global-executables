@@ -2,6 +2,18 @@
   "command": "coap-client",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "coap-client",
+      "version": "0.3.1",
+      "repository": "https://github.com/ryankurte/rust-coap-client",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "libcoap",
       "version": "4.3.5b",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

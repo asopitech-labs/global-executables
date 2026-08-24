@@ -2,6 +2,30 @@
   "command": "aubio",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-aubio-0.4.9-25",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "aubio-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "aubio-tools",
       "version": null,
@@ -26,6 +50,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "aubio",
+      "version": "0.4.9",
+      "repository": "https://aubio.org/",
+      "source": "https://files.pythonhosted.org/packages/cd/80/302d89240603e5347c7f8026c8b02c59f8dfaec66c91a743d82de7c86006/aubio-0.4.9.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aubio-ledfx",
+      "version": "0.4.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/13/60/530c3fd89bac40a1df3bb4313526f7b268292bb0c2dde0412bdc07e07d04/aubio_ledfx-0.4.11-cp310-cp310-macosx_10_15_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.11"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "aubio-tools",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

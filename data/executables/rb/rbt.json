@@ -2,6 +2,42 @@
   "command": "rbt",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rbt",
+      "version": "0.1.0",
+      "repository": "https://github.com/a7g4/rbt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rbt-datalake",
+      "version": "0.11.0",
+      "repository": "https://github.com/shan-alexander/rbt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rust-bio-tools",
+      "version": "0.42.2",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.42.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rbtools",
       "version": "6.0",
@@ -12,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "RBTools",
+      "version": "6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a0/92/a8d9f4c102d08a29a89b2ce5f3cb7ef2cb0476d6ba965e390baf072ad55e/rbtools-6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SL-RBTools",
+      "version": "0.7.12a1.dev0",
+      "repository": "http://www.reviewboard.org/",
+      "source": "https://files.pythonhosted.org/packages/ee/86/2f279cf4c3c8eeeb49c0f4028b2cbc83cc5c98adf7d1853af5654f95b6fc/SL-RBTools-0.7.12a1.dev0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.12a1.dev0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

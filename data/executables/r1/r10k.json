@@ -2,6 +2,30 @@
   "command": "r10k",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "r10k-5.0.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "akerl-r10k",
+      "version": "3.14.2.1",
+      "repository": "https://github.com/puppetlabs/r10k",
+      "source": "https://rubygems.org/gems/akerl-r10k-3.14.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.14.2.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "r10k",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

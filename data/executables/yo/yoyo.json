@@ -2,6 +2,30 @@
   "command": "yoyo",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "yoyo-agent",
+      "version": "0.1.16",
+      "repository": "https://github.com/yologdev/yoyo-evolve",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.16"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "pulumi-yoyo",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/pulumi-yoyo/1.0.3/pulumi-yoyo.1.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "yoyo",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

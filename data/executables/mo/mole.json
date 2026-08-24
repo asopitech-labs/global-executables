@@ -2,9 +2,21 @@
   "command": "mole",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "shmole",
+      "version": "0.0.1",
+      "repository": "https://github.com/thecaralice/shmole.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mole",
-      "version": "1.51.0",
+      "version": "1.52.0",
       "repository": "https://mole.fit",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

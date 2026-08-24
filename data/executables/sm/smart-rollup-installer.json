@@ -1,0 +1,31 @@
+{
+  "command": "smart-rollup-installer",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "mavryk-smart-rollup-installer",
+      "version": "0.2.2",
+      "repository": "https://gitlab.com/mavryk-network/mavryk-protocol.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tezos-smart-rollup-installer",
+      "version": "0.2.2",
+      "repository": "https://gitlab.com/tezos/tezos.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

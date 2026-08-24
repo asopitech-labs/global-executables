@@ -2,6 +2,54 @@
   "command": "hypothesis",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-hypothesis-6.165.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hypothesis",
+      "version": "0.12.0",
+      "repository": "https://github.com/out-of-cheese-error/rust-hypothesis",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rhiz_tag_nostd",
+      "version": "0.1.0",
+      "repository": "http://github.com/rhizoome/rhiz_tag",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hypothesis",
+      "version": "0.0.3",
+      "repository": "https://github.com/javierarce/hypothesis",
+      "source": "https://rubygems.org/gems/hypothesis-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-hypothesis",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

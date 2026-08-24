@@ -2,6 +2,30 @@
   "command": "glances",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "glances-4.5.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "glances",
+      "version": "0.9.5",
+      "repository": "https://github.com/jcadic/rust-glances",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "glances",
       "version": "4.5.6",
@@ -12,6 +36,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Glances",
+      "version": "4.5.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c3/ef/6b0367230076b92315ea222ebe09ee4012c5c3ce8afea8a12f0a3b97314b/glances-4.5.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.5.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

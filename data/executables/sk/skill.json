@@ -2,6 +2,54 @@
   "command": "skill",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "procutils-skill",
+      "version": "0.2.0",
+      "repository": "https://gitlab.com/rustutils/procutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "skill-cli",
+      "version": "0.3.0",
+      "repository": "https://github.com/kubiyabot/skill",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "skillrt",
+      "version": "0.1.0",
+      "repository": "https://github.com/jakejjoyner/skillrt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "procps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "procps",
       "version": null,
@@ -12,6 +60,102 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adonis0123/skill-cli",
+      "version": "1.0.10",
+      "repository": "git+https://github.com/Adonis0123/agent-skill-npm-boilerplate.git",
+      "source": "https://registry.npmjs.org/@adonis0123%2Fskill-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.10"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alatachan/skills_claw",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alatachan%2Fskills_claw/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anionzo/skill",
+      "version": "2.0.1",
+      "repository": "git+https://github.com/anionzo/skill.git",
+      "source": "https://registry.npmjs.org/@anionzo%2Fskill/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-skill",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f5/be/dbd76d1036e2ebfc237816642cdf9906a4a3a13c777b4cfb8b45a2a30e43/agent_skill-1.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-skills-hub",
+      "version": "1.6.26",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/bc/94/768f59884b37f26f7e293bec7efc50e23f175d31fdd2dd0fc9c2a80163d5/agent_skills_hub-1.6.26-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.26"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agentic-skills-manager",
+      "version": "1.0.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/64/f0/f2230bce3e3682a7573b55ed1680d5f46207918f55b7dd791fcb5ea580dc/agentic_skills_manager-1.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-teammate-skill-sdk",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/01/d7/82550e07f89d6018533c4dcc9421a6e7375c59856f306d28639326067751/ai_teammate_skill_sdk-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "askill",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a5/f0/3d72cf3382134bc7ac1c1a2a3f1f5077575d073d1e3eb7fcc9294ad3f301/askill-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +171,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

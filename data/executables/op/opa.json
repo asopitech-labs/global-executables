@@ -2,6 +2,66 @@
   "command": "opa",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "open-policy-agent-1.19.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/open-policy-agent/opa",
+      "version": "v0.10.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/open-policy-agent/opa/@v/v0.10.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/open-policy-agent/opa",
+      "version": "v0.10.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/open-policy-agent/opa/@v/v0.10.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/open-policy-agent/opa",
+      "version": "v0.10.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/open-policy-agent/opa/@v/v0.10.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/open-policy-agent/opa",
+      "version": "v0.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/open-policy-agent/opa/@v/v0.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/open-policy-agent/opa",
       "version": "v0.8.2",
@@ -14,9 +74,21 @@
       "latest_version": "v0.8.2"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/open-policy-agent/opa",
+      "version": "v0.9.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/open-policy-agent/opa/@v/v0.9.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "opa",
-      "version": "1.19.0",
+      "version": "1.19.1",
       "repository": "https://www.openpolicyagent.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +96,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "opa",
+      "version": "1.19.1",
+      "repository": "https://www.openpolicyagent.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.19.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "open-policy-agent.opa",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

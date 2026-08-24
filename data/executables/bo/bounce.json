@@ -1,0 +1,67 @@
+{
+  "command": "bounce",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nvg-bounce",
+      "version": "1.0.9",
+      "repository": "https://github.com/infosave2007/bounce",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rogpeppe/rog-go",
+      "version": "v0.0.0-20150110162453-f57ad5e24ab7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rogpeppe/rog-go/@v/v0.0.0-20150110162453-f57ad5e24ab7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150110162453-f57ad5e24ab7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "myitcv.io",
+      "version": "v0.0.0-20180717150903-bf2c84553c78",
+      "repository": null,
+      "source": "https://proxy.golang.org/myitcv.io/@v/v0.0.0-20180717150903-bf2c84553c78.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180717150903-bf2c84553c78"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Bounce",
+      "version": "0.12.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/bounce/0.12.0/bounce.0.12.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.12.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

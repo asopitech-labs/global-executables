@@ -2,6 +2,42 @@
   "command": "slop",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "slop-7.7-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "slop",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "slop",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "slop",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Slopped",
+      "version": "26.4.0.post2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/33/2f/79d9de3593b1a196442b6d681e5df112c3ead8fc45ca759008b543277eb5/slopped-26.4.0.post2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.4.0.post2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-slop-lint",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e9/19/1519d3659fee630e4f822f62e74d26575c70ae2e45e24f7684528d64a8a3/agent_slop_lint-1.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

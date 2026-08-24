@@ -2,9 +2,45 @@
   "command": "cpd",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "circuitpython-deploy",
+      "version": "0.1.2",
+      "repository": "https://github.com/shantanugoel/circuitpython-deploy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cpd",
+      "version": "0.5.1",
+      "repository": "https://github.com/joleaf/cpd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jscpd",
+      "version": "5.0.16",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "5.0.16"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jscpd",
-      "version": "5.0.15",
+      "version": "5.0.16",
       "repository": "https://jscpd.dev/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

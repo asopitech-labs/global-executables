@@ -2,6 +2,30 @@
   "command": "thor",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-thor-1.5.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "thor",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "uffizzi",
       "version": "2.4.21",
@@ -12,6 +36,78 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "atli",
+      "version": "0.1.13",
+      "repository": "https://github.com/nrser/atli",
+      "source": "https://rubygems.org/gems/atli-0.1.13.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.13"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "avrocado",
+      "version": "0.2.2",
+      "repository": "https://github.com/connexio-labs/avrocado",
+      "source": "https://rubygems.org/gems/avrocado-0.2.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "botanicus-thor",
+      "version": "0.9.8",
+      "repository": "http://yehudakatz.com",
+      "source": "https://rubygems.org/gems/botanicus-thor-0.9.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fixture_overlord",
+      "version": "0.1.9",
+      "repository": "https://github.com/revans/fixture_overlord",
+      "source": "https://rubygems.org/gems/fixture_overlord-0.1.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jherdman-thor",
+      "version": "0.9.5",
+      "repository": "http://yehudakatz.com",
+      "source": "https://rubygems.org/gems/jherdman-thor-0.9.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "josevalim-thor",
+      "version": "0.10.27",
+      "repository": "http://yehudakatz.com",
+      "source": "https://rubygems.org/gems/josevalim-thor-0.10.27.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.10.27"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

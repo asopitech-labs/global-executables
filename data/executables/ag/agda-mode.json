@@ -2,6 +2,18 @@
   "command": "agda-mode",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "agda-2.8.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "agda",
       "version": "2.8.0-r3",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agda",
+      "version": "2.7.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/35/fa/b0599dfbf50e8d1ac35bd965869e81985141f05e5b8d70790aee7fcf2d2c/agda-2.7.0.1-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.7.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "haste",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/syfaro/haste-client",
+      "version": "v0.0.0-20150731062254-09b1fbfa3977",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/syfaro/haste-client/@v/v0.0.0-20150731062254-09b1fbfa3977.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150731062254-09b1fbfa3977"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "haste-client",
       "version": "0.3.0",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Haste.Cli",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/haste.cli/0.0.1/haste.cli.0.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "haste",
+      "version": "0.3.0",
+      "repository": "https://github.com/toptal/haste-client",
+      "source": "https://rubygems.org/gems/haste-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,31 @@
+{
+  "command": "crash_worker",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "nookdb-core",
+      "version": "1.1.0",
+      "repository": "https://github.com/nookwright/nookdb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "noxu-db",
+      "version": "7.5.6",
+      "repository": "https://codeberg.org/gregburd/noxu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "7.5.6"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

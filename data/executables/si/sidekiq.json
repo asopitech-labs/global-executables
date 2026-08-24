@@ -2,6 +2,18 @@
   "command": "sidekiq",
   "providers": [
     {
+      "ecosystem": "rubygems",
+      "package": "kulesa-sidekiq",
+      "version": "1.2.3",
+      "repository": "http://mperham.github.com/sidekiq",
+      "source": "https://rubygems.org/gems/kulesa-sidekiq-1.2.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-sidekiq",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "mdoc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mono-6.12.0.206-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdoc",
+      "version": "0.3.0",
+      "repository": "https://github.com/kmaasrud/mdoc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mono-devel",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mono",
       "version": "6.14.1",
@@ -12,6 +48,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "notmdoc",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/notmdoc/0.0.1/notmdoc.0.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdoc",
+      "version": "0.0.11",
+      "repository": "https://github.com/7lime/mdoc-gem",
+      "source": "https://rubygems.org/gems/mdoc-0.0.11.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.11"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

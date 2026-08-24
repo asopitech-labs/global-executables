@@ -2,9 +2,21 @@
   "command": "wrangler2",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "wrangler-4.124.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cloudflare-wrangler",
-      "version": "4.123.0",
+      "version": "4.125.0",
       "repository": "https://developers.cloudflare.com/workers/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@askcodebase/wrangler",
+      "version": "3.15.8",
+      "repository": "git+https://github.com/cloudflare/workers-sdk.git",
+      "source": "https://registry.npmjs.org/@askcodebase%2Fwrangler/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.15.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

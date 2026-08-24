@@ -2,6 +2,54 @@
   "command": "mdview",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "algernon-1.17.11-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdview",
+      "version": "0.1.1",
+      "repository": "https://github.com/nacleric/mdview",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdview-tui",
+      "version": "0.4.0",
+      "repository": "https://github.com/Ivapo/mdview",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdviewer",
+      "version": "1.0.0",
+      "repository": "https://github.com/xenoninja/markdown-viewer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "algernon",
       "version": "1.17.11",
@@ -12,8 +60,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyMDView",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8a/94/980d9684cee11e428d5e5e918589489fff041d0c8199c778e5b0ae920ff4/pymdview-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asciisvg",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5c/31/4c3d8688d577d6ab5a9f3803fa15578ae7533d2dec7647577eec17af4c90/asciisvg-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdview",
+      "version": "0.3.1",
+      "repository": "https://github.com/obfusk/mdview",
+      "source": "https://rubygems.org/gems/mdview-0.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

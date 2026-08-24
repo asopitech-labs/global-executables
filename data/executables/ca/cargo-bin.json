@@ -2,6 +2,54 @@
   "command": "cargo-bin",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cargo-run-bin-1.7.4-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-bin",
+      "version": "0.3.0",
+      "repository": "https://github.com/gensmusic/cargo-bin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-bin-lib",
+      "version": "0.1.0",
+      "repository": "https://github.com/ramn/cargo-bin-lib",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-run-bin",
+      "version": "1.7.5",
+      "repository": "https://github.com/dustinblackman/cargo-run-bin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.7.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cargo-run-bin",
       "version": "1.7.4",
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

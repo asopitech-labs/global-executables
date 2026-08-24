@@ -2,6 +2,42 @@
   "command": "blob",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "apt-transport-blob",
+      "version": "1.2.2",
+      "repository": "https://github.com/Metaswitch/apt-transport-blob",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alexandredantas/aerospike-client-go/v6",
+      "version": "v6.0.0-20240318140146-32406e97d75a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alexandredantas/aerospike-client-go/v6/@v/v6.0.0-20240318140146-32406e97d75a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.0-20240318140146-32406e97d75a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/go-cloud/internal/cmd/gocdk",
+      "version": "v0.0.0-20190613164834-1562c97b6495",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/go-cloud/internal/cmd/gocdk/@v/v0.0.0-20190613164834-1562c97b6495.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613164834-1562c97b6495"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mattn/go-oci8",
       "version": "v0.0.0-20181017025833-e3e58f4cc797",
@@ -48,8 +84,164 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190410054007-e00f23025626"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-oci8",
+      "version": "v0.0.0-20190517005234-99a826511cf1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-oci8/@v/v0.0.0-20190517005234-99a826511cf1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190517005234-99a826511cf1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-oci8",
+      "version": "v0.0.0-20190524004114-abcafa411cc8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-oci8/@v/v0.0.0-20190524004114-abcafa411cc8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524004114-abcafa411cc8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-oci8",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-oci8/@v/v0.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tapester/go-oci8",
+      "version": "v0.0.0-20161216132042-61acf6a2bf44",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tapester/go-oci8/@v/v0.0.0-20161216132042-61acf6a2bf44.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161216132042-61acf6a2bf44"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zkfy/go-oci8",
+      "version": "v0.0.0-20180327092318-ad9f59dedff0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zkfy/go-oci8/@v/v0.0.0-20180327092318-ad9f59dedff0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180327092318-ad9f59dedff0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190515163321-b07c38155c55",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190515163321-b07c38155c55.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190515163321-b07c38155c55"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190517223022-b207d6bbe5f8",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190517223022-b207d6bbe5f8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190517223022-b207d6bbe5f8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190521214307-5e73f3c4e590",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190521214307-5e73f3c4e590.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190521214307-5e73f3c4e590"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190603194913-48a74357a8d6",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190603194913-48a74357a8d6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190603194913-48a74357a8d6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190604181933-1e0991f29699",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190604181933-1e0991f29699.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190604181933-1e0991f29699"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190605172751-7680184ff8fc",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190605172751-7680184ff8fc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190605172751-7680184ff8fc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190613153136-a4183a97eb97",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190613153136-a4183a97eb97.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613153136-a4183a97eb97"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gocloud.dev/internal/cmd/gocdk",
+      "version": "v0.0.0-20190613164834-1562c97b6495",
+      "repository": null,
+      "source": "https://proxy.golang.org/gocloud.dev/internal/cmd/gocdk/@v/v0.0.0-20190613164834-1562c97b6495.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613164834-1562c97b6495"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

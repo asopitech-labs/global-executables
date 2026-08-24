@@ -2,6 +2,18 @@
   "command": "bunker",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bunker",
+      "version": "1.1.0",
+      "repository": "https://github.com/simplysabir/bunker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mailgun/holster",
       "version": "v2.3.5+incompatible",
@@ -12,8 +24,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.3.5+incompatible"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "IronDome",
+      "version": "3.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/05/ae/643c77e687456ddae953f62b13c1fcbdc27bd79c15645f27fc17b006b874/irondome-3.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-bunker",
+      "version": "0.4.5",
+      "repository": "https://gitlab.com/shindagger/bunker",
+      "source": "https://files.pythonhosted.org/packages/a7/d5/8153cbaf8953e41457fb6f56066a71c5a722c64be2fe8cc9d1f1ba13ed91/aws_bunker-0.4.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.5"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Bunker.Bunker",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

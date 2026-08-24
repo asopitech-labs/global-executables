@@ -2,6 +2,42 @@
   "command": "cargo-rm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cargo-edit",
+      "version": "0.13.13",
+      "repository": "https://github.com/killercup/cargo-edit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.13"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-extras",
+      "version": "0.3.0",
+      "repository": "https://github.com/kbknapp/cargo-extras.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cargo-edit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cargo-edit",
       "version": "0.13.13",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "cargo-edit-0.13.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "zen",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "zen",
+      "version": "3.4.10",
+      "repository": "https://github.com/hamzamohdzubair/zen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.4.10"
+    },
+    {
       "ecosystem": "go",
       "package": "golang.org/x/talks",
       "version": "v0.0.0-20190313194420-5ca518b26a55",
@@ -12,8 +24,45 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190313194420-5ca518b26a55"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ai-zen/cli",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ai-zen%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "zen-cli",
+      "version": "1.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/zen-cli/1.4.0/zen-cli.1.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zen-browser",
+      "version": "1.21.15b",
+      "repository": "https://www.zen-browser.app/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.21.15b"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

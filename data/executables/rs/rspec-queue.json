@@ -1,0 +1,31 @@
+{
+  "command": "rspec-queue",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ruby-test-queue-0.12.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ci-queue",
+      "version": "0.98.0",
+      "repository": "https://github.com/Shopify/ci-queue",
+      "source": "https://rubygems.org/gems/ci-queue-0.98.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.98.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

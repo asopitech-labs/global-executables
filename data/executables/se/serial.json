@@ -2,6 +2,42 @@
   "command": "serial",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jsoncanvas",
+      "version": "0.1.6",
+      "repository": "https://github.com/julienduroure/jsoncanvas",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nucleo-h743zi",
+      "version": "0.2.1",
+      "repository": "https://github.com/astraw/nucleo-h743zi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aykevl/tinygo",
+      "version": "v0.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aykevl/tinygo/@v/v0.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/tarm/serial",
       "version": "v0.0.0-20151113213723-edb665337295",
@@ -36,8 +72,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180114052751-eaafced92e96"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tarm/serial",
+      "version": "v0.0.0-20180830185346-98f6abe2eb07",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tarm/serial/@v/v0.0.0-20180830185346-98f6abe2eb07.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180830185346-98f6abe2eb07"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

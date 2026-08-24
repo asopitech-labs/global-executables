@@ -2,6 +2,18 @@
   "command": "node-gyp",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "node-gyp-13.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "appium",
       "version": "3.6.0",
@@ -16,7 +28,7 @@
     {
       "ecosystem": "homebrew",
       "package": "dicebear",
-      "version": "10.5.0",
+      "version": "10.6.1",
       "repository": "https://www.dicebear.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -28,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "netlify-cli",
-      "version": "27.1.1",
+      "version": "27.1.2",
       "repository": "https://www.netlify.com/docs/cli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -63,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

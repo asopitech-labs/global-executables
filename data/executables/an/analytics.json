@@ -2,6 +2,30 @@
   "command": "analytics",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "analytics",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vcsgraph",
+      "version": "0.2.0",
+      "repository": "https://foss.heptapod.net/mercurial/vcsgraph",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/bitmovin/bitmovin-go",
       "version": "v1.26.0",
@@ -12,8 +36,164 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.26.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bitmovin/bitmovin-go",
+      "version": "v1.28.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bitmovin/bitmovin-go/@v/v1.28.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.28.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "aitor/analytics-php",
+      "version": "2.0.0",
+      "repository": "https://github.com/aitor72/analytics-php.git",
+      "source": "https://repo.packagist.org/p2/aitor/analytics-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "app-arena/analytics-php",
+      "version": "1.6.1-beta",
+      "repository": "https://github.com/apparena/analytics-php.git",
+      "source": "https://repo.packagist.org/p2/app-arena/analytics-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.6.1-beta"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "castledio/castled-php-sdk",
+      "version": "v2.0.0",
+      "repository": "https://github.com/castledio/castled-php-sdk.git",
+      "source": "https://repo.packagist.org/p2/castledio/castled-php-sdk.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "journify/journify-php",
+      "version": "0.0.2",
+      "repository": "https://github.com/journifyio/journify-php-sdk.git",
+      "source": "https://repo.packagist.org/p2/journify/journify-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kalyndavis/analytics-php",
+      "version": "1.6.2",
+      "repository": "https://github.com/KalynDavis/analytics-php.git",
+      "source": "https://repo.packagist.org/p2/kalyndavis/analytics-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.6.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-exec-trace-analytics",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1c/e0/8c1abc29464add560fb08b51c3bc4a8b6a1aea69d63c0e0a95c4448bd102/agent_exec_trace_analytics-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "analytics-ruby",
+      "version": "2.5.0",
+      "repository": "https://github.com/segmentio/analytics-ruby",
+      "source": "https://rubygems.org/gems/analytics-ruby-2.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.5.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "analytics-ruby-rudder",
+      "version": "0.0.1",
+      "repository": "https://github.com/rudderlabs/rudderanalytics-ruby",
+      "source": "https://rubygems.org/gems/analytics-ruby-rudder-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "events-sdk-ruby",
+      "version": "0.0.2",
+      "repository": "https://github.com/ht-sdks/events-sdk-ruby",
+      "source": "https://rubygems.org/gems/events-sdk-ruby-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ios_analytics_cli",
+      "version": "1.1.0",
+      "repository": "https://github.com/infinum/ios-analytics-cli/",
+      "source": "https://rubygems.org/gems/ios_analytics_cli-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "june-analytics-ruby",
+      "version": "2.4.3",
+      "repository": "https://github.com/juneHQ/analytics-ruby",
+      "source": "https://rubygems.org/gems/june-analytics-ruby-2.4.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.4.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "juneso-analytics-ruby",
+      "version": "2.4.2",
+      "repository": "https://github.com/juneHQ/analytics-ruby",
+      "source": "https://rubygems.org/gems/juneso-analytics-ruby-2.4.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.4.2"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

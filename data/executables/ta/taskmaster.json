@@ -2,6 +2,30 @@
   "command": "taskmaster",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "taskmaster",
+      "version": "0.1.1",
+      "repository": "https://github.com/jrstapl/taskmaster.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akashokik/taskmaster-cli",
+      "version": "1.1.2",
+      "repository": "git+https://github.com/your-username/taskmaster-cli.git",
+      "source": "https://registry.npmjs.org/@akashokik%2Ftaskmaster-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.2"
+    },
+    {
       "ecosystem": "pypi",
       "package": "42-taskmaster",
       "version": "1.0.2",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

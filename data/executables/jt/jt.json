@@ -2,6 +2,30 @@
   "command": "jt",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jt",
+      "version": "0.1.2",
+      "repository": "https://github.com/araekiel/jot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tomson",
+      "version": "0.1.1",
+      "repository": "https://github.com/softprops/tomson",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jot",
       "version": "0.1.2",
@@ -24,8 +48,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@2017takeda/jt-cli",
+      "version": "1.3.2",
+      "repository": "git+https://github.com/TAKEDA-Takashi/jt-cli.git",
+      "source": "https://registry.npmjs.org/@2017takeda%2Fjt-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.3.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jt",
+      "version": "0.3.0",
+      "repository": "https://github.com/siman-man/jt",
+      "source": "https://rubygems.org/gems/jt-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jt-mobile-kit",
+      "version": "1.2.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/jt-mobile-kit-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

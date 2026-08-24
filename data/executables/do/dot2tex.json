@@ -2,6 +2,30 @@
   "command": "dot2tex",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dot2tex-2.12.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apn_dot2tex",
+      "version": "2.11.10",
+      "repository": "https://github.com/APN-Pucky/dot2tex",
+      "source": "https://files.pythonhosted.org/packages/6b/fc/3bf6b1eb3110cdba1a1ec0c428c22dae816067cb66402df1c87996949d2d/apn_dot2tex-2.11.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.11.10"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "dot2tex",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

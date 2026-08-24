@@ -2,6 +2,18 @@
   "command": "git-flow",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-flow-rs",
+      "version": "0.4.3",
+      "repository": "https://github.com/niuiic/git-flow.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "git-flow",
       "version": "0.4.1",
@@ -26,6 +38,56 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "git-flow-1.12.3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Karls.Gitflow.Tool",
+      "version": "0.0.14",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/karls.gitflow.tool/0.0.14/karls.gitflow.tool.0.0.14.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.14"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "git-flow-next",
+      "version": "2.0.0",
+      "repository": "https://git-flow.sh",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "git-flow-next-pre",
+      "version": "2.0.0",
+      "repository": "https://github.com/gittower/git-flow-next",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "git-flow",
       "version": null,
@@ -36,8 +98,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "GitTower.GitFlowNext",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

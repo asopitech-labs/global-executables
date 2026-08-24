@@ -2,6 +2,54 @@
   "command": "greeter",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "greeter",
+      "version": "0.1.0",
+      "repository": "https://github.com/henry-lang/greeter",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "grpc_graphql_gateway",
+      "version": "1.2.5",
+      "repository": "https://github.com/Protocol-Lattice/grpc_graphql_gateway",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-swagger/go-swagger",
+      "version": "v0.0.0-20190513062051-8ce1ff423c5a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-swagger/go-swagger/@v/v0.0.0-20190513062051-8ce1ff423c5a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190513062051-8ce1ff423c5a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-swagger/go-swagger",
+      "version": "v0.18.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-swagger/go-swagger/@v/v0.18.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.18.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/go-swagger/go-swagger",
       "version": "v0.19.0",
@@ -36,8 +84,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/kubernetes",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/kubernetes/@v/v0.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adelinromana/ade-module",
+      "version": "1.3.4",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adelinromana%2Fade-module/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.3.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "greeter",
+      "version": "0.0.1",
+      "repository": "http://rubygems.org/gems/hola",
+      "source": "https://rubygems.org/gems/greeter-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

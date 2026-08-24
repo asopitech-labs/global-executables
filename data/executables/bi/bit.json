@@ -2,6 +2,18 @@
   "command": "bit",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bit-lang-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/zaius-labs/dotbit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bit",
       "version": "14.8.8",
@@ -24,8 +36,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adpharm/bit",
+      "version": "0.1.19",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adpharm%2Fbit/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.19"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bit_converter",
+      "version": "1.1.0",
+      "repository": "https://github.com/tuang3142/bit-converter",
+      "source": "https://rubygems.org/gems/bit_converter-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "bit",
+      "version": "1.1.2",
+      "repository": "https://github.com/chriswalz/bit",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.1.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,138 @@
   "command": "tiller",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tiller",
+      "version": "0.4.3",
+      "repository": "https://github.com/woodruffw/tiller",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tiller-sync",
+      "version": "0.2.1",
+      "repository": "https://github.com/webern/tiller-sync",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/akjaz400/helm",
+      "version": "v2.17.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/akjaz400/helm/@v/v2.17.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.17.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes/helm",
+      "version": "v2.14.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes/helm/@v/v2.14.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.14.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes/helm",
+      "version": "v2.9.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes/helm/@v/v2.9.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.9.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.10.0-rc.2.0.20190121235857-581e6cdbb8e4+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.10.0-rc.2.0.20190121235857-581e6cdbb8e4%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.10.0-rc.2.0.20190121235857-581e6cdbb8e4+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.10.0-rc.2.0.20190530185604-500f46bd62ab+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.10.0-rc.2.0.20190530185604-500f46bd62ab%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.10.0-rc.2.0.20190530185604-500f46bd62ab+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.12.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.12.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.12.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.12.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.12.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.12.2+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.12.3+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.12.3%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.12.3+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.13.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.13.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.13.0+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "k8s.io/helm",
       "version": "v2.13.1+incompatible",
@@ -12,6 +144,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.13.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.14.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.14.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.14.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.14.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.14.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.14.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/helm",
+      "version": "v2.7.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/helm/@v/v2.7.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.7.2+incompatible"
     },
     {
       "ecosystem": "go",
@@ -39,5 +207,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

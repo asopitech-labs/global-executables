@@ -2,6 +2,30 @@
   "command": "ee",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ee",
+      "version": "0.0.0",
+      "repository": "https://github.com/ewpratten/ee",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "envexpand",
+      "version": "2.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "easyengine",
       "version": "4.12.0",
@@ -12,8 +36,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alan512/experienceengine",
+      "version": "0.5.3",
+      "repository": "git+https://github.com/Alan-512/ExperienceEngine.git",
+      "source": "https://registry.npmjs.org/@alan512%2Fexperienceengine/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "easyengine/easyengine",
+      "version": "v4.12.0",
+      "repository": "https://github.com/EasyEngine/easyengine.git",
+      "source": "https://repo.packagist.org/p2/easyengine/easyengine.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v4.12.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kirtangajjar/ee",
+      "version": "4.0.0",
+      "repository": "https://github.com/kirtangajjar/ee4.git",
+      "source": "https://repo.packagist.org/p2/kirtangajjar/ee.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "4.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "easyeditor",
+      "version": "0.0.5",
+      "repository": "https://github.com/azhao1981/easyeditor",
+      "source": "https://rubygems.org/gems/easyeditor-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "files",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "faculties",
+      "version": "0.20.0",
+      "repository": "https://github.com/triblespace/faculties",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "files",
+      "version": "2.2.3",
+      "repository": "https://github.com/apibillme/files",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.2.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "docker.io/go-docker",
+      "version": "v0.0.0-20170928214725-4daae26030ad",
+      "repository": null,
+      "source": "https://proxy.golang.org/docker.io/go-docker/@v/v0.0.0-20170928214725-4daae26030ad.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170928214725-4daae26030ad"
+    },
+    {
       "ecosystem": "go",
       "package": "docker.io/go-docker",
       "version": "v1.0.0",
@@ -12,6 +48,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
     },
     {
       "ecosystem": "go",
@@ -28,6 +88,78 @@
     {
       "ecosystem": "go",
       "package": "github.com/nlopes/slack",
+      "version": "v0.0.0-20180221230908-b5448397ba5f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.0.0-20180221230908-b5448397ba5f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180221230908-b5448397ba5f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
+      "version": "v0.0.0-20180721202243-347a74b1ea30",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.0.0-20180721202243-347a74b1ea30.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180721202243-347a74b1ea30"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
       "version": "v0.5.0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.5.0.zip",
@@ -36,8 +168,116 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
+      "version": "v0.5.1-0.20190508220637-3970c759dead",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.5.1-0.20190508220637-3970c759dead.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.1-0.20190508220637-3970c759dead"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nlopes/slack",
+      "version": "v0.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nlopes/slack/@v/v0.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pomerium/pomerium",
+      "version": "v0.33.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pomerium/pomerium/@v/v0.33.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.33.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wundergraph/cosmo",
+      "version": "v0.0.0-20260819085144-9ddb7292c874",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wundergraph/cosmo/@v/v0.0.0-20260819085144-9ddb7292c874.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819085144-9ddb7292c874"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/build",
+      "version": "v0.0.0-20260819174720-52e248053411",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/build/@v/v0.0.0-20260819174720-52e248053411.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819174720-52e248053411"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "12.31zhoukao",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/12.31zhoukao/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Winix.Files",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winix.files/0.4.0/winix.files.0.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alabuga-fastapi-generator",
+      "version": "1.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/eb/22/3a5cc26c73b7f5ab168a42deba95b64bb92832cd99f4a5eb22532446289e/alabuga_fastapi_generator-1.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "files.com",
+      "version": "1.1.713",
+      "repository": "https://www.files.com",
+      "source": "https://rubygems.org/gems/files.com-1.1.713.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.713"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

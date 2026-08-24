@@ -1,0 +1,32 @@
+{
+  "command": "doomretro",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "doomretro-6.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "doom-retro",
+      "version": "6.1",
+      "repository": "https://www.doomretro.com/",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "6.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

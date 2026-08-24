@@ -2,6 +2,42 @@
   "command": "catfish",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "catfish-4.20.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "catfish",
+      "version": "0.1.1",
+      "repository": "https://github.com/samvdst/catfish",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "catfish",
+      "version": "0.0.8",
+      "repository": "https://github.com/chrisbaldauf/catfish",
+      "source": "https://rubygems.org/gems/catfish-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "catfish",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

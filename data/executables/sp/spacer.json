@@ -2,6 +2,30 @@
   "command": "spacer",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "spacer",
+      "version": "0.5.0",
+      "repository": "https://github.com/samwho/spacer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "whitespace-rs",
+      "version": "3.0.0",
+      "repository": "https://github.com/jlyonsmith/whitespace-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "spacer",
       "version": "0.5.0",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "code-tools",
+      "version": "5.0.2",
+      "repository": "http://rubygems.org/gems/code_tools",
+      "source": "https://rubygems.org/gems/code-tools-5.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "5.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "code_tools",
+      "version": "4.2.1",
+      "repository": "http://rubygems.org/gems/code_tools",
+      "source": "https://rubygems.org/gems/code_tools-4.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.2.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

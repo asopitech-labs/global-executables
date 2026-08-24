@@ -2,6 +2,30 @@
   "command": "tx",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tx-terminal",
+      "version": "0.1.0",
+      "repository": "https://github.com/theanuragg/Trading-Terminal",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/smartwalle/dbs",
+      "version": "v1.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/smartwalle/dbs/@v/v1.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "transifex-cli",
       "version": "1.6.17",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexcrondon/tx",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alexcrondon%2Ftx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "afdko",
+      "version": "5.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/16/c5/29c43f712b066b24fcdb6afe5c3e7fe15946d41063d6d772d601f572b5a3/afdko-5.0.1-cp310-cp310-macosx_10_15_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

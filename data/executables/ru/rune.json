@@ -2,6 +2,138 @@
   "command": "rune",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cyber-rune",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hotg-rune-cli",
+      "version": "0.11.3",
+      "repository": "https://github.com/hotg-ai/rune",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nomograph-rune",
+      "version": "0.16.0",
+      "repository": "https://gitlab.com/nomograph/rune",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rune-cli",
+      "version": "0.14.2",
+      "repository": "https://github.com/rune-rs/rune",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgraph-io/dgraph",
+      "version": "v1.0.12-rc3.0.20190521042159-6be440b32bee",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgraph-io/dgraph/@v/v1.0.12-rc3.0.20190521042159-6be440b32bee.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.12-rc3.0.20190521042159-6be440b32bee"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgraph-io/dgraph",
+      "version": "v1.0.12-rc3.0.20190524170609-14fa8274499b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgraph-io/dgraph/@v/v1.0.12-rc3.0.20190524170609-14fa8274499b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.12-rc3.0.20190524170609-14fa8274499b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgraph-io/dgraph",
+      "version": "v1.0.14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgraph-io/dgraph/@v/v1.0.14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.14"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgraph-io/dgraph",
+      "version": "v1.0.15",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgraph-io/dgraph/@v/v1.0.15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/meanhide/golang",
+      "version": "v0.0.0-20210825073704-98c714499dc2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/meanhide/golang/@v/v0.0.0-20210825073704-98c714499dc2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210825073704-98c714499dc2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rune",
       "version": "0.14.2",
@@ -12,8 +144,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alrightlook/rune-cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alrightlook%2Frune-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

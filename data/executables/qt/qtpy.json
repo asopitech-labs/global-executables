@@ -2,6 +2,30 @@
   "command": "qtpy",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-qtpy-2.4.3-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "QtPy",
+      "version": "2.4.3",
+      "repository": "https://github.com/spyder-ide/qtpy",
+      "source": "https://files.pythonhosted.org/packages/69/76/37c0ccd5ab968a6a438f9c623aeecc84c202ab2fabc6a8fd927580c15b5a/QtPy-2.4.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.4.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-qtpy",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

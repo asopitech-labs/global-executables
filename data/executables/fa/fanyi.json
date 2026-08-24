@@ -2,6 +2,18 @@
   "command": "fanyi",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "popup-translation",
+      "version": "0.2.2",
+      "repository": "https://github.com/fzdwx/popup-translation",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fanyi",
       "version": "11.0.0",
@@ -12,8 +24,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@angg/dict",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@angg%2Fdict/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jaggle/fanyi",
+      "version": "v0.2.10",
+      "repository": "https://github.com/jjsty1e/fanyi.git",
+      "source": "https://repo.packagist.org/p2/jaggle/fanyi.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.2.10"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jjsty1e/fanyi",
+      "version": "v0.2.10",
+      "repository": "https://github.com/jjsty1e/fanyi.git",
+      "source": "https://repo.packagist.org/p2/jjsty1e/fanyi.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.2.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fanyi",
+      "version": "0.0.3",
+      "repository": "https://github.com/dongri/fanyi",
+      "source": "https://rubygems.org/gems/fanyi-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

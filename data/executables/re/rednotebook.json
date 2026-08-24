@@ -2,6 +2,31 @@
   "command": "rednotebook",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "rednotebook-2.42-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "rednotebook",
+      "version": "2.42",
+      "repository": "https://rednotebook.sourceforge.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.42"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "rednotebook",
       "version": null,
@@ -15,5 +40,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

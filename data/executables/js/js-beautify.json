@@ -2,6 +2,18 @@
   "command": "js-beautify",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-jsbeautifier-2.0.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "js-beautify",
       "version": "2.0.3",
@@ -24,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "js-beautify",
+      "version": "0.1.8",
+      "repository": "http://github.com/hbt/js-beautify-gem",
+      "source": "https://rubygems.org/gems/js-beautify-0.1.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

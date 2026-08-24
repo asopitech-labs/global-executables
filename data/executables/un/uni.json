@@ -2,6 +2,42 @@
   "command": "uni",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "wvstreams-4.6.1-21",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "uni",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "uni-cli",
+      "version": "0.0.12",
+      "repository": "https://github.com/edadma/uni",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.12"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "uni",
       "version": "2.9.0",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agents-uni/core",
+      "version": "0.4.3",
+      "repository": "git+https://github.com/agents-uni/core.git",
+      "source": "https://registry.npmjs.org/@agents-uni%2Fcore/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

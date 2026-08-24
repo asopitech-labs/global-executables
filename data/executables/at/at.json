@@ -2,6 +2,30 @@
   "command": "at",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "at-3.2.5-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "at",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "at",
       "version": null,
@@ -14,6 +38,66 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@author-today-tools/cli",
+      "version": "0.1.3",
+      "repository": "git+ssh://git@github.com/maderwin/author-today-tools.git",
+      "source": "https://registry.npmjs.org/@author-today-tools%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aligntune",
+      "version": "0.1.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7c/93/894cea4f25210709c4b5fb52b7a6df5ce8ce2f1d6ad555854fe602613da1/aligntune-0.1.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artistools",
+      "version": "2026.8.20.2",
+      "repository": "https://github.com/artis-mcrt/artistools",
+      "source": "https://files.pythonhosted.org/packages/2f/c0/c226167c7f0a2aa0fee8fe804c2cf23a7f657d7c80dfd7cecbcf011f66e5/artistools-2026.8.20.2-cp313-abi3-macosx_13_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2026.8.20.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autoterminal",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ce/86/fb51492e17bab01eba29800d410cd423aca4539107931cbf79e9c779633f/autoterminal-1.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "at",
       "version": null,
@@ -24,8 +108,32 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2022-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2025-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

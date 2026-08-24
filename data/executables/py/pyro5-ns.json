@@ -2,6 +2,30 @@
   "command": "pyro5-ns",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-pyro-5.17-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Pyro5",
+      "version": "5.17",
+      "repository": "https://github.com/irmen/Pyro5",
+      "source": "https://files.pythonhosted.org/packages/24/62/878386c290088c6f614bf50e59c362e23c8aaa86de9a1d74d4ee67108736/pyro5-5.17-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.17"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-pyro5",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

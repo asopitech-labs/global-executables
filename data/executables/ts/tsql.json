@@ -2,6 +2,42 @@
   "command": "tsql",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "freetds-1.5.19-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tsql",
+      "version": "0.7.0",
+      "repository": "https://github.com/fcoury/tsql",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "freetds-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "freetds-bin",
       "version": null,
@@ -12,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20170728030519-84dc5e6cc4a6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20170728030519-84dc5e6cc4a6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170728030519-84dc5e6cc4a6"
     },
     {
       "ecosystem": "go",
@@ -40,6 +88,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20180416134016-e32faac87a22",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20180416134016-e32faac87a22.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180416134016-e32faac87a22"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20180521163914-c4e5513e46d4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20180521163914-c4e5513e46d4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180521163914-c4e5513e46d4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
       "version": "v0.0.0-20180620032804-94c9c97e8c9f",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20180620032804-94c9c97e8c9f.zip",
@@ -64,6 +136,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20180824013952-8fac8b954edb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20180824013952-8fac8b954edb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180824013952-8fac8b954edb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
       "version": "v0.0.0-20180901172138-1eb28afdf9b6",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20180901172138-1eb28afdf9b6.zip",
@@ -72,6 +156,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180901172138-1eb28afdf9b6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20190111225525-2fea367d496d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20190111225525-2fea367d496d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190111225525-2fea367d496d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20190204142019-df6d76eb9289",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20190204142019-df6d76eb9289.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190204142019-df6d76eb9289"
     },
     {
       "ecosystem": "go",
@@ -158,6 +266,54 @@
       "latest_version": "v0.0.0-20190423183735-731ef375ac02"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20190514213226-23b29e59681b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20190514213226-23b29e59681b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190514213226-23b29e59681b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.0.0-20190515213511-eb9f6a1743f3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.0.0-20190515213511-eb9f6a1743f3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190515213511-eb9f6a1743f3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/denisenkom/go-mssqldb",
+      "version": "v0.12.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/denisenkom/go-mssqldb/@v/v0.12.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zensqlmonitor/go-mssqldb",
+      "version": "v0.0.0-20170730055629-e8fbf836e44e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zensqlmonitor/go-mssqldb/@v/v0.0.0-20170730055629-e8fbf836e44e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170730055629-e8fbf836e44e"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "freetds",
       "version": "1.5.19",
@@ -183,5 +339,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

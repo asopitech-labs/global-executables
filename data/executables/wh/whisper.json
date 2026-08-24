@@ -2,6 +2,66 @@
   "command": "whisper",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-openai-whisper-20250625-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "inferencelayer",
+      "version": "0.2.20",
+      "repository": "https://gitlab.com/kortexya/inferencelayer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.20"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "whisper",
+      "version": "0.1.11",
+      "repository": "https://github.com/tureus/whisper.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.11"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "whisper-lang",
+      "version": "1.2.0",
+      "repository": "https://github.com/Myoucai/Whisper",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "whisper_cli",
+      "version": "0.1.5",
+      "repository": "https://github.com/m1guelpf/whisper-cli-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "openai-whisper",
       "version": "20250625",
@@ -12,8 +72,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aa-whisper",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b1/47/11c8b12477e19f89335e1fdae10870734d18708539b2e67a86df4a549911/aa_whisper-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

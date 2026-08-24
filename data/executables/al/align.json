@@ -2,6 +2,42 @@
   "command": "align",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "festival-2.5.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "align",
+      "version": "1.0.0",
+      "repository": "https://github.com/mahkoh/align-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "align-cli",
+      "version": "0.4.2",
+      "repository": "https://github.com/snijderlab/align-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "align",
       "version": "1.7.5",
@@ -24,8 +60,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aligndottech/cli",
+      "version": "0.12.1",
+      "repository": "git+https://github.com/aligndottech/align-cli.git",
+      "source": "https://registry.npmjs.org/@aligndottech%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.12.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Snijderlab.AlignCli",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "mps",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "burn-tch",
+      "version": "0.21.0",
+      "repository": "https://github.com/tracel-ai/burn/tree/main/crates/burn-tch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.21.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "moshpits",
+      "version": "0.11.2",
+      "repository": "https://git.jasonozias.com/moshpit.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mps",
+      "version": "1.0.1",
+      "repository": "https://github.com/integrated-reasoning/mps/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mps-rs",
+      "version": "1.8.2",
+      "repository": "https://github.com/mash-97/mps-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.8.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mplayershell",
       "version": "0.9.3",
@@ -12,8 +60,34 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "mps",
+      "version": "2026.1-261.25134.779",
+      "repository": "https://www.jetbrains.com/mps/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.1-261.25134.779"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "mps-eap",
+      "version": "2026.1-261.23567.257-EAP1",
+      "repository": "https://www.jetbrains.com/mps/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.1-261.23567.257-EAP1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

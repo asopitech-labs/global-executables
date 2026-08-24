@@ -2,6 +2,30 @@
   "command": "git-open",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cargo-git-open",
+      "version": "0.0.9",
+      "repository": "https://github.com/jsgv/git-open",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "git-open",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "git-open",
       "version": "1.3",
@@ -12,8 +36,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ghit",
+      "version": "0.2.4",
+      "repository": "https://github.com/fteem/ghit",
+      "source": "https://rubygems.org/gems/ghit-0.2.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-open",
+      "version": "1.0.0",
+      "repository": "https://github.com/JuanitoFatas/git-open",
+      "source": "https://rubygems.org/gems/git-open-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-utils",
+      "version": "2.4.0",
+      "repository": "https://github.com/mhartl/git-utils",
+      "source": "https://rubygems.org/gems/git-utils-2.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git_guts",
+      "version": "0.2.5",
+      "repository": "http://github.com/shadabahmed/git_guts",
+      "source": "https://rubygems.org/gems/git_guts-0.2.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

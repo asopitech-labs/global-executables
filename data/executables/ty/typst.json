@@ -2,6 +2,42 @@
   "command": "typst",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "typst-1:0.15.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tmp-typst-cli-custom-metadata",
+      "version": "0.16.0-rc.1",
+      "repository": "https://github.com/typst/typst",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0-rc.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "typst-cli",
+      "version": "0.15.1",
+      "repository": "https://github.com/typst/typst",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "typst",
       "version": "0.15.1",
@@ -12,8 +48,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "typst",
+      "version": "0.15.1",
+      "repository": "https://typst.app",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.15.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Typst.Typst",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

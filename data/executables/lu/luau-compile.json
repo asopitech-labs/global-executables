@@ -2,9 +2,45 @@
   "command": "luau-compile",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "luau-1:0.734-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "luau-1:0.735-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "luau-cli",
+      "version": "0.733.0",
+      "repository": "https://github.com/luau-rs/luau",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.733.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "luau",
-      "version": "0.734",
+      "version": "0.735",
       "repository": "https://luau.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

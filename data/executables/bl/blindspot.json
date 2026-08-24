@@ -2,6 +2,30 @@
   "command": "blindspot",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "blindspot",
+      "version": "1.2.2",
+      "repository": "https://github.com/xermicus/blindspot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arcari/react-blindspot",
+      "version": "1.0.6",
+      "repository": "git+https://github.com/tomaslachmann/blindspot.git",
+      "source": "https://registry.npmjs.org/@arcari%2Freact-blindspot/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.6"
+    },
+    {
       "ecosystem": "pypi",
       "package": "Bio-BlindSpot",
       "version": "1.0.3",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

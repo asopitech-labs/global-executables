@@ -2,6 +2,30 @@
   "command": "erd",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "erdtree-3.1.2-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "erdtree",
+      "version": "3.1.2",
+      "repository": "https://github.com/solidiquis/erdtree",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.1.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "erdtree",
       "version": "3.1.2",
@@ -12,8 +36,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@8zali9/shell-z",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/8zali9/shell-z.git",
+      "source": "https://registry.npmjs.org/@8zali9%2Fshell-z/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jw-rails-erd",
+      "version": "1.4.6",
+      "repository": "https://github.com/jamescway/rails-erd",
+      "source": "https://rubygems.org/gems/jw-rails-erd-1.4.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.4.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "erdtree",
+      "version": "3.1.2",
+      "repository": "https://github.com/solidiquis/erdtree",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.1.2"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Solidiquis.Erdtree",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

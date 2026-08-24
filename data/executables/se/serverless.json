@@ -1,0 +1,56 @@
+{
+  "command": "serverless",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/stackvista/datadog-agent-upstream-for-process-agent",
+      "version": "v0.0.0-20260818123103-b8455a4d7b2b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stackvista/datadog-agent-upstream-for-process-agent/@v/v0.0.0-20260818123103-b8455a4d7b2b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818123103-b8455a4d7b2b"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amuslija/serverless",
+      "version": "1.68.2",
+      "repository": "git+https://github.com/serverless/serverless.git",
+      "source": "https://registry.npmjs.org/@amuslija%2Fserverless/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.68.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "serverless",
+      "version": "3.39.0",
+      "repository": "https://serverless.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.39.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Serverless.Serverless",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

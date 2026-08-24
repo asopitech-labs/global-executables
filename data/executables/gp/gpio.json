@@ -2,6 +2,54 @@
   "command": "gpio",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gpio-utils",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mecha-gpio-utils",
+      "version": "0.3.0",
+      "repository": "https://github.com/mecha-org/mechanix-apps",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "prusacam",
+      "version": "1.0.0",
+      "repository": "https://github.com/spotzero/prusacam",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/balazsgrill/phirmata",
+      "version": "v0.0.0-20200816172732-1755c9f64a24",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/balazsgrill/phirmata/@v/v0.0.0-20200816172732-1755c9f64a24.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200816172732-1755c9f64a24"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "wiringpi",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

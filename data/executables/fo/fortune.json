@@ -2,6 +2,78 @@
   "command": "fortune",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fortune-mod-3.26.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fortune",
+      "version": "0.2.0",
+      "repository": "https://github.com/dimo414/fortune",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fortune-rs",
+      "version": "0.1.0",
+      "repository": "https://github.com/twang2218/fortune-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "v.io",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/v.io/@v/v0.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "v.io",
+      "version": "v0.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/v.io/@v/v0.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "v.io",
+      "version": "v0.1.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/v.io/@v/v0.1.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fortune",
       "version": "9708",
@@ -12,8 +84,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aidantomcy/fortune",
+      "version": "1.0.6",
+      "repository": "git+https://github.com/aidantomcy/fortune.git",
+      "source": "https://registry.npmjs.org/@aidantomcy%2Ffortune/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyFortune",
+      "version": "0.1",
+      "repository": "https://github.com/xiaomao5/pyfortune",
+      "source": "https://files.pythonhosted.org/packages/86/a5/9f903370223c866d8b45a68d2058ec7d77f6b5dba90f86da7b5b76b135f8/PyFortune-0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fortune_cookie",
+      "version": "0.0.4",
+      "repository": null,
+      "source": "https://rubygems.org/gems/fortune_cookie-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

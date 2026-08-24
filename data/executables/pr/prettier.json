@@ -2,6 +2,30 @@
   "command": "prettier",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "prettier-3.8.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "prettier",
+      "version": "0.1.5",
+      "repository": "https://github.com/jinxdash/prettier-plugin-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "prettier",
       "version": "3.9.6",
@@ -12,8 +36,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0k.io/prettier",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@0k.io%2Fprettier/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0k/prettier",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@0k%2Fprettier/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adamjlev/prettier",
+      "version": "2.1.0",
+      "repository": "git+https://github.com/prettier/prettier.git",
+      "source": "https://registry.npmjs.org/@adamjlev%2Fprettier/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agoric/prettier",
+      "version": "1.20.0",
+      "repository": "git+https://github.com/prettier/prettier.git",
+      "source": "https://registry.npmjs.org/@agoric%2Fprettier/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.20.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@awarest/prettier",
+      "version": "1.9.2-b",
+      "repository": "git+https://github.com/awarest/prettier.git",
+      "source": "https://registry.npmjs.org/@awarest%2Fprettier/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.9.2-b"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

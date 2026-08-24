@@ -1,0 +1,68 @@
+{
+  "command": "fission",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "cargo-fission",
+      "version": "0.12.0",
+      "repository": "https://github.com/fission-ui/fission",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fission/fission",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fission/fission/@v/v0.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fission",
+      "version": "0.5.0",
+      "repository": "https://github.com/thbishop/fission",
+      "source": "https://rubygems.org/gems/fission-0.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "fission-cli",
+      "version": "1.27.0",
+      "repository": "https://fission.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.27.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Fission.Fission.CLI",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

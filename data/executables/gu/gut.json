@@ -2,6 +2,18 @@
   "command": "gut",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gut-cli",
+      "version": "0.4.0",
+      "repository": "https://github.com/Twil3akine/gut-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gut",
       "version": "0.3.3",
@@ -12,8 +24,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gut",
+      "version": "0.0.0",
+      "repository": "https://github.com/minhajuddin/gut",
+      "source": "https://rubygems.org/gems/gut-0.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gut",
+      "version": "0.3.3",
+      "repository": "https://gut-cli.dev",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.3.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

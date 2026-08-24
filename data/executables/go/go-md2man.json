@@ -2,6 +2,30 @@
   "command": "go-md2man",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "go-md2man-2.0.7-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "go-md2man",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "go-md2man",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cpuguy83/go-md2man",
+      "version": "v0.0.0-20150803153522-71acacd42f85",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cpuguy83/go-md2man/@v/v0.0.0-20150803153522-71acacd42f85.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150803153522-71acacd42f85"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cpuguy83/go-md2man",
+      "version": "v0.0.0-20170603125239-23709d084719",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cpuguy83/go-md2man/@v/v0.0.0-20170603125239-23709d084719.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170603125239-23709d084719"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cpuguy83/go-md2man",
+      "version": "v0.0.0-20171223160537-8d868be6e9bf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cpuguy83/go-md2man/@v/v0.0.0-20171223160537-8d868be6e9bf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171223160537-8d868be6e9bf"
     },
     {
       "ecosystem": "go",
@@ -74,6 +134,30 @@
       "latest_version": "v1.0.7"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/cpuguy83/go-md2man",
+      "version": "v1.0.9-0.20180619205630-691ee98543af",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cpuguy83/go-md2man/@v/v1.0.9-0.20180619205630-691ee98543af.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.9-0.20180619205630-691ee98543af"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/source-to-image",
+      "version": "v1.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/source-to-image/@v/v1.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "go-md2man",
       "version": "2.0.7",
@@ -99,5 +183,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

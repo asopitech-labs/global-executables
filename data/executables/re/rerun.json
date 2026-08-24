@@ -2,6 +2,90 @@
   "command": "rerun",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rerun-cli",
+      "version": "0.36.2",
+      "repository": "https://github.com/rerun-io/rerun",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.36.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ddollar/rerun",
+      "version": "v0.0.0-20160217225315-69eacb115c73",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ddollar/rerun/@v/v0.0.0-20160217225315-69eacb115c73.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160217225315-69eacb115c73"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gravitational/teleport/build.assets/tooling",
+      "version": "v0.0.0-20260813231850-05f8e349433c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gravitational/teleport/build.assets/tooling/@v/v0.0.0-20260813231850-05f8e349433c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260813231850-05f8e349433c"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@9ickpic/rerun",
+      "version": "3.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@9ickpic%2Frerun/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-rerun",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0c/f2/62ad3fcf305b172f127ef47ca6f882cd9aea350bfd78e16f7d3395c140a6/agent_rerun-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "alexch-rerun",
+      "version": "0.3",
+      "repository": "http://github.com/alexch/rerun/",
+      "source": "https://rubygems.org/gems/alexch-rerun-0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dreamcat4-rerun",
+      "version": "0.3.2",
+      "repository": "http://github.com/alexch/rerun/",
+      "source": "https://rubygems.org/gems/dreamcat4-rerun-0.3.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "rerun",
       "version": null,
@@ -15,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

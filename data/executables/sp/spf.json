@@ -2,6 +2,18 @@
   "command": "spf",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "superfile-1.6.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "superfile",
       "version": "1.6.0",
@@ -12,8 +24,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amityco/social-plus-vise",
+      "version": "1.18.0",
+      "repository": "git+https://github.com/AmityCo/social-plus-forge.git",
+      "source": "https://registry.npmjs.org/@amityco%2Fsocial-plus-vise/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.18.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SemPubFlow",
+      "version": "0.0.3",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/3a/ef/2d39b55f942d83141fdd6f60592a3eeece3911200e3179127236168cc009/sempubflow-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "superfile",
+      "version": "1.6.0",
+      "repository": "https://superfile.netlify.app/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.6.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

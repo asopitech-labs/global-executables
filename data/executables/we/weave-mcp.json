@@ -2,9 +2,21 @@
   "command": "weave-mcp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "weave-mcp",
+      "version": "0.5.2",
+      "repository": "https://github.com/Ataraxy-Labs/weave",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "weave",
-      "version": "0.5.1",
+      "version": "0.5.2",
       "repository": "https://ataraxy-labs.github.io/weave/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ataraxy-labs/weave",
+      "version": "0.5.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ataraxy-labs%2Fweave/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

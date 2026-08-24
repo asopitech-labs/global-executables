@@ -14,6 +14,32 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "gallery-dl",
+      "version": "1.32.9",
+      "repository": "https://codeberg.org/mikf/gallery-dl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.32.9"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gallery-dl-nightly",
+      "version": "2026.08.24",
+      "repository": "https://github.com/mikf/gallery-dl",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.08.24"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "gallery-dl",
       "version": null,
@@ -24,8 +50,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "mikf.gallery-dl",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

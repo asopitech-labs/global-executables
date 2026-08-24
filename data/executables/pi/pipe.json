@@ -2,6 +2,66 @@
   "command": "pipe",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pipe-cli",
+      "version": "0.3.0",
+      "repository": "https://github.com/annie444/piped",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pipebased",
+      "version": "0.1.0",
+      "repository": "https://github.com/pipebase/pipebased",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/b3log/pipe",
+      "version": "v1.8.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/b3log/pipe/@v/v1.8.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudfoundry/bosh-agent",
+      "version": "v0.0.60",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudfoundry/bosh-agent/@v/v0.0.60.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.60"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/cloudfoundry/bosh-agent",
       "version": "v2.217.0+incompatible",
@@ -12,8 +72,92 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.217.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudfoundry/bosh-agent",
+      "version": "v2.218.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudfoundry/bosh-agent/@v/v2.218.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.218.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lbb4511/pipe",
+      "version": "v1.8.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lbb4511/pipe/@v/v1.8.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miku/clam",
+      "version": "v0.0.0-20150701134247-8054bf3dfcec",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miku/clam/@v/v0.0.0-20150701134247-8054bf3dfcec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150701134247-8054bf3dfcec"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "pipe-cli",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/pipe-cli/1.1.0/pipe-cli.1.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "chh/pipe",
+      "version": "v1.0.0beta1",
+      "repository": "https://github.com/CHH/pipe.git",
+      "source": "https://repo.packagist.org/p2/chh/pipe.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.0beta1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aisquare-pipe",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/41/57/4f878777654b94cf1c2b80f3791f0727b3371b9c5d4a446ca58038a61613/aisquare_pipe-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "codepipeline",
+      "version": "0.3.4",
+      "repository": "https://github.com/tongueroo/codepipeline",
+      "source": "https://rubygems.org/gems/codepipeline-0.3.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.4"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

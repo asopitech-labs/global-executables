@@ -2,6 +2,30 @@
   "command": "dcp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dcp",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dx-dcp",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dcp",
       "version": "0.4.1",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dcp",
+      "version": "0.2.2",
+      "repository": "http://github.com/tdtds/dcp",
+      "source": "https://rubygems.org/gems/dcp-0.2.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

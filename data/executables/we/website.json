@@ -2,6 +2,30 @@
   "command": "website",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tamlabzip",
+      "version": "0.1.5",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "website",
+      "version": "0.2.0",
+      "repository": "https://github.com/tirithen/website",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "camlistore.org",
       "version": "v0.0.0-20160720140908-d76959dd7c78",
@@ -28,6 +52,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/camlistore/camlistore",
+      "version": "v0.0.0-20151124030210-9868aa0f8d8a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/camlistore/camlistore/@v/v0.0.0-20151124030210-9868aa0f8d8a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20151124030210-9868aa0f8d8a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/camlistore/camlistore",
       "version": "v0.0.0-20171121062126-f9dcdfb07a66",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/camlistore/camlistore/@v/v0.0.0-20171121062126-f9dcdfb07a66.zip",
@@ -36,8 +72,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171121062126-f9dcdfb07a66"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stephenafamo/bob",
+      "version": "v0.50.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stephenafamo/bob/@v/v0.50.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.50.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

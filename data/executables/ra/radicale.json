@@ -2,6 +2,30 @@
   "command": "radicale",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "radicale-3.7.8-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Radicale",
+      "version": "3.7.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/85/0c/822f5d452a70ff69b49dd2d68446b657ce970ef8cadcf82a8d90bd93683f/radicale-3.7.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.7.8"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "radicale",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

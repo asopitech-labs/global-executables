@@ -2,6 +2,18 @@
   "command": "gdrive",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/prasmussen/gdrive",
+      "version": "v0.0.0-20190419185059-29ca5a922a95",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prasmussen/gdrive/@v/v0.0.0-20190419185059-29ca5a922a95.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190419185059-29ca5a922a95"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gdrive",
       "version": "3.9.1",
@@ -12,8 +24,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cloud_door",
+      "version": "0.0.3",
+      "repository": "https://github.com/KotaroHibi/cloud_door",
+      "source": "https://rubygems.org/gems/cloud_door-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gdrive-cli",
+      "version": "0.0.2",
+      "repository": "https://github.com/jakub-stastny/gdrive-cli",
+      "source": "https://rubygems.org/gems/gdrive-cli-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "google_drive_companion",
+      "version": "0.1.0",
+      "repository": "https://github.com/pricees/google-drive-companion",
+      "source": "https://rubygems.org/gems/google_drive_companion-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gdrive",
+      "version": "3.9.1",
+      "repository": "https://github.com/glotlabs/gdrive",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.9.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

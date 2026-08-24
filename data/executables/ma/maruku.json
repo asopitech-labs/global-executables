@@ -2,6 +2,42 @@
   "command": "maruku",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-maruku-0.7.3-10",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bai-maruku",
+      "version": "0.5.9",
+      "repository": "http://maruku.rubyforge.org",
+      "source": "https://rubygems.org/gems/bai-maruku-0.5.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "maruku",
+      "version": "0.7.3",
+      "repository": "http://github.com/bhollis/maruku",
+      "source": "https://rubygems.org/gems/maruku-0.7.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.7.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-maruku",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

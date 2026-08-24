@@ -2,6 +2,30 @@
   "command": "bus",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "linux-atm-2.5.2-9",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "atm-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "atm-tools",
       "version": null,
@@ -26,6 +50,54 @@
       "latest_version": "v0.0.0-20141219193815-347226584635"
     },
     {
+      "ecosystem": "go",
+      "package": "nanomsg.org/go-mangos",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/nanomsg.org/go-mangos/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "nanomsg.org/go/mangos/v2",
+      "version": "v2.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/nanomsg.org/go/mangos/v2/@v/v2.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antlegion/bus",
+      "version": "0.4.1",
+      "repository": "git+https://github.com/YangKGcsdms/antlegion-platform.git",
+      "source": "https://registry.npmjs.org/@antlegion%2Fbus/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bus-scheme",
+      "version": "0.7.6",
+      "repository": null,
+      "source": "https://rubygems.org/gems/bus-scheme-0.7.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.7.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "atm-tools",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

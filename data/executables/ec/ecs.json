@@ -2,9 +2,21 @@
   "command": "ecs",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/awsdocs/aws-doc-sdk-examples",
+      "version": "v0.0.0-20260818160903-44501e866df8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/awsdocs/aws-doc-sdk-examples/@v/v0.0.0-20260818160903-44501e866df8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818160903-44501e866df8"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ecs-deploy",
-      "version": "1.16.3",
+      "version": "1.17.0",
       "repository": "https://github.com/fabfuel/ecs-deploy",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "dateti/coding-standard",
+      "version": "v1.1.3",
+      "repository": "https://github.com/DateTi/coding-standard.git",
+      "source": "https://repo.packagist.org/p2/dateti/coding-standard.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "galek/coding-standard",
+      "version": "v2.1.5",
+      "repository": "https://github.com/JanGalek/coding-standard.git",
+      "source": "https://repo.packagist.org/p2/galek/coding-standard.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.1.5"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "janu-software/coding-standard",
+      "version": "v8.5.0",
+      "repository": "https://github.com/janu-software/coding-standard.git",
+      "source": "https://repo.packagist.org/p2/janu-software/coding-standard.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v8.5.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awful",
+      "version": "0.0.185",
+      "repository": "",
+      "source": "https://rubygems.org/gems/awful-0.0.185.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.185"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ecs-rails",
+      "version": "0.0.8",
+      "repository": "https://rubygems.org/gems/ecs-rails",
+      "source": "https://rubygems.org/gems/ecs-rails-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

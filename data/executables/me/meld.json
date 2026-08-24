@@ -2,6 +2,67 @@
   "command": "meld",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "meld-3.24.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "meld",
+      "version": "2.7.0",
+      "repository": "https://github.com/jerkytreats/meld",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "meld-config-manager",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Flask-Meld",
+      "version": "0.13.1",
+      "repository": "http://github.com/mikeabrahamsen/Flask-Meld/",
+      "source": "https://files.pythonhosted.org/packages/bd/e5/a74413f2e8f56702d54f53f465edc31d211b36935b49f133c80596404c74/Flask_Meld-0.13.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.13.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "meld",
+      "version": "3.24.0",
+      "repository": "https://meldmerge.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.24.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "meld",
       "version": null,
@@ -15,5 +76,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

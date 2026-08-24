@@ -2,6 +2,42 @@
   "command": "pint",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pint-0.87.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pint",
+      "version": "0.1.0",
+      "repository": "https://github.com/PhilippRados/pint",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pint-cli",
+      "version": "0.14.0",
+      "repository": "https://github.com/essential-contributions/pint",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pint",
       "version": "0.87.0",
@@ -12,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "hyperlinkgroup/pint",
+      "version": "1.27.0",
+      "repository": "https://github.com/hyperlinkgroup/pint.git",
+      "source": "https://repo.packagist.org/p2/hyperlinkgroup/pint.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.27.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "laravel/pint",
+      "version": "v1.30.5",
+      "repository": "https://github.com/laravel/pint.git",
+      "source": "https://repo.packagist.org/p2/laravel/pint.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.30.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

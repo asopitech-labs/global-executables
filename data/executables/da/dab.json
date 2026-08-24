@@ -1,0 +1,55 @@
+{
+  "command": "dab",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bsd-games-3.3-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dab",
+      "version": "0.2.0",
+      "repository": "https://github.com/ohsayan/dab",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dab-cli",
+      "version": "0.6.2",
+      "repository": "https://github.com/cesarferreira/dab",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Microsoft.DataApiBuilder",
+      "version": "2.1.0-rc",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/microsoft.dataapibuilder/2.1.0-rc/microsoft.dataapibuilder.2.1.0-rc.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.1.0-rc"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

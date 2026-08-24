@@ -2,6 +2,30 @@
   "command": "cogs",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cogs",
+      "version": "0.1.1",
+      "repository": "https://github.com/lloydmeta/cogs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "cogs",
+      "version": "1.0.576",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cogs/1.0.576/cogs.1.0.576.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.576"
+    },
+    {
       "ecosystem": "pypi",
       "package": "Cogs",
       "version": "0.4.4",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

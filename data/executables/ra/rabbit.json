@@ -2,6 +2,30 @@
   "command": "rabbit",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/clivern/rabbit",
+      "version": "v0.0.0-20190610211624-a54604521f93",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/clivern/rabbit/@v/v0.0.0-20190610211624-a54604521f93.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190610211624-a54604521f93"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "RabbitSpider",
+      "version": "2.7.6",
+      "repository": "https://github.com/YunTom/RabbitSpider/tree/master",
+      "source": "https://files.pythonhosted.org/packages/cd/0a/6c546854ab8d486391e0e52ee6172f7b1d6325b68395cd6bca335ad671aa/RabbitSpider-2.7.6.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.7.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "rabbit",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

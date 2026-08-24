@@ -2,6 +2,42 @@
   "command": "bunny",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bunny-api",
+      "version": "0.0.5",
+      "repository": "https://git.sr.ht/~shadow53/bunny-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudwatt/bunny",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudwatt/bunny/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gographics/imagick",
+      "version": "v1.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gographics/imagick/@v/v1.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/gographics/imagick",
       "version": "v3.2.0+incompatible",
@@ -15,6 +51,18 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/gographics/imagick/v3",
+      "version": "v3.7.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gographics/imagick/v3/@v/v3.7.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.7.3"
+    },
+    {
+      "ecosystem": "go",
       "package": "gopkg.in/gographics/imagick.v2",
       "version": "v2.5.0",
       "repository": null,
@@ -24,8 +72,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/gographics/imagick.v2",
+      "version": "v2.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/gographics/imagick.v2/@v/v2.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.7.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/gographics/imagick.v3",
+      "version": "v3.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/gographics/imagick.v3/@v/v3.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.2.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ghostzero/bunny",
+      "version": "0.2.2",
+      "repository": "https://github.com/own3d/bunny-cli.git",
+      "source": "https://repo.packagist.org/p2/ghostzero/bunny.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bunbun",
+      "version": "1.1.2",
+      "repository": "https://github.com/readysteady/bunbun",
+      "source": "https://rubygems.org/gems/bunbun-1.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

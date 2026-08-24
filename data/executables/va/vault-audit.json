@@ -1,0 +1,31 @@
+{
+  "command": "vault-audit",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "vault-audit-tools",
+      "version": "0.11.2",
+      "repository": "https://github.com/trenner1/hashicorp-vault-audit-analysis",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aimcpvault/mcp-proxy",
+      "version": "0.2.0-rc.11",
+      "repository": "git+https://github.com/vaultmcp/vault.git",
+      "source": "https://registry.npmjs.org/@aimcpvault%2Fmcp-proxy/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0-rc.11"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

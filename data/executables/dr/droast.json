@@ -2,9 +2,21 @@
   "command": "droast",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dockerfile-roast",
+      "version": "1.6.1",
+      "repository": "https://github.com/immanuwell/dockerfile-roast",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.6.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "droast",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "repository": "https://ewry.net/droast-dockerfile-linter/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

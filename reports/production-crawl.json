@@ -1,72 +1,533 @@
 {
-  "coverage_kind": "exhaustive",
+  "coverage_kind": "partial",
   "declared_sources": [
     "arch",
     "crates",
     "debian",
     "homebrew",
+    "macos",
+    "msys2",
     "npm",
     "pypi",
-    "ubuntu"
+    "scoop",
+    "shell",
+    "ubuntu",
+    "windows",
+    "winget"
   ],
   "failed": [],
+  "fallbacks": [],
   "requested_sources": [
     "arch",
     "debian",
     "homebrew",
-    "ubuntu"
+    "msys2",
+    "scoop",
+    "ubuntu",
+    "windows",
+    "winget"
   ],
   "sources": {
     "arch": {
       "coverage_kind": "exhaustive",
-      "downloaded_bytes": 1521404,
-      "duration_seconds": 0.735,
-      "final_url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
-      "records": 1647,
-      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "downloaded_bytes": 52236975,
+      "duration_seconds": 1.967,
+      "final_url": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.files",
+      "index_count": 3,
+      "indexes": [
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 1522164,
+          "duration_seconds": 0.841,
+          "final_url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+          "records": 1648,
+          "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 50605793,
+          "duration_seconds": 0.893,
+          "final_url": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+          "records": 21482,
+          "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 109018,
+          "duration_seconds": 0.233,
+          "final_url": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.files",
+          "records": 332,
+          "source": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.files",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.files"
+        }
+      ],
+      "observed": [
+        "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+        "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+        "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.files"
+      ],
+      "records": 24757,
+      "source": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.files",
       "status": "success",
       "status_code": 200,
       "url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files"
     },
     "debian": {
       "coverage_kind": "exhaustive",
-      "downloaded_bytes": 12617073,
-      "duration_seconds": 1.358,
-      "final_url": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
-      "records": 36199,
-      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "downloaded_bytes": 30192658,
+      "duration_seconds": 2.662,
+      "final_url": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "index_count": 5,
+      "indexes": [
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 12617073,
+          "duration_seconds": 0.967,
+          "final_url": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+          "records": 36199,
+          "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 187747,
+          "duration_seconds": 0.164,
+          "final_url": "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz",
+          "records": 151,
+          "source": "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 78247,
+          "duration_seconds": 0.234,
+          "final_url": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+          "records": 184,
+          "source": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 1149,
+          "duration_seconds": 0.235,
+          "final_url": "https://deb.debian.org/debian/dists/stable/non-free-firmware/Contents-amd64.gz",
+          "records": 0,
+          "source": "https://deb.debian.org/debian/dists/stable/non-free-firmware/Contents-amd64.gz",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://deb.debian.org/debian/dists/stable/non-free-firmware/Contents-amd64.gz"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 17308442,
+          "duration_seconds": 1.062,
+          "final_url": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+          "records": 40205,
+          "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz"
+        }
+      ],
+      "observed": [
+        "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/stable/non-free-firmware/Contents-amd64.gz",
+        "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz"
+      ],
+      "records": 76719,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
       "status": "success",
       "status_code": 200,
       "url": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz"
     },
     "homebrew": {
       "coverage_kind": "exhaustive",
-      "downloaded_bytes": 31356767,
-      "duration_seconds": 0.822,
+      "downloaded_bytes": 31414149,
+      "duration_seconds": 0.808,
       "final_url": "https://formulae.brew.sh/api/formula.json",
-      "packages": 8552,
-      "records": 25637,
+      "index_count": 1,
+      "indexes": [
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 31414149,
+          "duration_seconds": 0.808,
+          "final_url": "https://formulae.brew.sh/api/formula.json",
+          "packages": 8568,
+          "records": 25727,
+          "source": "https://formulae.brew.sh/api/formula.json",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://formulae.brew.sh/api/formula.json"
+        }
+      ],
+      "observed": [
+        "https://formulae.brew.sh/api/formula.json"
+      ],
+      "records": 25732,
       "source": "https://formulae.brew.sh/api/formula.json",
       "status": "success",
       "status_code": 200,
       "url": "https://formulae.brew.sh/api/formula.json"
     },
+    "msys2": {
+      "coverage_kind": "exhaustive",
+      "downloaded_bytes": 19338541,
+      "duration_seconds": 7.692,
+      "final_url": "https://repo.msys2.org/mingw/clang64/clang64.files",
+      "index_count": 4,
+      "indexes": [
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 1537052,
+          "duration_seconds": 1.553,
+          "final_url": "https://repo.msys2.org/msys/x86_64/msys.files",
+          "records": 2188,
+          "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://repo.msys2.org/msys/x86_64/msys.files"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 4690739,
+          "duration_seconds": 1.857,
+          "final_url": "https://repo.msys2.org/mingw/mingw64/mingw64.files",
+          "records": 0,
+          "source": "https://repo.msys2.org/mingw/mingw64/mingw64.files",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://repo.msys2.org/mingw/mingw64/mingw64.files"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 6566096,
+          "duration_seconds": 2.116,
+          "final_url": "https://repo.msys2.org/mingw/ucrt64/ucrt64.files",
+          "records": 0,
+          "source": "https://repo.msys2.org/mingw/ucrt64/ucrt64.files",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://repo.msys2.org/mingw/ucrt64/ucrt64.files"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 6544654,
+          "duration_seconds": 2.166,
+          "final_url": "https://repo.msys2.org/mingw/clang64/clang64.files",
+          "records": 0,
+          "source": "https://repo.msys2.org/mingw/clang64/clang64.files",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://repo.msys2.org/mingw/clang64/clang64.files"
+        }
+      ],
+      "observed": [
+        "https://repo.msys2.org/msys/x86_64/msys.files",
+        "https://repo.msys2.org/mingw/mingw64/mingw64.files",
+        "https://repo.msys2.org/mingw/ucrt64/ucrt64.files",
+        "https://repo.msys2.org/mingw/clang64/clang64.files"
+      ],
+      "records": 2188,
+      "source": "https://repo.msys2.org/mingw/clang64/clang64.files",
+      "status": "success",
+      "status_code": 200,
+      "url": "https://repo.msys2.org/msys/x86_64/msys.files"
+    },
+    "scoop": {
+      "coverage_kind": "exhaustive",
+      "downloaded_bytes": 2023583,
+      "duration_seconds": 2.311,
+      "final_url": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "index_count": 10,
+      "indexes": [
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 486740,
+          "duration_seconds": 0.336,
+          "final_url": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+          "packages": 1636,
+          "records": 3041,
+          "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 828548,
+          "duration_seconds": 0.424,
+          "final_url": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+          "packages": 2372,
+          "records": 2027,
+          "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 207526,
+          "duration_seconds": 0.266,
+          "final_url": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+          "packages": 601,
+          "records": 1173,
+          "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 88810,
+          "duration_seconds": 0.188,
+          "final_url": "https://codeload.github.com/ScoopInstaller/Nirsoft/tar.gz/refs/heads/master",
+          "packages": 291,
+          "records": 291,
+          "source": "https://codeload.github.com/ScoopInstaller/Nirsoft/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/ScoopInstaller/Nirsoft/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 41311,
+          "duration_seconds": 0.184,
+          "final_url": "https://codeload.github.com/ScoopInstaller/PHP/tar.gz/refs/heads/master",
+          "packages": 391,
+          "records": 782,
+          "source": "https://codeload.github.com/ScoopInstaller/PHP/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/ScoopInstaller/PHP/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 62266,
+          "duration_seconds": 0.172,
+          "final_url": "https://codeload.github.com/ScoopInstaller/Java/tar.gz/refs/heads/master",
+          "packages": 336,
+          "records": 2,
+          "source": "https://codeload.github.com/ScoopInstaller/Java/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/ScoopInstaller/Java/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 63943,
+          "duration_seconds": 0.199,
+          "final_url": "https://codeload.github.com/ScoopInstaller/Nonportable/tar.gz/refs/heads/master",
+          "packages": 132,
+          "records": 79,
+          "source": "https://codeload.github.com/ScoopInstaller/Nonportable/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/ScoopInstaller/Nonportable/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 22517,
+          "duration_seconds": 0.141,
+          "final_url": "https://codeload.github.com/niheaven/scoop-sysinternals/tar.gz/refs/heads/main",
+          "packages": 75,
+          "records": 8,
+          "source": "https://codeload.github.com/niheaven/scoop-sysinternals/tar.gz/refs/heads/main",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/niheaven/scoop-sysinternals/tar.gz/refs/heads/main"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 72078,
+          "duration_seconds": 0.195,
+          "final_url": "https://codeload.github.com/matthewjberger/scoop-nerd-fonts/tar.gz/refs/heads/master",
+          "packages": 367,
+          "records": 0,
+          "source": "https://codeload.github.com/matthewjberger/scoop-nerd-fonts/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/matthewjberger/scoop-nerd-fonts/tar.gz/refs/heads/master"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 149844,
+          "duration_seconds": 0.206,
+          "final_url": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+          "packages": 418,
+          "records": 263,
+          "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master"
+        }
+      ],
+      "observed": [
+        "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+        "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+        "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+        "https://codeload.github.com/ScoopInstaller/Nirsoft/tar.gz/refs/heads/master",
+        "https://codeload.github.com/ScoopInstaller/PHP/tar.gz/refs/heads/master",
+        "https://codeload.github.com/ScoopInstaller/Java/tar.gz/refs/heads/master",
+        "https://codeload.github.com/ScoopInstaller/Nonportable/tar.gz/refs/heads/master",
+        "https://codeload.github.com/niheaven/scoop-sysinternals/tar.gz/refs/heads/main",
+        "https://codeload.github.com/matthewjberger/scoop-nerd-fonts/tar.gz/refs/heads/master",
+        "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master"
+      ],
+      "records": 7666,
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "status": "success",
+      "status_code": 200,
+      "url": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master"
+    },
     "ubuntu": {
       "coverage_kind": "exhaustive",
       "downloaded_bytes": 51301092,
-      "duration_seconds": 1.617,
+      "duration_seconds": 0.409,
       "final_url": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
-      "records": 49831,
+      "index_count": 1,
+      "indexes": [
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 51301092,
+          "duration_seconds": 0.409,
+          "final_url": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+          "records": 49831,
+          "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz"
+        }
+      ],
+      "observed": [
+        "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz"
+      ],
+      "records": 49805,
       "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
       "status": "success",
       "status_code": 200,
       "url": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz"
+    },
+    "windows": {
+      "coverage_kind": "exhaustive",
+      "downloaded_bytes": 4820700640,
+      "duration_seconds": 0.0,
+      "final_url": "windows/nanoserver@sha256:41e29b2b14a45425c8e93b7cc87571f840c21d83f485df45e63b917e5a0366ab",
+      "index_count": 4,
+      "indexes": [
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 2380363321,
+          "duration_seconds": 0.0,
+          "final_url": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+          "image_digest": "sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+          "records": 350,
+          "source": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://mcr.microsoft.com/v2/windows/servercore/manifests/ltsc2025-amd64"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 2128172825,
+          "duration_seconds": 0.0,
+          "final_url": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+          "image_digest": "sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+          "records": 347,
+          "source": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://mcr.microsoft.com/v2/windows/servercore/manifests/ltsc2022-amd64"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 191742340,
+          "duration_seconds": 0.0,
+          "final_url": "windows/nanoserver@sha256:4249ba8974b8996812967d35c46c4e66afd771f929f96917ef6f7592a55edb12",
+          "image_digest": "sha256:4249ba8974b8996812967d35c46c4e66afd771f929f96917ef6f7592a55edb12",
+          "records": 77,
+          "source": "windows/nanoserver@sha256:4249ba8974b8996812967d35c46c4e66afd771f929f96917ef6f7592a55edb12",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://mcr.microsoft.com/v2/windows/nanoserver/manifests/ltsc2025-amd64"
+        },
+        {
+          "coverage_kind": "exhaustive",
+          "downloaded_bytes": 120422154,
+          "duration_seconds": 0.0,
+          "final_url": "windows/nanoserver@sha256:41e29b2b14a45425c8e93b7cc87571f840c21d83f485df45e63b917e5a0366ab",
+          "image_digest": "sha256:41e29b2b14a45425c8e93b7cc87571f840c21d83f485df45e63b917e5a0366ab",
+          "records": 73,
+          "source": "windows/nanoserver@sha256:41e29b2b14a45425c8e93b7cc87571f840c21d83f485df45e63b917e5a0366ab",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://mcr.microsoft.com/v2/windows/nanoserver/manifests/ltsc2022-amd64"
+        }
+      ],
+      "observed": [
+        "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+        "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+        "windows/nanoserver@sha256:4249ba8974b8996812967d35c46c4e66afd771f929f96917ef6f7592a55edb12",
+        "windows/nanoserver@sha256:41e29b2b14a45425c8e93b7cc87571f840c21d83f485df45e63b917e5a0366ab"
+      ],
+      "records": 847,
+      "source": "windows/nanoserver@sha256:41e29b2b14a45425c8e93b7cc87571f840c21d83f485df45e63b917e5a0366ab",
+      "status": "success",
+      "status_code": 200,
+      "url": "windows/servercore:ltsc2025-amd64"
+    },
+    "winget": {
+      "coverage_kind": "partial",
+      "downloaded_bytes": 19548607,
+      "duration_seconds": 0.139,
+      "final_url": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "index_count": 1,
+      "indexes": [
+        {
+          "coverage_kind": "partial",
+          "downloaded_bytes": 19548607,
+          "duration_seconds": 0.139,
+          "final_url": "https://cdn.winget.microsoft.com/cache/source.msix",
+          "note": "winget declares Commands only for manifests that opt in",
+          "packages": 1908,
+          "records": 4608,
+          "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+          "status": "success",
+          "status_code": 200,
+          "url": "https://cdn.winget.microsoft.com/cache/source.msix"
+        }
+      ],
+      "observed": [
+        "https://cdn.winget.microsoft.com/cache/source.msix"
+      ],
+      "records": 4606,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "status": "success",
+      "status_code": 200,
+      "url": "https://cdn.winget.microsoft.com/cache/source.msix"
     }
   },
   "status": "success",
   "uncollected": [
     "crates",
+    "macos",
     "npm",
-    "pypi"
+    "pypi",
+    "shell"
   ]
 }

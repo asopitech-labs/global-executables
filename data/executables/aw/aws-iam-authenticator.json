@@ -3,6 +3,18 @@
   "providers": [
     {
       "ecosystem": "go",
+      "package": "github.com/heptio/authenticator",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/heptio/authenticator/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/kubernetes-sigs/aws-iam-authenticator",
       "version": "v0.3.1-0.20181019024009-82544ec86140",
       "repository": null,
@@ -26,9 +38,21 @@
       "latest_version": "v0.4.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes-sigs/aws-iam-authenticator",
+      "version": "v0.7.18",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes-sigs/aws-iam-authenticator/@v/v0.7.18.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.18"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "aws-iam-authenticator",
-      "version": "0.7.18",
+      "version": "0.7.19",
       "repository": "https://github.com/kubernetes-sigs/aws-iam-authenticator",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -36,8 +60,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "aws-iam-authenticator",
+      "version": "0.7.19",
+      "repository": "https://github.com/kubernetes-sigs/aws-iam-authenticator",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.7.19"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Kubernetes.aws-iam-authenticator",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

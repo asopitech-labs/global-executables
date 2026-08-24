@@ -1,0 +1,43 @@
+{
+  "command": "atomcode",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "atomcode",
+      "version": "4.23.1",
+      "repository": "https://atomgit.com/atomgit_atomcode/atomcode",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "4.23.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atomgit.com/atomcode",
+      "version": "5.0.8",
+      "repository": "git+https://atomgit.com/atomgit_atomcode/atomcode.git",
+      "source": "https://registry.npmjs.org/@atomgit.com%2Fatomcode/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.0.8"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "AtomGit.AtomCode",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

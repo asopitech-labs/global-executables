@@ -2,9 +2,33 @@
   "command": "dbx",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dbx-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/davegomez/dbx-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "eventdbx",
+      "version": "3.19.4",
+      "repository": "https://github.com/eventdbx/eventdbx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.19.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dbx-cli",
-      "version": "0.4.64",
+      "version": "0.4.70",
       "repository": "https://dbxio.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dbx",
+      "version": "0.2.2",
+      "repository": "https://github.com/ddrscott/dbx",
+      "source": "https://rubygems.org/gems/dbx-0.2.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

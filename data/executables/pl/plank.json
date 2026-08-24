@@ -2,6 +2,42 @@
   "command": "plank",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "plank-0.11.89-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "plank",
+      "version": "0.2.0",
+      "repository": "https://github.com/alluring-mushroom/plank",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "plank",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "plank",
       "version": null,
@@ -14,6 +50,150 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20181019233642-2e10a0bbe9b3",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20181019233642-2e10a0bbe9b3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181019233642-2e10a0bbe9b3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190117095820-81934b1c32c2",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190117095820-81934b1c32c2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190117095820-81934b1c32c2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190131093439-a22cef183a8f",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190131093439-a22cef183a8f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190131093439-a22cef183a8f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190421193744-143a95a43bb7",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190421193744-143a95a43bb7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190421193744-143a95a43bb7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190504034938-863322699fe2",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190504034938-863322699fe2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190504034938-863322699fe2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190524132619-58b85f699367",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190524132619-58b85f699367.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524132619-58b85f699367"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190529235220-31df46e6f68b",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190529235220-31df46e6f68b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190529235220-31df46e6f68b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190530232626-7328fd620882",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190530232626-7328fd620882.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530232626-7328fd620882"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190604141730-4d6fd59959c3",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190604141730-4d6fd59959c3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190604141730-4d6fd59959c3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190605004553-1a373ade3732",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190605004553-1a373ade3732.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190605004553-1a373ade3732"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190606031010-855aa80c933d",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190606031010-855aa80c933d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606031010-855aa80c933d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190612225817-bf4a71fd9ef1",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190612225817-bf4a71fd9ef1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190612225817-bf4a71fd9ef1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "plank",
       "version": "1.6",
@@ -24,6 +204,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@am25/plank-cms",
+      "version": "0.11.2",
+      "repository": "git+https://github.com/am25-labs/plank-cms.git",
+      "source": "https://registry.npmjs.org/@am25%2Fplank-cms/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.11.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +231,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

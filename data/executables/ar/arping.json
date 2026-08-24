@@ -18,7 +18,31 @@
       "package": "arping",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "arping",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "iputils-arping",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
@@ -36,6 +60,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/j-keck/arping",
+      "version": "v0.0.0-20160618110441-2cf9dc699c56",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/j-keck/arping/@v/v0.0.0-20160618110441-2cf9dc699c56.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160618110441-2cf9dc699c56"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/j-keck/arping",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/j-keck/arping/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
     },
     {
       "ecosystem": "homebrew",
@@ -75,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

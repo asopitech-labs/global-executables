@@ -2,6 +2,30 @@
   "command": "mdcat",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mdcat",
+      "version": "2.15.0",
+      "repository": "https://github.com/BIRSAx2/mdcat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.15.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdcat-ng",
+      "version": "0.2.1",
+      "repository": "https://github.com/pawelb0/mdcat-ng",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mdcat",
       "version": "2.15.0",
@@ -12,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdcat",
+      "version": "0.4.0",
+      "repository": "https://github.com/dvinciguerra/mdcat",
+      "source": "https://rubygems.org/gems/mdcat-0.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "mdcat",
+      "version": "2.7.1",
+      "repository": "https://github.com/swsnr/mdcat",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.7.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

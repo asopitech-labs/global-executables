@@ -2,6 +2,42 @@
   "command": "renamer",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pipe-rename-1.6.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pipe-rename",
+      "version": "1.6.7",
+      "repository": "https://github.com/marcusbuffett/pipe-rename",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.6.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "renamer",
+      "version": "0.2.0",
+      "repository": "https://github.com/adriangoransson/renamer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pipe-rename",
       "version": "1.6.7",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "Renamer",
+      "version": "0.5.2",
+      "repository": "http://bitbucket.org/Bounga/renamer/src/",
+      "source": "https://rubygems.org/gems/Renamer-0.5.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

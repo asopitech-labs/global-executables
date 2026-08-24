@@ -2,6 +2,18 @@
   "command": "gal",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gal-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/adamjhf/gal",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ApiLogicServer",
       "version": "17.3.15",
@@ -12,8 +24,32 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "17.3.15"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "galvanize",
+      "version": "0.1.2",
+      "repository": "https://github.com/qubitrenegade/galvanize",
+      "source": "https://rubygems.org/gems/galvanize-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Monkey1Wizard.GAL",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

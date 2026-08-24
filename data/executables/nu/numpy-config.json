@@ -2,6 +2,30 @@
   "command": "numpy-config",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-numpy-2.5.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-numpy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "python3-numpy",
       "version": null,
@@ -24,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Plotium",
+      "version": "1.2.0",
+      "repository": "https://github.com/rohankishore/Plotium",
+      "source": "https://files.pythonhosted.org/packages/8b/8a/75cea6d984b49af9c15da0419ee5646fc12c387eb74d4f8779f37387138e/Plotium-1.2.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Ran-JIT",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/76/51/b5b20c7bc8f1d9de6879ef23c9ae84d936fde1d167599d250bc32407115b/Ran-JIT-0.1.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "browser",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "browser",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libsilo-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libsilo-bin",
       "version": null,
@@ -12,6 +36,78 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-eden/goxui",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-eden/goxui/@v/v0.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-eden/goxui",
+      "version": "v0.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-eden/goxui/@v/v0.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-eden/goxui",
+      "version": "v0.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-eden/goxui/@v/v0.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-eden/goxui",
+      "version": "v0.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-eden/goxui/@v/v0.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sisyphsu/goxui",
+      "version": "v0.0.0-20190610064817-5b85c26ee364",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sisyphsu/goxui/@v/v0.0.0-20190610064817-5b85c26ee364.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190610064817-5b85c26ee364"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autotester-use",
+      "version": "0.13.7.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/52/a9/07019609011097946c12db678e1b518e071252efd3042ff79de438d2dd7c/autotester_use-0.13.7.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.13.7.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

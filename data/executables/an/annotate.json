@@ -2,6 +2,54 @@
   "command": "annotate",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gd-2.3.3-9",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kraken2_rs",
+      "version": "0.6.12",
+      "repository": "https://github.com/jianshu93/kraken2-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.12"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kun_peng",
+      "version": "0.7.5",
+      "repository": "https://github.com/eric9n/Kun-peng",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libgd-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libgd-tools",
       "version": null,
@@ -12,6 +60,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "bosun.org",
+      "version": "v0.0.0-20190502231157-0bfef813bad3",
+      "repository": null,
+      "source": "https://proxy.golang.org/bosun.org/@v/v0.0.0-20190502231157-0bfef813bad3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190502231157-0bfef813bad3"
     },
     {
       "ecosystem": "homebrew",
@@ -38,6 +98,138 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@atomdevelops/annotate",
+      "version": "1.0.3",
+      "repository": "git+https://github.com/atomisadev/noted.git",
+      "source": "https://registry.npmjs.org/@atomdevelops%2Fannotate/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ImgVidObjectsDetector",
+      "version": "0.4.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/36/0a/53f8bff23957e49edd447561b47839c5a0c9bacc1d809fc72a36ebe1ead5/ImgVidObjectsDetector-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "IPGlider-annotate",
+      "version": "2.2.7",
+      "repository": "http://github.com/nofxx/annotate",
+      "source": "https://rubygems.org/gems/IPGlider-annotate-2.2.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.2.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "annot8",
+      "version": "1.0.1",
+      "repository": "https://github.com/chemica/annotate_models.git",
+      "source": "https://rubygems.org/gems/annot8-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "annotate",
+      "version": "3.2.0",
+      "repository": "https://github.com/ctran/annotate_models.git",
+      "source": "https://rubygems.org/gems/annotate-3.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "annotate-sequel",
+      "version": "1.1.1",
+      "repository": "http://github.com/kennym/annotate-sequel",
+      "source": "https://rubygems.org/gems/annotate-sequel-1.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "annotated",
+      "version": "0.1.1",
+      "repository": "https://github.com/thedumbtechguy/annotated",
+      "source": "https://rubygems.org/gems/annotated-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "annotated_models",
+      "version": "3.0.2",
+      "repository": "http://github.com/openteam/annotated_models",
+      "source": "https://rubygems.org/gems/annotated_models-3.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "codeape-annotate",
+      "version": "2.0.0.20090212001",
+      "repository": "http://github.com/ctran/annotate_models",
+      "source": "https://rubygems.org/gems/codeape-annotate-2.0.0.20090212001.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.0.20090212001"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "db-annotate",
+      "version": "1.0.0",
+      "repository": "https://github.com/eddyjaga/annotate_models-rails8",
+      "source": "https://rubygems.org/gems/db-annotate-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "doubledrones-annotate",
+      "version": "2.4.0.2",
+      "repository": "http://github.com/doubledrones/annotate_models",
+      "source": "https://rubygems.org/gems/doubledrones-annotate-2.4.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.4.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libgd-tools",
       "version": null,
@@ -51,5 +243,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "dz6",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dz6",
+      "version": "0.7.1",
+      "repository": "https://github.com/mentebinaria/dz6",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dz6",
       "version": "0.7.1",
@@ -12,8 +24,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dz6",
+      "version": "0.7.1",
+      "repository": "https://dz6.dev.br",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.7.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

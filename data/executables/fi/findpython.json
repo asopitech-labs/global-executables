@@ -2,6 +2,30 @@
   "command": "findpython",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-findpython-0.8.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "findpython",
+      "version": "1.0.0-alpha.3",
+      "repository": "https://github.com/frostming/findpython",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0-alpha.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-findpython",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,57 @@
+{
+  "command": "winget",
+  "providers": [
+    {
+      "ecosystem": "nuget",
+      "package": "winget",
+      "version": "42.42.42",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winget/42.42.42/winget.42.42.42.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "42.42.42"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "winget",
+      "version": "1.29.280",
+      "repository": "https://github.com/microsoft/winget-cli",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.29.280"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "winget-preview",
+      "version": "1.30.100",
+      "repository": "https://github.com/microsoft/winget-cli",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.30.100"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Microsoft.AppInstaller",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

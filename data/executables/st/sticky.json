@@ -1,0 +1,43 @@
+{
+  "command": "sticky",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "sticky-1.32-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sticky",
+      "version": "1.0.0",
+      "repository": "https://github.com/moddedBear/sticky",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jakecoffman/cp",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jakecoffman/cp/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

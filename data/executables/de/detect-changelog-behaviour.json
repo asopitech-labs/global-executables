@@ -2,6 +2,30 @@
   "command": "detect-changelog-behaviour",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "debian-analyzer",
+      "version": "0.160.20",
+      "repository": "https://github.com/jelmer/debian-analyzer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.160.20"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "debian-workbench",
+      "version": "0.3.1",
+      "repository": "https://github.com/jelmer/debian-analyzer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "lintian-brush",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

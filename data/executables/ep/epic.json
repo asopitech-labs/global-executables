@@ -1,0 +1,55 @@
+{
+  "command": "epic",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "epic4-2.10.11-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "epic",
+      "version": "0.2.0",
+      "repository": "https://github.com/solana-epic/epic",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "epic-harness",
+      "version": "0.8.2",
+      "repository": "https://github.com/epicsagas/epic-harness",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "epic",
+      "version": "0.0.4",
+      "repository": "http://github.com/progressions/epic",
+      "source": "https://rubygems.org/gems/epic-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

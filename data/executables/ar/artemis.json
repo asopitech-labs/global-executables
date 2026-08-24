@@ -2,6 +2,91 @@
   "command": "artemis",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@artemis-lang/cli",
+      "version": "0.3.4",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@artemis-lang%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artemis-agents",
+      "version": "2.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/97/d3/900ea2f8afdd7e721df59439a86875d952a97916a9f56a023cd5e186e527/artemis_agents-2.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artemis-cli",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a3/ee/89a60aea99a7b58c72fcce2ecee477dbbd293cc1914c9f1d4f57dd352476/artemis_cli-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artemis-lms-cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/be/81/c8d28d43cf2e9b3cd625b965f5bdbfc25008cbaa4f88421b61a236024155/artemis_lms_cli-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artemis-materials",
+      "version": "2.0.0.dev3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/23/e2/4eb916f01cd2cce7f9f0b8fe999eda585eb4105b58687ebd077348db29ed/artemis_materials-2.0.0.dev3-cp312-cp312-macosx_15_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0.dev3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artemis-ui",
+      "version": "0.97.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5d/2c/7e6f3acf483cd37eb6ab7a0fee6129cdd7bed5f140bfa1ddc449989f5f0b/artemis_ui-0.97.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.97.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "activemq-artemis",
+      "version": "2.55.0",
+      "repository": "https://artemis.apache.org/components/artemis/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.55.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "horae",
       "version": null,
@@ -15,5 +100,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

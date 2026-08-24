@@ -2,6 +2,30 @@
   "command": "goku",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "goku",
+      "version": "0.1.1",
+      "repository": "https://github.com/k-nasa/goku",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "goku-bench",
+      "version": "3.0.0",
+      "repository": "https://github.com/jcaromiq/goku",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "goku",
       "version": "3.0.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "goku",
+      "version": "1.2",
+      "repository": "https://github.com/shiroyasha/goku",
+      "source": "https://rubygems.org/gems/goku-1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

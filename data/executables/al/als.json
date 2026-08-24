@@ -2,6 +2,18 @@
   "command": "als",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "atool-0.39.0-10",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "agda",
       "version": "2.8.0-r3",
@@ -24,6 +36,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "atool-0.39.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alsania-io/cli",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/alsania-io/alsania-cli.git",
+      "source": "https://registry.npmjs.org/@alsania-io%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aml-org/als-node-client",
+      "version": "7.1.6",
+      "repository": "git+https://github.com/aml-org/als.git",
+      "source": "https://registry.npmjs.org/@aml-org%2Fals-node-client/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "7.1.6"
     },
     {
       "ecosystem": "pypi",
@@ -63,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

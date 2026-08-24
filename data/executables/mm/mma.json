@@ -2,6 +2,42 @@
   "command": "mma",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "macmemana",
+      "version": "0.3.1",
+      "repository": "https://github.com/W-Mai/macmemana",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mma",
+      "version": "0.1.2",
+      "repository": "https://github.com/sbOogway/mma",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "mma-cli",
+      "version": "9.0.7",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/mma-cli/9.0.7/mma-cli.9.0.7.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "9.0.7"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "mma",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

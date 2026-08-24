@@ -2,6 +2,42 @@
   "command": "enigma",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "enigma-1.04-8",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "haskell-crypto-enigma-0.1.1.6-245",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "enigma_shark",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "enigma",
       "version": "1.30",
@@ -12,8 +48,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Enigma.Cli",
+      "version": "1.2.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/enigma.cli/1.2.2/enigma.cli.1.2.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.2.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "julien-boudry/enigma-machine",
+      "version": "v5",
+      "repository": "https://github.com/julien-boudry/Enigma-Machine.git",
+      "source": "https://repo.packagist.org/p2/julien-boudry/enigma-machine.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "enigma_engine",
+      "version": "0.1.0",
+      "repository": "https://github.com/andela-sdamian/enigma_engine",
+      "source": "https://rubygems.org/gems/enigma_engine-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "enigma",
+      "version": "1.30",
+      "repository": "https://www.nongnu.org/enigma/index.html",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.30"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

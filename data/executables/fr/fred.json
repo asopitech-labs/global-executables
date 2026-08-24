@@ -2,6 +2,18 @@
   "command": "fred",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ferric-fred-cli",
+      "version": "0.3.8",
+      "repository": "https://github.com/ojhermann-org/ferric-fred",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.8"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fred",
       "version": "1.2.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fredric",
+      "version": "0.1.2",
+      "repository": "https://github.com/DannyBen/fredric",
+      "source": "https://rubygems.org/gems/fredric-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

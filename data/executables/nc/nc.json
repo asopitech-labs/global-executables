@@ -2,6 +2,18 @@
   "command": "nc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "openbsd-netcat-1.238_1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "netcat",
       "version": "0.7.1",
@@ -12,8 +24,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "gnu-netcat-0.7.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "openbsd-netcat-1.234_2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aiwanna-team/nodejs-cli",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/aiwanna-team/nodejs-cli.git",
+      "source": "https://registry.npmjs.org/@aiwanna-team%2Fnodejs-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Winix.NetCat",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winix.netcat/0.4.0/winix.netcat.0.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

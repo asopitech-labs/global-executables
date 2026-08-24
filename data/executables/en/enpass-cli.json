@@ -2,6 +2,18 @@
   "command": "enpass-cli",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "enpass-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/norcalli/enpass-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "enpass-cli",
       "version": "1.12.0",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

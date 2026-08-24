@@ -1,0 +1,32 @@
+{
+  "command": "lagrange",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "lagrange-library",
+      "version": "0.2.9",
+      "repository": "https://github.com/celestia-island/lagrange",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.9"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "lagrange",
+      "version": "1.20.9",
+      "repository": "https://gmi.skyjake.fi/lagrange",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.20.9"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

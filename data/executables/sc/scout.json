@@ -2,6 +2,66 @@
   "command": "scout",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "scout",
+      "version": "2.8.0",
+      "repository": "https://github.com/jhbabon/scout",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.8.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "scout-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/treygoff24/scout",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "scoutlang",
+      "version": "0.7.2",
+      "repository": "https://github.com/maxmindlin/scout-lang",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "swarm-scout",
+      "version": "0.6.1",
+      "repository": "https://github.com/ethswarm-tools/scout",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "openafs-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "openafs-client",
       "version": null,
@@ -26,6 +86,90 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@4meta5/scout",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@4meta5%2Fscout/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adi611/scout",
+      "version": "2.7.0",
+      "repository": "git+https://github.com/adi611/scout.git",
+      "source": "https://registry.npmjs.org/@adi611%2Fscout/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.7.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@archsense/scout",
+      "version": "0.2.5",
+      "repository": "git+https://github.com/ArchSense/archsense-mono.git",
+      "source": "https://registry.npmjs.org/@archsense%2Fscout/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@asuarezz/scout",
+      "version": "0.1.2",
+      "repository": "git+https://github.com/AndresSuarezz/scout.git",
+      "source": "https://registry.npmjs.org/@asuarezz%2Fscout/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Scout",
+      "version": "0.6.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/scout/0.6.1/scout.0.6.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "helpscout/helpscout-cli-php",
+      "version": "0.0.1",
+      "repository": "https://github.com/helpscout/helpscout-cli-php.git",
+      "source": "https://repo.packagist.org/p2/helpscout/helpscout-cli-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ScoutSuite",
+      "version": "5.14.0",
+      "repository": "https://github.com/nccgroup/ScoutSuite",
+      "source": "https://files.pythonhosted.org/packages/a6/06/b5b16e4f58888999cc291032ad4a853573d8e3f470272e82ca990b3f65dc/ScoutSuite-5.14.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.14.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "openafs-client",
       "version": null,
@@ -39,5 +183,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

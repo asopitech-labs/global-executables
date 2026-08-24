@@ -2,9 +2,21 @@
   "command": "catalina",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "catalina",
+      "version": "0.0.1",
+      "repository": "https://github.com/northernpaws/catalina",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tomcat",
-      "version": "11.0.24",
+      "version": "11.0.25",
       "repository": "https://tomcat.apache.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -16,7 +28,7 @@
     {
       "ecosystem": "homebrew",
       "package": "tomcat@10",
-      "version": "10.1.57",
+      "version": "10.1.59",
       "repository": "https://tomcat.apache.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -28,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "tomcat@9",
-      "version": "9.0.120",
+      "version": "9.0.121",
       "repository": "https://tomcat.apache.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -36,8 +48,99 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tomcat",
+      "version": "11.0.25",
+      "repository": "https://tomcat.apache.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "11.0.25"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tomcat10",
+      "version": "10.1.59",
+      "repository": "https://tomcat.apache.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "10.1.59"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tomcat11",
+      "version": "11.0.25",
+      "repository": "https://tomcat.apache.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "11.0.25"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tomcat6",
+      "version": "6.0.53",
+      "repository": "https://tomcat.apache.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "6.0.53"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tomcat7",
+      "version": "7.0.109",
+      "repository": "https://tomcat.apache.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.0.109"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tomcat8",
+      "version": "8.5.100",
+      "repository": "https://tomcat.apache.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "8.5.100"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tomcat9",
+      "version": "9.0.121",
+      "repository": "https://tomcat.apache.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.0.121"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

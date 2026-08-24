@@ -2,6 +2,30 @@
   "command": "testr",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-testrepository-0.0.22-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "tomware.TestR",
+      "version": "0.8.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/tomware.testr/0.8.2/tomware.testr.0.8.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.8.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-testrepository",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

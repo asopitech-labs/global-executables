@@ -2,9 +2,21 @@
   "command": "supabase",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "supabase",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "supabase",
-      "version": "2.114.0",
+      "version": "2.115.0",
       "repository": "https://supabase.com/docs/reference/cli/about",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,70 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aliyun-supabase/cli",
+      "version": "1.0.5",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aliyun-supabase%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anarkrypto/supabase",
+      "version": "1.1.0-fix",
+      "repository": "git+https://github.com/anarkrypto/supabase-cli.git",
+      "source": "https://registry.npmjs.org/@anarkrypto%2Fsupabase/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0-fix"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anarkrypto/supabase-cli",
+      "version": "0.0.0-automated",
+      "repository": "git+https://github.com/anarkrypto/supabase-cli.git",
+      "source": "https://registry.npmjs.org/@anarkrypto%2Fsupabase-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.0-automated"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "supabase",
+      "version": "2.115.0",
+      "repository": "https://supabase.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.115.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "supabase-beta",
+      "version": "2.116.0-beta.2",
+      "repository": "https://supabase.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.116.0-beta.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

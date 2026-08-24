@@ -2,6 +2,30 @@
   "command": "diagram",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "diagram",
+      "version": "0.1.1",
+      "repository": "https://github.com/yingkitw/diagram",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wcharczuk/go-incr",
+      "version": "v1.4.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wcharczuk/go-incr/@v/v1.4.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.13"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "diagram",
       "version": "1.1.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "CodeDiagramCreator",
+      "version": "0.0.6",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/codediagramcreator/0.0.6/codediagramcreator.0.0.6.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

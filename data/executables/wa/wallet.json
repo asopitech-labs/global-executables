@@ -2,6 +2,66 @@
   "command": "wallet",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "budgetbakers-wallet-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/TudorAndrei/wallet-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cruzbit",
+      "version": "1.4.0",
+      "repository": "https://github.com/christian-smith/cruzbit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "crypto-wallet",
+      "version": "0.1.0",
+      "repository": "https://github.com/ZocketZero/crypto-wallet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "motosan-wallet-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/motosan-dev/motosan-wallet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "krb5-wallet-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "krb5-wallet-client",
       "version": null,
@@ -12,8 +72,68 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/akbariandev/tonutils-go",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/akbariandev/tonutils-go/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.dedis.ch/cothority/v3",
+      "version": "v3.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.dedis.ch/cothority/v3/@v/v3.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abcpros/bitcore-wallet",
+      "version": "8.25.45",
+      "repository": "git+ssh://git@github.com/bitpay/bitcore-wallet.git",
+      "source": "https://registry.npmjs.org/@abcpros%2Fbitcore-wallet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "8.25.45"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adora-wallet/adoracore-wallet",
+      "version": "8.28.32",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adora-wallet%2Fadoracore-wallet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "8.28.32"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agentlayer.tech/wallet",
+      "version": "0.1.99",
+      "repository": "git+https://github.com/lopushok9/Agent-Layer.git",
+      "source": "https://registry.npmjs.org/@agentlayer.tech%2Fwallet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.99"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

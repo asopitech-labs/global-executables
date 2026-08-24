@@ -2,6 +2,30 @@
   "command": "faketty",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "faketty",
+      "version": "1.0.20",
+      "repository": "https://github.com/dtolnay/faketty",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.20"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "faketty-lib",
+      "version": "2.0.18",
+      "repository": "https://github.com/bryango/faketty-lib",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.18"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "faketty",
       "version": "1.0.20",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

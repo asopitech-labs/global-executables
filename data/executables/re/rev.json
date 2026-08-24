@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "linuxutils-text",
+      "version": "0.1.0",
+      "repository": "https://github.com/rustutils/linuxutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bsdextrautils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "util-linux",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "gopl.io",
+      "version": "v0.0.0-20161206225729-b725d6015f98",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopl.io/@v/v0.0.0-20161206225729-b725d6015f98.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161206225729-b725d6015f98"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "util-linux",
       "version": "2.42.2",
@@ -36,6 +72,43 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "util-linux-2.40.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "util-linux-ng",
+      "version": "2.14.1",
+      "repository": "http://gnuwin32.sourceforge.net/packages/util-linux-ng.htm",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.14.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -51,5 +124,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

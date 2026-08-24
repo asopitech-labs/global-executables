@@ -2,6 +2,66 @@
   "command": "samples",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cudnn-frontend-1.27.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "samples",
+      "version": "1.0.5",
+      "repository": "https://github.com/zhangtaomox/samples",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aliyun/fc-go-sdk",
+      "version": "v0.0.0-20181212124844-cf2b85944110",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aliyun/fc-go-sdk/@v/v0.0.0-20181212124844-cf2b85944110.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181212124844-cf2b85944110"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aliyun/fc-go-sdk",
+      "version": "v0.0.0-20190326033901-db3e654c23d6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aliyun/fc-go-sdk/@v/v0.0.0-20190326033901-db3e654c23d6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190326033901-db3e654c23d6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/eclipse/paho.mqtt.golang",
+      "version": "v0.0.0-20160630144056-44eec149d443",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/eclipse/paho.mqtt.golang/@v/v0.0.0-20160630144056-44eec149d443.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160630144056-44eec149d443"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/go-opencv/go-opencv",
       "version": "v0.0.0-20190115070742-a4fe8ec027cc",
@@ -51,6 +111,42 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/google/flatbuffers",
+      "version": "v1.11.1-0.20190614154707-a80db8538cf4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/flatbuffers/@v/v1.11.1-0.20190614154707-a80db8538cf4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.1-0.20190614154707-a80db8538cf4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/flatbuffers",
+      "version": "v1.11.1-0.20190617221513-e635141d5bc6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/flatbuffers/@v/v1.11.1-0.20190617221513-e635141d5bc6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.1-0.20190617221513-e635141d5bc6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/flatbuffers",
+      "version": "v1.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/flatbuffers/@v/v1.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.1"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/kidoman/embd",
       "version": "v0.0.0-20170508013040-d3d8c0c5c68d",
       "repository": null,
@@ -75,6 +171,30 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/owulveryck/onnx-go",
+      "version": "v0.0.0-20190611120340-a34fb4cb5f1d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/owulveryck/onnx-go/@v/v0.0.0-20190611120340-a34fb4cb5f1d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190611120340-a34fb4cb5f1d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/richmonkey/cfg",
+      "version": "v0.0.0-20130815005846-4b1e3c1869d4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/richmonkey/cfg/@v/v0.0.0-20130815005846-4b1e3c1869d4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20130815005846-4b1e3c1869d4"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/stretchr/codecs",
       "version": "v0.0.0-20170403063245-04a5b1e1910d",
       "repository": null,
@@ -84,8 +204,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170403063245-04a5b1e1910d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/withlin/canal-go",
+      "version": "v0.0.0-20190509060020-f4ee0964adee",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/withlin/canal-go/@v/v0.0.0-20190509060020-f4ee0964adee.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190509060020-f4ee0964adee"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,102 @@
   "command": "sm",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "inn-2.7.4-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "proxmark3-4.20142-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sm-search",
+      "version": "0.1.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "spongemock",
+      "version": "0.1.1",
+      "repository": "https://github.com/Tanja-4732/spongemock",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "starmetal",
+      "version": "0.4.0",
+      "repository": "https://github.com/Goldziher/starmetal",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "submarine-rs",
+      "version": "0.13.0",
+      "repository": "https://github.com/lebe-dev/submarine",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "systemctl-manager",
+      "version": "1.1.0",
+      "repository": "https://github.com/yarso-su/systemctl-manager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "sm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "sm",
       "version": null,
@@ -12,8 +108,68 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@100tal-seg/seg-materials",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@100tal-seg%2Fseg-materials/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SimpleModule.Cli",
+      "version": "0.0.40",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/simplemodule.cli/0.0.40/simplemodule.cli.0.0.40.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.40"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SoftmakeAll.CLI",
+      "version": "1.0.33",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/softmakeall.cli/1.0.33/softmakeall.cli.1.0.33.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.33"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-skill-manager",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/11/f4/652950c62f6d61ff3dd11ac3b33a11750116be33855cefed6bb885388155/agent_skill_manager-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awry",
+      "version": "0.1.0",
+      "repository": "https://github.com/rlister/awry",
+      "source": "https://rubygems.org/gems/awry-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

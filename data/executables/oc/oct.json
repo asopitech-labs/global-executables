@@ -1,0 +1,31 @@
+{
+  "command": "oct",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "openpgp-card-tools-0.11.13-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "openpgp-card-tools",
+      "version": "0.11.13",
+      "repository": "https://codeberg.org/openpgp-card/openpgp-card-tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.13"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

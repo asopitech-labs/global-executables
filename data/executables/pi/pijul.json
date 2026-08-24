@@ -1,0 +1,32 @@
+{
+  "command": "pijul",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "pijul",
+      "version": "0.15.0",
+      "repository": "https://nest.pijul.com/pijul/pijul",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pijul",
+      "version": "1.0.0-beta.11",
+      "repository": "https://pijul.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.0.0-beta.11"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

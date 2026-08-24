@@ -2,6 +2,30 @@
   "command": "doh",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "doh",
+      "version": "0.1.0",
+      "repository": "https://github.com/thecoshman/doh",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "doh-cli",
+      "version": "0.4.0",
+      "repository": "https://github.com/ubahmapk/doh",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "doh",
       "version": "0.1",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "doh",
+      "version": "0.0.1",
+      "repository": "https://github.com/primedia/doh/",
+      "source": "https://rubygems.org/gems/doh-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "matthewtodd-doh",
+      "version": "0.2.4",
+      "repository": null,
+      "source": "https://rubygems.org/gems/matthewtodd-doh-0.2.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

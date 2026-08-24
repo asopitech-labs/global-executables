@@ -2,6 +2,18 @@
   "command": "git-trim",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-trim",
+      "version": "0.4.4",
+      "repository": "https://github.com/foriequal0/git-trim",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "git-trim",
       "version": "0.4.4",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-trim",
+      "version": "0.2.0",
+      "repository": "https://github.com/cpetersen/git-trim",
+      "source": "https://rubygems.org/gems/git-trim-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,79 @@
+{
+  "command": "dice",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "dice-0.1.1-188",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rpg-dice-rust",
+      "version": "1.1.0",
+      "repository": "https://github.com/dgunay/rpg-dice-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "spicy-dice",
+      "version": "1.0.1",
+      "repository": "https://git.sr.ht/~spicywolf/spicy-dice",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/travis-g/dice",
+      "version": "v0.0.0-20190530053535-cb3e33dc5a0e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/travis-g/dice/@v/v0.0.0-20190530053535-cb3e33dc5a0e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530053535-cb3e33dc5a0e"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "character-roller",
+      "version": "0.1.4",
+      "repository": "https://github.com/mikedamage/character-roller",
+      "source": "https://rubygems.org/gems/character-roller-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dice-cli",
+      "version": "0.0.1",
+      "repository": "https://github.com/walerian777/dice",
+      "source": "https://rubygems.org/gems/dice-cli-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

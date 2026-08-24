@@ -2,6 +2,42 @@
   "command": "hist",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hist-cli",
+      "version": "0.5.0",
+      "repository": "https://github.com/ahcm/hist-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hist-rs",
+      "version": "0.1.8",
+      "repository": "https://github.com/noamteyssier/hist-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "loki",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "loki",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgryski/trifles",
+      "version": "v0.0.0-20190318185328-a8d75aae118c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgryski/trifles/@v/v0.0.0-20190318185328-a8d75aae118c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190318185328-a8d75aae118c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgryski/trifles",
+      "version": "v0.0.0-20190530022834-891760d8d75c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgryski/trifles/@v/v0.0.0-20190530022834-891760d8d75c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530022834-891760d8d75c"
     },
     {
       "ecosystem": "go",
@@ -38,6 +98,30 @@
       "latest_version": "v0.0.0-20150617131849-2304415b1c44"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/toolkits/rsc",
+      "version": "v0.0.0-20190916221529-28ce20d05d44",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/toolkits/rsc/@v/v0.0.0-20190916221529-28ce20d05d44.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190916221529-28ce20d05d44"
+    },
+    {
+      "ecosystem": "go",
+      "package": "rsc.io/rsc",
+      "version": "v0.0.0-20180427141835-fc6202590229",
+      "repository": null,
+      "source": "https://proxy.golang.org/rsc.io/rsc/@v/v0.0.0-20180427141835-fc6202590229.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180427141835-fc6202590229"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "historian",
       "version": "0.0.2",
@@ -48,6 +132,16 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "ksh",
+      "version": "Version AJM 93u+ 2012-08-01",
+      "repository": null,
+      "source": "ksh@Version AJM 93u+ 2012-08-01",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
     },
     {
       "ecosystem": "ubuntu",
@@ -63,5 +157,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

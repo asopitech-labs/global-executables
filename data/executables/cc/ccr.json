@@ -2,6 +2,30 @@
   "command": "ccr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ccr",
+      "version": "0.2.6",
+      "repository": "https://github.com/brevity1swos/ccr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "codecrypt",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "codecrypt",
       "version": null,
@@ -26,6 +50,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@ai-sensei/claude-code-augmentor",
+      "version": "1.0.5",
+      "repository": "git+https://github.com/cracked99/claude-code-augmentor.git",
+      "source": "https://registry.npmjs.org/@ai-sensei%2Fclaude-code-augmentor/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alpaca-network/claude-code-router",
+      "version": "1.0.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alpaca-network%2Fclaude-code-router/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "community_cookbook_releaser",
+      "version": "1.2.0",
+      "repository": "https://www.chef.io",
+      "source": "https://rubygems.org/gems/community_cookbook_releaser-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "codecrypt",
       "version": null,
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

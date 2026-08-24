@@ -2,6 +2,54 @@
   "command": "ansi2html",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-ansi2html-1.9.2-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ansi2html",
+      "version": "0.2.2",
+      "repository": "https://github.com/ahaoboy/ansi2",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ansiconv",
+      "version": "1.2.2",
+      "repository": "https://gitlab.com/cnrgh/infotools/ansiconv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "colorized-logs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "colorized-logs",
       "version": null,
@@ -12,6 +60,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansi2html",
+      "version": "1.9.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/bd/71/aee71b836e9ee2741d5694b80d74bfc7c8cd5dbdf7a9f3035fcf80d792b1/ansi2html-1.9.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.9.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ansi2html",
+      "version": "5.3.4",
+      "repository": "http://github.com/aslakhellesoy/#{s.name}",
+      "source": "https://rubygems.org/gems/ansi2html-5.3.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "5.3.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

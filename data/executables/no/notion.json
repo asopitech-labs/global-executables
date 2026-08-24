@@ -2,6 +2,30 @@
   "command": "notion",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "notion-1:4.0.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "notion",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "notion",
       "version": null,
@@ -12,6 +36,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@4ier/notion-cli",
+      "version": "0.7.0",
+      "repository": "git+https://github.com/4ier/notion-cli.git",
+      "source": "https://registry.npmjs.org/@4ier%2Fnotion-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@6missedcalls/notion-cli",
+      "version": "0.1.4",
+      "repository": "git+https://github.com/6missedcalls/notion-cli.git",
+      "source": "https://registry.npmjs.org/@6missedcalls%2Fnotion-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andrzejchm/notion-cli",
+      "version": "0.13.0",
+      "repository": "git+https://github.com/andrzejchm/notion-cli.git",
+      "source": "https://registry.npmjs.org/@andrzejchm%2Fnotion-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "DamianH.NotionCli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/damianh.notioncli/0.1.0/damianh.notioncli.0.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

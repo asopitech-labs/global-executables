@@ -2,6 +2,54 @@
   "command": "pal",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pal",
+      "version": "0.1.17",
+      "repository": "https://github.com/zcag/pal",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.17"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "palette-cli",
+      "version": "0.3.0",
+      "repository": "https://github.com/OJarrisonn/palette",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "palrun",
+      "version": "0.2.0-beta.2",
+      "repository": "https://github.com/GLINCKER/palrun",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0-beta.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pal",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "pal",
       "version": null,
@@ -12,6 +60,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "Paletti",
+      "version": "1.0.0",
+      "repository": "https://github.com/sghodas/paletti",
+      "source": "https://rubygems.org/gems/Paletti-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

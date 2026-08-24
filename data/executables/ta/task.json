@@ -2,16 +2,112 @@
   "command": "task",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "task-3.5.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "agent-task",
       "version": "0.3.2",
       "repository": "https://github.com/nyosegawa/agent-task",
-      "source": "https://crates.io/api/v1/crates/agent-task/0.3.2/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.3.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "done",
+      "version": "0.0.0-reserve",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0-reserve"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hypertask",
+      "version": "0.1.2",
+      "repository": "https://github.com/FreddieRidell/hypertask",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hypertask_cli",
+      "version": "0.2.1",
+      "repository": "https://github.com/FreddieRidell/hypertask",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "task-runner-detector",
+      "version": "0.4.0",
+      "repository": "https://github.com/elob/task-runner-detector",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "task-sh",
+      "version": "0.1.3",
+      "repository": "https://github.com/barledge/task.sh",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "task_cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/chasinglogic/taskforge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "taskwarrior",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
     },
     {
       "ecosystem": "debian",
@@ -38,9 +134,45 @@
       "latest_version": "v0.0.0-20160304234350-330f15046b11"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/go-task/task",
+      "version": "v2.2.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-task/task/@v/v2.2.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/open-falcon/task",
+      "version": "v0.0.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/open-falcon/task/@v/v0.0.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/visualfc/goqt",
+      "version": "v0.0.0-20160901223124-8c774d799233",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/visualfc/goqt/@v/v0.0.0-20160901223124-8c774d799233.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160901223124-8c774d799233"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "go-task",
-      "version": "3.52.0",
+      "version": "3.53.1",
       "repository": "https://taskfile.dev/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -62,6 +194,114 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "task-2.6.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "task-3.5.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "1k-tasks",
+      "version": "4.2.2",
+      "repository": "git+https://github.com/kevily/task-flow.git",
+      "source": "https://registry.npmjs.org/1k-tasks/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.2.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arnaud.derison/task",
+      "version": "2.0.2",
+      "repository": "git+https://github.com/arnaud422/task.git",
+      "source": "https://registry.npmjs.org/@arnaud.derison%2Ftask/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@askman-dev/task",
+      "version": "1.0.10",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@askman-dev%2Ftask/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.10"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Swallow.TaskRunner",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/swallow.taskrunner/0.0.1/swallow.taskrunner.0.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "TaskNet2",
+      "version": "3.48.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/tasknet2/3.48.0/tasknet2.3.48.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.48.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "TaskStak",
+      "version": "1.1.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/taskstak/1.1.3/taskstak.1.1.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jamielsharief/task-runner",
+      "version": "0.1.3",
+      "repository": "https://github.com/jamielsharief/task-runner.git",
+      "source": "https://repo.packagist.org/p2/jamielsharief/task-runner.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.3"
+    },
+    {
       "ecosystem": "pypi",
       "package": "5bb-task",
       "version": "3.49.1",
@@ -72,6 +312,55 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "3.49.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aind-session",
+      "version": "0.3.26",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/26/b5/f65d802b1e3c047954de5cf2ba9defe7e6f0a78a115a7f0d4ac6214f1b4b/aind_session-0.3.26-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.26"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "auto-app-panel",
+      "version": "0.1.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/13/8c/8350b551c4ffce695842078708cdde8c330b746d5a4c2d57acbaacf26835/auto_app_panel-0.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "clitasks",
+      "version": "0.0.8",
+      "repository": "http://github.com/unixsuperhero/clitasks",
+      "source": "https://rubygems.org/gems/clitasks-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "task",
+      "version": "3.53.1",
+      "repository": "https://taskfile.dev/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.53.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -87,5 +376,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

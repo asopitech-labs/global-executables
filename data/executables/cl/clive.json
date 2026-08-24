@@ -2,6 +2,30 @@
   "command": "clive",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "clive",
+      "version": "0.1.0",
+      "repository": "https://github.com/jondysinger/clive",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "clive-llm",
+      "version": "0.1.0",
+      "repository": "https://github.com/SedarOlmez94/clive",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "clive",
       "version": "0.12.17",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "commit-live-cli",
+      "version": "0.1.9",
+      "repository": "https://github.com/greyatom-edu-tech/commit-live-cli",
+      "source": "https://rubygems.org/gems/commit-live-cli-0.1.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.9"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

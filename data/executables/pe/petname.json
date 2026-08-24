@@ -2,6 +2,18 @@
   "command": "petname",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "petname",
+      "version": "3.2.0",
+      "repository": "https://github.com/allenap/rust-petname",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/dustinkirkland/golang-petname",
       "version": "v0.0.0-20170921220637-d3c2ba80e75e",
@@ -12,6 +24,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170921220637-d3c2ba80e75e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dustinkirkland/golang-petname",
+      "version": "v0.0.0-20190613200456-11339a705ed2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dustinkirkland/golang-petname/@v/v0.0.0-20190613200456-11339a705ed2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613200456-11339a705ed2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dustinkirkland/golang-petname",
+      "version": "v0.0.0-20260215035315-f0c533e9ce9b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dustinkirkland/golang-petname/@v/v0.0.0-20260215035315-f0c533e9ce9b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260215035315-f0c533e9ce9b"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

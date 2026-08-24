@@ -2,6 +2,30 @@
   "command": "nodes",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cmri_tools",
+      "version": "0.1.3",
+      "repository": "https://github.com/RobertGauld/cmri-rs/tree/main/cmri_tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nodes",
+      "version": "0.1.0",
+      "repository": "https://github.com/nyorain/nodes",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/go-chef/chef",
       "version": "v0.0.0-20180320225528-cfd55cf96411",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

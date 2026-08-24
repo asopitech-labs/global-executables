@@ -2,6 +2,18 @@
   "command": "eb",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "eb",
+      "version": "0.5.0",
+      "repository": "https://github.com/rye/eb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "aws-elasticbeanstalk",
       "version": "3.27.3",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "awsebcli",
+      "version": "3.27.3",
+      "repository": "http://aws.amazon.com/elasticbeanstalk/",
+      "source": "https://files.pythonhosted.org/packages/b8/b1/ee48b9e7a0e0c03254d27623f2b82a95f0ba95defe9bc6a6dc334d925501/awsebcli-3.27.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.27.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

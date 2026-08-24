@@ -2,6 +2,30 @@
   "command": "yaml2toml",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "babelfish",
+      "version": "0.2.1",
+      "repository": "https://github.com/pickfire/babelfish",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "yaml2toml",
+      "version": "0.0.2",
+      "repository": "https://github.com/cochranblock/runsible",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "remarshal",
       "version": "2.1.4",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

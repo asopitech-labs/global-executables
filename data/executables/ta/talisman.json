@@ -2,6 +2,18 @@
   "command": "talisman",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/portworx/talisman",
+      "version": "v0.0.0-20190115023107-286f67c146ff",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/portworx/talisman/@v/v0.0.0-20190115023107-286f67c146ff.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190115023107-286f67c146ff"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "talisman",
       "version": "1.37.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Thoughtworks.Talisman",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

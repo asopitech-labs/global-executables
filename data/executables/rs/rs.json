@@ -2,6 +2,42 @@
   "command": "rs",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ripsync",
+      "version": "1.2.0",
+      "repository": "https://github.com/beeboyd/ripsync",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rs-stack",
+      "version": "0.1.0",
+      "repository": "https://github.com/rohoswagger/rs-stack",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "rs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "rs",
       "version": null,
@@ -12,6 +48,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aiwanna-team/repo-start",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/aiwanna-team/repo-start.git",
+      "source": "https://registry.npmjs.org/@aiwanna-team%2Frepo-start/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atheodosiou/run-script",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@atheodosiou%2Frun-script/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "RunScripts",
+      "version": "0.9.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/runscripts/0.9.4/runscripts.0.9.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.9.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

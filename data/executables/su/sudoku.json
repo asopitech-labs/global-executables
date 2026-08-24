@@ -2,6 +2,66 @@
   "command": "sudoku",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fltk-1.4.5-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sudoku-tty",
+      "version": "0.1.4",
+      "repository": "https://github.com/crazymerlyn/sudoku",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sudoku-tui",
+      "version": "0.2.0",
+      "repository": "https://github.com/TianyiShi2001/sudoku-tui",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "nbsdgames",
       "version": "6.0.2",
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

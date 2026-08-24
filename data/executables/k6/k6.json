@@ -2,6 +2,42 @@
   "command": "k6",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/loadimpact/k6",
+      "version": "v0.0.0-20190613102800-2a2fe2cc665e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/loadimpact/k6/@v/v0.0.0-20190613102800-2a2fe2cc665e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613102800-2a2fe2cc665e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/loadimpact/k6",
+      "version": "v0.24.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/loadimpact/k6/@v/v0.24.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vincentschmid/k6",
+      "version": "v0.0.0-20240104192259-77bb9aea44d5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vincentschmid/k6/@v/v0.0.0-20240104192259-77bb9aea44d5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240104192259-77bb9aea44d5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "k6",
       "version": "2.2.0",
@@ -12,8 +48,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "k6",
+      "version": "2.2.0",
+      "repository": "https://k6.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "axiom",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "axiom-cli",
+      "version": "0.1.17",
+      "repository": "https://github.com/truth-linked/truthlinked",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.17"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "axiom_engine",
+      "version": "0.4.1",
+      "repository": "https://github.com/fernandogarzaaa/AXIOM-AETHER",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "axiom",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "axiom",
       "version": null,
@@ -12,6 +48,186 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "enzyme/axiom",
+      "version": "v4.2.0",
+      "repository": "https://github.com/enzyme/axiom.git",
+      "source": "https://repo.packagist.org/p2/enzyme/axiom.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v4.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "acs-axiom",
+      "version": "0.2.0",
+      "repository": "https://github.com/AusClimateService/axiom",
+      "source": "https://files.pythonhosted.org/packages/b2/36/4bcbd1e39a4db74997042f4aa38ebd10f417f83fc0927fdfd3d4cd4b920b/acs_axiom-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axi-platform",
+      "version": "0.10.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b9/7d/48652b33892ca68fa4c7c9ee2f470933a627a1b10b919586c477384f1f5e/axi_platform-0.10.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.11"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axio-framework",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d2/2b/a708cfa2140575a767b303fd26851401f4d3271cb56ce928836ac0bb1626/axio_framework-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-aether",
+      "version": "0.4.1",
+      "repository": "https://github.com/fernandogarzaaa/AXIOM-AETHER",
+      "source": "https://files.pythonhosted.org/packages/57/a6/c785c2560ec19985067985495b78423cdf08c8ba3b2b5888409c5702c064/axiom_aether-0.4.1-py3-none-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-agpp",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6e/97/d333455da207f7bfa91134af375b33d02d16a953be0f957b9a82c2b36730/axiom_agpp-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7a/b7/1d67aa55fa6db484bb30d74641b359a0fa86c29e9aab5003e2102ad4d136/axiom_cli-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-constitutional",
+      "version": "1.8.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/56/b7/61ef8a835dca47c594581f04918c549c5860208cd16c22cdcf4a44df38d7/axiom_constitutional-1.8.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.8.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-engine",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/94/d6/03a22f7db54091b52f36a4a390fa1fb35f776e1fca810b1c73e53593d177/axiom_engine-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-os-lm",
+      "version": "0.39.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f3/93/03021197157ac0adddf860c8ebcdec26cd3992b6807c997739e3d5606faf/axiom_os_lm-0.39.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.39.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-spec",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f0/8f/f8c20cdade2430a93ef8a3a6d277774588731e3b04e2de043f427135f2fb/axiom_spec-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-stack",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6c/3d/fcb35362f0c7a021a91299830aed5e16864ae3f8c7e65b5b94b63bfeaea3/axiom_stack-0.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-trace",
+      "version": "1.4.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/76/e0/718dac22a69b097630c56e6db5b053b1ae0b66f6135f9b49fb28a7629d4d/axiom_trace-1.4.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiom-tui",
+      "version": "1.3.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ed/28/dc7ff4b995ddfc485ee09cbc35f1ad0a55f4120ad04bb8dcdf0ed5990202/axiom_tui-1.3.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axiomai-engine",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fe/f6/a6dca1977a0bc9967c474bec0c79a954853a7087af283d2ae61e328c4258/axiomai_engine-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +243,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

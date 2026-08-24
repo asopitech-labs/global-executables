@@ -2,6 +2,18 @@
   "command": "ansible-creator",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ansible-creator-26.8.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ansible-creator",
       "version": "26.8.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansible-creator",
+      "version": "26.8.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fb/9d/05eaa5acb0bccf8ff0fea39a3e50faf71e42dc309940293b532281f1c811/ansible_creator-26.8.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.8.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,31 @@
   "command": "persepolis",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "persepolis-5.2.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "persepolis",
+      "version": "5.2.0.0",
+      "repository": "https://persepolisdm.github.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.2.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "persepolis",
       "version": null,
@@ -15,5 +40,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

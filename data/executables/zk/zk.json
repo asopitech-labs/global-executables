@@ -2,6 +2,78 @@
   "command": "zk",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "zk-0.15.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zenkit-cli",
+      "version": "0.4.5",
+      "repository": "https://github.com/stevelr/zenkit-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zk-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/terror/zk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vitessio/vitess",
+      "version": "v2.1.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vitessio/vitess/@v/v2.1.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vitessio/vitess",
+      "version": "v3.0.0-rc.3+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vitessio/vitess/@v/v3.0.0-rc.3%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0-rc.3+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/youtube/vitess",
+      "version": "v0.24.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/youtube/vitess/@v/v0.24.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/youtube/vitess",
       "version": "v2.1.1+incompatible",
@@ -12,6 +84,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "vitess.io/vitess",
+      "version": "v0.24.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/vitess.io/vitess/@v/v0.24.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "vitess.io/vitess",
+      "version": "v2.1.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/vitess.io/vitess/@v/v2.1.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "vitess.io/vitess",
+      "version": "v3.0.0-rc.3.0.20190602171040-12bfde34629c+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/vitess.io/vitess/@v/v3.0.0-rc.3.0.20190602171040-12bfde34629c%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0-rc.3.0.20190602171040-12bfde34629c+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "vitess.io/vitess",
+      "version": "v3.0.0-rc.3.0.20190616035427-640588c28bd3+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/vitess.io/vitess/@v/v3.0.0-rc.3.0.20190616035427-640588c28bd3%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0-rc.3.0.20190616035427-640588c28bd3+incompatible"
     },
     {
       "ecosystem": "homebrew",
@@ -36,8 +156,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "1901bmlh",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/1901bmlh/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "9.13liang",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/9.13liang/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zk",
+      "version": "0.15.6",
+      "repository": "https://zk-org.github.io/zk",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.15.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "cycle",
   "providers": [
     {
+      "ecosystem": "nuget",
+      "package": "cycle",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cycle/0.2.1/cycle.0.2.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "cycle/bootstrap",
+      "version": "v0.5.1",
+      "repository": "https://github.com/cycle/bootstrap.git",
+      "source": "https://repo.packagist.org/p2/cycle/bootstrap.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.5.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "cycle",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

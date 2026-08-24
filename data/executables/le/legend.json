@@ -6,12 +6,48 @@
       "package": "mapserver-bin",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mapserver-bin",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wcharczuk/go-chart",
+      "version": "v0.0.0-20190219185203-9852fce5a172",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wcharczuk/go-chart/@v/v0.0.0-20190219185203-9852fce5a172.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190219185203-9852fce5a172"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wcharczuk/go-chart",
+      "version": "v2.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wcharczuk/go-chart/@v/v2.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.1+incompatible"
     },
     {
       "ecosystem": "homebrew",
@@ -24,6 +60,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "legend",
+      "version": "0.1.0",
+      "repository": "https://diariolegendario.com",
+      "source": "https://rubygems.org/gems/legend-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

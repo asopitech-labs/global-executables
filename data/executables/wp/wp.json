@@ -2,6 +2,30 @@
   "command": "wp",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "wp-cli-2.12.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wp-cli",
+      "version": "0.1.4",
+      "repository": "https://github.com/ThomasHabets/wp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "wp-cli",
       "version": "2.12.0",
@@ -12,8 +36,154 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "amzil-ayoub/wp-cli",
+      "version": "1.2.3",
+      "repository": "https://github.com/ayoub-amzil/wp-cli.git",
+      "source": "https://repo.packagist.org/p2/amzil-ayoub/wp-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.2.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ayoub-amzil/wp-cli",
+      "version": "1.2.3",
+      "repository": "https://github.com/ayoub-amzil/wp-cli.git",
+      "source": "https://repo.packagist.org/p2/ayoub-amzil/wp-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.2.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "fafmio/wordpress-cli",
+      "version": "v0.0.1",
+      "repository": "https://github.com/FafMio/wordpress-cli.git",
+      "source": "https://repo.packagist.org/p2/fafmio/wordpress-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "fp-cli/fp-cli",
+      "version": "v2.12.0",
+      "repository": "https://github.com/fin-cli/fin-cli.git",
+      "source": "https://repo.packagist.org/p2/fp-cli/fp-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.12.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "globalis/wp-cli-bin",
+      "version": "2.8.1",
+      "repository": "https://github.com/globalis-ms/wp-cli-bin.git",
+      "source": "https://repo.packagist.org/p2/globalis/wp-cli-bin.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.8.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "globalis/wpg-wp-cli-bin",
+      "version": "0.1.1",
+      "repository": "https://github.com/wpg-archives/wpg-wp-cli-bin.git",
+      "source": "https://repo.packagist.org/p2/globalis/wpg-wp-cli-bin.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "globalis/wpg-wp-cli-phar",
+      "version": "1.5.1",
+      "repository": "https://github.com/wp-globalis-tools/wpg-wp-cli-phar.git",
+      "source": "https://repo.packagist.org/p2/globalis/wpg-wp-cli-phar.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.5.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "johnpbloch/wp-cli-phar",
+      "version": "v2.12.0",
+      "repository": "https://github.com/johnpbloch/wp-cli-phar.git",
+      "source": "https://repo.packagist.org/p2/johnpbloch/wp-cli-phar.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.12.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "leymannx/wp-cli-launcher",
+      "version": "0.0.20",
+      "repository": "https://github.com/leymannx/wp-cli-launcher.git",
+      "source": "https://repo.packagist.org/p2/leymannx/wp-cli-launcher.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.20"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "WebPortfolio",
+      "version": "0.2.6",
+      "repository": "https://github.com/mardix/webportfolio",
+      "source": "https://files.pythonhosted.org/packages/7b/df/fdef77f1387fba3fb7ab96a02cf66f16c4b9db83ba1cdf6d5d389824c9fc/WebPortfolio-0.2.6.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "weebp",
+      "version": "0.6.1",
+      "repository": "https://github.com/Francesco149/weebp",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "wp-cli",
+      "version": "2.12.0",
+      "repository": "https://wp-cli.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.12.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

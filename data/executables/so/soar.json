@@ -2,6 +2,30 @@
   "command": "soar",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "soar-cli",
+      "version": "0.13.2",
+      "repository": "https://github.com/pkgforge/soar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "soar-rpc",
+      "version": "0.1.4",
+      "repository": "https://github.com/ethgallucci/soar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "soar",
       "version": "0.13.2",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Soar",
+      "version": "1.5.2",
+      "repository": "https://github.com/arantonitis/soar",
+      "source": "https://files.pythonhosted.org/packages/77/15/acc988f04747d65147df81c6d62716d173d1b1c7f00f379f3a639318a396/Soar-1.5.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

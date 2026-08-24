@@ -2,6 +2,78 @@
   "command": "td",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tardis-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/hvpaiva/tardis-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tendrils-cli",
+      "version": "0.0.4",
+      "repository": "https://github.com/TendrilApps/tendrils-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "terminal-dictionary",
+      "version": "0.1.3",
+      "repository": "https://github.com/famedaxolotl/terminal-dictionary",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "todoist-cli-rs",
+      "version": "0.2.0",
+      "repository": "https://github.com/luoandorder/todoist-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "toodoux",
+      "version": "0.4.1",
+      "repository": "https://git.sr.ht/~hadronized/toodoux",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "textdraw",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "textdraw",
       "version": null,
@@ -12,6 +84,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/godaner/ajsp",
+      "version": "v0.0.0-20210428155650-560875aa5d32",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/godaner/ajsp/@v/v0.0.0-20210428155650-560875aa5d32.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210428155650-560875aa5d32"
     },
     {
       "ecosystem": "homebrew",
@@ -28,7 +112,7 @@
     {
       "ecosystem": "homebrew",
       "package": "todoist-cli",
-      "version": "3.1.8",
+      "version": "3.3.0",
       "repository": "https://github.com/Doist/todoist-cli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -51,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

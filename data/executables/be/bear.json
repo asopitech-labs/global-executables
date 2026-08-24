@@ -2,6 +2,30 @@
   "command": "bear",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "bear-4.2.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bear",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "bear",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "bear",
+      "version": "0.0.4",
+      "repository": "http://github.com/russ/bear",
+      "source": "https://rubygems.org/gems/bear-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "bear",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

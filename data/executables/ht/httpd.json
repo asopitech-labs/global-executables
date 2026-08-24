@@ -2,6 +2,30 @@
   "command": "httpd",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "apache-2.4.68-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "httpd",
+      "version": "0.1.4",
+      "repository": "https://github.com/lambdastackio/httpd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
       "ecosystem": "debian",
       "package": "merecat",
       "version": null,
@@ -26,6 +50,81 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@attrs/httpd",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/attrs/httpd.git",
+      "source": "https://registry.npmjs.org/@attrs%2Fhttpd/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "carno-php/web",
+      "version": "1.0.4",
+      "repository": "https://github.com/carno-php/web.git",
+      "source": "https://repo.packagist.org/p2/carno-php/web.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "apache",
+      "version": "2.4.68",
+      "repository": "https://www.apachelounge.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.4.68"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "xampp",
+      "version": "8.2.12-0",
+      "repository": "https://www.apachefriends.org/index.html",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "8.2.12-0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "xampp74",
+      "version": "7.4.29-1",
+      "repository": "https://www.apachefriends.org/index.html",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.4.29-1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "merecat",
       "version": null,
@@ -39,5 +138,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

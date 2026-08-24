@@ -2,6 +2,30 @@
   "command": "wrk",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "wrk",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "wrk",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "wrk",
       "version": null,
@@ -26,6 +50,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@awrk/cli",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/jtomchak/awrk.git",
+      "source": "https://registry.npmjs.org/@awrk%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alnoda-wrk",
+      "version": "0.4.33",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/7d/bb/19a657e71cac10eb5ac5b7b5728cec3d9e46d8ae6d32b46f8a56f718994c/alnoda_wrk-0.4.33-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.33"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "wrk",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

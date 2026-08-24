@@ -1,0 +1,43 @@
+{
+  "command": "integration_test",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "qkd-client",
+      "version": "0.1.0",
+      "repository": "https://github.com/Paraxiom/qkd_client",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "retread",
+      "version": "0.1.1",
+      "repository": "https://github.com/pileghoff/retread/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aws/eks-anywhere",
+      "version": "v0.26.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aws/eks-anywhere/@v/v0.26.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.26.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

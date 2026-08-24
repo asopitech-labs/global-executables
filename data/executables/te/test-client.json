@@ -2,6 +2,42 @@
   "command": "test-client",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "open-protocol-client",
+      "version": "0.0.0",
+      "repository": "https://github.com/dezemand/rs-open-protocol",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/anapaya/os-scion",
+      "version": "v0.15.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/anapaya/os-scion/@v/v0.15.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.15.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cactus/go-statsd-client",
+      "version": "v0.0.0-20170712055735-ad551ee7f9f3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cactus/go-statsd-client/@v/v0.0.0-20170712055735-ad551ee7f9f3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170712055735-ad551ee7f9f3"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/cactus/go-statsd-client",
       "version": "v0.0.0-20180516050940-5e3c483eb932",
@@ -16,6 +52,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/cactus/go-statsd-client",
+      "version": "v3.1.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cactus/go-statsd-client/@v/v3.1.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.1.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cactus/go-statsd-client",
       "version": "v3.1.1+incompatible",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/cactus/go-statsd-client/@v/v3.1.1%2Bincompatible.zip",
@@ -24,8 +72,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v3.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cactus/go-statsd-client",
+      "version": "v3.1.2-0.20190501063751-9a7692639588+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cactus/go-statsd-client/@v/v3.1.2-0.20190501063751-9a7692639588%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.1.2-0.20190501063751-9a7692639588+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cactus/go-statsd-client",
+      "version": "v3.2.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cactus/go-statsd-client/@v/v3.2.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.2.1+incompatible"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

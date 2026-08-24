@@ -2,6 +2,42 @@
   "command": "tg",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tegdb",
+      "version": "0.5.0",
+      "repository": "https://github.com/minifish-org/tegdb.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tg",
+      "version": "0.9.7",
+      "repository": "https://github.com/valeratrades/tg",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tg-cli",
+      "version": "0.2.1",
+      "repository": "https://github.com/Garfield1002/tg-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "topgit",
       "version": "0.19.14",
@@ -12,6 +48,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abhijayb/turbo-groups",
+      "version": "1.1.0",
+      "repository": "git+https://github.com/Abhijay/turbo-groups.git",
+      "source": "https://registry.npmjs.org/@abhijayb%2Fturbo-groups/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ajaymamtora/theme-manager",
+      "version": "4.2.0",
+      "repository": "git+https://github.com/Ajaymamtora/theme-manager.git",
+      "source": "https://registry.npmjs.org/@ajaymamtora%2Ftheme-manager/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "glad",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "glad-2.0.8-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amazon/glad",
+      "version": "1.1.2",
+      "repository": "git+https://github.com/amzn/generate-layer-architecture-diagram.git",
+      "source": "https://registry.npmjs.org/@amazon%2Fglad/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "glad",
+      "version": "0.0.7",
+      "repository": "http://alanclark.biz",
+      "source": "https://rubygems.org/gems/glad-0.0.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.7"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-glad",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

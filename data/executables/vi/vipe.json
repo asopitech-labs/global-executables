@@ -2,6 +2,66 @@
   "command": "vipe",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "moreutils-0.70-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cjrh-moreutils-vipe",
+      "version": "0.1.4",
+      "repository": "https://github.com/cjrh/moreutils-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rusty-vipe",
+      "version": "0.2.0",
+      "repository": "https://github.com/jsh562/rusty-vipe",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vipe-rs",
+      "version": "1.0.0",
+      "repository": "https://github.com/randymcmillan/vipe-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "moreutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "moreutils",
       "version": null,
@@ -26,6 +86,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "moreutils-0.70-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "moreutils",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

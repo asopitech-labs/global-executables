@@ -2,6 +2,30 @@
   "command": "fop",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fop-2.11-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fop-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/cool-japan/fop",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fop",
       "version": "2.11",
@@ -12,6 +36,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "FOP.Sharp.Cli",
+      "version": "26.8.3924",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/fop.sharp.cli/26.8.3924/fop.sharp.cli.26.8.3924.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "26.8.3924"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fop_lang",
+      "version": "0.8.0",
+      "repository": "https://jhollinger.github.io/fop-lang-rb/",
+      "source": "https://rubygems.org/gems/fop_lang-0.8.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

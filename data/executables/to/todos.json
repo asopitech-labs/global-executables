@@ -2,6 +2,30 @@
   "command": "todos",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "todos",
+      "version": "0.1.0",
+      "repository": "https://github.com/pepebecker/todos-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tofrodos",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "tofrodos",
       "version": null,
@@ -50,6 +74,42 @@
       "latest_version": "v1.1.1"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/syncthing/syncthing",
+      "version": "v1.1.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/syncthing/syncthing/@v/v1.1.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/syncthing/syncthing",
+      "version": "v1.1.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/syncthing/syncthing/@v/v1.1.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/theaaf/todos",
+      "version": "v0.0.0-20190402231846-ad63ef47a387",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/theaaf/todos/@v/v0.0.0-20190402231846-ad63ef47a387.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190402231846-ad63ef47a387"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tofrodos",
       "version": "2.1.1",
@@ -60,6 +120,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "4i_ntodos",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/4i_ntodos/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "4i_todos",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/4i_todos/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

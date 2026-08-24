@@ -2,6 +2,42 @@
   "command": "geckodriver",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "geckodriver-0.37.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "geckodriver",
+      "version": "0.37.1",
+      "repository": "https://hg.mozilla.org/mozilla-central/file/tip/testing/geckodriver",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.37.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "geckodriver-librs",
+      "version": "0.36.0",
+      "repository": "https://github.com/browsh-org/geckodriver-librs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.36.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "geckodriver",
       "version": "0.37.1",
@@ -12,8 +48,69 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "enm1989/geckodriver",
+      "version": "0.20",
+      "repository": "https://github.com/ENM1989/geckodriver.git",
+      "source": "https://repo.packagist.org/p2/enm1989/geckodriver.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.20"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "geckodriver-bin",
+      "version": "0.28.0",
+      "repository": "https://github.com/0rvar/geckodriver-bin",
+      "source": "https://rubygems.org/gems/geckodriver-bin-0.28.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.28.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "geckodriver-helper",
+      "version": "0.24.0",
+      "repository": "https://github.com/DevicoSolutions/geckodriver-helper",
+      "source": "https://rubygems.org/gems/geckodriver-helper-0.24.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.24.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "geckodriver-helper-custom",
+      "version": "0.2.0",
+      "repository": "https://github.com/DevicoSolutions/geckodriver-helper",
+      "source": "https://rubygems.org/gems/geckodriver-helper-custom-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "geckodriver",
+      "version": "0.37.1",
+      "repository": "https://github.com/mozilla/geckodriver",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.37.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

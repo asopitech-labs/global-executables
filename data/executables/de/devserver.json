@@ -2,6 +2,18 @@
   "command": "devserver",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "devserver",
+      "version": "0.4.2",
+      "repository": "https://github.com/kettle11/devserver",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.2"
+    },
+    {
       "ecosystem": "pypi",
       "package": "Canaille",
       "version": "0.3.6",
@@ -12,8 +24,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.3.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "devserver",
+      "version": "0.0.6",
+      "repository": "https://github.com/jasonadamyoung/devserver",
+      "source": "https://rubygems.org/gems/devserver-0.0.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.6"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

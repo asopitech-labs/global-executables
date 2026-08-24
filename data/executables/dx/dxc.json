@@ -2,6 +2,42 @@
   "command": "dxc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "directx-shader-compiler-1.10.2605.37-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dxc-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/mrsyntaxdev/DXC",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dxcode",
+      "version": "2.3.0",
+      "repository": "https://github.com/dogxii/dxcode",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.3.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "AI-Starter",
       "version": "3.0.7",
@@ -12,8 +48,44 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "3.0.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DXC-AI-MBN",
+      "version": "0.0.35",
+      "repository": "https://github.com/dxc-technology/DXC-Industrialized-AI-Starter",
+      "source": "https://files.pythonhosted.org/packages/6e/cc/3f137d945b2543dc042fae49f2087448cf57607cc0f818df478b63d5c10d/DXC_AI_MBN-0.0.35-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.35"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DXC-Industrialized-AI-Starter",
+      "version": "3.2.0",
+      "repository": "https://github.com/dxc-technology/DXC-Industrialized-AI-Starter",
+      "source": "https://files.pythonhosted.org/packages/35/12/466604d961db24235f638674168eb7e20db30e474adb0d25a148f6b55cc1/DXC_Industrialized_AI_Starter-3.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DXC-RL",
+      "version": "1.0.3.5",
+      "repository": "https://github.com/SureshAthanti/DXC-Industrialized-AI-Starter",
+      "source": "https://files.pythonhosted.org/packages/8e/22/1c2d8f25d2ab8186f0eeb54f2c0efb24274110641e9e0bca5cfd501d3694/DXC_RL-1.0.3.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.3.5"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "plz",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "plz",
+      "version": "0.0.0",
+      "repository": "https://github.com/RanolP/plz",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "plzplz",
+      "version": "0.0.21",
+      "repository": "https://github.com/k88hudson/plzplz",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.21"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "plz-cli",
       "version": "0.1.9",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai_plz",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4b/44/635e24f7f104139a33b1720c97cbc7e61f5b3128db5e8d3ed779179f1588/ai_plz-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

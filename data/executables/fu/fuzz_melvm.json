@@ -1,0 +1,31 @@
+{
+  "command": "fuzz_melvm",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "melstf",
+      "version": "0.12.3",
+      "repository": "https://github.com/themeliolabs/melstf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "themelio-stf",
+      "version": "0.11.13",
+      "repository": "https://github.com/themeliolabs/themelio-stf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.13"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

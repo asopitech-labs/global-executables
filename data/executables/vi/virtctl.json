@@ -2,6 +2,18 @@
   "command": "virtctl",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "kubevirt.io/kubevirt",
+      "version": "v0.18.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/kubevirt.io/kubevirt/@v/v0.18.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.18.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "virtctl",
       "version": "1.9.0",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

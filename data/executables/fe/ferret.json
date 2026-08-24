@@ -2,6 +2,42 @@
   "command": "ferret",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ferret",
+      "version": "1.1.1",
+      "repository": "https://codeberg.org/peterlane/ferret/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Ferret.Tools.Cli",
+      "version": "0.1.5",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/ferret.tools.cli/0.1.5/ferret.tools.cli.0.1.5.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dm-ferret-adapter",
+      "version": "1.2.0",
+      "repository": "http://github.com/datamapper/dm-ferret-adapter",
+      "source": "https://rubygems.org/gems/dm-ferret-adapter-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ferret",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

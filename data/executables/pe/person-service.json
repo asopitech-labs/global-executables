@@ -1,0 +1,31 @@
+{
+  "command": "person-service",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "person-service",
+      "version": "0.5.0",
+      "repository": "https://github.com/sixarm/main-x-service/person-service-rust-crate",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lcy2013/grpc-cloud/example",
+      "version": "v0.0.0-20251015084408-0a5ad78080ca",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lcy2013/grpc-cloud/example/@v/v0.0.0-20251015084408-0a5ad78080ca.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251015084408-0a5ad78080ca"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

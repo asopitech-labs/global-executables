@@ -1,0 +1,31 @@
+{
+  "command": "create-image",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bluez-utils-5.87-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "crazko/post-social-image",
+      "version": "v0.1.1",
+      "repository": "https://github.com/crazko/post-social-image.git",
+      "source": "https://repo.packagist.org/p2/crazko/post-social-image.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

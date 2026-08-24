@@ -6,6 +6,18 @@
       "package": "lr",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lr",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -26,6 +38,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@abrowne2/lr",
+      "version": "0.20.1",
+      "repository": "git+https://github.com/abrowne2/linear-cli.git",
+      "source": "https://registry.npmjs.org/@abrowne2%2Flr/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.20.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jleo-leftright",
+      "version": "0.9.1",
+      "repository": null,
+      "source": "https://rubygems.org/gems/jleo-leftright-0.9.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "leftright",
+      "version": "0.9.1",
+      "repository": "http://github.com/jordi/leftright",
+      "source": "https://rubygems.org/gems/leftright-0.9.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "lr",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

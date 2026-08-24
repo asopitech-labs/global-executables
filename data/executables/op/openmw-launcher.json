@@ -1,0 +1,45 @@
+{
+  "command": "openmw-launcher",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "openmw-0.51.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "openmw",
+      "version": "0.50.0",
+      "repository": "http://openmw.org/",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.50.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "openmw-nightly",
+      "version": "20251119-c06f94fe",
+      "repository": "https://openmw.org/",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "20251119-c06f94fe"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

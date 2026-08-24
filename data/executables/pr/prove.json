@@ -14,6 +14,42 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "fawkes-crypto-phase2",
+      "version": "0.2.2",
+      "repository": "https://github.com/zeropoolnetwork/phase2-bn254",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "stwo-cairo-dev-utils",
+      "version": "1.3.0",
+      "repository": "https://github.com/starkware-libs/stwo-cairo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "perl",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "perl",
       "version": null,
@@ -38,6 +74,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "perl-5.42.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "perl",
       "version": null,
@@ -51,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "sow",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-hoe-4.7.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arkone_ai/sow",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@arkone_ai%2Fsow/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hoe",
+      "version": "4.7.1",
+      "repository": "https://github.com/seattlerb/hoe",
+      "source": "https://rubygems.org/gems/hoe-4.7.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.7.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-hoe",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

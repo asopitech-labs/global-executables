@@ -2,6 +2,30 @@
   "command": "frpc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "frpc",
+      "version": "0.1.0",
+      "repository": "https://gitee.com/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fatedier/frp",
+      "version": "v0.27.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fatedier/frp/@v/v0.27.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.27.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "frpc",
       "version": "0.71.0",
@@ -12,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "frpc-ruby",
+      "version": "0.70.1",
+      "repository": "https://github.com/nathankidd/frpc-ruby",
+      "source": "https://rubygems.org/gems/frpc-ruby-0.70.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.70.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "frp",
+      "version": "0.71.0",
+      "repository": "https://github.com/fatedier/frp",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.71.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

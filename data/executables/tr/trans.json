@@ -2,6 +2,18 @@
   "command": "trans",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "translate-shell-0.9.7.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "translate-shell",
       "version": "0.9.7.1",
@@ -12,6 +24,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "light_tr",
+      "version": "2.0.1",
+      "repository": "https://github.com/pniemczyk/light_tr",
+      "source": "https://rubygems.org/gems/light_tr-2.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

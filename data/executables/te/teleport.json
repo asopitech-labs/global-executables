@@ -2,6 +2,30 @@
   "command": "teleport",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "teleport",
+      "version": "0.0.1",
+      "repository": "https://github.com/raphjaph/teleport",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gravitational/teleport",
+      "version": "v3.2.17+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gravitational/teleport/@v/v3.2.17%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.2.17+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "teleport",
       "version": "18.10.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "endroid/teleporter",
+      "version": "1.6.2",
+      "repository": "https://github.com/endroid/teleporter.git",
+      "source": "https://repo.packagist.org/p2/endroid/teleporter.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.6.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

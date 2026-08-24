@@ -2,6 +2,30 @@
   "command": "autorandr",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "autorandr-1.15-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autorandr",
+      "version": "1.15.post1",
+      "repository": "https://github.com/phillipberndt/autorandr",
+      "source": "https://files.pythonhosted.org/packages/c5/7c/eaf5b210f39f565028ccf2870cf472174e8a70ff4fab200cd5a8f72ca72f/autorandr-1.15.post1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.15.post1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "autorandr",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

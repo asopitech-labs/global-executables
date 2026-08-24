@@ -2,6 +2,54 @@
   "command": "multiply",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "sgb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "1st_calculator",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/1st_calculator/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adamduehansen/multiply",
+      "version": "1.2.6",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adamduehansen%2Fmultiply/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akh-test/junk",
+      "version": "0.0.7",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@akh-test%2Fjunk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.7"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "sgb",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

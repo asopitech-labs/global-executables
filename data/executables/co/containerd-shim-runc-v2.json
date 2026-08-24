@@ -2,6 +2,30 @@
   "command": "containerd-shim-runc-v2",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "containerd-2.3.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "containerd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "containerd",
       "version": null,
@@ -38,6 +62,18 @@
       "latest_version": "v0.0.0-20190321141026-ceba56893a76"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v1.7.34",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.7.34.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.34"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "containerd",
       "version": "2.3.4",
@@ -63,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

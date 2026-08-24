@@ -2,6 +2,90 @@
   "command": "lc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mono-6.12.0.206-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "count-lines",
+      "version": "1.0.2",
+      "repository": "https://github.com/stringertheory/count-lines",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lc",
+      "version": "0.3.0",
+      "repository": "https://github.com/k-nasa/lc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lc-cli",
+      "version": "0.1.3",
+      "repository": "https://github.com/rajashekar/lc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "librecommander",
+      "version": "0.1.2",
+      "repository": "https://github.com/leszek3737/LibreCommander",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "linecount",
+      "version": "0.1.0",
+      "repository": "https://github.com/eclarke/linecount",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mono-devel",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mono",
       "version": "6.14.1",
@@ -12,6 +96,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexkingcoder/lazycode",
+      "version": "2.0.6",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alexkingcoder%2Flazycode/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awful",
+      "version": "0.0.185",
+      "repository": "",
+      "source": "https://rubygems.org/gems/awful-0.0.185.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.185"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "linear-cli",
+      "version": "2.0.2",
+      "repository": "https://github.com/rubyists/linear-cli",
+      "source": "https://rubygems.org/gems/linear-cli-2.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

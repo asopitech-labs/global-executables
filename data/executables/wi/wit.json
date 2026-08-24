@@ -2,6 +2,42 @@
   "command": "wit",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "wit-3.05a-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wit",
+      "version": "0.16.0",
+      "repository": "https://github.com/bytecodealliance/cargo-component",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "wit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "wit",
       "version": null,
@@ -12,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@archships/wit-cli",
+      "version": "0.2.1",
+      "repository": "",
+      "source": "https://registry.npmjs.org/@archships%2Fwit-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

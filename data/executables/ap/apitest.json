@@ -2,6 +2,18 @@
   "command": "apitest",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "otter-api-tests",
+      "version": "1.2.1",
+      "repository": "https://salsa.debian.org/iwj/otter",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.1"
+    },
+    {
       "ecosystem": "go",
       "package": "badc0de.net/pkg/apitest",
       "version": "v0.0.0-20180211165856-1825674147ce",
@@ -12,8 +24,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180211165856-1825674147ce"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/kothar/go-backblaze.v0",
+      "version": "v0.0.0-20180916190456-9ac0cf0dab1a",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/kothar/go-backblaze.v0/@v/v0.0.0-20180916190456-9ac0cf0dab1a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180916190456-9ac0cf0dab1a"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apiTestHttp",
+      "version": "0.0.14",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/a6/8e/80aba96818fc42e0e387ad9f76fcacf5bcbfd30f62e7389fc74d89a21b8e/apiTestHttp-0.0.14-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.14"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apitest",
+      "version": "1.0.0a2",
+      "repository": "https://github.com/cr0hn/apitest",
+      "source": "https://files.pythonhosted.org/packages/14/5f/606ae0a9fb7f621319f35fdd3f4491b073c464993ab84c18fd59a5dedfea/apitest-1.0.0a2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0a2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apitest-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/HFerrahoglu/apitest-cli",
+      "source": "https://files.pythonhosted.org/packages/c5/c1/a160735ae1a4b2d49b4dda31d47949f8396e26b720e7ce5081c91300ae57/apitest_cli-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,78 @@
   "command": "tool",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jf-tool",
+      "version": "0.1.0",
+      "repository": "https://github.com/Josef-Friedrich/rust-tool",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mod-cli",
+      "version": "0.6.4",
+      "repository": "https://github.com/jamesgober/mod-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nevermind-neu",
+      "version": "0.2.1",
+      "repository": "https://github.com/regular-dev/nevermind-neu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rust_practice_haito",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tool-sync",
+      "version": "0.2.0",
+      "repository": "https://github.com/chshersh/tool-sync",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/vic",
+      "version": "v1.3.0-rc1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/vic/@v/v1.3.0-rc1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0-rc1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/hashicorp/vic",
       "version": "v1.5.0",
@@ -12,6 +84,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/junhsieh/goexamples",
+      "version": "v0.0.0-20190108064005-9a4ae5251883",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/junhsieh/goexamples/@v/v0.0.0-20190108064005-9a4ae5251883.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190108064005-9a4ae5251883"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v0.0.0-20160811095138-c3e958884919",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v0.0.0-20160811095138-c3e958884919.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160811095138-c3e958884919"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v0.0.0-20160907162043-3fb7a0e792ed",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v0.0.0-20160907162043-3fb7a0e792ed.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160907162043-3fb7a0e792ed"
     },
     {
       "ecosystem": "go",
@@ -40,6 +148,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/mattn/go-sqlite3",
+      "version": "v0.0.0-20170710140056-47fc4e5e9153",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v0.0.0-20170710140056-47fc4e5e9153.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170710140056-47fc4e5e9153"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v0.0.0-20170801170640-6654e412c3c7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v0.0.0-20170801170640-6654e412c3c7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170801170640-6654e412c3c7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
       "version": "v0.0.0-20170901084005-05548ff55570",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v0.0.0-20170901084005-05548ff55570.zip",
@@ -48,6 +180,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170901084005-05548ff55570"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v0.0.0-20180112085826-6c771bb98877",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v0.0.0-20180112085826-6c771bb98877.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180112085826-6c771bb98877"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.2.1-0.20170407154627-cf7286f069c3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.2.1-0.20170407154627-cf7286f069c3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1-0.20170407154627-cf7286f069c3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
     },
     {
       "ecosystem": "go",
@@ -75,6 +267,18 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/namespacelabs/foundation",
+      "version": "v0.0.557",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/namespacelabs/foundation/@v/v0.0.557.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.557"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/pingcap/go-ycsb",
       "version": "v0.0.0-20190127062920-94808f3239ae",
       "repository": null,
@@ -84,6 +288,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190127062920-94808f3239ae"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pingcap/go-ycsb",
+      "version": "v1.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pingcap/go-ycsb/@v/v1.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.3"
     },
     {
       "ecosystem": "go",
@@ -112,6 +328,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/vmware/vic",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vmware/vic",
       "version": "v1.5.2",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.2.zip",
@@ -120,8 +348,68 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.5.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vmware/vic",
+      "version": "v1.5.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "namespacelabs.dev/foundation",
+      "version": "v0.0.557",
+      "repository": null,
+      "source": "https://proxy.golang.org/namespacelabs.dev/foundation/@v/v0.0.557.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.557"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "blankkids/thinkphp-ddd",
+      "version": "5.0.0",
+      "repository": "https://github.com/blankkids/thinkphp-ddd.git",
+      "source": "https://repo.packagist.org/p2/blankkids/thinkphp-ddd.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "5.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ao-dev",
+      "version": "0.1.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/89/d8/6df9435bd4dce972fa0ba1851f81c1ffef9da413ef2d6edc226b2b5654bd/ao_dev-0.1.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jade_systems_toolbox",
+      "version": "0.1.4",
+      "repository": "https://github.com/lcreid/jade_systems_toolbox",
+      "source": "https://rubygems.org/gems/jade_systems_toolbox-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

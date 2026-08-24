@@ -2,6 +2,42 @@
   "command": "mdv",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mdv",
+      "version": "5.1.0",
+      "repository": "https://github.com/WhoSowSee/mdv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "5.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdvalidate",
+      "version": "0.2.5",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdvault",
+      "version": "0.7.2",
+      "repository": "https://github.com/agustinvalencia/mdvault",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mdv",
       "version": "1.7.5",
@@ -12,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Terminal.Gui.mdv",
+      "version": "1.0.5",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/terminal.gui.mdv/1.0.5/terminal.gui.mdv.1.0.5.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdv",
+      "version": "0.9.1",
+      "repository": "https://github.com/mvz/mdv",
+      "source": "https://rubygems.org/gems/mdv-0.9.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

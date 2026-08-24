@@ -6,6 +6,18 @@
       "package": "elm-compiler",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "elm-compiler",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -26,6 +38,31 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "ELM327-emulator",
+      "version": "3.0.5",
+      "repository": "https://github.com/Ircama/ELM327-emulator",
+      "source": "https://files.pythonhosted.org/packages/30/12/3c2776e89deb528ca284bd7ce353598294fcaa268b85aa296424dd52f8a1/elm327_emulator-3.0.5.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.0.5"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "elm",
+      "version": "0.19.2",
+      "repository": "https://elm-lang.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.19.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "elm-compiler",
       "version": null,
@@ -39,5 +76,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

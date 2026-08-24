@@ -2,6 +2,42 @@
   "command": "spell",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mangahub-spellchecker",
+      "version": "0.3.2",
+      "repository": "https://github.com/Zefirchiky/SpelRight",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "spel-right",
+      "version": "0.5.3",
+      "repository": "https://github.com/Zefirchiky/SpelRight",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "spell",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "spell",
       "version": null,
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

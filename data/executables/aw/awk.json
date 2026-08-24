@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/miku/clam",
+      "version": "v0.0.0-20150701134247-8054bf3dfcec",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miku/clam/@v/v0.0.0-20150701134247-8054bf3dfcec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150701134247-8054bf3dfcec"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/spakin/awk",
+      "version": "v0.0.0-20170806050032-7ca32c88407b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/spakin/awk/@v/v0.0.0-20170806050032-7ca32c88407b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170806050032-7ca32c88407b"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "awk",
       "version": "20260426",
@@ -36,8 +60,58 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "gawk-5.4.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gawk",
+      "version": "5.4.1",
+      "repository": "https://sourceforge.net/projects/ezwinports/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.4.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gow",
+      "version": "0.8.0",
+      "repository": "https://github.com/bmatzelle/gow",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,66 @@
   "command": "gost",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gost-3.2.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ginuerzh/gost",
+      "version": "v0.0.0-20190613161235-86e9772f087f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ginuerzh/gost/@v/v0.0.0-20190613161235-86e9772f087f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613161235-86e9772f087f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ginuerzh/gost",
+      "version": "v2.6.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ginuerzh/gost/@v/v2.6.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.6.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-gost/gost",
+      "version": "v0.0.0-20260818154432-aa1565c8b263",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-gost/gost/@v/v0.0.0-20260818154432-aa1565c8b263.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818154432-aa1565c8b263"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/knqyf263/gost",
+      "version": "v0.0.0-20190326022014-39175c0da9e3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/knqyf263/gost/@v/v0.0.0-20190326022014-39175c0da9e3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190326022014-39175c0da9e3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gost",
       "version": "3.2.6",
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,31 @@
+{
+  "command": "post_build",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "base91-rs",
+      "version": "0.2.2",
+      "repository": "https://github.com/douzebis/base91",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "btcli",
+      "version": "0.5.8",
+      "repository": "https://gitee.com/ironbayberry/btcli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.8"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

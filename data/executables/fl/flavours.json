@@ -2,6 +2,18 @@
   "command": "flavours",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "flavours",
+      "version": "0.7.1",
+      "repository": "https://github.com/Misterio77/flavours",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "flavours",
       "version": "0.7.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "flavours",
+      "version": "0.0.10",
+      "repository": "https://github.com/intermark/flavours",
+      "source": "https://rubygems.org/gems/flavours-0.0.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.10"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

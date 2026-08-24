@@ -2,6 +2,42 @@
   "command": "jam",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ftjam-2.5.3rc2-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jam",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jam-rs",
+      "version": "0.9.10",
+      "repository": "https://github.com/St4NNi/jam-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.10"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "argyll-cms",
       "version": "3.5.0",
@@ -12,8 +48,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jam",
+      "version": "0.2",
+      "repository": "http://rubyworks.github.com/jam",
+      "source": "https://rubygems.org/gems/jam-0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "javagems",
+      "version": "0.4.11",
+      "repository": "http://www.javagems.org/",
+      "source": "https://rubygems.org/gems/javagems-0.4.11.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.11"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "marmalade",
+      "version": "0.0.4",
+      "repository": "http://www.github.com/rustygeldmacher/marmalade",
+      "source": "https://rubygems.org/gems/marmalade-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

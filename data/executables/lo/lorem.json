@@ -2,6 +2,30 @@
   "command": "lorem",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "lorem-1.6-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lorem",
+      "version": "1.1.0",
+      "repository": "https://github.com/prabhdatnoor/lorem",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "lorem",
       "version": "0.8.0",
@@ -12,6 +36,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lorem",
+      "version": "0.1.2",
+      "repository": "http://lorem.rubyforge.org",
+      "source": "https://rubygems.org/gems/lorem-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

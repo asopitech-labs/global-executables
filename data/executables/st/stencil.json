@@ -2,9 +2,33 @@
   "command": "stencil",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "stencil-template",
+      "version": "0.1.1",
+      "repository": "https://github.com/kylechamberlin/stencil",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/getoutreach/stencil",
+      "version": "v1.45.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/getoutreach/stencil/@v/v1.45.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.45.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "stencil",
-      "version": "2.18.2",
+      "version": "3.0.0",
       "repository": "https://stencil.rgst.io",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antlinker/core",
+      "version": "2.5.2",
+      "repository": "git+https://github.com/ionic-team/stencil.git",
+      "source": "https://registry.npmjs.org/@antlinker%2Fcore/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.5.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arcticleaf/stencil-cli",
+      "version": "4.1.0",
+      "repository": "git@git.arcticleaf.io:modules/StencilCLI.git",
+      "source": "https://registry.npmjs.org/@arcticleaf%2Fstencil-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Stencil",
+      "version": "0.2.1",
+      "repository": "https://github.com/trilan/stencil",
+      "source": "https://files.pythonhosted.org/packages/79/d7/202e0593f2e03ace807daaccd4190dfb81890c92d57443c873bd88eca4dd/Stencil-0.2.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

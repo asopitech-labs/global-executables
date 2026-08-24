@@ -1,0 +1,56 @@
+{
+  "command": "eden",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "eden-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/omnidotdev/eden-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-eden-cli",
+      "version": "0.1.5",
+      "repository": "https://github.com/baikonur-oss/aws-eden-cli",
+      "source": "https://files.pythonhosted.org/packages/e4/cf/fb2232f8c1118ddebc1c434b8cd0d1de59b7008786fc34a5c1e2e35b9c00/aws_eden_cli-0.1.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "eden",
+      "version": "0.1.1",
+      "repository": "http://github.com/jasonl/eden",
+      "source": "https://rubygems.org/gems/eden-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "eden",
+      "version": "0.2.1",
+      "repository": "https://eden-emu.dev/",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.2.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

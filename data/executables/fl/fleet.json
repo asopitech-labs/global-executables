@@ -2,6 +2,42 @@
   "command": "fleet",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cargo-fleet",
+      "version": "0.0.1",
+      "repository": "https://github.com/dimensionhq/fleet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fleet-rs",
+      "version": "0.0.8",
+      "repository": "https://github.com/dimensionhq/fleet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.8"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pleme-fleet",
+      "version": "0.1.23",
+      "repository": "https://github.com/pleme-io/fleet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.23"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/coreos/fleet",
       "version": "v1.0.0",
@@ -14,9 +50,21 @@
       "latest_version": "v1.0.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/ns1labs/orb",
+      "version": "v0.30.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ns1labs/orb/@v/v0.30.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.30.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fleet-cli",
-      "version": "0.16.0",
+      "version": "0.16.1",
       "repository": "https://fleet.rancher.io/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +72,92 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antfleet/cli",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@antfleet%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "DotnetDeployer.Fleet.Tool",
+      "version": "0.1.24",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnetdeployer.fleet.tool/0.1.24/dotnetdeployer.fleet.tool.0.1.24.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.24"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "DotnetFleet.Tool",
+      "version": "0.1.24",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnetfleet.tool/0.1.24/dotnetfleet.tool.0.1.24.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.24"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agentic-fleet",
+      "version": "0.6.95",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/87/ba/e36c881162a904d97d8bcf8aa63a9a64d82e9313e8ca0111af1a382a6722/agentic_fleet-0.6.95-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.95"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-fleet",
+      "version": "0.1.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d7/29/a55635439eaa1867f2c2d3b3c32d1d02d71b3ff87c366587b6ddc257ae31/ai_fleet-0.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "JetBrains.FleetLauncher.EAP",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "JetBrains.FleetLauncher.Preview",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

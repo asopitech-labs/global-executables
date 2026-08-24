@@ -2,6 +2,42 @@
   "command": "tin",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tin",
+      "version": "0.3.0",
+      "repository": "https://github.com/dflemstr/tin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tin-lang",
+      "version": "0.2.2",
+      "repository": "https://github.com/dflemstr/tin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "tin",
       "version": null,
@@ -16,7 +52,7 @@
     {
       "ecosystem": "homebrew",
       "package": "tin",
-      "version": "2.6.5",
+      "version": "2.6.6",
       "repository": "http://www.tin.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "evaluator",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "serenade",
+      "version": "0.3.1",
+      "repository": "https://github.com/bolcom/serenade/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "kahip",
       "version": "3.25",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "coursemology-evaluator",
+      "version": "0.1.9",
+      "repository": "https://github.com/Coursemology/evaluator-slave",
+      "source": "https://rubygems.org/gems/coursemology-evaluator-0.1.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "evaluator",
+      "version": "0.1.6",
+      "repository": "http://github.com/minad/evaluator",
+      "source": "https://rubygems.org/gems/evaluator-0.1.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

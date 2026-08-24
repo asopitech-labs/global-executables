@@ -2,6 +2,54 @@
   "command": "verifier",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fridge-r0-verifier",
+      "version": "0.0.32",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.32"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jfbus/kafka",
+      "version": "v0.0.0-20190311163605-42af676813b2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jfbus/kafka/@v/v0.0.0-20190311163605-42af676813b2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190311163605-42af676813b2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/succinctlabs/sdk",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/succinctlabs/sdk/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wvanbergen/kafka",
+      "version": "v0.0.0-20160927093020-bc265fedb9ff",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wvanbergen/kafka/@v/v0.0.0-20160927093020-bc265fedb9ff.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160927093020-bc265fedb9ff"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/wvanbergen/kafka",
       "version": "v0.0.0-20171203153745-e2edea948ddf",
@@ -12,8 +60,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171203153745-e2edea948ddf"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@autodevops/verifier",
+      "version": "0.1.2",
+      "repository": "git+https://github.com/autodevopsai/autodevops.git",
+      "source": "https://registry.npmjs.org/@autodevops%2Fverifier/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2022-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2025-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

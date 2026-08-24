@@ -2,6 +2,18 @@
   "command": "smem",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rsfitsio",
+      "version": "0.470.2",
+      "repository": "https://github.com/cruzzil/rsfitsio",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.470.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cfitsio",
       "version": "4.7.0",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

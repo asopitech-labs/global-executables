@@ -2,6 +2,30 @@
   "command": "ROPgadget",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ropgadget-7.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ROPGadget",
+      "version": "7.7",
+      "repository": "https://github.com/JonathanSalwan/ROPgadget",
+      "source": "https://files.pythonhosted.org/packages/19/4a/8f286c08c0df06bbf29354b3d00e6f719f97cd9d6eb203c38c1797935d4e/ROPGadget-7.7-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "7.7"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-ropgadget",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

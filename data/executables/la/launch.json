@@ -2,6 +2,66 @@
   "command": "launch",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "beyond-launch",
+      "version": "0.3.2",
+      "repository": "https://github.com/beyondoss/launch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "launch",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "paraglide-launch",
+      "version": "0.3.1",
+      "repository": "https://github.com/paraglidehq/launch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "launch",
       "version": "1.2.5",
@@ -14,6 +74,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@01/launcher",
+      "version": "1.1.2",
+      "repository": "git+https://github.com/01alchemist/web-service-lib.git",
+      "source": "https://registry.npmjs.org/@01%2Flauncher/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@appjumpstart/launch",
+      "version": "3.0.0",
+      "repository": "git@github.com:appjumpstart/launch.git",
+      "source": "https://registry.npmjs.org/@appjumpstart%2Flaunch/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ClassHoster",
       "version": "0.1.5",
@@ -24,8 +108,32 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "GymBuddy",
+      "version": "2.1.7",
+      "repository": "https://github.com/CTKogstrom/GymBuddyApp",
+      "source": "https://files.pythonhosted.org/packages/d0/80/7d6357e3aed4228a664c61aa01209ed5cd68da35bce9ee92b3f554f89917/GymBuddy-2.1.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "GymBuddyApp",
+      "version": "1.0.4",
+      "repository": "https://github.com/CTKogstrom/GymBuddyApp",
+      "source": "https://files.pythonhosted.org/packages/f7/3a/088cc67fe75058e419195ee380363b49c3c345d6e6a7bd32cb799f6fe9bd/GymBuddyApp-1.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

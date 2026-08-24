@@ -2,6 +2,30 @@
   "command": "autogen",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "autogen-5.18.16-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "autogen",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "autogen",
       "version": null,
@@ -14,6 +38,18 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/ctessum/unit",
+      "version": "v0.0.0-20160621200450-755774ac2fcb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ctessum/unit/@v/v0.0.0-20160621200450-755774ac2fcb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160621200450-755774ac2fcb"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "autogen",
       "version": "5.18.16",
@@ -24,6 +60,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "autogen-5.18.16-6",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anovius/auto-gen",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@anovius%2Fauto-gen/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "bookmark",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bookmark",
+      "version": "0.1.4",
+      "repository": "https://github.com/yingkitw/bookmark",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "nb",
       "version": "7.25.5",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-bookmark",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-bookmark/0.0.1/dotnet-bookmark.0.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "divyashriravichandran/bookmark-cli",
+      "version": "v1.0",
+      "repository": "https://github.com/DivyashriRavichandran/bookmark-cli.git",
+      "source": "https://repo.packagist.org/p2/divyashriravichandran/bookmark-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

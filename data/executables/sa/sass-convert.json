@@ -2,6 +2,42 @@
   "command": "sass-convert",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-sass-3.7.4-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "aliddle-sass",
+      "version": "3.2.13",
+      "repository": "http://sass-lang.com/",
+      "source": "https://rubygems.org/gems/aliddle-sass-3.2.13.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.2.13"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "haml-edge",
+      "version": "3.1.79",
+      "repository": "http://haml-lang.com/",
+      "source": "https://rubygems.org/gems/haml-edge-3.1.79.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.1.79"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-sass",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

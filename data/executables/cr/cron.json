@@ -2,6 +2,30 @@
   "command": "cron",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "alfred-core",
+      "version": "0.1.9",
+      "repository": "https://github.com/PaoloPana/alfred-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cron",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cron",
       "version": null,
@@ -14,6 +38,78 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/pibigstar/go-todo",
+      "version": "v0.0.0-20190615034512-67315a51991e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pibigstar/go-todo/@v/v0.0.0-20190615034512-67315a51991e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190615034512-67315a51991e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sinute/go-daily",
+      "version": "v0.0.0-20221017071801-bc99abbeed3d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sinute/go-daily/@v/v0.0.0-20221017071801-bc99abbeed3d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20221017071801-bc99abbeed3d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/takama/daemon",
+      "version": "v0.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/takama/daemon/@v/v0.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.0"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alex-programmer/cron",
+      "version": "0.0.5-alpha",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alex-programmer%2Fcron/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5-alpha"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "becklyn/cron-job",
+      "version": "3.0.0",
+      "repository": "https://github.com/Becklyn/cron-job-bundle.git",
+      "source": "https://repo.packagist.org/p2/becklyn/cron-job.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "3.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "cron",
       "version": null,
@@ -24,8 +120,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "cuong21951.cron",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

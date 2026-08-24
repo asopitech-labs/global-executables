@@ -2,6 +2,42 @@
   "command": "grafana",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "grafana-13.1.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "grafana-13.2.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grafana/grafana",
+      "version": "v5.4.5+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grafana/grafana/@v/v5.4.5%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v5.4.5+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/grafana/grafana",
       "version": "v6.1.4+incompatible",
@@ -12,6 +48,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v6.1.4+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grafana/grafana",
+      "version": "v6.1.6+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grafana/grafana/@v/v6.1.6%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.1.6+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/heapster",
+      "version": "v0.0.0-20180704153620-b25f8a16208f",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/heapster/@v/v0.0.0-20180704153620-b25f8a16208f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180704153620-b25f8a16208f"
     },
     {
       "ecosystem": "go",
@@ -28,7 +88,7 @@
     {
       "ecosystem": "homebrew",
       "package": "grafana",
-      "version": "13.1.3",
+      "version": "13.2.0",
       "repository": "https://grafana.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -36,8 +96,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "grafana",
+      "version": "13.2.0",
+      "repository": "https://grafana.com/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "13.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

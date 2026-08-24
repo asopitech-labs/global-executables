@@ -2,6 +2,18 @@
   "command": "ansible-community",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ansible-14.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ansible",
       "version": "14.3.1",
@@ -50,6 +62,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "ansible-14.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansible",
+      "version": "14.3.1",
+      "repository": "https://ansible.com/",
+      "source": "https://files.pythonhosted.org/packages/d2/7d/cbd743c9c538b316b5adcf66e81224b608aa7927d85c325a9c349a8a59e5/ansible-14.3.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "14.3.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ansible",
       "version": null,
@@ -63,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

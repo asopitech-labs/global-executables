@@ -2,12 +2,24 @@
   "command": "acat",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "atool-0.39.0-10",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "acat",
       "version": "0.1.2",
       "repository": null,
-      "source": "https://crates.io/api/v1/crates/acat/0.1.2/download",
-      "confidence": "inferred",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
@@ -26,6 +38,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "atool-0.39.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autossh-cli",
+      "version": "1.7.0",
+      "repository": "https://github.com/spgyip/autossh",
+      "source": "https://files.pythonhosted.org/packages/ff/01/d01f4f1a7b233d96f3bcc593eb037b7c2722b46ed38eb9aa28271ed5a2f8/autossh_cli-1.7.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.7.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "atool",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

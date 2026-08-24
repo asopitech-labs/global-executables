@@ -2,6 +2,18 @@
   "command": "athenacli",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "athenacli",
+      "version": "0.1.0",
+      "repository": "https://github.com/ccakes/athenacli-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "athenacli",
       "version": "1.7.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "athenacli",
+      "version": "1.7.0",
+      "repository": "https://github.com/dbcli/athenacli",
+      "source": "https://files.pythonhosted.org/packages/ce/97/a502474912aaa5fbd9819df3920ff93d4358a26e3bf8fa03620db741f097/athenacli-1.7.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.7.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

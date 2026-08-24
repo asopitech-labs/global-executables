@@ -2,6 +2,162 @@
   "command": "bind",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bind-cli",
+      "version": "0.1.8",
+      "repository": "https://github.com/migueravila/bind",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devfeel/dotweb",
+      "version": "v0.0.0-20190220064112-c7ab14e88d65",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/devfeel/dotweb/@v/v0.0.0-20190220064112-c7ab14e88d65.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190220064112-c7ab14e88d65"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devfeel/dotweb",
+      "version": "v0.0.0-20190613043734-6c5cb5c18ff6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/devfeel/dotweb/@v/v0.0.0-20190613043734-6c5cb5c18ff6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613043734-6c5cb5c18ff6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goki/gopy",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goki/gopy/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/mobile",
+      "version": "v0.0.0-20190314164439-f2ef6f42b753",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/mobile/@v/v0.0.0-20190314164439-f2ef6f42b753.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190314164439-f2ef6f42b753"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/mobile",
+      "version": "v0.0.0-20190319155245-9487ef54b94a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/mobile/@v/v0.0.0-20190319155245-9487ef54b94a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190319155245-9487ef54b94a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/mobile",
+      "version": "v0.0.0-20190415191353-3e0bab5405d6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/mobile/@v/v0.0.0-20190415191353-3e0bab5405d6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190415191353-3e0bab5405d6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/mobile",
+      "version": "v0.0.0-20190509164839-32b2708ab171",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/mobile/@v/v0.0.0-20190509164839-32b2708ab171.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190509164839-32b2708ab171"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/mobile",
+      "version": "v0.0.0-20190607214518-6fa95d984e88",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/mobile/@v/v0.0.0-20190607214518-6fa95d984e88.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607214518-6fa95d984e88"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20180719123216-371a4e8cb797",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20180719123216-371a4e8cb797.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180719123216-371a4e8cb797"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20180806140643-507816974b79",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20180806140643-507816974b79.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180806140643-507816974b79"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20190107162257-dc0771356504",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20190107162257-dc0771356504.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190107162257-dc0771356504"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20190127143845-a42111704963",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20190127143845-a42111704963.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190127143845-a42111704963"
+    },
+    {
       "ecosystem": "go",
       "package": "golang.org/x/mobile",
       "version": "v0.0.0-20190312151609-d3739f865fa6",
@@ -28,6 +184,30 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20190318164015-6bd122906c08",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20190318164015-6bd122906c08.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190318164015-6bd122906c08"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20190319155245-9487ef54b94a",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20190319155245-9487ef54b94a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190319155245-9487ef54b94a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
       "version": "v0.0.0-20190412202009-28c689b77b5f",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20190412202009-28c689b77b5f.zip",
@@ -48,8 +228,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190415191353-3e0bab5405d6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20190509164839-32b2708ab171",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20190509164839-32b2708ab171.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190509164839-32b2708ab171"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/mobile",
+      "version": "v0.0.0-20190607214518-6fa95d984e88",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/mobile/@v/v0.0.0-20190607214518-6fa95d984e88.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607214518-6fa95d984e88"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "bash",
+      "version": "3.2.57(1)-release",
+      "repository": null,
+      "source": "bash@3.2.57(1)-release",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

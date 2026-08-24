@@ -2,9 +2,21 @@
   "command": "godap",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/macmod/godap",
+      "version": "v1.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/macmod/godap/@v/v1.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "godap",
-      "version": "2.12.0",
+      "version": "2.12.2",
       "repository": "https://github.com/Macmod/godap",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "nyc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "nyauser-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/Protryon/nyauser",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexbosworth/nyc",
+      "version": "15.1.0",
+      "repository": "git+ssh://git@github.com/istanbuljs/nyc.git",
+      "source": "https://registry.npmjs.org/@alexbosworth%2Fnyc/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "15.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "node-istanbul",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

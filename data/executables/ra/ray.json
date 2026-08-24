@@ -1,0 +1,91 @@
+{
+  "command": "ray",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ray",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rayfish",
+      "version": "0.1.5",
+      "repository": "https://github.com/rayfish/rayfish",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ant-ray",
+      "version": "2.44.1.1",
+      "repository": "https://github.com/ray-project/ray",
+      "source": "https://files.pythonhosted.org/packages/81/71/fc56141954aa73722a9ced6f827e5de332254a2606ce0cccc0220d077a4a/ant_ray-2.44.1.1-cp310-cp310-macosx_14_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.44.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ant-ray-cpp",
+      "version": "3.0.0.dev0",
+      "repository": "https://github.com/ray-project/ray",
+      "source": "https://files.pythonhosted.org/packages/f8/4e/f77c23682893067e89ad6d748ee22f38fb14f766b54ed473b4675735effc/ant_ray_cpp-3.0.0.dev0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.0.0.dev0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ant-ray-cpp-nightly",
+      "version": "2.53.0",
+      "repository": "https://github.com/ray-project/ray",
+      "source": "https://files.pythonhosted.org/packages/7a/a5/5d7141d70d85fa35390af2aafb9a0730acebbcc30dcbae0393f2e84db8c7/ant_ray_cpp_nightly-2.53.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.53.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ant-ray-nightly",
+      "version": "2.53.0",
+      "repository": "https://github.com/ray-project/ray",
+      "source": "https://files.pythonhosted.org/packages/d7/bd/a757564b704186776c86326784fce54a6f026209cc88608d2887b367b0a4/ant_ray_nightly-2.53.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.53.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,18 @@
   "command": "ss-setup",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "shadowsocks-libev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "shadowsocks-libev",
       "version": "3.3.6",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SecretStorage-Setup",
+      "version": "0.1.1",
+      "repository": "https://github.com/level12/secretstorage-setup",
+      "source": "https://files.pythonhosted.org/packages/ce/48/0213382de2360615d73a0d9f254f8d62769559ebb2abd104944a39bfc0f4/SecretStorage-Setup-0.1.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

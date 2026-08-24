@@ -2,6 +2,30 @@
   "command": "lambda",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "otlp2pipeline",
+      "version": "0.4.0",
+      "repository": "https://github.com/smithclay/otlp2pipeline",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lambda-align",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "lambda-align",
       "version": null,
@@ -12,6 +36,126 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/a-h/templ/examples/counter",
+      "version": "v0.0.0-20260715130625-04abee5364c6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/a-h/templ/examples/counter/@v/v0.0.0-20260715130625-04abee5364c6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260715130625-04abee5364c6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/awsdocs/aws-doc-sdk-examples",
+      "version": "v0.0.0-20260818160903-44501e866df8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/awsdocs/aws-doc-sdk-examples/@v/v0.0.0-20260818160903-44501e866df8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818160903-44501e866df8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/montblanc18/gps-viewer/server",
+      "version": "v0.0.0-20210904170249-6244953c781a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/montblanc18/gps-viewer/server/@v/v0.0.0-20210904170249-6244953c781a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210904170249-6244953c781a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sophearak/goasciiart",
+      "version": "v0.0.0-20190306090744-3cf6a02d7dc0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sophearak/goasciiart/@v/v0.0.0-20190306090744-3cf6a02d7dc0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190306090744-3cf6a02d7dc0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@-0/build-lambda-py",
+      "version": "1.0.4",
+      "repository": "git+https://github.com/subs0/build-lambda-py.git",
+      "source": "https://registry.npmjs.org/@-0%2Fbuild-lambda-py/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexo/lambda",
+      "version": "0.5.2",
+      "repository": "git+https://github.com/codedot/lambda.git",
+      "source": "https://registry.npmjs.org/@alexo%2Flambda/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antisatori/tapl",
+      "version": "0.0.5",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@antisatori%2Ftapl/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-lambda-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/HassanAbouelela/aws-lambda-cli",
+      "source": "https://files.pythonhosted.org/packages/5f/f8/58a314d43aee38a19ac37d3eb420a2b78daa4aceb9ad0c6992b57f303bd7/aws_lambda_cli-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "awsdeployer",
+      "version": "1.15.1",
+      "repository": "https://github.com/sgtpepperpt/awsdeployer",
+      "source": "https://files.pythonhosted.org/packages/c1/2e/3ed9c933c2b02c554dff4c3c7998038c6d5f1cec2195b08a906813f0bfbc/awsdeployer-1.15.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.15.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awful",
+      "version": "0.0.185",
+      "repository": "",
+      "source": "https://rubygems.org/gems/awful-0.0.185.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.185"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +171,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

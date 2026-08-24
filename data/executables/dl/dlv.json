@@ -2,6 +2,30 @@
   "command": "dlv",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "delve-1.27.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "delve",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "delve",
       "version": null,
@@ -15,6 +39,78 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/aarzilli/delve",
+      "version": "v0.0.0-20190605154254-e012d49b0c53",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aarzilli/delve/@v/v0.0.0-20190605154254-e012d49b0c53.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190605154254-e012d49b0c53"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/derekparker/delve",
+      "version": "v0.12.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/derekparker/delve/@v/v0.12.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/derekparker/delve",
+      "version": "v0.12.3-0.20170419170936-92dad944d7e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/derekparker/delve/@v/v0.12.3-0.20170419170936-92dad944d7e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.3-0.20170419170936-92dad944d7e0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/derekparker/delve",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/derekparker/delve/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/derekparker/delve",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/derekparker/delve/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-delve/delve",
+      "version": "v0.12.3-0.20170419170936-92dad944d7e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-delve/delve/@v/v0.12.3-0.20170419170936-92dad944d7e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.3-0.20170419170936-92dad944d7e0"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/go-delve/delve",
       "version": "v1.2.0",
       "repository": null,
@@ -24,6 +120,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-delve/delve",
+      "version": "v1.27.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-delve/delve/@v/v1.27.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.27.1"
     },
     {
       "ecosystem": "homebrew",
@@ -51,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

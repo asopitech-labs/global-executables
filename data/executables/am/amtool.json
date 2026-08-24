@@ -2,6 +2,42 @@
   "command": "amtool",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "alertmanager-0.33.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "alertmanager-0.34.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "prometheus-alertmanager",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "prometheus-alertmanager",
       "version": null,
@@ -12,6 +48,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/alertmanager",
+      "version": "v0.13.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/alertmanager/@v/v0.13.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.13.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/alertmanager",
+      "version": "v0.16.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/alertmanager/@v/v0.16.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.16.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/alertmanager",
+      "version": "v0.16.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/alertmanager/@v/v0.16.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.16.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus/alertmanager",
+      "version": "v0.17.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus/alertmanager/@v/v0.17.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.17.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

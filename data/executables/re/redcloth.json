@@ -2,6 +2,30 @@
   "command": "redcloth",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-redcloth-4.3.4-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ruby-redcloth",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ruby-redcloth",
       "version": null,
@@ -12,6 +36,78 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "BBRedCloth",
+      "version": "0.8.8",
+      "repository": "http://github.com/rofish/redcloth",
+      "source": "https://rubygems.org/gems/BBRedCloth-0.8.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "RedCloth",
+      "version": "4.3.4",
+      "repository": "https://github.com/jgarber/redcloth",
+      "source": "https://rubygems.org/gems/RedCloth-4.3.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.3.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "YSRedCloth",
+      "version": "4.2.18",
+      "repository": "http://redcloth.org",
+      "source": "https://rubygems.org/gems/YSRedCloth-4.2.18.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.2.18"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "assplecake-RedCloth",
+      "version": "4.2.10",
+      "repository": "http://redcloth.org",
+      "source": "https://rubygems.org/gems/assplecake-RedCloth-4.2.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.2.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gv-RedCloth",
+      "version": "4.3.2",
+      "repository": "http://redcloth.org",
+      "source": "https://rubygems.org/gems/gv-RedCloth-4.3.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.3.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jeremy-RedCloth",
+      "version": "4.1.1",
+      "repository": "http://redcloth.org",
+      "source": "https://rubygems.org/gems/jeremy-RedCloth-4.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.1.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

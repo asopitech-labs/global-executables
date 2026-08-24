@@ -2,6 +2,30 @@
   "command": "filter_non_conversion",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bismark",
+      "version": "3.1.0",
+      "repository": "https://github.com/FelixKrueger/Bismark",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bismark-filter-nonconversion",
+      "version": "1.0.0",
+      "repository": "https://github.com/FelixKrueger/Bismark",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bismark",
       "version": "3.1.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

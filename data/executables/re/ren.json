@@ -2,6 +2,30 @@
   "command": "ren",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ren-find",
+      "version": "0.0.4",
+      "repository": "https://github.com/robenkleene/ren-find.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mocheer/golib",
+      "version": "v0.0.0-20180211033259-a4505682ebce",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mocheer/golib/@v/v0.0.0-20180211033259-a4505682ebce.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180211033259-a4505682ebce"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ren",
       "version": "1.0",
@@ -12,8 +36,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "cmd",
+      "version": "Windows",
+      "repository": null,
+      "source": "https://learn.microsoft.com/windows-server/administration/windows-commands/cmd",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -6,12 +6,60 @@
       "package": "ale",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ale",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/kode4food/ale",
+      "version": "v0.0.0-20190602124245-db89f214beef",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/kode4food/ale/@v/v0.0.0-20190602124245-db89f214beef.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190602124245-db89f214beef"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ale-run/cli",
+      "version": "0.1.0-rc.11",
+      "repository": "git+https://github.com/ale-run/ale.git",
+      "source": "https://registry.npmjs.org/@ale-run%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0-rc.11"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ale",
+      "version": "0.0.3",
+      "repository": "https://github.com/jeremyboles/ale",
+      "source": "https://rubygems.org/gems/ale-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

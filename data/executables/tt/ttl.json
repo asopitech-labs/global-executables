@@ -2,6 +2,30 @@
   "command": "ttl",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "terminal_typing_lab",
+      "version": "0.1.0",
+      "repository": "https://github.com/alex-tdrn/terminal_typing_lab",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ttl",
+      "version": "0.21.0",
+      "repository": "https://github.com/lance0/ttl",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.21.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ttl",
       "version": "0.21.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@avelor/ttl",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/avelor-es/ttl.git",
+      "source": "https://registry.npmjs.org/@avelor%2Fttl/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

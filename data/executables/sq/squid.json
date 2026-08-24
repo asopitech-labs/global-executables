@@ -2,6 +2,54 @@
   "command": "squid",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "squid-7.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "clotho",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "squid-rs",
+      "version": "0.14.0",
+      "repository": "https://github.com/DenysVuika/squid",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "squidown",
+      "version": "0.2.0-alpha.1",
+      "repository": "https://github.com/bathan1/squid",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0-alpha.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "squid",
       "version": "7.6",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

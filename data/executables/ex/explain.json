@@ -2,6 +2,30 @@
   "command": "explain",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "explain",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "explain",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "explain",
       "version": null,
@@ -12,6 +36,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rubblelabs/ripple",
+      "version": "v0.0.0-20181102110429-fa9f82060ed5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rubblelabs/ripple/@v/v0.0.0-20181102110429-fa9f82060ed5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181102110429-fa9f82060ed5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "LMtoolbox",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ce/85/6e9d965d5f7753ff9a79cd46f041c9b4ecb979c903f5a9dce10d976878d8/lmtoolbox-0.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "explain",
+      "version": "0.0.1",
+      "repository": "https://github.com/txus/explain",
+      "source": "https://rubygems.org/gems/explain-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "explain_shell",
+      "version": "1.0.2",
+      "repository": "https://github.com/schneems/explain_shell",
+      "source": "https://rubygems.org/gems/explain_shell-1.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

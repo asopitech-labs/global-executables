@@ -2,6 +2,18 @@
   "command": "bender",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bender",
+      "version": "0.32.1",
+      "repository": "https://github.com/pulp-platform/bender",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.32.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bender",
       "version": "0.32.1",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bender",
+      "version": "0.2.6",
+      "repository": "https://www.github.com/aleak/bender",
+      "source": "https://rubygems.org/gems/bender-0.2.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bender-bot",
+      "version": "0.6.3",
+      "repository": "https://github.com/sczizzo/Archive/tree/master/bender",
+      "source": "https://rubygems.org/gems/bender-bot-0.6.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

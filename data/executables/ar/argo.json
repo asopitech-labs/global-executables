@@ -2,9 +2,57 @@
   "command": "argo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "argo-workflows-4.0.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "argo",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/argoproj/argo",
+      "version": "v2.2.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/argoproj/argo/@v/v2.2.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/argoproj/argo",
+      "version": "v2.3.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/argoproj/argo/@v/v2.3.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.0+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "argo",
-      "version": "4.1.1",
+      "version": "4.1.2",
       "repository": "https://argoproj.io",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +60,69 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@argo-video/cli",
+      "version": "0.38.2",
+      "repository": "git+https://github.com/shreyaskarnik/argo.git",
+      "source": "https://registry.npmjs.org/@argo-video%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.38.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@argojs/cli",
+      "version": "0.0.13",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@argojs%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.13"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "argo-ai",
+      "version": "0.4.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/77/38/d3e3b43f8e6311e984093ec3c5da458c7775c1fa58514ab0ae1c866a65d9/argo_ai-0.4.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "argo-shell-assistant",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/97/ee/9a9bfe2a91c75740b6aca1953ac2efa35f90a46dd585ad9d14defc763e75/argo_shell_assistant-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "argo",
+      "version": "4.1.2",
+      "repository": "https://github.com/argoproj/argo-workflows",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.1.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

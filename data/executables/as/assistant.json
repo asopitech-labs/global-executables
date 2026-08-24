@@ -2,6 +2,42 @@
   "command": "assistant",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "qt5-tools-5.15.19+kde+r3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "assistant",
+      "version": "1.4.1",
+      "repository": "https://github.com/iron-cage/claude_tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.4.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "qtchooser",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "qtchooser",
       "version": null,
@@ -74,6 +110,54 @@
       "latest_version": "0.4"
     },
     {
+      "ecosystem": "pypi",
+      "package": "abstractassistant",
+      "version": "0.4.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ed/f9/fa90026c056971c8b2a1a1349b5f45ed5417ace9beb47c24f1ca0c2edf12/abstractassistant-0.4.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.11"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-coding-assistant",
+      "version": "0.5.0",
+      "repository": "https://github.com/Shreyyyas22/ai-coding-assistant",
+      "source": "https://files.pythonhosted.org/packages/ca/37/9a97d26123cbdc8dfacc8662d73643edbb1821e76acb4c7f621e0c3da301/ai_coding_assistant-0.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-terminal-assistant",
+      "version": "0.1.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/21/4b/a7707869cd986ec54566389bfbbc67b5d39c1ce7efe4b2d2657e73d36508/ai_terminal_assistant-0.1.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "assistant",
+      "version": "2.0.2b2",
+      "repository": "https://gitlab.com/waser-technologies/technologies/assistant",
+      "source": "https://files.pythonhosted.org/packages/c8/fb/c8db00ebd48530e6a15514389aea7c51fd51b4e6ce6e02bf3fe9e456744f/assistant-2.0.2b2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.2b2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "qtchooser",
       "version": null,
@@ -87,5 +171,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

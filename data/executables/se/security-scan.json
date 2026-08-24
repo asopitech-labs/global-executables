@@ -1,0 +1,43 @@
+{
+  "command": "security-scan",
+  "providers": [
+    {
+      "ecosystem": "npm",
+      "package": "@araptus/npm-security-scanner",
+      "version": "2.0.2",
+      "repository": "git+https://github.com/araptus/npm-security-scanner.git",
+      "source": "https://registry.npmjs.org/@araptus%2Fnpm-security-scanner/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "security-scan",
+      "version": "5.6.7",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/security-scan/5.6.7/security-scan.5.6.7.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "5.6.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-security-scan",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/32/58/48001df43c9b59f2f514fc762b8f13839254d7b75e234b7a3ab03c01b9ff/ai_security_scan-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

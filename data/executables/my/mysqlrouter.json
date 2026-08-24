@@ -2,9 +2,45 @@
   "command": "mysqlrouter",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "percona-server-9.7.1_1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "percona-server-9.7.1_1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mysql-router",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mysql",
-      "version": "9.7.1",
+      "version": "26.7.0",
       "repository": "https://github.com/mysql/mysql-server",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -39,8 +75,20 @@
     },
     {
       "ecosystem": "homebrew",
+      "package": "mysql@9.7",
+      "version": "9.7.2",
+      "repository": "https://github.com/mysql/mysql-server",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
       "package": "percona-server",
-      "version": "8.4.10-10",
+      "version": "8.4.11-11",
       "repository": "https://www.percona.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -75,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

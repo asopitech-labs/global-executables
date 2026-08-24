@@ -14,6 +14,42 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "portmap",
+      "version": "2.0.0",
+      "repository": "https://github.com/fb0sh/pmap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "procutils-pmap",
+      "version": "0.2.0",
+      "repository": "https://gitlab.com/rustutils/procutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "procps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "procps",
       "version": null,
@@ -24,6 +60,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/svgo",
+      "version": "v0.0.0-20141004211159-89e3ac64b5b3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/svgo/@v/v0.0.0-20141004211159-89e3ac64b5b3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20141004211159-89e3ac64b5b3"
     },
     {
       "ecosystem": "go",
@@ -50,6 +98,30 @@
       "latest_version": "v0.0.0-20180226025133-644b8db467af"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/svgo",
+      "version": "v0.0.0-20211024235047-1546f124cd8b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/svgo/@v/v0.0.0-20211024235047-1546f124cd8b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211024235047-1546f124cd8b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dchapes/svgo",
+      "version": "v0.0.0-20160911180557-1e7d8e7455e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dchapes/svgo/@v/v0.0.0-20160911180557-1e7d8e7455e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160911180557-1e7d8e7455e0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "procps",
       "version": "4.0.7",
@@ -60,6 +132,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "procps-ng-4.0.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -6,12 +6,36 @@
       "package": "jsonnet",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "jsonnet",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fluxninja/aperture/v2",
+      "version": "v2.34.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fluxninja/aperture/v2/@v/v2.34.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.34.0"
     },
     {
       "ecosystem": "go",
@@ -24,6 +48,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.12.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/go-jsonnet",
+      "version": "v0.13.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/go-jsonnet/@v/v0.13.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.13.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/go-jsonnet",
+      "version": "v0.22.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/go-jsonnet/@v/v0.22.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.22.0"
     },
     {
       "ecosystem": "homebrew",
@@ -50,6 +98,19 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "go-jsonnet",
+      "version": "0.22.0",
+      "repository": "https://jsonnet.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.22.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "jsonnet",
       "version": null,
@@ -63,5 +124,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

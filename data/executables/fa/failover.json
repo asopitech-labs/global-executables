@@ -2,6 +2,30 @@
   "command": "failover",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "failover_vr",
+      "version": "0.5.0",
+      "repository": "https://github.com/Paul-weqe/failover",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rpcx-ecosystem/rpcx-examples3",
+      "version": "v0.0.0-20190522115016-4db828350800",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rpcx-ecosystem/rpcx-examples3/@v/v0.0.0-20190522115016-4db828350800.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190522115016-4db828350800"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "nut",
       "version": "2.8.5",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

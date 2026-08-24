@@ -2,6 +2,42 @@
   "command": "zenith",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "zenith-0.15.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zenith",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zenith-tool",
+      "version": "0.0.8",
+      "repository": "https://github.com/zenitheditor/zenith",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.8"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "zenith",
       "version": "0.15.0",
@@ -12,8 +48,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@automata-ooo/zenith-cli",
+      "version": "1.0.4",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@automata-ooo%2Fzenith-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "ZenithArch.Cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/zenitharch.cli/1.0.0/zenitharch.cli.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alenia-zenith",
+      "version": "1.2.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2a/38/4007925e267b8ddd37d42c67af23afe6a500a406687f28c09c98bb94531b/alenia_zenith-1.2.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.9"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "MakotoArai.Zenith",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "monitor",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cmri_tools",
+      "version": "0.1.3",
+      "repository": "https://github.com/RobertGauld/cmri-rs/tree/main/cmri_tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "monitor_cli",
+      "version": "1.13.3",
+      "repository": "https://github.com/mbecker20/monitor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.13.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "testwriter",
+      "version": "0.1.3",
+      "repository": "https://gitlab.com/hpux735/dbus-testwriter",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dmucs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "dmucs",
       "version": null,
@@ -12,6 +60,78 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitee.com/johng/gf",
+      "version": "v1.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitee.com/johng/gf/@v/v1.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aegixx/rpi",
+      "version": "v0.0.0-20230112032802-b0ce7688d7bf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aegixx/rpi/@v/v0.0.0-20230112032802-b0ce7688d7bf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230112032802-b0ce7688d7bf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ambitiousmice/go-one",
+      "version": "v1.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ambitiousmice/go-one/@v/v1.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogf/gf",
+      "version": "v1.6.17",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gogf/gf/@v/v1.6.17.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.17"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogf/gf",
+      "version": "v1.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gogf/gf/@v/v1.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goodrain/rainbond",
+      "version": "v3.6.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goodrain/rainbond/@v/v3.6.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.6.1+incompatible"
     },
     {
       "ecosystem": "go",
@@ -27,6 +147,42 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/koron/go-ssdp",
+      "version": "v0.9.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/koron/go-ssdp/@v/v0.9.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/go-os",
+      "version": "v0.0.0-20170713113540-bd87a0c3c18b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/go-os/@v/v0.0.0-20170713113540-bd87a0c3c18b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170713113540-bd87a0c3c18b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/go-os",
+      "version": "v0.0.0-20180410144123-2efaa0cdc33a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/go-os/@v/v0.0.0-20180410144123-2efaa0cdc33a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180410144123-2efaa0cdc33a"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/pydio/go-os",
       "version": "v0.0.0-20180410161642-493f22970962",
       "repository": null,
@@ -36,6 +192,102 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180410161642-493f22970962"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wslzz/rainbondgo",
+      "version": "v3.6.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wslzz/rainbondgo/@v/v3.6.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.6.1+incompatible"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alosha/monitor",
+      "version": "0.4.0",
+      "repository": "git+https://github.com/avlisodraude/monitor.git",
+      "source": "https://registry.npmjs.org/@alosha%2Fmonitor/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "araras",
+      "version": "2.7.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0f/55/41593543fde9a38d2ec2574285ed131080a8ecea9bd4f08ffe2a766e46a5/araras-2.7.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.7.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ashar-website-monitor",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/01/8d/958e1c2951d1d2e471940a06c338626c344236d41d4a2a18125e9bad8915/ashar_website_monitor-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "aeden-refinery",
+      "version": "0.10.10",
+      "repository": "http://github.com/aeden/refinery",
+      "source": "https://rubygems.org/gems/aeden-refinery-0.10.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.10.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "arvicco-avalon",
+      "version": "0.0.27",
+      "repository": "https://github.com/arvicco/avalon",
+      "source": "https://rubygems.org/gems/arvicco-avalon-0.0.27.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.27"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cloud-utils",
+      "version": "1.2",
+      "repository": "http://github.com/jbrisbin/cloud-utils-deployer",
+      "source": "https://rubygems.org/gems/cloud-utils-1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "inquisitor",
+      "version": "0.1.1",
+      "repository": "https://github.com/brain-geek/inquisitor",
+      "source": "https://rubygems.org/gems/inquisitor-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -51,5 +303,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

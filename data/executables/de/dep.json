@@ -2,6 +2,30 @@
   "command": "dep",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dep",
+      "version": "0.2.0",
+      "repository": "https://github.com/hardliner66/dep",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/dep",
+      "version": "v0.0.0-20181003191421-22125cfaa6dd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/dep/@v/v0.0.0-20181003191421-22125cfaa6dd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181003191421-22125cfaa6dd"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/golang/dep",
       "version": "v0.5.0",
@@ -14,6 +38,30 @@
       "latest_version": "v0.5.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/golang/dep",
+      "version": "v0.5.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/dep/@v/v0.5.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/dep",
+      "version": "v0.5.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/dep/@v/v0.5.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "deployer",
       "version": "8.0.5",
@@ -24,8 +72,141 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "adrian1207/deployer",
+      "version": "v7.0.0-beta.16",
+      "repository": "https://github.com/adrian1207/deployer.git",
+      "source": "https://repo.packagist.org/p2/adrian1207/deployer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v7.0.0-beta.16"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "bilge/deployer",
+      "version": "v7.0.0-beta.24",
+      "repository": "https://github.com/Bilge/deployer.git",
+      "source": "https://repo.packagist.org/p2/bilge/deployer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v7.0.0-beta.24"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "cutcode/deployer",
+      "version": "v1.1.1",
+      "repository": "https://github.com/CutCodeRu/deployer.git",
+      "source": "https://repo.packagist.org/p2/cutcode/deployer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "deployer/deployer",
+      "version": "v8.0.5",
+      "repository": "https://github.com/deployphp/deployer.git",
+      "source": "https://repo.packagist.org/p2/deployer/deployer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v8.0.5"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "deployer/dist",
+      "version": "v7.0.0-rc.4",
+      "repository": "https://github.com/deployphp/distribution.git",
+      "source": "https://repo.packagist.org/p2/deployer/dist.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v7.0.0-rc.4"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "frmwrk/deployer",
+      "version": "v2.0.3",
+      "repository": "https://gitlab.frmwrk.nl/frmwrk-general/deployer",
+      "source": "https://repo.packagist.org/p2/frmwrk/deployer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.0.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "inkvizytor/deployer",
+      "version": "v7.0.0-beta.16",
+      "repository": "https://github.com/inkvizytor/deployer.git",
+      "source": "https://repo.packagist.org/p2/inkvizytor/deployer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v7.0.0-beta.16"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dep",
+      "version": "1.1.0",
+      "repository": "http://cyx.github.com/dep",
+      "source": "https://rubygems.org/gems/dep-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dep-cj",
+      "version": "1.2.0",
+      "repository": "http://cyx.github.com/dep",
+      "source": "https://rubygems.org/gems/dep-cj-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dependencies",
+      "version": "0.0.9",
+      "repository": "https://github.com/djanowski/dependencies",
+      "source": "https://rubygems.org/gems/dependencies-0.0.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dep",
+      "version": "0.5.4",
+      "repository": "https://github.com/golang/dep",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.5.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

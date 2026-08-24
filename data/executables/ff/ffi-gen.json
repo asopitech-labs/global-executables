@@ -1,0 +1,43 @@
+{
+  "command": "ffi-gen",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "brioche-ducc-sys",
+      "version": "0.1.2-brioche",
+      "repository": "https://github.com/brioche-dev/ducc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2-brioche"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ducc-sys",
+      "version": "0.1.2",
+      "repository": "https://github.com/SkylerLipthay/ducc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ffi-swig-generator",
+      "version": "0.3.2",
+      "repository": "http://kenai.com/projects/ruby-ffi/sources/swig-generator/show",
+      "source": "https://rubygems.org/gems/ffi-swig-generator-0.3.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

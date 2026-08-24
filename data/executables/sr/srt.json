@@ -2,6 +2,54 @@
   "command": "srt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-srt-3.5.3-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sandbox-runtime",
+      "version": "0.1.1",
+      "repository": "https://github.com/wangyedev/sandbox-runtime-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ainative/sandbox-runtime",
+      "version": "0.0.49",
+      "repository": "git+https://github.com/AINative-Studio/cody-cli.git",
+      "source": "https://registry.npmjs.org/@ainative%2Fsandbox-runtime/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.49"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anthropic-ai/sandbox-runtime",
+      "version": "0.0.73",
+      "repository": "git+https://github.com/anthropic-experimental/sandbox-runtime.git",
+      "source": "https://registry.npmjs.org/@anthropic-ai%2Fsandbox-runtime/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.73"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-pysrt",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

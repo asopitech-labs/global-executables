@@ -1,0 +1,31 @@
+{
+  "command": "protoc-gen-rs",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "protobuf-codegen",
+      "version": "3.7.2",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.7.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "protobuf-codegen",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

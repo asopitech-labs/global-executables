@@ -2,6 +2,30 @@
   "command": "pyav",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-av-18.1.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-av",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "python3-av",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "av",
+      "version": "18.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/05/d4/d7cdc8bff143c17a6d35924375ae28dd692cacde38700a7d419fde54f44a/av-18.1.0-cp311-abi3-macosx_11_0_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "18.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "av-tmp",
+      "version": "8.1.999",
+      "repository": "https://github.com/PyAV-Org/PyAV",
+      "source": "https://files.pythonhosted.org/packages/4e/6c/c42c453a38ec0778debc1f164da1178f52cd2947ff536481d6f00e3f27cc/av_tmp-8.1.999-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.1.999"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

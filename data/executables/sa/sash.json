@@ -2,6 +2,30 @@
   "command": "sash",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sash",
+      "version": "0.1.0",
+      "repository": "https://codeberg.org/felipeqq2/sash",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "sash",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "sash",
       "version": null,
@@ -16,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "sagittarius-scheme",
-      "version": "0.9.14",
+      "version": "0.9.15",
       "repository": "https://github.com/ktakashi/sagittarius-scheme",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

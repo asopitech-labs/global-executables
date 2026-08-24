@@ -2,6 +2,30 @@
   "command": "cargo-fuzz",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cargo-fuzz-0.13.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-fuzz",
+      "version": "0.13.2",
+      "repository": "https://github.com/rust-fuzz/cargo-fuzz/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cargo-fuzz",
       "version": "0.13.2",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

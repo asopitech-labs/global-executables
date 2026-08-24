@@ -2,6 +2,30 @@
   "command": "svc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "svc-rs",
+      "version": "0.0.2",
+      "repository": "https://github.com/SemyonTs/svc-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "daemontools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "daemontools",
       "version": null,
@@ -12,6 +36,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/runthinker/allpay",
+      "version": "v0.0.0-20181218073451-1bfa26d3e71c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/runthinker/allpay/@v/v0.0.0-20181218073451-1bfa26d3e71c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181218073451-1bfa26d3e71c"
     },
     {
       "ecosystem": "homebrew",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,90 @@
   "command": "greet",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "haskell-servant-server-0.20.3.0-138",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "motils",
+      "version": "0.1.1",
+      "repository": "https://github.com/pykeras/BashUtils/tree/master/motils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aacnorg/cli",
+      "version": "1.4.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aacnorg%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akp-13/greetings",
+      "version": "1.0.4",
+      "repository": "git+https://github.com/AKP-13/greetings.git",
+      "source": "https://registry.npmjs.org/@akp-13%2Fgreetings/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amanr28/greet",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@amanr28%2Fgreet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "greet",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/greet/1.1.0/greet.1.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "greeter",
+      "version": "1.0.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/greeter/1.0.4/greeter.1.0.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.4"
+    },
+    {
       "ecosystem": "pypi",
       "package": "Adam-testtt",
       "version": "0.1.0",
@@ -12,8 +96,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "abedwomar",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/dd/28/c424b8e04bbc04d473994eb3a56e5b1bf9ed16cc701218b7abf3d4136fe2/abedwomar-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

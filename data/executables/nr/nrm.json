@@ -2,6 +2,18 @@
   "command": "nrm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "nrm",
+      "version": "0.1.0",
+      "repository": "https://github.com/myl7/nrm.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "nrm",
       "version": "2.1.0",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@3rd/nrm",
+      "version": "2.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@3rd%2Fnrm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adams549659584/nrm",
+      "version": "1.2.6",
+      "repository": "git://github.com/adams549659584/nrm.git",
+      "source": "https://registry.npmjs.org/@adams549659584%2Fnrm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amio/nrm",
+      "version": "1.0.2",
+      "repository": "git+https://github.com/amio/nrm.git",
+      "source": "https://registry.npmjs.org/@amio%2Fnrm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

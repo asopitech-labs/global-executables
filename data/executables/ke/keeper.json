@@ -2,6 +2,18 @@
   "command": "keeper",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "keeper",
+      "version": "0.1.0",
+      "repository": "https://github.com/michael-zapata/keeper",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "keeper-commander",
       "version": "18.1.1",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@askalf/strongroom",
+      "version": "0.5.0",
+      "repository": "git+https://github.com/askalf/strongroom.git",
+      "source": "https://registry.npmjs.org/@askalf%2Fstrongroom/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "KeeperSecurity.Commander",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,43 @@
+{
+  "command": "cleanarch",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "dnssec-tools-2.2.3-15",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "CleanArch.Tool",
+      "version": "2.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cleanarch.tool/2.0.3/cleanarch.tool.2.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.0.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "CleanArchitectureGenerator",
+      "version": "2.2.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cleanarchitecturegenerator/2.2.1/cleanarchitecturegenerator.2.2.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.2.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

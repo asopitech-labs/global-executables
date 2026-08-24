@@ -2,9 +2,33 @@
   "command": "md2pdf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "md2pdf",
+      "version": "0.0.3",
+      "repository": "https://gitea.tforgione.fr/tforgione/md2pdf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "md2pdf-rs",
+      "version": "0.1.0",
+      "repository": "https://github.com/cipherchabon/md2pdf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "md2pdf",
-      "version": "2.2.20",
+      "version": "2.2.21",
       "repository": "https://github.com/solworktech/md2pdf",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,92 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amitdevx/md2pdf",
+      "version": "0.8.7",
+      "repository": "git+https://github.com/amitdevx/md2pdf.git",
+      "source": "https://registry.npmjs.org/@amitdevx%2Fmd2pdf/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.8.7"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Markdown2Pdf.Console",
+      "version": "2.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/markdown2pdf.console/2.0.2/markdown2pdf.console.2.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "armin/md2pdf",
+      "version": "0.2.1",
+      "repository": "https://github.com/a-r-m-i-n/md2pdf.git",
+      "source": "https://repo.packagist.org/p2/armin/md2pdf.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Markdown2PDF",
+      "version": "0.1.4",
+      "repository": "https://github.com/kxxoling/markdown2pdf",
+      "source": "https://files.pythonhosted.org/packages/c6/a3/8ca5c5e29553d9a151abfb84da2c13471f07bd2314326b234fe8668360c6/Markdown2PDF-0.1.4.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "markdown_prawn",
+      "version": "0.0.4.pre",
+      "repository": "http://ryanstenhouse.eu",
+      "source": "https://rubygems.org/gems/markdown_prawn-0.0.4.pre.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4.pre"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "md2pdf",
+      "version": "0.0.1",
+      "repository": "https://github.com/rwestgeest/md2pdf",
+      "source": "https://rubygems.org/gems/md2pdf-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdown2pdf",
+      "version": "0.1.0",
+      "repository": "https://github.com/robin850/mdown2pdf",
+      "source": "https://rubygems.org/gems/mdown2pdf-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

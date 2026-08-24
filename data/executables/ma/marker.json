@@ -2,6 +2,66 @@
   "command": "marker",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "marker-2023.05.02-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "claude-marker",
+      "version": "0.3.0",
+      "repository": "https://github.com/joshLong145/claude-marker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "marker",
+      "version": "0.9.0",
+      "repository": "https://github.com/crawford/marker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "marker-typ",
+      "version": "0.1.4",
+      "repository": "https://github.com/ReeseHatfield/marker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/svgo",
+      "version": "v0.0.0-20141004211159-89e3ac64b5b3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/svgo/@v/v0.0.0-20141004211159-89e3ac64b5b3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20141004211159-89e3ac64b5b3"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/ajstarks/svgo",
       "version": "v0.0.0-20151117013546-fd2151ebabde",
@@ -24,8 +84,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180226025133-644b8db467af"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/svgo",
+      "version": "v0.0.0-20211024235047-1546f124cd8b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/svgo/@v/v0.0.0-20211024235047-1546f124cd8b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211024235047-1546f124cd8b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dchapes/svgo",
+      "version": "v0.0.0-20160911180557-1e7d8e7455e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dchapes/svgo/@v/v0.0.0-20160911180557-1e7d8e7455e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160911180557-1e7d8e7455e0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "automark",
+      "version": "1.0.7",
+      "repository": "https://github.com/mustafaquraish/marker",
+      "source": "https://files.pythonhosted.org/packages/74/95/0036efc097a39def04175ab298e328f900d291e5fad6214bf74cf2df0fe0/automark-1.0.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "marker",
+      "version": "0.4.0",
+      "repository": "http://github.com/rdblue/marker",
+      "source": "https://rubygems.org/gems/marker-0.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

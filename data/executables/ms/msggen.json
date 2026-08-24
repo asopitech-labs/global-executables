@@ -2,9 +2,33 @@
   "command": "msggen",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ros2-client",
+      "version": "0.10.1",
+      "repository": "https://github.com/Atostek/ros2-client/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ros2-client-multi-rmw",
+      "version": "0.12.0",
+      "repository": "https://github.com/semio-ai/ros2-client/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rsyslog",
-      "version": "8.2606.0",
+      "version": "8.2608.0",
       "repository": "https://www.rsyslog.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

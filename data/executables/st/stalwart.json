@@ -1,0 +1,43 @@
+{
+  "command": "stalwart",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "stalwart-0.16.17-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "stalwart",
+      "version": "0.15.6",
+      "repository": "https://github.com/arkiecompany/stalwart-lite",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.6"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "stalwart-lite",
+      "version": "0.15.6",
+      "repository": "https://github.com/tschk/stalwart-lite",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.6"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

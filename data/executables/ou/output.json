@@ -2,6 +2,42 @@
   "command": "output",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "4ti2-1.6.15-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chanoma",
+      "version": "0.1.2",
+      "repository": "https://github.com/booink/chanoma",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "yagiuda",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "yagiuda",
       "version": null,
@@ -12,6 +48,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitee.com/wenj91/dubbo-go-hessian2",
+      "version": "v0.0.0-20240114133923-6bc30ac5943c",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitee.com/wenj91/dubbo-go-hessian2/@v/v0.0.0-20240114133923-6bc30ac5943c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240114133923-6bc30ac5943c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gvisor.dev/gvisor",
+      "version": "v0.0.0-20190614143145-a8608c501b23",
+      "repository": null,
+      "source": "https://proxy.golang.org/gvisor.dev/gvisor/@v/v0.0.0-20190614143145-a8608c501b23.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190614143145-a8608c501b23"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aibulat/run",
+      "version": "0.2.26",
+      "repository": "git+https://github.com/ngmaibulat/packages.git",
+      "source": "https://registry.npmjs.org/@aibulat%2Frun/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.26"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

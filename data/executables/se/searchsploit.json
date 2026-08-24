@@ -2,9 +2,21 @@
   "command": "searchsploit",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "exploitdb-20260709-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "exploitdb",
-      "version": "2026-08-12",
+      "version": "2026-08-19",
       "repository": "https://www.exploit-db.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

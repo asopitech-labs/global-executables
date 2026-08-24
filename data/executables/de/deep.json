@@ -2,6 +2,42 @@
   "command": "deep",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-deepdiff-9.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aplus-frontend/deep-interface",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aplus-frontend%2Fdeep-interface/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "deep_firstgem",
+      "version": "0.0.5",
+      "repository": "http://rubygems.org/gems/deep_firstgem",
+      "source": "https://rubygems.org/gems/deep_firstgem-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-deepdiff",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

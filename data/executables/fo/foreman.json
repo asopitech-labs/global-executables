@@ -2,6 +2,18 @@
   "command": "foreman",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "foreman",
+      "version": "1.7.0",
+      "repository": "https://github.com/Roblox/foreman",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.7.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "foreman",
       "version": "0.90.0",
@@ -12,6 +24,78 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ibourgeois/foreman",
+      "version": "v0.0.3",
+      "repository": "https://github.com/iBourgeois/foreman.git",
+      "source": "https://repo.packagist.org/p2/ibourgeois/foreman.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "HeSYINUvSBZfxqA-foreman",
+      "version": "0.20.0.4",
+      "repository": "http://github.com/ddollar/foreman",
+      "source": "https://rubygems.org/gems/HeSYINUvSBZfxqA-foreman-0.20.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.20.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "foreman",
+      "version": "0.90.0",
+      "repository": "https://github.com/ddollar/foreman",
+      "source": "https://rubygems.org/gems/foreman-0.90.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.90.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "foreman-capistrano",
+      "version": "0.53.4",
+      "repository": "http://github.com/Gropher/foreman",
+      "source": "https://rubygems.org/gems/foreman-capistrano-0.53.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.53.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "foreman-export-systemd_user",
+      "version": "0.2.1",
+      "repository": "http://github.com/botandrose/foreman-export-systemd_user",
+      "source": "https://rubygems.org/gems/foreman-export-systemd_user-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "foreman-systemd",
+      "version": "0.78.0",
+      "repository": "https://github.com/aserafin/foreman",
+      "source": "https://rubygems.org/gems/foreman-systemd-0.78.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.78.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

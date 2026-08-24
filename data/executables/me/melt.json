@@ -2,6 +2,78 @@
   "command": "melt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mlt-7.40.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ck3save",
+      "version": "0.4.3",
+      "repository": "https://github.com/rakaly/ck3save.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hoi4save",
+      "version": "0.4.0",
+      "repository": "https://github.com/rakaly/hoi4save.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "imperator-save",
+      "version": "0.4.2",
+      "repository": "https://github.com/rakaly/imperator-save.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "melt",
+      "version": "0.1.6",
+      "repository": "https://github.com/moisutsu/melt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "melt",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "melt",
       "version": null,
@@ -38,6 +110,19 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "wixtoolset3",
+      "version": "3.14.1",
+      "repository": "https://wixtoolset.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.14.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "melt",
       "version": null,
@@ -51,5 +136,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

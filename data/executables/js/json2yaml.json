@@ -2,6 +2,42 @@
   "command": "json2yaml",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "haskell-yaml-0.11.11.2-258",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "babelfish",
+      "version": "0.2.1",
+      "repository": "https://github.com/pickfire/babelfish",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libkysdk-base",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "remarshal",
       "version": "2.1.4",
@@ -12,6 +48,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "json2yaml",
+      "version": "6.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/json2yaml/6.0.0/json2yaml.6.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "6.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "baze",
+      "version": "1.2.0",
+      "repository": "https://github.com/pcarrier/baze",
+      "source": "https://rubygems.org/gems/baze-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "json2yaml",
+      "version": "0.0.3",
+      "repository": "https://github.com/fukayatsu/json2yaml",
+      "source": "https://rubygems.org/gems/json2yaml-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "marathon_deploy",
+      "version": "0.1.56",
+      "repository": "https://github.com/eBayClassifiedsGroup/marathon_deploy",
+      "source": "https://rubygems.org/gems/marathon_deploy-0.1.56.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.56"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

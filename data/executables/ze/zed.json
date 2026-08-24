@@ -2,6 +2,107 @@
   "command": "zed",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "zfs-zed",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amtFMC",
+      "version": "0.0.3",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/9c/ab/c31b2e48c87d23bbf8138d4cdab530f6e79686031605e3c219813e9027f1/amtFMC-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amtFMC5030",
+      "version": "1.0.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/19/3a/ca07b4e3efbb24987b323fdcca69a2aee6f976e3e8ef3271ce3ca936f2f8/amtFMC5030-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zed",
+      "version": "1.16.1",
+      "repository": "https://zed.dev/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.16.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zed-nightly",
+      "version": "2026-08-24",
+      "repository": "https://zed.dev/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026-08-24"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zed-opengl",
+      "version": "1.16.1",
+      "repository": "https://zed.dev/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.16.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zed-opengl-nightly",
+      "version": "2026-08-24",
+      "repository": "https://zed.dev/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026-08-24"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zed-pre",
+      "version": "1.17.0",
+      "repository": "https://zed.dev/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.17.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "zfs-zed",
       "version": null,
@@ -15,5 +116,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

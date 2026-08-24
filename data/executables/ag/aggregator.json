@@ -2,6 +2,54 @@
   "command": "aggregator",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "wifi-densepose-hardware",
+      "version": "0.3.2",
+      "repository": "https://github.com/ruvnet/wifi-densepose",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xain-fl",
+      "version": "0.8.0",
+      "repository": "https://github.com/xainag/xain-fl/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aledbf/contrib",
+      "version": "v0.0.0-20171102143349-93285dabe62b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aledbf/contrib/@v/v0.0.0-20171102143349-93285dabe62b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171102143349-93285dabe62b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hazelcast/hazelcast-go-client",
+      "version": "v0.0.0-20190530123621-6cf767c2f31a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hazelcast/hazelcast-go-client/@v/v0.0.0-20190530123621-6cf767c2f31a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530123621-6cf767c2f31a"
+    },
+    {
       "ecosystem": "go",
       "package": "k8s.io/contrib",
       "version": "v0.0.0-20190411182844-89f6948e2457",
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

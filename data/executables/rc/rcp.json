@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "rcp",
+      "version": "0.1.0",
+      "repository": "https://github.com/nooberfsh/rcp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rcp-tools-rcp",
+      "version": "0.38.0",
+      "repository": "https://github.com/wykurz/rcp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.38.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "inetutils",
       "version": "2.8",
@@ -24,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "inetutils-2.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

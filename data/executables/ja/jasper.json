@@ -2,6 +2,18 @@
   "command": "jasper",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "jasper-4.2.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jasper",
       "version": "4.2.9",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Jasper",
+      "version": "0.1",
+      "repository": "https://github.com/tylerlaberge/Jasper",
+      "source": "https://files.pythonhosted.org/packages/56/cb/043d2be50b84d52b0cf8d210531cdbb97df047f95026ecf0238c190487ef/Jasper-0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jasper-cli",
+      "version": "0.0.8",
+      "repository": "http://jasper-vms.com",
+      "source": "https://rubygems.org/gems/jasper-cli-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

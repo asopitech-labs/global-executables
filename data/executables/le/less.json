@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "less",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "less",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "less",
       "version": null,
@@ -40,6 +64,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/codeskyblue/go-sh",
+      "version": "v0.0.0-20190328095946-f4ce45e7999e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/codeskyblue/go-sh/@v/v0.0.0-20190328095946-f4ce45e7999e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190328095946-f4ce45e7999e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/codeskyblue/go-sh",
       "version": "v0.0.0-20190412065543-76bd3d59ff27",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/codeskyblue/go-sh/@v/v0.0.0-20190412065543-76bd3d59ff27.zip",
@@ -48,6 +84,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190412065543-76bd3d59ff27"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/codeskyblue/go-sh",
+      "version": "v0.0.0-20250509230738-c29da582b0f5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/codeskyblue/go-sh/@v/v0.0.0-20250509230738-c29da582b0f5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250509230738-c29da582b0f5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/u-root/u-root",
+      "version": "v4.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/u-root/u-root/@v/v4.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/u-root/u-root",
+      "version": "v4.0.1-0.20190607171814-9f1bdc401932+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/u-root/u-root/@v/v4.0.1-0.20190607171814-9f1bdc401932%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.1-0.20190607171814-9f1bdc401932+incompatible"
     },
     {
       "ecosystem": "homebrew",
@@ -60,6 +132,94 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "less-704-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Winix.Less",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winix.less/0.4.0/winix.less.0.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gow",
+      "version": "0.8.0",
+      "repository": "https://github.com/bmatzelle/gow",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "less",
+      "version": "704",
+      "repository": "https://www.greenwoodsoftware.com/less/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "704"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "less-beta",
+      "version": "661",
+      "repository": "https://www.greenwoodsoftware.com/less/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "661"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "unxutils",
+      "version": "2007.03.01",
+      "repository": "https://unxutils.sourceforge.net/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2007.03.01"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +235,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

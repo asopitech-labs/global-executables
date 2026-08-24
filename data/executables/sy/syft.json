@@ -2,6 +2,30 @@
   "command": "syft",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "syft-1.51.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "syft-cli",
+      "version": "0.2.1",
+      "repository": "https://github.com/chaqchase/syft",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "syft",
       "version": "1.51.0",
@@ -12,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anchore-syft",
+      "version": "1.18.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/89/c3/e607d15b4a1e2888224acdd4465e5da9f4d0515b76c73b0e2cc3bbe4618a/anchore_syft-1.18.1-py2.py3-none-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.18.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "syft",
+      "version": "1.51.0",
+      "repository": "https://github.com/anchore/syft",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.51.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "augur",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "augur",
+      "version": "0.9.3",
+      "repository": "https://github.com/0xdea/augur",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tpt-augur-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/tpt-solutions/tpt-augur",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "augur-cli",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d2/ab/ca0c3a74b1905b37c357a45ffda6d32ca2499cb68d960467bb6188942c51/augur_cli-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "augur",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

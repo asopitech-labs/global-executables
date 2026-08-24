@@ -2,6 +2,30 @@
   "command": "markdown",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "discount-3.0.1.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "discount",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "discount",
       "version": null,
@@ -24,6 +48,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20151126072848-44b1ede22d71"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gopherjs/vecty",
+      "version": "v0.0.0-20180525005238-a3bd138280bf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gopherjs/vecty/@v/v0.0.0-20180525005238-a3bd138280bf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180525005238-a3bd138280bf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/benchmarks",
+      "version": "v0.0.0-20260819172200-70693762b6a0",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/benchmarks/@v/v0.0.0-20260819172200-70693762b6a0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819172200-70693762b6a0"
     },
     {
       "ecosystem": "homebrew",
@@ -62,6 +110,78 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "markdown-1.0.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "MarkdownCli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/markdowncli/1.0.0/markdowncli.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "cebe/markdown",
+      "version": "1.2.1",
+      "repository": "https://github.com/cebe/markdown.git",
+      "source": "https://repo.packagist.org/p2/cebe/markdown.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "appier-extras",
+      "version": "0.26.8",
+      "repository": "http://appier-extras.hive.pt",
+      "source": "https://files.pythonhosted.org/packages/a7/af/07093d7b149d35dfd75c238ce0685c24558b83cf3a838f40ceec39f2fb92/appier_extras-0.26.8-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.26.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "markdown-tools",
+      "version": "1.2.0",
+      "repository": "https://github.com/rubylibs/markdown-tools",
+      "source": "https://rubygems.org/gems/markdown-tools-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "markdown_render",
+      "version": "0.0.3",
+      "repository": "https://github.com/JesseHerrick/markdown_render",
+      "source": "https://rubygems.org/gems/markdown_render-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "discount",
       "version": null,
@@ -75,5 +195,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,43 @@
+{
+  "command": "vt-cli",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "virustotal-rs",
+      "version": "0.4.7",
+      "repository": "https://github.com/ThreatFlux/virustotal-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.7"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "vt-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-agent-video-transcription",
+      "version": "1.1.3",
+      "repository": "https://github.com/lopand-solutions/video-transcription-agent",
+      "source": "https://files.pythonhosted.org/packages/06/56/d1f78cec2b375f5d7f6126991417a8510495d4753accf2d26b5a5c73788b/ai_agent_video_transcription-1.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

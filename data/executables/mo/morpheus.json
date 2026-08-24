@@ -2,6 +2,18 @@
   "command": "morpheus",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "morpheus",
+      "version": "0.1.0",
+      "repository": "https://github.com/hugecheese/morpheus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "morpheus",
       "version": "2.4.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aryainguz/morpheus-cli",
+      "version": "1.2.0",
+      "repository": "git+https://github.com/Aryainguz/morpheus-CLI.git",
+      "source": "https://registry.npmjs.org/@aryainguz%2Fmorpheus-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

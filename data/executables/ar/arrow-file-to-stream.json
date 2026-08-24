@@ -1,0 +1,67 @@
+{
+  "command": "arrow-file-to-stream",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "arrow-25.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "arrow-25.0.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "arrow-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/apache/arrow/go/arrow",
+      "version": "v0.0.0-20211112161151-bc219186db40",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/apache/arrow/go/arrow/@v/v0.0.0-20211112161151-bc219186db40.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211112161151-bc219186db40"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/apache/arrow/go/v15",
+      "version": "v15.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/apache/arrow/go/v15/@v/v15.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v15.0.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

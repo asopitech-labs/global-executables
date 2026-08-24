@@ -2,6 +2,30 @@
   "command": "fm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fm-tui",
+      "version": "0.2.4",
+      "repository": "https://github.com/qkzk/fm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fmtools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "fmtools",
       "version": null,
@@ -12,6 +36,66 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@51npm/freedom-cli",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/51talk-design/freedom-cli.git",
+      "source": "https://registry.npmjs.org/@51npm%2Ffreedom-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "FileMoverMcp",
+      "version": "1.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/filemovermcp/1.2.0/filemovermcp.1.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fileman",
+      "version": "0.1.33724",
+      "repository": "https://github.com/nicolasdao/fileman",
+      "source": "https://rubygems.org/gems/fileman-0.1.33724.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.33724"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fm",
+      "version": "0.0.3",
+      "repository": "http://github.com/xman/ruby-fm",
+      "source": "https://rubygems.org/gems/fm-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fmanager",
+      "version": "0.0.1",
+      "repository": "http://github.com/xman/ruby-fmanager",
+      "source": "https://rubygems.org/gems/fmanager-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

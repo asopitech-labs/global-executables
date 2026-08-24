@@ -2,6 +2,30 @@
   "command": "parallel_rspec",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-parallel_tests-5.7.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "friendlyfashion-parallel_tests",
+      "version": "0.9.0",
+      "repository": "http://github.com/friendlyfashion/parallel_tests",
+      "source": "https://rubygems.org/gems/friendlyfashion-parallel_tests-0.9.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-parallel-tests",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

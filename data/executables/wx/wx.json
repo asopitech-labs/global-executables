@@ -2,6 +2,30 @@
   "command": "wx",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "wx",
+      "version": "0.0.2",
+      "repository": "https://github.com/mzkmnk/wx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wx-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/jackwener/wx-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "wx-cli",
       "version": "0.3.0",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agent-wechat/cli",
+      "version": "0.11.15",
+      "repository": "git+https://github.com/thisnick/agent-wechat.git",
+      "source": "https://registry.npmjs.org/@agent-wechat%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.11.15"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apexglory/agent-wechat2-cli",
+      "version": "0.11.15",
+      "repository": "git+https://github.com/apexglory/agent-wechat.git",
+      "source": "https://registry.npmjs.org/@apexglory%2Fagent-wechat2-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.11.15"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

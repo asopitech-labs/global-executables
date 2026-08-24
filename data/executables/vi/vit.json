@@ -2,6 +2,30 @@
   "command": "vit",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "vit-2.3.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vit",
+      "version": "1.2.3",
+      "repository": "https://github.com/BlackThunder080/vit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "vit",
       "version": "2.3.4",
@@ -12,6 +36,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ajax-16/vit",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/ajax-16/vit.git",
+      "source": "https://registry.npmjs.org/@ajax-16%2Fvit/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "VersionIncrementerTool",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/versionincrementertool/0.3.0/versionincrementertool.0.3.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.3.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,9 +2,21 @@
   "command": "cadence",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cadence-agent",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cadence",
-      "version": "1.10.5",
+      "version": "1.10.6",
       "repository": "https://cadence-lang.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Cadence",
+      "version": "1.1.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cadence/1.1.1/cadence.1.1.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "codesvault/cadence",
+      "version": "1.0.2",
+      "repository": "https://github.com/CodesVault/cadence.git",
+      "source": "https://repo.packagist.org/p2/codesvault/cadence.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

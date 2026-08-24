@@ -2,6 +2,30 @@
   "command": "b2",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "boost-1.92.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "b2",
+      "version": "0.1.0",
+      "repository": "https://github.com/azdle/b2",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "debian",
       "package": "libboost1.83-tools-dev",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libboost1.90-tools-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/kothar/go-backblaze.v0",
+      "version": "v0.0.0-20180916190456-9ac0cf0dab1a",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/kothar/go-backblaze.v0/@v/v0.0.0-20180916190456-9ac0cf0dab1a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180916190456-9ac0cf0dab1a"
     },
     {
       "ecosystem": "homebrew",
@@ -38,6 +86,19 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "b2",
+      "version": "4.7.1",
+      "repository": "https://www.backblaze.com/b2/docs/quick_command_line.html",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.7.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libboost1.83-tools-dev",
       "version": null,
@@ -51,5 +112,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

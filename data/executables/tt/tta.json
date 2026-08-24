@@ -2,6 +2,18 @@
   "command": "tta",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/loft-sh/tailscale",
+      "version": "v1.96.4-loft.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/loft-sh/tailscale/@v/v1.96.4-loft.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.96.4-loft.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tta",
       "version": "2.2",
@@ -12,8 +24,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tta",
+      "version": "2.3",
+      "repository": "http://tta.tausoft.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

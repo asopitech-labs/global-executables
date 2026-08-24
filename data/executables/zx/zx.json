@@ -2,6 +2,30 @@
   "command": "zx",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mdrv-zx",
+      "version": "0.1.0",
+      "repository": "https://github.com/mdrv/mdrv-zx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zix",
+      "version": "0.0.5",
+      "repository": "https://github.com/arkeasz/zix",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "zx",
       "version": "8.8.5",
@@ -12,6 +36,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antongolub/zx",
+      "version": "8.0.0-beta.6",
+      "repository": "git+https://github.com/google/zx.git",
+      "source": "https://registry.npmjs.org/@antongolub%2Fzx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "8.0.0-beta.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

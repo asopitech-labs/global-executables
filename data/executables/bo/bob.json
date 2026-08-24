@@ -2,6 +2,54 @@
   "command": "bob",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "bob-4.1.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bob",
+      "version": "1.0.0",
+      "repository": "https://github.com/jperkin/bob",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bob-nvim",
+      "version": "4.1.7",
+      "repository": "https://github.com/MordechaiHadad/bob",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "4.1.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pkgbob",
+      "version": "0.7.0",
+      "repository": "https://github.com/jperkin/bob",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bob",
       "version": "4.1.7",
@@ -14,6 +62,54 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@ardatan/bob",
+      "version": "0.2.7",
+      "repository": "git+ssh://git@github.com/kamilkisiela/bob.git",
+      "source": "https://registry.npmjs.org/@ardatan%2Fbob/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ardatan/bob-the-bundle",
+      "version": "1.2.6",
+      "repository": "git@github.com:kamilkisiela/bob.git",
+      "source": "https://registry.npmjs.org/@ardatan%2Fbob-the-bundle/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ardatan/bob-the-bundler",
+      "version": "1.2.6",
+      "repository": "git@github.com:kamilkisiela/bob.git",
+      "source": "https://registry.npmjs.org/@ardatan%2Fbob-the-bundler/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.6"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "chh/bob",
+      "version": "v1.0.0alpha3",
+      "repository": "https://github.com/CHH/bob.git",
+      "source": "https://repo.packagist.org/p2/chh/bob.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.0alpha3"
+    },
+    {
       "ecosystem": "pypi",
       "package": "BobBuildTool",
       "version": "1.2.0",
@@ -24,8 +120,21 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "bob",
+      "version": "4.1.7",
+      "repository": "https://github.com/MordechaiHadad/bob",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.1.7"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

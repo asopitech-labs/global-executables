@@ -2,6 +2,54 @@
   "command": "hot",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hopenpgp-tools-0.23.11-113",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "homeofficetracker",
+      "version": "0.7.0",
+      "repository": "https://github.com/hardliner66/homeofficetracker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hot-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/jpopesculian/hot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "hopenpgp-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "hopenpgp-tools",
       "version": null,
@@ -16,7 +64,7 @@
     {
       "ecosystem": "homebrew",
       "package": "hopenpgp-tools",
-      "version": "0.25.6",
+      "version": "0.25.8",
       "repository": "https://hackage.haskell.org/package/hopenpgp-tools",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

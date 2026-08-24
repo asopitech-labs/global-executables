@@ -2,6 +2,42 @@
   "command": "github-release",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "github-release",
+      "version": "0.1.2",
+      "repository": "https://github.com/yoshuawuyts/github-release",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aktau/github-release",
+      "version": "v0.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aktau/github-release/@v/v0.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/c4milo/github-release",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/c4milo/github-release/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "github-release",
       "version": "0.11.0",
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

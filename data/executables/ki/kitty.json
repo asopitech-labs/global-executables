@@ -2,6 +2,30 @@
   "command": "kitty",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "kitty-0.48.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kitty",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "kitty",
       "version": null,
@@ -14,6 +38,55 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "npm",
+      "package": "@anikghosh256/kitty-cli",
+      "version": "0.6.1",
+      "repository": "git+https://github.com/anikghosh256/kitty-cli.git",
+      "source": "https://registry.npmjs.org/@anikghosh256%2Fkitty-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "copycats",
+      "version": "0.8.1",
+      "repository": "https://github.com/cryptocopycats/copycats",
+      "source": "https://rubygems.org/gems/copycats-0.8.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "kitty",
+      "version": "0.0.4",
+      "repository": "http://github.com/bryanwoods/kitty",
+      "source": "https://rubygems.org/gems/kitty-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "kitty",
+      "version": "0.76.1.13",
+      "repository": "https://www.9bis.net/kitty",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.76.1.13"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "kitty",
       "version": null,
@@ -24,8 +97,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "avborup.kitty",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

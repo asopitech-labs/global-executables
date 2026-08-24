@@ -2,6 +2,54 @@
   "command": "pump",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "distcc-3.4-15",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pump",
+      "version": "0.0.5",
+      "repository": "https://github.com/dotcypress/pump",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jakecoffman/cp",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jakecoffman/cp/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pingcap/tidb-binlog",
+      "version": "v0.0.0-20190618071104-d54d6b91f2a1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pingcap/tidb-binlog/@v/v0.0.0-20190618071104-d54d6b91f2a1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190618071104-d54d6b91f2a1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "distcc",
       "version": "3.4",
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

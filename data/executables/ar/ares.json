@@ -2,6 +2,66 @@
   "command": "ares",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ares-emu-148-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ares-cli",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "project_ares",
+      "version": "0.12.0",
+      "repository": "https://github.com/bee-san/Ares",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "project_ares_test",
+      "version": "0.10.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ares",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ares",
       "version": null,
@@ -26,6 +86,115 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@ares-ai/cli",
+      "version": "0.1.0-alpha.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ares-ai%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0-alpha.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ares-dev/cli",
+      "version": "0.1.16",
+      "repository": "git+https://github.com/ares-tech/ares-cli.git",
+      "source": "https://registry.npmjs.org/@ares-dev%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.16"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@armourmind/ares-cli",
+      "version": "2.1.7",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@armourmind%2Fares-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.1.7"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "developer-samuel/ares-client",
+      "version": "v1.0.0",
+      "repository": "https://github.com/Developer-Samuel/ares-client.git",
+      "source": "https://repo.packagist.org/p2/developer-samuel/ares-client.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ares-agent",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/13/de/60fc11ca090a0e24494d64e42b7d1c7d9cb7d03f3bdc852684036f66010e/ares_agent-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ares-reasoning",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c0/9a/07937c6bb95ad56dd2587879786db1da428210adb4c4bf59df04fcc2f02f/ares_reasoning-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ares-redteamer",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/82/66/f444950d0e82afc22d7b6f272946c98de8d1299ce190df9193d434965c38/ares_redteamer-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ares-runtime",
+      "version": "2.0.8",
+      "repository": "https://github.com/shubhamtaywade82/agent-orchestrator",
+      "source": "https://rubygems.org/gems/ares-runtime-2.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.8"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "ares",
+      "version": "148",
+      "repository": "https://ares-emu.net",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "148"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ares",
       "version": null,
@@ -39,5 +208,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

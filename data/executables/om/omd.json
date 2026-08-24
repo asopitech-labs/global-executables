@@ -2,6 +2,54 @@
   "command": "omd",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "omd",
+      "version": "0.2.2",
+      "repository": "https://github.com/ptrglbvc/omd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "omd-cli",
+      "version": "0.7.0",
+      "repository": "https://github.com/Allen-Saji/openmetadata-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "openmetadata-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/romamo/openmetadata-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "omd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "omd",
       "version": null,
@@ -12,8 +60,32 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@3xhaust/oh-my-design",
+      "version": "0.18.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@3xhaust%2Foh-my-design/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.18.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "OpenMud.Mudpiler.Compiler.Project.Cli",
+      "version": "2.12.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/openmud.mudpiler.compiler.project.cli/2.12.2/openmud.mudpiler.compiler.project.cli.2.12.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.12.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

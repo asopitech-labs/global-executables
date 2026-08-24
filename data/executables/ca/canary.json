@@ -2,6 +2,18 @@
   "command": "canary",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "canaryspy",
+      "version": "0.1.3",
+      "repository": "https://github.com/irishmaestro/canaryspy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "container-canary",
       "version": "0.5.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "canary",
+      "version": "0.0.8",
+      "repository": "http://github.com/canary-io",
+      "source": "https://rubygems.org/gems/canary-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

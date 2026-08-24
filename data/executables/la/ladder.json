@@ -2,6 +2,30 @@
   "command": "ladder",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ladder",
+      "version": "0.1.2",
+      "repository": "https://github.com/Magicskys/ladder",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rogpeppe/misc",
+      "version": "v0.0.0-20181115194349-003328f094b1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rogpeppe/misc/@v/v0.0.0-20181115194349-003328f094b1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181115194349-003328f094b1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ladder",
       "version": "0.0.23",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "chef-ladder",
+      "version": "1.0.0",
+      "repository": "https://github.com/borntyping/chef-ladder",
+      "source": "https://rubygems.org/gems/chef-ladder-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

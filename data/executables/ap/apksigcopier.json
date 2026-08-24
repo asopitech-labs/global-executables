@@ -2,6 +2,30 @@
   "command": "apksigcopier",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "apksigcopier-1.1.1-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apksigcopier",
+      "version": "1.1.1",
+      "repository": "https://github.com/obfusk/apksigcopier",
+      "source": "https://files.pythonhosted.org/packages/46/56/8396b514b13012e8cd229fd501c34130155d07a4786c56bdd07ad3ce21f6/apksigcopier-1.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "apksigcopier",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

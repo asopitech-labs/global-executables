@@ -2,6 +2,18 @@
   "command": "braid",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "braid-cli",
+      "version": "0.0.5",
+      "repository": "https://github.com/viveky259259/braid",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "braid",
       "version": "1.1.10",
@@ -12,8 +24,80 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aip-tech/braid",
+      "version": "0.3.1",
+      "repository": "git+https://github.com/aip-tech/braid.git",
+      "source": "https://registry.npmjs.org/@aip-tech%2Fbraid/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyBRAID",
+      "version": "1.0.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/20/c8/c1579140b85c49d91a05ce4eab1185084539a2107f986b2890aa12e921a2/pybraid-1.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "braid",
+      "version": "1.1.10",
+      "repository": "https://github.com/cristibalan/braid",
+      "source": "https://rubygems.org/gems/braid-1.1.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dreamcat4-braid",
+      "version": "0.534",
+      "repository": "http://evil.che.lu/projects/braid",
+      "source": "https://rubygems.org/gems/dreamcat4-braid-0.534.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.534"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "evilchelu-braid",
+      "version": "0.5",
+      "repository": "http://evil.che.lu/projects/braid",
+      "source": "https://rubygems.org/gems/evilchelu-braid-0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "honkster-braid",
+      "version": "0.6.2",
+      "repository": "http://evil.che.lu/projects/braid",
+      "source": "https://rubygems.org/gems/honkster-braid-0.6.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

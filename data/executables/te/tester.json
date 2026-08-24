@@ -2,6 +2,102 @@
   "command": "tester",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "icao-9303",
+      "version": "0.1.0",
+      "repository": "https://github.com/recmo/icao-9303",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jbig2enc-rust",
+      "version": "0.5.4",
+      "repository": "https://github.com/LegeApp/Lege",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kari",
+      "version": "0.1.0",
+      "repository": "https://github.com/kari-lang/kari/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "roup",
+      "version": "0.7.0",
+      "repository": "https://github.com/ouankou/roup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v6.5.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v6.5.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.5.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v6.6.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v6.6.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.6.2+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v6.7.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v6.7.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.7.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v6.8.23+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v6.8.23%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.8.23+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/elastic/beats",
       "version": "v7.0.0+incompatible",
@@ -12,8 +108,92 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v7.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v7.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v7.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.0.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats",
+      "version": "v7.1.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/@v/v7.1.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/beats/v7",
+      "version": "v7.17.29",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/beats/v7/@v/v7.17.29.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.17.29"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/robertkrimen/otto",
+      "version": "v0.5.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/robertkrimen/otto/@v/v0.5.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aledan007/tester",
+      "version": "0.4.5",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aledan007%2Ftester/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arkecosystem/core-tester-cli",
+      "version": "2.7.26",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@arkecosystem%2Fcore-tester-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.7.26"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "apishka/tester",
+      "version": "2.0.4",
+      "repository": "https://github.com/apishka/tester.git",
+      "source": "https://repo.packagist.org/p2/apishka/tester.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.0.4"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

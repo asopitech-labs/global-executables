@@ -2,12 +2,24 @@
   "command": "age-plugin-yubikey",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "age-plugin-yubikey-0.5.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "age-plugin-yubikey",
       "version": "0.5.1",
       "repository": "https://github.com/str4d/age-plugin-yubikey",
-      "source": "https://crates.io/api/v1/crates/age-plugin-yubikey/0.5.1/download",
-      "confidence": "inferred",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

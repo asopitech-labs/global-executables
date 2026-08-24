@@ -2,6 +2,18 @@
   "command": "fortitude",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fortitude",
+      "version": "0.3.0",
+      "repository": "https://github.com/PlasmaFAIR/fortitude",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fortitude",
       "version": "0.9.2",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fortitude-sass",
+      "version": "0.7.9",
+      "repository": "http://github.com/fortitude/fortitude-sass",
+      "source": "https://rubygems.org/gems/fortitude-sass-0.7.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.7.9"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

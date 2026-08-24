@@ -6,6 +6,18 @@
       "package": "diction",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "diction",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -27,6 +39,30 @@
     },
     {
       "ecosystem": "go",
+      "package": "code.cloudfoundry.org/cli",
+      "version": "v6.45.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/code.cloudfoundry.org/cli/@v/v6.45.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.45.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "code.cloudfoundry.org/cli",
+      "version": "v6.53.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/code.cloudfoundry.org/cli/@v/v6.53.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.53.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/cloudfoundry/cli",
       "version": "v6.43.0+incompatible",
       "repository": null,
@@ -36,6 +72,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v6.43.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudfoundry/cli",
+      "version": "v6.53.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudfoundry/cli/@v/v6.53.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.53.0+incompatible"
     },
     {
       "ecosystem": "homebrew",
@@ -48,6 +96,66 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@archef2000/react-planner",
+      "version": "2.0.15",
+      "repository": "git+https://github.com/archef2000/react-planner.git",
+      "source": "https://registry.npmjs.org/@archef2000%2Freact-planner/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.15"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Style",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/style/1.0.0/style.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "rookxx.stylecopanalyzers-cli",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/rookxx.stylecopanalyzers-cli/1.1.0/rookxx.stylecopanalyzers-cli.1.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "adam-ascii",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f5/46/da8de0390f2d6303521edad78a6fbc332e4e477660b6abfbbf28ba3a1b09/adam_ascii-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "adam-modbus",
+      "version": "0.3.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/e9/0e/b622793b006b26cb4c1c3c66a3dd3e3fe7c5089619f144aecc539177db1f/adam_modbus-0.3.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -63,5 +171,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

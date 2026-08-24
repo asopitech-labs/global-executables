@@ -2,6 +2,18 @@
   "command": "enhance",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "libtecla-1.6.3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "libtecla",
       "version": "1.6.3",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0xdevabir/enhance",
+      "version": "0.1.4",
+      "repository": "git+https://github.com/0xdevabir/agent-enhance.git",
+      "source": "https://registry.npmjs.org/@0xdevabir%2Fenhance/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

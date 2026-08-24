@@ -2,6 +2,54 @@
   "command": "fire",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fire-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/gbenm/fire",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "2dfire-cli",
+      "version": "1.10.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/2dfire-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.10.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "fourkitchens/fire",
+      "version": "3.0.3",
+      "repository": "https://github.com/fourkitchens/fire.git",
+      "source": "https://repo.packagist.org/p2/fourkitchens/fire.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "3.0.3"
+    },
+    {
       "ecosystem": "pypi",
       "package": "CliFire",
       "version": "0.1.12",
@@ -12,8 +60,56 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.1.12"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autofire",
+      "version": "0.2",
+      "repository": "https://github.com/sslotin/autofire",
+      "source": "https://files.pythonhosted.org/packages/f7/8b/804e8d839fc469f9b4b6834ac8247c3edd0f28de3f363f7e560463003fda/autofire-0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dbfire",
+      "version": "0.0.2",
+      "repository": "https://github.com/m4rkw/dbfire",
+      "source": "https://rubygems.org/gems/dbfire-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fire",
+      "version": "0.2.0",
+      "repository": "http://rubyworks.github.com/fire",
+      "source": "https://rubygems.org/gems/fire-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "firehouse",
+      "version": "0.0.3",
+      "repository": "http://www.github.com/caguthrie/firehouse",
+      "source": "https://rubygems.org/gems/firehouse-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

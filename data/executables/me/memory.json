@@ -2,6 +2,18 @@
   "command": "memory",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "faculties",
+      "version": "0.20.0",
+      "repository": "https://github.com/triblespace/faculties",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/cloudfoundry/gosigar",
       "version": "v1.1.0",
@@ -12,8 +24,92 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudfoundry/gosigar",
+      "version": "v1.3.126",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudfoundry/gosigar/@v/v1.3.126.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.126"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aictx/memory",
+      "version": "0.2.1",
+      "repository": "git+https://github.com/aictx/memory.git",
+      "source": "https://registry.npmjs.org/@aictx%2Fmemory/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aigclab/memory",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aigclab%2Fmemory/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "adaptive-memory-engine",
+      "version": "0.1.17",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/38/bb/642a8f4423f30b974fcd39ed29be0cbe6a073e2d0563bd9ad7646068f9e4/adaptive_memory_engine-0.1.17-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.17"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agmemory",
+      "version": "0.23.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b9/30/603129527dbc7a72a485b7fca0551d3fdd3a58c3b7d3c8b63a829db2d1bb/agmemory-0.23.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.23.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

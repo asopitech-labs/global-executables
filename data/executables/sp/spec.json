@@ -2,6 +2,42 @@
   "command": "spec",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "spec-cli",
+      "version": "0.12.0",
+      "repository": "https://github.com/atomize-hq/spec",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bigwhite/experiments",
+      "version": "v0.0.0-20190420034840-485ab882b667",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bigwhite/experiments/@v/v0.0.0-20190420034840-485ab882b667.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190420034840-485ab882b667"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/streadway/amqp",
+      "version": "v0.0.0-20151001150549-b4f3ceab0337",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v0.0.0-20151001150549-b4f3ceab0337.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20151001150549-b4f3ceab0337"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/streadway/amqp",
       "version": "v0.0.0-20160311215503-2e25825abdbd",
@@ -36,6 +72,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171101222333-ff791c2d22d3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/streadway/amqp",
+      "version": "v0.0.0-20180131094250-fc7fda2371f5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v0.0.0-20180131094250-fc7fda2371f5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180131094250-fc7fda2371f5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/streadway/amqp",
+      "version": "v0.0.0-20180315184602-8e4aba63da9f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v0.0.0-20180315184602-8e4aba63da9f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180315184602-8e4aba63da9f"
     },
     {
       "ecosystem": "go",
@@ -88,6 +148,42 @@
     {
       "ecosystem": "go",
       "package": "github.com/streadway/amqp",
+      "version": "v0.0.0-20190224195609-f16568b23ee6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v0.0.0-20190224195609-f16568b23ee6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190224195609-f16568b23ee6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/streadway/amqp",
+      "version": "v0.0.0-20190225234609-30f8ed68076e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v0.0.0-20190225234609-30f8ed68076e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190225234609-30f8ed68076e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/streadway/amqp",
+      "version": "v0.0.0-20190312002841-61ee40d2027b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v0.0.0-20190312002841-61ee40d2027b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190312002841-61ee40d2027b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/streadway/amqp",
       "version": "v0.0.0-20190312223743-14f78b41ce6d",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v0.0.0-20190312223743-14f78b41ce6d.zip",
@@ -96,8 +192,92 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190312223743-14f78b41ce6d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/streadway/amqp",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/streadway/amqp/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antares123/ai-coding-workflow",
+      "version": "1.0.0",
+      "repository": "",
+      "source": "https://registry.npmjs.org/@antares123%2Fai-coding-workflow/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ageweke-rspec",
+      "version": "1.2.9",
+      "repository": "http://rspec.info",
+      "source": "https://rubygems.org/gems/ageweke-rspec-1.2.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "appengine-paginator",
+      "version": "0.2.2",
+      "repository": "http://github.com/joshsmoore/appengine-paginator",
+      "source": "https://rubygems.org/gems/appengine-paginator-0.2.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dchelimsky-rspec",
+      "version": "1.1.99.13",
+      "repository": "http://rspec.info/",
+      "source": "https://rubygems.org/gems/dchelimsky-rspec-1.1.99.13.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.99.13"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "inkling_api",
+      "version": "0.1.3",
+      "repository": "http://www.isotope11.com/",
+      "source": "https://rubygems.org/gems/inkling_api-0.1.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jesus",
+      "version": "1.0.0",
+      "repository": "http://github.com/dmathieu/jesus",
+      "source": "https://rubygems.org/gems/jesus-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

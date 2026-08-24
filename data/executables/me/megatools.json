@@ -6,6 +6,18 @@
       "package": "megatools",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "megatools",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -26,6 +38,32 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "megatools",
+      "version": "1.11.5.20250706",
+      "repository": "https://xff.cz/megatools",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.11.5.20250706"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "megatools-beta",
+      "version": "1.11.0-git-20220401",
+      "repository": "https://megatools.megous.com/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.11.0-git-20220401"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "megatools",
       "version": null,
@@ -39,5 +77,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

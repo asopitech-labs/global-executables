@@ -2,6 +2,30 @@
   "command": "predict",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "brainjepa",
+      "version": "0.2.7",
+      "repository": "https://github.com/eugenehp/brainjepa-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hfcast",
+      "version": "1.6.1",
+      "repository": "https://github.com/isopod/hfcast-engine",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.6.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "liblinear",
       "version": "2.50",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DL4Phylo",
+      "version": "0.0.3",
+      "repository": "https://github.com/phyloLearn/DL4Phylo",
+      "source": "https://files.pythonhosted.org/packages/a4/3a/674dfbd0597912aefd5a517bf2ef2945f24868d0c61718876ad25db87f67/DL4Phylo-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "NeurIPS22-CellSeg",
+      "version": "0.0.1",
+      "repository": "https://github.com/JunMa11/NeurIPS-CellSeg",
+      "source": "https://files.pythonhosted.org/packages/a9/bc/808ea37ad8c56f7af7ed59bde307137b0e9986a136a892d6868202bc0231/NeurIPS22-CellSeg-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

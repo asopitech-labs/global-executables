@@ -1,0 +1,31 @@
+{
+  "command": "arch-release-sync",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "arch-release-promotion-0.3.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "arch-release-promotion",
+      "version": "0.3.0.post0",
+      "repository": "https://gitlab.archlinux.org/archlinux/arch-release-promotion",
+      "source": "https://files.pythonhosted.org/packages/8e/f7/1f732e85675dd9fc923921fcdfc2bdf13de007caa9a404c4d183b4ba78c5/arch_release_promotion-0.3.0.post0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0.post0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

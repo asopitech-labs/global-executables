@@ -2,6 +2,30 @@
   "command": "hsc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hs-scraper",
+      "version": "0.1.1",
+      "repository": "https://github.com/jackyzhen/hb-scraper",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hsc",
+      "version": "0.1.8",
+      "repository": "https://github.com/i18n-site/rust.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.8"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "hsc",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "ccm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "claude-code-mux",
+      "version": "0.6.3",
+      "repository": "https://github.com/9j/claude-code-mux",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ccm",
       "version": "3.1.5",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@71zone/ccm",
+      "version": "0.1.6",
+      "repository": "git+https://github.com/71zone/ccm.git",
+      "source": "https://registry.npmjs.org/@71zone%2Fccm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arismag/claude-code-monitor",
+      "version": "1.4.0",
+      "repository": "git+https://github.com/arismag/claude-code-monitor.git",
+      "source": "https://registry.npmjs.org/@arismag%2Fclaude-code-monitor/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.4.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

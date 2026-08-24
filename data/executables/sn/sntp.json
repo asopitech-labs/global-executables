@@ -2,6 +2,30 @@
   "command": "sntp",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ntp-4.2.8.p18-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/btfak/sntp",
+      "version": "v0.0.0-20170909025617-bbde69cbb681",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/btfak/sntp/@v/v0.0.0-20170909025617-bbde69cbb681.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170909025617-bbde69cbb681"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ntp",
       "version": "4.2.8p18",
@@ -10,6 +34,18 @@
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
       "distribution_family": "macos",
       "distribution": "macos"
     },
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

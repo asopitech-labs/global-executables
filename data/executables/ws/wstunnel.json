@@ -2,6 +2,18 @@
   "command": "wstunnel",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/erebe/wstunnel",
+      "version": "v666.6.6+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/erebe/wstunnel/@v/v666.6.6%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v666.6.6+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "wstunnel",
       "version": "10.6.2",
@@ -12,8 +24,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "wstunnel",
+      "version": "10.6.2",
+      "repository": "https://github.com/erebe/wstunnel",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "10.6.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

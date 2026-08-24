@@ -2,6 +2,54 @@
   "command": "reflect",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ecobee/webrtc/v3",
+      "version": "v3.0.0-20240108171705-c809390524e3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ecobee/webrtc/v3/@v/v3.0.0-20240108171705-c809390524e3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0-20240108171705-c809390524e3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ecobee/webrtc/v4",
+      "version": "v4.0.0-20240102195737-c259e89eb53b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ecobee/webrtc/v4/@v/v4.0.0-20240102195737-c259e89eb53b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0-20240102195737-c259e89eb53b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gographics/imagick",
+      "version": "v1.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gographics/imagick/@v/v1.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/gographics/imagick",
       "version": "v3.2.0+incompatible",
@@ -15,6 +63,54 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/gographics/imagick/v3",
+      "version": "v3.7.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gographics/imagick/v3/@v/v3.7.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.7.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/junhsieh/goexamples",
+      "version": "v0.0.0-20190108064005-9a4ae5251883",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/junhsieh/goexamples/@v/v0.0.0-20190108064005-9a4ae5251883.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190108064005-9a4ae5251883"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pkc918/the-go-programming-language",
+      "version": "v0.0.0-20240123012639-7b4fe586d511",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pkc918/the-go-programming-language/@v/v0.0.0-20240123012639-7b4fe586d511.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240123012639-7b4fe586d511"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonnerre/golang-dns",
+      "version": "v0.0.0-20130925195549-c07f3c3cc475",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonnerre/golang-dns/@v/v0.0.0-20130925195549-c07f3c3cc475.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20130925195549-c07f3c3cc475"
+    },
+    {
+      "ecosystem": "go",
       "package": "gopkg.in/gographics/imagick.v2",
       "version": "v2.5.0",
       "repository": null,
@@ -24,8 +120,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/gographics/imagick.v2",
+      "version": "v2.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/gographics/imagick.v2/@v/v2.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.7.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/gographics/imagick.v3",
+      "version": "v3.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/gographics/imagick.v3/@v/v3.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apanchenko/reflect",
+      "version": "0.0.2",
+      "repository": "git+https://github.com/apanchenko/reflect.git",
+      "source": "https://registry.npmjs.org/@apanchenko%2Freflect/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

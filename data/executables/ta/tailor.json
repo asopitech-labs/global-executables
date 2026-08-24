@@ -2,6 +2,18 @@
   "command": "tailor",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tailor",
+      "version": "0.1.0",
+      "repository": "https://github.com/phodina/tailor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tailor",
       "version": "0.12.0",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adrianfish/tailor",
+      "version": "0.1.1",
+      "repository": "git+ssh://git@github.com/adrianfish/tailor.git",
+      "source": "https://registry.npmjs.org/@adrianfish%2Ftailor/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amanktyr/tailor",
+      "version": "1.3.0",
+      "repository": "git+https://github.com/AmanKtyr/Tailor.git",
+      "source": "https://registry.npmjs.org/@amanktyr%2Ftailor/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@attainblelabs/tailor",
+      "version": "0.1.4",
+      "repository": "git+https://github.com/attainblelabs/tailor.git",
+      "source": "https://registry.npmjs.org/@attainblelabs%2Ftailor/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

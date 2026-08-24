@@ -4,7 +4,7 @@
     {
       "ecosystem": "homebrew",
       "package": "llama.cpp",
-      "version": "10450",
+      "version": "0.2.0",
       "repository": "https://llama.app",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +12,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "llama",
+      "version": "0.3.0",
+      "repository": "https://github.com/twinfacer/llama",
+      "source": "https://rubygems.org/gems/llama-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "llama.cpp-openvino",
+      "version": "b10549",
+      "repository": "https://github.com/ggml-org/llama.cpp",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "b10549"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

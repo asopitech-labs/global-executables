@@ -1,0 +1,44 @@
+{
+  "command": "jx",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "jx",
+      "version": "0.8.1",
+      "repository": "https://github.com/sqwxl/jx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jenkins-x/jx",
+      "version": "v1.3.1119",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jenkins-x/jx/@v/v1.3.1119.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.1119"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "jx",
+      "version": "3.17.74",
+      "repository": "https://jenkins-x.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.17.74"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

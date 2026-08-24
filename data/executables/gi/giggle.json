@@ -2,6 +2,30 @@
   "command": "giggle",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "giggle-0.7-15",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "giggle",
+      "version": "0.0.0",
+      "repository": "https://github.com/alex-barstow/giggle-gem",
+      "source": "https://rubygems.org/gems/giggle-0.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "giggle",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

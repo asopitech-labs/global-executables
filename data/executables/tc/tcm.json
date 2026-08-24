@@ -6,12 +6,48 @@
       "package": "tcm",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tcm",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abendi/typed-css-modules",
+      "version": "0.8.0",
+      "repository": "git+https://github.com/abendi/typed-css-modules.git",
+      "source": "https://registry.npmjs.org/@abendi%2Ftyped-css-modules/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aw-web-design/tcm-cli",
+      "version": "4.1.128",
+      "repository": "git+https://github.com/The-Code-Monkey/TechStack.git",
+      "source": "https://registry.npmjs.org/@aw-web-design%2Ftcm-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.1.128"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

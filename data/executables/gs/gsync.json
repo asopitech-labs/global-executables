@@ -2,6 +2,18 @@
   "command": "gsync",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gsync",
+      "version": "0.1.2",
+      "repository": "https://github.com/TheDutchMC/GSync",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "coreutils",
       "version": "9.11",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0xshariq/github-mcp-server",
+      "version": "2.5.0",
+      "repository": "git+https://github.com/0xshariq/github-mcp-server.git",
+      "source": "https://registry.npmjs.org/@0xshariq%2Fgithub-mcp-server/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.5.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acepad/gsync",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@acepad%2Fgsync/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

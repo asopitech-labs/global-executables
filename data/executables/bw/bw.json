@@ -2,9 +2,69 @@
   "command": "bw",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "bitwarden-cli-2026.2.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "nvshmem-3.7.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "borrowing_exerci",
+      "version": "0.4.51",
+      "repository": "https://github.com/cnruby/learn-rust-by-crates/tree/master/hello-borrowing",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.51"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "branch-watch",
+      "version": "0.3.0",
+      "repository": "https://github.com/nuri-yoo/branch-watch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bw-helper",
+      "version": "0.1.4",
+      "repository": "https://github.com/mammothb/pi-extensions",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bitwarden-cli",
-      "version": "2026.7.0",
+      "version": "2026.8.0",
       "repository": "https://bitwarden.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,6 +72,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "briteweb/cli",
+      "version": "0.0.4",
+      "repository": "https://github.com/Briteweb/cli.git",
+      "source": "https://repo.packagist.org/p2/briteweb/cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.4"
     },
     {
       "ecosystem": "pypi",
@@ -38,6 +110,44 @@
       "latest_version": "2.1.2"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "buildkite_watcher",
+      "version": "0.3.1",
+      "repository": "https://github.com/nulogy/buildkite_watcher",
+      "source": "https://rubygems.org/gems/buildkite_watcher-0.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "bitwarden-cli",
+      "version": "2026.8.0",
+      "repository": "https://bitwarden.com/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.8.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "sphinxtrain",
+      "version": "5prealpha",
+      "repository": "https://cmusphinx.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5prealpha"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "bundlewrap",
       "version": null,
@@ -51,5 +161,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "d2",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "d2-0.8.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "oss.terrastruct.com/d2",
+      "version": "v0.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/oss.terrastruct.com/d2/@v/v0.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "d2",
       "version": "0.8.1",
@@ -12,8 +36,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "d2",
+      "version": "0.7.1",
+      "repository": "https://d2lang.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.7.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

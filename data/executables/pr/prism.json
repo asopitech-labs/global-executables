@@ -2,6 +2,42 @@
   "command": "prism",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "prism-rs",
+      "version": "0.1.0",
+      "repository": "https://github.com/saevarb/prism",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rsx-prism",
+      "version": "2.0.0",
+      "repository": "https://github.com/RSXGroup/prism",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/geckoboard/prism",
+      "version": "v0.0.0-20170116140430-11988c7f1577",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/geckoboard/prism/@v/v0.0.0-20170116140430-11988c7f1577.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170116140430-11988c7f1577"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "prism-cli",
       "version": "5.16.0",
@@ -12,8 +48,93 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arclux/prism",
+      "version": "3.0.0",
+      "repository": "git+https://github.com/arclight-digital/prism.git",
+      "source": "https://registry.npmjs.org/@arclux%2Fprism/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arnilo/prism",
+      "version": "0.3.0",
+      "repository": "git+https://github.com/ashiqrniloy/prism.git",
+      "source": "https://registry.npmjs.org/@arnilo%2Fprism/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "cline/prism",
+      "version": "2.0.2",
+      "repository": "https://github.com/faustbrian/prism.git",
+      "source": "https://repo.packagist.org/p2/cline/prism.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amni-prism",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0f/2a/2e175e64b34783e2c404f45a2a17a2257304cb6e9d8f8acab17b48bfe904/amni_prism-0.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "stoplight-prism",
+      "version": "5.15.11",
+      "repository": "https://stoplight.io/open-source/prism",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.15.11"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Andrea.Prism",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Stoplight.Prism",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,31 @@
+{
+  "command": "e2e-test-node",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ant-quic",
+      "version": "0.27.45",
+      "repository": "https://github.com/saorsa-labs/ant-quic",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.27.45"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "saorsa-transport",
+      "version": "0.36.0",
+      "repository": "https://github.com/WithAutonomi/saorsa-transport",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.36.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

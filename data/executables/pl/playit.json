@@ -1,0 +1,44 @@
+{
+  "command": "playit",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "playit",
+      "version": "1.2.0",
+      "repository": "https://github.com/kadircy/playit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "playit",
+      "version": "1.0.10",
+      "repository": "https://playit.gg/",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.0.10"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "DevelopedMethods.playit",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

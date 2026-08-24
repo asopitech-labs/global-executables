@@ -1,0 +1,31 @@
+{
+  "command": "hoot",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "guile-hoot",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hoot",
+      "version": "0.3.0",
+      "repository": "https://github.com/ruddfawcett/hoot",
+      "source": "https://rubygems.org/gems/hoot-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

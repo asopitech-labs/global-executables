@@ -2,9 +2,45 @@
   "command": "mo",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mo",
+      "version": "0.1.0",
+      "repository": "https://github.com/yuulive/mo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mo-cli",
+      "version": "0.5.0",
+      "repository": "https://github.com/thekaushikls/mo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "molybdenum",
+      "version": "0.1.10",
+      "repository": "https://github.com/gfannes/molybdenum",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mole",
-      "version": "1.51.0",
+      "version": "1.52.0",
       "repository": "https://mole.fit",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Tenowg.MongoObjects.CliTool",
+      "version": "0.3.9-beta",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/tenowg.mongoobjects.clitool/0.3.9-beta/tenowg.mongoobjects.clitool.0.3.9-beta.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.3.9-beta"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "learnosity/learnosity-qti",
+      "version": "v2.1.0",
+      "repository": "https://github.com/Learnosity/learnosity-qti.git",
+      "source": "https://repo.packagist.org/p2/learnosity/learnosity-qti.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

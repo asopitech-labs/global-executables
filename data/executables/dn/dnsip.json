@@ -2,6 +2,30 @@
   "command": "dnsip",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "drdns",
+      "version": "0.0.0",
+      "repository": "https://github.com/oxidizers/drdns/tree/master/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "djbdns-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "djbdns-utils",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "DNS-Command-Line-Tool",
+      "version": "1.0.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/d9/94/370b19d5aff7070f9f3aa9cd45279ac8cb9a492e5dd3cb56e1f5524dba7b/DNS_Command_Line_Tool-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "djbdns-utils",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

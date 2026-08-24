@@ -2,6 +2,42 @@
   "command": "triangle",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "xmt-lib",
+      "version": "0.1.2",
+      "repository": "https://github.com/pcarbonn/xmtlib",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "triangle-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/esimov/triangle",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/esimov/triangle/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "triangle",
       "version": "2.0.0",
@@ -12,6 +48,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aegypti",
+      "version": "0.4.4",
+      "repository": "https://github.com/frankvegadelgado/finlay",
+      "source": "https://files.pythonhosted.org/packages/75/12/901cce29d29d95462b2e43a8944513ba50641284c9e00b600b8572addb90/aegypti-0.4.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

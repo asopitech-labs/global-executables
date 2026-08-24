@@ -2,6 +2,42 @@
   "command": "scrub",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "manasight-parser",
+      "version": "0.7.2",
+      "repository": "https://github.com/manasight/manasight-parser",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "scrub-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/WillIsback/scrub",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scrub",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "scrub",
       "version": null,
@@ -14,6 +50,18 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "robpike.io/cmd/scrub",
+      "version": "v0.0.0-20150906235606-42c9d1a847af",
+      "repository": null,
+      "source": "https://proxy.golang.org/robpike.io/cmd/scrub/@v/v0.0.0-20150906235606-42c9d1a847af.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150906235606-42c9d1a847af"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "scrub",
       "version": "2.6.1",
@@ -24,6 +72,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "scrub",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/scrub/1.0.3/scrub.1.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

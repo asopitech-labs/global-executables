@@ -2,11 +2,59 @@
   "command": "mark",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mailutils-3.21-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mark",
+      "version": "0.0.1",
+      "repository": "https://github.com/ghmlee/mark.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mailutils-mh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mailutils-mh",
       "version": null,
       "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nmh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
@@ -26,9 +74,21 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/a8m/mark",
+      "version": "v0.1.1-0.20170507133748-44f2db618845",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/a8m/mark/@v/v0.1.1-0.20170507133748-44f2db618845.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1-0.20170507133748-44f2db618845"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mark",
-      "version": "16.9.1",
+      "version": "16.12.1",
       "repository": "https://samizdat.dev",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -48,6 +108,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aibulat/mark",
+      "version": "0.0.5",
+      "repository": "git+https://github.com/ngmaibulat/packages.git",
+      "source": "https://registry.npmjs.org/@aibulat%2Fmark/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arkecosystem/platform-sdk-ark-musig",
+      "version": "10.3.8",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@arkecosystem%2Fplatform-sdk-ark-musig/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "10.3.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "makers-mark",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://rubygems.org/gems/makers-mark-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mark",
+      "version": "0.0.2",
+      "repository": "https://github.com/jdan/mark",
+      "source": "https://rubygems.org/gems/mark-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +183,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

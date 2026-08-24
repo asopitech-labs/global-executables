@@ -2,6 +2,30 @@
   "command": "s3",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "aws-c-s3-0.12.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libs3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libs3-2",
       "version": null,
@@ -12,6 +36,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/artpar/rclone",
+      "version": "v1.71.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/artpar/rclone/@v/v1.71.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.71.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/awsdocs/aws-doc-sdk-examples",
+      "version": "v0.0.0-20260818160903-44501e866df8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/awsdocs/aws-doc-sdk-examples/@v/v0.0.0-20260818160903-44501e866df8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818160903-44501e866df8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/donatello/minio-go",
+      "version": "v2.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/donatello/minio-go/@v/v2.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattermost/minio-go",
+      "version": "v0.0.0-20180402084853-e30d3b9eaff9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattermost/minio-go/@v/v0.0.0-20180402084853-e30d3b9eaff9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180402084853-e30d3b9eaff9"
     },
     {
       "ecosystem": "go",
@@ -40,6 +112,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/minio/minio-go",
+      "version": "v0.0.0-20180413185816-a2238f0e60fa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v0.0.0-20180413185816-a2238f0e60fa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180413185816-a2238f0e60fa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
       "version": "v0.0.0-20180613230128-10531abd0af1",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v0.0.0-20180613230128-10531abd0af1.zip",
@@ -48,6 +132,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180613230128-10531abd0af1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
+      "version": "v0.0.0-20190129071736-3a5de8b1cf04",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v0.0.0-20190129071736-3a5de8b1cf04.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190129071736-3a5de8b1cf04"
     },
     {
       "ecosystem": "go",
@@ -100,6 +196,42 @@
     {
       "ecosystem": "go",
       "package": "github.com/minio/minio-go",
+      "version": "v0.0.0-20190422205105-a8704b60278f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v0.0.0-20190422205105-a8704b60278f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190422205105-a8704b60278f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
+      "version": "v2.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v2.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
+      "version": "v3.0.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v3.0.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.2+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
       "version": "v6.0.11+incompatible",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v6.0.11%2Bincompatible.zip",
@@ -108,6 +240,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v6.0.11+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
+      "version": "v6.0.13+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v6.0.13%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.13+incompatible"
     },
     {
       "ecosystem": "go",
@@ -124,6 +268,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/minio/minio-go",
+      "version": "v6.0.3+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v6.0.3%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.3+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
       "version": "v6.0.5+incompatible",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v6.0.5%2Bincompatible.zip",
@@ -132,6 +288,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v6.0.5+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
+      "version": "v6.0.6+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v6.0.6%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.6+incompatible"
     },
     {
       "ecosystem": "go",
@@ -147,6 +315,90 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/minio/minio-go",
+      "version": "v6.0.9+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/@v/v6.0.9%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.9+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go/v6",
+      "version": "v6.0.26",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/v6/@v/v6.0.26.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.26"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go/v6",
+      "version": "v6.0.27",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/v6/@v/v6.0.27.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.27"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go/v6",
+      "version": "v6.0.27-0.20190529152532-de69c0e465ed",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/v6/@v/v6.0.27-0.20190529152532-de69c0e465ed.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.27-0.20190529152532-de69c0e465ed"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go/v6",
+      "version": "v6.0.28",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/v6/@v/v6.0.28.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.28"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minio/minio-go/v6",
+      "version": "v6.0.29",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minio/minio-go/v6/@v/v6.0.29.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.29"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openimsdk/open-im-server/v3",
+      "version": "v3.8.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openimsdk/open-im-server/v3/@v/v3.8.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.8.3"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/pydio/minio-go",
       "version": "v0.0.0-20181114162246-41cbe90c6ca9",
       "repository": null,
@@ -156,6 +408,78 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181114162246-41cbe90c6ca9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pydio/minio-go",
+      "version": "v3.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pydio/minio-go/@v/v3.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.1+incompatible"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asgi-s3",
+      "version": "0.0.3",
+      "repository": "https://github.com/erm/asgi-s3",
+      "source": "https://files.pythonhosted.org/packages/c3/dd/ae950e795429cf1b1c2693edbf77400a64387fe8271c02e56ebee18758f8/asgi-s3-0.0.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "awss3tui",
+      "version": "0.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5e/53/38a7e95b33836e9e70e2b337c68268f24c11484b8a853ca110a5ca6072b1/awss3tui-0.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awful",
+      "version": "0.0.185",
+      "repository": "",
+      "source": "https://rubygems.org/gems/awful-0.0.185.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.185"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awry",
+      "version": "0.1.0",
+      "repository": "https://github.com/rlister/awry",
+      "source": "https://rubygems.org/gems/awry-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dears3",
+      "version": "0.1.0",
+      "repository": "https://github.com/7imon7ays/DearS3",
+      "source": "https://rubygems.org/gems/dears3-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -171,5 +495,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

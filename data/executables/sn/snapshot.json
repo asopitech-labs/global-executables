@@ -2,6 +2,78 @@
   "command": "snapshot",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "snapshot-50.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "apollo-router",
+      "version": "2.17.0",
+      "repository": "https://github.com/apollographql/router/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cpclib-sna",
+      "version": "0.10.0",
+      "repository": "https://github.com/cpcsdk/rust.cpclib",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "udu",
+      "version": "0.1.1",
+      "repository": "https://github.com/smaniotov/udu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "windows-snapshot",
+      "version": "0.1.1",
+      "repository": "https://github.com/SubconsciousCompute/windows-snapshot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gnome-snapshot",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "gnome-snapshot",
       "version": null,
@@ -12,6 +84,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arkecosystem/core-snapshots-cli",
+      "version": "2.1.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@arkecosystem%2Fcore-snapshots-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Snapshot.Cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/snapshot.cli/0.1.0/snapshot.cli.0.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "TruthOrigin.Snapshot",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/truthorigin.snapshot/1.0.1/truthorigin.snapshot.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

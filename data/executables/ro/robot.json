@@ -2,6 +2,30 @@
   "command": "robot",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "robot",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/gapid",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/gapid/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "robot-framework",
       "version": "7.4.2",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agile-team/robot-cli",
+      "version": "3.2.0",
+      "repository": "git+https://github.com/ChenyCHENYU/robot-cli.git",
+      "source": "https://registry.npmjs.org/@agile-team%2Frobot-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "HandLessRobot",
+      "version": "0.1.2",
+      "repository": "https://github.com/snakeclub/HandLessRobot",
+      "source": "https://files.pythonhosted.org/packages/db/ad/0a34005aa2247e22a893402537eef535940cca9a1db5e7415718fcf8601a/HandLessRobot-0.1.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

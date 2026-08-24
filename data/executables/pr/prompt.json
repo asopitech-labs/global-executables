@@ -2,6 +2,54 @@
   "command": "prompt",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "prompt",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "yammer",
+      "version": "0.16.0",
+      "repository": "https://github.com/rescrv/yammer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cnlubo/promptx",
+      "version": "v0.0.0-20190604093203-64b9ba23abd4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cnlubo/promptx/@v/v0.0.0-20190604093203-64b9ba23abd4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190604093203-64b9ba23abd4"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/manifoldco/promptui",
       "version": "v0.0.0-20180308161052-c0c0d3afc6a0",
@@ -12,8 +60,102 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180308161052-c0c0d3afc6a0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/manifoldco/promptui",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/manifoldco/promptui/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/manifoldco/promptui",
+      "version": "v0.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/manifoldco/promptui/@v/v0.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/manifoldco/promptui",
+      "version": "v0.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/manifoldco/promptui/@v/v0.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/manifoldco/promptui",
+      "version": "v0.3.3-0.20190221150523-ae9f05e7444d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/manifoldco/promptui/@v/v0.3.3-0.20190221150523-ae9f05e7444d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.3-0.20190221150523-ae9f05e7444d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/manifoldco/promptui",
+      "version": "v0.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/manifoldco/promptui/@v/v0.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mritd/promptx",
+      "version": "v0.0.0-20190427034026-115b425507e1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mritd/promptx/@v/v0.0.0-20190427034026-115b425507e1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190427034026-115b425507e1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@addorimprove/prompt",
+      "version": "0.13.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@addorimprove%2Fprompt/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "cmd",
+      "version": "Windows",
+      "repository": null,
+      "source": "https://learn.microsoft.com/windows-server/administration/windows-commands/cmd",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

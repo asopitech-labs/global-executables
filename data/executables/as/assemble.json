@@ -2,6 +2,30 @@
   "command": "assemble",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "assemble",
+      "version": "0.1.2",
+      "repository": "https://github.com/nbari/assemble",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "evm_arithmetization",
+      "version": "0.5.1",
+      "repository": "https://github.com/0xPolygonZero/zk_evm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.1"
+    },
+    {
       "ecosystem": "pypi",
       "package": "Assemble",
       "version": "0.2.2",
@@ -12,8 +36,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aqtest1",
+      "version": "0.7.2",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/8c/d3/70b4e5a320f81e2e9a2f6d4565334ccbb54d6c4af375076bc6177d80ec31/aqtest1-0.7.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

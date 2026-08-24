@@ -2,6 +2,42 @@
   "command": "garlic",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "garlic-cli",
+      "version": "0.2.4",
+      "repository": "https://github.com/eatenpancreas/garlic-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "garlic-ward",
+      "version": "0.3.5",
+      "repository": "https://github.com/justanotherspy/garlic",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "garlic",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "garlic",
       "version": null,
@@ -12,6 +48,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "garlic",
+      "version": "0.1.10",
+      "repository": "http://github.com/ianwhite/garlic",
+      "source": "https://rubygems.org/gems/garlic-0.1.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "garlic_rails3_compatibility",
+      "version": "0.1.10",
+      "repository": "http://github.com/smtlaissezfaire/garlic",
+      "source": "https://rubygems.org/gems/garlic_rails3_compatibility-0.1.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ianwhite-garlic",
+      "version": "0.1.9",
+      "repository": "http://github.com/ianwhite/garlic/tree",
+      "source": "https://rubygems.org/gems/ianwhite-garlic-0.1.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.9"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "dagger",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dagger-0.21.8-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dagger",
       "version": "0.21.8",
@@ -12,8 +24,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dagger",
+      "version": "2.3.2",
+      "repository": "https://github.com/tomas/dagger",
+      "source": "https://rubygems.org/gems/dagger-2.3.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.3.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dagger",
+      "version": "0.21.8",
+      "repository": "https://dagger.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.21.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

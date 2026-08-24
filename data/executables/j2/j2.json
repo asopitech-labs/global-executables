@@ -2,6 +2,30 @@
   "command": "j2",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-j2cli-0.3.12b-13",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Fifty-Docker",
+      "version": "1.3",
+      "repository": "https://bitbucket.org/50onred/fifty-docker/overview",
+      "source": "https://files.pythonhosted.org/packages/a6/ac/c0efa42b9868673ec25ad21688429435322b2a78b809e571c136a302d194/Fifty-Docker-1.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "j2cli",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

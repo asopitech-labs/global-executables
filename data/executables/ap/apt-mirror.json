@@ -2,6 +2,30 @@
   "command": "apt-mirror",
   "providers": [
     {
+      "ecosystem": "pypi",
+      "package": "apt-mirror",
+      "version": "16",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ca/9c/dee636084a731e4ebc4822bda999cab003302abb8b46eff60e48659ce2c1/apt_mirror-16-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "16"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apt-mirror-python",
+      "version": "0.4.7",
+      "repository": "https://github.com/sir-xw/apt-mirror-python",
+      "source": "https://files.pythonhosted.org/packages/35/5a/83e95499c3401c9c47fb1e94ff14a2cd4f4d392636d00d3820aab5343283/apt-mirror-python-0.4.7.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.7"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "apt-mirror",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "igo",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "igo-rs",
+      "version": "0.3.0",
+      "repository": "https://bitbucket.org/yshryk/igo-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/binet/igo",
       "version": "v0.0.0-20120820132205-32e525b9736a",
@@ -12,8 +24,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20120820132205-32e525b9736a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rocketlaunchr/igo",
+      "version": "v0.0.0-20181230205252-766d624d2de0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rocketlaunchr/igo/@v/v0.0.0-20181230205252-766d624d2de0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181230205252-766d624d2de0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "hyfetch",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hyfetch-2.1.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hyfetch",
+      "version": "2.0.5",
+      "repository": "https://github.com/hykilpikonna/hyfetch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hyfetch",
       "version": "2.1.0",
@@ -12,6 +36,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "HyFetch",
+      "version": "2.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/3d/29/29c6c560398e8d18792206a6e5ac670307aa7d08731f37a14fce20c77a40/hyfetch-2.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "HyFetch-testing",
+      "version": "1.5.0rc3",
+      "repository": "https://github.com/hykilpikonna/HyFetch",
+      "source": "https://files.pythonhosted.org/packages/23/c4/baa491e6fecf49a59ccca1fc2010791df799ce9428145f7014ce7a49faca/HyFetch_testing-1.5.0rc3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.0rc3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

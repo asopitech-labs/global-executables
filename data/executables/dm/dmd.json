@@ -2,9 +2,45 @@
   "command": "dmd",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dmd-1:2.112.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "dmd.tanna.dev",
+      "version": "v0.123.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/dmd.tanna.dev/@v/v0.123.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.123.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/tanna.dev/dependency-management-data",
+      "version": "v0.123.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/tanna.dev/dependency-management-data/@v/v0.123.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.123.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dmd",
-      "version": "2.112.1",
+      "version": "2.113.0",
       "repository": "https://dlang.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "lola",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "lola",
+      "version": "0.1.1",
+      "repository": "https://github.com/pixelsquare-nl/lola",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jmal-team/lola",
+      "version": "0.0.1-alpha",
+      "repository": "https://github.com/jmal-team/lola.git",
+      "source": "https://repo.packagist.org/p2/jmal-team/lola.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.1-alpha"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "lola",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

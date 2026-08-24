@@ -2,6 +2,66 @@
   "command": "meow",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "meow",
+      "version": "0.2.2",
+      "repository": "https://github.com/barrowsys/MEOW",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "meow-app",
+      "version": "0.21.0",
+      "repository": "https://github.com/madeye/meow-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.21.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "meow-editor",
+      "version": "1.4.0",
+      "repository": "https://themackabu.dev/project/meow-editor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rmeow",
+      "version": "2.1.2",
+      "repository": "https://github.com/datsfilipe/meow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "meow",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "meow",
       "version": null,
@@ -24,8 +84,33 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181112033425-871e50784daf"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MeowApp",
+      "version": "2.0.0",
+      "repository": "https://gitlab.com/pnmougel/meow2",
+      "source": "https://files.pythonhosted.org/packages/bd/94/9712941fa721953605dfeade0b9bd34017a40f4e82fefb7447dad69d21ec/MeowApp-2.0.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "meow",
+      "version": "0.2025.01.20",
+      "repository": "https://github.com/kiedtl/meow",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.2025.01.20"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

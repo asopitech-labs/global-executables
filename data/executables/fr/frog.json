@@ -2,6 +2,30 @@
   "command": "frog",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "frog",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "frog",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "frog",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@airstack/frog",
+      "version": "0.0.19",
+      "repository": "git+https://github.com/Airstack-xyz/airstack-frog-recipes.git",
+      "source": "https://registry.npmjs.org/@airstack%2Ffrog/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.19"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "frog",
+      "version": "1.0.1",
+      "repository": "https://github.com/anupcowkur/frog",
+      "source": "https://rubygems.org/gems/frog-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

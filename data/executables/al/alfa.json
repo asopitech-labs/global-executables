@@ -6,12 +6,60 @@
       "package": "alfa",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "alfa",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alfaai/cli",
+      "version": "0.1.4",
+      "repository": "git+https://github.com/eff-kay/alfa.git",
+      "source": "https://registry.npmjs.org/@alfaai%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alfa-cli",
+      "version": "0.1.48",
+      "repository": "https://bitbucket.org/widgetbrain/alfa-cli",
+      "source": "https://files.pythonhosted.org/packages/17/21/41cb1e350ef4859393a54a02075fcfb383908d7d968781a74f6049fff6ce/alfa-cli-0.1.48.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.48"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "alfa",
+      "version": "0.0.8.pre",
+      "repository": "http://github.com/vsyrovat/alfa",
+      "source": "https://rubygems.org/gems/alfa-0.0.8.pre.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8.pre"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "ignite",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cargo-ignite",
+      "version": "0.1.7",
+      "repository": "https://github.com/vunholy/cargo-ignite",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ignite",
       "version": "29.10.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@10up/ignite-cli",
+      "version": "1.0.4",
+      "repository": "git+https://github.com/10up/ignite-wp-monorepo.git",
+      "source": "https://registry.npmjs.org/@10up%2Fignite-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

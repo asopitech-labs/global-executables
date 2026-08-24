@@ -2,6 +2,30 @@
   "command": "podofopdfinfo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "podofo-tools-0.10.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libpodofo-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libpodofo-utils",
       "version": null,
@@ -16,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "podofo",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "repository": "https://github.com/podofo/podofo",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

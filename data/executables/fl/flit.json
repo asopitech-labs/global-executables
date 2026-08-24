@@ -2,6 +2,18 @@
   "command": "flit",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-flit-4.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "flit",
       "version": "4.0.2",
@@ -12,6 +24,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "flit",
+      "version": "0.3.1.pre",
+      "repository": "http://github.com/mattkirman/flit",
+      "source": "https://rubygems.org/gems/flit-0.3.1.pre.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.1.pre"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

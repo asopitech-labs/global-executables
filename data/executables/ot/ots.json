@@ -6,6 +6,18 @@
       "package": "ots",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ots",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -38,6 +50,54 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@alexsantosdev/simulador",
+      "version": "1.0.8",
+      "repository": "git+https://github.com/alexsantosdev/test-simulador-slc.git",
+      "source": "https://registry.npmjs.org/@alexsantosdev%2Fsimulador/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.8"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexsantosdev/simulador-slc",
+      "version": "1.0.3",
+      "repository": "git+https://github.com/alexsantosdev/test-simulador-slc.git",
+      "source": "https://registry.npmjs.org/@alexsantosdev%2Fsimulador-slc/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexsantosdev/slc",
+      "version": "1.0.59",
+      "repository": "git+https://github.com/alexsantosdev/test-simulador-slc.git",
+      "source": "https://registry.npmjs.org/@alexsantosdev%2Fslc/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.59"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "OpenTimestamps.Cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/opentimestamps.cli/1.0.0/opentimestamps.cli.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ots",
       "version": null,
@@ -51,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

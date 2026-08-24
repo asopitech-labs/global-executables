@@ -2,6 +2,18 @@
   "command": "mvim",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mvim-rs",
+      "version": "0.1.0",
+      "repository": "https://github.com/yuki1936/mvim-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "macvim",
       "version": "9.2.0321",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MVim",
+      "version": "0.2.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/55/f4/0e855ec1d283ac5bdab0a0e0ee23bbc3aa3350d080ae6239e736ed320aa3/MVim-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

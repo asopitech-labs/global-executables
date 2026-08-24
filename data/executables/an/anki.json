@@ -2,6 +2,80 @@
   "command": "anki",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "anki-26.08.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anki-cli",
+      "version": "0.1.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a3/4b/564f3ac23cfd80d6e79acbe9ded6f427536bb8b057adbdc1f6b9d11942dd/anki_cli-0.1.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anki_tool",
+      "version": "1.1.2",
+      "repository": "https://github.com/momodae",
+      "source": "https://files.pythonhosted.org/packages/30/bc/577c37e2886c6fb271d29032cc3ad5940c1c9393fba310219311677a4d92/anki_tool-1.1.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aqt",
+      "version": "26.8.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a7/5f/7d08084d5c97b1bad03b9bd64d24246b0918e94faf22ddd5e76fa2e52f7f/aqt-26.8.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.8.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "anki",
+      "version": "26.08.1",
+      "repository": "https://apps.ankiweb.net",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "26.08.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "anki-np",
+      "version": "25.09",
+      "repository": "https://apps.ankiweb.net",
+      "source": "https://codeload.github.com/ScoopInstaller/Nonportable/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "25.09"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "anki",
       "version": null,
@@ -15,5 +89,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

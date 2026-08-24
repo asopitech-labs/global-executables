@@ -2,6 +2,78 @@
   "command": "hop",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hopenpgp-tools-0.23.11-113",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hop-cli",
+      "version": "0.2.61",
+      "repository": "https://github.com/hopinc/hop_cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.61"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hop-editor",
+      "version": "1.1.0",
+      "repository": "https://github.com/NathanRoyer/hop-editor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hop-ssh",
+      "version": "0.1.0",
+      "repository": "https://github.com/UltraElite90/hop-ssh",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rs-hop",
+      "version": "0.4.1",
+      "repository": "https://github.com/cgroening/rs-hop",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "hopenpgp-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "hopenpgp-tools",
       "version": null,
@@ -16,7 +88,7 @@
     {
       "ecosystem": "homebrew",
       "package": "hopenpgp-tools",
-      "version": "0.25.6",
+      "version": "0.25.8",
       "repository": "https://hackage.haskell.org/package/hopenpgp-tools",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,6 +96,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-ec2-tool",
+      "version": "2024.3.13.1.54",
+      "repository": "https://github.com/Robot-Wranglers/aws-ec2-tool/",
+      "source": "https://files.pythonhosted.org/packages/7c/10/9b44dd61f0ddcd99c585d2c033793c08f0acdd69a4448bb92d94555f5972/aws_ec2_tool-2024.3.13.1.54-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2024.3.13.1.54"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hop",
+      "version": "0.0.5",
+      "repository": "https://github.com/jacobat/hop",
+      "source": "https://rubygems.org/gems/hop-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

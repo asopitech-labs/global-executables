@@ -2,6 +2,66 @@
   "command": "grim",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "grim-1.5.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "grim",
+      "version": "0.4.0",
+      "repository": "https://github.com/Vaishnav-Sabari-Girish/grimoire",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "grim-reaper",
+      "version": "1.0.35",
+      "repository": "https://github.com/cyber-boost/grim",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.35"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "grimoire_css",
+      "version": "1.8.1",
+      "repository": "https://github.com/persevie/grimoire-css",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.8.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "grim",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "grim",
       "version": null,
@@ -12,6 +72,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "grim/reaper",
+      "version": "1.0.32",
+      "repository": "https://github.com/cyber-boost/grim.git",
+      "source": "https://repo.packagist.org/p2/grim/reaper.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.32"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "grim-reaper",
+      "version": "1.0.35",
+      "repository": "https://github.com/cyber-boost/grim",
+      "source": "https://rubygems.org/gems/grim-reaper-1.0.35.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.35"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

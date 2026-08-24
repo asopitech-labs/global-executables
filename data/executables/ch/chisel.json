@@ -2,6 +2,42 @@
   "command": "chisel",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "chisel",
+      "version": "0.6.0",
+      "repository": "https://github.com/wasmx/wasm-chisel",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chisel-extract",
+      "version": "1.0.2",
+      "repository": "https://github.com/pathawks/chisel",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jpillora/chisel",
+      "version": "v0.0.0-20190128092258-ee6601a6bbde",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jpillora/chisel/@v/v0.0.0-20190128092258-ee6601a6bbde.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190128092258-ee6601a6bbde"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "chisel-tunnel",
       "version": "1.11.8",
@@ -24,8 +60,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "afterflow/chisel",
+      "version": "0.4.2",
+      "repository": "https://github.com/afterflow/chisel.git",
+      "source": "https://repo.packagist.org/p2/afterflow/chisel.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "chisel",
+      "version": "0.0.4",
+      "repository": "https://github.com/schrockwell/chisel",
+      "source": "https://rubygems.org/gems/chisel-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "chisel",
+      "version": "1.11.8",
+      "repository": "https://github.com/jpillora/chisel",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.11.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

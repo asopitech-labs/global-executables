@@ -2,6 +2,78 @@
   "command": "jj",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "jujutsu-0.44.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jj",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jj-cli",
+      "version": "0.44.0",
+      "repository": "https://github.com/jj-vcs/jj",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.44.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jujube",
+      "version": "0.1.1",
+      "repository": "https://github.com/martinvonz/jj",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "jujutsu",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tidwall/jj",
+      "version": "v1.2.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tidwall/jj/@v/v1.2.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jj",
       "version": "0.44.0",
@@ -12,8 +84,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jj",
+      "version": "0.1.0",
+      "repository": "http://github.com/keitarou/jj",
+      "source": "https://rubygems.org/gems/jj-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "json-prettyprint",
+      "version": "0.0.2",
+      "repository": "https://github.com/michalorman/json-prettyprint",
+      "source": "https://rubygems.org/gems/json-prettyprint-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "jj",
+      "version": "0.44.0",
+      "repository": "https://github.com/jj-vcs/jj",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.44.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

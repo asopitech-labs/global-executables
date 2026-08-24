@@ -2,9 +2,45 @@
   "command": "opencode",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "opencode-1.18.19-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "opencode-1.18.21-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "opencode",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "opencode",
-      "version": "1.18.15",
+      "version": "1.18.20",
       "repository": "https://opencode.ai",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,117 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "0byte-opencode",
+      "version": "1.18.18-yroftip7",
+      "repository": null,
+      "source": "https://registry.npmjs.org/0byte-opencode/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.18.18-yroftip7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adriancooney/opencode",
+      "version": "0.0.1-canary.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adriancooney%2Fopencode/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1-canary.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alergeek-ventures/opencode",
+      "version": "1.2.0",
+      "repository": "git+https://github.com/Alergeek-Ventures/opencode-plugin.git",
+      "source": "https://registry.npmjs.org/@alergeek-ventures%2Fopencode/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alisasasasaasas/opencode-ai",
+      "version": "1.2.0-preview.20251213.1619",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alisasasasaasas%2Fopencode-ai/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.0-preview.20251213.1619"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@allyseclabs/allysec-forge",
+      "version": "0.1.199",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@allyseclabs%2Fallysec-forge/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.199"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anieo/opencode-ai",
+      "version": "0.0.0-master-202603260302",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@anieo%2Fopencode-ai/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.0-master-202603260302"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anjanpoonacha/opencode",
+      "version": "1.18.6",
+      "repository": "git+https://github.com/anjanpoonacha/opencode.git",
+      "source": "https://registry.npmjs.org/@anjanpoonacha%2Fopencode/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.18.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "opencode",
+      "version": "1.18.21",
+      "repository": "https://opencode.ai/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.18.21"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "SST.opencode",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "cdb",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "tinycdb-0.81-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cordoba",
+      "version": "0.3.4",
+      "repository": "https://github.com/jothan/cordoba.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tinycdb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "tinycdb",
       "version": null,
@@ -26,6 +62,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "cdb-crawlr",
+      "version": "0.3.3",
+      "repository": "https://github.com/sgtFloyd/cdb-crawlr",
+      "source": "https://rubygems.org/gems/cdb-crawlr-0.3.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "tinycdb",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

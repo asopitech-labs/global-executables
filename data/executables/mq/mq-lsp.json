@@ -2,9 +2,21 @@
   "command": "mq-lsp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mq-lsp",
+      "version": "0.8.3",
+      "repository": "https://github.com/harehare/mq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mq",
-      "version": "0.8.2",
+      "version": "0.8.3",
       "repository": "https://mqlang.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

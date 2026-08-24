@@ -2,6 +2,18 @@
   "command": "term",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "termutils",
+      "version": "0.1.0",
+      "repository": "https://github.com/d33pster/termutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/apcera/termtables",
       "version": "v0.0.0-20170405184538-bcbc5dc54055",
@@ -12,8 +24,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170405184538-bcbc5dc54055"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@10xdevs/term",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@10xdevs%2Fterm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aurex-term",
+      "version": "1.0.0",
+      "repository": "https://spruky.qzz.io/term",
+      "source": "https://files.pythonhosted.org/packages/30/a4/3cfe9e0cca24810bedb5cf93b567f5fdade3ea8bc56954b2a87dfb880079/aurex_term-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

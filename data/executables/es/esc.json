@@ -2,6 +2,18 @@
   "command": "esc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "esc",
+      "version": "0.2.2",
+      "repository": "https://github.com/sstadick/esc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mjibson/esc",
       "version": "v0.1.0",
@@ -24,8 +36,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ainc/script",
+      "version": "0.1.22",
+      "repository": "git@absock.net:repo/ainc/script.git",
+      "source": "https://registry.npmjs.org/@ainc%2Fscript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.22"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "sail",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "bsd-games-3.3-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "sail-ocaml",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sail",
       "version": "0.10.9",
@@ -12,8 +36,92 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "coringawc/filament-plugin-workbench",
+      "version": "v1.1.1",
+      "repository": "https://github.com/CoringaWc/filament-plugin-workbench.git",
+      "source": "https://repo.packagist.org/p2/coringawc/filament-plugin-workbench.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "elnurvl/sail",
+      "version": "0.1.0",
+      "repository": "https://github.com/elnurvl/sail.git",
+      "source": "https://repo.packagist.org/p2/elnurvl/sail.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "hoepfner-digital/wp-sail",
+      "version": "1.1.2",
+      "repository": "https://github.com/HoepfnerDigital/wp-sail.git",
+      "source": "https://repo.packagist.org/p2/hoepfner-digital/wp-sail.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.1.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jeffersonrucu/sage-sail",
+      "version": "v1.0.3-beta",
+      "repository": "https://github.com/jeffersonrucu/sage-sail.git",
+      "source": "https://repo.packagist.org/p2/jeffersonrucu/sage-sail.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.3-beta"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jimchen/hyperf-sail",
+      "version": "2.0.0",
+      "repository": "https://github.com/JimChenWYU/hyperf-sail.git",
+      "source": "https://repo.packagist.org/p2/jimchen/hyperf-sail.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "laravel/sail",
+      "version": "v1.67.0",
+      "repository": "https://github.com/laravel/sail.git",
+      "source": "https://repo.packagist.org/p2/laravel/sail.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.67.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "SailPoint.SailPointCLI",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

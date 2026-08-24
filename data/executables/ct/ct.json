@@ -2,6 +2,90 @@
   "command": "ct",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ct-0.9.4-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "caltemps",
+      "version": "0.3.1",
+      "repository": "https://farga.eXO.cat/evilham/caltemps",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cdr-today",
+      "version": "0.0.1",
+      "repository": "https://github.com/cdr-today/st",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "codetwin",
+      "version": "0.1.10",
+      "repository": "https://github.com/carlosferreyra/codetwin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "coding-tools",
+      "version": "0.11.0",
+      "repository": "https://github.com/jshook/coding-tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ct-tracker",
+      "version": "0.1.1",
+      "repository": "https://gitlab.com/tnienhaus/ct",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "prismtty",
+      "version": "1.2.5",
+      "repository": "https://github.com/inxbit/prismtty",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "chart-testing",
       "version": "3.14.0",
@@ -24,8 +108,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "CompuTec.Tool",
+      "version": "3.0.1.603",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/computec.tool/3.0.1.603/computec.tool.3.0.1.603.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.0.1.603"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ct",
+      "version": "0.0.2",
+      "repository": "https://github.com/dongri/ct",
+      "source": "https://rubygems.org/gems/ct-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "helm-chart-testing",
+      "version": "3.14.0",
+      "repository": "https://github.com/helm/chart-testing/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.14.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

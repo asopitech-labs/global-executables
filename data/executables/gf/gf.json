@@ -2,6 +2,42 @@
   "command": "gf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gf-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/justinwangx/gf-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gitflow-cli",
+      "version": "1.3.0",
+      "repository": "https://github.com/byx-darwin/gitflow-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "graphforge-cli",
+      "version": "0.5.2",
+      "repository": "https://github.com/CurateLabs/graphforge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gf",
       "version": "2.10.2",
@@ -12,8 +48,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "QuinntyneBrown.GetFiles",
+      "version": "1.3.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/quinntynebrown.getfiles/1.3.0/quinntynebrown.getfiles.1.3.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-gf",
+      "version": "0.1.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-gf/0.1.3/dotnet-gf.0.1.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "gcgov/framework",
+      "version": "v6.3.3",
+      "repository": "https://github.com/gcgov/framework.git",
+      "source": "https://repo.packagist.org/p2/gcgov/framework.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v6.3.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gf",
+      "version": "0.1.0",
+      "repository": "https://github.com/takkanm/gf",
+      "source": "https://rubygems.org/gems/gf-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gradesfirst",
+      "version": "0.6.5",
+      "repository": "http://www.gradesfirst.com",
+      "source": "https://rubygems.org/gems/gradesfirst-0.6.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "xsv",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "xsv-0.13.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xsv",
+      "version": "0.13.0",
+      "repository": "https://github.com/BurntSushi/xsv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "xsv",
       "version": "0.13.0",
@@ -12,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "andrews-xsv",
+      "version": "0.13.0",
+      "repository": "https://github.com/sumitkanoje/xsv",
+      "source": "https://files.pythonhosted.org/packages/b3/b2/481d3e88cc8c7df5e161ce3d15fb55e4968804fce132787872bdfa44753c/andrews_xsv-0.13.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "xsv",
+      "version": "0.13.0",
+      "repository": "https://github.com/BurntSushi/xsv",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.13.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

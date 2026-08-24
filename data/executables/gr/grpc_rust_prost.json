@@ -1,0 +1,31 @@
+{
+  "command": "grpc_rust_prost",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "grpcio-compiler",
+      "version": "0.13.0",
+      "repository": "https://github.com/tikv/grpc-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rmqtt-grpcio-compiler",
+      "version": "0.15.0",
+      "repository": "https://github.com/rmqtt/rmqtt-raft/tree/main/raft-rs/proto/protobuf-build/compiler",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

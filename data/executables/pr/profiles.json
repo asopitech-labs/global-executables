@@ -2,6 +2,30 @@
   "command": "profiles",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "samba-2:4.24.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "samba",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "samba",
       "version": null,
@@ -14,6 +38,18 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/chef/automate",
+      "version": "v0.0.0-20190514153827-e78bfa5f2eee",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/chef/automate/@v/v0.0.0-20190514153827-e78bfa5f2eee.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190514153827-e78bfa5f2eee"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "samba",
       "version": "4.24.6",
@@ -22,6 +58,18 @@
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
       "distribution_family": "macos",
       "distribution": "macos"
     },
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

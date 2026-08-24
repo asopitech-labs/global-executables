@@ -2,6 +2,66 @@
   "command": "orca",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "orca-50.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mallorca",
+      "version": "0.2.12",
+      "repository": "https://github.com/mighty840/orca",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.12"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "orca-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/NanoCoder1007/orca/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@armazarashi0107/orca-cli",
+      "version": "0.8.16",
+      "repository": "git+https://github.com/MARUCIE/orca-cli.git",
+      "source": "https://registry.npmjs.org/@armazarashi0107%2Forca-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.8.16"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amanzi.orca",
+      "version": "0.5.3",
+      "repository": "https://github.com/KoduIsGreat/orca.git",
+      "source": "https://files.pythonhosted.org/packages/39/90/17b5b893948382b160fca54aec400124e1dc3a0c8af56215c56a9f663026/amanzi.orca-0.5.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "orca",
       "version": null,
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

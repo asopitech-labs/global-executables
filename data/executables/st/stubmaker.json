@@ -2,6 +2,18 @@
   "command": "stubmaker",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/vault",
+      "version": "v1.21.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/vault/@v/v1.21.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.21.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libsoap-lite-perl",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

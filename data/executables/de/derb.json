@@ -18,6 +18,18 @@
       "package": "icu-devtools",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "icu-devtools",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -50,6 +62,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "icu-devel-78.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "derb",
+      "version": "0.3.0",
+      "repository": "https://github.com/janlelis/derb",
+      "source": "https://rubygems.org/gems/derb-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "icu-devtools",
       "version": null,
@@ -63,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

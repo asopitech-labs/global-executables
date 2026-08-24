@@ -2,6 +2,31 @@
   "command": "linphone",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "linphone-desktop",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "linphone",
+      "version": "6.2.1",
+      "repository": "https://linphone.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "6.2.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "linphone-desktop",
       "version": null,
@@ -15,5 +40,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

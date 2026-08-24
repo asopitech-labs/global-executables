@@ -2,6 +2,30 @@
   "command": "gst",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "kgst",
+      "version": "1.0.0",
+      "repository": "https://github.com/sriram98v/generalized_suffix_tree",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "termutils",
+      "version": "0.1.0",
+      "repository": "https://github.com/d33pster/termutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gnu-smalltalk",
       "version": "3.2.5",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

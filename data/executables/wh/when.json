@@ -2,6 +2,42 @@
   "command": "when",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "when-1.1.45-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "when-cli",
+      "version": "0.4.0",
+      "repository": "https://github.com/mitsuhiko/when",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hjertnes/when",
+      "version": "v0.0.0-20201129192741-aa2eed1e2228",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hjertnes/when/@v/v0.0.0-20201129192741-aa2eed1e2228.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20201129192741-aa2eed1e2228"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "when",
       "version": "1.1.45",
@@ -12,6 +48,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Winix.When",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winix.when/0.4.0/winix.when.0.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

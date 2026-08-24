@@ -2,16 +2,52 @@
   "command": "alembic",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-alembic-1.19.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "alembic-cli",
       "version": "0.8.0",
       "repository": "https://github.com/cyberwitchery/alembic",
-      "source": "https://crates.io/api/v1/crates/alembic-cli/0.8.0/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alembic",
+      "version": "1.19.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/20/89/e62cc37b69ad357cc8ecd6e7367f5245f523d3cbb338a66197212bdf6749/alembic-1.19.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.19.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alembic-proxy",
+      "version": "1.68.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/51/0b/61c4fe14b7b04f09d07b2f75d625db0f56631fc0bcb3664ed73e04d02e42/alembic_proxy-1.68.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.68.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

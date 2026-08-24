@@ -2,6 +2,54 @@
   "command": "protoc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "protobuf-35.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "protobuf-35.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dgraph",
+      "version": "0.4.0",
+      "repository": "https://github.com/Swoorup/dgraph-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "protobuf-compiler",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "protobuf-compiler",
       "version": null,
@@ -27,6 +75,18 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/smartcontractkit/chainlink-common",
+      "version": "v0.11.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/smartcontractkit/chainlink-common/@v/v0.11.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.1"
+    },
+    {
+      "ecosystem": "go",
       "package": "myitcv.io",
       "version": "v0.0.0-20190417155434-88ab9413bcc2",
       "repository": null,
@@ -38,9 +98,45 @@
       "latest_version": "v0.0.0-20190417155434-88ab9413bcc2"
     },
     {
+      "ecosystem": "go",
+      "package": "myitcv.io",
+      "version": "v0.0.0-20190510131627-c1878129923a",
+      "repository": null,
+      "source": "https://proxy.golang.org/myitcv.io/@v/v0.0.0-20190510131627-c1878129923a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190510131627-c1878129923a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "myitcv.io",
+      "version": "v0.0.0-20190513145353-42487431adac",
+      "repository": null,
+      "source": "https://proxy.golang.org/myitcv.io/@v/v0.0.0-20190513145353-42487431adac.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190513145353-42487431adac"
+    },
+    {
+      "ecosystem": "go",
+      "package": "myitcv.io",
+      "version": "v0.0.0-20260318202529-0a80e21fa011",
+      "repository": null,
+      "source": "https://proxy.golang.org/myitcv.io/@v/v0.0.0-20260318202529-0a80e21fa011.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260318202529-0a80e21fa011"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "protobuf",
-      "version": "35.1",
+      "version": "36.0",
       "repository": "https://protobuf.dev/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -74,6 +170,55 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "protobuf-devel-21.12-3",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@accility/protoc-tools",
+      "version": "0.15.0",
+      "repository": "git+https://github.com/accility/protoc-tools.git",
+      "source": "https://registry.npmjs.org/@accility%2Fprotoc-tools/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "protoc",
+      "version": "3.6.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/protoc/3.6.1/protoc.3.6.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.6.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "protobuf",
+      "version": "36.0",
+      "repository": "https://github.com/protocolbuffers/protobuf",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "36.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "protobuf-compiler",
       "version": null,
@@ -87,5 +232,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

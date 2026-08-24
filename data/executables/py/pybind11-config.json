@@ -2,6 +2,18 @@
   "command": "pybind11-config",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pybind11-3.1.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pybind11",
       "version": "3.1.0",
@@ -12,6 +24,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Htool-DDM",
+      "version": "1.0.1rc2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2f/d7/fed094bee68380917f939df51fab616b5f46fc4b3761d7c4cca777cd8f6d/htool_ddm-1.0.1rc2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1rc2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

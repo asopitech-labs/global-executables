@@ -2,9 +2,21 @@
   "command": "oxen",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "oxen-cli",
+      "version": "0.53.4",
+      "repository": "https://github.com/Oxen-AI/Oxen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.53.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "oxen",
-      "version": "0.53.3",
+      "version": "0.53.4",
       "repository": "https://www.oxen.ai/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "fab",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fabric-3.2.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fab",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fabric",
       "version": "3.2.3",
@@ -12,6 +36,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Fabric-with-working-dependencies",
+      "version": "1.0.1",
+      "repository": "http://fabfile.org",
+      "source": "https://files.pythonhosted.org/packages/66/20/6c55e481fe499c1406feaa78427eaa72e93ba1c8fd2c9c595f3765f95272/Fabric-with-working-dependencies-1.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Fabric3",
+      "version": "1.14.post1",
+      "repository": "https://github.com/mathiasertl/fabric/",
+      "source": "https://files.pythonhosted.org/packages/85/14/0b4f34e1f9a351bbe0f1ddea8b12f8103e77e9b5dc7b935c25c2260fc2e5/Fabric3-1.14.post1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.14.post1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Fabric39",
+      "version": "1.15.3.post2",
+      "repository": "https://github.com/Parsely/fabric/",
+      "source": "https://files.pythonhosted.org/packages/94/51/231c9a45abb90d6898530370ba6565b0352b11c9c97d6b4ff40310b0babc/Fabric39-1.15.3.post2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.15.3.post2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fabric",
+      "version": "0.4.4",
+      "repository": "http://github.com/setfire/fabric",
+      "source": "https://rubygems.org/gems/fabric-0.4.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "stl",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "shuttle-rs",
+      "version": "2026.7.0",
+      "repository": "https://github.com/f4ah6o/shuttle-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2026.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "solana-tools-lite-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/arhangelskij/solana-tools-lite",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/segmentio/glue",
+      "version": "v0.0.0-20181207014941-d5c547719374",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/segmentio/glue/@v/v0.0.0-20181207014941-d5c547719374.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181207014941-d5c547719374"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "numpy-stl",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

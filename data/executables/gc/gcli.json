@@ -2,6 +2,42 @@
   "command": "gcli",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gcli",
+      "version": "2.0.0",
+      "repository": "https://github.com/gear-tech/gear",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "groq-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/Akshad135/groq-cli-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gcli",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "gcli",
       "version": null,
@@ -26,6 +62,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@anjapadu/g_cli",
+      "version": "1.2.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@anjapadu%2Fg_cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gcli",
+      "version": "1.0.0",
+      "repository": "https://github.com/edersonferreira/gcli",
+      "source": "https://rubygems.org/gems/gcli-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "github_cli",
+      "version": "0.6.2",
+      "repository": "https://github.com/piotrmurach/github_cli",
+      "source": "https://rubygems.org/gems/github_cli-0.6.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "gcli",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

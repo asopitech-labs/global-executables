@@ -2,6 +2,42 @@
   "command": "needle",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "needle-cli",
+      "version": "0.15.0",
+      "repository": "https://github.com/cesarferreira/needle",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "needle-rs",
+      "version": "0.1.5",
+      "repository": "https://github.com/aksiksi/needle",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "emboss",
       "version": null,
@@ -26,6 +62,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@ash0080/needle",
+      "version": "2.3.3",
+      "repository": "git+https://github.com/ash0080/needle.git",
+      "source": "https://registry.npmjs.org/@ash0080%2Fneedle/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.3.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "emboss",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

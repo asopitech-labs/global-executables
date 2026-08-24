@@ -2,6 +2,42 @@
   "command": "mapper",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dnssec-tools-2.2.3-15",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/drgrib/maps",
+      "version": "v0.0.0-20190206181841-390503673595",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/drgrib/maps/@v/v0.0.0-20190206181841-390503673595.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190206181841-390503673595"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/trillian",
+      "version": "v1.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/trillian/@v/v1.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/h2non/gock",
       "version": "v1.0.10",
@@ -12,6 +48,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/h2non/gock",
+      "version": "v1.0.12",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.0.12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.12"
     },
     {
       "ecosystem": "go",
@@ -28,6 +76,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/h2non/gock",
+      "version": "v1.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/h2non/gock",
       "version": "v1.0.9",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.0.9.zip",
@@ -36,6 +96,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/h2non/gock",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v0",
+      "version": "v0.0.0-20160419120746-1baf36abac00",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v0/@v/v0.0.0-20160419120746-1baf36abac00.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160419120746-1baf36abac00"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
     },
     {
       "ecosystem": "go",
@@ -52,6 +160,18 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
       "version": "v1.0.12",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.12.zip",
@@ -60,6 +180,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.12"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.13"
     },
     {
       "ecosystem": "go",
@@ -76,6 +208,54 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
       "version": "v1.0.6",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.6.zip",
@@ -84,8 +264,68 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SourceSymbolMapper",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/sourcesymbolmapper/1.0.2/sourcesymbolmapper.1.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

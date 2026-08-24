@@ -2,6 +2,30 @@
   "command": "envvars",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "apache-2.4.68-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hedzr/cmdr-examples",
+      "version": "v1.11.26",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hedzr/cmdr-examples/@v/v1.11.26.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.26"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/knative/serving",
       "version": "v0.0.0-20181026014132-cda99cffb47d",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

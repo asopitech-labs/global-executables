@@ -2,6 +2,18 @@
   "command": "gitup",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gitup",
+      "version": "0.2.1",
+      "repository": "https://github.com/gni/gitup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gitup",
       "version": "0.5.2",
@@ -12,6 +24,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gitup",
+      "version": "0.0.3",
+      "repository": "http://github.com/standoutdavid/gitup",
+      "source": "https://rubygems.org/gems/gitup-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

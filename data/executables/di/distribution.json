@@ -2,6 +2,18 @@
   "command": "distribution",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "distribution",
+      "version": "0.0.1",
+      "repository": "https://github.com/arcboxlabs/distribution-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "distribution",
       "version": "1.3",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "atlantispro",
+      "version": "0.2.1",
+      "repository": "https://github.com/legoless/Atlantis",
+      "source": "https://rubygems.org/gems/atlantispro-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "distribution",
+      "version": "0.8.0",
+      "repository": "https://github.com/sciruby/distribution",
+      "source": "https://rubygems.org/gems/distribution-0.8.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

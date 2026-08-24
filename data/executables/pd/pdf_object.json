@@ -1,0 +1,31 @@
+{
+  "command": "pdf_object",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ruby-pdf-reader-2.15.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fireinc-pdf-reader",
+      "version": "0.11.0",
+      "repository": "http://github.com/calebhaye/pdf-reader",
+      "source": "https://rubygems.org/gems/fireinc-pdf-reader-0.11.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.11.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

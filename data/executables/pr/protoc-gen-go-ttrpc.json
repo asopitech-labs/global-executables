@@ -2,6 +2,30 @@
   "command": "protoc-gen-go-ttrpc",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/containerd/ttrpc",
+      "version": "v1.2.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/ttrpc/@v/v1.2.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stevvooe/ttrpc",
+      "version": "v1.2.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stevvooe/ttrpc/@v/v1.2.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.9"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "gogottrpc",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

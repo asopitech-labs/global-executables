@@ -2,6 +2,18 @@
   "command": "bracken",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bracken",
+      "version": "0.1.0",
+      "repository": "https://github.com/eric9n/bracken-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bracken",
       "version": "3.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bracken",
+      "version": "0.1.1",
+      "repository": "http://github.com/matthewtodd/bracken",
+      "source": "https://rubygems.org/gems/bracken-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,9 +2,21 @@
   "command": "mamba",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mamba",
+      "version": "0.3.6",
+      "repository": "https://github.com/JSAbrahams/mamba",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "micromamba",
-      "version": "2.8.1",
+      "version": "2.9.0",
       "repository": "https://github.com/mamba-org/mamba",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "akc-mamba",
+      "version": "2.1.1",
+      "repository": "https://github.com/Akachain/akc-mamba",
+      "source": "https://files.pythonhosted.org/packages/ab/1f/c568f62c65f1e6cf59d83b90813a1ddc5ca2b1405ca87b2c0bf1aecd7572/akc_mamba-2.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "CondaForge.Mambaforge",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "CondaForge.Mambaforge.PyPy3",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "CondaForge.Miniforge3",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "CondaForge.Miniforge3.PyPy3",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "pipeline",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pipeline-cli",
+      "version": "0.12.0",
+      "repository": "https://github.com/yanguiyuan/pipeline-cli.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zetdb",
+      "version": "0.1.0",
+      "repository": "https://github.com/mzet97/zetdb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/gdamore/mangos",
       "version": "v0.0.0-20141219193815-347226584635",
@@ -14,6 +38,150 @@
       "latest_version": "v0.0.0-20141219193815-347226584635"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/pachyderm/pachyderm",
+      "version": "v1.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pachyderm/pachyderm/@v/v1.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190421193744-143a95a43bb7",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190421193744-143a95a43bb7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190421193744-143a95a43bb7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190504034938-863322699fe2",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190504034938-863322699fe2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190504034938-863322699fe2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190524132619-58b85f699367",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190524132619-58b85f699367.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524132619-58b85f699367"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190529235220-31df46e6f68b",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190529235220-31df46e6f68b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190529235220-31df46e6f68b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190530232626-7328fd620882",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190530232626-7328fd620882.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530232626-7328fd620882"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190604141730-4d6fd59959c3",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190604141730-4d6fd59959c3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190604141730-4d6fd59959c3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190605004553-1a373ade3732",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190605004553-1a373ade3732.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190605004553-1a373ade3732"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190606031010-855aa80c933d",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190606031010-855aa80c933d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606031010-855aa80c933d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190612225817-bf4a71fd9ef1",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190612225817-bf4a71fd9ef1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190612225817-bf4a71fd9ef1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "nanomsg.org/go-mangos",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/nanomsg.org/go-mangos/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "nanomsg.org/go/mangos/v2",
+      "version": "v2.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/nanomsg.org/go/mangos/v2/@v/v2.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "execline",
       "version": "2.9.9.2",
@@ -24,8 +192,80 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Mab.PipelineFramework.CLI",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/mab.pipelineframework.cli/1.0.0/mab.pipelineframework.cli.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "creativestyle/magesuite-coding-standards",
+      "version": "v2.0.15",
+      "repository": "https://github.com/magesuite/coding-standards.git",
+      "source": "https://repo.packagist.org/p2/creativestyle/magesuite-coding-standards.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.0.15"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DRUGseq-tools",
+      "version": "0.0.1",
+      "repository": "https://github.com/zzzseeu/pipeline",
+      "source": "https://files.pythonhosted.org/packages/0f/80/94402fb27742d8e4cd01de84199ffefa565e61ad10e5844356af08a386a4/DRUGseq_tools-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "UnityBuildPipeline",
+      "version": "0.0.8.1",
+      "repository": "https://github.com/MadCoder39/UnityBuildPipelineiOS",
+      "source": "https://files.pythonhosted.org/packages/60/64/064f24dd8c8ecd32e0f5e311e4fbf317eafa2056397cf5d4110300639b74/UnityBuildPipeline-0.0.8.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.8.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autonomize-model-sdk",
+      "version": "1.1.73",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e9/81/1b4022d0cdabfb8ca35aef962d5e4703bbdf9a89804f3edd3cd2e20a486d/autonomize_model_sdk-1.1.73-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.73"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "deployment_pipeline",
+      "version": "0.0.1",
+      "repository": "https://github.com/parolkar/deployment_pipeline",
+      "source": "https://rubygems.org/gems/deployment_pipeline-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

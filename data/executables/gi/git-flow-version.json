@@ -2,6 +2,30 @@
   "command": "git-flow-version",
   "providers": [
     {
+      "ecosystem": "msys2",
+      "package": "git-flow-1.12.3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "git-flow-version",
+      "version": "0.18.0-dev.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/git-flow-version/0.18.0-dev.1/git-flow-version.0.18.0-dev.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.18.0-dev.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "git-flow",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

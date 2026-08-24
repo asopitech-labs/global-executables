@@ -2,6 +2,30 @@
   "command": "aria2c",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "aria2-1.37.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "aria2",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "aria2",
       "version": null,
@@ -26,6 +50,44 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "aria2",
+      "version": "0.0.1b0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/08/67/88617a007ee3ce58bafce2454d930226a1d60198bbbd93f1ab1dac6a08c1/aria2-0.0.1b0-py3-none-manylinux_2_17_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1b0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "aria2",
+      "version": "1.37.0-1",
+      "repository": "https://aria2.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.37.0-1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "aria2-134",
+      "version": "1.34.0-1",
+      "repository": "https://aria2.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.34.0-1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "aria2",
       "version": null,
@@ -39,5 +101,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

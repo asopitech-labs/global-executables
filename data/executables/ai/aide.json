@@ -6,12 +6,24 @@
       "package": "aide-sh",
       "version": "0.5.0",
       "repository": "https://github.com/yiidtw/aide",
-      "source": "https://crates.io/api/v1/crates/aide-sh/0.5.0/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "aide",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
     },
     {
       "ecosystem": "debian",
@@ -38,6 +50,78 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@aide-dev/aide",
+      "version": "2.1.1",
+      "repository": "git+https://github.com/ldkong2077/aide.git",
+      "source": "https://registry.npmjs.org/@aide-dev%2Faide/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aide-dev/cli",
+      "version": "1.1.0",
+      "repository": "git+https://github.com/ldkong2077/aide-monorepo.git",
+      "source": "https://registry.npmjs.org/@aide-dev%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aide-core",
+      "version": "1.0.1000",
+      "repository": "https://platformio.org",
+      "source": "https://files.pythonhosted.org/packages/95/6b/8acb827327fe80cbfd96f408b5b591c6214bf4ed43e6a8c8f85475e67133/aide-core-1.0.1000.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1000"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aideml",
+      "version": "0.2.2",
+      "repository": "https://github.com/Wecoai/aideml",
+      "source": "https://files.pythonhosted.org/packages/10/ab/ca6b070f85cf171c5b41fa93005eb15e2cf1ec943ad1d6b6e11a885d8fec/aideml-0.2.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "codebrulee-aide",
+      "version": "0.0.4",
+      "repository": "http://github.com/duwanis/aide",
+      "source": "https://rubygems.org/gems/codebrulee-aide-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "duwanis-aide",
+      "version": "0.0.4",
+      "repository": "http://github.com/duwanis/aide",
+      "source": "https://rubygems.org/gems/duwanis-aide-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "aide",
       "version": null,
@@ -51,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

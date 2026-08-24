@@ -2,6 +2,18 @@
   "command": "godo",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "godo",
+      "version": "0.0.1",
+      "repository": "https://github.com/cortesi/godo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "go",
       "package": "gopkg.in/godo.v1",
       "version": "v1.4.5",
@@ -24,8 +36,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.0.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "godo",
+      "version": "1.0.8",
+      "repository": null,
+      "source": "https://rubygems.org/gems/godo-1.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.8"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

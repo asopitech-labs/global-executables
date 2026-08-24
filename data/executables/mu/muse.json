@@ -2,6 +2,30 @@
   "command": "muse",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "muse",
+      "version": "0.1.0",
+      "repository": "https://github.com/sxwedo/muse",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "muse",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "muse",
       "version": null,
@@ -12,6 +36,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arcticzeroo/muse",
+      "version": "0.0.14",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@arcticzeroo%2Fmuse/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.14"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "MusePlayer",
+      "version": "0.5.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/museplayer/0.5.2/museplayer.0.5.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MUSE-OS",
+      "version": "1.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/03/2c/1168e8c7606ef46a18fd8f1e864d2acdbda2f71b11ecd2478ea31310c456/muse_os-1.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Mopidy-Muse",
+      "version": "0.0.36",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/90/a2/2750908645fd8e59399ede1d79c308d1dfb7d5cd41462dd589f5bc535aa0/Mopidy_Muse-0.0.36-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.36"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

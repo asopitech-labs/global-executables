@@ -2,6 +2,30 @@
   "command": "acms",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@acms-subir/core",
+      "version": "0.2.0",
+      "repository": "git+https://onedev.subir.dev/acms-subir.git",
+      "source": "https://registry.npmjs.org/@acms-subir%2Fcore/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "acquia/acquia-cms-starterkit",
+      "version": "1.1.11",
+      "repository": "https://github.com/acquia/acquia-cms-starterkit.git",
+      "source": "https://repo.packagist.org/p2/acquia/acquia-cms-starterkit.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.1.11"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ACMS",
       "version": "0.1.0",
@@ -12,8 +36,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "acms_ruby",
+      "version": "0.1.0",
+      "repository": "https://github.com/majosystems/acms_ruby",
+      "source": "https://rubygems.org/gems/acms_ruby-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

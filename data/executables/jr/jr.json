@@ -2,6 +2,30 @@
   "command": "jr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jr",
+      "version": "0.1.0",
+      "repository": "https://github.com/kdheepak/jr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jsonrepair",
+      "version": "0.1.0",
+      "repository": "https://github.com/Latias94/jsonrepair",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jr",
       "version": "0.4.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jr-cli",
+      "version": "0.6.0",
+      "repository": "https://github.com/yuya-takeyama/jr",
+      "source": "https://rubygems.org/gems/jr-cli-0.6.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

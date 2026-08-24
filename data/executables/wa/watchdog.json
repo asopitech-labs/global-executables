@@ -2,6 +2,30 @@
   "command": "watchdog",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "watchdog",
+      "version": "0.2.6",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "watchdog",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "watchdog",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arc2898/watchdog",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/arc2898/watchdog.git",
+      "source": "https://registry.npmjs.org/@arc2898%2Fwatchdog/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@awesamarth/watchdog",
+      "version": "0.1.4",
+      "repository": "git+https://github.com/awesamarth/watchdog.git",
+      "source": "https://registry.npmjs.org/@awesamarth%2Fwatchdog/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "libormatejka/watchdog",
+      "version": "v0.0.8",
+      "repository": "https://github.com/libormatejka/watchdog.git",
+      "source": "https://repo.packagist.org/p2/libormatejka/watchdog.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.0.8"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

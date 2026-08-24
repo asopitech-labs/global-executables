@@ -2,6 +2,42 @@
   "command": "mtest",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-maxitest-6.2.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgryski/trifles",
+      "version": "v0.0.0-20190318185328-a8d75aae118c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgryski/trifles/@v/v0.0.0-20190318185328-a8d75aae118c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190318185328-a8d75aae118c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgryski/trifles",
+      "version": "v0.0.0-20190530022834-891760d8d75c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgryski/trifles/@v/v0.0.0-20190530022834-891760d8d75c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530022834-891760d8d75c"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tfel",
       "version": "5.1.0",
@@ -12,6 +48,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ampersand/magento-docker-test-instance",
+      "version": "0.2.0",
+      "repository": "https://github.com/AmpersandHQ/magento-docker-test-instance.git",
+      "source": "https://repo.packagist.org/p2/ampersand/magento-docker-test-instance.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "gemini",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gemini-cli-1:0.50.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gemini-cli",
       "version": "0.46.0",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anek-codes/gemini-cli",
+      "version": "0.25.0-nightly.20260107.59a18e710",
+      "repository": "git+https://github.com/google-gemini/gemini-cli.git",
+      "source": "https://registry.npmjs.org/@anek-codes%2Fgemini-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.25.0-nightly.20260107.59a18e710"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anipleades/fashion-ai-cli",
+      "version": "0.1.21",
+      "repository": "git+https://github.com/google-gemini/gemini-cli.git",
+      "source": "https://registry.npmjs.org/@anipleades%2Ffashion-ai-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.21"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gemini",
+      "version": "1.0.1",
+      "repository": "http://rubyforge.org/projects/gemini/",
+      "source": "https://rubygems.org/gems/gemini-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

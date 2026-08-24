@@ -2,6 +2,42 @@
   "command": "tcp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rstore",
+      "version": "0.1.1",
+      "repository": "https://github.com/myyrakle/rstore",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/myzhan/boomer",
+      "version": "v0.0.0-20190619033134-b5d68accb760",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/myzhan/boomer/@v/v0.0.0-20190619033134-b5d68accb760.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190619033134-b5d68accb760"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/younglucky/go-web-foundation",
+      "version": "v0.0.0-20140106072506-5d09fa75b5c9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/younglucky/go-web-foundation/@v/v0.0.0-20140106072506-5d09fa75b5c9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20140106072506-5d09fa75b5c9"
+    },
+    {
       "ecosystem": "go",
       "package": "golang.org/x/talks",
       "version": "v0.0.0-20190313194420-5ca518b26a55",
@@ -12,8 +48,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190313194420-5ca518b26a55"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@afrosintech/tcp",
+      "version": "0.0.0",
+      "repository": "git+https://github.com/afrosintech/tcp.git",
+      "source": "https://registry.npmjs.org/@afrosintech%2Ftcp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

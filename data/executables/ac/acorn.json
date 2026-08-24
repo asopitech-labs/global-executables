@@ -2,11 +2,23 @@
   "command": "acorn",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "acorn-1:8.18.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "acorn",
       "version": "1.0.0",
       "repository": null,
-      "source": "https://crates.io/api/v1/crates/acorn/1.0.0/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
@@ -16,14 +28,51 @@
     {
       "ecosystem": "crates",
       "package": "acorn-cli",
-      "version": "0.1.70",
+      "version": "0.1.75",
       "repository": "https://code.ornl.gov/research-enablement/acorn",
-      "source": "https://crates.io/api/v1/crates/acorn-cli/0.1.70/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
-      "latest_version": "0.1.70"
+      "latest_version": "0.1.75"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acornprover/cli",
+      "version": "0.0.5",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@acornprover%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "acorn-agent",
+      "version": "2.3.1",
+      "repository": "https://github.com/andamagodwin/Acorn",
+      "source": "https://files.pythonhosted.org/packages/f3/93/ad23fd2c61da3ce0736f132bde5a2fe07101dd29c497bbaf03f77b816668/acorn_agent-2.3.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.3.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "acorn",
+      "version": "0.1.75",
+      "repository": "https://acorn.ornl.gov",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.1.75"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +88,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

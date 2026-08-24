@@ -2,6 +2,30 @@
   "command": "pfetch",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pfetch-rs-2.11.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pfetch",
+      "version": "2.11.1",
+      "repository": "https://github.com/Gobidev/pfetch-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.11.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pfetch-rs",
       "version": "2.11.1",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

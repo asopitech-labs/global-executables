@@ -2,6 +2,18 @@
   "command": "fluent-bit",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/grafana/loki",
+      "version": "v1.6.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grafana/loki/@v/v1.6.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fluent-bit",
       "version": "5.1.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Chronosphere.FluentBit",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -6,6 +6,18 @@
       "package": "pilot",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pilot",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -26,6 +38,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "arcane-cli",
+      "version": "1.20.2",
+      "repository": "https://arcane.engineer",
+      "source": "https://files.pythonhosted.org/packages/4a/9e/a99a8e512f5bad15d6e058711b74c51af28613de367def677c53ac53560f/arcane_cli-1.20.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.20.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "arqon-pilot",
+      "version": "0.1.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/9b/b7/8473f9b5434a3572fae86707fb97731ca888a4a9686d16bb856996d0a721/arqon_pilot-0.1.6-py3-none-manylinux_2_28_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "pilot",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

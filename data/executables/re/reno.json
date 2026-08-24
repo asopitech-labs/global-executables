@@ -2,6 +2,30 @@
   "command": "reno",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "generic_cong_avoid",
+      "version": "0.4.0",
+      "repository": "https://github.com/ccp-project/generic-cong-avoid",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "reno",
+      "version": "0.1.0",
+      "repository": "https://github.com/xiaoyang-sde/reno",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-reno",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

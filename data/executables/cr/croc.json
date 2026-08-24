@@ -2,9 +2,45 @@
   "command": "croc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "croc-1:11.2.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "croc-1:11.2.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "crocodile",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "croc",
-      "version": "11.1.1",
+      "version": "11.2.5",
       "repository": "https://github.com/schollz/croc",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "HatTrick.CrockfordBase32.Tools",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/hattrick.crockfordbase32.tools/1.0.2/hattrick.crockfordbase32.tools.1.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "croc",
+      "version": "1.0.0",
+      "repository": "https://rubyforge.org/projects/croc/",
+      "source": "https://rubygems.org/gems/croc-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dmeiz-croc",
+      "version": "0.9.2",
+      "repository": null,
+      "source": "https://rubygems.org/gems/dmeiz-croc-0.9.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "croc",
+      "version": "11.2.5",
+      "repository": "https://schollz.com/software/croc6",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "11.2.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

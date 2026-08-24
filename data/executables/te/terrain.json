@@ -1,0 +1,43 @@
+{
+  "command": "terrain",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "terrain",
+      "version": "0.3.0",
+      "repository": "https://github.com/kyow/terrain",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anchor-protocol/terrain",
+      "version": "0.5.0-beta7",
+      "repository": "git+https://github.com/terra-money/terrain.git",
+      "source": "https://registry.npmjs.org/@anchor-protocol%2Fterrain/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.0-beta7"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

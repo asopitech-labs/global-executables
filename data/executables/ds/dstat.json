@@ -2,11 +2,35 @@
   "command": "dstat",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dstat",
+      "version": "0.0.2",
+      "repository": "https://github.com/mihaigalos/dstat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "debian",
       "package": "pcp",
       "version": null,
       "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pcp-dstat",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
@@ -26,6 +50,18 @@
       "latest_version": "1.3.3"
     },
     {
+      "ecosystem": "pypi",
+      "package": "DIRAC",
+      "version": "9.1.15",
+      "repository": "https://github.com/DIRACGrid/DIRAC/",
+      "source": "https://files.pythonhosted.org/packages/de/75/e301f4088cb0ca86295c557dbf741c9887dbcb5d51886d4e5568a86f3dd7/dirac-9.1.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "9.1.15"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "pcp",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

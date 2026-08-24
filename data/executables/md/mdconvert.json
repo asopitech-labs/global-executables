@@ -2,6 +2,42 @@
   "command": "mdconvert",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "isync-1.5.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdconvert",
+      "version": "1.0.0",
+      "repository": "https://github.com/PramudiR/mdconvert",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "isync",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "isync",
       "version": null,
@@ -26,6 +62,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "anagenex-mdtraj",
+      "version": "1.9.8.dev0",
+      "repository": "http://mdtraj.org",
+      "source": "https://files.pythonhosted.org/packages/9a/4f/049a6cbd218ae2fffe1d49c08621b441e955eb54ee6ea4262cda8a8f0488/anagenex_mdtraj-1.9.8.dev0-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.9.8.dev0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "isync",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

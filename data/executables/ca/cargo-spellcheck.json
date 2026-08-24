@@ -2,6 +2,30 @@
   "command": "cargo-spellcheck",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cargo-spellcheck-0.15.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-spellcheck",
+      "version": "0.15.7",
+      "repository": "https://github.com/drahnr/cargo-spellcheck.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cargo-spellcheck",
       "version": "0.15.7",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

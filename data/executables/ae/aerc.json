@@ -2,6 +2,30 @@
   "command": "aerc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "aerc-0.21.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "aerc",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "aerc",
       "version": null,
@@ -12,6 +36,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.sr.ht/~sircmpwn/aerc",
+      "version": "v0.0.0-20190607203318-a6787fa5d1e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.sr.ht/~sircmpwn/aerc/@v/v0.0.0-20190607203318-a6787fa5d1e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607203318-a6787fa5d1e0"
     },
     {
       "ecosystem": "homebrew",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

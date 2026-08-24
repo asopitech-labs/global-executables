@@ -2,9 +2,45 @@
   "command": "cz",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "axiom-truth",
+      "version": "0.15.3",
+      "repository": "https://github.com/Reflective-Lab/axiom",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chromazone",
+      "version": "1.0.1",
+      "repository": "https://github.com/matze/chromazone",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cz",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "commitizen",
-      "version": "4.17.0",
+      "version": "4.18.0",
       "repository": "https://commitizen-tools.github.io/commitizen/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@awesome-tools/commitizen",
+      "version": "1.5.1",
+      "repository": "git+https://github.com/basantech89/awesome-tools.git",
+      "source": "https://registry.npmjs.org/@awesome-tools%2Fcommitizen/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.5.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-flow-craft",
+      "version": "2025.4.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ec/51/43f8b37fae4653060aa45d35089da2ae70cc1fc81acaa7a3d6c967269bab/agent_flow_craft-2025.4.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2025.4.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-flow-tdd",
+      "version": "2025.4.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/be/08/77e2b99498b4259575c9c19b3c6c8cf3a82744897aa2e7f1b18e6b4fb528/agent_flow_tdd-2025.4.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2025.4.1.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

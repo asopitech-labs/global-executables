@@ -2,6 +2,30 @@
   "command": "adapter",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/kyma-incubator/compass/components/ias-adapter",
+      "version": "v0.0.0-20240704074401-a423d6070404",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kyma-incubator/compass/components/ias-adapter/@v/v0.0.0-20240704074401-a423d6070404.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240704074401-a423d6070404"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aux4/adapter",
+      "version": "0.2.13",
+      "repository": "git+https://github.com/aux4/adapter.git",
+      "source": "https://registry.npmjs.org/@aux4%2Fadapter/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.13"
+    },
+    {
       "ecosystem": "pypi",
       "package": "CondenSimAdapter",
       "version": "1.0.5",
@@ -12,8 +36,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "RNApolis",
+      "version": "0.16.14",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8c/f6/a41712a68347f273f66407bab6ef1aafb9e700b5f10e60c8be7b63ec8c0e/rnapolis-0.16.14-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.16.14"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

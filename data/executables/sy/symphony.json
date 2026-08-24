@@ -2,6 +2,42 @@
   "command": "symphony",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "seven-layer-symphony",
+      "version": "1.0.0",
+      "repository": "https://github.com/s0fractal/seven-layer-symphony",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "symphony-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/broomva/symphony",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "coinor-symphony",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "coinor-symphony",
       "version": null,
@@ -12,6 +48,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andrejvysny/symphony",
+      "version": "0.2.1",
+      "repository": "git+https://github.com/andrejvysny/symphony-ts.git",
+      "source": "https://registry.npmjs.org/@andrejvysny%2Fsymphony/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anmho/symphony",
+      "version": "0.1.2",
+      "repository": "git+https://github.com/anmho/symphony.git",
+      "source": "https://registry.npmjs.org/@anmho%2Fsymphony/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@artinet/symphony",
+      "version": "0.0.13",
+      "repository": "git+https://github.com/the-artinet-project/cli.git",
+      "source": "https://registry.npmjs.org/@artinet%2Fsymphony/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.13"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

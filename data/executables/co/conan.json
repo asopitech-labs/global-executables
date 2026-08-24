@@ -2,6 +2,18 @@
   "command": "conan",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "conan-chat",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "conan",
       "version": "2.31.2",
@@ -36,8 +48,45 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.0.19"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "conan",
+      "version": "0.4.12",
+      "repository": "http://github.com/madebymany/conan",
+      "source": "https://rubygems.org/gems/conan-0.4.12.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.12"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "conan_deploy",
+      "version": "0.0.17",
+      "repository": "http://github.com/MTNSatelliteComm/conan/README.md",
+      "source": "https://rubygems.org/gems/conan_deploy-0.0.17.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.17"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "conan",
+      "version": "2.31.2",
+      "repository": "https://conan.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.31.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

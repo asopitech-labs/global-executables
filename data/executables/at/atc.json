@@ -2,6 +2,30 @@
   "command": "atc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "bsd-games-3.3-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agenttower/cli",
+      "version": "0.5.0",
+      "repository": "git+https://github.com/manateeit/agent-tower.git",
+      "source": "https://registry.npmjs.org/@agenttower%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "AutoChrome",
       "version": "0.1.10",
@@ -12,8 +36,32 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anthropic-token-counter",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/36/63/42fb473a4b3b49ebb76dc49522a083748d9f0c568ec3f55ca89ef5c39215/anthropic_token_counter-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "atcommander",
+      "version": "0.1.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/77/15/9d177247cd0310730a6f4ba26e12a4086dfd5a6eaaceb0ccf7b05030f405/atcommander-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

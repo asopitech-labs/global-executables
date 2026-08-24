@@ -2,6 +2,42 @@
   "command": "storage",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "flipperzero-tools",
+      "version": "0.15.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "free-storage",
+      "version": "1.0.8",
+      "repository": "https://github.com/free-storage-org/free-storage",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dyn-tracing/storage",
+      "version": "v0.0.0-20210528171515-c9b16945b32a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dyn-tracing/storage/@v/v0.0.0-20210528171515-c9b16945b32a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210528171515-c9b16945b32a"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/jen20/riviera",
       "version": "v0.0.0-20170921165304-a7eb91c136c9",
@@ -12,8 +48,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170921165304-a7eb91c136c9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tom-fitz/fhi-storage/storage",
+      "version": "v0.0.0-20210715010527-2359342cbeb9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tom-fitz/fhi-storage/storage/@v/v0.0.0-20210715010527-2359342cbeb9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210715010527-2359342cbeb9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@1focus/storage",
+      "version": "0.0.3",
+      "repository": "git+https://github.com/1focus-ai/1focus.git",
+      "source": "https://registry.npmjs.org/@1focus%2Fstorage/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Storage.Console",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/storage.console/1.0.1/storage.console.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

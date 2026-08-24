@@ -1,0 +1,43 @@
+{
+  "command": "inline",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "inliners",
+      "version": "0.5.0",
+      "repository": "https://github.com/makovich/inliners",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "golang-golang-x-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.49.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.49.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.49.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,18 @@
   "command": "backlog",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "backlog-cli",
+      "version": "0.3.0",
+      "repository": "https://github.com/edanisko/backlog-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "backlog-md",
       "version": "1.50.1",
@@ -12,8 +24,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adhd/backlog",
+      "version": "0.1.8",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adhd%2Fbacklog/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aitool/backlog-cli",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/kurdin/backlog-cli.git",
+      "source": "https://registry.npmjs.org/@aitool%2Fbacklog-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@augustalex/backlog",
+      "version": "3.1.7",
+      "repository": "git+https://github.com/Augustalex/backlog.git",
+      "source": "https://registry.npmjs.org/@augustalex%2Fbacklog/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.1.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "backlog",
+      "version": "0.41.4",
+      "repository": "https://github.com/DatekWireless/backlog",
+      "source": "https://rubygems.org/gems/backlog-0.41.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.41.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "backlog_api",
+      "version": "0.0.2",
+      "repository": "https://github.com/a1125ts/backlog_api",
+      "source": "https://rubygems.org/gems/backlog_api-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "fasm",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fasm-1.73.35-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fasm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "fasm",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "fasm",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/fasm/0.1.1/fasm.0.1.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "FABulous-fasm",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/70/e2/7e0491c5c2b07cfe60f7bccc30e2f10342bd8371f72b08accba9709de94b/fabulous_fasm-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

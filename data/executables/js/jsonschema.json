@@ -2,6 +2,42 @@
   "command": "jsonschema",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-jsonschema-4.26.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tsenart/vegeta",
+      "version": "v11.4.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tsenart/vegeta/@v/v11.4.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v11.4.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tsenart/vegeta",
+      "version": "v12.2.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tsenart/vegeta/@v/v12.2.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v12.2.0+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/tsenart/vegeta",
       "version": "v12.3.0+incompatible",
@@ -12,6 +48,31 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v12.3.0+incompatible"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aispeech-ds-cli",
+      "version": "0.1.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a6/4f/738fe4b44b676328ae935ac317c0e8f85935e2b13d11f809d3d0ff635678/aispeech_ds_cli-0.1.6-py3-none-macosx_15_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "jsonschema",
+      "version": "16.8.0",
+      "repository": "https://github.com/sourcemeta/jsonschema",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "16.8.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +88,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

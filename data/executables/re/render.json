@@ -2,6 +2,102 @@
   "command": "render",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "boox-note-parser",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fastlio_rs",
+      "version": "0.2.3",
+      "repository": "https://github.com/jeff-hykin/fastlio_rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hvif",
+      "version": "0.1.1",
+      "repository": "https://git.linkmauve.fr/hvif.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "imagemusic",
+      "version": "1.0.1",
+      "repository": "https://gitlab.com/Taywee/imagemusic",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ratex-render",
+      "version": "0.1.14",
+      "repository": "https://github.com/erweixin/RaTeX",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.14"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "render-cli",
+      "version": "0.10.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rustlio2",
+      "version": "0.2.3",
+      "repository": "https://github.com/jeff-hykin/rustlio2",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "raster3d",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "raster3d",
       "version": null,
@@ -12,6 +108,126 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devfeel/dotweb",
+      "version": "v0.0.0-20190220064112-c7ab14e88d65",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/devfeel/dotweb/@v/v0.0.0-20190220064112-c7ab14e88d65.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190220064112-c7ab14e88d65"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devfeel/dotweb",
+      "version": "v0.0.0-20190613043734-6c5cb5c18ff6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/devfeel/dotweb/@v/v0.0.0-20190613043734-6c5cb5c18ff6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613043734-6c5cb5c18ff6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googlecodelabs/tools",
+      "version": "v2.2.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googlecodelabs/tools/@v/v2.2.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hypwxm/rider",
+      "version": "v1.1.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hypwxm/rider/@v/v1.1.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hypwxm/rider",
+      "version": "v1.1.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hypwxm/rider/@v/v1.1.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hypwxm/rider",
+      "version": "v1.1.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hypwxm/rider/@v/v1.1.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/letsblockit/letsblockit",
+      "version": "v0.54.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/letsblockit/letsblockit/@v/v0.54.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.54.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minskylab/calab",
+      "version": "v0.0.0-20220915062113-baa351e912d5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minskylab/calab/@v/v0.0.0-20220915062113-baa351e912d5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220915062113-baa351e912d5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/api",
+      "version": "v0.0.0-20260819011109-af5c920502e2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/api/@v/v0.0.0-20260819011109-af5c920502e2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819011109-af5c920502e2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/unrolled/render",
+      "version": "v0.0.0-20160218130117-198ad4d8b8a4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/unrolled/render/@v/v0.0.0-20160218130117-198ad4d8b8a4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160218130117-198ad4d8b8a4"
     },
     {
       "ecosystem": "go",
@@ -28,6 +244,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/unrolled/render",
+      "version": "v0.0.0-20171006150303-32bf1ea2a39e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/unrolled/render/@v/v0.0.0-20171006150303-32bf1ea2a39e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171006150303-32bf1ea2a39e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/unrolled/render",
       "version": "v0.0.0-20180914162206-b9786414de4d",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/unrolled/render/@v/v0.0.0-20180914162206-b9786414de4d.zip",
@@ -36,6 +264,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180914162206-b9786414de4d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/unrolled/render",
+      "version": "v0.0.0-20181210145518-4c664cb3ad2f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/unrolled/render/@v/v0.0.0-20181210145518-4c664cb3ad2f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181210145518-4c664cb3ad2f"
     },
     {
       "ecosystem": "go",
@@ -50,9 +290,21 @@
       "latest_version": "v1.0.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/unrolled/render",
+      "version": "v1.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/unrolled/render/@v/v1.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "render",
-      "version": "2.22.0",
+      "version": "2.24.0",
       "repository": "https://render.com/docs/cli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -60,6 +312,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@applitools/scripts",
+      "version": "1.2.0",
+      "repository": "git+https://github.com/applitools/eyes.sdk.javascript1.git",
+      "source": "https://registry.npmjs.org/@applitools%2Fscripts/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "infotechnohelp/renderscript",
+      "version": "0.0.1",
+      "repository": "https://gitlab.com/infotechnohelp/renderscript.git",
+      "source": "https://repo.packagist.org/p2/infotechnohelp/renderscript.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +351,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

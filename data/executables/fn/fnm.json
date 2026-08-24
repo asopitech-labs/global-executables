@@ -2,6 +2,42 @@
   "command": "fnm",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fnm-1.39.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fnm",
+      "version": "1.39.0",
+      "repository": "https://github.com/Schniz/fnm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.39.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fnm-binstall-test",
+      "version": "0.1.5",
+      "repository": "https://github.com/ahaoboy/fnm-binstall-test",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fnm",
       "version": "1.39.0",
@@ -12,8 +48,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "fnm",
+      "version": "1.39.0",
+      "repository": "https://github.com/Schniz/fnm",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.39.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

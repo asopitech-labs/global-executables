@@ -1,0 +1,55 @@
+{
+  "command": "idea",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "intellij-idea-community-edition-4:2026.2.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "motils",
+      "version": "0.1.1",
+      "repository": "https://github.com/pykeras/BashUtils/tree/master/motils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-idea-cli",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/df/57/963e5250219026bdb51ce3365854e2b456ef23bc7c9e3389a152b0fcb0d9/ai_idea_cli-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ideapad",
+      "version": "0.1.2",
+      "repository": "https://www.github.com/ajsharp/ideapad",
+      "source": "https://rubygems.org/gems/ideapad-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

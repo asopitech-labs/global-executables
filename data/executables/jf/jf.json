@@ -2,9 +2,57 @@
   "command": "jf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jeff",
+      "version": "0.1.2",
+      "repository": "https://github.com/DevinLeamy/jeff",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jf",
+      "version": "1.0.0",
+      "repository": "https://github.com/sayanarijit/jf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jflow",
+      "version": "0.5.2",
+      "repository": "https://github.com/brandonpittman/j-flow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jobfile",
+      "version": "0.1.1",
+      "repository": "https://github.com/darwincereska/jobfile",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jfrog-cli",
-      "version": "2.120.0",
+      "version": "2.121.0",
       "repository": "https://docs.jfrog.com/integrations/docs/jfrog-cli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +60,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "JellyfinCli",
+      "version": "0.1.28",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/jellyfincli/0.1.28/jellyfincli.0.1.28.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.28"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "codegear/json-formatter",
+      "version": "1.0.2",
+      "repository": "https://github.com/whitephp/json-formatter.git",
+      "source": "https://repo.packagist.org/p2/codegear/json-formatter.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jf",
+      "version": "0.5.0",
+      "repository": "https://github.com/timakin/jf",
+      "source": "https://rubygems.org/gems/jf-0.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "JFrog.Cli",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -6,12 +6,48 @@
       "package": "tlsrouter",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tlsrouter",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/tcpproxy",
+      "version": "v0.0.0-20180808230851-dfa16c61dad2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/tcpproxy/@v/v0.0.0-20180808230851-dfa16c61dad2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180808230851-dfa16c61dad2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.universe.tf/tcpproxy",
+      "version": "v0.0.0-20180808230851-dfa16c61dad2",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.universe.tf/tcpproxy/@v/v0.0.0-20180808230851-dfa16c61dad2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180808230851-dfa16c61dad2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

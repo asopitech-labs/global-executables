@@ -2,6 +2,18 @@
   "command": "lxd-benchmark",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "lxd-6.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "debian",
       "package": "lxd-tools",
       "version": null,
@@ -12,6 +24,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/canonical/lxd",
+      "version": "v0.0.0-20260820141449-1b235bf90f9f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/canonical/lxd/@v/v0.0.0-20260820141449-1b235bf90f9f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820141449-1b235bf90f9f"
     },
     {
       "ecosystem": "go",
@@ -28,6 +52,54 @@
     {
       "ecosystem": "go",
       "package": "github.com/lxc/lxd",
+      "version": "v0.0.0-20180515164315-d0d66b4842f4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lxc/lxd/@v/v0.0.0-20180515164315-d0d66b4842f4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180515164315-d0d66b4842f4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/lxd",
+      "version": "v0.0.0-20190208124523-fe0844d45b32",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lxc/lxd/@v/v0.0.0-20190208124523-fe0844d45b32.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190208124523-fe0844d45b32"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/lxd",
+      "version": "v0.0.0-20190219191936-eaa62ce98640",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lxc/lxd/@v/v0.0.0-20190219191936-eaa62ce98640.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190219191936-eaa62ce98640"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/lxd",
+      "version": "v0.0.0-20190402060902-a577d4452062",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lxc/lxd/@v/v0.0.0-20190402060902-a577d4452062.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190402060902-a577d4452062"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/lxd",
       "version": "v0.0.0-20190423184417-5e0e77bc4d75",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/lxc/lxd/@v/v0.0.0-20190423184417-5e0e77bc4d75.zip",
@@ -36,8 +108,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190423184417-5e0e77bc4d75"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/lxd",
+      "version": "v0.0.0-20190510140201-34780a149711",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lxc/lxd/@v/v0.0.0-20190510140201-34780a149711.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190510140201-34780a149711"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/lxd",
+      "version": "v0.0.0-20190524094409-afb25366a1af",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lxc/lxd/@v/v0.0.0-20190524094409-afb25366a1af.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524094409-afb25366a1af"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

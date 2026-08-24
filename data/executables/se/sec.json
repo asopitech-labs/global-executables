@@ -2,6 +2,30 @@
   "command": "sec",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "secrets-cli",
+      "version": "0.6.0",
+      "repository": "https://github.com/mpiorowski/secrets-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "secry",
+      "version": "1.2.4",
+      "repository": "https://github.com/rushpym-dotcom/secry-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sec",
       "version": "2.9.4",
@@ -12,6 +36,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@404labs/securitycheck",
+      "version": "0.2.1",
+      "repository": "git+https://github.com/SpectreMercury/404labs.git",
+      "source": "https://registry.npmjs.org/@404labs%2Fsecuritycheck/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "sequel",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-sequel-5.107.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "QaDeS-qades-sequel",
+      "version": "2.11.0",
+      "repository": "http://sequel.rubyforge.org",
+      "source": "https://rubygems.org/gems/QaDeS-qades-sequel-2.11.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.11.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "colincasey-sequel",
+      "version": "2.10.4",
+      "repository": "http://sequel.rubyforge.org",
+      "source": "https://rubygems.org/gems/colincasey-sequel-2.10.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.10.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "epugh-sequel",
+      "version": "0.0.0",
+      "repository": "http://github.com/epugh/sequel",
+      "source": "https://rubygems.org/gems/epugh-sequel-0.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-sequel",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,9 +2,21 @@
   "command": "apprise",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "apprise-1.10.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "apprise",
-      "version": "1.12.0",
+      "version": "1.13.0",
       "repository": "https://pypi.org/project/apprise/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,6 +24,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apprise",
+      "version": "1.13.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c6/ab/199a88aa1cee354a0e9bc0d9fce9d14969214e3c95b466d75d63756112c5/apprise-1.13.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.13.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "apprise",
+      "version": "0.9.10",
+      "repository": "http://github.com/Fingertips/apprise",
+      "source": "https://rubygems.org/gems/apprise-0.9.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.10"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

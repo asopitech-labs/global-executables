@@ -2,6 +2,30 @@
   "command": "vm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "voidmerge",
+      "version": "0.0.25",
+      "repository": "https://github.com/voidmerge/voidmerge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.25"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mgetty-voice",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mgetty-voice",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ad-feiben/vite-plugin-modular",
+      "version": "0.0.5",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ad-feiben%2Fvite-plugin-modular/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "VM-for-Dyte",
+      "version": "1.0.0",
+      "repository": "https://github.com/dyte-submissions/dyte-vit-2022-aayush1607",
+      "source": "https://files.pythonhosted.org/packages/ad/05/8d55fab072bed24bcbda45880498ba098d08d2c238f68d650630b8192a6d/VM_for_Dyte-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Version-manager-for-Dyte",
+      "version": "1.0.2",
+      "repository": "https://github.com/dyte-submissions/dyte-vit-2022-aayush1607",
+      "source": "https://files.pythonhosted.org/packages/86/a8/d89da1b69dc1770630405964608592a8cafc8b492f898110d17256292ce9/Version_manager_for_Dyte-1.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

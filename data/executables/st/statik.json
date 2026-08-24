@@ -2,6 +2,30 @@
   "command": "statik",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "statik",
+      "version": "0.2.1",
+      "repository": "https://github.com/Sycrosity/statik-rs/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "golang-statik",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "golang-statik",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rakyll/statik",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rakyll/statik/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rakyll/statik",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rakyll/statik/@v/v0.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rakyll/statik",
+      "version": "v0.1.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rakyll/statik/@v/v0.1.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.4"
     },
     {
       "ecosystem": "go",
@@ -36,6 +96,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.1.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rakyll/statik",
+      "version": "v0.1.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rakyll/statik/@v/v0.1.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tgulacsi/statik",
+      "version": "v0.1.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tgulacsi/statik/@v/v0.1.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.3"
     },
     {
       "ecosystem": "homebrew",
@@ -63,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

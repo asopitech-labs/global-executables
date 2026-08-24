@@ -2,6 +2,18 @@
   "command": "cartridge",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cartridge",
+      "version": "0.1.0",
+      "repository": "https://github.com/aadityadhruv/gameboy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cartridge-cli",
       "version": "2.12.12",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adbl/cartridge",
+      "version": "0.0.8",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adbl%2Fcartridge/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

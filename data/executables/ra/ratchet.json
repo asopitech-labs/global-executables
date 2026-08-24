@@ -2,6 +2,18 @@
   "command": "ratchet",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "solana-ratchet-cli",
+      "version": "0.4.0",
+      "repository": "https://github.com/saicharanpogul/ratchet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ratchet",
       "version": "0.12.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "MachinaXX.Ratchet",
+      "version": "1.26.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/machinaxx.ratchet/1.26.0/machinaxx.ratchet.1.26.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.26.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

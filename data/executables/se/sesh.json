@@ -2,6 +2,42 @@
   "command": "sesh",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sesh-robotics",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sesh-ssh",
+      "version": "0.2.0",
+      "repository": "https://github.com/roushou/sesh",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "term-sesh",
+      "version": "0.1.12",
+      "repository": "https://github.com/willothy/sesh",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.12"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sesh",
       "version": "2.28.0",
@@ -12,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agentsesh",
+      "version": "0.15.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/27/bf/a1ed6a75baceeace96d67163a9b76b056390a84f6047f61cb95107c35bf2/agentsesh-0.15.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-sesh",
+      "version": "0.0.1",
+      "repository": "https://github.com/panchgonzalez/aws-sesh",
+      "source": "https://files.pythonhosted.org/packages/71/f1/216f99818ce0b7166c645bb00d7295c99d9ded2b64237763f8059d5b23f2/aws_sesh-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

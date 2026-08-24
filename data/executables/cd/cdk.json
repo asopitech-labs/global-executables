@@ -2,9 +2,21 @@
   "command": "cdk",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/a-h/templ/examples/counter",
+      "version": "v0.0.0-20260715130625-04abee5364c6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/a-h/templ/examples/counter/@v/v0.0.0-20260715130625-04abee5364c6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260715130625-04abee5364c6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "aws-cdk",
-      "version": "2.1136.0",
+      "version": "2.1138.0",
       "repository": "https://github.com/aws/aws-cdk",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-cdk-bin",
+      "version": "2.176.0",
+      "repository": "https://github.com/rvben/aws-cdk-bin",
+      "source": "https://files.pythonhosted.org/packages/fe/6a/522ca21035d248b8258e53a1d2c11f7abd6cba1a7150d183361e04b87302/aws_cdk_bin-2.176.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.176.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-cdk-cli",
+      "version": "2.1138.0",
+      "repository": "https://github.com/rvben/aws-cdk-cli-py",
+      "source": "https://files.pythonhosted.org/packages/9a/79/6dcae3695a2bd96d3fc6ba6a2032064da344a18695cb5a2eb6daa51e9bbf/aws_cdk_cli-2.1138.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1138.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-cdk-wrapper",
+      "version": "2.1003.0",
+      "repository": "https://github.com/rvben/aws-cdk-wrapper",
+      "source": "https://files.pythonhosted.org/packages/f1/bf/c478da7f32d2b0480269bf6e418acdd0ae5c8ece74f58b362746bcc2f8f7/aws_cdk_wrapper-2.1003.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1003.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cuatlan-devkit",
+      "version": "1.0.0",
+      "repository": "https://gitlab.com/cuatlan/cuatlan-devkit",
+      "source": "https://rubygems.org/gems/cuatlan-devkit-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

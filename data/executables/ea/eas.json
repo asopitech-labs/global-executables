@@ -2,9 +2,33 @@
   "command": "eas",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "etk-asm",
+      "version": "0.3.0",
+      "repository": "https://github.com/quilt/etk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fuel-etk-asm",
+      "version": "0.3.1-dev",
+      "repository": "https://github.com/quilt/etk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1-dev"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "eas-cli",
-      "version": "22.0.0",
+      "version": "22.2.0",
       "repository": "https://docs.expo.dev/eas/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

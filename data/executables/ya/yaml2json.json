@@ -2,6 +2,102 @@
   "command": "yaml2json",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "haskell-yaml-0.11.11.2-258",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "babelfish",
+      "version": "0.2.1",
+      "repository": "https://github.com/pickfire/babelfish",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "convert2json",
+      "version": "2.6.3",
+      "repository": "https://github.com/simonrupf/convert2json",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.6.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "yaml2json",
+      "version": "0.1.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "yaml2json-rs-bin",
+      "version": "0.4.0",
+      "repository": "https://github.com/Nessex/yaml2json-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20190110045147-d73d73c0d4b7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20190110045147-d73d73c0d4b7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190110045147-d73d73c0d4b7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20190501202428-050c6e35c5b5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20190501202428-050c6e35c5b5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190501202428-050c6e35c5b5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20190603235743-3a07e7f72186",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20190603235743-3a07e7f72186.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190603235743-3a07e7f72186"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/influxdata/platform",
       "version": "v0.0.0-20181219193417-0f79e4ea3248",
@@ -12,6 +108,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181219193417-0f79e4ea3248"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20181220230935-ff0d2110ba96",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181220230935-ff0d2110ba96.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181220230935-ff0d2110ba96"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20190108190509-fef6d4618e96",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20190108190509-fef6d4618e96.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190108190509-fef6d4618e96"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20190111200105-98469bf07613",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20190111200105-98469bf07613.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190111200105-98469bf07613"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20190117200541-d500d3cf5589",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20190117200541-d500d3cf5589.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190117200541-d500d3cf5589"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rogpeppe/misc",
+      "version": "v0.0.0-20181115194349-003328f094b1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rogpeppe/misc/@v/v0.0.0-20181115194349-003328f094b1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181115194349-003328f094b1"
     },
     {
       "ecosystem": "homebrew",
@@ -38,6 +194,54 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@adius/yaml2json",
+      "version": "2.0.0",
+      "repository": "git+https://github.com/ad-si/yaml2json.git",
+      "source": "https://registry.npmjs.org/@adius%2Fyaml2json/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aitmed/yaml2json",
+      "version": "1.0.14",
+      "repository": "http://gitlab.aitmed.com/shitong/yaml2json.git",
+      "source": "https://registry.npmjs.org/@aitmed%2Fyaml2json/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.14"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "baze",
+      "version": "1.2.0",
+      "repository": "https://github.com/pcarrier/baze",
+      "source": "https://rubygems.org/gems/baze-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "json2yaml",
+      "version": "0.0.3",
+      "repository": "https://github.com/fukayatsu/json2yaml",
+      "source": "https://rubygems.org/gems/json2yaml-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "reserialize",
       "version": null,
@@ -51,5 +255,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

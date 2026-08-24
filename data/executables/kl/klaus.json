@@ -2,6 +2,30 @@
   "command": "klaus",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "klaus",
+      "version": "0.1.7",
+      "repository": "https://github.com/lambdastackio/klaus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@almondoo/klaus",
+      "version": "0.5.3",
+      "repository": "git+https://github.com/almondoo/klaus.git",
+      "source": "https://registry.npmjs.org/@almondoo%2Fklaus/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-klaus",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

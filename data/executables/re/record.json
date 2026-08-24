@@ -2,6 +2,54 @@
   "command": "record",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "chio-provider-conformance",
+      "version": "0.1.2",
+      "repository": "https://github.com/backbay-labs/chio",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "delta_2a_lidar",
+      "version": "0.1.1",
+      "repository": "https://github.com/jeroenvervaeke/delta_2a_lidar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "record",
+      "version": "0.2.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xawtv-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "xawtv-tools",
       "version": null,
@@ -15,6 +63,54 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/actgardner/gogen-avro",
+      "version": "v5.3.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/actgardner/gogen-avro/@v/v5.3.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v5.3.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/actgardner/gogen-avro",
+      "version": "v5.3.1-0.20190504041908-7dd4ae9e5e5e+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/actgardner/gogen-avro/@v/v5.3.1-0.20190504041908-7dd4ae9e5e5e%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v5.3.1-0.20190504041908-7dd4ae9e5e5e+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/actgardner/gogen-avro",
+      "version": "v5.3.1-0.20190531110914-0bc034a8cc8f+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/actgardner/gogen-avro/@v/v5.3.1-0.20190531110914-0bc034a8cc8f%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v5.3.1-0.20190531110914-0bc034a8cc8f+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/actgardner/gogen-avro",
+      "version": "v6.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/actgardner/gogen-avro/@v/v6.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/yobert/alsa",
       "version": "v0.0.0-20180630182551-d38d89fa843e",
       "repository": null,
@@ -24,6 +120,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180630182551-d38d89fa843e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yubo/golib",
+      "version": "v0.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yubo/golib/@v/v0.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/actgardner/gogen-avro.v5",
+      "version": "v5.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/actgardner/gogen-avro.v5/@v/v5.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v5.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ao-agent-dev",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/07/7f/3cd83e053977eb1424a56b2db163f3417eb3fab157155b333ddb83fcc8cf/ao_agent_dev-0.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ao-dev",
+      "version": "0.1.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/89/d8/6df9435bd4dce972fa0ba1851f81c1ffef9da413ef2d6edc226b2b5654bd/ao_dev-0.1.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +183,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

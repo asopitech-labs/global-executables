@@ -2,9 +2,45 @@
   "command": "qwen",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "qwen-code-0.19.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "qwen-code-0.19.11-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "qwen",
+      "version": "0.1.0",
+      "repository": "https://github.com/ziboh/qwen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "qwen-code",
-      "version": "0.21.12",
+      "version": "0.22.0",
       "repository": "https://github.com/QwenLM/qwen-code",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@3-/qwen-code",
+      "version": "0.1.11",
+      "repository": "git+https://github.com/QwenLM/qwen-code.git",
+      "source": "https://registry.npmjs.org/@3-%2Fqwen-code/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.11"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aattwwss/qwen-code",
+      "version": "0.10.5-fork.1",
+      "repository": "git+https://github.com/QwenLM/qwen-code.git",
+      "source": "https://registry.npmjs.org/@aattwwss%2Fqwen-code/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.10.5-fork.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agent-cli/agent-cli",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/agent-cli/agent-cli.git",
+      "source": "https://registry.npmjs.org/@agent-cli%2Fagent-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ai-masters-community/qwen-code",
+      "version": "0.3.12",
+      "repository": "git+https://github.com/QwenLM/qwen-code.git",
+      "source": "https://registry.npmjs.org/@ai-masters-community%2Fqwen-code/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.12"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

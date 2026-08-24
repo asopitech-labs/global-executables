@@ -2,6 +2,42 @@
   "command": "docker-compose",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "docker-compose-5.5.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "docker-tools",
+      "version": "0.0.2",
+      "repository": "https://github.com/nyar-vm/rusty-docker/tree/main/backends/docker-tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "docker-compose",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "docker-compose",
       "version": null,
@@ -16,7 +52,7 @@
     {
       "ecosystem": "homebrew",
       "package": "docker-compose",
-      "version": "5.4.0",
+      "version": "5.5.0",
       "repository": "https://docs.docker.com/compose/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,6 +60,31 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "fruition/mac-dev-shim",
+      "version": "v1.0.1",
+      "repository": "https://github.com/fruition/mac-dev-shim.git",
+      "source": "https://repo.packagist.org/p2/fruition/mac-dev-shim.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "docker-compose",
+      "version": "5.5.0",
+      "repository": "https://docs.docker.com/compose/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.5.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -36,8 +97,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Docker.DockerCompose",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

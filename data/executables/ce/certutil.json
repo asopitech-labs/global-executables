@@ -18,6 +18,18 @@
       "package": "libnss3-tools",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libnss3-tools",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -28,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "nss",
-      "version": "3.126.1",
+      "version": "3.127",
       "repository": "https://firefox-source-docs.mozilla.org/security/nss/index.html",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -36,6 +48,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "certutil",
+      "version": "0.2.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/certutil-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -48,8 +72,32 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2022-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2025-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

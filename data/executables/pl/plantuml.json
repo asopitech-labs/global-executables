@@ -2,6 +2,18 @@
   "command": "plantuml",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "plantuml-1.2026.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "plantuml",
       "version": "1.2026.6",
@@ -12,6 +24,43 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "eslider/plantuml-proxy",
+      "version": "0.0.8046",
+      "repository": "https://github.com/eSlider/plantuml-proxy.git",
+      "source": "https://repo.packagist.org/p2/eslider/plantuml-proxy.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.0.8046"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jawira/plantuml",
+      "version": "v1.2026.6",
+      "repository": "https://github.com/jawira/plantuml.git",
+      "source": "https://repo.packagist.org/p2/jawira/plantuml.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.2026.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "plantuml",
+      "version": "1.2026.6",
+      "repository": "https://github.com/plantuml/plantuml",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.2026.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +76,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

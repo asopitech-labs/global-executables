@@ -1,0 +1,55 @@
+{
+  "command": "jig",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "jig-2.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jig-run",
+      "version": "0.10.1",
+      "repository": "https://github.com/mb1986/jig",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jig-sh",
+      "version": "0.1.0",
+      "repository": "https://github.com/bpcakes/jig-sh",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nomograph-jig",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/nomograph/jig",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

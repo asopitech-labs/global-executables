@@ -1,0 +1,44 @@
+{
+  "command": "boundary",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "boundary",
+      "version": "0.27.0",
+      "repository": "https://github.com/rebelopsio/boundary",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.27.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "boundary",
+      "version": "0.21.3",
+      "repository": "https://www.boundaryproject.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.21.3"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Hashicorp.Boundary",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,90 @@
   "command": "g",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "blazing",
+      "version": "0.3.0",
+      "repository": "https://github.com/krzmknt/g",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "g-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/alonsovm44/g",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "g-rs",
+      "version": "2.0.2",
+      "repository": "https://github.com/jakublaba/g",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gencode",
+      "version": "0.1.1",
+      "repository": "https://github.com/Ultiminium/gencode",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mb-dev",
+      "version": "0.1.12",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.12"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "n7n-g",
+      "version": "0.1.4",
+      "repository": "https://git.7n.ai/7n/g",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alextolkachov24/vgo-go",
+      "version": "v0.0.0-20210915030655-298b09468694",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alextolkachov24/vgo-go/@v/v0.0.0-20210915030655-298b09468694.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210915030655-298b09468694"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "g-ls",
       "version": "0.31.2",
@@ -12,8 +96,105 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Decova.Gotcha",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/decova.gotcha/0.1.0/decova.gotcha.0.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Gazel.Cli",
+      "version": "10.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gazel.cli/10.0.1/gazel.cli.10.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "10.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "grrr-amsterdam/garp3",
+      "version": "v3.29.3",
+      "repository": "https://github.com/grrr-amsterdam/garp3.git",
+      "source": "https://repo.packagist.org/p2/grrr-amsterdam/garp3.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.29.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Gefyra",
+      "version": "2.5.4",
+      "repository": "https://gefyra.dev",
+      "source": "https://files.pythonhosted.org/packages/8a/69/8afaba7b5c86fb60273fecd45304475c9d0e0253ce323417ad2f64f54d2b/gefyra-2.5.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.5.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "g-module",
+      "version": "0.0.2",
+      "repository": "http://g-module.rubyforge.org",
+      "source": "https://rubygems.org/gems/g-module-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "geee",
+      "version": "1.1.0",
+      "repository": "https://github.com/coleww/g",
+      "source": "https://rubygems.org/gems/geee-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "google-geocoder",
+      "version": "0.1.0",
+      "repository": "http://github.com/shvets/google-geocoder",
+      "source": "https://rubygems.org/gems/google-geocoder-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "g",
+      "version": "1.8.0",
+      "repository": "https://github.com/voidint/g",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.8.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

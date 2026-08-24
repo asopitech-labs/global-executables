@@ -2,6 +2,30 @@
   "command": "logging",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cassandra-sys",
+      "version": "0.9.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cql_bindgen",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/agtorre/gocolorize",
       "version": "v1.0.0",
@@ -15,6 +39,114 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/amikos-tech/chroma-go",
+      "version": "v0.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/amikos-tech/chroma-go/@v/v0.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aws/amazon-ssm-agent",
+      "version": "v0.0.0-20190528210118-029ce48d3f04",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aws/amazon-ssm-agent/@v/v0.0.0-20190528210118-029ce48d3f04.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190528210118-029ce48d3f04"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aws/amazon-ssm-agent",
+      "version": "v0.0.0-20190619211950-fd516f8c9580",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aws/amazon-ssm-agent/@v/v0.0.0-20190619211950-fd516f8c9580.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190619211950-fd516f8c9580"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ayufan/golang-kardianos-service",
+      "version": "v0.0.0-20160429143213-0c8eb6d8fff2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ayufan/golang-kardianos-service/@v/v0.0.0-20160429143213-0c8eb6d8fff2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160429143213-0c8eb6d8fff2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v0.3.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v0.3.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chi/chi",
+      "version": "v0.0.0-20190316151245-d08916613452",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v0.0.0-20190316151245-d08916613452.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190316151245-d08916613452"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chi/chi",
+      "version": "v1.5.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v1.5.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chi/chi",
+      "version": "v3.1.4+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v3.1.4%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.1.4+incompatible"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/go-chi/chi",
       "version": "v3.1.5+incompatible",
       "repository": null,
@@ -24,6 +156,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v3.1.5+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chi/chi",
+      "version": "v3.3.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v3.3.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.3.0+incompatible"
     },
     {
       "ecosystem": "go",
@@ -52,6 +196,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/go-chi/chi",
+      "version": "v3.3.4+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v3.3.4%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.3.4+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chi/chi",
       "version": "v4.0.0+incompatible",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v4.0.0%2Bincompatible.zip",
@@ -64,6 +220,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/go-chi/chi",
+      "version": "v4.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v4.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chi/chi",
       "version": "v4.0.2+incompatible",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v4.0.2%2Bincompatible.zip",
@@ -72,6 +240,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v4.0.2+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chi/chi",
+      "version": "v4.0.3-0.20190508141739-08c92af09aaf+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chi/chi/@v/v4.0.3-0.20190508141739-08c92af09aaf%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.3-0.20190508141739-08c92af09aaf+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hedzr/cmdr-examples",
+      "version": "v1.11.26",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hedzr/cmdr-examples/@v/v1.11.26.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.26"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/k0sproject/rig",
+      "version": "v0.21.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/k0sproject/rig/@v/v0.21.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.21.11"
     },
     {
       "ecosystem": "go",
@@ -100,6 +304,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/kardianos/service",
+      "version": "v0.0.0-20180823001510-8f267d80f2eb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kardianos/service/@v/v0.0.0-20180823001510-8f267d80f2eb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180823001510-8f267d80f2eb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kardianos/service",
+      "version": "v0.0.0-20181115005516-4c239ee84e7b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kardianos/service/@v/v0.0.0-20181115005516-4c239ee84e7b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181115005516-4c239ee84e7b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kardianos/service",
       "version": "v1.0.0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/kardianos/service/@v/v1.0.0.zip",
@@ -108,8 +336,80 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kardianos/service",
+      "version": "v1.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kardianos/service/@v/v1.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pressly/chi",
+      "version": "v1.5.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pressly/chi/@v/v1.5.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/smartcontractkit/chainlink-common",
+      "version": "v0.11.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/smartcontractkit/chainlink-common/@v/v0.11.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ucloud/ucloud-sdk-go",
+      "version": "v0.8.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ucloud/ucloud-sdk-go/@v/v0.8.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ucloud/ucloud-sdk-go",
+      "version": "v0.8.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ucloud/ucloud-sdk-go/@v/v0.8.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alu0101051420/addlogging",
+      "version": "1.5.7",
+      "repository": "git+https://github.com/ULL-ESIT-PL-2021/espree-logging-module-jncabdom.git",
+      "source": "https://registry.npmjs.org/@alu0101051420%2Faddlogging/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.5.7"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

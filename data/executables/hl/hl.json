@@ -2,6 +2,42 @@
   "command": "hl",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hl-0.36.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hl",
+      "version": "0.4.0",
+      "repository": "https://github.com/twe4ked/hl",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hl2-cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hashlink",
       "version": "1.16",
@@ -24,8 +60,70 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hilighter",
+      "version": "1.5.9",
+      "repository": "https://gitlab.com/mjwhitta/hilighter/tree/ruby",
+      "source": "https://rubygems.org/gems/hilighter-1.5.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.5.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hl",
+      "version": "1.2.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/hl-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hl_cli_demo",
+      "version": "0.0.10",
+      "repository": null,
+      "source": "https://rubygems.org/gems/hl_cli_demo-0.0.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.10"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "hashlink",
+      "version": "1.16.0",
+      "repository": "https://hashlink.haxe.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.16.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "hl",
+      "version": "0.36.3",
+      "repository": "https://github.com/pamburus/hl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.36.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

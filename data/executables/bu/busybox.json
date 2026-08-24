@@ -2,6 +2,42 @@
   "command": "busybox",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "busybox-1.36.1-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "busybox",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "busybox",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "busybox",
       "version": null,
@@ -14,6 +50,92 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/genuinetools/binctr",
+      "version": "v0.0.0-20181229160523-e08afe0ff7f6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/genuinetools/binctr/@v/v0.0.0-20181229160523-e08afe0ff7f6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181229160523-e08afe0ff7f6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes/kubernetes",
+      "version": "v1.36.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes/kubernetes/@v/v1.36.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.36.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/kubernetes",
+      "version": "v1.36.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/kubernetes/@v/v1.36.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.36.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.36.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.36.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.36.4"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "busybox-1.36.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "busybox-lean",
+      "version": "6075-g169694ebd",
+      "repository": "https://frippery.org/busybox",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "6075-g169694ebd"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "mingit-busybox",
+      "version": "2.55.0.5",
+      "repository": "https://git-for-windows.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.55.0.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "busybox-static",
       "version": null,
@@ -24,8 +146,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "frippery.busybox-w32",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

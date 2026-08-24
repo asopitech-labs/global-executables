@@ -2,9 +2,33 @@
   "command": "rledger",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rledger",
+      "version": "0.1.0",
+      "repository": "https://github.com/mmkaram/hledger/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rustledger",
+      "version": "0.22.0",
+      "repository": "https://github.com/rustledger/rustledger",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.22.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rustledger",
-      "version": "0.21.0",
+      "version": "0.22.0",
       "repository": "https://rustledger.github.io",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

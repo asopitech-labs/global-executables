@@ -2,6 +2,30 @@
   "command": "serializer",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dx-flow-serializer",
+      "version": "0.5.0",
+      "repository": "https://github.com/essence/serializer-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "two_timer",
+      "version": "2.2.5",
+      "repository": "https://github.com/dfhoughton/two-timer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.2.5"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ArteomSer",
       "version": "0.9.0",
@@ -12,8 +36,44 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Brigadir",
+      "version": "1.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/8f/85/bef35e55897817157ddf22b96a03c056942166de92da01068f51a17004fa/Brigadir-1.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Brigadir-Ser",
+      "version": "1.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/ff/f3/4655c7be0e0991df954c93a9bc5c407627df773acdd90a7a59ee4943c773/Brigadir_Ser-1.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SalatikSer",
+      "version": "1.3.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/d0/26/9de38c2b7c5fe6bfae02eec5008e4c4c15e60c9ada66fe5893de64ab48c6/SalatikSer-1.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

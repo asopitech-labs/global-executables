@@ -2,6 +2,30 @@
   "command": "diceware",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "diceware",
+      "version": "0.5.10",
+      "repository": "https://codeberg.org/kakafarm/rusty-diceware",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.10"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "simple-diceware",
+      "version": "0.2.0",
+      "repository": "https://github.com/bchopson/simple-diceware-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "diceware",
       "version": "1.0.1",
@@ -12,6 +36,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "eff_diceware",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://rubygems.org/gems/eff_diceware-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

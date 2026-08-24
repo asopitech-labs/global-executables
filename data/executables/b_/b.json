@@ -2,6 +2,54 @@
   "command": "b",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "burrow-io",
+      "version": "0.0.1",
+      "repository": "https://github.com/elaurentium/burrow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "somehow",
+      "version": "0.1.5",
+      "repository": "https://github.com/btwiuse/somehow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/faiface/beep",
+      "version": "v0.0.0-20190331160154-e59a7440241a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/faiface/beep/@v/v0.0.0-20190331160154-e59a7440241a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190331160154-e59a7440241a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/faiface/beep",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/faiface/beep/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "build2",
       "version": "0.18.1",
@@ -12,8 +60,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "b-tool",
+      "version": "0.0.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/b-tool/0.0.4/b-tool.0.0.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "derhasi/buddy",
+      "version": "0.1.0",
+      "repository": "https://github.com/derhasi/buddy.git",
+      "source": "https://repo.packagist.org/p2/derhasi/buddy.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "b-bugtracker",
+      "version": "3.3.0",
+      "repository": "https://jwjulien.github.io/b",
+      "source": "https://files.pythonhosted.org/packages/0c/0d/6abe32cdd9a504c6ee9f6a93be223d45f176efc1e4a3ae84f182c32c2339/b_bugtracker-3.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bundler_timer",
+      "version": "1.2.0",
+      "repository": "https://github.com/bassnode/bundler_timer",
+      "source": "https://rubygems.org/gems/bundler_timer-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "geordi",
+      "version": "12.7.0",
+      "repository": "https://github.com/makandra/geordi",
+      "source": "https://rubygems.org/gems/geordi-12.7.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "12.7.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

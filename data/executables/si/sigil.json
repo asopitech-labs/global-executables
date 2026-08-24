@@ -2,6 +2,66 @@
   "command": "sigil",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "sigil-2.8.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sigil-cli",
+      "version": "1.1.2",
+      "repository": "https://github.com/NOMARJ/sigil",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sigil-parser",
+      "version": "0.3.0",
+      "repository": "https://github.com/Daemoniorum-LLC/sigil-lang",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wsc-cli",
+      "version": "0.11.0",
+      "repository": "https://github.com/pulseengine/wsc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "sigil",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "sigil",
       "version": null,
@@ -12,6 +72,66 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anmol-srv/sigil",
+      "version": "0.18.3",
+      "repository": "git+https://github.com/Anmol-Srv/sigil.git",
+      "source": "https://registry.npmjs.org/@anmol-srv%2Fsigil/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.18.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Sigil.Executor",
+      "version": "0.1.7",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/sigil.executor/0.1.7/sigil.executor.0.1.7.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Sigil.Sign",
+      "version": "0.9.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/sigil.sign/0.9.1/sigil.sign.0.9.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SigilBuild",
+      "version": "0.0.0-reserved",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/sigilbuild/0.0.0-reserved/sigilbuild.0.0.0-reserved.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.0-reserved"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jcadima/sigil",
+      "version": "v1.0.3",
+      "repository": "https://github.com/jcadima/sigil.git",
+      "source": "https://repo.packagist.org/p2/jcadima/sigil.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

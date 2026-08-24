@@ -2,6 +2,30 @@
   "command": "ddate",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ddate",
+      "version": "0.4.0",
+      "repository": "https://github.com/Celti/ddate",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ddate",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ddate",
       "version": null,
@@ -26,6 +50,55 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "packagist",
+      "package": "ddate/ddate",
+      "version": "v1.1.1",
+      "repository": "https://github.com/dweichert/Ddate.git",
+      "source": "https://repo.packagist.org/p2/ddate/ddate.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ddate",
+      "version": "1.0.0",
+      "repository": "http://ddate.rubyforge.org",
+      "source": "https://rubygems.org/gems/ddate-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ddate-redux",
+      "version": "2.0.1",
+      "repository": "https://github.com/tamouse/ddate-redux",
+      "source": "https://rubygems.org/gems/ddate-redux-2.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "util-linux-ng",
+      "version": "2.14.1",
+      "repository": "http://gnuwin32.sourceforge.net/packages/util-linux-ng.htm",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.14.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ddate",
       "version": null,
@@ -39,5 +112,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

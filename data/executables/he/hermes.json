@@ -2,9 +2,69 @@
   "command": "hermes",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hermes-agent-cli",
+      "version": "1.14.19",
+      "repository": "https://github.com/yangyifei123/hermes-rust-win",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.14.19"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hermes-bot",
+      "version": "0.3.1",
+      "repository": "https://github.com/jbyoung12/hermes-bot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hermes-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/informalsystems/hermes-sdk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hermes-mcp",
+      "version": "0.3.1",
+      "repository": "https://github.com/faysal-X-N/hermes",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ibc-relayer-cli",
+      "version": "1.13.2",
+      "repository": "https://github.com/informalsystems/hermes",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.13.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hermes-agent",
-      "version": "2026.8.16",
+      "version": "2026.8.19",
       "repository": "https://hermes-agent.nousresearch.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +72,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "hermes/dependencies",
+      "version": "1.2.0",
+      "repository": "https://github.com/gboquizosanchez/hermes-dependencies.git",
+      "source": "https://repo.packagist.org/p2/hermes/dependencies.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "atlasagent-cli",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/94/df/afc1801d415df0a9e281e35bf24c301b21ec93d442e800580d702168b9c5/atlasagent_cli-0.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

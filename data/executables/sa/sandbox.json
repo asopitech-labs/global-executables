@@ -2,6 +2,66 @@
   "command": "sandbox",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "expert",
+      "version": "0.0.1",
+      "repository": "https://github.com/ambaxter/expert-rs.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "eyes",
+      "version": "1.3.0",
+      "repository": "https://git.palmoe.dk/vodofrede/eyes/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sandbox-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/ConsoliDados/sandbox",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "satan",
+      "version": "0.1.0-indev",
+      "repository": "https://github.com/ErisianArchitect/satan",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0-indev"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tis-100",
+      "version": "0.2.2",
+      "repository": "https://github.com/rcolinray/tis-100-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/oscaroscar/vostok",
       "version": "v0.0.0-20190424111820-92c23ba08b37",
@@ -12,6 +72,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190424111820-92c23ba08b37"
+    },
+    {
+      "ecosystem": "go",
+      "package": "bitbucket.org/oscaroscar/vostok",
+      "version": "v0.0.0-20190510091253-13a103e61f47",
+      "repository": null,
+      "source": "https://proxy.golang.org/bitbucket.org/oscaroscar/vostok/@v/v0.0.0-20190510091253-13a103e61f47.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190510091253-13a103e61f47"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elastic/go-seccomp-bpf",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/go-seccomp-bpf/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
     },
     {
       "ecosystem": "go",
@@ -26,6 +110,66 @@
       "latest_version": "v1.1.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/elastic/go-seccomp-bpf",
+      "version": "v1.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elastic/go-seccomp-bpf/@v/v1.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adlele/claude-skill-tools",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adlele%2Fclaude-skill-tools/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amauryliet/sandbox",
+      "version": "1.0.23",
+      "repository": "git+https://github.com/AmauryLiet/docx_generation.git",
+      "source": "https://registry.npmjs.org/@amauryliet%2Fsandbox/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.23"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@architect/sandbox",
+      "version": "9.0.0",
+      "repository": "git+https://github.com/architect/sandbox.git",
+      "source": "https://registry.npmjs.org/@architect%2Fsandbox/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "9.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@architect/workflows",
+      "version": "3.6.0",
+      "repository": "git+https://github.com/arc-repos/arc-workflows.git",
+      "source": "https://registry.npmjs.org/@architect%2Fworkflows/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.6.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "policycoreutils-python-utils",
       "version": null,
@@ -36,8 +180,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "hdosys.herdr-sandbox",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

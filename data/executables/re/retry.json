@@ -2,6 +2,78 @@
   "command": "retry",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "retry-1.0.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nature",
+      "version": "1.5.0",
+      "repository": "https://github.com/llxxbb/Nature",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nature_retry",
+      "version": "0.15.0",
+      "repository": "https://github.com/llxxbb/Nature-Retry",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "retry-cli",
+      "version": "0.0.5",
+      "repository": "https://github.com/demoray/retry-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "retry-cmd",
+      "version": "0.4.1",
+      "repository": "https://github.com/timofurrer/retry",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "retry",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "retry",
       "version": null,
@@ -50,6 +122,54 @@
       "latest_version": "v0.0.0-20181229152359-495c1d672c93"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/slok/goresilience",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/slok/goresilience/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ucloud/ucloud-sdk-go",
+      "version": "v0.8.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ucloud/ucloud-sdk-go/@v/v0.8.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ucloud/ucloud-sdk-go",
+      "version": "v0.8.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ucloud/ucloud-sdk-go/@v/v0.8.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "knative.dev/networking",
+      "version": "v0.0.0-20260727162500-c7a7b772cac9",
+      "repository": null,
+      "source": "https://proxy.golang.org/knative.dev/networking/@v/v0.0.0-20260727162500-c7a7b772cac9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260727162500-c7a7b772cac9"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "retry",
       "version": "1.0.6",
@@ -60,6 +180,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Winix.Retry",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winix.retry/0.4.0/winix.retry.0.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "killbill-client",
+      "version": "4.0.9",
+      "repository": "http://www.killbilling.org",
+      "source": "https://rubygems.org/gems/killbill-client-4.0.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.0.9"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +219,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

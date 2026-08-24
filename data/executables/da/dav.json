@@ -2,6 +2,30 @@
   "command": "dav",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-webdav4-0.11.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dav-text",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "dav-text",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "davclient",
+      "version": "0.0.8",
+      "repository": "http://davclient.rubyforge.org/davclient",
+      "source": "https://rubygems.org/gems/davclient-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fernyb_davclient",
+      "version": "0.0.9",
+      "repository": "http://davclient.rubyforge.org/davclient",
+      "source": "https://rubygems.org/gems/fernyb_davclient-0.0.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.9"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

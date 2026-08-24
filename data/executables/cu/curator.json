@@ -2,6 +2,30 @@
   "command": "curator",
   "providers": [
     {
+      "ecosystem": "nuget",
+      "package": "Curator.Cli",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/curator.cli/0.0.3/curator.cli.0.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "elsuperbeano/curator",
+      "version": "v0.1-alpha4",
+      "repository": "https://github.com/ElSuperbeano/curator.git",
+      "source": "https://repo.packagist.org/p2/elsuperbeano/curator.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.1-alpha4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "elasticsearch-curator",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

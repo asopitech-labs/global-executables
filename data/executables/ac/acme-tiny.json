@@ -2,6 +2,30 @@
   "command": "acme-tiny",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "acme-tiny-5.0.3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "acme-tiny",
+      "version": "5.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a2/2c/82a77a01d579af5d8876c99e4c2045e4a4045118d3b8122e7b67989b230f/acme_tiny-5.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "acme-tiny",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "yte",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "yte",
+      "version": "0.1.3",
+      "repository": "https://gitlab.org/cyloncore/yte",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aio-yte",
+      "version": "2.0.5",
+      "repository": "https://github.com/Akm0d/aio-yte",
+      "source": "https://files.pythonhosted.org/packages/5a/54/69d1d51f5546df4591c0da16faff42418d4f8dce955e83625cb24f221c08/aio_yte-2.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-yte",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

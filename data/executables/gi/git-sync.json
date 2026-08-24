@@ -2,6 +2,66 @@
   "command": "git-sync",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-sync",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "git-synchronizer",
+      "version": "0.3.1",
+      "repository": "https://github.com/noirbizarre/git-synchronizer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kisom/goutils",
+      "version": "v1.23.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kisom/goutils/@v/v1.23.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.23.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v0.0.0-20150307020928-53ec66caf4e9",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v0.0.0-20150307020928-53ec66caf4e9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150307020928-53ec66caf4e9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "git-extras",
       "version": "7.5.0",
@@ -26,6 +86,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "git-extras-7.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "aaronidikko/laravel-git-sync",
+      "version": "v1.2.1",
+      "repository": "https://github.com/Aarondio/laravel-git-sync.git",
+      "source": "https://repo.packagist.org/p2/aaronidikko/laravel-git-sync.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-sync",
+      "version": "3.0.1",
+      "repository": "http://jdigger.github.com/git-process/",
+      "source": "https://rubygems.org/gems/git-sync-3.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-utils",
+      "version": "2.4.0",
+      "repository": "https://github.com/mhartl/git-utils",
+      "source": "https://rubygems.org/gems/git-utils-2.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git_sync_fork",
+      "version": "0.1.1",
+      "repository": "https://github.com/iamdionysus/git_sync_fork",
+      "source": "https://rubygems.org/gems/git_sync_fork-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "git-extras",
       "version": null,
@@ -39,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

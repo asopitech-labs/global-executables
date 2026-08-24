@@ -2,9 +2,45 @@
   "command": "hive",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "apiari-hive",
+      "version": "0.5.3",
+      "repository": "https://github.com/ApiariTools/hive",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hive-agent",
+      "version": "0.2.0",
+      "repository": "https://github.com/xn0tdev/hive",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wasps-with-bazookas",
+      "version": "2.0.4",
+      "repository": "https://github.com/Phara0h/WaspsWithBazookas",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hive",
-      "version": "4.2.0",
+      "version": "4.2.1",
       "repository": "https://hive.apache.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,80 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agent-hive/cli",
+      "version": "0.4.11",
+      "repository": "git+https://github.com/your-org/hive.git",
+      "source": "https://registry.npmjs.org/@agent-hive%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.11"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexbjr369/hive-cli",
+      "version": "1.0.0-alpha.2",
+      "repository": "git+https://github.com/alexbjr369/hive.git",
+      "source": "https://registry.npmjs.org/@alexbjr369%2Fhive-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0-alpha.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arieltoledo/codehive",
+      "version": "0.1.3",
+      "repository": "git+https://github.com/anomalyco/codehive.git",
+      "source": "https://registry.npmjs.org/@arieltoledo%2Fcodehive/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "DeHive.Cli",
+      "version": "2.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dehive.cli/2.2.0/dehive.cli.2.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hive-toolbelt",
+      "version": "2.0.4",
+      "repository": "https://github.com/hivewallet/toolbelt",
+      "source": "https://rubygems.org/gems/hive-toolbelt-2.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hive_ruby",
+      "version": "0.1.1",
+      "repository": "",
+      "source": "https://rubygems.org/gems/hive_ruby-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

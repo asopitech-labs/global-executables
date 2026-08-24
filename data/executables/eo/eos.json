@@ -2,6 +2,30 @@
   "command": "eos",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "explore-os",
+      "version": "0.2.0",
+      "repository": "https://github.com/explore-os/eos",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "elk-lapw",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "elk-lapw",
       "version": null,
@@ -12,6 +36,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amor-eos",
+      "version": "3.3.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0c/7c/ee2aa394ad19d8c0e880527cb328bfe1ea1812dbf187d1798279e678db1f/amor_eos-3.3.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

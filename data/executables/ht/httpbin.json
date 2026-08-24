@@ -2,6 +2,30 @@
   "command": "httpbin",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "haskell-wreq-0.5.4.4-71",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "httpbin",
+      "version": "0.3.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.3"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/jmcvetta/napping",
       "version": "v3.2.0+incompatible",
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

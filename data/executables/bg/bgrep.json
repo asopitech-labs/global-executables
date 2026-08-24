@@ -2,6 +2,18 @@
   "command": "bgrep",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bgrep",
+      "version": "1.0.0",
+      "repository": "https://github.com/gahag/bgrep",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bgrep",
       "version": "0.3",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "emonti-rbkb",
+      "version": "0.6.9.1",
+      "repository": "http://www.matasano.com",
+      "source": "https://rubygems.org/gems/emonti-rbkb-0.6.9.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.9.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

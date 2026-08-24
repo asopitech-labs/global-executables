@@ -2,9 +2,21 @@
   "command": "fastbase64.coreutils",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "simdutf-9.0.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "simdutf",
-      "version": "9.0.0",
+      "version": "9.1.0",
       "repository": "https://simdutf.github.io/simdutf/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

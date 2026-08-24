@@ -18,6 +18,18 @@
       "package": "ncurses-bin",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ncurses-bin",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -38,6 +50,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "ncurses-6.6-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "fishpig/magento2-dev-toolbox",
+      "version": "1.0.18",
+      "repository": "https://github.com/bentideswell/magento2-dev-toolbox.git",
+      "source": "https://repo.packagist.org/p2/fishpig/magento2-dev-toolbox.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.18"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amtFMC",
+      "version": "0.0.3",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/9c/ab/c31b2e48c87d23bbf8138d4cdab530f6e79686031605e3c219813e9027f1/amtFMC-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amtFMC5030",
+      "version": "1.0.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/19/3a/ca07b4e3efbb24987b323fdcca69a2aee6f976e3e8ef3271ce3ca936f2f8/amtFMC5030-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ncurses-bin",
       "version": null,
@@ -48,8 +120,32 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2022-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2025-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

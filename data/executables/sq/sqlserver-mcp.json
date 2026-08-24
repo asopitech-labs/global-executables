@@ -1,0 +1,31 @@
+{
+  "command": "sqlserver-mcp",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "sqlserver-mcp",
+      "version": "0.6.8",
+      "repository": "https://github.com/guercheLE/sqlserver-mcp-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.8"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SqlServer.Mcp.Server",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/sqlserver.mcp.server/1.0.3/sqlserver.mcp.server.1.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

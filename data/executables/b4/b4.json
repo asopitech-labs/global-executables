@@ -2,6 +2,18 @@
   "command": "b4",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "b4-0.15.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "b4",
       "version": "0.16.0",
@@ -12,6 +24,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "ByteAid.b4",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/byteaid.b4/0.1.0/byteaid.b4.0.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "b4",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/b4/0.1.0/b4.0.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

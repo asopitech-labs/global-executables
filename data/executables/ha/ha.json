@@ -2,6 +2,18 @@
   "command": "ha",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "homeassistant-cli",
+      "version": "0.2.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/wandoulabs/codis",
       "version": "v0.0.0-20181104082235-de1ad026e329",
@@ -12,8 +24,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181104082235-de1ad026e329"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "Ha",
+      "version": "0.3.1",
+      "repository": "http://www.salas.com",
+      "source": "https://rubygems.org/gems/Ha-0.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.1"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

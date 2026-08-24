@@ -2,6 +2,66 @@
   "command": "pp",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "perl-par-packer-1.064-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kli",
+      "version": "0.2.0",
+      "repository": "https://github.com/andunieee/kli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pipeprogress",
+      "version": "2023.3.0",
+      "repository": "https://github.com/salt-labs/pipeprogress",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2023.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ppgit",
+      "version": "0.22.1",
+      "repository": "https://github.com/Szizoid/ppgit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.22.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libpar-packer-perl",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libpar-packer-perl",
       "version": null,
@@ -12,6 +72,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v0.0.0-20160720141634-ad661195ed0e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v0.0.0-20160720141634-ad661195ed0e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160720141634-ad661195ed0e"
     },
     {
       "ecosystem": "go",
@@ -40,6 +112,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/maruel/panicparse",
+      "version": "v0.0.0-20180806203336-f20d4c4d746f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v0.0.0-20180806203336-f20d4c4d746f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180806203336-f20d4c4d746f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v1.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v1.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
       "version": "v1.1.1",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v1.1.1.zip",
@@ -50,9 +146,57 @@
       "latest_version": "v1.1.1"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v1.1.2-0.20180806203336-f20d4c4d746f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v1.1.2-0.20180806203336-f20d4c4d746f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2-0.20180806203336-f20d4c4d746f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v1.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v1.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maruel/panicparse",
+      "version": "v1.6.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maruel/panicparse/@v/v1.6.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "nss",
-      "version": "3.126.1",
+      "version": "3.127",
       "repository": "https://firefox-source-docs.mozilla.org/security/nss/index.html",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -74,6 +218,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "dalee/pp-core",
+      "version": "v3.1.11",
+      "repository": "https://github.com/Dalee/pp-core.git",
+      "source": "https://repo.packagist.org/p2/dalee/pp-core.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.1.11"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ach-diffraction-suite",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/24/71/23395f9ce1855c14c2be1f9357bd2bfa9cef20c484268f7abb917f844749/ach_diffraction_suite-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ansible-powerplay",
+      "version": "1.4.7",
+      "repository": "http://github.com/flajann2/ansible-powerplay",
+      "source": "https://rubygems.org/gems/ansible-powerplay-1.4.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.4.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdma",
+      "version": "0.1.1",
+      "repository": "https://www.github.com/claudiob/mdma",
+      "source": "https://rubygems.org/gems/mdma-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libpar-packer-perl",
       "version": null,
@@ -87,5 +291,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

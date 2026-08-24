@@ -2,6 +2,30 @@
   "command": "afew",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "afew-4.0.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "afew",
+      "version": "4.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b6/f1/39f31f2924d0089c34c0d9adbd8c6ba395f1647198b7a76175ac0d20673c/afew-4.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "afew",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

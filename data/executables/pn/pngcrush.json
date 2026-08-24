@@ -2,6 +2,30 @@
   "command": "pngcrush",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pngcrush-1.8.13-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pngcrush",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "pngcrush",
       "version": null,
@@ -26,6 +50,31 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "ipa-parser",
+      "version": "0.0.4",
+      "repository": "https://github.com/astro2linus/ipa-parser",
+      "source": "https://rubygems.org/gems/ipa-parser-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pngcrush",
+      "version": "1.8.11",
+      "repository": "https://pmt.sourceforge.io/pngcrush/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.8.11"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "pngcrush",
       "version": null,
@@ -39,5 +88,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

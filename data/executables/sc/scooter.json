@@ -2,6 +2,18 @@
   "command": "scooter",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "scooter",
+      "version": "0.9.1",
+      "repository": "https://github.com/thomasschafer/scooter",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "scooter",
       "version": "0.9.1",
@@ -12,8 +24,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "marathon-scooter",
+      "version": "0.1.3",
+      "repository": "https://github.com/yieldbot/scooter",
+      "source": "https://rubygems.org/gems/marathon-scooter-0.1.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "scooter",
+      "version": "0.9.1",
+      "repository": "https://github.com/thomasschafer/scooter",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.9.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

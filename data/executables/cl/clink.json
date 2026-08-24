@@ -1,0 +1,44 @@
+{
+  "command": "clink",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "link-cli",
+      "version": "0.2.8",
+      "repository": "https://github.com/link-foundation/link-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.8"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "clink",
+      "version": "2.6.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/clink/2.6.0/clink.2.6.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.6.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "clink",
+      "version": "1.9.32",
+      "repository": "https://chrisant996.github.io/clink/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.9.32"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,18 @@
   "command": "fuzzer",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fuzzer",
+      "version": "0.0.2",
+      "repository": "https://github.com/Eveheeero/debugger",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/bkaradzic/go-lz4",
       "version": "v0.0.0-20160924222819-7224d8d8f27e",
@@ -24,8 +36,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fuzzer",
+      "version": "0.5.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/fuzzer-0.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

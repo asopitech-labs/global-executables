@@ -2,6 +2,66 @@
   "command": "rimraf",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@aaa-backend-stack/build-tools",
+      "version": "2.4.4",
+      "repository": "git+ssh://git@github.com/allaboutapps/aaa-backend-stack.git",
+      "source": "https://registry.npmjs.org/@aaa-backend-stack%2Fbuild-tools/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.4.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alloc/fast-rimraf",
+      "version": "1.0.8",
+      "repository": "git+https://github.com/aleclarson/fast-rimraf.git",
+      "source": "https://registry.npmjs.org/@alloc%2Ffast-rimraf/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.8"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anyit/be-dev",
+      "version": "1.0.65",
+      "repository": "https://github.com/anton-nagornyi/anyit-be-dev",
+      "source": "https://registry.npmjs.org/@anyit%2Fbe-dev/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.65"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-rimraf",
+      "version": "1.2.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-rimraf/1.2.4/dotnet-rimraf.1.2.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.2.4"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "rimraf",
+      "version": "0.3.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/rimraf/0.3.1/rimraf.0.3.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "node-rimraf",
       "version": null,
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

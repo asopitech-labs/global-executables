@@ -2,6 +2,70 @@
   "command": "calibre",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "calibre-9.13.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "calibre",
+      "version": "9.13.0",
+      "repository": "https://calibre-ebook.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.13.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "calibre-normal",
+      "version": "9.13.0",
+      "repository": "https://calibre-ebook.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.13.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "calibre-normal5",
+      "version": "5.44.0",
+      "repository": "https://calibre-ebook.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.44.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "calibre-np",
+      "version": "9.13.0",
+      "repository": "https://calibre-ebook.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Nonportable/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "9.13.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "calibre",
       "version": null,
@@ -15,5 +79,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

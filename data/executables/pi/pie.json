@@ -2,9 +2,57 @@
   "command": "pie",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "p1e",
+      "version": "0.3.0",
+      "repository": "https://github.com/dineshdb/pie",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pielang-cli",
+      "version": "0.3.0",
+      "repository": "https://github.com/chirsz-ever/pielang-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elliotchance/pie",
+      "version": "v1.31.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elliotchance/pie/@v/v1.31.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.31.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elliotchance/pie",
+      "version": "v1.32.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elliotchance/pie/@v/v1.32.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.32.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pie",
-      "version": "1.4.9",
+      "version": "1.4.10",
       "repository": "https://github.com/php/pie",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +60,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Flatipie",
+      "version": "0.4.2",
+      "repository": "https://github.com/flatipie/Flatipie",
+      "source": "https://files.pythonhosted.org/packages/a3/95/76ce846265d919e1bb6d42764e179d95236704802464fad31fac29e9d7a3/Flatipie-0.4.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PIE",
+      "version": "1.0.1",
+      "repository": "https://github.com/Siegallab/PIE",
+      "source": "https://files.pythonhosted.org/packages/82/85/b747b6dead8520e5aa41987f4deef67012d64c75144e75d47bcdce11e2ee/PIE-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PaPie",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/43/b5/c94f229088e2418838b430bfdcee05ecd6c97af382397f367edb086b0f2a/papie-0.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

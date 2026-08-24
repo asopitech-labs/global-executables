@@ -2,6 +2,30 @@
   "command": "google-oauthlib-tool",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-google-auth-oauthlib-1.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PBFS",
+      "version": "2.0.0",
+      "repository": "https://github.com/hongzhu6129/HidenFeatures",
+      "source": "https://files.pythonhosted.org/packages/95/e4/8a4d764dbed4a8e31e929925c862b050c02f21af54042b6540f5bd7bec87/PBFS-2.0.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-google-auth-oauthlib",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

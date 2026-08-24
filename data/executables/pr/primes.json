@@ -2,6 +2,54 @@
   "command": "primes",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "arithmetician",
+      "version": "0.1.0",
+      "repository": "https://git.gay/monaco/arithmetician",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "codemonk-primes-cli",
+      "version": "1.0.4",
+      "repository": "https://github.com/sean9999/primes-cli/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rk-primes",
+      "version": "0.1.0",
+      "repository": "https://github.com/jeffs/rust-kart",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libmath-prime-util-perl",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libmath-prime-util-perl",
       "version": null,
@@ -12,6 +60,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jbarham/primegen.go",
+      "version": "v0.0.0-20120217115238-8c6d67b1f3fc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jbarham/primegen.go/@v/v0.0.0-20120217115238-8c6d67b1f3fc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20120217115238-8c6d67b1f3fc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/otiai10/primes",
+      "version": "v0.0.0-20180210170552-f6d2a1ba97c4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/otiai10/primes/@v/v0.0.0-20180210170552-f6d2a1ba97c4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180210170552-f6d2a1ba97c4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tildeleb/cuckoo",
+      "version": "v0.0.0-20190523055448-aec879e160f8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tildeleb/cuckoo/@v/v0.0.0-20190523055448-aec879e160f8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190523055448-aec879e160f8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "baze",
+      "version": "1.2.0",
+      "repository": "https://github.com/pcarrier/baze",
+      "source": "https://rubygems.org/gems/baze-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

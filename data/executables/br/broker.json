@@ -2,6 +2,18 @@
   "command": "broker",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "broker",
+      "version": "15.1.0",
+      "repository": "https://github.com/apibillme/broker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "15.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/micro/examples",
       "version": "v0.0.0-20190130075939-4c88706279b7",
@@ -24,8 +36,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/examples",
+      "version": "v0.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/examples/@v/v0.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "broker",
+      "version": "0.1.2",
+      "repository": "https://github.com/luckysailor/broker",
+      "source": "https://rubygems.org/gems/broker-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

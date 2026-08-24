@@ -2,6 +2,30 @@
   "command": "sem",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "parallel-20260722-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sem-cli",
+      "version": "0.23.1",
+      "repository": "https://github.com/Ataraxy-Labs/sem",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.23.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "parallel",
       "version": "20260722",
@@ -16,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "sem-cli",
-      "version": "0.22.1",
+      "version": "0.23.1",
       "repository": "https://ataraxy-labs.github.io/sem/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,6 +48,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "parallel-20260422-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ataraxy-labs/sem",
+      "version": "0.22.1",
+      "repository": "git+https://github.com/Ataraxy-Labs/sem.git",
+      "source": "https://registry.npmjs.org/@ataraxy-labs%2Fsem/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.22.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SecretsExpirationMonitor",
+      "version": "3.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/secretsexpirationmonitor/3.0.3/secretsexpirationmonitor.3.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.0.3"
     },
     {
       "ecosystem": "pypi",
@@ -36,6 +96,19 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.2.9"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "sem",
+      "version": "0.23.1",
+      "repository": "https://ataraxy-labs.github.io/sem/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.23.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -51,5 +124,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,102 @@
   "command": "pf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "passionfruitdev",
+      "version": "0.1.0",
+      "repository": "https://github.com/rust-lang/cargo/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "passionfruitdev-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/rust-lang/cargo/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "port-finder",
+      "version": "0.1.0",
+      "repository": "https://github.com/ItamiForge/port-finder",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "portforwarder-rs",
+      "version": "0.1.1",
+      "repository": "https://github.com/pzmarzly/portforwarder-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pretty_files",
+      "version": "3.0.6",
+      "repository": "https://github.com/yok1rai/pretty_files",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.6"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "processfork",
+      "version": "1.0.15",
+      "repository": "https://github.com/manav8498/processfork",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.15"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "proof-forge-pf",
+      "version": "0.1.2",
+      "repository": "https://github.com/DaviRain-Su/proof_forge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/datawire/pf",
+      "version": "v0.0.0-20180510150411-31a823f9495a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/datawire/pf/@v/v0.0.0-20180510150411-31a823f9495a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180510150411-31a823f9495a"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "promptfoo",
       "version": "0.122.0",
@@ -12,8 +108,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PYPOWER",
+      "version": "5.1.21",
+      "repository": "https://github.com/rwl/PYPOWER",
+      "source": "https://files.pythonhosted.org/packages/64/d4/b30e11b01b20f89b9974b879d0ecfc4f0d68b66d0ebb21f5365239915053/pypower-5.1.21-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.1.21"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PolarFlow",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f9/a4/e478c0fd97045aea43273016323262eba641d1003246bddc293a83d8e135/polarflow-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ach-diffraction-suite",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/24/71/23395f9ce1855c14c2be1f9357bd2bfa9cef20c484268f7abb917f844749/ach_diffraction_suite-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Microsoft.Promptflow",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "httpclient",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-httpclient-2.8.3-13",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobs/httpclient",
+      "version": "v0.0.0-20190402033034-a93d469d8657",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobs/httpclient/@v/v0.0.0-20190402033034-a93d469d8657.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190402033034-a93d469d8657"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/instana/go-sensor",
       "version": "v0.0.0-20180725091122-493edb422283",
@@ -12,6 +36,102 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180725091122-493edb422283"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/instana/go-sensor",
+      "version": "v1.4.16",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/instana/go-sensor/@v/v1.4.16.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.16"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/instana/golang-sensor",
+      "version": "v0.0.0-20180725091122-493edb422283",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/instana/golang-sensor/@v/v0.0.0-20180725091122-493edb422283.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180725091122-493edb422283"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/instana/golang-sensor",
+      "version": "v1.4.15",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/instana/golang-sensor/@v/v1.4.15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/instana/golang-sensor",
+      "version": "v1.4.16",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/instana/golang-sensor/@v/v1.4.16.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.16"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "glebtv-httpclient",
+      "version": "3.3.0",
+      "repository": "http://github.com/glebtv/httpclient",
+      "source": "https://rubygems.org/gems/glebtv-httpclient-3.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "httpclient",
+      "version": "2.9.0",
+      "repository": "https://github.com/nahi/httpclient",
+      "source": "https://rubygems.org/gems/httpclient-2.9.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.9.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "httpclient-fixcerts",
+      "version": "2.8.5",
+      "repository": "https://github.com/nahi/httpclient",
+      "source": "https://rubygems.org/gems/httpclient-fixcerts-2.8.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.8.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "httpclient-jgraichen",
+      "version": "2.3.4.2",
+      "repository": "http://github.com/nahi/httpclient",
+      "source": "https://rubygems.org/gems/httpclient-jgraichen-2.3.4.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.3.4.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

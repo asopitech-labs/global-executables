@@ -2,6 +2,54 @@
   "command": "nls",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "nickel-language-server-1.17.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nickel-lang-lsp",
+      "version": "1.17.0",
+      "repository": "https://github.com/tweag/nickel",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nil-lua-cli",
+      "version": "0.4.23",
+      "repository": "https://github.com/tsukilabs/nil",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.23"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nls-ls",
+      "version": "0.6.0",
+      "repository": "https://github.com/bydlw98/nls-ls",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mattn/go-oci8",
       "version": "v0.0.0-20181017025833-e3e58f4cc797",
@@ -48,8 +96,68 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190410054007-e00f23025626"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-oci8",
+      "version": "v0.0.0-20190517005234-99a826511cf1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-oci8/@v/v0.0.0-20190517005234-99a826511cf1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190517005234-99a826511cf1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-oci8",
+      "version": "v0.0.0-20190524004114-abcafa411cc8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-oci8/@v/v0.0.0-20190524004114-abcafa411cc8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524004114-abcafa411cc8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-oci8",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-oci8/@v/v0.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tapester/go-oci8",
+      "version": "v0.0.0-20161216132042-61acf6a2bf44",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tapester/go-oci8/@v/v0.0.0-20161216132042-61acf6a2bf44.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161216132042-61acf6a2bf44"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zkfy/go-oci8",
+      "version": "v0.0.0-20180327092318-ad9f59dedff0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zkfy/go-oci8/@v/v0.0.0-20180327092318-ad9f59dedff0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180327092318-ad9f59dedff0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

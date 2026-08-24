@@ -2,6 +2,66 @@
   "command": "frm",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mailutils-3.21-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fast_delete",
+      "version": "0.0.1",
+      "repository": "https://github.com/Himasnhu-AT/frm.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fcoreutils",
+      "version": "0.22.0",
+      "repository": "https://github.com/AiBrush/coreutils-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.22.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "frm",
+      "version": "0.0.2",
+      "repository": "https://github.com/MaxVanDijck/frame",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "frm-bin",
+      "version": "0.20.0",
+      "repository": "https://github.com/michaelklishin/frm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mailutils",
       "version": "3.21",
@@ -12,8 +72,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "frm",
+      "version": "0.0.11",
+      "repository": "https://github.com/ermal14/frm",
+      "source": "https://rubygems.org/gems/frm-0.0.11.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.11"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

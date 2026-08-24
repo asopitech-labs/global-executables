@@ -2,6 +2,30 @@
   "command": "ec",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "editorconfig-checker-3.11.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "eclectica",
+      "version": "0.9.2",
+      "repository": "https://github.com/markelog/eclectica",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ec",
       "version": "0.3.3",
@@ -24,8 +48,92 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "armin/editorconfig-cli",
+      "version": "2.2.1",
+      "repository": "https://github.com/a-r-m-i-n/editorconfig-cli.git",
+      "source": "https://repo.packagist.org/p2/armin/editorconfig-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.2.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "editorconfig-checker/editorconfig-checker",
+      "version": "10.7.0",
+      "repository": "https://github.com/editorconfig-checker/editorconfig-checker.php.git",
+      "source": "https://repo.packagist.org/p2/editorconfig-checker/editorconfig-checker.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "10.7.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jelle-s/everybody-codes",
+      "version": "1.0.3",
+      "repository": "https://github.com/Jelle-S/everybody-codes.git",
+      "source": "https://repo.packagist.org/p2/jelle-s/everybody-codes.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "easy_cols",
+      "version": "0.1.1",
+      "repository": "https://github.com/aks/easy_cols",
+      "source": "https://rubygems.org/gems/easy_cols-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "easycomments",
+      "version": "1.0.5",
+      "repository": "https://github.com/zisismaras/easycomments",
+      "source": "https://rubygems.org/gems/easycomments-1.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "eclectica",
+      "version": "0.9.2",
+      "repository": "https://github.com/markelog/eclectica#readme",
+      "source": "https://rubygems.org/gems/eclectica-0.9.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "env_compare",
+      "version": "0.1.4",
+      "repository": "https://github.com/jaydorsey/env_compare",
+      "source": "https://rubygems.org/gems/env_compare-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

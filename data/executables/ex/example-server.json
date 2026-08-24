@@ -2,6 +2,42 @@
   "command": "example-server",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "capnweb-server",
+      "version": "0.1.0",
+      "repository": "https://github.com/currentspace/capn-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/appscode/grpc-gateway",
+      "version": "v1.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/appscode/grpc-gateway/@v/v1.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/appscode/grpc-gateway",
+      "version": "v1.3.1-ac",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/appscode/grpc-gateway/@v/v1.3.1-ac.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.1-ac"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/grpc-ecosystem/grpc-gateway",
       "version": "v0.0.0-20161105223513-84398b94e188",
@@ -28,6 +64,42 @@
     {
       "ecosystem": "go",
       "package": "github.com/grpc-ecosystem/grpc-gateway",
+      "version": "v0.0.0-20170111152048-a51e1d5b0d79",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v0.0.0-20170111152048-a51e1d5b0d79.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170111152048-a51e1d5b0d79"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grpc-ecosystem/grpc-gateway",
+      "version": "v0.0.0-20170513180508-f6f92fcd9cdd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v0.0.0-20170513180508-f6f92fcd9cdd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170513180508-f6f92fcd9cdd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grpc-ecosystem/grpc-gateway",
+      "version": "v0.0.0-20170714172803-1a03ca3bad1e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v0.0.0-20170714172803-1a03ca3bad1e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170714172803-1a03ca3bad1e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grpc-ecosystem/grpc-gateway",
       "version": "v0.0.0-20170724004829-f2862b476edc",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v0.0.0-20170724004829-f2862b476edc.zip",
@@ -40,6 +112,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/grpc-ecosystem/grpc-gateway",
+      "version": "v0.0.0-20171103165559-8cc3a55af3bc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v0.0.0-20171103165559-8cc3a55af3bc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171103165559-8cc3a55af3bc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grpc-ecosystem/grpc-gateway",
+      "version": "v0.0.0-20171126203511-e4b8a938efae",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v0.0.0-20171126203511-e4b8a938efae.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171126203511-e4b8a938efae"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grpc-ecosystem/grpc-gateway",
       "version": "v0.0.0-20180312001938-58f78b988bc3",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v0.0.0-20180312001938-58f78b988bc3.zip",
@@ -48,6 +144,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180312001938-58f78b988bc3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grpc-ecosystem/grpc-gateway",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grpc-ecosystem/grpc-gateway",
+      "version": "v1.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grpc-ecosystem/grpc-gateway/@v/v1.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1"
     },
     {
       "ecosystem": "go",
@@ -87,5 +207,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

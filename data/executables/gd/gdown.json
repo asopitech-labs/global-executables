@@ -2,6 +2,18 @@
   "command": "gdown",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gdown-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/yourusername/gdown-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gdown",
       "version": "6.1.0",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

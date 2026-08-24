@@ -2,6 +2,18 @@
   "command": "starter",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "starter",
+      "version": "0.1.1",
+      "repository": "https://github.com/jailop/starter",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/kless/goutil",
       "version": "v0.0.0-20161130132832-0a73aea41b0b",
@@ -24,8 +36,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20161130132832-0a73aea41b0b"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abhishekbalija/starter",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/AbhishekBalija/starter.git",
+      "source": "https://registry.npmjs.org/@abhishekbalija%2Fstarter/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alt-digital/starter",
+      "version": "3.0.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alt-digital%2Fstarter/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ankhzet/starter",
+      "version": "1.4.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ankhzet%2Fstarter/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.4.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Starter",
+      "version": "0.4.2",
+      "repository": "http://github.com/klen/starter",
+      "source": "https://files.pythonhosted.org/packages/db/d2/74818bd3beb0436bf06542cca0122920a8395e5100bb99124b583948a811/Starter-0.4.2-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "models",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "models-cli",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "modelsdev",
+      "version": "0.14.0",
+      "repository": "https://github.com/reyamira/models",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aclements/go-misc",
+      "version": "v0.0.0-20190418165444-398a7449d616",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aclements/go-misc/@v/v0.0.0-20190418165444-398a7449d616.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190418165444-398a7449d616"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "models",
       "version": "0.14.0",
@@ -12,8 +48,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "models",
+      "version": "0.14.0",
+      "repository": "https://github.com/arimxyer/models",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.14.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

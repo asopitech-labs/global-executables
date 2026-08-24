@@ -2,6 +2,42 @@
   "command": "jgrep",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jgrep",
+      "version": "0.1.1",
+      "repository": "https://github.com/ficolas2/jgrep",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antti5/jgrep",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/antti5/jgrep.git",
+      "source": "https://registry.npmjs.org/@antti5%2Fjgrep/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jgrep",
+      "version": "1.5.4",
+      "repository": "https://github.com/ploubser/JSON-Grep",
+      "source": "https://rubygems.org/gems/jgrep-1.5.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.5.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "jgrep",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

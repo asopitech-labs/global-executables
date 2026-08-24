@@ -2,6 +2,30 @@
   "command": "mprocs",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "monade-mprocs",
+      "version": "0.4.1",
+      "repository": "https://github.com/monade/mprocs.lib",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mprocs",
+      "version": "0.9.6",
+      "repository": "https://github.com/pvolok/mprocs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mprocs",
       "version": "0.9.6",
@@ -12,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MProcs",
+      "version": "8.8.4.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/16/46/1dde48492c5cc450ca5e230ddf230da90079c9d3559ac7e6ad5e55a4442e/mprocs-8.8.4.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.8.4.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "mprocs",
+      "version": "0.9.6",
+      "repository": "https://github.com/pvolok/dekit",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.9.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

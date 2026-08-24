@@ -2,6 +2,30 @@
   "command": "gandalf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gandalf-consensus",
+      "version": "1.0.0",
+      "repository": "https://github.com/NothingRealm/gandalf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/vic",
+      "version": "v1.3.0-rc1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/vic/@v/v1.3.0-rc1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0-rc1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/hashicorp/vic",
       "version": "v1.5.0",
@@ -40,6 +64,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/vmware/vic",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vmware/vic",
       "version": "v1.5.2",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.2.zip",
@@ -48,8 +84,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.5.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vmware/vic",
+      "version": "v1.5.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.8"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

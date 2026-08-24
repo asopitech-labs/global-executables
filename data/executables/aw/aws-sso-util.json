@@ -2,6 +2,18 @@
   "command": "aws-sso-util",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "aws-sso-util",
+      "version": "0.1.1",
+      "repository": "https://github.com/alxolr/aws-sso-util",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "aws-sso-util",
       "version": "4.33.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-sso-util",
+      "version": "4.33.0",
+      "repository": "https://github.com/benkehoe/aws-sso-util",
+      "source": "https://files.pythonhosted.org/packages/0e/2c/b01133ab738a7e6fa5b83758ce49aaf4887c6bcefe76c0586e5518d5d9e1/aws_sso_util-4.33.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.33.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

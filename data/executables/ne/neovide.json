@@ -2,6 +2,30 @@
   "command": "neovide",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "neovide-0.16.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "neovide",
+      "version": "0.16.2",
+      "repository": "https://github.com/neovide/neovide",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "neovide",
       "version": "0.16.2",
@@ -12,8 +36,34 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "neovide",
+      "version": "0.16.2",
+      "repository": "https://neovide.dev",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.16.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "neovide-dev",
+      "version": "0.16.2",
+      "repository": "https://github.com/Kethku/neovide",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.16.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "exit",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tokio-process",
+      "version": "0.2.5",
+      "repository": "https://github.com/tokio-rs/tokio",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wait-timeout",
+      "version": "0.2.1",
+      "repository": "https://github.com/alexcrichton/wait-timeout",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "execline",
       "version": "2.9.9.2",
@@ -12,8 +36,58 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "bash",
+      "version": "3.2.57(1)-release",
+      "repository": null,
+      "source": "bash@3.2.57(1)-release",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "cmd",
+      "version": "Windows",
+      "repository": null,
+      "source": "https://learn.microsoft.com/windows-server/administration/windows-commands/cmd",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "ksh",
+      "version": "Version AJM 93u+ 2012-08-01",
+      "repository": null,
+      "source": "ksh@Version AJM 93u+ 2012-08-01",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "sh",
+      "version": "POSIX.1-2017",
+      "repository": null,
+      "source": "https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "zsh",
+      "version": "5.9",
+      "repository": null,
+      "source": "zsh@5.9",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

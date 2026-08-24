@@ -2,6 +2,42 @@
   "command": "rl",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rl-cli",
+      "version": "1.2.1",
+      "repository": "https://github.com/rl-lang/rl-lang",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rl-lang",
+      "version": "0.1.4",
+      "repository": "https://github.com/rl-lang/rl-lang",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/svgo",
+      "version": "v0.0.0-20141004211159-89e3ac64b5b3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/svgo/@v/v0.0.0-20141004211159-89e3ac64b5b3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20141004211159-89e3ac64b5b3"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/ajstarks/svgo",
       "version": "v0.0.0-20151117013546-fd2151ebabde",
@@ -26,6 +62,30 @@
       "latest_version": "v0.0.0-20180226025133-644b8db467af"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/svgo",
+      "version": "v0.0.0-20211024235047-1546f124cd8b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/svgo/@v/v0.0.0-20211024235047-1546f124cd8b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211024235047-1546f124cd8b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dchapes/svgo",
+      "version": "v0.0.0-20160911180557-1e7d8e7455e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dchapes/svgo/@v/v0.0.0-20160911180557-1e7d8e7455e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160911180557-1e7d8e7455e0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "randomize-lines",
       "version": "0.2.7",
@@ -36,8 +96,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amit-t/stet",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/amit-t/stet.git",
+      "source": "https://registry.npmjs.org/@amit-t%2Fstet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amit-t/stet.md",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/amit-t/stet.md.git",
+      "source": "https://registry.npmjs.org/@amit-t%2Fstet.md/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "RepoLauncher",
+      "version": "1.0.10",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/repolauncher/1.0.10/repolauncher.1.0.10.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.10"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

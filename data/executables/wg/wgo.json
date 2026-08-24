@@ -2,9 +2,21 @@
   "command": "wgo",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/wxnacy/wgo",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wxnacy/wgo/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "wgo",
-      "version": "0.6.4",
+      "version": "0.7.1",
       "repository": "https://github.com/bokwoon95/wgo",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

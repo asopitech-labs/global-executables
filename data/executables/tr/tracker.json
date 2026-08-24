@@ -2,6 +2,42 @@
   "command": "tracker",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "time-tracker-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/HBDE-work/time_tracker/tree/master",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cortexfoundation/torrentfs",
+      "version": "v1.0.72",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cortexfoundation/torrentfs/@v/v1.0.72.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.72"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/uber/kraken",
+      "version": "v0.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/uber/kraken/@v/v0.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "satellite-tracker",
       "version": "0.1.20",
@@ -12,8 +48,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adithya-naik/cmd-tracker",
+      "version": "1.0.5",
+      "repository": "git+https://github.com/adithya-naik/cmd-tracker.git",
+      "source": "https://registry.npmjs.org/@adithya-naik%2Fcmd-tracker/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apptrackr",
+      "version": "0.2.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/af/d6/24dd3f469e5dcfa56980ba1d0f1ba462d8051acc7e77fa752ec7548af32d/apptrackr-0.2.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "aws_tracker",
+      "version": "0.0.4",
+      "repository": "http://github.com/benton/aws_tracker",
+      "source": "https://rubygems.org/gems/aws_tracker-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tracker",
+      "version": "0.1.20",
+      "repository": "https://github.com/ShenMian/tracker",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.1.20"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

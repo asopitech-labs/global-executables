@@ -2,6 +2,30 @@
   "command": "gitwatch",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gitwatch-rs",
+      "version": "0.1.1",
+      "repository": "https://github.com/croissong/gitwatch-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gitwatch-tui",
+      "version": "0.1.0",
+      "repository": "https://github.com/AbuZhuma/gitwatch-tui",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gitwatch",
       "version": "0.6",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

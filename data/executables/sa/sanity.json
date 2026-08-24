@@ -2,9 +2,21 @@
   "command": "sanity",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sanity-cli",
+      "version": "0.1.10",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sanity",
-      "version": "8.0.0",
+      "version": "8.2.1",
       "repository": "https://www.sanity.io/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

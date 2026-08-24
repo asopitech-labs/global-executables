@@ -2,9 +2,21 @@
   "command": "uc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "unix-chat",
+      "version": "0.12.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "unitycatalog",
-      "version": "0.5.1",
+      "version": "0.6.0",
       "repository": "https://unitycatalog.io/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adammcarter/use-cases",
+      "version": "0.6.0",
+      "repository": "git+https://github.com/adammcarter/use-cases.git",
+      "source": "https://registry.npmjs.org/@adammcarter%2Fuse-cases/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atelierfabien/uploadcare",
+      "version": "0.4.2",
+      "repository": "git+https://github.com/fabien/uploadcare-node.git",
+      "source": "https://registry.npmjs.org/@atelierfabien%2Fuploadcare/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "UndetectedChrome",
+      "version": "0.4.1",
+      "repository": "https://github.com/guocity/UndetectedChrome",
+      "source": "https://files.pythonhosted.org/packages/7d/2c/9cd4d9cb329f6203568c8cafe03c7082767aa02fc44585c7de68e055bdfb/undetectedchrome-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

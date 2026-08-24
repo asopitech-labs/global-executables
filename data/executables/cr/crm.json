@@ -2,6 +2,18 @@
   "command": "crm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "crm",
+      "version": "0.2.3",
+      "repository": "https://github.com/wtklbm/crm.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
       "ecosystem": "debian",
       "package": "crm114",
       "version": null,
@@ -12,6 +24,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anosf/crm",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/anosf/crm.git",
+      "source": "https://registry.npmjs.org/@anosf%2Fcrm/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "commsworld-crm-cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://rubygems.org/gems/commsworld-crm-cli-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

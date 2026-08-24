@@ -1,0 +1,43 @@
+{
+  "command": "generate-idl",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "fogo-stake-pool-interface",
+      "version": "0.1.0",
+      "repository": "https://github.com/Tempest-Finance/fogo-stake-pool",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "solana-stake-interface",
+      "version": "4.4.0",
+      "repository": "https://github.com/solana-program/stake",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "4.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "spherenet-stake-interface",
+      "version": "0.5.2",
+      "repository": "https://github.com/Sphere-Foundation/stake",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

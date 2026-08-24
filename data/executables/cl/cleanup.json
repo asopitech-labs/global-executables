@@ -2,6 +2,18 @@
   "command": "cleanup",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cleanup-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/landaire/cleanup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/hashicorp/vault-plugin-secrets-gcpkms",
       "version": "v0.0.0-20181212182553-6cd991800a6d",
@@ -28,6 +40,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/vault-plugin-secrets-gcpkms",
+      "version": "v0.24.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/vault-plugin-secrets-gcpkms/@v/v0.24.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/vault-plugin-secrets-gcpkms",
       "version": "v0.5.1",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/vault-plugin-secrets-gcpkms/@v/v0.5.1.zip",
@@ -36,6 +60,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.5.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/keybase/client/go",
+      "version": "v0.0.0-20260820203613-463c4ce32852",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/keybase/client/go/@v/v0.0.0-20260820203613-463c4ce32852.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820203613-463c4ce32852"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kurin/blazer",
+      "version": "v0.5.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kurin/blazer/@v/v0.5.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.3"
     },
     {
       "ecosystem": "go",
@@ -48,6 +96,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171126203752-2081f5bf0465"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mjura/gke-operator",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mjura/gke-operator/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/origin",
+      "version": "v0.0.0-20160503220234-8f127d736703",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/origin/@v/v0.0.0-20160503220234-8f127d736703.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160503220234-8f127d736703"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rancher/axe",
+      "version": "v0.0.0-20190531011056-59fcf8b44147",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rancher/axe/@v/v0.0.0-20190531011056-59fcf8b44147.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190531011056-59fcf8b44147"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rancher/gitwatcher",
+      "version": "v0.0.0-20190612060519-6eee8fc7a202",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rancher/gitwatcher/@v/v0.0.0-20190612060519-6eee8fc7a202.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190612060519-6eee8fc7a202"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rancher/gke-operator",
+      "version": "v1.15.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rancher/gke-operator/@v/v1.15.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.15.1"
     },
     {
       "ecosystem": "go",
@@ -75,6 +183,54 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/rancher/types",
+      "version": "v0.0.0-20190620214030-190cd39189d9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rancher/types/@v/v0.0.0-20190620214030-190cd39189d9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190620214030-190cd39189d9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rancher/wrangler-api",
+      "version": "v0.0.0-20190619170228-c3525df45215",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rancher/wrangler-api/@v/v0.0.0-20190619170228-c3525df45215.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190619170228-c3525df45215"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rancher/wrangler-api",
+      "version": "v0.1.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rancher/wrangler-api/@v/v0.1.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v0.0.0-20160219000711-644d651c6907",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v0.0.0-20160219000711-644d651c6907.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160219000711-644d651c6907"
+    },
+    {
+      "ecosystem": "go",
       "package": "k8s.io/kubernetes",
       "version": "v0.0.0-20160809133706-301be4eeb561",
       "repository": null,
@@ -84,8 +240,80 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160809133706-301be4eeb561"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.3.0-alpha.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.3.0-alpha.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0-alpha.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.4.1-beta.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.4.1-beta.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.1-beta.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "knative.dev/serving",
+      "version": "v0.50.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/knative.dev/serving/@v/v0.50.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.50.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "admin-scripts",
+      "version": "0.7.1",
+      "repository": "http://admin-scripts.hive.pt",
+      "source": "https://files.pythonhosted.org/packages/8c/1c/de759d4ef6509ec04f20ece1026a2c77a5858c2c68231dd5fb8177df3dbd/admin_scripts-0.7.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aicsfeature",
+      "version": "0.2.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/8b/9e/ca5da1cf84340ebdf5f1fb6811691c3f9db8459ce1b78ee766c44cfb2a50/aicsfeature-0.2.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cleanup",
+      "version": "0.1.2",
+      "repository": "https://github.com/nickolai-sm/clean_up",
+      "source": "https://rubygems.org/gems/cleanup-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "finger",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "finger",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "finger",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "finger",
       "version": null,
@@ -14,6 +38,30 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "finger",
+      "version": "0.0.2",
+      "repository": "http://github.com/papercavalier/finger",
+      "source": "https://rubygems.org/gems/finger-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "finger",
       "version": null,
@@ -24,8 +72,56 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "nanoserver",
+      "version": "ltsc2022-amd64",
+      "repository": null,
+      "source": "windows/nanoserver@sha256:41e29b2b14a45425c8e93b7cc87571f840c21d83f485df45e63b917e5a0366ab",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "nanoserver"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "nanoserver",
+      "version": "ltsc2025-amd64",
+      "repository": null,
+      "source": "windows/nanoserver@sha256:4249ba8974b8996812967d35c46c4e66afd771f929f96917ef6f7592a55edb12",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "nanoserver"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2022-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2025-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "micro",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "micro-2.0.15-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "micro",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "micro",
       "version": null,
@@ -12,6 +36,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/go-grpc",
+      "version": "v0.10.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/go-grpc/@v/v0.10.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/go-grpc",
+      "version": "v0.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/go-grpc/@v/v0.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/go-grpc",
+      "version": "v0.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/go-grpc/@v/v0.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/go-grpc",
+      "version": "v0.8.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/go-grpc/@v/v0.8.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.0"
     },
     {
       "ecosystem": "go",
@@ -48,6 +120,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/kubernetes",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/kubernetes/@v/v0.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v0.0.0-20170809120202-22d30960188f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v0.0.0-20170809120202-22d30960188f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170809120202-22d30960188f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
     },
     {
       "ecosystem": "go",
@@ -100,6 +208,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/micro/micro",
+      "version": "v0.23.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v0.23.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.23.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v0.23.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v0.23.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.23.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
       "version": "v0.23.2",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/micro/micro/@v/v0.23.2.zip",
@@ -108,6 +240,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.23.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v0.24.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v0.24.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v0.24.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v0.24.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.0.1-0.20190319161240-59722c266c09",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.0.1-0.20190319161240-59722c266c09.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1-0.20190319161240-59722c266c09"
     },
     {
       "ecosystem": "go",
@@ -122,6 +302,102 @@
       "latest_version": "v1.1.1"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.18.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.18.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.18.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.5.1-0.20190607130058-4c6dbd7cc552",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.5.1-0.20190607130058-4c6dbd7cc552.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.1-0.20190607130058-4c6dbd7cc552"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.6.1-0.20190614162003-5694673b7ca1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.6.1-0.20190614162003-5694673b7ca1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.1-0.20190614162003-5694673b7ca1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pydio/cells",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pydio/cells/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "micro",
       "version": "2.0.15",
@@ -134,6 +410,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "nuget",
+      "package": "KamiSama.Microservices.Cli",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/kamisama.microservices.cli/1.0.3/kamisama.microservices.cli.1.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.3"
+    },
+    {
       "ecosystem": "pypi",
       "package": "5bb-micro",
       "version": "2.0.15rc1",
@@ -144,6 +432,44 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "2.0.15rc1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Micro",
+      "version": "3.1.0",
+      "repository": "https://github.com/humu1us/micro",
+      "source": "https://files.pythonhosted.org/packages/57/9e/f91b445dc810c4759a49fb8fd63355a9f7e6d64e128f120ad086528507cd/Micro-3.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "micro",
+      "version": "2.0.15",
+      "repository": "https://micro-editor.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.0.15"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "micro-nightly",
+      "version": "nightly-2026-08-24",
+      "repository": "https://micro-editor.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "nightly-2026-08-24"
     },
     {
       "ecosystem": "ubuntu",
@@ -159,5 +485,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

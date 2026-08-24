@@ -2,6 +2,18 @@
   "command": "adiff",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "atool-0.39.0-10",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "atool",
       "version": "0.39.0",
@@ -12,6 +24,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "atool-0.39.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "adiff",
+      "version": "0.0.17",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/adiff/0.0.17/adiff.0.0.17.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.17"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "adiff",
+      "version": "2.0.1",
+      "repository": "https://github.com/ashishnxt/adiff",
+      "source": "https://files.pythonhosted.org/packages/36/51/bd98dcd7ff3aa1a11bf41f2201ec8b20d3fa20eb0ad2d7ac3cdaa2626b05/adiff-2.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-a-ai",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2b/27/b129b177b8e107404eb06d8feb00f1ac020cc947e3a2db5cea7a74dc0223/agent_a_ai-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

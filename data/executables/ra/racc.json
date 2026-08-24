@@ -2,6 +2,18 @@
   "command": "racc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-racc-1.8.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ruby",
       "version": "4.0.6",
@@ -50,6 +62,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "ruby-3.4.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ed-precompiled_racc",
+      "version": "1.8.1",
+      "repository": "https://github.com/ruby/racc",
+      "source": "https://rubygems.org/gems/ed-precompiled_racc-1.8.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.8.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gd-racc",
+      "version": "1.4.11",
+      "repository": "http://i.loveruby.net/en/projects/racc/",
+      "source": "https://rubygems.org/gems/gd-racc-1.4.11.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.4.11"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "racc",
       "version": null,
@@ -63,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

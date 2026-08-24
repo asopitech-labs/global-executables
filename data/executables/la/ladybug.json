@@ -2,18 +2,30 @@
   "command": "ladybug",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-ladybug-core-0.44.56-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "akar-main",
-      "version": "0.1.3",
+      "version": "0.1.5",
       "repository": "https://github.com/mlengse/akar",
-      "source": "https://crates.io/api/v1/crates/akar-main/0.1.3/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
-      "latest_version": "0.1.3"
+      "latest_version": "0.1.5"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

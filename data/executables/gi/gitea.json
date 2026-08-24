@@ -2,6 +2,78 @@
   "command": "gitea",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gitea-1.27.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "code.gitea.io/gitea",
+      "version": "v1.8.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/code.gitea.io/gitea/@v/v1.8.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "code.gitea.io/gitea",
+      "version": "v1.8.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/code.gitea.io/gitea/@v/v1.8.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "code.gitea.io/gitea",
+      "version": "v1.9.0-dev.0.20190511102134-34eee25bd42d",
+      "repository": null,
+      "source": "https://proxy.golang.org/code.gitea.io/gitea/@v/v1.9.0-dev.0.20190511102134-34eee25bd42d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.0-dev.0.20190511102134-34eee25bd42d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-gitea/gitea",
+      "version": "v1.27.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-gitea/gitea/@v/v1.27.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.27.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-gitea/gitea",
+      "version": "v1.8.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-gitea/gitea/@v/v1.8.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gitea",
       "version": "1.27.2",
@@ -12,8 +84,34 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gitea",
+      "version": "1.27.2",
+      "repository": "https://gitea.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.27.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gitea-beta",
+      "version": "1.27.2",
+      "repository": "https://gitea.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.27.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "dy",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dreamy-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/LunchTimeCode/dreamy-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dy",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dynein",
       "version": "0.3.0",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dy",
+      "version": "1.0.1",
+      "repository": "http://rubygems.org/gems/dy",
+      "source": "https://rubygems.org/gems/dy-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fast_pack",
+      "version": "0.4.4",
+      "repository": "https://github.com/iOSGL/package.git",
+      "source": "https://rubygems.org/gems/fast_pack-0.4.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

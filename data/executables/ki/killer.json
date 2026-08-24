@@ -2,6 +2,30 @@
   "command": "killer",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "killer",
+      "version": "2.0.1",
+      "repository": "https://github.com/martin-k-m/killer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ExtensionKiller",
+      "version": "0.2",
+      "repository": "https://github.com/void5/BadExtension",
+      "source": "https://files.pythonhosted.org/packages/87/50/bb2a8381d975c0165e00db34a46adb203ee696ff5074019af4e1ba194bd3/ExtensionKiller-0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "killer",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

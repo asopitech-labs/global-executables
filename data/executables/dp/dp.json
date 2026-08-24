@@ -2,6 +2,54 @@
   "command": "dp",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "festival-2.5.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dp",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repotools",
+      "version": "0.10.0",
+      "repository": "https://github.com/ctsrc/repotools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "speech-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "speech-tools",
       "version": null,
@@ -26,6 +74,162 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@alauda/dp-cli",
+      "version": "0.3.17",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alauda%2Fdp-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.17"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "devprime.cli",
+      "version": "10.0.6",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/devprime.cli/10.0.6/devprime.cli.10.0.6.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "10.0.6"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "icanhazstring/duck-pony",
+      "version": "0.7.0",
+      "repository": "https://github.com/icanhazstring/duck-pony.git",
+      "source": "https://repo.packagist.org/p2/icanhazstring/duck-pony.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DrissionPage",
+      "version": "4.1.1.4",
+      "repository": "https://DrissionPage.cn",
+      "source": "https://files.pythonhosted.org/packages/1a/98/6411ae36a9c103e4cf78e2674643c6c0f6aeb394ea84544c2bcff7f3f27f/drissionpage-4.1.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.1.1.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DrissionPage-0503",
+      "version": "4.0.4.21",
+      "repository": "https://gitee.com/g1879/DrissionPage",
+      "source": "https://files.pythonhosted.org/packages/d5/ed/e4e54139abfe88747cf9cb207016f13cf8262e0416a9709f8f98dbe35e07/DrissionPage-0503-4.0.4.21.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.4.21"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DrissionPage-0518",
+      "version": "4.0.4.21",
+      "repository": "https://gitee.com/g1879/DrissionPage",
+      "source": "https://files.pythonhosted.org/packages/e0/2f/0b3a25fe0688c56e5c0edaa5f18304e03cb985415488fce979a56040f4e5/DrissionPage_0518-4.0.4.21-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.4.21"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DrissionPage-Enhanced",
+      "version": "4.2.0",
+      "repository": "https://github.com/yourusername/DrissionPage-Enhanced",
+      "source": "https://files.pythonhosted.org/packages/ca/61/60b73f6afe5c4dc0963bac56bca96009a94ddd90b23c5ccaae185375b6ff/drissionpage_enhanced-4.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DrissionPagePlus",
+      "version": "4.0.4.22.1",
+      "repository": "https://gitee.com/xx299x/DrissionPagePlus",
+      "source": "https://files.pythonhosted.org/packages/db/a1/5f43ff918775e0cb016cbe56dbdba75196c383ec3aef4bbc986411e6a3fb/DrissionPagePlus-4.0.4.22.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.4.22.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DrissionPagePro",
+      "version": "4.1.0.17",
+      "repository": "https://DrissionPage.cn",
+      "source": "https://files.pythonhosted.org/packages/49/bb/f1663c0d8c9ca7644346cf8e9021d789c3e7f5d2a5accee662175835e420/DrissionPagePro-4.1.0.17-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.1.0.17"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "FlcatDrissionPage",
+      "version": "0.1.33",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1a/8b/7abe319667b1081bd82f802e1b750621046f1d5acfc9f37064bbba220acb/flcatdrissionpage-0.1.33-cp310-cp310-win32.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.33"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PlayDrissionPage",
+      "version": "0.0.3.1",
+      "repository": "https://gitee.com/xx299x/PlayDrissionPage",
+      "source": "https://files.pythonhosted.org/packages/26/67/1590484461c5038b8c59ca0683a6fd0ba0222c001655853b4195a87c4ec2/PlayDrissionPage-0.0.3.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awful",
+      "version": "0.0.185",
+      "repository": "",
+      "source": "https://rubygems.org/gems/awful-0.0.185.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.185"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "speech-tools",
       "version": null,
@@ -39,5 +243,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

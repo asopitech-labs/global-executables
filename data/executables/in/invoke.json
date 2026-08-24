@@ -2,6 +2,30 @@
   "command": "invoke",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-invoke-3.0.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "starknet_in_rust",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pyinvoke",
       "version": "3.0.3",
@@ -12,6 +36,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anatoo/invoke",
+      "version": "0.0.0",
+      "repository": "https://github.com/anatoo/invoke.git",
+      "source": "https://registry.npmjs.org/@anatoo%2Finvoke/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "invokemedia/invoke-cli",
+      "version": "1.0.2",
+      "repository": "https://github.com/invokemedia/Invoke-CLI.git",
+      "source": "https://repo.packagist.org/p2/invokemedia/invoke-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

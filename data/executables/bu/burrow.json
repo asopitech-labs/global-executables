@@ -2,6 +2,54 @@
   "command": "burrow",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "burrow",
+      "version": "0.1.0",
+      "repository": "https://github.com/kirino-org/burrow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "burrow-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/meilisearch/burrow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "burrow-io",
+      "version": "0.0.1",
+      "repository": "https://github.com/elaurentium/burrow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "carrot",
+      "version": "0.1.1",
+      "repository": "https://github.com/carrot-wm/carrot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "burrow",
       "version": "1.9.6",
@@ -12,8 +60,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arpadegyed/burrow",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/aegyed/burrow.git",
+      "source": "https://registry.npmjs.org/@arpadegyed%2Fburrow/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "evaneos/burrow",
+      "version": "v4.6.0",
+      "repository": "https://github.com/Evaneos/Burrow.git",
+      "source": "https://repo.packagist.org/p2/evaneos/burrow.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v4.6.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

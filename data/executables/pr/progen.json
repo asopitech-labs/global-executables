@@ -2,6 +2,30 @@
   "command": "progen",
   "providers": [
     {
+      "ecosystem": "nuget",
+      "package": "ProjectGenerator",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/projectgenerator/1.0.2/projectgenerator.1.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansprogen",
+      "version": "0.0.6",
+      "repository": "http://www.mindtalk.com/u/anvie",
+      "source": "https://files.pythonhosted.org/packages/5e/22/d4bf9b744f14b2d692bb40b61df34a3e406e0121b19867f4cd6ec3b9032f/ansprogen-0.0.6.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-project-generator",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

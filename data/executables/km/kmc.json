@@ -6,12 +6,60 @@
       "package": "kmc",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kmc",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "kmc",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/kmc/0.4.1/kmc.0.4.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "KMC",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8c/74/d049da9a42fb7f8d24eca9341aa352a6d8618a9e8fca3b6bd48fd1cf64e5/kmc-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "kmc",
+      "version": "0.0.6",
+      "repository": "",
+      "source": "https://rubygems.org/gems/kmc-0.0.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

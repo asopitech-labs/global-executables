@@ -2,6 +2,18 @@
   "command": "babel",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "babel-cli-8.0.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "babel",
       "version": "8.0.4",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@allesa/babel-cli",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/babel/babel.git",
+      "source": "https://registry.npmjs.org/@allesa%2Fbabel-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andywer/babel-cli-dctypes",
+      "version": "7.0.0-alpha.1",
+      "repository": "https://github.com/babel/babel/tree/master/packages/babel-cli",
+      "source": "https://registry.npmjs.org/@andywer%2Fbabel-cli-dctypes/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "7.0.0-alpha.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

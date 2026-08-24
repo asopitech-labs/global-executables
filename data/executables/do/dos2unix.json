@@ -2,6 +2,30 @@
   "command": "dos2unix",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dos2unix-7.5.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dos2unix",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "dos2unix",
       "version": null,
@@ -26,6 +50,56 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "dos2unix-7.5.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "RiboParser",
+      "version": "0.3.15",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a7/5f/45b4a22fe5f55d019f023188070452e599b7958b3ce17b45423825d41fd8/riboparser-0.3.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.15"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dos2unix",
+      "version": "7.5.6",
+      "repository": "https://waterlander.net/dos2unix/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.5.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gow",
+      "version": "0.8.0",
+      "repository": "https://github.com/bmatzelle/gow",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "dos2unix",
       "version": null,
@@ -39,5 +113,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

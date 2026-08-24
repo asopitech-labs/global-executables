@@ -2,6 +2,42 @@
   "command": "cargo-clone",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cargo-clone-1.2.4-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-clone",
+      "version": "1.2.4",
+      "repository": "https://github.com/JanLikar/cargo-clone",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-clone-crate",
+      "version": "0.1.9",
+      "repository": "https://github.com/ehuss/cargo-clone-crate",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cargo-clone",
       "version": "1.2.4",
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

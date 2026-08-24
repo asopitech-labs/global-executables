@@ -2,6 +2,30 @@
   "command": "ssconvert",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gnumeric-1.12.61-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gnumeric",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "gnumeric",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "SpreadsheetConverter",
+      "version": "0.2.0",
+      "repository": "https://github.com/gumi/spreadsheetconverter/",
+      "source": "https://files.pythonhosted.org/packages/21/72/599f956056e3a8a6ae9060869c4acb78e629b9093baad0056cfeae3cb98c/SpreadsheetConverter-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "gnumeric",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

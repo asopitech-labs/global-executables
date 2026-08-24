@@ -2,6 +2,54 @@
   "command": "matrix",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "matrix-rain",
+      "version": "0.3.0",
+      "repository": "https://github.com/AdamIsrael/matrix-rain.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/datadog/dd-trace-go",
+      "version": "v1.74.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/datadog/dd-trace-go/@v/v1.74.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.74.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/datadog/dd-trace-go/v2",
+      "version": "v2.9.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/datadog/dd-trace-go/v2/@v/v2.9.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.9.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gonum/matrix",
+      "version": "v0.0.0-20170731230223-dd6034299e42",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gonum/matrix/@v/v0.0.0-20170731230223-dd6034299e42.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170731230223-dd6034299e42"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/gonum/matrix",
       "version": "v0.0.0-20180124231301-a41cc49d4c29",
@@ -12,8 +60,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180124231301-a41cc49d4c29"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gonum/matrix",
+      "version": "v0.0.0-20181209220409-c518dec07be9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gonum/matrix/@v/v0.0.0-20181209220409-c518dec07be9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181209220409-c518dec07be9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/datadog/dd-trace-go.v1",
+      "version": "v1.74.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/datadog/dd-trace-go.v1/@v/v1.74.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.74.8"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "bency/php-matrix-rain",
+      "version": "2.1.0",
+      "repository": "https://github.com/bency/matrix.git",
+      "source": "https://repo.packagist.org/p2/bency/php-matrix-rain.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gemika",
+      "version": "2.0.0",
+      "repository": "https://github.com/makandra/gemika",
+      "source": "https://rubygems.org/gems/gemika-2.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

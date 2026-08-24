@@ -6,6 +6,18 @@
       "package": "vite",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "vite",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -16,7 +28,7 @@
     {
       "ecosystem": "homebrew",
       "package": "vite",
-      "version": "8.2.1",
+      "version": "8.2.2",
       "repository": "https://vitejs.dev/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,6 +36,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akryum/vite",
+      "version": "3.2.0-server-cache",
+      "repository": "git+https://github.com/vitejs/vite.git",
+      "source": "https://registry.npmjs.org/@akryum%2Fvite/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.2.0-server-cache"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aleen42/vite",
+      "version": "4.0.100002",
+      "repository": "git+https://github.com/vitejs/vite.git",
+      "source": "https://registry.npmjs.org/@aleen42%2Fvite/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.0.100002"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alloc/vite",
+      "version": "2.6.3-3",
+      "repository": "git+https://github.com/vitejs/vite.git",
+      "source": "https://registry.npmjs.org/@alloc%2Fvite/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.6.3-3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "geoblacklight",
+      "version": "5.3.0",
+      "repository": "http://github.com/geoblacklight/geoblacklight",
+      "source": "https://rubygems.org/gems/geoblacklight-5.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "5.3.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

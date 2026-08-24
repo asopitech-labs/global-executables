@@ -2,6 +2,30 @@
   "command": "blsync",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "go-ethereum-1.17.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.17.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.17.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.17.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ethereum",
       "version": "1.17.5",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

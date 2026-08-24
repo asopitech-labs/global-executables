@@ -14,6 +14,54 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "cal",
+      "version": "0.0.1",
+      "repository": "https://github.com/parkr/cal-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "linuxutils-misc",
+      "version": "0.1.0",
+      "repository": "https://github.com/rustutils/linuxutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tijme-calendar",
+      "version": "0.1.1",
+      "repository": "https://github.com/7ijme/calendar.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ncal",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ncal",
       "version": null,
@@ -38,6 +86,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "util-linux-2.40.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@areebasaghir/cal",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@areebasaghir%2Fcal/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Dojical",
+      "version": "1.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/15/a2/ba6bbf492c3815af327391837fab7fa8adf03e7037495cf77b344bbb079d/dojical-1.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "GoodCalculator",
+      "version": "0.0.10",
+      "repository": "https://github.com/pypa/sampleproject",
+      "source": "https://files.pythonhosted.org/packages/7c/c1/3fbfe6ea1b5949f9d85cbeb0da4fd77ae34f5312600ff8e7ab73dbbe20c2/GoodCalculator-0.0.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.10"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ncal",
       "version": null,
@@ -51,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

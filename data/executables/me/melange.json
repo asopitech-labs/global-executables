@@ -2,9 +2,21 @@
   "command": "melange",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "melange-0.56.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "melange",
-      "version": "0.59.1",
+      "version": "0.59.2",
       "repository": "https://github.com/chainguard-dev/melange",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "MelangeDB.Cli",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/melangedb.cli/0.2.0/melangedb.cli.0.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

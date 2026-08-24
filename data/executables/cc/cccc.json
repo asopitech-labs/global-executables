@@ -2,6 +2,42 @@
   "command": "cccc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cccc",
+      "version": "0.4.33",
+      "repository": "https://github.com/ChesterRa/cccc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.33"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cccc-cli",
+      "version": "1.0.0",
+      "repository": "https://github.com/moznion/cccc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cccc",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cccc",
       "version": null,
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

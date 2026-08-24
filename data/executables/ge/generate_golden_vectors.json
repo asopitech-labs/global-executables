@@ -1,0 +1,31 @@
+{
+  "command": "generate_golden_vectors",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "roam-types",
+      "version": "7.3.0",
+      "repository": "https://github.com/bearcove/roam",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "7.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vox-core",
+      "version": "0.8.2",
+      "repository": "https://github.com/bearcove/vox",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,18 @@
   "command": "fastmcp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fastmcp-cli",
+      "version": "0.7.0",
+      "repository": "https://github.com/Dicklesworthstone/fastmcp_rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fastmcp",
       "version": "3.4.7",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ampersend_ai/fastmcp",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/edgeandnode/fastmcp.git",
+      "source": "https://registry.npmjs.org/@ampersend_ai%2Ffastmcp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

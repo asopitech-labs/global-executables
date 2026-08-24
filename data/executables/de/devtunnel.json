@@ -1,0 +1,44 @@
+{
+  "command": "devtunnel",
+  "providers": [
+    {
+      "ecosystem": "rubygems",
+      "package": "devtunnel",
+      "version": "1.1.1",
+      "repository": "https://devtunnel.link",
+      "source": "https://rubygems.org/gems/devtunnel-1.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "devtunnel",
+      "version": "1.0.2030+fc9273aa0f",
+      "repository": "https://aka.ms/devtunnels",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.0.2030+fc9273aa0f"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Microsoft.devtunnel",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

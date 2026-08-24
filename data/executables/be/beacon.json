@@ -2,6 +2,54 @@
   "command": "beacon",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "beacon-cli",
+      "version": "0.4.1",
+      "repository": "https://github.com/liorael/beacon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fawkes-crypto-phase2",
+      "version": "0.2.2",
+      "repository": "https://github.com/zeropoolnetwork/phase2-bn254",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rust-patlite-beacon",
+      "version": "0.1.1",
+      "repository": "https://github.com/benburkhart1/rust-patlite-beacon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ax25-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ax25-tools",
       "version": null,
@@ -12,6 +60,90 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bhs-gq/quorum-hotstuff",
+      "version": "v1.10.25",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bhs-gq/quorum-hotstuff/@v/v1.10.25.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.25"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/soulboundtoken/go-ethereum",
+      "version": "v1.10.23",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/soulboundtoken/go-ethereum/@v/v1.10.23.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.23"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agentsoc/beacon",
+      "version": "0.0.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@agentsoc%2Fbeacon/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arke-systems/beacon-cli",
+      "version": "1.11.4",
+      "repository": "github:Arke-Systems/beacon",
+      "source": "https://registry.npmjs.org/@arke-systems%2Fbeacon-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.11.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arkebcacy/beacon-cli",
+      "version": "0.4.19",
+      "repository": "github:ArkeBcacy/qorvo-beacon",
+      "source": "https://registry.npmjs.org/@arkebcacy%2Fbeacon-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.19"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arkebcacy/beacon-cli-temp",
+      "version": "0.1.14",
+      "repository": "github:Arke-Systems/beacon",
+      "source": "https://registry.npmjs.org/@arkebcacy%2Fbeacon-cli-temp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.14"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "archolith-beacon",
+      "version": "0.2.0rc1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/07/67/991c3b7bde7a9bb1975cd426d1393df5a32c43f9867cfba33ca045acf14b/archolith_beacon-0.2.0rc1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0rc1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

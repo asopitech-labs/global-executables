@@ -2,6 +2,42 @@
   "command": "staging",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "stager",
+      "version": "0.3.4",
+      "repository": "https://github.com/crate-ci/stager.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.6.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.6.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.6.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.6.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.4"
+    },
+    {
       "ecosystem": "go",
       "package": "k8s.io/kubernetes",
       "version": "v1.7.5",
@@ -12,8 +48,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.7.5"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "derhasi/staging",
+      "version": "1.1.1",
+      "repository": "https://github.com/derhasi/staging.git",
+      "source": "https://repo.packagist.org/p2/derhasi/staging.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.1.1"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

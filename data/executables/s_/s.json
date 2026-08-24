@@ -2,6 +2,18 @@
   "command": "s",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "strykelang",
+      "version": "0.17.48",
+      "repository": "https://github.com/MenkeTechnologies/strykelang",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.48"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "s-search",
       "version": "0.8.1",
@@ -12,8 +24,81 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amit-t/stet",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/amit-t/stet.git",
+      "source": "https://registry.npmjs.org/@amit-t%2Fstet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amit-t/stet.md",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/amit-t/stet.md.git",
+      "source": "https://registry.npmjs.org/@amit-t%2Fstet.md/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "dietercoopman/sajan",
+      "version": "v5.2.2",
+      "repository": "https://github.com/dietercoopman/sajan.git",
+      "source": "https://repo.packagist.org/p2/dietercoopman/sajan.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v5.2.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "advent-of-code-wim",
+      "version": "2025.12",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f8/86/9d5c1fc36aefa24da463c81156c131221daa0696146a849310fc499e48f1/advent_of_code_wim-2025.12-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2025.12"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "atcoder-auto-test",
+      "version": "0.1.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/77/99/c035408f155f7db9d0cb6416247bc0244c302c91f9a05f9e1acfd14cb9db/atcoder_auto_test-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "s",
+      "version": "0.8.1",
+      "repository": "https://github.com/zquestz/s",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

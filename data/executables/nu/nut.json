@@ -2,6 +2,42 @@
   "command": "nut",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "nut",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nut-workspace",
+      "version": "0.4.3",
+      "repository": "https://github.com/stefreak/nut",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "bolt/bolt",
+      "version": "3.7.5",
+      "repository": "https://github.com/bolt/bolt.git",
+      "source": "https://repo.packagist.org/p2/bolt/bolt.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "3.7.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "nutsqlite",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

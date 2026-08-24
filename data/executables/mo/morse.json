@@ -6,12 +6,48 @@
       "package": "morse",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "morse",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgryski/trifles",
+      "version": "v0.0.0-20190318185328-a8d75aae118c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgryski/trifles/@v/v0.0.0-20190318185328-a8d75aae118c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190318185328-a8d75aae118c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dgryski/trifles",
+      "version": "v0.0.0-20190530022834-891760d8d75c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dgryski/trifles/@v/v0.0.0-20190530022834-891760d8d75c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530022834-891760d8d75c"
     },
     {
       "ecosystem": "homebrew",
@@ -24,6 +60,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arcadiasystems/morse-cli",
+      "version": "0.5.0",
+      "repository": "git+https://github.com/arcadiasystems/morse-dcms.git",
+      "source": "https://registry.npmjs.org/@arcadiasystems%2Fmorse-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "gpanos/morse",
+      "version": "v1.0",
+      "repository": "https://github.com/gpanos/morse.git",
+      "source": "https://repo.packagist.org/p2/gpanos/morse.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Morse-Translator",
+      "version": "0.1",
+      "repository": "https://github.com/Tylerastro/MorseCode",
+      "source": "https://files.pythonhosted.org/packages/3b/21/cab9f1d7676b3207be2bbb0255cea477a651e54aaa29bb113bd7334ba331/Morse_Translator-0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amirstein-morse-translator",
+      "version": "0.3.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4a/4b/0128630488fa5c4524887099f39b764705ea32bb2f55360ab053d20b8ff2/amirstein_morse_translator-0.3.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.1.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

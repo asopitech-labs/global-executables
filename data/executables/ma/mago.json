@@ -2,9 +2,21 @@
   "command": "mago",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mago",
+      "version": "1.47.3",
+      "repository": "https://github.com/carthage-software/mago",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.47.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mago",
-      "version": "1.46.0",
+      "version": "1.47.3",
       "repository": "https://github.com/carthage-software/mago",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "carthage-software/mago",
+      "version": "1.47.2",
+      "repository": "https://github.com/carthage-software/mago.git",
+      "source": "https://repo.packagist.org/p2/carthage-software/mago.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.47.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mago",
+      "version": "0.1.0",
+      "repository": "https://github.com/greyblake/mago",
+      "source": "https://rubygems.org/gems/mago-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "CarthageSoftware.Mago",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

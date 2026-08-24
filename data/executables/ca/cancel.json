@@ -2,6 +2,30 @@
   "command": "cancel",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cups-2:2.4.19-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cups-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cups-client",
       "version": null,
@@ -12,6 +36,90 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb",
+      "version": "v3.3.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/@v/v3.3.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.3.2+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb",
+      "version": "v3.3.4+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/@v/v3.3.4%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.3.4+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb",
+      "version": "v3.4.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/@v/v3.4.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.4.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb/v4",
+      "version": "v4.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/v4/@v/v4.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb/v4",
+      "version": "v4.8.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/v4/@v/v4.8.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.8.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb/v4",
+      "version": "v4.8.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/v4/@v/v4.8.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.8.4"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,32 @@
+{
+  "command": "buildcache",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "buildcache",
+      "version": "0.0.1",
+      "repository": "https://github.com/elide-dev",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "buildcache",
+      "version": "0.33.0",
+      "repository": "https://gitlab.com/bits-n-bites/buildcache",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.33.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

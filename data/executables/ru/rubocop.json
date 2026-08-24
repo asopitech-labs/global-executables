@@ -2,6 +2,54 @@
   "command": "rubocop",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "rubocop-1.82.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "avrocado",
+      "version": "0.2.2",
+      "repository": "https://github.com/connexio-labs/avrocado",
+      "source": "https://rubygems.org/gems/avrocado-0.2.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "codeowner_validator",
+      "version": "0.4.0",
+      "repository": "https://github.com/cerner/codeowner_validator",
+      "source": "https://rubygems.org/gems/codeowner_validator-0.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "github_bot",
+      "version": "0.3.1",
+      "repository": "https://github.com/cerner/github_bot-ruby",
+      "source": "https://rubygems.org/gems/github_bot-0.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "rubocop",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

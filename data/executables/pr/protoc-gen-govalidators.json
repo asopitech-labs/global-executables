@@ -2,6 +2,30 @@
   "command": "protoc-gen-govalidators",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "go-proto-validators",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mwitkow/go-proto-validators",
+      "version": "v0.0.0-20180403085117-0950a7990007",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mwitkow/go-proto-validators/@v/v0.0.0-20180403085117-0950a7990007.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180403085117-0950a7990007"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mwitkow/go-proto-validators",
       "version": "v0.0.0-20190212092829-1f388280e944",
@@ -12,8 +36,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190212092829-1f388280e944"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mwitkow/go-proto-validators",
+      "version": "v0.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mwitkow/go-proto-validators/@v/v0.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.2"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

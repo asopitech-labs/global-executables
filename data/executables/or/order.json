@@ -2,6 +2,42 @@
   "command": "order",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "amd",
+      "version": "0.2.2",
+      "repository": "https://github.com/rwl/amd_order/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pacifica_rust_sdk",
+      "version": "3.0.0",
+      "repository": "https://github.com/Neiroleptik/pacifica_rust_sdk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lagan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "lagan",
       "version": null,
@@ -12,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudwego/biz-demo/book-shop",
+      "version": "v0.0.0-20260211060507-0e3c794d6e40",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudwego/biz-demo/book-shop/@v/v0.0.0-20260211060507-0e3c794d6e40.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260211060507-0e3c794d6e40"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "pass",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pass-1.7.4-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "passers",
+      "version": "0.1.0",
+      "repository": "https://github.com/Swarthe/pass-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/akrennmair/gopcap",
       "version": "v0.0.0-20150728160502-00e11033259a",
@@ -14,6 +38,42 @@
       "latest_version": "v0.0.0-20150728160502-00e11033259a"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/coreos/etcd",
+      "version": "v2.3.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/etcd/@v/v2.3.8%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.8+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mre-fog/etcd",
+      "version": "v2.3.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mre-fog/etcd/@v/v2.3.8%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.8+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.etcd.io/etcd",
+      "version": "v2.3.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.etcd.io/etcd/@v/v2.3.8%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.8+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pass",
       "version": "1.7.4",
@@ -24,6 +84,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "pass-1.7.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

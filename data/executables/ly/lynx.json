@@ -2,6 +2,30 @@
   "command": "lynx",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "lynx-2.9.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lynx",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "lynx",
       "version": null,
@@ -26,6 +50,56 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "lynx-2.9.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@24klynx/cli",
+      "version": "0.2.7",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@24klynx%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.7"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "lynx",
+      "version": "2.9.3",
+      "repository": "https://invisible-island.net/lynx/lynx.html",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.9.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "lynx283",
+      "version": "2.8.3",
+      "repository": "https://invisible-island.net/lynx/lynx.html",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.8.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "lynx",
       "version": null,
@@ -39,5 +113,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

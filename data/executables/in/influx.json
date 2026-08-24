@@ -2,6 +2,30 @@
   "command": "influx",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "influx-cli-2.8.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "influxdb-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "influxdb-client",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/been2io/influxdb",
+      "version": "v1.7.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/been2io/influxdb/@v/v1.7.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20161215172503-049f9b42e9a5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20161215172503-049f9b42e9a5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161215172503-049f9b42e9a5"
     },
     {
       "ecosystem": "go",
@@ -40,6 +88,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20170526172956-3b08f65a2086",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20170526172956-3b08f65a2086.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170526172956-3b08f65a2086"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
       "version": "v0.0.0-20170710172809-4244d0e0536b",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20170710172809-4244d0e0536b.zip",
@@ -48,6 +108,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170710172809-4244d0e0536b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20170816233040-9135b21efd59",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20170816233040-9135b21efd59.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170816233040-9135b21efd59"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20170912164834-f3f30726d822",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20170912164834-f3f30726d822.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170912164834-f3f30726d822"
     },
     {
       "ecosystem": "go",
@@ -88,6 +172,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20180904211643-ab81104697f6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20180904211643-ab81104697f6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180904211643-ab81104697f6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
       "version": "v0.0.0-20181009160823-86ac358448ec",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20181009160823-86ac358448ec.zip",
@@ -112,6 +208,54 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20181029184725-7d9830ab246b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20181029184725-7d9830ab246b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181029184725-7d9830ab246b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20181207160149-9dff5f072fb7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20181207160149-9dff5f072fb7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181207160149-9dff5f072fb7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20181220221034-7db3db278bfa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20181220221034-7db3db278bfa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181220221034-7db3db278bfa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20190110045147-d73d73c0d4b7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20190110045147-d73d73c0d4b7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190110045147-d73d73c0d4b7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
       "version": "v0.0.0-20190411212539-d24b7ba8c4c4",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20190411212539-d24b7ba8c4c4.zip",
@@ -120,6 +264,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190411212539-d24b7ba8c4c4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20190501202428-050c6e35c5b5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20190501202428-050c6e35c5b5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190501202428-050c6e35c5b5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v0.0.0-20190603235743-3a07e7f72186",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.0.0-20190603235743-3a07e7f72186.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190603235743-3a07e7f72186"
     },
     {
       "ecosystem": "go",
@@ -136,6 +304,66 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdata/influxdb",
+      "version": "v0.9.0-rc6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v0.9.0-rc6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0-rc6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.1.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.1.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.12.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.12.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.12.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
       "version": "v1.3.7",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.3.7.zip",
@@ -144,6 +372,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.3.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.5.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.5.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.5.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.5.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.6.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.6.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.2"
     },
     {
       "ecosystem": "go",
@@ -160,6 +448,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdata/influxdb",
+      "version": "v1.6.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.6.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
       "version": "v1.7.1",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.7.1.zip",
@@ -168,6 +468,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.7.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/influxdb",
+      "version": "v1.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/influxdb/@v/v1.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.2"
     },
     {
       "ecosystem": "go",
@@ -232,6 +544,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20181029221937-19d4abf7cb2d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181029221937-19d4abf7cb2d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181029221937-19d4abf7cb2d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
       "version": "v0.0.0-20181114141407-bceb99526a51",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181114141407-bceb99526a51.zip",
@@ -240,6 +564,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181114141407-bceb99526a51"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20181116023603-5b575143e67d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181116023603-5b575143e67d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181116023603-5b575143e67d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20181127001319-a06d4dea1682",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181127001319-a06d4dea1682.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181127001319-a06d4dea1682"
     },
     {
       "ecosystem": "go",
@@ -256,6 +604,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20181210065121-523a384f16cb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181210065121-523a384f16cb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181210065121-523a384f16cb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
       "version": "v0.0.0-20181219193417-0f79e4ea3248",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181219193417-0f79e4ea3248.zip",
@@ -264,6 +624,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181219193417-0f79e4ea3248"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20181220230935-ff0d2110ba96",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20181220230935-ff0d2110ba96.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181220230935-ff0d2110ba96"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20190108190509-fef6d4618e96",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20190108190509-fef6d4618e96.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190108190509-fef6d4618e96"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20190111200105-98469bf07613",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20190111200105-98469bf07613.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190111200105-98469bf07613"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdata/platform",
+      "version": "v0.0.0-20190117200541-d500d3cf5589",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdata/platform/@v/v0.0.0-20190117200541-d500d3cf5589.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190117200541-d500d3cf5589"
     },
     {
       "ecosystem": "go",
@@ -292,6 +700,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/influxdb/influxdb",
+      "version": "v1.13.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdb/influxdb/@v/v1.13.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.13.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdb/influxdb",
       "version": "v1.7.6",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/influxdb/influxdb/@v/v1.7.6.zip",
@@ -300,6 +720,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.7.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/build",
+      "version": "v0.0.0-20260819174720-52e248053411",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/build/@v/v0.0.0-20260819174720-52e248053411.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819174720-52e248053411"
     },
     {
       "ecosystem": "homebrew",
@@ -316,7 +748,7 @@
     {
       "ecosystem": "homebrew",
       "package": "influxdb@1",
-      "version": "1.12.4",
+      "version": "1.13.0",
       "repository": "https://influxdata.com/time-series-platform/influxdb/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -324,6 +756,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "influx2",
+      "version": "2.7.5",
+      "repository": "https://www.influxdata.com/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.7.5"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "influxdb1",
+      "version": "1.12.2",
+      "repository": "https://www.influxdata.com/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.12.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -339,5 +797,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

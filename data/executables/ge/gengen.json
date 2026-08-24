@@ -2,6 +2,42 @@
   "command": "gengen",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gengen-1.4.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/4gophers/gengen",
+      "version": "v0.0.0-20160125191809-a91064a26cca",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/4gophers/gengen/@v/v0.0.0-20160125191809-a91064a26cca.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160125191809-a91064a26cca"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/filecoin-project/go-filecoin",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/filecoin-project/go-filecoin/@v/v0.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "halide",
       "version": "21.0.0",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gengen",
+      "version": "1.1.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/gengen-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

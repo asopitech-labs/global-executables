@@ -2,6 +2,66 @@
   "command": "versioneer",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-versioneer-0.29-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kairos-io/kairos-sdk",
+      "version": "v0.25.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kairos-io/kairos-sdk/@v/v0.25.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.25.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "FiPy",
+      "version": "4.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/30/51/f8ee2927df97110036e2626bf32e26f66165af9db4cb6964f16b14e8b420/fipy-4.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "atpdataset",
+      "version": "0.0.10",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5c/8a/a5b114a96d0ed47188becd63393562578e647651829593e5393f57bb4583/atpdataset-0.0.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.10"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "atpthings",
+      "version": "0.0.44",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/30/da/9a38d588274df3864f0aed31cce58d3c0218f562c1caad7b7178a14d81ac/atpthings-0.0.44-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.44"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-versioneer",
       "version": null,
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

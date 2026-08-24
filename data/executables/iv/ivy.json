@@ -2,6 +2,30 @@
   "command": "ivy",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ivy_core",
+      "version": "0.1.0",
+      "repository": "https://github.com/mapkts/ivy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "robpike.io/ivy",
+      "version": "v0.0.0-20180326033303-3dd8a2d16657",
+      "repository": null,
+      "source": "https://proxy.golang.org/robpike.io/ivy/@v/v0.0.0-20180326033303-3dd8a2d16657.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180326033303-3dd8a2d16657"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ivy",
       "version": "2.6.0",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Ivy.Console",
+      "version": "1.3.21",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/ivy.console/1.3.21/ivy.console.1.3.21.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.3.21"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "iron_hammer",
+      "version": "1.1.1",
+      "repository": "http://github.com/MACSkeptic/Iron-Hammer",
+      "source": "https://rubygems.org/gems/iron_hammer-1.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "projection",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cddlib-1:0.94n-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "linear_algebra_42",
+      "version": "0.1.1",
+      "repository": "https://github.com/paulodavi/42sp-linear-algebra",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hazelcast/hazelcast-go-client",
+      "version": "v0.0.0-20190530123621-6cf767c2f31a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hazelcast/hazelcast-go-client/@v/v0.0.0-20190530123621-6cf767c2f31a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530123621-6cf767c2f31a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rs/rest-layer/examples",
+      "version": "v0.0.0-20190423104806-3f2cd5df9e8e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rs/rest-layer/examples/@v/v0.0.0-20190423104806-3f2cd5df9e8e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190423104806-3f2cd5df9e8e"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cddlib",
       "version": "0.94n",
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

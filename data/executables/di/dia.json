@@ -2,6 +2,30 @@
   "command": "dia",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dia",
+      "version": "0.1.0",
+      "repository": "https://github.com/orcharddweller/dia",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dia",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "dia",
       "version": null,
@@ -12,6 +36,55 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@artionh/dia",
+      "version": "0.0.2-5-alpha",
+      "repository": "git+https://github.com/artionh/dia.git",
+      "source": "https://registry.npmjs.org/@artionh%2Fdia/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.2-5-alpha"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-impact-accounting",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/76/10/8a4551e769fb94df34ecbbb120458ce9e9b7bb1a0b4e4d8a71f53bb68be6/ai_impact_accounting-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dia-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/diaandco/dia-cli",
+      "source": "https://rubygems.org/gems/dia-cli-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dia",
+      "version": "0.97.2",
+      "repository": "http://dia-installer.de",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.97.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +100,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

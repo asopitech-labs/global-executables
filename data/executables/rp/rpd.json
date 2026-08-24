@@ -2,6 +2,18 @@
   "command": "rpd",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "resourcepackd",
+      "version": "0.8.1",
+      "repository": "https://github.com/Maxuss/resourcepackd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/ajstarks/svgo",
       "version": "v0.0.0-20151117013546-fd2151ebabde",
@@ -24,8 +36,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180226025133-644b8db467af"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ajstarks/svgo",
+      "version": "v0.0.0-20211024235047-1546f124cd8b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ajstarks/svgo/@v/v0.0.0-20211024235047-1546f124cd8b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211024235047-1546f124cd8b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dchapes/svgo",
+      "version": "v0.0.0-20160911180557-1e7d8e7455e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dchapes/svgo/@v/v0.0.0-20160911180557-1e7d8e7455e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160911180557-1e7d8e7455e0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

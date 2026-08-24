@@ -2,6 +2,42 @@
   "command": "bombadil",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "toml-bombadil-4.2.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bombadil",
+      "version": "0.2.2",
+      "repository": "https://github.com/marcelotrevisani/bombadil",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "toml-bombadil",
+      "version": "4.2.0",
+      "repository": "https://github.com/oknozor/toml-bombadil/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "4.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "toml-bombadil",
       "version": "4.2.0",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antithesishq/bombadil",
+      "version": "0.7.0",
+      "repository": "git+https://github.com/antithesishq/bombadil.git",
+      "source": "https://registry.npmjs.org/@antithesishq%2Fbombadil/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.7.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

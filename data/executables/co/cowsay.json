@@ -2,6 +2,66 @@
   "command": "cowsay",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cowsay-3.8.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cowsay",
+      "version": "0.14.0",
+      "repository": "https://github.com/prabirshrestha/cowsay.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/code-hex/neo-cowsay",
+      "version": "v0.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/code-hex/neo-cowsay/@v/v0.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/code-hex/neo-cowsay",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/code-hex/neo-cowsay/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yanzay/tbot",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yanzay/tbot/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cowsay",
       "version": "3.8.4",
@@ -12,8 +72,94 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Cowsay.CLI",
+      "version": "1.1.33",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cowsay.cli/1.1.33/cowsay.cli.1.1.33.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.33"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Rumble.Cowsay.Tool",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/rumble.cowsay.tool/0.0.3/rumble.cowsay.tool.0.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Rumrunner0.Cowsay.Tool",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/rumrunner0.cowsay.tool/0.1.2/rumrunner0.cowsay.tool.0.1.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "cowsay-dotnet",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cowsay-dotnet/1.0.0/cowsay-dotnet.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cowsay",
+      "version": "0.3.0",
+      "repository": "https://github.com/johnnyt/cowsay",
+      "source": "https://rubygems.org/gems/cowsay-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "cowsay",
+      "version": "0.2013.07.19",
+      "repository": "https://github.com/lukesampson/cowsay-psh",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.2013.07.19"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "neo-cowsay",
+      "version": "2.0.4",
+      "repository": "https://github.com/Code-Hex/Neo-cowsay",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.0.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

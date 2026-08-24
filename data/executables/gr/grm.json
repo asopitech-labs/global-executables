@@ -2,6 +2,30 @@
   "command": "grm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-repo-manager",
+      "version": "0.12.0",
+      "repository": "https://github.com/hakoerber/git-repo-manager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "grm",
+      "version": "0.7.5",
+      "repository": "https://github.com/hakoerber/git-repo-manager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "coreutils",
       "version": "9.11",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aedev-git-repo-manager",
+      "version": "0.3.102",
+      "repository": "https://gitlab.com/aedev-group/aedev_git_repo_manager",
+      "source": "https://files.pythonhosted.org/packages/3c/41/9a82cfeee2c720784ac380dc56ef8f3db5e76b9cffd66ae9fdba22f0a4f9/aedev_git_repo_manager-0.3.102-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.102"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

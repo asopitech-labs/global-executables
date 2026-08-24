@@ -2,6 +2,30 @@
   "command": "commitlint",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "commitlint",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "commitlint-rs",
+      "version": "0.2.4",
+      "repository": "https://github.com/KeisukeYamashita/commitlint-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "commitlint",
       "version": "21.2.2",
@@ -12,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "CommitLint",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/commitlint/1.0.1/commitlint.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "choerulumam/commitlint-php",
+      "version": "v1.1.0",
+      "repository": "https://github.com/chumam2050/commitlint-php.git",
+      "source": "https://repo.packagist.org/p2/choerulumam/commitlint-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "commitlint",
+      "version": "0.4.0",
+      "repository": "https://github.com/arandilopez/commitlint",
+      "source": "https://rubygems.org/gems/commitlint-0.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

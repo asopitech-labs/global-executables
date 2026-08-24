@@ -2,6 +2,18 @@
   "command": "asciiquarium",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "asciiquarium-1.1-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "asciiquarium",
       "version": "1.1",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asciiquarium",
+      "version": "2.4.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5e/fd/449d1aed08c9e267f75af5726aa211a12bb3666ce53085535aca6e706604/asciiquarium-2.4.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asciiquarium-redux",
+      "version": "1.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/90/d6/6d514f8f1a61cd127f51f9b8b7196475d3a83ff8c5a678d6e77f9a1a9bfd/asciiquarium_redux-1.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "loki",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "loki-3.6.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "loki-ai",
+      "version": "0.5.0",
+      "repository": "https://github.com/Dark-Alex-17/coyote",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "loki",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "loki",
       "version": null,
@@ -14,6 +50,42 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/grafana/loki",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grafana/loki/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grafana/loki",
+      "version": "v1.6.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grafana/loki/@v/v1.6.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/weaveworks-experiments/loki",
+      "version": "v0.0.0-20170326163136-17ff1516db3d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/weaveworks-experiments/loki/@v/v0.0.0-20170326163136-17ff1516db3d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170326163136-17ff1516db3d"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "loki",
       "version": "3.7.6",
@@ -24,6 +96,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@asudbring/loki-profile-manager",
+      "version": "0.1.23",
+      "repository": "git+https://github.com/asudbring/loki-profile-manager.git",
+      "source": "https://registry.npmjs.org/@asudbring%2Floki-profile-manager/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.23"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "LOKK",
+      "version": "0.1.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/02/7b/02dacc33cbbebd3f6e72fc2e26e0e84a9d854a68fcde8795a0a20a20f4a7/lokk-0.1.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "loki",
+      "version": "0.0.4",
+      "repository": "https://github.com/pbhogan/loki",
+      "source": "https://rubygems.org/gems/loki-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

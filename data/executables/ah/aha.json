@@ -2,16 +2,40 @@
   "command": "aha",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "aha-0.5.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "aha",
       "version": "0.2.6",
       "repository": "https://github.com/jhqxxx/aha",
-      "source": "https://crates.io/api/v1/crates/aha/0.2.6/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "aha",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
     },
     {
       "ecosystem": "debian",
@@ -38,6 +62,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@ahalabs/cli",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/soulmachine/ts-cli-starter.git",
+      "source": "https://registry.npmjs.org/@ahalabs%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aha-tools",
+      "version": "0.0.1",
+      "repository": "https://github.com/StanfordAHA/aha",
+      "source": "https://files.pythonhosted.org/packages/48/e2/a10c4fc2a9488f49ff6b2cb4069907e0a921da0bc129bd8d163829697a65/aha_tools-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "arthub-api",
+      "version": "1.11.18",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/55/d1/dad71156fe8f78c5ccfa9a971883a06932cda44a87f5a4b84632b89ad559/arthub_api-1.11.18-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.11.18"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "aha",
       "version": null,
@@ -51,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

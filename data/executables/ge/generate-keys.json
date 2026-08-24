@@ -1,0 +1,43 @@
+{
+  "command": "generate-keys",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ppoppo-token",
+      "version": "0.21.1",
+      "repository": "https://github.com/hakchin/ppoppo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.21.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/secret-telegram/chat",
+      "version": "v0.0.0-20241025030232-2154053700bb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/secret-telegram/chat/@v/v0.0.0-20241025030232-2154053700bb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241025030232-2154053700bb"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agent-receipts/crypto",
+      "version": "0.4.0",
+      "repository": "git+https://github.com/webaesbyamin/agent-receipts.git",
+      "source": "https://registry.npmjs.org/@agent-receipts%2Fcrypto/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

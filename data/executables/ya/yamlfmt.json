@@ -2,6 +2,42 @@
   "command": "yamlfmt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "yamlfmt-0.21.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openimsdk/open-im-server/v3",
+      "version": "v3.8.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openimsdk/open-im-server/v3/@v/v3.8.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.8.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/yaml",
+      "version": "v1.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/yaml/@v/v1.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "yamlfmt",
       "version": "0.21.0",
@@ -12,8 +48,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "yamlfmt",
+      "version": "0.21.0",
+      "repository": "https://github.com/google/yamlfmt",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.21.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

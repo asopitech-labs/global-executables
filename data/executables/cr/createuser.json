@@ -2,6 +2,30 @@
   "command": "createuser",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "postgresql-libs-18.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.hoogi.eu/snafu/go-blog",
+      "version": "v0.7.23",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.hoogi.eu/snafu/go-blog/@v/v0.7.23.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.23"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "libpq",
       "version": "18.6",
@@ -111,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

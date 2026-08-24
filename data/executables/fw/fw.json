@@ -2,6 +2,78 @@
   "command": "fw",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fandhe-frontend-cli",
+      "version": "0.3.4",
+      "repository": "https://github.com/Fandhe-AI/fandhe-frontend",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "franken_whisper",
+      "version": "0.8.0",
+      "repository": "https://github.com/Dicklesworthstone/franken_whisper",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fw",
+      "version": "2.21.0",
+      "repository": "https://github.com/brocode/fw",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.21.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fw-rs",
+      "version": "0.1.1",
+      "repository": "https://github.com/amirhosseinghanipour/fw",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tfhe-hpu-backend",
+      "version": "0.6.0",
+      "repository": "https://github.com/zama-ai/tfhe-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "funnelweb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "funnelweb",
       "version": null,
@@ -26,6 +98,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "packagist",
+      "package": "jinomial/fw-cli",
+      "version": "v1.0.1",
+      "repository": "https://github.com/jinomial/fw-cli.git",
+      "source": "https://repo.packagist.org/p2/jinomial/fw-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fw",
+      "version": "0.1.0",
+      "repository": "http://github.com/jeremywrnr/fw-cli",
+      "source": "https://rubygems.org/gems/fw-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "funnelweb",
       "version": null,
@@ -39,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

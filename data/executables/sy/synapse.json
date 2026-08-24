@@ -2,6 +2,78 @@
   "command": "synapse",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "synapse-0.2.99.4-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cfs-synapse",
+      "version": "0.3.0",
+      "repository": "https://github.com/sjbeskur/synapse",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cmn-synapse",
+      "version": "0.3.0",
+      "repository": "https://github.com/cmnspore/cmn-synapse",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "synapse-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/krypticmouse/synapse",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "synapse-core",
+      "version": "0.8.5",
+      "repository": "https://github.com/pmaojo/synapse-engine",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "synapse",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "synapse",
       "version": null,
@@ -12,6 +84,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@2ndbrainlabs-ai/synapse-cli",
+      "version": "0.1.4-hotfix-1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@2ndbrainlabs-ai%2Fsynapse-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.4-hotfix-1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atlascrew/synapse-client",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/atlas-crew/horizon-security-platform.git",
+      "source": "https://registry.npmjs.org/@atlascrew%2Fsynapse-client/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-synapse",
+      "version": "0.2.1",
+      "repository": "https://github.com/YakshithK/synapse",
+      "source": "https://files.pythonhosted.org/packages/8c/3e/f0f2af9c994aaa047c36cc915aa5a0dd017097a5866855052eefce5d3936/agent_synapse-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "democracyworks-synapse",
+      "version": "0.9.2",
+      "repository": "",
+      "source": "https://rubygems.org/gems/democracyworks-synapse-0.9.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

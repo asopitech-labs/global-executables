@@ -1,0 +1,31 @@
+{
+  "command": "mock-server",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "tap-http",
+      "version": "0.7.0",
+      "repository": "https://github.com/TransactionAuthorizationProtocol/tap-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@airquality/mock-server",
+      "version": "0.1.4",
+      "repository": "git+https://github.com/LeeWeisheng/mock-server.git",
+      "source": "https://registry.npmjs.org/@airquality%2Fmock-server/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

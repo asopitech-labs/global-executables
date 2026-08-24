@@ -2,6 +2,18 @@
   "command": "img2py",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-wxpython-1:4.2.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "wxpython",
       "version": "4.3.1",
@@ -12,6 +24,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "NlvWxPython",
+      "version": "4.2.0",
+      "repository": "http://wxPython.org/",
+      "source": "https://files.pythonhosted.org/packages/b2/ee/3d7c78f9014fa715bdb351e82ede4853fc86bed01b2573548a7c5129c312/NlvWxPython-4.2.0-cp37-cp37m-win_amd64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

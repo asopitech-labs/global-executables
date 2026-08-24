@@ -2,6 +2,30 @@
   "command": "mdb",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mdb",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdb-cli",
+      "version": "0.3.0",
+      "repository": "https://github.com/marpledata/marple-sdk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mercury",
       "version": "22.01.8",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aiden-ng/module-b",
+      "version": "3.0.0-alpha.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aiden-ng%2Fmodule-b/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.0-alpha.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

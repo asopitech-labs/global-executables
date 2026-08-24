@@ -2,6 +2,114 @@
   "command": "ass",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "irpas",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "6.23rk",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/6.23rk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agentsecretstore/cli",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/Agent-Secret-Store/agent-secret-store.git",
+      "source": "https://registry.npmjs.org/@agentsecretstore%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ass-cli",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/a2/6e/2cbdebfc23771a66dbbb4ddb04fdca8a3a6d87b7af6c3d8197ec72c1403f/ass_cli-0.0.1-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "assister",
+      "version": "1.1.0",
+      "repository": "https://github.com/connormullett/assister",
+      "source": "https://files.pythonhosted.org/packages/ee/28/0aa98791b9f392f679d991b799ec250facdc68753d8ee7dee5b9247e8e4d/assister-1.1.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autosecscan",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/92/6d/7f4029ffd146d99ff1749025933a0dc918c65dbbd765d0c09bc646c4b169/autosecscan-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "apache_server_status",
+      "version": "0.1.2",
+      "repository": "https://github.com/suyesh/apache_server_status",
+      "source": "https://rubygems.org/gems/apache_server_status-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ass",
+      "version": "0.0.25",
+      "repository": "http://github.com/eiffelqiu/ass",
+      "source": "https://rubygems.org/gems/ass-0.0.25.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.25"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "assembla",
+      "version": "1.0.0",
+      "repository": "http://github.com/ignacy/assembla",
+      "source": "https://rubygems.org/gems/assembla-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "irpas",
       "version": null,
@@ -15,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

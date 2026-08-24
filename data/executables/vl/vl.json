@@ -2,6 +2,54 @@
   "command": "vl",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hdf5-rs",
+      "version": "0.2.0",
+      "repository": "https://github.com/aldanor/hdf5-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vde-layout",
+      "version": "2.0.2",
+      "repository": "https://github.com/yuki-yano/vde-layout",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "vl",
+      "version": "0.0.3",
+      "repository": "https://github.com/lsh/vl/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "atfs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "atfs",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

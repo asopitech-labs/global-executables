@@ -2,6 +2,30 @@
   "command": "gimme",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gimme",
+      "version": "0.1.13",
+      "repository": "https://github.com/maxdobeck/gimme",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.13"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gimmetool",
+      "version": "0.1.5",
+      "repository": "https://creature-workshop.kernelle-soft.com/kernelle-soft/gimmetool",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gimme",
       "version": "1.5.6",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-gimme",
+      "version": "1.0.6",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-gimme/1.0.6/dotnet-gimme.1.0.6.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.6"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "gimme/gimme",
+      "version": "v1.2.0-alpha",
+      "repository": "https://github.com/mattsparks/gimme.git",
+      "source": "https://repo.packagist.org/p2/gimme/gimme.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.2.0-alpha"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

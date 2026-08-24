@@ -4,7 +4,7 @@
     {
       "ecosystem": "homebrew",
       "package": "firebase-cli",
-      "version": "15.27.0",
+      "version": "15.28.1",
       "repository": "https://firebase.google.com/docs/cli/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +12,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@askelephant/firebase-tools",
+      "version": "15.5.1",
+      "repository": "git+https://github.com/firebase/firebase-tools.git",
+      "source": "https://registry.npmjs.org/@askelephant%2Ffirebase-tools/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "15.5.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "firebase",
+      "version": "15.28.1",
+      "repository": "https://github.com/firebase/firebase-tools",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "15.28.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Google.FirebaseCLI",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

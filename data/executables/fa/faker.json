@@ -2,9 +2,45 @@
   "command": "faker",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-faker-40.33.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "python-faker-40.33.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "faker",
+      "version": "0.0.4",
+      "repository": "https://github.com/tikotzky/faker-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "faker",
-      "version": "40.36.0",
+      "version": "40.37.0",
       "repository": "https://faker.readthedocs.io",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -26,6 +62,54 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "packagist",
+      "package": "cecil/faker",
+      "version": "1.9.1",
+      "repository": "https://github.com/Cecilapp/faker.git",
+      "source": "https://repo.packagist.org/p2/cecil/faker.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.9.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Faker",
+      "version": "40.36.0",
+      "repository": "https://github.com/joke2k/faker",
+      "source": "https://files.pythonhosted.org/packages/50/9a/b947ed175ce9a0dcb070ccf3607f0ce8720cfb5ed1a36166a150b2acd5af/faker-40.36.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "40.36.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "faker",
+      "version": "3.8.0",
+      "repository": "https://github.com/faker-ruby/faker",
+      "source": "https://rubygems.org/gems/faker-3.8.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.8.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "faker-bot",
+      "version": "0.6.0",
+      "repository": "https://github.com/faker-ruby/faker-bot",
+      "source": "https://rubygems.org/gems/faker-bot-0.6.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "faker",
       "version": null,
@@ -39,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

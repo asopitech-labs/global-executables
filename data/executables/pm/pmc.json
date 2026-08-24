@@ -2,6 +2,42 @@
   "command": "pmc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "linuxptp-4.4-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pmc",
+      "version": "2.0.0",
+      "repository": "https://lab.themackabu.dev/self/pmc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "linuxptp",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "linuxptp",
       "version": null,
@@ -12,6 +48,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "06-createfolder",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/06-createfolder/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "6createfolder",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/6createfolder/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aabadin/project-memory-context",
+      "version": "0.9.0",
+      "repository": "git+https://github.com/adrianabadin/memory-context.git",
+      "source": "https://registry.npmjs.org/@aabadin%2Fproject-memory-context/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "eruban/php-metrics-coupling",
+      "version": "0.1.0",
+      "repository": "https://github.com/ERuban/php-phpmetrics-coupling.git",
+      "source": "https://repo.packagist.org/p2/eruban/php-metrics-coupling.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

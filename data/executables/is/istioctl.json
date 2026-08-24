@@ -2,6 +2,150 @@
   "command": "istioctl",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "istio-1.30.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitee.com/mirrors/istio",
+      "version": "v0.0.0-20260227045414-37de52d1fc7b",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitee.com/mirrors/istio/@v/v0.0.0-20260227045414-37de52d1fc7b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260227045414-37de52d1fc7b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alipay/sofa-mesh",
+      "version": "v0.0.0-20181206054614-bf81c5a8a584",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alipay/sofa-mesh/@v/v0.0.0-20181206054614-bf81c5a8a584.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181206054614-bf81c5a8a584"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20180723195305-a66a221bfe4c",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20180723195305-a66a221bfe4c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180723195305-a66a221bfe4c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190125022433-f1eab0a25dd6",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190125022433-f1eab0a25dd6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190125022433-f1eab0a25dd6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190322063008-2b1331886076",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190322063008-2b1331886076.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190322063008-2b1331886076"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190509192354-eb2ecb3b1f44",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190509192354-eb2ecb3b1f44.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190509192354-eb2ecb3b1f44"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190516081059-beb17827e164",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190516081059-beb17827e164.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190516081059-beb17827e164"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190520131406-01d0c59eef8a",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190520131406-01d0c59eef8a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190520131406-01d0c59eef8a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190601191615-025c738a3926",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190601191615-025c738a3926.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190601191615-025c738a3926"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190617150826-32b1b8a6a88f",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190617150826-32b1b8a6a88f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190617150826-32b1b8a6a88f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "istio.io/istio",
+      "version": "v0.0.0-20190620205520-9e808dea2090",
+      "repository": null,
+      "source": "https://proxy.golang.org/istio.io/istio/@v/v0.0.0-20190620205520-9e808dea2090.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190620205520-9e808dea2090"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "istioctl",
       "version": "1.30.3",
@@ -12,8 +156,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "istioctl",
+      "version": "1.30.3",
+      "repository": "https://istio.io/latest/docs/reference/commands/istioctl/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.30.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

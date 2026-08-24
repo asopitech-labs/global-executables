@@ -2,6 +2,18 @@
   "command": "opal",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "opal-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/cloudflavor/opal",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "opal",
       "version": "1.8.3",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "azulene-opal",
+      "version": "0.4.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/84/cd/e37c75f7332bcf9560ea913e3643af4f415d685239ebaf77580d20b5a377/azulene_opal-0.4.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.11"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "azulene-studio",
+      "version": "0.5.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/df/4b/4aa23bd24846a62054215b899d8249cac1b5759dca4653a2a0dfaf948eb7/azulene_studio-0.5.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

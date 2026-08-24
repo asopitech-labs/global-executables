@@ -2,6 +2,102 @@
   "command": "ansible",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ansible-core-2.21.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/operator-framework/operator-sdk",
+      "version": "v0.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/operator-framework/operator-sdk/@v/v0.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/operator-framework/operator-sdk",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/operator-framework/operator-sdk/@v/v0.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/operator-framework/operator-sdk",
+      "version": "v0.8.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/operator-framework/operator-sdk/@v/v0.8.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/operator-framework/operator-sdk",
+      "version": "v0.8.1-0.20190517223317-f7f644008098",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/operator-framework/operator-sdk/@v/v0.8.1-0.20190517223317-f7f644008098.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1-0.20190517223317-f7f644008098"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/operator-framework/operator-sdk",
+      "version": "v0.8.1-0.20190613193535-fd13b3901fea",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/operator-framework/operator-sdk/@v/v0.8.1-0.20190613193535-fd13b3901fea.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1-0.20190613193535-fd13b3901fea"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/operator-framework/operator-sdk",
+      "version": "v0.8.1-0.20190614185049-67927bfe56d3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/operator-framework/operator-sdk/@v/v0.8.1-0.20190614185049-67927bfe56d3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1-0.20190614185049-67927bfe56d3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/operator-framework/operator-sdk",
+      "version": "v0.8.2-0.20190522220659-031d71ef8154",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/operator-framework/operator-sdk/@v/v0.8.2-0.20190522220659-031d71ef8154.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2-0.20190522220659-031d71ef8154"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ansible",
       "version": "14.3.1",
@@ -50,6 +146,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "ansible-core-2.21.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansible-core",
+      "version": "2.21.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a3/fa/938fe0504372377af2bef42abe0d8e463fdcd011ad803eaf300e4577dd7a/ansible_core-2.21.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.21.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansible-core-rs",
+      "version": "0.12.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8c/5b/b9a2c596a332e47451ffac7dc14f6647e3fe3c92132718ef3fa35637c37f/ansible_core_rs-0.12.0-py3-none-manylinux_2_28_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.12.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ansible-core",
       "version": null,
@@ -63,5 +195,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

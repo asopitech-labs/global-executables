@@ -2,6 +2,54 @@
   "command": "handler",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "amail-lambda-smtp-relay",
+      "version": "0.1.0",
+      "repository": "https://github.com/OJFord/amail",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "http-tunnel-handler",
+      "version": "0.2.0",
+      "repository": "https://github.com/tyrchen/http-tunnel",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/pio",
+      "version": "v0.0.0-20170809181920-825e39f34365",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/pio/@v/v0.0.0-20170809181920-825e39f34365.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170809181920-825e39f34365"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/pio",
+      "version": "v0.0.0-20180511174041-a9733b5b6b83",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/pio/@v/v0.0.0-20180511174041-a9733b5b6b83.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180511174041-a9733b5b6b83"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/kataras/pio",
       "version": "v0.0.0-20190103105442-ea782b38602d",
@@ -12,8 +60,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190103105442-ea782b38602d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/pio",
+      "version": "v0.0.14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/pio/@v/v0.0.14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.14"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "a2a-handler",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/07/86/97d5ba55da568e95f716bdd2aa988286a4f18fc1d784b261b2928f782cd6/a2a_handler-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

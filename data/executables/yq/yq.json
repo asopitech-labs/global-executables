@@ -2,6 +2,54 @@
   "command": "yq",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "go-yq-4.53.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "yq-4.1.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "convert2json",
+      "version": "2.6.3",
+      "repository": "https://github.com/simonrupf/convert2json",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.6.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "whyq",
+      "version": "0.10.2",
+      "repository": "https://github.com/clux/whyq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "python-yq",
       "version": "4.1.2",
@@ -16,7 +64,7 @@
     {
       "ecosystem": "homebrew",
       "package": "yq",
-      "version": "4.53.3",
+      "version": "4.53.6",
       "repository": "https://github.com/mikefarah/yq",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,6 +72,31 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "yq.tool",
+      "version": "4.53.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/yq.tool/4.53.3/yq.tool.4.53.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "4.53.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "yq",
+      "version": "4.53.6",
+      "repository": "https://mikefarah.gitbook.io/yq/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.53.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -36,8 +109,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "MikeFarah.yq",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

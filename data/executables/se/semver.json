@@ -2,6 +2,78 @@
   "command": "semver",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "semver-7.8.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "semver-cli2",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "semver-extra",
+      "version": "0.2.5",
+      "repository": "https://github.com/nicholaschiasson/semver-extra",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "semver-util",
+      "version": "0.2.1",
+      "repository": "https://github.com/sbruton/semver-util",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v0.3.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v0.3.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "semver",
       "version": "7.8.5",
@@ -12,6 +84,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-semver",
+      "version": "1.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-semver/1.4.0/dotnet-semver.1.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "vm2.SemVerTool",
+      "version": "2.1.2-preview.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/vm2.semvertool/2.1.2-preview.1/vm2.semvertool.2.1.2-preview.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.1.2-preview.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "iverberk/semver-updater",
+      "version": "0.9.14",
+      "repository": "https://github.com/iverberk/semver-updater.git",
+      "source": "https://repo.packagist.org/p2/iverberk/semver-updater.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.9.14"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jmirandase/git-semver-tool",
+      "version": "0.1.1",
+      "repository": "https://github.com/jmirandase/git_semver_tool.git",
+      "source": "https://repo.packagist.org/p2/jmirandase/git-semver-tool.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

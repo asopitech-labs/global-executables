@@ -2,6 +2,18 @@
   "command": "corral",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "corral",
+      "version": "0.1.5",
+      "repository": "https://github.com/danielclarke/corral",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "corral",
       "version": "0.9.2",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Corral",
+      "version": "2.4.1-netcore-alpha",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/corral/2.4.1-netcore-alpha/corral.2.4.1-netcore-alpha.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.4.1-netcore-alpha"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-corral",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/88/96/893e7bd89d221efe72b8ae8d2c0d4c0464e84cacae1a7ba1d900c2346529/agent_corral-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "ks",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ks-cli",
+      "version": "0.5.0",
+      "repository": "https://github.com/qntx/ks",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "debian",
       "package": "qdl",
       "version": null,
@@ -14,6 +26,18 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/ksonnet/ksonnet",
+      "version": "v0.13.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ksonnet/ksonnet/@v/v0.13.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.13.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "kitchen-sync",
       "version": "2.21",
@@ -24,6 +48,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

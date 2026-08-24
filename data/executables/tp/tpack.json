@@ -2,9 +2,21 @@
   "command": "tpack",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tpack-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/pluveto/tpack",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tpack",
-      "version": "2.0.4",
+      "version": "2.0.5",
       "repository": "https://github.com/tmuxpack/tpack",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

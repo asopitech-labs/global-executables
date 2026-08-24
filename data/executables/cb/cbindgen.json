@@ -2,6 +2,66 @@
   "command": "cbindgen",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cbindgen-0.29.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cbindgen",
+      "version": "0.29.4",
+      "repository": "https://github.com/mozilla/cbindgen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.29.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cbindgen-assoc-const",
+      "version": "0.28.0",
+      "repository": "https://github.com/mozilla/cbindgen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.28.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tfhe-c-api-bindgen",
+      "version": "0.26.1",
+      "repository": "https://github.com/mozilla/cbindgen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.26.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cbindgen",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cbindgen",
       "version": null,
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

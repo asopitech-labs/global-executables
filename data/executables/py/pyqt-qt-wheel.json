@@ -2,6 +2,18 @@
   "command": "pyqt-qt-wheel",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "pyqt-builder-1.19.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pyqt-builder",
       "version": "1.19.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyQt-builder",
+      "version": "1.19.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/13/e8/3cdb96cd8f7f0bf4113532d5d762324dd6ea3630362ea2169f9075803a2e/pyqt_builder-1.19.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.19.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "hugo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hugo-0.165.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hugo",
+      "version": "0.0.0",
+      "repository": "https://github.com/doki-land/rusty-ssg/tree/dev/compilers/hugo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "hugo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "hugo",
       "version": null,
@@ -26,6 +62,138 @@
       "latest_version": "v0.0.0-20160817031321-f914774f6bcb"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/go-openapi/runtime",
+      "version": "v0.33.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-openapi/runtime/@v/v0.33.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.33.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.49.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.49.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.49.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.6-0.20190515172700-cdd204ba7640",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.6-0.20190515172700-cdd204ba7640.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.6-0.20190515172700-cdd204ba7640"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.6-0.20190518081823-6b3f1a10028c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.6-0.20190518081823-6b3f1a10028c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.6-0.20190518081823-6b3f1a10028c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.6-0.20190520165727-0e4bd8fbb1b6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.6-0.20190520165727-0e4bd8fbb1b6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.6-0.20190520165727-0e4bd8fbb1b6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.6-0.20190520175141-b69771a3f835",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.6-0.20190520175141-b69771a3f835.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.6-0.20190520175141-b69771a3f835"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gohugoio/hugo",
+      "version": "v0.55.6-0.20190528185734-ff2807ddb7dd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gohugoio/hugo/@v/v0.55.6-0.20190528185734-ff2807ddb7dd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.6-0.20190528185734-ff2807ddb7dd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/spf13/hugo",
+      "version": "v0.55.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/spf13/hugo/@v/v0.55.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hugo",
       "version": "0.165.0",
@@ -38,6 +206,32 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "hugo",
+      "version": "0.165.0",
+      "repository": "https://gohugo.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.165.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "hugo-extended",
+      "version": "0.165.0",
+      "repository": "https://gohugo.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.165.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "hugo",
       "version": null,
@@ -48,8 +242,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Hugo.Hugo.Deploy",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

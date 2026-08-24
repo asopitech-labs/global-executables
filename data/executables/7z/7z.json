@@ -2,6 +2,30 @@
   "command": "7z",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "7zip-26.02-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "7zip",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "7zip",
       "version": null,
@@ -26,6 +50,120 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "p7zip-17.06-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "7zip",
+      "version": "0.0.6",
+      "repository": "git+ssh://git@github.com/fritx/win-7zip.git",
+      "source": "https://registry.npmjs.org/7zip/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "7zip-bin-wrapper",
+      "version": "1.0.58",
+      "repository": "git+https://github.com/GongT/baobao.git",
+      "source": "https://registry.npmjs.org/7zip-bin-wrapper/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.58"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "7zip",
+      "version": "26.02",
+      "repository": "https://www.7-zip.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "26.02"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "7zip-beta",
+      "version": "26.02",
+      "repository": "https://www.7-zip.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "26.02"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "7zip-dark",
+      "version": "26.02-v0.70.0",
+      "repository": "https://github.com/ozone10/7zip-Dark7zip",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "26.02-v0.70.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "7zip-zstd",
+      "version": "v26.02-1.5.7-r2",
+      "repository": "https://mcmilk.de/projects/7-Zip-zstd/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "v26.02-1.5.7-r2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "nanazip",
+      "version": "6.5.1800.0",
+      "repository": "https://github.com/M2Team/NanaZip",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "6.5.1800.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "nanazip-beta",
+      "version": "7.0.1800.0",
+      "repository": "https://github.com/M2Team/NanaZip",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.0.1800.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "7zip",
       "version": null,
@@ -36,8 +174,44 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "7zip.7zip",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "mcmilk.7zip-zstd",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "mcmilk.7zip-zstd-ndm",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "sloc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sloc",
+      "version": "0.0.1",
+      "repository": "https://github.com/hejack0207/sloc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sloc-rs",
+      "version": "0.1.0",
+      "repository": "https://github.com/Emii-lia/sloc-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sloc",
       "version": "0.3.2",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Sloc",
+      "version": "3.1.0-alpha.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/sloc/3.1.0-alpha.1/sloc.3.1.0-alpha.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "3.1.0-alpha.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

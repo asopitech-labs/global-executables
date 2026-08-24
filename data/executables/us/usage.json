@@ -2,9 +2,69 @@
   "command": "usage",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "usage-5.1.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pgnparse",
+      "version": "0.1.15",
+      "repository": "https://github.com/hyperchessbot/pgnparse",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.15"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "usage-cli",
+      "version": "6.1.1",
+      "repository": "https://github.com/jdx/usage",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "6.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xanadu",
+      "version": "0.0.5",
+      "repository": "https://github.com/yuma140902/xanadu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro/micro",
+      "version": "v1.18.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro/micro/@v/v1.18.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.18.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "usage",
-      "version": "5.1.0",
+      "version": "6.1.1",
       "repository": "https://usage.jdx.dev/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +72,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@10xdevs/usage",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@10xdevs%2Fusage/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "mariadb-test",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mariadb-clients-12.3.2-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "mariadb-lts-clients-11.8.8-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mariadb-test",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mariadb-test",
       "version": null,
@@ -16,7 +52,7 @@
     {
       "ecosystem": "homebrew",
       "package": "mariadb",
-      "version": "12.3.2",
+      "version": "12.3.3",
       "repository": "https://mariadb.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -28,7 +64,7 @@
     {
       "ecosystem": "homebrew",
       "package": "mariadb@10.11",
-      "version": "10.11.18",
+      "version": "10.11.19",
       "repository": "https://mariadb.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -64,7 +100,7 @@
     {
       "ecosystem": "homebrew",
       "package": "mariadb@11.4",
-      "version": "11.4.12",
+      "version": "11.4.13",
       "repository": "https://mariadb.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -76,7 +112,7 @@
     {
       "ecosystem": "homebrew",
       "package": "mariadb@11.8",
-      "version": "11.8.8",
+      "version": "11.8.9",
       "repository": "https://mariadb.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -99,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

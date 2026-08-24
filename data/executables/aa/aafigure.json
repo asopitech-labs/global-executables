@@ -2,6 +2,30 @@
   "command": "aafigure",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-aafigure-0.6-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aafigure",
+      "version": "0.6",
+      "repository": "http://launchpad.net/aafigure",
+      "source": "https://files.pythonhosted.org/packages/4d/82/a58d09930e357b196c40e2224de6b0bfc3d15d3f880c56dbf55c67c353d9/aafigure-0.6-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-aafigure",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "lolcat",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "lolcat-100.0.1-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lolcat",
+      "version": "1.5.0",
+      "repository": "https://github.com/ur0/lolcat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "neo-lolcat",
+      "version": "0.2.0",
+      "repository": "https://github.com/skyline69/neo-lolcat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "lolcat",
       "version": "100.0.1",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lolcat",
+      "version": "100.0.1",
+      "repository": "https://github.com/busyloop/lolcat",
+      "source": "https://rubygems.org/gems/lolcat-100.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "100.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

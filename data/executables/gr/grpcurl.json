@@ -2,6 +2,78 @@
   "command": "grpcurl",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "grpcurl-rs",
+      "version": "0.2.1",
+      "repository": "https://github.com/Shuozeli/grpcurl-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fullstorydev/grpcurl",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fullstorydev/grpcurl/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fullstorydev/grpcurl",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fullstorydev/grpcurl/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fullstorydev/grpcurl",
+      "version": "v1.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fullstorydev/grpcurl/@v/v1.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fullstorydev/grpcurl",
+      "version": "v1.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fullstorydev/grpcurl/@v/v1.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fullstorydev/grpcurl",
+      "version": "v1.9.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fullstorydev/grpcurl/@v/v1.9.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "grpcurl",
       "version": "1.9.3",
@@ -12,8 +84,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "grpcurl",
+      "version": "1.9.3",
+      "repository": "https://github.com/fullstorydev/grpcurl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.9.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

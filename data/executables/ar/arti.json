@@ -1,0 +1,43 @@
+{
+  "command": "arti",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "arti-2.5.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "arti",
+      "version": "2.5.1",
+      "repository": "https://gitlab.torproject.org/tpo/core/arti.git/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.5.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "arti-fit",
+      "version": "3.0.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/77/6c/3bca81fe988562f824f58215d735f64eebf0515c4f7c437c50b7f8dbfc99/arti_fit-3.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.0.5"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

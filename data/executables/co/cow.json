@@ -2,6 +2,42 @@
   "command": "cow",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cow-cli",
+      "version": "0.1.10",
+      "repository": "https://github.com/joeinnes/cow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cow-test-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/cowprotocol/solana-programs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fl-cow",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "fl-cow",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cyfdecyf/cow",
+      "version": "v0.0.0-20160619155848-41c0fb157c8b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cyfdecyf/cow/@v/v0.0.0-20160619155848-41c0fb157c8b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160619155848-41c0fb157c8b"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cow",
+      "version": "0.1.7",
+      "repository": "https://github.com/kazubu/cow/",
+      "source": "https://rubygems.org/gems/cow-0.1.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.7"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

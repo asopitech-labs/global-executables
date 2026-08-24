@@ -2,6 +2,18 @@
   "command": "normalize",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "normalize",
+      "version": "0.3.2",
+      "repository": "https://github.com/rhi-zone/normalize",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "normalize",
       "version": "0.7.7",
@@ -24,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alba-mistral",
+      "version": "13.0.2",
+      "repository": "https://git.cells.es/controls/mistral/mistral",
+      "source": "https://files.pythonhosted.org/packages/19/00/9e3cbc264b79841fa6535e9004d31e58d3ed6eb11c8ea6c35ab2636f3b24/alba-mistral-13.0.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "13.0.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

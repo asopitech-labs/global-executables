@@ -2,6 +2,30 @@
   "command": "et",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "epoch-time",
+      "version": "0.1.0",
+      "repository": "https://github.com/BorhanSaflo/epoch-time",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "everytime",
+      "version": "0.4.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "et",
       "version": "7.0.0",
@@ -12,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "et",
+      "version": "0.7.3",
+      "repository": "https://github.com/launchacademy/extraterrestrial",
+      "source": "https://rubygems.org/gems/et-0.7.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.7.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "evados-tracker",
+      "version": "0.2.21",
+      "repository": "http://github.com/evados/evados-tracker",
+      "source": "https://rubygems.org/gems/evados-tracker-0.2.21.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.21"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "extraterrestrial",
+      "version": "0.0.1",
+      "repository": "http://www.launchacademy.com",
+      "source": "https://rubygems.org/gems/extraterrestrial-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

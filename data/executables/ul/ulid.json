@@ -2,6 +2,54 @@
   "command": "ulid",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-ulid-4.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ulid-cli",
+      "version": "0.1.12",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.12"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ulid-lite",
+      "version": "0.6.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ulid-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ulid-cli",
       "version": null,
@@ -12,8 +60,68 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/oklog/ulid",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/oklog/ulid/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/oklog/ulid",
+      "version": "v1.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/oklog/ulid/@v/v1.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/oklog/ulid/v2",
+      "version": "v2.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/oklog/ulid/v2/@v/v2.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "NetUlid.Tool",
+      "version": "2.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/netulid.tool/2.1.0/netulid.tool.2.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "vm2.UlidTool",
+      "version": "5.2.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/vm2.ulidtool/5.2.1/vm2.ulidtool.5.2.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "5.2.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

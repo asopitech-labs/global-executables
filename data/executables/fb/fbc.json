@@ -1,0 +1,44 @@
+{
+  "command": "fbc",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "freebasic-1.10.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "fbc-cli",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/fbc-cli/1.0.3/fbc-cli.1.0.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "freebasic",
+      "version": "1.10.1",
+      "repository": "https://www.freebasic.net",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.10.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

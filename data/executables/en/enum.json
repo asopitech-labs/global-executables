@@ -2,6 +2,30 @@
   "command": "enum",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "async-rust",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "enum",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "enum",
       "version": null,
@@ -26,6 +50,88 @@
       "latest_version": "v0.0.0-20180714175718-26cad4b7c941"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/domainr/whoistest",
+      "version": "v0.0.0-20260717100248-762278eae57c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/domainr/whoistest/@v/v0.0.0-20260717100248-762278eae57c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260717100248-762278eae57c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-book/go-programming-book-code",
+      "version": "v0.0.0-20251125013809-1b81e21b7b77",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-book/go-programming-book-code/@v/v0.0.0-20251125013809-1b81e21b7b77.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251125013809-1b81e21b7b77"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/graph-gophers/graphql-go",
+      "version": "v1.10.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/graph-gophers/graphql-go/@v/v1.10.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "cerbero/enum",
+      "version": "2.3.5",
+      "repository": "https://github.com/cerbero90/enum.git",
+      "source": "https://repo.packagist.org/p2/cerbero/enum.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "2.3.5"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "fangx/php-enum",
+      "version": "v2.0.0",
+      "repository": "https://github.com/fangx-packages/php-enum.git",
+      "source": "https://repo.packagist.org/p2/fangx/php-enum.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "EndlessWaffleCLI",
+      "version": "0.1.6",
+      "repository": "",
+      "source": "https://rubygems.org/gems/EndlessWaffleCLI-0.1.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "ksh",
+      "version": "Version AJM 93u+ 2012-08-01",
+      "repository": null,
+      "source": "ksh@Version AJM 93u+ 2012-08-01",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "enum",
       "version": null,
@@ -39,5 +145,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

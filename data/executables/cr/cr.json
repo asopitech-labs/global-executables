@@ -2,6 +2,54 @@
   "command": "cr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "calcit_runner",
+      "version": "0.5.25",
+      "repository": "https://github.com/calcit-lang/calcit.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.25"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "claude-cr",
+      "version": "0.1.0",
+      "repository": "https://github.com/joshrotenberg/claude-wrapper",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cleanroom",
+      "version": "0.0.3",
+      "repository": "https://git.vexd.dev/bloated/cleanroom",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "clone-rs",
+      "version": "0.1.2",
+      "repository": "https://github.com/pie-314/clone-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "chart-releaser",
       "version": "1.8.1",
@@ -12,8 +60,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alistar.max/coderecall",
+      "version": "0.1.9",
+      "repository": "git+https://github.com/CodingOX/CodeRecall.git",
+      "source": "https://registry.npmjs.org/@alistar.max%2Fcoderecall/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@asthestarslept/ai-cr",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/your-username/ai-cr.git",
+      "source": "https://registry.npmjs.org/@asthestarslept%2Fai-cr/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "coderetreat",
+      "version": "0.0.0",
+      "repository": "https://github.com/jsoxford/code-retreat-rb",
+      "source": "https://rubygems.org/gems/coderetreat-0.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "helm-chart-releaser",
+      "version": "1.8.1",
+      "repository": "https://github.com/helm/chart-releaser/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.8.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "cargo-udeps",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cargo-udeps-0.1.61-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-udeps",
+      "version": "0.1.61",
+      "repository": "https://github.com/est31/cargo-udeps",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.61"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cargo-udeps",
       "version": "0.1.61",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "dnsping",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dnsping",
+      "version": "0.2.0",
+      "repository": "https://github.com/zhxie/dnsping",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "fortio.org/dnsping",
+      "version": "v1.11.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/fortio.org/dnsping/@v/v1.11.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "dnsdiag",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

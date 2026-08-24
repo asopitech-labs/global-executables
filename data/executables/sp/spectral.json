@@ -2,6 +2,18 @@
   "command": "spectral",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "espeak-ng",
+      "version": "0.1.3",
+      "repository": "https://github.com/eugenehp/espeak-ng-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "spectral-cli",
       "version": "6.16.3",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aexol/spectral",
+      "version": "0.9.187",
+      "repository": "https://gitlab.aexol.com/aexol/spectral.git",
+      "source": "https://registry.npmjs.org/@aexol%2Fspectral/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.9.187"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "automatic-spectral-acquisition",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b8/c6/0a2b2c8f77ec51df7a8c93c1662906792177fda0769ac26d4c648e56500c/automatic_spectral_acquisition-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Stoplight.Spectral",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

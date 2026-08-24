@@ -2,6 +2,30 @@
   "command": "gq",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gitquick",
+      "version": "0.3.1",
+      "repository": "https://github.com/gordziejonok/gitquick",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gq-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/jorgehermo9/gq/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "graphqurl",
       "version": "2.0.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@a4ayush/gitquest",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/a4ayush/gitquest.git",
+      "source": "https://registry.npmjs.org/@a4ayush%2Fgitquest/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

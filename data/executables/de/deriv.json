@@ -2,6 +2,18 @@
   "command": "deriv",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/dtolpin/infergo",
       "version": "v0.2.1",
@@ -108,8 +120,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "bitbucket.org/dtolpin/infergo",
+      "version": "v0.6.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/bitbucket.org/dtolpin/infergo/@v/v0.6.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.2"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "mi",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "move-it-cli",
+      "version": "0.2.4",
+      "repository": "https://github.com/BigPapa314/move-it-ws/tree/master/move-it",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libxgks-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libxgks-dev",
       "version": null,
@@ -12,6 +36,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@avcodes/mi",
+      "version": "1.11.0",
+      "repository": "git+https://github.com/av/mi.git",
+      "source": "https://registry.npmjs.org/@avcodes%2Fmi/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.11.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

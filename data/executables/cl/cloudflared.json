@@ -2,6 +2,42 @@
   "command": "cloudflared",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cloudflared-2026.8.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudflare/cloudflared",
+      "version": "v0.0.0-20190606095303-25a04e0c69c4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudflare/cloudflared/@v/v0.0.0-20190606095303-25a04e0c69c4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606095303-25a04e0c69c4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudflare/cloudflared",
+      "version": "v0.0.0-20260814112252-733bfb939963",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudflare/cloudflared/@v/v0.0.0-20260814112252-733bfb939963.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260814112252-733bfb939963"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cloudflared",
       "version": "2026.8.2",
@@ -12,8 +48,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "cloudflared",
+      "version": "2026.8.2",
+      "repository": "https://github.com/cloudflare/cloudflared",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.8.2"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Cloudflare.cloudflared",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

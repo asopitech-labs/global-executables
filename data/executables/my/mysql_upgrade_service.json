@@ -1,0 +1,33 @@
+{
+  "command": "mysql_upgrade_service",
+  "providers": [
+    {
+      "ecosystem": "scoop",
+      "package": "mariadb",
+      "version": "12.3.3",
+      "repository": "https://mariadb.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "12.3.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "mariadb103",
+      "version": "10.3.39",
+      "repository": "https://mariadb.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "10.3.39"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

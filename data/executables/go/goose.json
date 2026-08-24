@@ -2,6 +2,18 @@
   "command": "goose",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "goose-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/Montana/goose",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/liamstask/goose",
       "version": "v0.0.0-20150115234039-8488cc47d90c",
@@ -38,9 +50,81 @@
       "latest_version": "v0.0.0-20170411125245-c2d7eac2343d"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/elijahcarrel/goose",
+      "version": "v3.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elijahcarrel/goose/@v/v3.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pressly/goose",
+      "version": "v0.0.0-20170709213509-02e9395c174f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pressly/goose/@v/v0.0.0-20170709213509-02e9395c174f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170709213509-02e9395c174f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pressly/goose",
+      "version": "v2.3.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pressly/goose/@v/v2.3.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pressly/goose",
+      "version": "v2.4.3+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pressly/goose/@v/v2.4.3%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.4.3+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pressly/goose",
+      "version": "v2.4.5+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pressly/goose/@v/v2.4.5%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.4.5+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pressly/goose",
+      "version": "v2.6.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pressly/goose/@v/v2.6.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.6.0+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "block-goose-cli",
-      "version": "1.46.0",
+      "version": "1.47.0",
       "repository": "https://goose-docs.ai/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -60,8 +144,93 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aaif/goose-binary-darwin-arm64",
+      "version": "0.20.2",
+      "repository": "git+https://github.com/aaif-goose/goose.git",
+      "source": "https://registry.npmjs.org/@aaif%2Fgoose-binary-darwin-arm64/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.20.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aaif/goose-binary-darwin-x64",
+      "version": "0.20.2",
+      "repository": "git+https://github.com/aaif-goose/goose.git",
+      "source": "https://registry.npmjs.org/@aaif%2Fgoose-binary-darwin-x64/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.20.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aaif/goose-binary-linux-arm64",
+      "version": "0.20.2",
+      "repository": "git+https://github.com/aaif-goose/goose.git",
+      "source": "https://registry.npmjs.org/@aaif%2Fgoose-binary-linux-arm64/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.20.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aaif/goose-binary-linux-x64",
+      "version": "0.20.2",
+      "repository": "git+https://github.com/aaif-goose/goose.git",
+      "source": "https://registry.npmjs.org/@aaif%2Fgoose-binary-linux-x64/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.20.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aaif/goose-binary-win32-x64",
+      "version": "0.20.2",
+      "repository": "git+https://github.com/aaif-goose/goose.git",
+      "source": "https://registry.npmjs.org/@aaif%2Fgoose-binary-win32-x64/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.20.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "goose-cli",
+      "version": "1.47.0",
+      "repository": "https://block.github.io/goose/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.47.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Pressly.Goose",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

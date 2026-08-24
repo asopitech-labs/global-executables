@@ -2,6 +2,30 @@
   "command": "gti",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "coretilus",
+      "version": "0.7.0",
+      "repository": "https://github.com/titilambert/coretilus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gti",
+      "version": "0.0.2",
+      "repository": "https://github.com/UlmerMan/gti",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gti",
       "version": "1.9.1",
@@ -12,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "gti",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gti/1.0.0/gti.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "GolfGTI",
+      "version": "1.1.1",
+      "repository": "https://github.com/WoutervdVelde",
+      "source": "https://files.pythonhosted.org/packages/6e/ad/3b6a6ba96723f3d6044de90147c2190fceb4ec74b0dc06c0267a74cdaa83/GolfGTI-1.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git_er_done",
+      "version": "0.5.1",
+      "repository": "",
+      "source": "https://rubygems.org/gems/git_er_done-0.5.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

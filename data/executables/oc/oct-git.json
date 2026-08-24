@@ -1,0 +1,31 @@
+{
+  "command": "oct-git",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "openpgp-card-tool-git-0.1.8-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "openpgp-card-tool-git",
+      "version": "0.1.8",
+      "repository": "https://codeberg.org/openpgp-card/oct-git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.8"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

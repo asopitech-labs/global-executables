@@ -1,0 +1,43 @@
+{
+  "command": "pm3",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "proxmark3-4.20142-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akrc/pm3",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@akrc%2Fpm3/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PM3",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/3f/eb/b8fdc4af37380b5a4c0195ae7c118206c9b784a9b818c370109ba51e885c/pm3-0.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

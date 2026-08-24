@@ -2,9 +2,21 @@
   "command": "mycli",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dentimoer-cli",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mycli",
-      "version": "2.14.0",
+      "version": "2.16.0",
       "repository": "https://www.mycli.net/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,6 +24,90 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "11.15_yws",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/11.15_yws/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "1907a",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/1907a/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "2fatoken",
+      "version": "0.0.3",
+      "repository": "git+https://github.com/dudubernardino/2faToken.git",
+      "source": "https://registry.npmjs.org/2fatoken/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adarsht0912/mycli",
+      "version": "3.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adarsht0912%2Fmycli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alice_bob/mycli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alice_bob%2Fmycli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "HashHeap",
+      "version": "1.0.0",
+      "repository": "https://github.com/AlexHtZhang/HashHeap",
+      "source": "https://files.pythonhosted.org/packages/8a/08/2e0cebcc31f773df331d3c940d6683d64db3311d7f1d92e1f76f449b697a/HashHeap-1.0.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "OpenMechanochem",
+      "version": "1.0.1",
+      "repository": "https://github.com/danjodc/OpenMechanochem",
+      "source": "https://files.pythonhosted.org/packages/4e/2f/cdc58742c45478f1c24f2e45a3fe0a82e6163d95d4992afcb651de9f1e6b/OpenMechanochem-1.0.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "post",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "post-it",
+      "version": "3.1.0",
+      "repository": "https://github.com/astherath/post",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/gabeguz/post",
       "version": "v0.0.0-20190329192843-5e864efc0eca",
@@ -24,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aibulat/http",
+      "version": "0.1.5",
+      "repository": "git+https://github.com/ngmaibulat/packages.git",
+      "source": "https://registry.npmjs.org/@aibulat%2Fhttp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@androff/posthtml-cli",
+      "version": "1.0.0-beta.7",
+      "repository": "git+https://github.com/androdotdev/plantodo.git",
+      "source": "https://registry.npmjs.org/@androff%2Fposthtml-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0-beta.7"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

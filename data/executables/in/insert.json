@@ -2,6 +2,42 @@
   "command": "insert",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "insert",
+      "version": "0.1.0",
+      "repository": "https://github.com/kylechamberlin/insert",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/clickhouse/ch-go",
+      "version": "v0.74.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/clickhouse/ch-go/@v/v0.74.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.74.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/couchbase/go_n1ql",
+      "version": "v0.0.0-20160215142504-6cf4e348b127",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/couchbase/go_n1ql/@v/v0.0.0-20160215142504-6cf4e348b127.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160215142504-6cf4e348b127"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/couchbaselabs/go_n1ql",
       "version": "v0.0.0-20160215142504-6cf4e348b127",
@@ -12,8 +48,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160215142504-6cf4e348b127"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/couchbaselabs/go_n1ql",
+      "version": "v0.0.0-20220303011133-0ed4bf93e31d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/couchbaselabs/go_n1ql/@v/v0.0.0-20220303011133-0ed4bf93e31d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220303011133-0ed4bf93e31d"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "backend-test-tools",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-onnx-1:1.22.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "python-onnx-1:1.22.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-onnx",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "python3-onnx",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amd-onnx",
+      "version": "1.17.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/da/ed/f786991c52ee5d7d708518c841229438d7b7844e352c7a46f4fcfc0629a5/amd_onnx-1.17.0-cp310-cp310-macosx_11_0_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.17.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amd-onnx-weekly",
+      "version": "1.18.0.dev20250127",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f7/4e/ff3735f79f885f9c9531ebf6f0177688b68e7f5b41a7ab3895657efed535/amd_onnx_weekly-1.18.0.dev20250127-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.18.0.dev20250127"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

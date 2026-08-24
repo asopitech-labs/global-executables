@@ -2,6 +2,30 @@
   "command": "mcap",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "magic_cap_cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/magic-cap/magic-cap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/foxglove/mcap/go/cli/mcap",
+      "version": "v0.0.0-20260611073228-6ae4052f09fd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/foxglove/mcap/go/cli/mcap/@v/v0.0.0-20260611073228-6ae4052f09fd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260611073228-6ae4052f09fd"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mcap",
       "version": "0.3.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

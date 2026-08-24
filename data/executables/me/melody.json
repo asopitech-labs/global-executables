@@ -2,6 +2,30 @@
   "command": "melody",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "melody",
+      "version": "0.3.0",
+      "repository": "https://gitlab.com/Fuzen-py/Melody",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "melody_cli",
+      "version": "0.20.0",
+      "repository": "https://github.com/yoav-lavi/melody",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "melody",
       "version": "0.20.0",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "grei/melody2",
+      "version": "v1.0.0",
+      "repository": "https://github.com/guangrei/melody2.git",
+      "source": "https://repo.packagist.org/p2/grei/melody2.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MIDRC-MELODY",
+      "version": "0.3.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/bf/f1/106d2fa10e4233708a8ac3a551cd5b1f42a478b17352e276b70f2b1c0615/midrc_melody-0.3.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

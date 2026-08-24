@@ -2,6 +2,42 @@
   "command": "gmap",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "scotch-7.0.13-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gmap",
+      "version": "0.4.0",
+      "repository": "https://github.com/seeyebe/gmap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gmap",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "gmap",
       "version": null,
@@ -12,6 +48,78 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitee.com/johng/gf",
+      "version": "v1.3.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitee.com/johng/gf/@v/v1.3.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitee.com/johng/gf",
+      "version": "v1.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitee.com/johng/gf/@v/v1.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogf/gf",
+      "version": "v1.6.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gogf/gf/@v/v1.6.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogf/gf",
+      "version": "v1.6.17",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gogf/gf/@v/v1.6.17.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.17"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogf/gf",
+      "version": "v1.6.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gogf/gf/@v/v1.6.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogf/gf",
+      "version": "v1.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gogf/gf/@v/v1.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.0"
     },
     {
       "ecosystem": "homebrew",
@@ -39,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

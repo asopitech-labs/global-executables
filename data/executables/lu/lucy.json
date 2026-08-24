@@ -2,6 +2,30 @@
   "command": "lucy",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "lucy-cli",
+      "version": "1.15.3",
+      "repository": "https://github.com/jwoo0122/lucy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.15.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lucy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "lucy",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Spokesoft.Lucy",
+      "version": "0.0.7",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/spokesoft.lucy/0.0.7/spokesoft.lucy.0.0.7.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MyBestFriendLUCY",
+      "version": "1.1.3",
+      "repository": "https://github.com/yourusername/LUCY-1986-2009-project-ethereum-market-prediction-unit-limit_uncertainty,control_yourself--OurFriendLucy",
+      "source": "https://files.pythonhosted.org/packages/f2/01/1d6c743afc2552b856aa3faefd49e496ab0ad0a1d4c34bd45d71c6acf73a/MyBestFriendLUCY-1.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MyFriendLUCY",
+      "version": "1.1.1",
+      "repository": "https://github.com/yourusername/LUCY-1986-2009-project-ethereum-market-prediction-unit-limit_uncertainty,control_yourself--OurFriendLucy",
+      "source": "https://files.pythonhosted.org/packages/56/6d/0f88f8b7160e811a6db608f30cbb5956187be0f4fd9344c634f011a09272/MyFriendLUCY-1.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

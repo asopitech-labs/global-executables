@@ -2,9 +2,57 @@
   "command": "sf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "shifu",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/implabinash/shifu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "spotlight-find",
+      "version": "0.1.1",
+      "repository": "https://github.com/odysseus0/sf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "star_frame_cli",
+      "version": "0.30.0",
+      "repository": "https://github.com/staratlasmeta/star_frame",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.30.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "swift_file",
+      "version": "0.1.9",
+      "repository": "https://github.com/mateoradman/swift_file",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sf",
-      "version": "2.147.7",
+      "version": "2.148.3",
       "repository": "https://developer.salesforce.com/tools/salesforcecli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +60,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "A19029.Services.Framework.Cli",
+      "version": "1.0.29",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/a19029.services.framework.cli/1.0.29/a19029.services.framework.cli.1.0.29.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.29"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "StoryForge",
+      "version": "0.0.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/43/ff/a02084f97d6dd4146876da4e7565a0e7fe9ca05e6db2c80d9e263a93bc55/storyforge-0.0.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "adelic-signalforge",
+      "version": "0.4.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/73/6f/ea8927fce63b5f69d687f15964224601d763a4d4aaa02738400aded757c3/adelic_signalforge-0.4.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

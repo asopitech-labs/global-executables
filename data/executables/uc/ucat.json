@@ -2,6 +2,18 @@
   "command": "ucat",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "unp-1:2.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/anacrolix/go-libutp",
       "version": "v0.0.0-20180522111405-6baeb806518d",
@@ -12,6 +24,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180522111405-6baeb806518d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/anacrolix/go-libutp",
+      "version": "v0.0.0-20180725071407-34b43d880940",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/anacrolix/go-libutp/@v/v0.0.0-20180725071407-34b43d880940.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180725071407-34b43d880940"
     },
     {
       "ecosystem": "go",
@@ -27,6 +51,30 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/anacrolix/go-libutp",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/anacrolix/go-libutp/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/anacrolix/go-libutp",
+      "version": "v1.5.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/anacrolix/go-libutp/@v/v1.5.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.1"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/anacrolix/utp",
       "version": "v0.0.0-20180219060659-9e0e1d1d0572",
       "repository": null,
@@ -36,6 +84,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180219060659-9e0e1d1d0572"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/anacrolix/utp",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/anacrolix/utp/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
     },
     {
       "ecosystem": "homebrew",
@@ -63,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

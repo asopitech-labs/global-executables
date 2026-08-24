@@ -2,6 +2,150 @@
   "command": "ts",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "moreutils-0.70-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cjrh-moreutils-ts",
+      "version": "0.1.4",
+      "repository": "https://github.com/cjrh/moreutils-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "extra-utils",
+      "version": "1.0.0",
+      "repository": "https://github.com/jayden-chan/extra-utils.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rusty-ts",
+      "version": "0.2.1",
+      "repository": "https://github.com/jsh562/rusty-ts",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "timestampcli",
+      "version": "0.2.0",
+      "repository": "https://gitlab.com/ohemelaar/timestampcli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "treesearch",
+      "version": "1.0.8",
+      "repository": "https://github.com/shibing624/TreeSearch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.8"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "trimsec",
+      "version": "2.5.1",
+      "repository": "https://github.com/hitblast/trimsec",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.5.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ts",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ts-bin",
+      "version": "1.0.0",
+      "repository": "https://github.com/bbqsrc/ts",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ts-cli",
+      "version": "0.4.0",
+      "repository": "https://codeberg.org/kdwarn/ts-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wavs-types",
+      "version": "2.8.0",
+      "repository": "https://github.com/Lay3rLabs/WAVS",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.8.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "moreutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "moreutils",
       "version": null,
@@ -12,6 +156,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/etcd",
+      "version": "v2.3.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/etcd/@v/v2.3.8%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.8+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mre-fog/etcd",
+      "version": "v2.3.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mre-fog/etcd/@v/v2.3.8%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.8+incompatible"
     },
     {
       "ecosystem": "go",
@@ -38,6 +206,18 @@
       "latest_version": "v0.0.0-20171002115256-78ecb04241c0"
     },
     {
+      "ecosystem": "go",
+      "package": "go.etcd.io/etcd",
+      "version": "v2.3.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.etcd.io/etcd/@v/v2.3.8%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.8+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "moreutils",
       "version": "0.70",
@@ -62,6 +242,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "moreutils-0.70-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "0110ss",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/0110ss/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alhidjazi/my-test-cli2",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alhidjazi%2Fmy-test-cli2/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "OneStrata.SwaggerToTs",
+      "version": "2.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/onestrata.swaggertots/2.0.2/onestrata.swaggertots.2.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyTaskScheduler",
+      "version": "0.0.1.2",
+      "repository": "https://github.com/lizeyan/TaskScheduler",
+      "source": "https://files.pythonhosted.org/packages/c3/ae/867ae4635b8380bb5d157271fef5a6e34941a37488b8bc337844aee824c4/PyTaskScheduler-0.0.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "moreutils",
       "version": null,
@@ -75,5 +315,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

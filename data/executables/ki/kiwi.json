@@ -2,6 +2,78 @@
   "command": "kiwi",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "kiwi-cli",
+      "version": "1.0.0",
+      "repository": "https://github.com/gleich/kiwi/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kiwi",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acr-edge/qecopilot",
+      "version": "1.0.3",
+      "repository": "git+https://github.com/acr-edge/qecopilot.git",
+      "source": "https://registry.npmjs.org/@acr-edge%2Fqecopilot/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Easykiwi",
+      "version": "1.3",
+      "repository": "https://github.com/carrasquel/easykiwi",
+      "source": "https://files.pythonhosted.org/packages/a1/f4/96572d5b26ce05f65fd2564b555c6a622448269d932a58f0854435f74cae/Easykiwi-1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "akiwi",
+      "version": "1.8.23",
+      "repository": "https://github.com/shouxieai/tensorRT_Pro",
+      "source": "https://files.pythonhosted.org/packages/90/ea/a19e666052a6085e6528a2554536db2505edf897633da3811967de448efd/akiwi-1.8.23.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.8.23"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "kiwi",
+      "version": "1.0.0",
+      "repository": "http://yaksnrainbows.com",
+      "source": "https://rubygems.org/gems/kiwi-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "kiwi",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

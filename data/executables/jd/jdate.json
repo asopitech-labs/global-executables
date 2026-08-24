@@ -2,6 +2,30 @@
   "command": "jdate",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jdate",
+      "version": "1.0.0",
+      "repository": "https://github.com/jfcode4/jdate",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "jcal",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "jcal",
       "version": null,
@@ -26,6 +50,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "jalali-date",
+      "version": "0.3.7",
+      "repository": "http://github.com/loqman/jalalidate",
+      "source": "https://rubygems.org/gems/jalali-date-0.3.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jalalidate",
+      "version": "0.3.6",
+      "repository": "http://github.com/aziz/jalalidate",
+      "source": "https://rubygems.org/gems/jalalidate-0.3.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "jcal",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

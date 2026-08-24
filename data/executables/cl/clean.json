@@ -2,6 +2,66 @@
   "command": "clean",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "clean",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "clean-rs",
+      "version": "0.1.18",
+      "repository": "https://github.com/holi-java/clean",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.18"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "msaver",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v0.3.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v0.3.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blend/go-sdk",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blend/go-sdk/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/h2non/gock",
       "version": "v1.0.10",
@@ -12,6 +72,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/h2non/gock",
+      "version": "v1.0.12",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.0.12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.12"
     },
     {
       "ecosystem": "go",
@@ -28,6 +100,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/h2non/gock",
+      "version": "v1.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/h2non/gock",
       "version": "v1.0.9",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.0.9.zip",
@@ -36,6 +120,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/h2non/gock",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/h2non/gock/@v/v1.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v0",
+      "version": "v0.0.0-20160419120746-1baf36abac00",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v0/@v/v0.0.0-20160419120746-1baf36abac00.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160419120746-1baf36abac00"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
     },
     {
       "ecosystem": "go",
@@ -52,6 +184,18 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
       "version": "v1.0.12",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.12.zip",
@@ -60,6 +204,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.12"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.13"
     },
     {
       "ecosystem": "go",
@@ -76,6 +232,54 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
       "version": "v1.0.6",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.6.zip",
@@ -84,6 +288,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.0.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.0.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gock.v1",
+      "version": "v1.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gock.v1/@v/v1.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2"
     },
     {
       "ecosystem": "homebrew",
@@ -96,8 +348,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "IFProject",
+      "version": "0.0.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/34/ec/3499151c88012bd7eef6f3d0a6adf53d71cc4a245326d551af9dbb9b5d0c/IFProject-0.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aidial-interceptors-sdk",
+      "version": "0.8.0",
+      "repository": "https://epam-rail.com",
+      "source": "https://files.pythonhosted.org/packages/db/1e/4f5f13708988a003d7930357e608b65a9fdb7ec2ba951c4e9579858fdf16/aidial_interceptors_sdk-0.8.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "avcmt-py",
+      "version": "1.7.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e9/45/127260dfba3543cda2220be6c7c8b290aefb7d0d5a35874dbcb35d19365f/avcmt_py-1.7.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.7.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "clean",
+      "version": "1.1.1",
+      "repository": "http://geekfu.org",
+      "source": "https://rubygems.org/gems/clean-1.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ii",
+      "version": "0.1.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/ii-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

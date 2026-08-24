@@ -1,0 +1,31 @@
+{
+  "command": "gkill",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "gkill",
+      "version": "0.2.3",
+      "repository": "https://github.com/ax-x2/gkill",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "coreutils-8.32-5",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

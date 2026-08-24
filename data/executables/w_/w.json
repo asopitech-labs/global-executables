@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "procutils-w",
+      "version": "0.2.0",
+      "repository": "https://gitlab.com/rustutils/procutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "procps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "procps",
       "version": null,
@@ -84,6 +108,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.0.0-rc.15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.0.0-rc.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.0.0-rc.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0-rc.2"
     },
     {
       "ecosystem": "go",
@@ -172,6 +208,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
       "version": "v2.0.6",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.0.6.zip",
@@ -230,6 +278,54 @@
       "latest_version": "v2.2.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.8.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.8.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.8.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "procps",
       "version": "4.0.7",
@@ -240,6 +336,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "procps-ng-4.0.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
     },
     {
       "ecosystem": "ubuntu",
@@ -255,5 +375,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

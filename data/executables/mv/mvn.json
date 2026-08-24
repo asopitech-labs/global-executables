@@ -2,6 +2,18 @@
   "command": "mvn",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "maven-3.9.16-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "maven",
       "version": "3.9.16",
@@ -24,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aleen42/ci-common",
+      "version": "0.1.9-2",
+      "repository": "git+https://github.com/Coremail/ci-common.git",
+      "source": "https://registry.npmjs.org/@aleen42%2Fci-common/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.9-2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "maven4",
+      "version": "4.0.0-rc-6",
+      "repository": "https://maven.apache.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.0.0-rc-6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

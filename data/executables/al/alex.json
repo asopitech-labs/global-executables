@@ -2,6 +2,54 @@
   "command": "alex",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "alex-3.5.4.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "alex",
+      "version": "0.1.31",
+      "repository": "https://github.com/madhavajay/alex",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.31"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "parlex-gen",
+      "version": "0.4.1",
+      "repository": "https://github.com/ikhomyakov/parlex.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "alex",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "alex",
       "version": null,
@@ -26,6 +74,66 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@alexkl/core",
+      "version": "0.0.17",
+      "repository": "git+https://github.com/220529/alexkl.git",
+      "source": "https://registry.npmjs.org/@alexkl%2Fcore/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.17"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexsummer/cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alexsummer%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-lexicon",
+      "version": "0.11.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/9a/e3/dc6dbc1a7614e46912b3752773f7604b49b0561cd4f0ddc2d3620ebf28ff/agent_lexicon-0.11.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alex-py",
+      "version": "1.0.0",
+      "repository": "http://github.com/kaushik94/alex",
+      "source": "https://files.pythonhosted.org/packages/38/df/5203f7901d19cde7aeed46855675188a75b6f6c6d315472915954114a4df/alex_py-1.0.0-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "alex",
+      "version": "0.0.2",
+      "repository": "https://github.com/juangesino/alex",
+      "source": "https://rubygems.org/gems/alex-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "alex",
       "version": null,
@@ -39,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

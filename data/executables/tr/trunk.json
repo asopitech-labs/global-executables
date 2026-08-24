@@ -2,6 +2,42 @@
   "command": "trunk",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "trunk-0.21.14-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pg-trunk",
+      "version": "0.17.1",
+      "repository": "https://github.com/tembo-io/trunk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "trunk",
+      "version": "0.21.14",
+      "repository": "https://github.com/trunk-rs/trunk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.21.14"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "trunk",
       "version": "0.21.14",
@@ -12,8 +48,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "trunk",
+      "version": "0.21.14",
+      "repository": "https://trunkrs.dev/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.21.14"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

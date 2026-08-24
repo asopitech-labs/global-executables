@@ -1,0 +1,31 @@
+{
+  "command": "generate-index",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "santa",
+      "version": "0.4.0",
+      "repository": "https://github.com/tylerbutler/santa",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0ti.me/index-generator",
+      "version": "0.1.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@0ti.me%2Findex-generator/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.9"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

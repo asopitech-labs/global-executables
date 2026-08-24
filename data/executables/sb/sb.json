@@ -2,6 +2,102 @@
   "command": "sb",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "antimony-lang",
+      "version": "0.9.0",
+      "repository": "https://github.com/antimony-lang/antimony",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ast-bro",
+      "version": "4.2.0",
+      "repository": "https://github.com/aeroxy/ast-bro",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "4.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ast-outline",
+      "version": "2.1.1",
+      "repository": "https://github.com/aeroxy/ast-bro",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sb",
+      "version": "0.3.12",
+      "repository": "https://github.com/dirvine/sb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.12"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "second-brain-cli",
+      "version": "0.5.3",
+      "repository": "https://github.com/Anyesh/second-brain",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "shell-buddy",
+      "version": "0.11.0",
+      "repository": "https://github.com/hjelev/sb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "snowbros-atlas",
+      "version": "0.4.0",
+      "repository": "https://github.com/snowbros-labs/atlas",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lrzsz",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "lrzsz",
       "version": null,
@@ -12,6 +108,126 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alola-react/storybook",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/alolainc/alola-react-sdk.git",
+      "source": "https://registry.npmjs.org/@alola-react%2Fstorybook/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ast-bro/cli",
+      "version": "4.2.0",
+      "repository": "git+https://github.com/aeroxy/ast-bro.git",
+      "source": "https://registry.npmjs.org/@ast-bro%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ast-outline/cli",
+      "version": "2.1.1",
+      "repository": "git+https://github.com/aeroxy/ast-bro.git",
+      "source": "https://registry.npmjs.org/@ast-outline%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "ServiceBusCli",
+      "version": "0.0.9-beta",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/servicebuscli/0.0.9-beta/servicebuscli.0.0.9-beta.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.9-beta"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "asika/simple-benchmark",
+      "version": "3.1.0",
+      "repository": "https://github.com/asika32764/php-simple-benchmark.git",
+      "source": "https://repo.packagist.org/p2/asika/simple-benchmark.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ast-bro",
+      "version": "4.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1e/90/d00805525f7c083825d94998018dacf09fa785f78e258ada92b6b0e2abb3/ast_bro-4.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ast-outline-cli",
+      "version": "2.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/06/00/86a017018293dd05277141c2042123cc1d0777d4a14582b007d8f500a00d/ast_outline_cli-2.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "antimony",
+      "version": "0.1.1",
+      "repository": "https://github.com/manheim/antimony",
+      "source": "https://rubygems.org/gems/antimony-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "antimony-ssh",
+      "version": "0.1.4",
+      "repository": "https://github.com/manheim/antimony",
+      "source": "https://rubygems.org/gems/antimony-ssh-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-fancy",
+      "version": "0.1.3",
+      "repository": "https://github.com/mrinterweb/git-fancy",
+      "source": "https://rubygems.org/gems/git-fancy-0.1.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +243,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

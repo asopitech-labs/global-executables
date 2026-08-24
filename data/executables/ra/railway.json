@@ -2,9 +2,21 @@
   "command": "railway",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "railwayapp",
+      "version": "5.43.1",
+      "repository": "https://github.com/railwayapp/cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "5.43.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "railway",
-      "version": "5.41.2",
+      "version": "5.43.1",
       "repository": "https://railway.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "railway",
+      "version": "5.43.1",
+      "repository": "https://github.com/railwayapp/cli",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.43.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

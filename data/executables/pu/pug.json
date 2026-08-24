@@ -2,6 +2,18 @@
   "command": "pug",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pug",
+      "version": "0.2.0",
+      "repository": "https://github.com/bnoctis/pug-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pug",
       "version": "0.6.5",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@3-/pug",
+      "version": "0.2.2",
+      "repository": "git+https://atomgit.com/i18n/lib.git",
+      "source": "https://registry.npmjs.org/@3-%2Fpug/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kylekatarnls/jade-php",
+      "version": "3.3.1",
+      "repository": "https://github.com/kylekatarnls/jade-php.git",
+      "source": "https://repo.packagist.org/p2/kylekatarnls/jade-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "3.3.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

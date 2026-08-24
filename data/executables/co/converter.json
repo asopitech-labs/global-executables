@@ -2,6 +2,42 @@
   "command": "converter",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "imagepipe",
+      "version": "0.5.1",
+      "repository": "https://github.com/pedrocr/imagepipe",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mucab",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nydus-snapshotter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "nydus-snapshotter",
       "version": null,
@@ -12,8 +48,56 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "beechit/json-to-code-climate-subset-converter",
+      "version": "1.6.0",
+      "repository": "https://github.com/beechit/json-to-code-climate-subset-converter.git",
+      "source": "https://repo.packagist.org/p2/beechit/json-to-code-climate-subset-converter.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "crevasse/converter",
+      "version": "0.1.1",
+      "repository": "https://github.com/crevasse/converter.git",
+      "source": "https://repo.packagist.org/p2/crevasse/converter.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jaymoulin/yamete",
+      "version": "1.22.0",
+      "repository": "https://github.com/jaymoulin/yamete.git",
+      "source": "https://repo.packagist.org/p2/jaymoulin/yamete.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.22.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alanfe-puc-ds-csv-converter",
+      "version": "0.3.6",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/05/7a/1b516511f2a0a9aee57bae3f14aa5292afdcc06d8e6282f545756932c36a/alanfe_puc_ds_csv_converter-0.3.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

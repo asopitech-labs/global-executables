@@ -2,6 +2,30 @@
   "command": "static-web-server",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "static-web-server",
+      "version": "2.44.0",
+      "repository": "https://github.com/static-web-server/static-web-server",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.44.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "static-web-server-vicarian",
+      "version": "3.0.0-vicarian.1",
+      "repository": "https://github.com/static-web-server/static-web-server",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0-vicarian.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "static-web-server",
       "version": "2.44.0",
@@ -12,8 +36,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "static-web-server",
+      "version": "2.44.0",
+      "repository": "https://static-web-server.net/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.44.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

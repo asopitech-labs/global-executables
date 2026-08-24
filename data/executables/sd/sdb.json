@@ -2,6 +2,30 @@
   "command": "sdb",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sdb_debugger",
+      "version": "0.2.2",
+      "repository": "https://github.com/qhc99/rust-workspace/tree/master/sdb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "seismicdb",
+      "version": "0.6.1",
+      "repository": "https://github.com/alice-comfy/SeismicDB",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sdb",
       "version": "2.5.0",
@@ -24,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "api-sandbox",
+      "version": "0.1.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d5/a4/6f4cd26bad04e866959ecd45a759f531fe4e3028e65f16bcabe25f9fac28/api_sandbox-0.1.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

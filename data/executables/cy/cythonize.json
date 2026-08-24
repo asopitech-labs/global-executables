@@ -2,6 +2,30 @@
   "command": "cythonize",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cython-3.2.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cython3",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "cython3",
       "version": null,
@@ -16,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "cython",
-      "version": "3.2.9",
+      "version": "3.3.0",
       "repository": "https://cython.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +48,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "cython-3.2.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Cython",
+      "version": "3.2.9",
+      "repository": "https://cython.org/",
+      "source": "https://files.pythonhosted.org/packages/00/ec/e61deec9bcfbb0e1b36f8b5ba75cb44644419b4bfd0fdd666bffd21d9579/cython-3.2.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.2.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyBookAgents",
+      "version": "0.0.1.dev0",
+      "repository": "https://facebook.com/sintxcs",
+      "source": "https://files.pythonhosted.org/packages/f7/2a/487262b84482a401329339317a1a40f62631f4567d8e6444f79db2e99664/PyBookAgents-0.0.1.dev0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1.dev0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

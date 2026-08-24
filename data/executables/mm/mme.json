@@ -6,12 +6,48 @@
       "package": "plc-utils-extra",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "plc-utils-extra",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wmnsk/go-gtp",
+      "version": "v0.3.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wmnsk/go-gtp/@v/v0.3.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akabeko/music-metadata-editor-cli",
+      "version": "1.1.1",
+      "repository": "git+https://github.com/akabekobeko/npm-music-metadata-editor.git",
+      "source": "https://registry.npmjs.org/@akabeko%2Fmusic-metadata-editor-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

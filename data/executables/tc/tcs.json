@@ -2,6 +2,30 @@
   "command": "tcs",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tcs-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/spool-labs/tcs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tcs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "tcs",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/paulrosania/go-charset",
+      "version": "v0.0.0-20151028000031-621bb39fcc83",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/paulrosania/go-charset/@v/v0.0.0-20151028000031-621bb39fcc83.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20151028000031-621bb39fcc83"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/paulrosania/go-charset",
+      "version": "v0.0.0-20190326053356-55c9d7a5834c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/paulrosania/go-charset/@v/v0.0.0-20190326053356-55c9d7a5834c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190326053356-55c9d7a5834c"
     },
     {
       "ecosystem": "go",
@@ -38,6 +86,18 @@
       "latest_version": "v0.0.0-20180617210344-2471d30d28b4"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/rogpeppe/go-charset",
+      "version": "v0.0.0-20190617161244-0dc95cdf6f31",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rogpeppe/go-charset/@v/v0.0.0-20190617161244-0dc95cdf6f31.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190617161244-0dc95cdf6f31"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "tcs",
       "version": null,
@@ -51,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

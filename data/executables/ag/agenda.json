@@ -1,0 +1,43 @@
+{
+  "command": "agenda",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "maui-agenda-1.0.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@avilaops/agenda-cli",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/avilaops/agenda.git",
+      "source": "https://registry.npmjs.org/@avilaops%2Fagenda-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agenda-cli",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/39/b5/ffdb414690fd59677a47861496890e269c3c95fd655e3aa9478276f339c8/agenda_cli-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

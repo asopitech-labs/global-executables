@@ -2,6 +2,54 @@
   "command": "arborist",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "arborist-cli",
+      "version": "0.2.1",
+      "repository": "https://github.com/StrangeDaysTech/arborist-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ts-arborist",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/neilfitzgerald1972/arborist",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "arborist-ai",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/23/41/538877f39625ec31260021ce5b32ce7028d7ec9c6af3a914c8316f1a03e8/arborist_ai-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "arborist",
+      "version": "0.6.0",
+      "repository": "http://deveiate.org/projects/Arborist",
+      "source": "https://rubygems.org/gems/arborist-0.6.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "npm",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

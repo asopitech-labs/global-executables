@@ -2,6 +2,30 @@
   "command": "debootstrap",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "debootstrap-1.0.144-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@achingbrain/debootstrap",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@achingbrain%2Fdebootstrap/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "debootstrap",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

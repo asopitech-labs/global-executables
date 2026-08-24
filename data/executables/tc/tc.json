@@ -3,7 +3,7 @@
   "providers": [
     {
       "ecosystem": "arch",
-      "package": "iproute2-7.1.0-1",
+      "package": "iproute2-7.2.0-1",
       "version": null,
       "repository": null,
       "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
@@ -12,6 +12,54 @@
       "package_system": "pacman",
       "distribution_family": "arch",
       "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tc",
+      "version": "1.1.1",
+      "repository": "https://github.com/bephemeral/textcount",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "termcalc",
+      "version": "1.0.1",
+      "repository": "https://github.com/rtbo/termcalc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "token-counter",
+      "version": "0.2.0",
+      "repository": "https://github.com/EndlessReform/token-counter",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "iproute2",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
     },
     {
       "ecosystem": "debian",
@@ -24,6 +72,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "TsCommentify",
+      "version": "1.6.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/tscommentify/1.6.1/tscommentify.1.6.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.6.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "annieslasso",
+      "version": "0.2.96",
+      "repository": "http://thecannon.io",
+      "source": "https://files.pythonhosted.org/packages/28/4c/29d56f4b38f3549cc7e6cb801bc5bf5d4601f8f6dd447594714e86ba9a93/annieslasso-0.2.96-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.96"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

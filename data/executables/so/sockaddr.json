@@ -6,6 +6,18 @@
       "package": "ucommon-utils",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ucommon-utils",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -48,6 +60,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170523225028-2d10d7c10258"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-sockaddr",
+      "version": "v0.0.0-20170627023441-41949a141473",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-sockaddr/@v/v0.0.0-20170627023441-41949a141473.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170627023441-41949a141473"
     },
     {
       "ecosystem": "go",
@@ -98,6 +122,18 @@
       "latest_version": "v1.0.2"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-sockaddr",
+      "version": "v1.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-sockaddr/@v/v1.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ucommon",
       "version": "7.0.1",
@@ -123,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

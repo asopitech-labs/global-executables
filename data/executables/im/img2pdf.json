@@ -2,6 +2,18 @@
   "command": "img2pdf",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "img2pdf-0.6.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "img2pdf",
       "version": "0.6.3",
@@ -12,6 +24,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Img2Pdf",
+      "version": "1.0.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/img2pdf/1.0.4/img2pdf.1.0.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "img2pdf",
+      "version": "0.0.5",
+      "repository": "https://github.com/sroller/img2pdf",
+      "source": "https://rubygems.org/gems/img2pdf-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

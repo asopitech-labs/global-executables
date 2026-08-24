@@ -2,6 +2,78 @@
   "command": "gt",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "genotype_cli",
+      "version": "0.16.2",
+      "repository": "https://github.com/kossnocorp/genotype",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "git-tailor",
+      "version": "2.0.0",
+      "repository": "https://github.com/jordfras/git-tailor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "goto_project",
+      "version": "0.2.1",
+      "repository": "https://github.com/sivakov512/goto-project-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "groundtruth",
+      "version": "0.2.0",
+      "repository": "https://github.com/jondot/groundtruth",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "stkd-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/neul-labs/stkd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "genometools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "genometools",
       "version": null,
@@ -12,6 +84,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/im-0xea/gt",
+      "version": "v0.0.0-20230620095837-17628688a8c9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/im-0xea/gt/@v/v0.0.0-20230620095837-17628688a8c9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230620095837-17628688a8c9"
     },
     {
       "ecosystem": "homebrew",
@@ -50,6 +134,163 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@arianee/gitool",
+      "version": "1.28.0",
+      "repository": "git+https://github.com/Arianee/gitool.git",
+      "source": "https://registry.npmjs.org/@arianee%2Fgitool/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.28.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "CreativeCoders.GitTool",
+      "version": "0.24.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/creativecoders.gittool/0.24.0/creativecoders.gittool.0.24.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.24.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "GT.CLI",
+      "version": "2.0.0-beta1.2108.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gt.cli/2.0.0-beta1.2108.1/gt.cli.2.0.0-beta1.2108.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.0.0-beta1.2108.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Gwv.Gotcha.GlobalTool",
+      "version": "1.0.12",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gwv.gotcha.globaltool/1.0.12/gwv.gotcha.globaltool.1.0.12.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.12"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "EasyGitTool",
+      "version": "0.2705407472.dev0",
+      "repository": "https://easygittool.github.io",
+      "source": "https://files.pythonhosted.org/packages/77/a0/2ebdfdf3bd0c92b50d614078811450f564c2c099f30f338ea2e80f1adf71/EasyGitTool-0.2705407472.dev0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2705407472.dev0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Gentle",
+      "version": "0.1",
+      "repository": "http://www.dongwm.com",
+      "source": "https://files.pythonhosted.org/packages/9f/4d/0392ecd26f92c045c922d27d515bfb1c5b3db324f020858e05c2cdb79be0/Gentle-0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ezgit",
+      "version": "0.2.0",
+      "repository": "http://github.com/ajjames/ezgit",
+      "source": "https://rubygems.org/gems/ezgit-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gaptool",
+      "version": "0.11.0",
+      "repository": "http://mdb.io",
+      "source": "https://rubygems.org/gems/gaptool-0.11.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.11.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gaptool-client",
+      "version": "0.8.2",
+      "repository": "http://www.gild.com",
+      "source": "https://rubygems.org/gems/gaptool-client-0.8.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "growl-transfer",
+      "version": "0.0.4",
+      "repository": "https://github.com/ctshryock/growl-transfer",
+      "source": "https://rubygems.org/gems/growl-transfer-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gt-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/jgrodowski/gt",
+      "source": "https://rubygems.org/gems/gt-cli-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "green-tunnel",
+      "version": "2.0.2",
+      "repository": "https://github.com/SadeghHayeri/GreenTunnel",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.0.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "genometools",
       "version": null,
@@ -63,5 +304,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "schema-generator",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "steer",
+      "version": "0.19.0",
+      "repository": "https://github.com/BrendanGraham14/steer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.19.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "steer-cli",
+      "version": "0.1.5",
+      "repository": "https://github.com/brendangraham14/steer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20170426233943-68f4ded48ba9",
@@ -16,6 +40,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20170717235551-e4f56557df62",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20170717235551-e4f56557df62.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170717235551-e4f56557df62"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20170729233727-0c5108395e2d",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20170729233727-0c5108395e2d.zip",
@@ -24,6 +60,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170729233727-0c5108395e2d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20170807220725-57b029087370",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20170807220725-57b029087370.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170807220725-57b029087370"
     },
     {
       "ecosystem": "go",
@@ -52,6 +100,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20180218235700-15cf44e552f9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180218235700-15cf44e552f9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180218235700-15cf44e552f9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.0.0-20180419025854-664776a3b48a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180419025854-664776a3b48a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180419025854-664776a3b48a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
       "version": "v0.0.0-20180520015035-48a0ecefe2e4",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.0.0-20180520015035-48a0ecefe2e4.zip",
@@ -72,8 +144,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/googleapis/gnostic",
+      "version": "v0.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/googleapis/gnostic/@v/v0.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aleios-cloud/eventbridge-toolbox-schema-generator",
+      "version": "0.0.5",
+      "repository": "git+https://github.com/aleios-cloud/eventbridge-toolbox.git",
+      "source": "https://registry.npmjs.org/@aleios-cloud%2Feventbridge-toolbox-schema-generator/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

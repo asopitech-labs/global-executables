@@ -2,9 +2,45 @@
   "command": "gauge",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "faculties",
+      "version": "0.20.0",
+      "repository": "https://github.com/triblespace/faculties",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gauge-client",
+      "version": "0.3.1",
+      "repository": "https://github.com/aaronbassett/gauge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/getgauge/gauge",
+      "version": "v1.0.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/getgauge/gauge/@v/v1.0.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gauge",
-      "version": "1.6.35",
+      "version": "1.6.36",
       "repository": "https://gauge.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gauge",
+      "version": "1.6.36",
+      "repository": "https://gauge.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.6.36"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

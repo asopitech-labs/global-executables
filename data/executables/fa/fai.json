@@ -2,6 +2,30 @@
   "command": "fai",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fai-protocol",
+      "version": "0.2.1",
+      "repository": "https://github.com/kunci115/fai-protocol",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Flask-AutoIndex",
+      "version": "0.6.6",
+      "repository": "https://flask-autoindex.readthedocs.io",
+      "source": "https://files.pythonhosted.org/packages/b7/72/be5f9aa5a431123baa9bf2e99f8f182c67c84979d13f935709ed4205b446/Flask-AutoIndex-0.6.6.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "fai-client",
       "version": null,
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

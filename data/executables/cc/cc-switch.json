@@ -2,9 +2,21 @@
   "command": "cc-switch",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cc-switch",
+      "version": "0.3.1",
+      "repository": "https://github.com/Linuxdazhao/cc_auto_switch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cc-switch-cli",
-      "version": "5.10.1",
+      "version": "5.10.2",
       "repository": "https://github.com/SaladDay/cc-switch-cli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adithya-13/cc-switch",
+      "version": "1.0.6",
+      "repository": "git+https://github.com/adithya-13/cc-switch.git",
+      "source": "https://registry.npmjs.org/@adithya-13%2Fcc-switch/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alialf/cc-switch",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/alialfredji/cc-switch.git",
+      "source": "https://registry.npmjs.org/@alialf%2Fcc-switch/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aravhawk/cc-switch",
+      "version": "3.2.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aravhawk%2Fcc-switch/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "pub",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "probe-zmq",
+      "version": "0.3.7",
+      "repository": "https://github.com/ckoehler/probe",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pub",
+      "version": "0.3.12",
+      "repository": "https://github.com/btwiuse/pub",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.12"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/micro/examples",
       "version": "v0.0.0-20190130075939-4c88706279b7",
@@ -24,8 +48,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rickatcodemojo/fx",
+      "version": "v0.0.0-20200109010324-781092ff4b22",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rickatcodemojo/fx/@v/v0.0.0-20200109010324-781092ff4b22.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200109010324-781092ff4b22"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "beta_tools",
+      "version": "0.0.5",
+      "repository": "",
+      "source": "https://rubygems.org/gems/beta_tools-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

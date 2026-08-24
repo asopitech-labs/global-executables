@@ -2,6 +2,42 @@
   "command": "pygrun",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-antlr4-4.13.2-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "antlr4-grun",
+      "version": "0.4.1",
+      "repository": "https://github.com/charmoniumQ/antlr4-python-grun",
+      "source": "https://files.pythonhosted.org/packages/9f/6a/50ad9210d677d43dc27e9ce1f8078e73fb1212115f97f76663da65464112/antlr4_grun-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "antlr4-python3-runtime",
+      "version": "4.13.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/89/03/a851e84fcbb85214dc637b6378121ef9a0dd61b4c65264675d8a5c9b1ae7/antlr4_python3_runtime-4.13.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.13.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-antlr4",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

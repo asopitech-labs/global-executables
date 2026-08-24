@@ -2,6 +2,54 @@
   "command": "tether",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "serial-tether",
+      "version": "0.11.0",
+      "repository": "https://github.com/hulryung/serial-tether",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tether-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/datagrout/tether",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tether-utils",
+      "version": "0.11.4",
+      "repository": "https://github.com/RandomStudio/tether",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/vic",
+      "version": "v1.3.0-rc1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/vic/@v/v1.3.0-rc1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0-rc1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/hashicorp/vic",
       "version": "v1.5.0",
@@ -40,6 +88,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/vmware/vic",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vmware/vic",
       "version": "v1.5.2",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.2.zip",
@@ -48,8 +108,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.5.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vmware/vic",
+      "version": "v1.5.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/vic/@v/v1.5.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.8"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "thxnlo.tether",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "brook",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "brook-20260101.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/txthinking/brook",
+      "version": "v0.0.0-20190531125826-d329b08eb51a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/txthinking/brook/@v/v0.0.0-20190531125826-d329b08eb51a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190531125826-d329b08eb51a"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "brook",
       "version": "20260101",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

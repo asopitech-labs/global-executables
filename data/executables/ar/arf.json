@@ -2,9 +2,33 @@
   "command": "arf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "arf-cli",
+      "version": "20260607.0.4",
+      "repository": "https://github.com/ducks/arf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "20260607.0.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "arf-console",
+      "version": "0.5.0",
+      "repository": "https://github.com/eitsupi/arf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "arf",
-      "version": "0.4.5",
+      "version": "0.5.0",
       "repository": "https://github.com/eitsupi/arf",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

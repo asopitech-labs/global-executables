@@ -2,6 +2,30 @@
   "command": "sql",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "parallel-20260722-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "exoware-sql",
+      "version": "2026.7.1",
+      "repository": "https://github.com/exowarexyz/monorepo/tree/main/sql/rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2026.7.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/alecthomas/participle",
       "version": "v0.0.0-20190103085315-bf8340a459bd",
@@ -12,6 +36,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190103085315-bf8340a459bd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alecthomas/participle",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alecthomas/participle/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
     },
     {
       "ecosystem": "go",
@@ -27,6 +63,18 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/go-wonk/si/v2",
+      "version": "v2.1.43",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-wonk/si/v2/@v/v2.1.43.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.1.43"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/jen20/riviera",
       "version": "v0.0.0-20170921165304-a7eb91c136c9",
       "repository": null,
@@ -36,6 +84,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170921165304-a7eb91c136c9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mocheer/golib",
+      "version": "v0.0.0-20180211033259-a4505682ebce",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mocheer/golib/@v/v0.0.0-20180211033259-a4505682ebce.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180211033259-a4505682ebce"
     },
     {
       "ecosystem": "homebrew",
@@ -48,6 +108,43 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "parallel-20260422-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DBConnectionPool",
+      "version": "0.3.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2c/65/1d0ab4cabc8be5047f9cf465f849a5f3035fe15beaad11ab68fa1b04775a/dbconnectionpool-0.3.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "sqlcl",
+      "version": "26.2.1.222.1617",
+      "repository": "https://www.oracle.com/database/sqldeveloper/technologies/sqlcl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "26.2.1.222.1617"
     },
     {
       "ecosystem": "ubuntu",
@@ -63,5 +160,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

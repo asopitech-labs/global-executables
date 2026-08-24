@@ -2,6 +2,30 @@
   "command": "star",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "star",
+      "version": "0.1.2",
+      "repository": "https://github.com/hjiayz/star.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/meanhide/golang",
+      "version": "v0.0.0-20210825073704-98c714499dc2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/meanhide/golang/@v/v0.0.0-20210825073704-98c714499dc2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210825073704-98c714499dc2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "star",
       "version": "2024-03-21",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "111daty",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/111daty/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@armitee/star-cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@armitee%2Fstar-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

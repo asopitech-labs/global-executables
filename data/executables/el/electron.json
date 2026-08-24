@@ -1,0 +1,43 @@
+{
+  "command": "electron",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "electron-1:43-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/apache/qpid-proton",
+      "version": "v0.0.0-20260817100300-8d359708048d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/apache/qpid-proton/@v/v0.0.0-20260817100300-8d359708048d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260817100300-8d359708048d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "qpid.apache.org",
+      "version": "v0.0.0-20260817100300-8d359708048d",
+      "repository": null,
+      "source": "https://proxy.golang.org/qpid.apache.org/@v/v0.0.0-20260817100300-8d359708048d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260817100300-8d359708048d"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

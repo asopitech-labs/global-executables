@@ -1,0 +1,31 @@
+{
+  "command": "bashly",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "bashly",
+      "version": "1.4.0",
+      "repository": "https://bashly.dev",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bashly",
+      "version": "1.4.0",
+      "repository": "https://github.com/bashly-framework/bashly",
+      "source": "https://rubygems.org/gems/bashly-1.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.4.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

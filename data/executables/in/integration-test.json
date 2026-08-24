@@ -1,0 +1,43 @@
+{
+  "command": "integration-test",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "knishio-client",
+      "version": "0.9.4",
+      "repository": "https://github.com/WishKnish/KnishIO-Client-Rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/newscred/webhook-broker/integration-test",
+      "version": "v0.0.0-20260820124557-eff83cec3318",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/newscred/webhook-broker/integration-test/@v/v0.0.0-20260820124557-eff83cec3318.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820124557-eff83cec3318"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anterior/watchdawg",
+      "version": "0.0.7",
+      "repository": "git+https://github.com/anteriorcore/watchdawg.git",
+      "source": "https://registry.npmjs.org/@anterior%2Fwatchdawg/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.7"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

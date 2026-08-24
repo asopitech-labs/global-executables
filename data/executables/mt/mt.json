@@ -2,6 +2,42 @@
   "command": "mt",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "memtech",
+      "version": "0.1.0",
+      "repository": "https://github.com/IsotoxalDev/memtech",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "music-comp-mt-cli",
+      "version": "0.6.0",
+      "repository": "https://github.com/music-comp/mt-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wukong",
+      "version": "0.3.4",
+      "repository": "https://github.com/linux-china/wukong",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.4"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/dtolpin/infergo",
       "version": "v0.4.0",
@@ -72,8 +108,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "bitbucket.org/dtolpin/infergo",
+      "version": "v0.6.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/bitbucket.org/dtolpin/infergo/@v/v0.6.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Maitento.Shell",
+      "version": "26.8.7",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/maitento.shell/26.8.7/maitento.shell.26.8.7.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "26.8.7"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "delta-solutions/mysqltools",
+      "version": "1.0.8",
+      "repository": "https://github.com/Delta-Solutions/mysqltools.git",
+      "source": "https://repo.packagist.org/p2/delta-solutions/mysqltools.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.8"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Deliro.Mt",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

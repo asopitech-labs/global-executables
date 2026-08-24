@@ -2,6 +2,66 @@
   "command": "federation",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "grpc_graphql_gateway",
+      "version": "1.2.5",
+      "repository": "https://github.com/Protocol-Lattice/grpc_graphql_gateway",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "krackpot-rs",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lomocoin/stellar-go",
+      "version": "v0.0.0-20190124155450-cf1e2104ac12",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lomocoin/stellar-go/@v/v0.0.0-20190124155450-cf1e2104ac12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190124155450-cf1e2104ac12"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190117191501-eac57a5a172e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190117191501-eac57a5a172e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190117191501-eac57a5a172e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190119010821-e61b7f8307f6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190119010821-e61b7f8307f6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190119010821-e61b7f8307f6"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/stellar/go",
       "version": "v0.0.0-20190425211819-b9efeb270aea",
@@ -12,8 +72,80 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190425211819-b9efeb270aea"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190524214719-77008586ebb9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190524214719-77008586ebb9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524214719-77008586ebb9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190603212322-8eb1b2a1138b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190603212322-8eb1b2a1138b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190603212322-8eb1b2a1138b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190605001421-ab52594a2de9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190605001421-ab52594a2de9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190605001421-ab52594a2de9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190610131525-f5074f7607aa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190610131525-f5074f7607aa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190610131525-f5074f7607aa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190614181337-b9c203995c40",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190614181337-b9c203995c40.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190614181337-b9c203995c40"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stellar/go",
+      "version": "v0.0.0-20190620154127-8a76143e430b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stellar/go/@v/v0.0.0-20190620154127-8a76143e430b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190620154127-8a76143e430b"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,55 @@
+{
+  "command": "wsd",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "wvstreams-4.6.1-21",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "wsdsoftware.cli",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/wsdsoftware.cli/1.0.1/wsdsoftware.cli.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SinaTools",
+      "version": "1.0.9",
+      "repository": "https://github.com/SinaLab/sinatools",
+      "source": "https://files.pythonhosted.org/packages/aa/5e/0f91c77f92141019aff24431225adce0e2de221bb973b5372edeb4f418ac/sinatools-1.0.9-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "calas-ruby-wsd",
+      "version": "0.0.3",
+      "repository": "http://github.com/calas/ruby-wsd/tree/master",
+      "source": "https://rubygems.org/gems/calas-ruby-wsd-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

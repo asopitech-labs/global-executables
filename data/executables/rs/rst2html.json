@@ -2,6 +2,18 @@
   "command": "rst2html",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-docutils-1:0.23-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "docutils",
       "version": "0.23",
@@ -12,6 +24,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "python-docutils-0.22.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DysonPythonHack",
+      "version": "0.0.3.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/43/b8/a2803253b96afb5f31c934b72a85a6cefed6cba12903209984eb30d165d5/DysonPythonHack-0.0.3.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Plotium",
+      "version": "1.2.0",
+      "repository": "https://github.com/rohankishore/Plotium",
+      "source": "https://files.pythonhosted.org/packages/8b/8a/75cea6d984b49af9c15da0419ee5646fc12c387eb74d4f8779f37387138e/Plotium-1.2.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "affiant",
+      "version": "0.0.1.dev1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/85/9f/fa3338caaef57100753a2430076399eb794d481a13a62f61fda31eb94a41/affiant-0.0.1.dev1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1.dev1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

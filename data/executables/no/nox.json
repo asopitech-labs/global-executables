@@ -2,9 +2,57 @@
   "command": "nox",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-nox-2026.02.09-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nix-options-search",
+      "version": "0.3.5",
+      "repository": "https://github.com/madsbv/nix-options-search",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nox-mixnet",
+      "version": "0.1.0",
+      "repository": "https://github.com/hisoka-io/nox",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mjl-/nox",
+      "version": "v0.0.0-20190521125829-bec5ecfb5ada",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mjl-/nox/@v/v0.0.0-20190521125829-bec5ecfb5ada.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190521125829-bec5ecfb5ada"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "nox",
-      "version": "2026.8.10",
+      "version": "2026.8.17",
       "repository": "https://nox.thea.codes/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,6 +60,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Nox.Cli",
+      "version": "8.0.13",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/nox.cli/8.0.13/nox.cli.8.0.13.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "8.0.13"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,55 @@
+{
+  "command": "graphql-client",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "graphql-client-cli-0.16.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "graphql_client_cli",
+      "version": "0.16.0",
+      "repository": "https://github.com/graphql-rust/graphql-client",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "larsverp/graphql-client",
+      "version": "1.0.1",
+      "repository": "https://github.com/larsverp/graphql-client.git",
+      "source": "https://repo.packagist.org/p2/larsverp/graphql-client.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "graphql_client",
+      "version": "0.4.1",
+      "repository": "http://www.shopify.com/partners/apps",
+      "source": "https://rubygems.org/gems/graphql_client-0.4.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

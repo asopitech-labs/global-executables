@@ -2,9 +2,21 @@
   "command": "zero",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "zero-os",
+      "version": "0.1.2",
+      "repository": "https://github.com/zero-intel/zero",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "zero",
-      "version": "0.7.0",
+      "version": "0.8.0",
       "repository": "https://zero.gitlawb.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +36,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adhamu/zero",
+      "version": "7.0.2",
+      "repository": "https://github.com/adhamu/zero",
+      "source": "https://registry.npmjs.org/@adhamu%2Fzero/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "7.0.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aex.is/zero",
+      "version": "0.1.19",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aex.is%2Fzero/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.19"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "dimer47/zero",
+      "version": "v1.0.1",
+      "repository": "https://github.com/dimer47/zero.git",
+      "source": "https://repo.packagist.org/p2/dimer47/zero.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Vercel.Zero",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

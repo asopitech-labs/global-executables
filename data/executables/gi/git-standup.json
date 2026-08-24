@@ -2,6 +2,18 @@
   "command": "git-standup",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-standup",
+      "version": "0.2.2",
+      "repository": "https://github.com/hollanddd/git-standup-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "git-extras",
       "version": "7.5.0",
@@ -26,6 +38,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "git-extras-7.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "git-standup-cli",
+      "version": "2.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/git-standup-cli/2.2.0/git-standup-cli.2.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "git-extras",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

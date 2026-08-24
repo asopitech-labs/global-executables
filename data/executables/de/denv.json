@@ -2,6 +2,30 @@
   "command": "denv",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "denv",
+      "version": "0.3.0",
+      "repository": "https://github.com/eagletmt/denv-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "denv",
+      "version": "0.2.6",
+      "repository": "https://github.com/taiki45/denv",
+      "source": "https://rubygems.org/gems/denv-0.2.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libdemeter-perl",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

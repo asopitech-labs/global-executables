@@ -2,6 +2,18 @@
   "command": "koji",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "koji",
+      "version": "3.4.0",
+      "repository": "https://github.com/cococonscious/koji",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.4.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "koji",
       "version": "3.4.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "koji",
+      "version": "0.1.0",
+      "repository": "https://github.com/ninoseki/koji",
+      "source": "https://rubygems.org/gems/koji-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

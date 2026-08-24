@@ -2,6 +2,30 @@
   "command": "cabin",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cabin-language",
+      "version": "0.0.1",
+      "repository": "https://github.com/cabin-lang/cabin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cabinpkg",
+      "version": "0.17.0",
+      "repository": "https://github.com/cabinpkg/cabin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cabin",
       "version": "0.17.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

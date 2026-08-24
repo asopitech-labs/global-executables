@@ -2,6 +2,42 @@
   "command": "fyi",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fyi-1.0.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fyi",
+      "version": "0.1.0",
+      "repository": "https://github.com/paradigmxyz/fyi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fyi",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "fyi",
       "version": null,
@@ -12,8 +48,44 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "airblade-fyi",
+      "version": "1.0.1",
+      "repository": "http://github.com/airblade/fyi",
+      "source": "https://rubygems.org/gems/airblade-fyi-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fancy",
+      "version": "0.10.0",
+      "repository": "https://github.com/bakkdoor/fancy",
+      "source": "https://rubygems.org/gems/fancy-0.10.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fyi",
+      "version": "1.2.0",
+      "repository": "http://github.com/airblade/fyi",
+      "source": "https://rubygems.org/gems/fyi-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

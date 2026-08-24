@@ -2,6 +2,18 @@
   "command": "ncc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ncc",
+      "version": "0.1.4",
+      "repository": "https://github.com/taylordotfish/ncc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ncc",
       "version": "0.45.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dsl-clang",
+      "version": "0.1.1",
+      "repository": "https://github.com/dvarrui/dsl-clang",
+      "source": "https://rubygems.org/gems/dsl-clang-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

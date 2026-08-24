@@ -1,0 +1,55 @@
+{
+  "command": "review",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "archlinux-contrib-20260611-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "archlinux-contrib-20260823-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sashiko",
+      "version": "0.2.5",
+      "repository": "https://github.com/sashiko-dev/sashiko",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "appsec-reviewer",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/9f/e9/47e7d337751364e7fe2e46daf450376239fa3d89ea354f0da93f0be5420a/appsec_reviewer-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

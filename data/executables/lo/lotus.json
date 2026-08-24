@@ -1,0 +1,43 @@
+{
+  "command": "lotus",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "lotus-lua",
+      "version": "0.10.16",
+      "repository": "https://github.com/orgs/lotus-shell/lotus-lua",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.16"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/filecoin-project/lotus",
+      "version": "v1.36.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/filecoin-project/lotus/@v/v1.36.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.36.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lotusrb",
+      "version": "0.6.1",
+      "repository": "http://lotusrb.org",
+      "source": "https://rubygems.org/gems/lotusrb-0.6.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

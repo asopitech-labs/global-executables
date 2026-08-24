@@ -2,6 +2,54 @@
   "command": "faucet",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "faucet-cli",
+      "version": "1.11.0",
+      "repository": "https://github.com/faucet-hq/faucet-stream",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.11.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "faucet-server",
+      "version": "2.1.0",
+      "repository": "https://github.com/ixpantia/faucet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sn_faucet",
+      "version": "0.5.3",
+      "repository": "https://github.com/maidsafe/safe_network",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "netpipes",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "netpipes",
       "version": null,
@@ -12,6 +60,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bhs-gq/quorum-hotstuff",
+      "version": "v1.10.25",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bhs-gq/quorum-hotstuff/@v/v1.10.25.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.25"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bitherhq/go-bither",
+      "version": "v1.7.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bitherhq/go-bither/@v/v1.7.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.1"
     },
     {
       "ecosystem": "go",
@@ -40,6 +112,162 @@
     {
       "ecosystem": "go",
       "package": "github.com/ethereum/go-ethereum",
+      "version": "v0.0.0-20190103143258-49975264a8d3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v0.0.0-20190103143258-49975264a8d3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190103143258-49975264a8d3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.7.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.7.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.14"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.20",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.20.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.20"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.21",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.21.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.21"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.22",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.22.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.22"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.22-0.20190401134259-cd79bc61a983",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.22-0.20190401134259-cd79bc61a983.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.22-0.20190401134259-cd79bc61a983"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.22-0.20190525220710-fec3b56f7f44",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.22-0.20190525220710-fec3b56f7f44.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.22-0.20190525220710-fec3b56f7f44"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.22-0.20190527102806-a184ab7a6188",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.22-0.20190527102806-a184ab7a6188.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.22-0.20190527102806-a184ab7a6188"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.22-0.20190528221609-008d250e3c57",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.22-0.20190528221609-008d250e3c57.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.22-0.20190528221609-008d250e3c57"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.22-0.20190612110940-c8c3ebd59370",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.22-0.20190612110940-c8c3ebd59370.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.22-0.20190612110940-c8c3ebd59370"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.23",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.23.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.23"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.8.24",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.24.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.24"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
       "version": "v1.8.27",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.8.27.zip",
@@ -48,6 +276,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.8.27"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/filecoin-project/go-filecoin",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/filecoin-project/go-filecoin/@v/v0.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/horizenofficial/go-ethereum",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/horizenofficial/go-ethereum/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/node-real/bsc-erigon",
+      "version": "v1.9.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/node-real/bsc-erigon/@v/v1.9.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/reserve-protocol/go-ethereum",
+      "version": "v1.8.22-0.20190522235950-9fb0ffbfa3b5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/reserve-protocol/go-ethereum/@v/v1.8.22-0.20190522235950-9fb0ffbfa3b5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.22-0.20190522235950-9fb0ffbfa3b5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/soulboundtoken/go-ethereum",
+      "version": "v1.10.23",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/soulboundtoken/go-ethereum/@v/v1.10.23.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.23"
     },
     {
       "ecosystem": "ubuntu",
@@ -63,5 +351,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

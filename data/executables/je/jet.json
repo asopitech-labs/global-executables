@@ -2,6 +2,18 @@
   "command": "jet",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jetkcli",
+      "version": "0.1.2-alpha1",
+      "repository": "https://github.com/oknozor/jetkcli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2-alpha1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jet",
       "version": "2.15.0",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@2players/jet",
+      "version": "4.4.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@2players%2Fjet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jet-framework",
+      "version": "0.0.1",
+      "repository": "http://github.com/erwanb/jet",
+      "source": "https://rubygems.org/gems/jet-framework-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

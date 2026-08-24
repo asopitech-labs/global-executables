@@ -2,6 +2,42 @@
   "command": "haml",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-haml-7.2.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "haml",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ruby-haml",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ruby-haml",
       "version": null,
@@ -12,6 +48,114 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "alexluke/grunt-haml-php",
+      "version": "0.1.0",
+      "repository": "https://github.com/alexluke/grunt-haml-php.git",
+      "source": "https://repo.packagist.org/p2/alexluke/grunt-haml-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "drnic-haml",
+      "version": "2.3.1",
+      "repository": "http://haml.hamptoncatlin.com/",
+      "source": "https://rubygems.org/gems/drnic-haml-2.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.3.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gohanlonllc-haml",
+      "version": "2.1.0.20080513000000",
+      "repository": "http://haml.hamptoncatlin.com/",
+      "source": "https://rubygems.org/gems/gohanlonllc-haml-2.1.0.20080513000000.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.1.0.20080513000000"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "haml",
+      "version": "7.4.1",
+      "repository": "https://github.com/haml/haml",
+      "source": "https://rubygems.org/gems/haml-7.4.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "7.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "haml-edge",
+      "version": "3.1.79",
+      "repository": "http://haml-lang.com/",
+      "source": "https://rubygems.org/gems/haml-edge-3.1.79.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.1.79"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "haml_ejs",
+      "version": "0.0.1",
+      "repository": "http://haml-lang.com/",
+      "source": "https://rubygems.org/gems/haml_ejs-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "honkster-haml",
+      "version": "2.1.1",
+      "repository": "http://haml.hamptoncatlin.com/",
+      "source": "https://rubygems.org/gems/honkster-haml-2.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jwhitmire-haml",
+      "version": "2.1.0.3",
+      "repository": "http://haml.hamptoncatlin.com",
+      "source": "https://rubygems.org/gems/jwhitmire-haml-2.1.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.1.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "merbjedi-haml",
+      "version": "2.1.0",
+      "repository": "https://github.com/merbjedi/haml",
+      "source": "https://rubygems.org/gems/merbjedi-haml-2.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +171,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

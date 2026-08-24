@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "uu_printf",
+      "version": "0.10.0",
+      "repository": "https://github.com/uutils/coreutils/tree/main/src/uu/printf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "coreutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "coreutils",
       "version": null,
@@ -27,6 +51,66 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/golang/tools",
+      "version": "v0.0.0-20181017214349-06f26fdaaa28",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/tools/@v/v0.0.0-20181017214349-06f26fdaaa28.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181017214349-06f26fdaaa28"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/tools",
+      "version": "v0.0.0-20181030221726-6c7e314b6563",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/tools/@v/v0.0.0-20181030221726-6c7e314b6563.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181030221726-6c7e314b6563"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181015201034-8919434dde1e",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181015201034-8919434dde1e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181015201034-8919434dde1e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181015221341-5d4988d199e2",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181015221341-5d4988d199e2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181015221341-5d4988d199e2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181016152912-4fd33079060a",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181016152912-4fd33079060a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181016152912-4fd33079060a"
+    },
+    {
+      "ecosystem": "go",
       "package": "golang.org/x/tools",
       "version": "v0.0.0-20181019005945-6adeb8aab2de",
       "repository": null,
@@ -36,6 +120,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181019005945-6adeb8aab2de"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181022211751-9650c66da3ff",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181022211751-9650c66da3ff.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181022211751-9650c66da3ff"
     },
     {
       "ecosystem": "go",
@@ -76,6 +172,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181029181417-2d2de6298155",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181029181417-2d2de6298155.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181029181417-2d2de6298155"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
       "version": "v0.0.0-20181030151751-bb28844c46df",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181030151751-bb28844c46df.zip",
@@ -112,6 +220,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181102050050-92b943e6bff7",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181102050050-92b943e6bff7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181102050050-92b943e6bff7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
       "version": "v0.0.0-20181102223251-96e9e165b75e",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181102223251-96e9e165b75e.zip",
@@ -120,6 +240,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181102223251-96e9e165b75e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181105195657-c76e1ad98a63",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181105195657-c76e1ad98a63.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181105195657-c76e1ad98a63"
     },
     {
       "ecosystem": "go",
@@ -136,6 +268,18 @@
     {
       "ecosystem": "go",
       "package": "golang.org/x/tools",
+      "version": "v0.0.0-20181106213628-e21233ffa6c3",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181106213628-e21233ffa6c3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181106213628-e21233ffa6c3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
       "version": "v0.0.0-20181107215632-34b416bd17b3",
       "repository": null,
       "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.0.0-20181107215632-34b416bd17b3.zip",
@@ -144,6 +288,124 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181107215632-34b416bd17b3"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "coreutils-8.32-5",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "uutils-coreutils-0.10.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "coreutils",
+      "version": "5.97.3",
+      "repository": "https://sourceforge.net/projects/mingw/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.97.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gow",
+      "version": "0.8.0",
+      "repository": "https://github.com/bmatzelle/gow",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "microsoft-coreutils",
+      "version": "2026.6.16",
+      "repository": "https://github.com/microsoft/coreutils",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.6.16"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "unxutils",
+      "version": "2007.03.01",
+      "repository": "https://unxutils.sourceforge.net/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2007.03.01"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "bash",
+      "version": "3.2.57(1)-release",
+      "repository": null,
+      "source": "bash@3.2.57(1)-release",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "ksh",
+      "version": "Version AJM 93u+ 2012-08-01",
+      "repository": null,
+      "source": "ksh@Version AJM 93u+ 2012-08-01",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "zsh",
+      "version": "5.9",
+      "repository": null,
+      "source": "zsh@5.9",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
     },
     {
       "ecosystem": "ubuntu",
@@ -159,5 +421,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

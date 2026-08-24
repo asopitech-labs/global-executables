@@ -2,6 +2,42 @@
   "command": "wordcount",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "texlive-latexextra-2026.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wordcount",
+      "version": "0.1.0",
+      "repository": "https://github.com/mhorikoshi/wordcount",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "emboss",
       "version": null,
@@ -14,6 +50,66 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/apache/beam",
+      "version": "v2.11.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/apache/beam/@v/v2.11.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.11.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/apache/beam",
+      "version": "v2.12.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/apache/beam/@v/v2.12.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.12.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/apache/beam",
+      "version": "v2.13.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/apache/beam/@v/v2.13.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.13.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goinaction/code",
+      "version": "v0.0.0-20171020164608-49fc99e6affb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goinaction/code/@v/v0.0.0-20171020164608-49fc99e6affb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171020164608-49fc99e6affb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/webgenie/go-in-action",
+      "version": "v0.0.0-20160424215153-d6068f2ca89b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/webgenie/go-in-action/@v/v0.0.0-20160424215153-d6068f2ca89b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160424215153-d6068f2ca89b"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "texlive",
       "version": "20260301",
@@ -24,6 +120,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abhishek_npm26/word-counter-cli",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@abhishek_npm26%2Fword-counter-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@afifa_dar/wordcount",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@afifa_dar%2Fwordcount/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amit_kumar1/wordcount-cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@amit_kumar1%2Fwordcount-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "GPTparser",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b4/b2/7285e01569bc1db9333ad44df9cf9cd6ef897b27e9c8404af8ae1a8542d8/GPTparser-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +183,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

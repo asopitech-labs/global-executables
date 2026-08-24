@@ -2,6 +2,90 @@
   "command": "parser",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fluent-syntax",
+      "version": "0.12.0",
+      "repository": "https://github.com/projectfluent/fluent-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fluent-syntax_for_carbide",
+      "version": "0.11.0",
+      "repository": "https://github.com/projectfluent/fluent-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "oca-parser-xls",
+      "version": "3.0.0-rc.9",
+      "repository": "https://github.com/THCLab/oca-parser-xls",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0-rc.9"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pax-designer",
+      "version": "0.38.3",
+      "repository": "https://www.github.com/paxproject/pax",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.38.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pax-example",
+      "version": "0.10.7",
+      "repository": "https://www.github.com/pax-lang/pax",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "simulon",
+      "version": "0.0.8",
+      "repository": "https://github.com/fleek-network/draco",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fd/httpmiddlewarevet",
+      "version": "v0.0.0-20170711130252-61b18658802f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fd/httpmiddlewarevet/@v/v0.0.0-20170711130252-61b18658802f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170711130252-61b18658802f"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/gobuffalo/packr/v2",
       "version": "v2.0.0",
@@ -60,6 +144,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.0.0-rc.15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.0.0-rc.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.0.0-rc.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0-rc.2"
     },
     {
       "ecosystem": "go",
@@ -148,6 +244,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
       "version": "v2.0.6",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.0.6.zip",
@@ -207,6 +315,90 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gobuffalo/packr/v2",
+      "version": "v2.8.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gobuffalo/packr/v2/@v/v2.8.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.8.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/src-d/enry/v2",
+      "version": "v2.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/src-d/enry/v2/@v/v2.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/travis-g/dice",
+      "version": "v0.0.0-20190530053535-cb3e33dc5a0e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/travis-g/dice/@v/v0.0.0-20190530053535-cb3e33dc5a0e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530053535-cb3e33dc5a0e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/enry.v1",
+      "version": "v1.6.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/enry.v1/@v/v1.6.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.4"
+    },
+    {
+      "ecosystem": "go",
       "package": "gopkg.in/src-d/enry.v1",
       "version": "v1.6.7",
       "repository": null,
@@ -216,8 +408,68 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.6.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/enry.v1",
+      "version": "v1.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/enry.v1/@v/v1.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agoric/babel-parser",
+      "version": "7.9.4",
+      "repository": "https://github.com/babel/babel/tree/master/packages/babel-parser",
+      "source": "https://registry.npmjs.org/@agoric%2Fbabel-parser/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "7.9.4"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Anduin.Parser",
+      "version": "10.0.25",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/anduin.parser/10.0.25/anduin.parser.10.0.25.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "10.0.25"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PatchQuant",
+      "version": "0.1.4",
+      "repository": "https://github.com/Patch-Traders/BackTester",
+      "source": "https://files.pythonhosted.org/packages/52/5b/d2976fd16dc6985e4e0a909e83bd6379fe80c378776cdf8591da4b4c21e4/PatchQuant-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "log_auditor",
+      "version": "0.1.0",
+      "repository": "https://github.com/the-harry/log_auditor",
+      "source": "https://rubygems.org/gems/log_auditor-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

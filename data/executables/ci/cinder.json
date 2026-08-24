@@ -2,6 +2,42 @@
   "command": "cinder",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-cinderclient-9.9.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cosmic-cinder",
+      "version": "0.1.22",
+      "repository": "https://github.com/cosmic-markets/cinder",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.22"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cinder",
+      "version": "0.5.5",
+      "repository": "http://github.com/CinderCI/cinder",
+      "source": "https://rubygems.org/gems/cinder-0.5.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-cinderclient",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

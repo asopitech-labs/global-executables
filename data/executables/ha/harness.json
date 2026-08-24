@@ -2,6 +2,66 @@
   "command": "harness",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "harness-cli",
+      "version": "0.0.9",
+      "repository": "https://github.com/wenyuzhao/harness",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "harness-rs-cli",
+      "version": "0.0.50",
+      "repository": "https://github.com/liliang-cn/harness-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.50"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "harnesscli",
+      "version": "0.1.6",
+      "repository": "https://github.com/ayshptk/harness-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "slow5lib",
+      "version": "0.1.0",
+      "repository": "https://github.com/Psy-Fer/slow5lib-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/revel/cmd",
+      "version": "v0.19.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/revel/cmd/@v/v0.19.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.19.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/robfig/revel",
       "version": "v0.0.0-20140226070238-e8aac16df9e9",
@@ -12,8 +72,116 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20140226070238-e8aac16df9e9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "5harness",
+      "version": "0.22.0",
+      "repository": "git+https://github.com/vantanminh/5harness.git",
+      "source": "https://registry.npmjs.org/5harness/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.22.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agntk/agent-harness",
+      "version": "0.18.0",
+      "repository": "git+https://github.com/Phoenixrr2113/agent-harness.git",
+      "source": "https://registry.npmjs.org/@agntk%2Fagent-harness/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.18.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ai-harness/cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ai-harness%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ai-substrate/engineering-harness",
+      "version": "0.13.0",
+      "repository": "git+https://github.com/AI-Substrate/harness-engineering.git",
+      "source": "https://registry.npmjs.org/@ai-substrate%2Fengineering-harness/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@allocator-one/harness-cli",
+      "version": "1.6.0",
+      "repository": "git+https://github.com/allocator-one/harness-cli.git",
+      "source": "https://registry.npmjs.org/@allocator-one%2Fharness-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antubattle/harness",
+      "version": "0.3.0",
+      "repository": "git+https://github.com/AntuBattle/Harness.git",
+      "source": "https://registry.npmjs.org/@antubattle%2Fharness/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aegisloop",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/11/b0/72007e8c1f8ca18b7b376b1814f851e7691533512e6ba410caa79826d3f3/aegisloop-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-eval-harness",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/99/01/d7f7cef56809241bebeb60500fa8fe4f104f5a5e964496287dd955001ea1/agent_eval_harness-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-harness-skills",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0f/b8/53cedc92f0a50bae8eb84be6f95eb1008c0fc855e5b2e8778c6fd3d21842/agent_harness_skills-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

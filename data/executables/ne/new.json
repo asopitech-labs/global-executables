@@ -2,6 +2,42 @@
   "command": "new",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fawkes-crypto-phase2",
+      "version": "0.2.2",
+      "repository": "https://github.com/zeropoolnetwork/phase2-bn254",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "new-cli",
+      "version": "0.2.1",
+      "repository": "https://github.com/m1guelpf/new-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nmh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "nmh",
       "version": null,
@@ -12,6 +48,90 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-ego/riot",
+      "version": "v0.0.0-20180801182457-6077cfdd3987",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-ego/riot/@v/v0.0.0-20180801182457-6077cfdd3987.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180801182457-6077cfdd3987"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-ego/riot",
+      "version": "v0.0.0-20181222142112-75a2cab10779",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-ego/riot/@v/v0.0.0-20181222142112-75a2cab10779.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181222142112-75a2cab10779"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-ego/riot",
+      "version": "v0.0.0-20190307162011-3d971d90bc83",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-ego/riot/@v/v0.0.0-20190307162011-3d971d90bc83.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190307162011-3d971d90bc83"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@1-/new",
+      "version": "0.1.2",
+      "repository": "git+https://github.com/webc-site/npm.git",
+      "source": "https://registry.npmjs.org/@1-%2Fnew/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@2h2d/new",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/2h2d-co/new.git",
+      "source": "https://registry.npmjs.org/@2h2d%2Fnew/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anireact/new",
+      "version": "1.0.0-wip.27",
+      "repository": "https://github.com/anireact/ui.git",
+      "source": "https://registry.npmjs.org/@anireact%2Fnew/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0-wip.27"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atrilabs/new",
+      "version": "1.0.0-alpha.37",
+      "repository": "git+https://github.com/cruxcode/atrilabs-engine.git",
+      "source": "https://registry.npmjs.org/@atrilabs%2Fnew/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0-alpha.37"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

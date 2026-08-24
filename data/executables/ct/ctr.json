@@ -2,6 +2,30 @@
   "command": "ctr",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "containerd-2.3.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "containerd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "containerd",
       "version": null,
@@ -12,6 +36,66 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20170510165706-3addd8406531",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20170510165706-3addd8406531.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170510165706-3addd8406531"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20170808145631-06b9cb351610",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20170808145631-06b9cb351610.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170808145631-06b9cb351610"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20170809015928-29a4dd7f46e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20170809015928-29a4dd7f46e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170809015928-29a4dd7f46e0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20171019150505-992280e8e265",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20171019150505-992280e8e265.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171019150505-992280e8e265"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20171108001111-27d450a01bb5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20171108001111-27d450a01bb5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171108001111-27d450a01bb5"
     },
     {
       "ecosystem": "go",
@@ -28,6 +112,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20180213225836-cfd04396dc68",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20180213225836-cfd04396dc68.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180213225836-cfd04396dc68"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
       "version": "v0.0.0-20180226221259-4ac4fd0b6a26",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20180226221259-4ac4fd0b6a26.zip",
@@ -36,6 +132,114 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180226221259-4ac4fd0b6a26"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20180530150710-c7083eed5d86",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20180530150710-c7083eed5d86.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180530150710-c7083eed5d86"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20180607163415-63522d9eaa5a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20180607163415-63522d9eaa5a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180607163415-63522d9eaa5a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20180706181834-b41633746ed4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20180706181834-b41633746ed4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180706181834-b41633746ed4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20180918143018-d97a907f7f78",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20180918143018-d97a907f7f78.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180918143018-d97a907f7f78"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20180926172542-f88d3e5d6dfe",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20180926172542-f88d3e5d6dfe.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180926172542-f88d3e5d6dfe"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20181008134259-15f19d7a67fa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20181008134259-15f19d7a67fa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181008134259-15f19d7a67fa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20181204111016-4b284fa3ab61",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20181204111016-4b284fa3ab61.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181204111016-4b284fa3ab61"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20181214195911-aa5e000c9637",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20181214195911-aa5e000c9637.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181214195911-aa5e000c9637"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v0.0.0-20181221132743-47b328aab791",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v0.0.0-20181221132743-47b328aab791.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181221132743-47b328aab791"
     },
     {
       "ecosystem": "go",
@@ -76,6 +280,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/containerd/containerd",
+      "version": "v1.0.0-beta.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.0.0-beta.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0-beta.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
       "version": "v1.0.2",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.0.2.zip",
@@ -84,6 +300,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v1.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.3"
     },
     {
       "ecosystem": "go",
@@ -100,6 +328,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/containerd/containerd",
+      "version": "v1.2.0-beta.2.0.20180915010629-0dc7636c0bcd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.2.0-beta.2.0.20180915010629-0dc7636c0bcd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0-beta.2.0.20180915010629-0dc7636c0bcd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
       "version": "v1.2.2",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.2.2.zip",
@@ -108,6 +348,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.2.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v1.2.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.2.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.3"
     },
     {
       "ecosystem": "go",
@@ -132,6 +384,126 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.2.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v1.2.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.2.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/containerd",
+      "version": "v1.7.34",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/containerd/@v/v1.7.34.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.34"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20181005214437-8506fe836677",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20181005214437-8506fe836677.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181005214437-8506fe836677"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20181012222137-f913714917d2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20181012222137-f913714917d2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181012222137-f913714917d2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20181101221744-2bb57d27203d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20181101221744-2bb57d27203d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181101221744-2bb57d27203d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20181204194632-0ca1e3c2b73b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20181204194632-0ca1e3c2b73b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181204194632-0ca1e3c2b73b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20181220000310-0d5cabd006cb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20181220000310-0d5cabd006cb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181220000310-0d5cabd006cb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20190102180456-4b4b2abb2eb1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20190102180456-4b4b2abb2eb1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190102180456-4b4b2abb2eb1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20190125013620-4dd6735020f5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20190125013620-4dd6735020f5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190125013620-4dd6735020f5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v0.0.0-20190212230335-da0c016c830b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v0.0.0-20190212230335-da0c016c830b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190212230335-da0c016c830b"
     },
     {
       "ecosystem": "go",
@@ -160,6 +532,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/containerd/cri",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
       "version": "v1.11.1",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v1.11.1.zip",
@@ -168,6 +552,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.11.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/cri",
+      "version": "v1.11.1-0.20190125013620-4dd6735020f5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/cri/@v/v1.11.1-0.20190125013620-4dd6735020f5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.1-0.20190125013620-4dd6735020f5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/containerd",
+      "version": "v0.0.0-20161117222435-03e5862ec0d8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/containerd/@v/v0.0.0-20161117222435-03e5862ec0d8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161117222435-03e5862ec0d8"
     },
     {
       "ecosystem": "go",
@@ -180,6 +588,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170525184016-26183b3a69a3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/containerd",
+      "version": "v0.2.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/containerd/@v/v0.2.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.6"
     },
     {
       "ecosystem": "go",
@@ -206,6 +626,19 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "containerd",
+      "version": "2.3.4",
+      "repository": "https://containerd.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.3.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "containerd",
       "version": null,
@@ -219,5 +652,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

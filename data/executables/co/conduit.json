@@ -2,6 +2,42 @@
   "command": "conduit",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "conduit-cli",
+      "version": "0.4.2",
+      "repository": "https://github.com/SirCesarium/conduit-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lopatnov-conduit",
+      "version": "1.2.0",
+      "repository": "https://github.com/lopatnov/conduit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "valohai-conduit",
+      "version": "0.1.1",
+      "repository": "https://github.com/valohai/conduit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "conduit",
       "version": "0.19.0",
@@ -12,8 +48,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Zakira.Conduit",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/zakira.conduit/0.5.0/zakira.conduit.0.5.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "conduit-ui/conduit",
+      "version": "v3.0.0-alpha.1",
+      "repository": "https://github.com/conduit-ui/conduit.git",
+      "source": "https://repo.packagist.org/p2/conduit-ui/conduit.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.0.0-alpha.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aetherion",
+      "version": "0.14.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/dc/0e/3a4c5342bdd9a5b686824b363c556fd9ecd6a6e195dc9ffdc5773164f1ea/aetherion-0.14.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.14.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws_conduit",
+      "version": "0.0.33",
+      "repository": "https://github.com/concon121/aws-conduit",
+      "source": "https://files.pythonhosted.org/packages/e9/79/ef64efd7e23d8c210c02d390527db4388078ad7c206fa8e26fba6b5e8fa2/aws_conduit-0.0.33.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.33"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "conduit",
+      "version": "1.4.0",
+      "repository": "https://github.com/bqsoft/conduit",
+      "source": "https://rubygems.org/gems/conduit-1.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.4.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

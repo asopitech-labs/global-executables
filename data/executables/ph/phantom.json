@@ -2,6 +2,42 @@
   "command": "phantom",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "phantom-editor",
+      "version": "0.1.0",
+      "repository": "https://github.com/Shadorain/Phantom",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "phantom-secret",
+      "version": "0.1.2",
+      "repository": "https://github.com/EpicsDAO/phantom-secret",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "phantom-secrets",
+      "version": "0.5.1",
+      "repository": "https://github.com/ashlrai/phantom-secrets",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "phantom",
       "version": "6.2.0",
@@ -12,8 +48,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0x2e8/phantom-ai-crawler",
+      "version": "1.5.2",
+      "repository": "git+https://github.com/0x2e8-gc/phantom-ai-crawler.git",
+      "source": "https://registry.npmjs.org/@0x2e8%2Fphantom-ai-crawler/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.5.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aku11i/phantom",
+      "version": "6.2.0",
+      "repository": "git+https://github.com/phantompane/phantom.git",
+      "source": "https://registry.npmjs.org/@aku11i%2Fphantom/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "6.2.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "dconco/phantom-php",
+      "version": "v1.0.3",
+      "repository": "https://github.com/codetesla51/phantom-php.git",
+      "source": "https://repo.packagist.org/p2/dconco/phantom-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.3"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "hammadxcm.go-phantom",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

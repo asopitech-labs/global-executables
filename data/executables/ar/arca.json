@@ -1,0 +1,43 @@
+{
+  "command": "arca",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "arca-1.0.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "arca-tool",
+      "version": "0.1.4",
+      "repository": "https://github.com/khoek/ferramentum/tree/master/arca-tool",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arca/cli",
+      "version": "0.0.5",
+      "repository": "git+ssh://git@gitlab.com/madskristiansen/arca.git",
+      "source": "https://registry.npmjs.org/@arca%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

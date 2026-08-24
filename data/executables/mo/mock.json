@@ -2,6 +2,114 @@
   "command": "mock",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pipebuilder_mock",
+      "version": "0.1.0",
+      "repository": "https://github.com/pipebase/pipebuilder",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devfeel/dotweb",
+      "version": "v0.0.0-20190220064112-c7ab14e88d65",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/devfeel/dotweb/@v/v0.0.0-20190220064112-c7ab14e88d65.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190220064112-c7ab14e88d65"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devfeel/dotweb",
+      "version": "v0.0.0-20190613043734-6c5cb5c18ff6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/devfeel/dotweb/@v/v0.0.0-20190613043734-6c5cb5c18ff6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613043734-6c5cb5c18ff6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/edgexfoundry/device-mqtt-go",
+      "version": "v0.0.0-20190531015918-ebcdba692f70",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/edgexfoundry/device-mqtt-go/@v/v0.0.0-20190531015918-ebcdba692f70.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190531015918-ebcdba692f70"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/edgexfoundry/device-mqtt-go",
+      "version": "v0.0.0-20190613133935-03eabaaf7fa8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/edgexfoundry/device-mqtt-go/@v/v0.0.0-20190613133935-03eabaaf7fa8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613133935-03eabaaf7fa8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes-csi/csi-test",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes-csi/csi-test/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes-csi/csi-test",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes-csi/csi-test/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubevela/kubevela",
+      "version": "v1.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubevela/kubevela/@v/v1.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/observatorium/api",
+      "version": "v0.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/observatorium/api/@v/v0.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/thecodeteam/gocsi",
       "version": "v0.0.0-20171026153342-83f15105815b",
@@ -12,8 +120,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171026153342-83f15105815b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/thecodeteam/gocsi",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/thecodeteam/gocsi/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alrale/mock-server",
+      "version": "1.0.30",
+      "repository": "git+https://github.com/g0ngjie/alrale-mock-server.git",
+      "source": "https://registry.npmjs.org/@alrale%2Fmock-server/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.30"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andregeng/mock-cli",
+      "version": "1.2.9",
+      "repository": "git+https://github.com/AndreGeng/mock-cli.git",
+      "source": "https://registry.npmjs.org/@andregeng%2Fmock-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.9"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

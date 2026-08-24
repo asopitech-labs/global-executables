@@ -2,6 +2,18 @@
   "command": "openapi-generator",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "openapi-generator-7.24.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "openapi-generator",
       "version": "7.24.0",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@api-ts/openapi-generator",
+      "version": "6.1.11",
+      "repository": "git+https://github.com/BitGo/api-ts.git",
+      "source": "https://registry.npmjs.org/@api-ts%2Fopenapi-generator/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "6.1.11"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aqovia/openapi-generator-cli",
+      "version": "1.1.0",
+      "repository": "git+https://github.com/openapitools/openapi-generator-cli.git",
+      "source": "https://registry.npmjs.org/@aqovia%2Fopenapi-generator-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@artkravchenko/openapi-generator-cli",
+      "version": "5.0.0-SNAPSHOT.20200627.025400-338",
+      "repository": "git+https://github.com/artkravchenko/openapi-generator-cli.git",
+      "source": "https://registry.npmjs.org/@artkravchenko%2Fopenapi-generator-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.0.0-SNAPSHOT.20200627.025400-338"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

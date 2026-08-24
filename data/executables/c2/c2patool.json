@@ -2,6 +2,18 @@
   "command": "c2patool",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "c2patool",
+      "version": "0.27.15",
+      "repository": "https://github.com/contentauth/c2pa-rs/tree/main/cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.27.15"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "c2patool",
       "version": "0.27.15",
@@ -12,8 +24,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "c2patool",
+      "version": "0.27.15",
+      "repository": "https://contentauthenticity.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.27.15"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "monero-blockchain-usage",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "monero-0.18.5.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "monero",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "monero",
       "version": null,
@@ -26,6 +50,32 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "scoop",
+      "package": "monero",
+      "version": "0.18.5.2",
+      "repository": "https://getmonero.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.18.5.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "monero-cli",
+      "version": "0.18.5.1",
+      "repository": "https://getmonero.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.18.5.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "monero",
       "version": null,
@@ -39,5 +89,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

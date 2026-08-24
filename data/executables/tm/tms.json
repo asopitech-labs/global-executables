@@ -2,6 +2,18 @@
   "command": "tms",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tmux-sessionizer",
+      "version": "0.6.1",
+      "repository": "https://github.com/jrmoulton/tmux-sessionizer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tmux-sessionizer",
       "version": "0.6.1a",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "tribitgroup.microservice",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/tribitgroup.microservice/1.0.1/tribitgroup.microservice.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

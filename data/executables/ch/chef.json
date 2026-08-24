@@ -2,6 +2,30 @@
   "command": "chef",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "talkfilters-2.3.8-8",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cooklang-chef",
+      "version": "0.10.0",
+      "repository": "https://github.com/Zheoni/cooklang-chef",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/go-chef/chef",
       "version": "v0.0.0-20180320225528-cfd55cf96411",
@@ -12,8 +36,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180320225528-cfd55cf96411"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-chef/chef",
+      "version": "v0.30.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-chef/chef/@v/v0.30.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.30.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PieCrust",
+      "version": "3.3.0",
+      "repository": "http://bolt80.com/piecrust",
+      "source": "https://files.pythonhosted.org/packages/25/73/2389a233dc55f84732517b5196c5891da274c825272c98577e27e76864a7/PieCrust-3.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "chef-dk",
+      "version": "4.13.3",
+      "repository": "https://www.chef.io/",
+      "source": "https://rubygems.org/gems/chef-dk-4.13.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.13.3"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -14,6 +14,42 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "kymo-tex-lexer",
+      "version": "0.1.11",
+      "repository": "https://github.com/kymostudio/kymostudio",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.11"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ratex-lexer",
+      "version": "0.1.14",
+      "repository": "https://github.com/erweixin/RaTeX",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.14"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "flex",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "flex",
       "version": null,
@@ -26,6 +62,42 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/cockroachdb/cockroach",
+      "version": "v19.1.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cockroachdb/cockroach/@v/v19.1.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v19.1.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cockroachdb/cockroach",
+      "version": "v19.2.12+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cockroachdb/cockroach/@v/v19.2.12%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v19.2.12+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/onflow/cadence",
+      "version": "v1.10.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/onflow/cadence/@v/v1.10.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "flex",
       "version": "2.6.4",
@@ -36,6 +108,66 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "flex-2.6.4-4",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atproto/lex",
+      "version": "0.3.6",
+      "repository": "https://github.com/bluesky-social/atproto",
+      "source": "https://registry.npmjs.org/@atproto%2Flex/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atproto/lex-cli",
+      "version": "0.10.10",
+      "repository": "https://github.com/bluesky-social/atproto",
+      "source": "https://registry.npmjs.org/@atproto%2Flex-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.10.10"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atul-labs/lex",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/ATUL-Labs/lex.git",
+      "source": "https://registry.npmjs.org/@atul-labs%2Flex/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -51,5 +183,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

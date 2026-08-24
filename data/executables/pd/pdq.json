@@ -1,0 +1,31 @@
+{
+  "command": "pdq",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "pdq",
+      "version": "0.5.1",
+      "repository": "https://github.com/meistrari/pdq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "BogdanCalapod.pdq-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

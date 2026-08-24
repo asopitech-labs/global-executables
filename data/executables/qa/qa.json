@@ -2,6 +2,18 @@
   "command": "qa",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-quick-add",
+      "version": "0.3.0",
+      "repository": "https://github.com/fletch-r/git-quick-add",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "qqqa",
       "version": "1.0.1",
@@ -12,8 +24,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@app-studio/qa-cli",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@app-studio%2Fqa-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ardygh/qa-agent",
+      "version": "0.1.6",
+      "repository": "git+https://github.com/ardalangh/qa-agent.git",
+      "source": "https://registry.npmjs.org/@ardygh%2Fqa-agent/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "edmondscommerce/phpqa",
+      "version": "4.2.3",
+      "repository": "https://github.com/edmondscommerce/phpqa.git",
+      "source": "https://repo.packagist.org/p2/edmondscommerce/phpqa.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "4.2.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

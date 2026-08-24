@@ -2,6 +2,18 @@
   "command": "download_rsr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rustyspectral",
+      "version": "1.0.3",
+      "repository": "https://github.com/anomalyco/RustySpectral",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "pyspectral-bin",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

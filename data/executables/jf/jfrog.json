@@ -2,9 +2,21 @@
   "command": "jfrog",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/jfrog/jfrog-cli-go",
+      "version": "v1.22.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jfrog/jfrog-cli-go/@v/v1.22.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.22.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jfrog-cli",
-      "version": "2.120.0",
+      "version": "2.121.0",
       "repository": "https://docs.jfrog.com/integrations/docs/jfrog-cli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "jfrog",
+      "version": "2.121.0",
+      "repository": "https://jfrog.com/getcli/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.121.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

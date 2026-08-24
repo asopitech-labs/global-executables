@@ -2,9 +2,21 @@
   "command": "pasty",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pasty",
+      "version": "0.2.0",
+      "repository": "https://github.com/joek13/pasty",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "clippy",
-      "version": "1.8.0",
+      "version": "1.9.0",
       "repository": "https://github.com/neilberkman/clippy",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "stompcat",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-stomp-1.4.10-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "grempe-stomp",
+      "version": "1.0.6",
+      "repository": "http://stomp.codehaus.org/",
+      "source": "https://rubygems.org/gems/grempe-stomp-1.0.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-stomp",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

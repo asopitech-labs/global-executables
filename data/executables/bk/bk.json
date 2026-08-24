@@ -2,6 +2,42 @@
   "command": "bk",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bk",
+      "version": "0.6.0",
+      "repository": "https://github.com/aeosynth/bk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "browserkit",
+      "version": "0.4.3",
+      "repository": "https://github.com/yie1d/browserkit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hbackup",
+      "version": "0.5.6",
+      "repository": "https://github.com/asthetik/hbackup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bk",
       "version": "0.6.0",
@@ -12,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "buildkite-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/gusto/bk",
+      "source": "https://rubygems.org/gems/buildkite-cli-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Buildkite.CLI",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

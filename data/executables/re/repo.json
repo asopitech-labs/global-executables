@@ -2,6 +2,102 @@
   "command": "repo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "repo-2.62-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repo",
+      "version": "0.14.14",
+      "repository": "https://github.com/lgarron/repo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.14"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repo-cli",
+      "version": "0.1.3",
+      "repository": "https://github.com/edeneast/repo.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repo-control",
+      "version": "0.4.0",
+      "repository": "https://github.com/markussilvan/repo-control",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repo-rs",
+      "version": "0.1.2",
+      "repository": "https://codeberg.org/dadada/repo-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repo-rs-cli",
+      "version": "0.2.3",
+      "repository": "https://github.com/sunbeamdotpt/repo-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repo-tool",
+      "version": "0.1.1",
+      "repository": "https://codeberg.org/mageowl/repo-tool",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repo_cmd",
+      "version": "0.1.2",
+      "repository": "https://github.com/takagiy/repo_cmd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "repo",
       "version": "2.66.1",
@@ -12,6 +108,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Nerdbank.DotNetRepoTools",
+      "version": "1.5.42",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/nerdbank.dotnetrepotools/1.5.42/nerdbank.dotnetrepotools.1.5.42.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.5.42"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autorepo",
+      "version": "0.1.9",
+      "repository": "https://github.com/saahilb-tech/autorepo",
+      "source": "https://files.pythonhosted.org/packages/61/8c/ace76cba8286786c4afaea01a9edb94fd3edd2e33dc4ac081439cd3597d3/autorepo-0.1.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.9"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

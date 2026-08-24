@@ -2,6 +2,54 @@
   "command": "save",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hypersave",
+      "version": "0.1.0",
+      "repository": "https://codeberg.org/zvavybir/hyperrogue",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "save",
+      "version": "0.20220707.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20220707.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "atfs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/olahol/go-imageupload",
+      "version": "v0.0.0-20160503070439-09d2b92fa05e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/olahol/go-imageupload/@v/v0.0.0-20160503070439-09d2b92fa05e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160503070439-09d2b92fa05e"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "atfs",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

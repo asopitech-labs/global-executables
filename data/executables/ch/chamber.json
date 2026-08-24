@@ -2,6 +2,42 @@
   "command": "chamber",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "chamber",
+      "version": "1.0.1",
+      "repository": "https://github.com/orsinium-labs/chamber",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chamber-cli",
+      "version": "0.2.0",
+      "repository": "https://www.github.com/joshua-mo-143/chamber",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chamber-tui",
+      "version": "0.5.3",
+      "repository": "https://github.com/mikeleppane/visualvault",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "chamber",
       "version": "3.1.5",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "chamber",
+      "version": "3.2.0",
+      "repository": "https://github.com/thekompanee/chamber",
+      "source": "https://rubygems.org/gems/chamber-3.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "ant",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ant-1.10.17-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ant-cli",
+      "version": "0.5.2",
+      "repository": "https://github.com/maidsafe/autonomi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ant",
       "version": "1.10.17",
@@ -12,6 +36,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aleen42/ci-common",
+      "version": "0.1.9-2",
+      "repository": "git+https://github.com/Coremail/ci-common.git",
+      "source": "https://registry.npmjs.org/@aleen42%2Fci-common/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.9-2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antlegion/ant",
+      "version": "0.4.0",
+      "repository": "git+https://github.com/YangKGcsdms/antlegion-platform.git",
+      "source": "https://registry.npmjs.org/@antlegion%2Fant/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anttargett/ant",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/AntTargett/CLI-Tools.git",
+      "source": "https://registry.npmjs.org/@anttargett%2Fant/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
     },
     {
       "ecosystem": "pypi",
@@ -26,6 +86,66 @@
       "latest_version": "1.2.8"
     },
     {
+      "ecosystem": "pypi",
+      "package": "aniate",
+      "version": "1.3.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4c/fb/de6a569a63ddd9196b0a666b4a25e0fe3b276419f33878c127999863afdd/aniate-1.3.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anitypetools",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8e/74/aa829cbaaf2ee007991595f809269294f291469c372d0c7900f8b7375b9b/anitypetools-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ant-cli",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/78/ec/58e956cf6fe562f0a745ee1af0b34e1cfc9534827d5ca91e7af9a7361713/ant_cli-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "antahkarana-cli",
+      "version": "0.8.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/78/e8/55470dd65d4d52e5042f5aac70d0bc7feb27e83213853714c09f44f15150/antahkarana_cli-0.8.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "antcompress",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1e/e0/cf9f098769c0494e825ab9c8bf1ea8b5806a5a8e06231ab617a5c9ca2e5f/antcompress-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ant",
       "version": null,
@@ -36,8 +156,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Anthropic.Ant",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -18,12 +18,36 @@
       "package": "util-linux-extra",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "util-linux-extra",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/u-root/u-root",
+      "version": "v4.0.1-0.20190607171814-9f1bdc401932+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/u-root/u-root/@v/v4.0.1-0.20190607171814-9f1bdc401932%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.1-0.20190607171814-9f1bdc401932+incompatible"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

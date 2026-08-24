@@ -2,9 +2,21 @@
   "command": "newrelic",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/newrelic/newrelic-cli",
+      "version": "v0.113.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/newrelic/newrelic-cli/@v/v0.113.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.113.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "newrelic-cli",
-      "version": "0.113.5",
+      "version": "0.113.7",
       "repository": "https://github.com/newrelic/newrelic-cli",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adobe/helix-ops",
+      "version": "4.3.16",
+      "repository": "git+https://github.com/adobe/helix-ops.git",
+      "source": "https://registry.npmjs.org/@adobe%2Fhelix-ops/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.3.16"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dolores_rpm",
+      "version": "3.3.4.8",
+      "repository": "http://www.github.com/newrelic/rpm",
+      "source": "https://rubygems.org/gems/dolores_rpm-3.3.4.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.3.4.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ghazel-newrelic_rpm",
+      "version": "3.5.4",
+      "repository": "http://www.github.com/newrelic/rpm",
+      "source": "https://rubygems.org/gems/ghazel-newrelic_rpm-3.5.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.5.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "honkster-newrelic_rpm",
+      "version": "2.13.1",
+      "repository": "http://www.github.com/newrelic/rpm",
+      "source": "https://rubygems.org/gems/honkster-newrelic_rpm-2.13.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.13.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

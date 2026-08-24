@@ -2,6 +2,30 @@
   "command": "wrapper",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "squid_ewe",
+      "version": "2.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "service-wrapper",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "service-wrapper",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bigwhite/experiments",
+      "version": "v0.0.0-20190420034840-485ab882b667",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bigwhite/experiments/@v/v0.0.0-20190420034840-485ab882b667.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190420034840-485ab882b667"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flynn/flynn",
+      "version": "v0.0.0-20190424191857-b4b05fce92da",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flynn/flynn/@v/v0.0.0-20190424191857-b4b05fce92da.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190424191857-b4b05fce92da"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/iris-contrib/examples",
+      "version": "v0.0.0-20190202140230-8b1457715757",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/iris-contrib/examples/@v/v0.0.0-20190202140230-8b1457715757.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190202140230-8b1457715757"
     },
     {
       "ecosystem": "go",
@@ -27,6 +87,66 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/iris-contrib/middleware",
+      "version": "v0.0.0-20190607180642-00dac7c43ee7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/iris-contrib/middleware/@v/v0.0.0-20190607180642-00dac7c43ee7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190607180642-00dac7c43ee7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v0.0.0-20190322173422-7fa1f5672fa4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v0.0.0-20190322173422-7fa1f5672fa4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190322173422-7fa1f5672fa4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v0.0.0-20190606200517-a4fbbd31483d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v0.0.0-20190606200517-a4fbbd31483d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606200517-a4fbbd31483d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v0.0.0-20190612190628-656492266168",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v0.0.0-20190612190628-656492266168.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190612190628-656492266168"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v11.1.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v11.1.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v11.1.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/kataras/iris",
       "version": "v11.1.1+incompatible",
       "repository": null,
@@ -39,6 +159,42 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/kataras/iris",
+      "version": "v8.5.9+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/iris/@v/v8.5.9%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v8.5.9+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/pio",
+      "version": "v0.0.0-20170809181920-825e39f34365",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/pio/@v/v0.0.0-20170809181920-825e39f34365.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170809181920-825e39f34365"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/pio",
+      "version": "v0.0.0-20180511174041-a9733b5b6b83",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/pio/@v/v0.0.0-20180511174041-a9733b5b6b83.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180511174041-a9733b5b6b83"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/kataras/pio",
       "version": "v0.0.0-20190103105442-ea782b38602d",
       "repository": null,
@@ -48,6 +204,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190103105442-ea782b38602d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/pio",
+      "version": "v0.0.14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/pio/@v/v0.0.14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.14"
     },
     {
       "ecosystem": "go",
@@ -87,5 +255,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

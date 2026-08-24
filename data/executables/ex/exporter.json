@@ -2,6 +2,66 @@
   "command": "exporter",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "contrails",
+      "version": "0.1.4",
+      "repository": "https://github.com/strangeloopcanon/contrail",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "exporter",
+      "version": "0.1.4",
+      "repository": "https://github.com/strangeloopcanon/contrail",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/buildpack/lifecycle",
+      "version": "v0.0.0-20190314183328-a6ea5e18de72",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/buildpack/lifecycle/@v/v0.0.0-20190314183328-a6ea5e18de72.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190314183328-a6ea5e18de72"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/buildpack/lifecycle",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/buildpack/lifecycle/@v/v0.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kuskoman/logstash-exporter",
+      "version": "v1.9.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kuskoman/logstash-exporter/@v/v1.9.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.1"
+    },
+    {
       "ecosystem": "pypi",
       "package": "AcousticExport",
       "version": "0.0.3",
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

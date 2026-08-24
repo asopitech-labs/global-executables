@@ -2,6 +2,30 @@
   "command": "darklua",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "darklua",
+      "version": "0.19.0",
+      "repository": "https://github.com/seaofvoices/darklua",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.19.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "darklua-demo",
+      "version": "3.2.1",
+      "repository": "https://github.com/seaofvoices/darklua",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "darklua",
       "version": "0.19.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

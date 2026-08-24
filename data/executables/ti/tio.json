@@ -2,6 +2,30 @@
   "command": "tio",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "twinleaf-tools",
+      "version": "2.3.0",
+      "repository": "https://github.com/twinleaf/twinleaf-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tio",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "tio",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "tio-3.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "tio",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

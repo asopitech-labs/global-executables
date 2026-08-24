@@ -2,6 +2,30 @@
   "command": "tasks",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tasks-cli-rs",
+      "version": "0.16.0",
+      "repository": "https://github.com/weisanju/tasks-cli-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gambol99/go-marathon",
+      "version": "v0.0.0-20170110214826-4233de4119f7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gambol99/go-marathon/@v/v0.0.0-20170110214826-4233de4119f7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170110214826-4233de4119f7"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/gambol99/go-marathon",
       "version": "v0.0.0-20170922093320-ec4a50170df7",
@@ -51,6 +75,30 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/mgutz/goa",
+      "version": "v0.0.0-20200227234702-6e81f962a115",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mgutz/goa/@v/v0.0.0-20200227234702-6e81f962a115.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200227234702-6e81f962a115"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vmware/govmomi",
+      "version": "v0.55.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vmware/govmomi/@v/v0.55.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.55.1"
+    },
+    {
+      "ecosystem": "go",
       "package": "gopkg.in/godo.v1",
       "version": "v1.4.5",
       "repository": null,
@@ -60,8 +108,68 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.4.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@allpepper/task-orchestrator-tui",
+      "version": "3.1.0",
+      "repository": "git+https://github.com/alioshr/task-orchestrator-tui.git",
+      "source": "https://registry.npmjs.org/@allpepper%2Ftask-orchestrator-tui/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "grdev.tasks",
+      "version": "0.1.10",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/grdev.tasks/0.1.10/grdev.tasks.0.1.10.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "grdev.tasks-cli",
+      "version": "0.3.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/grdev.tasks-cli/0.3.4/grdev.tasks-cli.0.3.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Tasks-Tracker",
+      "version": "0.93",
+      "repository": "https://launchpad.net/tasks-tracker",
+      "source": "https://files.pythonhosted.org/packages/36/5a/c57166b2a22164f1d34483fb8e154fdd18a0e6947ea1a75b96b9c19d6f16/Tasks-Tracker-0.93.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.93"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansible-taskrunner",
+      "version": "2.11.0",
+      "repository": "https://github.com/berttejeda/ansible-taskrunner.git",
+      "source": "https://files.pythonhosted.org/packages/68/48/c028770971f48b1c7c53ce538450cb0ecdb6ebaec4ffc6ae544b74539b84/ansible_taskrunner-2.11.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.11.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

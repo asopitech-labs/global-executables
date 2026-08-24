@@ -2,6 +2,18 @@
   "command": "py.test",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-pytest-1:9.0.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pytest",
       "version": "9.1.1",
@@ -12,6 +24,66 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "python-pytest-8.4.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "AI4SS",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/a6/94/9ec02b565895e4d8a920b905c1655010dbf6f72770824022b348a63f659f/AI4SS-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ALClassifier4SS",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/14/7d/1d1f545a656383ad9b57836f3b2008e5adb1d0dc52d92e615f61be8786b0/ALClassifier4SS-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alauda-pytest",
+      "version": "5.2.3",
+      "repository": "https://docs.pytest.org/en/latest/",
+      "source": "https://files.pythonhosted.org/packages/2c/9d/4920d01c3e9b2e0fb7c3fa416c1b51f53313ae277e7478a6e70ae182851a/alauda_pytest-5.2.3-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.2.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "axio-cli",
+      "version": "1.1.0a101",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/f7/f0/2d120a02ffb581995422ec3fc8cd5c401b41afc2ce2507398fb8e892b55e/axio_cli-1.1.0a101-cp37-abi3-manylinux2010_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0a101"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

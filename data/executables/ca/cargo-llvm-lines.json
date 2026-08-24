@@ -2,9 +2,21 @@
   "command": "cargo-llvm-lines",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cargo-llvm-lines",
+      "version": "0.4.48",
+      "repository": "https://github.com/dtolnay/cargo-llvm-lines",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.48"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cargo-llvm-lines",
-      "version": "0.4.46",
+      "version": "0.4.48",
       "repository": "https://github.com/dtolnay/cargo-llvm-lines",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

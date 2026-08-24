@@ -2,6 +2,66 @@
   "command": "deadcode",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "deadcode",
+      "version": "0.2.0",
+      "repository": "https://codeberg.org/Taskeren/deadcode",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alecthomas/gometalinter",
+      "version": "v1.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alecthomas/gometalinter/@v/v1.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alecthomas/gometalinter",
+      "version": "v2.0.11+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alecthomas/gometalinter/@v/v2.0.11%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.11+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alecthomas/gometalinter",
+      "version": "v2.0.12+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alecthomas/gometalinter/@v/v2.0.12%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.12+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alecthomas/gometalinter",
+      "version": "v2.0.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alecthomas/gometalinter/@v/v2.0.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.2+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/alecthomas/gometalinter",
       "version": "v3.0.0+incompatible",
@@ -15,6 +75,30 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/gwaycc/gometalinter",
+      "version": "v0.0.0-20190319061830-30f4786e5ba4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gwaycc/gometalinter/@v/v0.0.0-20190319061830-30f4786e5ba4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190319061830-30f4786e5ba4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/remyoudompheng/go-misc",
+      "version": "v0.0.0-20190427085024-2d6ac652a50e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/remyoudompheng/go-misc/@v/v0.0.0-20190427085024-2d6ac652a50e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190427085024-2d6ac652a50e"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/tsenart/deadcode",
       "version": "v0.0.0-20160724212837-210d2dc333e9",
       "repository": null,
@@ -24,8 +108,92 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160724212837-210d2dc333e9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/twitchtv/retool",
+      "version": "v1.3.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/twitchtv/retool/@v/v1.3.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "golang.org/x/tools",
+      "version": "v0.49.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/tools/@v/v0.49.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.49.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/alecthomas/gometalinter.v1",
+      "version": "v1.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/alecthomas/gometalinter.v1/@v/v1.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/alecthomas/gometalinter.v2",
+      "version": "v2.0.12",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/alecthomas/gometalinter.v2/@v/v2.0.12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.12"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/alecthomas/gometalinter.v3",
+      "version": "v3.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/alecthomas/gometalinter.v3/@v/v3.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "DeadCode",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/deadcode/1.0.2/deadcode.1.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "archaeologist",
+      "version": "0.9.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/cc/42/b9b95482ab80bd54ca24abc2d7bd8347eddf71dced1f91c1ab7a9bcd6f08/archaeologist-0.9.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.3"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

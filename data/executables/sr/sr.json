@@ -2,6 +2,78 @@
   "command": "sr",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "surfraw-2.3.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "search_replace",
+      "version": "0.1.1",
+      "repository": "https://github.com/DoumanAsh/sr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sr",
+      "version": "0.1.1",
+      "repository": "https://github.com/samhh/sr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sr-cli",
+      "version": "9.0.0",
+      "repository": "https://github.com/urmzd/sr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "9.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sreplace",
+      "version": "0.14.0",
+      "repository": "https://gitlab.com/miyamoto128/sreplace",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "superepo",
+      "version": "0.2.0",
+      "repository": "https://github.com/GrandEngineering/superepo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/ctessum/sr",
       "version": "v0.0.0-20160428002617-24b4102c8837",
@@ -26,6 +98,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@100tal-seg/seg-react",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@100tal-seg%2Fseg-react/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SearchReplaceMcp",
+      "version": "1.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/searchreplacemcp/1.2.0/searchreplacemcp.1.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "surfraw",
       "version": null,
@@ -39,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

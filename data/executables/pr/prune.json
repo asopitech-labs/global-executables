@@ -2,11 +2,59 @@
   "command": "prune",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "graphviz-16.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "prune-lang",
+      "version": "0.2.4",
+      "repository": "https://github.com/antonping/prune-lang",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "prunecode",
+      "version": "0.1.0",
+      "repository": "https://github.com/dlabadini/prune",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "debian",
       "package": "graphviz",
       "version": null,
       "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "graphviz-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
@@ -26,6 +74,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "nuget",
+      "package": "dotnet-prune",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-prune/1.1.0/dotnet-prune.1.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "auditree-prune",
+      "version": "1.0.0",
+      "repository": "https://auditree.github.io/",
+      "source": "https://files.pythonhosted.org/packages/59/1a/a8490efb0d58b78c1c52f210a5db730e2793c3eae9d612f12280da7ff8d5/auditree_prune-1.0.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "geoffreywiseman-prune",
+      "version": "1.3.2",
+      "repository": "http://geoffreywiseman.github.com/prune",
+      "source": "https://rubygems.org/gems/geoffreywiseman-prune-1.3.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.3.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "graphviz",
       "version": null,
@@ -39,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

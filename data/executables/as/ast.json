@@ -2,6 +2,54 @@
   "command": "ast",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "assistant",
+      "version": "1.4.1",
+      "repository": "https://github.com/iron-cage/claude_tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "asterism-cli",
+      "version": "0.0.1",
+      "repository": "https://github.com/medicalissue/asterism",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cube-drone-marquee-parser",
+      "version": "0.6.2",
+      "repository": "https://github.com/cube-drone/marqueemarkup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/luisacatherine/sample-golang-linter/ast",
+      "version": "v0.0.0-20220928161339-e7dea59c4706",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/luisacatherine/sample-golang-linter/ast/@v/v0.0.0-20220928161339-e7dea59c4706.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220928161339-e7dea59c4706"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jruby",
       "version": "10.1.1.0",
@@ -14,6 +62,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@asteroidbelt/ast",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@asteroidbelt%2Fast/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "Alsulf",
       "version": "2025.11.0a1",
@@ -24,6 +84,30 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "2025.11.0a1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "adaptfx",
+      "version": "0.2.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/b8/c4/694877789da869c6b0b13dc0d31d6cd9ff243d99656abfbb1f1d8dc45fbc/adaptfx-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "assists",
+      "version": "0.2.0",
+      "repository": "https://github.com/phillipsj/assists",
+      "source": "https://files.pythonhosted.org/packages/56/7b/cf950c4a82acf67acac3a351a23335a0a48c2ba6494288fb1c6cc6c45a1d/assists-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

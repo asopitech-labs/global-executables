@@ -2,6 +2,42 @@
   "command": "uv",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "uv-0.12.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "update-version",
+      "version": "1.1.0",
+      "repository": "https://github.com/Drew-Chase/update-version",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "uv",
+      "version": "0.12.5",
+      "repository": "https://github.com/astral-sh/uv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "uv",
       "version": "0.12.5",
@@ -12,8 +48,69 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bjeanes-ultraviolet",
+      "version": "0.10.3",
+      "repository": "http://ultraviolet.rubyforge.org",
+      "source": "https://rubygems.org/gems/bjeanes-ultraviolet-0.10.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.10.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "devver-ultraviolet",
+      "version": "0.10.5",
+      "repository": null,
+      "source": "https://rubygems.org/gems/devver-ultraviolet-0.10.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.10.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hyperbolist-ultraviolet",
+      "version": "0.10.203",
+      "repository": "http://github.com/hyperbolist/ultraviolet",
+      "source": "https://rubygems.org/gems/hyperbolist-ultraviolet-0.10.203.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.10.203"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "uv",
+      "version": "0.12.5",
+      "repository": "https://docs.astral.sh/uv/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.12.5"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "astral-sh.uv",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "discover",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ruvector-data-framework",
+      "version": "0.3.0",
+      "repository": "https://github.com/ruvnet/ruvector",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "discover",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "discover",
       "version": null,
@@ -52,6 +76,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/go-discover",
+      "version": "v0.0.0-20180504182603-b55bdf904553",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-discover/@v/v0.0.0-20180504182603-b55bdf904553.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180504182603-b55bdf904553"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-discover",
       "version": "v0.0.0-20180521215750-266744fed5f1",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/go-discover/@v/v0.0.0-20180521215750-266744fed5f1.zip",
@@ -72,6 +108,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180831154906-f9c9239562a8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-discover",
+      "version": "v0.0.0-20181211180724-4715ef805dc5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-discover/@v/v0.0.0-20181211180724-4715ef805dc5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181211180724-4715ef805dc5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-discover",
+      "version": "v0.0.0-20190110222556-3185905a9a25",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-discover/@v/v0.0.0-20190110222556-3185905a9a25.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190110222556-3185905a9a25"
     },
     {
       "ecosystem": "go",
@@ -111,6 +171,42 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/hashicorp/go-discover",
+      "version": "v0.0.0-20190514181422-288623bee243",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-discover/@v/v0.0.0-20190514181422-288623bee243.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190514181422-288623bee243"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-discover",
+      "version": "v0.0.0-20190522154730-8aba54d36e17",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-discover/@v/v0.0.0-20190522154730-8aba54d36e17.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190522154730-8aba54d36e17"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/go-discover",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/go-discover/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/hyperledger/fabric",
       "version": "v1.4.1",
       "repository": null,
@@ -120,6 +216,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hyperledger/fabric",
+      "version": "v1.4.12",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hyperledger/fabric/@v/v1.4.12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.12"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/raysonxin/gokit-article-demo",
+      "version": "v0.0.0-20190325010809-9e3ce32a9cf3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/raysonxin/gokit-article-demo/@v/v0.0.0-20190325010809-9e3ce32a9cf3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190325010809-9e3ce32a9cf3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apphosting/discover",
+      "version": "0.2.4",
+      "repository": "git+https://github.com/FirebaseExtended/firebase-framework-tools.git",
+      "source": "https://registry.npmjs.org/@apphosting%2Fdiscover/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "RichMap",
+      "version": "0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/13/88/225d530d547b485e255e5f5639c83bad48b66af70e81b87b5c4fa2b27638/RichMap-0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "google_anymote",
+      "version": "0.0.4",
+      "repository": "https://github.com/rnhurt/google_anymote",
+      "source": "https://rubygems.org/gems/google_anymote-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -135,5 +291,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -6,12 +6,72 @@
       "package": "openshift-imagebuilder",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "openshift-imagebuilder",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/imagebuilder",
+      "version": "v0.0.0-20160803185652-5a8e7d9be33d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/imagebuilder/@v/v0.0.0-20160803185652-5a8e7d9be33d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160803185652-5a8e7d9be33d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/imagebuilder",
+      "version": "v0.0.0-20160901153613-74238f0cbdc0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/imagebuilder/@v/v0.0.0-20160901153613-74238f0cbdc0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160901153613-74238f0cbdc0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/imagebuilder",
+      "version": "v0.0.0-20181217180029-474d0f9df2cb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/imagebuilder/@v/v0.0.0-20181217180029-474d0f9df2cb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181217180029-474d0f9df2cb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/imagebuilder",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/imagebuilder/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

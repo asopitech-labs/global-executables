@@ -2,6 +2,54 @@
   "command": "xq",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "yq-4.1.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "convert2json",
+      "version": "2.6.3",
+      "repository": "https://github.com/simonrupf/convert2json",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.6.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xq",
+      "version": "0.5.0",
+      "repository": "https://github.com/MiSawa/xq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xq",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "xq",
       "version": null,
@@ -28,7 +76,7 @@
     {
       "ecosystem": "homebrew",
       "package": "xq",
-      "version": "1.5.0",
+      "version": "1.5.1",
       "repository": "https://github.com/sibprogrammer/xq",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -36,6 +84,31 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "acong-tech-xiangqin",
+      "version": "0.7.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2a/e0/bf438e22d14cdfcd98fcc8169adef8d094031857d8d53e00bce546569ee0/acong_tech_xiangqin-0.7.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "xq",
+      "version": "1.5.1",
+      "repository": "https://github.com/sibprogrammer/xq",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.5.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -51,5 +124,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

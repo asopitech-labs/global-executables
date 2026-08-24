@@ -2,6 +2,42 @@
   "command": "progress",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "progress-0.17-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mobot",
+      "version": "0.3.10",
+      "repository": "https://github.com/0xfe/mobot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.10"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "progress",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "progress",
       "version": null,
@@ -12,6 +48,102 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/clanstyles/go-git",
+      "version": "v4.6.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/clanstyles/go-git/@v/v4.6.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.6.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jojomi/go-script",
+      "version": "v2.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jojomi/go-script/@v/v2.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/src-d/go-git",
+      "version": "v0.0.0-20190418104243-aa6f288c256f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/src-d/go-git/@v/v0.0.0-20190418104243-aa6f288c256f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190418104243-aa6f288c256f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/src-d/go-git",
+      "version": "v4.7.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/src-d/go-git/@v/v4.7.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.7.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.0.0-20180807092216-43d17e14b714",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.0.0-20180807092216-43d17e14b714.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0-20180807092216-43d17e14b714"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.0.0-rc15",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.0.0-rc15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0-rc15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.1.1"
     },
     {
       "ecosystem": "go",
@@ -40,6 +172,78 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.12.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.12.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.12.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.13.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.13.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.13.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
       "version": "v4.7.1",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.7.1.zip",
@@ -62,6 +266,18 @@
       "latest_version": "v4.8.0"
     },
     {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.9.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.9.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.9.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "progress",
       "version": "0.17",
@@ -72,6 +288,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dorian-progress",
+      "version": "2.0.0",
+      "repository": "https://github.com/dorianmariecom/dorian-progress",
+      "source": "https://rubygems.org/gems/dorian-progress-2.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -87,5 +315,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

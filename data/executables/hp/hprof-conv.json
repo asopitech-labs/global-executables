@@ -2,6 +2,31 @@
   "command": "hprof-conv",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "google-android-platform-tools-installer",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "adb",
+      "version": "37.0.1",
+      "repository": "https://developer.android.com/studio/releases/platform-tools",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "37.0.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "google-android-platform-tools-installer",
       "version": null,
@@ -15,5 +40,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

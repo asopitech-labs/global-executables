@@ -2,6 +2,30 @@
   "command": "rxgettext",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-gettext-3.4.9-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gettext",
+      "version": "3.5.2",
+      "repository": "https://github.com/ruby-gettext/gettext",
+      "source": "https://rubygems.org/gems/gettext-3.5.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.5.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-gettext",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

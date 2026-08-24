@@ -2,16 +2,40 @@
   "command": "aichat",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "aichat-0.30.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "aichat",
       "version": "0.30.0",
       "repository": "https://github.com/sigoden/aichat",
-      "source": "https://crates.io/api/v1/crates/aichat/0.30.0/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.30.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "terminal-aichat",
+      "version": "1.0.6",
+      "repository": "https://github.com/ctxinf/terminal-aichat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.6"
     },
     {
       "ecosystem": "homebrew",
@@ -24,8 +48,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aichat-pro-cli",
+      "version": "2026.8.18.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c4/d6/5a9ade85a5040281d44fe3729ab2e4a1cf997be233334bc0504b1aeb4286/aichat_pro_cli-2026.8.18.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2026.8.18.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "aichat",
+      "version": "0.30.0",
+      "repository": "https://github.com/sigoden/aichat",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.30.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "sigoden.AIChat",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

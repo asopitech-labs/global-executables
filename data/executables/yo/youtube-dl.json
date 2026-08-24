@@ -1,0 +1,44 @@
+{
+  "command": "youtube-dl",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "zero4rs",
+      "version": "2.0.0",
+      "repository": "https://github.com/chunhui2001/zero4rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "youtube-dl",
+      "version": "2021.12.17",
+      "repository": "https://github.com/ytdl-org/youtube-dl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2021.12.17"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "youtube-dl.youtube-dl",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,9 +2,33 @@
   "command": "ocr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ocr",
+      "version": "0.1.3",
+      "repository": "https://github.com/yingkitw/ocr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sinute/go-daily",
+      "version": "v0.0.0-20221017071801-bc99abbeed3d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sinute/go-daily/@v/v0.0.0-20221017071801-bc99abbeed3d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20221017071801-bc99abbeed3d"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "open-code-review",
-      "version": "1.9.5",
+      "version": "1.9.10",
       "repository": "https://github.com/alibaba/open-code-review",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alibaba-group/open-code-review",
+      "version": "1.9.8",
+      "repository": "git+https://github.com/alibaba/open-code-review.git",
+      "source": "https://registry.npmjs.org/@alibaba-group%2Fopen-code-review/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.9.8"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apdesign/open-code-review",
+      "version": "1.8.8",
+      "repository": "git+https://github.com/alibaba/open-code-review.git",
+      "source": "https://registry.npmjs.org/@apdesign%2Fopen-code-review/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.8.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "OCR-file-name-changer",
+      "version": "1.0.2",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/ed/b7/a18d4d42e8fcc3b0c95039c07f18d4c12a7c72f3f397f8814a61d9ad703a/OCR_file_name_changer-1.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "oak",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "oakc",
+      "version": "0.6.1",
+      "repository": "https://github.com/adam-mcdaniel/oakc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "oakvcs-cli",
+      "version": "0.102.1",
+      "repository": "https://oak.space/oak/oak",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.102.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "oak",
       "version": "0.3",
@@ -24,8 +48,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alex.garcia/oak",
+      "version": "0.0.21",
+      "repository": "https://github.com/asg017/oak.git",
+      "source": "https://registry.npmjs.org/@alex.garcia%2Foak/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.21"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alex.garcia/oak-cli",
+      "version": "0.0.3",
+      "repository": "https://github.com/asg017/oak.git",
+      "source": "https://registry.npmjs.org/@alex.garcia%2Foak-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

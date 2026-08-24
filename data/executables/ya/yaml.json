@@ -2,6 +2,18 @@
   "command": "yaml",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "nodejs-yaml-2.9.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/docker/cli",
       "version": "v0.0.0-20171020201719-3352c0e137e8",
@@ -12,6 +24,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171020201719-3352c0e137e8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20171025085621-9b7656cc05d2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20171025085621-9b7656cc05d2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171025085621-9b7656cc05d2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20171121095125-2d0e2d22ca5f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20171121095125-2d0e2d22ca5f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171121095125-2d0e2d22ca5f"
     },
     {
       "ecosystem": "go",
@@ -28,6 +64,42 @@
     {
       "ecosystem": "go",
       "package": "github.com/docker/cli",
+      "version": "v0.0.0-20180315134925-37eebe5cb6ef",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20180315134925-37eebe5cb6ef.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180315134925-37eebe5cb6ef"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20180702151235-f5393c904aa2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20180702151235-f5393c904aa2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180702151235-f5393c904aa2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20180712011953-7178075fdad6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20180712011953-7178075fdad6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180712011953-7178075fdad6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
       "version": "v0.0.0-20180829130958-deb84a9e4e10",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20180829130958-deb84a9e4e10.zip",
@@ -36,6 +108,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180829130958-deb84a9e4e10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20180920165730-54c19e67f69c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20180920165730-54c19e67f69c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180920165730-54c19e67f69c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20181219132003-336b2a5cac7f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20181219132003-336b2a5cac7f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181219132003-336b2a5cac7f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190129171106-b258f458cc8d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190129171106-b258f458cc8d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190129171106-b258f458cc8d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190303104010-8ddde26af67f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190303104010-8ddde26af67f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190303104010-8ddde26af67f"
     },
     {
       "ecosystem": "go",
@@ -52,6 +172,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190327152802-57b27434ea29",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190327152802-57b27434ea29.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190327152802-57b27434ea29"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
       "version": "v0.0.0-20190424194312-f28d9cc92972",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190424194312-f28d9cc92972.zip",
@@ -60,6 +192,150 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190424194312-f28d9cc92972"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190429053159-3273c2e23546",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190429053159-3273c2e23546.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190429053159-3273c2e23546"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190506213505-d88565df0c2d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190506213505-d88565df0c2d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190506213505-d88565df0c2d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190511004558-53fc257292ad",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190511004558-53fc257292ad.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190511004558-53fc257292ad"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190514182811-d8a7eff5a108",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190514182811-d8a7eff5a108.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190514182811-d8a7eff5a108"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190515114040-4c605bdc7531",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190515114040-4c605bdc7531.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190515114040-4c605bdc7531"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190524120722-0f337f1dfe57",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190524120722-0f337f1dfe57.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524120722-0f337f1dfe57"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/cli",
+      "version": "v0.0.0-20190606190902-32d7596df6a9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/cli/@v/v0.0.0-20190606190902-32d7596df6a9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606190902-32d7596df6a9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/docker",
+      "version": "v0.0.0-20170324093042-9a2dcf6a15f6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker/@v/v0.0.0-20170324093042-9a2dcf6a15f6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170324093042-9a2dcf6a15f6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/docker",
+      "version": "v0.0.0-20170409210509-9585d0ea1985",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker/@v/v0.0.0-20170409210509-9585d0ea1985.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170409210509-9585d0ea1985"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/docker",
+      "version": "v0.0.0-20170422215112-83ee902ecc37",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker/@v/v0.0.0-20170422215112-83ee902ecc37.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170422215112-83ee902ecc37"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/docker",
+      "version": "v0.0.0-20170428230838-f1571e8b67b4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker/@v/v0.0.0-20170428230838-f1571e8b67b4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170428230838-f1571e8b67b4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/docker",
+      "version": "v0.0.0-20170502054910-90d35abf7b35",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker/@v/v0.0.0-20170502054910-90d35abf7b35.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170502054910-90d35abf7b35"
     },
     {
       "ecosystem": "go",
@@ -75,6 +351,54 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/docker/docker",
+      "version": "v0.0.0-20170601211448-f5ec1e2936dc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker/@v/v0.0.0-20170601211448-f5ec1e2936dc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170601211448-f5ec1e2936dc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/docker-ce",
+      "version": "v0.0.0-20180924210327-f53bd8bb8e43",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker-ce/@v/v0.0.0-20180924210327-f53bd8bb8e43.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180924210327-f53bd8bb8e43"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/docker-ce",
+      "version": "v17.12.1-ce-rc2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/docker-ce/@v/v17.12.1-ce-rc2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v17.12.1-ce-rc2+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ljun20160606/di",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ljun20160606/di/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/mndrix/tap-go",
       "version": "v0.0.0-20171203230836-629fa407e90b",
       "repository": null,
@@ -84,6 +408,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20171203230836-629fa407e90b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/moby/moby",
+      "version": "v0.0.0-20170601211448-f5ec1e2936dc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/moby/moby/@v/v0.0.0-20170601211448-f5ec1e2936dc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170601211448-f5ec1e2936dc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/moby/moby",
+      "version": "v1.13.2-0.20170601211448-f5ec1e2936dc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/moby/moby/@v/v1.13.2-0.20170601211448-f5ec1e2936dc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.13.2-0.20170601211448-f5ec1e2936dc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/scryinfo/dp",
+      "version": "v0.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/scryinfo/dp/@v/v0.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tiborvass/cli",
+      "version": "v0.0.0-20190419012645-1ed02c40fe68",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tiborvass/cli/@v/v0.0.0-20190419012645-1ed02c40fe68.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190419012645-1ed02c40fe68"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-yaml",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-yaml/1.0.0/dotnet-yaml.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
     },
     {
       "ecosystem": "pypi",
@@ -99,5 +483,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

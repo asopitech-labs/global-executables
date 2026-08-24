@@ -2,11 +2,59 @@
   "command": "next",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mailutils-3.21-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "next-rs-cli",
+      "version": "0.3.0",
+      "repository": "https://github.com/OS-Lihua/next.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mailutils-mh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mailutils-mh",
       "version": null,
       "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nmh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
@@ -38,6 +86,114 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@abdshomad/lazy-method",
+      "version": "4.42.3",
+      "repository": "git+https://github.com/abdshomad/LAZY-METHOD.git",
+      "source": "https://registry.npmjs.org/@abdshomad%2Flazy-method/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.42.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abdshomad/next-method",
+      "version": "4.42.2",
+      "repository": "git+https://github.com/abdshomad/NEXT-METHOD.git",
+      "source": "https://registry.npmjs.org/@abdshomad%2Fnext-method/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.42.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@about_/next",
+      "version": "15.0.0",
+      "repository": "git+https://github.com/vercel/next.js.git",
+      "source": "https://registry.npmjs.org/@about_%2Fnext/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "15.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aeolens/next",
+      "version": "0.2.2",
+      "repository": "git+https://github.com/aeolens/aeolens.git",
+      "source": "https://registry.npmjs.org/@aeolens%2Fnext/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agderposten/next",
+      "version": "7.0.3",
+      "repository": "git+https://github.com/zeit/next.js.git",
+      "source": "https://registry.npmjs.org/@agderposten%2Fnext/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "7.0.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aidenlx/next",
+      "version": "13.2.4-canary.1",
+      "repository": "git+https://github.com/vercel/next.js.git",
+      "source": "https://registry.npmjs.org/@aidenlx%2Fnext/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "13.2.4-canary.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@artherczar/next",
+      "version": "16.1.2",
+      "repository": "git+https://github.com/vercel/next.js.git",
+      "source": "https://registry.npmjs.org/@artherczar%2Fnext/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "16.1.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aslmarcochan/next",
+      "version": "13.5.11-asl.patch.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aslmarcochan%2Fnext/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "13.5.11-asl.patch.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "mailutils-mh",
       "version": null,
@@ -63,5 +219,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "slowloris",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "slowloris",
+      "version": "1.2.1",
+      "repository": "https://github.com/SirRade/slowloris-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anzerr/slowloris.tool",
+      "version": "1.0.12",
+      "repository": "git+ssh://git@github.com/anzerr/slowloris.tool.git",
+      "source": "https://registry.npmjs.org/@anzerr%2Fslowloris.tool/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.12"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Slowloris",
+      "version": "0.2.6",
+      "repository": "https://github.com/gkbrk/slowloris",
+      "source": "https://files.pythonhosted.org/packages/10/46/7f609c4ee4cf527b77afcb9a11af036b6d9613b23f0bba13d8fc2dfcc338/Slowloris-0.2.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "slowloris",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

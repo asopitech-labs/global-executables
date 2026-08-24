@@ -1,0 +1,91 @@
+{
+  "command": "ssg",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "fandhe-frontend-server",
+      "version": "0.2.0",
+      "repository": "https://github.com/Fandhe-AI/fandhe-frontend",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ssg",
+      "version": "0.0.56",
+      "repository": "https://github.com/sebastienrousseau/static-site-generator",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.56"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amiadeveloper/express-swagger-specs-generator",
+      "version": "1.0.0",
+      "repository": "git+ssh://git@github.com/naveenagarwal/express-swagger-specs-generator.git",
+      "source": "https://registry.npmjs.org/@amiadeveloper%2Fexpress-swagger-specs-generator/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "SSG.Test",
+      "version": "0.0.6",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/ssg.test/0.0.6/ssg.test.0.0.6.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.6"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "TerevintoSoftware.StaticSiteGenerator",
+      "version": "10.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/terevintosoftware.staticsitegenerator/10.0.1/terevintosoftware.staticsitegenerator.10.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "10.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "TerevintoSoftware.StaticSiteGenerator.Tool",
+      "version": "2.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/terevintosoftware.staticsitegenerator.tool/2.2.0/terevintosoftware.staticsitegenerator.tool.2.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "SigmaShake.SSG",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

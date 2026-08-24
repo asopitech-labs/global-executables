@@ -2,6 +2,30 @@
   "command": "nup",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "nup",
+      "version": "0.1.0",
+      "repository": "https://github.com/surajmandalcell/nup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dvi2ps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "dvi2ps",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@antfu/ni",
+      "version": "30.5.0",
+      "repository": "git+https://github.com/antfu-collective/ni.git",
+      "source": "https://registry.npmjs.org/@antfu%2Fni/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "30.5.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "dvi2ps",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

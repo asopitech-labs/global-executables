@@ -2,6 +2,18 @@
   "command": "sidecar",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sidecar",
+      "version": "1.0.0",
+      "repository": "https://github.com/runtimed/runtimed",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/micro/examples",
       "version": "v0.0.0-20190130075939-4c88706279b7",
@@ -24,8 +36,176 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/refunc/refunc",
+      "version": "v0.0.0-20190424145513-cfba75b0d169",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/refunc/refunc/@v/v0.0.0-20190424145513-cfba75b0d169.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190424145513-cfba75b0d169"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20181019233642-2e10a0bbe9b3",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20181019233642-2e10a0bbe9b3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181019233642-2e10a0bbe9b3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190117095820-81934b1c32c2",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190117095820-81934b1c32c2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190117095820-81934b1c32c2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190131093439-a22cef183a8f",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190131093439-a22cef183a8f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190131093439-a22cef183a8f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190421193744-143a95a43bb7",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190421193744-143a95a43bb7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190421193744-143a95a43bb7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190504034938-863322699fe2",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190504034938-863322699fe2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190504034938-863322699fe2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190524132619-58b85f699367",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190524132619-58b85f699367.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524132619-58b85f699367"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190529235220-31df46e6f68b",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190529235220-31df46e6f68b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190529235220-31df46e6f68b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190530232626-7328fd620882",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190530232626-7328fd620882.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190530232626-7328fd620882"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190604141730-4d6fd59959c3",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190604141730-4d6fd59959c3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190604141730-4d6fd59959c3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190605004553-1a373ade3732",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190605004553-1a373ade3732.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190605004553-1a373ade3732"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190606031010-855aa80c933d",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190606031010-855aa80c933d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606031010-855aa80c933d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/test-infra",
+      "version": "v0.0.0-20190612225817-bf4a71fd9ef1",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/test-infra/@v/v0.0.0-20190612225817-bf4a71fd9ef1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190612225817-bf4a71fd9ef1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agicrew/sidecar-cli",
+      "version": "1.0.6",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@agicrew%2Fsidecar-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.6"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

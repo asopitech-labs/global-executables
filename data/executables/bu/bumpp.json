@@ -2,6 +2,18 @@
   "command": "bumpp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bumpp",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bumpp",
       "version": "12.2.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@abmao/bump",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/hengshanMWC/version-bump-prompt.git",
+      "source": "https://registry.npmjs.org/@abmao%2Fbump/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

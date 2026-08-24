@@ -2,6 +2,18 @@
   "command": "phar",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "php-8.5.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "php",
       "version": "8.5.9",
@@ -60,8 +72,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "appserver-io/phar",
+      "version": "1.0.0",
+      "repository": "https://github.com/appserver-io/phar.git",
+      "source": "https://repo.packagist.org/p2/appserver-io/phar.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

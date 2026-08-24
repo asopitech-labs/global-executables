@@ -1,0 +1,55 @@
+{
+  "command": "commit-lint",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "atypical-commit",
+      "version": "0.4.0",
+      "repository": "https://github.com/kekkon-nexus/atypical",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexwei/commit-lint",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/alex8088/commit-lint.git",
+      "source": "https://registry.npmjs.org/@alexwei%2Fcommit-lint/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atypical/commit",
+      "version": "0.4.0",
+      "repository": "git+https://github.com/kekkon-nexus/atypical.git",
+      "source": "https://registry.npmjs.org/@atypical%2Fcommit/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "CommitLint.Net",
+      "version": "0.8.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/commitlint.net/0.8.0/commitlint.net.0.8.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.8.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

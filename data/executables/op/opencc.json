@@ -2,6 +2,30 @@
   "command": "opencc",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "opencc-1.3.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "opencc",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "opencc",
       "version": null,
@@ -16,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "opencc",
-      "version": "1.4.1",
+      "version": "1.4.2",
       "repository": "https://opencc.byvoid.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,6 +48,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "OpenCC",
+      "version": "1.4.1",
+      "repository": "https://github.com/BYVoid/OpenCC",
+      "source": "https://files.pythonhosted.org/packages/69/eb/aabab0e242b12c69d1a9efdb24f09bb66204a9cd10b3e973c5066c5d4859/opencc-1.4.1-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

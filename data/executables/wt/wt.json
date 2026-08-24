@@ -2,6 +2,126 @@
   "command": "wt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "worktrunk-0.68.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "iso-code-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/snehith01001110/ISO-Framework",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kono-wt",
+      "version": "1.5.0",
+      "repository": "https://github.com/getkono/wt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "watch-together",
+      "version": "0.1.0",
+      "repository": "https://github.com/abbasiandev/watch-together",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "weather-tui",
+      "version": "0.1.0",
+      "repository": "https://github.com/Xithrius/weather-tui",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "worktrunk",
+      "version": "0.74.0",
+      "repository": "https://github.com/max-sixty/worktrunk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.74.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wt-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/terror/wt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wtree",
+      "version": "0.6.0",
+      "repository": "https://github.com/imqdee/wtree",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wtui",
+      "version": "0.2.3",
+      "repository": "https://github.com/wbbradley/wt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "wiredtiger",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "wiredtiger",
       "version": null,
@@ -38,6 +158,80 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@abhi-arya1/wt",
+      "version": "0.0.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@abhi-arya1%2Fwt/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agent-army/worktree",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@agent-army%2Fworktree/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agenttools/worktree",
+      "version": "0.4.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@agenttools%2Fworktree/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SWjigeum",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/73/1c/1415ae8ed975190944085bc759b38fd75531a33a6603b9335f39912614d6/SWjigeum-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "windows-terminal",
+      "version": "1.24.11911.0",
+      "repository": "https://github.com/microsoft/terminal",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.24.11911.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "worktrunk",
+      "version": "0.74.0",
+      "repository": "https://worktrunk.dev",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.74.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "wiredtiger",
       "version": null,
@@ -48,8 +242,44 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Microsoft.WindowsTerminal",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "WorldTimeCLI.WorldTimeCLI",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "akesh0805.WorldTimeCli",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

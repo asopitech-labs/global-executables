@@ -2,6 +2,30 @@
   "command": "organize",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "organize",
+      "version": "0.0.2",
+      "repository": "https://github.com/zanderlewis/organize",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "organize-rs",
+      "version": "0.4.1",
+      "repository": "https://github.com/organize-rs/organize",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "organize-tool",
       "version": "3.3.0",
@@ -12,6 +36,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SmartFileOrganizer",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/72/d8/77699d3f20dc024c06ccd2b67fd700a1ac38997a4adf7ceddd02c02ed4ff/SmartFileOrganizer-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "auto-file-organizer",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/53/53/bc55cf211d36bb5cf6644aee12d1a360a78e054586a93251e77b0a5d3039/auto_file_organizer-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

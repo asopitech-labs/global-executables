@@ -1,0 +1,79 @@
+{
+  "command": "discord",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "discord-1:1.0.154-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "discord-cli-rs",
+      "version": "0.2.0",
+      "repository": "https://github.com/lengoclongk59/discord-cli-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "discord-user-rs",
+      "version": "0.6.1",
+      "repository": "https://github.com/lengoclongk59/discord-user-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "discord_api",
+      "version": "0.2.3",
+      "repository": "https://github.com/jos-b/discord_api",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "faculties",
+      "version": "0.20.0",
+      "repository": "https://github.com/triblespace/faculties",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ajmarquez99/discord-cli",
+      "version": "0.3.1",
+      "repository": "git+https://github.com/AJMarquez99/discord-cli.git",
+      "source": "https://registry.npmjs.org/@ajmarquez99%2Fdiscord-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

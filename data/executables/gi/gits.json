@@ -2,6 +2,18 @@
   "command": "gits",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gits-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/efJerryYang/gits",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gitslave",
       "version": "2.0.2",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git_selector",
+      "version": "0.2.7",
+      "repository": "https://github.com/suzukimilanpaak/git_selector",
+      "source": "https://rubygems.org/gems/git_selector-0.2.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gits",
+      "version": "0.0.1",
+      "repository": "https://github.com/iboB/gits",
+      "source": "https://rubygems.org/gems/gits-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

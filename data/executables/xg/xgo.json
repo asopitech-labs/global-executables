@@ -2,6 +2,42 @@
   "command": "xgo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "goplus-1.6.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xgo",
+      "version": "0.1.1",
+      "repository": "https://github.com/Karvyz/xgo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/karalabe/xgo",
+      "version": "v0.0.0-20190301120235-2d6d1848fb02",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/karalabe/xgo/@v/v0.0.0-20190301120235-2d6d1848fb02.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190301120235-2d6d1848fb02"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "xgo",
       "version": "1.7.5",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "xGo",
+      "version": "0.1.43",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/xgo/0.1.43/xgo.0.1.43.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.43"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

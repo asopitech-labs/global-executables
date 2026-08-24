@@ -2,6 +2,42 @@
   "command": "suite",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "chicory",
+      "version": "1.0.1",
+      "repository": "https://github.com/achester88/chicory-engine/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ericlagergren/decimal",
+      "version": "v0.0.0-20181231230500-73749d4874d5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ericlagergren/decimal/@v/v0.0.0-20181231230500-73749d4874d5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181231230500-73749d4874d5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ericlagergren/decimal",
+      "version": "v0.0.0-20190331172538-c787d12d14a5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ericlagergren/decimal/@v/v0.0.0-20190331172538-c787d12d14a5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190331172538-c787d12d14a5"
+    },
+    {
       "ecosystem": "pypi",
       "package": "3Di-cmd-client",
       "version": "0.0.3",
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

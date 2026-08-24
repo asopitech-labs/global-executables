@@ -2,6 +2,78 @@
   "command": "xml2json",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-xmljson-0.2.1-8",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "convert2json",
+      "version": "2.6.3",
+      "repository": "https://github.com/simonrupf/convert2json",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.6.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xml2json",
+      "version": "0.1.3",
+      "repository": "https://www.github.com/janstarke/xml2json",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acransac/vtk.js",
+      "version": "16.14.0-101",
+      "repository": "git+https://github.com/kitware/vtk-js.git",
+      "source": "https://registry.npmjs.org/@acransac%2Fvtk.js/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "16.14.0-101"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agracio/xml2json",
+      "version": "2026.6.160",
+      "repository": "git+https://github.com/agracio/xml2json.git",
+      "source": "https://registry.npmjs.org/@agracio%2Fxml2json/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2026.6.160"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "codegear/xml2json",
+      "version": "1.0.0",
+      "repository": "https://github.com/whitephp/xml2json.git",
+      "source": "https://repo.packagist.org/p2/codegear/xml2json.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libxml-compile-perl",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

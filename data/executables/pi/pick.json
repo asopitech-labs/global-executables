@@ -2,6 +2,54 @@
   "command": "pick",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mailutils-3.21-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pick",
+      "version": "0.1.1",
+      "repository": "https://github.com/gmadrid/pick",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pick-cli",
+      "version": "0.1.26",
+      "repository": "https://github.com/aryanbhosale/pick",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.26"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mailutils-mh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mailutils-mh",
       "version": null,
@@ -18,7 +66,31 @@
       "package": "nmh",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nmh",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pick",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
@@ -62,6 +134,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@aryanbhosale/pick",
+      "version": "0.1.26",
+      "repository": "git+https://github.com/aryanbhosale/pick.git",
+      "source": "https://registry.npmjs.org/@aryanbhosale%2Fpick/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.26"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "consenter",
+      "version": "1.0.6",
+      "repository": "https://github.com/pvdb/consenter",
+      "source": "https://rubygems.org/gems/consenter-1.0.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "mailutils-mh",
       "version": null,
@@ -99,5 +195,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

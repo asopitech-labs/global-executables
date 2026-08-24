@@ -2,6 +2,30 @@
   "command": "pcs",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pg-connection-string",
+      "version": "0.0.2",
+      "repository": "https://git.sr.ht/~brownjohnf/pg-connection-string",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "postgres-conn-str",
+      "version": "0.1.1",
+      "repository": "https://github.com/miralandlabs/postgres-conn-str",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "pcs",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

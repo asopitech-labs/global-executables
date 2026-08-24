@@ -2,6 +2,66 @@
   "command": "lit",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "llvm-22.1.8-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lit",
+      "version": "1.0.4",
+      "repository": "https://github.com/dylanmckay/lit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "liteparse",
+      "version": "2.13.1",
+      "repository": "https://github.com/run-llama/liteparse",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.13.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "litvc",
+      "version": "1.6.0",
+      "repository": "https://github.com/nervosys/Lit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wailsapp/wails/v2",
+      "version": "v2.15.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wailsapp/wails/v2/@v/v2.15.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.15.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "lit",
       "version": "18.1.8",
@@ -24,8 +84,69 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aditya81016/lithium-cli",
+      "version": "1.0.3",
+      "repository": "git+https://github.com/Lithium-CLI/CLI.git",
+      "source": "https://registry.npmjs.org/@aditya81016%2Flithium-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arthuravianna/lit-cli",
+      "version": "0.0.2",
+      "repository": "git+https://github.com/arthuravianna/lit-cli.git",
+      "source": "https://registry.npmjs.org/@arthuravianna%2Flit-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "adlitteratim",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/30/54/c3d2e11e0754a5c56dd2ab3bdf11ddb179a5c4546ddf33b763967bcef145/adlitteratim-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lit-cli",
+      "version": "0.8.1",
+      "repository": "https://reflekt.dev/lit",
+      "source": "https://rubygems.org/gems/lit-cli-0.8.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "wixtoolset3",
+      "version": "3.14.1",
+      "repository": "https://wixtoolset.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.14.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

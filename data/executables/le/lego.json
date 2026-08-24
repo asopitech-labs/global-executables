@@ -2,6 +2,30 @@
   "command": "lego",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "lego-5.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lego",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "lego",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/appscode/lego",
+      "version": "v1.0.2-0.20180815012227-0b6736776fb2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/appscode/lego/@v/v1.0.2-0.20180815012227-0b6736776fb2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2-0.20180815012227-0b6736776fb2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/appscode/lego",
+      "version": "v1.2.2-0.20181215093553-e57a0a1b7259",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/appscode/lego/@v/v1.2.2-0.20181215093553-e57a0a1b7259.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.2-0.20181215093553-e57a0a1b7259"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-acme/lego",
+      "version": "v2.3.1-0.20190318164254-3684cc738d37+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-acme/lego/@v/v2.3.1-0.20190318164254-3684cc738d37%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.1-0.20190318164254-3684cc738d37+incompatible"
     },
     {
       "ecosystem": "go",
@@ -36,6 +96,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.5.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-acme/lego",
+      "version": "v2.6.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-acme/lego/@v/v2.6.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.6.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-acme/lego",
+      "version": "v2.7.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-acme/lego/@v/v2.7.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.7.2+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tossp/teaweb-lego",
+      "version": "v0.0.0-20190606070638-5d2242ad2167",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tossp/teaweb-lego/@v/v0.0.0-20190606070638-5d2242ad2167.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606070638-5d2242ad2167"
     },
     {
       "ecosystem": "go",
@@ -64,6 +160,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/xenolf/lego",
+      "version": "v0.0.0-20170219045139-6cac0ea7d8b2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v0.0.0-20170219045139-6cac0ea7d8b2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170219045139-6cac0ea7d8b2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
       "version": "v0.0.0-20170618175828-28ead50ff1ca",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v0.0.0-20170618175828-28ead50ff1ca.zip",
@@ -72,6 +180,90 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170618175828-28ead50ff1ca"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v0.0.0-20170719225435-4dde48a9b991",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v0.0.0-20170719225435-4dde48a9b991.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170719225435-4dde48a9b991"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v0.0.0-20181211001449-b05b54d1f69a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v0.0.0-20181211001449-b05b54d1f69a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181211001449-b05b54d1f69a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v0.0.0-20190304181753-67b329e3e370",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v0.0.0-20190304181753-67b329e3e370.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190304181753-67b329e3e370"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v0.4.2-0.20180530171757-9a1f8d748a6e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v0.4.2-0.20180530171757-9a1f8d748a6e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.2-0.20180530171757-9a1f8d748a6e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v2.1.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v2.1.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.1.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v2.2.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v2.2.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.0+incompatible"
     },
     {
       "ecosystem": "go",
@@ -98,9 +290,33 @@
       "latest_version": "v2.5.0+incompatible"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v2.6.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v2.6.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.6.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenolf/lego",
+      "version": "v2.7.2+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenolf/lego/@v/v2.7.2%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.7.2+incompatible"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "lego",
-      "version": "5.3.1",
+      "version": "5.4.0",
       "repository": "https://go-acme.github.io/lego/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -108,6 +324,31 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@astronomersiva/lego",
+      "version": "3.3.1",
+      "repository": "git+https://github.com/astronomersiva/lego.git",
+      "source": "https://registry.npmjs.org/@astronomersiva%2Flego/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.3.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "lego",
+      "version": "5.4.0",
+      "repository": "https://github.com/go-acme/lego",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.4.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -123,5 +364,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

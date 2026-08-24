@@ -1,0 +1,67 @@
+{
+  "command": "gate",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "hashcat-utils-1.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ambitiousmice/go-one",
+      "version": "v1.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ambitiousmice/go-one/@v/v1.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anchrd/gate-sdk",
+      "version": "0.21.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@anchrd%2Fgate-sdk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.21.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@archef2000/react-planner",
+      "version": "2.0.15",
+      "repository": "git+https://github.com/archef2000/react-planner.git",
+      "source": "https://registry.npmjs.org/@archef2000%2Freact-planner/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.15"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agentguard-tool",
+      "version": "6.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/77/5d/64816a008f74917256f34960ce3e37a040e3df8ea14137fefc2c63644abc/agentguard_tool-6.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.0.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

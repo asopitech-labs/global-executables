@@ -2,9 +2,57 @@
   "command": "rad",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "radicle-1.10.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "shared_meataxe-1.0.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "r4d",
+      "version": "3.1.0",
+      "repository": "https://github.com/simhyeon/r4d",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "radicle-cli",
+      "version": "0.23.0",
+      "repository": "https://radicle.network/seeds/seed.radicle.dev/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.23.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rad",
-      "version": "0.11.0",
+      "version": "0.12.1",
       "repository": "https://amterp.dev/rad/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +72,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "atduskgreg-rad",
+      "version": "0.3.1",
+      "repository": "http://github.com/atduskreg/rad",
+      "source": "https://rubygems.org/gems/atduskgreg-rad-0.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "madrona-rad",
+      "version": "0.5.0",
+      "repository": "http://github.com/madrona/rad",
+      "source": "https://rubygems.org/gems/madrona-rad-0.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "radius",
+      "version": "0.60.0",
+      "repository": "https://radapp.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.60.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Radius.Radius",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

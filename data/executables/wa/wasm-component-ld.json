@@ -2,9 +2,33 @@
   "command": "wasm-component-ld",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "wasm-component-ld-0.5.30-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wasm-component-ld",
+      "version": "0.5.30",
+      "repository": "https://github.com/bytecodealliance/wasm-component-ld",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.30"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "wasm-component-ld",
-      "version": "0.5.29",
+      "version": "0.5.30",
       "repository": "https://wasi.dev",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "hostess",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hostess-0.5.2-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hostess",
+      "version": "0.2.6",
+      "repository": "https://github.com/chaixb/hostess",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.6"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hostess",
       "version": "0.5.2",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hostess",
+      "version": "0.1.8",
+      "repository": "http://chrisroos.co.uk",
+      "source": "https://rubygems.org/gems/hostess-0.1.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lazyatom-hostess",
+      "version": "0.1.1",
+      "repository": "http://chrisroos.co.uk",
+      "source": "https://rubygems.org/gems/lazyatom-hostess-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

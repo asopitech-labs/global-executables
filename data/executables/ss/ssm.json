@@ -2,6 +2,30 @@
   "command": "ssm",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ssm",
+      "version": "0.1.1",
+      "repository": "https://github.com/isolonenko/ssm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "surrealdb-simple-migration",
+      "version": "0.5.0",
+      "repository": "https://github.com/hpapier/surrealdb-simple-migration.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/kelseyhightower/confd",
       "version": "v0.16.0",
@@ -12,8 +36,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.16.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SessionSmith",
+      "version": "2.1.0",
+      "repository": "https://github.com/yut0takagi/SessionSmith",
+      "source": "https://files.pythonhosted.org/packages/84/a4/e844b7725b9c6eb853e913e6279f6f37f7449126a89c30c662cbbaec6814/sessionsmith-2.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-ssm-tool",
+      "version": "2024.3.14.5.51",
+      "repository": "https://github.com/Robot-Wranglers/aws-ssm-tool/",
+      "source": "https://files.pythonhosted.org/packages/b3/88/1fb86e1e8931cf5eaf127eb8123112d77fa4648730cf574de6ebd847aed1/aws_ssm_tool-2024.3.14.5.51-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2024.3.14.5.51"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awful",
+      "version": "0.0.185",
+      "repository": "",
+      "source": "https://rubygems.org/gems/awful-0.0.185.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.185"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awry",
+      "version": "0.1.0",
+      "repository": "https://github.com/rlister/awry",
+      "source": "https://rubygems.org/gems/awry-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

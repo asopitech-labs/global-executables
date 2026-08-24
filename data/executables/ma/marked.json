@@ -2,9 +2,45 @@
   "command": "marked",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "marked-15.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "marked-15.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "marked-cli",
+      "version": "0.3.1",
+      "repository": "https://github.com/dekellum/marked",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "marked",
-      "version": "18.0.9",
+      "version": "18.0.10",
       "repository": "https://marked.js.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,6 +48,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@03balogun/marked",
+      "version": "5.0.6",
+      "repository": "git://github.com/markedjs/marked.git",
+      "source": "https://registry.npmjs.org/@03balogun%2Fmarked/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.0.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acarl005/marked",
+      "version": "5.0.1",
+      "repository": "git://github.com/markedjs/marked.git",
+      "source": "https://registry.npmjs.org/@acarl005%2Fmarked/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ainb/marked",
+      "version": "0.0.102",
+      "repository": "git@gitlab.com:ainb/marked.git",
+      "source": "https://registry.npmjs.org/@ainb%2Fmarked/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.102"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

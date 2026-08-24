@@ -2,6 +2,42 @@
   "command": "bx",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bx",
+      "version": "0.0.2",
+      "repository": "https://github.com/mattwiller/bx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bx-cli",
+      "version": "0.4.1",
+      "repository": "https://github.com/codemonument/bx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "codemonument_bx",
+      "version": "0.3.5",
+      "repository": "https://github.com/codemonument/bx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "build2",
       "version": "0.18.1",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "abacus-py",
+      "version": "0.8.8",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/2e/40/38f9913499301c276709128c32c86ec003d24cc2914d46845d85aaf70e3b/abacus_py-0.8.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

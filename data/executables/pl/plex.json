@@ -2,6 +2,18 @@
   "command": "plex",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fpc-3.2.2-11",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fpc",
       "version": "3.2.2",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PlexLabExchange",
+      "version": "0.9.3",
+      "repository": "https://github.com/labdao/plex",
+      "source": "https://files.pythonhosted.org/packages/eb/e5/b03f23624bfdac826ad7f93c79d429ebad1187d86297c34115835759def9/PlexLabExchange-0.9.3-py3-none-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

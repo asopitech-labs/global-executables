@@ -1,0 +1,68 @@
+{
+  "command": "fp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "fpc-3.2.2-11",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "file_peek",
+      "version": "0.1.1",
+      "repository": "https://github.com/KwachOjunga/peek",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "filterpath",
+      "version": "0.2.1",
+      "repository": "https://github.com/cyqsimon/fp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ammario/fastpass",
+      "version": "v0.0.0-20170405141421-0f0200472f74",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ammario/fastpass/@v/v0.0.0-20170405141421-0f0200472f74.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170405141421-0f0200472f74"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "freepascal",
+      "version": "3.2.2",
+      "repository": "https://www.freepascal.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.2.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

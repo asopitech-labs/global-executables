@@ -1,0 +1,32 @@
+{
+  "command": "pmux",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "psmux",
+      "version": "3.3.8",
+      "repository": "https://github.com/psmux/psmux",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.3.8"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "psmux",
+      "version": "3.3.8",
+      "repository": "https://psmux.pages.dev",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.3.8"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

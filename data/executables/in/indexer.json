@@ -2,6 +2,42 @@
   "command": "indexer",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "alto-indexer",
+      "version": "2026.7.1",
+      "repository": "https://github.com/commonwarexyz/alto/tree/main/indexer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2026.7.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "commonware-bridge",
+      "version": "2026.7.1",
+      "repository": "https://github.com/commonwarexyz/monorepo/tree/main/examples/bridge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2026.7.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "sphinxsearch",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "sphinxsearch",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/azure/azure-sdk-for-go",
+      "version": "v21.4.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/azure/azure-sdk-for-go/@v/v21.4.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v21.4.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/azure/azure-sdk-for-go",
+      "version": "v29.0.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/azure/azure-sdk-for-go/@v/v29.0.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v29.0.0+incompatible"
     },
     {
       "ecosystem": "go",
@@ -26,6 +86,18 @@
       "latest_version": "v0.0.0-20170623211141-247102c87396"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/vibioh/kaamebott",
+      "version": "v0.0.0-20260418062200-181bd46b05c5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vibioh/kaamebott/@v/v0.0.0-20260418062200-181bd46b05c5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260418062200-181bd46b05c5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "manticoresearch",
       "version": "29.0.2",
@@ -36,6 +108,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "gaiaresources/catools",
+      "version": "v1.5.1",
+      "repository": "https://github.com/gaiaresources/catools.git",
+      "source": "https://repo.packagist.org/p2/gaiaresources/catools.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.5.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "class_indexer",
+      "version": "0.3.0",
+      "repository": "http://www.blackbytes.info",
+      "source": "https://rubygems.org/gems/class_indexer-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gdor-indexer",
+      "version": "0.8.0",
+      "repository": "https://github.com/sul-dlss/gdor-indexer",
+      "source": "https://rubygems.org/gems/gdor-indexer-0.8.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -51,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

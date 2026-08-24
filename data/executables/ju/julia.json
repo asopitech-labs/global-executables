@@ -2,9 +2,33 @@
   "command": "julia",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "julia-2:1.12.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "juliaup",
+      "version": "1.22.2",
+      "repository": "https://github.com/julialang/juliaup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.22.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "julia",
-      "version": "1.12.6",
+      "version": "1.12.7",
       "repository": "https://julialang.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -16,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "juliaup",
-      "version": "1.21.0",
+      "version": "1.22.2",
       "repository": "https://github.com/JuliaLang/juliaup",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,8 +48,84 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "julia",
+      "version": "1.12.7",
+      "repository": "https://julialang.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.12.7"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "julia-lts",
+      "version": "1.10.12",
+      "repository": "https://julialang.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.10.12"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "julia-rc",
+      "version": "1.13.0-rc3",
+      "repository": "https://julialang.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.13.0-rc3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "juliaup",
+      "version": "1.22.2",
+      "repository": "https://github.com/JuliaLang/juliaup",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.22.2"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Julialang.Julia",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Julialang.Juliaup",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

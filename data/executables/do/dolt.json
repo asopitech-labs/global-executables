@@ -2,9 +2,33 @@
   "command": "dolt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dolt-1:2.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dolthub/dolt/go",
+      "version": "v0.40.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dolthub/dolt/go/@v/v0.40.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.40.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "dolt",
-      "version": "2.3.0",
+      "version": "2.3.1",
       "repository": "https://www.dolthub.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dolt",
+      "version": "0.30.0",
+      "repository": "http://gitorious.org/gitorious/dolt",
+      "source": "https://rubygems.org/gems/dolt-0.30.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.30.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dolt",
+      "version": "2.3.1",
+      "repository": "https://github.com/dolthub/dolt",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.3.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

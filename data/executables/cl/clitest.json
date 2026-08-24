@@ -2,6 +2,42 @@
   "command": "clitest",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "clitest-0.5.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "clitest",
+      "version": "0.9.0",
+      "repository": "https://github.com/mmastrac/crok",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "clitestrunner",
+      "version": "0.2.1",
+      "repository": "https://codeberg.org/cicko/gmeets-assistant",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "clitest",
       "version": "0.5.0",
@@ -12,6 +48,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@appirio/demo-scoped-pkg",
+      "version": "2.10.25",
+      "repository": "https://gitlab.appirio.com/appirio-dx/demo-scoped-pkg.git",
+      "source": "https://registry.npmjs.org/@appirio%2Fdemo-scoped-pkg/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.10.25"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "clitest",
+      "version": "0.1.10",
+      "repository": "https://github.com/ykominami/clitest",
+      "source": "https://rubygems.org/gems/clitest-0.1.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.10"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

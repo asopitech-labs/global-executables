@@ -2,6 +2,42 @@
   "command": "rtail",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rtail",
+      "version": "0.1.6",
+      "repository": "https://github.com/knarfytrebil/rtail",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "eventmachine-tail",
+      "version": "0.6.6",
+      "repository": "http://code.google.com/p/semicomplete/wiki/EventMachineTail",
+      "source": "https://rubygems.org/gems/eventmachine-tail-0.6.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "io-tail",
+      "version": "0.0.3",
+      "repository": "http://github.com/octplane/ruby-io-tail",
+      "source": "https://rubygems.org/gems/io-tail-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-file-tail",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

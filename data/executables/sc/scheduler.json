@@ -2,6 +2,18 @@
   "command": "scheduler",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pipebuilder",
+      "version": "0.2.2",
+      "repository": "https://github.com/pipebase/pipebuilder",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
       "ecosystem": "go",
       "package": "admiralty.io/multicluster-scheduler",
       "version": "v0.3.0",
@@ -12,6 +24,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dapr/dapr",
+      "version": "v1.18.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dapr/dapr/@v/v1.18.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.18.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flynn/flynn",
+      "version": "v0.0.0-20190424191857-b4b05fce92da",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flynn/flynn/@v/v0.0.0-20190424191857-b4b05fce92da.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190424191857-b4b05fce92da"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flyteorg/flyte/flyteadmin",
+      "version": "v1.16.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flyteorg/flyte/flyteadmin/@v/v1.16.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.16.8"
     },
     {
       "ecosystem": "go",
@@ -40,6 +88,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/mesos/mesos-go",
+      "version": "v0.0.0-20180906210748-ff8175bfda54",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mesos/mesos-go/@v/v0.0.0-20180906210748-ff8175bfda54.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180906210748-ff8175bfda54"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mesos/mesos-go",
+      "version": "v0.0.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mesos/mesos-go/@v/v0.0.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mesos/mesos-go",
       "version": "v0.0.9",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/mesos/mesos-go/@v/v0.0.9.zip",
@@ -48,8 +120,68 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pingcap/tidb-operator",
+      "version": "v1.0.0-beta.2.0.20190604042222-3e9a3f0fefc5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pingcap/tidb-operator/@v/v1.0.0-beta.2.0.20190604042222-3e9a3f0fefc5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0-beta.2.0.20190604042222-3e9a3f0fefc5"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "coinview/framework",
+      "version": "1.0.2",
+      "repository": "https://github.com/andreydiveev/coinview-framework.git",
+      "source": "https://repo.packagist.org/p2/coinview/framework.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "connectholland/tactician-scheduler-plugin",
+      "version": "1.1.1",
+      "repository": "https://github.com/ConnectHolland/tactician-scheduler-plugin.git",
+      "source": "https://repo.packagist.org/p2/connectholland/tactician-scheduler-plugin.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "iprodev/sitemap-generator-pro",
+      "version": "v3.0.0",
+      "repository": "https://github.com/iprodev/PHP-XML-Sitemap-Generator.git",
+      "source": "https://repo.packagist.org/p2/iprodev/sitemap-generator-pro.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kode/scheduling",
+      "version": "v1.3.0",
+      "repository": "https://github.com/kodephp/scheduling.git",
+      "source": "https://repo.packagist.org/p2/kode/scheduling.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.3.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

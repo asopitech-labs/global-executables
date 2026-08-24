@@ -2,6 +2,114 @@
   "command": "inspect",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bare-metal-engine",
+      "version": "0.7.1",
+      "repository": "https://github.com/muhammed-eldabea/RunIT_Mac",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "env_inspector",
+      "version": "0.1.1",
+      "repository": "https://github.com/cleuton/rustingcrab/tree/main/code_samples/env_inspector",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fits-rs",
+      "version": "0.3.0",
+      "repository": "https://github.com/fifth-postulate/fits-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kreuzberg-orp",
+      "version": "0.1.2",
+      "repository": "https://github.com/kreuzberg-dev/orp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mirr-kb-native",
+      "version": "0.1.0",
+      "repository": "https://github.com/brandonfromph/mirr-project",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "moe-llm-core",
+      "version": "2.0.0",
+      "repository": "https://github.com/eriirfos-eng/ternary-intelligence-stack",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "onenote_parser",
+      "version": "2.0.0",
+      "repository": "https://github.com/msiemens/onenote.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "orp",
+      "version": "1.0.0",
+      "repository": "https://github.com/fbilhaut/orp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sc2reader-rs",
+      "version": "0.7.0",
+      "repository": "https://github.com/aldezex/sc2reader-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
       "ecosystem": "debian",
       "package": "libboost1.83-tools-dev",
       "version": null,
@@ -12,6 +120,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/rkt",
+      "version": "v0.0.0-20160415144533-02438c55fbd4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v0.0.0-20160415144533-02438c55fbd4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160415144533-02438c55fbd4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/rkt",
+      "version": "v0.0.0-20160801185252-a83419be28ac",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v0.0.0-20160801185252-a83419be28ac.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160801185252-a83419be28ac"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/rkt",
+      "version": "v0.0.0-20170220101605-ec37f3cb649b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v0.0.0-20170220101605-ec37f3cb649b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170220101605-ec37f3cb649b"
     },
     {
       "ecosystem": "go",
@@ -40,6 +184,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/coreos/rkt",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/coreos/rkt",
       "version": "v1.6.0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/coreos/rkt/@v/v1.6.0.zip",
@@ -48,6 +204,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/vulndb",
+      "version": "v0.0.0-20260819172145-99a8f501b4f3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/vulndb/@v/v0.0.0-20260819172145-99a8f501b4f3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819172145-99a8f501b4f3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
     },
     {
       "ecosystem": "go",
@@ -74,6 +266,90 @@
       "latest_version": "v1.30.0"
     },
     {
+      "ecosystem": "go",
+      "package": "golang.org/x/vulndb",
+      "version": "v0.0.0-20260819172145-99a8f501b4f3",
+      "repository": null,
+      "source": "https://proxy.golang.org/golang.org/x/vulndb/@v/v0.0.0-20260819172145-99a8f501b4f3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819172145-99a8f501b4f3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kraenzle-ritter/spreadsheet-inspect",
+      "version": "v1.0.0",
+      "repository": "https://github.com/kraenzle-ritter/spreadsheet-inspect.git",
+      "source": "https://repo.packagist.org/p2/kraenzle-ritter/spreadsheet-inspect.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "astabench",
+      "version": "0.5.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/78/f1/f0d83d5566aa74879536e26e60dd971f8c161214cb72a3139f03cf58f367/astabench-0.5.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-blackbelt-mcp-server",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/49/de/9f3581855e5f24dd1ac0c4059324f7bdee1b25ec89c7b5f5146f7b31df07/aws_blackbelt_mcp_server-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "code_inspector",
+      "version": "0.1.0",
+      "repository": "https://github.com/monde-sistemas/code_inspector",
+      "source": "https://rubygems.org/gems/code_inspector-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "inspect",
+      "version": "0.0.1",
+      "repository": "https://github.com/siadat/inspect",
+      "source": "https://rubygems.org/gems/inspect-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "json_inspector",
+      "version": "0.1.0",
+      "repository": "https://github.com/undr/json_inspector",
+      "source": "https://rubygems.org/gems/json_inspector-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libboost1.83-tools-dev",
       "version": null,
@@ -87,5 +363,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

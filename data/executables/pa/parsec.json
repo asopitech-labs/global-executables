@@ -2,6 +2,42 @@
   "command": "parsec",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-parsec",
+      "version": "0.5.0",
+      "repository": "https://github.com/erishforG/git-parsec",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "parsec-service",
+      "version": "1.5.0",
+      "repository": "https://github.com/parallaxsecond/parsec",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "parsec-service",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "parsec-service",
       "version": null,
@@ -12,6 +48,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prataprc/goparsec",
+      "version": "v0.0.0-20170801142144-82de4f9400c2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prataprc/goparsec/@v/v0.0.0-20170801142144-82de4f9400c2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170801142144-82de4f9400c2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prataprc/goparsec",
+      "version": "v0.0.0-20180806094145-2600a2a4a410",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prataprc/goparsec/@v/v0.0.0-20180806094145-2600a2a4a410.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180806094145-2600a2a4a410"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

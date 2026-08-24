@@ -2,6 +2,18 @@
   "command": "borgmatic",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "borgmatic-2.1.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "borgmatic",
       "version": "2.1.7",
@@ -12,6 +24,18 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "atticmatic",
+      "version": "0.1.8",
+      "repository": "https://torsion.org/atticmatic",
+      "source": "https://files.pythonhosted.org/packages/84/ee/cc2453d5865024832f22cade8c24d7d73b3ee0c07c3313315e7b71ea6d9d/atticmatic-0.1.8-py27-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

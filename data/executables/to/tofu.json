@@ -2,9 +2,33 @@
   "command": "tofu",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "opentofu-1.12.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tofu-llm",
+      "version": "0.7.2",
+      "repository": "https://github.com/teccdev/tofu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "opentofu",
-      "version": "1.12.5",
+      "version": "1.12.6",
       "repository": "https://opentofu.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -38,6 +62,44 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "nuget",
+      "package": "dotnet-tool-tofu",
+      "version": "0.0.6",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-tool-tofu/0.0.6/dotnet-tool-tofu.0.0.6.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "opentofu",
+      "version": "1.12.6",
+      "repository": "https://opentofu.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.12.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "tenv",
+      "version": "4.15.1",
+      "repository": "https://tofuutils.github.io/tenv/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.15.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-ufo-tofu",
       "version": null,
@@ -51,5 +113,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

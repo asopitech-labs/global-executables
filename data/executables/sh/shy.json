@@ -1,0 +1,43 @@
+{
+  "command": "shy",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "shy-0.1.10-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "shy",
+      "version": "0.1.10",
+      "repository": "https://github.com/xvxx/shy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "3h1-cli",
+      "version": "0.0.7",
+      "repository": "http://121.40.104.98:9090/web/3h1-cli.git",
+      "source": "https://registry.npmjs.org/3h1-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.7"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

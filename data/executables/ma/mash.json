@@ -2,6 +2,42 @@
   "command": "mash",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mash-http",
+      "version": "0.9.1",
+      "repository": "https://github.com/rseragon/mash",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mash-ssh",
+      "version": "0.5.0",
+      "repository": "https://github.com/crisidev/mash",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mash",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mash",
       "version": null,
@@ -12,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "HillTau",
+      "version": "1.0",
+      "repository": "http://github.com/Bhallalab/HillTau",
+      "source": "https://files.pythonhosted.org/packages/fd/f0/3e581787d6f99f2545a12d5fdee13d627d281b4df8f1e6c1a10b9242c956/HillTau-1.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

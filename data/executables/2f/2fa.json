@@ -2,6 +2,18 @@
   "command": "2fa",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "two-factor-auth",
+      "version": "0.1.4",
+      "repository": "https://github.com/bujnlc8/two-factor-auth",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
       "ecosystem": "go",
       "package": "rsc.io/2fa",
       "version": "v1.1.0",
@@ -24,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "2fa-cli",
+      "version": "1.0.4",
+      "repository": "git+https://github.com/skydiver/2fa-cli.git",
+      "source": "https://registry.npmjs.org/2fa-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "2fa-cmd",
+      "version": "0.0.6",
+      "repository": "git+https://github.com/x-ray-s/2fa-cmd.git",
+      "source": "https://registry.npmjs.org/2fa-cmd/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

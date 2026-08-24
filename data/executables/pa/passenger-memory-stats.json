@@ -6,6 +6,18 @@
       "package": "passenger",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "passenger",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -16,7 +28,7 @@
     {
       "ecosystem": "homebrew",
       "package": "passenger",
-      "version": "6.1.8",
+      "version": "6.2.0",
       "repository": "https://www.phusionpassenger.com/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -24,6 +36,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "colouringcode-passenger",
+      "version": "0.2",
+      "repository": "http://github.com/colouringcode/passenger",
+      "source": "https://rubygems.org/gems/colouringcode-passenger-0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "karsthammer-passenger",
+      "version": "2.2.4",
+      "repository": "http://www.modrails.com/",
+      "source": "https://rubygems.org/gems/karsthammer-passenger-2.2.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.2.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

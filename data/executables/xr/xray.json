@@ -2,6 +2,42 @@
   "command": "xray",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "x-ray",
+      "version": "0.4.1",
+      "repository": "https://github.com/excelano/xray",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xray",
+      "version": "0.1.1",
+      "repository": "https://gitlab.com/tonyfinn/xray",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xray-tui",
+      "version": "1.4.1",
+      "repository": "https://github.com/h33333333/xray",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.4.1"
+    },
+    {
       "ecosystem": "go",
       "package": "contrib.go.opencensus.io/exporter/aws",
       "version": "v0.0.0-20180906190126-dd54a7ef511e",
@@ -14,6 +50,30 @@
       "latest_version": "v0.0.0-20180906190126-dd54a7ef511e"
     },
     {
+      "ecosystem": "go",
+      "package": "contrib.go.opencensus.io/exporter/aws",
+      "version": "v0.0.0-20230502192102-15967c811cec",
+      "repository": null,
+      "source": "https://proxy.golang.org/contrib.go.opencensus.io/exporter/aws/@v/v0.0.0-20230502192102-15967c811cec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230502192102-15967c811cec"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/census-ecosystem/opencensus-go-exporter-aws",
+      "version": "v0.0.0-20180411051634-41633bc1ff6b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/census-ecosystem/opencensus-go-exporter-aws/@v/v0.0.0-20180411051634-41633bc1ff6b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180411051634-41633bc1ff6b"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "xray",
       "version": "26.3.27",
@@ -24,8 +84,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atmalviya/xray",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/atmalviya/equalcollective-assignment.git",
+      "source": "https://registry.npmjs.org/@atmalviya%2Fxray/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "xray",
+      "version": "26.3.27",
+      "repository": "https://github.com/XTLS/Xray-core",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "26.3.27"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

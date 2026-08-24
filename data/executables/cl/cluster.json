@@ -2,6 +2,18 @@
   "command": "cluster",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "graphviz-16.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "debian",
       "package": "graphviz",
       "version": null,
@@ -12,6 +24,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/2se/dolphin",
+      "version": "v1.0.1-rc1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/2se/dolphin/@v/v1.0.1-rc1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1-rc1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/namespacelabs/foundation",
+      "version": "v0.0.557",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/namespacelabs/foundation/@v/v0.0.557.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.557"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/withlin/canal-go",
+      "version": "v0.0.0-20190509060020-f4ee0964adee",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/withlin/canal-go/@v/v0.0.0-20190509060020-f4ee0964adee.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190509060020-f4ee0964adee"
     },
     {
       "ecosystem": "go",
@@ -28,6 +76,42 @@
     {
       "ecosystem": "go",
       "package": "k8s.io/kubernetes",
+      "version": "v1.4.1-beta.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.4.1-beta.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.1-beta.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.6.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.6.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
+      "version": "v1.6.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.6.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/kubernetes",
       "version": "v1.7.5",
       "repository": null,
       "source": "https://proxy.golang.org/k8s.io/kubernetes/@v/v1.7.5.zip",
@@ -36,6 +120,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.7.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "namespacelabs.dev/foundation",
+      "version": "v0.0.557",
+      "repository": null,
+      "source": "https://proxy.golang.org/namespacelabs.dev/foundation/@v/v0.0.557.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.557"
     },
     {
       "ecosystem": "homebrew",
@@ -48,6 +144,66 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "amphp/cluster",
+      "version": "v2.0.1",
+      "repository": "https://github.com/amphp/cluster.git",
+      "source": "https://repo.packagist.org/p2/amphp/cluster.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-cluster-factory",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/33/e8/6ec39072d71cf7bcaddb427bb550360779c77d16818a2466ac58dca961af/agent_cluster_factory-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "almos-kit",
+      "version": "1.1.1",
+      "repository": "https://github.com/MiguelMartzFdez/almos",
+      "source": "https://files.pythonhosted.org/packages/b6/fd/4d791e34c4e9e0764f7e96db369006d9ad542ec013c8ad220a075daf70f8/almos_kit-1.1.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cluster",
+      "version": "0.8.2",
+      "repository": null,
+      "source": "https://rubygems.org/gems/cluster-0.8.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ec2-clusterssh",
+      "version": "0.6.2",
+      "repository": "https://github.com/gposton/ec2-clusterssh",
+      "source": "https://rubygems.org/gems/ec2-clusterssh-0.6.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -63,5 +219,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

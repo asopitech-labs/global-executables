@@ -2,6 +2,42 @@
   "command": "cbor",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cbor-cli",
+      "version": "0.7.0",
+      "repository": "https://github.com/ironspecs/cbor-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cbor2-cli",
+      "version": "1.1.4",
+      "repository": "https://github.com/ldclabs/cbor2",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anyconfig-cbor-backend",
+      "version": "0.2.0",
+      "repository": "https://github.com/ssato/python-anyconfig-cbor-backend",
+      "source": "https://files.pythonhosted.org/packages/c6/b7/a5c34bcca5162462f26f652452fe122fa2a0cbb8f740de18a03d084a7cb6/anyconfig-cbor-backend-0.2.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "node-cbor",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

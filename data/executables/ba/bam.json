@@ -2,6 +2,30 @@
   "command": "bam",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "bam-0.5.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bam",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "bam",
       "version": null,
@@ -26,6 +50,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "BashBam",
+      "version": "2.0",
+      "repository": "http://thegoods.aj7may.com/bashbam",
+      "source": "https://files.pythonhosted.org/packages/fe/3a/a27b829cf60573784d6033559f48a2349cda9bfd7cf14c6a033e585056cc/BashBam-2.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bam",
+      "version": "1.0.1",
+      "repository": "https://github.com/vanntastic/bam",
+      "source": "https://rubygems.org/gems/bam-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gd_bam",
+      "version": "0.1.40",
+      "repository": "http://your.website.com",
+      "source": "https://rubygems.org/gems/gd_bam-0.1.40.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.40"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "bam",
       "version": null,
@@ -39,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

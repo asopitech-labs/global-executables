@@ -1,0 +1,103 @@
+{
+  "command": "proton",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-triton-3.5.1-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "proton-cli",
+      "version": "0.0.0",
+      "repository": "https://github.com/scattered-systems/proton-cli.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/apache/qpid-proton",
+      "version": "v0.0.0-20260817100300-8d359708048d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/apache/qpid-proton/@v/v0.0.0-20260817100300-8d359708048d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260817100300-8d359708048d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "qpid.apache.org",
+      "version": "v0.0.0-20260817100300-8d359708048d",
+      "repository": null,
+      "source": "https://proxy.golang.org/qpid.apache.org/@v/v0.0.0-20260817100300-8d359708048d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260817100300-8d359708048d"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adalo/cli",
+      "version": "1.0.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adalo%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atomicsolutions/proton",
+      "version": "2.0.18",
+      "repository": "git+https://github.com/atomicsolutions/proton-client-cli-v2.git",
+      "source": "https://registry.npmjs.org/@atomicsolutions%2Fproton/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.18"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atomicsolutions/proton5-cli",
+      "version": "5.0.29",
+      "repository": "git+https://github.com/atomicsolutions/proton5-cli.git",
+      "source": "https://registry.npmjs.org/@atomicsolutions%2Fproton5-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.0.29"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "foundation/proton",
+      "version": "v0.12.2",
+      "repository": "https://github.com/foundation/proton.git",
+      "source": "https://repo.packagist.org/p2/foundation/proton.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.12.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

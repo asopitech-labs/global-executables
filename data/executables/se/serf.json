@@ -2,6 +2,30 @@
   "command": "serf",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "selflang",
+      "version": "0.13.0",
+      "repository": "https://github.com/mkmik/serf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "serf",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "serf",
       "version": null,
@@ -100,6 +124,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20160809014204-114430d82108",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20160809014204-114430d82108.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160809014204-114430d82108"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
       "version": "v0.0.0-20161007004122-1d4fa605f6ff",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20161007004122-1d4fa605f6ff.zip",
@@ -124,6 +160,42 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20170208214939-c5e26c3704ca",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20170208214939-c5e26c3704ca.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170208214939-c5e26c3704ca"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20170525231504-c2e4be24cdc9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20170525231504-c2e4be24cdc9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170525231504-c2e4be24cdc9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20170707065445-6669b5d30985",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20170707065445-6669b5d30985.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170707065445-6669b5d30985"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
       "version": "v0.0.0-20170714182601-bbeddf0b3ab3",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20170714182601-bbeddf0b3ab3.zip",
@@ -132,6 +204,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170714182601-bbeddf0b3ab3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20170802190530-e0e11d82226a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20170802190530-e0e11d82226a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170802190530-e0e11d82226a"
     },
     {
       "ecosystem": "go",
@@ -168,6 +252,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180203003127-f691397e8ac6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20180504200640-4b67f2c2b2bb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20180504200640-4b67f2c2b2bb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180504200640-4b67f2c2b2bb"
     },
     {
       "ecosystem": "go",
@@ -220,6 +316,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20181025213009-75714e08b2cf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20181025213009-75714e08b2cf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181025213009-75714e08b2cf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20181120201513-4a3a10ccd1b0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20181120201513-4a3a10ccd1b0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181120201513-4a3a10ccd1b0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
       "version": "v0.0.0-20190104153947-c7f3bc96b409",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20190104153947-c7f3bc96b409.zip",
@@ -228,6 +348,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190104153947-c7f3bc96b409"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20190107214127-239fdb9f44a4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20190107214127-239fdb9f44a4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190107214127-239fdb9f44a4"
     },
     {
       "ecosystem": "go",
@@ -244,6 +376,234 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/serf",
+      "version": "v0.0.0-20190321155033-e516ab3e97c3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.0.0-20190321155033-e516ab3e97c3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190321155033-e516ab3e97c3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.10.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.10.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.4.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.4.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.6.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.6.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.6.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.6.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.6.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.6.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.6.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.6.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.8.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.8.2-0.20170208214939-c5e26c3704ca",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.2-0.20170208214939-c5e26c3704ca.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2-0.20170208214939-c5e26c3704ca"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
       "version": "v0.8.2-0.20171022020050-c20a0b1b1ea9",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.2-0.20171022020050-c20a0b1b1ea9.zip",
@@ -256,6 +616,66 @@
     {
       "ecosystem": "go",
       "package": "github.com/hashicorp/serf",
+      "version": "v0.8.2-0.20180530155958-984a73625de3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.2-0.20180530155958-984a73625de3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2-0.20180530155958-984a73625de3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.8.2-0.20180907130240-48d579458173",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.2-0.20180907130240-48d579458173.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2-0.20180907130240-48d579458173"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.8.2-0.20181025213009-75714e08b2cf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.2-0.20181025213009-75714e08b2cf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2-0.20181025213009-75714e08b2cf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.8.2-0.20181120201513-4a3a10ccd1b0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.2-0.20181120201513-4a3a10ccd1b0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2-0.20181120201513-4a3a10ccd1b0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.8.2-0.20190107214127-239fdb9f44a4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.2-0.20190107214127-239fdb9f44a4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2-0.20190107214127-239fdb9f44a4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
       "version": "v0.8.3",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.3.zip",
@@ -264,6 +684,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.8.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/serf",
+      "version": "v0.8.3-0.20190321155033-e516ab3e97c3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/serf/@v/v0.8.3-0.20190321155033-e516ab3e97c3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.3-0.20190321155033-e516ab3e97c3"
     },
     {
       "ecosystem": "homebrew",
@@ -291,5 +723,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

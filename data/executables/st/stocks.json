@@ -2,6 +2,30 @@
   "command": "stocks",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "stocks",
+      "version": "0.0.1",
+      "repository": "https://github.com/uzaaft/stocks",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-flutter-desktop/go-flutter",
+      "version": "v0.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-flutter-desktop/go-flutter/@v/v0.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bash-snippets",
       "version": "1.23.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

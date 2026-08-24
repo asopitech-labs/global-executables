@@ -1,0 +1,43 @@
+{
+  "command": "tensorboard",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "tensorboard-2.21.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PBFS",
+      "version": "2.0.0",
+      "repository": "https://github.com/hongzhu6129/HidenFeatures",
+      "source": "https://files.pythonhosted.org/packages/95/e4/8a4d764dbed4a8e31e929925c862b050c02f21af54042b6540f5bd7bec87/PBFS-2.0.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-edge-tensorflow",
+      "version": "2.21.0.dev20260126",
+      "repository": "https://www.tensorflow.org/",
+      "source": "https://files.pythonhosted.org/packages/89/6c/ba63fd743aa6e088490215d86b83ec2cfa39c52ae7ca137fe80c4fb1fc78/ai_edge_tensorflow-2.21.0.dev20260126-cp310-cp310-macosx_12_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.21.0.dev20260126"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

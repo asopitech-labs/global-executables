@@ -1,0 +1,31 @@
+{
+  "command": "amdgpu_top",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "amdgpu_top-0.11.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "amdgpu_top",
+      "version": "0.11.5",
+      "repository": "https://github.com/Umio-Yasuno/amdgpu_top",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.5"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

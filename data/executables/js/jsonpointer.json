@@ -2,6 +2,30 @@
   "command": "jsonpointer",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-jsonpointer-3.1.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-jsonpointer",
+      "version": "v0.0.0-20180225143300-37667080efed",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-jsonpointer/@v/v0.0.0-20180225143300-37667080efed.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180225143300-37667080efed"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-json-pointer",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

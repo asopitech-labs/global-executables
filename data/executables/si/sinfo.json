@@ -2,6 +2,30 @@
   "command": "sinfo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "slurm-llnl-26.05.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "slurm-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "slurm-client",
       "version": null,
@@ -12,6 +36,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SumsJob",
+      "version": "0.7.2",
+      "repository": "https://github.com/lululxvi/sumsjob",
+      "source": "https://files.pythonhosted.org/packages/9d/0e/a6b4a78a95cbb48a89130dc33f993e8b93d8ee2832f89876dac012288a3e/SumsJob-0.7.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amlhpc",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/90/38/840ffec6dee703bbcf28aa38c397bcfe83fe1ef2278ba0312951d94d0efe/amlhpc-0.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

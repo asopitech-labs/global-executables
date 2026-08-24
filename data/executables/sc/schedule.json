@@ -2,6 +2,66 @@
   "command": "schedule",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "opening-hours",
+      "version": "2.1.4",
+      "repository": "https://github.com/remi-dupre/opening-hours-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/houseme/url-shortenter",
+      "version": "v0.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/houseme/url-shortenter/@v/v0.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Winix.Schedule",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winix.schedule/0.4.0/winix.schedule.0.4.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "UETSchedule",
+      "version": "0.1.5",
+      "repository": "https://github.com/ppvan/autotkb",
+      "source": "https://files.pythonhosted.org/packages/32/e6/2b3bc850b4da22c73c79fed1d2dcf4e5f1885873019ec7f40c63bd01a714/UETSchedule-0.1.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "loadshedding",
+      "version": "0.1.8",
+      "repository": "https://github.com/xecutioner/loadshedding-schedule",
+      "source": "https://rubygems.org/gems/loadshedding-0.1.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.8"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "trollsched-bin",
       "version": null,
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "lemma",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "lemma",
+      "version": "0.9.7",
+      "repository": "https://github.com/lemma/lemma",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lemma-cli",
+      "version": "0.8.15",
+      "repository": "https://github.com/lemma/lemma",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.15"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lemma-compiler",
+      "version": "20260805.0.0",
+      "repository": "https://github.com/ducks/lemma",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "20260805.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lemma-rs",
+      "version": "0.2.0",
+      "repository": "https://github.com/LeanOxide/lemma.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mailgun/holster",
       "version": "v2.3.5+incompatible",
@@ -12,8 +60,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.3.5+incompatible"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artano-lemma",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e9/bb/1edbebbb05fbf9afb3de8613c0b040a6a053e5020348dc1780a6223f5ac6/artano_lemma-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

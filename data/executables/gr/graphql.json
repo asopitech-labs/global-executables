@@ -2,6 +2,30 @@
   "command": "graphql",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "graphql-cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "grpc_graphql_gateway",
+      "version": "1.2.5",
+      "repository": "https://github.com/Protocol-Lattice/grpc_graphql_gateway",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.5"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/alecthomas/participle",
       "version": "v0.0.0-20190103085315-bf8340a459bd",
@@ -12,6 +36,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190103085315-bf8340a459bd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alecthomas/participle",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/alecthomas/participle/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
     },
     {
       "ecosystem": "go",
@@ -50,6 +86,30 @@
       "latest_version": "v0.1.0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/rs/rest-layer",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rs/rest-layer/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rs/rest-layer/examples",
+      "version": "v0.0.0-20190423104806-3f2cd5df9e8e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rs/rest-layer/examples/@v/v0.0.0-20190423104806-3f2cd5df9e8e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190423104806-3f2cd5df9e8e"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "graphql-cli",
       "version": "4.1.0",
@@ -60,8 +120,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apollographql/graphql-language-service",
+      "version": "1.3.2",
+      "repository": "git+https://github.com/graphql/graphql-language-service.git",
+      "source": "https://registry.npmjs.org/@apollographql%2Fgraphql-language-service/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.3.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

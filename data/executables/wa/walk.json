@@ -2,6 +2,30 @@
   "command": "walk",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "4ti2-1.6.15-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20170525050717-0ac4c11b053b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20170525050717-0ac4c11b053b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170525050717-0ac4c11b053b"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/tonistiigi/fsutil",
       "version": "v0.0.0-20170929161712-dea3a0da73ae",
@@ -12,6 +36,78 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170929161712-dea3a0da73ae"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20180516223248-dc68c7445892",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20180516223248-dc68c7445892.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180516223248-dc68c7445892"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20180610154556-8abad97ee396",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20180610154556-8abad97ee396.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180610154556-8abad97ee396"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20180725061210-b19464cd1b6a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20180725061210-b19464cd1b6a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180725061210-b19464cd1b6a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20181002165410-f567071bed24",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20181002165410-f567071bed24.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181002165410-f567071bed24"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20181011223333-2862f6bc5ac9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20181011223333-2862f6bc5ac9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181011223333-2862f6bc5ac9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20190314220245-1ec1983587cd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20190314220245-1ec1983587cd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190314220245-1ec1983587cd"
     },
     {
       "ecosystem": "go",
@@ -38,6 +134,18 @@
       "latest_version": "v0.0.0-20190327153851-3bbb99cdbd76"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/tonistiigi/fsutil",
+      "version": "v0.0.0-20260819142231-83cac42c1c52",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tonistiigi/fsutil/@v/v0.0.0-20260819142231-83cac42c1c52.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819142231-83cac42c1c52"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "walk",
       "version": "1.13.0",
@@ -48,8 +156,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "walk",
+      "version": "1.13.0",
+      "repository": "https://github.com/antonmedv/walk",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.13.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "antonmedv.walk",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

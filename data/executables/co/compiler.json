@@ -2,6 +2,78 @@
   "command": "compiler",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fbthrift_compiler",
+      "version": "0.1.3",
+      "repository": "https://github.com/facebookexperimental/rust-shed/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "eclipse-titan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/i-darklight/compiler",
+      "version": "v0.0.0-20240120071744-cb19d56b2f1a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/i-darklight/compiler/@v/v0.0.0-20240120071744-cb19d56b2f1a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240120071744-cb19d56b2f1a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubeflow/pipelines",
+      "version": "v0.0.0-20260820100514-98c5c0e2b1e1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubeflow/pipelines/@v/v0.0.0-20260820100514-98c5c0e2b1e1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820100514-98c5c0e2b1e1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/red-sock/rscli",
+      "version": "v0.0.45",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/red-sock/rscli/@v/v0.0.45.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.45"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "in2pire/cli-compiler",
+      "version": "1.1.1",
+      "repository": "https://github.com/in2pire/in2pire-cli-compiler.git",
+      "source": "https://repo.packagist.org/p2/in2pire/cli-compiler.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.1.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "eclipse-titan",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

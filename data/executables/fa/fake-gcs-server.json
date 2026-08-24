@@ -2,9 +2,21 @@
   "command": "fake-gcs-server",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/fsouza/fake-gcs-server",
+      "version": "v1.55.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fsouza/fake-gcs-server/@v/v1.55.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.55.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fake-gcs-server",
-      "version": "1.55.1",
+      "version": "1.56.0",
       "repository": "https://github.com/fsouza/fake-gcs-server",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "ptop",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fpc-3.2.2-11",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "aprender-present-terminal",
+      "version": "0.63.0",
+      "repository": "https://github.com/paiml/aprender",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.63.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "presentar-terminal",
+      "version": "0.3.5",
+      "repository": "https://github.com/paiml/presentar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fpc",
       "version": "3.2.2",
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

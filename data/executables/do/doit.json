@@ -2,6 +2,78 @@
   "command": "doit",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-doit-0.37.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "doit",
+      "version": "0.2.0",
+      "repository": "https://github.com/CaduSouza1/DoIt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "doit-agent",
+      "version": "0.1.6",
+      "repository": "https://github.com/LaneSun/doit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "doit-cli",
+      "version": "0.1.7",
+      "repository": "https://github.com/jacobaclarke/doit-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "do",
+      "version": "0.1.4",
+      "repository": "https://github.com/daddye/do",
+      "source": "https://rubygems.org/gems/do-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "doit",
+      "version": "1.1.1",
+      "repository": "https://github.com/matique/doit",
+      "source": "https://rubygems.org/gems/doit-1.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-doit",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

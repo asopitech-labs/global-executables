@@ -2,6 +2,66 @@
   "command": "mr",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "myrepos-1.20180726-8",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "coretilus",
+      "version": "0.7.0",
+      "repository": "https://github.com/titilambert/coretilus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mark_recall",
+      "version": "0.1.0",
+      "repository": "https://github.com/technologicalMayhem/mark_recall",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "microralph",
+      "version": "0.9.0",
+      "repository": "https://github.com/twitchax/microralph",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mr",
+      "version": "0.1.0",
+      "repository": "https://github.com/eiz/mr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mr",
       "version": "1.20180726",
@@ -26,6 +86,18 @@
       "latest_version": "1.0.3"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "MrMurano",
+      "version": "1.13.0",
+      "repository": "https://github.com/exosite/MuranoCLI",
+      "source": "https://rubygems.org/gems/MrMurano-1.13.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.13.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "myrepos",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "calendar",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "calendar",
+      "version": "0.1.0",
+      "repository": "https://github.com/yingkitw/calendar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "calendar-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/batagliao/calendar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "calendar-rs",
+      "version": "1.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "calendar",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "calendar",
       "version": null,
@@ -12,6 +60,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/s-stepanov/learning-go",
+      "version": "v0.0.0-20200505133130-a43f60c62052",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/s-stepanov/learning-go/@v/v0.0.0-20200505133130-a43f60c62052.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200505133130-a43f60c62052"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "id-calendar-tui",
+      "version": "0.1.2",
+      "repository": "https://github.com/adipurnm/id-calendar-tui",
+      "source": "https://rubygems.org/gems/id-calendar-tui-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "legit",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "legit",
+      "version": "0.2.4",
+      "repository": "https://github.com/randymcmillan/legit.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "legit",
       "version": "1.2.0.post0",
@@ -12,6 +24,31 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "legit",
+      "version": "0.0.15",
+      "repository": "https://github.com/dillonkearns/legit",
+      "source": "https://rubygems.org/gems/legit-0.0.15.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.15"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "legit",
+      "version": "1.2.0",
+      "repository": "https://frostming.github.io/legit/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +64,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

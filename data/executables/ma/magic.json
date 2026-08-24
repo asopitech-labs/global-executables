@@ -2,6 +2,78 @@
   "command": "magic",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "golden-magic",
+      "version": "0.1.2",
+      "repository": "https://github.com/ramarivera/golden-magic",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "magic",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@21st-dev/magic",
+      "version": "0.2.2",
+      "repository": "git+https://github.com/21st-dev/magic-mcp.git",
+      "source": "https://registry.npmjs.org/@21st-dev%2Fmagic/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-magic",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-magic/1.0.0/dotnet-magic.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "kyosifov/wpemerge-magic",
+      "version": "1.0.4",
+      "repository": "https://github.com/KaloyanYosifov/wpemerge-magic.git",
+      "source": "https://repo.packagist.org/p2/kyosifov/wpemerge-magic.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "magic_test",
+      "version": "0.1.0",
+      "repository": "https://github.com/bullet-train-co/magic_test",
+      "source": "https://rubygems.org/gems/magic_test-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "magic",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

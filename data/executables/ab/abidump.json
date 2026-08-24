@@ -2,6 +2,66 @@
   "command": "abidump",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "go-ethereum-1.17.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bhs-gq/quorum-hotstuff",
+      "version": "v1.10.25",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bhs-gq/quorum-hotstuff/@v/v1.10.25.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.25"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ethereum/go-ethereum",
+      "version": "v1.17.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ethereum/go-ethereum/@v/v1.17.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.17.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/horizenofficial/go-ethereum",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/horizenofficial/go-ethereum/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/soulboundtoken/go-ethereum",
+      "version": "v1.10.23",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/soulboundtoken/go-ethereum/@v/v1.10.23.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.23"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ethereum",
       "version": "1.17.5",
@@ -12,8 +72,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "abidump",
+      "version": "0.1.1",
+      "repository": "https://github.com/rubycocos/blockchain",
+      "source": "https://rubygems.org/gems/abidump-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

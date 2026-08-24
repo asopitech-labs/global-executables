@@ -2,6 +2,18 @@
   "command": "gitlab",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-gitlab-8.5.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gitlab-gem",
       "version": "6.1.0",
@@ -12,8 +24,56 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fs-gitlab",
+      "version": "4.19.3",
+      "repository": "https://github.com/NARKOZ/gitlab",
+      "source": "https://rubygems.org/gems/fs-gitlab-4.19.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.19.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gitlab",
+      "version": "6.1.0",
+      "repository": "https://github.com/NARKOZ/gitlab",
+      "source": "https://rubygems.org/gems/gitlab-6.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "6.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gitlab-akerl",
+      "version": "4.0.0",
+      "repository": "https://github.com/narkoz/gitlab",
+      "source": "https://rubygems.org/gems/gitlab-akerl-4.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gitlab_cli",
+      "version": "2.0.0",
+      "repository": "https://github.com/drewblessing/gitlab-cli",
+      "source": "https://rubygems.org/gems/gitlab_cli-2.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

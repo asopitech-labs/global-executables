@@ -2,6 +2,18 @@
   "command": "serving",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "serenade",
+      "version": "0.3.1",
+      "repository": "https://github.com/bolcom/serenade/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/filipenos/serving",
       "version": "v0.0.0-20141214191032-26966e0cc6f7",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

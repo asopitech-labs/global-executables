@@ -2,9 +2,33 @@
   "command": "jenkins",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jenkins",
+      "version": "0.1.29",
+      "repository": "https://github.com/kairyou/jenkins-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.29"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/arangodb/kube-arangodb",
+      "version": "v0.0.0-20260820111611-278a4532d74b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/arangodb/kube-arangodb/@v/v0.0.0-20260820111611-278a4532d74b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820111611-278a4532d74b"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jenkins",
-      "version": "2.577",
+      "version": "2.578",
       "repository": "https://www.jenkins.io/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "akqa-jenkins",
+      "version": "0.6.4.1",
+      "repository": "http://github.com/cowboyd/jenkins.rb",
+      "source": "https://rubygems.org/gems/akqa-jenkins-0.6.4.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fuel-cli",
+      "version": "0.0.5",
+      "repository": "",
+      "source": "https://rubygems.org/gems/fuel-cli-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jenkins",
+      "version": "0.6.8",
+      "repository": "http://github.com/cowboyd/jenkins.rb",
+      "source": "https://rubygems.org/gems/jenkins-0.6.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jenkins-maestrodev",
+      "version": "0.6.9",
+      "repository": "https://github.com/jenkinsci/jenkins.rb/tree/master/ruby-tools/cli",
+      "source": "https://rubygems.org/gems/jenkins-maestrodev-0.6.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jenkins-remote-api",
+      "version": "0.0.4",
+      "repository": "https://github.com/tuo/jenkins-remote-api",
+      "source": "https://rubygems.org/gems/jenkins-remote-api-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

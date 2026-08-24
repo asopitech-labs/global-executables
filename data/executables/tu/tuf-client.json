@@ -2,6 +2,18 @@
   "command": "tuf-client",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "go-tuf",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/flynn/go-tuf",
       "version": "v0.0.0-20170108035750-a98aea1463c9",
@@ -12,8 +24,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170108035750-a98aea1463c9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flynn/go-tuf",
+      "version": "v0.0.0-20190425212541-cf1ac7de1ebf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flynn/go-tuf/@v/v0.0.0-20190425212541-cf1ac7de1ebf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190425212541-cf1ac7de1ebf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flynn/go-tuf",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flynn/go-tuf/@v/v0.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

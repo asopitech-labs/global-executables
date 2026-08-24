@@ -2,6 +2,18 @@
   "command": "amber",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "amber-cache",
+      "version": "0.0.0",
+      "repository": "https://github.com/andre-a-alves/amber-cache",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "amber",
       "version": "1.5.0",
@@ -12,8 +24,116 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alexzvn/amber",
+      "version": "0.5.2",
+      "repository": "git+https://github.com/alexzvn/amber.git",
+      "source": "https://registry.npmjs.org/@alexzvn%2Famber/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amber.js/bundler",
+      "version": "0.6.9",
+      "repository": "git+https://github.com/alexzvn/amber.git",
+      "source": "https://registry.npmjs.org/@amber.js%2Fbundler/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.6.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amberjs/cli",
+      "version": "0.0.4",
+      "repository": "https://gitlab.stratpoint.dev/thebrewery/amberjs/cli.git",
+      "source": "https://registry.npmjs.org/@amberjs%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ambers/cli",
+      "version": "0.107.0",
+      "repository": "https://lolg.it/amber/amber.git",
+      "source": "https://registry.npmjs.org/@ambers%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.107.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amber-cloud",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0f/d9/0a60ac1ea621c0831a7ac3e1016adc14fb1ba43d992101bcc83f176d731e/amber_cloud-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amber-runtime",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/14/68/9376a98fdd3f2b8eea6f5a6b2975e2b2e1485cf5674237266d37ac61a400/amber_runtime-0.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amber_mcap",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4a/06/4d0874e411534e866e5a5d445f1b0b44606547056ff67c4ed35e74092efa/amber_mcap-0.6.0-cp310-cp310-manylinux_2_35_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "amber",
+      "version": "0.3.12",
+      "repository": "https://github.com/leapcode/amber",
+      "source": "https://rubygems.org/gems/amber-0.3.12.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.12"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "amber-kit",
+      "version": "0.0.5",
+      "repository": "https://github.com/Jakitto/amber-kit",
+      "source": "https://rubygems.org/gems/amber-kit-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

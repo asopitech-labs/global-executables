@@ -2,6 +2,30 @@
   "command": "einfo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ebook-tools-0.2.2-9",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "epub-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "epub-utils",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "Eadb",
+      "version": "0.3.2",
+      "repository": "https://github.com/wenshi11019/eadb",
+      "source": "https://files.pythonhosted.org/packages/4c/84/75b96a1229f7985767d867792998709743fdd521c1a25c23c6f4d435d241/Eadb-0.3.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "epub-utils",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

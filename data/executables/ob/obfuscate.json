@@ -2,6 +2,30 @@
   "command": "obfuscate",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "obfuscate-0.0.10-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "obfuscate",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "obfuscate",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "darsyn/obfuscator",
+      "version": "0.1.0",
+      "repository": "https://github.com/darsyn/obfuscator.git",
+      "source": "https://repo.packagist.org/p2/darsyn/obfuscator.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "dmitryrechkin/php-obfuscator",
+      "version": "v1.1.0",
+      "repository": "https://github.com/dmitryrechkin/php-obfuscator.git",
+      "source": "https://repo.packagist.org/p2/dmitryrechkin/php-obfuscator.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyProjObfuscator",
+      "version": "1.1.0",
+      "repository": "https://github.com/elshadaghazade/PyProjObfuscator",
+      "source": "https://files.pythonhosted.org/packages/2d/a6/2fa83a130d2265124b73be21e712c7e2c17aee6a5c09751840adb28cd37c/PyProjObfuscator-1.1.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

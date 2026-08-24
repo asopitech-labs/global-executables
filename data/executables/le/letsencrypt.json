@@ -2,6 +2,54 @@
   "command": "letsencrypt",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/fireflyst/letsencrypt",
+      "version": "v0.0.0-20181212142952-cb8e9e4bb8df",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fireflyst/letsencrypt/@v/v0.0.0-20181212142952-cb8e9e4bb8df.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181212142952-cb8e9e4bb8df"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/valyala/fasthttp",
+      "version": "v1.73.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/valyala/fasthttp/@v/v1.73.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.73.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "acme-pki",
+      "version": "0.2.3",
+      "repository": "https://github.com/aeris/acme-pki/",
+      "source": "https://rubygems.org/gems/acme-pki-0.2.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "blix-letsencrypt",
+      "version": "1.0.3",
+      "repository": "https://github.com/realbite/blix-letsencrypt",
+      "source": "https://rubygems.org/gems/blix-letsencrypt-1.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "certbot",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

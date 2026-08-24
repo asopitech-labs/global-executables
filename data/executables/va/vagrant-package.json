@@ -2,6 +2,18 @@
   "command": "vagrant-package",
   "providers": [
     {
+      "ecosystem": "rubygems",
+      "package": "bmabey-vagrant",
+      "version": "0.2.0",
+      "repository": "http://github.com/mitchellh/vagrant",
+      "source": "https://rubygems.org/gems/bmabey-vagrant-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "freedom-maker",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

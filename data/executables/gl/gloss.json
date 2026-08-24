@@ -1,0 +1,43 @@
+{
+  "command": "gloss",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gloss-word",
+      "version": "0.3.5",
+      "repository": "https://github.com/theodore-s-beers/gloss-word",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gloss",
+      "version": "0.1.7",
+      "repository": null,
+      "source": "https://rubygems.org/gems/gloss-0.1.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.7"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

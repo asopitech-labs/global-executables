@@ -2,9 +2,21 @@
   "command": "cook",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cookcli",
+      "version": "0.34.0",
+      "repository": "https://github.com/cooklang/cookcli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.34.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cookcli",
-      "version": "0.33.1",
+      "version": "0.34.0",
       "repository": "https://cooklang.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cook",
+      "version": "2.0.10",
+      "repository": "https://github.com/stephengaito/rGems-cook",
+      "source": "https://rubygems.org/gems/cook-2.0.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.10"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

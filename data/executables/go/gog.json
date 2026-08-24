@@ -2,6 +2,54 @@
   "command": "gog",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "gog-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/qhkm/gogcli-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/andornaut/gog",
+      "version": "v0.5.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/andornaut/gog/@v/v0.5.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sourcegraph/srclib-go",
+      "version": "v0.0.0-20160816054300-3ef3b95aa665",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sourcegraph/srclib-go/@v/v0.0.0-20160816054300-3ef3b95aa665.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160816054300-3ef3b95aa665"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sourcegraph.com/sourcegraph/srclib-go",
+      "version": "v0.0.0-20160816054300-3ef3b95aa665",
+      "repository": null,
+      "source": "https://proxy.golang.org/sourcegraph.com/sourcegraph/srclib-go/@v/v0.0.0-20160816054300-3ef3b95aa665.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160816054300-3ef3b95aa665"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gogcli",
       "version": "0.37.0",
@@ -12,8 +60,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@autonia/gog",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@autonia%2Fgog/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gog",
+      "version": "0.0.3pre",
+      "repository": "http://github.com/goglog/gog",
+      "source": "https://rubygems.org/gems/gog-0.0.3pre.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3pre"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gogcli",
+      "version": "0.37.0",
+      "repository": "https://gogcli.sh",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.37.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "steipete.gogcli",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

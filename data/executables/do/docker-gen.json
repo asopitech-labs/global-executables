@@ -2,6 +2,18 @@
   "command": "docker-gen",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/jwilder/docker-gen",
+      "version": "v0.0.0-20181026015631-4edc190faa34",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jwilder/docker-gen/@v/v0.0.0-20181026015631-4edc190faa34.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181026015631-4edc190faa34"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "docker-gen",
       "version": "0.17.2",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

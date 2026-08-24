@@ -2,6 +2,78 @@
   "command": "shape",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "shape-cli",
+      "version": "0.3.2",
+      "repository": "https://github.com/shape-lang/shape",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "shapetools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rogpeppe/rog-go",
+      "version": "v0.0.0-20150110162453-f57ad5e24ab7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rogpeppe/rog-go/@v/v0.0.0-20150110162453-f57ad5e24ab7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150110162453-f57ad5e24ab7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "myitcv.io",
+      "version": "v0.0.0-20180717150903-bf2c84553c78",
+      "repository": null,
+      "source": "https://proxy.golang.org/myitcv.io/@v/v0.0.0-20180717150903-bf2c84553c78.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180717150903-bf2c84553c78"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Shapespyer",
+      "version": "0.2.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5a/74/460ad9690a54b8914fe34c67922f9e6c29a4cb0d14012e5a4d3f96a43f5e/shapespyer-0.2.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.7"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "shapetools",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

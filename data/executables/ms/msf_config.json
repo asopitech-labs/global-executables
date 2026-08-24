@@ -1,0 +1,31 @@
+{
+  "command": "msf_config",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "macsyfinder",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MacSyFinder",
+      "version": "2.1.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/28/5c/2f6af4ec38b5974d6022793a7d1caffb27d4f085097422acad744f8eb5cd/macsyfinder-2.1.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.6"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

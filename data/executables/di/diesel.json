@@ -2,6 +2,30 @@
   "command": "diesel",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "diesel-cli-2.3.12-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "diesel_cli",
+      "version": "2.3.12",
+      "repository": "https://github.com/diesel-rs/diesel",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.3.12"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "diesel",
       "version": "2.3.12",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "diesel",
+      "version": "0.1.5",
+      "repository": "http://github.com/thoughtbot/diesel",
+      "source": "https://rubygems.org/gems/diesel-0.1.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

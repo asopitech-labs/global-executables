@@ -2,6 +2,30 @@
   "command": "origami",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "origami",
+      "version": "0.1.0",
+      "repository": "https://github.com/Oery/origami",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ajardin/origami",
+      "version": "v1.13.0",
+      "repository": "https://github.com/origamiphp/origami.git",
+      "source": "https://repo.packagist.org/p2/ajardin/origami.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.13.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "origami",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "mux",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "interception-tools-0.6.8-9",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mux-lang",
+      "version": "0.6.0",
+      "repository": "https://github.com/muxlang/mux-compiler",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "teamux",
+      "version": "1.0.1",
+      "repository": "https://github.com/dotzenith/teamux",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
       "ecosystem": "debian",
       "package": "interception-tools",
       "version": null,
@@ -12,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/brankas/sentinel",
+      "version": "v0.0.0-20180521040807-0ff081867c31",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/brankas/sentinel/@v/v0.0.0-20180521040807-0ff081867c31.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180521040807-0ff081867c31"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

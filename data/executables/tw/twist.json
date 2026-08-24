@@ -1,0 +1,43 @@
+{
+  "command": "twist",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-twisted-26.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Twisted",
+      "version": "26.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a6/57/bcf4e2370dd218c9aa68a9140a65d86729c73f1d529f7e94786c2766fc72/twisted-26.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Twisted-binary",
+      "version": "20.3.0",
+      "repository": "https://twistedmatrix.com/",
+      "source": "https://files.pythonhosted.org/packages/12/c4/e23824aed938fb7d0164b732e5d33fc95f4ee5ba507d422349ffb62850a2/Twisted_binary-20.3.0-cp38-cp38-win_amd64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "20.3.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

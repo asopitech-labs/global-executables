@@ -2,6 +2,42 @@
   "command": "tuned",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "tuned-2.27.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "tuned-2.28.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "TunEd",
+      "version": "0.6.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/82/3b/1558648b1ecf5f37467b800a81e247fd0779bab4c0b814e514cbd0e6b1aa/tuned-0.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "tuned",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

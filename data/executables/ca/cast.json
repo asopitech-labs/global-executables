@@ -2,6 +2,66 @@
   "command": "cast",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "consortium-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/olivecasazza/consortium",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mmcloughlin/avo",
+      "version": "v0.0.0-20190318053554-7a0eb66183da",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mmcloughlin/avo/@v/v0.0.0-20190318053554-7a0eb66183da.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190318053554-7a0eb66183da"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mmcloughlin/avo",
+      "version": "v0.0.0-20190416024211-2e7d06bc7ada",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mmcloughlin/avo/@v/v0.0.0-20190416024211-2e7d06bc7ada.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190416024211-2e7d06bc7ada"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mmcloughlin/avo",
+      "version": "v0.0.0-20190515040033-83fbad1a6b3c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mmcloughlin/avo/@v/v0.0.0-20190515040033-83fbad1a6b3c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190515040033-83fbad1a6b3c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mmcloughlin/avo",
+      "version": "v0.0.0-20190613184424-cad456ebdea7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mmcloughlin/avo/@v/v0.0.0-20190613184424-cad456ebdea7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613184424-cad456ebdea7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "foundry",
       "version": "1.7.1",
@@ -12,8 +72,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@autonomy-cloud/cast-sdk",
+      "version": "1.23.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@autonomy-cloud%2Fcast-sdk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.23.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Cast.Cli",
+      "version": "1.3.21",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cast.cli/1.3.21/cast.cli.1.3.21.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.3.21"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "cast",
+      "version": "0.1.0-alpha",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/cast/0.1.0-alpha/cast.0.1.0-alpha.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0-alpha"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cast-ssh",
+      "version": "0.1.9",
+      "repository": "http://github.com/bakks/cast",
+      "source": "https://rubygems.org/gems/cast-ssh-0.1.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "caster",
+      "version": "0.9.6",
+      "repository": "http://github.com/akula1001/caster",
+      "source": "https://rubygems.org/gems/caster-0.9.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.6"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

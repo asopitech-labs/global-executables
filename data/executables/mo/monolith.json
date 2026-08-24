@@ -2,6 +2,42 @@
   "command": "monolith",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "monolith-2.10.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "monolith",
+      "version": "2.10.1",
+      "repository": "https://github.com/Y2Z/monolith",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.10.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dmibod/kanban/cmd",
+      "version": "v0.0.0-20230323142854-dd22c214170c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dmibod/kanban/cmd/@v/v0.0.0-20230323142854-dd22c214170c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230323142854-dd22c214170c"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "monolith",
       "version": "2.10.1",
@@ -12,8 +48,69 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Monolith-Cli",
+      "version": "0.2.9",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/monolith-cli/0.2.9/monolith-cli.0.2.9.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.2.9"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Theon.Monolith.Cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/theon.monolith.cli/1.0.0/theon.monolith.cli.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "majestic-monolith",
+      "version": "0.1.4",
+      "repository": "https://github.com/rocketshipio/monolith",
+      "source": "https://rubygems.org/gems/majestic-monolith-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "majesticmonolith",
+      "version": "0.1.4",
+      "repository": "https://github.com/majesticmonolith/cli",
+      "source": "https://rubygems.org/gems/majesticmonolith-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "monolith",
+      "version": "2.10.1",
+      "repository": "https://github.com/Y2Z/monolith",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.10.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

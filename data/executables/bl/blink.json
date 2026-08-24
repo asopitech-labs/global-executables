@@ -2,6 +2,18 @@
   "command": "blink",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "blink-cli",
+      "version": "0.0.1",
+      "repository": "https://github.com/Coombszy/blink-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/davecheney/gpio",
       "version": "v0.0.0-20160912024957-a6de66e7e470",
@@ -24,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arach/blink",
+      "version": "2.0.5",
+      "repository": "git+https://github.com/arach/blink.git",
+      "source": "https://registry.npmjs.org/@arach%2Fblink/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "BlikstickSquare",
+      "version": "0.1.0",
+      "repository": "https://github.com/ignazioc/blinksticksquare",
+      "source": "https://rubygems.org/gems/BlikstickSquare-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "blinky_monitor",
+      "version": "0.1.2",
+      "repository": "http://github.com/jamesottaway/blinky_monitor",
+      "source": "https://rubygems.org/gems/blinky_monitor-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

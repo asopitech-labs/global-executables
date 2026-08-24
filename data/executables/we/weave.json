@@ -2,6 +2,66 @@
   "command": "weave",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "texlive-bin-2026.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "packweave",
+      "version": "0.4.4",
+      "repository": "https://github.com/PackWeave/weave",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "weave-cli",
+      "version": "0.5.2",
+      "repository": "https://github.com/Ataraxy-Labs/weave",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "weave-init",
+      "version": "0.1.7",
+      "repository": "https://github.com/WeaveITMeta/weave-init",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "texlive-binaries",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "texlive-binaries",
       "version": null,
@@ -28,7 +88,7 @@
     {
       "ecosystem": "homebrew",
       "package": "weave",
-      "version": "0.5.1",
+      "version": "0.5.2",
       "repository": "https://ataraxy-labs.github.io/weave/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -36,6 +96,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@analogculture/weave",
+      "version": "2.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@analogculture%2Fweave/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ataraxy-labs/weave",
+      "version": "0.5.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ataraxy-labs%2Fweave/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "andrew-test-weave",
+      "version": "0.51.37",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/88/32/42e75a4f0c9077fc42ce17559ecd1347d6c3f4be34c8dbd6e417c917954a/andrew_test_weave-0.51.37-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.51.37"
     },
     {
       "ecosystem": "ubuntu",
@@ -51,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

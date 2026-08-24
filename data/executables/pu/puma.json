@@ -2,6 +2,42 @@
   "command": "puma",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-puma-7.1.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "puma",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "puma",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "puma",
       "version": null,
@@ -12,6 +48,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ed-precompiled_puma",
+      "version": "7.0.4",
+      "repository": "https://github.com/puma/puma",
+      "source": "https://rubygems.org/gems/ed-precompiled_puma-7.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "7.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ed2-precompiled_puma",
+      "version": "7.0.4",
+      "repository": "https://github.com/puma/puma",
+      "source": "https://rubygems.org/gems/ed2-precompiled_puma-7.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "7.0.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gitlab-puma",
+      "version": "4.3.5.gitlab.3",
+      "repository": null,
+      "source": "https://rubygems.org/gems/gitlab-puma-4.3.5.gitlab.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.3.5.gitlab.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jun-puma",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://rubygems.org/gems/jun-puma-1.0.3-java.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

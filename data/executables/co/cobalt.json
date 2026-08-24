@@ -2,6 +2,42 @@
   "command": "cobalt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "cobalt-0.20.4-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cobalt-bin",
+      "version": "0.20.4",
+      "repository": "https://github.com/cobalt-org/cobalt.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cobalt-web",
+      "version": "0.8.0",
+      "repository": "https://github.com/hobbsbros/cobalt.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cobalt",
       "version": "0.20.4",
@@ -12,8 +48,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "cobalt",
+      "version": "0.20.4",
+      "repository": "https://cobalt-org.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.20.4"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "cobalt-org.cobalt",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

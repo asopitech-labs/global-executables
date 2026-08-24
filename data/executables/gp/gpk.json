@@ -1,0 +1,44 @@
+{
+  "command": "gpk",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "gpk",
+      "version": "0.6.7",
+      "repository": "https://github.com/neur0map/glazepkg",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "GamePatchKit.Cli",
+      "version": "0.1.7",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gamepatchkit.cli/0.1.7/gamepatchkit.cli.0.1.7.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "glazepkg",
+      "version": "0.6.7",
+      "repository": "https://github.com/neur0map/glazepkg",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.6.7"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

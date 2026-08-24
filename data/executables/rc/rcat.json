@@ -2,6 +2,42 @@
   "command": "rcat",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rcat",
+      "version": "2.0.4",
+      "repository": "https://github.com/frewsxcv/rcat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rustcat",
+      "version": "3.0.0",
+      "repository": "https://github.com/robiot/rustcat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rustycat-android",
+      "version": "0.2.1",
+      "repository": "https://github.com/cesarferreira/rustycat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rustcat",
       "version": "3.0.0",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "all2md",
+      "version": "1.13.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/20/da/d0e92203faa7ebb3b4fa2b3b873ef8cd94124b5969c792207d4ea3b64c7a/all2md-1.13.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.13.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

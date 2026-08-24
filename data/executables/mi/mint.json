@@ -2,6 +2,30 @@
   "command": "mint",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mint-cli",
+      "version": "2.0.0",
+      "repository": "https://github.com/tomrford/mint",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mint-faa",
+      "version": "0.6.0",
+      "repository": "https://github.com/yanqd0/mint",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mint",
       "version": "0.18.0",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

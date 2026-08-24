@@ -2,6 +2,18 @@
   "command": "komac",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "komac",
+      "version": "2.16.0",
+      "repository": "https://github.com/russellbanks/Komac",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.16.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "komac",
       "version": "2.16.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "RussellBanks.Komac",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

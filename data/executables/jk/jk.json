@@ -2,6 +2,30 @@
   "command": "jk",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "jikken",
+      "version": "0.8.4",
+      "repository": "https://github.com/jikkenio/jikken",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jk",
+      "version": "0.2.7",
+      "repository": "https://github.com/joshka/jk",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jikken",
       "version": "0.8.4",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aaronshaf/jk",
+      "version": "0.1.18",
+      "repository": "git+https://github.com/aaronshaf/jk.git",
+      "source": "https://registry.npmjs.org/@aaronshaf%2Fjk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.18"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jenkins-builder",
+      "version": "0.3.4",
+      "repository": "https://github.com/lululau/jenkins-builder",
+      "source": "https://rubygems.org/gems/jenkins-builder-0.3.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

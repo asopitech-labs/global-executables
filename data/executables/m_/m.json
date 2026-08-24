@@ -2,6 +2,18 @@
   "command": "m",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ruby-m-1.7.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "go",
       "package": "bitbucket.org/drewwells/mentions",
       "version": "v0.0.0-20170207223943-c47f0f881f6a",
@@ -24,8 +36,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "m",
+      "version": "1.7.0",
+      "repository": "https://github.com/qrush/m",
+      "source": "https://rubygems.org/gems/m-1.7.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.7.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "maven-helper-script",
+      "version": "0.3.0",
+      "repository": "https://github.com/benkiefer/maven-helper-script",
+      "source": "https://rubygems.org/gems/maven-helper-script-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "merrol",
+      "version": "0.0.2",
+      "repository": "http://github.com/PhilT/merrol",
+      "source": "https://rubygems.org/gems/merrol-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,18 @@
   "command": "ansible-vault",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ansible-core-2.21.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ansible",
       "version": "14.3.1",
@@ -50,6 +62,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "msys2",
+      "package": "ansible-core-2.21.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansible-core",
+      "version": "2.21.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a3/fa/938fe0504372377af2bef42abe0d8e463fdcd011ad803eaf300e4577dd7a/ansible_core-2.21.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.21.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansible-vault-win",
+      "version": "1.0.0",
+      "repository": "https://github.com/sparkyb/ansible-vault-win",
+      "source": "https://files.pythonhosted.org/packages/b4/b9/0efbb2b702725d91dd376f3eed93fe3cf2cf9026839c95c3f7459161df2b/ansible_vault_win-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ansible-core",
       "version": null,
@@ -63,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

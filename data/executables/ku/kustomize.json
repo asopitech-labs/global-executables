@@ -2,6 +2,42 @@
   "command": "kustomize",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "kustomize-5.8.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kubernetes-tools",
+      "version": "0.0.2",
+      "repository": "https://github.com/nyar-vm/rusty-docker/tree/main/backends/kubernetes-tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kustomize",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "kustomize",
       "version": null,
@@ -12,6 +48,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/charles-chenzz/kustomize",
+      "version": "v1.0.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/charles-chenzz/kustomize/@v/v1.0.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/kustomize",
+      "version": "v1.0.10-0.20181026181014-6a917c5f363c",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/kustomize/@v/v1.0.10-0.20181026181014-6a917c5f363c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.10-0.20181026181014-6a917c5f363c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/kustomize",
+      "version": "v1.0.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/kustomize/@v/v1.0.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sigs.k8s.io/kustomize",
+      "version": "v2.0.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/sigs.k8s.io/kustomize/@v/v2.0.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.1+incompatible"
     },
     {
       "ecosystem": "go",
@@ -36,8 +120,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "kustomize",
+      "version": "5.8.1",
+      "repository": "https://github.com/kubernetes-sigs/kustomize",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.8.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Kubernetes.kustomize",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,31 @@
+{
+  "command": "worm",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bsd-games-3.3-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gonutz/prototype",
+      "version": "v1.9.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gonutz/prototype/@v/v1.9.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

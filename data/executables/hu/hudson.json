@@ -1,0 +1,31 @@
+{
+  "command": "hudson",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "bakervm",
+      "version": "0.9.0",
+      "repository": "https://github.com/bakervm/bakervm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hudson",
+      "version": "0.6.0",
+      "repository": "http://github.com/cowboyd/hudson.rb",
+      "source": "https://rubygems.org/gems/hudson-0.6.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

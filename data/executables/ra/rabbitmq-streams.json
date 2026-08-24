@@ -2,9 +2,21 @@
   "command": "rabbitmq-streams",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "rabbitmq-4.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rabbitmq",
-      "version": "4.3.4",
+      "version": "4.3.5",
       "repository": "https://www.rabbitmq.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

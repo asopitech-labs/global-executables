@@ -1,0 +1,44 @@
+{
+  "command": "cedar",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "cedar-db",
+      "version": "0.1.0",
+      "repository": "https://github.com/hedonhermdev",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cedar-policy-cli",
+      "version": "4.12.0",
+      "repository": "https://github.com/cedar-policy/cedar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "4.12.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "cedar",
+      "version": "4.12.0",
+      "repository": "https://cedarpolicy.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.12.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

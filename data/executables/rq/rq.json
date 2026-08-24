@@ -2,6 +2,114 @@
   "command": "rq",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "rq-1.0.4-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "convert2json",
+      "version": "2.6.3",
+      "repository": "https://github.com/simonrupf/convert2json",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.6.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "record-query",
+      "version": "1.0.4",
+      "repository": "https://github.com/dflemstr/rq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "reference-query",
+      "version": "0.50.0",
+      "repository": "https://github.com/dpep/rq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.50.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rng-query",
+      "version": "2.1.0",
+      "repository": "https://github.com/Zheoni/rng-query",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ronq",
+      "version": "0.1.1",
+      "repository": "https://github.com/bircoder432/ronq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "roundqueue",
+      "version": "0.2.9",
+      "repository": "https://github.com/droundy/roundqueue",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.9"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rq-cli",
+      "version": "0.1.3",
+      "repository": "https://github.com/saorsa-labs/rq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rsonpath",
+      "version": "0.10.1",
+      "repository": "https://github.com/rsonquery/rsonpath",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-rq",
       "version": null,
@@ -12,8 +120,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "seeyebe.rq",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

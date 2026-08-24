@@ -6,6 +6,18 @@
       "package": "jqp",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "jqp",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
@@ -26,6 +38,31 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "jqueryplugingen",
+      "version": "0.2.6",
+      "repository": "http://github.com/toddb/jqueryplugingenerator",
+      "source": "https://rubygems.org/gems/jqueryplugingen-0.2.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "jqp",
+      "version": "0.8.0",
+      "repository": "https://github.com/noahgorstein/jqp",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "jqp",
       "version": null,
@@ -39,5 +76,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

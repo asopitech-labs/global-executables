@@ -2,6 +2,42 @@
   "command": "fstrace",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fstrace",
+      "version": "1.0.0",
+      "repository": "https://github.com/Spectra010s/fstrace",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "libturnstile",
+      "version": "0.7.1",
+      "repository": "https://github.com/micromaomao/libturnstile",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "openafs-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "openafs-client",
       "version": null,
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

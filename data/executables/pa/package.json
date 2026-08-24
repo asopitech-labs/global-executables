@@ -2,6 +2,150 @@
   "command": "package",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "asset-importer-sys",
+      "version": "0.8.0",
+      "repository": "https://github.com/Latias94/asset-importer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-imgui-cte-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-imgui-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-imguizmo-quat-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-imguizmo-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-imnodes-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-implot-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-implot3d-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dear-node-editor-sys",
+      "version": "0.17.0",
+      "repository": "https://github.com/Latias94/dear-imgui-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "emdx",
+      "version": "0.1.2",
+      "repository": "https://github.com/tonymushah/eureka-mmanager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "russimp-sys",
+      "version": "2.0.2",
+      "repository": "https://github.com/jkvargas/russimp-sys",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "russimp-sys-ng",
+      "version": "2.0.6",
+      "repository": "https://github.com/Kek5chen/russimp-sys-ng",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.6"
+    },
+    {
       "ecosystem": "debian",
       "package": "mailagent",
       "version": null,
@@ -12,6 +156,30 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bufbuild/plugins",
+      "version": "v0.0.0-20260820125029-21121e5aa8a6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bufbuild/plugins/@v/v0.0.0-20260820125029-21121e5aa8a6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820125029-21121e5aa8a6"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "esimonetti/sugar-module-packager",
+      "version": "0.2.3",
+      "repository": "https://github.com/esimonetti/sugar-module-packager.git",
+      "source": "https://repo.packagist.org/p2/esimonetti/sugar-module-packager.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.2.3"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +195,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

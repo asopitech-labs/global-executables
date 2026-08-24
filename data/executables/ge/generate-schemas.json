@@ -1,0 +1,43 @@
+{
+  "command": "generate-schemas",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "nextest-runner",
+      "version": "0.122.1",
+      "repository": "https://github.com/nextest-rs/nextest",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.122.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "plenum",
+      "version": "2.0.1",
+      "repository": "https://github.com/reflex-search/plenum",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flanksource/duty",
+      "version": "v1.0.1370",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flanksource/duty/@v/v1.0.1370.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1370"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

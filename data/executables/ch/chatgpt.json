@@ -2,6 +2,90 @@
   "command": "chatgpt",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "chatgpt",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chatgpt-cli",
+      "version": "0.4.1",
+      "repository": "https://github.com/juanrgon/chatgpt-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "chatgpt_api",
+      "version": "0.3.0",
+      "repository": "https://github.com/MrRobb/chatgpt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "simple-chatgpt",
+      "version": "1.0.1",
+      "repository": "https://github.com/satosystems/simple-chatgpt/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tiny_chatgpt_cli",
+      "version": "3.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aigcaas/chatgpt",
+      "version": "5.2.4",
+      "repository": "git+https://github.com/aigcaas/chatgpt-api.git",
+      "source": "https://registry.npmjs.org/@aigcaas%2Fchatgpt/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.2.4"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Pingmint.OpenAI.Chat",
+      "version": "0.3.10",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/pingmint.openai.chat/0.3.10/pingmint.openai.chat.0.3.10.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.3.10"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ChatGPT-PyBot",
       "version": "0.4",
@@ -12,8 +96,44 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "anonymous-chatgpt",
+      "version": "0.0.4",
+      "repository": "https://github.com/Mr-Destructive/anonymous-chatgpt",
+      "source": "https://files.pythonhosted.org/packages/a8/4a/496e2f37542fb016f5585b758ddefbd2d16b7b11e820acde77299219fe2d/anonymous_chatgpt-0.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "assistants-framework",
+      "version": "0.9.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8e/4c/0a50cd1d09d06bf021b73bb41e7c70d897d17bf1e9184abffb47bc563f71/assistants_framework-0.9.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.7"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "j178.ChatGPT",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

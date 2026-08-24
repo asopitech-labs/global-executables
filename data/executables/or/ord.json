@@ -2,6 +2,30 @@
   "command": "ord",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ord",
+      "version": "0.29.0",
+      "repository": "https://github.com/ordinals/ord",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.29.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tmi-ord",
+      "version": "0.1.12",
+      "repository": "https://github.com/MJEND7/tmi-ord",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.12"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ord",
       "version": "0.29.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Ordinati",
+      "version": "0.1.1",
+      "repository": "https://github.com/Ordinati/Ordinati",
+      "source": "https://files.pythonhosted.org/packages/a1/5f/4ddb34307add3a9931e9bff455072d1ea44f4fa3e89fdeabcdd7f3fee075/Ordinati-0.1.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

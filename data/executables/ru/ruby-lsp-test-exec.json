@@ -1,0 +1,31 @@
+{
+  "command": "ruby-lsp-test-exec",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ruby-lsp-0.26.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "browser_app_base",
+      "version": "0.2.1",
+      "repository": "https://github.com/kuwayama1971/BrowserAppBase",
+      "source": "https://rubygems.org/gems/browser_app_base-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

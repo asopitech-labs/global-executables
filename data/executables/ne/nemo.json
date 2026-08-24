@@ -2,6 +2,30 @@
   "command": "nemo",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "nemo-6.6.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nemo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "nemo",
       "version": null,
@@ -12,6 +36,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aigrefin/nemo",
+      "version": "1.4.0",
+      "repository": "git+ssh://git@gitlab.com/jtellier/nemo.git",
+      "source": "https://registry.npmjs.org/@aigrefin%2Fnemo/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@albertomarturelo/nemo-cli",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/albertomarturelo/nemo.git",
+      "source": "https://registry.npmjs.org/@albertomarturelo%2Fnemo-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "NEMO",
+      "version": "8.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5e/83/8708582579d43ee141b40cad3ec358739d651ca18d100e29bfd388212eeb/nemo-8.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "NEMO-CE",
+      "version": "8.0.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8d/11/8d3be6103cd437332b048791e8de48ea59548cfa2b165a36850a36ec83fa/nemo_ce-8.0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.0.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

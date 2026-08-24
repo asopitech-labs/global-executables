@@ -2,6 +2,30 @@
   "command": "donkey",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "donkey",
+      "version": "0.0.1",
+      "repository": "https://github.com/btwiuse/donkey/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "donkey",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "donkey",
       "version": null,
@@ -12,6 +36,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aicoe-donkeycar",
+      "version": "4.3.0.post1",
+      "repository": "https://github.com/autorope/donkeycar",
+      "source": "https://files.pythonhosted.org/packages/a5/13/bc190c78b776cf7cf305606ecb209b798c736e9af027149dad7da5c0f9db/aicoe_donkeycar-4.3.0.post1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.0.post1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

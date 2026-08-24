@@ -2,6 +2,78 @@
   "command": "thanos",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "thanos",
+      "version": "0.1.1",
+      "repository": "https://codeberg.org/ruri/thanos",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/improbable-eng/thanos",
+      "version": "v0.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/improbable-eng/thanos/@v/v0.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/improbable-eng/thanos",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/improbable-eng/thanos/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/improbable-eng/thanos",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/improbable-eng/thanos/@v/v0.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/squat/thanos",
+      "version": "v0.5.0-rc.0.0.20190617145307-251a6da0d967",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/squat/thanos/@v/v0.5.0-rc.0.0.20190617145307-251a6da0d967.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0-rc.0.0.20190617145307-251a6da0d967"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wujinhu/thanos",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wujinhu/thanos/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "thanos",
       "version": "0.42.4",
@@ -12,8 +84,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "infinity_stones",
+      "version": "0.0.1",
+      "repository": "https://rosariopfernandes.github.io/infinity_stones",
+      "source": "https://rubygems.org/gems/infinity_stones-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

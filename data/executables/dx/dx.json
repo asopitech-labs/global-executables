@@ -2,6 +2,54 @@
   "command": "dx",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dioxus-cli-0.7.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dioxus-cli",
+      "version": "0.7.10",
+      "repository": "https://github.com/DioxusLabs/dioxus/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.10"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dx-cli",
+      "version": "0.3.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dx",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "dx",
       "version": null,
@@ -38,6 +86,67 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "nuget",
+      "package": "dx",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dx/0.5.0/dx.0.5.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "devex",
+      "version": "0.3.7",
+      "repository": "https://github.com/v2-io/devex",
+      "source": "https://rubygems.org/gems/devex-0.3.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dx",
+      "version": "0.1.0",
+      "repository": "https://deemx.net",
+      "source": "https://rubygems.org/gems/dx-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dioxus",
+      "version": "0.7.10",
+      "repository": "https://dioxuslabs.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.7.10"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "dx",
       "version": null,
@@ -51,5 +160,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

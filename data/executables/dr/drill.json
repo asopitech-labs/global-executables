@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "drill",
+      "version": "0.9.1",
+      "repository": "https://github.com/fcsonline/drill",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ldnsutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ldnsutils",
       "version": null,
@@ -24,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/aki237/drill",
+      "version": "v0.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/aki237/drill/@v/v0.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.6"
     },
     {
       "ecosystem": "homebrew",
@@ -50,6 +86,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@andresmgsl2/drill-cli",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@andresmgsl2%2Fdrill-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "Pickaxe",
+      "version": "0.7.1",
+      "repository": "https://github.com/dejw/pickaxe",
+      "source": "https://rubygems.org/gems/Pickaxe-0.7.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lexdrill",
+      "version": "0.26.1",
+      "repository": "https://github.com/kislak/lexdrill",
+      "source": "https://rubygems.org/gems/lexdrill-0.26.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.26.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ldnsutils",
       "version": null,
@@ -63,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

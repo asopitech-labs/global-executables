@@ -2,6 +2,18 @@
   "command": "rsql",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rsql_cli",
+      "version": "0.20.0",
+      "repository": "https://github.com/theseus-rs/rsql",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rsql",
       "version": "0.20.0",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "RockSQL",
+      "version": "1.0.0",
+      "repository": "https://github.com/gadhagod/RockSQL",
+      "source": "https://files.pythonhosted.org/packages/10/5e/a4b79b4b60cb0e0f211092bf3cbc3e9f3d4f47f8944c40796147b1e46520/RockSQL-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "RockSQL",
+      "version": "1.1",
+      "repository": "http://gadhagod.github.io/RockSQL",
+      "source": "https://rubygems.org/gems/RockSQL-1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

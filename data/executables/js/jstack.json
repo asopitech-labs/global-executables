@@ -2,6 +2,18 @@
   "command": "jstack",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "java-environment-common-3-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "graalvm",
       "version": "25.2.4",
@@ -28,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "openjdk",
-      "version": "26.0.2",
+      "version": "26.0.2.1",
       "repository": "https://openjdk.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -40,7 +52,7 @@
     {
       "ecosystem": "homebrew",
       "package": "openjdk@11",
-      "version": "11.0.32",
+      "version": "11.0.32.1",
       "repository": "https://openjdk.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -52,7 +64,7 @@
     {
       "ecosystem": "homebrew",
       "package": "openjdk@17",
-      "version": "17.0.20",
+      "version": "17.0.20.1",
       "repository": "https://openjdk.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -64,7 +76,7 @@
     {
       "ecosystem": "homebrew",
       "package": "openjdk@21",
-      "version": "21.0.12",
+      "version": "21.0.12.1",
       "repository": "https://openjdk.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -76,7 +88,7 @@
     {
       "ecosystem": "homebrew",
       "package": "openjdk@25",
-      "version": "25.0.4",
+      "version": "25.0.4.1",
       "repository": "https://openjdk.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -88,7 +100,7 @@
     {
       "ecosystem": "homebrew",
       "package": "openjdk@8",
-      "version": "1.8.0-502",
+      "version": "1.8.0-504",
       "repository": "https://openjdk.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -96,8 +108,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

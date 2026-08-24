@@ -2,6 +2,30 @@
   "command": "gravity",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "arcjet-gravity",
+      "version": "0.0.2",
+      "repository": "https://github.com/arcjet/gravity",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "stardust-xr-gravity",
+      "version": "0.3.0",
+      "repository": "https://github.com/StardustXR/gravity",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "gravity",
       "version": "0.9.8",
@@ -12,8 +36,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "jstewmc/gravity",
+      "version": "v0.1.1",
+      "repository": "https://github.com/jstewmc/gravity.git",
+      "source": "https://repo.packagist.org/p2/jstewmc/gravity.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gravityframework",
+      "version": "0.0.5",
+      "repository": "",
+      "source": "https://rubygems.org/gems/gravityframework-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

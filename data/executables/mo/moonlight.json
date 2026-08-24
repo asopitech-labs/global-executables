@@ -1,0 +1,43 @@
+{
+  "command": "moonlight",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "moonlight-qt-6.1.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "moonlight-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/moritzbrantner/moonlight",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MoonlightDB",
+      "version": "2.0.2",
+      "repository": "https://github.com/De4oult/Moonlight",
+      "source": "https://files.pythonhosted.org/packages/3a/33/b447bc24de93bd95c36f4c4319cc8db136f575e3bd8137a06aff054b82f9/MoonlightDB-2.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

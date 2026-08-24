@@ -2,6 +2,54 @@
   "command": "sugar",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "sugar-0.121-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "miraplex-sugar-cli",
+      "version": "2.1.1",
+      "repository": "https://github.com/miraland-labs/sugar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sugar-cli",
+      "version": "2.9.1",
+      "repository": "https://github.com/metaplex-foundation/sugar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.9.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alicd/sugar",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alicd%2Fsugar/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "sugar-session",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

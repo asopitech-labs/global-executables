@@ -1,0 +1,39 @@
+{
+  "command": "suspend",
+  "providers": [
+    {
+      "ecosystem": "msys2",
+      "package": "shutdown-2.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "bash",
+      "version": "3.2.57(1)-release",
+      "repository": null,
+      "source": "bash@3.2.57(1)-release",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "zsh",
+      "version": "5.9",
+      "repository": null,
+      "source": "zsh@5.9",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

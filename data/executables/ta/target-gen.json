@@ -1,0 +1,32 @@
+{
+  "command": "target-gen",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "target-gen",
+      "version": "0.32.0",
+      "repository": "https://github.com/probe-rs/probe-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.32.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "probe-rs",
+      "version": "0.32.0",
+      "repository": "https://probe.rs",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.32.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

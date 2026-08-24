@@ -2,6 +2,18 @@
   "command": "gallery",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "tuicore",
+      "version": "0.20.0",
+      "repository": "https://github.com/daure/tuicore",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
       "ecosystem": "go",
       "package": "golang.org/x/exp",
       "version": "v0.0.0-20160623011055-292a51b8d262",
@@ -24,8 +36,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.0-20150209141031-2ee7e5ff7370"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asp-plot",
+      "version": "2.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/15/48/cc506dc5f6d3bfbfda1187f47cd47a1fa98869d4469891fdf4a1baa9383a/asp_plot-2.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

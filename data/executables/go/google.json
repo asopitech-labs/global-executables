@@ -2,6 +2,90 @@
   "command": "google",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "google",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dghubble/gologin",
+      "version": "v2.1.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dghubble/gologin/@v/v2.1.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.1.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/terraform-cdk/examples/go/google",
+      "version": "v0.0.0-20251210140702-a0c56138e2b4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/terraform-cdk/examples/go/google/@v/v0.0.0-20251210140702-a0c56138e2b4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251210140702-a0c56138e2b4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/origin",
+      "version": "v0.0.0-20160503220234-8f127d736703",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/origin/@v/v0.0.0-20160503220234-8f127d736703.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160503220234-8f127d736703"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sourcegraph/gologin",
+      "version": "v1.0.2-0.20181110030308-c6f1b62954d8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sourcegraph/gologin/@v/v1.0.2-0.20181110030308-c6f1b62954d8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2-0.20181110030308-c6f1b62954d8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zalando/gin-oauth2",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zalando/gin-oauth2/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zalando/gin-oauth2",
+      "version": "v1.5.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zalando/gin-oauth2/@v/v1.5.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "osxutils",
       "version": "1.9.0",
@@ -12,8 +96,92 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "FreedomCoder-utility_belt",
+      "version": "1.1.1.2",
+      "repository": "http://utilitybelt.rubyforge.org",
+      "source": "https://rubygems.org/gems/FreedomCoder-utility_belt-1.1.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "akitaonrails-utility_belt",
+      "version": "1.0.13",
+      "repository": "http://utilitybelt.rubyforge.org",
+      "source": "https://rubygems.org/gems/akitaonrails-utility_belt-1.0.13.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.13"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "flyrb",
+      "version": "1.0.0.c",
+      "repository": "http://github.com/jtrupiano/flyrb",
+      "source": "https://rubygems.org/gems/flyrb-1.0.0.c.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0.c"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "google",
+      "version": "1.0.10",
+      "repository": "https://github.com/Kerrick/google",
+      "source": "https://rubygems.org/gems/google-1.0.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "google_terminal",
+      "version": "0.0.2",
+      "repository": "https://github.com/westoque/google_terminal",
+      "source": "https://rubygems.org/gems/google_terminal-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gsearch",
+      "version": "0.0.2",
+      "repository": "https://github.com/davidwilliam/google",
+      "source": "https://rubygems.org/gems/gsearch-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mguterl-utility_belt",
+      "version": "1.0.7",
+      "repository": "http://utilitybelt.rubyforge.org",
+      "source": "https://rubygems.org/gems/mguterl-utility_belt-1.0.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.7"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

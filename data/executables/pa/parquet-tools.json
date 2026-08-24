@@ -2,9 +2,33 @@
   "command": "parquet-tools",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/xitongsys/parquet-go",
+      "version": "v0.0.0-20190327025424-682b98622266",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xitongsys/parquet-go/@v/v0.0.0-20190327025424-682b98622266.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190327025424-682b98622266"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xitongsys/parquet-go",
+      "version": "v1.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xitongsys/parquet-go/@v/v1.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "go-parquet-tools",
-      "version": "1.54.3",
+      "version": "1.54.4",
       "repository": "https://github.com/hangxie/parquet-tools",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

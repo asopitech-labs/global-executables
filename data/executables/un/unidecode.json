@@ -2,6 +2,54 @@
   "command": "unidecode",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-unidecode-1.4.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mozillazg/go-unidecode",
+      "version": "v0.0.0-20161107135901-8772af720c7f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mozillazg/go-unidecode/@v/v0.0.0-20161107135901-8772af720c7f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161107135901-8772af720c7f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mozillazg/go-unidecode",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mozillazg/go-unidecode/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mozillazg/go-unidecode",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mozillazg/go-unidecode/@v/v0.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/rainycape/unidecode",
       "version": "v0.0.0-20150907023854-cb7f23ec59be",
@@ -12,8 +60,20 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20150907023854-cb7f23ec59be"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Unidecode",
+      "version": "1.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8f/b7/559f59d57d18b44c6d1250d2eeaa676e028b9c527431f5d0736478a73ba1/Unidecode-1.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

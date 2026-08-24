@@ -2,6 +2,18 @@
   "command": "zef",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "shared_meataxe-1.0.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rakudo-star",
       "version": "2026.07",
@@ -12,6 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "rakudo-moar",
+      "version": "2026.07-01",
+      "repository": "https://rakudo.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.07-01"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "rakudo-star",
+      "version": "2026.07-01",
+      "repository": "https://rakudo.org/star",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.07-01"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +65,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

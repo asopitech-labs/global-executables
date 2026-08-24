@@ -2,6 +2,66 @@
   "command": "witness",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "siglog",
+      "version": "0.1.0",
+      "repository": "https://github.com/prefix-dev/siglog",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "witness",
+      "version": "0.3.0",
+      "repository": "https://github.com/nolanderc/witness",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "witness-cli",
+      "version": "0.3.0",
+      "repository": "https://git.carpocratian.org/sibyl/witness",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "witness-mcdc",
+      "version": "0.43.0",
+      "repository": "https://github.com/pulseengine/witness",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.43.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "witness",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "witness",
       "version": "0.12.0",
@@ -12,8 +72,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@async/witness",
+      "version": "0.8.0",
+      "repository": "git+https://github.com/async/witness.git",
+      "source": "https://registry.npmjs.org/@async%2Fwitness/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.8.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

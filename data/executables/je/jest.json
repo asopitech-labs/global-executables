@@ -2,6 +2,42 @@
   "command": "jest",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rjest-cli",
+      "version": "0.1.3",
+      "repository": "https://github.com/neul-labs/rjest",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ainc/jest",
+      "version": "0.1.26",
+      "repository": "git@absock.net:ainc/jest.git",
+      "source": "https://registry.npmjs.org/@ainc%2Fjest/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.26"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@airk/jest",
+      "version": "0.0.106",
+      "repository": "git@gitlab.com:airk/jest.git",
+      "source": "https://registry.npmjs.org/@airk%2Fjest/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.106"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "jest",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

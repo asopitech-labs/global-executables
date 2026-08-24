@@ -2,6 +2,30 @@
   "command": "clone",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "clone-project-manager",
+      "version": "2.1.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/clanstyles/go-git",
+      "version": "v4.6.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/clanstyles/go-git/@v/v4.6.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.6.0+incompatible"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/docopt/docopt-go",
       "version": "v0.0.0-20180111231733-ee0de3bc6815",
@@ -15,6 +39,54 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/docopt/docopt.go",
+      "version": "v0.0.0-20180111231733-ee0de3bc6815",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docopt/docopt.go/@v/v0.0.0-20180111231733-ee0de3bc6815.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180111231733-ee0de3bc6815"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/src-d/go-git",
+      "version": "v0.0.0-20190418104243-aa6f288c256f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/src-d/go-git/@v/v0.0.0-20190418104243-aa6f288c256f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190418104243-aa6f288c256f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/src-d/go-git",
+      "version": "v4.7.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/src-d/go-git/@v/v4.7.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.7.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/lxc/go-lxc.v2",
+      "version": "v2.0.0-20181227225324-7c910f8a5edc",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/lxc/go-lxc.v2/@v/v2.0.0-20181227225324-7c910f8a5edc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0-20181227225324-7c910f8a5edc"
+    },
+    {
+      "ecosystem": "go",
       "package": "gopkg.in/lxc/go-lxc.v2",
       "version": "v2.0.0-20190324192716-2f350e4a2980",
       "repository": null,
@@ -24,6 +96,78 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.0.0-20190324192716-2f350e4a2980"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/lxc/go-lxc.v2",
+      "version": "v2.0.0-20190429015623-d9e43a802774",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/lxc/go-lxc.v2/@v/v2.0.0-20190429015623-d9e43a802774.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0-20190429015623-d9e43a802774"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/lxc/go-lxc.v2",
+      "version": "v2.0.0-20210307013912-d9b9f727ce0f",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/lxc/go-lxc.v2/@v/v2.0.0-20210307013912-d9b9f727ce0f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0-20210307013912-d9b9f727ce0f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.0.0-20180807092216-43d17e14b714",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.0.0-20180807092216-43d17e14b714.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0-20180807092216-43d17e14b714"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.0.0-rc15",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.0.0-rc15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0-rc15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.1.1"
     },
     {
       "ecosystem": "go",
@@ -52,6 +196,78 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.12.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.12.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.12.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.13.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.13.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.13.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
       "version": "v4.7.1",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.7.1.zip",
@@ -74,6 +290,18 @@
       "latest_version": "v4.8.0"
     },
     {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.9.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.9.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.9.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "nut",
       "version": "2.8.5",
@@ -84,8 +312,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@8zali9/shell-z",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/8zali9/shell-z.git",
+      "source": "https://registry.npmjs.org/@8zali9%2Fshell-z/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "clone",
+      "version": "1.0.0.beta2",
+      "repository": "https://github.com/adamluzsi/clone",
+      "source": "https://rubygems.org/gems/clone-1.0.0.beta2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0.beta2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

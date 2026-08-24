@@ -2,9 +2,33 @@
   "command": "swc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "swc_cli",
+      "version": "0.122.2",
+      "repository": "https://github.com/swc-project/swc.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.122.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "swc_cli_impl",
+      "version": "77.0.0",
+      "repository": "https://github.com/swc-project/swc.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "77.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "swc",
-      "version": "1.16.0",
+      "version": "1.16.1",
       "repository": "https://swc.rs",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "swc",
+      "version": "1.16.1",
+      "repository": "https://swc.rs",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.16.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

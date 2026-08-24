@@ -2,6 +2,66 @@
   "command": "plot",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "plotutils-2.6-12",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "plot",
+      "version": "0.2.0",
+      "repository": "https://github.com/milliams/plot",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rl_examples",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tracing-durations-export",
+      "version": "0.3.5",
+      "repository": "https://github.com/konstin/tracing-durations-export",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "plotutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "plotutils",
       "version": null,
@@ -12,6 +72,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tsenart/vegeta",
+      "version": "v12.2.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tsenart/vegeta/@v/v12.2.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v12.2.0+incompatible"
     },
     {
       "ecosystem": "go",
@@ -38,6 +110,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "UnifiedML",
+      "version": "1.0.6",
+      "repository": "https://github.com/agi-init/UnifiedML",
+      "source": "https://files.pythonhosted.org/packages/57/59/e5ccc047b30c1594feccce38751743f9fc1beb40580ac7a93cf4e7ce18c5/UnifiedML-1.0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.6"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "plotutils",
       "version": null,
@@ -51,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

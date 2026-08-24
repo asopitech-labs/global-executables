@@ -2,6 +2,43 @@
   "command": "ricochet",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ricochet",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "TrebuchetRicochet",
+      "version": "0.2",
+      "repository": "https://github.com/trebuchet-deploy/ricochet",
+      "source": "https://files.pythonhosted.org/packages/5a/d8/683c2de2c3b6a2809349bdecd11c12c5633c0d69ac1835e9ea9cf58b243e/TrebuchetRicochet-0.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "ricochet",
+      "version": "1.1.4",
+      "repository": "https://ricochet.im",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.1.4"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ricochet-im",
       "version": null,
@@ -15,5 +52,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

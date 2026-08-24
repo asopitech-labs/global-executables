@@ -2,6 +2,66 @@
   "command": "dns",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dnsync",
+      "version": "0.2.2",
+      "repository": "https://github.com/Ozy-Viking/dnsync",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hickory-util",
+      "version": "0.26.1",
+      "repository": "https://github.com/hickory-dns/hickory-dns",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.26.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mtop",
+      "version": "0.17.0",
+      "repository": "https://github.com/56quarters/mtop",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "trust-dns-util",
+      "version": "0.23.2",
+      "repository": "https://github.com/bluejekyll/trust-dns",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.23.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/akbariandev/tonutils-go",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/akbariandev/tonutils-go/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/cilium/dns",
       "version": "v0.0.0-20190417235132-8e25ec9a0ff3",
@@ -16,6 +76,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/docker/libnetwork",
+      "version": "v0.0.0-20161109232206-3ab699ea3657",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/libnetwork/@v/v0.0.0-20161109232206-3ab699ea3657.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161109232206-3ab699ea3657"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/libnetwork",
       "version": "v0.0.0-20161130172555-fd27f22aaa35",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/docker/libnetwork/@v/v0.0.0-20161130172555-fd27f22aaa35.zip",
@@ -24,6 +96,54 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20161130172555-fd27f22aaa35"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/libnetwork",
+      "version": "v0.0.0-20161213221817-b908488a139e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/libnetwork/@v/v0.0.0-20161213221817-b908488a139e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161213221817-b908488a139e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/libnetwork",
+      "version": "v0.0.0-20170103195052-ba79e3e43b87",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/libnetwork/@v/v0.0.0-20170103195052-ba79e3e43b87.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170103195052-ba79e3e43b87"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/libnetwork",
+      "version": "v0.0.0-20170219213102-ce28404512e8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/libnetwork/@v/v0.0.0-20170219213102-ce28404512e8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170219213102-ce28404512e8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docker/libnetwork",
+      "version": "v0.8.0-dev.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docker/libnetwork/@v/v0.8.0-dev.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.0-dev.2"
     },
     {
       "ecosystem": "go",
@@ -64,6 +184,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20160419102951-c9d1302d540e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20160419102951-c9d1302d540e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160419102951-c9d1302d540e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v0.0.0-20160512064316-48ab6605c66a",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20160512064316-48ab6605c66a.zip",
@@ -72,6 +204,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160512064316-48ab6605c66a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20160608161003-48c8acaf0c2d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20160608161003-48c8acaf0c2d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160608161003-48c8acaf0c2d"
     },
     {
       "ecosystem": "go",
@@ -100,6 +244,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20161003181808-3f1f7c8ec9ea",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20161003181808-3f1f7c8ec9ea.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161003181808-3f1f7c8ec9ea"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v0.0.0-20161122061214-271c58e0c14f",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20161122061214-271c58e0c14f.zip",
@@ -124,6 +280,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20170331060851-dcffd061aaee",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20170331060851-dcffd061aaee.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170331060851-dcffd061aaee"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v0.0.0-20170604123008-e78414ef7560",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20170604123008-e78414ef7560.zip",
@@ -132,6 +300,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170604123008-e78414ef7560"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20170721150254-0f3adef2e220",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20170721150254-0f3adef2e220.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170721150254-0f3adef2e220"
     },
     {
       "ecosystem": "go",
@@ -148,6 +328,78 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20170812192144-0598bd43cf51",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20170812192144-0598bd43cf51.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170812192144-0598bd43cf51"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20170818131442-e4205768578d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20170818131442-e4205768578d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170818131442-e4205768578d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20171103161535-b38dc3dcb734",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20171103161535-b38dc3dcb734.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171103161535-b38dc3dcb734"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20171108100119-388f6eea2949",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20171108100119-388f6eea2949.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171108100119-388f6eea2949"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20171125082028-79bfde677fa8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20171125082028-79bfde677fa8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171125082028-79bfde677fa8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20171128074819-6da3249dfb57",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20171128074819-6da3249dfb57.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171128074819-6da3249dfb57"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v0.0.0-20171221102407-90888765254c",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20171221102407-90888765254c.zip",
@@ -160,6 +412,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20180301142209-906238edc6eb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20180301142209-906238edc6eb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180301142209-906238edc6eb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v0.0.0-20180406150955-01d59357d468",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20180406150955-01d59357d468.zip",
@@ -168,6 +432,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180406150955-01d59357d468"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v0.0.0-20180521194751-350cd086d10d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v0.0.0-20180521194751-350cd086d10d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180521194751-350cd086d10d"
     },
     {
       "ecosystem": "go",
@@ -208,6 +484,66 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.0.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.0.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.0.12",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.12"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v1.0.13",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.13.zip",
@@ -232,6 +568,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v1.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v1.0.4",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.4.zip",
@@ -240,6 +600,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.0.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.6"
     },
     {
       "ecosystem": "go",
@@ -268,6 +652,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v1.0.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.0.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v1.1.0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.0.zip",
@@ -276,6 +672,78 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.1.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.1.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.1.12",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.12.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.12"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.1.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.13"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.1.14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.14"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2"
     },
     {
       "ecosystem": "go",
@@ -304,6 +772,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v1.1.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
+      "version": "v1.1.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v1.1.8",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.8.zip",
@@ -316,6 +808,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/miekg/dns",
+      "version": "v1.1.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miekg/dns",
       "version": "v1.1.9-0.20190417235132-8e25ec9a0ff3",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/miekg/dns/@v/v1.1.9-0.20190417235132-8e25ec9a0ff3.zip",
@@ -324,8 +828,56 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.1.9-0.20190417235132-8e25ec9a0ff3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/multiversx/mx-chain-vm-go",
+      "version": "v1.5.48",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/multiversx/mx-chain-vm-go/@v/v1.5.48.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.48"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zalgonoise/x/dns",
+      "version": "v0.0.0-20260729211131-1dcb39d025d1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zalgonoise/x/dns/@v/v0.0.0-20260729211131-1dcb39d025d1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260729211131-1dcb39d025d1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@architect/workflows",
+      "version": "3.6.0",
+      "repository": "git+https://github.com/arc-repos/arc-workflows.git",
+      "source": "https://registry.npmjs.org/@architect%2Fworkflows/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.6.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dns",
+      "version": "0.0.5",
+      "repository": "https://github.com/dismory/dns",
+      "source": "https://rubygems.org/gems/dns-0.0.5-x86_64-darwin.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

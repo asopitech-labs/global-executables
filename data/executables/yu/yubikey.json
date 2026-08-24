@@ -2,6 +2,42 @@
   "command": "yubikey",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "yubikey-cli",
+      "version": "0.7.0",
+      "repository": "https://github.com/iqlusioninc/yubikey.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "YubiOTP",
+      "version": "1.0.0",
+      "repository": "https://github.com/django-otp/yubiotp",
+      "source": "https://files.pythonhosted.org/packages/fc/53/b856197d421415b3a57a2ed14e23586b87206ef2621558aaefc05c050f10/YubiOTP-1.0.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "YubiRuby",
+      "version": "1.1.0",
+      "repository": "http://bitbucket.org/nolith/yubiruby/src/",
+      "source": "https://rubygems.org/gems/YubiRuby-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-yubiotp",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

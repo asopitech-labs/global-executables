@@ -2,9 +2,33 @@
   "command": "asc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "asc_bin",
+      "version": "2025.12.13",
+      "repository": "https://github.com/ascpkg/asc/tree/main/asc_bin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2025.12.13"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "asciiframe",
+      "version": "2.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "asc",
-      "version": "4.4.3",
+      "version": "4.9.0",
       "repository": "https://asccli.sh",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,128 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aldea/assemblyscript",
+      "version": "0.27.14",
+      "repository": "git+https://github.com/AssemblyScript/assemblyscript.git",
+      "source": "https://registry.npmjs.org/@aldea%2Fassemblyscript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.27.14"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antchain/assemblyscript",
+      "version": "0.19.23",
+      "repository": "git+https://github.com/AssemblyScript/assemblyscript.git",
+      "source": "https://registry.npmjs.org/@antchain%2Fassemblyscript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.19.23"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atscript/typescript",
+      "version": "0.1.89",
+      "repository": "git+https://github.com/moostjs/atscript.git",
+      "source": "https://registry.npmjs.org/@atscript%2Ftypescript/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.89"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-shared-context",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ab/ad/65a9af4956e515563c7a8c30e0461b0630c0eb11be477997a6363a6ae893/agent_shared_context-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "algospace",
+      "version": "0.4.13",
+      "repository": "https://github.com/Algo-Space/algospace-pypi",
+      "source": "https://files.pythonhosted.org/packages/6b/c9/f03857f940ad149e0c50320c68d6987377d16c2dec0fc4767138bce189bc/algospace-0.4.13.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.13"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asc",
+      "version": "0.3.1",
+      "repository": "https://github.com/mattberjon/asc",
+      "source": "https://files.pythonhosted.org/packages/f6/cd/71af4dcd853acee529e649de2cae8b4caaaa8f1ec4e32db2c4f524b2add4/asc-0.3.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asc-bin",
+      "version": "2025.12.13",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d9/17/fb9fbf01c369a71e02af9924639ff6452ec515b94a3be7ea553d91697688/asc_bin-2025.12.13-py2.py3-none-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2025.12.13"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asc-cli",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/84/c3/b719d1f299141cbb600e9cfc709df3000d0bf3ba0a0c360e01221d26bb57/asc_cli-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ascendant",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/82/4f/bb2a330a978bb96b93b5232767df560bb3beaf40ec185944597ae6b48bfc/ascendant-1.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Rorkai.ASC",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

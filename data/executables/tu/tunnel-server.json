@@ -1,0 +1,31 @@
+{
+  "command": "tunnel-server",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "mockforge-tunnel",
+      "version": "0.3.214",
+      "repository": "https://github.com/SaaSy-Solutions/mockforge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.214"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arturious/web-socket-tunnel-server",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/arturious9090/webSocket-tunnel.git",
+      "source": "https://registry.npmjs.org/@arturious%2Fweb-socket-tunnel-server/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,78 @@
   "command": "export",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "codex-app-server-protocol",
+      "version": "0.63.0",
+      "repository": "https://github.com/namastexlabs/codex",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.63.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/andlabs/libui",
+      "version": "v0.0.0-20190506033916-17486fd17593",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/andlabs/libui/@v/v0.0.0-20190506033916-17486fd17593.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190506033916-17486fd17593"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aykevl/tinygo",
+      "version": "v0.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aykevl/tinygo/@v/v0.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/easysoft/zendata",
+      "version": "v0.0.0-20250701142453-19c563dfb455",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/easysoft/zendata/@v/v0.0.0-20250701142453-19c563dfb455.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250701142453-19c563dfb455"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/juju/juju",
+      "version": "v0.0.0-20260820151607-b0fd541b555c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/juju/juju/@v/v0.0.0-20260820151607-b0fd541b555c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820151607-b0fd541b555c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/juju/juju",
+      "version": "v0.0.0-20260820163335-fd19949685fa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/juju/juju/@v/v0.0.0-20260820163335-fd19949685fa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820163335-fd19949685fa"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "execline",
       "version": "2.9.9.2",
@@ -12,8 +84,48 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "bash",
+      "version": "3.2.57(1)-release",
+      "repository": null,
+      "source": "bash@3.2.57(1)-release",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "ksh",
+      "version": "Version AJM 93u+ 2012-08-01",
+      "repository": null,
+      "source": "ksh@Version AJM 93u+ 2012-08-01",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "sh",
+      "version": "POSIX.1-2017",
+      "repository": null,
+      "source": "https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "zsh",
+      "version": "5.9",
+      "repository": null,
+      "source": "zsh@5.9",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

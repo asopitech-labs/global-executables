@@ -2,6 +2,18 @@
   "command": "epubcheck",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "epubcheck-5.3.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "epubcheck",
       "version": "5.3.0",
@@ -12,6 +24,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bookshop",
+      "version": "0.1.8",
+      "repository": "https://github.com/blueheadpublishing/bookshop",
+      "source": "https://rubygems.org/gems/bookshop-0.1.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "epubcheck",
+      "version": "3.0.1",
+      "repository": "http://github.com/jugyo/epubcheck",
+      "source": "https://rubygems.org/gems/epubcheck-3.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "epubcheck-ruby",
+      "version": "5.3.0.0",
+      "repository": "https://github.com/takahashim/epubcheck-ruby",
+      "source": "https://rubygems.org/gems/epubcheck-ruby-5.3.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "5.3.0.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

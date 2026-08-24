@@ -2,6 +2,30 @@
   "command": "quick",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "csv-groupby",
+      "version": "0.10.0",
+      "repository": "https://github.com/sflanaga/csv-groupby",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rusty_alfred",
+      "version": "0.1.1",
+      "repository": "https://github.com/jkcclemens/rusty_alfred",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/deis/deis",
       "version": "v1.13.4",
@@ -48,8 +72,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180111231733-ee0de3bc6815"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/docopt/docopt.go",
+      "version": "v0.0.0-20180111231733-ee0de3bc6815",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/docopt/docopt.go/@v/v0.0.0-20180111231733-ee0de3bc6815.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180111231733-ee0de3bc6815"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amethyst-labs/quickcli",
+      "version": "2.0.0-beta.8",
+      "repository": "git+https://github.com/AmethystDev-Labs/QuickCLI.git",
+      "source": "https://registry.npmjs.org/@amethyst-labs%2Fquickcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.0-beta.8"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

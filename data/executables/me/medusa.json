@@ -2,6 +2,30 @@
   "command": "medusa",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "medusa-2.2-13",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "medusa",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "medusa",
       "version": null,
@@ -26,6 +50,54 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@8medusa/cli",
+      "version": "2.12.2",
+      "repository": "git+https://github.com/medusajs/medusa.git",
+      "source": "https://registry.npmjs.org/@8medusa%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.12.2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@applifyer/medusa",
+      "version": "1.20.2",
+      "repository": "git+https://github.com/medusajs/medusa.git",
+      "source": "https://registry.npmjs.org/@applifyer%2Fmedusa/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.20.2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "instaclick/medusa",
+      "version": "0.7",
+      "repository": "https://github.com/instaclick/medusa.git",
+      "source": "https://repo.packagist.org/p2/instaclick/medusa.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "medusa",
+      "version": "0.0.1.7",
+      "repository": "http://github.com/perseus-a/medusa",
+      "source": "https://rubygems.org/gems/medusa-0.0.1.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1.7"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "medusa",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

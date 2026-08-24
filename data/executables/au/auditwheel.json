@@ -2,6 +2,18 @@
   "command": "auditwheel",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-auditwheel-6.4.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "auditwheel",
       "version": "6.8.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "auditwheel",
+      "version": "6.8.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/52/bd/879d404d56e486dcbda0e83261c1f686eec67f6498d460f9955df96d365e/auditwheel-6.8.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.8.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

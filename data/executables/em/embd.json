@@ -2,6 +2,18 @@
   "command": "embd",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "embd-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/ptsouchlos/embd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/kidoman/embd",
       "version": "v0.0.0-20170508013040-d3d8c0c5c68d",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

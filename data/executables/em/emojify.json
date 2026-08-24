@@ -2,6 +2,30 @@
   "command": "emojify",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "emojify",
+      "version": "0.2.0",
+      "repository": "https://github.com/daichimukai/emojify",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "l33t0-emojify",
+      "version": "0.1.0",
+      "repository": "https://github.com/l33t0/emojify",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "emojify",
       "version": "2.2.0",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@argilzar/cli-plugin-export-parquet",
+      "version": "1.3.4",
+      "repository": "git+https://github.com/argilzar/export-parquet.git",
+      "source": "https://registry.npmjs.org/@argilzar%2Fcli-plugin-export-parquet/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.3.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

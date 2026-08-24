@@ -2,6 +2,30 @@
   "command": "rig",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "random-identity-generator",
+      "version": "1.0.0",
+      "repository": "https://codeberg.org/jan0sch/rig",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "rig",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "rig",
       "version": null,
@@ -38,6 +62,90 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@amulet-laboratories/rig",
+      "version": "4.0.0",
+      "repository": "git+https://github.com/Amulet-Laboratories/rig.git",
+      "source": "https://registry.npmjs.org/@amulet-laboratories%2Frig/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.0.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "rig",
+      "version": "1.5.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/rig/1.5.0/rig.1.5.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "darling/ddms",
+      "version": "v2.0.0-alpha-13",
+      "repository": "https://github.com/sevidmusic/Rig.git",
+      "source": "https://repo.packagist.org/p2/darling/ddms.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.0.0-alpha-13"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "darling/rig",
+      "version": "v2.0.0-alpha-13",
+      "repository": "https://github.com/sevidmusic/Rig.git",
+      "source": "https://repo.packagist.org/p2/darling/rig.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v2.0.0-alpha-13"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "hampel/rig",
+      "version": "0.1.2",
+      "repository": "https://github.com/hampel/rig.git",
+      "source": "https://repo.packagist.org/p2/hampel/rig.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "algorig",
+      "version": "0.2",
+      "repository": "https://github.com/kadirpekel/algorig",
+      "source": "https://files.pythonhosted.org/packages/1c/7a/f255a6a04b58d3289e591dcf1a9d41ea9d16b959384fdfa7d5be5e320c90/algorig-0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "inprovise",
+      "version": "0.2.29",
+      "repository": "https://github.com/mcorino/Inprovise",
+      "source": "https://rubygems.org/gems/inprovise-0.2.29.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.29"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "rig",
       "version": null,
@@ -48,8 +156,32 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "RigSmith.Rig",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "RigSmith.Rigsmith",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,127 @@
+{
+  "command": "foundry",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "foundry-1.1.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "alia-foundry",
+      "version": "0.2.1",
+      "repository": "https://github.com/TxsharDev/Foundry",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "foundry-mcp",
+      "version": "0.7.1",
+      "repository": "https://github.com/cafreeman/foundry-mcp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rust-foundry",
+      "version": "0.1.0",
+      "repository": "https://github.com/logando-al/rust-foundry",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "foundry",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adalo/cli",
+      "version": "1.0.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adalo%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alterspective/foundry-cli",
+      "version": "0.5.8",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@alterspective%2Ffoundry-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.8"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "foundry",
+      "version": "0.1.0-alpha",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/foundry/0.1.0-alpha/foundry.0.1.0-alpha.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0-alpha"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-foundry-local",
+      "version": "0.1.10",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f7/05/80c96be5380d30df6d1dfb2f9aa0a970df045a05227119e02834b729cb67/agent_foundry_local-0.1.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Microsoft.FoundryLocal",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

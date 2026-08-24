@@ -2,6 +2,90 @@
   "command": "upgrade",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "torrust-index",
+      "version": "3.0.0",
+      "repository": "https://github.com/torrust/torrust-tracker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "torrust-index-backend",
+      "version": "2.0.0-alpha.3",
+      "repository": "https://github.com/torrust/torrust-index-backend",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0-alpha.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v0.0.0-20181024024035-c7c4067b79cc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v0.0.0-20181024024035-c7c4067b79cc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181024024035-c7c4067b79cc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.10.1-0.20190315083729-31f5bb843b78",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.10.1-0.20190315083729-31f5bb843b78.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.1-0.20190315083729-31f5bb843b78"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.10.1-0.20190424093727-5994cc52dfa8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.10.1-0.20190424093727-5994cc52dfa8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.1-0.20190424093727-5994cc52dfa8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.10.1-0.20190510164106-2a192bf78237",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.10.1-0.20190510164106-2a192bf78237.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.1-0.20190510164106-2a192bf78237"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattn/go-sqlite3",
+      "version": "v1.14.50",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattn/go-sqlite3/@v/v1.14.50.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.14.50"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mattn/go-sqlite3",
       "version": "v1.9.0",
@@ -12,8 +96,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.9.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@astrojs/upgrade",
+      "version": "0.7.4",
+      "repository": "git+https://github.com/withastro/astro.git",
+      "source": "https://registry.npmjs.org/@astrojs%2Fupgrade/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.7.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

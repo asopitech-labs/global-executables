@@ -2,6 +2,18 @@
   "command": "cronexpr",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "supercronic",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/gorhill/cronexpr",
       "version": "v0.0.0-20140423231348-a557574d6c02",
@@ -12,6 +24,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20140423231348-a557574d6c02"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gorhill/cronexpr",
+      "version": "v0.0.0-20160318121724-f0984319b442",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gorhill/cronexpr/@v/v0.0.0-20160318121724-f0984319b442.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160318121724-f0984319b442"
     },
     {
       "ecosystem": "go",
@@ -36,8 +60,44 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170915183032-675cac9b2d18"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gorhill/cronexpr",
+      "version": "v0.0.0-20180427100037-88b0669f7d75",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gorhill/cronexpr/@v/v0.0.0-20180427100037-88b0669f7d75.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180427100037-88b0669f7d75"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/heroiclabs/nakama",
+      "version": "v2.5.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/heroiclabs/nakama/@v/v2.5.1%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.5.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/x-mod/cronexpr",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/x-mod/cronexpr/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

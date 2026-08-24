@@ -2,6 +2,42 @@
   "command": "hypercorn",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "hypercorn-0.18.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Hypercorn",
+      "version": "0.18.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/93/35/850277d1b17b206bd10874c8a9a3f52e059452fb49bb0d22cbb908f6038b/hypercorn-0.18.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.18.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Hypercorn-noteable",
+      "version": "0.11.3",
+      "repository": "https://github.com/noteable-io/hypercorn/",
+      "source": "https://files.pythonhosted.org/packages/4b/82/b83b9b0f10d016bfb5ff2021d8c17c1c13cfe109913469ca50e26e7e5bf1/Hypercorn_noteable-0.11.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-hypercorn",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

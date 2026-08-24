@@ -2,6 +2,30 @@
   "command": "test_all",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fit",
+      "version": "0.5.0",
+      "repository": "https://github.com/richardbrodie/fit-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sisyphus32",
+      "version": "1.3.4",
+      "repository": "https://github.com/juules32/sisyphus32",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.3.4"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/artpar/rclone",
       "version": "v0.0.0-20190303170724-a9e1469cc153",
@@ -12,6 +36,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20190303170724-a9e1469cc153"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/artpar/rclone",
+      "version": "v1.71.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/artpar/rclone/@v/v1.71.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.71.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ncw/rclone",
+      "version": "v1.47.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ncw/rclone/@v/v1.47.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.47.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ncw/rclone",
+      "version": "v1.48.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ncw/rclone/@v/v1.48.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.48.0"
     },
     {
       "ecosystem": "homebrew",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "pit",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pit-cli",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rspit",
+      "version": "0.3.2",
+      "repository": "https://github.com/NaokiM03/rspit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pit",
       "version": "0.1.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

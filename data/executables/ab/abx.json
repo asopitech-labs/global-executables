@@ -6,12 +6,48 @@
       "package": "abx",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "abx",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@artblocks/abx-cli",
+      "version": "0.1.0-alpha.29",
+      "repository": "git+https://github.com/ArtBlocks/abx.git",
+      "source": "https://registry.npmjs.org/@artblocks%2Fabx-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0-alpha.29"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "abxpkg",
+      "version": "1.12.97",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4a/5d/25755095e90ae4581ff0db4b0824549d4123faaea870b8a66f13c4be8265/abxpkg-1.12.97-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.12.97"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

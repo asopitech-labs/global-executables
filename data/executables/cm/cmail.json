@@ -1,0 +1,43 @@
+{
+  "command": "cmail",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "xboard-4.9.1-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cmail",
+      "version": "0.4.0",
+      "repository": "https://github.com/BurntSushi/rust-cmail",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ainternet",
+      "version": "0.9.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/99/91/573b9d5483133ece8aa24aedcfcb71d246a34cc9399300c2f6f5e007db0d/ainternet-0.9.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

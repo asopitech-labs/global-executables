@@ -1,0 +1,31 @@
+{
+  "command": "metrics-server",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/kubernetes-incubator/metrics-server",
+      "version": "v0.3.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kubernetes-incubator/metrics-server/@v/v0.3.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.3"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Kubernetes.metrics-server",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

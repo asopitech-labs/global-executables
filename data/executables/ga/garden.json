@@ -2,6 +2,78 @@
   "command": "garden",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "clawgarden-cli",
+      "version": "0.22.0",
+      "repository": "https://github.com/a7garden/clawgarden",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.22.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "digital-garden",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "garden",
+      "version": "0.1.4",
+      "repository": "https://github.com/MikeLuu99/garden",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "garden-cli",
+      "version": "0.0.1",
+      "repository": "https://github.com/apirogov/garden",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "garden-lang",
+      "version": "0.25.0",
+      "repository": "https://github.com/Wilfred/garden",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.25.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "garden-tools",
+      "version": "2.6.2",
+      "repository": "https://gitlab.com/garden-rs/garden",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.6.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "garden",
       "version": "2.6.2",
@@ -12,8 +84,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adaptivekind/garden",
+      "version": "0.0.5",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adaptivekind%2Fgarden/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@artifact-garden/cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@artifact-garden%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

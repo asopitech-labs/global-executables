@@ -1,0 +1,43 @@
+{
+  "command": "kobe",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "kobe-cli",
+      "version": "3.4.0",
+      "repository": "https://github.com/qntx/kobe",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kobectl",
+      "version": "0.40.0",
+      "repository": "https://github.com/kunobi-ninja/kobe",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.40.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "kunobi-ninja.kobe",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,54 @@
   "command": "wire",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "slancha-wire",
+      "version": "0.17.0",
+      "repository": "https://github.com/SlanchaAi/wire",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wire-notify",
+      "version": "5.0.1",
+      "repository": "https://codeberg.org/apzhyn/wire",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "5.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/go-cloud",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/go-cloud/@v/v0.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/google/wire",
       "version": "v0.2.0",
@@ -12,8 +60,140 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.2.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.2.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.2.2-0.20190502165708-2183ee4806cf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.2.2-0.20190502165708-2183ee4806cf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2-0.20190502165708-2183ee4806cf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.2.2-0.20190514195116-d76a979091d4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.2.2-0.20190514195116-d76a979091d4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2-0.20190514195116-d76a979091d4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.2.2-0.20190517230242-ed1f30e1e8cc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.2.2-0.20190517230242-ed1f30e1e8cc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2-0.20190517230242-ed1f30e1e8cc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.2.2-0.20190529220206-b5d7d7864be4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.2.2-0.20190529220206-b5d7d7864be4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2-0.20190529220206-b5d7d7864be4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.2.2-0.20190603210048-000df02f3d88",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.2.2-0.20190603210048-000df02f3d88.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2-0.20190603210048-000df02f3d88"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.2.2-0.20190611223505-93b1ce745f8d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.2.2-0.20190611223505-93b1ce745f8d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2-0.20190611223505-93b1ce745f8d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wire",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wire/@v/v0.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aigentive/wire-cli",
+      "version": "1.0.2",
+      "repository": "git+https://github.com/aigentive/wirediagram.git",
+      "source": "https://registry.npmjs.org/@aigentive%2Fwire-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dewiring",
+      "version": "0.1.4",
+      "repository": "https://github.com/de-wiring/wire",
+      "source": "https://rubygems.org/gems/dewiring-0.1.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.4"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

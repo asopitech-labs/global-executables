@@ -6,12 +6,36 @@
       "package": "snapd",
       "version": null,
       "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "snapd",
+      "version": null,
+      "repository": null,
       "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
       "confidence": "filesystem",
       "source_type": "os_package",
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/glycerine/go-unsnap-stream",
+      "version": "v0.0.0-20171127062821-62a9a9eb44fd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/glycerine/go-unsnap-stream/@v/v0.0.0-20171127062821-62a9a9eb44fd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171127062821-62a9a9eb44fd"
     },
     {
       "ecosystem": "go",
@@ -24,6 +48,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20181221182339-f9677308dec2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/glycerine/go-unsnap-stream",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/glycerine/go-unsnap-stream/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/intelsdi-x/snap",
+      "version": "v0.0.0-20160505000653-5c1177efc47e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/intelsdi-x/snap/@v/v0.0.0-20160505000653-5c1177efc47e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160505000653-5c1177efc47e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/intelsdi-x/snap",
+      "version": "v0.0.0-20171023012245-79e1dd457d77",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/intelsdi-x/snap/@v/v0.0.0-20171023012245-79e1dd457d77.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171023012245-79e1dd457d77"
     },
     {
       "ecosystem": "go",
@@ -40,7 +100,7 @@
     {
       "ecosystem": "homebrew",
       "package": "snap",
-      "version": "2.76.2",
+      "version": "2.76.3",
       "repository": "https://snapcraft.io/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -48,6 +108,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "bcsingh50/thanos-php",
+      "version": "1.0.1",
+      "repository": "https://github.com/bcsingh50/ThanosPHP.git",
+      "source": "https://repo.packagist.org/p2/bcsingh50/thanos-php.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "asana_snapshot",
+      "version": "0.1.2",
+      "repository": "https://github.com/mtyeh411/asana_snapshot",
+      "source": "https://rubygems.org/gems/asana_snapshot-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -63,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

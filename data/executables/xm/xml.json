@@ -2,6 +2,18 @@
   "command": "xml",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "xmlstarlet-1.6.1-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/antchfx/xquery",
       "version": "v0.0.0-20170730121040-eb8c3c172607",
@@ -26,6 +38,18 @@
       "latest_version": "v0.0.0-20180515051857-ad5b8c7a47b0"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/spiegel-im-spiegel/github-pages-env",
+      "version": "v0.0.0-20241006100431-51bae0983127",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/spiegel-im-spiegel/github-pages-env/@v/v0.0.0-20241006100431-51bae0983127.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241006100431-51bae0983127"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "xmlstarlet",
       "version": "1.6.1",
@@ -36,8 +60,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "bitmyth/tooling",
+      "version": "v1.1.4",
+      "repository": "https://github.com/bitmyth/tooling.git",
+      "source": "https://repo.packagist.org/p2/bitmyth/tooling.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "xmlstarlet",
+      "version": "1.6.1",
+      "repository": "https://xmlstar.sourceforge.net/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.6.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

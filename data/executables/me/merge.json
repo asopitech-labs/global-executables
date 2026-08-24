@@ -2,6 +2,54 @@
   "command": "merge",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "rcs-5.10.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lenga",
+      "version": "1.0.2",
+      "repository": "https://github.com/lengalabs/lenga",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "resource_merger",
+      "version": "0.1.7",
+      "repository": "https://github.com/LuckyLuuk12/resource_merger",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "rcs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "rcs",
       "version": null,
@@ -14,6 +62,66 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/nathankerr/pdf",
+      "version": "v0.0.0-20150817203815-7cab54524cfa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathankerr/pdf/@v/v0.0.0-20150817203815-7cab54524cfa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20150817203815-7cab54524cfa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/noborus/tbln",
+      "version": "v0.0.0-20190608073357-119e1af8efa0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/noborus/tbln/@v/v0.0.0-20190608073357-119e1af8efa0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190608073357-119e1af8efa0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/noborus/tbln",
+      "version": "v0.0.0-20190621022552-146f38ac0ec0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/noborus/tbln/@v/v0.0.0-20190621022552-146f38ac0ec0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190621022552-146f38ac0ec0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb/v4",
+      "version": "v4.8.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/v4/@v/v4.8.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.8.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbauerster/mpb/v4",
+      "version": "v4.8.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbauerster/mpb/v4/@v/v4.8.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.8.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rcs",
       "version": "5.10.1",
@@ -24,6 +132,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "rcs-5.10.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adeficior/resource-merger",
+      "version": "2.0.0-rc.1",
+      "repository": "git+https://github.com/Adeficior/ResourceMerger.git",
+      "source": "https://registry.npmjs.org/@adeficior%2Fresource-merger/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.0-rc.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Colonyzer2",
+      "version": "1.1.22",
+      "repository": "http://research.ncl.ac.uk/colonyzer/",
+      "source": "https://files.pythonhosted.org/packages/9b/63/b5da26edbbcb3bd97085597deb323433b9801b2e85bb047d9e84801a5a8c/Colonyzer2-1.1.22.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.22"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "annotationjf",
+      "version": "0.0.6",
+      "repository": "https://github.com/ss-lab-cancerunit/cobra",
+      "source": "https://files.pythonhosted.org/packages/f8/4d/31af974171d5e2abbb710a2a3ea39e84bd77cc32b0d5c409d402b3f65df7/annotationjf-0.0.6.macosx-10.7-x86_64.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.6"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +195,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

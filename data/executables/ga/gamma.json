@@ -2,6 +2,30 @@
   "command": "gamma",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goki/freetype",
+      "version": "v0.0.0-20181231101311-fa8a33aabaff",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goki/freetype/@v/v0.0.0-20181231101311-fa8a33aabaff.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181231101311-fa8a33aabaff"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/golang/freetype",
       "version": "v0.0.0-20150924013838-f29eb116deb3",
@@ -16,6 +40,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/golang/freetype",
+      "version": "v0.0.0-20161208064710-d9be45aaf745",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/golang/freetype/@v/v0.0.0-20161208064710-d9be45aaf745.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161208064710-d9be45aaf745"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/golang/freetype",
       "version": "v0.0.0-20170609003504-e2365dfdc4a0",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/golang/freetype/@v/v0.0.0-20170609003504-e2365dfdc4a0.zip",
@@ -24,8 +60,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20170609003504-e2365dfdc4a0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hanguofeng/freetype-go-mirror",
+      "version": "v0.0.0-20140928112427-cfb10e2cb6de",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hanguofeng/freetype-go-mirror/@v/v0.0.0-20140928112427-cfb10e2cb6de.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20140928112427-cfb10e2cb6de"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gamma",
+      "version": "0.2.0",
+      "repository": "https://github.com/nishio-dens/gamma",
+      "source": "https://rubygems.org/gems/gamma-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

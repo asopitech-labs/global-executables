@@ -2,6 +2,30 @@
   "command": "dither",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bulb",
+      "version": "2.0.1",
+      "repository": "https://gitea.mielpeeters.be/mielpeeters/bulb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dither",
+      "version": "1.3.10",
+      "repository": "https://gitlab.com/efronlicht/dither",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.3.10"
+    },
+    {
       "ecosystem": "pypi",
       "package": "BayerDithering",
       "version": "0.3.2",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

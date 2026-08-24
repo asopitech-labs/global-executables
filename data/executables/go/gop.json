@@ -2,6 +2,18 @@
   "command": "gop",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "git-outpost",
+      "version": "0.5.0",
+      "repository": "https://github.com/OptimalCNC/git-outpost",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "xgo",
       "version": "1.7.5",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "generator-oj-problem",
+      "version": "0.1.0-beta",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/generator-oj-problem/0.1.0-beta/generator-oj-problem.0.1.0-beta.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.1.0-beta"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

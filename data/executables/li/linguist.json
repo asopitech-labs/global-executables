@@ -2,6 +2,42 @@
   "command": "linguist",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "qt5-tools-5.15.19+kde+r3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "linguist",
+      "version": "0.1.11",
+      "repository": "https://github.com/drshade/linguist",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.11"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "qtchooser",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "qtchooser",
       "version": null,
@@ -12,6 +48,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jenkins-x/draft-repo",
+      "version": "v0.0.0-20180417100212-2f66cc518135",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jenkins-x/draft-repo/@v/v0.0.0-20180417100212-2f66cc518135.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180417100212-2f66cc518135"
     },
     {
       "ecosystem": "homebrew",
@@ -50,6 +98,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "rubygems",
+      "package": "geothird-linguist",
+      "version": "2.6.8",
+      "repository": "https://github.com/geothird/linguist",
+      "source": "https://rubygems.org/gems/geothird-linguist-2.6.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.6.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gitlab-linguist",
+      "version": "3.0.1",
+      "repository": "https://github.com/github/linguist",
+      "source": "https://rubygems.org/gems/gitlab-linguist-3.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "linguist_ruby",
+      "version": "0.0.3",
+      "repository": "https://github.com/lingohub/lingohub_ruby",
+      "source": "https://rubygems.org/gems/linguist_ruby-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "qtchooser",
       "version": null,
@@ -63,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

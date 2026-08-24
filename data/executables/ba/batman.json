@@ -2,6 +2,30 @@
   "command": "batman",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "bat-extras-2024.08.24-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "batman-fim",
+      "version": "2.0.0",
+      "repository": "https://github.com/noojee/batman",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "bat-extras",
       "version": "2024.08.24",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Batman",
+      "version": "0.7.0",
+      "repository": "https://github.com/realgeeks/batman",
+      "source": "https://files.pythonhosted.org/packages/22/f0/52fbbc90de48eb1cfaab3f80a1681e649463effb21a926e14cb315ceb0b7/Batman-0.7.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

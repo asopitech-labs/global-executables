@@ -2,6 +2,90 @@
   "command": "nr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "extra-utils",
+      "version": "1.0.0",
+      "repository": "https://github.com/jayden-chan/extra-utils.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nci",
+      "version": "0.2.1",
+      "repository": "https://github.com/Debbl/nci.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nodepmutil",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "npack",
+      "version": "0.0.19",
+      "repository": "https://github.com/zhazhazhu/ni",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.19"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nr",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nreplops-tool",
+      "version": "0.3.1",
+      "repository": "https://github.com/mjhanninen/nreplops-tool",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "netrw",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ni",
       "version": "30.5.0",
@@ -12,6 +96,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adamburgess/nr",
+      "version": "2.0.0",
+      "repository": "git+https://github.com/adamburgess/nr.git",
+      "source": "https://registry.npmjs.org/@adamburgess%2Fnr/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amio/nr",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/amio/nr.git",
+      "source": "https://registry.npmjs.org/@amio%2Fnr/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antfu/ni",
+      "version": "30.5.0",
+      "repository": "git+https://github.com/antfu-collective/ni.git",
+      "source": "https://registry.npmjs.org/@antfu%2Fni/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "30.5.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antx/n",
+      "version": "0.21.5",
+      "repository": "git+https://github.com/huoxiangdong/n.git",
+      "source": "https://registry.npmjs.org/@antx%2Fn/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.21.5"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +159,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -1,0 +1,31 @@
+{
+  "command": "io-watch",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ruby-io-watch",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "io-watch",
+      "version": "0.6.3",
+      "repository": "https://github.com/socketry/io-watch.git",
+      "source": "https://rubygems.org/gems/io-watch-0.6.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

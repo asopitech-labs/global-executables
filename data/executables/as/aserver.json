@@ -2,6 +2,18 @@
   "command": "aserver",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "alsa-lib-1.2.16.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "alsa-lib",
       "version": "1.2.16.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aserver",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f3/8d/0657df225c6dd733c94195002eed1675af931f83959fb191b01882e5b7e8/aserver-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

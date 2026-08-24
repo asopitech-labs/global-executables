@@ -2,6 +2,90 @@
   "command": "fn",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "findnewest-0.3-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fair_next",
+      "version": "1.0.1",
+      "repository": "https://github.com/eum2o/fair_next",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "finn-assembler",
+      "version": "0.2.2",
+      "repository": "https://github.com/adam-mcdaniel/finn-assembler",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fn",
+      "version": "1.2.3",
+      "repository": "https://github.com/callum-oakley/fn",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hyper-hello-world",
+      "version": "0.1.1",
+      "repository": "https://github.com/Densaugeo/hyper-hello-world",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fn",
       "version": "0.6.63",
@@ -12,8 +96,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "FlexNamer",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/flexnamer/0.0.1/flexnamer.0.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Gsuuon.Tool.FNav",
+      "version": "0.0.9",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gsuuon.tool.fnav/0.0.9/gsuuon.tool.fnav.0.0.9.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "functio",
+      "version": "0.1.1",
+      "repository": "https://gitlab.com/functio/functio",
+      "source": "https://rubygems.org/gems/functio-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "fnproject",
+      "version": "0.6.63",
+      "repository": "https://fnproject.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.6.63"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

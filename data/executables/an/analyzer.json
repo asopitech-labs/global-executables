@@ -2,6 +2,54 @@
   "command": "analyzer",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "instrumenter",
+      "version": "0.1.4",
+      "repository": "https://github.com/Guilucand/instrumenter-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "obfsck",
+      "version": "0.1.0",
+      "repository": "https://github.com/89jobrien/obfsck",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/buildpack/lifecycle",
+      "version": "v0.0.0-20190314183328-a6ea5e18de72",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/buildpack/lifecycle/@v/v0.0.0-20190314183328-a6ea5e18de72.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190314183328-a6ea5e18de72"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/buildpack/lifecycle",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/buildpack/lifecycle/@v/v0.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "freeling",
       "version": "4.2",
@@ -12,8 +60,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "danxill/php-meminfo-analyzer",
+      "version": "v1.0.2",
+      "repository": "https://github.com/DanxilL/MemInfoAnalyzer.git",
+      "source": "https://repo.packagist.org/p2/danxill/php-meminfo-analyzer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-test-failure-analyzer",
+      "version": "2.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/17/09/172f94711900bf28e0d26b5b8de041ce926fcbcba36ae45c655fedea122d/ai_test_failure_analyzer-2.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

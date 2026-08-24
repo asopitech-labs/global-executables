@@ -2,6 +2,66 @@
   "command": "bumpversion",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bumpversion-cli",
+      "version": "0.0.12",
+      "repository": "https://github.com/romnn/bumpversion",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.12"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "BumpVersion",
+      "version": "0.0.9",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/bumpversion/0.0.9/bumpversion.0.0.9.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "advbumpversion",
+      "version": "1.2.0",
+      "repository": "https://github.com/andrivet/advbumpversion",
+      "source": "https://files.pythonhosted.org/packages/a5/db/891e877cc3947ef2c5a32fce8c0e75498c36f0662c79363de7e36f33d6a4/advbumpversion-1.2.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ahnlich-client-py",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0f/9d/46f5523b4eb97d8d9e43e58b2996097dfaaf90304fa20f4b2434adaffaa0/ahnlich_client_py-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bumpversion",
+      "version": "1.1.0",
+      "repository": "https://github.com/dlanileonardo/bumpversion",
+      "source": "https://rubygems.org/gems/bumpversion-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "bumpversion",
       "version": null,
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

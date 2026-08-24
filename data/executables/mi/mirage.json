@@ -2,6 +2,54 @@
   "command": "mirage",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mirage",
+      "version": "0.0.1",
+      "repository": "https://github.com/hemisphere-systems/mirage",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mirage-analyzer",
+      "version": "1.12.1",
+      "repository": "https://github.com/oldnordic/mirage",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.12.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mirage-tui",
+      "version": "1.3.4",
+      "repository": "https://github.com/mangetoncompost/mirage",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.3.4"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mirage",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mirage",
       "version": null,
@@ -12,6 +60,18 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "aliemam/mirage_core",
+      "version": "v0.15.5",
+      "repository": "https://github.com/aliemam/mirage_core.git",
+      "source": "https://repo.packagist.org/p2/aliemam/mirage_core.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.15.5"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

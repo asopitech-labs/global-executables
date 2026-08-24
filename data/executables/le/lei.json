@@ -2,6 +2,30 @@
   "command": "lei",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "lei-2.1.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lei",
+      "version": "0.3.1",
+      "repository": "https://github.com/emchang3/lei",
+      "source": "https://rubygems.org/gems/lei-0.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "lei",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "cart",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-cart-1.2.3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ngs/go-amazon-product-advertising-api",
+      "version": "v0.0.0-20161203193458-61566202d7a2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ngs/go-amazon-product-advertising-api/@v/v0.0.0-20161203193458-61566202d7a2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161203193458-61566202d7a2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "atari800",
       "version": "7.1.2",
@@ -12,8 +36,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "agoalofalife/cart",
+      "version": "v0.1.0",
+      "repository": "https://github.com/agoalofalife/cart.git",
+      "source": "https://repo.packagist.org/p2/agoalofalife/cart.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

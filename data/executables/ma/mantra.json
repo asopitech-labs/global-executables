@@ -2,6 +2,18 @@
   "command": "mantra",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mantra",
+      "version": "0.8.1",
+      "repository": "https://github.com/mhatzl/mantra",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "mantra",
       "version": "3.1",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mantra",
+      "version": "0.2.3",
+      "repository": "https://github.com/allomov/mantra",
+      "source": "https://rubygems.org/gems/mantra-0.2.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.3"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

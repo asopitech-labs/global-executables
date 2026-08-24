@@ -1,0 +1,67 @@
+{
+  "command": "booster",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "booster-0.13-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "booster",
+      "version": "0.6.0",
+      "repository": "https://github.com/quartiq/booster",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@appjumpstart/booster",
+      "version": "1.3.0",
+      "repository": "git+https://github.com/appjumpstart/booster.git",
+      "source": "https://registry.npmjs.org/@appjumpstart%2Fbooster/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Qube2",
+      "version": "0.3.43",
+      "repository": "https://github.com/dmarienko/Qube",
+      "source": "https://files.pythonhosted.org/packages/27/1a/d51162ba3644f568e7357481a8387dfcaef5f4644190faafe6eec70c0abc/Qube2-0.3.43-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.43"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-booster",
+      "version": "0.6.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f9/4e/2a0e41c5e4e3a53a097da8995f6ef32bd744b2f649c5896c348ddeb64abe/agent_booster-0.6.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.9"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

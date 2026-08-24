@@ -2,6 +2,66 @@
   "command": "room",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "room-cli",
+      "version": "3.6.1",
+      "repository": "https://github.com/knoxio/room",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/get-programming-with-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/get-programming-with-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nathany/learn-go",
+      "version": "v0.0.0-20180809044028-bda8da0b90a7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nathany/learn-go/@v/v0.0.0-20180809044028-bda8da0b90a7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180809044028-bda8da0b90a7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agree-able/room",
+      "version": "4.2.0",
+      "repository": "git+https://github.com/agree-able/room.git",
+      "source": "https://registry.npmjs.org/@agree-able%2Froom/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.2.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "RoomSharp.Cli",
+      "version": "0.5.5",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/roomsharp.cli/0.5.5/roomsharp.cli.0.5.5.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.5.5"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ChatRoom-jianjun",
       "version": "3.4.0",
@@ -15,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

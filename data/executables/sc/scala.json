@@ -2,6 +2,30 @@
   "command": "scala",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "scala",
+      "version": "0.1.1",
+      "repository": "https://github.com/yingkitw/scala-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "scala-rs",
+      "version": "0.1.1",
+      "repository": "https://github.com/MenkeTechnologies/scalars",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "scala",
       "version": "3.8.4",
@@ -48,8 +72,47 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "scala",
+      "version": "3.8.4",
+      "repository": "https://www.scala-lang.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.8.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "scala2",
+      "version": "2.13.16",
+      "repository": "https://www.scala-lang.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.13.16"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "scala212",
+      "version": "2.12.20",
+      "repository": "https://www.scala-lang.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.12.20"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

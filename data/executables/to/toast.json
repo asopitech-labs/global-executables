@@ -2,6 +2,54 @@
   "command": "toast",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "gsm-1.0.24-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "toast",
+      "version": "0.48.0",
+      "repository": "https://github.com/stepchowfun/toast",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.48.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "toast-api",
+      "version": "0.1.9",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libgsm-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "libgsm-tools",
       "version": null,
@@ -38,6 +86,42 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "nuget",
+      "package": "choshinyoung.Toast.Tools",
+      "version": "2.0.7-beta",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/choshinyoung.toast.tools/2.0.7-beta/choshinyoung.toast.tools.2.0.7-beta.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.0.7-beta"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-toast",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-toast/1.0.0/dotnet-toast.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hotplate",
+      "version": "1.0.3",
+      "repository": "http://github.com/Open-RIO/HotPlate",
+      "source": "https://rubygems.org/gems/hotplate-1.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "libgsm-tools",
       "version": null,
@@ -51,5 +135,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

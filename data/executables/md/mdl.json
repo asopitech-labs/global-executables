@@ -2,6 +2,54 @@
   "command": "mdl",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "markdownlint-0.18.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@artsparkai/mdl",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/artsparkAI/mdl.git",
+      "source": "https://registry.npmjs.org/@artsparkai%2Fmdl/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "drewlabs/mdl-cli",
+      "version": "v0.3.0",
+      "repository": "https://github.com/azandrew-sidoine/mdl.git",
+      "source": "https://repo.packagist.org/p2/drewlabs/mdl-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdl",
+      "version": "0.18.1",
+      "repository": "https://github.com/mivok/markdownlint",
+      "source": "https://rubygems.org/gems/mdl-0.18.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.18.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "markdownlint",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

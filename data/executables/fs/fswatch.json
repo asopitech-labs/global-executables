@@ -2,6 +2,30 @@
   "command": "fswatch",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fswatch-1.22.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fswatch",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "fswatch",
       "version": null,
@@ -14,6 +38,18 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/codeskyblue/fswatch",
+      "version": "v0.0.0-20190409014817-776b613dacea",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/codeskyblue/fswatch/@v/v0.0.0-20190409014817-776b613dacea.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190409014817-776b613dacea"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fswatch",
       "version": "1.22.0",
@@ -24,6 +60,54 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "hhxsv5/laravel-s",
+      "version": "v3.8.8",
+      "repository": "https://github.com/hhxsv5/laravel-s.git",
+      "source": "https://repo.packagist.org/p2/hhxsv5/laravel-s.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.8.8"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "hpc-code/laravel-s",
+      "version": "99.0.3",
+      "repository": "https://github.com/hpc-code/laravels.git",
+      "source": "https://repo.packagist.org/p2/hpc-code/laravel-s.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "99.0.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "laravel-s/laravel-sw",
+      "version": "v3.7.21",
+      "repository": "https://gitlab.com/test1361456/laravel-sw.git",
+      "source": "https://repo.packagist.org/p2/laravel-s/laravel-sw.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.7.21"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "fswatch",
+      "version": "0.0.5",
+      "repository": "http://github.com/wkm/fswatch",
+      "source": "https://rubygems.org/gems/fswatch-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

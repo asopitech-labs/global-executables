@@ -3,6 +3,30 @@
   "providers": [
     {
       "ecosystem": "go",
+      "package": "gitee.com/johng/gf",
+      "version": "v1.3.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitee.com/johng/gf/@v/v1.3.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogf/gkafka",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gogf/gkafka/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/google/cadvisor",
       "version": "v0.0.0-20160212224345-e9739af18411",
       "repository": null,
@@ -12,6 +36,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20160212224345-e9739af18411"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/cadvisor",
+      "version": "v0.23.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/cadvisor/@v/v0.23.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.23.0"
     },
     {
       "ecosystem": "homebrew",
@@ -24,8 +60,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "kafka",
+      "version": "4.3.1",
+      "repository": "https://kafka.apache.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.3.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

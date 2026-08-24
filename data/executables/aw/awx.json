@@ -1,0 +1,67 @@
+{
+  "command": "awx",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "awxkit-24.6.1-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agentwallex/cli",
+      "version": "0.9.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@agentwallex%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "alanbchristie-awxkit",
+      "version": "1.0.2",
+      "repository": "https://github.com/alanbchristie/awxkit",
+      "source": "https://files.pythonhosted.org/packages/c4/99/01434c88b22ad53bcb712eec782e8f6f1f6234dcb0efa1ddb98f47fe9feb/alanbchristie_awxkit-1.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "awxkit",
+      "version": "24.6.1",
+      "repository": "https://github.com/ansible/awx",
+      "source": "https://files.pythonhosted.org/packages/d2/cc/44ba38a631459824c37424f1eda9dac7deefaaabf32f6c92cc2307562eb4/awxkit-24.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "24.6.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "awx",
+      "version": "0.6.11",
+      "repository": "http://rubygems.org/gems/awx",
+      "source": "https://rubygems.org/gems/awx-0.6.11.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.6.11"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,30 @@
   "command": "twin",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "twin-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/cotrin/twin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mark-twin",
+      "version": "0.4.3",
+      "repository": "https://github.com/rhsev/mark-twin",
+      "source": "https://rubygems.org/gems/mark-twin-0.4.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "twin",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

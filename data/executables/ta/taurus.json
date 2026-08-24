@@ -2,6 +2,30 @@
   "command": "taurus",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "taurus",
+      "version": "0.1.1",
+      "repository": "https://github.com/m-cat/taurus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "boxunphp/taurus-installer",
+      "version": "v0.0.3",
+      "repository": "https://github.com/boxunphp/Taurus-Installer.git",
+      "source": "https://repo.packagist.org/p2/boxunphp/taurus-installer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-taurus",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

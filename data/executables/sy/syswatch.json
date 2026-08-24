@@ -2,9 +2,21 @@
   "command": "syswatch",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "syswatch",
+      "version": "0.10.0",
+      "repository": "https://github.com/matthart1983/syswatch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "syswatch",
-      "version": "0.9.0",
+      "version": "0.10.0",
       "repository": "https://www.netwatchlabs.com/labs/syswatch",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

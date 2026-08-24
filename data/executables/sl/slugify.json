@@ -2,6 +2,30 @@
   "command": "slugify",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-slugify-8.0.4-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mozillazg/go-slugify",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mozillazg/go-slugify/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "slugify",
       "version": "1.0.1",
@@ -12,6 +36,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ashishpandey001/slugify",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/ashishpandey001/slugify.git",
+      "source": "https://registry.npmjs.org/@ashishpandey001%2Fslugify/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "iodigital-com/slugify-cli",
+      "version": "v1.2.0",
+      "repository": "https://github.com/iodigital-com/slugify-cli.git",
+      "source": "https://repo.packagist.org/p2/iodigital-com/slugify-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "isaac/slugify-cli",
+      "version": "v1.2.0",
+      "repository": "https://github.com/iodigital-com/slugify-cli.git",
+      "source": "https://repo.packagist.org/p2/isaac/slugify-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.2.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

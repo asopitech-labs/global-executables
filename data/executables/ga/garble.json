@@ -2,6 +2,18 @@
   "command": "garble",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "garble_lang",
+      "version": "0.6.1",
+      "repository": "https://github.com/sine-fdn/garble/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "garble",
       "version": "0.17.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "garble",
+      "version": "0.0.2",
+      "repository": "http://github.com/jgorset/garble",
+      "source": "https://rubygems.org/gems/garble-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

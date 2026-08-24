@@ -2,6 +2,30 @@
   "command": "child",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "shared-data",
+      "version": "0.0.2",
+      "repository": "https://github.com/asajeffrey/shared-data",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/golog",
+      "version": "v0.0.0-20170811121246-2ed680e7b1f3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/golog/@v/v0.0.0-20170811121246-2ed680e7b1f3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170811121246-2ed680e7b1f3"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/kataras/golog",
       "version": "v0.0.0-20180321173939-03be10146386",
@@ -12,8 +36,32 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20180321173939-03be10146386"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/golog",
+      "version": "v0.0.0-20190620222301-4851375e24d4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/golog/@v/v0.0.0-20190620222301-4851375e24d4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190620222301-4851375e24d4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kataras/golog",
+      "version": "v0.1.15",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kataras/golog/@v/v0.1.15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.15"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

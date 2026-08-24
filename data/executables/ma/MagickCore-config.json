@@ -2,9 +2,33 @@
   "command": "MagickCore-config",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "imagemagick-7.1.2.29-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "imagemagick-7.1.2.30-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "imagemagick",
-      "version": "7.1.2-29",
+      "version": "7.1.2-30",
       "repository": "https://imagemagick.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -16,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "imagemagick-full",
-      "version": "7.1.2-29",
+      "version": "7.1.2-30",
       "repository": "https://imagemagick.org",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -28,7 +52,7 @@
     {
       "ecosystem": "homebrew",
       "package": "imagemagick@6",
-      "version": "6.9.13-54",
+      "version": "6.9.13-55",
       "repository": "https://legacy.imagemagick.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,54 @@
   "command": "fx",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "fx-39.2.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "felix",
+      "version": "2.16.1",
+      "repository": "https://github.com/kyoheiu/felix",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.16.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fx",
+      "version": "0.11.3",
+      "repository": "https://github.com/xandkar/fx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rickatcodemojo/fx",
+      "version": "v0.0.0-20200109010324-781092ff4b22",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rickatcodemojo/fx/@v/v0.0.0-20200109010324-781092ff4b22.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200109010324-781092ff4b22"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "fx",
       "version": "39.2.0",
@@ -12,8 +60,57 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "fx-agent",
+      "version": "0.0.5",
+      "repository": "https://fx.sh",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@5oo/fx",
+      "version": "0.4.0",
+      "repository": "git://github.com/logikaljay/fx.git",
+      "source": "https://registry.npmjs.org/@5oo%2Ffx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ahmadmunib/framework1",
+      "version": "v1.1.2",
+      "repository": "https://github.com/ahmadmunib/framework1.git",
+      "source": "https://repo.packagist.org/p2/ahmadmunib/framework1.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.1.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "fx",
+      "version": "39.2.0",
+      "repository": "https://github.com/antonmedv/fx",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "39.2.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

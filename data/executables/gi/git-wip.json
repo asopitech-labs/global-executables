@@ -12,8 +12,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "git-extras-7.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aileron/git-wip",
+      "version": "1.6.0",
+      "repository": "git+https://github.com/aileron-inc/git-wip.git",
+      "source": "https://registry.npmjs.org/@aileron%2Fgit-wip/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-wip",
+      "version": "0.8",
+      "repository": "https://github.com/aileron-inc/git-wip/",
+      "source": "https://rubygems.org/gems/git-wip-0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.8"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

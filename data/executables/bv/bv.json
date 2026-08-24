@@ -2,9 +2,45 @@
   "command": "bv",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "biov",
+      "version": "0.1.40",
+      "repository": "https://github.com/tejasprabhune/bv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.40"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "biovault",
+      "version": "0.1.133",
+      "repository": "https://github.com/openmined/biovault",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.133"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bivy",
+      "version": "0.4.3",
+      "repository": "https://github.com/flhoxha/bivy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "beads_viewer",
-      "version": "0.20.0",
+      "version": "0.21.0",
       "repository": "https://github.com/Dicklesworthstone/beads_viewer",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +48,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "bv",
+      "version": "1.1.10",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/bv/1.1.10/bv.1.1.10.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.10"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

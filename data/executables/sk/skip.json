@@ -2,6 +2,18 @@
   "command": "skip",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "skip",
+      "version": "0.2.1",
+      "repository": "https://git.kemitix.net/kemitix/skip",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mndrix/tap-go",
       "version": "v0.0.0-20170113192335-56cca451570b",
@@ -28,7 +40,7 @@
     {
       "ecosystem": "homebrew",
       "package": "skip",
-      "version": "1.9.5",
+      "version": "1.9.7",
       "repository": "https://skip.dev",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -39,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

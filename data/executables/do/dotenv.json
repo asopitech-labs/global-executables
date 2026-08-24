@@ -2,6 +2,138 @@
   "command": "dotenv",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-dotenv-1.2.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dotenv",
+      "version": "0.15.0",
+      "repository": "https://github.com/dotenv-rs/dotenv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dotenv-cli",
+      "version": "2.0.3",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dotenv-flow",
+      "version": "0.16.2",
+      "repository": "https://github.com/cdellacqua/dotenv-flow.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "dotenvor",
+      "version": "0.2.0",
+      "repository": "https://github.com/JohnTitor/dotenvor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "env-manager",
+      "version": "0.0.1",
+      "repository": "https://github.com/rawnly/env-manager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rotenv",
+      "version": "0.15.0",
+      "repository": "https://github.com/jewlexx/dotenv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ctison/dotenv",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ctison/dotenv/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotenv-tool",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotenv-tool/1.0.2/dotenv-tool.1.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "DysonPythonHack",
+      "version": "0.0.3.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/43/b8/a2803253b96afb5f31c934b72a85a6cefed6cba12903209984eb30d165d5/DysonPythonHack-0.0.3.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dotenv",
+      "version": "3.2.0",
+      "repository": "https://github.com/bkeepers/dotenv",
+      "source": "https://rubygems.org/gems/dotenv-3.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.2.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-dotenv-cli",
       "version": null,
@@ -15,5 +147,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

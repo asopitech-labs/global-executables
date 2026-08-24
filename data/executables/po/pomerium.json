@@ -2,9 +2,21 @@
   "command": "pomerium",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/pomerium/pomerium",
+      "version": "v0.33.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pomerium/pomerium/@v/v0.33.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.33.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "pomerium",
-      "version": "0.33.0",
+      "version": "0.33.1",
       "repository": "https://www.pomerium.com",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

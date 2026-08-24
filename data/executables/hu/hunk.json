@@ -2,6 +2,18 @@
   "command": "hunk",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hunktool",
+      "version": "0.4.1",
+      "repository": "https://github.com/TheBicPen/hunk.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hunk",
       "version": "0.19.0",
@@ -12,8 +24,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@851-labs/hunk",
+      "version": "0.7.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@851-labs%2Fhunk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "hunk",
+      "version": "0.19.0",
+      "repository": "https://hunk.dev",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.19.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,9 +2,69 @@
   "command": "ng",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "nanogrep",
+      "version": "2.2.1",
+      "repository": "https://github.com/Uniminin/nanogrep",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ng",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "noisegen",
+      "version": "0.7.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "remote_hash_map",
+      "version": "0.2.6",
+      "repository": "https://github.com/kwdowicz/remote_hash_map",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "neugram.io/ng",
+      "version": "v0.0.0-20180309130942-d472ff93d872",
+      "repository": null,
+      "source": "https://proxy.golang.org/neugram.io/ng/@v/v0.0.0-20180309130942-d472ff93d872.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180309130942-d472ff93d872"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "angular-cli",
-      "version": "22.1.4",
+      "version": "22.1.5",
       "repository": "https://angular.dev/cli/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,6 +72,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@angular.cn/cli",
+      "version": "11.2.0-next.0",
+      "repository": "git+https://github.com/angular/angular-cli.git",
+      "source": "https://registry.npmjs.org/@angular.cn%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "11.2.0-next.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@angular/cli",
+      "version": "22.1.5",
+      "repository": "git+https://github.com/angular/angular-cli.git",
+      "source": "https://registry.npmjs.org/@angular%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "22.1.5"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@any-u/ng",
+      "version": "0.3.1",
+      "repository": "git+https://github.com/any-u/ng.git",
+      "source": "https://registry.npmjs.org/@any-u%2Fng/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "dive",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "dive-0.13.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "divecli",
+      "version": "0.1.1",
+      "repository": "https://github.com/ffaanngg/dive",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/andreiavrammsd/validator",
       "version": "v9.28.0+incompatible",
@@ -12,6 +36,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v9.28.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/andreiavrammsd/validator",
+      "version": "v9.31.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/andreiavrammsd/validator/@v/v9.31.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.31.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-playground/validator",
+      "version": "v9.24.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-playground/validator/@v/v9.24.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.24.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-playground/validator",
+      "version": "v9.26.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-playground/validator/@v/v9.26.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.26.0+incompatible"
     },
     {
       "ecosystem": "go",
@@ -39,6 +99,42 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/go-playground/validator",
+      "version": "v9.29.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-playground/validator/@v/v9.29.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.29.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-playground/validator",
+      "version": "v9.31.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-playground/validator/@v/v9.31.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.31.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-playground/validator",
+      "version": "v9.9.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-playground/validator/@v/v9.9.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.9.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
       "package": "gopkg.in/bluesuncorp/validator.v9",
       "version": "v9.15.0",
       "repository": null,
@@ -60,6 +156,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v9.28.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/go-playground/validator.v9",
+      "version": "v9.0.0-20190430145919-e25e66164b53",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.0.0-20190430145919-e25e66164b53.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.0.0-20190430145919-e25e66164b53"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/go-playground/validator.v9",
+      "version": "v9.15.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.15.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.15.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/go-playground/validator.v9",
+      "version": "v9.19.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.19.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.19.0"
     },
     {
       "ecosystem": "go",
@@ -112,6 +244,18 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/go-playground/validator.v9",
+      "version": "v9.25.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.25.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.25.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/go-playground/validator.v9",
       "version": "v9.26.0",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.26.0.zip",
@@ -148,6 +292,30 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/go-playground/validator.v9",
+      "version": "v9.29.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.29.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.29.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/go-playground/validator.v9",
+      "version": "v9.31.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.31.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.31.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/go-playground/validator.v9",
       "version": "v9.9.1",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.9.1.zip",
@@ -156,6 +324,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v9.9.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/go-playground/validator.v9",
+      "version": "v9.9.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/go-playground/validator.v9/@v/v9.9.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v9.9.4"
     },
     {
       "ecosystem": "homebrew",
@@ -168,8 +348,33 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "dive",
+      "version": "0.13.1",
+      "repository": "https://github.com/wagoodman/dive/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.13.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "wagoodman.dive",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

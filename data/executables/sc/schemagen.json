@@ -2,6 +2,66 @@
   "command": "schemagen",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "java-environment-common-3-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "wycheproof",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/juju/juju",
+      "version": "v0.0.0-20260820151607-b0fd541b555c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/juju/juju/@v/v0.0.0-20260820151607-b0fd541b555c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820151607-b0fd541b555c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/juju/juju",
+      "version": "v0.0.0-20260820163335-fd19949685fa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/juju/juju/@v/v0.0.0-20260820163335-fd19949685fa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820163335-fd19949685fa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/replicatedhq/embedded-cluster-operator",
+      "version": "v0.42.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/replicatedhq/embedded-cluster-operator/@v/v0.42.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.42.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jena",
       "version": "6.2.0",
@@ -16,7 +76,7 @@
     {
       "ecosystem": "homebrew",
       "package": "openjdk@8",
-      "version": "1.8.0-502",
+      "version": "1.8.0-504",
       "repository": "https://openjdk.org/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

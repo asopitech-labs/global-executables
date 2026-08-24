@@ -2,6 +2,42 @@
   "command": "supervisord",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "supervisor-4.3.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ochinchina/supervisord",
+      "version": "v0.6.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ochinchina/supervisord/@v/v0.6.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rpoletaev/supervisord",
+      "version": "v0.0.0-20180225192445-4e265b19bfbd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rpoletaev/supervisord/@v/v0.0.0-20180225192445-4e265b19bfbd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180225192445-4e265b19bfbd"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "supervisor",
       "version": "4.3.0",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

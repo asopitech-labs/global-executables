@@ -2,6 +2,30 @@
   "command": "buf",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "buf-1.72.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/complex64/protoc-gen-gorm/examples/buf",
+      "version": "v0.0.0-20241014135006-6017e9416c0b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/complex64/protoc-gen-gorm/examples/buf/@v/v0.0.0-20241014135006-6017e9416c0b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241014135006-6017e9416c0b"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "buf",
       "version": "1.72.0",
@@ -12,8 +36,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "buf",
+      "version": "0.0.9",
+      "repository": "https://github.com/douglaslamb/buf",
+      "source": "https://rubygems.org/gems/buf-0.0.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "buf",
+      "version": "1.72.0",
+      "repository": "https://buf.build/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.72.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "bufbuild.buf",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "blaze",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "blaze-cli",
+      "version": "0.2.16",
+      "repository": "https://github.com/rnza0u/blaze.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.16"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "blazetools",
+      "version": "1.0.1",
+      "repository": "https://github.com/maphari/blaze",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wcharczuk/go-incr",
+      "version": "v1.4.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wcharczuk/go-incr/@v/v1.4.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.13"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "blazeblogger",
       "version": "1.2.0",
@@ -27,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

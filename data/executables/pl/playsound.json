@@ -2,6 +2,18 @@
   "command": "playsound",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "sdl_sound-1.0.3-13",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sdl2_sound",
       "version": "2.0.6",
@@ -12,8 +24,68 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "autotest-notification",
+      "version": "2.3.4",
+      "repository": "http://github.com/carlosbrando/autotest-notification/",
+      "source": "https://rubygems.org/gems/autotest-notification-2.3.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.3.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "blackwinter-autotest-notification",
+      "version": "2.2.0",
+      "repository": "http://github.com/carlosbrando/autotest-notification/",
+      "source": "https://rubygems.org/gems/blackwinter-autotest-notification-2.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "carlosbrando-autotest-notification",
+      "version": "2.0.0",
+      "repository": "http://autotest-notification.rubyforge.org",
+      "source": "https://rubygems.org/gems/carlosbrando-autotest-notification-2.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dcrec1-autotest-notification",
+      "version": "1.7.3",
+      "repository": "http://github.com/carlosbrando/autotest-notification/",
+      "source": "https://rubygems.org/gems/dcrec1-autotest-notification-1.7.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.7.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "godlike",
+      "version": "1.0.0",
+      "repository": "http://github.com/Adman65/godlike",
+      "source": "https://rubygems.org/gems/godlike-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

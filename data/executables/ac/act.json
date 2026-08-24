@@ -2,11 +2,23 @@
   "command": "act",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "act-0.2.89-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "crates",
       "package": "act",
       "version": "0.1.1",
       "repository": "https://github.com/ichy-wayland/act",
-      "source": "https://crates.io/api/v1/crates/act/0.1.1/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
@@ -18,7 +30,7 @@
       "package": "act-bin",
       "version": "0.0.1",
       "repository": "https://github.com/anru/act",
-      "source": "https://crates.io/api/v1/crates/act-bin/0.0.1/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
@@ -30,12 +42,24 @@
       "package": "act-cli",
       "version": "0.11.1",
       "repository": "https://github.com/actcore/act-cli",
-      "source": "https://crates.io/api/v1/crates/act-cli/0.11.1/download",
+      "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
       "latest_version": "0.11.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "crate-activity",
+      "version": "0.7.0",
+      "repository": "https://github.com/klebs6/klebs-general",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
     },
     {
       "ecosystem": "homebrew",
@@ -50,6 +74,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@actcore/act",
+      "version": "0.11.1",
+      "repository": "git+https://github.com/actcore/act-cli.git",
+      "source": "https://registry.npmjs.org/@actcore%2Fact/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.11.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@antdigital/cube",
+      "version": "4.7.17",
+      "repository": "git@code.alipay.com:ant-cube/cube-cli.git",
+      "source": "https://registry.npmjs.org/@antdigital%2Fcube/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.7.17"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ActDeact",
       "version": "1.0.0",
@@ -60,6 +108,139 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aCT-client",
+      "version": "1.0.0",
+      "repository": "http://github.com/ARCControlTower/aCT-Client",
+      "source": "https://files.pythonhosted.org/packages/86/3d/0b1a698e1e8eea576bef2928416f0edef10f6ef2ecb6621f5f2f3e2e10c7/act_client-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "act-bin",
+      "version": "0.2.89",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/95/ec/06f4867418eb58ba84065d6e7641435794dfee1a82c66359581a14ba0e70/act_bin-0.2.89-py3-none-macosx_12_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.89"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "act-cli",
+      "version": "0.11.1",
+      "repository": "https://actcore.dev",
+      "source": "https://files.pythonhosted.org/packages/31/bb/1bc1d785e44af76cbba58c9f85425eb7e3394d9691ccedfb51f191e7b770/act_cli-0.11.1-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "act-operator",
+      "version": "0.7.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/66/af/e8770b3a52a17310833998fa6f0b2e353eb2a2ca5bffe0d2419f5e822807/act_operator-0.7.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "act-tester",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f8/71/cdb51a9102d67eb8bb8fd22451705e1db01223b68a59a676241097361e66/act_tester-0.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "act-workflow",
+      "version": "4.8.399",
+      "repository": "https://github.com/tajalagawani/actpip",
+      "source": "https://files.pythonhosted.org/packages/d0/ea/0237b174a6644dc1c99a51eebdec098690113d159984617352c8a1369f9a/act_workflow-4.8.399-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.8.399"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "androidact",
+      "version": "0.1",
+      "repository": "https://github.com/bvdaakster/act",
+      "source": "https://files.pythonhosted.org/packages/d8/87/358963e2f651f1e4f05d7f16bdbf41a10845df566796d7c3af4407772a0a/androidact-0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "arches-containers",
+      "version": "1.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e8/5f/8540b360278a75fb7eccac5c7906cb1d14903c477555519dc375f99857b7/arches_containers-1.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autocommitt",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/74/dc/c1f7c09a3c80417e4dfe18bed29fbc5e12cd7ecb8768ac4ef0c5b4f2a872/autocommitt-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "act",
+      "version": "0.0.5",
+      "repository": "https://github.com/irrationalfab/act",
+      "source": "https://rubygems.org/gems/act-0.0.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "act",
+      "version": "0.2.89",
+      "repository": "https://github.com/nektos/act/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.2.89"
     },
     {
       "ecosystem": "ubuntu",
@@ -75,5 +256,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

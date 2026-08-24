@@ -2,6 +2,54 @@
   "command": "wmd",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "wikimedia-download",
+      "version": "0.1.1",
+      "repository": "https://github.com/fluffysquirrels/wikimedia-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wmd",
+      "version": "0.1.0",
+      "repository": "https://github.com/malwrar/wmd.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blocktree/openwallet",
+      "version": "v1.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blocktree/openwallet/@v/v1.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/blocktree/openwallet",
+      "version": "v1.4.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/blocktree/openwallet/@v/v1.4.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "wml",
       "version": null,
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

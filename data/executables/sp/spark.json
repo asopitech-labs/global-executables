@@ -2,6 +2,42 @@
   "command": "spark",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "spark",
+      "version": "0.4.0",
+      "repository": "https://github.com/jiri/rust-spark",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "spark-engine",
+      "version": "0.1.0",
+      "repository": "https://github.com/Luminous-Dynamics/spark-engine",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "spark-rs",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "spark",
       "version": "1.0.1",
@@ -12,8 +48,128 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adityaaria/spark",
+      "version": "6.6.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@adityaaria%2Fspark/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "6.6.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aidc/spark-cli",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@aidc%2Fspark-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "BlazorSpark.Console",
+      "version": "0.5.4",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/blazorspark.console/0.5.4/blazorspark.console.0.5.4.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.5.4"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Spark.CLI",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/spark.cli/1.1.0/spark.cli.1.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "andriichuk/releaser",
+      "version": "0.4.4",
+      "repository": "https://github.com/andriichuk/releaser.git",
+      "source": "https://repo.packagist.org/p2/andriichuk/releaser.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.4.4"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "certly/spark-installer",
+      "version": "v1.0.1",
+      "repository": "https://github.com/certly/spark-installer.git",
+      "source": "https://repo.packagist.org/p2/certly/spark-installer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ibourgeois/spark-installer",
+      "version": "v1.0.0",
+      "repository": "https://github.com/iBourgeois/spark-installer.git",
+      "source": "https://repo.packagist.org/p2/ibourgeois/spark-installer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "laravel/spark-installer",
+      "version": "v3.2.1",
+      "repository": "https://github.com/laravel/spark-installer.git",
+      "source": "https://repo.packagist.org/p2/laravel/spark-installer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v3.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Spark",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/29/c2/12137220bc97b7876a2fc2835c948881419a929fe3835dcabe35cc7289f8/spark-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "anadea-spark",
+      "version": "0.5.0",
+      "repository": "http://github.com/Anadea/spark",
+      "source": "https://rubygems.org/gems/anadea-spark-0.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

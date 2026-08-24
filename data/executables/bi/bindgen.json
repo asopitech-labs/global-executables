@@ -2,6 +2,66 @@
   "command": "bindgen",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "rust-bindgen-0.72.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "bindgen-cli",
+      "version": "0.72.1",
+      "repository": "https://github.com/rust-lang/rust-bindgen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.72.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "safe_bindgen",
+      "version": "0.13.3",
+      "repository": "https://github.com/maidsafe/sn_bindgen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sn_bindgen",
+      "version": "0.13.18",
+      "repository": "https://github.com/maidsafe/sn_bindgen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.18"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bindgen",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "bindgen",
       "version": null,
@@ -26,6 +86,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "GodoPy",
+      "version": "0.0.3",
+      "repository": "https://github.com/godopy/godopy",
+      "source": "https://files.pythonhosted.org/packages/f8/ee/5a6190319e770c38d2261b1f9d44009ff8371166d6da410c4b8e208324a1/GodoPy-0.0.3-cp37-cp37m-macosx_10_15_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "bindgen",
       "version": null,
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

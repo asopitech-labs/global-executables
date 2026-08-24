@@ -2,9 +2,69 @@
   "command": "generate-docs",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "eggsact",
+      "version": "1.2.2",
+      "repository": "https://github.com/eggstack/eggsact",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mn",
+      "version": "0.2.1",
+      "repository": "https://github.com/codesections/mnemonic",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "oxirs-gql",
+      "version": "0.4.1",
+      "repository": "https://github.com/cool-japan/oxirs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fluxninja/aperture/v2",
+      "version": "v2.34.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fluxninja/aperture/v2/@v/v2.34.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.34.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/taskcluster/taskcluster/v60",
+      "version": "v60.4.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/taskcluster/taskcluster/v60/@v/v60.4.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v60.4.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "hk",
-      "version": "1.55.0",
+      "version": "1.56.1",
       "repository": "https://hk.jdx.dev",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +72,44 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "1337-docs",
+      "version": "1.0.16",
+      "repository": "https://github.zhaw.ch/pm1-it19tazh-bles-berp-zubj/gruppe1-1337-projekt2-editor.git",
+      "source": "https://registry.npmjs.org/1337-docs/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.16"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "dereuromark/media-embed",
+      "version": "1.0.0",
+      "repository": "https://github.com/dereuromark/media-embed.git",
+      "source": "https://repo.packagist.org/p2/dereuromark/media-embed.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "airbyte-lib",
+      "version": "0.1.0",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/1e/d9/b68a45bceb9ff1717e3b279058950dfeb6d58dda9445213196835933146a/airbyte_lib-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

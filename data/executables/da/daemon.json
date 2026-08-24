@@ -2,6 +2,42 @@
   "command": "daemon",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "alfred-core",
+      "version": "0.1.9",
+      "repository": "https://github.com/PaoloPana/alfred-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kflow",
+      "version": "0.1.2",
+      "repository": "https://github.com/AlexsJones/kflow",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "daemon",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "daemon",
       "version": null,
@@ -14,6 +50,114 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/anapaya/os-scion",
+      "version": "v0.15.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/anapaya/os-scion/@v/v0.15.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.15.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/evilsocket/opensnitch",
+      "version": "v0.0.0-20190612155313-aa05ceb60bb4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/evilsocket/opensnitch/@v/v0.0.0-20190612155313-aa05ceb60bb4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190612155313-aa05ceb60bb4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/eyedeekay/sam-forwarder",
+      "version": "v0.0.0-20181221014024-04d57c329e15",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/eyedeekay/sam-forwarder/@v/v0.0.0-20181221014024-04d57c329e15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181221014024-04d57c329e15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdb/influxdb",
+      "version": "v0.0.0-20140723160018-3284662b3506",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdb/influxdb/@v/v0.0.0-20140723160018-3284662b3506.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20140723160018-3284662b3506"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/influxdb/influxdb",
+      "version": "v0.8.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/influxdb/influxdb/@v/v0.8.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/micro-plat/hydra",
+      "version": "v0.0.0-20190606101333-56ac7050a074",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/micro-plat/hydra/@v/v0.0.0-20190606101333-56ac7050a074.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190606101333-56ac7050a074"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/ingress-node-firewall",
+      "version": "v0.0.0-20260814144513-085a190849be",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/openshift/ingress-node-firewall/@v/v0.0.0-20260814144513-085a190849be.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260814144513-085a190849be"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sereiner/parrot",
+      "version": "v0.0.0-20190520024652-7acbe377d0a1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sereiner/parrot/@v/v0.0.0-20190520024652-7acbe377d0a1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190520024652-7acbe377d0a1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/takama/daemon",
+      "version": "v0.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/takama/daemon/@v/v0.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "daemon",
       "version": "0.8.4",
@@ -24,6 +168,30 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agentbean/daemon",
+      "version": "0.3.55",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@agentbean%2Fdaemon/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.55"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aia-read-svc",
+      "version": "0.6.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4d/cf/4d09d59766bdd6bff9b86f187a635ca8a97638e5f26cf9e23529871b3879/aia_read_svc-0.6.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +207,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,78 @@
   "command": "playwright",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-playwright-1.62.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "playwright",
+      "version": "0.0.20",
+      "repository": "https://github.com/octaltree/playwright-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.20"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amamf/playwright",
+      "version": "1.58.0-fork.3",
+      "repository": "git+https://github.com/amamf/playwright.git",
+      "source": "https://registry.npmjs.org/@amamf%2Fplaywright/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.58.0-fork.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "DamianH.Playwright.InstallTool",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/damianh.playwright.installtool/0.2.0/damianh.playwright.installtool.0.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Microsoft.Playwright.CLI",
+      "version": "1.2.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/microsoft.playwright.cli/1.2.3/microsoft.playwright.cli.1.2.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.2.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Undetected.Playwright.CLI",
+      "version": "1.2.4-next-2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/undetected.playwright.cli/1.2.4-next-2/undetected.playwright.cli.1.2.4-next-2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.2.4-next-2"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "node-playwright",
       "version": null,
@@ -15,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

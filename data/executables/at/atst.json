@@ -2,6 +2,30 @@
   "command": "atst",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "scotch-7.0.13-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scotch",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "scotch",
       "version": null,
@@ -26,6 +50,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "atst-tools",
+      "version": "2.2.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c2/ba/5a2962783dc1c2a8de88d1ac67fb9c3e31baeb420388b9f64f3fac1ef7b5/atst_tools-2.2.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.3"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "scotch",
       "version": null,
@@ -39,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

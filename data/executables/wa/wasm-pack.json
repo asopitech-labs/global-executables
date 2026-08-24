@@ -2,6 +2,114 @@
   "command": "wasm-pack",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "wasm-pack-0.15.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gear-pwasm-utils",
+      "version": "0.19.0",
+      "repository": "https://github.com/paritytech/wasm-utils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.19.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "owasm-utils-cli",
+      "version": "0.6.1",
+      "repository": "https://github.com/oasislabs/owasm-utils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pwasm-utils",
+      "version": "0.19.0",
+      "repository": "https://github.com/paritytech/wasm-utils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.19.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pwasm-utils-cli",
+      "version": "0.15.0",
+      "repository": "https://github.com/paritytech/wasm-utils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "twasm-utils",
+      "version": "0.17.0",
+      "repository": "https://github.com/tetcoin/twasm-utils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.17.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "twasm-utils-cli",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wasm-pack",
+      "version": "0.15.0",
+      "repository": "https://github.com/wasm-bindgen/wasm-pack.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "wasm-pack",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "wasm-pack",
       "version": "0.15.0",
@@ -15,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,9 +2,33 @@
   "command": "ast-grep",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ast-grep-0.44.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ast-grep",
+      "version": "0.45.2",
+      "repository": "https://github.com/ast-grep/ast-grep",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.45.2"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "ast-grep",
-      "version": "0.45.1",
+      "version": "0.45.2",
       "repository": "https://ast-grep.github.io/",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -12,8 +36,45 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ast-grep/cli",
+      "version": "0.45.1",
+      "repository": "git+https://github.com/ast-grep/ast-grep.git",
+      "source": "https://registry.npmjs.org/@ast-grep%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.45.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ast-grep-cli",
+      "version": "0.45.1",
+      "repository": "https://ast-grep.github.io/",
+      "source": "https://files.pythonhosted.org/packages/63/2f/5db21c7c3c61f758f0cde8ebbc60e5876d026857ca5a1ca41acb9607b18b/ast_grep_cli-0.45.1-py3-none-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.45.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "ast-grep",
+      "version": "0.45.2",
+      "repository": "https://ast-grep.github.io",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.45.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

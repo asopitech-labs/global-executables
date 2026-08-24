@@ -2,6 +2,18 @@
   "command": "editorconfig-checker",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "editorconfig-checker-3.11.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/editorconfig-checker/editorconfig-checker",
       "version": "v0.0.0-20190219201458-ead62885d7c8",
@@ -26,6 +38,18 @@
       "latest_version": "v0.0.0-20190423063348-396880807845"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/editorconfig-checker/editorconfig-checker",
+      "version": "v0.0.0-20231102090242-ddae3e68851e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/editorconfig-checker/editorconfig-checker/@v/v0.0.0-20231102090242-ddae3e68851e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231102090242-ddae3e68851e"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "editorconfig-checker",
       "version": "3.11.1",
@@ -36,8 +60,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "editorconfig-checker/editorconfig-checker",
+      "version": "10.7.0",
+      "repository": "https://github.com/editorconfig-checker/editorconfig-checker.php.git",
+      "source": "https://repo.packagist.org/p2/editorconfig-checker/editorconfig-checker.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "10.7.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "EditorConfig-Checker.EditorConfig-Checker",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,30 @@
   "command": "r",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "openai-chat",
+      "version": "0.1.1",
+      "repository": "https://github.com/dobefore/chatgpt-api-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "r-cran-littler",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "r-cran-littler",
       "version": null,
@@ -14,6 +38,88 @@
       "distribution": "debian"
     },
     {
+      "ecosystem": "npm",
+      "package": "@1stg/rollup-config",
+      "version": "0.12.0",
+      "repository": "git+ssh://git@github.com/1stG/configs.git",
+      "source": "https://registry.npmjs.org/@1stg%2Frollup-config/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acsetra/runner",
+      "version": "0.1.81",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@acsetra%2Frunner/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.81"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "r-tool",
+      "version": "0.0.20",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/r-tool/0.0.20/r-tool.0.0.20.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.20"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "run-script",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/run-script/0.6.0/run-script.0.6.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "wk.Run",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/wk.run/0.0.2/wk.run.0.0.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "acsetra",
+      "version": "0.1.81",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/18/8e/6f936771b64badc8ac43a35671a5c3b1e2812a84f20cb9980710580afd81/acsetra-0.1.81-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.81"
+    },
+    {
+      "ecosystem": "shell",
+      "package": "zsh",
+      "version": "5.9",
+      "repository": null,
+      "source": "zsh@5.9",
+      "confidence": "direct",
+      "source_type": "shell_builtin",
+      "package_system": "shell-builtin"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "r-cran-littler",
       "version": null,
@@ -24,8 +130,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "RProject.R",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

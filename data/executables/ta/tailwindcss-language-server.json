@@ -2,6 +2,18 @@
   "command": "tailwindcss-language-server",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "tailwindcss-language-server-0.14.29-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "tailwindcss-language-server",
       "version": "0.16.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@adilkairolla/tailwindcss-language-server",
+      "version": "0.14.29",
+      "repository": "git+https://github.com/tailwindlabs/tailwindcss-intellisense.git",
+      "source": "https://registry.npmjs.org/@adilkairolla%2Ftailwindcss-language-server/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.14.29"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

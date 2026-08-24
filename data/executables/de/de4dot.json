@@ -2,6 +2,19 @@
   "command": "de4dot",
   "providers": [
     {
+      "ecosystem": "scoop",
+      "package": "de4dot-netcoreapp3.1",
+      "version": "3.1.41592.3405",
+      "repository": "https://github.com/de4dot/de4dot",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.1.41592.3405"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "de4dot",
       "version": null,
@@ -12,8 +25,20 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "mentebinaria.retoolkit",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

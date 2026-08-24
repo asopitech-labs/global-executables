@@ -2,6 +2,30 @@
   "command": "cfn-guard",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cfn-guard",
+      "version": "3.2.0",
+      "repository": "https://github.com/aws-cloudformation/cloudformation-guard",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cfn-guard-preview",
+      "version": "0.7.0",
+      "repository": "https://github.com/ikben/cloudformation-guard/tree/preview-crate",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "cloudformation-guard",
       "version": "3.2.0",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

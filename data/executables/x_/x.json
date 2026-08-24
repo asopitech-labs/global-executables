@@ -2,6 +2,102 @@
   "command": "x",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "xbuild-0.2.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-x",
+      "version": "0.3.7",
+      "repository": "https://github.com/liuchong/cargo-x",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.7"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mark-clipboard",
+      "version": "0.1.2",
+      "repository": "https://github.com/markgandolfo/mark-clipboard",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rusty-x",
+      "version": "0.1.75",
+      "repository": "https://github.com/tdejager/rusty-x",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.75"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "x",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "x-launcher",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xbuild",
+      "version": "0.2.0",
+      "repository": "https://github.com/rust-mobile/xbuild",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "xet-data",
+      "version": "1.6.0",
+      "repository": "https://github.com/huggingface/xet-core",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.6.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "x-cli",
       "version": "5.0.0",
@@ -12,8 +108,92 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@-xun/ctl",
+      "version": "1.5.0",
+      "repository": "git+https://github.com/Xunnamius/xunnctl.git",
+      "source": "https://registry.npmjs.org/@-xun%2Fctl/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@0x-jerry/x",
+      "version": "2.13.1",
+      "repository": "git+https://github.com/0x-jerry/x.git",
+      "source": "https://registry.npmjs.org/@0x-jerry%2Fx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.13.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@a.lyu/x",
+      "version": "0.0.26",
+      "repository": ".",
+      "source": "https://registry.npmjs.org/@a.lyu%2Fx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.26"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andypai/x",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/abpai/x-cli.git",
+      "source": "https://registry.npmjs.org/@andypai%2Fx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "dotnet-x",
+      "version": "0.3.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/dotnet-x/0.3.1/dotnet-x.0.3.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "x",
+      "version": "10.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/x/10.0.0/x.10.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "10.0.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "XuanyuanLuoxue.XCLI",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

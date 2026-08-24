@@ -3,6 +3,18 @@
   "providers": [
     {
       "ecosystem": "go",
+      "package": "github.com/noironetworks/rke",
+      "version": "v1.3.14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/noironetworks/rke/@v/v1.3.14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.14"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/rancher/rke",
       "version": "v0.0.0-20190424235617-5660fd44d349",
       "repository": null,
@@ -26,6 +38,18 @@
       "latest_version": "v0.2.0-rc5"
     },
     {
+      "ecosystem": "go",
+      "package": "github.com/rancher/rke",
+      "version": "v0.2.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rancher/rke/@v/v0.2.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.4"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rke",
       "version": "1.8.14",
@@ -36,8 +60,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "rke",
+      "version": "1.8.14",
+      "repository": "https://rancher.com/products/rke/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.8.14"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

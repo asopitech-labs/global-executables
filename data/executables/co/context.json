@@ -2,6 +2,30 @@
   "command": "context",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "luametatex-2.11.08-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "context-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/contextenginehq/context-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/carbocation/interpose",
       "version": "v0.0.0-20161206215253-723534742ba3",
@@ -12,6 +36,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.0.0-20161206215253-723534742ba3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/charmbracelet/huh/spinner",
+      "version": "v0.0.0-20260223110133-9dc45e34a40b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/charmbracelet/huh/spinner/@v/v0.0.0-20260223110133-9dc45e34a40b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260223110133-9dc45e34a40b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/clanstyles/go-git",
+      "version": "v4.6.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/clanstyles/go-git/@v/v4.6.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.6.0+incompatible"
     },
     {
       "ecosystem": "go",
@@ -40,6 +88,30 @@
     {
       "ecosystem": "go",
       "package": "github.com/graphql-go/graphql",
+      "version": "v0.0.0-20160612150909-491504a5ac80",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/graphql-go/graphql/@v/v0.0.0-20160612150909-491504a5ac80.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160612150909-491504a5ac80"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/graphql-go/graphql",
+      "version": "v0.7.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/graphql-go/graphql/@v/v0.7.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/graphql-go/graphql",
       "version": "v0.7.7",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/graphql-go/graphql/@v/v0.7.7.zip",
@@ -52,6 +124,18 @@
     {
       "ecosystem": "go",
       "package": "github.com/graphql-go/graphql",
+      "version": "v0.7.7-0.20180912000844-cc8e9a91d6b8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/graphql-go/graphql/@v/v0.7.7-0.20180912000844-cc8e9a91d6b8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.7-0.20180912000844-cc8e9a91d6b8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/graphql-go/graphql",
       "version": "v0.7.8",
       "repository": null,
       "source": "https://proxy.golang.org/github.com/graphql-go/graphql/@v/v0.7.8.zip",
@@ -60,6 +144,30 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v0.7.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/graphql-go/graphql",
+      "version": "v0.7.9-0.20190403165646-199d20bbfed7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/graphql-go/graphql/@v/v0.7.9-0.20190403165646-199d20bbfed7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.9-0.20190403165646-199d20bbfed7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/graphql-go/graphql",
+      "version": "v0.8.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/graphql-go/graphql/@v/v0.8.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1"
     },
     {
       "ecosystem": "go",
@@ -87,6 +195,54 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/h2non/gentleman",
+      "version": "v2.0.5+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/h2non/gentleman/@v/v2.0.5%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.5+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sinute/go-daily",
+      "version": "v0.0.0-20221017071801-bc99abbeed3d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sinute/go-daily/@v/v0.0.0-20221017071801-bc99abbeed3d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20221017071801-bc99abbeed3d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/src-d/go-git",
+      "version": "v0.0.0-20190418104243-aa6f288c256f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/src-d/go-git/@v/v0.0.0-20190418104243-aa6f288c256f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190418104243-aa6f288c256f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/src-d/go-git",
+      "version": "v4.7.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/src-d/go-git/@v/v4.7.0%2Bincompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.7.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
       "package": "gopkg.in/h2non/gentleman.v2",
       "version": "v2.0.0",
       "repository": null,
@@ -108,6 +264,66 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v2.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/h2non/gentleman.v2",
+      "version": "v2.0.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/h2non/gentleman.v2/@v/v2.0.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.0.0-20180807092216-43d17e14b714",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.0.0-20180807092216-43d17e14b714.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0-20180807092216-43d17e14b714"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.0.0-rc15",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.0.0-rc15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.0.0-rc15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.1.1"
     },
     {
       "ecosystem": "go",
@@ -136,6 +352,78 @@
     {
       "ecosystem": "go",
       "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.12.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.12.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.12.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.13.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.13.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.13.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.7.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
       "version": "v4.7.1",
       "repository": null,
       "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.7.1.zip",
@@ -156,6 +444,42 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v4.8.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/src-d/go-git.v4",
+      "version": "v4.9.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/src-d/go-git.v4/@v/v4.9.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.9.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "nanomsg.org/go/mangos/v2",
+      "version": "v2.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/nanomsg.org/go/mangos/v2/@v/v2.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Context.Net",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/context.net/1.0.0/context.net.1.0.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.0"
     },
     {
       "ecosystem": "pypi",
@@ -183,5 +507,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

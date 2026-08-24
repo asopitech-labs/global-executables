@@ -2,6 +2,54 @@
   "command": "protoc-gen-doc",
   "providers": [
     {
+      "ecosystem": "debian",
+      "package": "protoc-gen-doc",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitee.com/nggs/tools",
+      "version": "v0.0.0-20190613083248-9d7d0c68bfc0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitee.com/nggs/tools/@v/v0.0.0-20190613083248-9d7d0c68bfc0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613083248-9d7d0c68bfc0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pseudomuto/protoc-gen-doc",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pseudomuto/protoc-gen-doc/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pseudomuto/protoc-gen-doc",
+      "version": "v1.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pseudomuto/protoc-gen-doc/@v/v1.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "protoc-gen-doc",
       "version": "1.5.1",
@@ -15,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

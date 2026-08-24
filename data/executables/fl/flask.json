@@ -2,6 +2,18 @@
   "command": "flask",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-flask-3.1.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ApiBot",
       "version": "0.0.4",
@@ -12,6 +24,78 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Dirtrav",
+      "version": "1.0.0",
+      "repository": "https://palletsprojects.com/p/flask",
+      "source": "https://files.pythonhosted.org/packages/a4/c0/5a7a396c4fd86a20d920120ebd1ca3699af2a846c216b90b1c3768e7332f/dirtrav-1.0.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Flask",
+      "version": "3.1.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7f/9c/34f6962f9b9e9c71f6e5ed806e0d0ff03c9d1b0b2340088a0cf4bce09b18/flask-3.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Flask-CLI",
+      "version": "0.4.0",
+      "repository": "http://github.com/inveniosoftware/flask-cli/",
+      "source": "https://files.pythonhosted.org/packages/2e/6c/67a364327f720806ebdd6ff3e98d7f9789971b34477e97ef8e77a0c45056/Flask_CLI-0.4.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Flask-Mirror-Upstream",
+      "version": "2.3.4",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/55/7d/54efe1c53bd5ad110b3c68bba1384b1b98e436c21da89417538ad10dccc7/flask_mirror_upstream-2.3.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.3.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Flask-v1.0",
+      "version": "1.0.5",
+      "repository": "https://github.com/nottrobin/flask-v1.0",
+      "source": "https://files.pythonhosted.org/packages/00/e7/4f688d202046aaa487ae891ff40612e98518b597d88ec18245af8377e539/flask_v1_0-1.0.5-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Forge-Games",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/a5/e0/632a5d4ea1763fa5985f6535f668d42b176635f3806a75c9fa170995e1ec/Forge-Games-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

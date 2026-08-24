@@ -2,6 +2,18 @@
   "command": "grpc_tools_ruby_protoc",
   "providers": [
     {
+      "ecosystem": "rubygems",
+      "package": "grpc-tools",
+      "version": "1.83.0",
+      "repository": "https://github.com/google/grpc/tree/master/src/ruby/tools",
+      "source": "https://rubygems.org/gems/grpc-tools-1.83.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.83.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ruby-grpc-tools",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

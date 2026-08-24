@@ -2,6 +2,30 @@
   "command": "svn2git",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "svn2git",
+      "version": "0.4.0",
+      "repository": "https://github.com/eduardosm/svn2git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "knu-svn2git",
+      "version": "1.3.1",
+      "repository": "https://www.negativetwenty.net/redmine/projects/svn2git",
+      "source": "https://rubygems.org/gems/knu-svn2git-1.3.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.3.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "svn2git",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

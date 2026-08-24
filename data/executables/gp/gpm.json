@@ -14,6 +14,30 @@
       "distribution": "archlinux"
     },
     {
+      "ecosystem": "crates",
+      "package": "gpm",
+      "version": "1.4.0",
+      "repository": "https://github.com/godot-package-manager/cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gpm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "gpm",
       "version": null,
@@ -24,6 +48,54 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "git-profile-manager",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/git-profile-manager/0.2.0/git-profile-manager.0.2.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "gpm",
+      "version": "0.4.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/gpm/0.4.3/gpm.0.4.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.4.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "itsahappymedium/gpm",
+      "version": "v0.1.1",
+      "repository": "https://github.com/itsahappymedium/gpm.git",
+      "source": "https://repo.packagist.org/p2/itsahappymedium/gpm.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gpm",
+      "version": "0.3.0",
+      "repository": "https://github.com/crealytics/gpm",
+      "source": "https://rubygems.org/gems/gpm-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
     },
     {
       "ecosystem": "ubuntu",
@@ -39,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

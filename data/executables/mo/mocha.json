@@ -2,6 +2,30 @@
   "command": "mocha",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@aaa-backend-stack/test-environment",
+      "version": "2.4.4",
+      "repository": "git+ssh://git@github.com/allaboutapps/aaa-backend-stack.git",
+      "source": "https://registry.npmjs.org/@aaa-backend-stack%2Ftest-environment/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.4.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Mocha",
+      "version": "0.12.1",
+      "repository": "https://github.com/mardix/mocha",
+      "source": "https://files.pythonhosted.org/packages/40/1c/26bf00a03b0cc32ff3e38a46427954802498d059c603d8f9e5c08835759e/Mocha-0.12.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.12.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "mocha",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

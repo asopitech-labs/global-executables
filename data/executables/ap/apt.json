@@ -2,6 +2,30 @@
   "command": "apt",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "apt-3.3.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "apt",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "apt",
       "version": null,
@@ -26,6 +50,30 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "packagist",
+      "package": "kuroro2121/automaid",
+      "version": "v1.0.2",
+      "repository": "https://github.com/GregSong/automaid.git",
+      "source": "https://repo.packagist.org/p2/kuroro2121/automaid.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apt-wrapper",
+      "version": "1.22",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e4/b0/af16510ace4b63a88ea1e863b186016fb273f123d6270d290d394fe1ca4e/apt_wrapper-1.22-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.22"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "apt",
       "version": null,
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

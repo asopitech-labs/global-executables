@@ -2,6 +2,30 @@
   "command": "sherlock",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sherlock",
+      "version": "5.0.8",
+      "repository": "https://github.com/jonaylor89/sherlock-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "5.0.8"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sherlock-io",
+      "version": "1.2.0",
+      "repository": "https://github.com/GriffinCanCode/SherlockIO.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "sherlock",
       "version": "0.16.0",
@@ -12,6 +36,42 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arcanis/sherlock",
+      "version": "2.0.3",
+      "repository": "https://github.com/arcanis/sherlock.git",
+      "source": "https://registry.npmjs.org/@arcanis%2Fsherlock/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.3"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Sherlock.Net.Cli",
+      "version": "0.16.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/sherlock.net.cli/0.16.0/sherlock.net.cli.0.16.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aws-sherlock",
+      "version": "0.1.4",
+      "repository": "https://github.com/ericvilla/aws-sherlock",
+      "source": "https://files.pythonhosted.org/packages/f0/2b/8ce608d9fba4cff8aa5cf1ebded7c60b52dfe2c5a60c2f8c03477bd92332/aws_sherlock-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,42 @@
   "command": "ascii",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "ascii-3.32-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ascii-cli",
+      "version": "1.2.1",
+      "repository": "https://github.com/AtleSkaanes/ascii-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ascii",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "ascii",
       "version": null,
@@ -26,6 +62,54 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "npm",
+      "package": "@alexlar/ascii",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/Alex-Lar/ascii.git",
+      "source": "https://registry.npmjs.org/@alexlar%2Fascii/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ascii-img-stuff",
+      "version": "0.2.0",
+      "repository": "https://github.com/yourusername/ascii_stuff",
+      "source": "https://files.pythonhosted.org/packages/93/50/d9b5de31863b90c6b845bc9d6fe010dbe8c6bf79c408f975b2b583e3577a/ascii_img_stuff-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ascii-player-unique-name",
+      "version": "1.1.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/bd/5e/0c992200292b286a18fc353da09bf291e03112e5e3413c54f137bb2b373f/ascii_player_unique_name-1.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ascii_invoicer",
+      "version": "2.5.19",
+      "repository": "https://github.com/ascii-dresden/ascii-invoicer",
+      "source": "https://rubygems.org/gems/ascii_invoicer-2.5.19.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.5.19"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "ascii",
       "version": null,
@@ -39,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

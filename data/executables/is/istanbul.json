@@ -2,6 +2,18 @@
   "command": "istanbul",
   "providers": [
     {
+      "ecosystem": "npm",
+      "package": "@antv/istanbul",
+      "version": "0.0.0",
+      "repository": "git+ssh://git@github.com/antvis/tools.git",
+      "source": "https://registry.npmjs.org/@antv%2Fistanbul/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "node-istanbul",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

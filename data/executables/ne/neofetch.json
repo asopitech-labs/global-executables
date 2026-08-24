@@ -2,6 +2,43 @@
   "command": "neofetch",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "neofetch",
+      "version": "0.2.0",
+      "repository": "https://github.com/ahaoboy/neofetch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "neofetch-7.1.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "neofetch",
+      "version": "7.1.0",
+      "repository": "https://github.com/dylanaraps/neofetch",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.1.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "neofetch",
       "version": null,
@@ -15,5 +52,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

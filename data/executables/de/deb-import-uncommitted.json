@@ -2,6 +2,18 @@
   "command": "deb-import-uncommitted",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "import-uncommitted",
+      "version": "0.184.0",
+      "repository": "https://salsa.debian.org/jelmer/debian-codemods.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.184.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "brz-debian",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

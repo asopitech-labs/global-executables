@@ -2,6 +2,18 @@
   "command": "jpeg-recompress",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "jpeg-archive-2.2.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jpeg-archive",
       "version": "2.2.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amory/jpeg-archive-bin",
+      "version": "2018.5.19-1",
+      "repository": "https://github.com/ptb/amory/tree/master/packages/jpeg-archive-bin",
+      "source": "https://registry.npmjs.org/@amory%2Fjpeg-archive-bin/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2018.5.19-1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

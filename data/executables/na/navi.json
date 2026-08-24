@@ -2,6 +2,66 @@
   "command": "navi",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "navi-2.24.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jj-navi",
+      "version": "0.2.3",
+      "repository": "https://github.com/eersnington/jj-navi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "navi",
+      "version": "2.24.0",
+      "repository": "https://github.com/denisidoro/navi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.24.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "navi-cli",
+      "version": "0.3.6",
+      "repository": "https://github.com/navi-ai-org/navi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.6"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "navi-notifier",
+      "version": "0.3.3",
+      "repository": "https://github.com/lararosekelley/navi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.3"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "navi",
       "version": "2.24.0",
@@ -12,8 +72,21 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "navi",
+      "version": "2.24.0",
+      "repository": "https://github.com/denisidoro/navi/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.24.0"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

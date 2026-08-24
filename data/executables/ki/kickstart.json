@@ -2,6 +2,18 @@
   "command": "kickstart",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "kickstart",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "kickstart",
       "version": "0.6.0",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "kickstart",
+      "version": "0.2.2.1",
+      "repository": "http://www.zenspider.com/ZSS/Products/kickstart/",
+      "source": "https://rubygems.org/gems/kickstart-0.2.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "kickstartgem",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://rubygems.org/gems/kickstartgem-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

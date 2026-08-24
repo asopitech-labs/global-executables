@@ -2,6 +2,30 @@
   "command": "git-release",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cargo-git-release",
+      "version": "0.2.1",
+      "repository": "https://github.com/thlstsul/cargo-git-release",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "git-release",
+      "version": "0.1.1",
+      "repository": "https://github.com/arsham/git-release",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "git-extras",
       "version": "7.5.0",
@@ -12,6 +36,126 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "git-extras-7.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "innmind/git-release",
+      "version": "3.3.0",
+      "repository": "https://github.com/Innmind/GitRelease.git",
+      "source": "https://repo.packagist.org/p2/innmind/git-release.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "3.3.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-extras",
+      "version": "0.1.0",
+      "repository": "https://github.com/ptdorf/git-extras",
+      "source": "https://rubygems.org/gems/git-extras-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-pivotal-tracker-integration",
+      "version": "1.4.0",
+      "repository": "https://github.com/nebhale/git-pivotal-tracker-integration",
+      "source": "https://rubygems.org/gems/git-pivotal-tracker-integration-1.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-rc",
+      "version": "0.0.7",
+      "repository": "https://github.com/x4121/git-release",
+      "source": "https://rubygems.org/gems/git-rc-0.0.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-release",
+      "version": "0.0.1",
+      "repository": "http://github.com/tommeier/git-release",
+      "source": "https://rubygems.org/gems/git-release-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git-work",
+      "version": "0.1.1",
+      "repository": "http://github.com/JosephKu/git-work",
+      "source": "https://rubygems.org/gems/git-work-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "github-release",
+      "version": "0.2.0",
+      "repository": "http://theshed.hezmatt.org/github-release",
+      "source": "https://rubygems.org/gems/github-release-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gitx",
+      "version": "4.5.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/gitx-4.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.5.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "livebuzz-gitx",
+      "version": "0.1.2",
+      "repository": "",
+      "source": "https://rubygems.org/gems/livebuzz-gitx-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +171,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

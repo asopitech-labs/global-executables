@@ -2,6 +2,30 @@
   "command": "designer",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "qt5-tools-5.15.19+kde+r3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "qtchooser",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "qtchooser",
       "version": null,
@@ -50,6 +74,18 @@
       "distribution": "macos"
     },
     {
+      "ecosystem": "pypi",
+      "package": "QtMPLtools",
+      "version": "1.0.5",
+      "repository": "https://github.com/dresis/QtMPLtools",
+      "source": "https://files.pythonhosted.org/packages/ad/d6/8cee352dcd8ffdcc5af2c643ee8986c94fedab99f8b48136d5e8a46516ce/QtMPLtools-1.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.5"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "qtchooser",
       "version": null,
@@ -63,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

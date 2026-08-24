@@ -2,6 +2,92 @@
   "command": "slack",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "slack-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/isaacadams/slack-api-client",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/ddo/go-dlog.v1",
+      "version": "v1.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/ddo/go-dlog.v1/@v/v1.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gopkg.in/ddo/go-dlog.v2",
+      "version": "v2.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gopkg.in/ddo/go-dlog.v2/@v/v2.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aiosbrain/aios",
+      "version": "0.11.1",
+      "repository": "git+https://github.com/aiosbrain/aios-workspace.git",
+      "source": "https://registry.npmjs.org/@aiosbrain%2Faios/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.11.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "cleentfaar/slack-cli",
+      "version": "0.20.1",
+      "repository": "https://github.com/cleentfaar/slack-cli.git",
+      "source": "https://repo.packagist.org/p2/cleentfaar/slack-cli.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.20.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "slack",
+      "version": "4.51.191",
+      "repository": "https://slack.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.51.191"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "slack-beta",
+      "version": "4.5.0",
+      "repository": "https://slack.com",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.5.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "slack",
       "version": null,
@@ -15,5 +101,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

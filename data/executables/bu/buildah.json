@@ -2,6 +2,30 @@
   "command": "buildah",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "buildah-1:1.45.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "buildah",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "buildah",
       "version": null,
@@ -12,6 +36,78 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containers/buildah",
+      "version": "v0.0.0-20190108002729-e7ca330f9237",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containers/buildah/@v/v0.0.0-20190108002729-e7ca330f9237.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190108002729-e7ca330f9237"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containers/buildah",
+      "version": "v1.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containers/buildah/@v/v1.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containers/buildah",
+      "version": "v1.8.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containers/buildah/@v/v1.8.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containers/buildah",
+      "version": "v1.8.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containers/buildah/@v/v1.8.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containers/buildah",
+      "version": "v1.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containers/buildah/@v/v1.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mtrmac/buildah",
+      "version": "v0.0.0-20190613182316-6ace324357a6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mtrmac/buildah/@v/v0.0.0-20190613182316-6ace324357a6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190613182316-6ace324357a6"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

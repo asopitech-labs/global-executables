@@ -2,6 +2,30 @@
   "command": "mira",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "mira-cli",
+      "version": "0.5.0",
+      "repository": "https://github.com/everruns/mira",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mira-assembler",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
       "ecosystem": "debian",
       "package": "mira-assembler",
       "version": null,
@@ -12,6 +36,42 @@
       "package_system": "deb",
       "distribution_family": "debian",
       "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@avelor/mira",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/avelor-es/mira.git",
+      "source": "https://registry.npmjs.org/@avelor%2Fmira/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MIRA-passwdmng",
+      "version": "2.1.20",
+      "repository": "https://github.com/GiraSec/MIRA_lite",
+      "source": "https://files.pythonhosted.org/packages/c5/bc/713c4863f62c78dd472367ee5ca79f1959ad27ac795ab6dd56f8b09ee5e4/MIRA-passwdmng-2.1.20.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.20"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "MiraSDKS",
+      "version": "0.8.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/bb/77/d233d6baad13bf2737f79043edc8bfe36de935dd617cb513e85bb111a9eb/mirasdks-0.8.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.2"
     },
     {
       "ecosystem": "ubuntu",
@@ -27,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

@@ -2,6 +2,90 @@
   "command": "encrypt",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "encrypt",
+      "version": "0.1.3",
+      "repository": "https://github.com/ptechen/encrypt.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "encrypt-rs",
+      "version": "0.3.7",
+      "repository": "https://github.com/stevelr/secret-keeper/tree/master/examples/encrypt-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@attackpattern/node-config",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/AttackPattern/node-config.git",
+      "source": "https://registry.npmjs.org/@attackpattern%2Fnode-config/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@avila-tek/mongoose-encryption",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@avila-tek%2Fmongoose-encryption/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "ChatLe.Cryptography.Tools",
+      "version": "2.1.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/chatle.cryptography.tools/2.1.0/chatle.cryptography.tools.2.1.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "aichenk/open-crypt",
+      "version": "1.0.1",
+      "repository": "https://github.com/aiChenK/open-crypt.git",
+      "source": "https://repo.packagist.org/p2/aichenk/open-crypt.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "encrypt/encrypt",
+      "version": "1.0.0",
+      "repository": "https://github.com/kingjethro999/encrypt-php.git",
+      "source": "https://repo.packagist.org/p2/encrypt/encrypt.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "AQLES",
       "version": "0.1.0",
@@ -12,8 +96,68 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Leytonium",
+      "version": "27",
+      "repository": "https://github.com/combatopera/Leytonium",
+      "source": "https://files.pythonhosted.org/packages/5a/66/f78967fff0494e5c31a5b2e8fd49cd4504d6a78ae4265dc3aa67b921b25a/leytonium-27-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SPARQLToSQL",
+      "version": "1.0.2",
+      "repository": "https://github.com/munkhbayar17/sparql-to-sql",
+      "source": "https://files.pythonhosted.org/packages/58/bd/9299ba498e18ba0822e90f452a187281ebaddcb4fe12ff05194f81faa427/SPARQLToSQL-1.0.2-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ahg48",
+      "version": "0.1.3",
+      "repository": "https://github.com/rch850/ahg48",
+      "source": "https://files.pythonhosted.org/packages/0a/c4/7c7f1a5936a8095f1cb1e6e423dbc9aa82a524c25b6327abf9d089a4d4d5/ahg48-0.1.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "enigma_encrypto",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://rubygems.org/gems/enigma_encrypto-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "enygma",
+      "version": "1.0.2",
+      "repository": "https://github.com/andela-echigbo/enygma",
+      "source": "https://rubygems.org/gems/enygma-1.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.2"
     }
   ],
   "first_seen": "2026-08-16",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

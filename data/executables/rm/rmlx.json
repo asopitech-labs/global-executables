@@ -2,9 +2,21 @@
   "command": "rmlx",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rmlx-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/0xDaizz/RMLX",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "rapid-mlx",
-      "version": "0.12.14",
+      "version": "0.12.18",
       "repository": "https://github.com/raullenchai/Rapid-MLX",
       "source": "https://formulae.brew.sh/api/formula.json",
       "confidence": "filesystem",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

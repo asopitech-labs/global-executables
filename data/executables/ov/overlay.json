@@ -1,0 +1,55 @@
+{
+  "command": "overlay",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/storj/storj",
+      "version": "v0.11.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/storj/storj/@v/v0.11.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "storj.io/storj",
+      "version": "v0.11.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/storj.io/storj/@v/v0.11.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "storj.io/storj",
+      "version": "v0.13.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/storj.io/storj/@v/v0.13.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.13.6"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-08-24"
+}

@@ -2,6 +2,42 @@
   "command": "apostrophe",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "apostrophe-3.4-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apostrophecms/cli",
+      "version": "3.7.0",
+      "repository": "git+https://github.com/apostrophecms/apostrophe.git",
+      "source": "https://registry.npmjs.org/@apostrophecms%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.7.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@apostrophecms/cli-stable",
+      "version": "3.6.1",
+      "repository": "git+https://github.com/apostrophecms/apostrophe.git",
+      "source": "https://registry.npmjs.org/@apostrophecms%2Fcli-stable/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.6.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "apostrophe",
       "version": null,
@@ -15,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }

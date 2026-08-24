@@ -2,6 +2,18 @@
   "command": "doesitcache",
   "providers": [
     {
+      "ecosystem": "arch",
+      "package": "python-cachecontrol-1:0.14.4-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
       "ecosystem": "pypi",
       "package": "CacheControl",
       "version": "0.14.4",
@@ -24,8 +36,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.12.5.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Forge-Games",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://files.pythonhosted.org/packages/a5/e0/632a5d4ea1763fa5985f6535f668d42b176635f3806a75c9fa170995e1ec/Forge-Games-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
     }
   ],
   "first_seen": "2026-08-17",
-  "last_seen": "2026-08-17"
+  "last_seen": "2026-08-24"
 }
