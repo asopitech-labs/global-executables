@@ -1,0 +1,43 @@
+{
+  "command": "check-docker-container.rb",
+  "providers": [
+    {
+      "ecosystem": "rubygems",
+      "package": "sensu-plugins-docker",
+      "version": "4.0.0",
+      "repository": "https://github.com/sensu-plugins/sensu-plugins-docker",
+      "source": "https://rubygems.org/gems/sensu-plugins-docker-4.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "sensu-plugins-docker-checks",
+      "version": "0.0.2",
+      "repository": "https://github.com/m4ce/sensu-plugins-docker-checks",
+      "source": "https://rubygems.org/gems/sensu-plugins-docker-checks-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "sensu-plugins-docker-swarm",
+      "version": "3.3.6",
+      "repository": "https://github.com/bkneis/sensu-plugins-docker",
+      "source": "https://rubygems.org/gems/sensu-plugins-docker-swarm-3.3.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.3.6"
+    }
+  ],
+  "first_seen": "2026-08-25",
+  "last_seen": "2026-08-25"
+}
