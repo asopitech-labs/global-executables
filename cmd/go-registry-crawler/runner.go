@@ -43,7 +43,7 @@ func (c *crawlConfig) applyDefaults() error {
 		requestTimeout, packageTimeout            time.Duration
 	}{
 		"go":        {"data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", "https://proxy.golang.org", 32, 45 * time.Second, 2 * time.Minute},
-		"npm":       {"data/production/npm-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", "https://registry.npmjs.org", 64, 45 * time.Second, 5 * time.Minute},
+		"npm":       {"data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", "https://registry.npmjs.org", 64, 45 * time.Second, 5 * time.Minute},
 		"pypi":      {"data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", "https://pypi.org", 24, 45 * time.Second, 2 * time.Minute},
 		"rubygems":  {"data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl", "https://rubygems.org", 16, 45 * time.Second, 2 * time.Minute},
 		"packagist": {"data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl", "https://repo.packagist.org", 24, 45 * time.Second, 2 * time.Minute},
@@ -112,9 +112,9 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 		InitialHostConcurrency: initialHostConcurrency, MaxHostConcurrency: config.Workers,
 	}
 	if config.Source == "npm" {
-		// npm's Cloudflare edge advertises Retry-After once this host exceeds about
-		// 300 requests/minute. A burst-free 200ms floor is faster in wall time than
-		// triggering a two-minute ban and retrying the same package.
+		// This runner's egress path received Retry-After under an unpaced burst. A
+		// burst-free 200ms floor avoids repeating that local observation; it is not
+		// a global npm quota shared by other runners.
 		registryConfig.MinRequestInterval = 200 * time.Millisecond
 	}
 	switch config.Source {

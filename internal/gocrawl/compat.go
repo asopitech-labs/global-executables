@@ -371,9 +371,15 @@ func exportCompatibility(
 		"timeouts":            pass.Timeouts,
 		"unavailable":         len(snapshot.Unavailable),
 		"workers":             pass.Workers,
+		profile.CatalogField:  snapshot.ModulesFile,
 	}
 	if profile.Source == "go" {
 		sourceReport["modules_per_minute"] = packagesPerMinute
+	}
+	for _, key := range []string{"catalog_digest", "catalog_scope", "catalog_source", "catalog_snapshot"} {
+		if value, exists := sourceState[key]; exists {
+			sourceReport[key] = value
+		}
 	}
 	report := map[string]any{
 		"coverage_kind":       coverage,

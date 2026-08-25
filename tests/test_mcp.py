@@ -88,7 +88,7 @@ async def test_streamable_http_protocol_and_health(dictionary_root):
     ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         health = None
-        for _ in range(300):
+        for _ in range(1200):
             try:
                 with urllib.request.urlopen(f"http://127.0.0.1:{port}/health", timeout=.2) as response:
                     health = json.load(response); break

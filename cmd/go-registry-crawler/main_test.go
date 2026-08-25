@@ -38,7 +38,7 @@ func TestSourceDefaultsKeepDatabasesAndCompatibilityViewsIsolated(t *testing.T) 
 		source, catalog, database, output string
 	}{
 		{"go", "data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl"},
-		{"npm", "data/production/npm-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl"},
+		{"npm", "data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl"},
 		{"pypi", "data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl"},
 		{"rubygems", "data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl"},
 		{"packagist", "data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl"},

@@ -43,9 +43,61 @@ def cursor(entry: Any) -> int | None:
     return value if isinstance(value, int) and not isinstance(value, bool) else None
 
 
+def catalog(entry: Any) -> str | None:
+    if not isinstance(entry, dict):
+        return None
+    for field in ("modules_file", "packages_file", "projects_file", "names_file"):
+        value = entry.get(field)
+        if isinstance(value, str) and value:
+            return value
+    return None
+
+
+def catalog_size(entry: Any) -> int | None:
+    value = entry.get("catalog_size") if isinstance(entry, dict) else None
+    return value if isinstance(value, int) and not isinstance(value, bool) else None
+
+
+def catalog_identity(entry: Any) -> tuple[str, str] | None:
+    if not isinstance(entry, dict):
+        return None
+    for field in ("catalog_digest", "catalog_snapshot"):
+        value = entry.get(field)
+        if isinstance(value, str) and value:
+            return field, value
+    value = catalog(entry)
+    return ("catalog", value) if value else None
+
+
+def catalog_changed_forward(published: Any, local: Any) -> bool:
+    before = published.get("catalog_snapshot") if isinstance(published, dict) else None
+    after = local.get("catalog_snapshot") if isinstance(local, dict) else None
+    if isinstance(before, str) and before:
+        if not isinstance(after, str) or after <= before:
+            return False
+        previous_digest = published.get("catalog_digest")
+        next_digest = local.get("catalog_digest") if isinstance(local, dict) else None
+        valid_next_digest = (
+            isinstance(next_digest, str)
+            and len(next_digest) == 71
+            and next_digest.startswith("sha256:")
+            and all(character in "0123456789abcdef" for character in next_digest[7:])
+        )
+        return valid_next_digest and next_digest != previous_digest
+    previous_catalog, next_catalog = catalog_identity(published), catalog_identity(local)
+    return next_catalog is not None and (
+        (previous_catalog is not None and previous_catalog != next_catalog)
+        or (
+            previous_catalog is None
+            and catalog_size(published) is not None
+            and catalog_size(published) != catalog_size(local)
+        )
+    )
+
+
 def would_regress(published: Any, local: Any) -> bool:
     before, after = cursor(published), cursor(local)
-    return before is not None and (after is None or after < before)
+    return before is not None and (after is None or after < before) and not catalog_changed_forward(published, local)
 
 
 def merge_state(source: str, published_path: Path, local_path: Path) -> tuple[bool, int | None, int | None]:

@@ -104,10 +104,10 @@ func TestExportSourceCompatibilityPreservesOtherSourcesAndPythonKeys(t *testing.
 	}
 	document := StateDocument{
 		"version": json.RawMessage("1"),
-		"sources": json.RawMessage(`{"crates":{"cursor":99},"npm":{"parser_generation":3,"catalog_bytes":123}}`),
+		"sources": json.RawMessage(`{"crates":{"cursor":99},"npm":{"parser_generation":3,"catalog_bytes":123,"catalog_digest":"sha256:abc","catalog_scope":"ecosyste.ms critical npm","catalog_source":"https://packages.ecosyste.ms/critical?registry=npmjs.org","catalog_snapshot":"2026-08-25"}}`),
 	}
 	snapshot := Snapshot{ImportSnapshot: ImportSnapshot{
-		Cursor: 3, CatalogSize: 3, CatalogComplete: true, ModulesFile: "data/production/npm-packages.txt",
+		Cursor: 3, CatalogSize: 3, CatalogComplete: true, ModulesFile: "data/production/npm-critical-packages.txt",
 		Retries: map[string]RetryEntry{}, Unavailable: map[string]string{"gone": "HTTP 404"},
 		Observations: []Observation{{Command: "demo", Confidence: "direct", Ecosystem: "npm", Language: "javascript", LatestVersion: "1.0.0", Package: "demo", Registry: "npm", Source: "fixture", SourceType: "language_package", Version: "1.0.0"}},
 	}, Generation: 7, Processed: 3}
@@ -126,7 +126,7 @@ func TestExportSourceCompatibilityPreservesOtherSourcesAndPythonKeys(t *testing.
 	if state.Sources["crates"]["cursor"] != float64(99) || state.Sources["npm"]["parser_generation"] != float64(3) {
 		t.Fatalf("state=%s", body)
 	}
-	if state.Sources["npm"]["packages_file"] != "data/production/npm-packages.txt" || state.Sources["npm"]["cursor"] != float64(3) {
+	if state.Sources["npm"]["packages_file"] != "data/production/npm-critical-packages.txt" || state.Sources["npm"]["cursor"] != float64(3) {
 		t.Fatalf("state=%s", body)
 	}
 	if _, exists := state.Sources["npm"]["modules_file"]; exists {
@@ -139,7 +139,11 @@ func TestExportSourceCompatibilityPreservesOtherSourcesAndPythonKeys(t *testing.
 	if err := json.Unmarshal(reportBody, &report); err != nil {
 		t.Fatal(err)
 	}
-	if report.Sources["npm"]["packages_per_minute"] != float64(180) || report.Sources["npm"]["package_budget"] != float64(3000) {
+	if report.Sources["npm"]["packages_per_minute"] != float64(180) || report.Sources["npm"]["package_budget"] != float64(3000) ||
+		report.Sources["npm"]["packages_file"] != "data/production/npm-critical-packages.txt" ||
+		report.Sources["npm"]["catalog_scope"] != "ecosyste.ms critical npm" ||
+		report.Sources["npm"]["catalog_snapshot"] != "2026-08-25" ||
+		report.Sources["npm"]["catalog_digest"] != "sha256:abc" {
 		t.Fatalf("report=%s", reportBody)
 	}
 }

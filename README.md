@@ -225,7 +225,7 @@ Potential sources include:
 | Debian / Ubuntu | package file contents |
 | Arch Linux | package files database |
 | Homebrew | formula/package contents |
-| npm | `bin` metadata |
+| npm | ecosyste.ms critical population; npm registry `bin` metadata |
 | PyPI | distribution entry points / `console_scripts` |
 | crates.io | Rust binary targets |
 | Go modules | `package main` directories in module archives |
@@ -401,8 +401,9 @@ For example:
     },
     "npm": {
       "status": "success",
-      "coverage_kind": "partial",
-      "records": 2
+      "coverage_kind": "exhaustive",
+      "scope": "ecosyste.ms critical npm population covering 80% of downloads or dependent repositories",
+      "records": 127
     }
   },
   "snapshot": "2026-08-15"
@@ -548,9 +549,9 @@ MCP makes that dataset immediately useful to agents.
 The schemas, deterministic builder, production OS index collector, derived
 prefix/length/ecosystem/trigram and logical-scope indexes, collector parsers,
 read-only local/HTTP MCP server, assessment API, bounded fixture freshness
-scenarios, and CI checks are implemented in this repository. Full-crawl coverage
-remains explicitly measured per source; registry sources stay partial until
-their package artifacts are exhaustively collected. See
+scenarios, and CI checks are implemented in this repository. Coverage is measured
+against each declared source population. npm is exhaustive for the finite ecosyste.ms
+critical population; the all-registry npm long tail is tracked separately. See
 [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) for exact naming, sharding, alias, and
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
 commands, freshness-state scenarios, and honest measured coverage limitations.
@@ -579,19 +580,20 @@ rotates through immutable test partitions, persists a cursor and last successful
 observations on the `freshness-data` branch, and publishes a machine-readable test
 report. It is not production freshness or a full dataset refresh. Coverage is
 snapshot-specific and reported by `get_coverage`. The
-published snapshot contains production OS/Homebrew coverage plus explicitly
-partial registry coverage; it is **not** full ecosystem coverage, so consumers must preserve
+published snapshot contains production OS/Homebrew coverage, exhaustive bounded
+registry populations, and partial PyPI/Go coverage; it is **not** full global ecosystem
+coverage, so consumers must preserve
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
 
-Registry artifact inspection is separately resumable. Dedicated local containers
-advance npm, PyPI, Go module, RubyGems, and Packagist cursors and publish checkpoints
-to `artifact-data`. CI performs one daily crates.io dump change check and downloads
-the dump only when it changed. Unchanged canonical data queues no dictionary or Pages
-work. Go modules, npm, PyPI, RubyGems, and Packagist use the transactional Go runtime;
-their bbolt state commits cursor, retry verdicts, and observations together. All but Go
-reuse complete sampled catalogs instead of enumerating them on every pass. A registry
-is promoted to `exhaustive` only after its catalog and required artifact inspections
-complete successfully.
+Registry artifact inspection is separately resumable. CI refreshes the finite npm
+critical catalog and crawls it to 100% daily, while dedicated local containers advance
+PyPI and Go module cursors and publish checkpoints to `artifact-data`. CI also performs
+one daily crates.io dump change check and downloads the dump only when it changed.
+Unchanged canonical data queues no dictionary or Pages work. Go modules, npm, PyPI, RubyGems, and Packagist use the transactional Go runtime;
+their bbolt state commits cursor, retry verdicts, and observations together. CI
+regenerates npm's bounded population; PyPI, RubyGems, and Packagist reuse sampled
+catalogs, while Go extends its index. A source is promoted to `exhaustive` only after
+its declared catalog and required artifact inspections complete successfully.
 
 Successful collection does not by itself permit a negative collision claim.
 Every valid query returns a factual `found` observation. Fixture, smoke, and

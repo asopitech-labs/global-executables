@@ -51,6 +51,21 @@ def test_crates_change_check_is_daily_and_restores_only_owned_crawl_data():
     assert "for source in" not in restore
 
 
+def test_daily_ci_owns_the_bounded_npm_critical_population():
+    registry = workflow("registry-artifacts.yml")
+    npm_job = registry.split("  npm-critical:", 1)[1]
+
+    assert "needs: crawl" in npm_job
+    assert "tools/npm_critical_catalog.py" in npm_job
+    assert '"catalog_digest": "sha256:" + hashlib.sha256' in npm_job
+    assert "--source npm --passes 0" in npm_job
+    assert "SOURCES=npm" in npm_job
+    assert "ALLOW_CI_OWNED_NPM=1" in npm_job
+    assert 'SOURCES="${SOURCES-pypi rubygems packagist nuget go}"' in (
+        ROOT / "tools/crawl_parallel.sh"
+    ).read_text()
+
+
 def test_registry_derivations_run_only_after_a_changed_publication():
     registry = workflow("registry-artifacts.yml")
     publish = registry.split("Publish resumable state and normalized observations", 1)[1].split(

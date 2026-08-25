@@ -56,6 +56,11 @@ jobs:
             exit 1
           fi
           mkdir -p data/production/intermediate
+          if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
+            git show origin/artifact-data:data/production/registry-state.json > /tmp/registry-state.json
+          else
+            rm -f /tmp/registry-state.json
+          fi
           for source in \
             arch debian ubuntu homebrew msys2 scoop winget windows \
             npm pypi crates go rubygems packagist nuget macos shell; do
@@ -149,6 +154,7 @@ jobs:
             data/production/intermediate/shell.jsonl \
             --snapshot "$(date -u +%F)" \
             --coverage-map data/production/coverage-map.json \
+            --registry-state /tmp/registry-state.json \
             --report reports/production-refresh.json
       - run: pytest -q
       - run: git diff --check

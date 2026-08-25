@@ -12,7 +12,7 @@ IMAGE="${IMAGE:-global-executables-crawl:local}"
 GO_IMAGE="${GO_IMAGE:-global-executables-go-crawler:local}"
 BASE="${BASE:-${HOME}/.ge-crawl}"
 # An explicitly empty value is useful when publishing checkout observations only.
-SOURCES="${SOURCES-pypi rubygems packagist nuget npm go}"
+SOURCES="${SOURCES-pypi rubygems packagist nuget go}"
 # Non-registry observations are produced in the checkout by production_crawl.py.  They
 # share artifact-data as their durable source of truth even though they have no cursor
 # state or per-source crawl container.
@@ -20,6 +20,7 @@ OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 sc
 PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
 BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
 PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"
+PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
 
 if [ -n "${CONTAINER_RUNTIME:-}" ]; then
   RUNTIME="${CONTAINER_RUNTIME}"
@@ -39,13 +40,21 @@ catalog_for() {
     rubygems) echo "rubygems-names.txt rubygems-names.txt.gz" ;;
     packagist) echo "packagist-packages.txt packagist-packages.txt.gz" ;;
     nuget) echo "nuget-tools.txt nuget-tools.txt.gz" ;;
-    npm) echo "npm-packages.txt npm-packages.txt.gz" ;;
+    npm) echo "npm-critical-packages.txt" ;;
     # Go's live catalogue is appended page by page so an interrupted sweep resumes, so
     # it has no gzip twin locally: one left beside it goes stale the moment the sweep
     # continues. The Git transport representation is sharded separately at publish time.
     go) echo "go-modules.txt go-modules.cursor.json" ;;
     *) echo "" ;;
   esac
+}
+
+guard_npm_owner() {
+  if [ "${ALLOW_CI_OWNED_NPM:-0}" != 1 ]; then
+    case " ${SOURCES} " in
+      *" npm "*) echo "npm is CI-owned; set ALLOW_CI_OWNED_NPM=1 only for an explicit takeover" >&2; exit 2 ;;
+    esac
+  fi
 }
 
 # `start` slices each container's state out of ${BASE}.  On a machine that has never run
@@ -70,6 +79,8 @@ seed() {
         rm -rf "${BASE}/data/production/transport/go-modules"
       elif git cat-file -e "origin/artifact-data:data/production/${name}" 2>/dev/null; then
         git show "origin/artifact-data:data/production/${name}" > "${BASE}/data/production/${name}"
+      elif [ -f "${ROOT_DIR}/data/production/${name}" ]; then
+        cp "${ROOT_DIR}/data/production/${name}" "${BASE}/data/production/${name}"
       fi
     done
     local rows="data/production/intermediate/${source}.jsonl"
@@ -112,6 +123,7 @@ PY
 
 start() {
   cd "${ROOT_DIR}"
+  guard_npm_owner
   if [ ! -f "${BASE}/data/production/registry-state.json" ]; then
     echo "no state at ${BASE}; seeding from origin/artifact-data first"
     seed
@@ -216,6 +228,7 @@ PY
 # so replacing the whole state would overwrite whichever writer published second — the
 # mistake that nearly rolled Go's catalog back fifteen months.
 publish() {
+  guard_npm_owner
   local worktree=/tmp/ge-artifact-publish
   local attempt="${PUBLISH_ATTEMPT:-1}"
   local push_status=0
@@ -255,6 +268,11 @@ publish() {
         cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
       fi
     done
+    if [ "${source}" = npm ] && \
+       [ -f "${dir}/data/production/npm-critical-packages.txt" ]; then
+      rm -f "${worktree}/data/production/npm-packages.txt" \
+        "${worktree}/data/production/npm-packages.txt.gz"
+    fi
     if [ "${source}" = go ] && \
        [ -f "${dir}/data/production/intermediate/go.jsonl" ]; then
       python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
@@ -332,12 +350,13 @@ publish_locked() (
     return 0
   fi
   publish
-) 9>"${BASE}.publish.lock"
+) 9>"${PUBLISH_LOCK}"
 
 # Publishing by hand means the crawl's progress lives only on this machine until
 # someone remembers.  `watch` keeps publishing while the containers run, so stopping
 # the session strands nothing.
 watch() {
+  guard_npm_owner
   local interval="${PUBLISH_INTERVAL:-1800}"
   while :; do
     sleep "${interval}"

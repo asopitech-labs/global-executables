@@ -8,7 +8,7 @@ from dataclasses import asdict
 from datetime import date
 from pathlib import Path
 
-from global_executables.pipeline import RebuildPolicy, rebuild
+from global_executables.pipeline import RebuildPolicy, rebuild, sync_npm_coverage
 
 
 def _write_report(path: Path, report: dict) -> None:
@@ -23,6 +23,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--snapshot", default=date.today().isoformat())
     parser.add_argument("--coverage-kind", choices=["fixture", "smoke", "partial", "exhaustive"], default="partial")
     parser.add_argument("--coverage-map", type=Path, help="JSON object mapping input stem to coverage kind")
+    parser.add_argument("--registry-state", type=Path, help="published registry checkpoint used to prove scoped coverage")
     parser.add_argument("--report", type=Path, default=Path("reports/refresh.json"))
     parser.add_argument("--allow-shrink-reason",
                         help="required explanation when intentionally publishing fewer executable names")
@@ -39,6 +40,9 @@ def main(argv: list[str] | None = None) -> int:
     coverage = json.loads(args.coverage_map.read_text()) if args.coverage_map else args.coverage_kind
     if not isinstance(coverage, (str, dict)):
         raise SystemExit("coverage map must be a JSON object")
+    if args.registry_state and isinstance(coverage, dict):
+        state = json.loads(args.registry_state.read_text()) if args.registry_state.is_file() else {}
+        coverage = sync_npm_coverage(coverage, state)
     try:
         result = rebuild(
             args.root,

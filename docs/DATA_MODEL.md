@@ -35,7 +35,10 @@ evidence). Package names are never substituted for executable names.
 
 `metadata.coverage[*].status` reports whether an attempted collector succeeded;
 `coverage_kind` reports whether its scope is `fixture`, `smoke`, `partial`, or
-`exhaustive`. These fields are intentionally independent. `negative_lookup` is
+`exhaustive`. A coverage entry may also name a finite `scope`, `catalog_source`,
+`catalog_packages`, `catalog_snapshot`, and `catalog_digest`; `exhaustive` applies
+to that declared population, never to an unstated global ecosystem. These fields are
+intentionally independent. `negative_lookup` is
 `exhaustive` only when every declared source has both exhaustive scope and a
 successful run. `index_manifest` pins every derived index by SHA-256 so readers
 can reject missing or stale index files without making indexes canonical.

@@ -1,11 +1,8 @@
 name: Registry artifact crawl
 
-# Every catalog-walking source is filled from local containers, which have neither the
-# six-hour job limit nor the one-run-at-a-time group and run one per registry.  CI
-# keeps crates.io, whose whole registry arrives in a single daily dump and which
-# therefore finishes inside a job. Both writers share the artifact-data branch, so
-# they must never share a source. One daily Last-Modified check avoids downloading an
-# unchanged dump or rebuilding derived artifacts from unchanged canonical data.
+# CI owns the bounded npm critical population and the crates.io dump. Local containers
+# own the remaining long catalog walks. Both writers share artifact-data, so they must
+# never share a source.
 on:
   schedule:
     - cron: "47 4 * * *"
@@ -135,3 +132,91 @@ jobs:
       - name: Fail after publishing partial progress
         if: steps.crawl.outcome == 'failure'
         run: exit 1
+
+  npm-critical:
+    needs: crawl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build the current critical npm catalog
+        run: python3 tools/npm_critical_catalog.py
+      - name: Restore npm evidence and reset the bounded sweep
+        run: |
+          git fetch origin artifact-data || true
+          mkdir -p data/production/intermediate reports
+          if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
+            git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
+          fi
+          if git cat-file -e origin/artifact-data:data/production/intermediate/npm.jsonl 2>/dev/null; then
+            git show origin/artifact-data:data/production/intermediate/npm.jsonl \
+              > data/production/intermediate/npm.jsonl
+          fi
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from datetime import date
+          from pathlib import Path
+
+          path = Path("data/production/registry-state.json")
+          catalog = Path("data/production/npm-critical-packages.txt")
+          state = json.loads(path.read_text()) if path.is_file() else {"version": 1, "sources": {}}
+          state.setdefault("sources", {})["npm"] = {
+              "catalog_complete": True,
+              "catalog_digest": "sha256:" + hashlib.sha256(catalog.read_bytes()).hexdigest(),
+              "catalog_scope": "ecosyste.ms critical npm population covering 80% of downloads or dependent repositories",
+              "catalog_size": len(catalog.read_text().splitlines()),
+              "catalog_snapshot": date.today().isoformat(),
+              "catalog_source": "https://packages.ecosyste.ms/critical?registry=npmjs.org",
+              "cursor": 0,
+              "failure_attempts": {},
+              "failures": {},
+              "packages_file": "data/production/npm-critical-packages.txt",
+              "retry_npm": [],
+              "unavailable": {},
+          }
+          path.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+          PY
+      - name: Inspect the complete critical npm population
+        run: |
+          docker build --file Dockerfile.go-crawler --target runtime \
+            --tag global-executables-go-crawler:ci .
+          docker run --rm --init -v "$PWD:/state" global-executables-go-crawler:ci \
+            crawl --source npm --passes 0 --package-budget 3000
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: npm-critical-crawl-report
+          path: reports/registry-artifact-crawl.json
+      - name: Publish critical npm state and observations
+        id: publish
+        run: |
+          mkdir -p /tmp/ci-registry-npm/data/production/intermediate \
+            /tmp/ci-registry-npm/reports
+          cp data/production/registry-state.json \
+            /tmp/ci-registry-npm/data/production/registry-state.json
+          cp data/production/npm-critical-packages.txt \
+            /tmp/ci-registry-npm/data/production/npm-critical-packages.txt
+          cp data/production/intermediate/npm.jsonl \
+            /tmp/ci-registry-npm/data/production/intermediate/npm.jsonl
+          cp reports/registry-artifact-crawl.json \
+            /tmp/ci-registry-npm/reports/registry-artifact-crawl.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          publish_output="$(BASE=/tmp/ci-registry SOURCES=npm OBSERVATION_SOURCES=' ' \
+            ALLOW_CI_OWNED_NPM=1 \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "$publish_output"
+          if printf '%s\n' "$publish_output" | grep -qx published; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Refresh the dictionary after npm changes
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh.yml --ref main

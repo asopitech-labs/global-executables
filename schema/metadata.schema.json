@@ -23,7 +23,12 @@
           "status": {"enum": ["success", "failed"]},
           "coverage_kind": {"enum": ["fixture", "smoke", "partial", "exhaustive"]},
           "records": {"type": "integer", "minimum": 0},
-          "source": {"type": "string", "minLength": 1}
+          "source": {"type": "string", "minLength": 1},
+          "scope": {"type": "string", "minLength": 1},
+          "catalog_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+          "catalog_packages": {"type": "integer", "minimum": 0},
+          "catalog_snapshot": {"type": "string", "format": "date"},
+          "catalog_source": {"type": "string", "format": "uri"}
         }
       }
     },

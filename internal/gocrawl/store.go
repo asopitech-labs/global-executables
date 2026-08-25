@@ -288,7 +288,7 @@ func (s *BoltStore) ViewSnapshot(
 				if err := json.Unmarshal(value, &observation); err != nil {
 					return err
 				}
-				return yield(observation)
+				return yield(sanitizeObservation(observation))
 			})
 		}
 		return visit(snapshot, observations)
@@ -333,15 +333,43 @@ func snapshotFromTx(tx *bolt.Tx, includeObservations bool) (Snapshot, error) {
 		if err := json.Unmarshal(value, &observation); err != nil {
 			return err
 		}
-		snapshot.Observations = append(snapshot.Observations, observation)
+		snapshot.Observations = append(snapshot.Observations, sanitizeObservation(observation))
 		return nil
 	})
 	return snapshot, err
 }
 
 func putObservation(bucket *bolt.Bucket, observation Observation) error {
+	observation = sanitizeObservation(observation)
 	key := strings.Join([]string{observation.Command, observation.Ecosystem, observation.Package, observation.Source}, "\x00")
 	return putJSON(bucket, key, observation)
+}
+
+func sanitizeObservation(observation Observation) Observation {
+	observation.Source = stripURLCredentials(observation.Source)
+	if observation.Repository != nil {
+		repository := stripURLCredentials(*observation.Repository)
+		observation.Repository = &repository
+	}
+	return observation
+}
+
+func stripURLCredentials(value string) string {
+	scheme := strings.Index(value, "://")
+	if scheme < 0 {
+		return value
+	}
+	authorityStart := scheme + 3
+	authorityEnd := len(value)
+	if offset := strings.IndexAny(value[authorityStart:], "/?#"); offset >= 0 {
+		authorityEnd = authorityStart + offset
+	}
+	authority := value[authorityStart:authorityEnd]
+	userinfo := strings.LastIndex(authority, "@")
+	if userinfo < 0 {
+		return value
+	}
+	return value[:authorityStart] + authority[userinfo+1:] + value[authorityEnd:]
 }
 
 func putJSON(bucket *bolt.Bucket, key string, value any) error {

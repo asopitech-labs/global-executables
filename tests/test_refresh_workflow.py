@@ -21,6 +21,8 @@ def test_refresh_reuses_durable_os_samples_by_default():
                                 "nuget", "macos", "shell"}:
         assert source in restore
     assert "origin/dictionary:reports/production-crawl.json" in REFRESH
+    assert "origin/artifact-data:data/production/registry-state.json" in restore
+    assert "--registry-state /tmp/registry-state.json" in REFRESH
 
     acquire = REFRESH.split("Acquire production OS indexes", 1)[1].split("Publish refreshed OS observations", 1)[0]
     assert "if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples" in acquire
@@ -37,7 +39,7 @@ def test_refresh_publishes_os_observations_and_alerts_on_failure():
 
 
 def test_local_publish_includes_os_observations_from_the_checkout():
-    assert 'SOURCES="${SOURCES-pypi rubygems packagist nuget npm go}"' in PARALLEL_CRAWL
+    assert 'SOURCES="${SOURCES-pypi rubygems packagist nuget go}"' in PARALLEL_CRAWL
     assert 'OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 scoop winget windows macos shell}"' in PARALLEL_CRAWL
     assert 'local rows="data/production/intermediate/${source}.jsonl"' in PARALLEL_CRAWL
     assert 'local observed="${ROOT_DIR}/${rows}"' in PARALLEL_CRAWL
@@ -51,6 +53,39 @@ def test_transactional_sources_use_dedicated_go_runtime_with_failure_restart():
     assert 'crawl --source "${source}" --passes 0' in PARALLEL_CRAWL
     assert 'go|npm|pypi|rubygems|packagist) ;;' in PARALLEL_CRAWL
     assert 'if [ "${needs_python}" = 1 ]' in PARALLEL_CRAWL
+    assert 'npm) echo "npm-critical-packages.txt"' in PARALLEL_CRAWL
+    assert 'rm -f "${worktree}/data/production/npm-packages.txt"' in PARALLEL_CRAWL
+    assert '"${worktree}/data/production/npm-packages.txt.gz"' in PARALLEL_CRAWL
+
+
+def test_local_start_requires_an_explicit_npm_ownership_takeover(tmp_path):
+    podman = tmp_path / "podman"
+    podman.write_text("#!/bin/sh\nexit 0\n")
+    podman.chmod(0o755)
+
+    result = subprocess.run(
+        ["bash", "tools/crawl_parallel.sh", "start"], cwd=ROOT,
+        capture_output=True, text=True,
+        env={**os.environ, "PATH": f"{tmp_path}:/usr/bin:/bin", "SOURCES": "npm"},
+    )
+
+    assert result.returncode == 2
+    assert "npm is CI-owned" in result.stderr
+
+
+def test_local_publish_requires_an_explicit_npm_ownership_takeover(tmp_path):
+    podman = tmp_path / "podman"
+    podman.write_text("#!/bin/sh\nexit 0\n")
+    podman.chmod(0o755)
+
+    result = subprocess.run(
+        ["bash", "tools/crawl_parallel.sh", "publish"], cwd=ROOT,
+        capture_output=True, text=True,
+        env={**os.environ, "PATH": f"{tmp_path}:/usr/bin:/bin", "SOURCES": "npm"},
+    )
+
+    assert result.returncode == 2
+    assert "npm is CI-owned" in result.stderr
 
 
 def test_parallel_crawl_uses_podman_when_docker_is_missing(tmp_path):
@@ -77,12 +112,14 @@ def test_manual_and_watched_publication_share_one_exclusive_lock(tmp_path):
     assert "publish) publish_locked ;;" in PARALLEL_CRAWL
 
     base = tmp_path / "crawl"
-    with open(f"{base}.publish.lock", "w") as lock:
+    publish_lock = tmp_path / "publish.lock"
+    with publish_lock.open("w") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         result = subprocess.run(
             ["bash", "tools/crawl_parallel.sh", "publish"], cwd=ROOT,
             capture_output=True, text=True,
-            env={**os.environ, "BASE": str(base), "SOURCES": "", "OBSERVATION_SOURCES": ""},
+            env={**os.environ, "BASE": str(base), "SOURCES": "", "OBSERVATION_SOURCES": "",
+                 "PUBLISH_LOCK": str(publish_lock)},
         )
 
     assert result.returncode == 0

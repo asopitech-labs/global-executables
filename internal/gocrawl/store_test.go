@@ -5,7 +5,54 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	bolt "go.etcd.io/bbolt"
 )
+
+func TestBoltStoreStripsURLCredentialsFromObservations(t *testing.T) {
+	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := store.Import(context.Background(), ImportSnapshot{}); err != nil {
+		t.Fatal(err)
+	}
+	repository := "git+ssh://ghp_secret@github.com:example/tool.git"
+	legacy := Observation{
+		Command: "tool", Ecosystem: "npm", Package: "tool",
+		Repository: &repository, Source: "https://token@example.test/tool",
+	}
+	// Bypass putObservation to model a credential-bearing row from an existing DB.
+	if err := store.db.Update(func(tx *bolt.Tx) error {
+		return putJSON(tx.Bucket(observationBucket), "legacy", legacy)
+	}); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, err := store.Snapshot(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	var streamed []Observation
+	if err := store.ViewSnapshot(context.Background(), func(_ Snapshot, observations ObservationSequence) error {
+		return observations(func(observation Observation) error {
+			streamed = append(streamed, observation)
+			return nil
+		})
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if err := store.Close(); err != nil {
+		t.Fatal(err)
+	}
+	for _, observations := range [][]Observation{snapshot.Observations, streamed} {
+		if got := *observations[0].Repository; got != "git+ssh://github.com:example/tool.git" {
+			t.Fatalf("repository=%q", got)
+		}
+		if got := observations[0].Source; got != "https://example.test/tool" {
+			t.Fatalf("source=%q", got)
+		}
+	}
+}
 
 func TestBoltStoreCommitsCursorRetryAndObservationsAtomically(t *testing.T) {
 	path := filepath.Join(t.TempDir(), "crawl.db")

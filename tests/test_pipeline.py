@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 import pytest
 from global_executables.model import shard, valid_command
-from global_executables.pipeline import DatasetShrinkError, RebuildPolicy, load_canonical, rebuild
+from global_executables.pipeline import DatasetShrinkError, RebuildPolicy, load_canonical, rebuild, sync_npm_coverage
 from global_executables.search import Dataset, DatasetIndexError
 
 ROOT=Path(__file__).parents[1]
@@ -45,6 +45,45 @@ def test_rebuild_accepts_per_source_coverage_kinds(tmp_path):
     assert metadata["coverage"]["debian"]["coverage_kind"] == "exhaustive"
     assert metadata["coverage"]["npm"]["coverage_kind"] == "partial"
     assert metadata["negative_lookup"] == "unknown"
+
+def test_rebuild_preserves_declared_coverage_scope(tmp_path):
+    npm_scope = {
+        "coverage_kind": "exhaustive",
+        "scope": "ecosyste.ms critical npm snapshot (80% of downloads)",
+        "catalog_packages": 2295,
+    }
+    rebuild(tmp_path, INPUTS, "2026-08-14", coverage_kind={"npm": npm_scope})
+    metadata = json.loads((tmp_path / "data/metadata.json").read_text())
+    assert metadata["coverage"]["npm"] == {
+        "status": "success",
+        "records": 2,
+        "source": str(ROOT / "fixtures/intermediate/npm.jsonl"),
+        **npm_scope,
+    }
+
+
+def test_npm_exhaustive_coverage_requires_a_complete_published_checkpoint():
+    coverage = {"npm": {"coverage_kind": "exhaustive", "scope": "critical npm"}}
+    assert sync_npm_coverage(coverage, {})["npm"]["coverage_kind"] == "partial"
+    incomplete = {"sources": {"npm": {"catalog_complete": True}}}
+    assert sync_npm_coverage(coverage, incomplete)["npm"]["coverage_kind"] == "partial"
+    complete = {"sources": {"npm": {
+        "catalog_complete": True,
+        "catalog_digest": "sha256:" + "a" * 64,
+        "catalog_scope": "critical npm",
+        "catalog_size": 2295,
+        "catalog_snapshot": "2026-08-26",
+        "catalog_source": "https://packages.ecosyste.ms/critical?registry=npmjs.org",
+        "cursor": 2295,
+        "failures": {},
+        "retry_npm": [],
+    }}}
+    synchronized = sync_npm_coverage(coverage, complete)["npm"]
+    assert synchronized["coverage_kind"] == "exhaustive"
+    assert synchronized["catalog_packages"] == 2295
+    for invalid in (0, True, None):
+        complete["sources"]["npm"]["catalog_size"] = invalid
+        assert sync_npm_coverage(coverage, complete)["npm"]["coverage_kind"] == "partial"
 
 def test_indexed_search_matches_reference_scan_and_intersects_filters(tmp_path):
     rebuild(tmp_path,INPUTS,"2026-08-14")

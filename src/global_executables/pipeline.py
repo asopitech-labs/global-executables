@@ -45,6 +45,45 @@ class DatasetShrinkError(ValueError):
         )
 
 
+def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
+    """Bind npm coverage to the published finite-catalog checkpoint."""
+    result = dict(coverage)
+    descriptor = dict(result.get("npm", {}))
+    descriptor["coverage_kind"] = "partial"
+    sources = state.get("sources", {}) if isinstance(state, dict) else {}
+    npm = sources.get("npm", {}) if isinstance(sources, dict) else {}
+    if not isinstance(npm, dict):
+        npm = {}
+    for target, source in {
+        "catalog_digest": "catalog_digest",
+        "catalog_snapshot": "catalog_snapshot",
+        "catalog_source": "catalog_source",
+        "scope": "catalog_scope",
+    }.items():
+        if isinstance(npm.get(source), str) and npm[source]:
+            descriptor[target] = npm[source]
+    size, cursor = npm.get("catalog_size"), npm.get("cursor")
+    if type(size) is int and size > 0:
+        descriptor["catalog_packages"] = size
+    failures, retries = npm.get("failures"), npm.get("retry_npm")
+    digest = npm.get("catalog_digest")
+    if (
+        npm.get("catalog_complete") is True
+        and type(size) is int and size > 0
+        and type(cursor) is int and cursor == size
+        and isinstance(failures, dict) and not failures
+        and isinstance(retries, list) and not retries
+        and isinstance(digest, str) and len(digest) == 71 and digest.startswith("sha256:")
+        and all(character in "0123456789abcdef" for character in digest[7:])
+        and all(isinstance(npm.get(key), str) and npm[key] for key in (
+            "catalog_scope", "catalog_snapshot", "catalog_source",
+        ))
+    ):
+        descriptor["coverage_kind"] = "exhaustive"
+    result["npm"] = descriptor
+    return result
+
+
 def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]] | None, seen: str,
           history: dict[str, str] | None = None) -> MergeResult:
     grouped: dict[str, dict[tuple[str, ...], dict[str, Any]]] = defaultdict(dict)
@@ -142,7 +181,7 @@ def publish(root: Path, records: list[dict[str, Any]], coverage: dict[str, Any],
 
 
 def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
-            coverage_kind: str | dict[str, str] = "fixture", *,
+            coverage_kind: str | dict[str, Any] = "fixture", *,
             policy: RebuildPolicy = RebuildPolicy()) -> RebuildResult:
     snapshot = snapshot or date.today().isoformat()
     previous = load_canonical(root)
@@ -151,8 +190,9 @@ def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
     for path in inputs:
         current = [json.loads(line) for line in path.read_text().splitlines() if line]
         rows.extend(current); eco = path.stem
-        kind = coverage_kind.get(eco, "partial") if isinstance(coverage_kind, dict) else coverage_kind
-        coverage[eco] = {"status": "success", "coverage_kind": kind, "records": len(current), "source": str(path)}
+        descriptor = coverage_kind.get(eco, "partial") if isinstance(coverage_kind, dict) else coverage_kind
+        descriptor = {"coverage_kind": descriptor} if isinstance(descriptor, str) else dict(descriptor)
+        coverage[eco] = {"status": "success", "records": len(current), "source": str(path), **descriptor}
     merged = merge(rows, previous, snapshot, history)
     if len(merged.records) < len(previous) and not policy.shrink_reason:
         raise DatasetShrinkError(len(previous), len(merged.records))
