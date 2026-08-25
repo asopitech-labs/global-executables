@@ -7,8 +7,10 @@ transactional Go registry crawler. The crawler is a durable, network-heavy pipel
 so a successful build is not just compilation: the same source must pass the same
 dependency, concurrency, security, and container checks locally and in CI.
 
-The target is `linux/amd64`, matching the rootless Podman host. Python continues to
-own every other registry; Go has a single supported implementation.
+The target is `linux/amd64`, matching the rootless Podman host. Go is the only
+supported runtime for the transactional `go`, `npm`, and `pypi` sources. Python owns
+the remaining registry adapters and is not retained as a rollback implementation for
+those three sources.
 
 ## At a glance
 
@@ -16,9 +18,11 @@ own every other registry; Go has a single supported implementation.
 - Development: digest-pinned official container; host Go is optional.
 - Validation: one shared format, vet, test, race, vulnerability, and build pipeline.
 - Runtime: dedicated scratch image and an explicit `crawl` subcommand.
-- Durable state: bbolt commits observations, retries, cursor, and generation together.
+- Sources: Go modules, npm release metadata, and PyPI wheels/sdists share one engine.
+- Durable state: one bbolt database per source commits observations, retries, cursor,
+  and generation together.
 - Compatibility: state, JSONL, and report are streamed from one database snapshot.
-- Recovery: a new Go database can import the last published compatibility export.
+- Recovery: a new source database can import its last published compatibility export.
 
 ## Quick start
 
@@ -53,7 +57,8 @@ release gates:
 - the Docker build context excludes repository history and crawl state;
 - a bind-mounted write creates files owned by the invoking user;
 - the placeholder binary is not routed to production; and
-- issue #40 records the environment contract and validation evidence.
+- issue #40 records the environment contract and issue #42 records the npm/PyPI
+  migration and measured throughput evidence.
 
 The gate passed before crawler behavior was added. Any toolchain or dependency update
 must pass it again; Go 1.26.5 was replaced by 1.26.7 when `govulncheck` found reachable
@@ -68,7 +73,7 @@ standard-library vulnerabilities, rather than weakening the security gate.
 | Toolchain switching | `GOTOOLCHAIN=local` | A build must fail on a mismatched toolchain instead of silently downloading a different compiler. |
 | Local setup | Digest-pinned official Go container | The host currently has no Go installation. Container-first setup makes onboarding reproducible and avoids root-owned repository files. |
 | Deployment target | `linux/amd64`, `CGO_ENABLED=0` | This matches the current crawler host and produces a portable static crawler binary. |
-| Runtime image | Dedicated minimal Go crawler image | The Go source can be built, rolled back, and operated independently of the Python registry crawlers. |
+| Runtime image | Dedicated minimal Go crawler image | The transactional sources can be built and operated independently of the Python registry crawlers. |
 | Dependencies | Go modules with committed `go.mod` and `go.sum` | Versions and downloaded module contents are reviewable and checksum-verified. |
 | Developer tools | Pinned `tool` directives in `go.mod` | Security tools use the same reviewed version locally and in CI. |
 
@@ -96,27 +101,31 @@ go.mod + go.sum
 ## Runtime topology and recovery
 
 ```text
-index.golang.org --> atomic append-only catalog --> bounded work coordinator
-proxy.golang.org --> module inspectors ----------> ordered result buffer
-                                                  |
-                                                  v
-                         bbolt transaction: observations + retry verdict + cursor
-                                                  |
-                                                  v
-                         one read generation --> JSONL + state + report
+cached source catalog ---------------------------> bounded work coordinator
+  |-- index.golang.org (incremental refresh)       |-- Go module inspector
+  |-- npm package snapshot (import once)           |-- npm metadata inspector
+  `-- PyPI project snapshot (import once)          `-- PyPI range/archive inspector
+                                                        |
+                                                        v
+                          per-source bbolt transaction: observations + retry + cursor
+                                                        |
+                                                        v
+                          one read generation --> JSONL + state + report
 ```
 
 Workers do not write files or mutable state. Results may finish out of order, but the
 coordinator commits only the largest contiguous catalog prefix. A process stop can
 waste HTTP work; it cannot move the cursor past an uncommitted module.
 
-The first migration imports the Python JSONL/state into `go-crawl.db`. The database is
-then canonical locally. Compatibility files remain the durable publish/rollback
-contract and can rebuild a missing database. The catalog uses a fixed-record derived
-index for the immutable prefix and keeps only post-index additions in bbolt; this
-avoids duplicating roughly two million module-path strings in the database. Both the
-derived index and database stay in the mounted state directory and are not built into
-or published with the image.
+The first migration imports each source's Python-era JSONL/state into
+`go-crawl.db`, `npm-crawl.db`, or `pypi-crawl.db`. The selected database is then
+canonical locally. Compatibility files remain the durable publication and recovery
+contract and can rebuild a missing database. A fixed-record derived index serves the
+cached immutable catalog prefix without duplicating millions of names in bbolt. Go
+alone refreshes its chronological upstream index before inspection; npm and PyPI
+reuse their complete imported catalog snapshots instead of enumerating them on every
+pass. Derived indexes and databases stay in the mounted state directory and are not
+built into or published with the image.
 
 Every module has a whole-inspection deadline in addition to each HTTP-attempt deadline.
 Transient failures return to the durable retry queue; permanent proxy responses and a
@@ -128,16 +137,17 @@ Run one bounded pass explicitly:
 ```console
 podman run --rm --init --userns=keep-id --user "$(id -u):$(id -g)" \
   --volume /path/to/go-state:/state \
-  global-executables-go-crawler:local crawl --passes 1
+  global-executables-go-crawler:local crawl --source npm --passes 1
 ```
 
 `--passes 0` continues until the catalog is current, the committed cursor reaches its
 end, and no retry remains. Starting the image without `crawl` is intentionally an
 error, so merely building or pulling it cannot mutate production state.
 
-The Python crawler image remains separate. During migration, orchestration sends
-only the `go` source to the Go image. Rollback sends it back to the existing Python
-image without converting state in place.
+The Python crawler image remains separate for crates.io, RubyGems, Packagist, and
+NuGet. Orchestration always sends `go`, `npm`, and `pypi` to the Go image; the Python
+entrypoint rejects those source names. Recovery rebuilds a source database from its
+published compatibility export instead of switching implementations.
 
 ## One pipeline, explicit gates
 
@@ -201,11 +211,11 @@ Dockerfile. Updating it is an explicit reviewed change that reruns both CI bound
 
 ## Recovery boundary
 
-The Go cutover is complete and the Python Go path has been removed. Other ecosystems
-remain on Python. A recovery stops only the Go container, preserves the failed database
-for diagnosis, and imports the last published compatibility export into a new Go-owned
-store. Never translate a partially committed Go transaction back into the JSON state
-file or publish a cursor below the shared branch.
+The Go, npm, and PyPI cutovers are complete and their Python paths have been removed.
+Other ecosystems remain on Python. A recovery stops only the affected container,
+preserves its failed database for diagnosis, and imports the last published
+compatibility export into a new Go-owned store. Never translate a partially committed
+transaction back into the JSON state file or publish a cursor below the shared branch.
 
 ## Troubleshooting
 
@@ -223,8 +233,8 @@ file or publish a cursor below the shared branch.
   `.index` file is rebuilt atomically on the next pass.
 - **Compatibility export is interrupted:** restart the same Go state directory. The
   database is canonical and regenerates all compatibility views from one generation.
-- **Crawler repeatedly exits nonzero:** inspect `docker logs ge-go`, preserve the DB and
-  compatibility files, then use the rollback procedure in `docs/OPERATIONS.md`.
+- **Crawler repeatedly exits nonzero:** inspect `podman logs ge-<source>`, preserve the
+  DB and compatibility files, then use the recovery procedure in `docs/OPERATIONS.md`.
 
 ## Primary references
 

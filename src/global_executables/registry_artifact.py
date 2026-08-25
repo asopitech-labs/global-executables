@@ -7,7 +7,6 @@ and no failures remain.  A stopped or rate-limited run remains partial.
 from __future__ import annotations
 
 import csv
-import html
 import http.client
 import json
 import gzip
@@ -19,7 +18,6 @@ import sys
 import tarfile
 import time
 import threading
-import tomllib
 import urllib.parse
 import urllib.error
 import urllib.request
@@ -29,12 +27,11 @@ from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
-from .collectors import crates_manifest, declared_command, npm_metadata, record
+from .collectors import crates_manifest, declared_command, record
 from .model import write_jsonl
 
 
 USER_AGENT = "global-executables-registry-crawl/1.0 (+https://github.com/asopitech-labs/global-executables)"
-PROJECT_LINK = re.compile(r"<a\b[^>]*href=[\"'][^\"']+[\"'][^>]*>([^<]+)</a>", re.I)
 CRATES_DB_DUMP = "https://static.crates.io/db-dump.tar.gz"
 # crates.io asks crawlers for at most one request per second and answers 429 well before
 # a CI runner's natural pace.  Only the API host is paced; its CDN mirrors are not.
@@ -59,10 +56,6 @@ PERMANENT_HTTP_CODES = (404, 405, 410, 451)
 # errors are deliberately exempt: they self-heal, and a DNS outage spanning a few passes
 # would otherwise bury packages that are perfectly fine.
 FAILURE_ATTEMPT_LIMIT = 3
-# Bumped when an npm parsing fix invalidates the coverage an earlier cursor claimed.
-NPM_PARSER_GENERATION = 3
-NPM_ALL_DOCS = "https://replicate.npmjs.com/_all_docs"
-NPM_CATALOG_PAGE = 10000
 # Progress is persisted this often inside a pass.  State used to be written once, after
 # every source finished, so an interruption discarded the cursors of sources that had
 # already completed along with the work in flight.
@@ -503,141 +496,6 @@ def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: 
     failures[key] = message
 
 
-def _archive_files(body: bytes) -> dict[str, bytes]:
-    files: dict[str, bytes] = {}
-    try:
-        with tarfile.open(fileobj=BytesIO(body), mode="r:*") as archive:
-            for member in archive.getmembers():
-                if member.isfile() and member.name not in files:
-                    handle = archive.extractfile(member)
-                    if handle is not None:
-                        files[member.name] = handle.read()
-        return files
-    except tarfile.TarError:
-        pass
-    with zipfile.ZipFile(BytesIO(body)) as archive:
-        return {name: archive.read(name) for name in archive.namelist() if not name.endswith("/")}
-
-
-def _entry_point_rows(files: dict[str, bytes], package: str, version: str,
-                      repository: str | None, source: str, artifact: str) -> list[dict[str, Any]]:
-    commands: set[str] = set()
-
-    def add_lines(value: str) -> None:
-        for line in value.splitlines():
-            line = line.strip()
-            if line and not line.startswith(("#", "[")) and "=" in line:
-                commands.add(line.split("=", 1)[0].strip())
-
-    for name, body in files.items():
-        if name.endswith(".dist-info/entry_points.txt") or name.endswith(".egg-info/entry_points.txt"):
-            section = None
-            for raw in body.decode("utf-8", "replace").splitlines():
-                line = raw.strip()
-                if line.startswith("["):
-                    section = line
-                elif section == "[console_scripts]" and "=" in line:
-                    commands.add(line.split("=", 1)[0].strip())
-
-    for name, body in files.items():
-        text = body.decode("utf-8", "replace")
-        if name.endswith("pyproject.toml"):
-            try:
-                document = tomllib.loads(text)
-                project = document.get("project", {})
-                commands.update(project.get("scripts", {}).keys())
-                commands.update(project.get("entry-points", {}).get("console_scripts", {}).keys())
-                poetry = document.get("tool", {}).get("poetry", {}).get("scripts", {})
-                commands.update(poetry.keys())
-            except (tomllib.TOMLDecodeError, AttributeError):
-                pass
-        elif name.endswith("setup.cfg"):
-            in_console = False
-            for raw in text.splitlines():
-                line = raw.strip()
-                if line.startswith("["):
-                    in_console = line.lower() == "[options.entry_points]"
-                elif in_console and "=" in line:
-                    add_lines(line)
-        elif name.endswith("setup.py"):
-            for match in re.finditer(r"console_scripts[^\[\(]*[\[\(](.*?)[\]\)]", text, re.S):
-                add_lines(match.group(1).replace(",", "\n"))
-
-    return [record(command, "pypi", package, version, repository, artifact,
-                   source_type="language_package", language="python", registry="pypi",
-                   latest_version=version) for command in sorted(commands)]
-
-
-def _sdist_rows(body: bytes, package: str, version: str, repository: str | None, source: str) -> list[dict[str, Any]]:
-    return _entry_point_rows(_archive_files(body), package, version, repository, source, source)
-
-
-def _console_scripts(text: str) -> list[str]:
-    commands = []
-    section = None
-    for raw in text.splitlines():
-        line = raw.strip()
-        if line.startswith("["):
-            section = line
-        elif section == "[console_scripts]" and "=" in line:
-            commands.append(line.split("=", 1)[0].strip())
-    return commands
-
-
-def _console_script_rows(commands: list[str], package: str, version: str, repository: str | None,
-                         source: str) -> list[dict[str, Any]]:
-    return [record(command, "pypi", package, version, repository, source,
-                   source_type="language_package", language="python", registry="pypi",
-                   latest_version=version) for command in sorted(set(commands))]
-
-
-def _wheel_commands_from(names: list[str], read: Callable[[str], bytes]) -> list[str]:
-    commands: list[str] = []
-    for name in names:
-        if name.endswith(".dist-info/entry_points.txt"):
-            commands.extend(_console_scripts(read(name).decode("utf-8", "replace")))
-        # A wheel shipping a prebuilt binary declares it as a data script, not a
-        # console script; ruff and friends were invisible while only entry points were read.
-        elif ".data/scripts/" in name and not name.endswith("/"):
-            commands.append(name.rsplit("/", 1)[-1])
-    return commands
-
-
-def _wheel_commands(url: str, timeout: int) -> tuple[list[str], int]:
-    """Read a wheel's declared commands over HTTP ranges rather than downloading it.
-
-    A wheel is a ZIP whose file list sits in the trailing central directory, and the
-    commands live in one small member; the rest of a multi-megabyte wheel is payload
-    the crawler never reads.  Falls back to the whole file when the host or the archive
-    will not cooperate.
-    """
-    try:
-        archive = RemoteZip(url, timeout)
-        return _wheel_commands_from(archive.names, archive.read), archive.downloaded
-    except (RegistryCrawlError, urllib.error.HTTPError, OSError, struct.error, zlib.error, KeyError):
-        body, transfer = fetch(url, timeout)
-        with zipfile.ZipFile(BytesIO(body)) as whole:
-            return _wheel_commands_from(whole.namelist(), whole.read), transfer["downloaded_bytes"]
-
-
-def _wheel_rows(body: bytes, package: str, version: str, repository: str | None, source: str) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
-    with zipfile.ZipFile(BytesIO(body)) as archive:
-        entries = [name for name in archive.namelist() if name.endswith(".dist-info/entry_points.txt")]
-        for entry in entries:
-            section = None
-            for raw in archive.read(entry).decode("utf-8", "replace").splitlines():
-                line = raw.strip()
-                if line.startswith("["):
-                    section = line
-                elif section == "[console_scripts]" and "=" in line:
-                    command = line.split("=", 1)[0].strip()
-                    rows.append(record(command, "pypi", package, version, repository, source,
-                                       source_type="language_package", language="python", registry="pypi",
-                                       latest_version=version))
-    return rows
-
-
 def _ruby_gem_rows(body: bytes, package: str, version: str, repository: str | None,
                    source: str) -> list[dict[str, Any]]:
     """Extract RubyGems' declared executables from the gemspec metadata."""
@@ -703,11 +561,6 @@ def _gem_metadata(url: str, timeout: int) -> tuple[bytes, int]:
     with tarfile.open(fileobj=BytesIO(body), mode="r:*") as archive:
         handle = archive.extractfile("metadata.gz")
         return (handle.read() if handle is not None else b""), transfer["downloaded_bytes"]
-
-
-def _pypi_projects(body: bytes) -> list[str]:
-    names = {html.unescape(value).strip() for value in PROJECT_LINK.findall(body.decode("utf-8", "replace"))}
-    return sorted(name for name in names if name)
 
 
 def _rubygems_names(body: bytes) -> list[str]:
@@ -815,212 +668,6 @@ def _dump_rows(archive: tarfile.TarFile, member: tarfile.TarInfo):
     if handle is None:
         return
     yield from csv.DictReader(TextIOWrapper(_UnseekableMember(handle), encoding="utf-8", newline=""))
-
-
-def _is_wheel(candidate: dict[str, Any]) -> bool:
-    """Decide by the filename, not by the type PyPI records.
-
-    A few uploads declare ``bdist_wheel`` and ship a tarball.  Reading one as a ZIP
-    fails on an artifact whose commands a sdist read would have found: `Task_allocator`
-    is a well-formed tar.gz that spent three attempts failing as `File is not a zip file`.
-    """
-    return candidate.get("filename", "").endswith(".whl")
-
-
-def _crawl_pypi(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
-                checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
-    project_file = Path(state.setdefault("projects_file", "data/production/pypi-projects.txt"))
-    if not read_catalog(project_file):
-        body, transfer = fetch("https://pypi.org/simple/", timeout)
-        project_file.parent.mkdir(parents=True, exist_ok=True)
-        write_catalog(project_file, _pypi_projects(body))
-        state["catalog_bytes"] = transfer["downloaded_bytes"]
-        # The catalogue is what the pass cannot cheaply redo; persist it first.
-        checkpoint()
-    projects = read_catalog(project_file)
-    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
-    failures, unavailable, attempts = _failure_state(state)
-    retry_projects = state.setdefault("retry_projects", [])
-    retry_projects[:] = [project for project in retry_projects if project not in unavailable]
-    # The queue used to hold only projects owed an sdist read, so any other failure was
-    # left behind the cursor with nothing to bring it back — and `complete` refuses to
-    # call the source exhaustive while a failure stands, which made the state permanent.
-    for project in failures:
-        if project not in retry_projects:
-            retry_projects.append(project)
-    rows: list[dict[str, Any]] = []
-    collected = 0
-    budget_exhausted = False
-    retry_quota = max(1, budget // 2)
-    retry_used = 0
-    while (retry_projects or cursor < len(projects)) and processed < budget:
-        retrying = bool(retry_projects) and (retry_used < retry_quota or cursor >= len(projects))
-        project = retry_projects.pop(0) if retrying else projects[cursor]
-        try:
-            metadata_body, _ = fetch(f"https://pypi.org/pypi/{urllib.parse.quote(project)}/json", timeout)
-            metadata = json.loads(metadata_body); info = metadata.get("info", {})
-            candidates = [item for item in metadata.get("urls", []) if item.get("packagetype") in {"bdist_wheel", "sdist"}]
-            candidates.sort(key=lambda item: (not _is_wheel(item),
-                                              "none-any" not in item.get("filename", ""), item.get("filename", "")))
-            if not candidates:
-                unavailable[project] = "latest release has no wheel or sdist"
-                failures.pop(project, None)
-            else:
-                package = info.get("name", project); version = info.get("version", "unknown")
-                selected = False; last_error: Exception | None = None
-                for candidate in candidates:
-                    url = candidate["url"]
-                    try:
-                        if _is_wheel(candidate):
-                            commands, spent = _wheel_commands(url, timeout)
-                            downloaded += spent
-                            if downloaded > byte_budget:
-                                budget_exhausted = True
-                                break
-                            rows.extend(_console_script_rows(commands, package, version, info.get("home_page"), url))
-                        else:
-                            artifact, transfer = fetch(url, timeout)
-                            downloaded += transfer["downloaded_bytes"]
-                            if downloaded > byte_budget:
-                                budget_exhausted = True
-                                break
-                            rows.extend(_sdist_rows(artifact, package, version, info.get("home_page"), url))
-                        selected = True
-                        break
-                    except Exception as error:
-                        last_error = error
-                if budget_exhausted:
-                    if retrying:
-                        retry_projects.insert(0, project)
-                    break
-                if not selected:
-                    raise last_error or RegistryCrawlError("no usable wheel or sdist")
-                failures.pop(project, None)
-        except Exception as error:  # keep the cursor moving; failures block exhaustive status
-            _record_failure(failures, unavailable, project, error, attempts)
-            if project in failures and project not in retry_projects:
-                retry_projects.append(project)
-        if not retrying:
-            cursor += 1
-        else:
-            retry_used += 1
-        processed += 1
-        if _due_for_checkpoint(processed):
-            collected += len(rows)
-            checkpoint(rows, cursor=cursor)
-        if budget_exhausted or interrupted():
-            break
-    state["cursor"] = cursor
-    collected += len(rows)
-    _append_rows(output, rows)
-    return {"cursor": cursor, "catalog_size": len(projects), "processed": processed,
-            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
-            "budget_exhausted": budget_exhausted,
-            "unavailable": len(unavailable), "retry_pending": len(retry_projects),
-            "complete": cursor >= len(projects) and not failures and not retry_projects,
-            "coverage_kind": "exhaustive" if cursor >= len(projects) and not failures and not retry_projects else "partial"}
-
-
-def _npm_release_url(name: str) -> str:
-    """Address the latest release, not the packument.
-
-    registry.npmjs.org answers a bare package name with every version it ever
-    published, and `bin` lives inside `versions[...]` — never at the top level, which
-    is where the parser looked.  The `/latest` document is the shape the parser
-    expects and is a few kilobytes rather than megabytes.
-    """
-    return "https://registry.npmjs.org/" + urllib.parse.quote(name, safe="@") + "/latest"
-
-
-def _crawl_npm(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
-               checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
-    """Inspect every npm package once, from the registry's own package list.
-
-    The changes feed carries every revision — over 126 million of them against 4.3
-    million packages — so walking it to reach each package once costs thirty times
-    what enumerating the packages does.
-    """
-    if int(state.get("parser_generation", 1)) < NPM_PARSER_GENERATION:
-        state.update({"parser_generation": NPM_PARSER_GENERATION, "cursor": 0})
-        for retired in ("since", "complete", "retry_packages"):
-            state.pop(retired, None)
-    catalog_file = Path(state.setdefault("packages_file", "data/production/npm-packages.txt"))
-    catalog_file.parent.mkdir(parents=True, exist_ok=True)
-    downloaded = 0
-    if not read_catalog(catalog_file):
-        names: list[str] = []
-        start_key = ""
-        while True:
-            query = {"limit": NPM_CATALOG_PAGE}
-            if start_key:
-                query["startkey"] = json.dumps(start_key)
-            try:
-                body, transfer = fetch(f"{NPM_ALL_DOCS}?{urllib.parse.urlencode(query)}", timeout)
-            except Exception:
-                break  # keep the names already listed rather than losing the whole walk
-            downloaded += transfer["downloaded_bytes"]
-            rows = json.loads(body).get("rows", [])
-            if start_key:
-                rows = [row for row in rows if row.get("id") != start_key]
-            if not rows:
-                break
-            names.extend(row["id"] for row in rows if row.get("id") and not row["id"].startswith("_"))
-            start_key = rows[-1]["id"]
-            if interrupted():
-                break
-        write_catalog(catalog_file, names)
-        checkpoint()  # 431 requests went into this list; do not risk it on a later step
-    packages = read_catalog(catalog_file)
-    cursor = int(state.get("cursor", 0)); processed = 0
-    failures, unavailable, attempts = _failure_state(state)
-    rows_out: list[dict[str, Any]] = []
-    collected = 0
-    budget_exhausted = False
-    # `complete` requires an empty failure list, so a package the cursor walked past
-    # after a network blip would keep npm `partial` for good with no way back to it.
-    retry_names = state.setdefault("retry_npm", [])
-    retry_names[:] = [name for name in retry_names if name not in unavailable]
-    for name in failures:
-        if name not in retry_names:
-            retry_names.append(name)
-    retry_budget = len(retry_names)  # one attempt per queued package per pass
-    while (retry_budget or cursor < len(packages)) and processed < budget:
-        retrying = retry_budget > 0
-        if retrying:
-            retry_budget -= 1
-        name = retry_names.pop(0) if retrying else packages[cursor]
-        try:
-            metadata_url = _npm_release_url(name)
-            metadata_body, transfer = fetch(metadata_url, timeout)
-            downloaded += transfer["downloaded_bytes"]
-            if downloaded > byte_budget:
-                budget_exhausted = True
-                if retrying:
-                    retry_names.insert(0, name)
-                break
-            rows_out.extend(npm_metadata(json.loads(metadata_body), metadata_url))
-            failures.pop(name, None)
-        except Exception as error:
-            _record_failure(failures, unavailable, name, error, attempts)
-            if name in failures and name not in retry_names:
-                retry_names.append(name)  # queued for the next pass, not this one
-        if not retrying:
-            cursor += 1
-        processed += 1
-        if _due_for_checkpoint(processed):
-            collected += len(rows_out)
-            checkpoint(rows_out, cursor=cursor)
-        if interrupted():
-            break
-    state["cursor"] = cursor
-    collected += len(rows_out)
-    _append_rows(output, rows_out)
-    complete = cursor >= len(packages) and not failures and not retry_names
-    return {"cursor": cursor, "catalog_size": len(packages), "processed": processed,
-            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
-            "unavailable": len(unavailable), "retry_pending": len(retry_names),
-            "budget_exhausted": budget_exhausted,
-            "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
 
 
 def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
@@ -1410,8 +1057,8 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
     state = _load_json(state_path, {"version": 1, "sources": {}})
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
-        "pypi": _crawl_pypi, "npm": _crawl_npm, "crates": _crawl_crates,
-        "rubygems": _crawl_rubygems, "packagist": _crawl_packagist, "nuget": _crawl_nuget,
+        "crates": _crawl_crates, "rubygems": _crawl_rubygems,
+        "packagist": _crawl_packagist, "nuget": _crawl_nuget,
     }
     source_budgets = source_budgets or {}
     for source in sources:

@@ -43,12 +43,14 @@ def test_local_publish_includes_os_observations_from_the_checkout():
     assert 'local observed="${ROOT_DIR}/${rows}"' in PARALLEL_CRAWL
 
 
-def test_local_go_source_uses_dedicated_go_runtime_with_failure_restart():
+def test_transactional_sources_use_dedicated_go_runtime_with_failure_restart():
     assert "tools/go_image.sh" in PARALLEL_CRAWL
-    assert 'if [ "${source}" = go ]; then' in PARALLEL_CRAWL
+    assert 'go|npm|pypi)' in PARALLEL_CRAWL
     assert 'global-executables-go-crawler:local' in PARALLEL_CRAWL
     assert "--restart on-failure:5" in PARALLEL_CRAWL
-    assert "crawl --passes 0" in PARALLEL_CRAWL
+    assert 'crawl --source "${source}" --passes 0' in PARALLEL_CRAWL
+    assert 'go|npm|pypi) ;;' in PARALLEL_CRAWL
+    assert 'if [ "${needs_python}" = 1 ]' in PARALLEL_CRAWL
 
 
 def test_manual_and_watched_publication_share_one_exclusive_lock(tmp_path):
@@ -70,11 +72,12 @@ def test_manual_and_watched_publication_share_one_exclusive_lock(tmp_path):
     assert "publication already in progress" in result.stdout
 
 
-def test_python_crawl_loop_rejects_go():
-    result = subprocess.run(
-        ["sh", "tools/crawl_loop.sh"], cwd=ROOT, capture_output=True, text=True,
-        env={**os.environ, "SOURCES": "go"},
-    )
+def test_python_crawl_loop_rejects_transactional_sources():
+    for source in ("go", "npm", "pypi"):
+        result = subprocess.run(
+            ["sh", "tools/crawl_loop.sh"], cwd=ROOT, capture_output=True, text=True,
+            env={**os.environ, "SOURCES": source},
+        )
 
-    assert result.returncode == 2
-    assert "dedicated Go runtime" in result.stderr
+        assert result.returncode == 2
+        assert "transactional Go runtime" in result.stderr

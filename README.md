@@ -587,7 +587,10 @@ Registry artifact inspection is separately resumable. Dedicated local containers
 advance npm, PyPI, Go module, RubyGems, and Packagist cursors and publish checkpoints
 to `artifact-data`. CI performs one daily crates.io dump change check and downloads
 the dump only when it changed. Unchanged canonical data queues no dictionary or Pages
-work. A registry is promoted to `exhaustive` only after its catalog and required
+work. Go modules, npm, and PyPI use the transactional Go runtime; their bbolt state
+commits cursor, retry verdicts, and observations together, while npm/PyPI reuse their
+complete sampled catalogs instead of enumerating them on every pass. A registry is
+promoted to `exhaustive` only after its catalog and required
 artifact inspections complete successfully.
 
 Successful collection does not by itself permit a negative collision claim.
