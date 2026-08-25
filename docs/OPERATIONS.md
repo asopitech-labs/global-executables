@@ -313,8 +313,8 @@ restarted. Other `ge-*` containers still run Python.
 
 The mounted Go state directory contains:
 
-- `registry-state.json`, `intermediate/go.jsonl`, and the report: publishable,
-  Python-compatible snapshot views;
+- `registry-state.json`, `intermediate/go.jsonl`, `go-modules.txt`, and the report:
+  plain Python-compatible runtime snapshot views;
 - `go-crawl.db`: the canonical local transaction store; and
 - `go-modules.txt.index`: a rebuildable exact membership index for the immutable
   catalog prefix.
@@ -323,6 +323,16 @@ The DB and derived index are local operational state and are not published. The 
 catalog is replaced atomically when new names arrive from `index.golang.org`; a stop
 between catalog replacement and DB metadata commit is reconciled from the file tail on
 restart.
+
+Git is a transport boundary, not the runtime format. GitHub rejects individual blobs
+above 100 MiB, so `artifact-data` stores the growing Go observation snapshot and module
+catalog under `data/production/transport/` as deterministic gzip parts with at most
+32 MiB uncompressed content each. A manifest pins part order, compressed and
+uncompressed sizes, per-part SHA-256 digests, and the whole restored-file digest.
+`seed` and `refresh.yml` verify every part before atomically replacing the plain local
+file; missing or corrupt parts fail closed. They retain a plain-file fallback only for
+the legacy migration checkpoint. Publication deletes the legacy Go blobs in the same
+commit that adds the verified shards.
 
 `crawl_parallel.sh publish` merges only the state and crawl-report entries this machine
 owns, and refuses a source whose local cursor is behind the published one — the check

@@ -29,9 +29,9 @@ catalog_for() {
     packagist) echo "packagist-packages.txt packagist-packages.txt.gz" ;;
     nuget) echo "nuget-tools.txt nuget-tools.txt.gz" ;;
     npm) echo "npm-packages.txt npm-packages.txt.gz" ;;
-    # Go's catalogue is appended to page by page so an interrupted sweep resumes, so it
-    # has no gzip twin: one left beside it goes stale the moment the sweep continues, and
-    # `read_catalog` prefers the compressed copy — 993,468 stale names over 1.4M live ones.
+    # Go's live catalogue is appended page by page so an interrupted sweep resumes, so
+    # it has no gzip twin locally: one left beside it goes stale the moment the sweep
+    # continues. The Git transport representation is sharded separately at publish time.
     go) echo "go-modules.txt go-modules.cursor.json" ;;
     *) echo "" ;;
   esac
@@ -48,12 +48,30 @@ seed() {
     > "${BASE}/data/production/registry-state.json"
   for source in ${SOURCES}; do
     for name in $(catalog_for "${source}"); do
-      if git cat-file -e "origin/artifact-data:data/production/${name}" 2>/dev/null; then
+      if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
+         git cat-file -e "origin/artifact-data:data/production/transport/go-modules/manifest.json" 2>/dev/null; then
+        rm -rf "${BASE}/data/production/transport/go-modules"
+        git archive origin/artifact-data data/production/transport/go-modules \
+          | tar -x -C "${BASE}"
+        python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
+          --input-dir "${BASE}/data/production/transport/go-modules" \
+          --output "${BASE}/data/production/go-modules.txt"
+        rm -rf "${BASE}/data/production/transport/go-modules"
+      elif git cat-file -e "origin/artifact-data:data/production/${name}" 2>/dev/null; then
         git show "origin/artifact-data:data/production/${name}" > "${BASE}/data/production/${name}"
       fi
     done
     local rows="data/production/intermediate/${source}.jsonl"
-    if git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
+    if [ "${source}" = go ] && \
+       git cat-file -e "origin/artifact-data:data/production/transport/go-observations/manifest.json" 2>/dev/null; then
+      rm -rf "${BASE}/data/production/transport/go-observations"
+      git archive origin/artifact-data data/production/transport/go-observations \
+        | tar -x -C "${BASE}"
+      python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
+        --input-dir "${BASE}/data/production/transport/go-observations" \
+        --output "${BASE}/${rows}"
+      rm -rf "${BASE}/data/production/transport/go-observations"
+    elif git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
       git show "origin/artifact-data:${rows}" > "${BASE}/${rows}"
     fi
   done
@@ -204,10 +222,26 @@ publish() {
       return "${merge_status}"
     fi
     for name in $(catalog_for "${source}"); do
-      [ -f "${dir}/data/production/${name}" ] && cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
+      if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
+         [ -f "${dir}/data/production/${name}" ]; then
+        python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
+          --input "${dir}/data/production/${name}" \
+          --output-dir "${worktree}/data/production/transport/go-modules"
+        rm -f "${worktree}/data/production/go-modules.txt"
+      elif [ -f "${dir}/data/production/${name}" ]; then
+        cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
+      fi
     done
-    [ -f "${dir}/data/production/intermediate/${source}.jsonl" ] && \
-      cp "${dir}/data/production/intermediate/${source}.jsonl" "${worktree}/data/production/intermediate/${source}.jsonl"
+    if [ "${source}" = go ] && \
+       [ -f "${dir}/data/production/intermediate/go.jsonl" ]; then
+      python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
+        --input "${dir}/data/production/intermediate/go.jsonl" \
+        --output-dir "${worktree}/data/production/transport/go-observations"
+      rm -f "${worktree}/data/production/intermediate/go.jsonl"
+    elif [ -f "${dir}/data/production/intermediate/${source}.jsonl" ]; then
+      cp "${dir}/data/production/intermediate/${source}.jsonl" \
+        "${worktree}/data/production/intermediate/${source}.jsonl"
+    fi
   done
   for source in ${OBSERVATION_SOURCES}; do
     local rows="data/production/intermediate/${source}.jsonl"
