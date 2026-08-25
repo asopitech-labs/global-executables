@@ -2,6 +2,18 @@
   "command": "deploy-server",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/jinchunguang/web-app",
+      "version": "v0.0.0-20191230031526-6fa57cae70bc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jinchunguang/web-app/@v/v0.0.0-20191230031526-6fa57cae70bc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191230031526-6fa57cae70bc"
+    },
+    {
       "ecosystem": "npm",
       "package": "@batistafull/deploy-server",
       "version": "4.0.0",

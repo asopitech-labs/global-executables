@@ -1,8 +1,8 @@
 {
-  "accepted_records": 904662,
+  "accepted_records": 933059,
   "coverage_kind": "partial",
   "failed": [],
-  "input_records": 904672,
+  "input_records": 933071,
   "inputs": [
     "data/production/intermediate/arch.jsonl",
     "data/production/intermediate/debian.jsonl",
@@ -22,8 +22,8 @@
     "data/production/intermediate/macos.jsonl",
     "data/production/intermediate/shell.jsonl"
   ],
-  "previous_unique_executables": 435676,
-  "records": 904672,
+  "previous_unique_executables": 435791,
+  "records": 933071,
   "rejected": [
     {
       "command": "",
@@ -53,6 +53,18 @@
       "command": "# \tthis_module",
       "ecosystem": "pypi",
       "package": "estimates",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "forensic",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "fortunes",
       "reason": "invalid executable name"
     },
     {
@@ -86,9 +98,9 @@
       "reason": "invalid executable name"
     }
   ],
-  "rejected_records": 10,
+  "rejected_records": 12,
   "shrink_reason": null,
   "snapshot": "2026-08-25",
   "status": "success",
-  "unique_executables": 435791
+  "unique_executables": 452472
 }
