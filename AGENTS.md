@@ -25,3 +25,21 @@ actor ambiguous.
 This rule applies to user-visible summaries of reasoning and decisions; it does not
 require disclosure of private chain-of-thought. Agents must provide concise rationale,
 evidence, assumptions, and responsibility boundaries with explicit subjects instead.
+
+## Modern Go development
+
+Before an agent edits a Go file, the agent must read the complete JetBrains Modern Go
+Guidelines list for that file and the Go version declared by `go.mod`:
+
+```console
+./tools/go_container.sh go run github.com/JetBrains/go-modern-guidelines@v0.1.1 list --file-path internal/gocrawl/coordinator.go
+```
+
+The agent must not truncate or filter the list. When a returned guideline may apply
+but its effect is unclear, the agent must run the same command with `explain` and the
+specific guideline IDs. The agent must apply relevant guidance unless it changes
+behavior or does not compile for the declared Go version.
+
+The shared pipeline enforces the standard-library modernization fixes. The agent must
+run `./tools/go_container.sh ./tools/go_pipeline.sh modern` while editing and the full
+`check` command before handoff. A host Go installation is not required.

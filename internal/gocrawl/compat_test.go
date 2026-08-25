@@ -109,7 +109,7 @@ func TestCompatibilityImportAndExportPreserveOtherSources(t *testing.T) {
 
 func bytesLines(body []byte) [][]byte {
 	var lines [][]byte
-	for _, line := range bytes.Split(body, []byte{'\n'}) {
+	for line := range bytes.SplitSeq(body, []byte{'\n'}) {
 		if len(line) > 0 {
 			lines = append(lines, line)
 		}

@@ -166,8 +166,8 @@ func gemspecCommands(body string) ([]string, error) {
 		}
 		for _, child := range lines[index+1:] {
 			trimmed := strings.TrimSpace(child)
-			if strings.HasPrefix(trimmed, "-") {
-				if command := declaredCommand(strings.Trim(strings.TrimSpace(strings.TrimPrefix(trimmed, "-")), "\\\"'")); command != "" {
+			if after, ok := strings.CutPrefix(trimmed, "-"); ok {
+				if command := declaredCommand(strings.Trim(strings.TrimSpace(after), "\\\"'")); command != "" {
 					set[command] = struct{}{}
 				}
 			} else if trimmed != "" && !strings.HasPrefix(child, " ") && !strings.HasPrefix(child, "\t") {

@@ -5,17 +5,19 @@ import (
 	"archive/zip"
 	"bufio"
 	"bytes"
+	"cmp"
 	"compress/gzip"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
+	"maps"
 	"net/http"
 	"net/url"
 	"path"
 	"regexp"
-	"sort"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -70,16 +72,22 @@ func (i *PyPIInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) go
 			candidates = append(candidates, candidate)
 		}
 	}
-	sort.Slice(candidates, func(left, right int) bool {
-		leftWheel, rightWheel := strings.HasSuffix(candidates[left].Filename, ".whl"), strings.HasSuffix(candidates[right].Filename, ".whl")
+	slices.SortFunc(candidates, func(left, right pypiCandidate) int {
+		leftWheel, rightWheel := strings.HasSuffix(left.Filename, ".whl"), strings.HasSuffix(right.Filename, ".whl")
 		if leftWheel != rightWheel {
-			return leftWheel
+			if leftWheel {
+				return -1
+			}
+			return 1
 		}
-		leftAny, rightAny := strings.Contains(candidates[left].Filename, "none-any"), strings.Contains(candidates[right].Filename, "none-any")
+		leftAny, rightAny := strings.Contains(left.Filename, "none-any"), strings.Contains(right.Filename, "none-any")
 		if leftAny != rightAny {
-			return leftAny
+			if leftAny {
+				return -1
+			}
+			return 1
 		}
-		return candidates[left].Filename < candidates[right].Filename
+		return cmp.Compare(left.Filename, right.Filename)
 	})
 	if len(candidates) == 0 {
 		return classifyResult(ctx, result, permanentError{errors.New("latest release has no wheel or sdist")})
@@ -206,7 +214,7 @@ func commandsFromWheel(archive *zip.Reader) ([]string, error) {
 func consoleScripts(body string) []string {
 	set := make(map[string]struct{})
 	section := ""
-	for _, raw := range strings.Split(body, "\n") {
+	for raw := range strings.SplitSeq(body, "\n") {
 		line := strings.TrimSpace(raw)
 		if strings.HasPrefix(line, "[") {
 			section = line
@@ -309,7 +317,7 @@ func commandsFromMetadata(files map[string][]byte) []string {
 
 func collectTOMLScripts(body string, set map[string]struct{}) {
 	section := ""
-	for _, raw := range strings.Split(body, "\n") {
+	for raw := range strings.SplitSeq(body, "\n") {
 		line := strings.TrimSpace(raw)
 		if strings.HasPrefix(line, "[") {
 			section = strings.ToLower(line)
@@ -330,7 +338,7 @@ func collectTOMLScripts(body string, set map[string]struct{}) {
 func collectSetupCFG(body string, set map[string]struct{}) {
 	inEntryPoints := false
 	inConsoleScripts := false
-	for _, raw := range strings.Split(body, "\n") {
+	for raw := range strings.SplitSeq(body, "\n") {
 		line := strings.TrimSpace(raw)
 		if strings.HasPrefix(line, "[") {
 			inEntryPoints = strings.EqualFold(line, "[options.entry_points]")
@@ -379,10 +387,5 @@ func collectSetupPy(body string, set map[string]struct{}) {
 }
 
 func sortedKeys(set map[string]struct{}) []string {
-	values := make([]string, 0, len(set))
-	for value := range set {
-		values = append(values, value)
-	}
-	sort.Strings(values)
-	return values
+	return slices.Sorted(maps.Keys(set))
 }

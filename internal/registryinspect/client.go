@@ -410,8 +410,8 @@ func retryableNetworkError(err error) bool {
 }
 
 func isTimeout(err error) bool {
-	var networkError net.Error
-	return errors.Is(err, context.DeadlineExceeded) || (errors.As(err, &networkError) && networkError.Timeout())
+	networkError, ok := errors.AsType[net.Error](err)
+	return errors.Is(err, context.DeadlineExceeded) || (ok && networkError.Timeout())
 }
 
 type permanentError struct{ error }
@@ -420,12 +420,10 @@ func classify(parent context.Context, err error) (gocrawlVerdict string, message
 	if parent.Err() != nil {
 		return "canceled", parent.Err().Error(), false
 	}
-	var permanent permanentError
-	if errors.As(err, &permanent) {
+	if _, ok := errors.AsType[permanentError](err); ok {
 		return "permanent", err.Error(), false
 	}
-	var httpErr *HTTPError
-	if errors.As(err, &httpErr) {
+	if httpErr, ok := errors.AsType[*HTTPError](err); ok {
 		switch httpErr.StatusCode {
 		case http.StatusNotFound, http.StatusMethodNotAllowed, http.StatusGone, http.StatusUnavailableForLegalReasons:
 			return "permanent", err.Error(), false
@@ -438,10 +436,9 @@ func isNetworkFailure(err error) bool {
 	if errors.Is(err, context.DeadlineExceeded) {
 		return true
 	}
-	var readError *responseReadError
-	if errors.As(err, &readError) {
+	if _, ok := errors.AsType[*responseReadError](err); ok {
 		return true
 	}
-	var networkError net.Error
-	return errors.As(err, &networkError)
+	_, ok := errors.AsType[net.Error](err)
+	return ok
 }

@@ -3,6 +3,7 @@ package gocrawl
 import (
 	"bufio"
 	"bytes"
+	"cmp"
 	"context"
 	"crypto/sha256"
 	"encoding/binary"
@@ -11,7 +12,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"sort"
+	"slices"
 	"strings"
 
 	bolt "go.etcd.io/bbolt"
@@ -291,11 +292,11 @@ func buildCatalogIndex(ctx context.Context, catalogPath, indexPath string) error
 			return err
 		}
 	}
-	sort.Slice(records, func(i, j int) bool {
-		if comparison := bytes.Compare(records[i].hash[:], records[j].hash[:]); comparison != 0 {
-			return comparison < 0
+	slices.SortFunc(records, func(left, right catalogRecord) int {
+		if comparison := bytes.Compare(left.hash[:], right.hash[:]); comparison != 0 {
+			return comparison
 		}
-		return records[i].offset < records[j].offset
+		return cmp.Compare(left.offset, right.offset)
 	})
 	if err := os.MkdirAll(filepath.Dir(indexPath), 0o755); err != nil {
 		return err

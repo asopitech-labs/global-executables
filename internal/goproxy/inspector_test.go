@@ -261,7 +261,7 @@ func TestInspectorDeduplicatesCommandNamesAcrossDirectories(t *testing.T) {
 func TestRangeReaderSupportsZIP64CentralDirectory(t *testing.T) {
 	var archive bytes.Buffer
 	writer := zip.NewWriter(&archive)
-	for index := 0; index < 65_536; index++ {
+	for index := range 65_536 {
 		name := fmt.Sprintf("example.com/zip64@v1.0.0/files/%05d.txt", index)
 		if _, err := writer.CreateHeader(&zip.FileHeader{Name: name, Method: zip.Store}); err != nil {
 			t.Fatal(err)

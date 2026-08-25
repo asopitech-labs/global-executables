@@ -5,7 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"sort"
+	"maps"
+	"slices"
 	"time"
 
 	"github.com/asopitech-labs/global-executables/internal/gocrawl"
@@ -270,11 +271,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 	}
 
 	works := make([]gocrawl.ModuleWork, 0, config.PackageBudget)
-	retryModules := make([]string, 0, len(before.Retries))
-	for module := range before.Retries {
-		retryModules = append(retryModules, module)
-	}
-	sort.Strings(retryModules)
+	retryModules := slices.Sorted(maps.Keys(before.Retries))
 	for _, module := range retryModules {
 		if len(works) >= config.PackageBudget {
 			break

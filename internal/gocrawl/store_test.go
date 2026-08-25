@@ -174,7 +174,7 @@ func TestBoltStoreNeverSettlesUncountedRetry(t *testing.T) {
 	if err := store.Import(context.Background(), ImportSnapshot{}); err != nil {
 		t.Fatal(err)
 	}
-	for attempt := 0; attempt < 9; attempt++ {
+	for attempt := range 9 {
 		result := ModuleResult{
 			Work:    ModuleWork{Module: "example.com/healthy", Retry: attempt > 0, Attempt: 1},
 			Verdict: VerdictRetry, Error: "temporary network failure", UncountedRetry: true,

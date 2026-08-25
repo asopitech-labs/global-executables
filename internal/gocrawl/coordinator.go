@@ -36,9 +36,7 @@ func (c Coordinator) Run(ctx context.Context, works []ModuleWork, inspector Insp
 	resultCh := make(chan ModuleResult, c.MaxInFlight)
 	var workers sync.WaitGroup
 	for range c.Workers {
-		workers.Add(1)
-		go func() {
-			defer workers.Done()
+		workers.Go(func() {
 			for work := range workCh {
 				result := inspector.Inspect(runCtx, work)
 				select {
@@ -47,7 +45,7 @@ func (c Coordinator) Run(ctx context.Context, works []ModuleWork, inspector Insp
 					return
 				}
 			}
-		}()
+		})
 	}
 	defer func() {
 		close(workCh)

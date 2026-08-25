@@ -8,9 +8,10 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"maps"
 	"os"
 	"path/filepath"
-	"sort"
+	"slices"
 	"time"
 )
 
@@ -275,15 +276,13 @@ func exportCompatibility(
 	}
 	failures := make(map[string]string, len(snapshot.Retries))
 	attempts := make(map[string]int, len(snapshot.Retries))
-	retryModules := make([]string, 0, len(snapshot.Retries))
+	retryModules := slices.Sorted(maps.Keys(snapshot.Retries))
 	for module, entry := range snapshot.Retries {
 		failures[module] = entry.Error
 		if entry.Attempts > 0 {
 			attempts[module] = entry.Attempts
 		}
-		retryModules = append(retryModules, module)
 	}
-	sort.Strings(retryModules)
 	var sourceState map[string]any
 	if raw := sources[profile.Source]; len(raw) > 0 {
 		if err := json.Unmarshal(raw, &sourceState); err != nil {
@@ -296,7 +295,7 @@ func exportCompatibility(
 	for _, key := range []string{"modules_file", "packages_file", "projects_file", "names_file", "retry_modules", "retry_npm", "retry_projects", "retry_gems", "retry_packagist"} {
 		delete(sourceState, key)
 	}
-	for key, value := range map[string]any{
+	maps.Copy(sourceState, map[string]any{
 		"catalog_complete":    snapshot.CatalogComplete,
 		"catalog_size":        snapshot.CatalogSize,
 		"catalog_since":       snapshot.CatalogSince,
@@ -307,9 +306,7 @@ func exportCompatibility(
 		"unavailable":         snapshot.Unavailable,
 		profile.CatalogField:  snapshot.ModulesFile,
 		profile.RetryField:    retryModules,
-	} {
-		sourceState[key] = value
-	}
+	})
 	sourceRaw, err := json.Marshal(sourceState)
 	if err != nil {
 		return err

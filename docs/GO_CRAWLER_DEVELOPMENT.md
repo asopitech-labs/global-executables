@@ -16,7 +16,8 @@ implementation for transactional sources.
 
 - Exact compiler: Go 1.26.7 with `GOTOOLCHAIN=local`.
 - Development: digest-pinned official container; host Go is optional.
-- Validation: one shared format, vet, test, race, vulnerability, and build pipeline.
+- Style: JetBrains Modern Go Guidelines v0.1.1 plus the Go 1.26 standard fixers.
+- Validation: one shared format, modernization, vet, test, race, vulnerability, and build pipeline.
 - Runtime: dedicated scratch image and an explicit `crawl` subcommand.
 - Sources: Go modules, npm, PyPI, RubyGems, and Packagist share one engine.
 - Durable state: one bbolt database per source commits observations, retries, cursor,
@@ -29,6 +30,8 @@ implementation for transactional sources.
 No host Go installation is required. Podman is preferred; Docker is supported.
 
 ```console
+./tools/go_container.sh go run github.com/JetBrains/go-modern-guidelines@v0.1.1 list --file-path internal/gocrawl/coordinator.go
+./tools/go_container.sh ./tools/go_pipeline.sh modern
 ./tools/go_container.sh ./tools/go_pipeline.sh check
 ./tools/go_container.sh ./tools/go_pipeline.sh build
 ./tools/go_image.sh go-test global-executables-go-test:local
@@ -45,6 +48,36 @@ GOTOOLCHAIN=local ./tools/go_pipeline.sh check
 
 `go.mod` is the canonical Go version and dependency contract. The development
 container, CI setup, and pipeline version check must all agree with it.
+
+## Modern Go development policy
+
+The project follows the [JetBrains Modern Go Guidelines](https://github.com/JetBrains/go-modern-guidelines)
+for the Go version declared by `go.mod`. Before editing a Go file, a developer or agent
+runs the versioned CLI `list --file-path` command shown above and reads the complete,
+unfiltered output. The developer or agent runs `explain ID...` only for returned rules
+that require a behavior decision. Relevant rules apply unless they would change the
+intended behavior or fail to compile for the declared Go version.
+
+The JetBrains CLI is the review reference; `go fix -diff ./...` is the enforceable
+repository gate. The command uses the exact Go 1.26.7 standard analyzers and fails when
+source still has safe modernization fixes. A developer applies those fixes with
+`./tools/go_container.sh go fix ./...`, reviews the diff, and then runs the full shared
+pipeline. Pinning the advisory CLI in the command avoids an unreviewed guideline change
+while keeping it out of the production module dependency graph.
+
+| Path | Current role | Target role | Action | Delete when | Proof |
+| --- | --- | --- | --- | --- | --- |
+| `go.mod` | Go version, toolchain, dependencies | unchanged canonical contract | keep | never | pipeline environment gate |
+| `Dockerfile.go-crawler` | exact development and runtime images | unchanged container contract | keep | never | container test and smoke build |
+| `tools/go_container.sh` | host-independent Go command runner | unchanged local entrypoint | keep | never | container `modern` and `check` commands |
+| `tools/go_pipeline.sh` | format, test, security, build gates | also owns modernization enforcement | replace | old format-only policy is gone | `modern` rejects a non-empty `go fix -diff` |
+| `cmd/**/*.go`, `internal/**/*.go` | crawler implementation and tests | Go 1.26 idioms without behavior changes | replace | standard fixer reports no diff | `go fix -diff ./...` exits zero |
+| `.github/workflows/validate.yml` | delegates validation to the shared pipeline | unchanged delegation boundary | keep | never | native and container jobs call the shared pipeline |
+| `AGENTS.md`, this guide | human and agent instructions | name the same pre-edit and validation flow | replace | old format-only instructions are gone | policy tests and document review |
+
+CI does not install a second style tool or duplicate guideline logic. The shared
+pipeline remains the single blocker, while the external guideline list informs code
+review for recommendations that standard fixers do not automate.
 
 ## Implementation gate
 
@@ -161,6 +194,7 @@ same file used by developers.
 | Toolchain | compare `go env GOVERSION` with `go.mod` | compiler drift or implicit switching |
 | Dependency hygiene | `go mod tidy -diff`, `go mod verify` | stale manifests or modified module cache |
 | Formatting | `gofmt` check | non-canonical source formatting |
+| Modern Go | `go fix -diff ./...` | safe Go-version-specific modernization still required |
 | Static analysis | `go vet ./...` | suspicious standard-library and concurrency constructs |
 | Unit/integration | `go test ./...` | functional regressions |
 | Concurrency | `go test -race ./...` | exercised data races |
@@ -228,6 +262,9 @@ below the shared branch.
   that the container is using the invoking UID before rerunning it.
 - **Module drift:** run `go mod tidy`, review both manifest files, and rerun the full
   pipeline. Do not accept an unexplained checksum change.
+- **Modernization gate fails:** review `go fix -diff ./...`, apply it with
+  `./tools/go_container.sh go fix ./...`, and rerun the full pipeline. Do not suppress
+  a fixer globally to preserve an older spelling.
 - **Race check fails only in CI:** preserve the failing seed/log and reproduce in the
   exact development image; do not disable `-race` for the package.
 - **Container build sends crawl data:** stop the build and fix `.dockerignore`; runtime
@@ -245,6 +282,7 @@ below the shared branch.
 - [Go dependency and tool management](https://go.dev/doc/modules/managing-dependencies)
 - [Go security best practices](https://go.dev/doc/security/best-practices)
 - [Go race detector](https://go.dev/doc/articles/race_detector)
+- [JetBrains Modern Go Guidelines](https://github.com/JetBrains/go-modern-guidelines)
 - [GitHub `setup-go`](https://github.com/actions/setup-go/blob/main/README.md)
 - [Docker build contexts and `.dockerignore`](https://docs.docker.com/build/concepts/context/)
 - [Docker multi-stage builds](https://docs.docker.com/build/building/multi-stage/)

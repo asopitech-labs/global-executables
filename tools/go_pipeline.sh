@@ -42,6 +42,10 @@ formatting() {
   fi
 }
 
+modernization() {
+  go fix -diff ./...
+}
+
 tests() {
   go vet ./...
   go test ./...
@@ -64,6 +68,7 @@ check() {
   environment
   dependencies
   formatting
+  modernization
   tests
   security
   build
@@ -73,9 +78,10 @@ case "${1:-check}" in
   environment) environment ;;
   dependencies) environment; dependencies ;;
   format) environment; formatting ;;
-  test) environment; dependencies; formatting; tests ;;
+  modern) environment; dependencies; formatting; modernization ;;
+  test) environment; dependencies; formatting; modernization; tests ;;
   security) environment; security ;;
   build) environment; build ;;
   check) check ;;
-  *) echo "usage: $0 {environment|dependencies|format|test|security|build|check}" >&2; exit 2 ;;
+  *) echo "usage: $0 {environment|dependencies|format|modern|test|security|build|check}" >&2; exit 2 ;;
 esac

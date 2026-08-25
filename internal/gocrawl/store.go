@@ -1,6 +1,7 @@
 package gocrawl
 
 import (
+	"cmp"
 	"context"
 	"encoding/binary"
 	"encoding/json"
@@ -8,7 +9,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"sort"
+	"slices"
 	"strings"
 	"time"
 
@@ -255,10 +256,11 @@ func (s *BoltStore) snapshot(ctx context.Context, includeObservations bool) (Sna
 		snapshot, loadErr = snapshotFromTx(tx, includeObservations)
 		return loadErr
 	})
-	sort.Slice(snapshot.Observations, func(i, j int) bool {
-		left, right := snapshot.Observations[i], snapshot.Observations[j]
-		return strings.Join([]string{left.Command, left.Package, left.Source}, "\x00") <
-			strings.Join([]string{right.Command, right.Package, right.Source}, "\x00")
+	slices.SortFunc(snapshot.Observations, func(left, right Observation) int {
+		return cmp.Compare(
+			strings.Join([]string{left.Command, left.Package, left.Source}, "\x00"),
+			strings.Join([]string{right.Command, right.Package, right.Source}, "\x00"),
+		)
 	})
 	return snapshot, err
 }

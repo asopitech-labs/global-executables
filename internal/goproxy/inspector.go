@@ -10,10 +10,11 @@ import (
 	"go/parser"
 	"go/token"
 	"io"
+	"maps"
 	"net"
 	"net/http"
 	"path"
-	"sort"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -157,12 +158,10 @@ func classify(err error) (gocrawl.Verdict, string, bool) {
 	if errors.Is(err, context.Canceled) {
 		return gocrawl.VerdictCanceled, err.Error(), false
 	}
-	var permanent permanentError
-	if errors.As(err, &permanent) {
+	if _, ok := errors.AsType[permanentError](err); ok {
 		return gocrawl.VerdictPermanent, err.Error(), false
 	}
-	var httpErr *HTTPError
-	if errors.As(err, &httpErr) {
+	if httpErr, ok := errors.AsType[*HTTPError](err); ok {
 		switch httpErr.StatusCode {
 		case http.StatusNotFound, http.StatusMethodNotAllowed, http.StatusGone, http.StatusUnavailableForLegalReasons:
 			return gocrawl.VerdictPermanent, err.Error(), false
@@ -175,12 +174,11 @@ func isNetworkFailure(err error) bool {
 	if errors.Is(err, context.DeadlineExceeded) {
 		return true
 	}
-	var readError *responseReadError
-	if errors.As(err, &readError) {
+	if _, ok := errors.AsType[*responseReadError](err); ok {
 		return true
 	}
-	var networkError net.Error
-	return errors.As(err, &networkError)
+	_, ok := errors.AsType[net.Error](err)
+	return ok
 }
 
 func (i *Inspector) latestVersion(ctx context.Context, modulePath string) (string, error) {
@@ -200,8 +198,8 @@ func (i *Inspector) latestVersion(ctx context.Context, modulePath string) (strin
 		}
 		return payload.Version, nil
 	}
-	var httpErr *HTTPError
-	if !errors.As(err, &httpErr) || httpErr.StatusCode != http.StatusNotFound {
+	httpErr, ok := errors.AsType[*HTTPError](err)
+	if !ok || httpErr.StatusCode != http.StatusNotFound {
 		return "", err
 	}
 	listURL := fmt.Sprintf("%s/%s/@v/list", i.config.BaseURL, escaped)
@@ -210,7 +208,7 @@ func (i *Inspector) latestVersion(ctx context.Context, modulePath string) (strin
 		return "", listErr
 	}
 	var selected string
-	for _, candidate := range strings.Fields(string(list.Body)) {
+	for candidate := range strings.FieldsSeq(string(list.Body)) {
 		if semver.IsValid(candidate) && (selected == "" || semver.Compare(candidate, selected) > 0) {
 			selected = candidate
 		}
@@ -263,11 +261,7 @@ func (i *Inspector) inspectArchive(
 			commandSet[command] = struct{}{}
 		}
 	}
-	commands := make([]string, 0, len(commandSet))
-	for command := range commandSet {
-		commands = append(commands, command)
-	}
-	sort.Strings(commands)
+	commands := slices.Sorted(maps.Keys(commandSet))
 	observations := make([]gocrawl.Observation, 0, len(commands))
 	for _, command := range commands {
 		observations = append(observations, gocrawl.Observation{
@@ -286,9 +280,11 @@ func (i *Inspector) archiveSize(ctx context.Context, url string) (int64, error) 
 			return i.validateArchiveSize(size)
 		}
 	}
-	var httpErr *HTTPError
-	if err != nil && (!errors.As(err, &httpErr) || httpErr.StatusCode != http.StatusMethodNotAllowed) {
-		return 0, err
+	if err != nil {
+		httpErr, ok := errors.AsType[*HTTPError](err)
+		if !ok || httpErr.StatusCode != http.StatusMethodNotAllowed {
+			return 0, err
+		}
 	}
 	headers := make(http.Header)
 	headers.Set("Range", "bytes=0-0")
@@ -372,7 +368,7 @@ func commandCandidates(archive *zip.Reader, modulePath, version, escapedPath, es
 }
 
 func excludedPath(relative string) bool {
-	for _, part := range strings.Split(relative, "/") {
+	for part := range strings.SplitSeq(relative, "/") {
 		if part == "vendor" || part == "testdata" {
 			return true
 		}

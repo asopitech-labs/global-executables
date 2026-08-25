@@ -3,10 +3,11 @@ package registryinspect
 import (
 	"context"
 	"encoding/json"
+	"maps"
 	"net/http"
 	"net/url"
 	"path"
-	"sort"
+	"slices"
 	"strings"
 
 	"github.com/asopitech-labs/global-executables/internal/gocrawl"
@@ -88,12 +89,7 @@ func npmCommands(packageName string, raw json.RawMessage) ([]string, error) {
 			set[command] = struct{}{}
 		}
 	}
-	commands := make([]string, 0, len(set))
-	for command := range set {
-		commands = append(commands, command)
-	}
-	sort.Strings(commands)
-	return commands, nil
+	return slices.Sorted(maps.Keys(set)), nil
 }
 
 func npmRepository(raw json.RawMessage) *string {
