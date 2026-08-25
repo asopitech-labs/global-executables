@@ -1,8 +1,8 @@
 {
-  "accepted_records": 842734,
+  "accepted_records": 866474,
   "coverage_kind": "partial",
   "failed": [],
-  "input_records": 842736,
+  "input_records": 866478,
   "inputs": [
     "data/production/intermediate/arch.jsonl",
     "data/production/intermediate/debian.jsonl",
@@ -22,8 +22,8 @@
     "data/production/intermediate/macos.jsonl",
     "data/production/intermediate/shell.jsonl"
   ],
-  "previous_unique_executables": 391201,
-  "records": 842736,
+  "previous_unique_executables": 400443,
+  "records": 866478,
   "rejected": [
     {
       "command": "",
@@ -32,15 +32,27 @@
       "reason": "invalid executable name"
     },
     {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "deeds",
+      "reason": "invalid executable name"
+    },
+    {
       "command": "# As from http://pypi.python.org/pypi?%3Aaction",
       "ecosystem": "pypi",
       "package": "cool-ascii-faces",
       "reason": "invalid executable name"
+    },
+    {
+      "command": "# Full list: https://pypi.python.org/pypi?%3Aaction",
+      "ecosystem": "pypi",
+      "package": "days-until",
+      "reason": "invalid executable name"
     }
   ],
-  "rejected_records": 2,
+  "rejected_records": 4,
   "shrink_reason": null,
   "snapshot": "2026-08-25",
   "status": "success",
-  "unique_executables": 400443
+  "unique_executables": 415524
 }
