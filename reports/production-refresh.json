@@ -1,8 +1,8 @@
 {
-  "accepted_records": 933059,
+  "accepted_records": 973502,
   "coverage_kind": "partial",
   "failed": [],
-  "input_records": 933071,
+  "input_records": 973524,
   "inputs": [
     "data/production/intermediate/arch.jsonl",
     "data/production/intermediate/debian.jsonl",
@@ -22,8 +22,8 @@
     "data/production/intermediate/macos.jsonl",
     "data/production/intermediate/shell.jsonl"
   ],
-  "previous_unique_executables": 435791,
-  "records": 933071,
+  "previous_unique_executables": 452472,
+  "records": 973524,
   "rejected": [
     {
       "command": "",
@@ -35,6 +35,60 @@
       "command": "#\t\t'doc_crawler.py",
       "ecosystem": "pypi",
       "package": "doc_crawler",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_bed_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_custom_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_domain_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_gene_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"collate_counts",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"collate_studies",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"gffindex",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"gffquant",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"split_table",
+      "ecosystem": "pypi",
+      "package": "gqlib",
       "reason": "invalid executable name"
     },
     {
@@ -68,6 +122,12 @@
       "reason": "invalid executable name"
     },
     {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "glamour",
+      "reason": "invalid executable name"
+    },
+    {
       "command": "# As from http://pypi.python.org/pypi?%3Aaction",
       "ecosystem": "pypi",
       "package": "cool-ascii-faces",
@@ -98,9 +158,9 @@
       "reason": "invalid executable name"
     }
   ],
-  "rejected_records": 12,
+  "rejected_records": 22,
   "shrink_reason": null,
   "snapshot": "2026-08-25",
   "status": "success",
-  "unique_executables": 452472
+  "unique_executables": 476302
 }
