@@ -3,6 +3,7 @@ package registryinspect
 import (
 	"context"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"net/http/httptest"
@@ -98,11 +99,11 @@ func TestRequestTimeoutStartsAfterHostGate(t *testing.T) {
 	}))
 	defer server.Close()
 	requester := newRequester(Config{
-		RequestTimeout: 25 * time.Millisecond, PackageTimeout: 300 * time.Millisecond,
+		RequestTimeout: 500 * time.Millisecond, PackageTimeout: 3 * time.Second,
 		MaxAttempts: 1, InitialHostConcurrency: 1, MaxHostConcurrency: 1,
-		MinRequestInterval: 75 * time.Millisecond,
+		MinRequestInterval: time.Second,
 	})
-	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 	for range 2 {
 		if _, err := requester.request(ctx, http.MethodGet, server.URL, nil, 16); err != nil {
@@ -147,6 +148,21 @@ func TestRequesterEnforcesResponseLimit(t *testing.T) {
 	if _, err := requester.request(context.Background(), http.MethodGet, server.URL, nil, 8); err == nil ||
 		!strings.Contains(err.Error(), "response exceeded 8 bytes") {
 		t.Fatalf("limit error=%v", err)
+	}
+}
+
+func TestClassifyMarksOnlyNetworkRetriesUncounted(t *testing.T) {
+	network := classifyResult(context.Background(), gocrawl.ModuleResult{}, &net.DNSError{Err: "temporary", Name: "example.test", IsTemporary: true})
+	if network.Verdict != gocrawl.VerdictRetry || !network.UncountedRetry {
+		t.Fatalf("network result=%+v", network)
+	}
+	content := classifyResult(context.Background(), gocrawl.ModuleResult{}, fmt.Errorf("invalid metadata"))
+	if content.Verdict != gocrawl.VerdictRetry || content.UncountedRetry {
+		t.Fatalf("content result=%+v", content)
+	}
+	truncated := classifyResult(context.Background(), gocrawl.ModuleResult{}, io.ErrUnexpectedEOF)
+	if truncated.Verdict != gocrawl.VerdictRetry || truncated.UncountedRetry {
+		t.Fatalf("parser result=%+v", truncated)
 	}
 }
 

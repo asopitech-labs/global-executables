@@ -10,6 +10,7 @@ import (
 	"go/parser"
 	"go/token"
 	"io"
+	"net"
 	"net/http"
 	"path"
 	"sort"
@@ -117,7 +118,7 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 	defer cancel()
 	version, err := i.latestVersion(moduleCtx, work.Module)
 	if err != nil {
-		result.Verdict, result.Error = classifyInspectionError(ctx, err)
+		result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, err)
 		return result
 	}
 	escapedPath, err := module.EscapePath(work.Module)
@@ -134,7 +135,7 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 	observations, downloaded, err := i.inspectArchive(moduleCtx, url, work.Module, version, escapedPath, escapedVersion)
 	result.DownloadedBytes = downloaded
 	if err != nil {
-		result.Verdict, result.Error = classifyInspectionError(ctx, err)
+		result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, err)
 		return result
 	}
 	result.Verdict = gocrawl.VerdictSuccess
@@ -142,32 +143,44 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 	return result
 }
 
-func classifyInspectionError(parent context.Context, err error) (gocrawl.Verdict, string) {
+func classifyInspectionError(parent context.Context, err error) (gocrawl.Verdict, string, bool) {
 	if parentErr := parent.Err(); parentErr != nil {
-		return gocrawl.VerdictCanceled, parentErr.Error()
+		return gocrawl.VerdictCanceled, parentErr.Error(), false
 	}
 	return classify(err)
 }
 
-func classify(err error) (gocrawl.Verdict, string) {
+func classify(err error) (gocrawl.Verdict, string, bool) {
 	if err == nil {
-		return gocrawl.VerdictSuccess, ""
+		return gocrawl.VerdictSuccess, "", false
 	}
 	if errors.Is(err, context.Canceled) {
-		return gocrawl.VerdictCanceled, err.Error()
+		return gocrawl.VerdictCanceled, err.Error(), false
 	}
 	var permanent permanentError
 	if errors.As(err, &permanent) {
-		return gocrawl.VerdictPermanent, err.Error()
+		return gocrawl.VerdictPermanent, err.Error(), false
 	}
 	var httpErr *HTTPError
 	if errors.As(err, &httpErr) {
 		switch httpErr.StatusCode {
 		case http.StatusNotFound, http.StatusMethodNotAllowed, http.StatusGone, http.StatusUnavailableForLegalReasons:
-			return gocrawl.VerdictPermanent, err.Error()
+			return gocrawl.VerdictPermanent, err.Error(), false
 		}
 	}
-	return gocrawl.VerdictRetry, err.Error()
+	return gocrawl.VerdictRetry, err.Error(), isNetworkFailure(err)
+}
+
+func isNetworkFailure(err error) bool {
+	if errors.Is(err, context.DeadlineExceeded) {
+		return true
+	}
+	var readError *responseReadError
+	if errors.As(err, &readError) {
+		return true
+	}
+	var networkError net.Error
+	return errors.As(err, &networkError)
 }
 
 func (i *Inspector) latestVersion(ctx context.Context, modulePath string) (string, error) {

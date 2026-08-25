@@ -40,6 +40,7 @@ type ModuleResult struct {
 	Observations    []Observation
 	Error           string
 	DownloadedBytes int64
+	UncountedRetry  bool
 }
 
 type Inspector interface {

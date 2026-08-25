@@ -1,6 +1,7 @@
 package gocrawl
 
 import (
+	"context"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -32,6 +33,66 @@ func TestLoadSourceCompatibilityImportsNPMPythonState(t *testing.T) {
 	}
 	if snapshot.ModulesFile != "data/production/npm-packages.txt" || snapshot.Retries["flaky"].Attempts != 2 {
 		t.Fatalf("snapshot=%+v", snapshot)
+	}
+}
+
+func TestLoadSourceCompatibilityImportsRemainingPythonRegistryStates(t *testing.T) {
+	tests := []struct {
+		source, catalogField, retryField string
+	}{
+		{"rubygems", "names_file", "retry_gems"},
+		{"packagist", "packages_file", "retry_packagist"},
+	}
+	for _, test := range tests {
+		t.Run(test.source, func(t *testing.T) {
+			directory := t.TempDir()
+			catalog := filepath.Join(directory, "catalog.txt")
+			state := filepath.Join(directory, "state.json")
+			if err := os.WriteFile(catalog, []byte("alpha\nbeta\n"), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			body := `{"version":1,"sources":{"` + test.source + `":{"cursor":1,"` + test.catalogField + `":"catalog.txt","failures":{"flaky":"invalid archive","network":"timeout"},"failure_attempts":{"flaky":2},"` + test.retryField + `":["flaky","network"]}}}`
+			if err := os.WriteFile(state, []byte(body), 0o644); err != nil {
+				t.Fatal(err)
+			}
+
+			rows := filepath.Join(directory, "rows.jsonl")
+			profile := CompatibilityProfileFor(test.source)
+			snapshot, document, err := LoadSourceCompatibility(state, rows, catalog, profile)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if snapshot.Cursor != 1 || snapshot.CatalogSize != 2 || !snapshot.CatalogComplete ||
+				snapshot.Retries["flaky"].Attempts != 2 || snapshot.Retries["network"].Attempts != 0 {
+				t.Fatalf("snapshot=%+v", snapshot)
+			}
+			store, err := OpenBoltStore(filepath.Join(directory, "crawl.db"), StoreOptions{})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := store.Import(context.Background(), snapshot); err != nil {
+				t.Fatal(err)
+			}
+			paths := ExportPaths{State: state, Observations: rows, Report: filepath.Join(directory, "report.json")}
+			if err := ExportSourceStoreCompatibility(context.Background(), paths, document, store, PassReport{}, profile); err != nil {
+				t.Fatal(err)
+			}
+			if err := store.Close(); err != nil {
+				t.Fatal(err)
+			}
+			reopened, err := OpenBoltStore(filepath.Join(directory, "crawl.db"), StoreOptions{})
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer reopened.Close()
+			restarted, err := reopened.Progress(context.Background())
+			if err != nil {
+				t.Fatal(err)
+			}
+			if restarted.Cursor != 1 || restarted.Retries["flaky"].Attempts != 2 || restarted.Retries["network"].Attempts != 0 {
+				t.Fatalf("restarted=%+v", restarted)
+			}
+		})
 	}
 }
 

@@ -120,8 +120,8 @@ func (i *PyPIInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) go
 }
 
 func classifyResult(parent context.Context, result gocrawl.ModuleResult, err error) gocrawl.ModuleResult {
-	verdict, message := classify(parent, err)
-	result.Verdict, result.Error = gocrawl.Verdict(verdict), message
+	verdict, message, uncountedRetry := classify(parent, err)
+	result.Verdict, result.Error, result.UncountedRetry = gocrawl.Verdict(verdict), message, uncountedRetry
 	return result
 }
 

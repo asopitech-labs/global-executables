@@ -57,6 +57,10 @@ func CompatibilityProfileFor(source string) CompatibilityProfile {
 		return CompatibilityProfile{Source: source, CatalogField: "packages_file", RetryField: "retry_npm", CatalogCompleteDefault: true}
 	case "pypi":
 		return CompatibilityProfile{Source: source, CatalogField: "projects_file", RetryField: "retry_projects", CatalogCompleteDefault: true}
+	case "rubygems":
+		return CompatibilityProfile{Source: source, CatalogField: "names_file", RetryField: "retry_gems", CatalogCompleteDefault: true}
+	case "packagist":
+		return CompatibilityProfile{Source: source, CatalogField: "packages_file", RetryField: "retry_packagist", CatalogCompleteDefault: true}
 	default:
 		return CompatibilityProfile{Source: "go", CatalogField: "modules_file", RetryField: "retry_modules"}
 	}
@@ -70,11 +74,14 @@ type compatibilityState struct {
 	ModulesFile     string            `json:"modules_file"`
 	PackagesFile    string            `json:"packages_file"`
 	ProjectsFile    string            `json:"projects_file"`
+	NamesFile       string            `json:"names_file"`
 	Failures        map[string]string `json:"failures"`
 	FailureAttempts map[string]int    `json:"failure_attempts"`
 	RetryModules    []string          `json:"retry_modules"`
 	RetryNPM        []string          `json:"retry_npm"`
 	RetryProjects   []string          `json:"retry_projects"`
+	RetryGems       []string          `json:"retry_gems"`
+	RetryPackagist  []string          `json:"retry_packagist"`
 	Unavailable     map[string]string `json:"unavailable"`
 }
 
@@ -119,9 +126,6 @@ func LoadSourceCompatibility(statePath, observationsPath, catalogPath string, pr
 	retries := make(map[string]RetryEntry)
 	for module, reason := range state.Failures {
 		attempts := state.FailureAttempts[module]
-		if attempts <= 0 {
-			attempts = 1
-		}
 		retries[module] = RetryEntry{Error: reason, Attempts: attempts}
 	}
 	retryNames := state.RetryModules
@@ -129,10 +133,14 @@ func LoadSourceCompatibility(statePath, observationsPath, catalogPath string, pr
 		retryNames = state.RetryNPM
 	} else if profile.RetryField == "retry_projects" {
 		retryNames = state.RetryProjects
+	} else if profile.RetryField == "retry_gems" {
+		retryNames = state.RetryGems
+	} else if profile.RetryField == "retry_packagist" {
+		retryNames = state.RetryPackagist
 	}
 	for _, module := range retryNames {
 		if _, exists := retries[module]; !exists {
-			retries[module] = RetryEntry{Error: state.Failures[module], Attempts: max(1, state.FailureAttempts[module])}
+			retries[module] = RetryEntry{Error: state.Failures[module], Attempts: state.FailureAttempts[module]}
 		}
 	}
 	observations, err := loadObservations(observationsPath)
@@ -151,6 +159,8 @@ func LoadSourceCompatibility(statePath, observationsPath, catalogPath string, pr
 		catalogFile = state.PackagesFile
 	} else if profile.CatalogField == "projects_file" {
 		catalogFile = state.ProjectsFile
+	} else if profile.CatalogField == "names_file" {
+		catalogFile = state.NamesFile
 	}
 	if catalogFile == "" {
 		catalogFile = catalogPath
@@ -268,7 +278,9 @@ func exportCompatibility(
 	retryModules := make([]string, 0, len(snapshot.Retries))
 	for module, entry := range snapshot.Retries {
 		failures[module] = entry.Error
-		attempts[module] = entry.Attempts
+		if entry.Attempts > 0 {
+			attempts[module] = entry.Attempts
+		}
 		retryModules = append(retryModules, module)
 	}
 	sort.Strings(retryModules)
@@ -281,7 +293,7 @@ func exportCompatibility(
 	if sourceState == nil {
 		sourceState = make(map[string]any)
 	}
-	for _, key := range []string{"modules_file", "packages_file", "projects_file", "retry_modules", "retry_npm", "retry_projects"} {
+	for _, key := range []string{"modules_file", "packages_file", "projects_file", "names_file", "retry_modules", "retry_npm", "retry_projects", "retry_gems", "retry_packagist"} {
 		delete(sourceState, key)
 	}
 	for key, value := range map[string]any{

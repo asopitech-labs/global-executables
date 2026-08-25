@@ -45,12 +45,29 @@ def test_local_publish_includes_os_observations_from_the_checkout():
 
 def test_transactional_sources_use_dedicated_go_runtime_with_failure_restart():
     assert "tools/go_image.sh" in PARALLEL_CRAWL
-    assert 'go|npm|pypi)' in PARALLEL_CRAWL
+    assert 'go|npm|pypi|rubygems|packagist)' in PARALLEL_CRAWL
     assert 'global-executables-go-crawler:local' in PARALLEL_CRAWL
     assert "--restart on-failure:5" in PARALLEL_CRAWL
     assert 'crawl --source "${source}" --passes 0' in PARALLEL_CRAWL
-    assert 'go|npm|pypi) ;;' in PARALLEL_CRAWL
+    assert 'go|npm|pypi|rubygems|packagist) ;;' in PARALLEL_CRAWL
     assert 'if [ "${needs_python}" = 1 ]' in PARALLEL_CRAWL
+
+
+def test_parallel_crawl_uses_podman_when_docker_is_missing(tmp_path):
+    podman = tmp_path / "podman"
+    podman.write_text("#!/bin/sh\nprintf 'Up 1 minute'\n")
+    podman.chmod(0o755)
+
+    result = subprocess.run(
+        ["bash", "tools/crawl_parallel.sh", "status"], cwd=ROOT,
+        capture_output=True, text=True,
+        env={**os.environ, "PATH": f"{tmp_path}:/usr/bin:/bin", "BASE": str(tmp_path / "state"),
+             "SOURCES": "rubygems"},
+    )
+
+    assert result.returncode == 0
+    assert "Up 1 minute" in result.stdout
+    assert "not running" not in result.stdout
 
 
 def test_manual_and_watched_publication_share_one_exclusive_lock(tmp_path):
@@ -73,7 +90,7 @@ def test_manual_and_watched_publication_share_one_exclusive_lock(tmp_path):
 
 
 def test_python_crawl_loop_rejects_transactional_sources():
-    for source in ("go", "npm", "pypi"):
+    for source in ("go", "npm", "pypi", "rubygems", "packagist"):
         result = subprocess.run(
             ["sh", "tools/crawl_loop.sh"], cwd=ROOT, capture_output=True, text=True,
             env={**os.environ, "SOURCES": source},

@@ -21,6 +21,17 @@ PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
 BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
 PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"
 
+if [ -n "${CONTAINER_RUNTIME:-}" ]; then
+  RUNTIME="${CONTAINER_RUNTIME}"
+elif command -v podman >/dev/null 2>&1; then
+  RUNTIME=podman
+elif command -v docker >/dev/null 2>&1; then
+  RUNTIME=docker
+else
+  echo "Podman or Docker is required." >&2
+  exit 1
+fi
+
 # Catalogs are per source, so each container carries only the one it reads.
 catalog_for() {
   case "$1" in
@@ -108,15 +119,15 @@ start() {
   local needs_python=0
   for source in ${SOURCES}; do
     case "${source}" in
-      go|npm|pypi) ;;
+      go|npm|pypi|rubygems|packagist) ;;
       *) needs_python=1 ;;
     esac
   done
   if [ "${needs_python}" = 1 ]; then
-    docker build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
+    "${RUNTIME}" build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
   fi
   case " ${SOURCES} " in
-    *" go "*|*" npm "*|*" pypi "*) tools/go_image.sh runtime "${GO_IMAGE}" >/dev/null ;;
+    *" go "*|*" npm "*|*" pypi "*|*" rubygems "*|*" packagist "*) CONTAINER_RUNTIME="${RUNTIME}" tools/go_image.sh runtime "${GO_IMAGE}" >/dev/null ;;
   esac
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
@@ -143,15 +154,15 @@ PY
        [ ! -f "${dir}/data/production/intermediate/${source}.jsonl" ]; then
       cp "${BASE}/data/production/intermediate/${source}.jsonl" "${dir}/data/production/intermediate/${source}.jsonl"
     fi
-    docker rm -f "ge-${source}" >/dev/null 2>&1 || true
+    "${RUNTIME}" rm -f "ge-${source}" >/dev/null 2>&1 || true
     case "${source}" in
-      go|npm|pypi)
-        docker run --detach --init --name "ge-${source}" --restart on-failure:5 \
+      go|npm|pypi|rubygems|packagist)
+        "${RUNTIME}" run --detach --init --name "ge-${source}" --restart on-failure:5 \
           -v "${dir}:/state" "${GO_IMAGE}" crawl --source "${source}" --passes 0 \
           --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}" >/dev/null
         ;;
       *)
-        docker run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
+        "${RUNTIME}" run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
           -e "SOURCES=${source}" -e "PACKAGE_BUDGET=${PACKAGE_BUDGET}" \
           -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" "${IMAGE}" >/dev/null
         ;;
@@ -163,7 +174,7 @@ PY
 status() {
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
-    printf '%-10s %-24s ' "${source}" "$(docker ps --filter "name=ge-${source}" --format '{{.Status}}' || echo 'not running')"
+    printf '%-10s %-24s ' "${source}" "$("${RUNTIME}" ps --filter "name=ge-${source}" --format '{{.Status}}' || echo 'not running')"
     python3 - "$dir" "$source" <<'PY'
 import json, pathlib, sys
 state = pathlib.Path(sys.argv[1]) / "data/production/registry-state.json"
@@ -330,7 +341,7 @@ watch() {
   local interval="${PUBLISH_INTERVAL:-1800}"
   while :; do
     sleep "${interval}"
-    if ! docker ps --format '{{.Names}}' | grep -q '^ge-'; then
+    if ! "${RUNTIME}" ps --format '{{.Names}}' | grep -q '^ge-'; then
       echo "$(date -u +%FT%TZ) no crawl containers left; stopping the publisher"
       break
     fi
@@ -347,6 +358,6 @@ case "${1:-start}" in
   merge) merge ;;
   publish) publish_locked ;;
   watch) watch ;;
-  stop) for source in ${SOURCES}; do docker stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
+  stop) for source in ${SOURCES}; do "${RUNTIME}" stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
   *) echo "usage: $0 {seed|start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
 esac

@@ -66,6 +66,11 @@ type responseData struct {
 	body       []byte
 }
 
+type responseReadError struct{ err error }
+
+func (e *responseReadError) Error() string { return e.err.Error() }
+func (e *responseReadError) Unwrap() error { return e.err }
+
 type HTTPError struct {
 	StatusCode int
 	URL        string
@@ -227,14 +232,15 @@ func (r *requester) request(ctx context.Context, method, target string, headers 
 		gate.release(resp.StatusCode, readErr, r.retryAfter(resp.Header.Get("Retry-After")))
 		cancel()
 		if readErr != nil {
-			lastErr = readErr
+			transportErr := &responseReadError{err: readErr}
+			lastErr = transportErr
 			if attempt < r.config.MaxAttempts {
 				if err := r.wait(ctx, attempt, ""); err != nil {
 					return responseData{}, err
 				}
 				continue
 			}
-			return responseData{}, readErr
+			return responseData{}, transportErr
 		}
 		if closeErr != nil {
 			return responseData{}, closeErr
@@ -410,20 +416,32 @@ func isTimeout(err error) bool {
 
 type permanentError struct{ error }
 
-func classify(parent context.Context, err error) (gocrawlVerdict string, message string) {
+func classify(parent context.Context, err error) (gocrawlVerdict string, message string, uncountedRetry bool) {
 	if parent.Err() != nil {
-		return "canceled", parent.Err().Error()
+		return "canceled", parent.Err().Error(), false
 	}
 	var permanent permanentError
 	if errors.As(err, &permanent) {
-		return "permanent", err.Error()
+		return "permanent", err.Error(), false
 	}
 	var httpErr *HTTPError
 	if errors.As(err, &httpErr) {
 		switch httpErr.StatusCode {
 		case http.StatusNotFound, http.StatusMethodNotAllowed, http.StatusGone, http.StatusUnavailableForLegalReasons:
-			return "permanent", err.Error()
+			return "permanent", err.Error(), false
 		}
 	}
-	return "retry", err.Error()
+	return "retry", err.Error(), isNetworkFailure(err)
+}
+
+func isNetworkFailure(err error) bool {
+	if errors.Is(err, context.DeadlineExceeded) {
+		return true
+	}
+	var readError *responseReadError
+	if errors.As(err, &readError) {
+		return true
+	}
+	var networkError net.Error
+	return errors.As(err, &networkError)
 }

@@ -6,7 +6,7 @@
 # mounted working directory, which mirrors the artifact-data branch layout.
 set -eu
 
-SOURCES=${SOURCES:-"crates rubygems packagist"}
+SOURCES=${SOURCES:-"crates nuget"}
 PACKAGE_BUDGET=${PACKAGE_BUDGET:-2000}
 BYTE_BUDGET=${BYTE_BUDGET:-5000000000}
 SOURCE_PACKAGE_BUDGETS=${SOURCE_PACKAGE_BUDGETS:-}
@@ -20,8 +20,8 @@ TIMEOUT=${TIMEOUT:-90}
 PASS_TIMEOUT=${PASS_TIMEOUT:-5400}
 
 case " ${SOURCES} " in
-  *" go "*|*" npm "*|*" pypi "*)
-    echo "Go, npm, and PyPI are not supported by the Python crawl loop; use the transactional Go runtime via tools/crawl_parallel.sh" >&2
+  *" go "*|*" npm "*|*" pypi "*|*" rubygems "*|*" packagist "*)
+    echo "Go, npm, PyPI, RubyGems, and Packagist are not supported by the Python crawl loop; use the transactional Go runtime via tools/crawl_parallel.sh" >&2
     exit 2
     ;;
 esac

@@ -118,6 +118,36 @@ func TestBoltStoreMovesRepeatedFailureToUnavailable(t *testing.T) {
 	}
 }
 
+func TestBoltStoreNeverSettlesUncountedRetry(t *testing.T) {
+	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{FailureAttemptLimit: 3})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.Import(context.Background(), ImportSnapshot{}); err != nil {
+		t.Fatal(err)
+	}
+	for attempt := 0; attempt < 9; attempt++ {
+		result := ModuleResult{
+			Work:    ModuleWork{Module: "example.com/healthy", Retry: attempt > 0, Attempt: 1},
+			Verdict: VerdictRetry, Error: "temporary network failure", UncountedRetry: true,
+		}
+		if attempt == 0 {
+			result.Work.CatalogOffset = 20
+		}
+		if err := store.Commit(context.Background(), []ModuleResult{result}); err != nil {
+			t.Fatal(err)
+		}
+	}
+	snapshot, err := store.Snapshot(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if snapshot.Retries["example.com/healthy"].Attempts != 0 || len(snapshot.Unavailable) != 0 {
+		t.Fatalf("snapshot=%+v", snapshot)
+	}
+}
+
 func TestBoltStoreProgressOmitsHeavyObservations(t *testing.T) {
 	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{})
 	if err != nil {

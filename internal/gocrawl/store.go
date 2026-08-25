@@ -212,12 +212,15 @@ func (s *BoltStore) applyVerdict(tx *bolt.Tx, result ModuleResult) error {
 		}
 		return unavailable.Put(module, []byte(result.Error))
 	case VerdictRetry:
+		var previous RetryEntry
+		if value := retries.Get(module); value != nil {
+			_ = json.Unmarshal(value, &previous)
+		}
+		if result.UncountedRetry {
+			return putJSON(retries, result.Work.Module, RetryEntry{Error: result.Error, Attempts: previous.Attempts})
+		}
 		attempts := result.Work.Attempt
 		if attempts <= 0 {
-			var previous RetryEntry
-			if value := retries.Get(module); value != nil {
-				_ = json.Unmarshal(value, &previous)
-			}
 			attempts = previous.Attempts + 1
 		}
 		if attempts >= s.failureAttemptLimit {
