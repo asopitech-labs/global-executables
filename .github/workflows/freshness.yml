@@ -1,8 +1,8 @@
-name: Incremental freshness scan
+name: Fixture freshness scenario
 
+# This is a bounded scenario over immutable fixtures, not production freshness
+# evidence. Run it explicitly when testing scheduler/state behavior.
 on:
-  schedule:
-    - cron: "17 */6 * * *"
   workflow_dispatch:
     inputs:
       partition_budget:
@@ -34,14 +34,6 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -e '.[test]'
-      - name: Restore published dictionary
-        run: |
-          set -o pipefail
-          git fetch origin dictionary
-          git archive origin/dictionary data | tar -x -C .
-          test -s data/metadata.json
-          test -d data/executables
-          test -d data/indexes
       - name: Restore persisted freshness state
         run: |
           git fetch origin freshness-data || true

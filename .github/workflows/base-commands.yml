@@ -1,11 +1,9 @@
 name: Observe base command sets
 
 # A base command set is not published anywhere, so it is sampled from installed
-# systems.  No single observation is privileged — this workflow adds runner images
-# to whatever the maintainers observe locally, and the samples accumulate.
+# systems. No single observation is privileged. Samples accumulate durably and an
+# operator runs this workflow only when a new environment is intentionally sampled.
 on:
-  schedule:
-    - cron: "23 5 * * 1"
   workflow_dispatch:
 
 permissions:

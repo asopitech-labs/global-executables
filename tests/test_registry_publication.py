@@ -115,6 +115,27 @@ def test_both_publishers_use_source_owned_merge():
     assert "merge_status" in PARALLEL
 
 
+def test_ci_publisher_reports_whether_canonical_data_changed():
+    publish = WORKFLOW.split("Publish resumable state and normalized observations", 1)[1].split(
+        "Queue the next crawl or the generated refresh", 1
+    )[0]
+
+    assert "id: publish" in publish
+    assert 'echo "changed=true" >> "$GITHUB_OUTPUT"' in publish
+    assert 'echo "changed=false" >> "$GITHUB_OUTPUT"' in publish
+
+
+def test_unchanged_crates_dump_does_not_republish_a_run_only_report_change():
+    publish = WORKFLOW.split("Publish resumable state and normalized observations", 1)[1].split(
+        "Queue the next crawl or the generated refresh", 1
+    )[0]
+
+    unchanged_guard = "'.sources.crates.unchanged == true'"
+    assert unchanged_guard in publish
+    assert publish.index(unchanged_guard) < publish.index("bash tools/crawl_parallel.sh publish")
+    assert "The crates dump is unchanged; skipping canonical publication." in publish
+
+
 def test_shared_publisher_retries_from_a_fresh_remote_snapshot():
     assert 'PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"' in PARALLEL
     assert 'local attempt="${PUBLISH_ATTEMPT:-1}"' in PARALLEL

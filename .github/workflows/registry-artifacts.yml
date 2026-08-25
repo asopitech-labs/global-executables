@@ -2,12 +2,13 @@ name: Registry artifact crawl
 
 # Every catalog-walking source is filled from local containers, which have neither the
 # six-hour job limit nor the one-run-at-a-time group and run one per registry.  CI
-# keeps crates.io, whose whole registry arrives in a single dump and which therefore
-# finishes inside a job.  Both writers share the artifact-data branch, so they must
-# never share a source.
+# keeps crates.io, whose whole registry arrives in a single daily dump and which
+# therefore finishes inside a job. Both writers share the artifact-data branch, so
+# they must never share a source. One daily Last-Modified check avoids downloading an
+# unchanged dump or rebuilding derived artifacts from unchanged canonical data.
 on:
   schedule:
-    - cron: "47 */6 * * *"
+    - cron: "47 4 * * *"
   workflow_dispatch:
     inputs:
       package_budget:
@@ -43,32 +44,14 @@ jobs:
       - name: Restore resumable registry state
         run: |
           git fetch origin artifact-data || true
-          mkdir -p /tmp/before
           mkdir -p data/production/intermediate
           if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
           fi
-          # go-modules.txt has no .gz twin on purpose: the catalogue is appended page by
-          # page so an interrupted sweep resumes, and read_catalog prefers a compressed
-          # copy -- a stale one beside it is read in place of the live list.
-          for catalog in pypi-projects.txt rubygems-names.txt packagist-packages.txt \
-                         go-modules.txt go-modules.cursor.json \
-                         nuget-tools.txt nuget-tools.txt.gz npm-packages.txt npm-packages.txt.gz \
-                         pypi-projects.txt.gz rubygems-names.txt.gz packagist-packages.txt.gz; do
-            if git cat-file -e origin/artifact-data:data/production/$catalog 2>/dev/null; then
-              git show origin/artifact-data:data/production/$catalog > data/production/$catalog
-            fi
-          done
-          for source in npm pypi crates go rubygems packagist nuget; do
-            if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
-              git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
-            fi
-          done
-      - name: Record where each cursor started
-        run: |
-          # "Published" has to mean "something advanced", so the starting cursors are
-          # kept and the publish step reports the difference rather than a bare commit.
-          cp data/production/registry-state.json /tmp/before/registry-state.json 2>/dev/null || echo '{}' > /tmp/before/registry-state.json
+          if git cat-file -e origin/artifact-data:data/production/intermediate/crates.jsonl 2>/dev/null; then
+            git show origin/artifact-data:data/production/intermediate/crates.jsonl \
+              > data/production/intermediate/crates.jsonl
+          fi
       - name: Run bounded artifact inspection
         id: crawl
         continue-on-error: true
@@ -93,8 +76,15 @@ jobs:
           name: registry-artifact-crawl-report
           path: reports/registry-artifact-crawl.json
       - name: Publish resumable state and normalized observations
+        id: publish
         if: always()
         run: |
+          if test -f reports/registry-artifact-crawl.json && \
+             jq -e '.sources.crates.unchanged == true' reports/registry-artifact-crawl.json >/dev/null; then
+            echo "The crates dump is unchanged; skipping canonical publication."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           rm -rf /tmp/ci-registry-crates
           mkdir -p /tmp/ci-registry-crates/data/production/intermediate \
             /tmp/ci-registry-crates/reports
@@ -110,24 +100,33 @@ jobs:
           fi
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          BASE=/tmp/ci-registry SOURCES=crates OBSERVATION_SOURCES=' ' \
-            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish
+          publish_output="$(BASE=/tmp/ci-registry SOURCES=crates OBSERVATION_SOURCES=' ' \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "$publish_output"
+          if printf '%s\n' "$publish_output" | grep -qx published; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Queue the next crawl or the generated refresh
-        if: always()
+        if: always() && steps.publish.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
           PACKAGE_BUDGET: ${{ inputs.package_budget || '1000' }}
           BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
+          PUBLISHED_CHANGED: ${{ steps.publish.outputs.changed || 'false' }}
         run: |
           if test ! -f reports/registry-artifact-crawl.json; then
             echo "::warning::No crawl report was produced; not queueing a follow-up."
             exit 0
           fi
-          # A run this workflow dispatched with GITHUB_TOKEN does not emit the
-          # workflow_run event pages.yml listens for, so publish the page explicitly.
-          gh workflow run pages.yml --ref main || echo "::warning::Could not queue the Pages deploy."
           if jq -e '.coverage_kind == "exhaustive" and .status == "success"' reports/registry-artifact-crawl.json >/dev/null; then
-            gh workflow run refresh.yml --ref main
+            if test "$PUBLISHED_CHANGED" = true; then
+              # refresh.yml rebuilds dictionary and dispatches Pages after publication.
+              gh workflow run refresh.yml --ref main
+            else
+              echo "The crates dump is unchanged; no derived workflow is needed."
+            fi
           else
             gh workflow run registry-artifacts.yml --ref main \
               -f package_budget="$PACKAGE_BUDGET" \
