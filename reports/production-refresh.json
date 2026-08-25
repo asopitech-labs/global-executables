@@ -1,8 +1,8 @@
 {
-  "accepted_records": 866474,
+  "accepted_records": 904519,
   "coverage_kind": "partial",
   "failed": [],
-  "input_records": 866478,
+  "input_records": 904529,
   "inputs": [
     "data/production/intermediate/arch.jsonl",
     "data/production/intermediate/debian.jsonl",
@@ -22,8 +22,8 @@
     "data/production/intermediate/macos.jsonl",
     "data/production/intermediate/shell.jsonl"
   ],
-  "previous_unique_executables": 400443,
-  "records": 866478,
+  "previous_unique_executables": 415524,
+  "records": 904529,
   "rejected": [
     {
       "command": "",
@@ -32,9 +32,27 @@
       "reason": "invalid executable name"
     },
     {
+      "command": "#\t\t'doc_crawler.py",
+      "ecosystem": "pypi",
+      "package": "doc_crawler",
+      "reason": "invalid executable name"
+    },
+    {
       "command": "# \tthis_module",
       "ecosystem": "pypi",
       "package": "deeds",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "earring",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "estimates",
       "reason": "invalid executable name"
     },
     {
@@ -48,11 +66,29 @@
       "ecosystem": "pypi",
       "package": "days-until",
       "reason": "invalid executable name"
+    },
+    {
+      "command": "https://github.com/mtigas/django-medusa/tarball/master#egg",
+      "ecosystem": "pypi",
+      "package": "django-things",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "https://github.com/sklfihggczx/every_hello_tools",
+      "ecosystem": "pypi",
+      "package": "every-hello-tools-zs",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "https://svn.openplans.org/svn/topp.utils#egg",
+      "ecosystem": "pypi",
+      "package": "externalator",
+      "reason": "invalid executable name"
     }
   ],
-  "rejected_records": 4,
+  "rejected_records": 10,
   "shrink_reason": null,
   "snapshot": "2026-08-25",
   "status": "success",
-  "unique_executables": 415524
+  "unique_executables": 435676
 }

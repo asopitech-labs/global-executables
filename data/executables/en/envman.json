@@ -2,6 +2,18 @@
   "command": "envman",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/bitrise-io/envman",
+      "version": "v0.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bitrise-io/envman/@v/v0.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0"
+    },
+    {
       "ecosystem": "packagist",
       "package": "brainmaestro/envman",
       "version": "v0.1.0",
@@ -12,6 +24,18 @@
       "language": "php",
       "registry": "packagist",
       "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "envman-cli",
+      "version": "1.0.3",
+      "repository": "https://github.com/ahmad0303/envman",
+      "source": "https://files.pythonhosted.org/packages/4d/72/d195db5c442bd5a773bf38151fa901ca0cf9fe636d0c5c9eef78619c77bb/envman_cli-1.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.3"
     }
   ],
   "first_seen": "2026-08-24",
