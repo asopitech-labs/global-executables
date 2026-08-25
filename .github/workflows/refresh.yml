@@ -44,6 +44,7 @@ jobs:
           test -d data/indexes
       - name: Restore latest durable observations
         run: |
+          set -o pipefail
           if artifact_ref=$(git ls-remote --heads origin artifact-data); then
             if test -n "$artifact_ref"; then
               git fetch origin artifact-data
@@ -58,7 +59,16 @@ jobs:
           for source in \
             arch debian ubuntu homebrew msys2 scoop winget windows \
             npm pypi crates go rubygems packagist nuget macos shell; do
-            if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
+            if test "$source" = go && \
+               git cat-file -e origin/artifact-data:data/production/transport/go-observations/manifest.json 2>/dev/null; then
+              rm -rf /tmp/artifact-transport
+              mkdir -p /tmp/artifact-transport
+              git archive origin/artifact-data data/production/transport/go-observations \
+                | tar -x -C /tmp/artifact-transport
+              python tools/transport_shards.py unpack \
+                --input-dir /tmp/artifact-transport/data/production/transport/go-observations \
+                --output data/production/intermediate/go.jsonl
+            elif git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
               git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
             else
               if test -f fixtures/intermediate/$source.jsonl; then
