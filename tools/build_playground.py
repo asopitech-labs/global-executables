@@ -9,12 +9,25 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
+CRAWL_SCHEDULE = "47 4 * * *"
+CRAWL_HOUR = 4
+CRAWL_MINUTE = 47
+
+
 def next_crawl(now: datetime) -> datetime:
     candidates = []
-    for day in range(3):
+    for day in range(2):
         date = (now + timedelta(days=day)).date()
-        for hour in (0, 6, 12, 18):
-            candidates.append(datetime(date.year, date.month, date.day, hour, 47, tzinfo=timezone.utc))
+        candidates.append(
+            datetime(
+                date.year,
+                date.month,
+                date.day,
+                CRAWL_HOUR,
+                CRAWL_MINUTE,
+                tzinfo=timezone.utc,
+            )
+        )
     return next(value for value in candidates if value > now)
 
 
@@ -42,7 +55,7 @@ def main() -> None:
     status = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "next_crawl_at": next_crawl(now).isoformat().replace("+00:00", "Z"),
-        "schedule": "47 */6 * * *",
+        "schedule": CRAWL_SCHEDULE,
         "artifact_data_commit": args.artifact_data_commit,
         "dictionary_commit": args.dictionary_commit,
         "main_commit": args.main_commit,

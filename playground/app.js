@@ -27,12 +27,10 @@ function coverageScope(metadata) {
 function nextScheduled(now = new Date()) {
   const candidate = new Date(now);
   candidate.setUTCSeconds(0, 0);
-  for (let day = 0; day < 3; day += 1) {
-    for (const hour of [0, 6, 12, 18]) {
-      candidate.setUTCDate(now.getUTCDate() + day);
-      candidate.setUTCHours(hour, 47, 0, 0);
-      if (candidate > now) return candidate;
-    }
+  for (let day = 0; day < 2; day += 1) {
+    candidate.setUTCDate(now.getUTCDate() + day);
+    candidate.setUTCHours(4, 47, 0, 0);
+    if (candidate > now) return candidate;
   }
   return candidate;
 }
@@ -54,7 +52,7 @@ function renderOverview() {
   $("metric-next-note").textContent = `${new Intl.DateTimeFormat(undefined, { timeStyle: "short" }).format(new Date(next))} · local time`;
   $("status-meta").textContent = `Report observed ${formatDate(state.status?.generated_at)} · ${state.status?.artifact_data_commit ? state.status.artifact_data_commit.slice(0, 8) : "live"}`;
   $("schedule-title").textContent = `Next scheduled crawl · ${formatDate(next)}`;
-  $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "47 */6 * * *"} UTC at the latest · runs chain back to back while a registry is still partial.`;
+  $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "47 4 * * *"} UTC · unchanged dumps do not publish or rebuild.`;
   const dictionaryCommit = state.status?.dictionary_commit?.slice(0, 8) || "live";
   $("footer-build").textContent = `Dictionary ${dictionaryCommit} · snapshot ${metadata.snapshot || "unknown"} · data served from GitHub raw content.`;
 
@@ -193,7 +191,7 @@ async function runQuery(event) {
 }
 async function boot() {
   try { state.metadata = await json(`${RAW_BASE}/data/metadata.json`); } catch (error) { $("result").textContent = JSON.stringify({ error: error.message }, null, 2); }
-  try { state.status = await json("./status.json"); } catch { state.status = { crawl_report: { coverage_kind: "partial", status: "unavailable", sources: {} }, schedule: "47 */6 * * *" }; }
+  try { state.status = await json("./status.json"); } catch { state.status = { crawl_report: { coverage_kind: "partial", status: "unavailable", sources: {} }, schedule: "47 4 * * *" }; }
   renderOverview(); renderForm();
   document.querySelectorAll(".operation").forEach((button) => button.addEventListener("click", () => { state.operation = button.dataset.operation; document.querySelectorAll(".operation").forEach((item) => item.classList.toggle("active", item === button)); renderForm(); }));
   $("query-form").addEventListener("submit", runQuery);
