@@ -44,11 +44,12 @@ def test_refresh_restores_and_publishes_only_the_dictionary_branch():
     assert "steps.publish_dictionary.outputs.changed == 'true'" in publish_body
 
 
-def test_ci_dataset_readers_restore_the_dictionary_without_replacing_pr_code():
+def test_ci_validation_restores_the_dictionary_without_replacing_pr_code():
     freshness = _read(".github/workflows/freshness.yml")
     validate = _read(".github/workflows/validate.yml")
 
-    assert "origin/dictionary" in freshness
+    # The fixture freshness scenario never reads canonical dictionary data.
+    assert "origin/dictionary" not in freshness
     assert "origin/dictionary" in validate
     assert "/tmp/published-dictionary" in validate
     assert "tools/validate_dictionary.py" in validate

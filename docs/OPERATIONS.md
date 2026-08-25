@@ -7,6 +7,23 @@ evidence when an upstream source fails, and refuses an unexplained decrease in u
 names. Invalid individual command names are quarantined in the refresh report rather
 than stopping publication; malformed input and unexplained shrinkage still block it.
 
+## Acquisition policy
+
+Acquisition cadence follows the lifetime of the fact, rather than the cadence of a
+dictionary rebuild.
+
+| Class | Examples | Trigger | Canonical result |
+| --- | --- | --- | --- |
+| Durable environment sample | Windows/macOS PATH, shell built-ins, runner images | Manual, when intentionally adding an environment or release | `artifact-data` observations |
+| Moving registry catalog | Local npm/PyPI/Go/RubyGems/Packagist crawlers; crates.io daily dump | Resumable local crawler, or one daily crates.io change check | `artifact-data` cursor and observations |
+| Derived rebuild | Dictionary indexes and Pages | Only after canonical publication changes; weekly refresh is a recovery backstop | `dictionary` and Pages |
+| Advisory live monitor | Representative upstream protocol/package probes | Weekly | Smoke artifact only; never canonical data |
+| Fixture scenario | Bounded freshness scheduler and parser fixtures | Manual or test suite | Test report/state only |
+
+An unchanged crates.io dump queues no dictionary or Pages work. Feature pull requests
+run validation once; the push trigger is reserved for `main`. No scheduled workflow
+re-samples an installed OS, shell, or immutable fixture.
+
 The current main snapshot includes a measured production OS crawl plus
 explicitly partial language-registry inputs. Homebrew's complete formula
 catalog is exhaustive for the supported API scope. The 2026-08-15 snapshot
@@ -27,11 +44,12 @@ part of an artifact that can carry the answer, and extracts declared console
 scripts, npm bins, Cargo binary targets, Go `package main` directories, RubyGems
 gemspec executables, or Composer `bin` declarations. Packagist rows are emitted only when the newest package
 metadata contains `bin`; the command is the basename Composer exposes through
-`vendor/bin`. The
-`registry-artifacts.yml` workflow runs every six hours and persists its cursor,
-failures, normalized observations, and report on the `artifact-data` branch.
-It cannot mark a source exhaustive while any cursor, artifact, or failure
-remains unresolved.
+`vendor/bin`. The `registry-artifacts.yml` workflow performs one daily
+`Last-Modified` check for the crates.io dump and persists crates-owned state,
+normalized observations, and its report on the `artifact-data` branch only when the
+dump changed. Other registries are advanced by their dedicated local containers. A
+source cannot be marked exhaustive while any cursor, artifact, or failure remains
+unresolved.
 
 The crawler asks each registry for the executable names before it asks for an
 artifact, because most of them already publish the answer.
@@ -156,10 +174,12 @@ architecture — a build identifies a release as precisely as a digest does, and
 command set differs between Apple Silicon and Intel.
 
 No observation of a base command set is privileged: a maintainer's laptop and a CI
-runner are both single samples, so `base-commands.yml` adds runner images to whatever
-is observed locally and the samples accumulate. Every record cites the build it came
-from, so a second machine, architecture or release widens coverage rather than
-replacing it. macOS 26.5.2 (25F84, arm64) contributes 1,258 commands, 586 of them new.
+runner are both single samples, so a manual `base-commands.yml` run adds chosen runner
+images to whatever is observed locally and the samples accumulate. It has no schedule:
+run it only to sample a deliberately new environment or release. Every record cites
+the build it came from, so a second machine, architecture or release widens coverage
+rather than replacing it. macOS 26.5.2 (25F84, arm64) contributes 1,258 commands, 586
+of them new.
 
 A system binary that refuses `stat` to an unprivileged reader is still recorded: the
 name occupies a PATH directory, and dropping it would turn "could not read" into
@@ -190,9 +210,10 @@ inspection unwound the pass and discarded a catalogue that was already complete 
 disk. A test asserts every crawler does this, because the same gap was found and
 closed three separate times.
 
-crates.io is asked for the dump's `Last-Modified` before downloading it. The dump is
-republished daily and its observations replace rather than extend, so re-reading an
-unchanged one spent 1.7GB to rewrite an identical file on every run.
+crates.io is asked for the dump's `Last-Modified` once daily before downloading it.
+The dump is republished daily and its observations replace rather than extend, so an
+unchanged response skips the 1.7GB download, publication, dictionary rebuild, and
+Pages deployment.
 
 ## When a package is gone
 
@@ -305,12 +326,15 @@ restart.
 
 `crawl_parallel.sh publish` merges only the state and crawl-report entries this machine
 owns, and refuses a source whose local cursor is behind the published one — the check
-that stopped Go's catalogue being rolled back fifteen months. The scheduled crates
-writer uses the same source-owned merge and publishes only `crates.jsonl`; it must not
-copy a stale whole-state or whole-report snapshot over other writers. `watch` runs the
+that stopped Go's catalogue being rolled back fifteen months. The daily crates writer
+uses the same source-owned merge, restores and publishes only crates-owned observations
+plus the shared source-merged state; it must not copy an unrelated catalog, stale
+whole-state, or whole-report snapshot over other writers. `watch` runs the
 publisher on an interval, because publishing by hand leaves the crawl's progress on one
-machine until someone remembers. The merged report is what Pages exposes as
-`status.json`, so a published cursor and its public progress display advance together.
+machine until someone remembers. The merged report is the input Pages exposes as
+`status.json` after a dictionary refresh. The weekly refresh is a recovery backstop for
+locally published checkpoints; dispatch `refresh.yml` when the public display must
+advance immediately.
 If another writer wins the push race, the shared publisher discards its temporary
 worktree, fetches the new branch head, and rebuilds the source-owned merge up to three
 times. It does not rebase a stale combined JSON snapshot. Pass `OBSERVATION_SOURCES`
@@ -611,12 +635,13 @@ Freshness and usage observations are provider facts. Missing metrics are
 documented normalization method. `assess_executable` exposes derived risk with
 methodology version `1.0.0` while preserving the underlying observations.
 
-## Incremental freshness scans
+## Fixture freshness scenarios
 
-Full crawls are not required for every freshness observation. A partition
-manifest under `fixtures/freshness/manifest.json` declares the source units to
-visit. A bounded run advances a persisted round-robin cursor, scans a limited
-number of partitions and normalized records, and writes:
+The partition manifest under `fixtures/freshness/manifest.json` contains immutable
+test data. It exercises the bounded scheduler and state contract; it is not production
+freshness evidence and is never run on a schedule. A manual scenario advances a
+persisted round-robin cursor, scans a limited number of fixture partitions and
+normalized records, and writes:
 
 - `data/freshness/state.json` — cursor, source checksums, completed cycles,
   last successful observations, and staleness state;
@@ -643,9 +668,10 @@ the changed source partition completes a full cycle. A missing or malformed
 source preserves the last successful observation and marks the partition
 stale/unavailable.
 
-Freshness output is intentionally separate from `data/executables`. A partial
+Scenario output is intentionally separate from `data/executables`. A partial
 scan always remains `coverage_kind=partial`, cannot make an absence
-`clear_in_index`, and cannot set dataset metadata to exhaustive. The scheduled
+`clear_in_index`, and cannot set dataset metadata to exhaustive. The manual
 workflow publishes only state and the report to the `freshness-data` branch;
 failed partitions remain visible and fail the workflow after the report is
-published. The workflow is a freshness signal, not a full-coverage claim.
+published. The result is test evidence, not a production freshness or full-coverage
+claim.

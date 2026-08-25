@@ -6,9 +6,6 @@ on:
     paths:
       - "playground/**"
       - "tools/build_playground.py"
-  workflow_run:
-    workflows: ["Registry artifact crawl"]
-    types: [completed]
   workflow_dispatch:
 
 permissions:

@@ -547,13 +547,13 @@ MCP makes that dataset immediately useful to agents.
 
 The schemas, deterministic builder, production OS index collector, derived
 prefix/length/ecosystem/trigram and logical-scope indexes, collector parsers,
-read-only local/HTTP MCP server, assessment API, incremental partial freshness
-scans, and CI checks are implemented in this repository. Full-crawl coverage
+read-only local/HTTP MCP server, assessment API, bounded fixture freshness
+scenarios, and CI checks are implemented in this repository. Full-crawl coverage
 remains explicitly measured per source; registry sources stay partial until
 their package artifacts are exhaustively collected. See
 [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) for exact naming, sharding, alias, and
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
-commands, rolling freshness scans, and honest measured coverage limitations.
+commands, freshness-state scenarios, and honest measured coverage limitations.
 
 Install the program, materialize the published branch in a separate worktree,
 and query that snapshot without network access:
@@ -574,20 +574,21 @@ the canonical JSON directly from the `dictionary` branch, without running MCP.
 See [`docs/MCP.md`](docs/MCP.md) for local client configuration, the remote
 endpoint, resources, health visibility, and the survivor-only agent workflow.
 
-The scheduled job includes a bounded incremental freshness scan. It rotates
-through declared source partitions, persists a cursor and last successful
-observations on the `freshness-data` branch, and publishes a machine-readable
-report. It is a freshness signal, not a full dataset refresh. Coverage is
+The manual fixture workflow exercises a bounded incremental freshness scan. It
+rotates through immutable test partitions, persists a cursor and last successful
+observations on the `freshness-data` branch, and publishes a machine-readable test
+report. It is not production freshness or a full dataset refresh. Coverage is
 snapshot-specific and reported by `get_coverage`. The
 published snapshot contains production OS/Homebrew coverage plus explicitly
 partial registry coverage; it is **not** full ecosystem coverage, so consumers must preserve
 `clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
 
-Registry artifact inspection is separately resumable. Every six hours the
-artifact crawler advances npm, PyPI, crates.io, Go module, RubyGems, and Packagist cursors on the
-`artifact-data` branch, retaining executable evidence and failures. A registry
-is promoted to `exhaustive` only after its catalog and required artifact
-inspections complete successfully.
+Registry artifact inspection is separately resumable. Dedicated local containers
+advance npm, PyPI, Go module, RubyGems, and Packagist cursors and publish checkpoints
+to `artifact-data`. CI performs one daily crates.io dump change check and downloads
+the dump only when it changed. Unchanged canonical data queues no dictionary or Pages
+work. A registry is promoted to `exhaustive` only after its catalog and required
+artifact inspections complete successfully.
 
 Successful collection does not by itself permit a negative collision claim.
 Every valid query returns a factual `found` observation. Fixture, smoke, and
