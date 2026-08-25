@@ -2,6 +2,18 @@
   "command": "bound",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/yaeshimo/hello-go",
+      "version": "v0.0.0-20190502101432-d6742e8a9c6c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yaeshimo/hello-go/@v/v0.0.0-20190502101432-d6742e8a9c6c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190502101432-d6742e8a9c6c"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "num-utils",
       "version": "0.5",
@@ -12,8 +24,32 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bound",
+      "version": "1.0.1",
+      "repository": "https://github.com/wryfi/bound",
+      "source": "https://files.pythonhosted.org/packages/e0/81/3631c9f410038826e5d4157f99048600bc33478988232c39c9758ee2e712/bound-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bound-policy",
+      "version": "0.9.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b6/01/3dd091808827e35ac877a72e69d12ed727e402a216002c2a4471d6f77181/bound_policy-0.9.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.2"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-24"
+  "last_seen": "2026-08-25"
 }
