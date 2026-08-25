@@ -19,18 +19,15 @@ if [ "${SEED}" = "1" ] && [ ! -f "${STATE_DIR}/data/production/registry-state.js
   echo "==> Seeding ${STATE_DIR} from origin/artifact-data"
   git fetch origin artifact-data --quiet || true
   for path in data/production/registry-state.json \
-              data/production/pypi-projects.txt \
               data/production/rubygems-names.txt \
               data/production/packagist-packages.txt \
-              data/production/npm-packages.txt \
-              data/production/npm-packages.txt.gz \
               reports/registry-artifact-crawl.json; do
     if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
       git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"
       echo "    ${path}"
     fi
   done
-  for source in npm pypi crates rubygems packagist; do
+  for source in crates rubygems packagist; do
     path="data/production/intermediate/${source}.jsonl"
     if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
       git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"
@@ -44,7 +41,7 @@ docker build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
 echo "==> Crawling into ${STATE_DIR}"
 exec docker run --rm --init \
   --volume "${STATE_DIR}:/state" \
-  --env "SOURCES=${SOURCES:-npm pypi crates rubygems packagist}" \
+  --env "SOURCES=${SOURCES:-crates rubygems packagist}" \
   --env "PACKAGE_BUDGET=${PACKAGE_BUDGET:-2000}" \
   --env "SOURCE_PACKAGE_BUDGETS=${SOURCE_PACKAGE_BUDGETS:-}" \
   --env "BYTE_BUDGET=${BYTE_BUDGET:-5000000000}" \

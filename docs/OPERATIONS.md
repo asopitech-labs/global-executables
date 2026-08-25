@@ -7,6 +7,17 @@ evidence when an upstream source fails, and refuses an unexplained decrease in u
 names. Invalid individual command names are quarantined in the refresh report rather
 than stopping publication; malformed input and unexplained shrinkage still block it.
 
+## Current operating state
+
+- Go modules, npm, and PyPI run only in the transactional Go runtime; their Python
+  implementations and Python CLI routes are removed.
+- The 2026-08-25 production cutover measured npm at 310–328 packages/min and PyPI at
+  1,901–2,285 packages/min, with zero `429` and zero timeouts in the cited live passes.
+- npm is intentionally capped at 300 requests/min after an unconstrained run proved
+  the registry's two-minute rate-limit window. PyPI uses 24 adaptive workers.
+- The current cursors and rows are in [Registry crawl status](#registry-crawl-status);
+  recovery starts at [Transactional-source recovery](#transactional-source-recovery).
+
 ## Acquisition policy
 
 Acquisition cadence follows the lifetime of the fact, rather than the cadence of a
@@ -35,10 +46,10 @@ official API supplies the executable inventory. npm, PyPI, crates.io, Go
 modules, RubyGems, and Packagist remain
 `partial` until their package artifacts are exhaustively inspected.
 
-The registry artifact crawler is resumable and budgeted. It enumerates the
-PyPI simple catalog, follows npm's replication change cursor, reads the crates.io
-database dump, distils Go's module index into a module catalog, enumerates RubyGems'
-compact-index names catalog, and enumerates Packagist's package catalog. For
+The registry artifact crawler is resumable and budgeted. It reuses the complete npm
+and PyPI catalog snapshots already sampled, reads the crates.io database dump,
+distils Go's module index into a module catalog, enumerates RubyGems' compact-index
+names catalog, and enumerates Packagist's package catalog. For
 each selected package it reads authoritative package metadata, or the smallest
 part of an artifact that can carry the answer, and extracts declared console
 scripts, npm bins, Cargo binary targets, Go `package main` directories, RubyGems
@@ -61,12 +72,11 @@ artifact, because most of them already publish the answer.
   `exhaustive` in a single run.
 * npm answers from registry metadata, but only from the release document: a bare
   package name returns every version ever published, where `bin` never appears at the
-  top level. Packages are enumerated once from `_all_docs` — the changes feed carries
-  126 million revisions against 4.3 million packages, so reaching each package through
-  it costs thirty times what listing them does.
+  top level. Packages were enumerated once from `_all_docs`; later passes reuse the
+  cached complete package catalog instead of resampling it.
 * Packagist already answered from registry metadata (`bin`).
 * PyPI does not expose console scripts in its JSON API, so a wheel still has to be
-  read — but a wheel is a ZIP, so `RemoteZip` reads the trailing central directory
+  read — but a wheel is a ZIP, so the range reader reads the trailing central directory
   and then the one small member that names the commands. Wheels that ship a
   prebuilt binary declare it under `.data/scripts/` rather than as a console
   script; both are collected.
@@ -86,11 +96,11 @@ budget on one archive per module, at the version `@latest` reports.
 Requests to the crates.io API host are paced to one per second, the rate crates.io
 asks crawlers to hold; `fetch` also retries 429 with the advertised `Retry-After`.
 `--source-package-budget SOURCE=N` raises the per-run package budget for one selected
-Python source. Go has its own `--package-budget` flag in the transactional runtime.
+Python source. Go, npm, and PyPI use `--package-budget` in the transactional runtime.
 
 ## Registry crawl status
 
-Where the artifact crawl stood on 2026-08-21. The catalogue percentage is the cursor
+Live local snapshot at 2026-08-25 12:55 JST. The catalogue percentage is the cursor
 against the enumerated name list, not against rows collected — most packages ship no
 executable, so rows grow far more slowly than the cursor.
 
@@ -98,11 +108,11 @@ executable, so rows grow far more slowly than the cursor.
 | --- | --- | --- | --- | --- |
 | crates.io | `exhaustive` | 319,955 / 319,955 | 88,771 | CI, one dump per run |
 | NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
-| RubyGems | `partial` | 104,790 / 196,126 (53.4%) | 27,298 | local container |
-| Packagist | `partial` | 225,856 / 458,432 (49.3%) | 6,698 | local container |
-| PyPI | `partial` | 116,963 / 870,264 (13.4%) | 47,060 | local container |
-| npm | `partial` | 155,181 / 4,311,362 (3.6%) | 23,957 | local container |
-| Go | `partial` | 7,792 / 1,965,638 (0.4%) | 132,911 | local container |
+| RubyGems | `partial` | 127,127 / 196,126 (64.8%) | 32,941 | Python local container |
+| Packagist | `partial` | 296,055 / 458,432 (64.6%) | 8,721 | Python local container |
+| PyPI | `partial` | 202,590 / 870,264 (23.3%) | 89,778 | Go transactional container |
+| npm | `partial` | 221,774 / 4,311,362 (5.1%) | 32,996 | Go transactional container |
+| Go | `partial` | 533,405 / 1,977,830 (27.0%) | 384,288 | Go transactional container |
 
 Only crates.io runs in CI: its whole registry arrives in one dump, so it finishes
 inside a job. Every catalogue-walking source is filled by `crawl_parallel.sh` on a
@@ -110,10 +120,10 @@ local machine, because a CI job stops at six hours and the workflow runs one at 
 time. `watch` publishes to `artifact-data` on an interval so the progress does not
 live on one machine.
 
-Go's catalogue phase is complete. Every new pass now spends its budget on inspecting
-modules. Its row count is large against its cursor because a module contributes one row
-per `package main` directory, and because the catalogue phase ran long before the
-inspection phase started.
+All three transactional catalogs are complete for their current snapshots. Go checks
+its incremental index edge; npm and PyPI report zero catalog requests and spend every
+pass on inspection. Go's row count is large against its cursor because a module can
+contribute one row per `package main` directory.
 
 ## Windows and .NET coverage
 
@@ -273,15 +283,16 @@ found in three crawlers separately, each time by reading one of them for another
 ## Crawling in a container
 
 A CI job stops at six hours and the workflow runs one at a time, so long catalog
-sweeps are driven locally. `Dockerfile.crawl` remains the Python runtime for non-Go
-registries. Go uses `Dockerfile.go-crawler`, a dedicated transactional runtime.
+sweeps are driven locally. `Dockerfile.crawl` remains the Python runtime for crates.io,
+RubyGems, Packagist, and NuGet. Go modules, npm, and PyPI use
+`Dockerfile.go-crawler`, the dedicated transactional runtime.
 `tools/crawl_container.sh` is the single Python-container path;
 `tools/crawl_parallel.sh` routes each source to its correct image.
 
 ```sh
-tools/crawl_container.sh                                   # every Python source
-SOURCES=crates PASSES=1 tools/crawl_container.sh           # one source, one pass
-SOURCES="npm" PACKAGE_BUDGET=20000 tools/crawl_container.sh
+tools/crawl_container.sh                                    # remaining Python sources
+SOURCES=crates PASSES=1 tools/crawl_container.sh            # one Python source, one pass
+SOURCES="npm pypi" PACKAGE_BUDGET=3000 tools/crawl_parallel.sh start
 ```
 
 `tools/crawl_parallel.sh` runs one container per registry instead. Every
@@ -304,25 +315,61 @@ HTTP work, not the entire pass. Measured on the local runtime, crates.io reaches
 `exhaustive` in a single pass — 319,466 crates, 88,610 executable names — at a peak of
 347MB.
 
-### Transactional Go runtime
+### Transactional runtime: Go modules, npm, and PyPI
 
-`SOURCES=go tools/crawl_parallel.sh start` builds the shared Python image and the
-dedicated Go runtime, then starts `ge-go` with `crawl --passes 0`. A nonzero local
-failure is restarted up to five times; reaching exhaustive exits zero and is not
-restarted. Other `ge-*` containers still run Python.
+`SOURCES="go npm pypi" tools/crawl_parallel.sh start` builds the dedicated Go runtime,
+then starts `ge-go`, `ge-npm`, and `ge-pypi` with `crawl --source <source> --passes 0`.
+A nonzero local failure is restarted up to five times; reaching exhaustive exits zero
+and is not restarted. Other `ge-*` containers still run Python. The Python CLI and
+loop reject all three transactional source names, preventing two implementations from
+writing the same source.
 
-The mounted Go state directory contains:
+Each mounted source state directory contains:
 
-- `registry-state.json`, `intermediate/go.jsonl`, `go-modules.txt`, and the report:
+- `registry-state.json`, `intermediate/<source>.jsonl`, its cached catalog, and the report:
   plain Python-compatible runtime snapshot views;
-- `go-crawl.db`: the canonical local transaction store; and
-- `go-modules.txt.index`: a rebuildable exact membership index for the immutable
+- `<source>-crawl.db`: the canonical local transaction store; and
+- `<catalog>.txt.index`: a rebuildable exact membership index for the immutable
   catalog prefix.
 
-The DB and derived index are local operational state and are not published. The module
-catalog is replaced atomically when new names arrive from `index.golang.org`; a stop
-between catalog replacement and DB metadata commit is reconciled from the file tail on
-restart.
+The DB and derived index are local operational state and are not published. Only the
+Go module catalog is refreshed from its chronological upstream index. npm and PyPI
+import their complete sampled catalogs once and reuse them on every pass. A stop
+between a Go catalog replacement and DB metadata commit is reconciled from the file
+tail on restart.
+
+The lifecycle boundary is explicit:
+
+| Artifact | Owner | Lifecycle |
+| --- | --- | --- |
+| `<source>-crawl.db` | transactional runtime | canonical mutable state; preserve on failure |
+| `<catalog>.txt.index` | transactional runtime | derived cache; rebuild atomically if absent or invalid |
+| catalog text snapshot | source adapter | Go extends incrementally; npm/PyPI replace only on an intentional resample |
+| `registry-state.json`, JSONL, report | compatibility exporter | regenerate from one bbolt read snapshot after every committed pass |
+| Python npm/PyPI runners | none | deleted; Git history is the recovery record |
+
+### Throughput and upstream safety
+
+All three adapters share one reusable HTTP transport with per-host concurrency,
+attempt timeouts, whole-package deadlines, adaptive reduction after `429`, bounded
+backoff with jitter, `Retry-After`, and a circuit breaker. A queued request starts its
+attempt timeout only after it acquires the host gate, so local backpressure cannot make
+an unsent request look like an upstream timeout.
+
+The 2026-08-25 cutover measurements used 3,000-package passes on the production host:
+
+| Source | Retired Python rate | Go live rate | Production constraint |
+| --- | ---: | ---: | --- |
+| npm | about 60 packages/min | 310–328 packages/min | fixed 200 ms host interval (at most 300 requests/min) plus adaptive concurrency |
+| PyPI | about 23 packages/min | 1,901–2,285 packages/min | 24 workers; wheel range reads avoid full downloads when supported |
+
+npm's unconstrained 64-worker run produced 4,741 `429` responses in 5,798 requests,
+and the registry advertised `Retry-After: 122`. That is evidence for an upstream-safe
+ceiling, not a reason to keep increasing workers. Advertised retry time is therefore
+honored separately from the normal 15-second backoff cap. PyPI's validation completed
+without `429`; its concurrency remains adaptive if that changes. Reusing the artifact
+size already present in PyPI JSON removed the redundant wheel `HEAD` request and cut a
+representative 3,000-package pass from 8,543 to 5,965 requests (30.2%).
 
 Git is a transport boundary, not the runtime format. GitHub rejects individual blobs
 above 100 MiB, so `artifact-data` stores the growing Go observation snapshot and module
@@ -360,14 +407,17 @@ chained CI runs first, or crawl a source locally that CI is not advancing.
 
 ## Checking a running crawl
 
-`tools/crawl_parallel.sh status` gives the cursor per source. Python sources resume
-from their state files. Go resumes from bbolt and regenerates its state file as the
-publishable view; the report is only a summary of the last pass.
+`tools/crawl_parallel.sh status` gives the cursor per source. Remaining Python sources
+resume from their state files. Go modules, npm, and PyPI resume from bbolt and
+regenerate their state files as publishable views; each report summarizes the last
+pass.
 
 ```sh
 tools/crawl_parallel.sh status                    # container status and cursor
 docker logs --tail 20 ge-rubygems                 # per-pass summary lines
-docker logs --tail 20 ge-go                       # transactional Go passes
+podman logs --tail 20 ge-go                       # transactional Go-module passes
+podman logs --tail 20 ge-npm                      # paced npm passes
+podman logs --tail 20 ge-pypi                     # concurrent PyPI passes
 git show origin/artifact-data:reports/registry-artifact-crawl.json | jq '.sources'
 ```
 
@@ -380,9 +430,9 @@ import gzip, json, pathlib
 for src, cat in (("pypi", "pypi-projects"), ("npm", "npm-packages"), ("go", "go-modules"),
                  ("rubygems", "rubygems-names"), ("packagist", "packagist-packages")):
     d = pathlib.Path.home() / f".ge-crawl-{src}/data/production"
-    # Every source but Go reads the compressed copy first; Go updates the plain file
-    # atomically and never gzips it, so a .gz beside it would be stale by definition.
-    order = (".txt",) if src == "go" else (".txt.gz", ".txt")
+    # Go updates the plain file atomically. npm and PyPI retain their imported plain
+    # snapshots; the gzip files are publication-compatible copies.
+    order = (".txt",) if src in {"go", "npm", "pypi"} else (".txt.gz", ".txt")
     f = next((d / f"{cat}{e}" for e in order if (d / f"{cat}{e}").is_file()), None)
     if not f:
         continue
@@ -394,20 +444,22 @@ PY
 
 Go refreshes its denominator from the chronological module index before each pass.
 `catalog_complete` means the index reader reached the current edge for that snapshot;
-new module versions may make it grow on a later pass.
+new module versions may make it grow on a later pass. npm/PyPI denominators stay on
+their sampled complete catalogs until an operator deliberately replaces the sample.
 
-## Go recovery
+## Transactional-source recovery
 
-Go has one supported crawler: the transactional runtime started with
-`SOURCES=go tools/crawl_parallel.sh start`. The retired Python Go implementation is
-not kept as an alternate execution path; Git already preserves its history.
+Go modules, npm, and PyPI have one supported crawler: the transactional runtime started
+with `SOURCES="go npm pypi" tools/crawl_parallel.sh start`. Their retired Python
+implementations are not kept as alternate execution paths; Git already preserves the
+history.
 
-If the local Go database is unusable, stop only `ge-go`, preserve the database for
-diagnosis, and restore the last published compatibility snapshot from
-`artifact-data`. Start the Go runtime against that source directory so it imports the
-published cursor and observations into a new database. Before publishing, verify that
-the exported cursor is not below the published cursor and let the source-owned merge
-perform its normal no-regression check.
+If a local source database is unusable, stop only its `ge-<source>` container, preserve
+the database for diagnosis, and restore the last published compatibility snapshot from
+`artifact-data`. Start the transactional runtime against that source directory so it
+imports the published cursor and observations into a new database. Before publishing,
+verify that the exported cursor is not below the published cursor and let the
+source-owned merge perform its normal no-regression check.
 
 To check that withdrawals are being classified rather than retried, group the
 outstanding failures by kind. A kind that recurs across passes without changing is a

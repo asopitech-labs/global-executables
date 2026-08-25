@@ -5,12 +5,14 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -28,6 +30,80 @@ func TestRunReportsBootstrapVersion(t *testing.T) {
 	}
 	if stderr.Len() != 0 {
 		t.Fatalf("stderr = %q", stderr.String())
+	}
+}
+
+func TestSourceDefaultsKeepDatabasesAndCompatibilityViewsIsolated(t *testing.T) {
+	tests := []struct {
+		source, catalog, database, output string
+	}{
+		{"go", "data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl"},
+		{"npm", "data/production/npm-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl"},
+		{"pypi", "data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl"},
+	}
+	for _, test := range tests {
+		t.Run(test.source, func(t *testing.T) {
+			config := crawlConfig{Source: test.source}
+			if err := config.applyDefaults(); err != nil {
+				t.Fatal(err)
+			}
+			if config.CatalogPath != test.catalog || config.DatabasePath != test.database || config.ObservationsPath != test.output {
+				t.Fatalf("config=%+v", config)
+			}
+		})
+	}
+}
+
+func TestExecutePassRunsNPMWithBoundedPacingAndExportsCompatibility(t *testing.T) {
+	var active atomic.Int64
+	var maximum atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		current := active.Add(1)
+		defer active.Add(-1)
+		for {
+			previous := maximum.Load()
+			if current <= previous || maximum.CompareAndSwap(previous, current) {
+				break
+			}
+		}
+		time.Sleep(20 * time.Millisecond)
+		name := strings.TrimSuffix(strings.TrimPrefix(r.URL.Path, "/"), "/latest")
+		_, _ = fmt.Fprintf(w, `{"name":%q,"version":"1.0.0","bin":{%q:"cli.js"}}`, name, name)
+	}))
+	defer server.Close()
+
+	directory := t.TempDir()
+	config := crawlConfig{
+		Source: "npm", StatePath: filepath.Join(directory, "registry-state.json"),
+		ObservationsPath: filepath.Join(directory, "npm.jsonl"), ReportPath: filepath.Join(directory, "report.json"),
+		CatalogPath: filepath.Join(directory, "npm-packages.txt"), DatabasePath: filepath.Join(directory, "npm-crawl.db"),
+		RegistryURL: server.URL, PackageBudget: 32, ByteBudget: 1 << 20, Workers: 8,
+		MaxInFlight: 16, CommitBatch: 4, RequestTimeout: time.Second, ModuleTimeout: 10 * time.Second,
+	}
+	var catalog strings.Builder
+	for index := range 32 {
+		_, _ = fmt.Fprintf(&catalog, "package-%02d\n", index)
+	}
+	if err := os.WriteFile(config.CatalogPath, []byte(catalog.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(config.StatePath, []byte(`{"version":1,"sources":{"npm":{"cursor":0,"packages_file":"npm-packages.txt","parser_generation":3}}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	report, err := executePass(context.Background(), config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if report.Processed != 32 || report.Records != 32 || !report.Complete || maximum.Load() > 2 {
+		t.Fatalf("report=%+v maximum=%d", report, maximum.Load())
+	}
+	stateBody, _ := os.ReadFile(config.StatePath)
+	if !bytes.Contains(stateBody, []byte(`"npm"`)) || !bytes.Contains(stateBody, []byte(`"cursor": 32`)) {
+		t.Fatalf("state=%s", stateBody)
+	}
+	if bytes.Contains(stateBody, []byte(`"go"`)) {
+		t.Fatalf("Go source leaked into npm state: %s", stateBody)
 	}
 }
 
