@@ -37,3 +37,23 @@ def test_playground_fallback_and_placeholder_match_daily_schedule():
     assert "setUTCHours(4, 47, 0, 0)" in app
     assert 'state.status?.schedule || "47 4 * * *"' in app
     assert "daily crates.io change check" in page
+
+
+def test_playground_discloses_the_breaking_npm_coverage_change():
+    page = (ROOT / "playground/index.html").read_text()
+    app = (ROOT / "playground/app.js").read_text()
+
+    for required in (
+        'id="npm-coverage-notice"',
+        "Breaking npm coverage change",
+        "We apologize",
+        "4.3-million-package",
+        "218,774",
+        "221,774",
+        "2,295",
+        "npm overall is not 100% covered",
+        "issues/54",
+    ):
+        assert required in page
+    assert page.index('id="npm-coverage-notice"') < page.index('class="hero"')
+    assert "critical 100%" in app

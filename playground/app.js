@@ -80,6 +80,7 @@ function renderOverview() {
     const card = document.createElement("article");
     card.className = "source-card";
     const complete = source.coverage_kind === "exhaustive" || source.complete;
+    const label = name === "npm" && complete ? "critical 100%" : complete ? "exhaustive" : statusLabel(source.coverage_kind);
     const progress = source.catalog_size ? Math.min(100, (Number(source.cursor || 0) / Number(source.catalog_size)) * 100) : complete ? 100 : 3;
     // npm's cursor is a replication sequence, Go's is a timestamp; "through 2537341"
     // read like a truncated date.
@@ -93,7 +94,7 @@ function renderOverview() {
     // alongside two failures used to report only the failures.
     const stats = [`${formatNumber(source.records || 0)} records`];
     if (errors) stats.push(`${formatNumber(errors)} failures`);
-    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${complete ? "exhaustive" : statusLabel(source.coverage_kind)}</span></div><div class="source-bar"><i style="width:${progress}%"></i></div><div class="source-stats"><span>${position}</span><span>${stats.join(" · ")}</span></div>`;
+    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${label}</span></div><div class="source-bar"><i style="width:${progress}%"></i></div><div class="source-stats"><span>${position}</span><span>${stats.join(" · ")}</span></div>`;
     grid.append(card);
   }
 }
