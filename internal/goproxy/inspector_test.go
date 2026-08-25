@@ -134,7 +134,7 @@ func TestInspectorTreatsAttemptDeadlineAsRetryNotPassCancellation(t *testing.T) 
 		RequestTimeout: 10 * time.Millisecond,
 	})
 	result := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "example.com/slow", Attempt: 1})
-	if result.Verdict != gocrawl.VerdictRetry {
+	if result.Verdict != gocrawl.VerdictRetry || !result.UncountedRetry {
 		t.Fatalf("verdict=%s error=%s", result.Verdict, result.Error)
 	}
 }
@@ -154,7 +154,7 @@ func TestInspectorBoundsWholeModuleAndQueuesRetry(t *testing.T) {
 	})
 	started := time.Now()
 	result := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "example.com/large", Attempt: 1})
-	if result.Verdict != gocrawl.VerdictRetry {
+	if result.Verdict != gocrawl.VerdictRetry || !result.UncountedRetry {
 		t.Fatalf("verdict=%s error=%s", result.Verdict, result.Error)
 	}
 	if time.Since(started) > 500*time.Millisecond {

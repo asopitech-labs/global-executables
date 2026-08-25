@@ -17,6 +17,11 @@ type responseData struct {
 	Body       []byte
 }
 
+type responseReadError struct{ err error }
+
+func (e *responseReadError) Error() string { return e.err.Error() }
+func (e *responseReadError) Unwrap() error { return e.err }
+
 type HTTPError struct {
 	StatusCode int
 	Status     string
@@ -75,14 +80,15 @@ func (i *Inspector) request(
 		closeErr := resp.Body.Close()
 		cancel()
 		if readErr != nil {
-			lastErr = readErr
+			transportErr := &responseReadError{err: readErr}
+			lastErr = transportErr
 			if attempt < i.config.MaxAttempts {
 				if err := i.sleep(ctx, i.backoff(attempt, "")); err != nil {
 					return responseData{}, err
 				}
 				continue
 			}
-			return responseData{}, readErr
+			return responseData{}, transportErr
 		}
 		if closeErr != nil {
 			return responseData{}, closeErr

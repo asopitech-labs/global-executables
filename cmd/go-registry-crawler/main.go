@@ -33,7 +33,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	config := crawlConfig{}
 	passes := 1
 	pause := 5 * time.Second
-	flags.StringVar(&config.Source, "source", "go", "registry source: go, npm, or pypi")
+	flags.StringVar(&config.Source, "source", "go", "registry source: go, npm, pypi, rubygems, or packagist")
 	flags.StringVar(&config.StatePath, "state", "", "compatibility registry state")
 	flags.StringVar(&config.ObservationsPath, "output", "", "compatibility observations")
 	flags.StringVar(&config.ReportPath, "report", "", "crawl report")
@@ -41,7 +41,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags.StringVar(&config.DatabasePath, "database", "", "transactional source-local store")
 	flags.StringVar(&config.ProxyURL, "proxy", "https://proxy.golang.org", "Go module proxy")
 	flags.StringVar(&config.IndexURL, "index", "https://index.golang.org/index", "Go module index endpoint")
-	flags.StringVar(&config.RegistryURL, "registry", "", "npm or PyPI registry base URL")
+	flags.StringVar(&config.RegistryURL, "registry", "", "registry base URL for npm, PyPI, RubyGems, or Packagist")
 	flags.IntVar(&config.CatalogPages, "catalog-pages", 10, "maximum index pages per pass")
 	flags.IntVar(&config.PackageBudget, "package-budget", 3000, "maximum modules in this pass")
 	flags.Int64Var(&config.ByteBudget, "byte-budget", 8_000_000_000, "maximum downloaded bytes in this pass")

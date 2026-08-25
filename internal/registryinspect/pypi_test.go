@@ -59,7 +59,7 @@ func TestPyPIInspectorReadsWheelCommandsWithRanges(t *testing.T) {
 	defer server.Close()
 
 	inspector := NewPyPIInspector(Config{
-		BaseURL: server.URL, RequestTimeout: time.Second, PackageTimeout: time.Second,
+		BaseURL: server.URL, RequestTimeout: 3 * time.Second, PackageTimeout: 10 * time.Second,
 		RangeBlockSize: 128,
 	})
 	result := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "demo"})

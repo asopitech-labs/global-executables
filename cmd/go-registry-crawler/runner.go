@@ -42,9 +42,11 @@ func (c *crawlConfig) applyDefaults() error {
 		workers                                   int
 		requestTimeout, packageTimeout            time.Duration
 	}{
-		"go":   {"data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", "https://proxy.golang.org", 32, 45 * time.Second, 2 * time.Minute},
-		"npm":  {"data/production/npm-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", "https://registry.npmjs.org", 64, 45 * time.Second, 5 * time.Minute},
-		"pypi": {"data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", "https://pypi.org", 24, 45 * time.Second, 2 * time.Minute},
+		"go":        {"data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", "https://proxy.golang.org", 32, 45 * time.Second, 2 * time.Minute},
+		"npm":       {"data/production/npm-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", "https://registry.npmjs.org", 64, 45 * time.Second, 5 * time.Minute},
+		"pypi":      {"data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", "https://pypi.org", 24, 45 * time.Second, 2 * time.Minute},
+		"rubygems":  {"data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl", "https://rubygems.org", 16, 45 * time.Second, 2 * time.Minute},
+		"packagist": {"data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl", "https://repo.packagist.org", 24, 45 * time.Second, 2 * time.Minute},
 	}
 	selected, exists := defaults[c.Source]
 	if !exists {
@@ -136,6 +138,14 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 	case "pypi":
 		inspector := registryinspect.NewPyPIInspector(registryConfig)
 		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("pypi"), inspector: inspector,
+			refresh: staticCatalog, metrics: inspector.Metrics}, nil
+	case "rubygems":
+		inspector := registryinspect.NewRubyGemsInspector(registryConfig)
+		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("rubygems"), inspector: inspector,
+			refresh: staticCatalog, metrics: inspector.Metrics}, nil
+	case "packagist":
+		inspector := registryinspect.NewPackagistInspector(registryConfig)
+		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("packagist"), inspector: inspector,
 			refresh: staticCatalog, metrics: inspector.Metrics}, nil
 	default:
 		return crawlAdapter{}, fmt.Errorf("unsupported source %q", config.Source)

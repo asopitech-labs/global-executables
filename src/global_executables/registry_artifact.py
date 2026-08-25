@@ -496,110 +496,6 @@ def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: 
     failures[key] = message
 
 
-def _ruby_gem_rows(body: bytes, package: str, version: str, repository: str | None,
-                   source: str) -> list[dict[str, Any]]:
-    """Extract RubyGems' declared executables from the gemspec metadata."""
-    with tarfile.open(fileobj=BytesIO(body), mode="r:*") as archive:
-        metadata_name = next(name for name in archive.getnames() if name == "metadata.gz")
-        handle = archive.extractfile(metadata_name)
-        if handle is None:
-            return []
-        metadata = gzip.decompress(handle.read()).decode("utf-8", "replace")
-    return _gem_rows(metadata, package, version, repository, source)
-
-
-def _gem_rows(metadata: str, package: str, version: str, repository: str | None,
-              source: str) -> list[dict[str, Any]]:
-    commands: set[str] = set()
-    lines = metadata.splitlines()
-    for index, raw in enumerate(lines):
-        if not re.match(r"^executables:\s*(?:\[\s*\]|)$", raw.strip()):
-            continue
-        remainder = raw.split(":", 1)[1].strip()
-        if remainder and remainder != "[]":
-            commands.update(value.strip(" \\\"'") for value in remainder.strip("[]").split(",") if value.strip())
-        for child in lines[index + 1:]:
-            stripped = child.strip()
-            if stripped.startswith("-"):
-                value = stripped[1:].strip().strip("\\\"'")
-                if value:
-                    commands.add(value)
-            elif stripped and not child.startswith((" ", "\t")):
-                break
-        break
-    named = {declared_command(command) for command in commands}
-    return [record(command, "rubygems", package, version, repository, source,
-                   source_type="language_package", language="ruby", registry="rubygems",
-                   latest_version=version) for command in sorted(name for name in named if name)]
-
-
-GEM_HEAD_BYTES = 65536
-
-
-def _gem_metadata(url: str, timeout: int) -> tuple[bytes, int]:
-    """Fetch just enough of a .gem to reach its metadata.gz member.
-
-    A .gem is an uncompressed tar whose gemspec sits near the front, so the declared
-    executables are readable from the first few blocks instead of the whole gem.
-    Falls back to the whole file when the member is not in the head.
-    """
-    try:
-        size = content_length(url, timeout)
-        if size > GEM_HEAD_BYTES:
-            head, transfer = fetch_range(url, 0, GEM_HEAD_BYTES - 1, timeout)
-            padded = head + b"\0" * 1024
-            with tarfile.open(fileobj=BytesIO(padded), mode="r|") as archive:
-                for member in archive:
-                    if member.name == "metadata.gz":
-                        handle = archive.extractfile(member)
-                        if handle is not None:
-                            return handle.read(), transfer["downloaded_bytes"]
-                    break  # metadata.gz is the first member when the layout is conventional
-    except (RegistryCrawlError, urllib.error.HTTPError, OSError, tarfile.TarError, EOFError):
-        pass
-    body, transfer = fetch(url, timeout)
-    with tarfile.open(fileobj=BytesIO(body), mode="r:*") as archive:
-        handle = archive.extractfile("metadata.gz")
-        return (handle.read() if handle is not None else b""), transfer["downloaded_bytes"]
-
-
-def _rubygems_names(body: bytes) -> list[str]:
-    names = set()
-    for line in body.decode("utf-8", "replace").splitlines():
-        name = line.strip()
-        if name and name != "---" and not name.endswith(":") and " " not in name:
-            names.add(name)
-    return sorted(names)
-
-
-def _packagist_packages(body: bytes) -> list[str]:
-    value = json.loads(body)
-    names = value.get("packageNames", []) if isinstance(value, dict) else []
-    return sorted(name.strip() for name in names if isinstance(name, str) and name.strip())
-
-
-def _packagist_rows(value: dict[str, Any], package: str, source: str) -> list[dict[str, Any]]:
-    """Extract Composer ``bin`` declarations from the newest Packagist version."""
-    versions = value.get("packages", {}).get(package, [])
-    if not isinstance(versions, list) or not versions:
-        return []
-    metadata = versions[0]
-    bins = metadata.get("bin", []) if isinstance(metadata, dict) else []
-    if isinstance(bins, str):
-        bins = [bins]
-    if not isinstance(bins, list):
-        return []
-    version = metadata.get("version", "unknown")
-    repository = metadata.get("source") or metadata.get("homepage")
-    if isinstance(repository, dict):
-        repository = repository.get("url")
-    commands = {PurePosixPath(entry).name for entry in bins if isinstance(entry, str) and entry.strip()}
-    return [record(command, "packagist", package, version, repository, source,
-                   source_type="language_package", language="php", registry="packagist",
-                   latest_version=version)
-            for command in sorted(commands) if command]
-
-
 def _postgres_array(value: str) -> list[str]:
     """Parse a Postgres ``text[]`` literal the way the database dump writes it."""
     value = value.strip()
@@ -774,77 +670,6 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
             "budget_exhausted": False, "complete": complete,
             "coverage_kind": "exhaustive" if complete else "partial"}
 
-def _crawl_rubygems(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
-                    checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
-    catalog_file = Path(state.setdefault("names_file", "data/production/rubygems-names.txt"))
-    if not read_catalog(catalog_file):
-        body, transfer = fetch("https://rubygems.org/names", timeout)
-        catalog_file.parent.mkdir(parents=True, exist_ok=True)
-        write_catalog(catalog_file, _rubygems_names(body))
-        state["catalog_bytes"] = transfer["downloaded_bytes"]
-        checkpoint()  # persist the catalogue before anything can unwind the pass
-    gems = read_catalog(catalog_file)
-    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
-    failures, unavailable, attempts = _failure_state(state)
-    rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
-    # Without a queue the cursor walks past a gem that failed on a network blip and never
-    # comes back, so the source finishes permanently short of what it could read.  The
-    # queue is bounded to its length at the start of the pass: a gem that fails again is
-    # revisited next pass instead of consuming this pass's budget over and over.
-    retry_gems = state.setdefault("retry_gems", [])
-    retry_gems[:] = [name for name in retry_gems if name not in unavailable]
-    for name in failures:
-        if name not in retry_gems:
-            retry_gems.append(name)
-    retry_budget = len(retry_gems)
-    while (retry_budget or cursor < len(gems)) and processed < budget:
-        retrying = retry_budget > 0
-        if retrying:
-            retry_budget -= 1
-        package = retry_gems.pop(0) if retrying else gems[cursor]
-        try:
-            metadata_url = "https://rubygems.org/api/v1/gems/" + urllib.parse.quote(package, safe="") + ".json"
-            metadata_body, _ = fetch(metadata_url, timeout)
-            metadata = json.loads(metadata_body)
-            if metadata.get("yanked"):
-                # RubyGems still lists a yanked gem but its CDN answers AccessDenied for
-                # the artifact, so fetching it buys a 403 that is retried on every run.
-                raise RegistryCrawlError("gem is yanked")
-            version = metadata.get("version", "unknown")
-            artifact_url = metadata.get("gem_uri") or f"https://rubygems.org/gems/{urllib.parse.quote(package, safe='')}-{urllib.parse.quote(version, safe='')}.gem"
-            compressed, spent = _gem_metadata(artifact_url, timeout); downloaded += spent
-            if downloaded > byte_budget:
-                budget_exhausted = True
-                if retrying:
-                    retry_gems.insert(0, package)
-                break
-            repository = metadata.get("source_code_uri") or metadata.get("homepage_uri")
-            gemspec = gzip.decompress(compressed).decode("utf-8", "replace") if compressed else ""
-            rows.extend(_gem_rows(gemspec, metadata.get("name", package), version, repository, artifact_url))
-            failures.pop(package, None)
-        except Exception as error:
-            _record_failure(failures, unavailable, package, error, attempts)
-            if package in failures and package not in retry_gems:
-                retry_gems.append(package)  # queued for the next pass, not this one
-        if not retrying:
-            cursor += 1
-        processed += 1
-        if _due_for_checkpoint(processed):
-            collected += len(rows)
-            checkpoint(rows, cursor=cursor)
-        if interrupted():
-            break
-    state["cursor"] = cursor
-    collected += len(rows)
-    _append_rows(output, rows)
-    complete = cursor >= len(gems) and not failures and not retry_gems
-    return {"cursor": cursor, "catalog_size": len(gems), "processed": processed,
-            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
-            "unavailable": len(unavailable), "retry_pending": len(retry_gems),
-            "budget_exhausted": budget_exhausted,
-            "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
-
-
 NUGET_SEARCH = "https://azuresearch-usnc.nuget.org/query"
 NUGET_FLAT = "https://api.nuget.org/v3-flatcontainer"
 NUGET_PAGE = 1000
@@ -982,61 +807,6 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     return report
 
 
-def _crawl_packagist(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
-                     checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
-    catalog_file = Path(state.setdefault("packages_file", "data/production/packagist-packages.txt"))
-    if not read_catalog(catalog_file):
-        body, transfer = fetch("https://packagist.org/packages/list.json", timeout)
-        catalog_file.parent.mkdir(parents=True, exist_ok=True)
-        write_catalog(catalog_file, _packagist_packages(body))
-        state["catalog_bytes"] = transfer["downloaded_bytes"]
-        checkpoint()  # persist the catalogue before anything can unwind the pass
-    packages = read_catalog(catalog_file)
-    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
-    failures, unavailable, attempts = _failure_state(state)
-    retry_packages = state.setdefault("retry_packagist", [])
-    for package in failures:
-        if package not in retry_packages:
-            retry_packages.append(package)
-    retry_budget = len(retry_packages)  # one attempt per queued package per run
-    rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
-    while (retry_budget or cursor < len(packages)) and processed < budget:
-        retrying = retry_budget > 0
-        if retrying:
-            retry_budget -= 1
-        package = retry_packages.pop(0) if retrying else packages[cursor]
-        try:
-            metadata_url = "https://repo.packagist.org/p2/" + urllib.parse.quote(package, safe="/") + ".json"
-            metadata_body, transfer = fetch(metadata_url, timeout)
-            downloaded += transfer["downloaded_bytes"]
-            if downloaded > byte_budget:
-                budget_exhausted = True
-                break
-            rows.extend(_packagist_rows(json.loads(metadata_body), package, metadata_url))
-            failures.pop(package, None)
-        except Exception as error:
-            _record_failure(failures, unavailable, package, error, attempts)
-            if retrying and package not in retry_packages:
-                retry_packages.append(package)
-        if not retrying:
-            cursor += 1
-        processed += 1
-        if _due_for_checkpoint(processed):
-            collected += len(rows)
-            checkpoint(rows, cursor=cursor)
-        if budget_exhausted or interrupted():
-            break
-    state["cursor"] = cursor
-    collected += len(rows)
-    _append_rows(output, rows)
-    complete = cursor >= len(packages) and not failures and not retry_packages
-    return {"cursor": cursor, "catalog_size": len(packages), "processed": processed,
-            "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
-            "unavailable": len(unavailable), "retry_pending": len(retry_packages),
-            "budget_exhausted": budget_exhausted, "complete": complete,
-            "coverage_kind": "exhaustive" if complete else "partial"}
-
-
 def _refuse_empty_exhaustive(result: dict[str, Any], observations: Path) -> None:
     """A registry that has yielded nothing has not been surveyed, whatever its cursor says.
 
@@ -1057,8 +827,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
     state = _load_json(state_path, {"version": 1, "sources": {}})
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
-        "crates": _crawl_crates, "rubygems": _crawl_rubygems,
-        "packagist": _crawl_packagist, "nuget": _crawl_nuget,
+        "crates": _crawl_crates, "nuget": _crawl_nuget,
     }
     source_budgets = source_budgets or {}
     for source in sources:

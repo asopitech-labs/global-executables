@@ -1,5 +1,4 @@
 from io import BytesIO
-import gzip
 import json
 import re
 import tarfile
@@ -12,40 +11,7 @@ import pytest
 
 import global_executables.registry_artifact as registry_artifact
 from global_executables.collectors import npm_metadata
-from global_executables.registry_artifact import (_gem_rows, _packagist_packages, _packagist_rows,
-                                                   _failure_state, _postgres_array, _ruby_gem_rows,
-                                                   _rubygems_names)
-
-
-def test_rubygems_catalog_and_gem_metadata_are_artifact_evidence():
-    assert _rubygems_names(b"---\nalpha\nBeta Gem\n") == ["alpha"]
-    metadata = b"---\nname: demo\nversion: 1.0.0\nexecutables:\n- demo\n- demo-admin\n"
-    stream = BytesIO()
-    with tarfile.open(fileobj=stream, mode="w") as archive:
-        payload = gzip.compress(metadata)
-        info = tarfile.TarInfo("metadata.gz"); info.size = len(payload)
-        archive.addfile(info, BytesIO(payload))
-    rows = _ruby_gem_rows(stream.getvalue(), "demo", "1.0.0", "https://example.test", "https://example.test/demo.gem")
-    assert [row["command"] for row in rows] == ["demo", "demo-admin"]
-    assert rows[0]["language"] == "ruby" and rows[0]["registry"] == "rubygems"
-
-
-def test_packagist_only_emits_composer_bin_declarations():
-    body = json.dumps({
-        "packages": {
-            "demo/tool": [{
-                "name": "demo/tool", "version": "1.0.0",
-                "bin": ["bin/demo", "tools/admin"],
-                "source": {"url": "https://example.test/demo/tool"},
-            }],
-            "demo/library": [{"name": "demo/library", "version": "1.0.0"}],
-        }
-    }).encode()
-    assert _packagist_packages(b'{"packageNames":["demo/tool","demo/library"]}') == ["demo/library", "demo/tool"]
-    rows = _packagist_rows(json.loads(body), "demo/tool", "https://repo.packagist.org/p2/demo/tool.json")
-    assert [row["command"] for row in rows] == ["admin", "demo"]
-    assert all(row["language"] == "php" and row["registry"] == "packagist" for row in rows)
-    assert _packagist_rows(json.loads(body), "demo/library", "https://example.test") == []
+from global_executables.registry_artifact import _failure_state, _postgres_array
 
 
 def test_crates_binaries_come_from_the_dump_not_from_downloads(tmp_path, monkeypatch):
@@ -98,30 +64,6 @@ def test_postgres_array_literals_from_the_dump():
     assert _postgres_array('{"cargo-add","cargo-rm"}') == ["cargo-add", "cargo-rm"]
     assert _postgres_array('{"with,comma"}') == ["with,comma"]
     assert _postgres_array("") == []
-
-
-def test_gem_executables_are_read_from_the_head_of_the_archive(monkeypatch):
-    metadata = b"---\nname: demo\nversion: 1.0.0\nexecutables:\n- demo\n"
-    gem = BytesIO()
-    with tarfile.open(fileobj=gem, mode="w") as archive:
-        payload = gzip.compress(metadata)
-        info = tarfile.TarInfo("metadata.gz"); info.size = len(payload)
-        archive.addfile(info, BytesIO(payload))
-        filler = b"x" * 500_000
-        info = tarfile.TarInfo("data.tar.gz"); info.size = len(filler)
-        archive.addfile(info, BytesIO(filler))
-    body = gem.getvalue()
-
-    monkeypatch.setattr(registry_artifact, "content_length", lambda url, timeout=120: len(body))
-    monkeypatch.setattr(registry_artifact, "fetch_range",
-                        lambda url, start, end, timeout=120: (body[start:end + 1], {"downloaded_bytes": end - start + 1}))
-    monkeypatch.setattr(registry_artifact, "fetch",
-                        lambda *a, **k: pytest.fail("the head read must cover the gemspec"))
-
-    blob, spent = registry_artifact._gem_metadata("https://example.test/demo.gem", 120)
-    assert spent == registry_artifact.GEM_HEAD_BYTES and spent < len(body)
-    rows = _gem_rows(gzip.decompress(blob).decode(), "demo", "1.0.0", None, "https://example.test/demo.gem")
-    assert [row["command"] for row in rows] == ["demo"]
 
 
 def test_permanent_registry_conditions_are_not_retryable_failures():
@@ -286,31 +228,7 @@ def test_every_crawler_that_blocks_on_failures_can_revisit_one():
         seeded = re.search(r"for \w+ in failures:\s*\n\s*if \w+ not in retry_\w+:", body)
         assert requeued or seeded, (
             f"{name} blocks exhaustive on failures but never queues one for retry")
-    assert source.count("not in retry_") >= 5
-
-
-def test_rubygems_revisits_a_gem_that_failed_on_a_blip(tmp_path, monkeypatch):
-    catalog = tmp_path / "names.txt"
-    catalog.write_text("good\nflaky\n")
-    refused = {"flaky"}
-
-    def fake_fetch(url, timeout=120):
-        name = url.rsplit("/", 1)[-1].removesuffix(".json")
-        if name in refused:
-            raise urllib.error.URLError("[Errno -3] Temporary failure in name resolution")
-        return json.dumps({"name": name, "version": "1.0.0", "gem_uri": "https://example.invalid/g.gem"}).encode(), {}
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    monkeypatch.setattr(registry_artifact, "_gem_metadata", lambda url, timeout: (b"", 0))
-    state = {"names_file": str(catalog)}
-    first = registry_artifact._crawl_rubygems(state, tmp_path / "out.jsonl", 10, 10**9, 5)
-    assert first["cursor"] == 2 and state["retry_gems"] == ["flaky"]
-    assert first["coverage_kind"] == "partial"  # the cursor is at the end but one gem is owed
-
-    refused.clear()  # the outage passes
-    second = registry_artifact._crawl_rubygems(state, tmp_path / "out.jsonl", 10, 10**9, 5)
-    assert state["retry_gems"] == [] and second["failures"] == 0
-    assert second["coverage_kind"] == "exhaustive"
+    assert source.count("not in retry_") >= 3
 
 
 def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch):
@@ -323,13 +241,13 @@ def test_source_package_budget_overrides_the_shared_budget(tmp_path, monkeypatch
         return runner
 
     monkeypatch.setattr(registry_artifact, "_crawl_crates", spy("crates"))
-    monkeypatch.setattr(registry_artifact, "_crawl_rubygems", spy("rubygems"))
+    monkeypatch.setattr(registry_artifact, "_crawl_nuget", spy("nuget"))
     report = registry_artifact.crawl_registry_sources(
-        ["rubygems", "crates"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json",
+        ["nuget", "crates"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json",
         package_budget=1000, source_budgets={"crates": 10_000},
     )
 
-    assert seen == {"rubygems": 1000, "crates": 10_000}
+    assert seen == {"nuget": 1000, "crates": 10_000}
     assert report["sources"]["crates"]["package_budget"] == 10_000
 
 
@@ -400,14 +318,14 @@ def test_a_source_cannot_claim_exhaustive_with_nothing_on_file(tmp_path, monkeyp
         output.write_text('{"command": "demo"}\n')
         return {"coverage_kind": "exhaustive", "complete": True, "records": 1}
 
-    monkeypatch.setattr(registry_artifact, "_crawl_rubygems", empty_but_confident)
+    monkeypatch.setattr(registry_artifact, "_crawl_nuget", empty_but_confident)
     monkeypatch.setattr(registry_artifact, "_crawl_crates", productive)
     report = registry_artifact.crawl_registry_sources(
-        ["rubygems", "crates"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json")
+        ["nuget", "crates"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json")
 
-    rubygems = report["sources"]["rubygems"]
-    assert rubygems["coverage_kind"] == "partial" and rubygems["complete"] is False
-    assert rubygems["observations"] == 0 and "no observations" in rubygems["error"]
+    nuget = report["sources"]["nuget"]
+    assert nuget["coverage_kind"] == "partial" and nuget["complete"] is False
+    assert nuget["observations"] == 0 and "no observations" in nuget["error"]
     assert report["status"] == "failed"
     # A source that actually collected something keeps its claim.
     assert report["sources"]["crates"]["coverage_kind"] == "exhaustive"
@@ -418,9 +336,9 @@ def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):
     def failed_source(*args, **kwargs):
         return {"failures": 1, "coverage_kind": "partial"}
 
-    monkeypatch.setattr(registry_artifact, "_crawl_rubygems", failed_source)
+    monkeypatch.setattr(registry_artifact, "_crawl_nuget", failed_source)
     report = registry_artifact.crawl_registry_sources(
-        ["rubygems"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json"
+        ["nuget"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json"
     )
 
     assert report["status"] == "failed"
@@ -592,65 +510,6 @@ def test_a_shell_absent_from_this_machine_is_not_observed_here(tmp_path, monkeyp
     assert [index["status"] for index in coverage["indexes"]] == ["success", "skipped"]
 
 
-def test_progress_survives_an_interruption_mid_pass(tmp_path, monkeypatch):
-    """State was written once, after every source finished, so a kill lost the lot."""
-    catalog = tmp_path / "gems.txt"
-    catalog.write_text("\n".join(f"pkg-{i}" for i in range(1000)) + "\n")
-    state_path = tmp_path / "state.json"
-    state_path.write_text(json.dumps({"version": 1, "sources": {
-        "rubygems": {"names_file": str(catalog)}}}) + "\n")
-
-    seen = {"count": 0}
-
-    def fake_fetch(url, timeout=120, attempts=4):
-        package = url.rsplit("/", 1)[-1].removesuffix(".json")
-        return json.dumps({"name": package, "version": "1.0.0",
-                           "gem_uri": f"https://x/{package}.gem"}).encode(), {"downloaded_bytes": 1}
-
-    def fake_gem_metadata(url, timeout):
-        seen["count"] += 1
-        if seen["count"] > 250:          # the process is killed part-way through the pass
-            registry_artifact._interrupted = True
-        package = url.rsplit("/", 1)[-1].removesuffix(".gem")
-        return gzip.compress(f"executables:\n- {package}\n".encode()), 1
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    monkeypatch.setattr(registry_artifact, "_gem_metadata", fake_gem_metadata)
-    monkeypatch.setattr(registry_artifact, "_interrupted", False)
-    try:
-        report = registry_artifact.crawl_registry_sources(
-            ["rubygems"], state_path, tmp_path / "intermediate", tmp_path / "report.json", package_budget=1000)
-    finally:
-        registry_artifact._interrupted = False
-
-    saved = json.loads(state_path.read_text())["sources"]["rubygems"]
-    observations = (tmp_path / "intermediate" / "rubygems.jsonl").read_text().splitlines()
-    # the cursor and the rows both survive, and they agree with each other
-    assert saved["cursor"] >= registry_artifact.CHECKPOINT_INTERVAL
-    assert saved["cursor"] == len(observations)
-    assert report["sources"]["rubygems"]["cursor"] == saved["cursor"]
-
-
-def test_a_finished_source_keeps_its_cursor_when_a_later_one_dies(tmp_path, monkeypatch):
-    state_path = tmp_path / "state.json"
-
-    def finished(state, output, budget, byte_budget, timeout, checkpoint=None):
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text('{"command": "demo"}\n')
-        state["cursor"] = 4242
-        return {"coverage_kind": "partial", "complete": False, "cursor": 4242, "records": 1}
-
-    def explodes(state, output, budget, byte_budget, timeout, checkpoint=None):
-        raise RuntimeError("killed mid-pass")
-
-    monkeypatch.setattr(registry_artifact, "_crawl_crates", finished)
-    monkeypatch.setattr(registry_artifact, "_crawl_rubygems", explodes)
-    registry_artifact.crawl_registry_sources(
-        ["crates", "rubygems"], state_path, tmp_path / "intermediate", tmp_path / "report.json")
-
-    assert json.loads(state_path.read_text())["sources"]["crates"]["cursor"] == 4242
-
-
 def test_an_unchanged_crates_dump_is_not_downloaded_again(tmp_path, monkeypatch):
     """The dump is republished daily; re-reading it costs 1.7GB to rewrite one file."""
     output = tmp_path / "crates.jsonl"
@@ -678,7 +537,7 @@ def test_no_crawler_shadows_its_checkpoint_callback():
     """Every crawler must retain the checkpoint callback handed to it."""
     import inspect
 
-    for name in ("_crawl_crates", "_crawl_rubygems", "_crawl_packagist", "_crawl_nuget"):
+    for name in ("_crawl_crates", "_crawl_nuget"):
         source = inspect.getsource(getattr(registry_artifact, name))
         assert "\n    checkpoint = " not in source, f"{name} rebinds its checkpoint parameter"
 
@@ -802,7 +661,7 @@ def test_no_crawler_builds_a_catalogue_without_persisting_it(tmp_path):
     that hit multiple registries and was still open for three more sources."""
     import inspect
     unguarded = []
-    for name in ("_crawl_rubygems", "_crawl_packagist", "_crawl_nuget"):
+    for name in ("_crawl_nuget",):
         body = inspect.getsource(getattr(registry_artifact, name))
         built = body.find("write_catalog(")
         if built < 0:
@@ -824,12 +683,10 @@ def test_a_declared_entry_becomes_the_command_an_install_creates():
     for nothing in ("", "   ", ".", "..", "/", None, 7):
         assert declared_command(nothing) is None
 
-    # npm bin keys and gemspec executables are declarations, not filesystem entries
+    # npm bin keys are declarations, not filesystem entries.
     rows = npm_metadata({"name": "@a/b", "version": "1.0",
                          "bin": {"": "x", "@a/ivue-cli": "y", "ok": "z"}}, "s")
     assert sorted(row["command"] for row in rows) == ["ivue-cli", "ok"]
-    gem = _gem_rows("executables:\n- ../bin/code-labs\n- /arake\n- rake\n", "g", "1.0", None, "s")
-    assert [row["command"] for row in gem] == ["arake", "code-labs", "rake"]
 
 
 def test_a_budget_for_an_unselected_source_is_rejected(tmp_path):
@@ -846,7 +703,7 @@ def test_a_budget_for_an_unselected_source_is_rejected(tmp_path):
     assert "for a selected source" in result.stderr
 
 
-@pytest.mark.parametrize("source", ["go", "npm", "pypi"])
+@pytest.mark.parametrize("source", ["go", "npm", "pypi", "rubygems", "packagist"])
 def test_python_registry_runtime_rejects_transactional_sources(tmp_path, source):
     """Transactional sources have one supported runtime; Python must not be selectable."""
     state_path = tmp_path / f"{source}-state.json"
@@ -856,33 +713,6 @@ def test_python_registry_runtime_rejects_transactional_sources(tmp_path, source)
                        match=f"unsupported registry source: {source}"):
         registry_artifact.crawl_registry_sources(
             [source], state_path, tmp_path / "intermediate", tmp_path / "report.json", package_budget=0)
-
-
-def test_a_pass_reports_every_row_it_flushed_not_the_leftover(tmp_path, monkeypatch):
-    """Checkpointing empties the buffer, so `records` counted only the tail since the
-    last one — NuGet reported 0 records for passes that wrote thousands of rows."""
-    catalog = tmp_path / "gems.txt"
-    catalog.write_text("\n".join(f"pkg-{i}" for i in range(500)) + "\n")
-    state_path = tmp_path / "state.json"
-    state_path.write_text(json.dumps(
-        {"version": 1, "sources": {"rubygems": {"names_file": str(catalog)}}}) + "\n")
-    monkeypatch.setattr(registry_artifact, "CHECKPOINT_INTERVAL", 100)
-
-    def fake_fetch(url, timeout=120, attempts=4):
-        package = url.rsplit("/", 1)[-1].removesuffix(".json")
-        return json.dumps({"name": package, "version": "1.0.0",
-                           "gem_uri": f"https://x/{package}.gem"}).encode(), {"downloaded_bytes": 1}
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    monkeypatch.setattr(registry_artifact, "_gem_metadata",
-                        lambda url, timeout: (gzip.compress(b"executables:\n- cmd\n"), 1))
-    report = registry_artifact.crawl_registry_sources(
-        ["rubygems"], state_path, tmp_path / "intermediate", tmp_path / "report.json",
-        package_budget=350)
-
-    written = len((tmp_path / "intermediate" / "rubygems.jsonl").read_text().splitlines())
-    assert written == 350
-    assert report["sources"]["rubygems"]["records"] == written  # not 50, the residual buffer
 
 
 def test_a_finished_catalogue_still_retries_what_failed(tmp_path, monkeypatch):
@@ -908,30 +738,3 @@ def test_a_finished_catalogue_still_retries_what_failed(tmp_path, monkeypatch):
     assert report["failures"] == 0 and report["retry_pending"] == 0
     assert report["complete"] is True and report["coverage_kind"] == "exhaustive"
     assert report["cursor"] == 2  # a retry does not advance the catalogue cursor
-
-
-def test_a_yanked_gem_is_not_fetched_or_retried(tmp_path, monkeypatch):
-    """RubyGems keeps listing a yanked gem while its CDN answers AccessDenied, so 38 of
-    them sat in `failures` being retried forever."""
-    catalog = tmp_path / "names.txt"
-    registry_artifact.write_catalog(catalog, ["live", "spam"])
-    fetched = []
-
-    def fake_fetch(url, timeout=120, attempts=4):
-        fetched.append(url)
-        name = url.rsplit("/", 1)[-1].removesuffix(".json")
-        return json.dumps({"name": name, "version": "1.0.0", "yanked": name == "spam",
-                           "gem_uri": f"https://rubygems.org/gems/{name}-1.0.0.gem"}).encode(), \
-               {"downloaded_bytes": 1}
-
-    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
-    monkeypatch.setattr(registry_artifact, "_gem_metadata",
-                        lambda url, timeout: (gzip.compress(b"executables:\n- live\n"), 1))
-    state = {"names_file": str(catalog)}
-
-    report = registry_artifact._crawl_rubygems(state, tmp_path / "rubygems.jsonl", 10, 1_000_000, 120)
-
-    assert not any("spam-1.0.0.gem" in url for url in fetched)   # never asked for
-    assert report["failures"] == 0 and report["unavailable"] == 1
-    assert state["unavailable"]["spam"] == "gem is yanked"
-    assert report["cursor"] == 2 and report["coverage_kind"] == "exhaustive"

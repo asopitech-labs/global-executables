@@ -12,6 +12,17 @@ IMAGE="${IMAGE:-global-executables-crawl:local}"
 STATE_DIR="${STATE_DIR:-${ROOT_DIR}/.local-crawl}"
 SEED="${SEED:-1}"
 
+if [ -n "${CONTAINER_RUNTIME:-}" ]; then
+  RUNTIME="${CONTAINER_RUNTIME}"
+elif command -v podman >/dev/null 2>&1; then
+  RUNTIME=podman
+elif command -v docker >/dev/null 2>&1; then
+  RUNTIME=docker
+else
+  echo "Podman or Docker is required." >&2
+  exit 1
+fi
+
 cd "${ROOT_DIR}"
 mkdir -p "${STATE_DIR}/data/production/intermediate" "${STATE_DIR}/reports"
 
@@ -19,15 +30,14 @@ if [ "${SEED}" = "1" ] && [ ! -f "${STATE_DIR}/data/production/registry-state.js
   echo "==> Seeding ${STATE_DIR} from origin/artifact-data"
   git fetch origin artifact-data --quiet || true
   for path in data/production/registry-state.json \
-              data/production/rubygems-names.txt \
-              data/production/packagist-packages.txt \
+              data/production/nuget-tools.txt \
               reports/registry-artifact-crawl.json; do
     if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
       git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"
       echo "    ${path}"
     fi
   done
-  for source in crates rubygems packagist; do
+  for source in crates nuget; do
     path="data/production/intermediate/${source}.jsonl"
     if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
       git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"
@@ -36,12 +46,12 @@ if [ "${SEED}" = "1" ] && [ ! -f "${STATE_DIR}/data/production/registry-state.js
 fi
 
 echo "==> Building ${IMAGE}"
-docker build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
+"${RUNTIME}" build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
 
 echo "==> Crawling into ${STATE_DIR}"
-exec docker run --rm --init \
+exec "${RUNTIME}" run --rm --init \
   --volume "${STATE_DIR}:/state" \
-  --env "SOURCES=${SOURCES:-crates rubygems packagist}" \
+  --env "SOURCES=${SOURCES:-crates nuget}" \
   --env "PACKAGE_BUDGET=${PACKAGE_BUDGET:-2000}" \
   --env "SOURCE_PACKAGE_BUDGETS=${SOURCE_PACKAGE_BUDGETS:-}" \
   --env "BYTE_BUDGET=${BYTE_BUDGET:-5000000000}" \

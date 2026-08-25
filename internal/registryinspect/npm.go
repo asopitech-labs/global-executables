@@ -34,8 +34,8 @@ func (i *NPMInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) goc
 	metadataURL := i.baseURL + "/" + escaped + "/latest"
 	response, err := i.http.request(packageCtx, http.MethodGet, metadataURL, nil, i.http.config.MaxMetadataBytes)
 	if err != nil {
-		verdict, message := classify(ctx, err)
-		result.Verdict, result.Error = gocrawl.Verdict(verdict), message
+		verdict, message, uncountedRetry := classify(ctx, err)
+		result.Verdict, result.Error, result.UncountedRetry = gocrawl.Verdict(verdict), message, uncountedRetry
 		return result
 	}
 	result.DownloadedBytes = int64(len(response.body))
