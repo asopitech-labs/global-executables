@@ -84,6 +84,11 @@ https://raw.githubusercontent.com/asopitech-labs/global-executables/dictionary
 See [the dictionary branch migration note](docs/DICTIONARY_BRANCH.md) for the
 branch contract, local setup, and the `main` URL cutover.
 
+Go development follows the
+[JetBrains Modern Go Guidelines](https://github.com/JetBrains/go-modern-guidelines).
+See the [Go crawler development and build contract](docs/GO_CRAWLER_DEVELOPMENT.md)
+for the versioned review, build, test, security, and release workflow.
+
 ---
 
 ## Architecture
