@@ -2,6 +2,18 @@
   "command": "create-db",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "bagatel",
+      "version": "0.8.3",
+      "repository": "https://github.com/tweedegolf/bag-address-lookup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.3"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/gcors88/read_files_go",
       "version": "v0.0.0-20231202213924-90c4a88bb57f",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-08-28"
+  "last_seen": "2026-08-29"
 }
