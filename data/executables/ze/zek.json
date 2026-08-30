@@ -2,6 +2,18 @@
   "command": "zek",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "zek-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/thezeeck/zek",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/miku/zek",
       "version": "v0.1.31",
@@ -39,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-08-29"
+  "last_seen": "2026-08-30"
 }
