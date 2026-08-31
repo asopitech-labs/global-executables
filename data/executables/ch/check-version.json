@@ -2,6 +2,18 @@
   "command": "check-version",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/secrethub/secrethub-go",
+      "version": "v0.33.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/secrethub/secrethub-go/@v/v0.33.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.33.0"
+    },
+    {
       "ecosystem": "npm",
       "package": "@casomoltd/tooling",
       "version": "0.23.0",
@@ -12,8 +24,32 @@
       "language": "javascript",
       "registry": "npm",
       "latest_version": "0.23.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jgt-tools",
+      "version": "0.6.1",
+      "repository": "https://jolly-good-toolbelt.github.io/jgt_tools/",
+      "source": "https://files.pythonhosted.org/packages/d6/47/b94351bafe4845a80d7088f43c55e57c24a4104e4b170fa53ae33d87728f/jgt_tools-0.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "package-dev-tools",
+      "version": "0.8.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d5/e7/a66eb090a95482e04030af43284e27fc3b26a41a3bae5bb67aae0ce9b733/package_dev_tools-0.8.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.5"
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

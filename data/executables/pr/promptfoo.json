@@ -2,6 +2,18 @@
   "command": "promptfoo",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/tmc/pe",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tmc/pe/@v/v0.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "promptfoo",
       "version": "0.122.0",
@@ -12,8 +24,20 @@
       "package_system": "homebrew",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "promptfoo",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/76/54/dd88dab13e85dd1e007d5d517c6bf6f8a1bbdb393a077c7268e51e0fb135/promptfoo-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

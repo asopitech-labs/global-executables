@@ -2,6 +2,18 @@
   "command": "mistral-server",
   "providers": [
     {
+      "ecosystem": "pypi",
+      "package": "mistral",
+      "version": "22.0.0",
+      "repository": "https://docs.openstack.org/mistral/latest/",
+      "source": "https://files.pythonhosted.org/packages/41/07/6ad0ec950f97a3c3e0f6543913473a88d46c731a9f12fee674db1e5f6c36/mistral-22.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "22.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-mistral",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

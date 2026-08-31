@@ -2,6 +2,30 @@
   "command": "taps",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/taigrr/adb",
+      "version": "v0.2.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/taigrr/adb/@v/v0.2.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "taps",
+      "version": "1.1.0",
+      "repository": "https://github.com/Vimru/taps",
+      "source": "https://files.pythonhosted.org/packages/5b/cb/55c915eb56e8c1a616e75416e1571af1476497e938e27d13efe37867f32a/taps-1.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0"
+    },
+    {
       "ecosystem": "rubygems",
       "package": "dkastner-taps",
       "version": "0.3.11",
@@ -99,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

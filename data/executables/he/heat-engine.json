@@ -2,6 +2,18 @@
   "command": "heat-engine",
   "providers": [
     {
+      "ecosystem": "pypi",
+      "package": "openstack-heat",
+      "version": "26.0.1",
+      "repository": "https://docs.openstack.org/heat/latest/",
+      "source": "https://files.pythonhosted.org/packages/5a/ec/8f9a95e558a57520cc93813ef047138610dd419dbea8c77345262c36652d/openstack_heat-26.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.0.1"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-heat",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

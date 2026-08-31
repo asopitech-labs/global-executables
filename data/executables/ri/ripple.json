@@ -2,6 +2,42 @@
   "command": "ripple",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/bmbstack/ripple",
+      "version": "v1.4.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bmbstack/ripple/@v/v1.4.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ripple-mq/ripple-server",
+      "version": "v1.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ripple-mq/ripple-server/@v/v1.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yuitaso/sampleWebServer",
+      "version": "v0.0.0-20231026131832-bff25892bf7e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yuitaso/sample!web!server/@v/v0.0.0-20231026131832-bff25892bf7e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231026131832-bff25892bf7e"
+    },
+    {
       "ecosystem": "npm",
       "package": "@alimaandev/ripple",
       "version": "0.7.0",
@@ -12,6 +48,18 @@
       "language": "javascript",
       "registry": "npm",
       "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ripple-mcp",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b4/9b/def7de70f7c085693e2460143a6da6e78d58f669210f3fdb239a58257940/ripple_mcp-0.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
     },
     {
       "ecosystem": "rubygems",
@@ -39,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

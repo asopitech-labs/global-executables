@@ -2,6 +2,18 @@
   "command": "ipconfig",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/sigam-zq/base-study",
+      "version": "v0.0.0-20260718031617-711c0b75ab97",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sigam-zq/base-study/@v/v0.0.0-20260718031617-711c0b75ab97.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260718031617-711c0b75ab97"
+    },
+    {
       "ecosystem": "macos",
       "package": "macos-base",
       "version": "14.8.7",
@@ -36,6 +48,18 @@
       "package_system": "macos-base",
       "distribution_family": "macos",
       "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ipconfig",
+      "version": "0.9.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0d/21/6c7d1c95d0b20a5b0d38afee76f3ef814010da95156e8acc46953c5388e7/ipconfig-0.9.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.9"
     },
     {
       "ecosystem": "windows",
@@ -87,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

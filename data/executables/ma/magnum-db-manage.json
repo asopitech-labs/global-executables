@@ -2,6 +2,18 @@
   "command": "magnum-db-manage",
   "providers": [
     {
+      "ecosystem": "pypi",
+      "package": "magnum",
+      "version": "22.0.0",
+      "repository": "http://docs.openstack.org/magnum/latest/",
+      "source": "https://files.pythonhosted.org/packages/81/21/61c7a3313b01adf08db590251ab223ec97edb728b8288defbdb12bda26c5/magnum-22.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "22.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-magnum",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

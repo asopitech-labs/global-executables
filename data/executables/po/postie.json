@@ -2,6 +2,18 @@
   "command": "postie",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/javi11/postie",
+      "version": "v0.0.31",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/javi11/postie/@v/v0.0.31.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.31"
+    },
+    {
       "ecosystem": "npm",
       "package": "@anishhs/postie",
       "version": "1.0.5",
@@ -12,6 +24,18 @@
       "language": "javascript",
       "registry": "npm",
       "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "py-postie",
+      "version": "0.10",
+      "repository": "http://github.com/itsnauman/postie",
+      "source": "https://files.pythonhosted.org/packages/a5/b7/af4a61ac608d4948d30f663c0b23fc1226d37e73ce50b2a90d312ec737a1/py_postie-0.10-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10"
     },
     {
       "ecosystem": "rubygems",
@@ -27,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

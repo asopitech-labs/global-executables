@@ -2,6 +2,30 @@
   "command": "synthetic",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/dstiliadis/sched-bench",
+      "version": "v0.0.0-20200327214136-5c488b46fddd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dstiliadis/sched-bench/@v/v0.0.0-20200327214136-5c488b46fddd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200327214136-5c488b46fddd"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "lucidtech-synthetic",
+      "version": "0.6.1",
+      "repository": "https://github.com/LucidtechAI/synthetic",
+      "source": "https://files.pythonhosted.org/packages/69/5c/074776ed241536540c4281930ea43a2e02918136086598bc93c27c27f1fd/lucidtech_synthetic-0.6.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.1"
+    },
+    {
       "ecosystem": "rubygems",
       "package": "synthetic",
       "version": "0.1.2",
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

@@ -2,6 +2,18 @@
   "command": "ironic-neutron-agent",
   "providers": [
     {
+      "ecosystem": "pypi",
+      "package": "networking-baremetal",
+      "version": "8.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/bd/fe/bd1bd5eb36ba5377d7689c64ea296116179ab504ed29a96d92e54d7fdf85/networking_baremetal-8.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.0.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-ironic-neutron-agent",
       "version": null,
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

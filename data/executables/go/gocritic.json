@@ -2,6 +2,18 @@
   "command": "gocritic",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "git.freesoso.sbs/go-critic/go-critic",
+      "version": "v0.13.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.freesoso.sbs/go-critic/go-critic/@v/v0.13.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.13.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "go-critic",
       "version": "0.14.4",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

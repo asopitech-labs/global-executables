@@ -2,6 +2,18 @@
   "command": "airflow",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/emoncse/airflow",
+      "version": "v0.0.0-20240918131844-7e472173c4dc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/emoncse/airflow/@v/v0.0.0-20240918131844-7e472173c4dc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240918131844-7e472173c4dc"
+    },
+    {
       "ecosystem": "pypi",
       "package": "alo7-airflow",
       "version": "1.10.0.7",
@@ -72,8 +84,44 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "1.10.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pano-airflow",
+      "version": "2.7.1",
+      "repository": "https://panoramichillscapital.com/",
+      "source": "https://files.pythonhosted.org/packages/65/39/b6305e816f93d48aeb35d36c50d5cbe284bf1f021b8b14104a588bb68a7d/pano_airflow-2.7.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.7.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "smartpip2",
+      "version": "2.2.3",
+      "repository": "https://www.smartchart.cn/",
+      "source": "https://files.pythonhosted.org/packages/f7/41/f153e07193aecf9b5b9d99939f4db1b84444143c76340c89507357d773f2/smartpip2-2.2.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "torch-airflow-sdk",
+      "version": "0.0.41",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1c/c4/4a1ef9e08a2eb35af0c1075b31045a030ddb9648c1a47a7551a9bcb27333/torch_airflow_sdk-0.0.41.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.41"
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

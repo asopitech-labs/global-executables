@@ -2,6 +2,18 @@
   "command": "nssh",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/0x6b/nssh",
+      "version": "v0.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/0x6b/nssh/@v/v0.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.1"
+    },
+    {
       "ecosystem": "npm",
       "package": "@buladou/nssh",
       "version": "0.22.6",
@@ -12,8 +24,20 @@
       "language": "javascript",
       "registry": "npm",
       "latest_version": "0.22.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "netbox-ssh-browser",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/52/56/59d817684ef3289ee1cb573af50cafab8a90731dff2bbcc80df6c6b9aa96/netbox_ssh_browser-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

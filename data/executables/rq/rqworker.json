@@ -2,6 +2,30 @@
   "command": "rqworker",
   "providers": [
     {
+      "ecosystem": "pypi",
+      "package": "rq",
+      "version": "2.11.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/80/1e/f85cba91fe58c63812b4acce073fc448230381c4785e03832f455305ff82/rq-2.11.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.11.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rq27",
+      "version": "1.7.0",
+      "repository": "https://github.com/openoriented/rq27",
+      "source": "https://files.pythonhosted.org/packages/23/56/4f1725200af85577106458fdbf465bf41d219e05e1aa46f18e1050ed091d/rq27-1.7.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.7.0"
+    },
+    {
       "ecosystem": "ubuntu",
       "package": "python3-rq",
       "version": null,
@@ -15,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }

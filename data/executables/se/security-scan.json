@@ -2,6 +2,18 @@
   "command": "security-scan",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/sebrandon1/go-quay",
+      "version": "v1.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sebrandon1/go-quay/@v/v1.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2"
+    },
+    {
       "ecosystem": "npm",
       "package": "@araptus/npm-security-scanner",
       "version": "2.0.2",
@@ -48,8 +60,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "security-scan-cli",
+      "version": "2.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c0/c5/0d349c80ef481ca4d9dc7f4f490a0efeabf27e8872abf303b3bf1723f581/security_scan_cli-2.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-08-30"
+  "last_seen": "2026-08-31"
 }
