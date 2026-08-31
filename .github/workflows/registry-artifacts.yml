@@ -45,7 +45,15 @@ jobs:
           if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
           fi
-          if git cat-file -e origin/artifact-data:data/production/intermediate/crates.jsonl 2>/dev/null; then
+          if git cat-file -e origin/artifact-data:data/production/transport/crates-observations/manifest.json 2>/dev/null; then
+            rm -rf /tmp/crates-observation-transport
+            mkdir -p /tmp/crates-observation-transport
+            git archive origin/artifact-data data/production/transport/crates-observations \
+              | tar -x -C /tmp/crates-observation-transport
+            python3 tools/transport_shards.py unpack \
+              --input-dir /tmp/crates-observation-transport/data/production/transport/crates-observations \
+              --output data/production/intermediate/crates.jsonl
+          elif git cat-file -e origin/artifact-data:data/production/intermediate/crates.jsonl 2>/dev/null; then
             git show origin/artifact-data:data/production/intermediate/crates.jsonl \
               > data/production/intermediate/crates.jsonl
           fi
@@ -151,7 +159,15 @@ jobs:
           if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
           fi
-          if git cat-file -e origin/artifact-data:data/production/intermediate/npm.jsonl 2>/dev/null; then
+          if git cat-file -e origin/artifact-data:data/production/transport/npm-observations/manifest.json 2>/dev/null; then
+            rm -rf /tmp/npm-observation-transport
+            mkdir -p /tmp/npm-observation-transport
+            git archive origin/artifact-data data/production/transport/npm-observations \
+              | tar -x -C /tmp/npm-observation-transport
+            python3 tools/transport_shards.py unpack \
+              --input-dir /tmp/npm-observation-transport/data/production/transport/npm-observations \
+              --output data/production/intermediate/npm.jsonl
+          elif git cat-file -e origin/artifact-data:data/production/intermediate/npm.jsonl 2>/dev/null; then
             git show origin/artifact-data:data/production/intermediate/npm.jsonl \
               > data/production/intermediate/npm.jsonl
           fi

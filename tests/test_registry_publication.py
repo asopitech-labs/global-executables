@@ -261,5 +261,12 @@ def test_unchanged_crates_dump_does_not_republish_a_run_only_report_change():
 def test_shared_publisher_retries_from_a_fresh_remote_snapshot():
     assert 'PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"' in PARALLEL
     assert 'local attempt="${PUBLISH_ATTEMPT:-1}"' in PARALLEL
-    assert 'PUBLISH_ATTEMPT=$((attempt + 1)) publish' in PARALLEL
+    assert 'PUBLISH_ATTEMPT=$((attempt + 1)) publish_snapshot' in PARALLEL
     assert 'PUBLISH_MAX_ATTEMPTS=3' in WORKFLOW
+
+
+def test_shared_publisher_isolates_sources_and_uses_disposable_worktrees():
+    assert 'for source in ${SOURCES}; do' in PARALLEL
+    assert 'SOURCES="${source}" OBSERVATION_SOURCES="" publish_snapshot' in PARALLEL
+    assert 'mktemp -d /tmp/ge-artifact-publish.XXXXXX' in PARALLEL
+    assert 'local worktree=/tmp/ge-artifact-publish' not in PARALLEL

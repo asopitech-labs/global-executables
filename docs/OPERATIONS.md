@@ -395,18 +395,22 @@ RubyGems and Packagist also completed their cited live passes with zero `429`, z
 timeouts, and zero circuit opens.
 
 Git is a transport boundary, not the runtime format. GitHub rejects individual blobs
-above 100 MiB, so `artifact-data` stores the growing Go observation snapshot and module
-catalog under `data/production/transport/` as deterministic gzip parts with at most
-32 MiB uncompressed content each. A manifest pins part order, compressed and
+above 100 MiB, so `artifact-data` stores every registry observation snapshot and the
+growing Go module catalog under `data/production/transport/` as deterministic gzip
+parts with at most 32 MiB uncompressed content each. A manifest pins part order, compressed and
 uncompressed sizes, per-part SHA-256 digests, and the whole restored-file digest.
 `seed` and `refresh.yml` verify every part before atomically replacing the plain local
 file; missing or corrupt parts fail closed. They retain a plain-file fallback only for
-the legacy migration checkpoint. Publication deletes the legacy Go blobs in the same
-commit that adds the verified shards.
+legacy migration checkpoints. Publication deletes each legacy registry blob in the
+same commit that adds its verified shards.
 
-`crawl_parallel.sh publish` merges only the state and crawl-report entries this machine
-owns, and refuses a source whose local cursor is behind the published one — the check
-that stopped Go's catalogue being rolled back fifteen months. The daily crates writer
+`crawl_parallel.sh publish` publishes one registry per commit and push, merges only the
+state and crawl-report entry that registry owns, and refuses a source whose local cursor
+is behind the published one — the check that stopped Go's catalogue being rolled back
+fifteen months. A failed source is reported after the publisher attempts the remaining
+sources, so a PyPI transfer failure cannot strand a valid Go checkpoint. Each attempt
+uses a disposable worktree; an interrupted attempt cannot lock the next publication to
+a stale fixed path. The daily crates writer
 uses the same source-owned merge, restores and publishes only crates-owned observations
 plus the shared source-merged state; it must not copy an unrelated catalog, stale
 whole-state, or whole-report snapshot over other writers. `watch` runs the

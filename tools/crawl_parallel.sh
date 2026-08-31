@@ -84,15 +84,15 @@ seed() {
       fi
     done
     local rows="data/production/intermediate/${source}.jsonl"
-    if [ "${source}" = go ] && \
-       git cat-file -e "origin/artifact-data:data/production/transport/go-observations/manifest.json" 2>/dev/null; then
-      rm -rf "${BASE}/data/production/transport/go-observations"
-      git archive origin/artifact-data data/production/transport/go-observations \
+    local transport="data/production/transport/${source}-observations"
+    if git cat-file -e "origin/artifact-data:${transport}/manifest.json" 2>/dev/null; then
+      rm -rf "${BASE}/${transport}"
+      git archive origin/artifact-data "${transport}" \
         | tar -x -C "${BASE}"
       python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
-        --input-dir "${BASE}/data/production/transport/go-observations" \
+        --input-dir "${BASE}/${transport}" \
         --output "${BASE}/${rows}"
-      rm -rf "${BASE}/data/production/transport/go-observations"
+      rm -rf "${BASE}/${transport}"
     elif git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
       git show "origin/artifact-data:${rows}" > "${BASE}/${rows}"
     fi
@@ -227,15 +227,16 @@ PY
 # Publish only the sources this machine owns.  CI writes crates.io to the same branch,
 # so replacing the whole state would overwrite whichever writer published second — the
 # mistake that nearly rolled Go's catalog back fifteen months.
-publish() {
+publish_snapshot() (
   guard_npm_owner
-  local worktree=/tmp/ge-artifact-publish
+  local worktree
+  worktree=$(mktemp -d /tmp/ge-artifact-publish.XXXXXX)
+  rmdir "${worktree}"
   local attempt="${PUBLISH_ATTEMPT:-1}"
   local push_status=0
+  trap 'git worktree remove "${worktree}" --force >/dev/null 2>&1 || true; rm -rf "${worktree}"' EXIT
   cd "${ROOT_DIR}"
   git fetch origin artifact-data --quiet
-  git worktree remove "${worktree}" --force >/dev/null 2>&1 || true
-  rm -rf "${worktree}"
   git worktree prune
   git worktree add --quiet "${worktree}" origin/artifact-data
   mkdir -p "${worktree}/data/production/intermediate" "${worktree}/reports"
@@ -273,15 +274,13 @@ publish() {
       rm -f "${worktree}/data/production/npm-packages.txt" \
         "${worktree}/data/production/npm-packages.txt.gz"
     fi
-    if [ "${source}" = go ] && \
-       [ -f "${dir}/data/production/intermediate/go.jsonl" ]; then
+    local rows="data/production/intermediate/${source}.jsonl"
+    local transport="data/production/transport/${source}-observations"
+    if [ -f "${dir}/${rows}" ]; then
       python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
-        --input "${dir}/data/production/intermediate/go.jsonl" \
-        --output-dir "${worktree}/data/production/transport/go-observations"
-      rm -f "${worktree}/data/production/intermediate/go.jsonl"
-    elif [ -f "${dir}/data/production/intermediate/${source}.jsonl" ]; then
-      cp "${dir}/data/production/intermediate/${source}.jsonl" \
-        "${worktree}/data/production/intermediate/${source}.jsonl"
+        --input "${dir}/${rows}" \
+        --output-dir "${worktree}/${transport}"
+      rm -f "${worktree}/${rows}"
     fi
   done
   for source in ${OBSERVATION_SOURCES}; do
@@ -327,7 +326,6 @@ PYOBS
       push_status=$?
     fi
   fi
-  git worktree remove "${worktree}" --force || true
   if [ "${push_status}" -ne 0 ]; then
     if [ "${attempt}" -ge "${PUBLISH_MAX_ATTEMPTS}" ]; then
       echo "artifact-data publish failed after ${attempt} attempts" >&2
@@ -335,15 +333,34 @@ PYOBS
     fi
     echo "artifact-data advanced concurrently; rebuilding from the latest branch (attempt $((attempt + 1))/${PUBLISH_MAX_ATTEMPTS})" >&2
     sleep "$((attempt * 5))"
-    PUBLISH_ATTEMPT=$((attempt + 1)) publish
+    PUBLISH_ATTEMPT=$((attempt + 1)) publish_snapshot
   fi
+)
+
+publish() {
+  guard_npm_owner
+  local source status=0 publish_status
+  for source in ${SOURCES}; do
+    if SOURCES="${source}" OBSERVATION_SOURCES="" publish_snapshot; then
+      :
+    else
+      publish_status=$?
+      status="${publish_status}"
+      echo "${source} publication failed; continuing with the remaining sources" >&2
+    fi
+  done
+  if [ -n "${OBSERVATION_SOURCES}" ]; then
+    if SOURCES="" publish_snapshot; then
+      :
+    else
+      status=$?
+    fi
+  fi
+  return "${status}"
 }
 
-# The manual command and the long-running supervisor share BASE and therefore the
-# same temporary worktree.  Serialise the entire publication, not just the push: two
-# writers racing in worktree cleanup can remove the checkout while the other is
-# preparing its commit.  A skipped manual run is safe because the active publisher
-# already owns the same local source snapshots.
+# The manual command and the long-running supervisor share BASE. Serialise the entire
+# publication so both writers do not publish the same snapshots concurrently.
 publish_locked() (
   if ! flock -n 9; then
     echo "publication already in progress for ${BASE}; skipping"

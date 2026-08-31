@@ -8,6 +8,7 @@ ROOT = Path(__file__).parents[1]
 TOOL = ROOT / "tools/transport_shards.py"
 PARALLEL = (ROOT / "tools/crawl_parallel.sh").read_text()
 REFRESH = (ROOT / ".github/workflows/refresh.yml").read_text()
+REGISTRY = (ROOT / ".github/workflows/registry-artifacts.yml").read_text()
 
 
 def run_tool(*args: object, expected: int = 0) -> subprocess.CompletedProcess[str]:
@@ -76,16 +77,21 @@ def test_unpack_missing_part_fails_closed(tmp_path):
     assert not (tmp_path / "output.jsonl").exists()
 
 
-def test_go_publisher_uses_shards_and_removes_legacy_transport_files():
+def test_publisher_shards_every_registry_observation_and_removes_legacy_files():
     assert "tools/transport_shards.py\" pack" in PARALLEL
-    assert "transport/go-observations" in PARALLEL
+    assert 'transport/${source}-observations' in PARALLEL
     assert "transport/go-modules" in PARALLEL
-    assert 'rm -f "${worktree}/data/production/intermediate/go.jsonl"' in PARALLEL
+    assert 'rm -f "${worktree}/${rows}"' in PARALLEL
     assert 'rm -f "${worktree}/data/production/go-modules.txt"' in PARALLEL
 
 
 def test_seed_and_refresh_prefer_verified_shards_with_legacy_fallback():
     assert "tools/transport_shards.py\" unpack" in PARALLEL
+    assert 'transport/${source}-observations' in PARALLEL
     assert "origin/artifact-data:${rows}" in PARALLEL
     assert "tools/transport_shards.py unpack" in REFRESH
+    assert 'transport/${source}-observations' in REFRESH
     assert "origin/artifact-data:data/production/intermediate/$source.jsonl" in REFRESH
+    assert REGISTRY.count("tools/transport_shards.py unpack") == 2
+    assert "transport/crates-observations" in REGISTRY
+    assert "transport/npm-observations" in REGISTRY
