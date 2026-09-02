@@ -102,6 +102,21 @@ def test_forecast_orders_mixed_timezone_offsets_chronologically():
     assert forecast["estimated_completion_at"] == "2026-09-01T00:00:00Z"
 
 
+def test_forecast_ignores_old_publication_catchup_outside_recent_window():
+    builder = load_builder()
+    history = [
+        {"observed_at": "2026-09-01T00:00:00Z", "source": {"cursor": 0, "catalog_size": 2_000}},
+        {"observed_at": "2026-09-02T00:00:00Z", "source": {"cursor": 200, "catalog_size": 1_000}},
+        {"observed_at": "2026-09-03T00:00:00Z", "source": {"cursor": 300, "catalog_size": 1_000}},
+    ]
+
+    forecast = builder.completion_forecast(history)
+
+    assert forecast["samples"] == 2
+    assert forecast["backlog_change_per_day"] == -100
+    assert forecast["estimated_completion_at"] == "2026-09-10T00:00:00Z"
+
+
 def test_pages_pipeline_exports_history_and_renders_forecast():
     workflow = (ROOT / ".github/workflows/pages.yml").read_text()
     app = (ROOT / "playground/app.js").read_text()

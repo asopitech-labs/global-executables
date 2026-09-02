@@ -12,6 +12,7 @@ from pathlib import Path
 CRAWL_SCHEDULE = "47 4 * * *"
 CRAWL_HOUR = 4
 CRAWL_MINUTE = 47
+FORECAST_WINDOW = timedelta(hours=24)
 
 
 def _timestamp(value: str) -> datetime:
@@ -26,6 +27,9 @@ def completion_forecast(history: list[dict]) -> dict:
     observations = []
     previous = None
     dated = [item for item in history if item.get("observed_at")]
+    if dated:
+        latest = max(_timestamp(item["observed_at"]) for item in dated)
+        dated = [item for item in dated if _timestamp(item["observed_at"]) >= latest - FORECAST_WINDOW]
     for item in sorted(dated, key=lambda value: _timestamp(value["observed_at"])):
         source = item.get("source") or {}
         state = (
@@ -40,7 +44,8 @@ def completion_forecast(history: list[dict]) -> dict:
 
     result = {
         "source": "go",
-        "model": "recent-published-net-backlog-v1",
+        "model": "rolling-24h-published-net-backlog-v1",
+        "window_hours": 24,
         "status": "insufficient_data",
         "samples": len(observations),
         "observed_from": _iso(observations[0][0]) if observations else None,

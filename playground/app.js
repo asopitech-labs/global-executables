@@ -64,7 +64,7 @@ function renderOverview() {
   $("forecast-window").textContent = forecast.observed_from && forecast.observed_to ? `${formatDate(forecast.observed_from, false)} – ${formatDate(forecast.observed_to, false)}` : "insufficient history";
   if (forecast.status === "estimated") {
     $("forecast-title").textContent = `Estimated completion · ${formatDate(forecast.estimated_completion_at, false)}`;
-    $("forecast-detail").textContent = `Linear projection from ${formatNumber(forecast.samples)} published checkpoints; future catalog growth is reflected in the net trend.`;
+    $("forecast-detail").textContent = `Rolling 24-hour projection from ${formatNumber(forecast.samples)} published checkpoints; catalog growth and retries are reflected in the net trend.`;
   } else if (forecast.status === "complete") {
     $("forecast-title").textContent = "Current catalog complete";
     $("forecast-detail").textContent = "The published cursor has reached the current catalog with no retry backlog.";

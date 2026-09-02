@@ -655,11 +655,13 @@ During the build it snapshots
 the latest `artifact-data` crawl report into `status.json`, including the next
 scheduled crawl time, source cursors, failures, and coverage kind.
 
-The same build replays up to seven days of published Go checkpoints and writes an
-advisory completion forecast into `status.json`. Its backlog is
+The same build reads up to seven days of published Go checkpoints, selects the rolling
+24-hour operating window, and writes an advisory completion forecast into `status.json`.
+The short window excludes delayed bulk publication and migration catch-up from normal
+crawler throughput. Its backlog is
 `catalog_size - cursor + retry_pending`, so catalog growth and unresolved retries
 cannot make the estimate look faster than the observed net trend. The forecast uses
-the first and last distinct checkpoint in that window. If fewer than two checkpoints
+the first and last distinct checkpoint in the 24-hour window. If fewer than two checkpoints
 exist or the backlog is flat or growing, Pages reports no finite completion date
 instead of extrapolating a misleading ETA. The crawl report history remains the source
 of truth; the rendered forecast is disposable and reproducible.
