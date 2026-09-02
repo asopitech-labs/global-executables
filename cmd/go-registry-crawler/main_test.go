@@ -231,3 +231,29 @@ func TestExecuteLoopRunsRequestedPassesAndStopsAtCompletion(t *testing.T) {
 		t.Fatalf("output=%q", output.String())
 	}
 }
+
+func TestBuildPassWorksPrioritizesCatalogAndBoundsRetries(t *testing.T) {
+	directory := t.TempDir()
+	catalog := filepath.Join(directory, "go-modules.txt")
+	if err := os.WriteFile(catalog, []byte("new-a\nnew-b\nnew-c\nnew-d\nnew-e\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{
+		CatalogSize: 5,
+		Retries: map[string]gocrawl.RetryEntry{
+			"retry-a": {Attempts: 1},
+			"retry-b": {Attempts: 2},
+		},
+	}}
+
+	works, err := buildPassWorks(catalog, before, 4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(works) != 4 || works[0].Retry || works[1].Retry || works[2].Retry || !works[3].Retry {
+		t.Fatalf("works=%+v", works)
+	}
+	if works[0].Module != "new-a" || works[3].Module != "retry-a" {
+		t.Fatalf("works=%+v", works)
+	}
+}

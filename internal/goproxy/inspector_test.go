@@ -92,6 +92,135 @@ func TestInspectorUsesRangeReaderAndFindsMainPackages(t *testing.T) {
 	}
 }
 
+func TestInspectorUsesPackageIndexWithoutReadingArchive(t *testing.T) {
+	var archiveRequests atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/@latest"):
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+		case strings.HasPrefix(r.URL.Path, "/v1/packages/"):
+			_, _ = w.Write([]byte(`{
+				"modulePath":"example.com/demo",
+				"version":"v1.0.0",
+				"packages":{"items":[
+					{"path":"example.com/demo/cmd/demo","name":"main"},
+					{"path":"example.com/demo/examples/demo","name":"main"}
+				],"total":2}
+			}`))
+		default:
+			archiveRequests.Add(1)
+			http.Error(w, "archive must not be read", http.StatusInternalServerError)
+		}
+	}))
+	defer server.Close()
+
+	result := NewInspector(Config{
+		BaseURL: server.URL, PackageIndexURL: server.URL, Client: server.Client(), MaxAttempts: 1,
+	}).Inspect(t.Context(), gocrawl.ModuleWork{Module: "example.com/demo", Attempt: 1})
+
+	if result.Verdict != gocrawl.VerdictSuccess || len(result.Observations) != 1 {
+		t.Fatalf("result=%+v", result)
+	}
+	if result.Observations[0].Command != "demo" || archiveRequests.Load() != 0 {
+		t.Fatalf("observations=%+v archiveRequests=%d", result.Observations, archiveRequests.Load())
+	}
+	if result.DownloadedBytes == 0 || !strings.Contains(result.Observations[0].Source, "/v1/packages/") {
+		t.Fatalf("result=%+v", result)
+	}
+}
+
+func TestInspectorFallsBackFromPackageIndexAndValidatesModulePath(t *testing.T) {
+	archive := moduleZIP(t)
+	var modRequests atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/@latest"):
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+		case strings.HasPrefix(r.URL.Path, "/v1/packages/"):
+			http.NotFound(w, r)
+		case strings.HasSuffix(r.URL.Path, ".mod"):
+			modRequests.Add(1)
+			_, _ = w.Write([]byte("module example.com/demo\n"))
+		case r.Method == http.MethodHead:
+			w.Header().Set("Content-Length", strconv.Itoa(len(archive)))
+		case strings.HasSuffix(r.URL.Path, ".zip"):
+			_, _ = w.Write(archive)
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer server.Close()
+
+	result := NewInspector(Config{
+		BaseURL: server.URL, PackageIndexURL: server.URL, Client: server.Client(), MaxAttempts: 1,
+	}).Inspect(t.Context(), gocrawl.ModuleWork{Module: "example.com/demo", Attempt: 1})
+
+	if result.Verdict != gocrawl.VerdictSuccess || len(result.Observations) != 1 || modRequests.Load() != 1 {
+		t.Fatalf("result=%+v modRequests=%d", result, modRequests.Load())
+	}
+}
+
+func TestInspectorRejectsMismatchedModuleDeclarationBeforeArchive(t *testing.T) {
+	var archiveRequests atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/@latest"):
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+		case strings.HasPrefix(r.URL.Path, "/v1/packages/"):
+			http.NotFound(w, r)
+		case strings.HasSuffix(r.URL.Path, ".mod"):
+			_, _ = w.Write([]byte("module example.com/canonical\n"))
+		default:
+			archiveRequests.Add(1)
+			http.Error(w, "archive must not be read", http.StatusInternalServerError)
+		}
+	}))
+	defer server.Close()
+
+	result := NewInspector(Config{
+		BaseURL: server.URL, PackageIndexURL: server.URL, Client: server.Client(), MaxAttempts: 1,
+	}).Inspect(t.Context(), gocrawl.ModuleWork{Module: "example.com/alias", Attempt: 1})
+
+	if result.Verdict != gocrawl.VerdictPermanent || !strings.Contains(result.Error, "declares module") {
+		t.Fatalf("result=%+v", result)
+	}
+	if archiveRequests.Load() != 0 {
+		t.Fatalf("archiveRequests=%d", archiveRequests.Load())
+	}
+}
+
+func TestInspectorPrefersCachedOnlyArchive(t *testing.T) {
+	archive := moduleZIP(t)
+	var regularArchiveRequests atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/@latest"):
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+		case strings.HasSuffix(r.URL.Path, ".mod"):
+			_, _ = w.Write([]byte("module example.com/demo\n"))
+		case strings.HasPrefix(r.URL.Path, "/cached-only/") && r.Method == http.MethodHead:
+			w.Header().Set("Content-Length", strconv.Itoa(len(archive)))
+		case strings.HasPrefix(r.URL.Path, "/cached-only/"):
+			_, _ = w.Write(archive)
+		case strings.HasSuffix(r.URL.Path, ".zip"):
+			regularArchiveRequests.Add(1)
+			http.Error(w, "regular archive must not be read", http.StatusInternalServerError)
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer server.Close()
+
+	result := NewInspector(Config{
+		BaseURL: server.URL, CachedOnlyURL: server.URL + "/cached-only",
+		Client: server.Client(), MaxAttempts: 1,
+	}).Inspect(t.Context(), gocrawl.ModuleWork{Module: "example.com/demo", Attempt: 1})
+
+	if result.Verdict != gocrawl.VerdictSuccess || regularArchiveRequests.Load() != 0 {
+		t.Fatalf("result=%+v regularArchiveRequests=%d", result, regularArchiveRequests.Load())
+	}
+}
+
 func TestInspectorClassifiesMissingModuleAsPermanent(t *testing.T) {
 	server := httptest.NewServer(http.NotFoundHandler())
 	defer server.Close()

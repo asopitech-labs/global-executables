@@ -34,6 +34,32 @@ type crawlConfig struct {
 	ModuleTimeout    time.Duration
 }
 
+func buildPassWorks(catalogPath string, before gocrawl.Snapshot, budget int) ([]gocrawl.ModuleWork, error) {
+	if budget <= 0 {
+		return nil, nil
+	}
+	retryModules := slices.Sorted(maps.Keys(before.Retries))
+	retryBudget := min(len(retryModules), max(1, budget/4))
+	catalogBudget := budget - retryBudget
+	works, err := gocrawl.ReadCatalogBatch(catalogPath, before.Cursor, before.CatalogOffset, catalogBudget, 0)
+	if err != nil {
+		return nil, err
+	}
+	for _, module := range retryModules[:retryBudget] {
+		if len(works) >= budget {
+			break
+		}
+		entry := before.Retries[module]
+		works = append(works, gocrawl.ModuleWork{
+			Order: uint64(len(works)), Module: module, Retry: true, Attempt: entry.Attempts + 1,
+		})
+	}
+	for index := range works {
+		works[index].Order = uint64(index)
+	}
+	return works, nil
+}
+
 func (c *crawlConfig) applyDefaults() error {
 	if c.Source == "" {
 		c.Source = "go"
@@ -120,10 +146,17 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 	}
 	switch config.Source {
 	case "go":
+		packageIndexURL, cachedOnlyURL := "", ""
+		if config.ProxyURL == "https://proxy.golang.org" {
+			packageIndexURL = "https://pkg.go.dev"
+			cachedOnlyURL = config.ProxyURL + "/cached-only"
+		}
 		return crawlAdapter{
 			profile: gocrawl.CompatibilityProfileFor("go"),
 			inspector: goproxy.NewInspector(goproxy.Config{
-				BaseURL: config.ProxyURL, RequestTimeout: config.RequestTimeout, ModuleTimeout: config.ModuleTimeout,
+				BaseURL: config.ProxyURL, PackageIndexURL: packageIndexURL, CachedOnlyURL: cachedOnlyURL,
+				PackageIndexInterval: 25 * time.Millisecond,
+				RequestTimeout:       config.RequestTimeout, ModuleTimeout: config.ModuleTimeout,
 			}),
 			refresh: func(ctx context.Context, path string, store *gocrawl.BoltStore) (gocrawl.CatalogRefreshReport, error) {
 				return gocrawl.RefreshCatalog(ctx, path, store,
@@ -270,26 +303,9 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		return gocrawl.PassReport{}, err
 	}
 
-	works := make([]gocrawl.ModuleWork, 0, config.PackageBudget)
-	retryModules := slices.Sorted(maps.Keys(before.Retries))
-	for _, module := range retryModules {
-		if len(works) >= config.PackageBudget {
-			break
-		}
-		entry := before.Retries[module]
-		works = append(works, gocrawl.ModuleWork{
-			Order: uint64(len(works)), Module: module, Retry: true, Attempt: entry.Attempts + 1,
-		})
-	}
-	remaining := config.PackageBudget - len(works)
-	if remaining > 0 {
-		catalogWorks, err := gocrawl.ReadCatalogBatch(
-			config.CatalogPath, before.Cursor, before.CatalogOffset, remaining, uint64(len(works)),
-		)
-		if err != nil {
-			return gocrawl.PassReport{}, err
-		}
-		works = append(works, catalogWorks...)
+	works, err := buildPassWorks(config.CatalogPath, before, config.PackageBudget)
+	if err != nil {
+		return gocrawl.PassReport{}, err
 	}
 
 	passCtx, cancel := context.WithCancel(ctx)

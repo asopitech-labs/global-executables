@@ -17,15 +17,20 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/asopitech-labs/global-executables/internal/gocrawl"
+	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
 	"golang.org/x/mod/semver"
 )
 
 type Config struct {
 	BaseURL               string
+	PackageIndexURL       string
+	CachedOnlyURL         string
+	PackageIndexInterval  time.Duration
 	Client                *http.Client
 	RequestTimeout        time.Duration
 	ModuleTimeout         time.Duration
@@ -43,9 +48,11 @@ type Config struct {
 }
 
 type Inspector struct {
-	config Config
-	client *http.Client
-	sleep  func(context.Context, time.Duration) error
+	config             Config
+	client             *http.Client
+	sleep              func(context.Context, time.Duration) error
+	packageIndexMu     sync.Mutex
+	nextPackageRequest time.Time
 }
 
 type permanentError struct{ error }
@@ -61,6 +68,11 @@ func NewInspector(config Config) *Inspector {
 		config.BaseURL = "https://proxy.golang.org"
 	}
 	config.BaseURL = strings.TrimRight(config.BaseURL, "/")
+	config.PackageIndexURL = strings.TrimRight(config.PackageIndexURL, "/")
+	config.CachedOnlyURL = strings.TrimRight(config.CachedOnlyURL, "/")
+	if config.PackageIndexURL != "" && config.PackageIndexInterval <= 0 {
+		config.PackageIndexInterval = 25 * time.Millisecond
+	}
 	if config.RequestTimeout <= 0 {
 		config.RequestTimeout = 45 * time.Second
 	}
@@ -132,9 +144,39 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 		result.Verdict, result.Error = gocrawl.VerdictPermanent, err.Error()
 		return result
 	}
-	url := fmt.Sprintf("%s/%s/@v/%s.zip", i.config.BaseURL, escapedPath, escapedVersion)
+	if i.config.PackageIndexURL != "" {
+		observations, downloaded, complete, indexErr := i.inspectPackageIndex(moduleCtx, work.Module, version)
+		result.DownloadedBytes += downloaded
+		if indexErr == nil && complete {
+			result.Verdict = gocrawl.VerdictSuccess
+			result.Observations = observations
+			return result
+		}
+		if moduleCtx.Err() != nil {
+			result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, moduleCtx.Err())
+			return result
+		}
+	}
+	if i.config.PackageIndexURL != "" || i.config.CachedOnlyURL != "" {
+		downloaded, modErr := i.validateModulePath(moduleCtx, work.Module, escapedPath, escapedVersion)
+		result.DownloadedBytes += downloaded
+		if modErr != nil {
+			result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, modErr)
+			return result
+		}
+	}
+	archiveBaseURL := i.config.BaseURL
+	if i.config.CachedOnlyURL != "" {
+		archiveBaseURL = i.config.CachedOnlyURL
+	}
+	url := fmt.Sprintf("%s/%s/@v/%s.zip", archiveBaseURL, escapedPath, escapedVersion)
 	observations, downloaded, err := i.inspectArchive(moduleCtx, url, work.Module, version, escapedPath, escapedVersion)
-	result.DownloadedBytes = downloaded
+	result.DownloadedBytes += downloaded
+	if err != nil && archiveBaseURL != i.config.BaseURL && moduleCtx.Err() == nil {
+		url = fmt.Sprintf("%s/%s/@v/%s.zip", i.config.BaseURL, escapedPath, escapedVersion)
+		observations, downloaded, err = i.inspectArchive(moduleCtx, url, work.Module, version, escapedPath, escapedVersion)
+		result.DownloadedBytes += downloaded
+	}
 	if err != nil {
 		result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, err)
 		return result
@@ -142,6 +184,26 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 	result.Verdict = gocrawl.VerdictSuccess
 	result.Observations = observations
 	return result
+}
+
+func (i *Inspector) validateModulePath(
+	ctx context.Context,
+	modulePath, escapedPath, escapedVersion string,
+) (int64, error) {
+	modURL := fmt.Sprintf("%s/%s/@v/%s.mod", i.config.BaseURL, escapedPath, escapedVersion)
+	response, err := i.request(ctx, http.MethodGet, modURL, nil, 16*1024*1024)
+	downloaded := int64(len(response.Body))
+	if err != nil {
+		return downloaded, err
+	}
+	declared := modfile.ModulePath(response.Body)
+	if declared == "" {
+		return downloaded, fmt.Errorf("module file has no module directive: %s", modulePath)
+	}
+	if declared != modulePath {
+		return downloaded, permanentError{fmt.Errorf("module %s declares module %s", modulePath, declared)}
+	}
+	return downloaded, nil
 }
 
 func classifyInspectionError(parent context.Context, err error) (gocrawl.Verdict, string, bool) {
@@ -262,15 +324,19 @@ func (i *Inspector) inspectArchive(
 		}
 	}
 	commands := slices.Sorted(maps.Keys(commandSet))
+	return observationsForCommands(commands, modulePath, version, url), view.bytesDownloaded(), nil
+}
+
+func observationsForCommands(commands []string, modulePath, version, source string) []gocrawl.Observation {
 	observations := make([]gocrawl.Observation, 0, len(commands))
 	for _, command := range commands {
 		observations = append(observations, gocrawl.Observation{
 			Command: command, Confidence: "direct", Ecosystem: "go", Language: "go",
 			LatestVersion: version, Package: modulePath, Registry: "go", Repository: nil,
-			Source: url, SourceType: "language_package", Version: version,
+			Source: source, SourceType: "language_package", Version: version,
 		})
 	}
-	return observations, view.bytesDownloaded(), nil
+	return observations
 }
 
 func (i *Inspector) archiveSize(ctx context.Context, url string) (int64, error) {
