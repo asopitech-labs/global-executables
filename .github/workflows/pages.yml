@@ -44,6 +44,14 @@ jobs:
             printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/production-crawl.json
           fi
           DICTIONARY_COMMIT=$(git rev-parse origin/dictionary)
+          : > /tmp/go-crawl-history.jsonl
+          while read -r commit observed_at; do
+            git show "$commit:reports/registry-artifact-crawl.json" \
+              | jq -c --arg observed_at "$observed_at" \
+                'select(.sources.go) | {observed_at: $observed_at, source: .sources.go}' \
+              >> /tmp/go-crawl-history.jsonl
+          done < <(git log origin/artifact-data --since='7 days ago' --reverse \
+            --format='%H %cI' -- reports/registry-artifact-crawl.json)
           echo "ARTIFACT_DATA_COMMIT=$ARTIFACT_DATA_COMMIT" >> "$GITHUB_ENV"
           echo "DICTIONARY_COMMIT=$DICTIONARY_COMMIT" >> "$GITHUB_ENV"
       - name: Build static playground
@@ -52,6 +60,7 @@ jobs:
           python tools/build_playground.py \
             --output _site \
             --crawl-report /tmp/registry-artifact-crawl.json \
+            --crawl-history /tmp/go-crawl-history.jsonl \
             --production-report /tmp/production-crawl.json \
             --artifact-data-commit "$ARTIFACT_DATA_COMMIT" \
             --dictionary-commit "$DICTIONARY_COMMIT" \

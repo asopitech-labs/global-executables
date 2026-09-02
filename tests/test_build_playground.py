@@ -57,3 +57,58 @@ def test_playground_discloses_the_breaking_npm_coverage_change():
         assert required in page
     assert page.index('id="npm-coverage-notice"') < page.index('class="hero"')
     assert "critical 100%" in app
+
+
+def test_forecast_uses_net_backlog_change_from_published_history():
+    builder = load_builder()
+    history = [
+        {"observed_at": "2026-09-01T00:00:00Z", "source": {"cursor": 100, "catalog_size": 1_000, "retry_pending": 0}},
+        {"observed_at": "2026-09-02T00:00:00Z", "source": {"cursor": 300, "catalog_size": 1_100, "retry_pending": 0}},
+    ]
+
+    forecast = builder.completion_forecast(history)
+
+    assert forecast["status"] == "estimated"
+    assert forecast["remaining_work"] == 800
+    assert forecast["backlog_change_per_day"] == -100
+    assert forecast["estimated_completion_at"] == "2026-09-10T00:00:00Z"
+
+
+def test_forecast_refuses_a_completion_date_when_backlog_is_growing():
+    builder = load_builder()
+    history = [
+        {"observed_at": "2026-09-01T00:00:00Z", "source": {"cursor": 100, "catalog_size": 1_000, "retry_pending": 0}},
+        {"observed_at": "2026-09-02T00:00:00Z", "source": {"cursor": 200, "catalog_size": 1_200, "retry_pending": 0}},
+    ]
+
+    forecast = builder.completion_forecast(history)
+
+    assert forecast["status"] == "non_converging"
+    assert forecast["backlog_change_per_day"] == 100
+    assert forecast["estimated_completion_at"] is None
+
+
+def test_forecast_orders_mixed_timezone_offsets_chronologically():
+    builder = load_builder()
+    history = [
+        {"observed_at": "2026-08-31T16:00:00Z", "source": {"cursor": 300, "catalog_size": 1_100}},
+        {"observed_at": "2026-09-01T00:00:00+09:00", "source": {"cursor": 100, "catalog_size": 1_000}},
+    ]
+
+    forecast = builder.completion_forecast(history)
+
+    assert forecast["status"] == "estimated"
+    assert forecast["backlog_change_per_day"] == -2_400
+    assert forecast["estimated_completion_at"] == "2026-09-01T00:00:00Z"
+
+
+def test_pages_pipeline_exports_history_and_renders_forecast():
+    workflow = (ROOT / ".github/workflows/pages.yml").read_text()
+    app = (ROOT / "playground/app.js").read_text()
+    page = (ROOT / "playground/index.html").read_text()
+
+    assert "go-crawl-history.jsonl" in workflow
+    assert "--crawl-history /tmp/go-crawl-history.jsonl" in workflow
+    assert 'id="forecast-title"' in page
+    assert 'state.status?.forecast' in app
+    assert "forecast.backlog_change_per_day == null" in app

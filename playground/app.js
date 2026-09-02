@@ -56,6 +56,26 @@ function renderOverview() {
   const dictionaryCommit = state.status?.dictionary_commit?.slice(0, 8) || "live";
   $("footer-build").textContent = `Dictionary ${dictionaryCommit} · snapshot ${metadata.snapshot || "unknown"} · data served from GitHub raw content.`;
 
+  const forecast = state.status?.forecast || {};
+  const trend = forecast.backlog_change_per_day == null ? null : Number(forecast.backlog_change_per_day);
+  $("forecast-progress").textContent = forecast.overall_progress_percent == null ? "—" : `${Number(forecast.overall_progress_percent).toFixed(2)}%`;
+  $("forecast-remaining").textContent = forecast.remaining_work == null ? "—" : formatNumber(forecast.remaining_work);
+  $("forecast-rate").textContent = Number.isFinite(trend) ? `${trend > 0 ? "+" : ""}${formatNumber(trend)}` : "—";
+  $("forecast-window").textContent = forecast.observed_from && forecast.observed_to ? `${formatDate(forecast.observed_from, false)} – ${formatDate(forecast.observed_to, false)}` : "insufficient history";
+  if (forecast.status === "estimated") {
+    $("forecast-title").textContent = `Estimated completion · ${formatDate(forecast.estimated_completion_at, false)}`;
+    $("forecast-detail").textContent = `Linear projection from ${formatNumber(forecast.samples)} published checkpoints; future catalog growth is reflected in the net trend.`;
+  } else if (forecast.status === "complete") {
+    $("forecast-title").textContent = "Current catalog complete";
+    $("forecast-detail").textContent = "The published cursor has reached the current catalog with no retry backlog.";
+  } else if (forecast.status === "non_converging") {
+    $("forecast-title").textContent = "No finite completion date at the current trend";
+    $("forecast-detail").textContent = "The measured backlog is growing because catalog growth and retries currently exceed net crawl progress.";
+  } else {
+    $("forecast-title").textContent = "Completion date unavailable";
+    $("forecast-detail").textContent = "At least two distinct published checkpoints are required for a forecast.";
+  }
+
   // The OS indexes come from their own pipeline: each run takes a whole file index,
   // so they have records and a coverage kind but never a cursor to advance.
   const osGrid = $("os-grid");

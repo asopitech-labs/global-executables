@@ -64,6 +64,19 @@
         <div class="source-grid" id="os-grid" aria-live="polite"></div>
         <div class="source-group-label">Language registries · package artifacts</div>
         <div class="source-grid" id="source-grid" aria-live="polite"></div>
+        <div class="forecast-card" aria-live="polite">
+          <div>
+            <span class="forecast-label">Evidence-based completion forecast</span>
+            <strong id="forecast-title">Calculating…</strong>
+            <span class="forecast-note" id="forecast-detail">Reading published checkpoints.</span>
+          </div>
+          <dl class="forecast-facts">
+            <div><dt>Registry progress</dt><dd id="forecast-progress">—</dd></div>
+            <div><dt>Go remaining</dt><dd id="forecast-remaining">—</dd></div>
+            <div><dt>Net backlog / day</dt><dd id="forecast-rate">—</dd></div>
+            <div><dt>Observed window</dt><dd id="forecast-window">—</dd></div>
+          </dl>
+        </div>
       </section>
 
       <section class="playground-layout" id="playground">
