@@ -90,6 +90,11 @@ def test_ci_periodically_refreshes_every_completed_registry_in_parallel():
     assert "tools/registry_artifact_crawl.py" in refresh
     assert 'observations changed' in refresh
     assert 'gh workflow run refresh.yml --ref main' in refresh
+    assert 'gh workflow run pages.yml --ref main' in refresh
+    assert "grep -qx 'published'" in refresh
+    assert refresh.index('bash tools/crawl_parallel.sh publish)') < refresh.index(
+        'gh workflow run pages.yml --ref main'
+    )
 
 
 def test_registry_derivations_run_only_after_a_changed_publication():

@@ -26,12 +26,9 @@ function coverageScope(metadata) {
 
 function nextScheduled(now = new Date()) {
   const candidate = new Date(now);
-  candidate.setUTCSeconds(0, 0);
-  for (let day = 0; day < 2; day += 1) {
-    candidate.setUTCDate(now.getUTCDate() + day);
-    candidate.setUTCHours(4, 47, 0, 0);
-    if (candidate > now) return candidate;
-  }
+  const hour = now.getUTCHours();
+  candidate.setUTCHours(hour - (hour % 6), 17, 0, 0);
+  if (candidate <= now) candidate.setUTCHours(hour - (hour % 6) + 6, 17, 0, 0);
   return candidate;
 }
 
@@ -52,7 +49,7 @@ function renderOverview() {
   $("metric-next-note").textContent = `${new Intl.DateTimeFormat(undefined, { timeStyle: "short" }).format(new Date(next))} · local time`;
   $("status-meta").textContent = `Report observed ${formatDate(state.status?.generated_at)} · ${state.status?.artifact_data_commit ? state.status.artifact_data_commit.slice(0, 8) : "live"}`;
   $("schedule-title").textContent = `Next scheduled crawl · ${formatDate(next)}`;
-  $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "47 4 * * *"} UTC · unchanged dumps do not publish or rebuild.`;
+  $("schedule-detail").textContent = `Cron: ${state.status?.schedule || "17 */6 * * *"} UTC · progress is published after each CI refresh.`;
   const dictionaryCommit = state.status?.dictionary_commit?.slice(0, 8) || "live";
   $("footer-build").textContent = `Dictionary ${dictionaryCommit} · snapshot ${metadata.snapshot || "unknown"} · data served from GitHub raw content.`;
 
@@ -94,7 +91,7 @@ function renderOverview() {
 
   const grid = $("source-grid");
   grid.replaceChildren();
-  const order = ["npm", "pypi", "crates", "go", "rubygems", "packagist"];
+  const order = ["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget"];
   for (const name of order) {
     const source = sources[name] || { coverage_kind: "pending", complete: false };
     const card = document.createElement("article");
@@ -107,7 +104,8 @@ function renderOverview() {
     const cursorLabel = Number.isFinite(Number(source.since))
       ? `change ${formatNumber(Number(source.since))}`
       : `through ${String(source.since).slice(0, 10)}`;
-    const position = source.catalog_size ? `${formatNumber(source.cursor || 0)} / ${formatNumber(source.catalog_size)}`
+    const position = source.refresh_cursor != null ? `refresh ${formatNumber(source.refresh_cursor)} / ${formatNumber(source.catalog_size)}`
+      : source.catalog_size ? `${formatNumber(source.cursor || 0)} / ${formatNumber(source.catalog_size)}`
       : source.since ? cursorLabel : complete ? "catalog complete" : "in progress";
     const errors = Number(source.failures || 0);
     // Records and failures are separate facts: a run that collected thousands of records

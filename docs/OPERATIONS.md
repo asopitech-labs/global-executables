@@ -16,7 +16,8 @@ than stopping publication; malformed input and unexplained shrinkage still block
   `refresh_cursor`, and successful refreshes replace that package's prior observations.
 - Local containers are temporary completion boosters and stop at 100%. The
   `registry-refresh.yml` CI matrix owns steady-state refreshes every six hours and
-  dispatches a dictionary rebuild only when normalized observations changed.
+  redeploys Pages after publishing progress; it rebuilds the dictionary only when
+  normalized observations changed.
 - The 2026-08-25 critical npm sweep finished 2,295 / 2,295 packages in 455 seconds
   (302 packages/min), with zero failures, retries, `429`, or timeouts.
 - The RubyGems/Packagist cutover measured 805 and 2,434 packages/min respectively;
@@ -666,10 +667,11 @@ there is neither a successful observation nor a readable stored fallback.
 
 The `pages.yml` workflow builds the static index playground and deploys it with
 the GitHub Pages artifact/deploy actions. It runs after relevant pushes to
-`main`, after registry crawls, and when a changed dictionary is published.
+`main`, whenever the CI refresher publishes crawl progress, and when a changed
+dictionary is published.
 During the build it snapshots
 the latest `artifact-data` crawl report into `status.json`, including the next
-scheduled crawl time, source cursors, failures, and coverage kind.
+scheduled refresh time, discovery and refresh cursors, failures, and coverage kind.
 
 The same build reads up to seven days of published Go checkpoints, selects the rolling
 24-hour operating window, and writes an advisory completion forecast into `status.json`.

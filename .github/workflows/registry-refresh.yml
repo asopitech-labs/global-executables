@@ -103,3 +103,6 @@ jobs:
           if printf '%s\n' "${publish_output}" | grep -qx 'observations changed'; then
             gh workflow run refresh.yml --ref main
           fi
+          if printf '%s\n' "${publish_output}" | grep -qx 'published'; then
+            gh workflow run pages.yml --ref main
+          fi

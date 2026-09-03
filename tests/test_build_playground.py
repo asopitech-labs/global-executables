@@ -15,28 +15,35 @@ def load_builder():
     return module
 
 
-def test_next_crates_check_is_daily_at_0447_utc():
+def test_next_ci_refresh_is_every_six_hours_at_minute_17():
     builder = load_builder()
 
-    before = datetime(2026, 8, 25, 4, 46, tzinfo=timezone.utc)
-    after = datetime(2026, 8, 25, 4, 48, tzinfo=timezone.utc)
+    before = datetime(2026, 8, 25, 6, 16, tzinfo=timezone.utc)
+    after = datetime(2026, 8, 25, 6, 18, tzinfo=timezone.utc)
 
-    assert builder.next_crawl(before) == datetime(2026, 8, 25, 4, 47, tzinfo=timezone.utc)
-    assert builder.next_crawl(after) == datetime(2026, 8, 26, 4, 47, tzinfo=timezone.utc)
-    assert builder.CRAWL_SCHEDULE == "47 4 * * *"
+    assert builder.next_crawl(before) == datetime(2026, 8, 25, 6, 17, tzinfo=timezone.utc)
+    assert builder.next_crawl(after) == datetime(2026, 8, 25, 12, 17, tzinfo=timezone.utc)
+    assert builder.CRAWL_SCHEDULE == "17 */6 * * *"
 
 
-def test_playground_fallback_and_placeholder_match_daily_schedule():
+def test_playground_fallback_and_placeholder_match_ci_refresh_schedule():
     app = (ROOT / "playground/app.js").read_text()
     page = (ROOT / "playground/index.html").read_text()
     builder = SCRIPT.read_text()
 
     for contents in (app, page, builder):
-        assert "47 */6 * * *" not in contents
-        assert "every six hours" not in contents
-    assert "setUTCHours(4, 47, 0, 0)" in app
-    assert 'state.status?.schedule || "47 4 * * *"' in app
-    assert "daily crates.io change check" in page
+        assert "17 */6 * * *" in contents or "every six hours" in contents
+    assert "hour - (hour % 6) + 6" in app
+    assert 'state.status?.schedule || "17 */6 * * *"' in app
+    assert "Next CI registry refresh" in page
+
+
+def test_playground_shows_ci_refresh_position_for_every_refreshed_registry():
+    app = (ROOT / "playground/app.js").read_text()
+
+    assert '["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget"]' in app
+    assert "source.refresh_cursor" in app
+    assert "refresh ${formatNumber(source.refresh_cursor)} / ${formatNumber(source.catalog_size)}" in app
 
 
 def test_playground_discloses_the_breaking_npm_coverage_change():

@@ -9,9 +9,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
-CRAWL_SCHEDULE = "47 4 * * *"
-CRAWL_HOUR = 4
-CRAWL_MINUTE = 47
+CRAWL_SCHEDULE = "17 */6 * * *"
+CRAWL_MINUTE = 17
 FORECAST_WINDOW = timedelta(hours=24)
 
 
@@ -99,20 +98,8 @@ def registry_progress(report: dict) -> float | None:
 
 
 def next_crawl(now: datetime) -> datetime:
-    candidates = []
-    for day in range(2):
-        date = (now + timedelta(days=day)).date()
-        candidates.append(
-            datetime(
-                date.year,
-                date.month,
-                date.day,
-                CRAWL_HOUR,
-                CRAWL_MINUTE,
-                tzinfo=timezone.utc,
-            )
-        )
-    return next(value for value in candidates if value > now)
+    candidate = now.replace(hour=now.hour - now.hour % 6, minute=CRAWL_MINUTE, second=0, microsecond=0)
+    return candidate if candidate > now else candidate + timedelta(hours=6)
 
 
 def main() -> None:
