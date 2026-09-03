@@ -170,13 +170,13 @@ PY
     case "${source}" in
       go|npm|pypi|rubygems|packagist)
         "${RUNTIME}" run --detach --init --name "ge-${source}" --restart on-failure:5 \
-          -v "${dir}:/state" "${GO_IMAGE}" crawl --source "${source}" --passes 0 --continuous \
+          -v "${dir}:/state" "${GO_IMAGE}" crawl --source "${source}" --passes 0 \
           --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}" >/dev/null
         ;;
       *)
         "${RUNTIME}" run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
           -e "SOURCES=${source}" -e "PACKAGE_BUDGET=${PACKAGE_BUDGET}" \
-          -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" -e "CONTINUOUS=1" "${IMAGE}" >/dev/null
+          -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" "${IMAGE}" >/dev/null
         ;;
     esac
     echo "started ge-${source} against ${dir}"
@@ -381,28 +381,15 @@ publish_locked() (
 watch() {
   guard_npm_owner
   local interval="${PUBLISH_INTERVAL:-1800}"
-  local refresh_pending=0
   while :; do
     sleep "${interval}"
     if ! "${RUNTIME}" ps --format '{{.Names}}' | grep -q '^ge-'; then
       echo "$(date -u +%FT%TZ) no crawl containers left; stopping the publisher"
       break
     fi
-    local publish_output
-    publish_output="$(publish_locked 2>&1)" || true
     printf '%s ' "$(date -u +%FT%TZ)"
-    printf '%s\n' "${publish_output}" | grep -vE '^remote:' | tr '\n' ' '
+    publish_locked 2>&1 | grep -vE '^remote:' | tr '\n' ' '
     echo
-    if printf '%s\n' "${publish_output}" | grep -qx 'observations changed'; then
-      refresh_pending=1
-    fi
-    if [ "${refresh_pending}" = 1 ]; then
-      if gh workflow run refresh.yml --ref main; then
-        refresh_pending=0
-      else
-        echo "dictionary refresh dispatch failed; the publisher will retry" >&2
-      fi
-    fi
   done
 }
 

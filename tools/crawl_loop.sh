@@ -86,13 +86,13 @@ while :; do
     exit 1
   fi
 
-  if exhaustive && [ "${CONTINUOUS:-0}" != 1 ]; then
+  if exhaustive; then
     echo "=== every selected source is exhaustive ==="
     break
   fi
-  # A source with no discovery, retry, or refresh work must not busy-loop. Continuous
-  # registry adapters normally process a refresh batch here; an idle source backs off
-  # and eventually stops so its supervisor can expose the missing work.
+  # A source whose cursor has reached the end of its catalog returns instantly having
+  # processed nothing.  Retrying that every few seconds is a busy loop, so back off and
+  # stop once it is clear no further pass can achieve anything.
   if processed_nothing; then
     idle=$((idle + 1))
     if [ "${idle}" -ge "${IDLE_PASSES:-5}" ]; then

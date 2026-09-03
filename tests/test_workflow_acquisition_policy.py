@@ -66,13 +66,30 @@ def test_daily_ci_owns_the_bounded_npm_critical_population():
     ).read_text()
 
 
-def test_local_long_running_crawlers_continue_refreshing_after_exhaustive():
+def test_local_crawlers_are_completion_boosters_not_refresh_workers():
     parallel = (ROOT / "tools/crawl_parallel.sh").read_text()
 
-    assert "--continuous" in parallel
-    assert '-e "CONTINUOUS=1"' in parallel
-    assert 'gh workflow run refresh.yml --ref main' in parallel
-    assert 'observations changed' in parallel
+    start = parallel.split("start()", 1)[1].split("status()", 1)[0]
+    watch = parallel.split("watch()", 1)[1]
+    assert "--continuous" not in start
+    assert "CONTINUOUS=1" not in start
+    assert 'gh workflow run refresh.yml --ref main' not in watch
+
+
+def test_ci_periodically_refreshes_every_completed_registry_in_parallel():
+    refresh = workflow("registry-refresh.yml")
+    triggers = trigger_block(refresh)
+
+    assert 'cron: "17 */6 * * *"' in triggers
+    assert "matrix:" in refresh and "max-parallel: 5" in refresh
+    for source in ("go", "pypi", "rubygems", "packagist", "nuget"):
+        assert source in refresh
+    assert 'select(.cursor >= .catalog_size)' in refresh
+    assert 'select((.catalog_size | type) == "number")' in refresh
+    assert "--passes 1 --continuous" in refresh
+    assert "tools/registry_artifact_crawl.py" in refresh
+    assert 'observations changed' in refresh
+    assert 'gh workflow run refresh.yml --ref main' in refresh
 
 
 def test_registry_derivations_run_only_after_a_changed_publication():

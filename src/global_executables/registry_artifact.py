@@ -820,6 +820,8 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         if interrupted():
             break
     state["cursor"] = cursor
+    state["catalog_size"] = len(tools)
+    state["catalog_complete"] = not bool(state.get("catalog_truncated"))
     state["refresh_cursor"] = refresh_cursor
     collected += len(rows)
     _replace_package_rows(output, replaced_packages, replacement_rows)

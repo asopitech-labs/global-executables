@@ -1,0 +1,105 @@
+name: Refresh completed registry indexes
+
+# Local containers are temporary completion boosters. CI owns steady-state refreshes
+# after a source has reached the end of its catalog.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      package_budget:
+        description: "Maximum packages refreshed per source"
+        required: false
+        default: "3000"
+      byte_budget:
+        description: "Maximum downloaded artifact bytes per source"
+        required: false
+        default: "8000000000"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: registry-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        source: [go, pypi, rubygems, packagist, nuget]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[test]'
+      - name: Restore the completed source checkpoint
+        id: restore
+        env:
+          SOURCE: ${{ matrix.source }}
+        run: |
+          BASE="/tmp/ci-refresh-${SOURCE}" SOURCES="${SOURCE}" OBSERVATION_SOURCES=' ' \
+            bash tools/crawl_parallel.sh seed
+          state="/tmp/ci-refresh-${SOURCE}/data/production/registry-state.json"
+          if jq -e --arg source "${SOURCE}" \
+            '.sources[$source] | select((.catalog_size | type) == "number") | select(.cursor >= .catalog_size) | select(.catalog_complete != false)' \
+            "${state}" >/dev/null; then
+            echo "eligible=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "eligible=false" >> "$GITHUB_OUTPUT"
+            echo "${SOURCE} is still owned by the local completion booster."
+          fi
+      - name: Refresh one transactional batch
+        if: steps.restore.outputs.eligible == 'true' && matrix.source != 'nuget'
+        env:
+          SOURCE: ${{ matrix.source }}
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '3000' }}
+          BYTE_BUDGET: ${{ inputs.byte_budget || '8000000000' }}
+        run: |
+          docker build --file Dockerfile.go-crawler --target runtime \
+            --tag global-executables-go-crawler:ci .
+          docker run --rm --init -v "/tmp/ci-refresh-${SOURCE}:/state" \
+            global-executables-go-crawler:ci crawl --source "${SOURCE}" \
+            --passes 1 --continuous --package-budget "${PACKAGE_BUDGET}" \
+            --byte-budget "${BYTE_BUDGET}"
+      - name: Refresh one NuGet batch
+        if: steps.restore.outputs.eligible == 'true' && matrix.source == 'nuget'
+        env:
+          SOURCE: ${{ matrix.source }}
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '3000' }}
+          BYTE_BUDGET: ${{ inputs.byte_budget || '8000000000' }}
+        run: |
+          root="/tmp/ci-refresh-${SOURCE}"
+          python tools/registry_artifact_crawl.py --source nuget \
+            --state "${root}/data/production/registry-state.json" \
+            --output-dir "${root}/data/production/intermediate" \
+            --report "${root}/reports/registry-artifact-crawl.json" \
+            --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}"
+      - uses: actions/upload-artifact@v4
+        if: steps.restore.outputs.eligible == 'true'
+        with:
+          name: registry-refresh-${{ matrix.source }}
+          path: /tmp/ci-refresh-${{ matrix.source }}/reports/registry-artifact-crawl.json
+      - name: Publish refresh progress and update derived data
+        if: steps.restore.outputs.eligible == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE: ${{ matrix.source }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          publish_output="$(BASE=/tmp/ci-refresh SOURCES="${SOURCE}" OBSERVATION_SOURCES=' ' \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "${publish_output}"
+          if printf '%s\n' "${publish_output}" | grep -qx 'observations changed'; then
+            gh workflow run refresh.yml --ref main
+          fi

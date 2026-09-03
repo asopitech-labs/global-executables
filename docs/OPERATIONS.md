@@ -14,8 +14,9 @@ than stopping publication; malformed input and unexplained shrinkage still block
 - Every indexed registry package remains on a bounded refresh cycle after exhaustive
   coverage. New catalog entries keep priority; completed catalogs use a separate
   `refresh_cursor`, and successful refreshes replace that package's prior observations.
-- The local publisher checkpoints refresh progress every 30 minutes and dispatches a
-  dictionary rebuild only when normalized observations changed.
+- Local containers are temporary completion boosters and stop at 100%. The
+  `registry-refresh.yml` CI matrix owns steady-state refreshes every six hours and
+  dispatches a dictionary rebuild only when normalized observations changed.
 - The 2026-08-25 critical npm sweep finished 2,295 / 2,295 packages in 455 seconds
   (302 packages/min), with zero failures, retries, `429`, or timeouts.
 - The RubyGems/Packagist cutover measured 805 and 2,434 packages/min respectively;
@@ -34,7 +35,7 @@ dictionary rebuild.
 | Class | Examples | Trigger | Canonical result |
 | --- | --- | --- | --- |
 | Durable environment sample | Windows/macOS PATH, shell built-ins, runner images | Manual, when intentionally adding an environment or release | `artifact-data` observations |
-| Moving registry catalog | CI npm critical population and crates.io dump; local PyPI/Go crawlers; completed NuGet/RubyGems/Packagist catalogs | Daily bounded CI sweep or continuous local crawler | `artifact-data` discovery cursor, refresh cursor, and current observations |
+| Moving registry catalog | CI npm critical population and crates.io dump; local completion boosters; CI refresh matrix for completed catalogs | Daily discovery sweep, temporary local booster, or six-hour CI refresh | `artifact-data` discovery cursor, refresh cursor, and current observations |
 | Derived rebuild | Dictionary indexes and Pages | Only after canonical publication changes; weekly refresh is a recovery backstop | `dictionary` and Pages |
 | Advisory live monitor | Representative upstream protocol/package probes | Weekly | Smoke artifact only; never canonical data |
 | Fixture scenario | Bounded freshness scheduler and parser fixtures | Manual or test suite | Test report/state only |
@@ -326,11 +327,11 @@ because the work is entirely I/O. Every container gets its own state directory â
 shared one would put four writers on a single cursor file â€” and `merge` folds the
 per-source states back into one publishable tree.
 
-A continuous pass whose discovery cursor has reached the catalog end spends its bounded
-package budget on a circular `refresh_cursor`. A package is inspected at most once per
-pass. New catalog entries and unresolved retries retain priority over refresh work.
-Single-run and CI invocations still stop at exhaustive coverage unless they explicitly
-enable continuous mode.
+The six-hour CI refresh gives each completed source one bounded continuous-mode pass.
+That pass spends its package budget on a circular `refresh_cursor`; each package is
+inspected at most once per pass. New catalog entries and unresolved retries retain
+priority over refresh work. A local booster never enables continuous mode and exits
+when its discovery cursor reaches exhaustive coverage.
 
 Each pass is budgeted. Python sources checkpoint on their existing cadence. The Go
 runtime commits ordered batches transactionally, so stopping it loses only uncommitted
@@ -342,11 +343,11 @@ HTTP work, not the entire pass. Measured on the local runtime, crates.io reaches
 
 `SOURCES="go pypi rubygems packagist" tools/crawl_parallel.sh start` builds the
 dedicated Go runtime, then starts one `ge-<source>` container with
-`crawl --source <source> --passes 0 --continuous` for each source. NuGet uses the same
-continuous lifecycle through the bounded Python runtime. A nonzero local failure is
-restarted up to five times; exhaustive coverage changes scheduling from discovery to
-refresh instead of terminating the container. The Python CLI and loop reject the five
-transactional source names, preventing two implementations from writing the same source.
+`crawl --source <source> --passes 0` for each source. A nonzero local failure is
+restarted up to five times; exhaustive coverage terminates the booster. The CI refresh
+matrix accepts that source only after its published cursor reaches the catalog size.
+The Python CLI and loop reject the five transactional source names, preventing two
+implementations from writing the same source.
 
 Each mounted source state directory contains:
 
@@ -375,8 +376,8 @@ The lifecycle boundary is explicit:
 | Python transactional-source runners | No owner | Remain deleted | delete | Already satisfied | Python rejects all five source names |
 
 The bbolt transaction is the fact and refresh-state owner. Source adapters own external
-IO, the compatibility exporter owns machine-facing JSON, `crawl_parallel.sh watch` owns
-publication and refresh dispatch, and `refresh.yml` owns derived dictionary replacement.
+IO, the compatibility exporter owns machine-facing JSON, `registry-refresh.yml` owns
+steady-state scheduling and publication, and `refresh.yml` owns derived dictionary replacement.
 A failed inspection preserves the last good package observation and queues a retry; a
 successful inspection, including a package that now exposes no command, atomically
 replaces the old package observation set.

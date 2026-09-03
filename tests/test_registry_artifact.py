@@ -760,4 +760,5 @@ def test_nuget_continuously_refreshes_completed_catalog_and_replaces_old_command
     rows = [json.loads(line) for line in output.read_text().splitlines()]
     assert report["complete"] is True and report["refreshed"] == 1
     assert state["refresh_cursor"] == 1
+    assert state["catalog_size"] == 2 and state["catalog_complete"] is True
     assert {(row["package"], row["command"]) for row in rows} == {("alpha", "new"), ("beta", "keep")}
