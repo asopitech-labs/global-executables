@@ -2,6 +2,18 @@
   "command": "canaryctl",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/iheanyi/simple-canary",
+      "version": "v0.0.0-20180928143743-6b29ee764efb",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/iheanyi/simple-canary?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20180928143743-6b29ee764efb",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180928143743-6b29ee764efb"
+    },
+    {
       "ecosystem": "npm",
       "package": "@canaryctl/canary",
       "version": "0.1.0",
