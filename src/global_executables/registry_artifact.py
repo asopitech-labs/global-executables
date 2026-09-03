@@ -436,6 +436,19 @@ def _append_rows(path: Path, rows: list[dict[str, Any]]) -> None:
             handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
 
+def _replace_package_rows(path: Path, packages: set[str], rows: list[dict[str, Any]]) -> None:
+    if not packages:
+        return
+    existing = [json.loads(line) for line in path.read_text().splitlines() if line.strip()] \
+        if path.is_file() else []
+    merged = [row for row in existing if row.get("package") not in packages]
+    merged.extend(rows)
+    merged.sort(key=lambda row: (row.get("command", ""), row.get("package", ""), row.get("source", "")))
+    temporary = path.with_name(f".{path.name}.tmp")
+    write_jsonl(merged, temporary)
+    temporary.replace(path)
+
+
 def _permanently_gone(text: str) -> bool:
     return any(f"HTTP Error {code}" in text for code in PERMANENT_HTTP_CODES)
 
@@ -744,7 +757,11 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             advertised = 0
         state["catalog_advertised"] = advertised
         state["catalog_truncated"] = bool(advertised) and len(tools) < advertised
-    cursor = int(state.get("cursor", 0)); processed = 0; downloaded = 0
+    cursor = int(state.get("cursor", 0)); refresh_cursor = int(state.get("refresh_cursor", 0))
+    if refresh_cursor >= len(tools):
+        refresh_cursor = 0
+    refresh_enabled = cursor >= len(tools)
+    processed = 0; refreshed = 0; downloaded = 0
     failures, unavailable, attempts = _failure_state(state)
     # Reaching the end of the catalogue is not the end of the work: a tool that failed
     # on a DNS blip has no other way back, and six of them held a finished NuGet at
@@ -755,12 +772,15 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         if name not in retry_tools:
             retry_tools.append(name)
     retry_budget = len(retry_tools)
-    rows: list[dict[str, Any]] = []; collected = 0; budget_exhausted = False
-    while (retry_budget or cursor < len(tools)) and processed < budget:
+    rows: list[dict[str, Any]] = []; replacement_rows: list[dict[str, Any]] = []
+    replaced_packages: set[str] = set(); collected = 0; budget_exhausted = False
+    while (retry_budget or cursor < len(tools) or
+           (refresh_enabled and tools and refreshed < len(tools))) and processed < budget:
         retrying = retry_budget > 0
         if retrying:
             retry_budget -= 1
-        package = retry_tools.pop(0) if retrying else tools[cursor]
+        refreshing = not retrying and cursor >= len(tools)
+        package = retry_tools.pop(0) if retrying else tools[refresh_cursor if refreshing else cursor]
         lowered = urllib.parse.quote(package.lower(), safe="")
         try:
             body, _ = fetch(f"{NUGET_FLAT}/{lowered}/index.json", timeout)
@@ -774,29 +794,39 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             if downloaded > byte_budget:
                 budget_exhausted = True
                 break
-            rows.extend(record(command, "nuget", package, version, None, url,
-                               source_type="language_package", language="dotnet",
-                               registry="nuget", latest_version=version)
-                        for command in sorted(set(commands)))
+            package_rows = [record(command, "nuget", package, version, None, url,
+                                   source_type="language_package", language="dotnet",
+                                   registry="nuget", latest_version=version)
+                            for command in sorted(set(commands))]
+            rows.extend(package_rows)
+            replacement_rows.extend(package_rows)
+            replaced_packages.add(package)
             failures.pop(package, None)
         except Exception as error:
             _record_failure(failures, unavailable, package, error, attempts)
             if package in failures and package not in retry_tools:
                 retry_tools.append(package)  # queued for the next run, not this one
-        if not retrying:
+        if refreshing:
+            refreshed += 1
+            refresh_cursor = (refresh_cursor + 1) % len(tools)
+        elif not retrying:
             cursor += 1
         processed += 1
         if _due_for_checkpoint(processed):
             collected += len(rows)
-            checkpoint(rows, cursor=cursor)
+            _replace_package_rows(output, replaced_packages, replacement_rows)
+            rows.clear(); replacement_rows.clear(); replaced_packages.clear()
+            checkpoint(cursor=cursor, refresh_cursor=refresh_cursor)
         if interrupted():
             break
     state["cursor"] = cursor
+    state["refresh_cursor"] = refresh_cursor
     collected += len(rows)
-    _append_rows(output, rows)
+    _replace_package_rows(output, replaced_packages, replacement_rows)
     truncated = bool(state.get("catalog_truncated"))
     complete = cursor >= len(tools) and not failures and not retry_tools and not truncated
-    report = {"cursor": cursor, "catalog_size": len(tools), "processed": processed,
+    report = {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
+              "catalog_size": len(tools), "processed": processed,
               "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
               "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
               "catalog_truncated": truncated, "catalog_advertised": state.get("catalog_advertised"),

@@ -17,6 +17,7 @@ type ModuleWork struct {
 	CatalogOffset int64
 	Module        string
 	Retry         bool
+	Refresh       bool
 	Attempt       int
 }
 
@@ -57,15 +58,17 @@ type RetryEntry struct {
 }
 
 type ImportSnapshot struct {
-	Cursor          uint64
-	CatalogOffset   int64
-	CatalogSize     uint64
-	CatalogComplete bool
-	CatalogSince    string
-	ModulesFile     string
-	Retries         map[string]RetryEntry
-	Unavailable     map[string]string
-	Observations    []Observation
+	Cursor               uint64
+	CatalogOffset        int64
+	CatalogSize          uint64
+	CatalogComplete      bool
+	CatalogSince         string
+	RefreshCursor        uint64
+	RefreshCatalogOffset int64
+	ModulesFile          string
+	Retries              map[string]RetryEntry
+	Unavailable          map[string]string
+	Observations         []Observation
 }
 
 type Snapshot struct {

@@ -27,6 +27,7 @@ type PassReport struct {
 	StartedAt         time.Time
 	FinishedAt        time.Time
 	Processed         uint64
+	Refreshed         uint64
 	Records           uint64
 	DownloadedBytes   uint64
 	BudgetExhausted   bool
@@ -72,6 +73,7 @@ type compatibilityState struct {
 	CatalogSize     uint64            `json:"catalog_size"`
 	CatalogComplete *bool             `json:"catalog_complete"`
 	CatalogSince    string            `json:"catalog_since"`
+	RefreshCursor   uint64            `json:"refresh_cursor"`
 	ModulesFile     string            `json:"modules_file"`
 	PackagesFile    string            `json:"packages_file"`
 	ProjectsFile    string            `json:"projects_file"`
@@ -124,6 +126,13 @@ func LoadSourceCompatibility(statePath, observationsPath, catalogPath string, pr
 	if err != nil {
 		return ImportSnapshot{}, nil, err
 	}
+	if state.RefreshCursor > catalogSize {
+		return ImportSnapshot{}, nil, fmt.Errorf("state refresh cursor %d exceeds catalog size %d", state.RefreshCursor, catalogSize)
+	}
+	refreshOffset, err := LocateCatalogOffset(catalogPath, state.RefreshCursor)
+	if err != nil {
+		return ImportSnapshot{}, nil, err
+	}
 	retries := make(map[string]RetryEntry)
 	for module, reason := range state.Failures {
 		attempts := state.FailureAttempts[module]
@@ -169,6 +178,7 @@ func LoadSourceCompatibility(statePath, observationsPath, catalogPath string, pr
 	return ImportSnapshot{
 		Cursor: state.Cursor, CatalogOffset: offset, CatalogSize: catalogSize,
 		CatalogComplete: catalogComplete, CatalogSince: state.CatalogSince,
+		RefreshCursor: state.RefreshCursor, RefreshCatalogOffset: refreshOffset,
 		ModulesFile: catalogFile, Retries: retries, Unavailable: state.Unavailable,
 		Observations: observations,
 	}, document, nil
@@ -300,6 +310,7 @@ func exportCompatibility(
 		"catalog_size":        snapshot.CatalogSize,
 		"catalog_since":       snapshot.CatalogSince,
 		"cursor":              snapshot.Cursor,
+		"refresh_cursor":      snapshot.RefreshCursor,
 		"failure_attempts":    attempts,
 		"failures":            failures,
 		"snapshot_generation": snapshot.Generation,
@@ -359,6 +370,8 @@ func exportCompatibility(
 		"packages_per_minute": packagesPerMinute,
 		"package_budget":      pass.PackageBudget,
 		"processed":           pass.Processed,
+		"refreshed":           pass.Refreshed,
+		"refresh_cursor":      snapshot.RefreshCursor,
 		"requests":            pass.Requests,
 		"rate_limited":        pass.RateLimited,
 		"records":             pass.Records,

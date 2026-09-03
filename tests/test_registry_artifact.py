@@ -738,3 +738,26 @@ def test_a_finished_catalogue_still_retries_what_failed(tmp_path, monkeypatch):
     assert report["failures"] == 0 and report["retry_pending"] == 0
     assert report["complete"] is True and report["coverage_kind"] == "exhaustive"
     assert report["cursor"] == 2  # a retry does not advance the catalogue cursor
+
+
+def test_nuget_continuously_refreshes_completed_catalog_and_replaces_old_commands(tmp_path, monkeypatch):
+    catalog = tmp_path / "tools.txt"
+    registry_artifact.write_catalog(catalog, ["alpha", "beta"])
+    output = tmp_path / "nuget.jsonl"
+    output.write_text(
+        json.dumps({"command": "old", "ecosystem": "nuget", "package": "alpha", "source": "old"}) + "\n" +
+        json.dumps({"command": "keep", "ecosystem": "nuget", "package": "beta", "source": "keep"}) + "\n"
+    )
+
+    monkeypatch.setattr(registry_artifact, "fetch", lambda *args, **kwargs:
+                        (json.dumps({"versions": ["2.0.0"]}).encode(), {"downloaded_bytes": 1}))
+    monkeypatch.setattr(registry_artifact, "_nuget_tool_commands", lambda url, timeout: (["new"], 1))
+    state = {"tools_file": str(catalog), "cursor": 2, "refresh_cursor": 0,
+             "catalog_advertised": 2, "catalog_truncated": False}
+
+    report = registry_artifact._crawl_nuget(state, output, 1, 1_000_000, 120)
+
+    rows = [json.loads(line) for line in output.read_text().splitlines()]
+    assert report["complete"] is True and report["refreshed"] == 1
+    assert state["refresh_cursor"] == 1
+    assert {(row["package"], row["command"]) for row in rows} == {("alpha", "new"), ("beta", "keep")}

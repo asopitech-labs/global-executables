@@ -1,6 +1,7 @@
 package gocrawl
 
 import (
+	"bytes"
 	"cmp"
 	"context"
 	"encoding/binary"
@@ -17,11 +18,12 @@ import (
 )
 
 var (
-	metaBucket        = []byte("meta")
-	retryBucket       = []byte("retries")
-	unavailableBucket = []byte("unavailable")
-	observationBucket = []byte("observations")
-	catalogBucket     = []byte("catalog")
+	metaBucket              = []byte("meta")
+	retryBucket             = []byte("retries")
+	unavailableBucket       = []byte("unavailable")
+	observationBucket       = []byte("observations")
+	observationModuleBucket = []byte("observation_modules")
+	catalogBucket           = []byte("catalog")
 )
 
 type StoreOptions struct {
@@ -47,10 +49,14 @@ func OpenBoltStore(path string, options StoreOptions) (*BoltStore, error) {
 	}
 	store := &BoltStore{db: db, failureAttemptLimit: options.FailureAttemptLimit}
 	if err := db.Update(func(tx *bolt.Tx) error {
-		for _, name := range [][]byte{metaBucket, retryBucket, unavailableBucket, observationBucket, catalogBucket} {
+		buildObservationIndex := tx.Bucket(observationModuleBucket) == nil
+		for _, name := range [][]byte{metaBucket, retryBucket, unavailableBucket, observationBucket, observationModuleBucket, catalogBucket} {
 			if _, err := tx.CreateBucketIfNotExists(name); err != nil {
 				return err
 			}
+		}
+		if buildObservationIndex {
+			return indexExistingObservations(tx)
 		}
 		return nil
 	}); err != nil {
@@ -106,6 +112,12 @@ func (s *BoltStore) Import(ctx context.Context, snapshot ImportSnapshot) error {
 		if err := meta.Put([]byte("catalog_since"), []byte(snapshot.CatalogSince)); err != nil {
 			return err
 		}
+		if err := putUint(meta, "refresh_cursor", snapshot.RefreshCursor); err != nil {
+			return err
+		}
+		if err := putInt64(meta, "refresh_catalog_offset", snapshot.RefreshCatalogOffset); err != nil {
+			return err
+		}
 		if err := meta.Put([]byte("modules_file"), []byte(snapshot.ModulesFile)); err != nil {
 			return err
 		}
@@ -132,7 +144,7 @@ func (s *BoltStore) Import(ctx context.Context, snapshot ImportSnapshot) error {
 			}
 		}
 		for _, observation := range snapshot.Observations {
-			if err := putObservation(tx.Bucket(observationBucket), observation); err != nil {
+			if err := putObservation(tx, observation); err != nil {
 				return err
 			}
 		}
@@ -154,12 +166,30 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 		}
 		cursor := getUint(meta, "cursor")
 		offset := getInt64(meta, "catalog_offset")
+		refreshCursor := getUint(meta, "refresh_cursor")
+		refreshOffset := getInt64(meta, "refresh_catalog_offset")
+		catalogSize := getUint(meta, "catalog_size")
 		var downloaded uint64
 		for _, result := range results {
 			if result.Verdict == VerdictCanceled {
 				return context.Canceled
 			}
-			if !result.Work.Retry {
+			if result.Work.Refresh {
+				if refreshCursor >= catalogSize {
+					refreshCursor, refreshOffset = 0, 0
+				}
+				if result.Work.CatalogIndex != refreshCursor {
+					return fmt.Errorf("refresh cursor hole: got catalog index %d, want %d", result.Work.CatalogIndex, refreshCursor)
+				}
+				if result.Work.CatalogOffset < refreshOffset {
+					return fmt.Errorf("refresh catalog offset regressed: got %d, have %d", result.Work.CatalogOffset, refreshOffset)
+				}
+				refreshCursor++
+				refreshOffset = result.Work.CatalogOffset
+				if refreshCursor >= catalogSize {
+					refreshCursor, refreshOffset = 0, 0
+				}
+			} else if !result.Work.Retry {
 				if result.Work.CatalogIndex != cursor {
 					return fmt.Errorf("cursor hole: got catalog index %d, want %d", result.Work.CatalogIndex, cursor)
 				}
@@ -175,8 +205,13 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 			if err := s.applyVerdict(tx, result); err != nil {
 				return err
 			}
+			if result.Verdict == VerdictSuccess || result.Verdict == VerdictPermanent {
+				if err := deleteModuleObservations(tx, result.Work.Module); err != nil {
+					return err
+				}
+			}
 			for _, observation := range result.Observations {
-				if err := putObservation(tx.Bucket(observationBucket), observation); err != nil {
+				if err := putObservation(tx, observation); err != nil {
 					return err
 				}
 			}
@@ -185,6 +220,12 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 			return err
 		}
 		if err := putInt64(meta, "catalog_offset", offset); err != nil {
+			return err
+		}
+		if err := putUint(meta, "refresh_cursor", refreshCursor); err != nil {
+			return err
+		}
+		if err := putInt64(meta, "refresh_catalog_offset", refreshOffset); err != nil {
 			return err
 		}
 		if err := putUint(meta, "generation", getUint(meta, "generation")+1); err != nil {
@@ -307,6 +348,8 @@ func snapshotFromTx(tx *bolt.Tx, includeObservations bool) (Snapshot, error) {
 	snapshot.CatalogSize = getUint(meta, "catalog_size")
 	snapshot.CatalogComplete = getBool(meta, "catalog_complete")
 	snapshot.CatalogSince = string(meta.Get([]byte("catalog_since")))
+	snapshot.RefreshCursor = getUint(meta, "refresh_cursor")
+	snapshot.RefreshCatalogOffset = getInt64(meta, "refresh_catalog_offset")
 	snapshot.ModulesFile = string(meta.Get([]byte("modules_file")))
 	snapshot.Generation = getUint(meta, "generation")
 	snapshot.Processed = getUint(meta, "processed")
@@ -341,10 +384,42 @@ func snapshotFromTx(tx *bolt.Tx, includeObservations bool) (Snapshot, error) {
 	return snapshot, err
 }
 
-func putObservation(bucket *bolt.Bucket, observation Observation) error {
+func putObservation(tx *bolt.Tx, observation Observation) error {
 	observation = sanitizeObservation(observation)
 	key := strings.Join([]string{observation.Command, observation.Ecosystem, observation.Package, observation.Source}, "\x00")
-	return putJSON(bucket, key, observation)
+	if err := putJSON(tx.Bucket(observationBucket), key, observation); err != nil {
+		return err
+	}
+	return tx.Bucket(observationModuleBucket).Put(observationModuleKey(observation.Package, key), nil)
+}
+
+func observationModuleKey(module, observationKey string) []byte {
+	return []byte(module + "\x00" + observationKey)
+}
+
+func deleteModuleObservations(tx *bolt.Tx, module string) error {
+	index := tx.Bucket(observationModuleBucket)
+	prefix := []byte(module + "\x00")
+	cursor := index.Cursor()
+	for key, _ := cursor.Seek(prefix); key != nil && bytes.HasPrefix(key, prefix); key, _ = cursor.Next() {
+		if err := tx.Bucket(observationBucket).Delete(key[len(prefix):]); err != nil {
+			return err
+		}
+		if err := cursor.Delete(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func indexExistingObservations(tx *bolt.Tx) error {
+	return tx.Bucket(observationBucket).ForEach(func(key, value []byte) error {
+		var observation Observation
+		if err := json.Unmarshal(value, &observation); err != nil {
+			return err
+		}
+		return tx.Bucket(observationModuleBucket).Put(observationModuleKey(observation.Package, string(key)), nil)
+	})
 }
 
 func sanitizeObservation(observation Observation) Observation {

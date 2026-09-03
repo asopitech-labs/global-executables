@@ -90,6 +90,14 @@ func (s *BoltStore) SyncCatalog(ctx context.Context, path string) error {
 					return err
 				}
 			}
+			if schema != 0 {
+				if err := putUint(meta, "refresh_cursor", 0); err != nil {
+					return err
+				}
+				if err := putInt64(meta, "refresh_catalog_offset", 0); err != nil {
+					return err
+				}
+			}
 			return meta.Put([]byte("catalog_base_digest"), index.digest[:])
 		}); err != nil {
 			return err

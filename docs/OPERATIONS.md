@@ -11,6 +11,11 @@ than stopping publication; malformed input and unexplained shrinkage still block
 
 - Go modules, npm, PyPI, RubyGems, and Packagist run only in the transactional Go
   runtime; their Python implementations and Python CLI routes are removed.
+- Every indexed registry package remains on a bounded refresh cycle after exhaustive
+  coverage. New catalog entries keep priority; completed catalogs use a separate
+  `refresh_cursor`, and successful refreshes replace that package's prior observations.
+- The local publisher checkpoints refresh progress every 30 minutes and dispatches a
+  dictionary rebuild only when normalized observations changed.
 - The 2026-08-25 critical npm sweep finished 2,295 / 2,295 packages in 455 seconds
   (302 packages/min), with zero failures, retries, `429`, or timeouts.
 - The RubyGems/Packagist cutover measured 805 and 2,434 packages/min respectively;
@@ -29,7 +34,7 @@ dictionary rebuild.
 | Class | Examples | Trigger | Canonical result |
 | --- | --- | --- | --- |
 | Durable environment sample | Windows/macOS PATH, shell built-ins, runner images | Manual, when intentionally adding an environment or release | `artifact-data` observations |
-| Moving registry catalog | CI npm critical population and crates.io dump; local PyPI/Go crawlers; completed RubyGems/Packagist catalogs | Daily bounded CI sweep or resumable local crawler | `artifact-data` cursor and observations |
+| Moving registry catalog | CI npm critical population and crates.io dump; local PyPI/Go crawlers; completed NuGet/RubyGems/Packagist catalogs | Daily bounded CI sweep or continuous local crawler | `artifact-data` discovery cursor, refresh cursor, and current observations |
 | Derived rebuild | Dictionary indexes and Pages | Only after canonical publication changes; weekly refresh is a recovery backstop | `dictionary` and Pages |
 | Advisory live monitor | Representative upstream protocol/package probes | Weekly | Smoke artifact only; never canonical data |
 | Fixture scenario | Bounded freshness scheduler and parser fixtures | Manual or test suite | Test report/state only |
@@ -321,10 +326,11 @@ because the work is entirely I/O. Every container gets its own state directory â
 shared one would put four writers on a single cursor file â€” and `merge` folds the
 per-source states back into one publishable tree.
 
-A pass whose cursor has reached the end of its catalog returns instantly having
-processed nothing, so the loop backs off rather than retrying every few seconds, and
-stops once several consecutive passes have achieved nothing. NuGet reached that state
-after 4,000 tools and was spinning through a pass every five seconds.
+A continuous pass whose discovery cursor has reached the catalog end spends its bounded
+package budget on a circular `refresh_cursor`. A package is inspected at most once per
+pass. New catalog entries and unresolved retries retain priority over refresh work.
+Single-run and CI invocations still stop at exhaustive coverage unless they explicitly
+enable continuous mode.
 
 Each pass is budgeted. Python sources checkpoint on their existing cadence. The Go
 runtime commits ordered batches transactionally, so stopping it loses only uncommitted
@@ -336,10 +342,11 @@ HTTP work, not the entire pass. Measured on the local runtime, crates.io reaches
 
 `SOURCES="go pypi rubygems packagist" tools/crawl_parallel.sh start` builds the
 dedicated Go runtime, then starts one `ge-<source>` container with
-`crawl --source <source> --passes 0` for each source.
-A nonzero local failure is restarted up to five times; reaching exhaustive exits zero
-and is not restarted. The Python CLI and loop reject all five transactional source
-names, preventing two implementations from writing the same source.
+`crawl --source <source> --passes 0 --continuous` for each source. NuGet uses the same
+continuous lifecycle through the bounded Python runtime. A nonzero local failure is
+restarted up to five times; exhaustive coverage changes scheduling from discovery to
+refresh instead of terminating the container. The Python CLI and loop reject the five
+transactional source names, preventing two implementations from writing the same source.
 
 Each mounted source state directory contains:
 
@@ -358,13 +365,21 @@ tail on restart.
 
 The lifecycle boundary is explicit:
 
-| Artifact | Owner | Lifecycle |
-| --- | --- | --- |
-| `<source>-crawl.db` | transactional runtime | canonical mutable state; preserve on failure |
-| `<catalog>.txt.index` | transactional runtime | derived cache; rebuild atomically if absent or invalid |
-| catalog text snapshot | source adapter | Go extends incrementally; npm replaces daily; other sources replace on an intentional resample |
-| `registry-state.json`, JSONL, report | compatibility exporter | regenerate from one bbolt read snapshot after every committed pass |
-| Python transactional-source runners | none | deleted; Git history is the recovery record |
+| Path | Current responsibility | Target responsibility | Action | Delete when | Verification |
+| --- | --- | --- | --- | --- | --- |
+| `<source>-crawl.db` | Discovery cursor, retry verdicts, observations | Add the circular refresh cursor and package-level replacement index | keep | The transactional runtime is replaced | Store transaction tests and restart replay |
+| `<catalog>.txt.index` | Exact membership cache | Also provides offsets for bounded refresh batches | keep | The catalog reader no longer needs random restart offsets | Catalog replacement and append tests |
+| catalog text snapshot | Discovery denominator | Go extends incrementally; npm replaces daily; other sources replace on intentional resample | keep | An authoritative change feed replaces the snapshot | Catalog digest and size checks |
+| `registry-state.json`, JSONL, report | Published compatibility views | Publish discovery and refresh progress; replace stale package observations | keep | All consumers read a future canonical store directly | Export/re-import and publication tests |
+| Exhaustive-stop branch in continuous workers | Stops work at 100% | Illegal in continuous mode; retained only for explicit single-run jobs | shrink | No bounded single-run job requires it | Loop and shell-routing tests |
+| Python transactional-source runners | No owner | Remain deleted | delete | Already satisfied | Python rejects all five source names |
+
+The bbolt transaction is the fact and refresh-state owner. Source adapters own external
+IO, the compatibility exporter owns machine-facing JSON, `crawl_parallel.sh watch` owns
+publication and refresh dispatch, and `refresh.yml` owns derived dictionary replacement.
+A failed inspection preserves the last good package observation and queues a retry; a
+successful inspection, including a package that now exposes no command, atomically
+replaces the old package observation set.
 
 ### Throughput and upstream safety
 

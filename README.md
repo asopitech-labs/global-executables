@@ -592,9 +592,13 @@ coverage, so consumers must preserve
 
 Registry artifact inspection is separately resumable. CI refreshes the finite npm
 critical catalog and crawls it to 100% daily, while dedicated local containers advance
-PyPI and Go module cursors and publish checkpoints to `artifact-data`. CI also performs
+PyPI and Go module cursors and publish checkpoints to `artifact-data`. After a source
+reaches 100%, continuous workers cycle through every indexed package with a persisted
+refresh cursor; successful results replace stale package observations, including
+commands removed by a newer release. CI also performs
 one daily crates.io dump change check and downloads the dump only when it changed.
-Unchanged canonical data queues no dictionary or Pages work. Go modules, npm, PyPI, RubyGems, and Packagist use the transactional Go runtime;
+The local publisher dispatches a dictionary rebuild only when normalized observations
+changed. Unchanged canonical data queues no dictionary or Pages work. Go modules, npm, PyPI, RubyGems, and Packagist use the transactional Go runtime;
 their bbolt state commits cursor, retry verdicts, and observations together. CI
 regenerates npm's bounded population; PyPI, RubyGems, and Packagist reuse sampled
 catalogs, while Go extends its index. A source is promoted to `exhaustive` only after

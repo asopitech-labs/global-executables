@@ -220,6 +220,57 @@ func TestBoltStoreProgressOmitsHeavyObservations(t *testing.T) {
 	}
 }
 
+func TestBoltStoreRefreshReplacesPackageObservationsAndCyclesCursor(t *testing.T) {
+	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.Import(t.Context(), ImportSnapshot{
+		Cursor: 2, CatalogSize: 2,
+		Observations: []Observation{
+			{Command: "old", Ecosystem: "npm", Package: "demo", Source: "old"},
+			{Command: "keep", Ecosystem: "npm", Package: "other", Source: "keep"},
+		},
+	}); err != nil {
+		t.Fatal(err)
+	}
+
+	result := ModuleResult{
+		Work: ModuleWork{Module: "demo", Refresh: true, CatalogIndex: 0,
+			CatalogOffset: int64(len("demo\n"))},
+		Verdict: VerdictSuccess,
+		Observations: []Observation{
+			{Command: "new", Ecosystem: "npm", Package: "demo", Source: "new"},
+		},
+	}
+	if err := store.Commit(t.Context(), []ModuleResult{result}); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, err := store.Snapshot(t.Context())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if snapshot.RefreshCursor != 1 || len(snapshot.Observations) != 2 ||
+		snapshot.Observations[0].Command != "keep" || snapshot.Observations[1].Command != "new" {
+		t.Fatalf("snapshot=%+v", snapshot)
+	}
+
+	result.Work = ModuleWork{Module: "demo", Refresh: true, CatalogIndex: 1,
+		CatalogOffset: int64(len("demo\nother\n"))}
+	result.Observations = nil
+	if err := store.Commit(t.Context(), []ModuleResult{result}); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, err = store.Snapshot(t.Context())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if snapshot.RefreshCursor != 0 || len(snapshot.Observations) != 1 || snapshot.Observations[0].Command != "keep" {
+		t.Fatalf("snapshot=%+v", snapshot)
+	}
+}
+
 func TestBoltStoreReconcilesCatalogAppendBeforeCheckpoint(t *testing.T) {
 	directory := t.TempDir()
 	catalogPath := filepath.Join(directory, "go-modules.txt")
@@ -231,7 +282,7 @@ func TestBoltStoreReconcilesCatalogAppendBeforeCheckpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer store.Close()
-	if err := store.Import(context.Background(), ImportSnapshot{CatalogSize: 2}); err != nil {
+	if err := store.Import(context.Background(), ImportSnapshot{CatalogSize: 2, RefreshCursor: 1}); err != nil {
 		t.Fatal(err)
 	}
 	if err := store.SyncCatalog(context.Background(), catalogPath); err != nil {
@@ -272,6 +323,9 @@ func TestBoltStoreReconcilesCatalogAppendBeforeCheckpoint(t *testing.T) {
 	if progress.CatalogSize != 4 {
 		t.Fatalf("catalog size=%d", progress.CatalogSize)
 	}
+	if progress.RefreshCursor != 1 {
+		t.Fatalf("refresh cursor=%d", progress.RefreshCursor)
+	}
 }
 
 func TestBoltStoreRebuildsSameSizedReplacedCatalogIdentity(t *testing.T) {
@@ -285,7 +339,7 @@ func TestBoltStoreRebuildsSameSizedReplacedCatalogIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer store.Close()
-	if err := store.Import(context.Background(), ImportSnapshot{CatalogSize: 2}); err != nil {
+	if err := store.Import(context.Background(), ImportSnapshot{CatalogSize: 2, RefreshCursor: 1}); err != nil {
 		t.Fatal(err)
 	}
 	if err := store.SyncCatalog(context.Background(), catalogPath); err != nil {
@@ -303,5 +357,8 @@ func TestBoltStoreRebuildsSameSizedReplacedCatalogIdentity(t *testing.T) {
 	}
 	if progress.CatalogSize != 1 {
 		t.Fatalf("catalog size=%d", progress.CatalogSize)
+	}
+	if progress.RefreshCursor != 0 {
+		t.Fatalf("refresh cursor=%d", progress.RefreshCursor)
 	}
 }

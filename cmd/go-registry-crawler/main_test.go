@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -106,6 +107,50 @@ func TestExecutePassRunsNPMWithBoundedPacingAndExportsCompatibility(t *testing.T
 	}
 	if bytes.Contains(stateBody, []byte(`"go"`)) {
 		t.Fatalf("Go source leaked into npm state: %s", stateBody)
+	}
+}
+
+func TestExecutePassContinuouslyReplacesChangedNPMCommands(t *testing.T) {
+	var requests atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		command := "old"
+		if requests.Add(1) > 1 {
+			command = "new"
+		}
+		_, _ = fmt.Fprintf(w, `{"name":"demo","version":"1.0.0","bin":{%q:"cli.js"}}`, command)
+	}))
+	defer server.Close()
+
+	directory := t.TempDir()
+	config := crawlConfig{
+		Source: "npm", StatePath: filepath.Join(directory, "state.json"),
+		ObservationsPath: filepath.Join(directory, "npm.jsonl"), ReportPath: filepath.Join(directory, "report.json"),
+		CatalogPath: filepath.Join(directory, "packages.txt"), DatabasePath: filepath.Join(directory, "crawl.db"),
+		RegistryURL: server.URL, PackageBudget: 1, ByteBudget: 1 << 20, Workers: 1,
+		MaxInFlight: 1, CommitBatch: 1, RequestTimeout: time.Second, ModuleTimeout: time.Second,
+		Continuous: true,
+	}
+	if err := os.WriteFile(config.CatalogPath, []byte("demo\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(config.StatePath, []byte(`{"version":1,"sources":{"npm":{"cursor":0,"catalog_complete":true}}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	if _, err := executePass(t.Context(), config); err != nil {
+		t.Fatal(err)
+	}
+	second, err := executePass(t.Context(), config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rows, err := os.ReadFile(config.ObservationsPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if second.Refreshed != 1 || bytes.Contains(rows, []byte(`"command":"old"`)) ||
+		!bytes.Contains(rows, []byte(`"command":"new"`)) || strings.Count(string(rows), "\n") != 1 {
+		t.Fatalf("second=%+v rows=%s", second, rows)
 	}
 }
 
@@ -232,6 +277,24 @@ func TestExecuteLoopRunsRequestedPassesAndStopsAtCompletion(t *testing.T) {
 	}
 }
 
+func TestExecuteLoopKeepsRefreshingAfterCompletion(t *testing.T) {
+	var output bytes.Buffer
+	wantStop := errors.New("stop continuous test")
+	calls := 0
+	executor := func(context.Context, crawlConfig) (gocrawl.PassReport, error) {
+		calls++
+		if calls == 3 {
+			return gocrawl.PassReport{}, wantStop
+		}
+		return gocrawl.PassReport{Processed: 10, Complete: true}, nil
+	}
+
+	err := executeLoop(context.Background(), crawlConfig{Continuous: true}, 0, 0, &output, executor)
+	if !errors.Is(err, wantStop) || calls != 3 {
+		t.Fatalf("err=%v calls=%d output=%q", err, calls, output.String())
+	}
+}
+
 func TestBuildPassWorksPrioritizesCatalogAndBoundsRetries(t *testing.T) {
 	directory := t.TempDir()
 	catalog := filepath.Join(directory, "go-modules.txt")
@@ -246,7 +309,7 @@ func TestBuildPassWorksPrioritizesCatalogAndBoundsRetries(t *testing.T) {
 		},
 	}}
 
-	works, err := buildPassWorks(catalog, before, 4)
+	works, err := buildPassWorks(catalog, before, 4, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -254,6 +317,28 @@ func TestBuildPassWorksPrioritizesCatalogAndBoundsRetries(t *testing.T) {
 		t.Fatalf("works=%+v", works)
 	}
 	if works[0].Module != "new-a" || works[3].Module != "retry-a" {
+		t.Fatalf("works=%+v", works)
+	}
+}
+
+func TestBuildPassWorksCyclesThroughCompletedCatalog(t *testing.T) {
+	directory := t.TempDir()
+	catalog := filepath.Join(directory, "packages.txt")
+	if err := os.WriteFile(catalog, []byte("alpha\nbeta\ngamma\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{
+		Cursor: 3, CatalogSize: 3, RefreshCursor: 1,
+		RefreshCatalogOffset: int64(len("alpha\n")),
+		Retries:              map[string]gocrawl.RetryEntry{},
+	}}
+
+	works, err := buildPassWorks(catalog, before, 2, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(works) != 2 || !works[0].Refresh || !works[1].Refresh ||
+		works[0].Module != "beta" || works[1].Module != "gamma" {
 		t.Fatalf("works=%+v", works)
 	}
 }

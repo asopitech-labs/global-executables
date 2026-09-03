@@ -50,6 +50,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags.IntVar(&config.CommitBatch, "commit-batch", 32, "maximum results per transaction")
 	flags.DurationVar(&config.RequestTimeout, "request-timeout", 0, "deadline per HTTP attempt (source-safe default when zero)")
 	flags.DurationVar(&config.ModuleTimeout, "module-timeout", 0, "deadline per package inspection (source-safe default when zero)")
+	flags.BoolVar(&config.Continuous, "continuous", false, "keep cycling through indexed packages after exhaustive coverage")
 	flags.IntVar(&passes, "passes", 1, "number of passes; zero runs until exhaustive")
 	flags.DurationVar(&pause, "pause", 5*time.Second, "delay between passes")
 	if err := flags.Parse(args[1:]); err != nil {

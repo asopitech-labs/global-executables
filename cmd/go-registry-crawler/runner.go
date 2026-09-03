@@ -32,18 +32,39 @@ type crawlConfig struct {
 	CommitBatch      int
 	RequestTimeout   time.Duration
 	ModuleTimeout    time.Duration
+	Continuous       bool
 }
 
-func buildPassWorks(catalogPath string, before gocrawl.Snapshot, budget int) ([]gocrawl.ModuleWork, error) {
+func buildPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refresh bool) ([]gocrawl.ModuleWork, error) {
 	if budget <= 0 {
 		return nil, nil
 	}
 	retryModules := slices.Sorted(maps.Keys(before.Retries))
 	retryBudget := min(len(retryModules), max(1, budget/4))
 	catalogBudget := budget - retryBudget
-	works, err := gocrawl.ReadCatalogBatch(catalogPath, before.Cursor, before.CatalogOffset, catalogBudget, 0)
-	if err != nil {
-		return nil, err
+	var works []gocrawl.ModuleWork
+	if before.Cursor < before.CatalogSize {
+		var err error
+		works, err = gocrawl.ReadCatalogBatch(catalogPath, before.Cursor, before.CatalogOffset, catalogBudget, 0)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if refresh && len(works) < catalogBudget && before.Cursor >= before.CatalogSize && before.CatalogSize > 0 {
+		refreshCursor, refreshOffset := before.RefreshCursor, before.RefreshCatalogOffset
+		if refreshCursor >= before.CatalogSize {
+			refreshCursor, refreshOffset = 0, 0
+		}
+		refreshWorks, err := gocrawl.ReadCatalogBatch(
+			catalogPath, refreshCursor, refreshOffset, catalogBudget-len(works), uint64(len(works)),
+		)
+		if err != nil {
+			return nil, err
+		}
+		for index := range refreshWorks {
+			refreshWorks[index].Refresh = true
+		}
+		works = append(works, refreshWorks...)
 	}
 	for _, module := range retryModules[:retryBudget] {
 		if len(works) >= budget {
@@ -191,6 +212,7 @@ type measuringCommitter struct {
 	byteBudget int64
 	cancel     context.CancelFunc
 	processed  uint64
+	refreshed  uint64
 	records    uint64
 	downloaded uint64
 	exhausted  bool
@@ -212,7 +234,7 @@ func executeLoop(
 		if err != nil {
 			return err
 		}
-		if report.Complete {
+		if report.Complete && !config.Continuous {
 			_, _ = fmt.Fprintln(output, "catalog is exhaustive")
 			return nil
 		}
@@ -238,6 +260,9 @@ func (c *measuringCommitter) Commit(ctx context.Context, results []gocrawl.Modul
 	}
 	c.processed += uint64(len(results))
 	for _, result := range results {
+		if result.Work.Refresh {
+			c.refreshed++
+		}
 		c.records += uint64(len(result.Observations))
 		if result.DownloadedBytes > 0 {
 			c.downloaded += uint64(result.DownloadedBytes)
@@ -303,7 +328,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		return gocrawl.PassReport{}, err
 	}
 
-	works, err := buildPassWorks(config.CatalogPath, before, config.PackageBudget)
+	works, err := buildPassWorks(config.CatalogPath, before, config.PackageBudget, config.Continuous)
 	if err != nil {
 		return gocrawl.PassReport{}, err
 	}
@@ -327,7 +352,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		Records: committer.records, DownloadedBytes: committer.downloaded,
 		BudgetExhausted: committer.exhausted, Interrupted: ctx.Err() != nil, Workers: config.Workers,
 		CatalogDiscovered: catalogReport.Discovered, CatalogRequests: catalogReport.Requests,
-		PackageBudget: config.PackageBudget, Requests: metrics.Requests,
+		PackageBudget: config.PackageBudget, Refreshed: committer.refreshed, Requests: metrics.Requests,
 		RateLimited: metrics.RateLimited, Timeouts: metrics.Timeouts,
 		CircuitOpens: metrics.CircuitOpens, HostConcurrency: metrics.HostConcurrency,
 	}

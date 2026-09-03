@@ -66,6 +66,15 @@ def test_daily_ci_owns_the_bounded_npm_critical_population():
     ).read_text()
 
 
+def test_local_long_running_crawlers_continue_refreshing_after_exhaustive():
+    parallel = (ROOT / "tools/crawl_parallel.sh").read_text()
+
+    assert "--continuous" in parallel
+    assert '-e "CONTINUOUS=1"' in parallel
+    assert 'gh workflow run refresh.yml --ref main' in parallel
+    assert 'observations changed' in parallel
+
+
 def test_registry_derivations_run_only_after_a_changed_publication():
     registry = workflow("registry-artifacts.yml")
     publish = registry.split("Publish resumable state and normalized observations", 1)[1].split(
