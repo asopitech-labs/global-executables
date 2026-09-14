@@ -2,16 +2,16 @@
   "command": "hoist",
   "providers": [
     {
-      "ecosystem": "crates",
-      "package": "hoist",
-      "version": "0.1.0",
-      "repository": "https://github.com/jpowersdev/hoist",
-      "source": "https://static.crates.io/db-dump.tar.gz",
+      "ecosystem": "go",
+      "package": "github.com/abradner/hoist",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/abradner/hoist?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
       "confidence": "direct",
       "source_type": "language_package",
-      "language": "rust",
-      "registry": "crates.io",
-      "latest_version": "0.1.0"
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
     },
     {
       "ecosystem": "go",
@@ -75,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

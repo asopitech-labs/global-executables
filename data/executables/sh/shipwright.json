@@ -2,6 +2,18 @@
   "command": "shipwright",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "swb",
+      "version": "0.3.0",
+      "repository": "https://github.com/jamiedavenport/shipwright",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/byuoitav/shipwright",
       "version": "v0.0.0-20201020215637-d221b79696ff",
@@ -99,5 +111,5 @@
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

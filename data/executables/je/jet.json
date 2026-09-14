@@ -3,18 +3,6 @@
   "providers": [
     {
       "ecosystem": "crates",
-      "package": "jet-cli",
-      "version": "0.1.0",
-      "repository": "https://codeberg.org/khush/jet",
-      "source": "https://static.crates.io/db-dump.tar.gz",
-      "confidence": "direct",
-      "source_type": "language_package",
-      "language": "rust",
-      "registry": "crates.io",
-      "latest_version": "0.1.0"
-    },
-    {
-      "ecosystem": "crates",
       "package": "jetkcli",
       "version": "0.1.2-alpha1",
       "repository": "https://github.com/oknozor/jetkcli",
@@ -267,6 +255,18 @@
     },
     {
       "ecosystem": "go",
+      "package": "github.com/simontesar/jet",
+      "version": "v2.2.0+incompatible",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/simontesar/jet?filter=name+%3D%3D+%22main%22&limit=1000&version=v2.2.0%2Bincompatible",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
       "package": "github.com/sirmackan/jet/v2",
       "version": "v2.11.2",
       "repository": null,
@@ -398,6 +398,30 @@
       "latest_version": "v0.0.0-20260514162647-34e5dcbb17ed"
     },
     {
+      "ecosystem": "go",
+      "package": "source.gleipnir.technology/Gleipnir/jet/v2",
+      "version": "v2.14.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/source.gleipnir.technology/Gleipnir/jet/v2?filter=name+%3D%3D+%22main%22&limit=1000&version=v2.14.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.14.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "source.gleipnir.technology/Gleipnir/nidus-sync",
+      "version": "v0.0.23",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/source.gleipnir.technology/Gleipnir/nidus-sync?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.23",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.23"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "jet",
       "version": "2.15.0",
@@ -483,5 +507,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

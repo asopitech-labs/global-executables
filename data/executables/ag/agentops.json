@@ -2,6 +2,30 @@
   "command": "agentops",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/Zts0hg/foxharness",
+      "version": "v0.1.36",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/!zts0hg/foxharness/@v/v0.1.36.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.36"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pomerium/agentops",
+      "version": "v0.0.0-20260728164502-8945804853e1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/pomerium/agentops?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260728164502-8945804853e1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260728164502-8945804853e1"
+    },
+    {
       "ecosystem": "npm",
       "package": "@agentops-kit/cli",
       "version": "0.1.4",
@@ -63,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

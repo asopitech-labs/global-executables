@@ -2,6 +2,54 @@
   "command": "notifyd",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "notifyd",
+      "version": "0.3.0",
+      "repository": "https://github.com/rmzlb/notifyd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.tnet.space/orezeno/notifyd",
+      "version": "v0.0.0-20260602202620-c30892b787c8",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/git.tnet.space/orezeno/notifyd?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260602202620-c30892b787c8",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260602202620-c30892b787c8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-freedesktop/notifications",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/go-freedesktop/notifications?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.5.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hanzoai/notify",
+      "version": "v1.7.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/hanzoai/notify?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.7.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.2"
+    },
+    {
       "ecosystem": "macos",
       "package": "macos-base",
       "version": "14.8.7",
@@ -51,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

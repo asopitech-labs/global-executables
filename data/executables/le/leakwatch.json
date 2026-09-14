@@ -2,6 +2,30 @@
   "command": "leakwatch",
   "providers": [
     {
+      "ecosystem": "go",
+      "package": "github.com/HodeTech/leakwatch",
+      "version": "v1.8.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/HodeTech/leakwatch?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.8.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.8.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/KoJaco/leakwatch",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/KoJaco/leakwatch?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "leakwatch",
       "version": "0.6.1",
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-31",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

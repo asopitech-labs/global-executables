@@ -2,6 +2,18 @@
   "command": "test_kv",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fsci-stats",
+      "version": "0.2.0",
+      "repository": "https://github.com/Dicklesworthstone/frankenscipy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mattermost/mattermost-server/v6",
       "version": "v6.7.2",
@@ -39,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

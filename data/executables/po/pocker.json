@@ -2,6 +2,18 @@
   "command": "pocker",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pocker",
+      "version": "0.2.0",
+      "repository": "https://github.com/markzyu/pocker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "pocker-tui",
       "version": "1.18.4",
@@ -15,5 +27,5 @@
     }
   ],
   "first_seen": "2026-08-31",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

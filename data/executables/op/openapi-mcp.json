@@ -2,6 +2,18 @@
   "command": "openapi-mcp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "openapi-mcp",
+      "version": "0.1.1",
+      "repository": "https://github.com/altendky/openapi-mcp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/Mariscal6/openapi-mcp",
       "version": "v0.0.0-20250729140912-7a5911913a3f",
@@ -84,6 +96,18 @@
       "language": "go",
       "registry": "go",
       "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ubermorgenland/openapi-mcp",
+      "version": "v0.0.0-20260707154909-8c7eee6dd231",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/ubermorgenland/openapi-mcp?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260707154909-8c7eee6dd231",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260707154909-8c7eee6dd231"
     },
     {
       "ecosystem": "npm",
@@ -183,5 +207,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

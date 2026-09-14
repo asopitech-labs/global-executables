@@ -2,6 +2,18 @@
   "command": "magnet",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "magnet-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/wustites/magnet-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/alwindoss/magnet",
       "version": "v0.0.0-20250809000737-5154a7ad71b3",
@@ -51,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

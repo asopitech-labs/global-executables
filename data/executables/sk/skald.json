@@ -2,6 +2,30 @@
   "command": "skald",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "skald",
+      "version": "3.0.3",
+      "repository": "https://github.com/robbestad/skald-lang",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/algorhythmic/skald",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/algorhythmic/skald/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "sibylline-skald",
       "version": "0.2.0",
@@ -39,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-31",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

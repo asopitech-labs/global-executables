@@ -2,6 +2,18 @@
   "command": "init_db",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "do-harness-db",
+      "version": "0.1.0",
+      "repository": "https://github.com/d-o-hub/do-harness",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/arx-net/easytv-service-manager",
       "version": "v0.0.0-20200630135033-6049a1a5abc8",
@@ -51,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-31",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }

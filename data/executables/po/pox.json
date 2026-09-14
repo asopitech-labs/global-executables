@@ -2,6 +2,18 @@
   "command": "pox",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "paraoxidizer",
+      "version": "0.1.1",
+      "repository": "https://github.com/tryhard-26/ParaOxidizer",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/9elements/osfc2019_system76_coreboot",
       "version": "v0.0.0-20190821114941-228de2658cbb",
@@ -279,5 +291,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-09-03"
+  "last_seen": "2026-09-14"
 }
