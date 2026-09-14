@@ -163,9 +163,19 @@ every pass. Derived indexes and databases stay in the mounted state directory an
 are not built into or published with the image.
 
 Every module has a whole-inspection deadline in addition to each HTTP-attempt deadline.
-Transient failures return to the durable retry queue; permanent proxy responses and a
-failure that reaches the attempt limit move to `unavailable`. Cancellation never
-crosses a missing ordered result.
+A transient HTTP-attempt failure returns to the durable retry queue without consuming
+an attempt. A whole-module deadline consumes one, because a module that cannot be
+inspected inside its own budget fails the same way on every pass and would otherwise
+hold a retry slot and a share of the byte budget forever. Permanent proxy responses and
+a failure that reaches the attempt limit move to `unavailable`, which the next catalog
+refresh sweep re-inspects. Cancellation never crosses a missing ordered result.
+
+Archive inspection reads one candidate `.go` file per directory through a range reader
+that caches a small window of blocks. The inspector probes those directories in archive
+order so each block is fetched once; probing in map order refetches the same blocks per
+directory and downloads a wide archive many times over. Go's default whole-module budget
+is ten minutes, wider than the metadata-driven sources, because a Go module is inspected
+by reading its archive and the catalog is complete enough that no pass needs to hurry.
 
 Run one bounded pass explicitly:
 

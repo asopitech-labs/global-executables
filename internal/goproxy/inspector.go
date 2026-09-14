@@ -57,6 +57,13 @@ type Inspector struct {
 
 type permanentError struct{ error }
 
+var errModuleDeadline = errors.New("module inspection deadline exceeded")
+
+type moduleDirectory struct {
+	directory string
+	file      *zip.File
+}
+
 type archiveView struct {
 	archive    *zip.Reader
 	rangeRead  *httpRangeReaderAt
@@ -127,11 +134,11 @@ func NewInspector(config Config) *Inspector {
 
 func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocrawl.ModuleResult {
 	result := gocrawl.ModuleResult{Work: work}
-	moduleCtx, cancel := context.WithTimeout(ctx, i.config.ModuleTimeout)
+	moduleCtx, cancel := context.WithTimeoutCause(ctx, i.config.ModuleTimeout, errModuleDeadline)
 	defer cancel()
 	version, err := i.latestVersion(moduleCtx, work.Module)
 	if err != nil {
-		result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, err)
+		result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, moduleCtx, err)
 		return result
 	}
 	escapedPath, err := module.EscapePath(work.Module)
@@ -153,7 +160,7 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 			return result
 		}
 		if moduleCtx.Err() != nil {
-			result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, moduleCtx.Err())
+			result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, moduleCtx, moduleCtx.Err())
 			return result
 		}
 	}
@@ -161,7 +168,7 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 		downloaded, modErr := i.validateModulePath(moduleCtx, work.Module, escapedPath, escapedVersion)
 		result.DownloadedBytes += downloaded
 		if modErr != nil {
-			result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, modErr)
+			result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, moduleCtx, modErr)
 			return result
 		}
 	}
@@ -178,7 +185,7 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 		result.DownloadedBytes += downloaded
 	}
 	if err != nil {
-		result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, err)
+		result.Verdict, result.Error, result.UncountedRetry = classifyInspectionError(ctx, moduleCtx, err)
 		return result
 	}
 	result.Verdict = gocrawl.VerdictSuccess
@@ -206,9 +213,15 @@ func (i *Inspector) validateModulePath(
 	return downloaded, nil
 }
 
-func classifyInspectionError(parent context.Context, err error) (gocrawl.Verdict, string, bool) {
+func classifyInspectionError(parent, moduleCtx context.Context, err error) (gocrawl.Verdict, string, bool) {
 	if parentErr := parent.Err(); parentErr != nil {
 		return gocrawl.VerdictCanceled, parentErr.Error(), false
+	}
+	// A module that cannot be inspected inside its own budget fails the same way on
+	// every pass, so the attempt counts and the module retires instead of holding a
+	// permanent slot in the retry set.
+	if errors.Is(context.Cause(moduleCtx), errModuleDeadline) {
+		return gocrawl.VerdictRetry, errModuleDeadline.Error(), false
 	}
 	return classify(err)
 }
@@ -295,8 +308,8 @@ func (i *Inspector) inspectArchive(
 	}
 	directories := commandCandidates(view.archive, modulePath, version, escapedPath, escapedVersion)
 	var probeBytes uint64
-	for _, file := range directories {
-		probeBytes += file.CompressedSize64
+	for _, candidate := range directories {
+		probeBytes += candidate.file.CompressedSize64
 	}
 	if view.rangeRead != nil && size <= i.config.MaxFullDownloadBytes &&
 		(len(directories) > i.config.MaxDirectoryProbes || probeBytes*2 >= uint64(size)) {
@@ -310,14 +323,14 @@ func (i *Inspector) inspectArchive(
 	}
 
 	commandSet := make(map[string]struct{})
-	for directory, file := range directories {
-		isMain, err := i.isMainPackage(file)
+	for _, candidate := range directories {
+		isMain, err := i.isMainPackage(candidate.file)
 		if err != nil {
 			return nil, view.bytesDownloaded(), err
 		}
 		if isMain {
-			command := path.Base(directory)
-			if directory == "" || directory == "." {
+			command := path.Base(candidate.directory)
+			if candidate.directory == "" || candidate.directory == "." {
 				command = path.Base(modulePath)
 			}
 			commandSet[command] = struct{}{}
@@ -404,10 +417,15 @@ func (v archiveView) bytesDownloaded() int64 {
 	return v.downloaded
 }
 
-func commandCandidates(archive *zip.Reader, modulePath, version, escapedPath, escapedVersion string) map[string]*zip.File {
+// commandCandidates lists one candidate file per directory in archive order. The
+// order matters: the range reader caches a small window of blocks, so walking the
+// archive forward reads each block once, while map order refetches the same blocks
+// for every directory and can download an archive many times over.
+func commandCandidates(archive *zip.Reader, modulePath, version, escapedPath, escapedVersion string) []moduleDirectory {
 	actualRoot := modulePath + "@" + version + "/"
 	escapedRoot := escapedPath + "@" + escapedVersion + "/"
-	directories := make(map[string]*zip.File)
+	var directories []moduleDirectory
+	seen := make(map[string]struct{})
 	for _, file := range archive.File {
 		name := file.Name
 		var relative string
@@ -426,8 +444,9 @@ func commandCandidates(archive *zip.Reader, modulePath, version, escapedPath, es
 		if directory == "." {
 			directory = ""
 		}
-		if _, exists := directories[directory]; !exists {
-			directories[directory] = file
+		if _, exists := seen[directory]; !exists {
+			seen[directory] = struct{}{}
+			directories = append(directories, moduleDirectory{directory: directory, file: file})
 		}
 	}
 	return directories

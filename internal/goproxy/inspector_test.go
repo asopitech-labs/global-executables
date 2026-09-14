@@ -268,7 +268,7 @@ func TestInspectorTreatsAttemptDeadlineAsRetryNotPassCancellation(t *testing.T) 
 	}
 }
 
-func TestInspectorBoundsWholeModuleAndQueuesRetry(t *testing.T) {
+func TestInspectorCountsWholeModuleDeadlineSoOversizedModulesRetire(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if strings.HasSuffix(r.URL.Path, "/@latest") {
 			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
@@ -283,8 +283,11 @@ func TestInspectorBoundsWholeModuleAndQueuesRetry(t *testing.T) {
 	})
 	started := time.Now()
 	result := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "example.com/large", Attempt: 1})
-	if result.Verdict != gocrawl.VerdictRetry || !result.UncountedRetry {
-		t.Fatalf("verdict=%s error=%s", result.Verdict, result.Error)
+	if result.Verdict != gocrawl.VerdictRetry || result.UncountedRetry {
+		t.Fatalf("verdict=%s uncounted=%t error=%s", result.Verdict, result.UncountedRetry, result.Error)
+	}
+	if result.Error != errModuleDeadline.Error() {
+		t.Fatalf("error=%s", result.Error)
 	}
 	if time.Since(started) > 500*time.Millisecond {
 		t.Fatalf("module timeout was not enforced: %s", time.Since(started))
@@ -455,5 +458,79 @@ func TestInspectorAccountsForRangeProbeBeforeFullDownloadFallback(t *testing.T) 
 	}
 	if result.DownloadedBytes <= int64(len(archive)) {
 		t.Fatalf("downloaded=%d archive=%d", result.DownloadedBytes, len(archive))
+	}
+}
+
+// wideModuleZIP writes directories command packages, each padded with a stored
+// non-Go file so that one range block spans several command directories.
+func wideModuleZIP(t *testing.T, directories, padding int) []byte {
+	t.Helper()
+	var body bytes.Buffer
+	writer := zip.NewWriter(&body)
+	for index := range directories {
+		prefix := fmt.Sprintf("example.com/wide@v1.0.0/cmd/tool%04d/", index)
+		entry, err := writer.Create(prefix + "main.go")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := entry.Write([]byte("package main\nfunc main() {}\n")); err != nil {
+			t.Fatal(err)
+		}
+		filler, err := writer.CreateHeader(&zip.FileHeader{Name: prefix + "data.bin", Method: zip.Store})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := filler.Write(make([]byte, padding)); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := writer.Close(); err != nil {
+		t.Fatal(err)
+	}
+	return body.Bytes()
+}
+
+func TestInspectorReadsWideArchiveAboutOnce(t *testing.T) {
+	const blockSize = 16 * 1024
+	archive := wideModuleZIP(t, 600, 1024)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/@latest"):
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+		case r.Method == http.MethodHead:
+			w.Header().Set("Content-Length", strconv.Itoa(len(archive)))
+			w.Header().Set("Accept-Ranges", "bytes")
+		case r.Header.Get("Range") != "":
+			var start, end int
+			if _, err := fmt.Sscanf(r.Header.Get("Range"), "bytes=%d-%d", &start, &end); err != nil {
+				t.Errorf("range: %v", err)
+				return
+			}
+			if end >= len(archive) {
+				end = len(archive) - 1
+			}
+			w.Header().Set("Content-Range", fmt.Sprintf("bytes %d-%d/%d", start, end, len(archive)))
+			w.WriteHeader(http.StatusPartialContent)
+			_, _ = w.Write(archive[start : end+1])
+		default:
+			t.Errorf("unexpected request: %s %s", r.Method, r.URL)
+		}
+	}))
+	defer server.Close()
+
+	result := NewInspector(Config{
+		BaseURL: server.URL, Client: server.Client(), MaxAttempts: 1,
+		FullDownloadThreshold: 1, RangeBlockSize: blockSize, RangeCacheBlocks: 2,
+		MaxDirectoryProbes: 4096,
+	}).Inspect(context.Background(), gocrawl.ModuleWork{Module: "example.com/wide", Attempt: 1})
+
+	if result.Verdict != gocrawl.VerdictSuccess || len(result.Observations) != 600 {
+		t.Fatalf("verdict=%s observations=%d error=%s", result.Verdict, len(result.Observations), result.Error)
+	}
+	// Probing every directory in archive order keeps the small block cache warm, so a
+	// wide archive is read about once. Probing in map order refetches a block per
+	// directory and downloads the archive many times over.
+	if limit := 2 * int64(len(archive)); result.DownloadedBytes > limit {
+		t.Fatalf("downloaded=%d archive=%d limit=%d", result.DownloadedBytes, len(archive), limit)
 	}
 }

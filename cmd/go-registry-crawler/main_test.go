@@ -37,12 +37,13 @@ func TestRunReportsBootstrapVersion(t *testing.T) {
 func TestSourceDefaultsKeepDatabasesAndCompatibilityViewsIsolated(t *testing.T) {
 	tests := []struct {
 		source, catalog, database, output string
+		moduleTimeout                     time.Duration
 	}{
-		{"go", "data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl"},
-		{"npm", "data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl"},
-		{"pypi", "data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl"},
-		{"rubygems", "data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl"},
-		{"packagist", "data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl"},
+		{"go", "data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", 10 * time.Minute},
+		{"npm", "data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", 5 * time.Minute},
+		{"pypi", "data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", 2 * time.Minute},
+		{"rubygems", "data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl", 2 * time.Minute},
+		{"packagist", "data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl", 2 * time.Minute},
 	}
 	for _, test := range tests {
 		t.Run(test.source, func(t *testing.T) {
@@ -52,6 +53,11 @@ func TestSourceDefaultsKeepDatabasesAndCompatibilityViewsIsolated(t *testing.T) 
 			}
 			if config.CatalogPath != test.catalog || config.DatabasePath != test.database || config.ObservationsPath != test.output {
 				t.Fatalf("config=%+v", config)
+			}
+			// Go reads whole archives, so its whole-module budget is deliberately the
+			// widest; a deadline now costs an attempt and eventually retires a module.
+			if config.ModuleTimeout != test.moduleTimeout {
+				t.Fatalf("module timeout=%s want=%s", config.ModuleTimeout, test.moduleTimeout)
 			}
 		})
 	}

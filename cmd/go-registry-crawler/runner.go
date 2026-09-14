@@ -90,7 +90,10 @@ func (c *crawlConfig) applyDefaults() error {
 		workers                                   int
 		requestTimeout, packageTimeout            time.Duration
 	}{
-		"go":        {"data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", "https://proxy.golang.org", 32, 45 * time.Second, 2 * time.Minute},
+		// Go reads whole module archives rather than a metadata document, and its
+		// catalog is already complete, so the widest modules get a generous budget
+		// instead of timing out and retiring while the crawl only refreshes.
+		"go":        {"data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", "https://proxy.golang.org", 32, 45 * time.Second, 10 * time.Minute},
 		"npm":       {"data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", "https://registry.npmjs.org", 64, 45 * time.Second, 5 * time.Minute},
 		"pypi":      {"data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", "https://pypi.org", 24, 45 * time.Second, 2 * time.Minute},
 		"rubygems":  {"data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl", "https://rubygems.org", 16, 45 * time.Second, 2 * time.Minute},

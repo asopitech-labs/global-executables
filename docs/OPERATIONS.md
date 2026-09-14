@@ -58,14 +58,16 @@ authority for executable metadata.
 
 The current main snapshot includes a measured production OS crawl plus scoped
 language-registry inputs. Homebrew's complete formula
-catalog is exhaustive for the supported API scope. The 2026-08-15 snapshot
-contains 63,617 unique names, 113,352 provider observations, 63,617
-canonical files, and 23,714 derived index files. Debian stable, Ubuntu noble,
+catalog is exhaustive for the supported API scope. The 2026-09-03 published snapshot
+contains 854,022 unique names, 1,992,672 provider observations, 854,022
+canonical files, and 58,921 derived index files. Debian stable, Ubuntu noble,
 and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
 official API supplies the executable inventory. npm is `exhaustive` for the declared
 ecosyste.ms critical population; crates.io, RubyGems, Packagist, and NuGet are
-exhaustive for their declared catalogs. PyPI and Go remain `partial`.
+exhaustive for their declared catalogs. That snapshot still records PyPI and Go as
+`partial`; PyPI's crawl has since reached its full catalog and carries the exhaustive
+marking into the next publication, while Go stays `partial` until its retry set clears.
 
 The registry artifact crawler is resumable and budgeted. CI regenerates npm's finite
 critical catalog from ecosyste.ms and reuses the PyPI catalog snapshot, reads the crates.io database dump,
@@ -122,26 +124,33 @@ Python source. All five transactional sources use `--package-budget` in the Go r
 
 ## Registry crawl status
 
-Live snapshot at 2026-08-25 20:06 JST. The catalogue percentage is the cursor
-against the enumerated name list, not against rows collected — most packages ship no
-executable, so rows grow far more slowly than the cursor.
+Cursor snapshot read from `artifact-data` at 2026-09-14 15:00 JST. The catalogue
+percentage is the cursor against the enumerated name list, not against rows collected —
+most packages ship no executable, so rows grow far more slowly than the cursor. Every
+catalog cursor has now reached its enumerated name list. The row column is the
+2026-09-03 published dictionary's count, the most recent rebuild actually published.
 
-| Source | Coverage | Cursor | Rows | Runs on |
+| Source | Coverage | Cursor | Rows (2026-09-03 dictionary) | Runs on |
 | --- | --- | --- | --- | --- |
-| crates.io | `exhaustive` | 319,955 / 319,955 | 88,771 | CI, one dump per run |
+| crates.io | `exhaustive` | 333,039 / 333,039 (100%) | 90,609 | CI, one dump per run |
 | NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
-| RubyGems | `exhaustive` | 196,126 / 196,126 | 51,383 | Go transactional container, finished |
-| Packagist | `exhaustive` | 458,432 / 458,432 | 13,253 | Go transactional container, finished |
-| PyPI | `partial` | 505,246 / 870,264 (58.1%) | 224,835 | Go transactional container |
-| npm critical | `exhaustive` | 2,295 / 2,295 (100%) | 127 current critical observations; historical long-tail evidence retained | CI daily; verified locally |
-| Go | `partial` | 684,242 / 1,979,127 (34.6%) | 494,200 | Go transactional container |
+| RubyGems | `exhaustive` | 196,126 / 196,126 (100%) | 51,383 | CI refresh matrix |
+| Packagist | `exhaustive` | 458,432 / 458,432 (100%) | 13,253 | CI refresh matrix |
+| PyPI | `exhaustive` | 870,264 / 870,264 (100%) | 388,484 | CI refresh matrix |
+| npm critical | `exhaustive` | 2,295 / 2,295 (100%) | 50,309 including retained long-tail evidence | CI daily; verified locally |
+| Go | `partial` | 2,145,565 / 2,145,565 (100%) | 1,188,518 | CI refresh matrix |
+
+Go alone remains `partial` after reaching its cursor: its retry set still holds the
+widest module archives, so no pass has yet finished inside its budget with an empty
+retry set. A source cannot be marked exhaustive while any cursor, artifact, or failure
+remains unresolved.
 
 CI owns crates.io and the bounded npm critical population; both finish comfortably
-inside one job. Local containers own the longer PyPI and Go walks. The local default
-excludes npm, and `start` rejects npm unless an operator explicitly sets
-`ALLOW_CI_OWNED_NPM=1`; these guards prevent an accidental CI/workstation cursor race.
-`watch` publishes local
-progress to `artifact-data` on an interval.
+inside one job. The `registry-refresh.yml` matrix owns the steady-state refresh of every
+completed catalog. The local default excludes npm, and `start` rejects npm unless an
+operator explicitly sets `ALLOW_CI_OWNED_NPM=1`; these guards prevent an accidental
+CI/workstation cursor race. `watch` publishes local progress to `artifact-data` on an
+interval.
 
 The npm critical catalog is regenerated in CI. Go checks its incremental index edge;
 the other transactional catalogs remain cached until their operator refreshes them.
@@ -410,6 +419,22 @@ size already present in PyPI JSON removed the redundant wheel `HEAD` request and
 representative 3,000-package pass from 8,543 to 5,965 requests (30.2%).
 RubyGems and Packagist also completed their cited live passes with zero `429`, zero
 timeouts, and zero circuit opens.
+
+Go's inspection cost is the module archive itself rather than a metadata document. The
+inspector reads one candidate `.go` file per directory through a range reader with a
+small block cache, and it walks those directories in archive order so each block is
+fetched once. Probing them in map order refetched the same blocks for every directory:
+a regression test measures 9,597,532 bytes downloaded for an 850,222-byte archive, an
+11.3x amplification, and the 2026-09-14 CI refresh spent 11.1 GB and its whole byte
+budget on 96 modules. A 2026-09-14 live measurement on the production host read
+`gopkg.in/Azure/azure-sdk-for-go.v68` (68.7 MB archive) with 68.2 MB downloaded in
+1m45s, `github.com/cdktf/cdktf-provider-aws-go/aws/v21` (113.3 MB) with 71.1 MB in
+1m29s, and `github.com/alibaba/kubernetes` (22.5 MB) with 20.0 MB in 27s; that last
+module contributed 78 commands the amplified walk never reached. Because Go's catalog
+is complete and its crawl only refreshes, Go's whole-module budget is ten minutes
+rather than the two minutes the metadata-driven sources use, and a budget overrun now
+costs an attempt so a module retires into `unavailable` instead of holding a retry slot
+and a share of the byte budget forever.
 
 Git is a transport boundary, not the runtime format. GitHub rejects individual blobs
 above 100 MiB, so `artifact-data` stores every registry observation snapshot and the
