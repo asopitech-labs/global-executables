@@ -177,3 +177,16 @@ def test_recipe_snapshots_publish_as_observations_and_derive_only_on_change():
     assert "SOURCES=''" in recipes
     assert "steps.publish.outputs.changed == 'true'" in recipes
     assert "gh workflow run refresh.yml --ref main" in recipes
+
+
+def test_recipe_snapshot_report_reaches_the_published_page():
+    cpp = workflow("cpp-registries.yml")
+    pages = workflow("pages.yml")
+    parallel = (ROOT / "tools/crawl_parallel.sh").read_text()
+
+    # A snapshot collector advances no cursor, so it has nothing to merge into the
+    # registry report and needs its own published report to stay visible.
+    assert "OBSERVATION_REPORT=reports/cpp-registry-crawl.json" in cpp
+    assert 'OBSERVATION_REPORT:-' in parallel
+    assert "origin/artifact-data:reports/cpp-registry-crawl.json" in pages
+    assert "--recipe-report /tmp/cpp-registry-crawl.json" in pages

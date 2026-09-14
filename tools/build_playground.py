@@ -109,6 +109,9 @@ def main() -> None:
     # The OS indexes are crawled by a separate pipeline, so their coverage never
     # reached the page even though it is the exhaustive half of the dataset.
     parser.add_argument("--production-report", type=Path, default=Path("reports/production-crawl.json"))
+    # C and C++ recipe repositories are read whole on every run, so they report
+    # records and coverage but never a cursor.
+    parser.add_argument("--recipe-report", type=Path, default=Path("reports/cpp-registry-crawl.json"))
     parser.add_argument("--crawl-history", type=Path)
     parser.add_argument("--artifact-data-commit", default="")
     parser.add_argument("--dictionary-commit", default="")
@@ -121,6 +124,9 @@ def main() -> None:
         "status": "unavailable", "coverage_kind": "partial", "sources": {}
     }
     production = json.loads(args.production_report.read_text()) if args.production_report.is_file() else {
+        "status": "unavailable", "coverage_kind": "partial", "sources": {}
+    }
+    recipes = json.loads(args.recipe_report.read_text()) if args.recipe_report.is_file() else {
         "status": "unavailable", "coverage_kind": "partial", "sources": {}
     }
     now = datetime.now(timezone.utc)
@@ -138,6 +144,7 @@ def main() -> None:
         "main_commit": args.main_commit,
         "crawl_report": report,
         "production_report": production,
+        "recipe_report": recipes,
         "forecast": forecast,
         "freshness": {"status": "published", "coverage_kind": report.get("coverage_kind", "partial")},
     }

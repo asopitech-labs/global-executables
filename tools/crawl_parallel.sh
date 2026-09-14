@@ -310,6 +310,13 @@ target.write_text("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + 
 PYOBS
     fi
   done
+  # A snapshot collector advances no cursor, so it has nothing to merge into the
+  # registry report, but its run still has to be visible on the published page.
+  if [ -n "${OBSERVATION_REPORT:-}" ] && [ -f "${ROOT_DIR}/${OBSERVATION_REPORT}" ]; then
+    mkdir -p "${worktree}/$(dirname "${OBSERVATION_REPORT}")"
+    cp "${ROOT_DIR}/${OBSERVATION_REPORT}" "${worktree}/${OBSERVATION_REPORT}"
+    git -C "${worktree}" add -f "${OBSERVATION_REPORT}"
+  fi
   git -C "${worktree}" add -f data/production
   if [ -f "${worktree}/reports/registry-artifact-crawl.json" ]; then
     git -C "${worktree}" add -f reports/registry-artifact-crawl.json

@@ -1,4 +1,6 @@
 import importlib.util
+import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -13,6 +15,24 @@ def load_builder():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def _build(output: Path, crawl: Path, recipes: Path) -> Path:
+    builder = load_builder()
+    argv = sys.argv
+    sys.argv = ["build_playground.py", "--output", str(output), "--crawl-report", str(crawl),
+                "--recipe-report", str(recipes)]
+    try:
+        cwd = Path.cwd()
+        import os
+        os.chdir(ROOT)
+        try:
+            builder.main()
+        finally:
+            os.chdir(cwd)
+    finally:
+        sys.argv = argv
+    return output / "status.json"
 
 
 def test_next_ci_refresh_is_every_six_hours_at_minute_17():
@@ -134,3 +154,41 @@ def test_pages_pipeline_exports_history_and_renders_forecast():
     assert 'id="forecast-title"' in page
     assert 'state.status?.forecast' in app
     assert "forecast.backlog_change_per_day == null" in app
+
+
+def test_status_carries_the_recipe_snapshot_report(tmp_path):
+    crawl = tmp_path / "crawl.json"
+    crawl.write_text(json.dumps({"status": "success", "coverage_kind": "partial", "sources": {}}))
+    recipes = tmp_path / "cpp.json"
+    recipes.write_text(json.dumps({"status": "success", "coverage_kind": "partial", "sources": {
+        "vcpkg": {"coverage_kind": "partial", "records": 917,
+                  "indexes": [{"packages": 2862, "declaring_packages": 278}]},
+        "xmake": {"coverage_kind": "partial", "records": 114,
+                  "indexes": [{"packages": 2004, "declaring_packages": 114}]},
+    }}))
+    output = tmp_path / "site"
+    status = json.loads(_build(output, crawl, recipes) .read_text())
+
+    assert status["recipe_report"]["sources"]["vcpkg"]["records"] == 917
+    assert status["recipe_report"]["sources"]["xmake"]["records"] == 114
+    # A recipe repository is read whole every run, so it never reports a cursor.
+    assert "cursor" not in status["recipe_report"]["sources"]["vcpkg"]
+
+
+def test_status_reports_an_uncollected_recipe_repository_rather_than_omitting_it(tmp_path):
+    crawl = tmp_path / "crawl.json"
+    crawl.write_text(json.dumps({"status": "success", "coverage_kind": "partial", "sources": {}}))
+    output = tmp_path / "site"
+    status = json.loads(_build(output, crawl, tmp_path / "missing.json").read_text())
+
+    assert status["recipe_report"] == {"status": "unavailable", "coverage_kind": "partial", "sources": {}}
+
+
+def test_playground_renders_recipe_snapshots_without_a_cursor():
+    app = (ROOT / "playground/app.js").read_text()
+    page = (ROOT / "playground/index.html").read_text()
+
+    assert 'id="recipe-grid"' in page
+    assert '["vcpkg", "xmake"]' in app
+    assert "state.status?.recipe_report?.sources" in app
+    assert "packages declare a command" in app

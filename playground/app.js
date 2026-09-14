@@ -89,6 +89,28 @@ function renderOverview() {
     osGrid.append(card);
   }
 
+  // A recipe repository is read whole on every run, so it has records and a coverage
+  // kind but no cursor to advance, and its evidence differs per source: vcpkg declares
+  // its tools, while xmake only declares that a package is a binary.
+  const recipeGrid = $("recipe-grid");
+  recipeGrid.replaceChildren();
+  const recipeSources = state.status?.recipe_report?.sources || {};
+  for (const name of ["vcpkg", "xmake"]) {
+    const source = recipeSources[name];
+    const card = document.createElement("article");
+    card.className = "source-card";
+    const index = source?.indexes?.[0] || {};
+    const declared = Number(index.declaring_packages || 0);
+    const packages = Number(index.packages || 0);
+    const label = source ? statusLabel(source.coverage_kind) : "pending";
+    const width = packages ? Math.max(3, Math.min(100, (declared / packages) * 100)) : 3;
+    const position = packages
+      ? `${formatNumber(declared)} / ${formatNumber(packages)} packages declare a command`
+      : source ? statusLabel(source.status) : "not yet collected";
+    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status">${label}</span></div><div class="source-bar"><i style="width:${width}%"></i></div><div class="source-stats"><span>${position}</span><span>${formatNumber(source?.records || 0)} records</span></div>`;
+    recipeGrid.append(card);
+  }
+
   const grid = $("source-grid");
   grid.replaceChildren();
   const order = ["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget", "conan"];

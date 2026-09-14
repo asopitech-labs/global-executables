@@ -729,6 +729,17 @@ During the build it snapshots
 the latest `artifact-data` crawl report into `status.json`, including the next
 scheduled refresh time, discovery and refresh cursors, failures, and coverage kind.
 
+The page renders three groups because the sources answer in three different shapes.
+OS file indexes and C/C++ recipe repositories are read whole on every run and report
+records and a coverage kind but never a cursor, while the language registries advance
+a cursor through a catalogue. ConanCenter inspects one artifact per recipe, so it
+belongs with the registries and publishes into the same crawl report. vcpkg and xmake
+advance no cursor and have nothing to merge into that report, so `cpp-registries.yml`
+publishes `reports/cpp-registry-crawl.json` beside it and `pages.yml` passes it to the
+builder as `--recipe-report`. Their bar is the share of the population that declares a
+command, which is the honest measure for a source whose index was read completely and
+whose upstream still describes only part of it.
+
 The same build reads up to seven days of published Go checkpoints, selects the rolling
 24-hour operating window, and writes an advisory completion forecast into `status.json`.
 The short window excludes delayed bulk publication and migration catch-up from normal

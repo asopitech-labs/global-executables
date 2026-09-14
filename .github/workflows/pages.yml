@@ -38,6 +38,11 @@ jobs:
             printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/registry-artifact-crawl.json
             ARTIFACT_DATA_COMMIT=
           fi
+          if git cat-file -e origin/artifact-data:reports/cpp-registry-crawl.json 2>/dev/null; then
+            git show origin/artifact-data:reports/cpp-registry-crawl.json > /tmp/cpp-registry-crawl.json
+          else
+            printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/cpp-registry-crawl.json
+          fi
           if git cat-file -e origin/dictionary:reports/production-crawl.json 2>/dev/null; then
             git show origin/dictionary:reports/production-crawl.json > /tmp/production-crawl.json
           else
@@ -62,6 +67,7 @@ jobs:
             --crawl-report /tmp/registry-artifact-crawl.json \
             --crawl-history /tmp/go-crawl-history.jsonl \
             --production-report /tmp/production-crawl.json \
+            --recipe-report /tmp/cpp-registry-crawl.json \
             --artifact-data-commit "$ARTIFACT_DATA_COMMIT" \
             --dictionary-commit "$DICTIONARY_COMMIT" \
             --main-commit "$GITHUB_SHA"

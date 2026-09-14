@@ -180,6 +180,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           publish_output="$(SOURCES='' OBSERVATION_SOURCES='vcpkg xmake' \
+            OBSERVATION_REPORT=reports/cpp-registry-crawl.json \
             PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
           printf '%s\n' "$publish_output"
           if printf '%s\n' "$publish_output" | grep -qx published; then
