@@ -38,6 +38,17 @@ def test_refresh_publishes_os_observations_and_alerts_on_failure():
     assert "gh issue create" in REFRESH
 
 
+def test_refresh_alerts_when_its_own_budget_cancels_the_run():
+    """A run stopped by timeout-minutes ends as cancelled, not failure."""
+    assert "timeout-minutes: 90" in REFRESH
+
+    alert = REFRESH.split("alert-refresh-failure:", 1)[1]
+    assert "needs.refresh.result == 'failure'" in alert
+    assert "needs.refresh.result == 'cancelled'" in alert
+    assert "always()" in alert
+    assert "did not complete" in alert
+
+
 def test_local_publish_includes_os_observations_from_the_checkout():
     assert 'SOURCES="${SOURCES-pypi rubygems packagist nuget go}"' in PARALLEL_CRAWL
     assert 'OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 scoop winget windows macos shell}"' in PARALLEL_CRAWL

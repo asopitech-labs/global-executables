@@ -22,7 +22,11 @@ jobs:
   refresh:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # The 2026-09-14 run needed 6m to restore the dictionary, 12m to restore durable
+    # observations, 8m to rebuild, and was still publishing when the 30-minute limit
+    # cancelled it, which stalled publication from 2026-09-03. The budget leaves room
+    # for the dataset to keep growing.
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -200,7 +204,10 @@ jobs:
 
   alert-refresh-failure:
     needs: refresh
-    if: always() && needs.refresh.result == 'failure'
+    # A run that exceeds timeout-minutes ends as cancelled rather than failure, so
+    # alerting on failure alone hid an eleven-day publication outage. A run cancelled
+    # while still queued never starts this job, so superseded dispatches stay silent.
+    if: always() && (needs.refresh.result == 'failure' || needs.refresh.result == 'cancelled')
     runs-on: ubuntu-latest
     steps:
       - name: Open or update the refresh failure alert
@@ -209,7 +216,7 @@ jobs:
         run: |
           title="Alert: generated dataset refresh failed"
           run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          body="The scheduled dataset refresh failed: ${run_url}"
+          body="The generated dataset refresh did not complete (${{ needs.refresh.result }}): ${run_url}"
           issue=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
             --search "$title in:title" --json number --jq '.[0].number // empty')
           if test -n "$issue"; then
