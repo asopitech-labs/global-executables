@@ -91,7 +91,7 @@ function renderOverview() {
 
   const grid = $("source-grid");
   grid.replaceChildren();
-  const order = ["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget"];
+  const order = ["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget", "conan"];
   for (const name of order) {
     const source = sources[name] || { coverage_kind: "pending", complete: false };
     const card = document.createElement("article");
