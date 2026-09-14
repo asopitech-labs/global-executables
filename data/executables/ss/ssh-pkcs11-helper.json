@@ -2,6 +2,19 @@
   "command": "ssh-pkcs11-helper",
   "providers": [
     {
+      "ecosystem": "conan",
+      "package": "openssh",
+      "version": "9.9p1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/openssh/9.9p1/_/_/revisions/9c3896d3c73bce4db66d28dada4dee69/packages/18ba219b3f0943cc02cc3aab7d0d1c263ab002b3/revisions/bf4c078cb108f48395a21f38b1ac4301/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "9.9p1"
+    },
+    {
       "ecosystem": "windows",
       "package": "servercore",
       "version": "ltsc2022-amd64",
