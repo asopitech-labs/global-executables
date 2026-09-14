@@ -2,6 +2,19 @@
   "command": "presentmon",
   "providers": [
     {
+      "ecosystem": "vcpkg",
+      "package": "presentmon",
+      "version": "2.3.0",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "2.3.0"
+    },
+    {
       "ecosystem": "winget",
       "package": "Intel.PresentMon.Console",
       "version": null,

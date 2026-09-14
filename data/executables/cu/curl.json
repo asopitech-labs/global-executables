@@ -1180,6 +1180,19 @@
       "distribution": "ubuntu"
     },
     {
+      "ecosystem": "vcpkg",
+      "package": "curl",
+      "version": "8.22.0",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "8.22.0"
+    },
+    {
       "ecosystem": "windows",
       "package": "nanoserver",
       "version": "ltsc2022-amd64",
@@ -1226,6 +1239,18 @@
       "package_system": "windows-image",
       "distribution_family": "windows",
       "distribution": "servercore"
+    },
+    {
+      "ecosystem": "xmake",
+      "package": "curl",
+      "version": null,
+      "repository": "https://github.com/xmake-io/xmake-repo",
+      "source": "https://codeload.github.com/xmake-io/xmake-repo/tar.gz/refs/heads/master",
+      "confidence": "inferred",
+      "source_type": "language_package",
+      "package_system": "xmake",
+      "language": "c++",
+      "registry": "xmake-repo"
     }
   ],
   "first_seen": "2026-08-14",
