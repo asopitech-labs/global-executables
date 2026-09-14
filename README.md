@@ -105,6 +105,9 @@ Package ecosystems
         ├── Go modules
         ├── RubyGems
         ├── Packagist / Composer
+        ├── ConanCenter
+        ├── vcpkg
+        ├── xmake-repo
         └── others
                 │
                 ▼
@@ -236,7 +239,20 @@ Potential sources include:
 | Go modules | `package main` directories in module archives |
 | RubyGems | gemspec `executables` metadata |
 | Packagist / Composer | `composer.json` `bin` declarations in Packagist metadata |
+| ConanCenter | `bin/` contents of the built package, read from `conanmanifest.txt` |
+| vcpkg | `vcpkg_copy_tools(TOOL_NAMES ...)` declarations in `portfile.cmake` |
+| xmake-repo | `set_kind("binary")` packages, whose command name is inferred |
 | others | ecosystem-specific executable metadata |
+
+C and C++ have no single registry, so three recipe repositories are read instead, and
+each contributes the strongest evidence it actually carries. vcpkg names the tools a
+port installs, because naming them is what installs them. ConanCenter recipes never
+name their executables, so the built package's own file list is read. xmake declares
+that a package is a binary but never what the binary is called, so its records are
+marked `inferred` and no xmake record should be read as a declaration. None of the
+three is `exhaustive`: a vcpkg port can install a command without declaring it, a
+ConanCenter recipe nobody has built states nothing about installed files, and an xmake
+package can install a command under another name.
 
 The project records how each executable was discovered rather than treating all observations as equally authoritative.
 

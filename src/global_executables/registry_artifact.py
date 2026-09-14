@@ -27,7 +27,7 @@ from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
-from .collectors import crates_manifest, declared_command, record
+from .collectors import conan_manifest_commands, crates_manifest, declared_command, record
 from .model import write_jsonl
 
 
@@ -839,6 +839,185 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     return report
 
 
+CONAN_INDEX = "https://codeload.github.com/conan-io/conan-center-index/tar.gz/refs/heads/master"
+CONAN_REMOTE = "https://center2.conan.io/v2/conans"
+# A command set barely differs across build configurations, so one is inspected, and
+# the manifest URL records which.  Linux first because its binaries carry no suffix.
+CONAN_PREFERRED_OS = ("Linux", "Macos", "Windows")
+CONAN_CONFIG_VERSION = re.compile(r'^\s{2}"?([^"\s:]+)"?:\s*$', re.M)
+
+
+def _version_key(value: str) -> tuple[tuple[int, Any], ...]:
+    return tuple((0, int(part)) if part.isdigit() else (1, part)
+                 for part in re.split(r"[._-]", value) if part)
+
+
+def _conan_catalog(timeout: int) -> tuple[list[str], int]:
+    """Read every ConanCenter recipe and its newest version from the index snapshot.
+
+    The index is one repository tarball, so the whole declared population costs a
+    single request and the catalogue is finite rather than paged.
+    """
+    body, transfer = fetch(CONAN_INDEX, timeout)
+    versions: dict[str, list[str]] = {}
+    with tarfile.open(fileobj=BytesIO(body), mode="r:gz") as archive:
+        for member in archive:
+            if not member.isfile() or not member.name.endswith("/config.yml"):
+                continue
+            parts = member.name.split("/")
+            if len(parts) != 4 or parts[1] != "recipes":
+                continue
+            handle = archive.extractfile(member)
+            if handle is None:
+                continue
+            declared = CONAN_CONFIG_VERSION.findall(handle.read().decode("utf-8", "replace"))
+            if declared:
+                versions[parts[2]] = declared
+    if not versions:
+        raise RegistryCrawlError("conan-center-index snapshot carried no recipe versions")
+    return ([f"{name}/{max(found, key=_version_key)}" for name, found in sorted(versions.items())],
+            transfer["downloaded_bytes"])
+
+
+def _conan_package_commands(reference: str, timeout: int) -> tuple[list[str], str, int]:
+    """Inspect one ConanCenter binary package for the commands it installs.
+
+    A conan recipe never declares its executables, so the evidence is the built
+    package's own file list.  `conanmanifest.txt` carries that list as a small text
+    file, which is far less than the package archive it describes.
+    """
+    name, _, version = reference.partition("/")
+    if not name or not version:
+        raise RegistryCrawlError(f"malformed recipe reference: {reference}")
+    quoted = f"{urllib.parse.quote(name, safe='')}/{urllib.parse.quote(version, safe='')}"
+    revisions_url = f"{CONAN_REMOTE}/{quoted}/_/_/revisions"
+    body, transfer = fetch(revisions_url, timeout)
+    downloaded = transfer["downloaded_bytes"]
+    revisions = json.loads(body).get("revisions") or []
+    if not revisions:
+        raise RegistryCrawlError(f"recipe has no published revision: {reference}")
+    recipe_revision = max(revisions, key=lambda item: str(item.get("time", "")))["revision"]
+    revision_url = f"{revisions_url}/{recipe_revision}"
+    body, transfer = fetch(f"{revision_url}/search", timeout)
+    downloaded += transfer["downloaded_bytes"]
+    packages = json.loads(body)
+    if not isinstance(packages, dict) or not packages:
+        # A recipe nobody has built yet states nothing about installed files.
+        return [], "", downloaded
+    def preference(item: tuple[str, dict[str, Any]]) -> tuple[int, str]:
+        declared = str((item[1].get("settings") or {}).get("os", ""))
+        rank = CONAN_PREFERRED_OS.index(declared) if declared in CONAN_PREFERRED_OS else len(CONAN_PREFERRED_OS)
+        return rank, item[0]
+    package_id = min(packages.items(), key=preference)[0]
+    body, transfer = fetch(f"{revision_url}/packages/{package_id}/revisions", timeout)
+    downloaded += transfer["downloaded_bytes"]
+    package_revisions = json.loads(body).get("revisions") or []
+    if not package_revisions:
+        return [], "", downloaded
+    package_revision = max(package_revisions, key=lambda item: str(item.get("time", "")))["revision"]
+    manifest_url = (f"{revision_url}/packages/{package_id}/revisions/{package_revision}"
+                    "/files/conanmanifest.txt")
+    body, transfer = fetch(manifest_url, timeout)
+    downloaded += transfer["downloaded_bytes"]
+    return conan_manifest_commands(body.decode("utf-8", "replace")), manifest_url, downloaded
+
+
+def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
+                 checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
+    """Inspect ConanCenter's built packages for the commands they install."""
+    catalog_file = Path(state.setdefault("recipes_file", "data/production/conan-recipes.txt"))
+    catalog_file.parent.mkdir(parents=True, exist_ok=True)
+    downloaded = 0
+    if not read_catalog(catalog_file):
+        references, spent = _conan_catalog(timeout)
+        downloaded += spent
+        write_catalog(catalog_file, references)
+        state["catalog_complete"] = True
+        checkpoint()  # the catalogue is the expensive part; a later failure must not lose it
+    recipes = read_catalog(catalog_file)
+    cursor = int(state.get("cursor", 0))
+    refresh_cursor = int(state.get("refresh_cursor", 0))
+    if refresh_cursor >= len(recipes):
+        refresh_cursor = 0
+    refresh_enabled = cursor >= len(recipes)
+    processed = refreshed = collected = 0
+    budget_exhausted = False
+    failures, unavailable, attempts = _failure_state(state)
+    # A recipe nobody has built publishes no file list, so it is neither a failure nor
+    # evidence of absence.  Tracking it keeps the source honestly short of exhaustive.
+    uninspected = state.setdefault("uninspected", {})
+    retry_recipes = state.setdefault("retry_recipes", [])
+    retry_recipes[:] = [name for name in retry_recipes if name not in unavailable]
+    for name in failures:
+        if name not in retry_recipes:
+            retry_recipes.append(name)
+    retry_budget = len(retry_recipes)
+    rows: list[dict[str, Any]] = []
+    replacement_rows: list[dict[str, Any]] = []
+    replaced_packages: set[str] = set()
+    while (retry_budget or cursor < len(recipes) or
+           (refresh_enabled and recipes and refreshed < len(recipes))) and processed < budget:
+        retrying = retry_budget > 0
+        if retrying:
+            retry_budget -= 1
+        refreshing = not retrying and cursor >= len(recipes)
+        reference = (retry_recipes.pop(0) if retrying
+                     else recipes[refresh_cursor if refreshing else cursor])
+        package, _, version = reference.partition("/")
+        try:
+            commands, manifest_url, spent = _conan_package_commands(reference, timeout)
+            downloaded += spent
+            if manifest_url:
+                uninspected.pop(reference, None)
+            else:
+                uninspected[reference] = "no built package published for this recipe"
+            package_rows = [record(command, "conan", package, version,
+                                   "https://github.com/conan-io/conan-center-index",
+                                   manifest_url or CONAN_REMOTE, "filesystem",
+                                   source_type="language_package", language="c++",
+                                   package_system="conan", registry="conancenter",
+                                   latest_version=version)
+                            for command in commands]
+            rows.extend(package_rows)
+            replacement_rows.extend(package_rows)
+            replaced_packages.add(package)
+            failures.pop(package, None)
+        except Exception as error:
+            _record_failure(failures, unavailable, reference, error, attempts)
+            if reference in failures and reference not in retry_recipes:
+                retry_recipes.append(reference)
+        if refreshing:
+            refreshed += 1
+            refresh_cursor = (refresh_cursor + 1) % len(recipes)
+        elif not retrying:
+            cursor += 1
+        processed += 1
+        if downloaded > byte_budget:
+            budget_exhausted = True
+            break
+        if _due_for_checkpoint(processed):
+            collected += len(rows)
+            _replace_package_rows(output, replaced_packages, replacement_rows)
+            rows.clear(); replacement_rows.clear(); replaced_packages.clear()
+            checkpoint(cursor=cursor, refresh_cursor=refresh_cursor)
+        if interrupted():
+            break
+    state["cursor"] = cursor
+    state["catalog_size"] = len(recipes)
+    state["refresh_cursor"] = refresh_cursor
+    collected += len(rows)
+    _replace_package_rows(output, replaced_packages, replacement_rows)
+    complete = (cursor >= len(recipes) and not failures and not retry_recipes
+                and not uninspected)
+    return {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
+            "catalog_size": len(recipes), "processed": processed, "records": collected,
+            "downloaded_bytes": downloaded, "failures": len(failures),
+            "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
+            "retry_pending": len(retry_recipes), "uninspected": len(uninspected),
+            "complete": complete,
+            "coverage_kind": "exhaustive" if complete else "partial"}
+
+
 def _refuse_empty_exhaustive(result: dict[str, Any], observations: Path) -> None:
     """A registry that has yielded nothing has not been surveyed, whatever its cursor says.
 
@@ -859,7 +1038,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
     state = _load_json(state_path, {"version": 1, "sources": {}})
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
-        "crates": _crawl_crates, "nuget": _crawl_nuget,
+        "crates": _crawl_crates, "nuget": _crawl_nuget, "conan": _crawl_conan,
     }
     source_budgets = source_budgets or {}
     for source in sources:

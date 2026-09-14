@@ -21,10 +21,12 @@ import urllib.error
 import urllib.request
 import zipfile
 from pathlib import Path
+from collections.abc import Callable
 from typing import Any
 
 from .collectors import (homebrew_metadata, package_files, record, scoop_manifests,
-                         winget_commands, windows_command)
+                         vcpkg_ports, vcpkg_tool_names, winget_commands, windows_command,
+                         xmake_packages)
 from .model import read_jsonl, valid_command, write_jsonl
 
 
@@ -74,13 +76,21 @@ SOURCE_INDEXES = {
     "windows": [f"{repository}:{tag}" for repository, tag in (
         ("windows/servercore", "ltsc2025-amd64"), ("windows/servercore", "ltsc2022-amd64"),
         ("windows/nanoserver", "ltsc2025-amd64"), ("windows/nanoserver", "ltsc2022-amd64"))],
+    # C and C++ distribute through several recipe repositories rather than one
+    # registry, and each repository is a single snapshot tarball.
+    "vcpkg": ["https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master"],
+    "xmake": ["https://codeload.github.com/xmake-io/xmake-repo/tar.gz/refs/heads/master"],
     "npm": ["https://replicate.npmjs.com/_all_docs"],
     "pypi": ["https://pypi.org/simple/"],
     "crates": ["https://index.crates.io/config.json"],
 }
 SOURCE_URLS = {source: urls[0] for source, urls in SOURCE_INDEXES.items()}
 FILE_INDEX_SOURCES = {"debian", "ubuntu", "arch", "msys2"}
-COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "windows", "macos", "shell"}
+COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "windows", "macos", "shell",
+                                          "vcpkg", "xmake"}
+# A source whose upstream declares commands for only part of its population can never
+# report the absence of a name, however completely its own index was read.
+PARTIAL_DECLARATION_SOURCES = {"winget", "vcpkg", "xmake"}
 PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 # There is no privileged observation of a base command set: every run samples one
 # installed system.  Those samples accumulate rather than replace each other, so a
@@ -397,7 +407,82 @@ def _crawl_homebrew(body: bytes, source_url: str) -> tuple[list[dict[str, Any]],
     }
 
 
+def _tarball_members(body: bytes, keep: Callable[[str], bool]) -> dict[str, str]:
+    """Read the text members a recipe repository snapshot carries, by relative path."""
+    members: dict[str, str] = {}
+    with tarfile.open(fileobj=io.BytesIO(body), mode="r:gz") as archive:
+        for member in archive:
+            if not member.isfile() or not keep(member.name):
+                continue
+            handle = archive.extractfile(member)
+            if handle is None:
+                continue
+            members[member.name.split("/", 1)[-1]] = handle.read().decode("utf-8", "replace")
+    return members
+
+
+def _crawl_vcpkg(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Read the tools vcpkg ports declare through `vcpkg_copy_tools`."""
+    members = _tarball_members(body, lambda name: "/ports/" in name
+                              and name.rsplit("/", 1)[-1] in {"portfile.cmake", "vcpkg.json"})
+    ports: dict[str, dict[str, str]] = {}
+    for path, text in members.items():
+        parts = path.split("/")
+        if len(parts) != 3 or parts[0] != "ports":
+            continue
+        ports.setdefault(parts[1], {})[parts[2]] = text
+    if not ports:
+        raise ProductionSourceError(f"vcpkg snapshot carried no ports: {source_url}")
+    triples = []
+    declaring = 0
+    unresolved = 0
+    for port, files in sorted(ports.items()):
+        portfile = files.get("portfile.cmake", "")
+        names, missing = vcpkg_tool_names(portfile)
+        unresolved += missing
+        if names:
+            declaring += 1
+        triples.append((port, _vcpkg_version(files.get("vcpkg.json", "")), portfile))
+    rows = vcpkg_ports(triples, source_url)
+    return rows, {"status": "success", "coverage_kind": "partial", "records": len(rows),
+                  "packages": len(ports), "declaring_packages": declaring,
+                  "unresolved_tool_names": unresolved, "source": source_url,
+                  "note": "vcpkg names tools only in ports that call vcpkg_copy_tools"}
+
+
+def _vcpkg_version(manifest: str) -> str | None:
+    try:
+        value = json.loads(manifest) if manifest else {}
+    except json.JSONDecodeError:
+        return None
+    for key in ("version", "version-semver", "version-string", "version-date"):
+        if isinstance(value.get(key), str):
+            return value[key]
+    return None
+
+
+def _crawl_xmake(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Read the packages xmake-repo declares as binaries."""
+    members = _tarball_members(body, lambda name: "/packages/" in name and name.endswith("/xmake.lua"))
+    definitions: dict[str, str] = {}
+    for path, text in members.items():
+        parts = path.split("/")
+        if len(parts) != 4 or parts[0] != "packages":
+            continue
+        definitions[parts[2]] = text
+    if not definitions:
+        raise ProductionSourceError(f"xmake-repo snapshot carried no packages: {source_url}")
+    rows = xmake_packages(sorted(definitions.items()), source_url)
+    return rows, {"status": "success", "coverage_kind": "partial", "records": len(rows),
+                  "packages": len(definitions), "declaring_packages": len(rows), "source": source_url,
+                  "note": "xmake declares the package kind but never the installed command name"}
+
+
 def _crawl_index(source: str, body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    if source == "vcpkg":
+        return _crawl_vcpkg(body, source_url)
+    if source == "xmake":
+        return _crawl_xmake(body, source_url)
     if source == "homebrew":
         return _crawl_homebrew(body, source_url)
     if source == "scoop":
@@ -459,7 +544,7 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
 def crawl_sources(sources: list[str], output_dir: Path, report_path: Path, timeout: int = 300) -> dict[str, Any]:
     report: dict[str, Any] = {
         "status": "success",
-        "coverage_kind": "exhaustive" if set(sources) <= (COLLECTED_SOURCES - {"winget"}) else "partial",
+        "coverage_kind": "exhaustive" if set(sources) <= (COLLECTED_SOURCES - PARTIAL_DECLARATION_SOURCES) else "partial",
         "declared_sources": sorted(SOURCE_URLS),
         "requested_sources": sorted(sources),
         "sources": {},

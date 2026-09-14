@@ -67,7 +67,8 @@ jobs:
           fi
           for source in \
             arch debian ubuntu homebrew msys2 scoop winget windows \
-            npm pypi crates go rubygems packagist nuget macos shell; do
+            npm pypi crates go rubygems packagist nuget macos shell \
+            conan vcpkg xmake; do
             transport="data/production/transport/${source}-observations"
             if git cat-file -e "origin/artifact-data:${transport}/manifest.json" 2>/dev/null; then
               rm -rf /tmp/artifact-transport
@@ -93,6 +94,7 @@ jobs:
           python tools/production_crawl.py \
             --source debian --source ubuntu --source arch --source homebrew \
             --source msys2 --source scoop --source winget --source windows \
+            --source vcpkg --source xmake \
             --output-dir data/production/intermediate \
             --report reports/production-crawl.json
       - name: Publish refreshed OS observations
@@ -106,7 +108,7 @@ jobs:
             git worktree add -b artifact-data /tmp/os-observation-publish HEAD
           fi
           mkdir -p /tmp/os-observation-publish/data/production/intermediate
-          for source in arch debian ubuntu homebrew msys2 scoop winget windows; do
+          for source in arch debian ubuntu homebrew msys2 scoop winget windows vcpkg xmake; do
             cp data/production/intermediate/${source}.jsonl \
               /tmp/os-observation-publish/data/production/intermediate/${source}.jsonl
           done
@@ -120,7 +122,9 @@ jobs:
             data/production/intermediate/msys2.jsonl \
             data/production/intermediate/scoop.jsonl \
             data/production/intermediate/winget.jsonl \
-            data/production/intermediate/windows.jsonl
+            data/production/intermediate/windows.jsonl \
+            data/production/intermediate/vcpkg.jsonl \
+            data/production/intermediate/xmake.jsonl
           git -C /tmp/os-observation-publish diff --cached --quiet || \
             git -C /tmp/os-observation-publish commit -m "Preserve production OS observations"
           for attempt in 1 2 3; do
@@ -150,6 +154,9 @@ jobs:
             data/production/intermediate/rubygems.jsonl \
             data/production/intermediate/packagist.jsonl \
             data/production/intermediate/nuget.jsonl \
+            data/production/intermediate/conan.jsonl \
+            data/production/intermediate/vcpkg.jsonl \
+            data/production/intermediate/xmake.jsonl \
             data/production/intermediate/msys2.jsonl \
             data/production/intermediate/scoop.jsonl \
             data/production/intermediate/winget.jsonl \

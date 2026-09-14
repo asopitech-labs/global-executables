@@ -40,6 +40,7 @@ catalog_for() {
     rubygems) echo "rubygems-names.txt rubygems-names.txt.gz" ;;
     packagist) echo "packagist-packages.txt packagist-packages.txt.gz" ;;
     nuget) echo "nuget-tools.txt nuget-tools.txt.gz" ;;
+    conan) echo "conan-recipes.txt conan-recipes.txt.gz" ;;
     npm) echo "npm-critical-packages.txt" ;;
     # Go's live catalogue is appended page by page so an interrupted sweep resumes, so
     # it has no gzip twin locally: one left beside it goes stale the moment the sweep

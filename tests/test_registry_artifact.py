@@ -762,3 +762,66 @@ def test_nuget_continuously_refreshes_completed_catalog_and_replaces_old_command
     assert state["refresh_cursor"] == 1
     assert state["catalog_size"] == 2 and state["catalog_complete"] is True
     assert {(row["package"], row["command"]) for row in rows} == {("alpha", "new"), ("beta", "keep")}
+
+
+def _conan_index_tarball(recipes: dict[str, str]) -> bytes:
+    stream = BytesIO()
+    with tarfile.open(fileobj=stream, mode="w:gz") as archive:
+        for name, versions in recipes.items():
+            payload = ("versions:\n" + versions).encode()
+            info = tarfile.TarInfo(f"conan-center-index-master/recipes/{name}/config.yml")
+            info.size = len(payload)
+            archive.addfile(info, BytesIO(payload))
+    return stream.getvalue()
+
+
+def _conan_remote(manifest: str) -> dict[str, bytes]:
+    base = "https://center2.conan.io/v2/conans"
+    return {
+        f"{base}/demotool/1.3.1/_/_/revisions":
+            b'{"revisions": [{"revision": "rr0", "time": "2025-01-01T00:00:00.000+0000"},'
+            b' {"revision": "rr1", "time": "2026-01-01T00:00:00.000+0000"}]}',
+        f"{base}/demotool/1.3.1/_/_/revisions/rr1/search":
+            b'{"winpkg": {"settings": {"os": "Windows"}}, "linpkg": {"settings": {"os": "Linux"}}}',
+        f"{base}/demotool/1.3.1/_/_/revisions/rr1/packages/linpkg/revisions":
+            b'{"revisions": [{"revision": "pr1", "time": "2026-01-02T00:00:00.000+0000"}]}',
+        f"{base}/demotool/1.3.1/_/_/revisions/rr1/packages/linpkg/revisions/pr1/files/conanmanifest.txt":
+            manifest.encode(),
+        f"{base}/demolib/2.0.0/_/_/revisions":
+            b'{"revisions": [{"revision": "rr9", "time": "2026-01-01T00:00:00.000+0000"}]}',
+        f"{base}/demolib/2.0.0/_/_/revisions/rr9/search": b"{}",
+    }
+
+
+def test_conan_commands_come_from_the_built_package_not_the_recipe(tmp_path, monkeypatch):
+    manifest = (pathlib.Path(__file__).parents[1] / "fixtures/collectors/conanmanifest.txt").read_text()
+    index = _conan_index_tarball({"demotool": '  "1.2.0":\n    folder: all\n  "1.3.1":\n    folder: all\n',
+                                  "demolib": '  "2.0.0":\n    folder: all\n'})
+    responses = {registry_artifact.CONAN_INDEX: index, **_conan_remote(manifest)}
+
+    def fake_fetch(url, timeout=120, attempts=4):
+        if url not in responses:
+            raise urllib.error.HTTPError(url, 404, "Not Found", None, None)
+        return responses[url], {"downloaded_bytes": len(responses[url])}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
+    state = tmp_path / "state.json"
+    state.write_text(json.dumps({"version": 1, "sources": {
+        "conan": {"recipes_file": str(tmp_path / "conan-recipes.txt")}}}))
+    report = registry_artifact.crawl_registry_sources(
+        ["conan"], state, tmp_path / "intermediate", tmp_path / "report.json",
+        package_budget=10)
+    conan = report["sources"]["conan"]
+    rows = [json.loads(line) for line in (tmp_path / "intermediate/conan.jsonl").read_text().splitlines() if line.strip()]
+
+    # The newest declared version is inspected, and a Linux build is preferred so the
+    # recorded commands carry no Windows suffix.
+    assert [(row["package"], row["command"], row["version"]) for row in rows] == [
+        ("demotool", "demotool", "1.3.1"), ("demotool", "demotool-1.2", "1.3.1")]
+    assert {row["confidence"] for row in rows} == {"filesystem"}
+    assert rows[0]["source"].endswith("/conanmanifest.txt")
+    assert conan["cursor"] == 2 and conan["catalog_size"] == 2 and conan["failures"] == 0
+    # A recipe nobody has built states nothing about installed files, so the whole
+    # catalogue being walked still does not license a negative answer.
+    assert conan["uninspected"] == 1
+    assert conan["coverage_kind"] == "partial" and conan["complete"] is False

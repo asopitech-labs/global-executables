@@ -420,6 +420,32 @@ representative 3,000-package pass from 8,543 to 5,965 requests (30.2%).
 RubyGems and Packagist also completed their cited live passes with zero `429`, zero
 timeouts, and zero circuit opens.
 
+### C and C++ recipe registries
+
+C and C++ distribute through several recipe repositories rather than one registry, so
+`conan`, `vcpkg`, and `xmake` are collected as three separate sources with their own
+coverage entries. Each one is read for the strongest evidence it carries, and the
+record's confidence says which that was.
+
+| Source | Population | Evidence | Confidence | Why it is not exhaustive |
+| --- | --- | --- | --- | --- |
+| vcpkg | `ports/*` of the `microsoft/vcpkg` snapshot | `vcpkg_copy_tools(TOOL_NAMES ...)` in `portfile.cmake` | `direct` | A port can install a command without calling `vcpkg_copy_tools`, and a name built from a CMake variable is counted rather than guessed at |
+| conan | `recipes/*/config.yml` of the `conan-io/conan-center-index` snapshot | `bin/` entries of the built package, read from `conanmanifest.txt` | `filesystem` | A recipe nobody has built publishes no file list, and those recipes are counted as `uninspected` |
+| xmake | `packages/*/*/xmake.lua` of the `xmake-io/xmake-repo` snapshot | `set_kind("binary")` | `inferred` | xmake declares that a package installs a command but never what the command is called, so the package name stands in for it |
+
+The vcpkg and xmake populations are one repository tarball each, so both are collected
+in a single request by `production_crawl.py` and replace their previous snapshot.
+ConanCenter needs one artifact inspection per recipe, so it runs in the budgeted,
+resumable registry crawler instead: `registry_artifact_crawl.py --source conan` walks
+the recipe catalogue from a durable cursor. The 2026-09-14 measurement read the 1,944
+recipe catalogue in one 4.7 MB request, and `conanmanifest.txt` keeps each inspection
+to a small text file rather than the package archive it describes.
+
+Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
+`7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs
+`activemqcpp-config`, which is why the whole recipe population is walked rather than
+only the recipes that declare `package_type = "application"`.
+
 Go's inspection cost is the module archive itself rather than a metadata document. The
 inspector reads one candidate `.go` file per directory through a range reader with a
 small block cache, and it walks those directories in archive order so each block is

@@ -175,3 +175,112 @@ def homebrew_metadata(value, source="homebrew-api"):
             for alias,target in aliases.items(): out.append(record(alias,"homebrew",package,version,formula.get("homepage"),source,"filesystem",target,
                 source_type="os_package", package_system="homebrew", distribution_family="macos", distribution="macos"))
     return out
+
+# --- C and C++ recipe registries ---------------------------------------------------
+# C and C++ have no single registry, and none of the three recipe repositories answers
+# "which commands does this install?" the way npm or RubyGems do.  Each one is read for
+# the strongest evidence it actually carries, and the confidence says which that was.
+CPP_REPOSITORIES = {
+    "vcpkg": "https://github.com/microsoft/vcpkg",
+    "xmake": "https://github.com/xmake-io/xmake-repo",
+    "conan": "https://github.com/conan-io/conan-center-index",
+}
+VCPKG_COPY_TOOLS = re.compile(r"vcpkg_copy_tools\s*\((.*?)\)", re.S)
+# TOOL_NAMES runs until the next keyword of the same call.
+VCPKG_TOOL_KEYWORDS = ("TOOL_NAMES", "AUTO_CLEAN", "SEARCH_DIR", "DESTINATION", "NO_SUFFIX")
+
+
+def vcpkg_tool_names(portfile):
+    """Read the commands a vcpkg port copies into `tools/<port>/`.
+
+    `vcpkg_copy_tools` is what moves a built binary into the installed tool directory,
+    so a port that installs a command has to name it here.  A name built from a CMake
+    variable is not resolvable without running the port, so it is counted rather than
+    guessed at.
+    """
+    names, unresolved = [], 0
+    for block in VCPKG_COPY_TOOLS.findall(portfile):
+        collecting = False
+        for token in block.split():
+            bare = token.strip('"\'')
+            if bare in VCPKG_TOOL_KEYWORDS:
+                collecting = bare == "TOOL_NAMES"
+                continue
+            if not collecting:
+                continue
+            if "$" in bare or "@" in bare:
+                unresolved += 1
+                continue
+            name = declared_command(bare)
+            if name and COMMAND_NAME.match(name):
+                names.append(windows_command(name))
+    return sorted(set(names)), unresolved
+
+
+def vcpkg_ports(ports, source="vcpkg"):
+    """Build records from `(port, version, portfile)` triples."""
+    out = []
+    for port, version, portfile in ports:
+        names, _ = vcpkg_tool_names(portfile)
+        for command in names:
+            out.append(record(command, "vcpkg", port, version, CPP_REPOSITORIES["vcpkg"], source,
+                              "direct", source_type="language_package", language="c++",
+                              package_system="vcpkg", registry="vcpkg", latest_version=version))
+    return out
+
+
+XMAKE_KIND = re.compile(r"""set_kind\s*\(\s*["'](\w+)["']""")
+XMAKE_VERSION = re.compile(r"""add_versions\s*\(\s*["']([^"']+)["']""")
+
+
+def xmake_packages(packages, source="xmake-repo"):
+    """Build records from `(package, xmake.lua)` pairs.
+
+    An xmake package declares that it installs a command through `set_kind("binary")`
+    but never names it, and its install step is Lua that only a build can resolve.  The
+    package name is the command in the common case and the record says `inferred`, so a
+    consumer can tell this apart from a declaration or a file listing.
+    """
+    out = []
+    for package, definition in packages:
+        kind = XMAKE_KIND.search(definition)
+        if not kind or kind.group(1) != "binary":
+            continue
+        versions = XMAKE_VERSION.findall(definition)
+        version = versions[-1] if versions else None
+        command = declared_command(package)
+        if not command or not COMMAND_NAME.match(command):
+            continue
+        out.append(record(command, "xmake", package, version, CPP_REPOSITORIES["xmake"], source,
+                          "inferred", source_type="language_package", language="c++",
+                          package_system="xmake", registry="xmake-repo", latest_version=version))
+    return out
+
+
+CONAN_MANIFEST_BIN = re.compile(r"^bin/([^/:]+):", re.M)
+# A built package puts more than commands under `bin/`: import libraries, debug
+# symbols and the odd data file live there too, on Windows especially.
+CONAN_NON_COMMAND_SUFFIXES = (
+    ".dll", ".so", ".dylib", ".lib", ".a", ".pdb", ".exp", ".ilk", ".def",
+    ".txt", ".md", ".cmake", ".json", ".xml", ".yml", ".yaml", ".h", ".hpp", ".pc",
+)
+
+
+def conan_manifest_commands(manifest):
+    """Read the commands a built ConanCenter package installs into `bin/`.
+
+    `conanmanifest.txt` lists every file of the built package with its digest, so the
+    command set is filesystem evidence that costs one small text file rather than the
+    package archive.
+    """
+    names = []
+    for entry in CONAN_MANIFEST_BIN.findall(manifest):
+        name = entry.strip()
+        if not name or name.startswith("."):
+            continue
+        if name.lower().endswith(CONAN_NON_COMMAND_SUFFIXES):
+            continue
+        command = declared_command(name)
+        if command and COMMAND_NAME.match(command):
+            names.append(windows_command(command))
+    return sorted(set(names))
