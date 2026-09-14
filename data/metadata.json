@@ -6,6 +6,7 @@
   "indexes_derived": true,
   "checked_sources": [
     "arch",
+    "conan",
     "crates",
     "debian",
     "go",
@@ -20,8 +21,10 @@
     "scoop",
     "shell",
     "ubuntu",
+    "vcpkg",
     "windows",
-    "winget"
+    "winget",
+    "xmake"
   ],
   "negative_lookup": "unknown",
   "coverage": {
@@ -80,7 +83,7 @@
     },
     "rubygems": {
       "status": "success",
-      "records": 51383,
+      "records": 51384,
       "source": "data/production/intermediate/rubygems.jsonl",
       "coverage_kind": "exhaustive"
     },
@@ -95,6 +98,24 @@
       "records": 13143,
       "source": "data/production/intermediate/nuget.jsonl",
       "coverage_kind": "exhaustive"
+    },
+    "conan": {
+      "status": "success",
+      "records": 0,
+      "source": "data/production/intermediate/conan.jsonl",
+      "coverage_kind": "partial"
+    },
+    "vcpkg": {
+      "status": "success",
+      "records": 0,
+      "source": "data/production/intermediate/vcpkg.jsonl",
+      "coverage_kind": "partial"
+    },
+    "xmake": {
+      "status": "success",
+      "records": 0,
+      "source": "data/production/intermediate/xmake.jsonl",
+      "coverage_kind": "partial"
     },
     "msys2": {
       "status": "success",
