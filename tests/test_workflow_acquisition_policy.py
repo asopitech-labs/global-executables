@@ -132,3 +132,48 @@ def test_weekly_upstream_smoke_remains_a_bounded_live_monitor():
 
     assert "schedule:" in trigger_block(smoke)
     assert "tools/live_smoke.py" in smoke
+
+
+def test_conan_walk_is_daily_resumable_and_restores_only_its_own_catalogue():
+    cpp = workflow("cpp-registries.yml")
+    triggers = trigger_block(cpp)
+    restore = cpp.split("Restore the resumable ConanCenter walk", 1)[1].split(
+        "Inspect a bounded batch of ConanCenter packages", 1
+    )[0]
+
+    assert 'cron: "23 5 * * *"' in triggers
+    assert "*/6" not in triggers
+    assert "registry-state.json" in restore
+    # The published cursor counts positions in this catalogue, so resuming without it
+    # would walk a different list from the one the cursor described.
+    assert "conan-recipes.txt.gz" in restore
+    assert "conan.jsonl" in restore
+    for unrelated in ("npm-packages", "pypi-projects", "rubygems-names",
+                      "packagist-packages", "go-modules", "nuget-tools", "crates.jsonl"):
+        assert unrelated not in restore
+    assert "--source conan" in cpp
+    assert "SOURCES=conan" in cpp
+
+
+def test_conan_continuation_is_keyed_on_the_cursor_not_on_coverage():
+    queue = workflow("cpp-registries.yml").split(
+        "Continue the walk or refresh the dictionary", 1)[1]
+
+    # ConanCenter is never exhaustive while recipes remain that nobody has built, so a
+    # self-dispatch keyed on coverage would queue a run forever.
+    assert "cursor < .sources.conan.catalog_size" in queue
+    assert "coverage_kind" not in queue
+    assert "gh workflow run cpp-registries.yml" in queue
+    assert 'test "$PUBLISHED_CHANGED" = true' in queue
+    assert "gh workflow run refresh.yml" in queue
+
+
+def test_recipe_snapshots_publish_as_observations_and_derive_only_on_change():
+    cpp = workflow("cpp-registries.yml")
+    recipes = cpp.split("  recipes:", 1)[1]
+
+    assert "--source vcpkg --source xmake" in recipes
+    assert "OBSERVATION_SOURCES='vcpkg xmake'" in recipes
+    assert "SOURCES=''" in recipes
+    assert "steps.publish.outputs.changed == 'true'" in recipes
+    assert "gh workflow run refresh.yml --ref main" in recipes

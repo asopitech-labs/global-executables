@@ -36,7 +36,8 @@ dictionary rebuild.
 | Class | Examples | Trigger | Canonical result |
 | --- | --- | --- | --- |
 | Durable environment sample | Windows/macOS PATH, shell built-ins, runner images | Manual, when intentionally adding an environment or release | `artifact-data` observations |
-| Moving registry catalog | CI npm critical population and crates.io dump; local completion boosters; CI refresh matrix for completed catalogs | Daily discovery sweep, temporary local booster, or six-hour CI refresh | `artifact-data` discovery cursor, refresh cursor, and current observations |
+| Moving registry catalog | CI npm critical population and crates.io dump; ConanCenter recipe walk; local completion boosters; CI refresh matrix for completed catalogs | Daily discovery sweep, temporary local booster, or six-hour CI refresh | `artifact-data` discovery cursor, refresh cursor, and current observations |
+| Recipe repository snapshot | vcpkg ports, xmake-repo packages | Daily single-request snapshot | `artifact-data` observations |
 | Derived rebuild | Dictionary indexes and Pages | Only after canonical publication changes; weekly refresh is a recovery backstop | `dictionary` and Pages |
 | Advisory live monitor | Representative upstream protocol/package probes | Weekly | Smoke artifact only; never canonical data |
 | Fixture scenario | Bounded freshness scheduler and parser fixtures | Manual or test suite | Test report/state only |
@@ -433,13 +434,17 @@ record's confidence says which that was.
 | conan | `recipes/*/config.yml` of the `conan-io/conan-center-index` snapshot | `bin/` entries of the built package, read from `conanmanifest.txt` | `filesystem` | A recipe nobody has built publishes no file list, and those recipes are counted as `uninspected` |
 | xmake | `packages/*/*/xmake.lua` of the `xmake-io/xmake-repo` snapshot | `set_kind("binary")` | `inferred` | xmake declares that a package installs a command but never what the command is called, so the package name stands in for it |
 
-The vcpkg and xmake populations are one repository tarball each, so both are collected
-in a single request by `production_crawl.py` and replace their previous snapshot.
-ConanCenter needs one artifact inspection per recipe, so it runs in the budgeted,
-resumable registry crawler instead: `registry_artifact_crawl.py --source conan` walks
-the recipe catalogue from a durable cursor. The 2026-09-14 measurement read the 1,944
-recipe catalogue in one 4.7 MB request, and `conanmanifest.txt` keeps each inspection
-to a small text file rather than the package archive it describes.
+`cpp-registries.yml` owns all three daily. The vcpkg and xmake populations are one
+repository tarball each, so its `recipes` job collects both in a single request through
+`production_crawl.py` and merges them into the published observations. ConanCenter needs
+one artifact inspection per recipe, so its `conan` job runs the budgeted, resumable
+registry crawler instead: `registry_artifact_crawl.py --source conan` walks the recipe
+catalogue from a durable cursor and re-dispatches itself until the cursor reaches the
+end. That continuation is keyed on the cursor rather than on coverage, because
+ConanCenter is never exhaustive while recipes remain that nobody has built and a
+self-dispatch on that condition would queue a run forever. The 2026-09-14 measurement
+read the 1,944 recipe catalogue in one 4.7 MB request, and `conanmanifest.txt` keeps
+each inspection to a small text file rather than the package archive it describes.
 
 Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
 `7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs

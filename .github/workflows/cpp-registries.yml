@@ -1,0 +1,194 @@
+name: C and C++ registry crawl
+
+# C and C++ have no single registry. ConanCenter needs one artifact inspection per
+# recipe, so its walk is bounded and resumable like the other registry crawls. vcpkg
+# and xmake are one repository snapshot each, so they complete in a single request.
+on:
+  schedule:
+    - cron: "23 5 * * *"
+  workflow_dispatch:
+    inputs:
+      package_budget:
+        description: "Maximum ConanCenter recipes inspected in this run"
+        required: false
+        default: "1500"
+      byte_budget:
+        description: "Maximum downloaded bytes for this run"
+        required: false
+        default: "2000000000"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: cpp-registry-crawl
+  cancel-in-progress: false
+
+jobs:
+  conan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[test]'
+      - name: Restore the resumable ConanCenter walk
+        run: |
+          git fetch origin artifact-data || true
+          mkdir -p data/production/intermediate reports
+          if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
+            git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
+          fi
+          # The cursor indexes this catalogue, so resuming without it would walk a
+          # different list from the one the published cursor counted.
+          if git cat-file -e origin/artifact-data:data/production/conan-recipes.txt.gz 2>/dev/null; then
+            git show origin/artifact-data:data/production/conan-recipes.txt.gz > data/production/conan-recipes.txt.gz
+          fi
+          if git cat-file -e origin/artifact-data:data/production/transport/conan-observations/manifest.json 2>/dev/null; then
+            rm -rf /tmp/conan-observation-transport
+            mkdir -p /tmp/conan-observation-transport
+            git archive origin/artifact-data data/production/transport/conan-observations \
+              | tar -x -C /tmp/conan-observation-transport
+            python3 tools/transport_shards.py unpack \
+              --input-dir /tmp/conan-observation-transport/data/production/transport/conan-observations \
+              --output data/production/intermediate/conan.jsonl
+          elif git cat-file -e origin/artifact-data:data/production/intermediate/conan.jsonl 2>/dev/null; then
+            git show origin/artifact-data:data/production/intermediate/conan.jsonl \
+              > data/production/intermediate/conan.jsonl
+          fi
+      - name: Inspect a bounded batch of ConanCenter packages
+        id: crawl
+        continue-on-error: true
+        env:
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '1500' }}
+          BYTE_BUDGET: ${{ inputs.byte_budget || '2000000000' }}
+        run: |
+          # A crawl that dies before writing a report would otherwise leave a stale
+          # copy to be published over the branch's real progress.
+          rm -f reports/registry-artifact-crawl.json
+          python tools/registry_artifact_crawl.py \
+            --source conan \
+            --state data/production/registry-state.json \
+            --output-dir data/production/intermediate \
+            --report reports/registry-artifact-crawl.json \
+            --package-budget "$PACKAGE_BUDGET" \
+            --byte-budget "$BYTE_BUDGET"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: conan-crawl-report
+          path: reports/registry-artifact-crawl.json
+      - name: Publish the walk and its observations
+        id: publish
+        if: always()
+        run: |
+          rm -rf /tmp/ci-cpp-conan
+          mkdir -p /tmp/ci-cpp-conan/data/production/intermediate /tmp/ci-cpp-conan/reports
+          cp data/production/registry-state.json /tmp/ci-cpp-conan/data/production/registry-state.json
+          if test -f data/production/conan-recipes.txt.gz; then
+            cp data/production/conan-recipes.txt.gz /tmp/ci-cpp-conan/data/production/conan-recipes.txt.gz
+          fi
+          if test -f data/production/intermediate/conan.jsonl; then
+            cp data/production/intermediate/conan.jsonl \
+              /tmp/ci-cpp-conan/data/production/intermediate/conan.jsonl
+          fi
+          if test -f reports/registry-artifact-crawl.json; then
+            cp reports/registry-artifact-crawl.json \
+              /tmp/ci-cpp-conan/reports/registry-artifact-crawl.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          publish_output="$(BASE=/tmp/ci-cpp SOURCES=conan OBSERVATION_SOURCES=' ' \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "$publish_output"
+          if printf '%s\n' "$publish_output" | grep -qx published; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Continue the walk or refresh the dictionary
+        if: always() && steps.publish.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '1500' }}
+          BYTE_BUDGET: ${{ inputs.byte_budget || '2000000000' }}
+          PUBLISHED_CHANGED: ${{ steps.publish.outputs.changed || 'false' }}
+        run: |
+          if test ! -f reports/registry-artifact-crawl.json; then
+            echo "::warning::No crawl report was produced; not queueing a follow-up."
+            exit 0
+          fi
+          # The continuation is keyed on the cursor, not on coverage. ConanCenter is
+          # never exhaustive while recipes remain that nobody has built, and keying a
+          # self-dispatch on that condition would queue a run forever.
+          if jq -e '.sources.conan.cursor < .sources.conan.catalog_size' \
+              reports/registry-artifact-crawl.json >/dev/null; then
+            gh workflow run cpp-registries.yml --ref main \
+              -f package_budget="$PACKAGE_BUDGET" \
+              -f byte_budget="$BYTE_BUDGET"
+          elif test "$PUBLISHED_CHANGED" = true; then
+            gh workflow run refresh.yml --ref main
+          else
+            echo "The ConanCenter walk is at the end of its catalogue and nothing changed."
+          fi
+      - name: Fail after publishing partial progress
+        if: steps.crawl.outcome == 'failure'
+        run: exit 1
+
+  recipes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[test]'
+      - name: Restore the published vcpkg and xmake observations
+        run: |
+          git fetch origin artifact-data || true
+          mkdir -p data/production/intermediate reports
+          for source in vcpkg xmake; do
+            if git cat-file -e "origin/artifact-data:data/production/intermediate/${source}.jsonl" 2>/dev/null; then
+              git show "origin/artifact-data:data/production/intermediate/${source}.jsonl" \
+                > "data/production/intermediate/${source}.jsonl"
+            fi
+          done
+      - name: Collect the vcpkg and xmake snapshots
+        run: |
+          python tools/production_crawl.py \
+            --source vcpkg --source xmake \
+            --output-dir data/production/intermediate \
+            --report reports/cpp-registry-crawl.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cpp-recipe-crawl-report
+          path: reports/cpp-registry-crawl.json
+      - name: Publish the recipe observations
+        id: publish
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          publish_output="$(SOURCES='' OBSERVATION_SOURCES='vcpkg xmake' \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "$publish_output"
+          if printf '%s\n' "$publish_output" | grep -qx published; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Refresh the dictionary after a recipe change
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh.yml --ref main
