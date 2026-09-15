@@ -2,6 +2,18 @@
   "command": "songbird",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "songbird-tui",
+      "version": "1.0.0",
+      "repository": "https://github.com/kaizoku010/Songbird-TUI",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/Banh-Canh/songbird",
       "version": "v0.4.0",
@@ -63,5 +75,5 @@
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-09-14"
+  "last_seen": "2026-09-15"
 }

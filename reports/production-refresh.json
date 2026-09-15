@@ -1,8 +1,8 @@
 {
-  "accepted_records": 2069240,
+  "accepted_records": 2069370,
   "coverage_kind": "partial",
   "failed": [],
-  "input_records": 2069376,
+  "input_records": 2069507,
   "inputs": [
     "data/production/intermediate/arch.jsonl",
     "data/production/intermediate/debian.jsonl",
@@ -25,8 +25,8 @@
     "data/production/intermediate/macos.jsonl",
     "data/production/intermediate/shell.jsonl"
   ],
-  "previous_unique_executables": 880788,
-  "records": 2069376,
+  "previous_unique_executables": 881103,
+  "records": 2069507,
   "rejected": [
     {
       "command": "",
@@ -68,6 +68,12 @@
       "command": "#\t'sudoshreplay",
       "ecosystem": "pypi",
       "package": "sudosh-replay",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\t'sample",
+      "ecosystem": "pypi",
+      "package": "BFG-Y2H",
       "reason": "invalid executable name"
     },
     {
@@ -845,9 +851,9 @@
       "reason": "invalid executable name"
     }
   ],
-  "rejected_records": 136,
+  "rejected_records": 137,
   "shrink_reason": null,
-  "snapshot": "2026-09-14",
+  "snapshot": "2026-09-15",
   "status": "success",
-  "unique_executables": 881103
+  "unique_executables": 881153
 }
