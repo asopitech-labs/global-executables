@@ -986,7 +986,7 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             rows.extend(package_rows)
             replacement_rows.extend(package_rows)
             replaced_packages.add(package)
-            failures.pop(package, None)
+            failures.pop(reference, None)
         except Exception as error:
             _record_failure(failures, unavailable, reference, error, attempts)
             if reference in failures and reference not in retry_recipes:

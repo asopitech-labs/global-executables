@@ -850,3 +850,20 @@ def test_conan_commands_come_from_the_built_package_not_the_recipe(tmp_path, mon
     # catalogue being walked still does not license a negative answer.
     assert conan["uninspected"] == 1
     assert conan["coverage_kind"] == "partial" and conan["complete"] is False
+
+
+def test_conan_retry_clears_the_full_recipe_failure_key(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    registry_artifact.write_catalog(catalog, ["demotool/1.0.0"])
+    monkeypatch.setattr(registry_artifact, "_conan_package_commands",
+                        lambda reference, timeout: (["demotool"], "https://example.invalid/manifest", 1))
+    state = {"recipes_file": str(catalog), "cursor": 1, "catalog_size": 1,
+             "catalog_complete": True,
+             "failures": {"demotool/1.0.0": "HTTP Error 503: Service Unavailable"}}
+
+    report = registry_artifact._crawl_conan(
+        state, tmp_path / "conan.jsonl", 10, 1_000_000, 120)
+
+    assert report["failures"] == 0
+    assert report["retry_pending"] == 0
+    assert report["complete"] is True
