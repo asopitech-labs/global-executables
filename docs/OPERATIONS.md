@@ -119,7 +119,8 @@ in `data/production/go-modules.txt` and the inspection phase spends the artifact
 budget on one archive per module, at the version `@latest` reports.
 
 Requests to the crates.io API host are paced to one per second, the rate crates.io
-asks crawlers to hold; `fetch` also retries 429 with the advertised `Retry-After`.
+asks crawlers to hold; `fetch` retries 429 and transient 5xx responses with the
+advertised `Retry-After` when present.
 `--source-package-budget SOURCE=N` raises the per-run package budget for one selected
 Python source. All five transactional sources use `--package-budget` in the Go runtime.
 
@@ -289,11 +290,12 @@ were retried indefinitely before the flag was consulted.
 * `405` — what npm returns for the package literally named `-`, whose path collides
   with the registry's own `/-/` API namespace.
 
-Anything else that is not a network error gives up after `FAILURE_ATTEMPT_LIMIT`
-attempts and is recorded as `gave up after N attempts: <reason>`. Without a bound, one
-truncated artifact keeps a source `partial` permanently. Network errors are exempt on
-purpose: they say nothing about the package, and a DNS outage spanning a few passes
-would otherwise bury packages that are perfectly readable. That exemption is not
+Anything that is neither a permanent withdrawal nor a transient network/upstream
+condition gives up after `FAILURE_ATTEMPT_LIMIT` attempts and is recorded as
+`gave up after N attempts: <reason>`. Without a bound, one truncated artifact keeps a
+source `partial` permanently. DNS failures, 429 responses, and transient 5xx responses
+are exempt on purpose: they say nothing about the package, and the crawler retries them
+with bounded backoff before leaving them in the retry queue. That exemption is not
 theoretical — of twelve RubyGems failures outstanding at one restart, eleven were
 transient name-resolution errors that succeeded on the next attempt.
 

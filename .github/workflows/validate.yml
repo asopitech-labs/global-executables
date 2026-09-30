@@ -19,7 +19,7 @@ jobs:
       - name: Validate published dictionary integrity separately
         run: |
           set -o pipefail
-          git fetch origin dictionary
+          git fetch --depth=1 origin dictionary
           mkdir -p /tmp/published-dictionary
           git archive origin/dictionary data | tar -x -C /tmp/published-dictionary
           test -s /tmp/published-dictionary/data/metadata.json

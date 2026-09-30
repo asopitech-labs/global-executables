@@ -155,6 +155,25 @@ def test_conan_walk_is_daily_resumable_and_restores_only_its_own_catalogue():
     assert "SOURCES=conan" in cpp
 
 
+def test_ci_does_not_fetch_the_repository_history_for_data_jobs():
+    for name in ("base-commands.yml", "cpp-registries.yml", "freshness.yml",
+                 "pages.yml", "registry-artifacts.yml", "registry-refresh.yml"):
+        assert "fetch-depth: 0" not in workflow(name)
+
+    cpp = workflow("cpp-registries.yml")
+    assert cpp.count("fetch-depth: 1") == 2
+    assert cpp.count("git fetch --depth=1 origin artifact-data") == 2
+
+    pages = workflow("pages.yml")
+    assert "git fetch --shallow-since='7 days ago' origin artifact-data" in pages
+    assert "git fetch --depth=1 origin dictionary" in pages
+
+    for path in (ROOT / "tools/crawl_parallel.sh", ROOT / "tools/crawl_container.sh"):
+        contents = path.read_text()
+        assert "git fetch --quiet --depth=1 origin artifact-data" in contents
+        assert "git fetch origin artifact-data --quiet" not in contents
+
+
 def test_conan_continuation_is_keyed_on_the_cursor_not_on_coverage():
     queue = workflow("cpp-registries.yml").split(
         "Continue the walk or refresh the dictionary", 1)[1]

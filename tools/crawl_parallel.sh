@@ -64,7 +64,7 @@ guard_npm_owner() {
 seed() {
   cd "${ROOT_DIR}"
   mkdir -p "${BASE}/data/production/intermediate" "${BASE}/reports"
-  git fetch origin artifact-data --quiet
+  git fetch --quiet --depth=1 origin artifact-data
   git show origin/artifact-data:data/production/registry-state.json \
     > "${BASE}/data/production/registry-state.json"
   for source in ${SOURCES}; do
@@ -237,7 +237,7 @@ publish_snapshot() (
   local push_status=0
   trap 'git worktree remove "${worktree}" --force >/dev/null 2>&1 || true; rm -rf "${worktree}"' EXIT
   cd "${ROOT_DIR}"
-  git fetch origin artifact-data --quiet
+  git fetch --quiet --depth=1 origin artifact-data
   git worktree prune
   git worktree add --quiet "${worktree}" origin/artifact-data
   mkdir -p "${worktree}/data/production/intermediate" "${worktree}/reports"

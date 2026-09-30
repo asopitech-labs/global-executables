@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -40,7 +40,7 @@ jobs:
       - run: pip install -e '.[test]'
       - name: Restore the resumable ConanCenter walk
         run: |
-          git fetch origin artifact-data || true
+          git fetch --depth=1 origin artifact-data || true
           mkdir -p data/production/intermediate reports
           if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
             git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
@@ -147,7 +147,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -155,7 +155,7 @@ jobs:
       - run: pip install -e '.[test]'
       - name: Restore the published vcpkg and xmake observations
         run: |
-          git fetch origin artifact-data || true
+          git fetch --depth=1 origin artifact-data || true
           mkdir -p data/production/intermediate reports
           for source in vcpkg xmake; do
             if git cat-file -e "origin/artifact-data:data/production/intermediate/${source}.jsonl" 2>/dev/null; then

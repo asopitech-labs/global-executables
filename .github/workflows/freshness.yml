@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -36,7 +36,7 @@ jobs:
       - run: pip install -e '.[test]'
       - name: Restore persisted freshness state
         run: |
-          git fetch origin freshness-data || true
+          git fetch --depth=1 origin freshness-data || true
           mkdir -p data/freshness
           if git cat-file -e origin/freshness-data:data/freshness/state.json 2>/dev/null; then
             git show origin/freshness-data:data/freshness/state.json > data/freshness/state.json

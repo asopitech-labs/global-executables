@@ -51,6 +51,8 @@ PERMANENT_CRATE_CONDITIONS = ("crate has no non-yanked version:", "crate archive
 # how a registry reports a withdrawal or a legal takedown, and 405 is what npm returns for
 # the package literally named "-", whose path collides with the registry's own API space.
 PERMANENT_HTTP_CODES = (404, 405, 410, 451)
+# These responses describe a temporary upstream condition, not a package verdict.
+RETRYABLE_HTTP_CODES = (429, 500, 502, 503, 504)
 # A failure that is neither a clean "gone" answer nor a network blip still has to stop
 # somewhere, or one unreadable artifact holds a source below exhaustive forever.  Network
 # errors are deliberately exempt: they self-heal, and a DNS outage spanning a few passes
@@ -184,8 +186,9 @@ def fetch(url: str, timeout: int = 120, attempts: int = 4) -> tuple[bytes, dict[
                 return body, {"url": url, "status_code": response.status, "downloaded_bytes": len(body),
                               "duration_seconds": round(time.monotonic() - started, 3)}
         except urllib.error.HTTPError as error:
-            # Back off on rate limiting rather than losing the rest of the source's budget.
-            if error.code != 429 or attempt == attempts:
+            # Back off on rate limiting and transient upstream failures rather than
+            # turning a temporary registry outage into a package verdict.
+            if error.code not in RETRYABLE_HTTP_CODES or attempt == attempts:
                 raise
             time.sleep(_retry_after_seconds(error, attempt))
         except OSError as error:
@@ -454,8 +457,10 @@ def _permanently_gone(text: str) -> bool:
 
 
 def _network_blip(error: Exception) -> bool:
-    """True for errors that say nothing about the package, only about the connection."""
-    return isinstance(error, OSError) and not isinstance(error, urllib.error.HTTPError)
+    """True for errors that say nothing about the package, only the upstream path."""
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code in RETRYABLE_HTTP_CODES
+    return isinstance(error, OSError)
 
 
 def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str], dict[str, int]]:

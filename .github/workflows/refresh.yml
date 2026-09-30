@@ -35,7 +35,7 @@ jobs:
       - name: Restore published dictionary
         run: |
           set -o pipefail
-          git fetch origin dictionary
+          git fetch --depth=1 origin dictionary
           git archive origin/dictionary data | tar -x -C .
           mkdir -p reports
           if git cat-file -e origin/dictionary:reports/production-crawl.json; then
@@ -51,7 +51,7 @@ jobs:
           set -o pipefail
           if artifact_ref=$(git ls-remote --heads origin artifact-data); then
             if test -n "$artifact_ref"; then
-              git fetch origin artifact-data
+              git fetch --depth=1 origin artifact-data
             else
               echo "artifact-data does not exist yet; using fixture inputs for the initial refresh"
             fi
@@ -100,7 +100,7 @@ jobs:
       - name: Publish refreshed OS observations
         if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples
         run: |
-          git fetch origin artifact-data || true
+          git fetch --depth=1 origin artifact-data || true
           rm -rf /tmp/os-observation-publish
           if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
             git worktree add /tmp/os-observation-publish origin/artifact-data
@@ -176,7 +176,7 @@ jobs:
       - name: Publish generated dictionary
         id: publish_dictionary
         run: |
-          git fetch origin dictionary
+          git fetch --depth=1 origin dictionary
           rm -rf /tmp/dictionary-publish
           git worktree add /tmp/dictionary-publish origin/dictionary
           rm -rf \

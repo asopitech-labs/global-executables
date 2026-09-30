@@ -59,7 +59,8 @@ def test_ci_validation_restores_the_dictionary_without_replacing_pr_code():
 
 def test_pages_reads_dictionary_and_has_a_report_fallback():
     pages = _read(".github/workflows/pages.yml")
-    assert "git fetch origin artifact-data dictionary" in pages
+    assert "git fetch --shallow-since='7 days ago' origin artifact-data" in pages
+    assert "git fetch --depth=1 origin dictionary" in pages
     assert "origin/dictionary:reports/production-crawl.json" in pages
     assert '"status":"unavailable"' in pages
     assert '--dictionary-commit "$DICTIONARY_COMMIT"' in pages

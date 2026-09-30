@@ -27,10 +27,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 0
+          fetch-depth: 1
       - name: Restore published reports
         run: |
-          git fetch origin artifact-data dictionary
+          git fetch --shallow-since='7 days ago' origin artifact-data
+          git fetch --depth=1 origin dictionary
           if git cat-file -e origin/artifact-data:reports/registry-artifact-crawl.json 2>/dev/null; then
             git show origin/artifact-data:reports/registry-artifact-crawl.json > /tmp/registry-artifact-crawl.json
             ARTIFACT_DATA_COMMIT=$(git rev-parse origin/artifact-data)

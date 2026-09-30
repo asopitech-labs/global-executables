@@ -293,6 +293,31 @@ def test_fetch_backs_off_on_rate_limiting_instead_of_failing(monkeypatch):
         urllib.error.HTTPError("u", 429, "", {}, None), 3) == 8.0
 
 
+def test_fetch_retries_transient_server_errors(monkeypatch):
+    monkeypatch.setattr(registry_artifact, "_last_request", {})
+    sleeps = []
+    monkeypatch.setattr(registry_artifact.time, "sleep", sleeps.append)
+    errors = [
+        urllib.error.HTTPError("https://center2.conan.io/x", 503, "Unavailable", {}, None),
+        urllib.error.HTTPError("https://center2.conan.io/x", 502, "Bad Gateway", {}, None),
+    ]
+
+    class _Response:
+        status = 200
+        def read(self): return b"ok"
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    def fake_urlopen(request, timeout=None):
+        return _Response() if not errors else (_ for _ in ()).throw(errors.pop(0))
+
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", fake_urlopen)
+    body, transfer = registry_artifact.fetch("https://center2.conan.io/x")
+
+    assert body == b"ok" and transfer["status_code"] == 200
+    assert sleeps == [2.0, 4.0]
+
+
 def test_fetch_surfaces_rate_limiting_once_the_attempts_run_out(monkeypatch):
     monkeypatch.setattr(registry_artifact, "_last_request", {})
     monkeypatch.setattr(registry_artifact.time, "sleep", lambda seconds: None)

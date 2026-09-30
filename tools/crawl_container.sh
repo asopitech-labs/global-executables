@@ -28,7 +28,7 @@ mkdir -p "${STATE_DIR}/data/production/intermediate" "${STATE_DIR}/reports"
 
 if [ "${SEED}" = "1" ] && [ ! -f "${STATE_DIR}/data/production/registry-state.json" ]; then
   echo "==> Seeding ${STATE_DIR} from origin/artifact-data"
-  git fetch origin artifact-data --quiet || true
+  git fetch --quiet --depth=1 origin artifact-data || true
   for path in data/production/registry-state.json \
               data/production/nuget-tools.txt \
               reports/registry-artifact-crawl.json; do
