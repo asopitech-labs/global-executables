@@ -76,13 +76,13 @@ jobs:
             --package-budget "$PACKAGE_BUDGET" \
             --byte-budget "$BYTE_BUDGET"
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: registry-artifact-crawl-report
           path: reports/registry-artifact-crawl.json
       - name: Publish resumable state and normalized observations
         id: publish
-        if: always()
+        if: ${{ !cancelled() }}
         run: |
           if test -f reports/registry-artifact-crawl.json && \
              jq -e '.sources.crates.unchanged == true' reports/registry-artifact-crawl.json >/dev/null; then
@@ -114,7 +114,7 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
       - name: Queue the next crawl or the generated refresh
-        if: always() && steps.publish.outcome == 'success'
+        if: ${{ !cancelled() && steps.publish.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ github.token }}
           PACKAGE_BUDGET: ${{ inputs.package_budget || '1000' }}
@@ -132,18 +132,22 @@ jobs:
             else
               echo "The crates dump is unchanged; no derived workflow is needed."
             fi
-          else
+          elif jq -e '(.sources.crates.catalog_grew // false) == true or
+                     (.sources.crates.cursor // 0) < (.sources.crates.catalog_size // 0)' \
+              reports/registry-artifact-crawl.json >/dev/null; then
             gh workflow run registry-artifacts.yml --ref main \
               -f package_budget="$PACKAGE_BUDGET" \
               -f byte_budget="$BYTE_BUDGET"
+          else
+            echo "The crates crawl keeps its durable retry queue for the next scheduled run."
           fi
-      - name: Fail after publishing partial progress
+      - name: Fail on an unrecoverable crawl error
         if: steps.crawl.outcome == 'failure'
         run: exit 1
 
   npm-critical:
     needs: crawl
-    if: always()
+    if: ${{ !cancelled() && needs.crawl.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -203,7 +207,7 @@ jobs:
           docker run --rm --init -v "$PWD:/state" global-executables-go-crawler:ci \
             crawl --source npm --passes 0 --package-budget 3000
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: npm-critical-crawl-report
           path: reports/registry-artifact-crawl.json

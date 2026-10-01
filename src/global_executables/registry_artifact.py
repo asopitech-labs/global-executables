@@ -7,9 +7,11 @@ and no failures remain.  A stopped or rate-limited run remains partial.
 from __future__ import annotations
 
 import csv
+import hashlib
 import http.client
 import json
 import gzip
+import os
 import re
 import signal
 import socket
@@ -23,12 +25,12 @@ import urllib.error
 import urllib.request
 import zipfile
 import zlib
+from datetime import datetime, timedelta, timezone
 from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
 from .collectors import conan_manifest_commands, crates_manifest, declared_command, record
-from .model import write_jsonl
 
 
 USER_AGENT = "global-executables-registry-crawl/1.0 (+https://github.com/asopitech-labs/global-executables)"
@@ -37,9 +39,10 @@ CRATES_DB_DUMP = "https://static.crates.io/db-dump.tar.gz"
 # a CI runner's natural pace.  Only the API host is paced; its CDN mirrors are not.
 HOST_MIN_INTERVAL = {"crates.io": 1.0}
 RETRY_AFTER_CAP = 60.0
-# A lost name lookup is worth a short retry; a lost network is not worth one per request.
+# Every request gets a bounded retry budget.  The item queue below is the durable retry
+# mechanism; this budget only absorbs a short request-level fault.
 NETWORK_BACKOFF_CAP = 8.0
-NETWORK_OUTAGE_STREAK = 8
+REQUEST_ATTEMPTS = 3
 # Long enough that a pass stops resolving the same handful of hosts, short enough
 # that a registry moving its addresses costs one interval rather than the run.
 DNS_CACHE_SECONDS = 300.0
@@ -58,17 +61,19 @@ RETRYABLE_HTTP_CODES = (429, 500, 502, 503, 504)
 # errors are deliberately exempt: they self-heal, and a DNS outage spanning a few passes
 # would otherwise bury packages that are perfectly fine.
 FAILURE_ATTEMPT_LIMIT = 3
+TRANSIENT_RETRY_LIMIT = 6
+TRANSIENT_RETRY_BASE = 3600.0
+TRANSIENT_RETRY_CAP = 86400.0
 # Progress is persisted this often inside a pass.  State used to be written once, after
 # every source finished, so an interruption discarded the cursors of sources that had
 # already completed along with the work in flight.
-CHECKPOINT_INTERVAL = 200
+CHECKPOINT_INTERVAL = 32
 # Counting packages assumes packages are quick.  A Go module costs a request per source
 # directory, so 200 of them can outlast the pass itself: one pass spent twenty-one
 # minutes inspecting and was killed having written nothing, leaving the next pass to
 # redo all of it.  Persist on a count or a clock, whichever comes first.
-CHECKPOINT_SECONDS = 120.0
+CHECKPOINT_SECONDS = 30.0
 _last_request: dict[str, float] = {}
-_network_failure_streak = 0
 _last_checkpoint = 0.0
 _interrupted = False
 
@@ -117,6 +122,23 @@ def _due_for_checkpoint(processed: int) -> bool:
 
 class RegistryCrawlError(RuntimeError):
     pass
+
+
+class RegistryRequestError(RegistryCrawlError):
+    """A bounded HTTP attempt set with enough context to diagnose its failure."""
+
+    def __init__(self, url: str, category: str, attempts: int, elapsed: float,
+                 detail: str, status_code: int | None = None, operation: str = "http") -> None:
+        self.url = url
+        self.category = category
+        self.attempts = attempts
+        self.elapsed = elapsed
+        self.detail = detail
+        self.status_code = status_code
+        self.operation = operation
+        super().__init__(
+            f"{operation} {category} after {attempts} attempts in {elapsed:.3f}s at {url}: {detail}"
+        )
 
 
 def install_dns_cache() -> None:
@@ -169,62 +191,101 @@ def _retry_after_seconds(error: urllib.error.HTTPError, attempt: int) -> float:
         return min(2.0 ** attempt, RETRY_AFTER_CAP)
 
 
-def fetch(url: str, timeout: int = 120, attempts: int = 4) -> tuple[bytes, dict[str, Any]]:
-    global _network_failure_streak
+def _request_category(error: Exception) -> str:
+    if isinstance(error, urllib.error.HTTPError):
+        return f"http_{error.code}"
+    if isinstance(error, http.client.IncompleteRead):
+        return "network"
+    reason = getattr(error, "reason", None)
+    if isinstance(error, TimeoutError) or isinstance(reason, TimeoutError):
+        return "timeout"
+    if isinstance(error, urllib.error.URLError):
+        return "network"
+    if isinstance(error, OSError):
+        return "network"
+    return "protocol"
+
+
+def _request_is_retryable(error: Exception) -> bool:
+    if isinstance(error, RegistryRequestError):
+        return error.category in {"timeout", "network"} or (
+            error.status_code is not None and error.status_code in RETRYABLE_HTTP_CODES
+        )
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code in RETRYABLE_HTTP_CODES
+    return isinstance(error, OSError)
+
+
+def _request_bytes(url: str, timeout: int, headers: dict[str, str] | None = None,
+                   method: str = "GET", attempts: int = REQUEST_ATTEMPTS) -> tuple[bytes, dict[str, Any]]:
     started = time.monotonic()
-    # Retrying a lost name lookup rescues a hiccup, but paying the backoff on every
-    # request once the host has simply lost the network turns a short outage into hours.
-    # So retry until the failures stop looking isolated, then fail fast until one lands.
-    outage = _network_failure_streak >= NETWORK_OUTAGE_STREAK
-    for attempt in range(1, attempts + 1):
+    limit = max(1, attempts)
+    for attempt in range(1, limit + 1):
         _throttle(url)
-        request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        request_headers = {"User-Agent": USER_AGENT, **(headers or {})}
+        request = urllib.request.Request(url, method=method, headers=request_headers)
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
-                body = response.read()
-                _network_failure_streak = 0
-                return body, {"url": url, "status_code": response.status, "downloaded_bytes": len(body),
+                body = b"" if method == "HEAD" else response.read()
+                response_headers = getattr(response, "headers", {})
+                return body, {"url": url, "status_code": getattr(response, "status", 200),
+                              "headers": dict(response_headers.items()),
+                              "downloaded_bytes": len(body),
                               "duration_seconds": round(time.monotonic() - started, 3)}
         except urllib.error.HTTPError as error:
             # Back off on rate limiting and transient upstream failures rather than
             # turning a temporary registry outage into a package verdict.
-            if error.code not in RETRYABLE_HTTP_CODES or attempt == attempts:
-                raise
+            if error.code not in RETRYABLE_HTTP_CODES or attempt == limit:
+                raise RegistryRequestError(url, _request_category(error), attempt,
+                                           time.monotonic() - started, str(error), error.code) from error
             time.sleep(_retry_after_seconds(error, attempt))
-        except OSError as error:
-            # A resolver hiccup is not an answer about the package.  One that lasted
-            # seconds once failed 3,000 Go modules in a burst, because nothing retried.
-            #
-            # But retry only what failed fast.  A timeout has already spent the whole
-            # budget waiting, so retrying multiplies it: four attempts against a dropped
-            # SYN at a 300-second timeout is twenty minutes stuck on one module, which is
-            # exactly what this retry did to Go before the exemption was added.
-            timed_out = isinstance(error, TimeoutError) or isinstance(getattr(error, "reason", None), TimeoutError)
-            if timed_out or outage or attempt == attempts:
-                _network_failure_streak += 1
-                raise
+        except (OSError, http.client.HTTPException) as error:
+            if attempt == limit:
+                raise RegistryRequestError(url, _request_category(error), attempt,
+                                           time.monotonic() - started, str(error)) from error
             time.sleep(min(2.0 ** attempt, NETWORK_BACKOFF_CAP))
     raise RegistryCrawlError(f"unreachable retry loop: {url}")
 
 
+def fetch(url: str, timeout: int = 120, attempts: int = REQUEST_ATTEMPTS) -> tuple[bytes, dict[str, Any]]:
+    return _request_bytes(url, timeout, attempts=attempts)
+
+
+def _open_stream(url: str, timeout: int, attempts: int = REQUEST_ATTEMPTS,
+                 operation: str = "stream") -> Any:
+    started = time.monotonic()
+    limit = max(1, attempts)
+    for attempt in range(1, limit + 1):
+        _throttle(url)
+        request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        try:
+            return urllib.request.urlopen(request, timeout=timeout)
+        except urllib.error.HTTPError as error:
+            if error.code not in RETRYABLE_HTTP_CODES or attempt == limit:
+                raise RegistryRequestError(url, _request_category(error), attempt,
+                                           time.monotonic() - started, str(error), error.code,
+                                           operation=operation) from error
+            time.sleep(_retry_after_seconds(error, attempt))
+        except (OSError, http.client.HTTPException) as error:
+            if attempt == limit:
+                raise RegistryRequestError(url, _request_category(error), attempt,
+                                           time.monotonic() - started, str(error),
+                                           operation=operation) from error
+            time.sleep(min(2.0 ** attempt, NETWORK_BACKOFF_CAP))
+    raise RegistryCrawlError(f"unreachable stream loop: {url}")
+
+
 def fetch_range(url: str, start: int, end: int, timeout: int = 120) -> tuple[bytes, dict[str, Any]]:
     """Fetch one inclusive byte range, refusing a server that ignores the request."""
-    started = time.monotonic()
-    _throttle(url)
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Range": f"bytes={start}-{end}"})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        if response.status != 206:
-            raise RegistryCrawlError(f"host ignored the range request: {url}")
-        body = response.read()
-    return body, {"url": url, "status_code": 206, "downloaded_bytes": len(body),
-                  "duration_seconds": round(time.monotonic() - started, 3)}
+    body, transfer = _request_bytes(url, timeout, {"Range": f"bytes={start}-{end}"})
+    if transfer["status_code"] != 206:
+        raise RegistryCrawlError(f"host ignored the range request: {url}")
+    return body, transfer
 
 
 def content_length(url: str, timeout: int = 120) -> int:
-    _throttle(url)
-    request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        length = response.headers.get("Content-Length")
+    _, transfer = _request_bytes(url, timeout, method="HEAD")
+    length = transfer["headers"].get("Content-Length")
     if length is None:
         raise RegistryCrawlError(f"artifact does not advertise a length: {url}")
     return int(length)
@@ -275,6 +336,7 @@ class _RangeReader:
         return self._connection, self._path
 
     def read(self, start: int, end: int) -> bytes:
+        started = time.monotonic()
         for attempt in (1, 2, 3):  # a pooled connection can be closed by the peer
             connection, path = self._connect()
             try:
@@ -283,10 +345,12 @@ class _RangeReader:
                                                          "Range": f"bytes={start}-{end}"})
                 response = connection.getresponse()
                 body = response.read()  # drained in full, or the connection cannot be reused
-            except (http.client.HTTPException, OSError):
+            except (http.client.HTTPException, OSError) as error:
                 self.close()
                 if attempt == 3:
-                    raise
+                    raise RegistryRequestError(self.url, _request_category(error), attempt,
+                                               time.monotonic() - started, str(error),
+                                               operation="nuget.range") from error
                 continue
             if response.status in (301, 302, 303, 307, 308) and attempt < 3:
                 location = response.getheader("Location")
@@ -403,8 +467,37 @@ def _load_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:
 def _save_json(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
-    temporary.replace(path)
+    try:
+        with temporary.open("w", encoding="utf-8") as handle:
+            handle.write(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(path)
+        _fsync_directory(path.parent)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _write_text_atomic(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.tmp")
+    try:
+        with temporary.open("w", encoding="utf-8") as handle:
+            handle.write(text)
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(path)
+        _fsync_directory(path.parent)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def read_catalog(path: Path) -> list[str]:
@@ -422,11 +515,35 @@ def read_catalog(path: Path) -> list[str]:
     return []
 
 
+def _catalog_digest(names: list[str]) -> str:
+    digest = hashlib.sha256()
+    for name in names:
+        digest.update(name.encode("utf-8"))
+        digest.update(b"\n")
+    return f"sha256:{digest.hexdigest()}"
+
+
+def _pin_catalog(state: dict[str, Any], names: list[str]) -> None:
+    digest = _catalog_digest(names)
+    previous = state.get("catalog_digest")
+    if previous and previous != digest:
+        raise RegistryCrawlError("catalog changed without resetting its resumable cursor")
+    state["catalog_digest"] = digest
+
+
 def write_catalog(path: Path, names: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     packed = path.with_suffix(path.suffix + ".gz")
-    with gzip.open(packed, "wt", encoding="utf-8") as handle:
-        handle.write("\n".join(names) + "\n")
+    temporary = packed.with_name(f".{packed.name}.tmp")
+    try:
+        with gzip.open(temporary, "wt", encoding="utf-8") as handle:
+            handle.write("\n".join(names) + "\n")
+        with temporary.open("rb") as handle:
+            os.fsync(handle.fileno())
+        temporary.replace(packed)
+        _fsync_directory(packed.parent)
+    finally:
+        temporary.unlink(missing_ok=True)
     path.unlink(missing_ok=True)
 
 
@@ -437,19 +554,29 @@ def _append_rows(path: Path, rows: list[dict[str, Any]]) -> None:
     with path.open("a", encoding="utf-8") as handle:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
 
 
 def _replace_package_rows(path: Path, packages: set[str], rows: list[dict[str, Any]]) -> None:
     if not packages:
         return
+    path.parent.mkdir(parents=True, exist_ok=True)
     existing = [json.loads(line) for line in path.read_text().splitlines() if line.strip()] \
         if path.is_file() else []
     merged = [row for row in existing if row.get("package") not in packages]
     merged.extend(rows)
     merged.sort(key=lambda row: (row.get("command", ""), row.get("package", ""), row.get("source", "")))
     temporary = path.with_name(f".{path.name}.tmp")
-    write_jsonl(merged, temporary)
-    temporary.replace(path)
+    try:
+        with temporary.open("w", encoding="utf-8") as handle:
+            handle.write("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in merged))
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(path)
+        _fsync_directory(path.parent)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def _permanently_gone(text: str) -> bool:
@@ -458,6 +585,8 @@ def _permanently_gone(text: str) -> bool:
 
 def _network_blip(error: Exception) -> bool:
     """True for errors that say nothing about the package, only the upstream path."""
+    if isinstance(error, RegistryRequestError):
+        return _request_is_retryable(error)
     if isinstance(error, urllib.error.HTTPError):
         return error.code in RETRYABLE_HTTP_CODES
     return isinstance(error, OSError)
@@ -492,9 +621,14 @@ def _failure_state(state: dict[str, Any]) -> tuple[dict[str, str], dict[str, str
 
 
 def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: str, error: Exception,
-                    attempts: dict[str, int] | None = None) -> None:
+                    attempts: dict[str, int] | None = None,
+                    details: dict[str, dict[str, Any]] | None = None) -> None:
     message = str(error)
-    gone = isinstance(error, urllib.error.HTTPError) and error.code in PERMANENT_HTTP_CODES
+    gone = ((isinstance(error, urllib.error.HTTPError) and error.code in PERMANENT_HTTP_CODES)
+            or (isinstance(error, RegistryRequestError)
+                and error.status_code in PERMANENT_HTTP_CODES))
+    if details is not None:
+        details[key] = _error_details(error)
     if gone or message.startswith(PERMANENT_CRATE_CONDITIONS):
         unavailable[key] = message
         failures.pop(key, None)
@@ -512,6 +646,107 @@ def _record_failure(failures: dict[str, str], unavailable: dict[str, str], key: 
             return
         attempts[key] = tried
     failures[key] = message
+
+
+def _error_details(error: Exception) -> dict[str, Any]:
+    if isinstance(error, RegistryRequestError):
+        return {"category": error.category, "url": error.url, "attempts": error.attempts,
+                "elapsed_seconds": round(error.elapsed, 3), "status_code": error.status_code,
+                "operation": error.operation, "message": error.detail}
+    return {"category": _request_category(error), "message": str(error)}
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def _retry_due(metadata: dict[str, Any], key: str, now: datetime | None = None) -> bool:
+    value = metadata.get(key, {})
+    if not isinstance(value, dict):
+        return True
+    scheduled = value.get("next_attempt_at")
+    if not isinstance(scheduled, str) or not scheduled:
+        return True
+    try:
+        parsed = datetime.fromisoformat(scheduled)
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return (now or _utc_now()) >= parsed
+    except (TypeError, ValueError):
+        return True
+
+
+def _schedule_transient_retry(state: dict[str, Any], key: str, error: Exception) -> bool:
+    if not _network_blip(error):
+        return True
+    metadata = state.setdefault("retry_metadata", {})
+    previous = metadata.get(key, {})
+    attempts = int(previous.get("attempts", 0)) + 1 if isinstance(previous, dict) else 1
+    if attempts >= TRANSIENT_RETRY_LIMIT:
+        details = _error_details(error)
+        state.setdefault("blocked", {})[key] = {
+            "attempts": attempts, "last_error": str(error), "last_attempt_at": _utc_now().isoformat(),
+            **details,
+        }
+        metadata.pop(key, None)
+        return False
+    delay = min(TRANSIENT_RETRY_BASE * (2 ** (attempts - 1)), TRANSIENT_RETRY_CAP)
+    details = _error_details(error)
+    metadata[key] = {"attempts": attempts, "next_attempt_at": (_utc_now() + timedelta(seconds=delay)).isoformat(),
+                     "last_attempt_at": _utc_now().isoformat(), "last_error": str(error), **details}
+    return True
+
+
+def _retry_candidates(state: dict[str, Any], queue_name: str,
+                      failures: dict[str, str], unavailable: dict[str, str]) -> tuple[list[str], int]:
+    queue = state.setdefault(queue_name, [])
+    blocked = state.setdefault("blocked", {})
+    queue[:] = list(dict.fromkeys(name for name in queue if name not in unavailable and name not in blocked))
+    for name in failures:
+        if name not in queue:
+            queue.append(name)
+    metadata = state.setdefault("retry_metadata", {})
+    now = _utc_now()
+    due = [name for name in queue if _retry_due(metadata, name, now)]
+    return due, len(queue) - len(due)
+
+
+def _next_refresh_index(items: list[str], start: int, excluded: set[str]) -> int | None:
+    if not items:
+        return None
+    for offset in range(len(items)):
+        index = (start + offset) % len(items)
+        if items[index] not in excluded:
+            return index
+    return None
+
+
+def _retry_waiting_count(state: dict[str, Any], queue_name: str) -> int:
+    metadata = state.setdefault("retry_metadata", {})
+    return sum(1 for key in state.get(queue_name, []) if not _retry_due(metadata, key))
+
+
+def _drop_retry_key(state: dict[str, Any], key: str) -> None:
+    for queue_name in ("retry_tools", "retry_recipes"):
+        queue = state.get(queue_name)
+        if isinstance(queue, list):
+            queue[:] = [item for item in queue if item != key]
+
+
+def _failure_diagnostics(state: dict[str, Any], failures: dict[str, str], queue_name: str) -> dict[str, Any]:
+    details = state.setdefault("failure_details", {})
+    result = {key: details[key] for key in set(failures) | set(state.get(queue_name, [])) if key in details}
+    result.update({key: value for key, value in state.get("blocked", {}).items()})
+    return result
+
+
+def _clear_failure(state: dict[str, Any], failures: dict[str, str], attempts: dict[str, int], key: str) -> None:
+    failures.pop(key, None)
+    attempts.pop(key, None)
+    state.setdefault("failure_details", {}).pop(key, None)
+    state.setdefault("retry_metadata", {}).pop(key, None)
+    state.setdefault("blocked", {}).pop(key, None)
+    _drop_retry_key(state, key)
 
 
 def _postgres_array(value: str) -> list[str]:
@@ -603,11 +838,9 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     failures, unavailable, attempts = _failure_state(state)
     # The dump is republished daily and the observations replace rather than extend, so
     # re-reading an unchanged one costs 1.7GB to rewrite the same file.
-    _throttle(CRATES_DB_DUMP)
-    head = urllib.request.Request(CRATES_DB_DUMP, method="HEAD", headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(head, timeout=timeout) as response:
-        published = response.headers.get("Last-Modified", "")
-        size = int(response.headers.get("Content-Length") or 0)
+    _, head_transfer = _request_bytes(CRATES_DB_DUMP, timeout, method="HEAD")
+    published = head_transfer["headers"].get("Last-Modified", "")
+    size = int(head_transfer["headers"].get("Content-Length") or 0)
     published_header = published
     if published and published == state.get("dump_last_modified") and output.is_file():
         collected = sum(1 for line in output.open(encoding="utf-8") if line.strip())
@@ -629,31 +862,36 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
     binaries: dict[str, tuple[str, list[str]]] = {}
     published = ""
     csv.field_size_limit(min(sys.maxsize, 2 ** 31 - 1))
-    _throttle(CRATES_DB_DUMP)
-    request = urllib.request.Request(CRATES_DB_DUMP, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        counter = _CountingReader(response)
-        with tarfile.open(fileobj=counter, mode="r|gz") as archive:  # type: ignore[arg-type]
-            for member in archive:
-                name = PurePosixPath(member.name).name
-                if name == "metadata.json":
-                    handle = archive.extractfile(member)
-                    if handle is not None:
-                        published = json.loads(handle.read()).get("timestamp", "")
-                elif name == "crates.csv":
-                    for row in _dump_rows(archive, member):
-                        crates[row["id"]] = (row["name"], row.get("repository") or None)
-                elif name == "default_versions.csv":
-                    for row in _dump_rows(archive, member):
-                        defaults[row["crate_id"]] = row["version_id"]
-                elif name == "versions.csv":
-                    for row in _dump_rows(archive, member):
-                        if row.get("yanked") in ("t", "true", "True"):
-                            continue
-                        commands = _postgres_array(row.get("bin_names") or "")
-                        if commands:
-                            binaries[row["id"]] = (row["num"], commands)
-        downloaded = counter.count
+    started = time.monotonic()
+    response = _open_stream(CRATES_DB_DUMP, timeout, operation="crates.dump")
+    try:
+        with response:
+            counter = _CountingReader(response)
+            with tarfile.open(fileobj=counter, mode="r|gz") as archive:  # type: ignore[arg-type]
+                for member in archive:
+                    name = PurePosixPath(member.name).name
+                    if name == "metadata.json":
+                        handle = archive.extractfile(member)
+                        if handle is not None:
+                            published = json.loads(handle.read()).get("timestamp", "")
+                    elif name == "crates.csv":
+                        for row in _dump_rows(archive, member):
+                            crates[row["id"]] = (row["name"], row.get("repository") or None)
+                    elif name == "default_versions.csv":
+                        for row in _dump_rows(archive, member):
+                            defaults[row["crate_id"]] = row["version_id"]
+                    elif name == "versions.csv":
+                        for row in _dump_rows(archive, member):
+                            if row.get("yanked") in ("t", "true", "True"):
+                                continue
+                            commands = _postgres_array(row.get("bin_names") or "")
+                            if commands:
+                                binaries[row["id"]] = (row["num"], commands)
+            downloaded = counter.count
+    except (OSError, http.client.HTTPException) as error:
+        raise RegistryRequestError(CRATES_DB_DUMP, _request_category(error), 1,
+                                   time.monotonic() - started, str(error),
+                                   operation="crates.dump") from error
 
     rows: list[dict[str, Any]] = []
     with_binaries = 0
@@ -708,12 +946,24 @@ def _nuget_tool_commands(url: str, timeout: int) -> tuple[list[str], int]:
         members = [name for name in archive.names if name.rsplit("/", 1)[-1].lower() == "dotnettoolsettings.xml"]
         text = archive.read(members[0]).decode("utf-8", "replace") if members else ""
         return TOOL_COMMAND.findall(text), archive.downloaded
+    except RegistryRequestError:
+        raise
     except (RegistryCrawlError, urllib.error.HTTPError, OSError, struct.error, zlib.error, KeyError):
-        body, transfer = fetch(url, timeout)
+        body, transfer = _fetch_stage(url, timeout, "nuget.package")
         with zipfile.ZipFile(BytesIO(body)) as whole:
             members = [name for name in whole.namelist() if name.rsplit("/", 1)[-1].lower() == "dotnettoolsettings.xml"]
             text = whole.read(members[0]).decode("utf-8", "replace") if members else ""
         return TOOL_COMMAND.findall(text), transfer["downloaded_bytes"]
+
+
+def _fetch_stage(url: str, timeout: int, operation: str) -> tuple[bytes, dict[str, Any]]:
+    try:
+        return fetch(url, timeout)
+    except RegistryRequestError as error:
+        if error.operation == operation:
+            raise
+        raise RegistryRequestError(error.url, error.category, error.attempts, error.elapsed,
+                                   error.detail, error.status_code, operation=operation) from error
 
 
 def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
@@ -721,18 +971,24 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     """Inspect NuGet's .NET tool packages, the only NuGet packages that ship commands."""
     catalog_file = Path(state.setdefault("tools_file", "data/production/nuget-tools.txt"))
     catalog_file.parent.mkdir(parents=True, exist_ok=True)
-    if not read_catalog(catalog_file):
-        identifiers: set[str] = set()
-        advertised = 0
+    existing_tools = read_catalog(catalog_file)
+    catalog_grew = False
+    state["catalog_grew"] = False
+    if not existing_tools or state.get("catalog_truncated"):
+        identifiers: set[str] = set(existing_tools)
+        previous_size = len(identifiers)
+        advertised = int(state.get("catalog_advertised") or 0)
+        catalog_fetch_failed = False
         for term in NUGET_TERMS:
             skip = 0
             while True:
                 query = urllib.parse.urlencode({"q": term, "packageType": "DotnetTool",
                                                 "take": NUGET_PAGE, "skip": skip, "prerelease": "true"})
                 try:
-                    body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
+                    body, _ = _fetch_stage(f"{NUGET_SEARCH}?{query}", timeout, "nuget.catalog")
                 except Exception:
                     # One truncated response must not discard every term already collected.
+                    catalog_fetch_failed = True
                     break
                 value = json.loads(body)
                 advertised = max(advertised, int(value.get("totalHits") or 0))
@@ -743,20 +999,33 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
                 skip += len(page)
             if interrupted():
                 break
-        write_catalog(catalog_file, sorted(identifiers))
         state["catalog_advertised"] = advertised
-        state["catalog_truncated"] = len(identifiers) < advertised
+        state["catalog_truncated"] = (catalog_fetch_failed or
+                                       (bool(advertised) and len(identifiers) < advertised) or
+                                       interrupted())
+        catalog_grew = len(identifiers) > previous_size
+        state["catalog_grew"] = catalog_grew
+        if catalog_grew:
+            # A changed ordered catalogue invalidates its cursor. Replaying is safe:
+            # observation replacement is keyed by package.
+            state.pop("catalog_digest", None)
+            state["cursor"] = 0
+            state["refresh_cursor"] = 0
+        ordered_identifiers = sorted(identifiers)
+        _pin_catalog(state, ordered_identifiers)
+        write_catalog(catalog_file, ordered_identifiers)
         # Building the catalogue is the expensive part of the pass; persist its verdict
         # before inspecting anything, so a later failure cannot discard it.
         checkpoint()
     tools = read_catalog(catalog_file)
+    _pin_catalog(state, tools)
     if state.get("catalog_advertised") is None and tools:
         # A catalog built before this check existed carries no verdict, and without one
         # the source would present a sample of the tool list as the whole of it.
         query = urllib.parse.urlencode({"q": "", "packageType": "DotnetTool", "take": 1,
                                         "skip": 0, "prerelease": "false"})
         try:
-            body, _ = fetch(f"{NUGET_SEARCH}?{query}", timeout)
+            body, _ = _fetch_stage(f"{NUGET_SEARCH}?{query}", timeout, "nuget.catalog")
             advertised = int(json.loads(body).get("totalHits") or 0)
         except Exception:
             advertised = 0
@@ -772,23 +1041,25 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     # on a DNS blip has no other way back, and six of them held a finished NuGet at
     # partial with nothing left to walk.
     retry_tools = state.setdefault("retry_tools", [])
-    retry_tools[:] = [name for name in retry_tools if name not in unavailable]
-    for name in failures:
-        if name not in retry_tools:
-            retry_tools.append(name)
-    retry_budget = len(retry_tools)
+    retry_candidates, retry_waiting = _retry_candidates(state, "retry_tools", failures, unavailable)
+    refresh_excluded = set(retry_tools)
+    refresh_remaining = sum(name not in refresh_excluded for name in tools) if refresh_enabled else 0
+    refresh_index = _next_refresh_index(tools, refresh_cursor, refresh_excluded)
     rows: list[dict[str, Any]] = []; replacement_rows: list[dict[str, Any]] = []
     replaced_packages: set[str] = set(); collected = 0; budget_exhausted = False
-    while (retry_budget or cursor < len(tools) or
-           (refresh_enabled and tools and refreshed < len(tools))) and processed < budget:
-        retrying = retry_budget > 0
-        if retrying:
-            retry_budget -= 1
+    while (retry_candidates or cursor < len(tools) or
+           (refresh_enabled and refresh_remaining > 0)) and processed < budget:
+        retrying = bool(retry_candidates)
         refreshing = not retrying and cursor >= len(tools)
-        package = retry_tools.pop(0) if retrying else tools[refresh_cursor if refreshing else cursor]
+        if refreshing:
+            if refresh_index is None:
+                break
+            package = tools[refresh_index]
+        else:
+            package = retry_candidates.pop(0) if retrying else tools[cursor]
         lowered = urllib.parse.quote(package.lower(), safe="")
         try:
-            body, _ = fetch(f"{NUGET_FLAT}/{lowered}/index.json", timeout)
+            body, _ = _fetch_stage(f"{NUGET_FLAT}/{lowered}/index.json", timeout, "nuget.index")
             versions = json.loads(body).get("versions", [])
             if not versions:
                 raise RegistryCrawlError(f"tool has no published version: {package}")
@@ -806,18 +1077,25 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             rows.extend(package_rows)
             replacement_rows.extend(package_rows)
             replaced_packages.add(package)
-            failures.pop(package, None)
+            _clear_failure(state, failures, attempts, package)
         except Exception as error:
-            _record_failure(failures, unavailable, package, error, attempts)
+            _record_failure(failures, unavailable, package, error, attempts,
+                            state.setdefault("failure_details", {}))
+            if package in failures and not _schedule_transient_retry(state, package, error):
+                failures.pop(package, None)
+            if package not in failures:
+                _drop_retry_key(state, package)
             if package in failures and package not in retry_tools:
                 retry_tools.append(package)  # queued for the next run, not this one
         if refreshing:
             refreshed += 1
-            refresh_cursor = (refresh_cursor + 1) % len(tools)
+            refresh_remaining -= 1
+            refresh_cursor = (refresh_index + 1) % len(tools)
+            refresh_index = _next_refresh_index(tools, refresh_cursor, refresh_excluded)
         elif not retrying:
             cursor += 1
         processed += 1
-        if _due_for_checkpoint(processed):
+        if _due_for_checkpoint(processed) or interrupted():
             collected += len(rows)
             _replace_package_rows(output, replaced_packages, replacement_rows)
             rows.clear(); replacement_rows.clear(); replaced_packages.clear()
@@ -831,14 +1109,20 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     collected += len(rows)
     _replace_package_rows(output, replaced_packages, replacement_rows)
     truncated = bool(state.get("catalog_truncated"))
-    complete = cursor >= len(tools) and not failures and not retry_tools and not truncated
+    retry_waiting = _retry_waiting_count(state, "retry_tools")
+    complete = (cursor >= len(tools) and not failures and not retry_tools
+                and not state.get("blocked") and not truncated)
     report = {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
               "catalog_size": len(tools), "processed": processed,
               "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
               "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
               "catalog_truncated": truncated, "catalog_advertised": state.get("catalog_advertised"),
-              "retry_pending": len(retry_tools),
+              "catalog_grew": catalog_grew,
+              "retry_pending": len(retry_tools), "retry_waiting": retry_waiting,
+              "blocked": len(state.get("blocked", {})),
+              "failure_details": _failure_diagnostics(state, failures, "retry_tools"),
               "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
+    report["status"] = "success" if complete else "partial"
     if truncated:
         report["note"] = "NuGet search paging stops short of totalHits; this is a sample of .NET tools"
     return report
@@ -863,7 +1147,7 @@ def _conan_catalog(timeout: int) -> tuple[list[str], int]:
     The index is one repository tarball, so the whole declared population costs a
     single request and the catalogue is finite rather than paged.
     """
-    body, transfer = fetch(CONAN_INDEX, timeout)
+    body, transfer = _fetch_stage(CONAN_INDEX, timeout, "conan.catalog")
     versions: dict[str, list[str]] = {}
     with tarfile.open(fileobj=BytesIO(body), mode="r:gz") as archive:
         for member in archive:
@@ -896,14 +1180,14 @@ def _conan_package_commands(reference: str, timeout: int) -> tuple[list[str], st
         raise RegistryCrawlError(f"malformed recipe reference: {reference}")
     quoted = f"{urllib.parse.quote(name, safe='')}/{urllib.parse.quote(version, safe='')}"
     revisions_url = f"{CONAN_REMOTE}/{quoted}/_/_/revisions"
-    body, transfer = fetch(revisions_url, timeout)
+    body, transfer = _fetch_stage(revisions_url, timeout, "conan.revisions")
     downloaded = transfer["downloaded_bytes"]
     revisions = json.loads(body).get("revisions") or []
     if not revisions:
         raise RegistryCrawlError(f"recipe has no published revision: {reference}")
     recipe_revision = max(revisions, key=lambda item: str(item.get("time", "")))["revision"]
     revision_url = f"{revisions_url}/{recipe_revision}"
-    body, transfer = fetch(f"{revision_url}/search", timeout)
+    body, transfer = _fetch_stage(f"{revision_url}/search", timeout, "conan.package_search")
     downloaded += transfer["downloaded_bytes"]
     packages = json.loads(body)
     if not isinstance(packages, dict) or not packages:
@@ -914,7 +1198,8 @@ def _conan_package_commands(reference: str, timeout: int) -> tuple[list[str], st
         rank = CONAN_PREFERRED_OS.index(declared) if declared in CONAN_PREFERRED_OS else len(CONAN_PREFERRED_OS)
         return rank, item[0]
     package_id = min(packages.items(), key=preference)[0]
-    body, transfer = fetch(f"{revision_url}/packages/{package_id}/revisions", timeout)
+    body, transfer = _fetch_stage(f"{revision_url}/packages/{package_id}/revisions", timeout,
+                                  "conan.package_revisions")
     downloaded += transfer["downloaded_bytes"]
     package_revisions = json.loads(body).get("revisions") or []
     if not package_revisions:
@@ -922,7 +1207,7 @@ def _conan_package_commands(reference: str, timeout: int) -> tuple[list[str], st
     package_revision = max(package_revisions, key=lambda item: str(item.get("time", "")))["revision"]
     manifest_url = (f"{revision_url}/packages/{package_id}/revisions/{package_revision}"
                     "/files/conanmanifest.txt")
-    body, transfer = fetch(manifest_url, timeout)
+    body, transfer = _fetch_stage(manifest_url, timeout, "conan.manifest")
     downloaded += transfer["downloaded_bytes"]
     return conan_manifest_commands(body.decode("utf-8", "replace")), manifest_url, downloaded
 
@@ -936,10 +1221,12 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     if not read_catalog(catalog_file):
         references, spent = _conan_catalog(timeout)
         downloaded += spent
+        _pin_catalog(state, references)
         write_catalog(catalog_file, references)
         state["catalog_complete"] = True
         checkpoint()  # the catalogue is the expensive part; a later failure must not lose it
     recipes = read_catalog(catalog_file)
+    _pin_catalog(state, recipes)
     cursor = int(state.get("cursor", 0))
     refresh_cursor = int(state.get("refresh_cursor", 0))
     if refresh_cursor >= len(recipes):
@@ -952,22 +1239,23 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     # evidence of absence.  Tracking it keeps the source honestly short of exhaustive.
     uninspected = state.setdefault("uninspected", {})
     retry_recipes = state.setdefault("retry_recipes", [])
-    retry_recipes[:] = [name for name in retry_recipes if name not in unavailable]
-    for name in failures:
-        if name not in retry_recipes:
-            retry_recipes.append(name)
-    retry_budget = len(retry_recipes)
+    retry_candidates, retry_waiting = _retry_candidates(state, "retry_recipes", failures, unavailable)
+    refresh_excluded = set(retry_recipes)
+    refresh_remaining = sum(reference not in refresh_excluded for reference in recipes) if refresh_enabled else 0
+    refresh_index = _next_refresh_index(recipes, refresh_cursor, refresh_excluded)
     rows: list[dict[str, Any]] = []
     replacement_rows: list[dict[str, Any]] = []
     replaced_packages: set[str] = set()
-    while (retry_budget or cursor < len(recipes) or
-           (refresh_enabled and recipes and refreshed < len(recipes))) and processed < budget:
-        retrying = retry_budget > 0
-        if retrying:
-            retry_budget -= 1
+    while (retry_candidates or cursor < len(recipes) or
+           (refresh_enabled and refresh_remaining > 0)) and processed < budget:
+        retrying = bool(retry_candidates)
         refreshing = not retrying and cursor >= len(recipes)
-        reference = (retry_recipes.pop(0) if retrying
-                     else recipes[refresh_cursor if refreshing else cursor])
+        if refreshing:
+            if refresh_index is None:
+                break
+            reference = recipes[refresh_index]
+        else:
+            reference = retry_candidates.pop(0) if retrying else recipes[cursor]
         package, _, version = reference.partition("/")
         try:
             commands, manifest_url, spent = _conan_package_commands(reference, timeout)
@@ -986,21 +1274,28 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             rows.extend(package_rows)
             replacement_rows.extend(package_rows)
             replaced_packages.add(package)
-            failures.pop(reference, None)
+            _clear_failure(state, failures, attempts, reference)
         except Exception as error:
-            _record_failure(failures, unavailable, reference, error, attempts)
+            _record_failure(failures, unavailable, reference, error, attempts,
+                            state.setdefault("failure_details", {}))
+            if reference in failures and not _schedule_transient_retry(state, reference, error):
+                failures.pop(reference, None)
+            if reference not in failures:
+                _drop_retry_key(state, reference)
             if reference in failures and reference not in retry_recipes:
                 retry_recipes.append(reference)
         if refreshing:
             refreshed += 1
-            refresh_cursor = (refresh_cursor + 1) % len(recipes)
+            refresh_remaining -= 1
+            refresh_cursor = (refresh_index + 1) % len(recipes)
+            refresh_index = _next_refresh_index(recipes, refresh_cursor, refresh_excluded)
         elif not retrying:
             cursor += 1
         processed += 1
         if downloaded > byte_budget:
             budget_exhausted = True
             break
-        if _due_for_checkpoint(processed):
+        if _due_for_checkpoint(processed) or interrupted():
             collected += len(rows)
             _replace_package_rows(output, replaced_packages, replacement_rows)
             rows.clear(); replacement_rows.clear(); replaced_packages.clear()
@@ -1012,15 +1307,19 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     state["refresh_cursor"] = refresh_cursor
     collected += len(rows)
     _replace_package_rows(output, replaced_packages, replacement_rows)
+    retry_waiting = _retry_waiting_count(state, "retry_recipes")
     complete = (cursor >= len(recipes) and not failures and not retry_recipes
-                and not uninspected)
-    return {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
-            "catalog_size": len(recipes), "processed": processed, "records": collected,
-            "downloaded_bytes": downloaded, "failures": len(failures),
-            "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
-            "retry_pending": len(retry_recipes), "uninspected": len(uninspected),
-            "complete": complete,
-            "coverage_kind": "exhaustive" if complete else "partial"}
+                and not state.get("blocked") and not uninspected)
+    result = {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
+              "catalog_size": len(recipes), "processed": processed, "records": collected,
+              "downloaded_bytes": downloaded, "failures": len(failures),
+              "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
+              "retry_pending": len(retry_recipes), "retry_waiting": retry_waiting,
+              "blocked": len(state.get("blocked", {})), "uninspected": len(uninspected),
+              "failure_details": _failure_diagnostics(state, failures, "retry_recipes"),
+              "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
+    result["status"] = "success" if complete else "partial"
+    return result
 
 
 def _refuse_empty_exhaustive(result: dict[str, Any], observations: Path) -> None:
@@ -1060,6 +1359,20 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
                 buffer.clear()
             _save_json(state_path, state)
 
+        source_retry = source_state.get("source_retry")
+        if isinstance(source_retry, dict) and not _retry_due({"source": source_retry}, "source"):
+            report["sources"][source] = {
+                "status": "partial", "coverage_kind": "partial", "package_budget": budget,
+                "retry_pending": 1, "retry_waiting": 1,
+                "failure_details": {"source": source_state.get("source_failure", {})},
+            }
+            report["status"] = "partial"
+            _save_json(state_path, state)
+            if interrupted():
+                report["interrupted"] = True
+                break
+            continue
+
         try:
             install_dns_cache()  # a lookup per package is what the resolver gives way under
             _start_checkpoint_clock()  # each source gets its own two minutes, not the last one's
@@ -1067,18 +1380,54 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
                                                         byte_budget, timeout, checkpoint)
             report["sources"][source]["package_budget"] = budget
             _refuse_empty_exhaustive(report["sources"][source], observations)
+            source_state.pop("source_retry", None)
+            source_state.pop("source_failure", None)
+            source_state.pop("source_blocked", None)
         except Exception as error:
-            report["sources"][source] = {"status": "failed", "error": str(error), "coverage_kind": "partial"}
-            report["status"] = "failed"
+            details = _error_details(error)
+            source_state["source_failure"] = details
+            if isinstance(error, RegistryRequestError) and _request_is_retryable(error):
+                previous = source_state.get("source_retry", {})
+                attempts = int(previous.get("attempts", 0)) + 1 if isinstance(previous, dict) else 1
+                if attempts >= TRANSIENT_RETRY_LIMIT:
+                    source_state["source_blocked"] = {"attempts": attempts, **details}
+                    source_state.pop("source_retry", None)
+                    report["sources"][source] = {
+                        "status": "failed", "error": str(error), "coverage_kind": "partial",
+                        "blocked": 1, "failure_details": {"source": details},
+                    }
+                    report["status"] = "failed"
+                else:
+                    delay = min(TRANSIENT_RETRY_BASE * (2 ** (attempts - 1)), TRANSIENT_RETRY_CAP)
+                    source_state["source_retry"] = {
+                        "attempts": attempts, "next_attempt_at": (_utc_now() + timedelta(seconds=delay)).isoformat(),
+                        **details,
+                    }
+                    report["sources"][source] = {
+                        "status": "partial", "coverage_kind": "partial",
+                        "retry_pending": 1, "retry_waiting": 0,
+                        "failure_details": {"source": details},
+                    }
+                    report["status"] = "partial"
+            else:
+                report["sources"][source] = {"status": "failed", "error": str(error),
+                                               "coverage_kind": "partial",
+                                               "failure_details": {"source": details}}
+                report["status"] = "failed"
         _save_json(state_path, state)  # a later source must not cost this one its cursor
         result = report["sources"].get(source, {})
-        if result.get("failures", 0) or result.get("error"):
+        if result.get("error") or result.get("status") == "failed":
             report["status"] = "failed"
+        elif (result.get("failures", 0) or result.get("retry_pending", 0) or
+              result.get("blocked", 0) or result.get("coverage_kind") != "exhaustive"):
+            report["status"] = "partial"
         if interrupted():
             report["interrupted"] = True
             break
-    report["coverage_kind"] = "exhaustive" if report["status"] == "success" and all(v.get("coverage_kind") == "exhaustive" for v in report["sources"].values()) else "partial"
+    report["coverage_kind"] = ("exhaustive" if report["status"] == "success" and report["sources"] and
+                                all(v.get("coverage_kind") == "exhaustive" for v in report["sources"].values())
+                                else "partial")
     report["state"] = str(state_path); report["package_budget"] = package_budget; report["byte_budget"] = byte_budget
     _save_json(state_path, state)
-    report_path.parent.mkdir(parents=True, exist_ok=True); report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+    _write_text_atomic(report_path, json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
     return report

@@ -173,6 +173,11 @@ def test_ci_does_not_fetch_the_repository_history_for_data_jobs():
         assert "git fetch --quiet --depth=1 origin artifact-data" in contents
         assert "git fetch origin artifact-data --quiet" not in contents
 
+    assert "if: always()" not in cpp
+    registry = workflow("registry-artifacts.yml")
+    assert "if: always()" not in registry
+    assert "!cancelled()" in cpp and "!cancelled()" in registry
+
 
 def test_conan_continuation_is_keyed_on_the_cursor_not_on_coverage():
     queue = workflow("cpp-registries.yml").split(

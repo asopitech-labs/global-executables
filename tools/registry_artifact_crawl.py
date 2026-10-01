@@ -17,7 +17,8 @@ parser.add_argument("--package-budget", type=int, default=100)
 parser.add_argument("--source-package-budget", action="append", default=[], metavar="SOURCE=N",
                     help="raise or lower --package-budget for one source, e.g. crates=10000")
 parser.add_argument("--byte-budget", type=int, default=500_000_000)
-parser.add_argument("--timeout", type=int, default=120)
+parser.add_argument("--timeout", type=int, default=45,
+                    help="seconds per bounded HTTP attempt; item failures remain in the durable retry queue")
 args = parser.parse_args()
 # A stop signal should end the crawl at its next checkpoint rather than kill it
 # between checkpoints, which is when the unsaved work is largest.
@@ -33,5 +34,5 @@ report = crawl_registry_sources(args.source, args.state, args.output_dir, args.r
 print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
 if report.get("interrupted"):
     print("stopped on a signal; progress is checkpointed", flush=True)
-if report["status"] != "success":
+if report["status"] not in {"success", "partial"}:
     raise SystemExit(1)

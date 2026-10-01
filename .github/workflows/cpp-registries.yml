@@ -80,13 +80,13 @@ jobs:
             --package-budget "$PACKAGE_BUDGET" \
             --byte-budget "$BYTE_BUDGET"
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: conan-crawl-report
           path: reports/registry-artifact-crawl.json
       - name: Publish the walk and its observations
         id: publish
-        if: always()
+        if: ${{ !cancelled() }}
         run: |
           rm -rf /tmp/ci-cpp-conan
           mkdir -p /tmp/ci-cpp-conan/data/production/intermediate /tmp/ci-cpp-conan/reports
@@ -113,7 +113,7 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
       - name: Continue the walk or refresh the dictionary
-        if: always() && steps.publish.outcome == 'success'
+        if: ${{ !cancelled() && steps.publish.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ github.token }}
           PACKAGE_BUDGET: ${{ inputs.package_budget || '1500' }}
@@ -132,12 +132,16 @@ jobs:
             gh workflow run cpp-registries.yml --ref main \
               -f package_budget="$PACKAGE_BUDGET" \
               -f byte_budget="$BYTE_BUDGET"
-          elif test "$PUBLISHED_CHANGED" = true; then
+          elif jq -e '(.sources.conan.retry_pending // 0) == 0 and
+                     (.sources.conan.failures // 0) == 0 and
+                     (.sources.conan.blocked // 0) == 0' \
+              reports/registry-artifact-crawl.json >/dev/null && \
+              test "$PUBLISHED_CHANGED" = true; then
             gh workflow run refresh.yml --ref main
           else
-            echo "The ConanCenter walk is at the end of its catalogue and nothing changed."
+            echo "The ConanCenter walk keeps its durable retry queue for the next scheduled run."
           fi
-      - name: Fail after publishing partial progress
+      - name: Fail on an unrecoverable crawl error
         if: steps.crawl.outcome == 'failure'
         run: exit 1
 
@@ -170,7 +174,7 @@ jobs:
             --output-dir data/production/intermediate \
             --report reports/cpp-registry-crawl.json
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: cpp-recipe-crawl-report
           path: reports/cpp-registry-crawl.json

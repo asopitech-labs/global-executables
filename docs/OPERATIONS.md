@@ -120,9 +120,37 @@ budget on one archive per module, at the version `@latest` reports.
 
 Requests to the crates.io API host are paced to one per second, the rate crates.io
 asks crawlers to hold; `fetch` retries 429 and transient 5xx responses with the
-advertised `Retry-After` when present.
+advertised `Retry-After` when present. Every Python registry request opening, including
+NuGet HEAD/range reads and the crates.io dump stream, uses three bounded attempts.
+A terminal failure records the operation, URL, category, elapsed time, HTTP status,
+and attempt count in `failure_details`; a failed streaming dump is retained as a
+source-level diagnostic instead of being replayed blindly.
 `--source-package-budget SOURCE=N` raises the per-run package budget for one selected
 Python source. All five transactional sources use `--package-budget` in the Go runtime.
+
+### Retry, interruption, and resume contract
+
+An item-level network failure enters `retry_*` with a durable next-attempt time and
+exponential delay from one hour to 24 hours. Six failed item passes move the item to
+`blocked` with its last diagnostic; a scheduled crawl does not spin on a permanently
+unreachable endpoint. A retry whose due time has not arrived is reported as
+`retry_waiting` and is not executed. Permanent HTTP answers and malformed artifacts
+remain recorded as `unavailable` rather than entering that queue.
+
+The Python crawler checkpoints every 32 items or 30 seconds, whichever comes first.
+State, catalogues, observations, and reports are replaced atomically after an fsync;
+catalog digests pin the ordered list that a cursor describes. A catalog that grows
+resets its cursor and replays observations by package key, while an unchanged partial
+catalog waits for the next schedule. A signal stops at the next checkpoint. CI avoids
+publishing or dispatching follow-up work after cancellation, so the next run resumes
+from the last published checkpoint and safely replays only the bounded in-flight batch.
+An item-level partial result exits successfully for publication; only a fatal crawl
+error fails the job. Inspect the durable diagnosis with:
+
+```sh
+git show origin/artifact-data:data/production/registry-state.json \
+  | jq '.sources.conan | {cursor, retry_pending, retry_waiting, blocked, failure_details}'
+```
 
 ## Registry crawl status
 

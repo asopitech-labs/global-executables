@@ -122,8 +122,7 @@ def test_network_blips_never_exhaust_the_attempt_budget():
 
 
 def test_fetch_retries_a_lost_lookup_but_gives_up_during_an_outage(monkeypatch):
-    """3,000 Go modules once failed in a burst because nothing retried a name lookup."""
-    monkeypatch.setattr(registry_artifact, "_network_failure_streak", 0)
+    """A lost lookup is retried locally, while every request remains bounded."""
     monkeypatch.setattr(registry_artifact.time, "sleep", lambda _seconds: None)
     calls = []
 
@@ -141,28 +140,98 @@ def test_fetch_retries_a_lost_lookup_but_gives_up_during_an_outage(monkeypatch):
     monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", flaky)
     body, _ = registry_artifact.fetch("https://example.invalid/a", timeout=5)
     assert body == b"ok" and len(calls) == 3  # two blips absorbed
-    assert registry_artifact._network_failure_streak == 0  # a success clears the streak
 
-    # A timeout already spent the whole budget, so retrying it only multiplies the wait.
+    # A timeout gets only the bounded request budget; later attempts belong to the durable queue.
     for reason in (TimeoutError("timed out"), urllib.error.URLError(TimeoutError("timed out"))):
         attempted = []
         monkeypatch.setattr(registry_artifact.urllib.request, "urlopen",
                             lambda request, timeout=None, _r=reason: (attempted.append(1), (_ for _ in ()).throw(_r))[0])
-        with pytest.raises((TimeoutError, urllib.error.URLError)):
+        with pytest.raises(registry_artifact.RegistryRequestError):
             registry_artifact.fetch("https://example.invalid/slow", timeout=5)
-        assert attempted == [1], f"a {type(reason).__name__} must cost one attempt, not four"
+        assert len(attempted) == registry_artifact.REQUEST_ATTEMPTS
 
-    # Once the failures stop looking isolated, a request costs one attempt, not four.
     always_down = lambda request, timeout=None: (_ for _ in ()).throw(
         urllib.error.URLError("[Errno -2] Name or service not known"))
     monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", always_down)
-    for _ in range(registry_artifact.NETWORK_OUTAGE_STREAK):
-        with pytest.raises(urllib.error.URLError):
-            registry_artifact.fetch("https://example.invalid/b", timeout=5)
-    attempts_before = registry_artifact._network_failure_streak
-    with pytest.raises(urllib.error.URLError):
-        registry_artifact.fetch("https://example.invalid/c", timeout=5)
-    assert registry_artifact._network_failure_streak == attempts_before + 1
+    with pytest.raises(registry_artifact.RegistryRequestError) as raised:
+        registry_artifact.fetch("https://example.invalid/b", timeout=5)
+    assert raised.value.category == "network"
+
+
+def test_fetch_retries_timeouts_with_a_bounded_budget_and_context(monkeypatch):
+    monkeypatch.setattr(registry_artifact, "_last_request", {})
+    monkeypatch.setattr(registry_artifact.time, "sleep", lambda _seconds: None)
+    attempted = []
+
+    def timed_out(request, timeout=None):
+        attempted.append((request.full_url, timeout))
+        raise urllib.error.URLError(TimeoutError("timed out"))
+
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", timed_out)
+
+    with pytest.raises(registry_artifact.RegistryRequestError) as raised:
+        registry_artifact.fetch("https://center2.conan.io/slow", timeout=7, attempts=3)
+
+    error = raised.value
+    assert len(attempted) == 3
+    assert all(url == "https://center2.conan.io/slow" and timeout == 7 for url, timeout in attempted)
+    assert error.category == "timeout"
+    assert error.url == "https://center2.conan.io/slow"
+    assert error.attempts == 3
+    assert "center2.conan.io/slow" in str(error)
+
+
+def test_head_requests_use_the_same_bounded_retry_contract(monkeypatch):
+    monkeypatch.setattr(registry_artifact.time, "sleep", lambda _seconds: None)
+    responses = [TimeoutError("timed out")]
+
+    class _Response:
+        status = 200
+        headers = {"Content-Length": "17"}
+        def read(self): return b""
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+
+    def urlopen(request, timeout=None):
+        if responses:
+            raise responses.pop()
+        return _Response()
+
+    monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", urlopen)
+
+    assert registry_artifact.content_length("https://example.invalid/tool.nupkg", 3) == 17
+
+
+def test_transient_retry_limit_blocks_an_item_and_removes_it_from_the_queue(tmp_path, monkeypatch):
+    catalog = tmp_path / "tools.txt"
+    registry_artifact.write_catalog(catalog, ["alpha"])
+    error = registry_artifact.RegistryRequestError(
+        "https://api.nuget.org/v3-flatcontainer/alpha/index.json", "timeout", 3, 45,
+        "timed out", operation="nuget.index")
+    monkeypatch.setattr(registry_artifact, "_nuget_tool_commands",
+                        lambda *args: (_ for _ in ()).throw(error))
+    monkeypatch.setattr(registry_artifact, "fetch",
+                        lambda *args, **kwargs: (b'{"versions": ["1.0.0"]}', {"downloaded_bytes": 1}))
+    state = {
+        "tools_file": str(catalog), "cursor": 1,
+        "failures": {"alpha": str(error)}, "retry_tools": ["alpha"],
+        "retry_metadata": {"alpha": {"attempts": registry_artifact.TRANSIENT_RETRY_LIMIT - 1}},
+    }
+
+    report = registry_artifact._crawl_nuget(state, tmp_path / "nuget.jsonl", 1, 1_000_000, 120)
+
+    assert report["retry_pending"] == 0 and report["blocked"] == 1
+    assert state["retry_tools"] == []
+    assert state["blocked"]["alpha"]["url"].endswith("/alpha/index.json")
+
+
+def test_a_pinned_catalog_cannot_resume_against_a_different_order(tmp_path):
+    catalog = tmp_path / "tools.txt"
+    registry_artifact.write_catalog(catalog, ["alpha"])
+    state = {"tools_file": str(catalog), "catalog_digest": "sha256:wrong", "cursor": 0}
+
+    with pytest.raises(registry_artifact.RegistryCrawlError, match="catalog changed"):
+        registry_artifact._crawl_nuget(state, tmp_path / "nuget.jsonl", 1, 1_000_000, 120)
 
 
 def test_a_host_is_resolved_once_per_interval_not_once_per_request(monkeypatch):
@@ -328,9 +397,10 @@ def test_fetch_surfaces_rate_limiting_once_the_attempts_run_out(monkeypatch):
         raise urllib.error.HTTPError("https://crates.io/x", 429, "Too Many Requests", {}, None)
 
     monkeypatch.setattr(registry_artifact.urllib.request, "urlopen", always_limited)
-    with pytest.raises(urllib.error.HTTPError):
+    with pytest.raises(registry_artifact.RegistryRequestError) as raised:
         registry_artifact.fetch("https://crates.io/x", 120, attempts=3)
     assert len(attempts) == 3
+    assert raised.value.status_code == 429
 
 
 def test_a_source_cannot_claim_exhaustive_with_nothing_on_file(tmp_path, monkeypatch):
@@ -366,8 +436,87 @@ def test_crawl_marks_source_failures_as_failed(tmp_path, monkeypatch):
         ["nuget"], tmp_path / "state.json", tmp_path / "intermediate", tmp_path / "report.json"
     )
 
-    assert report["status"] == "failed"
-    assert json.loads((tmp_path / "report.json").read_text())["status"] == "failed"
+    assert report["status"] == "partial"
+    assert json.loads((tmp_path / "report.json").read_text())["status"] == "partial"
+
+
+def test_source_level_transient_failure_is_durable_and_respects_due_time(tmp_path, monkeypatch):
+    error = registry_artifact.RegistryRequestError(
+        "https://codeload.github.com/conan-io/conan-center-index/tar.gz/refs/heads/master",
+        "timeout", 3, 135, "timed out", operation="conan.catalog")
+
+    monkeypatch.setattr(registry_artifact, "_crawl_conan",
+                        lambda *args: (_ for _ in ()).throw(error))
+    state_path = tmp_path / "state.json"
+    report = registry_artifact.crawl_registry_sources(
+        ["conan"], state_path, tmp_path / "intermediate", tmp_path / "report.json")
+
+    assert report["status"] == "partial"
+    assert report["sources"]["conan"]["retry_pending"] == 1
+    saved = json.loads(state_path.read_text())["sources"]["conan"]
+    assert saved["source_failure"]["url"].endswith("conan-center-index/tar.gz/refs/heads/master")
+
+    monkeypatch.setattr(registry_artifact, "_crawl_conan",
+                        lambda *args: pytest.fail("source retry is not due yet"))
+    report = registry_artifact.crawl_registry_sources(
+        ["conan"], state_path, tmp_path / "intermediate", tmp_path / "report.json")
+    assert report["sources"]["conan"]["retry_waiting"] == 1
+
+
+def test_a_retry_before_its_due_time_is_persisted_but_not_retried(tmp_path, monkeypatch):
+    catalog = tmp_path / "tools.txt"
+    registry_artifact.write_catalog(catalog, ["alpha"])
+    state = {
+        "tools_file": str(catalog), "cursor": 1,
+        "failures": {"alpha": "timed out"},
+        "retry_tools": ["alpha"],
+        "retry_metadata": {"alpha": {"next_attempt_at": "2999-01-01T00:00:00+00:00"}},
+    }
+
+    monkeypatch.setattr(registry_artifact, "_nuget_tool_commands",
+                        lambda *args: pytest.fail("a retry scheduled in the future must not run"))
+    report = registry_artifact._crawl_nuget(
+        state, tmp_path / "nuget.jsonl", 10, 1_000_000, 120)
+
+    assert report["processed"] == 0
+    assert report["retry_pending"] == 1
+    assert report["retry_waiting"] == 1
+
+
+def test_conan_commits_each_item_when_checkpoint_interval_is_one(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    registry_artifact.write_catalog(catalog, ["demotool/1.0.0"])
+    monkeypatch.setattr(registry_artifact, "_conan_package_commands",
+                        lambda reference, timeout: (["demotool"], "https://example.invalid/manifest", 1))
+    monkeypatch.setattr(registry_artifact, "CHECKPOINT_INTERVAL", 1)
+    checkpoints = []
+
+    registry_artifact._crawl_conan(
+        {"recipes_file": str(catalog)}, tmp_path / "conan.jsonl", 10, 1_000_000, 120,
+        lambda **updates: checkpoints.append(updates),
+    )
+
+    assert checkpoints and checkpoints[-1]["cursor"] == 1
+
+
+def test_signal_stops_after_checkpoint_and_leaves_the_next_cursor(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    registry_artifact.write_catalog(catalog, ["alpha/1.0.0", "beta/1.0.0"])
+    monkeypatch.setattr(registry_artifact, "_conan_package_commands",
+                        lambda reference, timeout: ([reference.split("/", 1)[0]], "manifest", 1))
+    calls = []
+
+    def stop_after_first_item():
+        calls.append(1)
+        return len(calls) >= 1
+
+    monkeypatch.setattr(registry_artifact, "interrupted", stop_after_first_item)
+    state = {"recipes_file": str(catalog)}
+    report = registry_artifact._crawl_conan(
+        state, tmp_path / "conan.jsonl", 10, 1_000_000, 120)
+
+    assert report["processed"] == 1 and report["cursor"] == 1
+    assert state["cursor"] == 1
 
 
 def test_windows_command_names_drop_the_extension_users_never_type():
@@ -408,8 +557,14 @@ def test_msys2_reuses_the_pacman_reader_with_a_windows_identity():
 def test_nuget_never_claims_exhaustive_from_a_truncated_catalog(tmp_path, monkeypatch):
     catalog = tmp_path / "tools.txt"
     catalog.write_text("demo.tool\n")
-    monkeypatch.setattr(registry_artifact, "fetch",
-                        lambda url, timeout=120, attempts=4: (json.dumps({"versions": ["1.0.0"]}).encode(), {"downloaded_bytes": 1}))
+    def fake_fetch(url, *args, **kwargs):
+        if registry_artifact.NUGET_SEARCH in url:
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query, keep_blank_values=True)
+            page = [{"id": "demo.tool"}] if query.get("skip", ["0"])[0] == "0" else []
+            return json.dumps({"totalHits": 8619, "data": page}).encode(), {"downloaded_bytes": 1}
+        return json.dumps({"versions": ["1.0.0"]}).encode(), {"downloaded_bytes": 1}
+
+    monkeypatch.setattr(registry_artifact, "fetch", fake_fetch)
     monkeypatch.setattr(registry_artifact, "_nuget_tool_commands", lambda url, timeout: (["demo"], 5))
     state = {"tools_file": str(catalog), "catalog_truncated": True, "catalog_advertised": 8619}
 
@@ -571,6 +726,7 @@ def test_the_crates_dump_clears_verdicts_the_retired_path_left(tmp_path, monkeyp
     """One stale IncompleteRead held a complete crates.io at partial forever."""
     class _Head:
         headers = {"Last-Modified": "Thu, 21 Aug 2026 02:00:00 GMT", "Content-Length": "10"}
+        def read(self): return b""
         def __enter__(self): return self
         def __exit__(self, *args): return False
 
