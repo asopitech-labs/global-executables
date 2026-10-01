@@ -910,9 +910,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
 
     # The dump is a whole-registry snapshot, so the observations replace rather than
     # extend what an earlier snapshot wrote.
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in rows),
-                      encoding="utf-8")
+    _write_text_atomic(output, "".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in rows))
     collected = len(rows)
     state["dump_timestamp"] = published
     state["dump_last_modified"] = last_modified
