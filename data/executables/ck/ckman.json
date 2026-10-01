@@ -2,6 +2,18 @@
   "command": "ckman",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ckman",
+      "version": "0.1.0",
+      "repository": "https://github.com/canokeys/canokey-manager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/housepower/ckman",
       "version": "v1.3.7",
@@ -16,16 +28,16 @@
     {
       "ecosystem": "pypi",
       "package": "canokey-manager",
-      "version": "5.4.0.post1",
-      "repository": "https://github.com/canokeys/yubikey-manager",
-      "source": "https://files.pythonhosted.org/packages/2a/3c/0ea43e2acf7619d0ca260d43171bdc3ea14bdfb354082910bd19ebdb5f47/canokey_manager-5.4.0.post1-py3-none-any.whl",
+      "version": "5.9.2.post1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fd/af/967e36e447c4858b21d3a632bdaeb70bf0744ea06d8bab68697c5f2cf298/canokey_manager-5.9.2.post1-py3-none-any.whl",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "python",
       "registry": "pypi",
-      "latest_version": "5.4.0.post1"
+      "latest_version": "5.9.2.post1"
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

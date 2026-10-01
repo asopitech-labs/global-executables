@@ -1,8 +1,8 @@
 {
-  "accepted_records": 2069370,
+  "accepted_records": 2069599,
   "coverage_kind": "partial",
   "failed": [],
-  "input_records": 2069507,
+  "input_records": 2069741,
   "inputs": [
     "data/production/intermediate/arch.jsonl",
     "data/production/intermediate/debian.jsonl",
@@ -26,14 +26,8 @@
     "data/production/intermediate/shell.jsonl"
   ],
   "previous_unique_executables": 881153,
-  "records": 2069507,
+  "records": 2069741,
   "rejected": [
-    {
-      "command": "",
-      "ecosystem": "pypi",
-      "package": "bmlx",
-      "reason": "invalid executable name"
-    },
     {
       "command": "#\t\t\t\"toyecc",
       "ecosystem": "pypi",
@@ -44,6 +38,18 @@
       "command": "#\t\t\t'calcpkg",
       "ecosystem": "pypi",
       "package": "xkcd",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t\"binwb",
+      "ecosystem": "pypi",
+      "package": "binwb-cli",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t\"dokuwiki2html",
+      "ecosystem": "pypi",
+      "package": "PyDokuwiki",
       "reason": "invalid executable name"
     },
     {
@@ -128,6 +134,30 @@
       "command": "# \t\"split_table",
       "ecosystem": "pypi",
       "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tXY-steroids",
+      "ecosystem": "pypi",
+      "package": "XY-Steroid",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tXY-steroids",
+      "ecosystem": "pypi",
+      "package": "XY-Steroids",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "O2",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "appraisal",
       "reason": "invalid executable name"
     },
     {
@@ -851,9 +881,9 @@
       "reason": "invalid executable name"
     }
   ],
-  "rejected_records": 137,
+  "rejected_records": 142,
   "shrink_reason": null,
-  "snapshot": "2026-09-15",
+  "snapshot": "2026-10-01",
   "status": "success",
-  "unique_executables": 881153
+  "unique_executables": 883846
 }

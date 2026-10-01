@@ -2,6 +2,18 @@
   "command": "homestead",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "homestead",
+      "version": "0.1.2",
+      "repository": "https://github.com/Haberkamp/homestead",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "go",
       "package": "alin.ovh/homestead",
       "version": "v0.0.0-20260522201716-559f579ea7a8",
@@ -183,5 +195,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

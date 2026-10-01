@@ -2,6 +2,18 @@
   "command": "dkr",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "dkr",
+      "version": "0.3.0",
+      "repository": "https://github.com/junousia/dkr",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/fd/dkr-util",
       "version": "v1.1.0",
@@ -39,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

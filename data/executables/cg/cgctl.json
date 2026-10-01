@@ -2,6 +2,18 @@
   "command": "cgctl",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cgctl",
+      "version": "0.1.0",
+      "repository": "https://github.com/lu_zero/cg-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/KubrickLiu/cgroups/cmd",
       "version": "v0.0.0-20220808093600-39a2709c46df",
@@ -39,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-31",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

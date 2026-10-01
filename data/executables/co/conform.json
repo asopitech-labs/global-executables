@@ -2,6 +2,18 @@
   "command": "conform",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "conform-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/OffeneDatenmodellierung/open-spec-conform",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/Olen/conform",
       "version": "v0.0.0-20241031150952-3e69fb42824c",
@@ -111,5 +123,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

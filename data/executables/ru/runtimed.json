@@ -2,6 +2,18 @@
   "command": "runtimed",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "syntrop-runtimed",
+      "version": "0.5.2",
+      "repository": "https://github.com/syntropd/runtimed",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/airconduct/kruntime",
       "version": "v0.0.3",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

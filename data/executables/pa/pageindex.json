@@ -2,6 +2,18 @@
   "command": "pageindex",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "pageindex-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/dan-garden/rust-pageindex",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/neurondb/pageindex",
       "version": "v0.0.0-20260323012123-3afbfb3c4665",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-09-03",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

@@ -2,6 +2,18 @@
   "command": "hardhat",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hardhat",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/ralpha9/hardhat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/somatic-labs/hardhat",
       "version": "v1.1.0",
@@ -75,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

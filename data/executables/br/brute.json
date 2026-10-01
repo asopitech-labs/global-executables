@@ -2,6 +2,18 @@
   "command": "brute",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "benostreamdb",
+      "version": "0.11.1",
+      "repository": "https://github.com/benolabsai/benostreamdb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/amandahla/coursera-algorithms-part1",
       "version": "v0.0.0-20201020150727-59a66dae382c",
@@ -65,7 +77,7 @@
       "ecosystem": "pypi",
       "package": "brute-force-attacker",
       "version": "1.0.1",
-      "repository": "",
+      "repository": null,
       "source": "https://files.pythonhosted.org/packages/85/15/39f39dedc5b75f34f18154732d89bf481b3c2c43b6a8fa324c74d4a73bae/brute_force_attacker-1.0.1-py3-none-any.whl",
       "confidence": "direct",
       "source_type": "language_package",
@@ -87,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

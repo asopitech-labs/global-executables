@@ -3,15 +3,27 @@
   "providers": [
     {
       "ecosystem": "crates",
+      "package": "souls-cli",
+      "version": "0.0.1",
+      "repository": "https://github.com/Secure-Your-Soul/SoulsCLI",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "crates",
       "package": "strykelang",
-      "version": "0.17.52",
+      "version": "0.17.58",
       "repository": "https://github.com/MenkeTechnologies/strykelang",
       "source": "https://static.crates.io/db-dump.tar.gz",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "rust",
       "registry": "crates.io",
-      "latest_version": "0.17.52"
+      "latest_version": "0.17.58"
     },
     {
       "ecosystem": "go",
@@ -389,7 +401,7 @@
       "ecosystem": "pypi",
       "package": "atcoder-auto-test",
       "version": "0.1.0",
-      "repository": "",
+      "repository": null,
       "source": "https://files.pythonhosted.org/packages/77/99/c035408f155f7db9d0cb6416247bc0244c302c91f9a05f9e1acfd14cb9db/atcoder_auto_test-0.1.0-py3-none-any.whl",
       "confidence": "direct",
       "source_type": "language_package",
@@ -568,5 +580,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

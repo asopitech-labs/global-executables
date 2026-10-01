@@ -2,6 +2,18 @@
   "command": "trove",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "trove-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/Tankenstein/trove",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/nadduli/trove",
       "version": "v0.0.0-20250408192333-3684609feb35",
@@ -87,5 +99,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

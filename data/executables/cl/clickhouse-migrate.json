@@ -2,6 +2,18 @@
   "command": "clickhouse-migrate",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "axum-webtools-clickhouse-migrate",
+      "version": "0.1.62",
+      "repository": "https://github.com/jonatansalemes/axum-webtools.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.62"
+    },
+    {
       "ecosystem": "npm",
       "package": "@danilryba/test-migration",
       "version": "1.2.0",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

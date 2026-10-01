@@ -2,6 +2,18 @@
   "command": "crate",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "crate-cli",
+      "version": "10.2.2",
+      "repository": "https://github.com/crates-dev/ctares",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "10.2.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/5Pointers/crate",
       "version": "v0.0.0-20201009223409-e50f0711f49b",
@@ -51,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

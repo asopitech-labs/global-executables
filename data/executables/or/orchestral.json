@@ -2,6 +2,18 @@
   "command": "orchestral",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "orchestral-cli",
+      "version": "0.4.1",
+      "repository": "https://github.com/sizzlecar/orchestral",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
       "ecosystem": "pypi",
       "package": "orchestral-ai",
       "version": "1.10.1",
@@ -27,5 +39,5 @@
     }
   ],
   "first_seen": "2026-08-31",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

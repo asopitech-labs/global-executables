@@ -2,6 +2,18 @@
   "command": "hecate-tui",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "hecate-core",
+      "version": "0.2.2",
+      "repository": "https://github.com/luciano-sparti/hecate-vault",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/Orangiuss/HecateArsenal/src",
       "version": "v0.0.0-20241001102652-6c2d72164226",
@@ -51,5 +63,5 @@
     }
   ],
   "first_seen": "2026-08-31",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

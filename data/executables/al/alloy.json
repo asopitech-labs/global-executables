@@ -2,6 +2,18 @@
   "command": "alloy",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "alloy-luau",
+      "version": "0.1.0-rc.9",
+      "repository": "https://github.com/alloy-luau/alloy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0-rc.9"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/james-nesbitt/alloy",
       "version": "v0.0.0-20260406122921-4dbe9f74bcc2",
@@ -184,14 +196,14 @@
     {
       "ecosystem": "pypi",
       "package": "alloy-runtime-cli",
-      "version": "0.2.115",
+      "version": "0.2.123",
       "repository": null,
-      "source": "https://files.pythonhosted.org/packages/c4/7f/190dc3cb7cc44cabc8268009a9496169165e40d3522b774af0f4bce9e7bc/alloy_runtime_cli-0.2.115-py3-none-any.whl",
+      "source": "https://files.pythonhosted.org/packages/47/1b/a5a4b7f9ad5b660d59e4a5b43c1b1641c76d5444d5dd098c5a7c7e5646b5/alloy_runtime_cli-0.2.123-py3-none-any.whl",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "python",
       "registry": "pypi",
-      "latest_version": "0.2.115"
+      "latest_version": "0.2.123"
     },
     {
       "ecosystem": "pypi",
@@ -231,5 +243,5 @@
     }
   ],
   "first_seen": "2026-08-15",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }

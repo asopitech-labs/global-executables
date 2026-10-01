@@ -2,6 +2,18 @@
   "command": "lifecycle",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sekejap-dist",
+      "version": "0.19.2",
+      "repository": "https://github.com/sekejapdb/sekejap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.19.2"
+    },
+    {
       "ecosystem": "go",
       "package": "cnb.cool/svn/process",
       "version": "v0.0.0-20260817055039-88dd2a0004ca",
@@ -459,5 +471,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-09-15"
+  "last_seen": "2026-10-01"
 }
