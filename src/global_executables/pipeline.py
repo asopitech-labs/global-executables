@@ -85,9 +85,12 @@ def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[s
 
 
 def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]] | None, seen: str,
-          history: dict[str, str] | None = None) -> MergeResult:
+          history: dict[str, str] | None = None,
+          preserve_ecosystems: set[str] | None = None) -> MergeResult:
     grouped: dict[str, dict[tuple[str, ...], dict[str, Any]]] = defaultdict(dict)
     rejected: list[dict[str, Any]] = []
+    observed_by_ecosystem: dict[str, set[str]] = defaultdict(set)
+    observed_commands: set[str] = set()
     for raw in records:
         command = raw["command"]
         if not isinstance(command, str) or not valid_command(command):
@@ -98,6 +101,10 @@ def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]]
                 "reason": "invalid executable name",
             })
             continue
+        observed_commands.add(command)
+        ecosystem = raw.get("ecosystem")
+        if isinstance(ecosystem, str):
+            observed_by_ecosystem[ecosystem].add(command)
         provider = {k: raw.get(k) for k in ("ecosystem", "package", "version", "repository", "source", "confidence")}
         for key in (
             "alias_of", "source_type", "package_system", "distribution_family", "distribution",
@@ -110,10 +117,17 @@ def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]]
     output = []
     previous = previous or {}
     history = history or {}
+    for command, old in previous.items():
+        for provider in old.get("providers", ()):
+            ecosystem = provider.get("ecosystem")
+            if (preserve_ecosystems and ecosystem in preserve_ecosystems
+                    and command not in observed_by_ecosystem.get(ecosystem, ())):
+                grouped[command][provider_key(provider)] = provider
     for command in sorted(grouped, key=lambda x: (x.casefold(), x)):
         old = previous.get(command, {})
         output.append({"command": command, "providers": sorted(grouped[command].values(), key=provider_key),
-                       "first_seen": old.get("first_seen", history.get(command, seen)), "last_seen": seen})
+                       "first_seen": old.get("first_seen", history.get(command, seen)),
+                       "last_seen": seen if command in observed_commands else old.get("last_seen", seen)})
     return MergeResult(output, tuple(rejected))
 
 
@@ -186,14 +200,18 @@ def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
     snapshot = snapshot or date.today().isoformat()
     previous = load_canonical(root)
     history = load_history(root)
-    rows = []; coverage = {}
+    rows = []; coverage = {}; partial_ecosystems = set()
     for path in inputs:
         current = [json.loads(line) for line in path.read_text().splitlines() if line]
         rows.extend(current); eco = path.stem
         descriptor = coverage_kind.get(eco, "partial") if isinstance(coverage_kind, dict) else coverage_kind
         descriptor = {"coverage_kind": descriptor} if isinstance(descriptor, str) else dict(descriptor)
         coverage[eco] = {"status": "success", "records": len(current), "source": str(path), **descriptor}
-    merged = merge(rows, previous, snapshot, history)
+        # Partial inputs are observations, not deletion claims; exhaustive inputs remain authoritative.
+        if descriptor.get("coverage_kind") == "partial":
+            partial_ecosystems.add(eco)
+    merged = merge(rows, previous, snapshot, history,
+                   partial_ecosystems if not policy.shrink_reason else None)
     if len(merged.records) < len(previous) and not policy.shrink_reason:
         raise DatasetShrinkError(len(previous), len(merged.records))
     publish(root, merged.records, coverage, snapshot, history)

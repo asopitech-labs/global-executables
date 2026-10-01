@@ -660,9 +660,9 @@ Normal registry-triggered and scheduled refreshes perform the lifecycle in this 
 3. Rebuild the dictionary. Unusable command names are counted under
    `rejected_records` in `reports/production-refresh.json`; malformed JSON remains a
    hard failure.
-4. Refuse to replace the dictionary when the new unique-name count is lower. An
-   intentional removal requires `--allow-shrink-reason "..."`, which is recorded in
-   the refresh report.
+4. Preserve records omitted by partial sources, while exhaustive-source removals
+   still pass through the shrink guard. An intentional removal requires
+   `--allow-shrink-reason "..."`, which is recorded in the refresh report.
 5. Publish canonical data and reports to `dictionary`. A failed scheduled refresh opens or
    updates a GitHub issue with the failed run URL.
 

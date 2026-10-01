@@ -46,6 +46,30 @@ def test_rebuild_accepts_per_source_coverage_kinds(tmp_path):
     assert metadata["coverage"]["npm"]["coverage_kind"] == "partial"
     assert metadata["negative_lookup"] == "unknown"
 
+
+def test_partial_source_preserves_unobserved_history_and_replaces_observed_provider(tmp_path):
+    first = tmp_path / "npm.jsonl"
+    first.write_text(json.dumps({
+        "command": "partial-tool", "ecosystem": "npm", "package": "partial-tool",
+        "version": "1", "repository": None, "source": "catalog-v1", "confidence": "direct",
+    }) + "\n")
+    rebuild(tmp_path, [first], "2026-08-14", coverage_kind={"npm": "partial"})
+
+    first.write_text("")
+    rebuild(tmp_path, [first], "2026-08-15", coverage_kind={"npm": "partial"})
+    preserved = load_canonical(tmp_path)["partial-tool"]
+    assert preserved["last_seen"] == "2026-08-14"
+    assert preserved["providers"][0]["version"] == "1"
+
+    first.write_text(json.dumps({
+        "command": "partial-tool", "ecosystem": "npm", "package": "partial-tool",
+        "version": "2", "repository": None, "source": "catalog-v2", "confidence": "direct",
+    }) + "\n")
+    rebuild(tmp_path, [first], "2026-08-16", coverage_kind={"npm": "partial"})
+    observed = load_canonical(tmp_path)["partial-tool"]
+    assert observed["last_seen"] == "2026-08-16"
+    assert [provider["version"] for provider in observed["providers"]] == ["2"]
+
 def test_rebuild_preserves_declared_coverage_scope(tmp_path):
     npm_scope = {
         "coverage_kind": "exhaustive",

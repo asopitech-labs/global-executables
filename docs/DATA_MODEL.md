@@ -25,9 +25,11 @@ Aliases and symlinks are individual executable records because users can invoke
 their names. When the target is known, `alias_of` is provider provenance. Names
 differing only in case remain separate records. Dates are UTC ISO 8601 calendar
 dates. `first_seen` survives refreshes; `last_seen` is the latest observation.
-A provider absent from a refresh disappears from the current snapshot. If it
-later returns, the executable retains `first_seen` when historical canonical
-state is available; release history provides the durable audit trail.
+A provider absent from an exhaustive refresh disappears from the current snapshot;
+a provider from a partial source remains until that source observes the command
+again or an explicit shrink reason authorizes removal. If it later returns, the
+executable retains `first_seen` when historical canonical state is available;
+release history provides the durable audit trail.
 
 Confidence means: `direct` (declared executable metadata), `filesystem`
 (executable installation path or bottle inventory), or `inferred` (indirect
