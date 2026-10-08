@@ -2,6 +2,19 @@
   "command": "jrunscript",
   "providers": [
     {
+      "ecosystem": "conan",
+      "package": "zulu-openjdk",
+      "version": "21.0.9",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/zulu-openjdk/21.0.9/_/_/revisions/077ac504ee7ac883dd8d05a320cd746f/packages/63fead0844576fc02943e16909f08fcdddd6f44b/revisions/927f625aca56d609869046c4cec467dc/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "21.0.11"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "graalvm",
       "version": "25.2.4",
