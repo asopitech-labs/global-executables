@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Registry crawl state: `data/production/registry-state.json` (92.7 MB on
+  `artifact-data`, near GitHub's 100 MB file limit) is replaced by the
+  `data/production/registry-state/` directory: a `manifest.json` commit point, one
+  `source.json` per registry, and large maps such as Go's 1.18 million `unavailable`
+  modules as SHA-256-prefix JSONL shards (281 files, largest 331 KB). Python and Go
+  write byte-identical files, saves are atomic and rewrite only changed shards, and a
+  typical publication pushes 0.7–1.5 KB instead of 3–4 KB. The first publication after
+  this change migrates the branch in its normal commit; readers fall back to the
+  legacy file for one release. Shell steps use `tools/registry_state.py`
+  (`restore`, `get`, `copy`, `summary`, `migrate`). See "Registry crawl state layout"
+  in docs/OPERATIONS.md.
 - ConanCenter: `bin/` entries that are never commands are no longer recorded
   (`LICENSE`, `COPYING`, `OWNERS`, `PKG-INFO`, `setup.cfg`, `pyproject.toml`,
   `*.exe.config`, `*.jar`, `*.conf`, versioned `.so` libraries, ...). Scripts are kept

@@ -43,3 +43,14 @@ behavior or does not compile for the declared Go version.
 The shared pipeline enforces the standard-library modernization fixes. The agent must
 run `./tools/go_container.sh ./tools/go_pipeline.sh modern` while editing and the full
 `check` command before handoff. A host Go installation is not required.
+
+## Registry crawl state
+
+The registry crawl state is a sharded directory, `data/production/registry-state/`,
+described in docs/OPERATIONS.md ("Registry crawl state layout"). Code must read and
+write it only through `global_executables.registry_state` (Python),
+`gocrawl.ReadStateDocument`/`WriteStateDocument` (Go), or `tools/registry_state.py`
+(shell and workflows), never with `cat`, `cp`, `git show`, or `jq` on its files. The
+Python and Go encoders must stay byte-identical: a change to the layout or encoding
+must update both implementations and
+`internal/gocrawl/testdata/registry-state/manifest.golden.json` in the same commit, and must keep a fallback for the previous layout for one release.

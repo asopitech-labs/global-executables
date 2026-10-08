@@ -148,8 +148,9 @@ An item-level partial result exits successfully for publication; only a fatal cr
 error fails the job. Inspect the durable diagnosis with:
 
 ```sh
-git show origin/artifact-data:data/production/registry-state.json \
-  | jq '.sources.conan | {cursor, retry_pending, retry_waiting, blocked, failure_details}'
+python3 tools/registry_state.py restore --ref origin/artifact-data --state /tmp/registry-state
+python3 tools/registry_state.py get --state /tmp/registry-state --source conan \
+  | jq '{cursor, retry_pending, retry_waiting, blocked, failure_details}'
 ```
 
 ## Registry crawl status
@@ -392,8 +393,9 @@ implementations from writing the same source.
 
 Each mounted source state directory contains:
 
-- `registry-state.json`, `intermediate/<source>.jsonl`, its cached catalog, and the report:
-  plain Python-compatible runtime snapshot views;
+- `registry-state/` (see [Registry crawl state layout](#registry-crawl-state-layout)),
+  `intermediate/<source>.jsonl`, its cached catalog, and the report: plain
+  Python-compatible runtime snapshot views;
 - `<source>-crawl.db`: the canonical local transaction store; and
 - `<catalog>.txt.index`: a rebuildable exact membership index for the immutable
   catalog prefix.
@@ -412,7 +414,7 @@ The lifecycle boundary is explicit:
 | `<source>-crawl.db` | Discovery cursor, retry verdicts, observations | Add the circular refresh cursor and package-level replacement index | keep | The transactional runtime is replaced | Store transaction tests and restart replay |
 | `<catalog>.txt.index` | Exact membership cache | Also provides offsets for bounded refresh batches | keep | The catalog reader no longer needs random restart offsets | Catalog replacement and append tests |
 | catalog text snapshot | Discovery denominator | Go extends incrementally; npm replaces daily; other sources replace on intentional resample | keep | An authoritative change feed replaces the snapshot | Catalog digest and size checks |
-| `registry-state.json`, JSONL, report | Published compatibility views | Publish discovery and refresh progress; replace stale package observations | keep | All consumers read a future canonical store directly | Export/re-import and publication tests |
+| `registry-state/`, JSONL, report | Published compatibility views | Publish discovery and refresh progress; replace stale package observations | keep | All consumers read a future canonical store directly | Export/re-import and publication tests |
 | Exhaustive-stop branch in continuous workers | Stops work at 100% | Illegal in continuous mode; retained only for explicit single-run jobs | shrink | No bounded single-run job requires it | Loop and shell-routing tests |
 | Python transactional-source runners | No owner | Remain deleted | delete | Already satisfied | Python rejects all five source names |
 
@@ -607,7 +609,9 @@ source snapshots without `catalog_size`, compare the cursor with the catalogue f
 
 ```sh
 python3 - <<'PY'
-import gzip, json, pathlib
+import gzip, pathlib, sys
+sys.path.insert(0, "src")  # run from the repository root
+from global_executables.registry_state import load_state
 for src, cat in (("pypi", "pypi-projects"), ("go", "go-modules"),
                  ("rubygems", "rubygems-names"), ("packagist", "packagist-packages")):
     d = pathlib.Path.home() / f".ge-crawl-{src}/data/production"
@@ -618,7 +622,7 @@ for src, cat in (("pypi", "pypi-projects"), ("go", "go-modules"),
     if not f:
         continue
     total = sum(1 for _ in (gzip.open if f.suffix == ".gz" else open)(f, "rt"))
-    s = json.loads((d / "registry-state.json").read_text())["sources"][src]
+    s = load_state(d / "registry-state")["sources"][src]
     print(f"{src:10} {s.get('cursor', 0):>9,}/{total:<9,} {s.get('cursor', 0) / total:6.1%}")
 PY
 ```
@@ -651,9 +655,11 @@ npm's `405` were found:
 
 ```sh
 python3 - <<'PY'
-import collections, json, pathlib, re
-for p in sorted(pathlib.Path.home().glob(".ge-crawl-*/data/production/registry-state.json")):
-    for name, s in json.loads(p.read_text()).get("sources", {}).items():
+import collections, pathlib, re, sys
+sys.path.insert(0, "src")  # run from the repository root
+from global_executables.registry_state import load_state
+for p in sorted(pathlib.Path.home().glob(".ge-crawl-*/data/production")):
+    for name, s in load_state(p / "registry-state").get("sources", {}).items():
         f = s.get("failures", {})
         if not f:
             continue
@@ -700,6 +706,110 @@ This machine runs Colima, not Docker Desktop. Two consequences:
   is missing, point `DOCKER_CONFIG` at a directory whose `config.json` is `{}` and
   set `DOCKER_HOST=unix://$HOME/.colima/default/docker.sock`, because a replacement
   config also drops the `colima` context.
+
+## Registry crawl state layout
+
+Every registry crawler resumes from one logical document,
+`{"version": 1, "sources": {"<source>": {...}}}`, written by the Python crawlers
+(crates.io, NuGet, ConanCenter) and by the Go transactional crawler. It used to be one
+`data/production/registry-state.json`; on `artifact-data` that file reached 92.7 MB,
+close to GitHub's 100 MB hard limit, almost all of it Go's `unavailable` map
+(1.18 million modules). The same document is now a directory of small files:
+
+```text
+data/production/registry-state/
+├── manifest.json              # commit point: layout version, summaries, size + SHA-256 of every file
+├── conan/source.json          # a source's checkpoint without its large maps
+├── go/source.json
+├── go/unavailable/00-00.jsonl # 256 shards of sorted ["module", "reason"] lines
+├── go/unavailable/01-10.jsonl
+├── ...
+├── pypi/source.json
+├── pypi/unavailable/0-0.jsonl # 16 shards
+└── ...
+```
+
+- **Sharding.** A map field (`unavailable`, `failures`, ...) with 1,024 or more entries
+  moves out of `source.json` into JSONL shards of `["key", value]` lines sorted by key.
+  A key's shard is the first hex digits of `sha256(key)`: one file (`all.jsonl`) up to
+  8,192 entries, then 16, 256, or 4,096 shards so a shard averages at most 8,192
+  entries (about 330 KB for Go). A run that changes a few keys rewrites only the shards
+  that hold them plus the manifest; unchanged files are not rewritten at all. The
+  shard name repeats its prefix reversed (`a3-3a.jsonl`) because Git pairs a changed
+  blob with its previous version by a hash of the path's last 16 characters: with
+  plain `a3.jsonl` names 112 of 256 hashes collided and a Go pass that touches every
+  shard pushed 7.5 MB of whole files instead of 43 KB of deltas.
+  `tests/test_registry_state.py` keeps the names collision-free.
+- **No compression.** Shards are plain text on purpose. Git already zlib-compresses
+  every object and delta-compresses text between versions; a gzip shard would turn a
+  three-line change into a whole new blob on every push. Catalogues are separate files
+  and keep their existing `.gz` and transport-shard forms.
+- **Canonical bytes.** `src/global_executables/registry_state.py` and
+  `internal/gocrawl/statestore.go` encode identically: UTF-8, sorted keys, compact
+  shard lines, two-space indented `manifest.json` and `source.json`, U+2028/U+2029
+  escaped, numbers kept as written. A Python publisher re-saving a Go checkpoint
+  therefore changes no bytes.
+  `internal/gocrawl/testdata/registry-state/manifest.golden.json` pins the SHA-256 of
+  every file produced from a trimmed real `artifact-data` sample, and both test suites
+  must reproduce it; the Go suite also round-trips through Python when
+  `python3` is available. `schema/registry-state-manifest.schema.json` describes the
+  manifest.
+- **Atomic replacement.** A save writes the changed files under `.staging/files/`,
+  then `.staging/manifest.json` (the commit point), renames the staged files into
+  place, renames the manifest last, and deletes files the new manifest no longer lists.
+  A writer stopped before the commit point leaves the previous state untouched and its
+  staging is discarded; one stopped after it is rolled forward by the next save or
+  `recover`. Readers prefer a committed staging area, verify every file against the
+  manifest's size and SHA-256, and retry when a concurrent save replaces files
+  underneath them, so they never assemble a mixture. One writer per state directory
+  still applies; the publication lock and per-source container directories keep it so.
+- **Paths.** Every `--state` option accepts the directory or the legacy `.json` path;
+  `data/production/registry-state.json` means "the layout at
+  `data/production/registry-state/`, falling back to the legacy file".
+
+Shell steps never touch the files directly. Use `tools/registry_state.py`:
+
+```sh
+python3 tools/registry_state.py restore --ref origin/artifact-data --state data/production/registry-state
+python3 tools/registry_state.py summary --state data/production/registry-state   # sizes and cursors
+python3 tools/registry_state.py get --state data/production/registry-state --source go --scalars
+python3 tools/registry_state.py copy --from A --to B [--only-source go]
+python3 tools/registry_state.py migrate --state legacy/registry-state.json --to /tmp/registry-state
+```
+
+Measured against `artifact-data` at `876e2c5` (2026-10-08 08:09 JST): the legacy file
+was 1 file of 92,679,802 bytes; the layout is 281 files and 83,001,850 bytes, the
+largest 331,367 bytes. Over the twelve publications of 2026-10-07 (UTC), the Git
+data each push sends fell from 39.5 KB to 11.6 KB in total (2.9–3.8 KB per push
+before, 0.7–1.5 KB after), each commit touching 2–6 files. A simulated Go pass that
+adds 600 and clears 50 `unavailable` modules touches 233 shards and pushes 43 KB,
+against 10 KB for the single file: the cost of spreading one map's changes across
+shards, and still small. The one-time migration commit pushes about 21 MB.
+
+### Migration and rollback
+
+Migration needs no manual step and no direct edit of a data branch. Until it happens,
+restores read the legacy file. The first publication after this layout reaches `main`
+(`tools/crawl_parallel.sh publish`, used by every CI publisher and the local booster)
+loads the published state, writes `registry-state/`, deletes
+`registry-state.json`, and records both in its ordinary "Record crawl data" commit.
+Local per-source directories migrate the same way the first time a crawler saves.
+
+Readers keep the legacy fallback for one release. To roll back after the branch has
+migrated, revert the code change and, before the next scheduled crawl, publish a
+legacy file regenerated from the directory (the old code cannot read the layout and
+would otherwise start every cursor from zero):
+
+```sh
+python3 tools/registry_state.py restore --ref origin/artifact-data --state /tmp/registry-state
+python3 - <<'PY'
+import json, sys
+sys.path.insert(0, "src")
+from global_executables.registry_state import load_state
+state = load_state("/tmp/registry-state")
+open("registry-state.json", "w").write(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+PY
+```
 
 ## Durable observation lifecycle
 
