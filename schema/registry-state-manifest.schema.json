@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/asopitech-labs/global-executables/schema/registry-state-manifest.schema.json",
+  "title": "Registry crawl state manifest",
+  "description": "data/production/registry-state/manifest.json: the commit point of the sharded registry crawl state. Every listed file must match its size and SHA-256; files not listed are not part of the state. See docs/OPERATIONS.md, src/global_executables/registry_state.py and internal/gocrawl/statestore.go.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["document", "files", "format", "layout_version", "sources"],
+  "properties": {
+    "format": {"const": "global-executables-registry-state"},
+    "layout_version": {"const": 1},
+    "document": {
+      "description": "Top-level keys of the logical state document other than sources, such as version.",
+      "type": "object",
+      "not": {"required": ["sources"]}
+    },
+    "files": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z0-9][a-z0-9_-]*/(source\\.json|[a-z0-9][a-z0-9_]*/(all|[0-9a-f]{1,3}-[0-9a-f]{1,3})\\.jsonl)$"},
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["bytes", "sha256"],
+        "properties": {
+          "bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z0-9][a-z0-9_-]*$"},
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fields", "summary"],
+        "properties": {
+          "fields": {
+            "description": "Maps stored as sha256(key)-prefix shards of sorted [key, value] JSON lines.",
+            "type": "object",
+            "propertyNames": {"pattern": "^[a-z0-9][a-z0-9_]*$"},
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["entries", "prefix_length"],
+              "properties": {
+                "entries": {"type": "integer", "minimum": 1024},
+                "prefix_length": {"type": "integer", "minimum": 0, "maximum": 3}
+              }
+            }
+          },
+          "summary": {
+            "description": "Copies of the source's scalar progress fields, for humans reading the branch.",
+            "type": "object",
+            "propertyNames": {"enum": ["catalog_complete", "catalog_digest", "catalog_size", "catalog_snapshot", "cursor", "refresh_cursor", "snapshot_generation"]}
+          }
+        }
+      }
+    }
+  }
+}
