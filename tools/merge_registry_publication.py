@@ -11,8 +11,13 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from global_executables.registry_state import load_state, save_state  # noqa: E402
 
 
 def read_json(path: Path, fallback: dict[str, Any]) -> dict[str, Any]:
@@ -101,8 +106,10 @@ def would_regress(published: Any, local: Any) -> bool:
 
 
 def merge_state(source: str, published_path: Path, local_path: Path) -> tuple[bool, int | None, int | None]:
-    published = read_json(published_path, {"version": 1, "sources": {}})
-    local = read_json(local_path, {"version": 1, "sources": {}})
+    # State paths may name the sharded directory or the legacy file; saving writes the
+    # directory and removes the legacy file, which migrates the published branch.
+    published = load_state(published_path, {"version": 1, "sources": {}})
+    local = load_state(local_path, {"version": 1, "sources": {}})
     published_sources = published.setdefault("sources", {})
     local_entry = local.get("sources", {}).get(source)
     if not isinstance(published_sources, dict) or not isinstance(local_entry, dict):
@@ -112,7 +119,7 @@ def merge_state(source: str, published_path: Path, local_path: Path) -> tuple[bo
     if would_regress(previous, local_entry):
         return False, before, after
     published_sources[source] = local_entry
-    write_json_atomic(published_path, published)
+    save_state(published_path, published)
     return True, before, after
 
 

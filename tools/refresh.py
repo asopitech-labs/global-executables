@@ -9,6 +9,7 @@ from datetime import date
 from pathlib import Path
 
 from global_executables.pipeline import RebuildPolicy, rebuild, sync_npm_coverage
+from global_executables.registry_state import load_state
 
 
 def _write_report(path: Path, report: dict) -> None:
@@ -41,7 +42,7 @@ def main(argv: list[str] | None = None) -> int:
     if not isinstance(coverage, (str, dict)):
         raise SystemExit("coverage map must be a JSON object")
     if args.registry_state and isinstance(coverage, dict):
-        state = json.loads(args.registry_state.read_text()) if args.registry_state.is_file() else {}
+        state = load_state(args.registry_state, {})
         coverage = sync_npm_coverage(coverage, state)
     try:
         result = rebuild(

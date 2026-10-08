@@ -12,7 +12,12 @@ merger = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(merger)
 module_merge_state = merger.merge_state
 WORKFLOW = (ROOT / ".github/workflows/registry-artifacts.yml").read_text()
+load_state = merger.load_state
 PARALLEL = (ROOT / "tools/crawl_parallel.sh").read_text()
+
+
+def merged_state_is_sharded(legacy: Path) -> bool:
+    return (legacy.with_suffix("") / "manifest.json").is_file() and not legacy.exists()
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -85,7 +90,9 @@ def run_merge(
         text=True,
     )
     assert completed.returncode == expected_returncode, completed.stderr
-    return json.loads(published_state.read_text()), json.loads(published_report.read_text())
+    # Publishing migrates the legacy file to the sharded directory beside it.
+    assert merged_state_is_sharded(published_state) == (expected_returncode == 0)
+    return load_state(published_state), json.loads(published_report.read_text())
 
 
 def test_merger_updates_only_the_owned_source(tmp_path):
@@ -148,7 +155,7 @@ def test_merger_accepts_cursor_reset_for_a_new_catalog(tmp_path):
     )
 
     assert completed.returncode == 0, completed.stderr
-    assert json.loads(published_state.read_text())["sources"]["npm"]["cursor"] == 2_295
+    assert load_state(published_state)["sources"]["npm"]["cursor"] == 2_295
     assert json.loads(published_report.read_text())["sources"]["npm"]["coverage_kind"] == "exhaustive"
 
 
@@ -233,6 +240,7 @@ def test_both_publishers_use_source_owned_merge():
     assert "bash tools/crawl_parallel.sh publish" in WORKFLOW
     assert "SOURCES=crates" in WORKFLOW
     assert "cp data/production/registry-state.json /tmp/artifact-publish" not in WORKFLOW
+    assert '--published-state "${worktree}/data/production/registry-state"' in PARALLEL
     assert "merge_registry_publication.py" in PARALLEL
     assert "merge_status" in PARALLEL
 

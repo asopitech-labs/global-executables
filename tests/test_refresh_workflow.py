@@ -21,8 +21,9 @@ def test_refresh_reuses_durable_os_samples_by_default():
                                 "nuget", "macos", "shell"}:
         assert source in restore
     assert "origin/dictionary:reports/production-crawl.json" in REFRESH
-    assert "origin/artifact-data:data/production/registry-state.json" in restore
-    assert "--registry-state /tmp/registry-state.json" in REFRESH
+    assert "tools/registry_state.py restore --ref origin/artifact-data" in restore
+    assert "--state /tmp/registry-state" in restore
+    assert "--registry-state /tmp/registry-state " in REFRESH
 
     acquire = REFRESH.split("Acquire production OS indexes", 1)[1].split("Publish refreshed OS observations", 1)[0]
     assert "if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples" in acquire

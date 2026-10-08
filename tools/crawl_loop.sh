@@ -72,7 +72,7 @@ while :; do
   # cannot answer that, so the kill after it is what actually ends a hang.
   timeout --signal=TERM --kill-after=120 "${PASS_TIMEOUT}" \
     python /app/tools/registry_artifact_crawl.py "$@" \
-    --state data/production/registry-state.json \
+    --state data/production/registry-state \
     --output-dir data/production/intermediate \
     --report reports/registry-artifact-crawl.json \
     --package-budget "${PACKAGE_BUDGET}" \

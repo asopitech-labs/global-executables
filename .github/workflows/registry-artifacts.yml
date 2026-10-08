@@ -42,9 +42,10 @@ jobs:
         run: |
           git fetch --depth=1 origin artifact-data || true
           mkdir -p data/production/intermediate
-          if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
-            git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
-          fi
+          # Reads the sharded layout, or the legacy registry-state.json until the first
+          # publication after the layout change migrates the branch.
+          python3 tools/registry_state.py restore --ref origin/artifact-data \
+            --state data/production/registry-state
           if git cat-file -e origin/artifact-data:data/production/transport/crates-observations/manifest.json 2>/dev/null; then
             rm -rf /tmp/crates-observation-transport
             mkdir -p /tmp/crates-observation-transport
@@ -70,7 +71,7 @@ jobs:
           rm -f reports/registry-artifact-crawl.json
           python tools/registry_artifact_crawl.py \
             --source crates \
-            --state data/production/registry-state.json \
+            --state data/production/registry-state \
             --output-dir data/production/intermediate \
             --report reports/registry-artifact-crawl.json \
             --package-budget "$PACKAGE_BUDGET" \
@@ -93,8 +94,8 @@ jobs:
           rm -rf /tmp/ci-registry-crates
           mkdir -p /tmp/ci-registry-crates/data/production/intermediate \
             /tmp/ci-registry-crates/reports
-          cp data/production/registry-state.json \
-            /tmp/ci-registry-crates/data/production/registry-state.json
+          python3 tools/registry_state.py copy --from data/production/registry-state \
+            --to /tmp/ci-registry-crates/data/production/registry-state
           if test -f data/production/intermediate/crates.jsonl; then
             cp data/production/intermediate/crates.jsonl \
               /tmp/ci-registry-crates/data/production/intermediate/crates.jsonl
@@ -160,9 +161,10 @@ jobs:
         run: |
           git fetch --depth=1 origin artifact-data || true
           mkdir -p data/production/intermediate reports
-          if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
-            git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
-          fi
+          # Reads the sharded layout, or the legacy registry-state.json until the first
+          # publication after the layout change migrates the branch.
+          python3 tools/registry_state.py restore --ref origin/artifact-data \
+            --state data/production/registry-state
           if git cat-file -e origin/artifact-data:data/production/transport/npm-observations/manifest.json 2>/dev/null; then
             rm -rf /tmp/npm-observation-transport
             mkdir -p /tmp/npm-observation-transport
@@ -177,13 +179,16 @@ jobs:
           fi
           python3 - <<'PY'
           import hashlib
-          import json
+          import sys
           from datetime import date
           from pathlib import Path
 
-          path = Path("data/production/registry-state.json")
+          sys.path.insert(0, "src")
+          from global_executables.registry_state import load_state, save_state
+
+          path = Path("data/production/registry-state")
           catalog = Path("data/production/npm-critical-packages.txt")
-          state = json.loads(path.read_text()) if path.is_file() else {"version": 1, "sources": {}}
+          state = load_state(path)
           state.setdefault("sources", {})["npm"] = {
               "catalog_complete": True,
               "catalog_digest": "sha256:" + hashlib.sha256(catalog.read_bytes()).hexdigest(),
@@ -198,7 +203,7 @@ jobs:
               "retry_npm": [],
               "unavailable": {},
           }
-          path.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+          save_state(path, state)
           PY
       - name: Inspect the complete critical npm population
         run: |
@@ -216,8 +221,8 @@ jobs:
         run: |
           mkdir -p /tmp/ci-registry-npm/data/production/intermediate \
             /tmp/ci-registry-npm/reports
-          cp data/production/registry-state.json \
-            /tmp/ci-registry-npm/data/production/registry-state.json
+          python3 tools/registry_state.py copy --from data/production/registry-state \
+            --to /tmp/ci-registry-npm/data/production/registry-state
           cp data/production/npm-critical-packages.txt \
             /tmp/ci-registry-npm/data/production/npm-critical-packages.txt
           cp data/production/intermediate/npm.jsonl \

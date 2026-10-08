@@ -10,7 +10,7 @@ from global_executables.registry_artifact import crawl_registry_sources, install
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--source", action="append", choices=["conan", "crates", "nuget"], required=True)
-parser.add_argument("--state", type=Path, default=Path("data/production/registry-state.json"))
+parser.add_argument("--state", type=Path, default=Path("data/production/registry-state"))
 parser.add_argument("--output-dir", type=Path, default=Path("data/production/intermediate"))
 parser.add_argument("--report", type=Path, default=Path("reports/registry-artifact-crawl.json"))
 parser.add_argument("--package-budget", type=int, default=100)

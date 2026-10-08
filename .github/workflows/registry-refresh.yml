@@ -49,10 +49,10 @@ jobs:
         run: |
           BASE="/tmp/ci-refresh-${SOURCE}" SOURCES="${SOURCE}" OBSERVATION_SOURCES=' ' \
             bash tools/crawl_parallel.sh seed
-          state="/tmp/ci-refresh-${SOURCE}/data/production/registry-state.json"
-          if jq -e --arg source "${SOURCE}" \
-            '.sources[$source] | select((.catalog_size | type) == "number") | select(.cursor >= .catalog_size) | select(.catalog_complete != false)' \
-            "${state}" >/dev/null; then
+          state="/tmp/ci-refresh-${SOURCE}/data/production/registry-state"
+          if python3 tools/registry_state.py get --state "${state}" --source "${SOURCE}" --scalars | jq -e \
+            'select((.catalog_size | type) == "number") | select(.cursor >= .catalog_size) | select(.catalog_complete != false)' \
+            >/dev/null; then
             echo "eligible=true" >> "$GITHUB_OUTPUT"
           else
             echo "eligible=false" >> "$GITHUB_OUTPUT"
@@ -80,7 +80,7 @@ jobs:
         run: |
           root="/tmp/ci-refresh-${SOURCE}"
           python tools/registry_artifact_crawl.py --source nuget \
-            --state "${root}/data/production/registry-state.json" \
+            --state "${root}/data/production/registry-state" \
             --output-dir "${root}/data/production/intermediate" \
             --report "${root}/reports/registry-artifact-crawl.json" \
             --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}"
