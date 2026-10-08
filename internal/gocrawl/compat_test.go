@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"os"
 	"path/filepath"
 	"testing"
@@ -80,7 +81,10 @@ func TestCompatibilityImportAndExportPreserveOtherSources(t *testing.T) {
 	}
 
 	var exported map[string]any
-	stateBytes, _ := os.ReadFile(statePath)
+	stateBytes := readStateForTest(t, statePath)
+	if _, err := os.Stat(statePath); !errors.Is(err, os.ErrNotExist) {
+		t.Fatalf("legacy state file survived the export: %v", err)
+	}
 	if err := json.Unmarshal(stateBytes, &exported); err != nil {
 		t.Fatal(err)
 	}
