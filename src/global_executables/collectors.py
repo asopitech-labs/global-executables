@@ -347,10 +347,23 @@ def xmake_packages(packages, source="xmake-repo"):
 CONAN_MANIFEST_BIN = re.compile(r"^bin/([^/:]+):", re.M)
 # A built package puts more than commands under `bin/`: import libraries, debug
 # symbols and the odd data file live there too, on Windows especially.
+# `conanmanifest.txt` carries no executable bit, so these are filtered by name.  The
+# lists are conservative: only names that are never invoked as a command are dropped,
+# and scripts (`.py`, `.sh`, `.pl`) are kept because `bin/` scripts are commands.
 CONAN_NON_COMMAND_SUFFIXES = (
     ".dll", ".so", ".dylib", ".lib", ".a", ".pdb", ".exp", ".ilk", ".def",
     ".txt", ".md", ".cmake", ".json", ".xml", ".yml", ".yaml", ".h", ".hpp", ".pc",
+    # Configuration, packaging metadata, documentation and resources.
+    ".cfg", ".conf", ".config", ".ini", ".toml", ".in", ".manifest", ".plist",
+    ".html", ".htm", ".rst", ".jar", ".pyc", ".pyo", ".ico", ".png", ".mo", ".qm",
 )
+# Versioned shared libraries: `libfoo.so.1`, `libfoo.so.1.2.3`.
+CONAN_SHARED_LIBRARY = re.compile(r"\.so(\.\d+)+$", re.I)
+# Upper-case documentation and ownership files that projects drop next to their tools
+# (`depot_tools` ships `OWNERS` and `LUCI_OWNERS`; `meson` ships `COPYING`, `PKG-INFO`).
+CONAN_NON_COMMAND_NAMES = re.compile(
+    r"^(LICEN[CS]E|COPYING|COPYRIGHT|NOTICE|README|AUTHORS|CHANGELOG|CHANGES|NEWS|"
+    r"OWNERS|[A-Z]+_OWNERS|PKG-INFO|DIR_METADATA|MANIFEST)([._-].*)?$")
 
 
 def conan_manifest_commands(manifest):
@@ -365,7 +378,8 @@ def conan_manifest_commands(manifest):
         name = entry.strip()
         if not name or name.startswith("."):
             continue
-        if name.lower().endswith(CONAN_NON_COMMAND_SUFFIXES):
+        if (name.lower().endswith(CONAN_NON_COMMAND_SUFFIXES) or CONAN_SHARED_LIBRARY.search(name)
+                or CONAN_NON_COMMAND_NAMES.match(name)):
             continue
         command = declared_command(name)
         if command and COMMAND_NAME.match(command):

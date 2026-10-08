@@ -91,6 +91,15 @@ def test_conan_commands_come_from_the_built_package_file_list():
     assert conan_manifest_commands((ROOT / "conanmanifest-headeronly.txt").read_text()) == []
 
 
+def test_conan_drops_bin_entries_that_are_never_commands():
+    # Names taken from published ConanCenter rows: meson shipped COPYING, PKG-INFO,
+    # setup.cfg and pyproject.toml in bin/, depot_tools LICENSE and OWNERS files,
+    # dependencies *.exe.config, maven m2.conf and zserio a jar.
+    commands = conan_manifest_commands((ROOT / "conanmanifest-noncommands.txt").read_text())
+    # Scripts and real executables stay; a Windows suffix is removed as before.
+    assert commands == ["Dependencies", "gclient.py", "meson", "meson.py"]
+
+
 def test_cpp_recipe_rows_carry_ecosystem_and_evidence_provenance():
     rows = _cpp_rows()
     assert {row["ecosystem"] for row in rows} == {"vcpkg", "xmake"}

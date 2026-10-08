@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- ConanCenter: `bin/` entries that are never commands are no longer recorded
+  (`LICENSE`, `COPYING`, `OWNERS`, `PKG-INFO`, `setup.cfg`, `pyproject.toml`,
+  `*.exe.config`, `*.jar`, `*.conf`, versioned `.so` libraries, ...). Scripts are kept
+  (#58).
 - xmake: the recorded version is the newest declared one rather than the last
   `add_versions` line (`meson` was published as 0.50.1 instead of 1.12.1), and bundle
   packages such as `autotools`, `binutils`, and `*-tools` no longer yield an inferred

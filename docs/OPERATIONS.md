@@ -516,6 +516,17 @@ yields an inferred command, because their name is not a command any of them inst
 (`depot_tools`, `linux-tools`, `qt-tools`, `vulkan-tools`, ...). On the 2026-10-08
 snapshot this leaves 104 of the 117 binary packages.
 
+`conanmanifest.txt` lists files without their executable bit, so `bin/` entries are
+filtered by name, conservatively: libraries (`.dll`, `.so`, `.so.1.2`, `.dylib`, `.lib`,
+...), configuration and packaging metadata (`.cfg`, `.conf`, `.config`, `.ini`, `.toml`,
+`.in`, `.json`, `.txt`, ...), documentation and resources (`.md`, `.html`, `.rst`,
+`.png`, `.jar`, ...), and upper-case documentation or ownership files (`LICENSE`,
+`COPYING`, `NOTICE`, `README`, `OWNERS`, `*_OWNERS`, `PKG-INFO`, `DIR_METADATA`,
+`MANIFEST`). Scripts such as `.py`, `.sh`, and `.pl` are kept, because a script in
+`bin/` is a command. On the published 2026-10-07 rows this drops 23 of 1,818, all of
+them non-commands; the per-package replacement removes them as the refresh rotation
+re-inspects each recipe.
+
 Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
 `7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs
 `activemqcpp-config`, which is why the whole recipe population is walked rather than
