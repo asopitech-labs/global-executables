@@ -461,7 +461,7 @@ record's confidence says which that was.
 | Source | Population | Evidence | Confidence | Why it is not exhaustive |
 | --- | --- | --- | --- | --- |
 | vcpkg | `ports/*` of the `microsoft/vcpkg` snapshot | `vcpkg_copy_tools(TOOL_NAMES ...)` in `portfile.cmake` | `direct` | A port can install a command without calling `vcpkg_copy_tools`, and a name built from a CMake variable is counted rather than guessed at |
-| conan | `recipes/*/config.yml` of the `conan-io/conan-center-index` snapshot | `bin/` entries of the built package, read from `conanmanifest.txt` | `filesystem` | A recipe nobody has built publishes no file list, and those recipes are counted as `uninspected` |
+| conan | `recipes/*/config.yml` of the `conan-io/conan-center-index` snapshot | `bin/` entries of the built package, read from `conanmanifest.txt` | `filesystem` | A recipe nobody has built publishes no file list, and those recipes are counted as `uninspected`; a recipe the remote does not publish is counted as `unavailable`, and both hold the source short of complete |
 | xmake | `packages/*/*/xmake.lua` of the `xmake-io/xmake-repo` snapshot | `set_kind("binary")` | `inferred` | xmake declares that a package installs a command but never what the command is called, so the package name stands in for it |
 
 `cpp-registries.yml` owns all three daily. The vcpkg and xmake populations are one
@@ -483,6 +483,15 @@ whole calls (`mnn`). When a vcpkg port or xmake package is present in the snapsh
 parsed, its new rows replace every older row for that package, so a name an earlier
 parser produced by mistake is dropped on the next run. A package that has left the
 snapshot keeps its rows as durable evidence that the name was published.
+
+Versions in `config.yml` may be double-quoted, single-quoted (`fff`: `'1.1'`), or bare;
+the quote is stripped before the reference is built. The newest declared version is
+inspected first. When the remote answers 404 for it (`gcc/16.1.0` is declared before it
+is published) or has no built package for it, the remote's `search` endpoint lists the
+published versions and up to `CONAN_FALLBACK_VERSIONS` (3) older ones are tried, newest
+first. A row's `version` is the version actually inspected and `latest_version` is the
+version the recipe declares. A 404 that no fallback resolves leaves the recipe
+`unavailable`, which now counts against completeness like `uninspected`.
 
 The recipe catalogue is re-read once the walk has reached its end and the catalogue on
 file is older than seven days (`CONAN_CATALOG_MAX_AGE`); a catalogue with no

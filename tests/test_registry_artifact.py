@@ -487,7 +487,7 @@ def test_conan_commits_each_item_when_checkpoint_interval_is_one(tmp_path, monke
     catalog = tmp_path / "conan-recipes.txt"
     registry_artifact.write_catalog(catalog, ["demotool/1.0.0"])
     monkeypatch.setattr(registry_artifact, "_conan_package_commands",
-                        lambda reference, timeout: (["demotool"], "https://example.invalid/manifest", 1))
+                        lambda reference, timeout: (["demotool"], "https://example.invalid/manifest", 1, reference.partition("/")[2]))
     monkeypatch.setattr(registry_artifact, "CHECKPOINT_INTERVAL", 1)
     checkpoints = []
 
@@ -503,7 +503,7 @@ def test_signal_stops_after_checkpoint_and_leaves_the_next_cursor(tmp_path, monk
     catalog = tmp_path / "conan-recipes.txt"
     registry_artifact.write_catalog(catalog, ["alpha/1.0.0", "beta/1.0.0"])
     monkeypatch.setattr(registry_artifact, "_conan_package_commands",
-                        lambda reference, timeout: ([reference.split("/", 1)[0]], "manifest", 1))
+                        lambda reference, timeout: ([reference.split("/", 1)[0]], "manifest", 1, reference.partition("/")[2]))
     calls = []
 
     def stop_after_first_item():
@@ -1012,7 +1012,7 @@ def test_conan_retry_clears_the_full_recipe_failure_key(tmp_path, monkeypatch):
     catalog = tmp_path / "conan-recipes.txt"
     registry_artifact.write_catalog(catalog, ["demotool/1.0.0"])
     monkeypatch.setattr(registry_artifact, "_conan_package_commands",
-                        lambda reference, timeout: (["demotool"], "https://example.invalid/manifest", 1))
+                        lambda reference, timeout: (["demotool"], "https://example.invalid/manifest", 1, reference.partition("/")[2]))
     state = {"recipes_file": str(catalog), "cursor": 1, "catalog_size": 1,
              "catalog_complete": True,
              # A freshly read catalogue: this test is about the retry, not the re-read.
@@ -1069,7 +1069,7 @@ def test_conan_rollover_keeps_unfinished_pending_recipes_for_the_next_run(tmp_pa
     monkeypatch.setattr(registry_artifact, "_conan_catalog",
                         lambda timeout: (["alpha/1.0", "beta/1.0", "gamma/1.0"], 10))
     monkeypatch.setattr(registry_artifact, "_conan_package_commands",
-                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1))
+                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1, reference.partition("/")[2]))
 
     first = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
     assert first["catalog_pending"] == 1 and first["complete"] is False
@@ -1088,7 +1088,7 @@ def test_conan_catalogue_is_not_reread_mid_walk_and_a_failed_reread_keeps_the_ol
     monkeypatch.setattr(registry_artifact, "_conan_catalog",
                         lambda timeout: pytest.fail("the initial walk must finish on the catalogue it counted"))
     monkeypatch.setattr(registry_artifact, "_conan_package_commands",
-                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1))
+                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1, reference.partition("/")[2]))
     report = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
     assert report["cursor"] == 1 and "catalog_refresh" not in report
 
@@ -1108,7 +1108,92 @@ def test_conan_catalogue_that_differs_from_the_walked_one_restarts_the_walk(tmp_
     state = _stale_conan_state(catalog, ["alpha/1.0", "beta/1.0"], days_old=0)
     state["catalog_digest"] = "sha256:" + "0" * 64
     monkeypatch.setattr(registry_artifact, "_conan_package_commands",
-                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1))
+                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1, reference.partition("/")[2]))
     report = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
     assert report["catalog_refresh"]["status"] == "reset"
     assert report["cursor"] == 1 and report["catalog_size"] == 2
+
+
+def _conan_built(name: str, version: str, manifest: str) -> dict[str, bytes]:
+    base = f"https://center2.conan.io/v2/conans/{name}/{version}/_/_/revisions"
+    return {
+        base: b'{"revisions": [{"revision": "rr1", "time": "2026-01-01T00:00:00.000+0000"}]}',
+        f"{base}/rr1/search": b'{"linpkg": {"settings": {"os": "Linux"}}}',
+        f"{base}/rr1/packages/linpkg/revisions":
+            b'{"revisions": [{"revision": "pr1", "time": "2026-01-02T00:00:00.000+0000"}]}',
+        f"{base}/rr1/packages/linpkg/revisions/pr1/files/conanmanifest.txt": manifest.encode(),
+    }
+
+
+def _conan_fake_fetch(responses):
+    def fake_fetch(url, timeout=120, attempts=4):
+        if url not in responses:
+            raise urllib.error.HTTPError(url, 404, "Not Found", None, None)
+        return responses[url], {"downloaded_bytes": len(responses[url])}
+    return fake_fetch
+
+
+def test_conan_catalogue_unquotes_single_and_double_quoted_versions(monkeypatch):
+    # fff's real config.yml quotes its version with single quotes, which used to reach
+    # the remote as `fff/'1.1'` and come back 404.
+    index = _conan_index_tarball({"fff": "  '1.1':\n    folder: all\n",
+                                  "type_safe": "  '0.2.1':\n    folder: all\n  \"0.2.4\":\n    folder: all\n",
+                                  "zlib": "  1.3.1:\n    folder: all\n"})
+    monkeypatch.setattr(registry_artifact, "fetch", _conan_fake_fetch({registry_artifact.CONAN_INDEX: index}))
+    references, _ = registry_artifact._conan_catalog(120)
+    assert references == ["fff/1.1", "type_safe/0.2.4", "zlib/1.3.1"]
+
+
+def test_conan_falls_back_to_an_older_built_version_when_the_newest_is_not_published(monkeypatch):
+    # gcc/16.1.0 is declared in conan-center-index but the remote answered 404 for it.
+    responses = {
+        "https://center2.conan.io/v2/conans/search?q=gcc":
+            b'{"results": ["gcc/10.2.0@_/_", "gcc/15.1.0@_/_", "gcc/15.2.0@_/_", "gcc/15.2.0@other/stable"]}',
+        **_conan_built("gcc", "15.2.0", "1\nbin/gcc: aa\nbin/g++: bb\nlib/libgcc.a: cc\n"),
+        # 15.1.0 is published but has no built package; 15.2.0 is newer and tried first.
+        "https://center2.conan.io/v2/conans/gcc/15.1.0/_/_/revisions":
+            b'{"revisions": [{"revision": "rr1", "time": "2026-01-01T00:00:00.000+0000"}]}',
+        "https://center2.conan.io/v2/conans/gcc/15.1.0/_/_/revisions/rr1/search": b"{}",
+    }
+    monkeypatch.setattr(registry_artifact, "fetch", _conan_fake_fetch(responses))
+    commands, manifest_url, _, version = registry_artifact._conan_package_commands("gcc/16.1.0", 120)
+    assert (commands, version) == (["g++", "gcc"], "15.2.0")
+    assert "/gcc/15.2.0/" in manifest_url
+
+
+def test_conan_fallback_is_bounded_and_an_unresolved_404_is_raised(monkeypatch):
+    responses = {"https://center2.conan.io/v2/conans/search?q=demo":
+                 b'{"results": ["demo/1.0@_/_", "demo/2.0@_/_", "demo/3.0@_/_", "demo/4.0@_/_", "demo/5.0@_/_"]}',
+                 **_conan_built("demo", "1.0", "1\nbin/demo: aa\n")}
+    requested = []
+    fake = _conan_fake_fetch(responses)
+
+    def recording_fetch(url, timeout=120, attempts=4):
+        requested.append(url)
+        return fake(url, timeout, attempts)
+
+    monkeypatch.setattr(registry_artifact, "fetch", recording_fetch)
+    with pytest.raises(urllib.error.HTTPError):
+        registry_artifact._conan_package_commands("demo/6.0", 120)
+    tried = sorted({url.split("/demo/", 1)[1].split("/", 1)[0] for url in requested if "/demo/" in url})
+    # The newest plus CONAN_FALLBACK_VERSIONS older versions; demo/1.0 is never reached.
+    assert tried == ["3.0", "4.0", "5.0", "6.0"]
+
+
+def test_conan_unavailable_recipes_hold_the_source_short_of_complete(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    state = _stale_conan_state(catalog, ["gcc/16.1.0", "gone/1.0"], days_old=0, cursor=0)
+    responses = {"https://center2.conan.io/v2/conans/search?q=gcc": b'{"results": ["gcc/15.2.0@_/_"]}',
+                 **_conan_built("gcc", "15.2.0", "1\nbin/gcc: aa\n")}
+    monkeypatch.setattr(registry_artifact, "fetch", _conan_fake_fetch(responses))
+    state["unavailable"] = {"gcc/16.1.0": "HTTP Error 404: Not Found"}
+    output = tmp_path / "conan.jsonl"
+    report = registry_artifact._crawl_conan(state, output, 10, 1_000_000, 120)
+    rows = [json.loads(line) for line in output.read_text().splitlines() if line.strip()]
+
+    assert [(row["command"], row["version"], row["latest_version"]) for row in rows] == [
+        ("gcc", "15.2.0", "16.1.0")]
+    # gcc is resolved by the fallback; gone/1.0 is published nowhere and is never inspected.
+    assert sorted(state["unavailable"]) == ["gone/1.0"]
+    assert report["unavailable"] == 1 and report["uninspected"] == 0 and report["failures"] == 0
+    assert report["complete"] is False and report["coverage_kind"] == "partial"

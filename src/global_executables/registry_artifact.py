@@ -1131,7 +1131,13 @@ CONAN_REMOTE = "https://center2.conan.io/v2/conans"
 # A command set barely differs across build configurations, so one is inspected, and
 # the manifest URL records which.  Linux first because its binaries carry no suffix.
 CONAN_PREFERRED_OS = ("Linux", "Macos", "Windows")
-CONAN_CONFIG_VERSION = re.compile(r'^\s{2}"?([^"\s:]+)"?:\s*$', re.M)
+# config.yml quotes a version with double quotes, single quotes (`fff`: `'1.1'`), or
+# not at all; the quote is YAML syntax and never part of the reference.
+CONAN_CONFIG_VERSION = re.compile(r"""^\s{2}(["']?)([^"'\s:]+)\1:\s*$""", re.M)
+# When the newest declared version has no built package (it is not yet published, so the
+# remote answers 404, or nobody has built it), older published versions are tried, at
+# most this many, so a recipe such as gcc/16.1.0 still yields gcc 15.2.0's commands.
+CONAN_FALLBACK_VERSIONS = 3
 # conan-center-index moves daily.  The walk reads the catalogue once and then refreshes
 # the recipes it lists, so without a re-read new recipes and new versions never reach
 # the index.  Once the walk has reached the end of the catalogue, a catalogue older than
@@ -1166,7 +1172,8 @@ def _conan_catalog(timeout: int) -> tuple[list[str], int]:
             handle = archive.extractfile(member)
             if handle is None:
                 continue
-            declared = CONAN_CONFIG_VERSION.findall(handle.read().decode("utf-8", "replace"))
+            declared = [match.group(2) for match in
+                        CONAN_CONFIG_VERSION.finditer(handle.read().decode("utf-8", "replace"))]
             if declared:
                 versions[parts[2]] = declared
     if not versions:
@@ -1175,16 +1182,74 @@ def _conan_catalog(timeout: int) -> tuple[list[str], int]:
             transfer["downloaded_bytes"])
 
 
-def _conan_package_commands(reference: str, timeout: int) -> tuple[list[str], str, int]:
+def _not_found(error: Exception) -> bool:
+    return ((isinstance(error, urllib.error.HTTPError) and error.code == 404)
+            or (isinstance(error, RegistryRequestError) and error.status_code == 404))
+
+
+def _conan_published_versions(name: str, timeout: int) -> tuple[list[str], int]:
+    """List the versions of one recipe the remote publishes, newest first."""
+    body, transfer = _fetch_stage(f"{CONAN_REMOTE}/search?q={urllib.parse.quote(name, safe='')}",
+                                  timeout, "conan.version_search")
+    versions = set()
+    for found in json.loads(body).get("results") or []:
+        base, _, user_channel = str(found).partition("@")
+        found_name, _, found_version = base.partition("/")
+        if found_name == name and found_version and user_channel in ("", "_/_"):
+            versions.add(found_version)
+    return sorted(versions, key=_version_key, reverse=True), transfer["downloaded_bytes"]
+
+
+def _conan_package_commands(reference: str, timeout: int) -> tuple[list[str], str, int, str]:
+    """Inspect one ConanCenter recipe for the commands it installs.
+
+    Returns the commands, the manifest URL ("" when no built package was found), the
+    bytes downloaded, and the version actually inspected.  The newest declared version
+    is tried first; when the remote does not publish it (404) or has no built package
+    for it, up to `CONAN_FALLBACK_VERSIONS` older published versions are tried.  A 404
+    that no fallback resolves is raised, so the recipe is recorded as unavailable.
+    """
+    name, _, version = reference.partition("/")
+    if not name or not version:
+        raise RegistryCrawlError(f"malformed recipe reference: {reference}")
+    missing: Exception | None = None
+    try:
+        commands, manifest_url, downloaded = _conan_version_commands(name, version, timeout)
+    except Exception as error:
+        if not _not_found(error):
+            raise
+        commands, manifest_url, downloaded, missing = [], "", 0, error
+    if manifest_url:
+        return commands, manifest_url, downloaded, version
+    try:
+        published, spent = _conan_published_versions(name, timeout)
+        downloaded += spent
+    except Exception as error:
+        if not _not_found(error):
+            raise
+        published = []
+    for candidate in [found for found in published if found != version][:CONAN_FALLBACK_VERSIONS]:
+        try:
+            commands, manifest_url, spent = _conan_version_commands(name, candidate, timeout)
+        except Exception as error:
+            if not _not_found(error):
+                raise
+            continue
+        downloaded += spent
+        if manifest_url:
+            return commands, manifest_url, downloaded, candidate
+    if missing is not None:
+        raise missing
+    return [], "", downloaded, version
+
+
+def _conan_version_commands(name: str, version: str, timeout: int) -> tuple[list[str], str, int]:
     """Inspect one ConanCenter binary package for the commands it installs.
 
     A conan recipe never declares its executables, so the evidence is the built
     package's own file list.  `conanmanifest.txt` carries that list as a small text
     file, which is far less than the package archive it describes.
     """
-    name, _, version = reference.partition("/")
-    if not name or not version:
-        raise RegistryCrawlError(f"malformed recipe reference: {reference}")
     quoted = f"{urllib.parse.quote(name, safe='')}/{urllib.parse.quote(version, safe='')}"
     revisions_url = f"{CONAN_REMOTE}/{quoted}/_/_/revisions"
     body, transfer = _fetch_stage(revisions_url, timeout, "conan.revisions")
@@ -1337,13 +1402,15 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             reference = retry_candidates.pop(0) if retrying else recipes[cursor]
         package, _, version = reference.partition("/")
         try:
-            commands, manifest_url, spent = _conan_package_commands(reference, timeout)
+            commands, manifest_url, spent, inspected_version = _conan_package_commands(reference, timeout)
             downloaded += spent
+            unavailable.pop(reference, None)
             if manifest_url:
                 uninspected.pop(reference, None)
             else:
                 uninspected[reference] = "no built package published for this recipe"
-            package_rows = [record(command, "conan", package, version,
+            # `version` is what was inspected; `latest_version` is what the recipe declares.
+            package_rows = [record(command, "conan", package, inspected_version,
                                    "https://github.com/conan-io/conan-center-index",
                                    manifest_url or CONAN_REMOTE, "filesystem",
                                    source_type="language_package", language="c++",
@@ -1387,8 +1454,10 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     collected += len(rows)
     _replace_package_rows(output, replaced_packages, replacement_rows)
     retry_waiting = _retry_waiting_count(state, "retry_recipes")
+    # A recipe the remote does not publish was never inspected either, so it holds the
+    # source short of complete exactly like one nobody has built.
     complete = (cursor >= len(recipes) and not failures and not retry_recipes and not pending
-                and not state.get("blocked") and not uninspected)
+                and not state.get("blocked") and not uninspected and not unavailable)
     result = {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
               "catalog_size": len(recipes), "processed": processed, "records": collected,
               "downloaded_bytes": downloaded, "failures": len(failures),

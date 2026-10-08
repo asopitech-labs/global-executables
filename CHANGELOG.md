@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- ConanCenter: single-quoted versions in `config.yml` are unquoted (`fff/'1.1'` was
+  requested verbatim and returned 404), and a recipe whose newest version is not
+  published or not built falls back to at most three older published versions
+  (`gcc/16.1.0` now yields gcc 15.x/12.x commands). Conan rows record the inspected
+  `version` alongside the declared `latest_version`. Recipes still `unavailable` count
+  against completeness (#58).
 - ConanCenter: the recipe catalogue is re-read every seven days once the walk is
   complete, and a changed catalogue rolls over (new recipes and versions are queued in
   `catalog_pending`) instead of failing with "catalog changed". The catalogue had not
