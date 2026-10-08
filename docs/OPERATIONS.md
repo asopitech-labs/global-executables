@@ -484,6 +484,19 @@ parsed, its new rows replace every older row for that package, so a name an earl
 parser produced by mistake is dropped on the next run. A package that has left the
 snapshot keeps its rows as durable evidence that the name was published.
 
+The recipe catalogue is re-read once the walk has reached its end and the catalogue on
+file is older than seven days (`CONAN_CATALOG_MAX_AGE`); a catalogue with no
+`catalog_fetched_at` is re-read on the next run. The re-read rolls over instead of
+restarting the walk: recipes and versions that are new are queued in `catalog_pending`
+and inspected ahead of the refresh rotation, the cursor moves to the end of the new
+catalogue, and retry, failure, `unavailable`, and `uninspected` bookkeeping for
+references that left the catalogue is dropped. Published rows for a package stay until
+a newer version of it is inspected. A failed re-read keeps the catalogue already walked
+and is retried on the next run, and a catalogue on file whose digest differs from the
+walked one restarts the walk from the beginning rather than failing it. The report
+carries `catalog_pending`, `catalog_fetched_at`, and, on a run that re-read the
+catalogue, `catalog_refresh`.
+
 Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
 `7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs
 `activemqcpp-config`, which is why the whole recipe population is walked rather than

@@ -1015,6 +1015,8 @@ def test_conan_retry_clears_the_full_recipe_failure_key(tmp_path, monkeypatch):
                         lambda reference, timeout: (["demotool"], "https://example.invalid/manifest", 1))
     state = {"recipes_file": str(catalog), "cursor": 1, "catalog_size": 1,
              "catalog_complete": True,
+             # A freshly read catalogue: this test is about the retry, not the re-read.
+             "catalog_fetched_at": registry_artifact._utc_now().isoformat(),
              "failures": {"demotool/1.0.0": "HTTP Error 503: Service Unavailable"}}
 
     report = registry_artifact._crawl_conan(
@@ -1023,3 +1025,90 @@ def test_conan_retry_clears_the_full_recipe_failure_key(tmp_path, monkeypatch):
     assert report["failures"] == 0
     assert report["retry_pending"] == 0
     assert report["complete"] is True
+
+
+def _stale_conan_state(catalog, references, days_old=8, **extra):
+    registry_artifact.write_catalog(catalog, references)
+    fetched = registry_artifact._utc_now() - registry_artifact.timedelta(days=days_old)
+    return {"recipes_file": str(catalog), "cursor": len(references), "catalog_size": len(references),
+            "catalog_complete": True, "catalog_fetched_at": fetched.isoformat(),
+            "catalog_digest": registry_artifact._catalog_digest(references), **extra}
+
+
+def test_conan_catalogue_is_reread_when_stale_and_rolled_over_without_restarting(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    state = _stale_conan_state(
+        catalog, ["alpha/1.0", "beta/1.0", "gone/1.0"],
+        unavailable={"gone/1.0": "HTTP Error 404: Not Found"},
+        uninspected={"beta/1.0": "no built package published for this recipe"})
+    monkeypatch.setattr(registry_artifact, "_conan_catalog",
+                        lambda timeout: (["alpha/1.0", "beta/2.0", "new/0.1"], 10))
+    inspected = []
+
+    def inspect(reference, timeout):
+        inspected.append(reference)
+        return [reference.split("/", 1)[0]], "https://example.invalid/manifest", 1
+
+    monkeypatch.setattr(registry_artifact, "_conan_package_commands", inspect)
+    report = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 2, 1_000_000, 120)
+
+    assert report["catalog_refresh"] == {"status": "refreshed", "added": 2, "removed": 2, "size": 3}
+    # The new recipe and the new version are inspected first; the walk stays complete.
+    assert inspected == ["beta/2.0", "new/0.1"]
+    assert report["cursor"] == 3 and report["catalog_size"] == 3 and report["catalog_pending"] == 0
+    assert registry_artifact.read_catalog(catalog) == ["alpha/1.0", "beta/2.0", "new/0.1"]
+    # Bookkeeping for superseded references no longer holds the source back.
+    assert "gone/1.0" not in state["unavailable"] and "beta/1.0" not in state["uninspected"]
+    assert state["catalog_digest"] == registry_artifact._catalog_digest(registry_artifact.read_catalog(catalog))
+    assert registry_artifact._conan_catalog_stale(state, registry_artifact._utc_now()) is False
+
+
+def test_conan_rollover_keeps_unfinished_pending_recipes_for_the_next_run(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    state = _stale_conan_state(catalog, ["alpha/1.0"])
+    monkeypatch.setattr(registry_artifact, "_conan_catalog",
+                        lambda timeout: (["alpha/1.0", "beta/1.0", "gamma/1.0"], 10))
+    monkeypatch.setattr(registry_artifact, "_conan_package_commands",
+                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1))
+
+    first = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
+    assert first["catalog_pending"] == 1 and first["complete"] is False
+    assert state["catalog_pending"] == ["gamma/1.0"]
+
+    monkeypatch.setattr(registry_artifact, "_conan_catalog",
+                        lambda timeout: pytest.fail("a fresh catalogue is not read again"))
+    second = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
+    assert "catalog_refresh" not in second
+    assert second["catalog_pending"] == 0 and state["catalog_pending"] == []
+
+
+def test_conan_catalogue_is_not_reread_mid_walk_and_a_failed_reread_keeps_the_old_one(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    state = _stale_conan_state(catalog, ["alpha/1.0", "beta/1.0"], cursor=0)
+    monkeypatch.setattr(registry_artifact, "_conan_catalog",
+                        lambda timeout: pytest.fail("the initial walk must finish on the catalogue it counted"))
+    monkeypatch.setattr(registry_artifact, "_conan_package_commands",
+                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1))
+    report = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
+    assert report["cursor"] == 1 and "catalog_refresh" not in report
+
+    state = _stale_conan_state(catalog, ["alpha/1.0", "beta/1.0"])
+    error = registry_artifact.RegistryRequestError(
+        registry_artifact.CONAN_INDEX, "timeout", 3, 135, "timed out", operation="conan.catalog")
+    monkeypatch.setattr(registry_artifact, "_conan_catalog", lambda timeout: (_ for _ in ()).throw(error))
+    report = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
+    assert report["catalog_refresh"]["status"] == "failed"
+    assert registry_artifact.read_catalog(catalog) == ["alpha/1.0", "beta/1.0"]
+    assert report["cursor"] == 2 and report["refreshed"] == 1
+    assert registry_artifact._conan_catalog_stale(state, registry_artifact._utc_now()) is True
+
+
+def test_conan_catalogue_that_differs_from_the_walked_one_restarts_the_walk(tmp_path, monkeypatch):
+    catalog = tmp_path / "conan-recipes.txt"
+    state = _stale_conan_state(catalog, ["alpha/1.0", "beta/1.0"], days_old=0)
+    state["catalog_digest"] = "sha256:" + "0" * 64
+    monkeypatch.setattr(registry_artifact, "_conan_package_commands",
+                        lambda reference, timeout: (["x"], "https://example.invalid/manifest", 1))
+    report = registry_artifact._crawl_conan(state, tmp_path / "conan.jsonl", 1, 1_000_000, 120)
+    assert report["catalog_refresh"]["status"] == "reset"
+    assert report["cursor"] == 1 and report["catalog_size"] == 2
