@@ -190,16 +190,57 @@ VCPKG_COPY_TOOLS = re.compile(r"vcpkg_copy_tools\s*\((.*?)\)", re.S)
 VCPKG_TOOL_KEYWORDS = ("TOOL_NAMES", "AUTO_CLEAN", "SEARCH_DIR", "DESTINATION", "NO_SUFFIX")
 
 
+CMAKE_BRACKET_OPEN = re.compile(r"\[(=*)\[")
+
+
+def strip_cmake_comments(text):
+    """Remove CMake line comments (`# ...`) and bracket comments (`#[[ ... ]]`).
+
+    A portfile documents the tools it deliberately does not install, and comments out
+    whole `vcpkg_copy_tools` calls, so a name inside a comment is not a declaration.
+    Quoted arguments and bracket arguments are kept intact, because a `#` inside them
+    does not start a comment.
+    """
+    out, i, n = [], 0, len(text)
+    while i < n:
+        char = text[i]
+        if char == '"':
+            end = i + 1
+            while end < n and text[end] != '"':
+                end += 2 if text[end] == "\\" else 1
+            out.append(text[i:end + 1])
+            i = end + 1
+        elif char == "#":
+            bracket = CMAKE_BRACKET_OPEN.match(text, i + 1)
+            if bracket:
+                close = text.find("]" + bracket.group(1) + "]", bracket.end())
+                i = n if close < 0 else close + len(bracket.group(1)) + 2
+            else:
+                newline = text.find("\n", i)
+                i = n if newline < 0 else newline
+        elif char == "[" and CMAKE_BRACKET_OPEN.match(text, i):
+            bracket = CMAKE_BRACKET_OPEN.match(text, i)
+            close = text.find("]" + bracket.group(1) + "]", bracket.end())
+            end = n if close < 0 else close + len(bracket.group(1)) + 2
+            out.append(text[i:end])
+            i = end
+        else:
+            out.append(char)
+            i += 1
+    return "".join(out)
+
+
 def vcpkg_tool_names(portfile):
     """Read the commands a vcpkg port copies into `tools/<port>/`.
 
     `vcpkg_copy_tools` is what moves a built binary into the installed tool directory,
     so a port that installs a command has to name it here.  A name built from a CMake
     variable is not resolvable without running the port, so it is counted rather than
-    guessed at.
+    guessed at.  Comments are removed first: `mnn` comments out a whole call and
+    annotates names with `# tools/cpp`, and `openexr` lists `# not installed: exrcheck`.
     """
     names, unresolved = [], 0
-    for block in VCPKG_COPY_TOOLS.findall(portfile):
+    for block in VCPKG_COPY_TOOLS.findall(strip_cmake_comments(portfile)):
         collecting = False
         for token in block.split():
             bare = token.strip('"\'')

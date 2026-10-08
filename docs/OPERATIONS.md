@@ -476,6 +476,14 @@ self-dispatch on that condition would queue a run forever. The 2026-09-14 measur
 read the 1,944 recipe catalogue in one 4.7 MB request, and `conanmanifest.txt` keeps
 each inspection to a small text file rather than the package archive it describes.
 
+The vcpkg parser removes CMake line comments (`# ...`) and bracket comments
+(`#[[ ... ]]`) before it reads `TOOL_NAMES`, because portfiles use comments to list tools
+they deliberately do not install (`openexr`: `# not installed: exrcheck`) and to disable
+whole calls (`mnn`). When a vcpkg port or xmake package is present in the snapshot and
+parsed, its new rows replace every older row for that package, so a name an earlier
+parser produced by mistake is dropped on the next run. A package that has left the
+snapshot keeps its rows as durable evidence that the name was published.
+
 Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
 `7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs
 `activemqcpp-config`, which is why the whole recipe population is walked rather than

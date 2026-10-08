@@ -111,6 +111,33 @@ def test_vcpkg_snapshot_records_declared_tools_and_stays_partial():
     assert coverage["coverage_kind"] == "partial"
 
 
+def test_reparsed_vcpkg_ports_replace_their_stale_rows(tmp_path, monkeypatch):
+    from global_executables import production
+
+    output = tmp_path / "intermediate" / "vcpkg.jsonl"
+    output.parent.mkdir()
+    stale = [
+        # Rows an older parser read out of openexr's comments.
+        {"command": "not", "ecosystem": "vcpkg", "package": "openexr", "source": production.SOURCE_URLS["vcpkg"]},
+        {"command": "exrcheck", "ecosystem": "vcpkg", "package": "openexr", "source": production.SOURCE_URLS["vcpkg"]},
+        # A port that has left the snapshot keeps its durable evidence.
+        {"command": "oldtool", "ecosystem": "vcpkg", "package": "retired", "source": production.SOURCE_URLS["vcpkg"]},
+    ]
+    output.write_text("".join(json.dumps(row) + "\n" for row in stale))
+    body = _repository_tarball({
+        "vcpkg-master/ports/openexr/portfile.cmake":
+            b"vcpkg_copy_tools(\n  TOOL_NAMES\n    exr2aces\n    # not installed: exrcheck\n    exrinfo\n  AUTO_CLEAN\n)\n",
+        "vcpkg-master/ports/openexr/vcpkg.json": b'{"name": "openexr", "version": "3.4.0"}',
+    })
+    monkeypatch.setattr(production, "fetch", lambda url, timeout=300: (body, {"downloaded_bytes": len(body)}))
+    report = production.crawl_sources(["vcpkg"], tmp_path / "intermediate", tmp_path / "report.json")
+    rows = [json.loads(line) for line in output.read_text().splitlines() if line.strip()]
+    assert sorted((row["package"], row["command"]) for row in rows) == [
+        ("openexr", "exr2aces"), ("openexr", "exrinfo"), ("retired", "oldtool")]
+    # The package set is merge bookkeeping and never reaches the published report.
+    assert production.REPARSED_PACKAGES not in json.dumps(report)
+
+
 def test_xmake_snapshot_records_binary_packages_only():
     from global_executables.production import _crawl_xmake
 

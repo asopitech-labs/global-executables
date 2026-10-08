@@ -91,6 +91,8 @@ COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "window
 # A source whose upstream declares commands for only part of its population can never
 # report the absence of a name, however completely its own index was read.
 PARTIAL_DECLARATION_SOURCES = {"winget", "vcpkg", "xmake"}
+# A recipe snapshot reports which packages it parsed, so their stale rows can be replaced.
+REPARSED_PACKAGES = "_reparsed_packages"
 PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 # There is no privileged observation of a base command set: every run samples one
 # installed system.  Those samples accumulate rather than replace each other, so a
@@ -98,16 +100,27 @@ PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 ACCUMULATING_SOURCES = COLLECTED_SOURCES
 
 
-def _merge_observations(rows: list[dict[str, Any]], output: Path) -> list[dict[str, Any]]:
+def _merge_observations(rows: list[dict[str, Any]], output: Path,
+                        reparsed: set[tuple[str, str]] | None = None) -> list[dict[str, Any]]:
     # A stable provider identity replaces its older metadata, while an executable that
     # disappeared from a moving upstream index remains durable evidence that the name
     # has been published before.
+    #
+    # `reparsed` names the `(ecosystem, package)` pairs whose recipe this run read and
+    # parsed successfully.  For those the new rows are the whole answer: an older row
+    # the current parser no longer produces was a parser mistake, not a command that
+    # left upstream, so it is replaced rather than carried forward.  A package absent
+    # from the snapshot keeps its durable rows.
+    reparsed = reparsed or set()
+
     def identity(row: dict[str, Any]) -> tuple[Any, ...]:
         return row.get("command"), row.get("ecosystem"), row.get("package"), row.get("source")
 
     merged = {identity(row): row for row in rows}
     if output.is_file():
         for previous in read_jsonl(output):
+            if (previous.get("ecosystem"), previous.get("package")) in reparsed:
+                continue
             merged.setdefault(identity(previous), previous)
     return list(merged.values())
 
@@ -447,7 +460,8 @@ def _crawl_vcpkg(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], di
     return rows, {"status": "success", "coverage_kind": "partial", "records": len(rows),
                   "packages": len(ports), "declaring_packages": declaring,
                   "unresolved_tool_names": unresolved, "source": source_url,
-                  "note": "vcpkg names tools only in ports that call vcpkg_copy_tools"}
+                  "note": "vcpkg names tools only in ports that call vcpkg_copy_tools",
+                  REPARSED_PACKAGES: {("vcpkg", port) for port in ports}}
 
 
 def _vcpkg_version(manifest: str) -> str | None:
@@ -475,7 +489,8 @@ def _crawl_xmake(body: bytes, source_url: str) -> tuple[list[dict[str, Any]], di
     rows = xmake_packages(sorted(definitions.items()), source_url)
     return rows, {"status": "success", "coverage_kind": "partial", "records": len(rows),
                   "packages": len(definitions), "declaring_packages": len(rows), "source": source_url,
-                  "note": "xmake declares the package kind but never the installed command name"}
+                  "note": "xmake declares the package kind but never the installed command name",
+                  REPARSED_PACKAGES: {("xmake", package) for package in definitions}}
 
 
 def _crawl_index(source: str, body: bytes, source_url: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -501,6 +516,7 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
         )
     rows: list[dict[str, Any]] = []
     indexes: list[dict[str, Any]] = []
+    reparsed: set[tuple[str, str]] = set()
     downloaded = 0
     coverage_kind = "exhaustive"
     for source_url in SOURCE_INDEXES[source]:
@@ -525,12 +541,14 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
             body, transfer = fetch(source_url, timeout)
             index_rows, index_coverage = _crawl_index(source, body, source_url)
         rows.extend(index_rows)
+        # The package set is bookkeeping for the merge, not part of the published report.
+        reparsed |= index_coverage.pop(REPARSED_PACKAGES, set())
         downloaded += transfer["downloaded_bytes"]
         if index_coverage.get("coverage_kind") != "exhaustive":
             coverage_kind = index_coverage["coverage_kind"]
         indexes.append({**index_coverage, **transfer})
     if source in ACCUMULATING_SOURCES:
-        rows = _merge_observations(rows, output)
+        rows = _merge_observations(rows, output, reparsed)
     write_jsonl(sorted(rows, key=lambda row: (row["command"], row["package"], row["source"])), output)
     return {"status": "success", "coverage_kind": coverage_kind, "records": len(rows),
             "indexes": indexes, "index_count": len(indexes), "downloaded_bytes": downloaded,

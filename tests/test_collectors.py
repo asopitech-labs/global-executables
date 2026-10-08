@@ -2,8 +2,8 @@ import json
 from pathlib import Path
 from jsonschema import Draft202012Validator
 from global_executables.collectors import (conan_manifest_commands, crates_manifest, homebrew_metadata,
-                                           npm_metadata, package_files, vcpkg_ports, vcpkg_tool_names,
-                                           xmake_packages)
+                                           npm_metadata, package_files, strip_cmake_comments, vcpkg_ports,
+                                           vcpkg_tool_names, xmake_packages)
 ROOT=Path(__file__).parents[1]/"fixtures/collectors"
 
 def test_filesystem_collectors_only_bin_paths():
@@ -37,6 +37,26 @@ def test_vcpkg_reads_declared_tools_and_counts_what_cmake_hides():
     # A name built from a CMake variable is counted, never guessed at.
     assert unresolved == 1
     assert vcpkg_tool_names((ROOT / "vcpkg-library-portfile.cmake").read_text()) == ([], 0)
+
+
+def test_vcpkg_ignores_names_inside_cmake_comments():
+    # Real portfiles: mnn comments out a whole vcpkg_copy_tools call and annotates names
+    # with `# tools/cpp`; openexr lists `# not installed: exrcheck` inside TOOL_NAMES.
+    mnn, unresolved = vcpkg_tool_names((ROOT / "vcpkg-mnn-portfile.cmake").read_text())
+    assert unresolved == 0
+    assert {"cpp", "converter", "evaluation", "quantization", "train", "test"}.isdisjoint(mnn)
+    assert {"run_test.out", "benchmark.out", "benchmarkExprModels.out"}.isdisjoint(mnn)
+    assert {"MNNConvert", "MNNDump2Json", "TestConvertResult", "train.out"} <= set(mnn)
+    openexr, _ = vcpkg_tool_names((ROOT / "vcpkg-openexr-portfile.cmake").read_text())
+    assert "not" not in openexr and "exrcheck" not in openexr
+    assert openexr[:2] == ["exr2aces", "exrenvmap"] and len(openexr) == 11
+
+
+def test_cmake_comment_stripping_keeps_quoted_and_bracket_arguments():
+    text = 'a "x # y" # line\n#[[ block\n # ]] b [=[ k # ]=] c #[==[ z ]==]d'
+    assert strip_cmake_comments(text) == 'a "x # y" \n b [=[ k # ]=] c d'
+    assert vcpkg_tool_names("vcpkg_copy_tools(TOOL_NAMES one #[[ two ]] three AUTO_CLEAN)") == (
+        ["one", "three"], 0)
 
 
 def test_xmake_binary_packages_are_inferred_and_libraries_are_not_recorded():
