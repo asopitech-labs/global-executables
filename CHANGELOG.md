@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- xmake: the recorded version is the newest declared one rather than the last
+  `add_versions` line (`meson` was published as 0.50.1 instead of 1.12.1), and bundle
+  packages such as `autotools`, `binutils`, and `*-tools` no longer yield an inferred
+  command named after the package (#58).
 - ConanCenter: single-quoted versions in `config.yml` are unquoted (`fff/'1.1'` was
   requested verbatim and returned 404), and a recipe whose newest version is not
   published or not built falls back to at most three older published versions

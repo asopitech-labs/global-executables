@@ -272,6 +272,53 @@ def vcpkg_ports(ports, source="vcpkg"):
 
 XMAKE_KIND = re.compile(r"""set_kind\s*\(\s*["'](\w+)["']""")
 XMAKE_VERSION = re.compile(r"""add_versions\s*\(\s*["']([^"']+)["']""")
+# `add_versions("github:1.10.0", ...)` names the URL alias the version is fetched from.
+XMAKE_VERSION_ALIAS = re.compile(r"^[A-Za-z][\w-]*:")
+# An xmake binary package never names its command, so the package name stands in for it.
+# These packages are bundles or build-system helpers whose name is not a command any of
+# them installs (`binutils` installs `ld` and `as`, `qt-tools` installs `moc` and `uic`),
+# so inferring a command from the name would invent one.  The list is deliberately
+# short: anything else keeps the `inferred` record.
+XMAKE_NON_COMMAND_PACKAGES = frozenset({
+    "autotools", "binutils", "gz-cmake", "jrl-cmakemodules", "policycoreutils",
+    "shared-mime-info", "texinfo",
+})
+XMAKE_NON_COMMAND_SUFFIXES = ("-tools", "_tools")  # depot_tools, linux-tools, qt-tools, ...
+PRERELEASE_TAGS = frozenset({"a", "alpha", "b", "beta", "dev", "pre", "preview", "rc", "snapshot"})
+
+
+def version_sort_key(value):
+    """Order version strings newest-last without assuming strict semver.
+
+    Numeric runs compare as numbers, a release sorts after its pre-releases
+    (`1.0.0-rc1` < `1.0.0` < `1.0.0.1`), and a leading `v` is ignored.
+    """
+    key = []
+    for token in re.findall(r"\d+|[A-Za-z]+", value.lstrip("vV")):
+        if token.isdigit():
+            key.append((2, int(token), ""))
+        elif token.lower() in PRERELEASE_TAGS:
+            key.append((0, 0, token.lower()))
+        else:
+            key.append((1, 0, token.lower()))
+    key.append((1, 0, ""))
+    return tuple(key)
+
+
+def xmake_newest_version(definition):
+    """Return the newest version an xmake.lua declares.
+
+    The order of `add_versions` lines is not meaningful: many packages list the newest
+    first (`meson` declares 1.12.1 first and 0.50.1 last), so the last line is often the
+    oldest.
+    """
+    versions = [XMAKE_VERSION_ALIAS.sub("", value) for value in XMAKE_VERSION.findall(definition)]
+    versions = [value for value in versions if value]
+    return max(versions, key=version_sort_key) if versions else None
+
+
+def xmake_infers_command(package):
+    return package not in XMAKE_NON_COMMAND_PACKAGES and not package.endswith(XMAKE_NON_COMMAND_SUFFIXES)
 
 
 def xmake_packages(packages, source="xmake-repo"):
@@ -285,10 +332,9 @@ def xmake_packages(packages, source="xmake-repo"):
     out = []
     for package, definition in packages:
         kind = XMAKE_KIND.search(definition)
-        if not kind or kind.group(1) != "binary":
+        if not kind or kind.group(1) != "binary" or not xmake_infers_command(package):
             continue
-        versions = XMAKE_VERSION.findall(definition)
-        version = versions[-1] if versions else None
+        version = xmake_newest_version(definition)
         command = declared_command(package)
         if not command or not COMMAND_NAME.match(command):
             continue

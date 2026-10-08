@@ -152,6 +152,29 @@ def test_xmake_snapshot_records_binary_packages_only():
     assert coverage["packages"] == 2 and coverage["coverage_kind"] == "partial"
 
 
+def test_reparsed_xmake_packages_drop_rows_for_names_no_longer_inferred(tmp_path, monkeypatch):
+    from global_executables import production
+
+    output = tmp_path / "intermediate" / "xmake.jsonl"
+    output.parent.mkdir()
+    source = production.SOURCE_URLS["xmake"]
+    output.write_text("".join(json.dumps(row) + "\n" for row in [
+        {"command": "autotools", "ecosystem": "xmake", "package": "autotools", "source": source},
+        {"command": "meson", "ecosystem": "xmake", "package": "meson", "source": source, "version": "0.50.1"},
+    ]))
+    body = _repository_tarball({
+        "xmake-repo-master/packages/a/autotools/xmake.lua":
+            b'package("autotools")\n    set_kind("binary")\n    add_versions("1.0", "aa")\n',
+        "xmake-repo-master/packages/m/meson/xmake.lua":
+            b'package("meson")\n    set_kind("binary")\n    add_versions("1.12.1", "aa")\n'
+            b'    add_versions("0.50.1", "bb")\n',
+    })
+    monkeypatch.setattr(production, "fetch", lambda url, timeout=300: (body, {"downloaded_bytes": len(body)}))
+    production.crawl_sources(["xmake"], tmp_path / "intermediate", tmp_path / "report.json")
+    rows = [json.loads(line) for line in output.read_text().splitlines() if line.strip()]
+    assert [(row["command"], row["version"]) for row in rows] == [("meson", "1.12.1")]
+
+
 def test_cpp_sources_never_claim_an_exhaustive_report(tmp_path, monkeypatch):
     from global_executables import production
 

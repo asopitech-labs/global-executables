@@ -506,6 +506,16 @@ walked one restarts the walk from the beginning rather than failing it. The repo
 carries `catalog_pending`, `catalog_fetched_at`, and, on a run that re-read the
 catalogue, `catalog_refresh`.
 
+An xmake record's version is the newest version the recipe declares, compared
+numerically with pre-releases before releases and a URL alias such as `github:`
+stripped; the order of `add_versions` lines carries no meaning (`meson` lists 1.12.1
+first and 0.50.1 last). A short, explicit list of bundle and build-helper packages never
+yields an inferred command, because their name is not a command any of them installs:
+`autotools`, `binutils`, `gz-cmake`, `jrl-cmakemodules`, `policycoreutils`,
+`shared-mime-info`, `texinfo`, and every package ending in `-tools` or `_tools`
+(`depot_tools`, `linux-tools`, `qt-tools`, `vulkan-tools`, ...). On the 2026-10-08
+snapshot this leaves 104 of the 117 binary packages.
+
 Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
 `7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs
 `activemqcpp-config`, which is why the whole recipe population is walked rather than
