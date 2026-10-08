@@ -190,16 +190,57 @@ VCPKG_COPY_TOOLS = re.compile(r"vcpkg_copy_tools\s*\((.*?)\)", re.S)
 VCPKG_TOOL_KEYWORDS = ("TOOL_NAMES", "AUTO_CLEAN", "SEARCH_DIR", "DESTINATION", "NO_SUFFIX")
 
 
+CMAKE_BRACKET_OPEN = re.compile(r"\[(=*)\[")
+
+
+def strip_cmake_comments(text):
+    """Remove CMake line comments (`# ...`) and bracket comments (`#[[ ... ]]`).
+
+    A portfile documents the tools it deliberately does not install, and comments out
+    whole `vcpkg_copy_tools` calls, so a name inside a comment is not a declaration.
+    Quoted arguments and bracket arguments are kept intact, because a `#` inside them
+    does not start a comment.
+    """
+    out, i, n = [], 0, len(text)
+    while i < n:
+        char = text[i]
+        if char == '"':
+            end = i + 1
+            while end < n and text[end] != '"':
+                end += 2 if text[end] == "\\" else 1
+            out.append(text[i:end + 1])
+            i = end + 1
+        elif char == "#":
+            bracket = CMAKE_BRACKET_OPEN.match(text, i + 1)
+            if bracket:
+                close = text.find("]" + bracket.group(1) + "]", bracket.end())
+                i = n if close < 0 else close + len(bracket.group(1)) + 2
+            else:
+                newline = text.find("\n", i)
+                i = n if newline < 0 else newline
+        elif char == "[" and CMAKE_BRACKET_OPEN.match(text, i):
+            bracket = CMAKE_BRACKET_OPEN.match(text, i)
+            close = text.find("]" + bracket.group(1) + "]", bracket.end())
+            end = n if close < 0 else close + len(bracket.group(1)) + 2
+            out.append(text[i:end])
+            i = end
+        else:
+            out.append(char)
+            i += 1
+    return "".join(out)
+
+
 def vcpkg_tool_names(portfile):
     """Read the commands a vcpkg port copies into `tools/<port>/`.
 
     `vcpkg_copy_tools` is what moves a built binary into the installed tool directory,
     so a port that installs a command has to name it here.  A name built from a CMake
     variable is not resolvable without running the port, so it is counted rather than
-    guessed at.
+    guessed at.  Comments are removed first: `mnn` comments out a whole call and
+    annotates names with `# tools/cpp`, and `openexr` lists `# not installed: exrcheck`.
     """
     names, unresolved = [], 0
-    for block in VCPKG_COPY_TOOLS.findall(portfile):
+    for block in VCPKG_COPY_TOOLS.findall(strip_cmake_comments(portfile)):
         collecting = False
         for token in block.split():
             bare = token.strip('"\'')
@@ -231,6 +272,53 @@ def vcpkg_ports(ports, source="vcpkg"):
 
 XMAKE_KIND = re.compile(r"""set_kind\s*\(\s*["'](\w+)["']""")
 XMAKE_VERSION = re.compile(r"""add_versions\s*\(\s*["']([^"']+)["']""")
+# `add_versions("github:1.10.0", ...)` names the URL alias the version is fetched from.
+XMAKE_VERSION_ALIAS = re.compile(r"^[A-Za-z][\w-]*:")
+# An xmake binary package never names its command, so the package name stands in for it.
+# These packages are bundles or build-system helpers whose name is not a command any of
+# them installs (`binutils` installs `ld` and `as`, `qt-tools` installs `moc` and `uic`),
+# so inferring a command from the name would invent one.  The list is deliberately
+# short: anything else keeps the `inferred` record.
+XMAKE_NON_COMMAND_PACKAGES = frozenset({
+    "autotools", "binutils", "gz-cmake", "jrl-cmakemodules", "policycoreutils",
+    "shared-mime-info", "texinfo",
+})
+XMAKE_NON_COMMAND_SUFFIXES = ("-tools", "_tools")  # depot_tools, linux-tools, qt-tools, ...
+PRERELEASE_TAGS = frozenset({"a", "alpha", "b", "beta", "dev", "pre", "preview", "rc", "snapshot"})
+
+
+def version_sort_key(value):
+    """Order version strings newest-last without assuming strict semver.
+
+    Numeric runs compare as numbers, a release sorts after its pre-releases
+    (`1.0.0-rc1` < `1.0.0` < `1.0.0.1`), and a leading `v` is ignored.
+    """
+    key = []
+    for token in re.findall(r"\d+|[A-Za-z]+", value.lstrip("vV")):
+        if token.isdigit():
+            key.append((2, int(token), ""))
+        elif token.lower() in PRERELEASE_TAGS:
+            key.append((0, 0, token.lower()))
+        else:
+            key.append((1, 0, token.lower()))
+    key.append((1, 0, ""))
+    return tuple(key)
+
+
+def xmake_newest_version(definition):
+    """Return the newest version an xmake.lua declares.
+
+    The order of `add_versions` lines is not meaningful: many packages list the newest
+    first (`meson` declares 1.12.1 first and 0.50.1 last), so the last line is often the
+    oldest.
+    """
+    versions = [XMAKE_VERSION_ALIAS.sub("", value) for value in XMAKE_VERSION.findall(definition)]
+    versions = [value for value in versions if value]
+    return max(versions, key=version_sort_key) if versions else None
+
+
+def xmake_infers_command(package):
+    return package not in XMAKE_NON_COMMAND_PACKAGES and not package.endswith(XMAKE_NON_COMMAND_SUFFIXES)
 
 
 def xmake_packages(packages, source="xmake-repo"):
@@ -244,10 +332,9 @@ def xmake_packages(packages, source="xmake-repo"):
     out = []
     for package, definition in packages:
         kind = XMAKE_KIND.search(definition)
-        if not kind or kind.group(1) != "binary":
+        if not kind or kind.group(1) != "binary" or not xmake_infers_command(package):
             continue
-        versions = XMAKE_VERSION.findall(definition)
-        version = versions[-1] if versions else None
+        version = xmake_newest_version(definition)
         command = declared_command(package)
         if not command or not COMMAND_NAME.match(command):
             continue
@@ -260,10 +347,23 @@ def xmake_packages(packages, source="xmake-repo"):
 CONAN_MANIFEST_BIN = re.compile(r"^bin/([^/:]+):", re.M)
 # A built package puts more than commands under `bin/`: import libraries, debug
 # symbols and the odd data file live there too, on Windows especially.
+# `conanmanifest.txt` carries no executable bit, so these are filtered by name.  The
+# lists are conservative: only names that are never invoked as a command are dropped,
+# and scripts (`.py`, `.sh`, `.pl`) are kept because `bin/` scripts are commands.
 CONAN_NON_COMMAND_SUFFIXES = (
     ".dll", ".so", ".dylib", ".lib", ".a", ".pdb", ".exp", ".ilk", ".def",
     ".txt", ".md", ".cmake", ".json", ".xml", ".yml", ".yaml", ".h", ".hpp", ".pc",
+    # Configuration, packaging metadata, documentation and resources.
+    ".cfg", ".conf", ".config", ".ini", ".toml", ".in", ".manifest", ".plist",
+    ".html", ".htm", ".rst", ".jar", ".pyc", ".pyo", ".ico", ".png", ".mo", ".qm",
 )
+# Versioned shared libraries: `libfoo.so.1`, `libfoo.so.1.2.3`.
+CONAN_SHARED_LIBRARY = re.compile(r"\.so(\.\d+)+$", re.I)
+# Upper-case documentation and ownership files that projects drop next to their tools
+# (`depot_tools` ships `OWNERS` and `LUCI_OWNERS`; `meson` ships `COPYING`, `PKG-INFO`).
+CONAN_NON_COMMAND_NAMES = re.compile(
+    r"^(LICEN[CS]E|COPYING|COPYRIGHT|NOTICE|README|AUTHORS|CHANGELOG|CHANGES|NEWS|"
+    r"OWNERS|[A-Z]+_OWNERS|PKG-INFO|DIR_METADATA|MANIFEST)([._-].*)?$")
 
 
 def conan_manifest_commands(manifest):
@@ -278,7 +378,8 @@ def conan_manifest_commands(manifest):
         name = entry.strip()
         if not name or name.startswith("."):
             continue
-        if name.lower().endswith(CONAN_NON_COMMAND_SUFFIXES):
+        if (name.lower().endswith(CONAN_NON_COMMAND_SUFFIXES) or CONAN_SHARED_LIBRARY.search(name)
+                or CONAN_NON_COMMAND_NAMES.match(name)):
             continue
         command = declared_command(name)
         if command and COMMAND_NAME.match(command):

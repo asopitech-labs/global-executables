@@ -461,7 +461,7 @@ record's confidence says which that was.
 | Source | Population | Evidence | Confidence | Why it is not exhaustive |
 | --- | --- | --- | --- | --- |
 | vcpkg | `ports/*` of the `microsoft/vcpkg` snapshot | `vcpkg_copy_tools(TOOL_NAMES ...)` in `portfile.cmake` | `direct` | A port can install a command without calling `vcpkg_copy_tools`, and a name built from a CMake variable is counted rather than guessed at |
-| conan | `recipes/*/config.yml` of the `conan-io/conan-center-index` snapshot | `bin/` entries of the built package, read from `conanmanifest.txt` | `filesystem` | A recipe nobody has built publishes no file list, and those recipes are counted as `uninspected` |
+| conan | `recipes/*/config.yml` of the `conan-io/conan-center-index` snapshot | `bin/` entries of the built package, read from `conanmanifest.txt` | `filesystem` | A recipe nobody has built publishes no file list, and those recipes are counted as `uninspected`; a recipe the remote does not publish is counted as `unavailable`, and both hold the source short of complete |
 | xmake | `packages/*/*/xmake.lua` of the `xmake-io/xmake-repo` snapshot | `set_kind("binary")` | `inferred` | xmake declares that a package installs a command but never what the command is called, so the package name stands in for it |
 
 `cpp-registries.yml` owns all three daily. The vcpkg and xmake populations are one
@@ -475,6 +475,57 @@ ConanCenter is never exhaustive while recipes remain that nobody has built and a
 self-dispatch on that condition would queue a run forever. The 2026-09-14 measurement
 read the 1,944 recipe catalogue in one 4.7 MB request, and `conanmanifest.txt` keeps
 each inspection to a small text file rather than the package archive it describes.
+
+The vcpkg parser removes CMake line comments (`# ...`) and bracket comments
+(`#[[ ... ]]`) before it reads `TOOL_NAMES`, because portfiles use comments to list tools
+they deliberately do not install (`openexr`: `# not installed: exrcheck`) and to disable
+whole calls (`mnn`). When a vcpkg port or xmake package is present in the snapshot and
+parsed, its new rows replace every older row for that package, so a name an earlier
+parser produced by mistake is dropped on the next run. A package that has left the
+snapshot keeps its rows as durable evidence that the name was published.
+
+Versions in `config.yml` may be double-quoted, single-quoted (`fff`: `'1.1'`), or bare;
+the quote is stripped before the reference is built. The newest declared version is
+inspected first. When the remote answers 404 for it (`gcc/16.1.0` is declared before it
+is published) or has no built package for it, the remote's `search` endpoint lists the
+published versions and up to `CONAN_FALLBACK_VERSIONS` (3) older ones are tried, newest
+first. A row's `version` is the version actually inspected and `latest_version` is the
+version the recipe declares. A 404 that no fallback resolves leaves the recipe
+`unavailable`, which now counts against completeness like `uninspected`.
+
+The recipe catalogue is re-read once the walk has reached its end and the catalogue on
+file is older than seven days (`CONAN_CATALOG_MAX_AGE`); a catalogue with no
+`catalog_fetched_at` is re-read on the next run. The re-read rolls over instead of
+restarting the walk: recipes and versions that are new are queued in `catalog_pending`
+and inspected ahead of the refresh rotation, the cursor moves to the end of the new
+catalogue, and retry, failure, `unavailable`, and `uninspected` bookkeeping for
+references that left the catalogue is dropped. Published rows for a package stay until
+a newer version of it is inspected. A failed re-read keeps the catalogue already walked
+and is retried on the next run, and a catalogue on file whose digest differs from the
+walked one restarts the walk from the beginning rather than failing it. The report
+carries `catalog_pending`, `catalog_fetched_at`, and, on a run that re-read the
+catalogue, `catalog_refresh`.
+
+An xmake record's version is the newest version the recipe declares, compared
+numerically with pre-releases before releases and a URL alias such as `github:`
+stripped; the order of `add_versions` lines carries no meaning (`meson` lists 1.12.1
+first and 0.50.1 last). A short, explicit list of bundle and build-helper packages never
+yields an inferred command, because their name is not a command any of them installs:
+`autotools`, `binutils`, `gz-cmake`, `jrl-cmakemodules`, `policycoreutils`,
+`shared-mime-info`, `texinfo`, and every package ending in `-tools` or `_tools`
+(`depot_tools`, `linux-tools`, `qt-tools`, `vulkan-tools`, ...). On the 2026-10-08
+snapshot this leaves 104 of the 117 binary packages.
+
+`conanmanifest.txt` lists files without their executable bit, so `bin/` entries are
+filtered by name, conservatively: libraries (`.dll`, `.so`, `.so.1.2`, `.dylib`, `.lib`,
+...), configuration and packaging metadata (`.cfg`, `.conf`, `.config`, `.ini`, `.toml`,
+`.in`, `.json`, `.txt`, ...), documentation and resources (`.md`, `.html`, `.rst`,
+`.png`, `.jar`, ...), and upper-case documentation or ownership files (`LICENSE`,
+`COPYING`, `NOTICE`, `README`, `OWNERS`, `*_OWNERS`, `PKG-INFO`, `DIR_METADATA`,
+`MANIFEST`). Scripts such as `.py`, `.sh`, and `.pl` are kept, because a script in
+`bin/` is a command. On the published 2026-10-07 rows this drops 23 of 1,818, all of
+them non-commands; the per-package replacement removes them as the refresh rotation
+re-inspects each recipe.
 
 Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
 `7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs
