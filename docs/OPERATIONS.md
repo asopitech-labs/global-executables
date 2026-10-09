@@ -721,6 +721,7 @@ the generic sharding, so neither encoder changed, see
 | --- | --- |
 | `checked` | `{package: "<day>:<streak>:<version>"}`: the day number (UTC days since 1970) of the last successful check, how many consecutive checks found the same version, and that version. About 41 bytes per package. |
 | `feed_cursor` | Opaque position in the registry change feed (PyPI serial, npm `update_seq`, Packagist timestamp, Conan commit SHA). Committed in the same Bolt transaction as the queue it produced. |
+| `feed_queue` | NuGet's equivalent of `feed_pending` (a list of tool ids), stored in the same checkpoint as `feed_cursor`. |
 | `feed_pending` | Announced changes not yet committed as observations. An entry is removed in the transaction that commits the package's observations, so a crash replays it. |
 | `due_floor` | Every check older than this day is due (set by a feed `resync`). |
 | `extraction_revision` | Version of the code that turns a registry document into rows. A state with a lower revision drops `checked` once, so a fixed extractor re-reads everything. Raise `ExtractionRevision` (Go, `internal/gocrawl/policy.go`) and `EXTRACTION_REVISION` (Python, `refresh_policy.py`) together when extraction changes. |
@@ -731,8 +732,11 @@ Tiers:
   equals the recorded one the artifact reads and the row rewrite are skipped and only
   the check advances. A changed or failed package keeps working as before.
 - **P1, change feed.** PyPI (`changelog_since_serial`), npm (`_changes`), Packagist
-  (`metadata/changes.json`, including `resync`) and Conan (GitHub compare of
-  conan-center-index) enqueue the changed packages. A gap too large to replay, a
+  (`metadata/changes.json`, including `resync`), Conan (GitHub compare of
+  conan-center-index) and NuGet (V3 catalog: pages newer than the stored
+  `commitTimeStamp`, `PackageDetails` and `PackageDelete` leaves, at most 24 pages, only
+  commits older than five minutes; `feed_queue` holds the announced tools until their rows
+  are committed) enqueue the changed packages. A gap too large to replay, a
   Packagist `resync`, or a diverged Conan history sets `due_floor` to today instead.
   The cursor advances only after the page and queue are stored. Go's index.golang.org
   catalog walk queues known modules it reports again.

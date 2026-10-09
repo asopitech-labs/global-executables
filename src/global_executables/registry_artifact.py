@@ -1002,6 +1002,44 @@ def _prepare_checks(state: dict[str, Any], output: Path, key_of: Callable[[dict[
     return checked
 
 
+# The feed's HTTP transport; tests replace it so no test reaches api.nuget.org.
+_nuget_feed_request = _request_bytes
+
+
+def _nuget_feed(state: dict[str, Any], tools: list[str], timeout: int,
+                checkpoint: Callable[..., None], day: int) -> dict[str, Any]:
+    """Queue the tools the NuGet catalog changed since the stored commit timestamp.
+
+    The cursor and the queue (`feed_queue`) are written by one checkpoint, and a queued
+    tool leaves the queue only after its rows are committed (see `_crawl_nuget`), so a
+    crash replays the work.  A failed poll leaves both untouched.
+    """
+    report: dict[str, Any] = {"events": 0, "enqueued": 0, "deleted": 0, "requests": 0,
+                              "downloaded_bytes": 0, "resync": False, "error": ""}
+    try:
+        page = change_feeds.nuget_poll(_nuget_feed_request, str(state.get("feed_cursor") or ""), timeout,
+                                       {tool.lower(): tool for tool in tools}, _utc_now())
+    except Exception as error:
+        report["error"] = str(error)
+        return report
+    report.update(requests=page.requests, downloaded_bytes=page.downloaded_bytes, events=len(page.names),
+                  deleted=len(page.deleted), resync=page.resync)
+    queue = state.setdefault("feed_queue", [])
+    queued = set(queue)
+    for name in sorted(page.names):
+        if name not in queued:
+            queue.append(name)
+            queued.add(name)
+            report["enqueued"] += 1
+    if page.resync:
+        state["due_floor"] = day
+    changed = page.cursor != state.get("feed_cursor") or report["enqueued"] or page.resync
+    state["feed_cursor"] = page.cursor
+    if changed:
+        checkpoint()
+    return report
+
+
 def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                  checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Inspect NuGet's .NET tool packages, the only NuGet packages that ship commands."""
@@ -1069,7 +1107,11 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
         state["catalog_truncated"] = bool(advertised) and len(tools) < advertised
     checked = _prepare_checks(state, output, lambda row: row.get("package"))
     day = refresh_policy.today(_utc_now())
-    max_days = refresh_policy.BACKOFF_MAX_DAYS_PLAIN  # NuGet has no polled feed (docs/OPERATIONS.md)
+    feed_report = _nuget_feed(state, tools, timeout, checkpoint, day) if tools else {}
+    # Backoff stretches only while the feed is there to announce what the backoff skips.
+    max_days = (refresh_policy.BACKOFF_MAX_DAYS_PLAIN if feed_report.get("error")
+                else refresh_policy.BACKOFF_MAX_DAYS_FEED)
+    feed_queue = state.setdefault("feed_queue", [])
     cursor = int(state.get("cursor", 0)); refresh_cursor = int(state.get("refresh_cursor", 0))
     if refresh_cursor >= len(tools):
         refresh_cursor = 0
@@ -1084,12 +1126,25 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     refresh_excluded = set(retry_tools)
     refresh_remaining = sum(name not in refresh_excluded for name in tools) if refresh_enabled else 0
     refresh_index = _next_refresh_index(tools, refresh_cursor, refresh_excluded)
+    # Announced tools go first but never take more than half the budget: the rotation
+    # (the backstop) keeps running even when a feed floods.
+    feed_candidates = [name for name in feed_queue if name in set(tools)][:max(1, budget // 2)]
+    feed_done: list[str] = []
     rows: list[dict[str, Any]] = []; replacement_rows: list[dict[str, Any]] = []
     replaced_packages: set[str] = set(); collected = 0; budget_exhausted = False
-    while (retry_candidates or cursor < len(tools) or
+
+    def settle_feed() -> None:
+        # Only after the rows are in the output file does a tool leave the queue.
+        if feed_done:
+            done = set(feed_done)
+            feed_queue[:] = [name for name in feed_queue if name not in done]
+            feed_done.clear()
+
+    while (retry_candidates or feed_candidates or cursor < len(tools) or
            (refresh_enabled and refresh_remaining > 0)) and processed < budget:
         retrying = bool(retry_candidates)
-        refreshing = not retrying and cursor >= len(tools)
+        feeding = not retrying and bool(feed_candidates)
+        refreshing = not retrying and not feeding and cursor >= len(tools)
         if refreshing:
             if refresh_index is None:
                 break
@@ -1102,7 +1157,8 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
                 refresh_index = _next_refresh_index(tools, refresh_cursor, refresh_excluded)
                 continue
         else:
-            package = retry_candidates.pop(0) if retrying else tools[cursor]
+            package = (retry_candidates.pop(0) if retrying
+                       else feed_candidates.pop(0) if feeding else tools[cursor])
         lowered = urllib.parse.quote(package.lower(), safe="")
         try:
             body, _ = _fetch_stage(f"{NUGET_FLAT}/{lowered}/index.json", timeout, "nuget.index")
@@ -1143,18 +1199,21 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
                 _drop_retry_key(state, package)
             if package in failures and package not in retry_tools:
                 retry_tools.append(package)  # queued for the next run, not this one
+        if feeding:
+            feed_done.append(package)  # a failure is now owned by the retry queue
         if refreshing:
             refreshed += 1
             refresh_remaining -= 1
             refresh_cursor = (refresh_index + 1) % len(tools)
             refresh_index = _next_refresh_index(tools, refresh_cursor, refresh_excluded)
-        elif not retrying:
+        elif not retrying and not feeding:
             cursor += 1
         processed += 1
         if _due_for_checkpoint(processed) or interrupted():
             collected += len(rows)
             _replace_package_rows(output, replaced_packages, replacement_rows)
             rows.clear(); replacement_rows.clear(); replaced_packages.clear()
+            settle_feed()
             checkpoint(cursor=cursor, refresh_cursor=refresh_cursor)
         if interrupted():
             break
@@ -1164,13 +1223,15 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     state["refresh_cursor"] = refresh_cursor
     collected += len(rows)
     _replace_package_rows(output, replaced_packages, replacement_rows)
+    settle_feed()
     truncated = bool(state.get("catalog_truncated"))
     retry_waiting = _retry_waiting_count(state, "retry_tools")
     complete = (cursor >= len(tools) and not failures and not retry_tools
                 and not state.get("blocked") and not truncated)
     report = {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
               "unchanged": unchanged, "skipped_not_due": skipped, "checked": len(checked),
-              "ttl": refresh_policy.ttl_summary(checked, day, max_days),
+              "ttl": refresh_policy.ttl_summary(checked, day, max_days), "feed": feed_report,
+              "feed_queue": len(feed_queue),
               "catalog_size": len(tools), "processed": processed,
               "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
               "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,

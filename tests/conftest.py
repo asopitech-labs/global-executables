@@ -10,3 +10,4 @@ def offline_change_feeds(monkeypatch):
         raise OSError(f"network access to {url} is not allowed in tests")
 
     monkeypatch.setattr(registry_artifact, "_conan_feed_request", refuse)
+    monkeypatch.setattr(registry_artifact, "_nuget_feed_request", refuse)

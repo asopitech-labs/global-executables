@@ -382,3 +382,147 @@ def test_paced_host_reservations_queue_in_order(monkeypatch):
     for _ in range(3):
         registry_artifact._throttle("https://crates.io/api/v1/crates/a")
     assert slept == [pytest.approx(1.0), pytest.approx(2.0)], "back-to-back requests are spaced one second apart"
+
+
+# --- NuGet V3 catalog feed (P1) -------------------------------------------------------
+
+
+def stamp(clock, minutes_ago):
+    return (clock.now - timedelta(minutes=minutes_ago)).strftime("%Y-%m-%dT%H:%M:%S.0000000Z")
+
+
+class FakeCatalog:
+    """catalog0/index.json plus its pages; `commit` appends a leaf to a new page."""
+
+    def __init__(self, monkeypatch, clock):
+        self.clock = clock
+        self.pages = []  # (page stamp, [leaf, ...])
+        self.calls = []
+        self.fail = None
+        monkeypatch.setattr(registry_artifact, "_nuget_feed_request", self.request)
+
+    def commit(self, minutes_ago, *leaves):
+        stamped = [{"@type": f"nuget:{kind}", "commitTimeStamp": stamp(self.clock, minutes_ago),
+                    "nuget:id": name, "nuget:version": "1.0"} for kind, name in leaves]
+        self.pages.append((stamp(self.clock, minutes_ago), stamped))
+
+    @property
+    def head(self):
+        return self.pages[-1][0] if self.pages else stamp(self.clock, 10_000)
+
+    def request(self, url, timeout, headers=None, method="GET", attempts=3):
+        self.calls.append(url)
+        if self.fail:
+            raise self.fail
+        if url == change_feeds.NUGET_CATALOG:
+            body = {"commitTimeStamp": self.head, "items": [
+                {"@id": f"https://catalog/page{index}.json", "commitTimeStamp": page[0]}
+                for index, page in enumerate(self.pages)]}
+        else:
+            body = {"items": self.pages[int(url.rsplit("page", 1)[1].split(".")[0])][1]}
+        raw = json.dumps(body).encode()
+        return raw, {"downloaded_bytes": len(raw)}
+
+
+def nuget_fixture(tmp_path, monkeypatch, versions=None):
+    clock = Clock(monkeypatch)
+    registry = FakeNuGet(monkeypatch, versions or {"Alpha": "1.0.0", "Beta": "2.0.0", "Gamma": "3.0.0"})
+    catalog = FakeCatalog(monkeypatch, clock)
+    state = nuget_state(tmp_path, sorted(registry.versions))
+    return clock, registry, catalog, state, tmp_path / "nuget.jsonl"
+
+
+def test_nuget_feed_first_poll_records_the_head_and_queues_nothing(tmp_path, monkeypatch):
+    clock, registry, catalog, state, output = nuget_fixture(tmp_path, monkeypatch)
+    catalog.commit(60, ("PackageDetails", "Alpha"))
+    report = registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    assert state["feed_cursor"] == catalog.head and report["feed"]["enqueued"] == 0
+    assert state["feed_queue"] == [] and catalog.calls == [change_feeds.NUGET_CATALOG]
+
+
+def test_nuget_feed_queues_announced_tools_and_commits_cursor_with_the_queue(tmp_path, monkeypatch):
+    clock, registry, catalog, state, output = nuget_fixture(tmp_path, monkeypatch)
+    registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    clock.advance(0)
+    # Cursor is recorded now; then two packages publish (one unrelated to the catalogue).
+    registry_artifact._crawl_nuget(state, output, 0, 10**9, 120)
+    first_cursor = state["feed_cursor"]
+    registry.versions["Beta"] = "2.1.0"
+    catalog.commit(40, ("PackageDetails", "beta"), ("PackageDetails", "Unrelated"))
+    saved = []
+    report = registry_artifact._crawl_nuget(state, output, 0, 10**9, 120, lambda **kw: saved.append(
+        (state["feed_cursor"], list(state["feed_queue"]))))
+    # Budget 0: nothing inspected, but the queue and the new cursor were stored together.
+    assert saved and saved[-1] == (catalog.head, ["Beta"]) and state["feed_cursor"] != first_cursor
+    assert report["feed"]["events"] == 1 and report["feed"]["enqueued"] == 1
+    # The next run consumes the queue: Beta is re-read although it is not due yet.
+    registry.nupkg_requests = 0
+    done = registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    assert registry.nupkg_requests == 1 and state["feed_queue"] == []
+    assert done["unchanged"] == 0 and '"2.1.0"' in output.read_text()
+
+
+def test_nuget_feed_failure_leaves_cursor_and_queue_for_replay(tmp_path, monkeypatch):
+    clock, registry, catalog, state, output = nuget_fixture(tmp_path, monkeypatch)
+    registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    cursor = state["feed_cursor"]
+    catalog.commit(40, ("PackageDetails", "Alpha"))
+    catalog.fail = OSError("catalog down")
+    report = registry_artifact._crawl_nuget(state, output, 0, 10**9, 120)
+    assert report["feed"]["error"] and state["feed_cursor"] == cursor and state["feed_queue"] == []
+    catalog.fail = None
+    report = registry_artifact._crawl_nuget(state, output, 0, 10**9, 120)
+    assert state["feed_queue"] == ["Alpha"] and state["feed_cursor"] == catalog.head
+
+
+def test_nuget_feed_ignores_catalog_pages_younger_than_the_ready_floor(tmp_path, monkeypatch):
+    clock, registry, catalog, state, output = nuget_fixture(tmp_path, monkeypatch)
+    registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    cursor = state["feed_cursor"]
+    catalog.commit(1, ("PackageDetails", "Alpha"))  # one minute old: the flat container may lag
+    registry_artifact._crawl_nuget(state, output, 0, 10**9, 120)
+    assert state["feed_queue"] == [] and state["feed_cursor"] == cursor
+    clock.now += timedelta(minutes=10)
+    registry_artifact._crawl_nuget(state, output, 0, 10**9, 120)
+    assert state["feed_queue"] == ["Alpha"]
+
+
+def test_nuget_feed_delete_leaf_queues_the_tool_and_a_vanished_one_is_reported_unavailable(tmp_path, monkeypatch):
+    clock, registry, catalog, state, output = nuget_fixture(tmp_path, monkeypatch)
+    registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    catalog.commit(40, ("PackageDelete", "Gamma"))
+    del registry.versions["Gamma"]  # the flat container no longer lists it
+    report = registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    assert report["feed"]["deleted"] == 1
+    assert "Gamma" in state["unavailable"] and "Gamma" not in state["checked"]
+    assert state["feed_queue"] == []
+
+
+def test_nuget_feed_page_cap_resynchronises_and_makes_every_tool_due(tmp_path, monkeypatch):
+    clock, registry, catalog, state, output = nuget_fixture(tmp_path, monkeypatch)
+    registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    for minute in range(change_feeds.NUGET_PAGE_LIMIT + 2):
+        catalog.commit(1000 - minute, ("PackageDetails", "Unrelated"))
+    registry.index_requests = 0
+    report = registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    assert report["feed"]["resync"] and state["feed_cursor"] == catalog.head
+    day = refresh_policy.today(clock.now)
+    assert state["due_floor"] == day
+    # Checks written on the same day as the floor are not older than it; next day all are due.
+    clock.advance(1)
+    registry.index_requests = 0
+    again = registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    assert again["skipped_not_due"] == 0 and registry.index_requests == 3
+    assert len(catalog.calls) < 2 * (change_feeds.NUGET_PAGE_LIMIT + 2), "a resync reads no catalog pages"
+
+
+def test_nuget_rotation_backstop_finds_a_release_the_feed_never_announced(tmp_path, monkeypatch):
+    clock, registry, catalog, state, output = nuget_fixture(tmp_path, monkeypatch)
+    registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    registry.versions["Alpha"] = "1.5.0"  # no catalog leaf for it
+    for _ in range(3):
+        clock.advance(2)
+        registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+        if '"1.5.0"' in output.read_text():
+            break
+    assert '"1.5.0"' in output.read_text()
