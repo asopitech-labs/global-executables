@@ -93,6 +93,16 @@ COLLECTED_SOURCES = FILE_INDEX_SOURCES | {"homebrew", "scoop", "winget", "window
 PARTIAL_DECLARATION_SOURCES = {"winget", "vcpkg", "xmake"}
 # A recipe snapshot reports which packages it parsed, so their stale rows can be replaced.
 REPARSED_PACKAGES = "_reparsed_packages"
+
+
+def reparsed_path(output: Path) -> Path:
+    """Sidecar naming the packages a run re-parsed, read by tools/merge_observations.py.
+
+    The collector replaces those packages' rows in its own output, but publication
+    merges that output into the branch copy again; without the sidecar the merge
+    re-added every row the collector had just replaced (#58).
+    """
+    return output.with_name(f"{output.stem}.reparsed.json")
 PACMAN_IDENTITY = {"arch": ("arch", "archlinux"), "msys2": ("windows", "msys2")}
 # There is no privileged observation of a base command set: every run samples one
 # installed system.  Those samples accumulate rather than replace each other, so a
@@ -514,6 +524,8 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
         raise ProductionSourceError(
             f"{source} requires a package-artifact inventory adapter; HTTP metadata alone is not executable evidence"
         )
+    # A sidecar left by an earlier run must not outlive a run that failed or fell back.
+    reparsed_path(output).unlink(missing_ok=True)
     rows: list[dict[str, Any]] = []
     indexes: list[dict[str, Any]] = []
     reparsed: set[tuple[str, str]] = set()
@@ -550,6 +562,9 @@ def crawl_source(source: str, output: Path, timeout: int = 300) -> dict[str, Any
     if source in ACCUMULATING_SOURCES:
         rows = _merge_observations(rows, output, reparsed)
     write_jsonl(sorted(rows, key=lambda row: (row["command"], row["package"], row["source"])), output)
+    if reparsed:
+        reparsed_path(output).write_text(
+            json.dumps({"packages": sorted([list(pair) for pair in reparsed])}, ensure_ascii=False) + "\n")
     return {"status": "success", "coverage_kind": coverage_kind, "records": len(rows),
             "indexes": indexes, "index_count": len(indexes), "downloaded_bytes": downloaded,
             "source": indexes[-1].get("source", SOURCE_INDEXES[source][0]),

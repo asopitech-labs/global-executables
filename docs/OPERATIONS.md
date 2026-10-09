@@ -581,6 +581,12 @@ times. It does not rebase a stale combined JSON snapshot. Pass `OBSERVATION_SOUR
 explicitly: a registry-only supervisor should leave it blank because OS observations
 are durable samples, which shortens the conflict window and avoids reprocessing large
 unchanged files.
+Each observation source is merged by `tools/merge_observations.py`: a newly observed
+row wins and a published row the run did not observe is kept. A recipe snapshot
+(vcpkg, xmake) also writes `<source>.reparsed.json` beside its rows, naming every
+package it parsed; published rows for those packages are dropped before the merge, so a
+parser fix removes the rows it no longer produces. The sidecar stays in the runner's
+ignored `data/production/intermediate/` and is never published.
 
 The single-source container holds no credentials and never pushes. `STATE_DIR` is laid out
 exactly like the `artifact-data` branch, so publishing a local run is a copy into a

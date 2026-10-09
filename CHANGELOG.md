@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- vcpkg/xmake publication: the #60 replace-on-reparse fix only reached the collector's
+  own output. `crawl_parallel.sh publish` merged that output into `artifact-data` by
+  row identity and re-added every row the collector had dropped, so the 2026-10-08
+  cpp-registries run (7787cd0) still published mnn `cpp`/`train`, openexr
+  `not`/`exrcheck`, and xmake `autotools`/`binutils` (926 vcpkg and 117 xmake rows
+  instead of 914 and 104). The collector now names the packages it re-parsed in a
+  `<source>.reparsed.json` sidecar, and the new `tools/merge_observations.py` drops
+  their published rows before merging. Other observation sources keep accumulating
+  (#58).
 - Go toolchain: 1.26.7 → 1.26.9 (`go.mod` toolchain line and the digest-pinned
   `golang:1.26.9-bookworm` image in `Dockerfile.go-crawler`). `govulncheck` in the
   `go` CI job reported reachable `net/http` vulnerabilities fixed in go1.26.9
