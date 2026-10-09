@@ -728,9 +728,15 @@ Consequences, all covered by tests:
 
 - A check that finds the package unchanged (same version, same `extraction_revision`)
   writes **nothing** to history: no `checked_at`, no row rewrite, no shard rewrite, no
-  commit. A run where nothing changed publishes nothing (`nothing to publish`); the
-  report is skipped too when it differs only in effort (`tools/merge_registry_publication.py`,
-  `EFFORT_KEYS`; `REPORT_HEARTBEAT_HOURS` opts in to a periodic idle republish, default off).
+  commit. A run where nothing changed publishes no state, rows or shards
+  (`nothing to publish`). Only the report (`reports/registry-artifact-crawl.json`, with
+  its last-crawl time) is republished by an idle run, and at most once per 24 hours
+  (`REPORT_HEARTBEAT_HOURS`, default 24 in `tools/crawl_parallel.sh` and
+  `tools/merge_registry_publication.py`; 0 turns it off): a report that differs from the
+  published one only in effort (`EFFORT_KEYS`: request counts, bytes, timings, cursors of the
+  rotation) is skipped until the published report is a day old, and any real change
+  (status, coverage, failures, generation, catalogue) is published at once. The status
+  page therefore keeps moving while the history stays zero-diff.
   An all-unchanged 3,000-package batch measured with `tools/measure_state_churn.py` at
   PyPI scale (870,000 packages): before (#65) 256 of 256 shard files, 52,864 B pushed;
   now 0 files, 0 B.

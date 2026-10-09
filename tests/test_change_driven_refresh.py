@@ -677,6 +677,7 @@ def test_publication_of_an_all_unchanged_run_is_empty(tmp_path, monkeypatch):
     """Two crawls, the second finding nothing new: the second publish makes no commit."""
     import shutil
     import subprocess
+    import time
     root = Path(__file__).resolve().parents[1]
     origin = tmp_path / "origin.git"
     subprocess.run(["git", "init", "-q", "--bare", str(origin)], check=True)
@@ -724,6 +725,16 @@ def test_publication_of_an_all_unchanged_run_is_empty(tmp_path, monkeypatch):
         output = crawl_and_publish(days)
         assert "nothing to publish" in output, output
     assert head() == settled
+    # Idle for more than a day (a heartbeat of a few milliseconds stands in for it): the
+    # report alone is republished; no state or row file is touched.
+    environment["REPORT_HEARTBEAT_HOURS"] = "0.000001"
+    time.sleep(0.01)
+    output = crawl_and_publish(40)
+    assert "published" in output.splitlines()
+    assert head() != settled
+    changed = subprocess.run(["git", "diff", "--name-only", settled.strip(), head().strip()], cwd=origin,
+                             capture_output=True, text=True).stdout.split()
+    assert changed == ["reports/registry-artifact-crawl.json"], changed
 
 
 def test_workflows_keep_the_schedule_cache_between_runs_and_git_ignores_it():

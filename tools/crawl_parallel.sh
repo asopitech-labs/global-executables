@@ -20,6 +20,9 @@ OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 sc
 PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
 BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
 PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"
+# An idle run republishes only the report (last-crawl time) at most this often, in hours;
+# history and state stay untouched (docs/OPERATIONS.md "History and cache"). 0 disables it.
+export REPORT_HEARTBEAT_HOURS="${REPORT_HEARTBEAT_HOURS:-24}"
 PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
 
 if [ -n "${CONTAINER_RUNTIME:-}" ]; then

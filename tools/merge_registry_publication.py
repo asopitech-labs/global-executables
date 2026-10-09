@@ -169,7 +169,13 @@ def outcome(entry: Any) -> Any:
     return {key: value for key, value in entry.items() if key not in EFFORT_KEYS}
 
 
-def merge_report(source: str, published_path: Path, local_path: Path, heartbeat_hours: float = 0.0) -> bool:
+# An idle run republishes only the report (its last-crawl time) once a day, so the status
+# page keeps moving while the history stays untouched.
+DEFAULT_HEARTBEAT_HOURS = 24.0
+
+
+def merge_report(source: str, published_path: Path, local_path: Path,
+                 heartbeat_hours: float = DEFAULT_HEARTBEAT_HOURS) -> bool:
     if not local_path.is_file():
         return False
     published = read_json(published_path, {"sources": {}})
@@ -186,7 +192,10 @@ def merge_report(source: str, published_path: Path, local_path: Path, heartbeat_
     published_sources[source] = local_entry
     finished = [
         value
-        for value in (published.get("finished_at"), local.get("finished_at"))
+        for value in (published.get("finished_at"),
+                      # The Python crawlers' reports carry no time: stamp the publication, so the
+                      # heartbeat has an anchor.
+                      local.get("finished_at") or datetime.now(timezone.utc).isoformat())
         if isinstance(value, str) and value
     ]
     if finished:
@@ -197,7 +206,7 @@ def merge_report(source: str, published_path: Path, local_path: Path, heartbeat_
 
 
 def heartbeat_due(published: dict[str, Any], hours: float) -> bool:
-    """With a heartbeat the report is refreshed at least that often even when idle (off by default)."""
+    """The report is refreshed at least every ``hours`` even when idle (0 turns it off)."""
     if hours <= 0:
         return False
     finished = published.get("finished_at")
@@ -217,8 +226,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--local-state", required=True, type=Path)
     parser.add_argument("--published-report", type=Path)
     parser.add_argument("--local-report", type=Path)
-    parser.add_argument("--report-heartbeat-hours", type=float, default=float(os.environ.get("REPORT_HEARTBEAT_HOURS", "0")),
-                        help="republish an unchanged report at least this often (0: never)")
+    parser.add_argument("--report-heartbeat-hours", type=float, default=float(os.environ.get("REPORT_HEARTBEAT_HOURS", str(DEFAULT_HEARTBEAT_HOURS))),
+                        help="republish an idle report at least this often, in hours (0: never)")
     return parser.parse_args()
 
 

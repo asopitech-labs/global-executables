@@ -9,8 +9,9 @@
   again (staggered, history untouched). A check that finds a package unchanged writes
   nothing to git, so a run where nothing changed publishes nothing: an all-unchanged
   3,000-package PyPI batch went from 256 shard files / 52,864 B to 0 / 0. The
-  per-run effort fields of the report no longer trigger a commit (`REPORT_HEARTBEAT_HOURS`
-  opts in to an idle republish). `snapshot_generation` moves only when history did.
+  per-run effort fields of the report no longer trigger a commit; an idle run
+  republishes only the report (last-crawl time) at most once per 24 h
+  (`REPORT_HEARTBEAT_HOURS`, default 24, 0 disables), so the status page keeps updating. `snapshot_generation` moves only when history did.
   Legacy `checked` is read for one release and dropped on the first save. See "History
   and cache" in docs/OPERATIONS.md.
 - Change-driven refresh (#64, refs #58): the latest-version refresh skips packages
