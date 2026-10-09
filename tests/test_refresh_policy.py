@@ -48,9 +48,9 @@ def test_record_check_counts_unchanged_streak_and_restarts_on_change():
 def test_seed_from_rows_makes_the_first_recheck_cheap_but_due():
     checked = {"kept": policy.pack(50, 2, "9")}
     seeded = policy.seed_from_rows(checked, [{"package": "a", "version": "1.0"}, {"package": "kept", "version": "0"},
-                                              {"package": "", "version": "1"}, {"package": "b"}])
-    assert seeded == 1 and checked["a"] == "0:0:1.0" and checked["kept"] == "50:2:9"
-    assert policy.is_due(checked, "a", 1, 14) and policy.known_version(checked, "a") == "1.0"
+                                              {"package": "", "version": "1"}, {"package": "b"}], day=1000)
+    assert seeded == 1 and checked["kept"] == "50:2:9"
+    assert policy.is_due(checked, "a", 1000, 14) and policy.known_version(checked, "a") == "1.0"
 
 
 def test_ttl_classification_and_summary():
@@ -77,3 +77,33 @@ def test_token_bucket_reserves_in_order_and_refills():
 
 def test_feed_floor_defers_young_announcements():
     assert policy.feed_ready_at(1000, 60) == 1060
+
+
+HERE = Path(__file__).resolve().parents[1] / "internal" / "gocrawl" / "testdata" / "refresh"
+
+
+def test_cold_checks_match_the_go_implementation_and_spread_over_the_stagger_tiers():
+    cases = json.loads((HERE / "cold-golden.json").read_text())["cases"]
+    assert all(policy.cold_check(c["module"], c["version"], c["day"]) == c["check"] for c in cases)
+    streaks = {policy.unpack(policy.cold_check(f"pkg-{i}", "1", 1000))[1] for i in range(200)}
+    assert streaks == set(range(policy.COLD_STAGGER_STREAKS))
+
+
+def test_cache_file_matches_the_go_golden_and_survives_loss_and_revision_changes(tmp_path):
+    import gzip
+    entries = {"alpha": "20001:2:1.0", "b": "20002:0:2.0", "zeta": "19990:5:9.9.9"}
+    path = tmp_path / "cache" / "pypi.cache.gz"
+    policy.write_cache(path, entries, 77, revision=policy.EXTRACTION_REVISION)
+    assert gzip.open(path, "rt").read() == (HERE / "schedule-cache-golden.txt").read_text()
+    assert policy.read_cache(path) == (entries, 77, True)
+    assert policy.read_cache(path, revision=policy.EXTRACTION_REVISION + 1) == ({}, 0, False)
+    assert policy.read_cache(tmp_path / "missing.gz") == ({}, 0, False)
+    path.write_bytes(b"not gzip")
+    assert policy.read_cache(path) == ({}, 0, False)
+
+
+def test_cold_refresh_start_moves_one_budget_per_window():
+    from datetime import datetime, timedelta, timezone
+    now = datetime.fromtimestamp(1_800_000_000, timezone.utc)
+    first, second = policy.cold_refresh_start(870_000, 3000, now), policy.cold_refresh_start(870_000, 3000, now + timedelta(hours=6))
+    assert second == (first + 3000) % 870_000

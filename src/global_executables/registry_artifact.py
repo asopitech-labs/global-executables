@@ -481,6 +481,20 @@ def _save_json(path: Path, value: dict[str, Any]) -> None:
     save_state(path, value)
 
 
+def _save_state(path: Path, state: dict[str, Any]) -> None:
+    """Save the registry state without the cache: checks and rotation position stay in memory.
+
+    History is written only when it changed; bookkeeping about when a package was last
+    looked at goes to the schedule cache (``refresh_policy.write_cache``), so a legacy
+    ``checked`` map disappears from the branch on the first save.
+    """
+    stripped = {**state, "sources": {
+        name: {key: value for key, value in entry.items() if key not in refresh_policy.CACHE_KEYS}
+        if isinstance(entry, dict) else entry
+        for name, entry in state.get("sources", {}).items()}}
+    save_state(path, stripped)
+
+
 def _fsync_directory(path: Path) -> None:
     descriptor = os.open(path, os.O_RDONLY)
     try:
@@ -1040,6 +1054,13 @@ def _nuget_feed(state: dict[str, Any], tools: list[str], timeout: int,
     return report
 
 
+def _refresh_start(state: dict[str, Any], size: int, budget: int) -> int:
+    """The rotation position: from the cache when it had one, else derived from the time."""
+    if state.pop("refresh_cursor_cold", False) and "refresh_cursor" not in state:
+        return refresh_policy.cold_refresh_start(size, budget, _utc_now())
+    return int(state.get("refresh_cursor", 0))
+
+
 def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                  checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Inspect NuGet's .NET tool packages, the only NuGet packages that ship commands."""
@@ -1112,7 +1133,7 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     max_days = (refresh_policy.BACKOFF_MAX_DAYS_PLAIN if feed_report.get("error")
                 else refresh_policy.BACKOFF_MAX_DAYS_FEED)
     feed_queue = state.setdefault("feed_queue", [])
-    cursor = int(state.get("cursor", 0)); refresh_cursor = int(state.get("refresh_cursor", 0))
+    cursor = int(state.get("cursor", 0)); refresh_cursor = _refresh_start(state, len(tools), budget)
     if refresh_cursor >= len(tools):
         refresh_cursor = 0
     refresh_enabled = cursor >= len(tools)
@@ -1548,7 +1569,7 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             recipes = references
     _pin_catalog(state, recipes)
     cursor = int(state.get("cursor", 0))
-    refresh_cursor = int(state.get("refresh_cursor", 0))
+    refresh_cursor = _refresh_start(state, len(recipes), budget)
     if refresh_cursor >= len(recipes):
         refresh_cursor = 0
     refresh_enabled = cursor >= len(recipes)
@@ -1699,7 +1720,8 @@ def _refuse_empty_exhaustive(result: dict[str, Any], observations: Path) -> None
 
 def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Path, report_path: Path,
                            package_budget: int = 100, byte_budget: int = 500_000_000,
-                           timeout: int = 120, source_budgets: dict[str, int] | None = None) -> dict[str, Any]:
+                           timeout: int = 120, source_budgets: dict[str, int] | None = None,
+                           cache_dir: Path | None = None) -> dict[str, Any]:
     state = _load_json(state_path, {"version": 1, "sources": {}})
     output_dir.mkdir(parents=True, exist_ok=True); report: dict[str, Any] = {"status": "success", "sources": {}}
     runners: dict[str, Callable[..., dict[str, Any]]] = {
@@ -1712,13 +1734,30 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
         source_state = state["sources"].setdefault(source, {})
         budget = int(source_budgets.get(source, package_budget))
         observations = output_dir / f"{source}.jsonl"
+        cache_path = (cache_dir or state_path.parent / "cache") / f"{source}.cache.gz"
+        cached_checks, cached_cursor, warm = refresh_policy.read_cache(cache_path)
+        if warm:
+            # The cache is newer than any legacy `checked` map left in the state.
+            source_state[refresh_policy.CHECKED_FIELD] = {**source_state.get(refresh_policy.CHECKED_FIELD, {}),
+                                                         **cached_checks}
+            source_state["refresh_cursor"] = cached_cursor
+        elif not isinstance(source_state.get("refresh_cursor"), int):
+            source_state.pop("refresh_cursor", None)
+            source_state["refresh_cursor_cold"] = True  # no cache: the crawler derives a start
+
+        def save(_source: str = source, _state: dict[str, Any] = source_state, _cache: Path = cache_path) -> None:
+            _save_state(state_path, state)
+            refresh_policy.write_cache(_cache, _state.get(refresh_policy.CHECKED_FIELD, {}),
+                                       int(_state.get("refresh_cursor") or 0))
+
         def checkpoint(buffer: list[dict[str, Any]] | None = None, _state: dict[str, Any] = source_state,
-                       _observations: Path = observations, **updates: Any) -> None:
+                       _observations: Path = observations, _save: Callable[[], None] = save,
+                       **updates: Any) -> None:
             _state.update(updates)
             if buffer:
                 _append_rows(_observations, buffer)
                 buffer.clear()
-            _save_json(state_path, state)
+            _save()
 
         source_retry = source_state.get("source_retry")
         if isinstance(source_retry, dict) and not _retry_due({"source": source_retry}, "source"):
@@ -1728,7 +1767,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
                 "failure_details": {"source": source_state.get("source_failure", {})},
             }
             report["status"] = "partial"
-            _save_json(state_path, state)
+            _save_state(state_path, state)
             if interrupted():
                 report["interrupted"] = True
                 break
@@ -1775,7 +1814,7 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
                                                "coverage_kind": "partial",
                                                "failure_details": {"source": details}}
                 report["status"] = "failed"
-        _save_json(state_path, state)  # a later source must not cost this one its cursor
+        save()  # a later source must not cost this one its cursor (and the cache keeps its checks)
         result = report["sources"].get(source, {})
         if result.get("error") or result.get("status") == "failed":
             report["status"] = "failed"
@@ -1789,6 +1828,6 @@ def crawl_registry_sources(sources: list[str], state_path: Path, output_dir: Pat
                                 all(v.get("coverage_kind") == "exhaustive" for v in report["sources"].values())
                                 else "partial")
     report["state"] = str(state_path); report["package_budget"] = package_budget; report["byte_budget"] = byte_budget
-    _save_json(state_path, state)
+    _save_state(state_path, state)
     _write_text_atomic(report_path, json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
     return report

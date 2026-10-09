@@ -546,3 +546,190 @@ def test_reparsed_merge_and_change_driven_state_cover_disjoint_sources():
     # vcpkg and xmake publish through the merge step in cpp-registries.yml, and they keep no checks.
     workflow = (Path(__file__).resolve().parents[1] / ".github" / "workflows" / "cpp-registries.yml").read_text()
     assert "OBSERVATION_SOURCES='vcpkg xmake'" in workflow
+
+
+# --- History and cache split ------------------------------------------------------------
+
+
+def tree(root):
+    root = Path(root)
+    return {str(path.relative_to(root)): path.read_bytes() for path in sorted(root.rglob("*")) if path.is_file()}
+
+
+def run_nuget(tmp_path, budget=10):
+    state = tmp_path / "data" / "production" / "registry-state"
+    return registry_artifact.crawl_registry_sources(
+        ["nuget"], state, tmp_path / "data" / "production" / "intermediate",
+        tmp_path / "reports" / "crawl.json", package_budget=budget, byte_budget=10**9, timeout=120), state
+
+
+def seeded_nuget_project(tmp_path, monkeypatch, versions):
+    clock = Clock(monkeypatch)
+    registry = FakeNuGet(monkeypatch, versions)
+    catalog = tmp_path / "data" / "production" / "nuget-tools.txt"
+    registry_artifact.write_catalog(catalog, sorted(versions))
+    state = tmp_path / "data" / "production" / "registry-state"
+    registry_artifact.save_state(state, {"version": 1, "sources": {"nuget": {
+        "tools_file": str(catalog), "cursor": len(versions), "catalog_advertised": len(versions),
+        "catalog_truncated": False}}})
+    return clock, registry
+
+
+def test_an_all_unchanged_run_leaves_the_state_directory_byte_identical(tmp_path, monkeypatch):
+    clock, registry = seeded_nuget_project(tmp_path, monkeypatch, {"Alpha": "1.0.0", "Beta": "2.0.0", "Gamma": "3.0.0"})
+    _, state = run_nuget(tmp_path)  # the first look records rows, cursors and the catalogue verdict
+    clock.advance(1)
+    run_nuget(tmp_path)  # settles anything the first rotation still had to write
+    settled = tree(state)
+    cache_file = tmp_path / "data" / "production" / "cache" / "nuget.cache.gz"
+    cache_before = cache_file.read_bytes()
+    requests = registry.index_requests
+    for _ in range(3):
+        clock.advance(40)
+        report, _ = run_nuget(tmp_path)
+        assert report["sources"]["nuget"]["unchanged"] >= 1
+    assert registry.index_requests > requests, "the packages are still checked"
+    assert tree(state) == settled, "checking an unchanged package must not write history"
+    assert cache_file.read_bytes() != cache_before, "the checks went to the cache"
+    assert "checked" not in registry_artifact.load_state(state)["sources"]["nuget"]
+    assert "refresh_cursor" not in registry_artifact.load_state(state)["sources"]["nuget"]
+
+
+def test_a_lost_cache_rechecks_everything_and_never_touches_history(tmp_path, monkeypatch):
+    clock, registry = seeded_nuget_project(tmp_path, monkeypatch, {"Alpha": "1.0.0", "Beta": "2.0.0", "Gamma": "3.0.0"})
+    _, state = run_nuget(tmp_path)
+    clock.advance(1)
+    run_nuget(tmp_path)
+    settled, rows = tree(state), (tmp_path / "data" / "production" / "intermediate" / "nuget.jsonl").read_bytes()
+    (tmp_path / "data" / "production" / "cache" / "nuget.cache.gz").unlink()
+    registry.index_requests = registry.nupkg_requests = 0
+    clock.advance(1)
+    report, _ = run_nuget(tmp_path)
+    assert registry.index_requests == 3, "a cold cache makes every package due"
+    assert registry.nupkg_requests == 0, "rows seed the known version, so no artifact is read again"
+    assert report["sources"]["nuget"]["unchanged"] == 3
+    assert tree(state) == settled
+    assert (tmp_path / "data" / "production" / "intermediate" / "nuget.jsonl").read_bytes() == rows
+
+
+def test_a_legacy_checked_map_is_read_once_and_dropped_from_the_state(tmp_path, monkeypatch):
+    clock, registry = seeded_nuget_project(tmp_path, monkeypatch, {"Alpha": "1.0.0"})
+    day = refresh_policy.today(clock.now)
+    state = tmp_path / "data" / "production" / "registry-state"
+    document = registry_artifact.load_state(state)
+    document["sources"]["nuget"]["checked"] = {"Alpha": refresh_policy.pack(day, 3, "1.0.0")}
+    document["sources"]["nuget"]["refresh_cursor"] = 0
+    document["sources"]["nuget"]["extraction_revision"] = refresh_policy.EXTRACTION_REVISION
+    registry_artifact.save_state(state, document)
+    assert "checked" in registry_artifact.load_state(state)["sources"]["nuget"]
+    run_nuget(tmp_path)
+    assert "checked" not in registry_artifact.load_state(state)["sources"]["nuget"]
+    checks, _, warm = refresh_policy.read_cache(tmp_path / "data" / "production" / "cache" / "nuget.cache.gz")
+    assert warm and refresh_policy.unpack(checks["Alpha"])[2] == "1.0.0"
+
+
+def test_a_released_package_changes_only_its_rows(tmp_path, monkeypatch):
+    clock, registry = seeded_nuget_project(tmp_path, monkeypatch, {"Alpha": "1.0.0", "Beta": "2.0.0"})
+    _, state = run_nuget(tmp_path)
+    clock.advance(1)
+    run_nuget(tmp_path)
+    settled = tree(state)
+    rows_path = tmp_path / "data" / "production" / "intermediate" / "nuget.jsonl"
+    rows_before = rows_path.read_text().splitlines()
+    registry.versions["Beta"] = "2.1.0"
+    for _ in range(4):
+        clock.advance(3)
+        run_nuget(tmp_path)
+    changed = [line for line in rows_path.read_text().splitlines() if line not in rows_before]
+    assert changed and all('"Beta"' in line for line in changed)
+    assert tree(state) == settled, "a new version is recorded in the rows alone"
+
+
+def test_conan_unchanged_run_writes_nothing_to_the_state_and_a_cold_cache_rereads_recipes(tmp_path, monkeypatch):
+    clock = Clock(monkeypatch)
+    registry = FakeConan(monkeypatch, {"alpha": ("1.0", "rr1"), "beta": ("2.0", "rr7")})
+    references = ["alpha/1.0", "beta/2.0"]
+    seeded = conan_state(tmp_path, references)
+    state = tmp_path / "data" / "production" / "registry-state"
+    save_state(state, {"version": 1, "sources": {"conan": seeded}})
+
+    def run():
+        return registry_artifact.crawl_registry_sources(
+            ["conan"], state, tmp_path / "data" / "production" / "intermediate", tmp_path / "reports" / "c.json",
+            package_budget=10, byte_budget=10**9, timeout=120)
+
+    run(); clock.advance(1); run()
+    settled = tree(state)
+    for _ in range(3):
+        clock.advance(40)
+        report = run()
+        assert report["sources"]["conan"]["unchanged"] == 2
+    assert tree(state) == settled, "an unchanged recipe revision writes nothing to the history"
+    (tmp_path / "data" / "production" / "cache" / "conan.cache.gz").unlink()
+    registry.requests.clear()
+    clock.advance(1)
+    report = run()
+    assert report["sources"]["conan"]["unchanged"] == 0 and len(registry.requests) >= 8, "cold: recipes are read again"
+    assert tree(state) == settled, "and the rows they produce are the ones already stored"
+
+
+def test_publication_of_an_all_unchanged_run_is_empty(tmp_path, monkeypatch):
+    """Two crawls, the second finding nothing new: the second publish makes no commit."""
+    import shutil
+    import subprocess
+    root = Path(__file__).resolve().parents[1]
+    origin = tmp_path / "origin.git"
+    subprocess.run(["git", "init", "-q", "--bare", str(origin)], check=True)
+    seed = tmp_path / "seed"
+    seed.mkdir()
+    for args in (("init", "-q", "-b", "artifact-data"), ("commit", "--allow-empty", "-qm", "seed"),
+                 ("push", "-q", f"file://{origin}", "artifact-data")):
+        subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args], cwd=seed, check=True)
+    work = tmp_path / "work"
+    for relative in ("tools/crawl_parallel.sh", "tools/merge_observations.py", "tools/merge_registry_publication.py",
+                     "tools/registry_state.py", "tools/transport_shards.py", "src/global_executables/__init__.py",
+                     "src/global_executables/registry_state.py"):
+        (work / relative).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / relative, work / relative)
+    for args in (("init", "-q", "-b", "main"), ("add", "-A"), ("commit", "-qm", "tools"),
+                 ("remote", "add", "origin", f"file://{origin}")):
+        subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args], cwd=work, check=True)
+
+    clock, registry = seeded_nuget_project(tmp_path / "base-nuget", monkeypatch, {"Alpha": "1.0.0", "Beta": "2.0.0"})
+    crawl_root = tmp_path / "base-nuget"
+    environment = {**__import__("os").environ, "BASE": str(tmp_path / "base"), "SOURCES": "nuget",
+                   "OBSERVATION_SOURCES": " ", "PUBLISH_MAX_ATTEMPTS": "1",
+                   "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.com",
+                   "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+    # crawl_parallel.sh looks for the run's checkout at "${BASE}-nuget".
+    assert (tmp_path / "base-nuget") == crawl_root
+
+    def crawl_and_publish(advance):
+        clock.advance(advance)
+        registry_artifact.crawl_registry_sources(
+            ["nuget"], crawl_root / "data/production/registry-state", crawl_root / "data/production/intermediate",
+            crawl_root / "reports/registry-artifact-crawl.json", package_budget=10, byte_budget=10**9, timeout=120)
+        result = subprocess.run(["bash", "tools/crawl_parallel.sh", "publish"], cwd=work, env=environment,
+                                capture_output=True, text=True)
+        assert result.returncode == 0, result.stderr
+        return result.stdout
+
+    def head():
+        return subprocess.run(["git", "rev-parse", "artifact-data"], cwd=origin, capture_output=True, text=True).stdout
+
+    assert "published" in crawl_and_publish(0)
+    crawl_and_publish(1)  # settles what the first rotation still wrote
+    settled = head()
+    for days in (40, 40, 40):
+        output = crawl_and_publish(days)
+        assert "nothing to publish" in output, output
+    assert head() == settled
+
+
+def test_workflows_keep_the_schedule_cache_between_runs_and_git_ignores_it():
+    root = Path(__file__).resolve().parents[1]
+    refresh = (root / ".github/workflows/registry-refresh.yml").read_text()
+    cpp = (root / ".github/workflows/cpp-registries.yml").read_text()
+    assert "uses: actions/cache@v4" in refresh and "/data/production/cache" in refresh
+    assert "uses: actions/cache@v4" in cpp and "path: data/production/cache" in cpp
+    assert "data/production/cache/" in (root / ".gitignore").read_text().splitlines()
