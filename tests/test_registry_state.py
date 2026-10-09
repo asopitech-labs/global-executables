@@ -363,3 +363,20 @@ def test_publication_migrates_the_branch_in_its_normal_commit(tmp_path):
     changes = git(origin, "show", "--name-status", "--format=", "artifact-data").splitlines()
     assert sorted(changes) == ["M\tdata/production/registry-state/manifest.json",
                                "M\tdata/production/registry-state/nuget/source.json"]
+
+
+def test_change_driven_fields_are_stored_canonically_and_match_the_go_golden(tmp_path):
+    """`checked`, `feed_cursor` and `feed_pending` ride the generic map sharding.
+
+    The golden directory is read and rewritten byte for byte by
+    internal/gocrawl (TestStateGoldenWithChecksIsByteIdentical): both encoders agree.
+    """
+    golden = Path(__file__).resolve().parents[1] / "internal" / "gocrawl" / "testdata" / "refresh" / "state-golden"
+    document = load_state(golden)
+    pypi = document["sources"]["pypi"]
+    assert len(pypi["checked"]) == 1500 and len(pypi["feed_pending"]) == 1200 and pypi["feed_cursor"] == "42006261"
+    save_state(tmp_path / "again", document)
+    original = {path.relative_to(golden): path.read_bytes() for path in golden.rglob("*") if path.is_file()}
+    rewritten = {path.relative_to(tmp_path / "again"): path.read_bytes()
+                 for path in (tmp_path / "again").rglob("*") if path.is_file()}
+    assert rewritten == original

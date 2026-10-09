@@ -38,7 +38,13 @@ func (c Coordinator) Run(ctx context.Context, works []ModuleWork, inspector Insp
 	for range c.Workers {
 		workers.Go(func() {
 			for work := range workCh {
-				result := inspector.Inspect(runCtx, work)
+				var result ModuleResult
+				if work.Skip {
+					// Not due: nothing to read; the entry only advances the cursor.
+					result = ModuleResult{Work: work, Verdict: VerdictSuccess, Unchanged: true}
+				} else {
+					result = inspector.Inspect(runCtx, work)
+				}
 				select {
 				case resultCh <- result:
 				case <-runCtx.Done():

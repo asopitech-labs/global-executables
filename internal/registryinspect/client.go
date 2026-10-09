@@ -1,6 +1,7 @@
 package registryinspect
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
@@ -187,6 +188,11 @@ func (r *requester) gateFor(target string) *adaptiveGate {
 }
 
 func (r *requester) request(ctx context.Context, method, target string, headers http.Header, maxBytes int64) (responseData, error) {
+	return r.requestBody(ctx, method, target, headers, nil, maxBytes)
+}
+
+// requestBody is request with a request body, used by the XML-RPC change feed.
+func (r *requester) requestBody(ctx context.Context, method, target string, headers http.Header, body []byte, maxBytes int64) (responseData, error) {
 	var lastErr error
 	for attempt := 1; attempt <= r.config.MaxAttempts; attempt++ {
 		gate := r.gateFor(target)
@@ -194,7 +200,7 @@ func (r *requester) request(ctx context.Context, method, target string, headers 
 			return responseData{}, err
 		}
 		requestCtx, cancel := context.WithTimeout(ctx, r.config.RequestTimeout)
-		req, err := http.NewRequestWithContext(requestCtx, method, target, nil)
+		req, err := http.NewRequestWithContext(requestCtx, method, target, bytes.NewReader(body))
 		if err != nil {
 			gate.release(0, err, 0)
 			cancel()

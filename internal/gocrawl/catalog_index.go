@@ -218,10 +218,27 @@ func (s *BoltStore) CommitCatalogPage(
 	since string,
 	complete bool,
 ) error {
+	return s.CommitCatalogPageWithChanges(ctx, newModules, fileEnd, since, complete, nil)
+}
+
+// CommitCatalogPageWithChanges also queues `changed`, the modules the index announced
+// with a new version that the catalog already knew, in the transaction that advances
+// the index cursor (`since`): the cursor never gets ahead of the queued work.
+func (s *BoltStore) CommitCatalogPageWithChanges(
+	ctx context.Context,
+	newModules []string,
+	fileEnd int64,
+	since string,
+	complete bool,
+	changed []FeedEvent,
+) error {
 	if err := ctx.Err(); err != nil {
 		return err
 	}
 	return s.db.Update(func(tx *bolt.Tx) error {
+		if _, err := enqueueEvents(tx, changed, FeedOptions{}); err != nil {
+			return err
+		}
 		meta := tx.Bucket(metaBucket)
 		indexedEnd := getInt64(meta, "catalog_delta_offset")
 		if fileEnd < indexedEnd {

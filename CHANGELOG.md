@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Change-driven refresh (#64, refs #58): the latest-version refresh skips packages
+  whose registry version is unchanged (Go, npm, PyPI, RubyGems, Packagist, NuGet, Conan),
+  backs off unchanged packages exponentially without spending budget, and uses the
+  PyPI, npm, Packagist, Conan and NuGet change feeds to queue changed packages first (NuGet
+  polls the V3 catalog by commit timestamp, handles deletes, resyncs past 24 pages).
+  The rotation remains the backstop. New registry-state fields `checked`, `feed_cursor`,
+  `feed_pending`, `due_floor`, `extraction_revision` (generic maps; Python and Go
+  encoders byte-identical, golden in `internal/gocrawl/testdata/refresh/state-golden`). See "Change-driven
+  refresh" in docs/OPERATIONS.md.
 - vcpkg/xmake publication: the #60 replace-on-reparse fix only reached the collector's
   own output. `crawl_parallel.sh publish` merged that output into `artifact-data` by
   row identity and re-added every row the collector had dropped, so the 2026-10-08

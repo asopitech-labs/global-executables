@@ -1,18 +1,25 @@
 package main
 
 import (
+	"bufio"
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
 	"io"
 	"maps"
+	"os"
 	"slices"
+	"strings"
 	"time"
 
 	"github.com/asopitech-labs/global-executables/internal/gocrawl"
 	"github.com/asopitech-labs/global-executables/internal/goproxy"
 	"github.com/asopitech-labs/global-executables/internal/registryinspect"
 )
+
+// clock is the pass clock; tests replace it to move a run to a later day.
+var clock = time.Now
 
 type crawlConfig struct {
 	Source           string
@@ -24,6 +31,8 @@ type crawlConfig struct {
 	ProxyURL         string
 	IndexURL         string
 	RegistryURL      string
+	FeedURL          string
+	registryDefault  bool
 	CatalogPages     int
 	PackageBudget    int
 	ByteBudget       int64
@@ -35,34 +44,61 @@ type crawlConfig struct {
 	Continuous       bool
 }
 
+// passPolicy carries what the change-driven refresh adds to a pass: the checks that
+// decide which rotation entries are due, and the modules a change feed announced.
+type passPolicy struct {
+	Checks   func([]string) (map[string]gocrawl.Check, error)
+	Today    int
+	DueFloor int
+	MaxDays  int
+	Feed     []string
+}
+
 func buildPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refresh bool) ([]gocrawl.ModuleWork, error) {
+	return planPassWorks(catalogPath, before, budget, refresh, passPolicy{})
+}
+
+// planPassWorks orders a pass: announced changes first, then the catalog walk, then
+// the rotation backstop, then retries. The rotation always keeps a tenth of the
+// budget once the walk is complete, however many changes a feed announces, and the
+// walk keeps half of it while the catalog is still being read.
+func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refresh bool, policy passPolicy) ([]gocrawl.ModuleWork, error) {
 	if budget <= 0 {
 		return nil, nil
 	}
 	retryModules := slices.Sorted(maps.Keys(before.Retries))
 	retryBudget := min(len(retryModules), max(1, budget/4))
-	catalogBudget := budget - retryBudget
+	remaining := budget - retryBudget
+	walking := before.Cursor < before.CatalogSize
+	feedUse := 0
+	if len(policy.Feed) > 0 {
+		share := remaining / 2
+		if !walking {
+			share = remaining
+			if refresh && before.CatalogSize > 0 {
+				share -= max(1, budget/10)
+			}
+		}
+		feedUse = max(0, min(len(policy.Feed), share))
+	}
+	catalogBudget := remaining - feedUse
 	var works []gocrawl.ModuleWork
-	if before.Cursor < before.CatalogSize {
+	for _, module := range policy.Feed[:feedUse] {
+		works = append(works, gocrawl.ModuleWork{Module: module, Feed: true, Attempt: 1})
+	}
+	var walk []gocrawl.ModuleWork
+	if walking {
 		var err error
-		works, err = gocrawl.ReadCatalogBatch(catalogPath, before.Cursor, before.CatalogOffset, catalogBudget, 0)
+		walk, err = gocrawl.ReadCatalogBatch(catalogPath, before.Cursor, before.CatalogOffset, catalogBudget, 0)
 		if err != nil {
 			return nil, err
 		}
 	}
-	if refresh && len(works) < catalogBudget && before.Cursor >= before.CatalogSize && before.CatalogSize > 0 {
-		refreshCursor, refreshOffset := before.RefreshCursor, before.RefreshCatalogOffset
-		if refreshCursor >= before.CatalogSize {
-			refreshCursor, refreshOffset = 0, 0
-		}
-		refreshWorks, err := gocrawl.ReadCatalogBatch(
-			catalogPath, refreshCursor, refreshOffset, catalogBudget-len(works), uint64(len(works)),
-		)
+	works = append(works, walk...)
+	if refresh && len(walk) < catalogBudget && before.Cursor >= before.CatalogSize && before.CatalogSize > 0 {
+		refreshWorks, err := planRefresh(catalogPath, before, catalogBudget-len(walk), policy)
 		if err != nil {
 			return nil, err
-		}
-		for index := range refreshWorks {
-			refreshWorks[index].Refresh = true
 		}
 		works = append(works, refreshWorks...)
 	}
@@ -75,10 +111,79 @@ func buildPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, ref
 			Order: uint64(len(works)), Module: module, Retry: true, Attempt: entry.Attempts + 1,
 		})
 	}
+	if err := attachKnown(works, policy); err != nil {
+		return nil, err
+	}
 	for index := range works {
 		works[index].Order = uint64(index)
 	}
 	return works, nil
+}
+
+// planRefresh reads the next rotation entries. With checks available it reads further
+// than the budget and marks entries that are not due as skipped: they advance the
+// rotation cursor without a request, so the budget is spent on packages that are due.
+func planRefresh(catalogPath string, before gocrawl.Snapshot, target int, policy passPolicy) ([]gocrawl.ModuleWork, error) {
+	refreshCursor, refreshOffset := before.RefreshCursor, before.RefreshCatalogOffset
+	if refreshCursor >= before.CatalogSize {
+		refreshCursor, refreshOffset = 0, 0
+	}
+	scan := target
+	if policy.Checks != nil {
+		scan = target * gocrawl.MaxScanFactor
+	}
+	batch, err := gocrawl.ReadCatalogBatch(catalogPath, refreshCursor, refreshOffset, scan, 0)
+	if err != nil {
+		return nil, err
+	}
+	var checks map[string]gocrawl.Check
+	if policy.Checks != nil {
+		modules := make([]string, len(batch))
+		for index, work := range batch {
+			modules[index] = work.Module
+		}
+		if checks, err = policy.Checks(modules); err != nil {
+			return nil, err
+		}
+	}
+	due, cut := 0, len(batch)
+	for index := range batch {
+		batch[index].Refresh = true
+		if check, recorded := checks[batch[index].Module]; recorded &&
+			!check.Due(batch[index].Module, policy.Today, policy.DueFloor, policy.MaxDays) {
+			batch[index].Skip = true
+			continue
+		}
+		due++
+		if due >= target {
+			cut = index + 1
+			break
+		}
+	}
+	return batch[:cut], nil
+}
+
+// attachKnown records on each work the version its last check found.
+func attachKnown(works []gocrawl.ModuleWork, policy passPolicy) error {
+	if policy.Checks == nil || len(works) == 0 {
+		return nil
+	}
+	modules := make([]string, 0, len(works))
+	for _, work := range works {
+		if !work.Skip {
+			modules = append(modules, work.Module)
+		}
+	}
+	checks, err := policy.Checks(modules)
+	if err != nil {
+		return err
+	}
+	for index := range works {
+		if check, recorded := checks[works[index].Module]; recorded && !works[index].Skip {
+			works[index].Known = check.Version
+		}
+	}
+	return nil
 }
 
 func (c *crawlConfig) applyDefaults() error {
@@ -120,6 +225,7 @@ func (c *crawlConfig) applyDefaults() error {
 	}
 	if c.RegistryURL == "" {
 		c.RegistryURL = selected.registry
+		c.registryDefault = true
 	}
 	if c.ProxyURL == "" {
 		c.ProxyURL = "https://proxy.golang.org"
@@ -144,6 +250,13 @@ type crawlAdapter struct {
 	inspector gocrawl.Inspector
 	refresh   func(context.Context, string, *gocrawl.BoltStore) (gocrawl.CatalogRefreshReport, error)
 	metrics   func() registryinspect.Metrics
+	// feed announces changes since the last poll; nil when the registry has no
+	// complete feed. feedFloor is how long to wait after an announcement before
+	// reading the registry, and maxBackoffDays bounds the rotation's skipping.
+	feed           gocrawl.Feed
+	feedOptions    gocrawl.FeedOptions
+	feedFloor      time.Duration
+	maxBackoffDays int
 }
 
 func buildAdapter(config crawlConfig) (crawlAdapter, error) {
@@ -187,24 +300,42 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 					goproxy.NewIndexClient(config.IndexURL, goproxy.Config{RequestTimeout: config.RequestTimeout}),
 					gocrawl.CatalogRefreshOptions{MaxPages: config.CatalogPages, PageSize: 2000})
 			},
-			metrics: func() registryinspect.Metrics { return registryinspect.Metrics{} },
+			metrics:        func() registryinspect.Metrics { return registryinspect.Metrics{} },
+			feedFloor:      time.Minute,
+			maxBackoffDays: gocrawl.BackoffMaxDaysFeed,
 		}, nil
 	case "npm":
 		inspector := registryinspect.NewNPMInspector(registryConfig)
+		catalogNames, err := loadNameSet(config.CatalogPath)
+		if err != nil {
+			return crawlAdapter{}, err
+		}
 		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("npm"), inspector: inspector,
-			refresh: staticCatalog, metrics: inspector.Metrics}, nil
+			refresh: staticCatalog, metrics: inspector.Metrics,
+			feed: registryinspect.NewNPMFeed(registryConfig, config.FeedURL),
+			// npm's scope is the critical set: announcements for other packages are ignored.
+			feedOptions: gocrawl.FeedOptions{Known: func(name string) bool { _, in := catalogNames[name]; return in }},
+			feedFloor:   5 * time.Minute, maxBackoffDays: gocrawl.BackoffMaxDaysFeed}, nil
 	case "pypi":
 		inspector := registryinspect.NewPyPIInspector(registryConfig)
 		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("pypi"), inspector: inspector,
-			refresh: staticCatalog, metrics: inspector.Metrics}, nil
+			refresh: staticCatalog, metrics: inspector.Metrics,
+			feed:        registryinspect.NewPyPIFeed(registryConfig),
+			feedOptions: gocrawl.FeedOptions{AdmitUnknown: true},
+			feedFloor:   time.Minute, maxBackoffDays: gocrawl.BackoffMaxDaysFeed}, nil
 	case "rubygems":
 		inspector := registryinspect.NewRubyGemsInspector(registryConfig)
+		// RubyGems has no complete feed (just_updated lists only the newest 50 gems), so
+		// the rotation stays the only trigger and its skipping is bounded tighter.
 		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("rubygems"), inspector: inspector,
-			refresh: staticCatalog, metrics: inspector.Metrics}, nil
+			refresh: staticCatalog, metrics: inspector.Metrics, maxBackoffDays: gocrawl.BackoffMaxDaysPlain}, nil
 	case "packagist":
 		inspector := registryinspect.NewPackagistInspector(registryConfig)
 		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("packagist"), inspector: inspector,
-			refresh: staticCatalog, metrics: inspector.Metrics}, nil
+			refresh: staticCatalog, metrics: inspector.Metrics,
+			feed:        registryinspect.NewPackagistFeed(registryConfig, config.FeedURL),
+			feedOptions: gocrawl.FeedOptions{AdmitUnknown: true},
+			feedFloor:   time.Minute, maxBackoffDays: gocrawl.BackoffMaxDaysFeed}, nil
 	default:
 		return crawlAdapter{}, fmt.Errorf("unsupported source %q", config.Source)
 	}
@@ -217,6 +348,9 @@ type measuringCommitter struct {
 	processed  uint64
 	refreshed  uint64
 	records    uint64
+	unchanged  uint64
+	skipped    uint64
+	feedWorks  uint64
 	downloaded uint64
 	exhausted  bool
 }
@@ -267,6 +401,15 @@ func (c *measuringCommitter) Commit(ctx context.Context, results []gocrawl.Modul
 			c.refreshed++
 		}
 		c.records += uint64(len(result.Observations))
+		switch {
+		case result.Work.Skip:
+			c.skipped++
+		case result.Unchanged:
+			c.unchanged++
+		}
+		if result.Work.Feed {
+			c.feedWorks++
+		}
 		if result.DownloadedBytes > 0 {
 			c.downloaded += uint64(result.DownloadedBytes)
 		}
@@ -300,7 +443,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		return gocrawl.PassReport{}, err
 	}
 
-	store, err := gocrawl.OpenBoltStore(config.DatabasePath, gocrawl.StoreOptions{FailureAttemptLimit: 3})
+	store, err := gocrawl.OpenBoltStore(config.DatabasePath, gocrawl.StoreOptions{FailureAttemptLimit: 3, Now: clock})
 	if err != nil {
 		return gocrawl.PassReport{}, err
 	}
@@ -326,12 +469,35 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 	if errors.Is(catalogErr, context.Canceled) || errors.Is(catalogErr, context.DeadlineExceeded) {
 		return gocrawl.PassReport{}, catalogErr
 	}
+	// A feed poll and the queue it fills only run in the continuous refresh; a failed
+	// poll leaves the cursor where it was and the next run replays it.
+	var feedReport gocrawl.FeedReport
+	var feedModules []string
+	if adapter.feed != nil && config.Continuous && (config.registryDefault || config.FeedURL != "") {
+		feedReport, err = gocrawl.PollFeed(ctx, store, adapter.feed, adapter.feedOptions)
+		if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
+			return gocrawl.PassReport{}, err
+		}
+		feedModules, _, err = store.PendingFeed(ctx, clock(), adapter.feedFloor, config.PackageBudget)
+		if err != nil {
+			return gocrawl.PassReport{}, err
+		}
+	}
 	before, err := store.Progress(ctx)
 	if err != nil {
 		return gocrawl.PassReport{}, err
 	}
-
-	works, err := buildPassWorks(config.CatalogPath, before, config.PackageBudget, config.Continuous)
+	policy := passPolicy{Feed: feedModules}
+	if config.Continuous {
+		dueFloor, floorErr := store.DueFloor(ctx)
+		if floorErr != nil {
+			return gocrawl.PassReport{}, floorErr
+		}
+		policy.Today, policy.DueFloor = gocrawl.Today(clock()), dueFloor
+		policy.MaxDays = cmp.Or(adapter.maxBackoffDays, gocrawl.BackoffMaxDaysPlain)
+	}
+	policy.Checks = func(modules []string) (map[string]gocrawl.Check, error) { return store.Checks(ctx, modules) }
+	works, err := planPassWorks(config.CatalogPath, before, config.PackageBudget, config.Continuous, policy)
 	if err != nil {
 		return gocrawl.PassReport{}, err
 	}
@@ -358,6 +524,10 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		PackageBudget: config.PackageBudget, Refreshed: committer.refreshed, Requests: metrics.Requests,
 		RateLimited: metrics.RateLimited, Timeouts: metrics.Timeouts,
 		CircuitOpens: metrics.CircuitOpens, HostConcurrency: metrics.HostConcurrency,
+		Unchanged: committer.unchanged, Skipped: committer.skipped, FeedWorks: committer.feedWorks,
+		FeedEvents: uint64(feedReport.Events), FeedEnqueued: uint64(feedReport.Enqueued),
+		FeedRequests: uint64(feedReport.Requests), FeedBytes: uint64(feedReport.DownloadedBytes),
+		FeedResync: feedReport.Resync, FeedError: feedReport.Error,
 	}
 	if catalogErr != nil {
 		report.CatalogError = catalogErr.Error()
@@ -380,4 +550,22 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		return report, runErr
 	}
 	return report, nil
+}
+
+// loadNameSet reads a catalog file into a set of names.
+func loadNameSet(path string) (map[string]struct{}, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	names := make(map[string]struct{})
+	scanner := bufio.NewScanner(file)
+	scanner.Buffer(make([]byte, 64*1024), 4*1024*1024)
+	for scanner.Scan() {
+		if name := strings.TrimSpace(scanner.Text()); name != "" {
+			names[name] = struct{}{}
+		}
+	}
+	return names, scanner.Err()
 }

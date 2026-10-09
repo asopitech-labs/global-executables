@@ -44,6 +44,17 @@ type PassReport struct {
 	Timeouts          uint64
 	CircuitOpens      uint64
 	HostConcurrency   int
+	// Change-driven refresh accounting: rotation entries skipped as not due, looks that
+	// found the recorded version, work a feed announced, and the feed poll itself.
+	Unchanged    uint64
+	Skipped      uint64
+	FeedWorks    uint64
+	FeedEvents   uint64
+	FeedEnqueued uint64
+	FeedRequests uint64
+	FeedBytes    uint64
+	FeedResync   bool
+	FeedError    string
 }
 
 type CompatibilityProfile struct {
@@ -86,6 +97,13 @@ type compatibilityState struct {
 	RetryGems       []string          `json:"retry_gems"`
 	RetryPackagist  []string          `json:"retry_packagist"`
 	Unavailable     map[string]string `json:"unavailable"`
+	// Checks, FeedCursor, FeedPending, DueFloor and ExtractionRevision are the
+	// change-driven refresh fields (docs/OPERATIONS.md "Change-driven refresh").
+	Checks             map[string]string    `json:"checked"`
+	FeedCursor         string               `json:"feed_cursor"`
+	FeedPending        map[string]FeedEntry `json:"feed_pending"`
+	DueFloor           int                  `json:"due_floor"`
+	ExtractionRevision int                  `json:"extraction_revision"`
 }
 
 func LoadCompatibility(statePath, observationsPath, catalogPath string) (ImportSnapshot, StateDocument, error) {
@@ -175,7 +193,14 @@ func LoadSourceCompatibility(statePath, observationsPath, catalogPath string, pr
 	if catalogFile == "" {
 		catalogFile = catalogPath
 	}
+	checks, feedPending := state.Checks, state.FeedPending
+	if state.ExtractionRevision != 0 && state.ExtractionRevision < ExtractionRevision {
+		// The extraction logic changed since these checks were recorded, so they can
+		// no longer vouch that stored rows match what the current code would produce.
+		checks = nil
+	}
 	return ImportSnapshot{
+		Checks: checks, FeedCursor: state.FeedCursor, FeedPending: feedPending, DueFloor: state.DueFloor,
 		Cursor: state.Cursor, CatalogOffset: offset, CatalogSize: catalogSize,
 		CatalogComplete: catalogComplete, CatalogSince: state.CatalogSince,
 		RefreshCursor: state.RefreshCursor, RefreshCatalogOffset: refreshOffset,
@@ -312,6 +337,11 @@ func exportCompatibility(
 		"failures":            failures,
 		"snapshot_generation": snapshot.Generation,
 		"unavailable":         snapshot.Unavailable,
+		"checked":             snapshot.Checks,
+		"feed_cursor":         snapshot.FeedCursor,
+		"feed_pending":        snapshot.FeedPending,
+		"due_floor":           snapshot.DueFloor,
+		"extraction_revision": ExtractionRevision,
 		profile.CatalogField:  snapshot.ModulesFile,
 		profile.RetryField:    retryModules,
 	})
@@ -373,6 +403,17 @@ func exportCompatibility(
 		"timeouts":            pass.Timeouts,
 		"unavailable":         len(snapshot.Unavailable),
 		"workers":             pass.Workers,
+		"unchanged":           pass.Unchanged,
+		"skipped_not_due":     pass.Skipped,
+		"feed_works":          pass.FeedWorks,
+		"feed_events":         pass.FeedEvents,
+		"feed_enqueued":       pass.FeedEnqueued,
+		"feed_requests":       pass.FeedRequests,
+		"feed_bytes":          pass.FeedBytes,
+		"feed_resync":         pass.FeedResync,
+		"feed_error":          pass.FeedError,
+		"feed_pending":        len(snapshot.FeedPending),
+		"checked":             len(snapshot.Checks),
 		profile.CatalogField:  snapshot.ModulesFile,
 	}
 	if profile.Source == "go" {

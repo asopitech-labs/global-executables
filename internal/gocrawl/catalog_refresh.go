@@ -8,6 +8,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 type CatalogEntry struct {
@@ -62,6 +63,7 @@ func RefreshCatalog(
 	report := CatalogRefreshReport{Complete: progress.CatalogComplete}
 	pending := make([]string, 0)
 	pendingSet := make(map[string]struct{})
+	var changed []FeedEvent
 	var fetchErr error
 	for range options.MaxPages {
 		page, err := fetcher.FetchCatalogPage(ctx, since, options.PageSize)
@@ -83,6 +85,23 @@ func RefreshCatalog(
 		if err != nil {
 			return report, err
 		}
+		fresh := make(map[string]struct{}, len(newModules))
+		for _, module := range newModules {
+			fresh[module] = struct{}{}
+		}
+		for _, entry := range page.Entries {
+			if _, isNew := fresh[entry.Path]; isNew {
+				continue
+			}
+			if _, queued := pendingSet[entry.Path]; queued {
+				continue
+			}
+			var unix int64
+			if parsed, parseErr := time.Parse(time.RFC3339Nano, entry.Timestamp); parseErr == nil {
+				unix = parsed.Unix()
+			}
+			changed = append(changed, FeedEvent{Name: entry.Path, Time: unix, Kind: "version"})
+		}
 		for _, module := range newModules {
 			if _, duplicate := pendingSet[module]; duplicate {
 				continue
@@ -102,7 +121,7 @@ func RefreshCatalog(
 	if fetchErr != nil {
 		report.Complete = false
 	}
-	if err := store.CommitCatalogPage(ctx, pending, fileEnd, since, report.Complete); err != nil {
+	if err := store.CommitCatalogPageWithChanges(ctx, pending, fileEnd, since, report.Complete, changed); err != nil {
 		return report, err
 	}
 	report.Discovered = uint64(len(pending))

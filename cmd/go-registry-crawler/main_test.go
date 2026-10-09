@@ -119,11 +119,11 @@ func TestExecutePassRunsNPMWithBoundedPacingAndExportsCompatibility(t *testing.T
 func TestExecutePassContinuouslyReplacesChangedNPMCommands(t *testing.T) {
 	var requests atomic.Int64
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		command := "old"
+		command, version := "old", "1.0.0"
 		if requests.Add(1) > 1 {
-			command = "new"
+			command, version = "new", "1.0.1"
 		}
-		_, _ = fmt.Fprintf(w, `{"name":"demo","version":"1.0.0","bin":{%q:"cli.js"}}`, command)
+		_, _ = fmt.Fprintf(w, `{"name":"demo","version":%q,"bin":{%q:"cli.js"}}`, version, command)
 	}))
 	defer server.Close()
 
@@ -146,6 +146,10 @@ func TestExecutePassContinuouslyReplacesChangedNPMCommands(t *testing.T) {
 	if _, err := executePass(t.Context(), config); err != nil {
 		t.Fatal(err)
 	}
+	// The first look recorded a check dated today; the rotation re-checks a package
+	// again the next day.
+	defer func(previous func() time.Time) { clock = previous }(clock)
+	clock = func() time.Time { return time.Now().Add(48 * time.Hour) }
 	second, err := executePass(t.Context(), config)
 	if err != nil {
 		t.Fatal(err)
