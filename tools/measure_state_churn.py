@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
-"""Measure what the `checked` map costs the artifact-data branch.
+"""Measure what per-package check bookkeeping costs the artifact-data branch.
+
+Two layouts: the one #65 shipped (`checked` in the registry state, the default) and the
+history/cache split (`--split`: checks live in a cache file outside git, the state is
+untouched by an unchanged batch).
 
 Builds a registry state with N packages, commits it to a scratch git repository, applies
 one run's worth of check updates and reports how much a push would carry (a thin pack of
 the second commit, which is what `git push` sends) and how many shard files change.
 Nothing touches a real data branch.
 
-    python3 tools/measure_checked_churn.py --packages 870000 --visited 3000 --changed 8
+    python3 tools/measure_state_churn.py --packages 870000 --visited 3000 --changed 8
 """
 from __future__ import annotations
 
@@ -33,6 +37,7 @@ def main() -> int:
     parser.add_argument("--packages", type=int, default=870_000)
     parser.add_argument("--visited", type=int, default=3000, help="packages whose check is rewritten by one run")
     parser.add_argument("--changed", type=int, default=8, help="of those, how many found a new version")
+    parser.add_argument("--split", action="store_true", help="checks go to the schedule cache, not the state")
     parser.add_argument("--contiguous", action="store_true", help="visit a contiguous catalog range, not random keys")
     args = parser.parse_args()
     rng = random.Random(7)
@@ -44,7 +49,10 @@ def main() -> int:
         repo = Path(scratch)
         git(repo, "init", "-q")
         git(repo, "config", "user.email", "m@example.test"); git(repo, "config", "user.name", "m")
-        document = {"version": 1, "sources": {"pypi": {"cursor": args.packages, "catalog_size": args.packages, "checked": checked}}}
+        entry = {"cursor": args.packages, "catalog_size": args.packages}
+        if not args.split:
+            entry["checked"] = checked
+        document = {"version": 1, "sources": {"pypi": entry}}
         save_state(repo / "state", document)
         git(repo, "add", "-A"); git(repo, "commit", "-qm", "base")
         base_bytes = sum(path.stat().st_size for path in (repo / "state").rglob("*") if path.is_file())
@@ -59,14 +67,21 @@ def main() -> int:
                 checked[name] = refresh_policy.pack(day + 1, 0, version + ".1")
             else:
                 checked[name] = refresh_policy.pack(day + 1, streak + 1, version)
+        if args.split:
+            # Unchanged packages only move their check in the cache (outside the repository);
+            # a changed package would rewrite its own rows, not the state.
+            refresh_policy.write_cache(Path(scratch).parent / "measure-cache.gz", checked, 0)
         save_state(repo / "state", document)
         git(repo, "add", "-A")
         changed_files = git(repo, "diff", "--cached", "--name-only").decode().split()
+        if not changed_files:
+            print(f"packages={args.packages} split={args.split} visited={args.visited}: nothing to commit")
+            print("shard files changed: 0\npush payload (thin pack): 0 bytes")
+            return 0
         git(repo, "commit", "-qm", "run")
-        revisions = git(repo, "rev-list", "--objects", "HEAD", "^HEAD~1")
         pack = git(repo, "pack-objects", "--thin", "--revs", "--stdout", stdin=b"HEAD\n^HEAD~1\n")
         shards = [name for name in changed_files if name.endswith(".jsonl")]
-        print(f"packages={args.packages} state_bytes={base_bytes} visited={args.visited} changed={args.changed} "
+        print(f"split={args.split} packages={args.packages} state_bytes={base_bytes} visited={args.visited} changed={args.changed} "
               f"contiguous={args.contiguous}")
         print(f"shard files changed: {len(shards)} of {len(list((repo / 'state').rglob('*.jsonl')))}")
         print(f"push payload (thin pack): {len(pack)} bytes")

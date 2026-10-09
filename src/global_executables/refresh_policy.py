@@ -3,7 +3,11 @@
 The latest version of a package is looked up again on a rotation (``refresh_cursor``).
 Without this module every visit re-read the package's artifacts whether or not its
 latest version had changed.  The policy records, per package, the last successful
-check in the ``checked`` map of the registry state and uses it three ways:
+check in the *schedule cache* (see "History and cache" in docs/OPERATIONS.md) and uses
+it three ways.  Checks are bookkeeping, not history: they live in a cache file that is
+never committed and may be lost at any time, so an unchanged package never writes to
+the registry state (#66; #65 stored them in the state's ``checked`` map, which is still
+read for one release):
 
 * P0, version-equal skip: a visit that finds the recorded latest version keeps the
   stored rows and skips the artifact download.
@@ -14,16 +18,19 @@ check in the ``checked`` map of the registry state and uses it three ways:
 
 ``internal/gocrawl/policy.go`` implements the same interval function for the Go
 crawler; ``internal/gocrawl/testdata/refresh/policy-golden.json`` is checked by both test suites.
-A check is the string ``"<day>:<streak>:<version>"``: compact, and one scalar so the
-registry state shards it like any other map.  ETags never enter the state.
+A check is the string ``"<day>:<streak>:<version>"``.  ETags never enter the state.
 """
 
 from __future__ import annotations
 
+import gzip
 import hashlib
+import os
+import tempfile
 import threading
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Callable
 
 BACKOFF_MIN_DAYS = 1
@@ -35,6 +42,14 @@ BACKOFF_MAX_DAYS_PLAIN = 14
 # Hard TTL: a check older than this is reported as stale whatever the backoff says.
 HARD_TTL_DAYS = 120
 CHECKED_FIELD = "checked"
+# Keys of a source's in-memory state that belong to the cache and are stripped before
+# the state is saved (``registry_artifact._save_state``).
+CACHE_KEYS = (CHECKED_FIELD, "refresh_cursor", "refresh_cursor_cold")
+CACHE_MAGIC = "# global-executables schedule cache v1"
+# 3 million checks are about 25 MB compressed; past it the oldest checks are dropped
+# and simply become due.
+MAX_CACHE_ENTRIES = 3_000_000
+COLD_STAGGER_STREAKS = 4
 # Identifies the logic that turns a registry document into rows.  State written by a
 # lower revision is not trusted to skip artifact reads; raise it when extraction changes.
 EXTRACTION_REVISION = 1
@@ -113,22 +128,91 @@ def forget(checked: dict[str, Any], key: str) -> None:
     checked.pop(key, None)
 
 
-def seed_from_rows(checked: dict[str, Any], rows: list[dict[str, Any]],
-                   key_of: Callable[[dict[str, Any]], str] | None = None) -> int:
-    """Seed checks from stored observation rows so the first re-check can already skip.
+def cold_check(key: str, version: str, day: int) -> str:
+    """The check assumed for a package history knows but the cache does not.
 
-    A seeded check has day 0: it is due at once, yet a visit that finds the same
+    Due now, with a streak spread by name over the first backoff tiers so the next looks
+    do not all land together.  Identical to ``gocrawl.ColdCheck``.
+    """
+    streak = int.from_bytes(hashlib.sha256(("cold:" + key).encode("utf-8")).digest()[:2], "big") % COLD_STAGGER_STREAKS
+    return pack(day - recheck_interval(key, streak, BACKOFF_MAX_DAYS_PLAIN), streak, version)
+
+
+def cold_refresh_start(size: int, budget: int, now: datetime | None = None) -> int:
+    """Where the rotation begins without a cache: one budget further per six-hour window,
+    so repeated cold starts still sweep the whole catalogue.  Same as ``gocrawl.ColdRefreshStart``."""
+    if size <= 0 or budget <= 0:
+        return 0
+    now = now or datetime.now(timezone.utc)
+    return (int(now.timestamp() // (6 * 3600)) * budget) % size
+
+
+def seed_from_rows(checked: dict[str, Any], rows: list[dict[str, Any]],
+                   key_of: Callable[[dict[str, Any]], str] | None = None, day: int | None = None) -> int:
+    """Seed checks from stored observation rows so a cold start can still skip artifacts.
+
+    A seeded check is due at once (see ``cold_check``), yet a visit that finds the same
     version avoids the artifact download.
     """
+    day = today() if day is None else day
     seeded = 0
     for row in rows:
         key = key_of(row) if key_of else row.get("package")
         version = row.get("latest_version") or row.get("version")
         if not key or not version or key in checked:
             continue
-        checked[key] = pack(0, 0, str(version))
+        checked[key] = cold_check(key, str(version), day)
         seeded += 1
     return seeded
+
+
+def read_cache(path: Path, revision: int = EXTRACTION_REVISION) -> tuple[dict[str, str], int, bool]:
+    """Load a schedule cache: ``(checks, rotation cursor, found)``.
+
+    A missing file, another format or another extraction revision is a cold start
+    (``found`` False), never an error; so is an unreadable file.  Format shared with
+    ``gocrawl.ReadCache``.
+    """
+    try:
+        with gzip.open(path, "rt", encoding="utf-8") as stream:
+            if stream.readline().rstrip("\n") != CACHE_MAGIC:
+                return {}, 0, False
+            checks: dict[str, str] = {}
+            cursor = 0
+            for line in stream:
+                line = line.rstrip("\n")
+                if line.startswith("# extraction "):
+                    if line[len("# extraction "):] != str(revision):
+                        return {}, 0, False
+                elif line.startswith("# cursor "):
+                    cursor = int(line[len("# cursor "):] or 0)
+                elif not line.startswith("#") and "\t" in line:
+                    name, value = line.split("\t", 1)
+                    if unpack(value) is not None:
+                        checks[name] = value
+            return checks, cursor, True
+    except (OSError, EOFError, ValueError):
+        return {}, 0, False
+
+
+def write_cache(path: Path, checks: dict[str, Any], cursor: int, revision: int = EXTRACTION_REVISION) -> None:
+    """Store the cache atomically; names sorted so equal caches are equal files."""
+    names = [name for name, value in checks.items()
+             if name and "\t" not in name and "\n" not in name and unpack(value) is not None]
+    if len(names) > MAX_CACHE_ENTRIES:
+        names.sort(key=lambda name: unpack(checks[name])[0], reverse=True)
+        names = names[:MAX_CACHE_ENTRIES]
+    names.sort()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(dir=path.parent, prefix=".cache-", suffix=".tmp")
+    try:
+        with os.fdopen(descriptor, "wb") as raw, gzip.GzipFile(fileobj=raw, mode="wb", mtime=0) as stream:
+            stream.write(f"{CACHE_MAGIC}\n# extraction {revision}\n# cursor {cursor}\n".encode("utf-8"))
+            for name in names:
+                stream.write(f"{name}\t{checks[name]}\n".encode("utf-8"))
+        os.replace(temporary, path)
+    finally:
+        Path(temporary).unlink(missing_ok=True)
 
 
 def classify(age_days: int, soft_days: int, hard_days: int = HARD_TTL_DAYS) -> str:

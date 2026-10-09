@@ -130,8 +130,12 @@ func TestExportSourceCompatibilityPreservesOtherSourcesAndPythonKeys(t *testing.
 	if state.Sources["npm"]["packages_file"] != "data/production/npm-critical-packages.txt" || state.Sources["npm"]["cursor"] != float64(3) {
 		t.Fatalf("state=%s", body)
 	}
-	if state.Sources["npm"]["refresh_cursor"] != float64(2) {
+	// The rotation position is cache (cache.go), never history: it must not reach the state.
+	if state.Sources["npm"]["refresh_cursor"] != float64(0) {
 		t.Fatalf("state=%s", body)
+	}
+	if _, exists := state.Sources["npm"]["checked"]; exists {
+		t.Fatalf("checks are cache and must not be written to the state: %s", body)
 	}
 	if _, exists := state.Sources["npm"]["modules_file"]; exists {
 		t.Fatalf("Go-only key leaked into npm state: %s", body)

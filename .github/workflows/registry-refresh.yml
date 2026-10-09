@@ -58,6 +58,17 @@ jobs:
             echo "eligible=false" >> "$GITHUB_OUTPUT"
             echo "${SOURCE} is still owned by the local completion booster."
           fi
+      # The schedule cache holds when each package was last checked. It is cache, not
+      # history: never committed, and a miss only makes every package due again
+      # (docs/OPERATIONS.md "History and cache").
+      - name: Restore the schedule cache
+        if: steps.restore.outputs.eligible == 'true'
+        uses: actions/cache@v4
+        with:
+          path: /tmp/ci-refresh-${{ matrix.source }}/data/production/cache
+          key: schedule-v1-${{ matrix.source }}-${{ github.run_id }}
+          restore-keys: |
+            schedule-v1-${{ matrix.source }}-
       - name: Refresh one transactional batch
         if: steps.restore.outputs.eligible == 'true' && matrix.source != 'nuget'
         env:

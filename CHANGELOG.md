@@ -2,12 +2,24 @@
 
 ## Unreleased
 
+- History and cache are separate (#66, refs #64): per-package check bookkeeping
+  (`checked`, the refresh rotation position) is no longer written to the registry
+  state. It lives in a schedule cache, `data/production/cache/<source>.cache.gz`, kept
+  by `actions/cache` and never committed; a lost cache only makes every package due
+  again (staggered, history untouched). A check that finds a package unchanged writes
+  nothing to git, so a run where nothing changed publishes nothing: an all-unchanged
+  3,000-package PyPI batch went from 256 shard files / 52,864 B to 0 / 0. The
+  per-run effort fields of the report no longer trigger a commit; an idle run
+  republishes only the report (last-crawl time) at most once per 24 h
+  (`REPORT_HEARTBEAT_HOURS`, default 24, 0 disables), so the status page keeps updating. `snapshot_generation` moves only when history did.
+  Legacy `checked` is read for one release and dropped on the first save. See "History
+  and cache" in docs/OPERATIONS.md.
 - Change-driven refresh (#64, refs #58): the latest-version refresh skips packages
   whose registry version is unchanged (Go, npm, PyPI, RubyGems, Packagist, NuGet, Conan),
   backs off unchanged packages exponentially without spending budget, and uses the
   PyPI, npm, Packagist, Conan and NuGet change feeds to queue changed packages first (NuGet
   polls the V3 catalog by commit timestamp, handles deletes, resyncs past 24 pages).
-  The rotation remains the backstop. New registry-state fields `checked`, `feed_cursor`,
+  The rotation remains the backstop. New registry-state fields `feed_cursor`,
   `feed_pending`, `due_floor`, `extraction_revision` (generic maps; Python and Go
   encoders byte-identical, golden in `internal/gocrawl/testdata/refresh/state-golden`). See "Change-driven
   refresh" in docs/OPERATIONS.md.

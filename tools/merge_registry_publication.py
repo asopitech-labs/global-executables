@@ -12,6 +12,7 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -147,7 +148,34 @@ def aggregate_report(report: dict[str, Any]) -> None:
         report.pop(key, None)
 
 
-def merge_report(source: str, published_path: Path, local_path: Path) -> bool:
+# Per-run effort and timing: how many requests a pass spent says nothing about what the
+# published data is, and committing it would make every run a commit (history/cache
+# split, docs/OPERATIONS.md). A report entry that differs only in these keys is not
+# published; one that differs in anything else (status, cursors, failures, coverage,
+# catalogue identity, generation, errors) is.
+EFFORT_KEYS = frozenset({
+    "started_at", "finished_at", "interrupted", "duration_seconds", "packages_per_minute", "modules_per_minute",
+    "processed", "refreshed", "records", "downloaded_bytes", "requests", "rate_limited", "timeouts", "workers",
+    "host_concurrency", "package_budget", "byte_budget", "unchanged", "skipped_not_due", "feed_works",
+    "feed_events", "feed_enqueued", "feed_requests", "feed_bytes", "feed_resync", "feed_error", "feed",
+    "feed_queue", "checked", "ttl", "catalog_discovered", "catalog_requests", "budget_exhausted", "refresh_cursor",
+    "state",
+})
+
+
+def outcome(entry: Any) -> Any:
+    if not isinstance(entry, dict):
+        return entry
+    return {key: value for key, value in entry.items() if key not in EFFORT_KEYS}
+
+
+# An idle run republishes only the report (its last-crawl time) once a day, so the status
+# page keeps moving while the history stays untouched.
+DEFAULT_HEARTBEAT_HOURS = 24.0
+
+
+def merge_report(source: str, published_path: Path, local_path: Path,
+                 heartbeat_hours: float = DEFAULT_HEARTBEAT_HOURS) -> bool:
     if not local_path.is_file():
         return False
     published = read_json(published_path, {"sources": {}})
@@ -159,10 +187,15 @@ def merge_report(source: str, published_path: Path, local_path: Path) -> bool:
     previous = published_sources.get(source)
     if would_regress(previous, local_entry):
         return False
+    if previous is not None and outcome(previous) == outcome(local_entry) and not heartbeat_due(published, heartbeat_hours):
+        return False  # nothing but effort changed: no commit for a run that found nothing
     published_sources[source] = local_entry
     finished = [
         value
-        for value in (published.get("finished_at"), local.get("finished_at"))
+        for value in (published.get("finished_at"),
+                      # The Python crawlers' reports carry no time: stamp the publication, so the
+                      # heartbeat has an anchor.
+                      local.get("finished_at") or datetime.now(timezone.utc).isoformat())
         if isinstance(value, str) and value
     ]
     if finished:
@@ -172,6 +205,20 @@ def merge_report(source: str, published_path: Path, local_path: Path) -> bool:
     return True
 
 
+def heartbeat_due(published: dict[str, Any], hours: float) -> bool:
+    """The report is refreshed at least every ``hours`` even when idle (0 turns it off)."""
+    if hours <= 0:
+        return False
+    finished = published.get("finished_at")
+    try:
+        last = datetime.fromisoformat(str(finished).replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    if last.tzinfo is None:
+        last = last.replace(tzinfo=timezone.utc)
+    return datetime.now(timezone.utc) - last >= timedelta(hours=hours)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source", required=True)
@@ -179,6 +226,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--local-state", required=True, type=Path)
     parser.add_argument("--published-report", type=Path)
     parser.add_argument("--local-report", type=Path)
+    parser.add_argument("--report-heartbeat-hours", type=float, default=float(os.environ.get("REPORT_HEARTBEAT_HOURS", str(DEFAULT_HEARTBEAT_HOURS))),
+                        help="republish an idle report at least this often, in hours (0: never)")
     return parser.parse_args()
 
 
@@ -194,7 +243,8 @@ def main() -> int:
         return 3
     report_merged = False
     if args.published_report is not None:
-        report_merged = merge_report(args.source, args.published_report, args.local_report)
+        report_merged = merge_report(args.source, args.published_report, args.local_report,
+                                     args.report_heartbeat_hours)
     movement = f"{before} -> {after}" if before != after else "cursor unchanged"
     print(f"{args.source} {movement}; report {'merged' if report_merged else 'unchanged'}")
     return 0

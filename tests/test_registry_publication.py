@@ -278,3 +278,40 @@ def test_shared_publisher_isolates_sources_and_uses_disposable_worktrees():
     assert 'SOURCES="${source}" OBSERVATION_SOURCES="" publish_snapshot' in PARALLEL
     assert 'mktemp -d /tmp/ge-artifact-publish.XXXXXX' in PARALLEL
     assert 'local worktree=/tmp/ge-artifact-publish' not in PARALLEL
+
+
+def test_a_report_that_differs_only_in_effort_is_republished_at_most_once_a_day(tmp_path):
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    stamp = lambda hours: (now - timedelta(hours=hours)).isoformat()  # noqa: E731
+    entry = {"status": "success", "coverage_kind": "exhaustive", "cursor": 10, "catalog_size": 10, "failures": 0,
+             "unavailable": 2, "snapshot_generation": 7, "processed": 3000, "requests": 3000, "downloaded_bytes": 5,
+             "duration_seconds": 12.5, "unchanged": 2900, "skipped_not_due": 0, "finished_at": stamp(5),
+             "started_at": stamp(5), "checked": 10, "feed_events": 4, "refresh_cursor": 3000}
+    published, local = tmp_path / "published.json", tmp_path / "local.json"
+
+    def publish_report(published_hours_ago, **changes):
+        write_json(published, {"sources": {"pypi": {**entry, "finished_at": stamp(published_hours_ago)}},
+                               "finished_at": stamp(published_hours_ago)})
+        idle = {**entry, "requests": 1, "downloaded_bytes": 99, "duration_seconds": 3.0, "refresh_cursor": 6000,
+                "finished_at": stamp(0), "started_at": stamp(0), **changes}
+        write_json(local, {"sources": {"pypi": idle}, "finished_at": stamp(0)})
+        before = published.read_text()
+        merged = merger.merge_report("pypi", published, local)
+        return merged, published.read_text() != before
+
+    # Idle within 24 hours: nothing is written, so the publication has no diff.
+    assert publish_report(5) == (False, False)
+    assert publish_report(23) == (False, False)
+    # Idle after 24 hours: only the report moves (its last-crawl time); the next idle run is quiet again.
+    assert publish_report(25) == (True, True)
+    assert merger.merge_report("pypi", published, local) is False
+    # Anything that is not effort is published at once, heartbeat or not.
+    for change in ({"failures": 1}, {"status": "partial"}, {"snapshot_generation": 8}, {"unavailable": 3}):
+        assert publish_report(1, **change) == (True, True)
+    # The heartbeat can be turned off.
+    write_json(local, {"sources": {"pypi": {**entry, "requests": 1, "finished_at": stamp(0)}}, "finished_at": stamp(0)})
+    write_json(published, {"sources": {"pypi": {**entry, "finished_at": stamp(500)}}, "finished_at": stamp(500)})
+    assert merger.merge_report("pypi", published, local, heartbeat_hours=0) is False
+    assert merger.DEFAULT_HEARTBEAT_HOURS == 24
+    assert 'REPORT_HEARTBEAT_HOURS="${REPORT_HEARTBEAT_HOURS:-24}"' in PARALLEL

@@ -28,20 +28,23 @@ type crawlConfig struct {
 	ReportPath       string
 	CatalogPath      string
 	DatabasePath     string
-	ProxyURL         string
-	IndexURL         string
-	RegistryURL      string
-	FeedURL          string
-	registryDefault  bool
-	CatalogPages     int
-	PackageBudget    int
-	ByteBudget       int64
-	Workers          int
-	MaxInFlight      int
-	CommitBatch      int
-	RequestTimeout   time.Duration
-	ModuleTimeout    time.Duration
-	Continuous       bool
+	// CachePath is the schedule cache (checks and rotation position): never committed,
+	// safe to lose. See docs/OPERATIONS.md "History and cache".
+	CachePath       string
+	ProxyURL        string
+	IndexURL        string
+	RegistryURL     string
+	FeedURL         string
+	registryDefault bool
+	CatalogPages    int
+	PackageBudget   int
+	ByteBudget      int64
+	Workers         int
+	MaxInFlight     int
+	CommitBatch     int
+	RequestTimeout  time.Duration
+	ModuleTimeout   time.Duration
+	Continuous      bool
 }
 
 // passPolicy carries what the change-driven refresh adds to a pass: the checks that
@@ -219,6 +222,9 @@ func (c *crawlConfig) applyDefaults() error {
 	}
 	if c.DatabasePath == "" {
 		c.DatabasePath = selected.database
+	}
+	if c.CachePath == "" {
+		c.CachePath = gocrawl.DefaultCachePath(c.StatePath, c.Source)
 	}
 	if c.ObservationsPath == "" {
 		c.ObservationsPath = selected.observations
@@ -459,6 +465,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		var imported gocrawl.ImportSnapshot
 		imported, document, err = gocrawl.LoadSourceCompatibility(config.StatePath, config.ObservationsPath, config.CatalogPath, adapter.profile)
 		if err == nil {
+			applyScheduleCache(&imported, config, clock())
 			err = store.Import(ctx, imported)
 		}
 	}
@@ -541,6 +548,13 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 	}
 	report.Complete = catalogErr == nil && afterProgress.CatalogComplete &&
 		afterProgress.Cursor >= afterProgress.CatalogSize && len(afterProgress.Retries) == 0
+	// Bookkeeping goes to the cache only; losing it costs requests, never history.
+	if checks, checksErr := store.AllChecks(context.Background()); checksErr == nil {
+		cache := gocrawl.Cache{Checks: checks, Cursor: afterProgress.RefreshCursor}
+		if err := gocrawl.WriteCache(config.CachePath, cache, gocrawl.ExtractionRevision); err != nil {
+			fmt.Fprintf(os.Stderr, "schedule cache not saved: %v\n", err)
+		}
+	}
 	if err := gocrawl.ExportSourceStoreCompatibility(context.Background(), gocrawl.ExportPaths{
 		State: config.StatePath, Observations: config.ObservationsPath, Report: config.ReportPath,
 	}, document, store, report, adapter.profile); err != nil {
@@ -550,6 +564,33 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		return report, runErr
 	}
 	return report, nil
+}
+
+// applyScheduleCache fills what the state no longer carries: the checks and the rotation
+// position. A missing, stale or unreadable cache is a cold start: checks come from the
+// stored rows (due now, staggered) and the rotation begins at a time-derived position so
+// repeated cold starts still sweep the whole catalog.
+func applyScheduleCache(imported *gocrawl.ImportSnapshot, config crawlConfig, now time.Time) {
+	cache, warm, err := gocrawl.ReadCache(config.CachePath, gocrawl.ExtractionRevision)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "schedule cache ignored: %v\n", err)
+	}
+	cursor := gocrawl.ColdRefreshStart(imported.CatalogSize, config.PackageBudget, now)
+	if warm {
+		if imported.Checks == nil {
+			imported.Checks = map[string]string{}
+		}
+		maps.Copy(imported.Checks, cache.Checks)
+		cursor = cache.Cursor
+	}
+	if cursor >= imported.CatalogSize {
+		cursor = 0
+	}
+	offset, err := gocrawl.LocateCatalogOffset(config.CatalogPath, cursor)
+	if err != nil {
+		cursor, offset = 0, 0
+	}
+	imported.RefreshCursor, imported.RefreshCatalogOffset = cursor, offset
 }
 
 // loadNameSet reads a catalog file into a set of names.

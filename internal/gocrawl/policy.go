@@ -107,3 +107,8 @@ func Next(previous Check, hadPrevious bool, latest string, today int) (Check, bo
 func FeedReadyAt(eventUnix int64, floor time.Duration) time.Time {
 	return time.Unix(eventUnix, 0).Add(floor)
 }
+
+func coldDigest(module string) uint32 {
+	digest := sha256.Sum256([]byte("cold:" + module))
+	return uint32(digest[0])<<8 | uint32(digest[1])
+}
