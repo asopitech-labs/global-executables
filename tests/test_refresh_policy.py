@@ -5,7 +5,7 @@ import pytest
 
 from global_executables import refresh_policy as policy
 
-GOLDEN = Path(__file__).resolve().parents[1] / "fixtures" / "refresh" / "policy-golden.json"
+GOLDEN = Path(__file__).resolve().parents[1] / "internal" / "gocrawl" / "testdata" / "refresh" / "policy-golden.json"
 
 
 def test_recheck_interval_matches_the_go_implementation_table():

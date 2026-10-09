@@ -21,7 +21,7 @@ type refreshGolden struct {
 // must schedule a package identically, or a Python publisher and the Go crawler would
 // disagree about which packages are due.
 func TestRecheckIntervalMatchesSharedGolden(t *testing.T) {
-	body, err := os.ReadFile("../../fixtures/refresh/policy-golden.json")
+	body, err := os.ReadFile("testdata/refresh/policy-golden.json")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +337,7 @@ func TestStateRoundTripKeepsChecksAndFeedAndDropsThemOnNewExtractionRevision(t *
 // tests/test_registry_state.py): both encoders must produce the same bytes for the
 // change-driven fields, or a Python publisher re-saving a Go checkpoint would churn it.
 func TestStateGoldenWithChecksIsByteIdentical(t *testing.T) {
-	golden := "../../fixtures/refresh/state-golden"
+	golden := "testdata/refresh/state-golden"
 	document, found, err := ReadStateDocument(golden)
 	if err != nil || !found {
 		t.Fatalf("found=%v err=%v", found, err)

@@ -715,7 +715,7 @@ rotation is still the backstop: no feed is trusted to be complete.
 
 State fields (per source in `registry-state/<source>/source.json`; the two large maps use
 the generic sharding, so neither encoder changed, see
-`fixtures/refresh/state-golden`, which both Python and Go rewrite byte for byte):
+`internal/gocrawl/testdata/refresh/state-golden`, which both Python and Go rewrite byte for byte):
 
 | field | meaning |
 | --- | --- |
@@ -738,7 +738,7 @@ Tiers:
   catalog walk queues known modules it reports again.
 - **P2, backoff.** Each unchanged check doubles the re-check interval (1 day up to 60;
   npm, Conan and feed-backed sources use their own caps), with deterministic jitter
-  shared by Go and Python (`fixtures/refresh/policy-golden.json`). Rotation entries
+  shared by Go and Python (`internal/gocrawl/testdata/refresh/policy-golden.json`). Rotation entries
   that are not due advance the cursor and cost no request or budget.
 - **P3, pacing.** Python hosts use a token bucket with ordered reservation
   (`refresh_policy.TokenBucket`); feed announcements younger than a minute wait so the

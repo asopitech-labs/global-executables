@@ -371,7 +371,7 @@ def test_change_driven_fields_are_stored_canonically_and_match_the_go_golden(tmp
     The golden directory is read and rewritten byte for byte by
     internal/gocrawl (TestStateGoldenWithChecksIsByteIdentical): both encoders agree.
     """
-    golden = Path(__file__).resolve().parents[1] / "fixtures" / "refresh" / "state-golden"
+    golden = Path(__file__).resolve().parents[1] / "internal" / "gocrawl" / "testdata" / "refresh" / "state-golden"
     document = load_state(golden)
     pypi = document["sources"]["pypi"]
     assert len(pypi["checked"]) == 1500 and len(pypi["feed_pending"]) == 1200 and pypi["feed_cursor"] == "42006261"

@@ -13,7 +13,7 @@ check in the ``checked`` map of the registry state and uses it three ways:
 * P3, token bucket with reservation and a per-source feed floor.
 
 ``internal/gocrawl/policy.go`` implements the same interval function for the Go
-crawler; ``fixtures/refresh/policy-golden.json`` is checked by both test suites.
+crawler; ``internal/gocrawl/testdata/refresh/policy-golden.json`` is checked by both test suites.
 A check is the string ``"<day>:<streak>:<version>"``: compact, and one scalar so the
 registry state shards it like any other map.  ETags never enter the state.
 """
