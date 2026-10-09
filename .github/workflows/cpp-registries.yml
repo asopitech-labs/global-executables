@@ -63,6 +63,14 @@ jobs:
             git show origin/artifact-data:data/production/intermediate/conan.jsonl \
               > data/production/intermediate/conan.jsonl
           fi
+      # Schedule cache (checks and rotation position): never committed, safe to lose.
+      - name: Restore the schedule cache
+        uses: actions/cache@v4
+        with:
+          path: data/production/cache
+          key: schedule-v1-conan-${{ github.run_id }}
+          restore-keys: |
+            schedule-v1-conan-
       - name: Inspect a bounded batch of ConanCenter packages
         id: crawl
         continue-on-error: true
