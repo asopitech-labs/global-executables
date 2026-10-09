@@ -713,30 +713,77 @@ This machine runs Colima, not Docker Desktop. Two consequences:
   set `DOCKER_HOST=unix://$HOME/.colima/default/docker.sock`, because a replacement
   config also drops the `colima` context.
 
+## History and cache
+
+The crawl keeps two kinds of information apart, the way shields.io does:
+
+| | history | cache |
+| --- | --- | --- |
+| what | the observations (rows), `unavailable`/failure records, catalogue cursors, change-feed cursors and queues, `due_floor`, `extraction_revision` | when each package was last looked at (`<day>:<streak>:<version>`), the position of the refresh rotation, anything that only schedules the next look (ETag/Last-Modified validators, TTL class, backoff tier) |
+| where | `artifact-data` (git): the sharded `registry-state/` and the row transport shards | `data/production/cache/<source>.cache.gz`, never committed (`.gitignore`), kept between CI runs by `actions/cache` and between local runs by the file itself |
+| written | only when something actually changed: a new version, different extracted commands, an availability change, a feed that advanced | on every look, including "nothing changed" |
+| lost | never: it is the product | at any time: nothing is wrong, the next run is just more expensive |
+
+Consequences, all covered by tests:
+
+- A check that finds the package unchanged (same version, same `extraction_revision`)
+  writes **nothing** to history: no `checked_at`, no row rewrite, no shard rewrite, no
+  commit. A run where nothing changed publishes nothing (`nothing to publish`); the
+  report is skipped too when it differs only in effort (`tools/merge_registry_publication.py`,
+  `EFFORT_KEYS`; `REPORT_HEARTBEAT_HOURS` opts in to a periodic idle republish, default off).
+  An all-unchanged 3,000-package batch measured with `tools/measure_state_churn.py` at
+  PyPI scale (870,000 packages): before (#65) 256 of 256 shard files, 52,864 B pushed;
+  now 0 files, 0 B.
+- A new version, new commands or a vanished package changes only that package's rows and
+  failure record. The generation counter (`snapshot_generation`, in `manifest.json` and
+  the source's `source.json`) moves only when history moved.
+- A missing, corrupt, oversized-and-trimmed or other-revision cache is a **cold start**,
+  never an error. Every package is due again, staggered: its streak is spread over the
+  first backoff tiers by a hash of its name (`ColdCheck` / `cold_check`, identical in Go
+  and Python) so the next looks do not fall on the same day; its known version is taken
+  from its stored row, so an unchanged package still costs one metadata request and no
+  artifact read (Conan cannot: its recipe revision is not in the row, so a cold Conan
+  re-reads its recipes within the run budget). The rotation starts at a position derived
+  from the time, advancing one budget per six-hour window, so even a cache that is lost
+  on every run sweeps the whole catalogue instead of re-reading its first entries. History
+  is never altered by a cold start.
+- Format (versioned, shared by Go `internal/gocrawl/cache.go` and Python
+  `refresh_policy.read_cache`): gzip text; `# global-executables schedule cache v1`,
+  `# extraction <revision>`, `# cursor <rotation position>`, then `<name>\t<check>` lines
+  sorted by name. A different format or extraction revision is ignored. At most
+  3,000,000 entries (about 25 MB compressed; 870,000 PyPI entries are 12.3 MB and read in
+  about a second); beyond that the oldest checks are dropped and become due.
+- CI: `registry-refresh.yml` (go, pypi, rubygems, packagist, nuget) and
+  `cpp-registries.yml` (conan) restore `data/production/cache` with `actions/cache`
+  (key `schedule-v1-<source>-<run id>`, restore prefix `schedule-v1-<source>-`; the cache
+  is saved after the job). Self-run: the cache file sits beside the state directory
+  (`--cache` for the Go crawler, `cache_dir` for `crawl_registry_sources`).
+- Migration: #65 stored `checked` (and the rotation `refresh_cursor`) in the state. Both
+  are still read for one release as a seed when no cache exists; the first save drops
+  `checked` and writes `refresh_cursor` as 0, which is one change to each source's
+  `source.json`/shards, after which they never churn again.
+
 ## Change-driven refresh
 
-Latest-version refresh used to be a fixed rotation (`refresh_cursor`) that re-read every
-package's artifacts. It now spends requests where something changed (issue #64). The
+Latest-version refresh used to be a fixed rotation that re-read every package's
+artifacts. It now spends requests where something changed (issues #64, #66). The
 rotation is still the backstop: no feed is trusted to be complete.
 
-State fields (per source in `registry-state/<source>/source.json`; the two large maps use
-the generic sharding, so neither encoder changed, see
-`internal/gocrawl/testdata/refresh/state-golden`, which both Python and Go rewrite byte for byte):
+History fields (per source in `registry-state/<source>/source.json`):
 
 | field | meaning |
 | --- | --- |
-| `checked` | `{package: "<day>:<streak>:<version>"}`: the day number (UTC days since 1970) of the last successful check, how many consecutive checks found the same version, and that version. About 41 bytes per package. |
-| `feed_cursor` | Opaque position in the registry change feed (PyPI serial, npm `update_seq`, Packagist timestamp, Conan commit SHA). Committed in the same Bolt transaction as the queue it produced. |
+| `feed_cursor` | Opaque position in the registry change feed (PyPI serial, npm `update_seq`, Packagist timestamp, Conan commit SHA, NuGet catalog `commitTimeStamp`). Committed in the same Bolt transaction as the queue it produced; it changes only when the feed advanced. |
 | `feed_queue` | NuGet's equivalent of `feed_pending` (a list of tool ids), stored in the same checkpoint as `feed_cursor`. |
 | `feed_pending` | Announced changes not yet committed as observations. An entry is removed in the transaction that commits the package's observations, so a crash replays it. |
 | `due_floor` | Every check older than this day is due (set by a feed `resync`). |
-| `extraction_revision` | Version of the code that turns a registry document into rows. A state with a lower revision drops `checked` once, so a fixed extractor re-reads everything. Raise `ExtractionRevision` (Go, `internal/gocrawl/policy.go`) and `EXTRACTION_REVISION` (Python, `refresh_policy.py`) together when extraction changes. |
+| `extraction_revision` | Version of the code that turns a registry document into rows. A state with a lower revision does not seed checks from its rows and ignores older caches, so a fixed extractor re-reads everything. Raise `ExtractionRevision` (Go, `internal/gocrawl/policy.go`) and `EXTRACTION_REVISION` (Python, `refresh_policy.py`) together when extraction changes. |
 
-Tiers:
+Tiers (the check each one reads and writes is cache, see "History and cache"):
 
 - **P0, version-equal skip.** The inspector fetches the registry's latest version; if it
   equals the recorded one the artifact reads and the row rewrite are skipped and only
-  the check advances. A changed or failed package keeps working as before.
+  the cache advances. A changed or failed package keeps working as before.
 - **P1, change feed.** PyPI (`changelog_since_serial`), npm (`_changes`), Packagist
   (`metadata/changes.json`, including `resync`), Conan (GitHub compare of
   conan-center-index) and NuGet (V3 catalog: pages newer than the stored
@@ -754,15 +801,17 @@ Tiers:
   (`refresh_policy.TokenBucket`); feed announcements younger than a minute wait so the
   registry's own CDN has them. The Go crawler keeps its per-host limits.
 - **TTL.** Soft TTL is the backoff interval; hard TTL (`HARD_TTL_DAYS`) is the age after
-  which a row is reported stale. Reports carry `unchanged`, `skipped_not_due`, `ttl`.
+  which a package is reported stale. Reports carry `unchanged`, `skipped_not_due`, `ttl`.
+  Rows do not age in git: an unchanged package's rows are by definition still current,
+  and how long ago it was last confirmed is cache information.
 
-ETags and other validators are never written to git state. Go stores a check only for a
-module that has rows (a check per catalog module would add about 90 MB). Measure the
-state cost with `tools/measure_checked_churn.py`.
+ETags and other validators are never written to git. Go records a check only for a
+module that has rows (a check for every catalogue module would mean loading about two
+million entries into the store at each cold start); a module without rows is read in
+full at each visit, as before checks existed.
 
-Rollback: revert the PR. Old readers ignore the extra source fields, and the rotation
-keeps working from `refresh_cursor`; leftover `checked` data is dropped by the next
-extraction revision or ignored.
+Rollback: revert the PR. Old readers ignore the missing fields and the rotation restarts
+at the cold position; a leftover cache is harmless and can be deleted.
 
 ## Registry crawl state layout
 
