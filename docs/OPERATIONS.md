@@ -707,6 +707,53 @@ This machine runs Colima, not Docker Desktop. Two consequences:
   set `DOCKER_HOST=unix://$HOME/.colima/default/docker.sock`, because a replacement
   config also drops the `colima` context.
 
+## Change-driven refresh
+
+Latest-version refresh used to be a fixed rotation (`refresh_cursor`) that re-read every
+package's artifacts. It now spends requests where something changed (issue #64). The
+rotation is still the backstop: no feed is trusted to be complete.
+
+State fields (per source in `registry-state/<source>/source.json`; the two large maps use
+the generic sharding, so neither encoder changed, see
+`fixtures/refresh/state-golden`, which both Python and Go rewrite byte for byte):
+
+| field | meaning |
+| --- | --- |
+| `checked` | `{package: "<day>:<streak>:<version>"}`: the day number (UTC days since 1970) of the last successful check, how many consecutive checks found the same version, and that version. About 41 bytes per package. |
+| `feed_cursor` | Opaque position in the registry change feed (PyPI serial, npm `update_seq`, Packagist timestamp, Conan commit SHA). Committed in the same Bolt transaction as the queue it produced. |
+| `feed_pending` | Announced changes not yet committed as observations. An entry is removed in the transaction that commits the package's observations, so a crash replays it. |
+| `due_floor` | Every check older than this day is due (set by a feed `resync`). |
+| `extraction_revision` | Version of the code that turns a registry document into rows. A state with a lower revision drops `checked` once, so a fixed extractor re-reads everything. Raise `ExtractionRevision` (Go, `internal/gocrawl/policy.go`) and `EXTRACTION_REVISION` (Python, `refresh_policy.py`) together when extraction changes. |
+
+Tiers:
+
+- **P0, version-equal skip.** The inspector fetches the registry's latest version; if it
+  equals the recorded one the artifact reads and the row rewrite are skipped and only
+  the check advances. A changed or failed package keeps working as before.
+- **P1, change feed.** PyPI (`changelog_since_serial`), npm (`_changes`), Packagist
+  (`metadata/changes.json`, including `resync`) and Conan (GitHub compare of
+  conan-center-index) enqueue the changed packages. A gap too large to replay, a
+  Packagist `resync`, or a diverged Conan history sets `due_floor` to today instead.
+  The cursor advances only after the page and queue are stored. Go's index.golang.org
+  catalog walk queues known modules it reports again.
+- **P2, backoff.** Each unchanged check doubles the re-check interval (1 day up to 60;
+  npm, Conan and feed-backed sources use their own caps), with deterministic jitter
+  shared by Go and Python (`fixtures/refresh/policy-golden.json`). Rotation entries
+  that are not due advance the cursor and cost no request or budget.
+- **P3, pacing.** Python hosts use a token bucket with ordered reservation
+  (`refresh_policy.TokenBucket`); feed announcements younger than a minute wait so the
+  registry's own CDN has them. The Go crawler keeps its per-host limits.
+- **TTL.** Soft TTL is the backoff interval; hard TTL (`HARD_TTL_DAYS`) is the age after
+  which a row is reported stale. Reports carry `unchanged`, `skipped_not_due`, `ttl`.
+
+ETags and other validators are never written to git state. Go stores a check only for a
+module that has rows (a check per catalog module would add about 90 MB). Measure the
+state cost with `tools/measure_checked_churn.py`.
+
+Rollback: revert the PR. Old readers ignore the extra source fields, and the rotation
+keeps working from `refresh_cursor`; leftover `checked` data is dropped by the next
+extraction revision or ignored.
+
 ## Registry crawl state layout
 
 Every registry crawler resumes from one logical document,

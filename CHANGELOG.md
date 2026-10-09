@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Change-driven refresh (#64, refs #58): the latest-version refresh skips packages
+  whose registry version is unchanged (Go, npm, PyPI, RubyGems, Packagist, NuGet, Conan),
+  backs off unchanged packages exponentially without spending budget, and uses the
+  PyPI, npm, Packagist and Conan change feeds to queue changed packages first; the
+  rotation remains the backstop. New registry-state fields `checked`, `feed_cursor`,
+  `feed_pending`, `due_floor`, `extraction_revision` (generic maps; Python and Go
+  encoders byte-identical, golden in `fixtures/refresh/state-golden`). See "Change-driven
+  refresh" in docs/OPERATIONS.md.
 - Go toolchain: 1.26.7 → 1.26.9 (`go.mod` toolchain line and the digest-pinned
   `golang:1.26.9-bookworm` image in `Dockerfile.go-crawler`). `govulncheck` in the
   `go` CI job reported reachable `net/http` vulnerabilities fixed in go1.26.9
