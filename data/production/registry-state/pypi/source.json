@@ -4,16 +4,29 @@
   "catalog_since": "",
   "catalog_size": 870264,
   "cursor": 870264,
+  "due_floor": 0,
+  "extraction_revision": 1,
   "failure_attempts": {
-    "duckduckpy": 1
+    "duckduckpy": 2,
+    "triton": 1,
+    "triton-pascal": 1,
+    "triton-xpu": 1
   },
   "failures": {
-    "duckduckpy": "archive/tar: invalid tar header"
+    "duckduckpy": "archive/tar: invalid tar header",
+    "triton": "artifact size 248077577 exceeds limit 134217728",
+    "triton-pascal": "artifact size 209471139 exceeds limit 134217728",
+    "triton-xpu": "artifact size 182188911 exceeds limit 134217728"
   },
+  "feed_cursor": "42018270",
+  "feed_pending": {},
   "projects_file": "data/production/pypi-projects.txt",
-  "refresh_cursor": 260806,
+  "refresh_cursor": 0,
   "retry_projects": [
-    "duckduckpy"
+    "duckduckpy",
+    "triton",
+    "triton-pascal",
+    "triton-xpu"
   ],
   "snapshot_generation": 94
 }
