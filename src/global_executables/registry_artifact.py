@@ -26,11 +26,14 @@ import urllib.request
 import zipfile
 import zlib
 from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from io import BytesIO, RawIOBase, TextIOWrapper
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
+from . import change_feeds, refresh_policy
 from .collectors import conan_manifest_commands, crates_manifest, declared_command, record
+from .model import read_jsonl
 from .registry_state import load_state, save_state
 
 
@@ -39,6 +42,9 @@ CRATES_DB_DUMP = "https://static.crates.io/db-dump.tar.gz"
 # crates.io asks crawlers for at most one request per second and answers 429 well before
 # a CI runner's natural pace.  Only the API host is paced; its CDN mirrors are not.
 HOST_MIN_INTERVAL = {"crates.io": 1.0}
+# ConanCenter binaries are rebuilt without a recipe commit, which no feed announces, so
+# its rotation may skip a package for less long than a feed-covered source's.
+BACKOFF_MAX_DAYS_CONAN = 30
 RETRY_AFTER_CAP = 60.0
 # Every request gets a bounded retry budget.  The item queue below is the durable retry
 # mechanism; this budget only absorbs a short request-level fault.
@@ -74,7 +80,9 @@ CHECKPOINT_INTERVAL = 32
 # minutes inspecting and was killed having written nothing, leaving the next pass to
 # redo all of it.  Persist on a count or a clock, whichever comes first.
 CHECKPOINT_SECONDS = 30.0
-_last_request: dict[str, float] = {}
+# One token bucket per paced host (see `refresh_policy.TokenBucket`): a reservation is
+# claimed at once, so concurrent callers queue instead of racing past the floor.
+_last_request: dict[str, refresh_policy.TokenBucket] = {}
 _last_checkpoint = 0.0
 _interrupted = False
 
@@ -119,6 +127,10 @@ def _due_for_checkpoint(processed: int) -> bool:
         _last_checkpoint = now
         return True
     return False
+
+
+class _Unchanged(Exception):
+    """Control flow: the package's recorded version is current, nothing to read."""
 
 
 class RegistryCrawlError(RuntimeError):
@@ -178,10 +190,11 @@ def _throttle(url: str) -> None:
     interval = HOST_MIN_INTERVAL.get(host)
     if interval is None:
         return
-    pause = interval - (time.monotonic() - _last_request.get(host, float("-inf")))
-    if pause > 0:
-        time.sleep(pause)
-    _last_request[host] = time.monotonic()
+    bucket = _last_request.get(host)
+    if bucket is None:
+        bucket = _last_request[host] = refresh_policy.TokenBucket(
+            1.0 / interval, 1, clock=lambda: time.monotonic(), sleep=lambda seconds: time.sleep(seconds))
+    bucket.wait()
 
 
 def _retry_after_seconds(error: urllib.error.HTTPError, attempt: int) -> float:
@@ -809,6 +822,22 @@ def _dump_rows(archive: tarfile.TarFile, member: tarfile.TarInfo):
     yield from csv.DictReader(TextIOWrapper(_UnseekableMember(handle), encoding="utf-8", newline=""))
 
 
+# crates.io republishes its dump daily: soft TTL one day, hard TTL two weeks.
+CRATES_DUMP_SOFT_DAYS = 2
+CRATES_DUMP_HARD_DAYS = 14
+
+
+def _dump_ttl(last_modified: str, now: datetime) -> str:
+    """Soft/hard TTL verdict (`refresh_policy.classify`) of the dump a run is reporting."""
+    try:
+        published = parsedate_to_datetime(last_modified)
+    except (TypeError, ValueError):
+        return "unknown"
+    if published.tzinfo is None:
+        published = published.replace(tzinfo=timezone.utc)
+    return refresh_policy.classify((now - published).days, CRATES_DUMP_SOFT_DAYS, CRATES_DUMP_HARD_DAYS)
+
+
 def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                   checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Read every crate's declared binaries from the crates.io database dump.
@@ -840,6 +869,7 @@ def _crawl_crates(state: dict[str, Any], output: Path, budget: int, byte_budget:
                 "processed": 0, "records": collected, "downloaded_bytes": 0, "dump_bytes": size,
                 "failures": len(failures), "unavailable": len(unavailable),
                 "budget_exhausted": False, "complete": complete, "unchanged": True,
+                "ttl": _dump_ttl(published, _utc_now()),
                 "coverage_kind": "exhaustive" if complete else "partial"}
     if size > byte_budget:
         return {"records": 0, "processed": 0, "downloaded_bytes": 0, "dump_bytes": size,
@@ -954,6 +984,24 @@ def _fetch_stage(url: str, timeout: int, operation: str) -> tuple[bytes, dict[st
                                    error.detail, error.status_code, operation=operation) from error
 
 
+def _prepare_checks(state: dict[str, Any], output: Path, key_of: Callable[[dict[str, Any]], Any]) -> dict[str, Any]:
+    """Return the source's `checked` map, seeded from stored rows on first use.
+
+    State written by older extraction logic cannot vouch for the stored rows, so a lower
+    `extraction_revision` drops the checks and every package is read once more.
+    """
+    stored = state.get("extraction_revision")
+    outdated = isinstance(stored, int) and stored < refresh_policy.EXTRACTION_REVISION
+    if outdated:
+        state.pop(refresh_policy.CHECKED_FIELD, None)
+    state["extraction_revision"] = refresh_policy.EXTRACTION_REVISION
+    checked = state.setdefault(refresh_policy.CHECKED_FIELD, {})
+    # Rows written by older logic must not seed checks that would then vouch for them.
+    if not checked and not outdated and output.is_file():
+        refresh_policy.seed_from_rows(checked, read_jsonl(output), key_of)
+    return checked
+
+
 def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                  checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Inspect NuGet's .NET tool packages, the only NuGet packages that ship commands."""
@@ -1019,11 +1067,14 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             advertised = 0
         state["catalog_advertised"] = advertised
         state["catalog_truncated"] = bool(advertised) and len(tools) < advertised
+    checked = _prepare_checks(state, output, lambda row: row.get("package"))
+    day = refresh_policy.today(_utc_now())
+    max_days = refresh_policy.BACKOFF_MAX_DAYS_PLAIN  # NuGet has no polled feed (docs/OPERATIONS.md)
     cursor = int(state.get("cursor", 0)); refresh_cursor = int(state.get("refresh_cursor", 0))
     if refresh_cursor >= len(tools):
         refresh_cursor = 0
     refresh_enabled = cursor >= len(tools)
-    processed = 0; refreshed = 0; downloaded = 0
+    processed = 0; refreshed = 0; downloaded = 0; unchanged = 0; skipped = 0
     failures, unavailable, attempts = _failure_state(state)
     # Reaching the end of the catalogue is not the end of the work: a tool that failed
     # on a DNS blip has no other way back, and six of them held a finished NuGet at
@@ -1043,6 +1094,13 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             if refresh_index is None:
                 break
             package = tools[refresh_index]
+            if not refresh_policy.is_due(checked, package, day, max_days, int(state.get("due_floor", 0))):
+                # Not due: advance the rotation without a request or a unit of budget.
+                skipped += 1
+                refresh_remaining -= 1
+                refresh_cursor = (refresh_index + 1) % len(tools)
+                refresh_index = _next_refresh_index(tools, refresh_cursor, refresh_excluded)
+                continue
         else:
             package = retry_candidates.pop(0) if retrying else tools[cursor]
         lowered = urllib.parse.quote(package.lower(), safe="")
@@ -1052,23 +1110,33 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             if not versions:
                 raise RegistryCrawlError(f"tool has no published version: {package}")
             version = versions[-1]
-            url = f"{NUGET_FLAT}/{lowered}/{urllib.parse.quote(version, safe='')}/{lowered}.{urllib.parse.quote(version, safe='')}.nupkg"
-            commands, spent = _nuget_tool_commands(url, timeout)
-            downloaded += spent
-            if downloaded > byte_budget:
-                budget_exhausted = True
-                break
-            package_rows = [record(command, "nuget", package, version, None, url,
-                                   source_type="language_package", language="dotnet",
-                                   registry="nuget", latest_version=version)
-                            for command in sorted(set(commands))]
-            rows.extend(package_rows)
-            replacement_rows.extend(package_rows)
-            replaced_packages.add(package)
-            _clear_failure(state, failures, attempts, package)
+            if refresh_policy.known_version(checked, package) == version:
+                # The tool's latest version is the one already recorded: its stored rows
+                # stay and the package download (megabytes) is skipped.
+                unchanged += 1
+                refresh_policy.record_check(checked, package, version, day)
+                _clear_failure(state, failures, attempts, package)
+            else:
+                url = f"{NUGET_FLAT}/{lowered}/{urllib.parse.quote(version, safe='')}/{lowered}.{urllib.parse.quote(version, safe='')}.nupkg"
+                commands, spent = _nuget_tool_commands(url, timeout)
+                downloaded += spent
+                if downloaded > byte_budget:
+                    budget_exhausted = True
+                    break
+                package_rows = [record(command, "nuget", package, version, None, url,
+                                       source_type="language_package", language="dotnet",
+                                       registry="nuget", latest_version=version)
+                                for command in sorted(set(commands))]
+                rows.extend(package_rows)
+                replacement_rows.extend(package_rows)
+                replaced_packages.add(package)
+                refresh_policy.record_check(checked, package, version, day)
+                _clear_failure(state, failures, attempts, package)
         except Exception as error:
             _record_failure(failures, unavailable, package, error, attempts,
                             state.setdefault("failure_details", {}))
+            if package in unavailable:
+                refresh_policy.forget(checked, package)
             if package in failures and not _schedule_transient_retry(state, package, error):
                 failures.pop(package, None)
             if package not in failures:
@@ -1101,6 +1169,8 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     complete = (cursor >= len(tools) and not failures and not retry_tools
                 and not state.get("blocked") and not truncated)
     report = {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
+              "unchanged": unchanged, "skipped_not_due": skipped, "checked": len(checked),
+              "ttl": refresh_policy.ttl_summary(checked, day, max_days),
               "catalog_size": len(tools), "processed": processed,
               "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
               "unavailable": len(unavailable), "budget_exhausted": budget_exhausted,
@@ -1233,6 +1303,21 @@ def _conan_package_commands(reference: str, timeout: int) -> tuple[list[str], st
     return [], "", downloaded, version
 
 
+# The newest recipe revision each full inspection saw, read back by the crawl to record a
+# check without a second request.
+_conan_revisions: dict[tuple[str, str], str] = {}
+
+
+def _conan_recipe_revision(name: str, version: str, timeout: int) -> tuple[str, int]:
+    """The newest published recipe revision of one version: the first request of an inspection."""
+    quoted = f"{urllib.parse.quote(name, safe='')}/{urllib.parse.quote(version, safe='')}"
+    body, transfer = _fetch_stage(f"{CONAN_REMOTE}/{quoted}/_/_/revisions", timeout, "conan.revisions")
+    revisions = json.loads(body).get("revisions") or []
+    if not revisions:
+        raise RegistryCrawlError(f"recipe has no published revision: {name}/{version}")
+    return max(revisions, key=lambda item: str(item.get("time", "")))["revision"], transfer["downloaded_bytes"]
+
+
 def _conan_version_commands(name: str, version: str, timeout: int) -> tuple[list[str], str, int]:
     """Inspect one ConanCenter binary package for the commands it installs.
 
@@ -1248,6 +1333,7 @@ def _conan_version_commands(name: str, version: str, timeout: int) -> tuple[list
     if not revisions:
         raise RegistryCrawlError(f"recipe has no published revision: {reference}")
     recipe_revision = max(revisions, key=lambda item: str(item.get("time", "")))["revision"]
+    _conan_revisions[(name, version)] = recipe_revision
     revision_url = f"{revisions_url}/{recipe_revision}"
     body, transfer = _fetch_stage(f"{revision_url}/search", timeout, "conan.package_search")
     downloaded += transfer["downloaded_bytes"]
@@ -1320,6 +1406,46 @@ def _roll_conan_catalog(state: dict[str, Any], previous: list[str], current: lis
     return {"added": len(added), "removed": len(known - keep), "size": len(current)}
 
 
+# The feed's HTTP transport; tests replace it so no test reaches api.github.com.
+_conan_feed_request = _request_bytes
+
+
+def _conan_feed(state: dict[str, Any], recipes: list[str], timeout: int,
+                checkpoint: Callable[..., None], day: int) -> dict[str, Any]:
+    """Queue the recipes conan-center-index changed since the stored commit.
+
+    The cursor and the queue (`catalog_pending`) live in the same state document and are
+    written by one checkpoint, so the cursor never gets ahead of the queued work.  A
+    failed poll leaves both untouched: the next run replays it.
+    """
+    report: dict[str, Any] = {"events": 0, "enqueued": 0, "requests": 0, "downloaded_bytes": 0,
+                              "resync": False, "error": ""}
+    try:
+        page = change_feeds.conan_poll(_conan_feed_request, str(state.get("feed_cursor") or ""), timeout)
+    except Exception as error:
+        report["error"] = str(error)
+        return report
+    report.update(requests=page.requests, downloaded_bytes=page.downloaded_bytes,
+                  events=len(page.names), resync=page.resync)
+    pending = state.setdefault("catalog_pending", [])
+    queued = set(pending)
+    by_name = {reference.partition("/")[0]: reference for reference in recipes}
+    for name in sorted(page.names):
+        reference = by_name.get(name)
+        if reference and reference not in queued:
+            pending.append(reference)
+            queued.add(reference)
+            report["enqueued"] += 1
+    if page.catalog_changed:
+        # A recipe or version list changed: read the catalogue again instead of waiting a week.
+        state["catalog_fetched_at"] = ""
+    if page.resync:
+        state["due_floor"] = day
+    state["feed_cursor"] = page.cursor
+    checkpoint()
+    return report
+
+
 def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: int, timeout: int,
                  checkpoint: Callable[..., None] = _no_checkpoint) -> dict[str, Any]:
     """Inspect ConanCenter's built packages for the commands they install."""
@@ -1328,6 +1454,9 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     downloaded = 0
     catalog_refresh: dict[str, Any] | None = None
     recipes = read_catalog(catalog_file)
+    checked = _prepare_checks(state, output, lambda row: None)  # a reference has no row to seed from
+    day = refresh_policy.today(_utc_now())
+    feed_report = _conan_feed(state, recipes, timeout, checkpoint, day) if recipes else {}
     if not recipes:
         references, spent = _conan_catalog(timeout)
         downloaded += spent
@@ -1362,7 +1491,7 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
     if refresh_cursor >= len(recipes):
         refresh_cursor = 0
     refresh_enabled = cursor >= len(recipes)
-    processed = refreshed = collected = 0
+    processed = refreshed = collected = unchanged = skipped = 0
     budget_exhausted = False
     failures, unavailable, attempts = _failure_state(state)
     # A recipe nobody has built publishes no file list, so it is neither a failure nor
@@ -1386,12 +1515,32 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             if refresh_index is None:
                 break
             reference = recipes[refresh_index]
+            if not refresh_policy.is_due(checked, reference, day, BACKOFF_MAX_DAYS_CONAN,
+                                         int(state.get("due_floor", 0))):
+                skipped += 1
+                refresh_remaining -= 1
+                refresh_cursor = (refresh_index + 1) % len(recipes)
+                refresh_index = _next_refresh_index(recipes, refresh_cursor, refresh_excluded)
+                continue
         elif from_pending:
             reference = pending.pop(0)
         else:
             reference = retry_candidates.pop(0) if retrying else recipes[cursor]
         package, _, version = reference.partition("/")
         try:
+            known = refresh_policy.known_version(checked, reference)
+            if known and "@" in known and known.partition("@")[0] == version:
+                # The recipe revision is the first request of an inspection.  When it is
+                # the one recorded, the search, package revisions and manifest are skipped.
+                revision, spent = _conan_recipe_revision(package, version, timeout)
+                downloaded += spent
+                if known == f"{version}@{revision}":
+                    unchanged += 1
+                    refresh_policy.record_check(checked, reference, known, day)
+                    unavailable.pop(reference, None)
+                    _clear_failure(state, failures, attempts, reference)
+                    raise _Unchanged
+            _conan_revisions.pop((package, version), None)
             commands, manifest_url, spent, inspected_version = _conan_package_commands(reference, timeout)
             downloaded += spent
             unavailable.pop(reference, None)
@@ -1410,7 +1559,14 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             rows.extend(package_rows)
             replacement_rows.extend(package_rows)
             replaced_packages.add(package)
+            revision = _conan_revisions.get((package, inspected_version))
+            if manifest_url and revision:
+                refresh_policy.record_check(checked, reference, f"{inspected_version}@{revision}", day)
+            else:
+                refresh_policy.forget(checked, reference)
             _clear_failure(state, failures, attempts, reference)
+        except _Unchanged:
+            pass
         except Exception as error:
             _record_failure(failures, unavailable, reference, error, attempts,
                             state.setdefault("failure_details", {}))
@@ -1455,6 +1611,9 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
               "retry_pending": len(retry_recipes), "retry_waiting": retry_waiting,
               "blocked": len(state.get("blocked", {})), "uninspected": len(uninspected),
               "catalog_pending": len(pending), "catalog_fetched_at": state.get("catalog_fetched_at"),
+              "unchanged": unchanged, "skipped_not_due": skipped, "checked": len(checked),
+              "ttl": refresh_policy.ttl_summary(checked, day, BACKOFF_MAX_DAYS_CONAN),
+              "feed": feed_report,
               "failure_details": _failure_diagnostics(state, failures, "retry_recipes"),
               "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
     if catalog_refresh:
