@@ -14,7 +14,7 @@ implementation for transactional sources.
 
 ## At a glance
 
-- Exact compiler: Go 1.26.7 with `GOTOOLCHAIN=local`.
+- Exact compiler: Go 1.26.9 with `GOTOOLCHAIN=local`.
 - Development: digest-pinned official container; host Go is optional.
 - Style: JetBrains Modern Go Guidelines v0.1.1 plus the Go 1.26 standard fixers.
 - Validation: one shared format, modernization, vet, test, race, vulnerability, and build pipeline.
@@ -59,7 +59,7 @@ that require a behavior decision. Relevant rules apply unless they would change 
 intended behavior or fail to compile for the declared Go version.
 
 The JetBrains CLI is the review reference; `go fix -diff ./...` is the enforceable
-repository gate. The command uses the exact Go 1.26.7 standard analyzers and fails when
+repository gate. The command uses the exact Go 1.26.9 standard analyzers and fails when
 source still has safe modernization fixes. A developer applies those fixes with
 `./tools/go_container.sh go fix ./...`, reviews the diff, and then runs the full shared
 pipeline. Pinning the advisory CLI in the command avoids an unreviewed guideline change
@@ -94,7 +94,8 @@ release gates:
   migration and measured throughput evidence.
 
 The gate passed before crawler behavior was added. Any toolchain or dependency update
-must pass it again; Go 1.26.5 was replaced by 1.26.7 when `govulncheck` found reachable
+must pass it again; Go 1.26.5 was replaced by 1.26.7, and 1.26.7 by 1.26.9 (GO-2026-6617
+and related `net/http` advisories of 2026-10-08), when `govulncheck` found reachable
 standard-library vulnerabilities, rather than weakening the security gate.
 
 ## Environment decision
@@ -102,7 +103,7 @@ standard-library vulnerabilities, rather than weakening the security gate.
 | Concern | Contract | Reason |
 | --- | --- | --- |
 | Language | Go, not Java | The workload is dominated by HTTP, ZIP inspection, bounded concurrency, and a static local executable. Go fits the repository and deployment footprint without introducing a JVM. |
-| Toolchain | Go 1.26.7, exact patch | This is the maintained Go 1.26 patch release as of 2026-08-25. Patch-level pinning prevents developer and CI drift. |
+| Toolchain | Go 1.26.9, exact patch | This is the maintained Go 1.26 patch release as of 2026-10-08. Patch-level pinning prevents developer and CI drift. |
 | Toolchain switching | `GOTOOLCHAIN=local` | A build must fail on a mismatched toolchain instead of silently downloading a different compiler. |
 | Local setup | Digest-pinned official Go container | Container-first setup is reproducible and avoids depending on host toolchain state. |
 | Deployment target | `linux/amd64`, `CGO_ENABLED=0` | This matches the current crawler host and produces a portable static crawler binary. |
