@@ -287,25 +287,10 @@ publish_snapshot() (
     local observed="${ROOT_DIR}/${rows}"
     local target="${worktree}/${rows}"
     if [ -f "${observed}" ]; then
-      # Moving package indexes are evidence over time.  Merge by provider identity so
+      # Moving package indexes are evidence over time: merge by provider identity so
       # a newly observed version wins without deleting a command that disappeared.
-      python3 - "${observed}" "${target}" <<'PYOBS'
-import json, pathlib, sys
-observed, target = map(pathlib.Path, sys.argv[1:])
-
-def rows(path):
-    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()] if path.is_file() else []
-
-def identity(row):
-    return row.get("command"), row.get("ecosystem"), row.get("package"), row.get("source")
-
-merged = {identity(row): row for row in rows(observed)}
-for row in rows(target):
-    merged.setdefault(identity(row), row)
-ordered = sorted(merged.values(), key=lambda row: (row.get("command", ""), row.get("package", ""), row.get("source", "")))
-target.parent.mkdir(parents=True, exist_ok=True)
-target.write_text("".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in ordered))
-PYOBS
+      # Packages a recipe snapshot just re-parsed are replaced, not merged.
+      python3 "${ROOT_DIR}/tools/merge_observations.py" --observed "${observed}" --target "${target}"
     fi
   done
   # A snapshot collector advances no cursor, so it has nothing to merge into the
