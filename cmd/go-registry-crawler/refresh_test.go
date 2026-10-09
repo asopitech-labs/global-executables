@@ -6,10 +6,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"maps"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"sync"
 	"testing"
@@ -251,7 +253,7 @@ func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
 		MaxInFlight: 8, CommitBatch: 8, RequestTimeout: 2 * time.Second, ModuleTimeout: 5 * time.Second,
 	}
 	var catalog strings.Builder
-	for name := range fake.versions {
+	for _, name := range slices.Sorted(maps.Keys(fake.versions)) {
 		catalog.WriteString(name + "\n")
 	}
 	if err := os.WriteFile(config.CatalogPath, []byte(catalog.String()), 0o644); err != nil {
@@ -303,6 +305,17 @@ func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
 	versions := readRows(t, config.ObservationsPath)
 	if versions["p07"] != "2.0.0" {
 		t.Fatalf("an announced release must be picked up: %v", versions["p07"])
+	}
+	// The rotation reaches the missed release within a few passes (one pass may spend
+	// its budget on other due entries); that is the backstop's guarantee.
+	for range 3 {
+		if versions["p21"] == "2.0.0" {
+			break
+		}
+		if _, err := executePass(t.Context(), config); err != nil {
+			t.Fatal(err)
+		}
+		versions = readRows(t, config.ObservationsPath)
 	}
 	if versions["p21"] != "2.0.0" {
 		t.Fatalf("the rotation backstop must find a release the feed missed: %v", versions["p21"])
