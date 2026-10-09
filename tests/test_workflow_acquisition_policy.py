@@ -37,7 +37,8 @@ def test_crates_change_check_is_daily_and_restores_only_owned_crawl_data():
 
     assert 'cron: "47 4 * * *"' in triggers
     assert "*/6" not in triggers
-    assert "registry-state.json" in restore
+    assert "tools/registry_state.py restore --ref origin/artifact-data" in restore
+    assert "--state data/production/registry-state" in restore
     assert "crates.jsonl" in restore
     for unrelated in (
         "npm-packages",
@@ -143,7 +144,8 @@ def test_conan_walk_is_daily_resumable_and_restores_only_its_own_catalogue():
 
     assert 'cron: "23 5 * * *"' in triggers
     assert "*/6" not in triggers
-    assert "registry-state.json" in restore
+    assert "tools/registry_state.py restore --ref origin/artifact-data" in restore
+    assert "--state data/production/registry-state" in restore
     # The published cursor counts positions in this catalogue, so resuming without it
     # would walk a different list from the one the cursor described.
     assert "conan-recipes.txt.gz" in restore

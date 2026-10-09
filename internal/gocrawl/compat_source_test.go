@@ -120,7 +120,7 @@ func TestExportSourceCompatibilityPreservesOtherSourcesAndPythonKeys(t *testing.
 	var state struct {
 		Sources map[string]map[string]any `json:"sources"`
 	}
-	body, _ := os.ReadFile(paths.State)
+	body := readStateForTest(t, paths.State)
 	if err := json.Unmarshal(body, &state); err != nil {
 		t.Fatal(err)
 	}

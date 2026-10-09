@@ -42,9 +42,10 @@ jobs:
         run: |
           git fetch --depth=1 origin artifact-data || true
           mkdir -p data/production/intermediate reports
-          if git cat-file -e origin/artifact-data:data/production/registry-state.json 2>/dev/null; then
-            git show origin/artifact-data:data/production/registry-state.json > data/production/registry-state.json
-          fi
+          # Reads the sharded layout, or the legacy registry-state.json until the first
+          # publication after the layout change migrates the branch.
+          python3 tools/registry_state.py restore --ref origin/artifact-data \
+            --state data/production/registry-state
           # The cursor indexes this catalogue, so resuming without it would walk a
           # different list from the one the published cursor counted.
           if git cat-file -e origin/artifact-data:data/production/conan-recipes.txt.gz 2>/dev/null; then
@@ -74,7 +75,7 @@ jobs:
           rm -f reports/registry-artifact-crawl.json
           python tools/registry_artifact_crawl.py \
             --source conan \
-            --state data/production/registry-state.json \
+            --state data/production/registry-state \
             --output-dir data/production/intermediate \
             --report reports/registry-artifact-crawl.json \
             --package-budget "$PACKAGE_BUDGET" \
@@ -90,7 +91,8 @@ jobs:
         run: |
           rm -rf /tmp/ci-cpp-conan
           mkdir -p /tmp/ci-cpp-conan/data/production/intermediate /tmp/ci-cpp-conan/reports
-          cp data/production/registry-state.json /tmp/ci-cpp-conan/data/production/registry-state.json
+          python3 tools/registry_state.py copy --from data/production/registry-state \
+            --to /tmp/ci-cpp-conan/data/production/registry-state
           if test -f data/production/conan-recipes.txt.gz; then
             cp data/production/conan-recipes.txt.gz /tmp/ci-cpp-conan/data/production/conan-recipes.txt.gz
           fi

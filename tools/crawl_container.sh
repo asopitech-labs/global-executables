@@ -26,11 +26,13 @@ fi
 cd "${ROOT_DIR}"
 mkdir -p "${STATE_DIR}/data/production/intermediate" "${STATE_DIR}/reports"
 
-if [ "${SEED}" = "1" ] && [ ! -f "${STATE_DIR}/data/production/registry-state.json" ]; then
+if [ "${SEED}" = "1" ] && \
+   ! python3 tools/registry_state.py exists --state "${STATE_DIR}/data/production/registry-state"; then
   echo "==> Seeding ${STATE_DIR} from origin/artifact-data"
   git fetch --quiet --depth=1 origin artifact-data || true
-  for path in data/production/registry-state.json \
-              data/production/nuget-tools.txt \
+  python3 tools/registry_state.py restore --ref origin/artifact-data \
+    --state "${STATE_DIR}/data/production/registry-state"
+  for path in data/production/nuget-tools.txt \
               reports/registry-artifact-crawl.json; do
     if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
       git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"

@@ -31,6 +31,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
 from .collectors import conan_manifest_commands, crates_manifest, declared_command, record
+from .registry_state import load_state, save_state
 
 
 USER_AGENT = "global-executables-registry-crawl/1.0 (+https://github.com/asopitech-labs/global-executables)"
@@ -456,26 +457,15 @@ class RemoteZip:
 
 
 def _load_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:
-    if not path.is_file():
-        return default
-    value = json.loads(path.read_text())
-    if not isinstance(value, dict) or value.get("version") != 1:
+    """Read the crawl state in either on-disk layout (see registry_state)."""
+    value = load_state(path, default)
+    if value.get("version") != 1:
         raise RegistryCrawlError(f"invalid registry crawl state: {path}")
     return value
 
 
 def _save_json(path: Path, value: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    try:
-        with temporary.open("w", encoding="utf-8") as handle:
-            handle.write(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-        temporary.replace(path)
-        _fsync_directory(path.parent)
-    finally:
-        temporary.unlink(missing_ok=True)
+    save_state(path, value)
 
 
 def _fsync_directory(path: Path) -> None:

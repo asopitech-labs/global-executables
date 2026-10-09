@@ -65,8 +65,8 @@ seed() {
   cd "${ROOT_DIR}"
   mkdir -p "${BASE}/data/production/intermediate" "${BASE}/reports"
   git fetch --quiet --depth=1 origin artifact-data
-  git show origin/artifact-data:data/production/registry-state.json \
-    > "${BASE}/data/production/registry-state.json"
+  python3 "${ROOT_DIR}/tools/registry_state.py" restore --require --repo "${ROOT_DIR}" \
+    --ref origin/artifact-data --state "${BASE}/data/production/registry-state"
   for source in ${SOURCES}; do
     for name in $(catalog_for "${source}"); do
       if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
@@ -108,10 +108,12 @@ seed() {
   # Report from the seeded base: the per-source directories `status` reads do not exist
   # until `start` slices them, so asking it here answers "cursor=None" for everything.
   echo "seeded ${BASE} from origin/artifact-data"
-  python3 - "${BASE}" "${SOURCES}" <<'PY'
-import json, pathlib, sys
-base, sources = pathlib.Path(sys.argv[1]), sys.argv[2].split()
-state = json.loads((base / "data/production/registry-state.json").read_text()).get("sources", {})
+  python3 - "${ROOT_DIR}" "${BASE}" "${SOURCES}" <<'PY'
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
+from global_executables.registry_state import load_state
+base, sources = pathlib.Path(sys.argv[2]), sys.argv[3].split()
+state = load_state(base / "data/production/registry-state").get("sources", {})
 for source in sources:
     entry = state.get(source) or {}
     queued = next((len(v) for k, v in entry.items() if k.startswith("retry_") and isinstance(v, list)), 0)
@@ -125,7 +127,7 @@ PY
 start() {
   cd "${ROOT_DIR}"
   guard_npm_owner
-  if [ ! -f "${BASE}/data/production/registry-state.json" ]; then
+  if ! python3 "${ROOT_DIR}/tools/registry_state.py" exists --state "${BASE}/data/production/registry-state"; then
     echo "no state at ${BASE}; seeding from origin/artifact-data first"
     seed
   fi
@@ -146,17 +148,17 @@ start() {
     local dir="${BASE}-${source}"
     mkdir -p "${dir}/data/production/intermediate" "${dir}/reports"
     # Split this source's slice out of the combined state rather than re-seeding it.
-    python3 - "$dir" "$source" "$BASE" <<'PY'
-import json, pathlib, sys
-directory, source = pathlib.Path(sys.argv[1]), sys.argv[2]
-target = directory / "data/production/registry-state.json"
-if target.is_file():
+    python3 - "${ROOT_DIR}" "$dir" "$source" "$BASE" <<'PY'
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
+from global_executables.registry_state import load_state, save_state, state_exists
+directory, source = pathlib.Path(sys.argv[2]), sys.argv[3]
+target = directory / "data/production/registry-state"
+if state_exists(target):
     raise SystemExit(0)
 # Read the base this run was told to use; hardcoding the default silently ignored BASE.
-combined = pathlib.Path(sys.argv[3]) / "data/production/registry-state.json"
-state = json.loads(combined.read_text()) if combined.is_file() else {"version": 1, "sources": {}}
-slice_ = {"version": 1, "sources": {source: state.get("sources", {}).get(source, {})}}
-target.write_text(json.dumps(slice_, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+state = load_state(pathlib.Path(sys.argv[4]) / "data/production/registry-state")
+save_state(target, {"version": 1, "sources": {source: state.get("sources", {}).get(source, {})}})
 PY
     for name in $(catalog_for "${source}"); do
       if [ -f "${BASE}/data/production/${name}" ] && [ ! -f "${dir}/data/production/${name}" ]; then
@@ -188,10 +190,12 @@ status() {
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
     printf '%-10s %-24s ' "${source}" "$("${RUNTIME}" ps --filter "name=ge-${source}" --format '{{.Status}}' || echo 'not running')"
-    python3 - "$dir" "$source" <<'PY'
-import json, pathlib, sys
-state = pathlib.Path(sys.argv[1]) / "data/production/registry-state.json"
-source = json.loads(state.read_text()).get("sources", {}).get(sys.argv[2], {}) if state.is_file() else {}
+    python3 - "${ROOT_DIR}" "$dir" "$source" <<'PY'
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
+from global_executables.registry_state import load_state
+state = load_state(pathlib.Path(sys.argv[2]) / "data/production/registry-state")
+source = state.get("sources", {}).get(sys.argv[3], {})
 size, cursor = source.get("catalog_size"), source.get("cursor")
 print(f"{cursor:,}/{size:,}" if isinstance(size, int) and isinstance(cursor, int) else f"cursor={cursor}")
 PY
@@ -201,18 +205,12 @@ PY
 merge() {
   local out="${BASE}"
   mkdir -p "${out}/data/production/intermediate"
-  python3 - "$BASE" "$SOURCES" <<'PY'
-import json, pathlib, sys
-base, sources = pathlib.Path(sys.argv[1]), sys.argv[2].split()
-target = base / "data/production/registry-state.json"
-combined = json.loads(target.read_text()) if target.is_file() else {"version": 1, "sources": {}}
-for source in sources:
-    slice_ = base.parent / f"{base.name}-{source}/data/production/registry-state.json"
-    if slice_.is_file():
-        combined.setdefault("sources", {}).update(json.loads(slice_.read_text()).get("sources", {}))
-target.write_text(json.dumps(combined, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
-print(f"merged {len(sources)} source states into {target}")
-PY
+  local slices=()
+  for source in ${SOURCES}; do
+    slices+=(--from "${BASE}-${source}/data/production/registry-state")
+  done
+  python3 "${ROOT_DIR}/tools/registry_state.py" merge-sources \
+    --into "${out}/data/production/registry-state" ${slices[@]+"${slices[@]}"}
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
     for name in $(catalog_for "${source}"); do
@@ -243,11 +241,11 @@ publish_snapshot() (
   mkdir -p "${worktree}/data/production/intermediate" "${worktree}/reports"
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
-    local state="${dir}/data/production/registry-state.json"
-    [ -f "${state}" ] || continue
+    local state="${dir}/data/production/registry-state"
+    python3 "${ROOT_DIR}/tools/registry_state.py" exists --state "${state}" || continue
     if python3 "${ROOT_DIR}/tools/merge_registry_publication.py" \
         --source "${source}" \
-        --published-state "${worktree}/data/production/registry-state.json" \
+        --published-state "${worktree}/data/production/registry-state" \
         --local-state "${state}" \
         --published-report "${worktree}/reports/registry-artifact-crawl.json" \
         --local-report "${dir}/reports/registry-artifact-crawl.json"; then

@@ -12,6 +12,7 @@ import pytest
 import global_executables.registry_artifact as registry_artifact
 from global_executables.collectors import npm_metadata
 from global_executables.registry_artifact import _failure_state, _postgres_array
+from global_executables.registry_state import load_state
 
 
 def test_crates_binaries_come_from_the_dump_not_from_downloads(tmp_path, monkeypatch):
@@ -453,7 +454,7 @@ def test_source_level_transient_failure_is_durable_and_respects_due_time(tmp_pat
 
     assert report["status"] == "partial"
     assert report["sources"]["conan"]["retry_pending"] == 1
-    saved = json.loads(state_path.read_text())["sources"]["conan"]
+    saved = load_state(state_path)["sources"]["conan"]
     assert saved["source_failure"]["url"].endswith("conan-center-index/tar.gz/refs/heads/master")
 
     monkeypatch.setattr(registry_artifact, "_crawl_conan",

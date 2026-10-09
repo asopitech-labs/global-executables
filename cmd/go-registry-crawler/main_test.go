@@ -107,7 +107,7 @@ func TestExecutePassRunsNPMWithBoundedPacingAndExportsCompatibility(t *testing.T
 	if report.Processed != 32 || report.Records != 32 || !report.Complete || maximum.Load() > 2 {
 		t.Fatalf("report=%+v maximum=%d", report, maximum.Load())
 	}
-	stateBody, _ := os.ReadFile(config.StatePath)
+	stateBody := readStateForTest(t, config.StatePath)
 	if !bytes.Contains(stateBody, []byte(`"npm"`)) || !bytes.Contains(stateBody, []byte(`"cursor": 32`)) {
 		t.Fatalf("state=%s", stateBody)
 	}
@@ -234,7 +234,7 @@ func TestExecutePassExportsProgressAndResumesIdempotently(t *testing.T) {
 		t.Fatalf("first=%+v", first)
 	}
 	var state map[string]any
-	stateBody, _ := os.ReadFile(config.StatePath)
+	stateBody := readStateForTest(t, config.StatePath)
 	if err := json.Unmarshal(stateBody, &state); err != nil {
 		t.Fatal(err)
 	}
@@ -347,4 +347,17 @@ func TestBuildPassWorksCyclesThroughCompletedCatalog(t *testing.T) {
 		works[0].Module != "beta" || works[1].Module != "gamma" {
 		t.Fatalf("works=%+v", works)
 	}
+}
+
+func readStateForTest(t *testing.T, path string) []byte {
+	t.Helper()
+	document, found, err := gocrawl.ReadStateDocument(path)
+	if err != nil || !found {
+		t.Fatalf("read state %s: found=%v err=%v", path, found, err)
+	}
+	body, err := json.MarshalIndent(document, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	return body
 }

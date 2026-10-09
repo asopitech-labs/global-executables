@@ -184,18 +184,15 @@ func LoadSourceCompatibility(statePath, observationsPath, catalogPath string, pr
 	}, document, nil
 }
 
+// LoadStateDocument reads the shared registry state at statePath in either layout
+// (see statestore.go), returning an empty version 1 document when none exists.
 func LoadStateDocument(statePath string) (StateDocument, error) {
-	document := StateDocument{}
-	if body, err := os.ReadFile(statePath); err == nil {
-		if err := json.Unmarshal(body, &document); err != nil {
-			return nil, fmt.Errorf("read state: %w", err)
-		}
-	} else if !errors.Is(err, os.ErrNotExist) {
+	document, _, err := ReadStateDocument(statePath)
+	if err != nil {
 		return nil, err
 	}
 	if len(document) == 0 {
-		document["version"] = json.RawMessage("1")
-		document["sources"] = json.RawMessage("{}")
+		document = StateDocument{"version": json.RawMessage("1"), "sources": json.RawMessage("{}")}
 	}
 	return document, nil
 }
@@ -331,11 +328,6 @@ func exportCompatibility(
 	if _, exists := document["version"]; !exists {
 		document["version"] = json.RawMessage("1")
 	}
-	stateBody, err := json.MarshalIndent(document, "", "  ")
-	if err != nil {
-		return err
-	}
-	stateBody = append(stateBody, '\n')
 
 	complete := snapshot.CatalogComplete && snapshot.Cursor >= snapshot.CatalogSize && len(snapshot.Retries) == 0
 	coverage := "partial"
@@ -421,7 +413,7 @@ func exportCompatibility(
 	}); err != nil {
 		return err
 	}
-	if err := atomicWrite(paths.State, stateBody, 0o644); err != nil {
+	if err := WriteStateDocument(paths.State, document); err != nil {
 		return err
 	}
 	return atomicWrite(paths.Report, reportBody, 0o644)

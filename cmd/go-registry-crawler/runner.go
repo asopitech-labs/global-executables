@@ -104,7 +104,7 @@ func (c *crawlConfig) applyDefaults() error {
 		return fmt.Errorf("unsupported source %q", c.Source)
 	}
 	if c.StatePath == "" {
-		c.StatePath = "data/production/registry-state.json"
+		c.StatePath = "data/production/registry-state"
 	}
 	if c.ReportPath == "" {
 		c.ReportPath = "reports/registry-artifact-crawl.json"
