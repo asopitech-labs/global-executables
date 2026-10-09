@@ -24,13 +24,18 @@ var (
 	observationBucket       = []byte("observations")
 	observationModuleBucket = []byte("observation_modules")
 	catalogBucket           = []byte("catalog")
+	checkBucket             = []byte("checks")
+	feedBucket              = []byte("feed")
 )
 
 type StoreOptions struct {
 	FailureAttemptLimit int
+	// Now supplies the clock for check days; tests move it. Defaults to time.Now.
+	Now func() time.Time
 }
 
 type BoltStore struct {
+	now                 func() time.Time
 	db                  *bolt.DB
 	failureAttemptLimit int
 	catalog             *CatalogIndex
@@ -47,10 +52,13 @@ func OpenBoltStore(path string, options StoreOptions) (*BoltStore, error) {
 	if err != nil {
 		return nil, err
 	}
-	store := &BoltStore{db: db, failureAttemptLimit: options.FailureAttemptLimit}
+	store := &BoltStore{db: db, failureAttemptLimit: options.FailureAttemptLimit, now: time.Now}
+	if options.Now != nil {
+		store.now = options.Now
+	}
 	if err := db.Update(func(tx *bolt.Tx) error {
 		buildObservationIndex := tx.Bucket(observationModuleBucket) == nil
-		for _, name := range [][]byte{metaBucket, retryBucket, unavailableBucket, observationBucket, observationModuleBucket, catalogBucket} {
+		for _, name := range [][]byte{metaBucket, retryBucket, unavailableBucket, observationBucket, observationModuleBucket, catalogBucket, checkBucket, feedBucket} {
 			if _, err := tx.CreateBucketIfNotExists(name); err != nil {
 				return err
 			}
@@ -148,8 +156,45 @@ func (s *BoltStore) Import(ctx context.Context, snapshot ImportSnapshot) error {
 				return err
 			}
 		}
-		return nil
+		return importChecks(tx, snapshot)
 	})
+}
+
+// importChecks stores the recorded checks, the feed position and the announced
+// changes. A package that has observations but no check is seeded with day zero, so it
+// is due at once yet a re-check that finds the same version can skip its artifacts.
+func importChecks(tx *bolt.Tx, snapshot ImportSnapshot) error {
+	meta := tx.Bucket(metaBucket)
+	if err := meta.Put([]byte("feed_cursor"), []byte(snapshot.FeedCursor)); err != nil {
+		return err
+	}
+	if err := putUint(meta, "due_floor", uint64(max(snapshot.DueFloor, 0))); err != nil {
+		return err
+	}
+	checks := tx.Bucket(checkBucket)
+	for module, value := range snapshot.Checks {
+		if _, valid := ParseCheck(value); !valid {
+			continue
+		}
+		if err := checks.Put([]byte(module), []byte(value)); err != nil {
+			return err
+		}
+	}
+	for _, observation := range snapshot.Observations {
+		if observation.Version == "" || checks.Get([]byte(observation.Package)) != nil {
+			continue
+		}
+		seed := EncodeCheck(Check{Version: observation.Version})
+		if err := checks.Put([]byte(observation.Package), []byte(seed)); err != nil {
+			return err
+		}
+	}
+	for module, entry := range snapshot.FeedPending {
+		if err := putJSON(tx.Bucket(feedBucket), module, entry); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
@@ -170,6 +215,7 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 		refreshOffset := getInt64(meta, "refresh_catalog_offset")
 		catalogSize := getUint(meta, "catalog_size")
 		var downloaded uint64
+		today := Today(s.now())
 		for _, result := range results {
 			if result.Verdict == VerdictCanceled {
 				return context.Canceled
@@ -189,7 +235,7 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 				if refreshCursor >= catalogSize {
 					refreshCursor, refreshOffset = 0, 0
 				}
-			} else if !result.Work.Retry {
+			} else if !result.Work.Retry && !result.Work.Feed {
 				if result.Work.CatalogIndex != cursor {
 					return fmt.Errorf("cursor hole: got catalog index %d, want %d", result.Work.CatalogIndex, cursor)
 				}
@@ -205,7 +251,10 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 			if err := s.applyVerdict(tx, result); err != nil {
 				return err
 			}
-			if result.Verdict == VerdictSuccess || result.Verdict == VerdictPermanent {
+			if err := applyCheck(tx, result, today); err != nil {
+				return err
+			}
+			if (result.Verdict == VerdictSuccess || result.Verdict == VerdictPermanent) && !result.Unchanged {
 				if err := deleteModuleObservations(tx, result.Work.Module); err != nil {
 					return err
 				}
@@ -242,6 +291,9 @@ func (s *BoltStore) applyVerdict(tx *bolt.Tx, result ModuleResult) error {
 	retries := tx.Bucket(retryBucket)
 	unavailable := tx.Bucket(unavailableBucket)
 	module := []byte(result.Work.Module)
+	if result.Work.Skip {
+		return nil
+	}
 	switch result.Verdict {
 	case VerdictSuccess:
 		if err := retries.Delete(module); err != nil {
@@ -322,6 +374,9 @@ func (s *BoltStore) ViewSnapshot(
 		if err != nil {
 			return err
 		}
+		if err := snapshotChecks(tx, &snapshot); err != nil {
+			return err
+		}
 		observations := func(yield func(Observation) error) error {
 			return tx.Bucket(observationBucket).ForEach(func(_, value []byte) error {
 				if err := ctx.Err(); err != nil {
@@ -373,6 +428,9 @@ func snapshotFromTx(tx *bolt.Tx, includeObservations bool) (Snapshot, error) {
 	if !includeObservations {
 		return snapshot, nil
 	}
+	if err := snapshotChecks(tx, &snapshot); err != nil {
+		return Snapshot{}, err
+	}
 	err := tx.Bucket(observationBucket).ForEach(func(_, value []byte) error {
 		var observation Observation
 		if err := json.Unmarshal(value, &observation); err != nil {
@@ -382,6 +440,75 @@ func snapshotFromTx(tx *bolt.Tx, includeObservations bool) (Snapshot, error) {
 		return nil
 	})
 	return snapshot, err
+}
+
+func snapshotChecks(tx *bolt.Tx, snapshot *Snapshot) error {
+	meta := tx.Bucket(metaBucket)
+	snapshot.FeedCursor = string(meta.Get([]byte("feed_cursor")))
+	snapshot.DueFloor = int(getUint(meta, "due_floor"))
+	snapshot.Checks = make(map[string]string)
+	snapshot.FeedPending = make(map[string]FeedEntry)
+	if err := tx.Bucket(checkBucket).ForEach(func(key, value []byte) error {
+		snapshot.Checks[string(key)] = string(value)
+		return nil
+	}); err != nil {
+		return err
+	}
+	return tx.Bucket(feedBucket).ForEach(func(key, value []byte) error {
+		var entry FeedEntry
+		if err := json.Unmarshal(value, &entry); err != nil {
+			return err
+		}
+		snapshot.FeedPending[string(key)] = entry
+		return nil
+	})
+}
+
+// applyCheck records what a committed result learned about a module, and removes the
+// module from the feed queue in the same transaction as its observations. A feed
+// announcement therefore survives a crash until the observations it caused are durable.
+func applyCheck(tx *bolt.Tx, result ModuleResult, today int) error {
+	module := []byte(result.Work.Module)
+	if result.Work.Feed || result.Verdict == VerdictSuccess || result.Verdict == VerdictPermanent {
+		// A retry result is owned by the retry bucket from now on.
+		if err := tx.Bucket(feedBucket).Delete(module); err != nil {
+			return err
+		}
+	}
+	checks := tx.Bucket(checkBucket)
+	switch {
+	case result.Verdict == VerdictPermanent:
+		return checks.Delete(module)
+	case result.Verdict != VerdictSuccess || result.Work.Skip || result.Latest == "":
+		return nil
+	}
+	var previous Check
+	var had bool
+	if value := checks.Get(module); value != nil {
+		previous, had = ParseCheck(string(value))
+	}
+	next, _ := Next(previous, had, result.Latest, today)
+	return checks.Put(module, []byte(EncodeCheck(next)))
+}
+
+// Checks returns the recorded check of each module that has one.
+func (s *BoltStore) Checks(ctx context.Context, modules []string) (map[string]Check, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+	found := make(map[string]Check, len(modules))
+	err := s.db.View(func(tx *bolt.Tx) error {
+		checks := tx.Bucket(checkBucket)
+		for _, module := range modules {
+			if value := checks.Get([]byte(module)); value != nil {
+				if check, valid := ParseCheck(string(value)); valid {
+					found[module] = check
+				}
+			}
+		}
+		return nil
+	})
+	return found, err
 }
 
 func putObservation(tx *bolt.Tx, observation Observation) error {
