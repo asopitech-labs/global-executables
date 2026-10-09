@@ -2,13 +2,13 @@ module github.com/asopitech-labs/global-executables
 
 go 1.26.0
 
-toolchain go1.26.7
+toolchain go1.26.9
 
 tool golang.org/x/vuln/cmd/govulncheck
 
 require (
 	go.etcd.io/bbolt v1.5.0
-	golang.org/x/mod v0.39.0
+	golang.org/x/mod v0.40.0
 )
 
 require (
