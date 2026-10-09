@@ -526,3 +526,23 @@ def test_nuget_rotation_backstop_finds_a_release_the_feed_never_announced(tmp_pa
         if '"1.5.0"' in output.read_text():
             break
     assert '"1.5.0"' in output.read_text()
+
+
+def test_reparsed_merge_and_change_driven_state_cover_disjoint_sources():
+    """#62's `<source>.reparsed.json` merge and #65's `checked`/feed state never meet.
+
+    tools/merge_observations.py only handles OBSERVATION_SOURCES (snapshot collectors);
+    every source with checks or a feed is published by copying its checkpoint and rows
+    wholesale, so a re-parsed package cannot resurrect rows through a stale check and a
+    check cannot hide a re-parse.
+    """
+    import re
+    from pathlib import Path
+
+    script = (Path(__file__).resolve().parents[1] / "tools" / "crawl_parallel.sh").read_text()
+    declared = re.search(r'^OBSERVATION_SOURCES="\$\{OBSERVATION_SOURCES:-([^}]*)\}"', script, re.M).group(1).split()
+    stateful = {"go", "npm", "pypi", "rubygems", "packagist", "nuget", "crates", "conan"}
+    assert declared and not stateful & set(declared)
+    # vcpkg and xmake publish through the merge step in cpp-registries.yml, and they keep no checks.
+    workflow = (Path(__file__).resolve().parents[1] / ".github" / "workflows" / "cpp-registries.yml").read_text()
+    assert "OBSERVATION_SOURCES='vcpkg xmake'" in workflow
