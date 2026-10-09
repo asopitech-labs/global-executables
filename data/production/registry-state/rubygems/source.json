@@ -4,11 +4,21 @@
   "catalog_since": "",
   "catalog_size": 196126,
   "cursor": 196126,
-  "failure_attempts": {},
-  "failures": {},
+  "due_floor": 0,
+  "extraction_revision": 1,
+  "failure_attempts": {
+    "redmine_client_user": 1
+  },
+  "failures": {
+    "redmine_client_user": "gem archive has no metadata.gz"
+  },
+  "feed_cursor": "",
+  "feed_pending": {},
   "names_file": "data/production/rubygems-names.txt",
-  "refresh_cursor": 62996,
-  "retry_gems": null,
+  "refresh_cursor": 0,
+  "retry_gems": [
+    "redmine_client_user"
+  ],
   "snapshot_generation": 94,
   "unavailable": {
     "Nordes-logstash-input-azureblob": "gem is yanked",
