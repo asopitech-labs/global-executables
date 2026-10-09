@@ -62,6 +62,11 @@ func (i *RubyGemsInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork
 	if metadata.Version == "" {
 		metadata.Version = "unknown"
 	}
+	result.Latest = metadata.Version
+	if work.SameVersion(metadata.Version) {
+		// The gem is the version already recorded: skip the gemspec download.
+		return result.AsUnchanged(metadata.Version)
+	}
 	artifactURL := metadata.GemURI
 	if artifactURL == "" {
 		artifactURL = i.baseURL + "/gems/" + escaped + "-" + url.PathEscape(metadata.Version) + ".gem"

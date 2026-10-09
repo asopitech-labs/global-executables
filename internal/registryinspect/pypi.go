@@ -66,6 +66,11 @@ func (i *PyPIInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) go
 	if err := json.Unmarshal(response.body, &payload); err != nil {
 		return classifyResult(ctx, result, err)
 	}
+	result.Latest = payload.Info.Version
+	if work.SameVersion(payload.Info.Version) {
+		// The release is the one already recorded: skip the wheel/sdist reads.
+		return result.AsUnchanged(payload.Info.Version)
+	}
 	candidates := make([]pypiCandidate, 0, len(payload.URLs))
 	for _, candidate := range payload.URLs {
 		if candidate.PackageType == "bdist_wheel" || candidate.PackageType == "sdist" {

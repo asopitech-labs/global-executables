@@ -534,3 +534,31 @@ func TestInspectorReadsWideArchiveAboutOnce(t *testing.T) {
 		t.Fatalf("downloaded=%d archive=%d limit=%d", result.DownloadedBytes, len(archive), limit)
 	}
 }
+
+func TestInspectorSkipsModuleReadsWhenLatestVersionIsRecorded(t *testing.T) {
+	var requests atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		requests.Add(1)
+		if strings.HasSuffix(r.URL.Path, "/@latest") {
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+			return
+		}
+		t.Errorf("an unchanged module must cost only the @latest request, got %s", r.URL.Path)
+		http.NotFound(w, r)
+	}))
+	defer server.Close()
+	inspector := NewInspector(Config{BaseURL: server.URL, RequestTimeout: time.Second, ModuleTimeout: time.Second})
+	result := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "example.com/demo", Known: "v1.0.0"})
+	if result.Verdict != gocrawl.VerdictSuccess || !result.Unchanged || result.Latest != "v1.0.0" || requests.Load() != 1 {
+		t.Fatalf("result=%+v requests=%d", result, requests.Load())
+	}
+}
+
+func TestRecordableVersionKeepsTheStateSmallForModulesWithoutCommands(t *testing.T) {
+	if got := recordableVersion("v1.0.0", nil); got != "" {
+		t.Fatalf("a module without rows must not add a check to the state: %q", got)
+	}
+	if got := recordableVersion("v1.0.0", []gocrawl.Observation{{Command: "demo"}}); got != "v1.0.0" {
+		t.Fatalf("got %q", got)
+	}
+}

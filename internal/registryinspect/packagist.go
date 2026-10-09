@@ -57,6 +57,10 @@ func (i *PackagistInspector) Inspect(ctx context.Context, work gocrawl.ModuleWor
 	if version == "" {
 		version = "unknown"
 	}
+	result.Latest = version
+	if work.SameVersion(version) {
+		return result.AsUnchanged(version)
+	}
 	var bins []string
 	var single string
 	if json.Unmarshal(latest.Bin, &single) == nil && single != "" {

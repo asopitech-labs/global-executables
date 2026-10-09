@@ -53,6 +53,10 @@ func (i *NPMInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) goc
 	if payload.Name == "" {
 		payload.Name = work.Module
 	}
+	result.Latest = payload.Version
+	if work.SameVersion(payload.Version) {
+		return result.AsUnchanged(payload.Version)
+	}
 	commands, err := npmCommands(payload.Name, payload.Bin)
 	if err != nil {
 		result.Verdict, result.Error = gocrawl.VerdictRetry, err.Error()
