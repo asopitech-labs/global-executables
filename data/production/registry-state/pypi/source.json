@@ -7,23 +7,34 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
-    "duckduckpy": 2,
-    "triton": 1,
-    "triton-pascal": 1,
-    "triton-xpu": 1
+    "ddtrace": 1,
+    "grpcio": 1,
+    "grpcio-tools": 1,
+    "tensordict-nightly": 1,
+    "tf-nightly": 1,
+    "triton": 2,
+    "triton-pascal": 2,
+    "triton-xpu": 2
   },
   "failures": {
-    "duckduckpy": "archive/tar: invalid tar header",
+    "ddtrace": "response exceeded 8388608 bytes",
+    "grpcio": "response exceeded 8388608 bytes",
+    "grpcio-tools": "response exceeded 8388608 bytes",
+    "tensordict-nightly": "response exceeded 8388608 bytes",
+    "tf-nightly": "artifact size 383366267 exceeds limit 134217728",
     "triton": "artifact size 248077577 exceeds limit 134217728",
     "triton-pascal": "artifact size 209471139 exceeds limit 134217728",
     "triton-xpu": "artifact size 182188911 exceeds limit 134217728"
   },
-  "feed_cursor": "42018270",
-  "feed_pending": {},
+  "feed_cursor": "42040619",
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
   "retry_projects": [
-    "duckduckpy",
+    "ddtrace",
+    "grpcio",
+    "grpcio-tools",
+    "tensordict-nightly",
+    "tf-nightly",
     "triton",
     "triton-pascal",
     "triton-xpu"
