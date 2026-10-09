@@ -1,37 +1,48 @@
 {
   "aggregate": true,
   "coverage_kind": "partial",
-  "finished_at": "2026-10-09T11:43:25.834943206Z",
+  "finished_at": "2026-10-09T12:15:04.378134+00:00",
   "sources": {
     "conan": {
       "blocked": 0,
       "budget_exhausted": false,
       "catalog_fetched_at": "2026-10-08T12:06:41.998120+00:00",
       "catalog_pending": 0,
-      "catalog_refresh": {
-        "added": 85,
-        "removed": 81,
-        "size": 1948,
-        "status": "refreshed"
-      },
       "catalog_size": 1948,
+      "checked": 1452,
       "complete": false,
       "coverage_kind": "partial",
       "cursor": 1948,
-      "downloaded_bytes": 30310531,
+      "downloaded_bytes": 27348982,
       "failure_details": {},
       "failures": 0,
-      "observations": 1860,
+      "feed": {
+        "downloaded_bytes": 40,
+        "enqueued": 0,
+        "error": "",
+        "events": 0,
+        "requests": 1,
+        "resync": false
+      },
+      "observations": 1854,
       "package_budget": 1500,
       "processed": 1500,
-      "records": 1290,
-      "refresh_cursor": 941,
-      "refreshed": 1415,
+      "records": 1370,
+      "refresh_cursor": 493,
+      "refreshed": 1500,
       "retry_pending": 0,
       "retry_waiting": 0,
+      "skipped_not_due": 0,
       "status": "partial",
-      "unavailable": 39,
-      "uninspected": 26
+      "ttl": {
+        "due": 0,
+        "fresh": 1452,
+        "stale": 0,
+        "unchecked": 0
+      },
+      "unavailable": 38,
+      "unchanged": 0,
+      "uninspected": 25
     },
     "crates": {
       "budget_exhausted": false,
