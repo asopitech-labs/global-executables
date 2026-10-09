@@ -4,10 +4,16 @@
   "catalog_since": "",
   "catalog_size": 870264,
   "cursor": 870264,
-  "failure_attempts": {},
-  "failures": {},
+  "failure_attempts": {
+    "duckduckpy": 1
+  },
+  "failures": {
+    "duckduckpy": "archive/tar: invalid tar header"
+  },
   "projects_file": "data/production/pypi-projects.txt",
-  "refresh_cursor": 257806,
-  "retry_projects": null,
+  "refresh_cursor": 260806,
+  "retry_projects": [
+    "duckduckpy"
+  ],
   "snapshot_generation": 94
 }
