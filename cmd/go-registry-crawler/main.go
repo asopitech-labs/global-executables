@@ -42,6 +42,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags.StringVar(&config.ProxyURL, "proxy", "https://proxy.golang.org", "Go module proxy")
 	flags.StringVar(&config.IndexURL, "index", "https://index.golang.org/index", "Go module index endpoint")
 	flags.StringVar(&config.RegistryURL, "registry", "", "registry base URL for npm, PyPI, RubyGems, or Packagist")
+	flags.StringVar(&config.FeedURL, "feed", "", "change feed base URL for npm (replicate), PyPI is derived from -registry, or Packagist (packagist.org)")
 	flags.IntVar(&config.CatalogPages, "catalog-pages", 10, "maximum index pages per pass")
 	flags.IntVar(&config.PackageBudget, "package-budget", 3000, "maximum modules in this pass")
 	flags.Int64Var(&config.ByteBudget, "byte-budget", 8_000_000_000, "maximum downloaded bytes in this pass")

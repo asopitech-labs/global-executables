@@ -1,0 +1,356 @@
+package main
+
+import (
+	"archive/zip"
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"path/filepath"
+	"strings"
+	"sync"
+	"testing"
+	"time"
+
+	"github.com/asopitech-labs/global-executables/internal/gocrawl"
+)
+
+func TestPlanPassWorksSkipsNotDueEntriesWithoutSpendingBudget(t *testing.T) {
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	var names strings.Builder
+	for index := range 100 {
+		fmt.Fprintf(&names, "pkg-%03d\n", index)
+	}
+	if err := os.WriteFile(catalog, []byte(names.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	checks := map[string]gocrawl.Check{}
+	for index := range 100 {
+		// The first 80 were checked today after a long unchanged streak; the rest are new.
+		if index < 80 {
+			checks[fmt.Sprintf("pkg-%03d", index)] = gocrawl.Check{Day: 1000, Streak: 20, Version: "1"}
+		}
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 100, Cursor: 100, CatalogComplete: true}}
+	policy := passPolicy{Today: 1001, MaxDays: 60, Checks: func(modules []string) (map[string]gocrawl.Check, error) {
+		found := map[string]gocrawl.Check{}
+		for _, module := range modules {
+			if check, ok := checks[module]; ok {
+				found[module] = check
+			}
+		}
+		return found, nil
+	}}
+	works, err := planPassWorks(catalog, before, 10, true, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	skipped, due := 0, 0
+	for _, work := range works {
+		if work.Skip {
+			skipped++
+			if !work.Refresh {
+				t.Fatal("a skipped rotation entry must still advance the refresh cursor")
+			}
+		} else {
+			due++
+		}
+	}
+	if due != 10 || skipped != 80 {
+		t.Fatalf("due=%d skipped=%d: the budget must be spent on due packages only", due, skipped)
+	}
+	for index, work := range works {
+		if work.CatalogIndex != uint64(index) {
+			t.Fatalf("rotation entries must stay contiguous: %d at %d", work.CatalogIndex, index)
+		}
+	}
+}
+
+func TestPlanPassWorksKeepsTheRotationBackstopWhenAFeedFloodsTheBudget(t *testing.T) {
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	var names strings.Builder
+	for index := range 50 {
+		fmt.Fprintf(&names, "pkg-%03d\n", index)
+	}
+	if err := os.WriteFile(catalog, []byte(names.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	flood := make([]string, 500)
+	for index := range flood {
+		flood[index] = fmt.Sprintf("announced-%03d", index)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 50, Cursor: 50, CatalogComplete: true}}
+	works, err := planPassWorks(catalog, before, 40, true, passPolicy{Feed: flood, MaxDays: 60})
+	if err != nil {
+		t.Fatal(err)
+	}
+	feed, refresh := 0, 0
+	for _, work := range works {
+		switch {
+		case work.Feed:
+			feed++
+		case work.Refresh:
+			refresh++
+		}
+	}
+	if len(works) != 40 || refresh < 4 || feed != 36 {
+		t.Fatalf("total=%d feed=%d refresh=%d: the rotation keeps a tenth of the budget", len(works), feed, refresh)
+	}
+	// While the catalog is still being walked, the walk keeps at least half.
+	walking := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 50, Cursor: 0}}
+	works, err = planPassWorks(catalog, walking, 40, true, passPolicy{Feed: flood, MaxDays: 60})
+	if err != nil {
+		t.Fatal(err)
+	}
+	walk := 0
+	for _, work := range works {
+		if !work.Feed && !work.Refresh && !work.Retry {
+			walk++
+		}
+	}
+	if walk < 20 {
+		t.Fatalf("walk=%d: feed announcements must not starve the catalog walk", walk)
+	}
+}
+
+// fakePyPI serves metadata, one wheel per project and the XML-RPC changelog, and
+// counts what the crawler asks for.
+type fakePyPI struct {
+	mu       sync.Mutex
+	versions map[string]string
+	serial   int64
+	changes  [][]any
+	metadata int
+	files    int
+	fileSize int64
+	now      func() time.Time
+	wheel    []byte
+}
+
+func newFakePyPI(t *testing.T, projects int, now func() time.Time) (*fakePyPI, *httptest.Server) {
+	t.Helper()
+	var wheel bytes.Buffer
+	writer := zip.NewWriter(&wheel)
+	entry, _ := writer.Create("demo-1.dist-info/entry_points.txt")
+	_, _ = entry.Write([]byte("[console_scripts]\ndemo = demo:main\n"))
+	// Real wheels carry code and data; pad so a download costs what it would.
+	padding, _ := writer.Create("demo/data.bin")
+	_, _ = padding.Write(bytes.Repeat([]byte("x"), 20_000))
+	if err := writer.Close(); err != nil {
+		t.Fatal(err)
+	}
+	fake := &fakePyPI{versions: map[string]string{}, now: now, wheel: wheel.Bytes(), serial: 1000}
+	for index := range projects {
+		fake.versions[fmt.Sprintf("p%02d", index)] = "1.0.0"
+	}
+	var server *httptest.Server
+	server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fake.mu.Lock()
+		defer fake.mu.Unlock()
+		switch {
+		case r.Method == http.MethodPost && r.URL.Path == "/pypi":
+			body, _ := io.ReadAll(r.Body)
+			if strings.Contains(string(body), "changelog_last_serial") {
+				fmt.Fprintf(w, `<?xml version='1.0'?><methodResponse><params><param><value><int>%d</int></value></param></params></methodResponse>`, fake.serial)
+				return
+			}
+			var since int64
+			fmt.Sscanf(string(body[strings.Index(string(body), "<int>")+5:]), "%d", &since)
+			var rows strings.Builder
+			for _, change := range fake.changes {
+				if change[3].(int64) > since {
+					fmt.Fprintf(&rows, `<value><array><data><value><string>%s</string></value><value><string>%s</string></value><value><int>%d</int></value><value><string>new release</string></value><value><int>%d</int></value></data></array></value>`,
+						change[0], change[1], change[2], change[3])
+				}
+			}
+			fmt.Fprintf(w, `<?xml version='1.0'?><methodResponse><params><param><value><array><data>%s</data></array></value></param></params></methodResponse>`, rows.String())
+		case strings.HasSuffix(r.URL.Path, "/json"):
+			name := strings.TrimSuffix(strings.TrimPrefix(r.URL.Path, "/pypi/"), "/json")
+			version, ok := fake.versions[name]
+			if !ok {
+				http.NotFound(w, r)
+				return
+			}
+			fake.metadata++
+			_, _ = fmt.Fprintf(w, `{"info":{"name":%q,"version":%q},"urls":[{"packagetype":"bdist_wheel","filename":"%s-%s-py3-none-any.whl","size":%d,"url":%q}]}`,
+				name, version, name, version, len(fake.wheel), server.URL+"/files/"+name+"/"+version+".whl")
+		case strings.HasPrefix(r.URL.Path, "/files/"):
+			fake.files++
+			http.ServeContent(w, r, "x.whl", time.Unix(0, 0), bytes.NewReader(fake.wheel))
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	t.Cleanup(server.Close)
+	return fake, server
+}
+
+func (f *fakePyPI) release(name, version string) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	f.versions[name] = version
+}
+
+func (f *fakePyPI) announce(name, version string) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	f.serial++
+	f.changes = append(f.changes, []any{name, version, f.now().Add(-10 * time.Minute).Unix(), f.serial})
+}
+
+func (f *fakePyPI) counts() (metadata, files int) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	return f.metadata, f.files
+}
+
+func readRows(t *testing.T, path string) map[string]string {
+	t.Helper()
+	body, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	versions := map[string]string{}
+	for line := range strings.SplitSeq(strings.TrimSpace(string(body)), "\n") {
+		if line == "" {
+			continue
+		}
+		var row struct{ Package, Version string }
+		var raw map[string]any
+		if err := json.Unmarshal([]byte(line), &raw); err != nil {
+			t.Fatal(err)
+		}
+		row.Package, _ = raw["package"].(string)
+		row.Version, _ = raw["version"].(string)
+		versions[row.Package] = row.Version
+	}
+	return versions
+}
+
+// TestPyPIChangeDrivenRefreshReplay replays three days of a registry against the
+// crawler and compares what it requests with what the fixed rotation would: the
+// baseline is the first pass (every package read in full), which is also what every
+// rotation visit cost before checks existed.
+func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
+	const projects = 40
+	day := time.Date(2026, 10, 1, 3, 0, 0, 0, time.UTC)
+	var offset atomic64
+	defer func(previous func() time.Time) { clock = previous }(clock)
+	clock = func() time.Time { return day.Add(time.Duration(offset.Load()) * 24 * time.Hour) }
+	fake, server := newFakePyPI(t, projects, clock)
+
+	directory := t.TempDir()
+	config := crawlConfig{
+		Source: "pypi", StatePath: filepath.Join(directory, "registry-state"),
+		ObservationsPath: filepath.Join(directory, "pypi.jsonl"), ReportPath: filepath.Join(directory, "report.json"),
+		CatalogPath: filepath.Join(directory, "projects.txt"), DatabasePath: filepath.Join(directory, "crawl.db"),
+		RegistryURL: server.URL, FeedURL: server.URL, PackageBudget: projects, ByteBudget: 1 << 30, Workers: 4,
+		MaxInFlight: 8, CommitBatch: 8, RequestTimeout: 2 * time.Second, ModuleTimeout: 5 * time.Second,
+	}
+	var catalog strings.Builder
+	for name := range fake.versions {
+		catalog.WriteString(name + "\n")
+	}
+	if err := os.WriteFile(config.CatalogPath, []byte(catalog.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(config.StatePath+".json", []byte(`{"version":1,"sources":{"pypi":{"cursor":0,"catalog_complete":true}}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	// Day 0: the walk reads every project in full (the cost of any visit without a check).
+	walk, err := executePass(t.Context(), config)
+	if err != nil || walk.Processed != projects {
+		t.Fatalf("walk=%+v err=%v", walk, err)
+	}
+	baseMetadata, baseFiles := fake.counts()
+	baseBytes := walk.DownloadedBytes
+	if baseFiles != projects {
+		t.Fatalf("baseline wheel downloads=%d", baseFiles)
+	}
+
+	// Day 2: continuous refresh. Nothing changed: every package is due, one metadata
+	// request each, and no wheel is read. The feed poll only records its position.
+	offset.Store(2)
+	config.Continuous = true
+	second, err := executePass(t.Context(), config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	m2, f2 := fake.counts()
+	if f2 != baseFiles || m2-baseMetadata != projects || second.Unchanged != projects {
+		t.Fatalf("second=%+v metadata=%d files=%d", second, m2-baseMetadata, f2-baseFiles)
+	}
+	t.Logf("day-2 refresh of %d unchanged packages: %d requests / %d bytes (baseline %d requests / %d bytes)",
+		projects, m2-baseMetadata, second.DownloadedBytes, baseMetadata+baseFiles, baseBytes)
+	if second.DownloadedBytes*2 >= baseBytes {
+		t.Fatalf("downloaded %d bytes, expected under half of the baseline %d", second.DownloadedBytes, baseBytes)
+	}
+
+	// Day 4: p07 releases and the feed announces it; p21 releases but the feed misses
+	// it. The announced package is read first; the rotation finds the other.
+	offset.Store(4)
+	fake.release("p07", "2.0.0")
+	fake.announce("p07", "2.0.0")
+	fake.release("p21", "2.0.0")
+	third, err := executePass(t.Context(), config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	versions := readRows(t, config.ObservationsPath)
+	if versions["p07"] != "2.0.0" {
+		t.Fatalf("an announced release must be picked up: %v", versions["p07"])
+	}
+	if versions["p21"] != "2.0.0" {
+		t.Fatalf("the rotation backstop must find a release the feed missed: %v", versions["p21"])
+	}
+	if third.FeedWorks != 1 || third.FeedEnqueued != 1 {
+		t.Fatalf("third=%+v", third)
+	}
+	// Day 5: everything was checked yesterday and backed off, except the two packages
+	// whose version changed (their streak restarted). The rotation spends its requests
+	// only on those; the rest advance the cursor without a request.
+	offset.Store(5)
+	m4, _ := fake.counts()
+	var fourth gocrawl.PassReport
+	skipped := uint64(0)
+	for range 2 {
+		fourth, err = executePass(t.Context(), config)
+		if err != nil {
+			t.Fatal(err)
+		}
+		skipped += fourth.Skipped
+		if fourth.FeedError != "" || second.FeedError != "" {
+			t.Fatalf("feed errors: %q %q", second.FeedError, fourth.FeedError)
+		}
+	}
+	m5, _ := fake.counts()
+	if m5-m4 > 2 || skipped < projects-3 {
+		t.Fatalf("metadata %d -> %d, skipped %d: not-due packages must cost no request", m4, m5, skipped)
+	}
+	// The state a publisher stores carries the checks, the cursor and an empty queue.
+	document, _, err := gocrawl.ReadStateDocument(config.StatePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var sources map[string]map[string]any
+	_ = json.Unmarshal(document["sources"], &sources)
+	if len(sources["pypi"]["checked"].(map[string]any)) != projects || sources["pypi"]["feed_cursor"] == "" {
+		t.Fatalf("state=%v", sources["pypi"])
+	}
+}
+
+type atomic64 struct {
+	mu    sync.Mutex
+	value int64
+}
+
+func (a *atomic64) Load() int64 { a.mu.Lock(); defer a.mu.Unlock(); return a.value }
+func (a *atomic64) Store(v int64) {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	a.value = v
+}
