@@ -39,6 +39,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags.StringVar(&config.ReportPath, "report", "", "crawl report")
 	flags.StringVar(&config.CatalogPath, "catalog", "", "package catalog")
 	flags.StringVar(&config.DatabasePath, "database", "", "transactional source-local store")
+	flags.StringVar(&config.CachePath, "cache", "", "schedule cache (never committed; default: cache/<source>.cache.gz beside the state directory)")
 	flags.StringVar(&config.ProxyURL, "proxy", "https://proxy.golang.org", "Go module proxy")
 	flags.StringVar(&config.IndexURL, "index", "https://index.golang.org/index", "Go module index endpoint")
 	flags.StringVar(&config.RegistryURL, "registry", "", "registry base URL for npm, PyPI, RubyGems, or Packagist")

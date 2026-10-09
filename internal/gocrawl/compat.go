@@ -327,17 +327,21 @@ func exportCompatibility(
 	for _, key := range []string{"modules_file", "packages_file", "projects_file", "names_file", "retry_modules", "retry_npm", "retry_projects", "retry_gems", "retry_packagist"} {
 		delete(sourceState, key)
 	}
+	// #65 stored every check here; they are cache now. Dropping the key migrates the
+	// branch on the next save (LoadSourceCompatibility still reads it for one release).
+	delete(sourceState, "checked")
 	maps.Copy(sourceState, map[string]any{
-		"catalog_complete":    snapshot.CatalogComplete,
-		"catalog_size":        snapshot.CatalogSize,
-		"catalog_since":       snapshot.CatalogSince,
-		"cursor":              snapshot.Cursor,
-		"refresh_cursor":      snapshot.RefreshCursor,
+		"catalog_complete": snapshot.CatalogComplete,
+		"catalog_size":     snapshot.CatalogSize,
+		"catalog_since":    snapshot.CatalogSince,
+		"cursor":           snapshot.Cursor,
+		// The rotation position and the per-package checks are cache, not history: they
+		// live in the schedule cache (cache.go) and never reach the state branch.
+		"refresh_cursor":      0,
 		"failure_attempts":    attempts,
 		"failures":            failures,
 		"snapshot_generation": snapshot.Generation,
 		"unavailable":         snapshot.Unavailable,
-		"checked":             snapshot.Checks,
 		"feed_cursor":         snapshot.FeedCursor,
 		"feed_pending":        snapshot.FeedPending,
 		"due_floor":           snapshot.DueFloor,

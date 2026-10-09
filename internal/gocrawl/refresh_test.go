@@ -1,9 +1,13 @@
 package gocrawl
 
 import (
+	"compress/gzip"
 	"encoding/json"
+	"fmt"
+	"io"
 	"os"
 	"path/filepath"
+	"strconv"
 	"testing"
 	"time"
 )
@@ -97,7 +101,7 @@ func TestCommitKeepsObservationsOfUnchangedResultAndAdvancesCheck(t *testing.T) 
 	}
 	// Importing seeds a check from the stored row so the first re-check can already skip.
 	checks, _ := store.Checks(t.Context(), []string{"demo"})
-	if checks["demo"].Version != "1.0" || checks["demo"].Day != 0 {
+	if checks["demo"].Version != "1.0" || checks["demo"].Day >= 200 || checks["demo"].Streak >= ColdStaggerStreaks {
 		t.Fatalf("seed=%+v", checks)
 	}
 	work := ModuleWork{Module: "demo", Refresh: true, CatalogIndex: 0, Known: "1.0"}
@@ -296,7 +300,7 @@ func TestCatalogRefreshQueuesKnownModulesTheIndexAnnounced(t *testing.T) {
 	}
 }
 
-func TestStateRoundTripKeepsChecksAndFeedAndDropsThemOnNewExtractionRevision(t *testing.T) {
+func TestStateRoundTripKeepsFeedAndNeverExportsChecks(t *testing.T) {
 	directory := t.TempDir()
 	statePath := filepath.Join(directory, "registry-state")
 	catalog := filepath.Join(directory, "names.txt")
@@ -320,8 +324,8 @@ func TestStateRoundTripKeepsChecksAndFeedAndDropsThemOnNewExtractionRevision(t *
 	if err != nil {
 		t.Fatal(err)
 	}
-	if imported.Checks["demo"] != EncodeCheck(Check{Day: 590, Streak: 2, Version: "1.0"}) ||
-		imported.FeedCursor != "77" || imported.DueFloor != 3 || imported.FeedPending["demo"].Kind != "new release" {
+	// Checks are cache: the exported state carries none (the history/cache split).
+	if len(imported.Checks) != 0 || imported.FeedCursor != "77" || imported.DueFloor != 3 || imported.FeedPending["demo"].Kind != "new release" {
 		t.Fatalf("imported=%+v", imported)
 	}
 	// State written by older extraction logic cannot vouch for stored rows.
@@ -329,7 +333,77 @@ func TestStateRoundTripKeepsChecksAndFeedAndDropsThemOnNewExtractionRevision(t *
 	ExtractionRevision++
 	imported, _, err = LoadSourceCompatibility(statePath, paths.Observations, catalog, profile)
 	if err != nil || len(imported.Checks) != 0 || imported.FeedCursor != "77" {
-		t.Fatalf("checks must be dropped after an extraction revision bump (the feed position stays): %+v err=%v", imported, err)
+		t.Fatalf("the feed position stays across an extraction revision bump: %+v err=%v", imported, err)
+	}
+}
+
+func TestLegacyCheckedStateIsReadOnceAndDroppedOnTheNextSave(t *testing.T) {
+	directory := t.TempDir()
+	statePath := filepath.Join(directory, "registry-state")
+	catalog := filepath.Join(directory, "names.txt")
+	os.WriteFile(catalog, []byte("demo\n"), 0o644)
+	profile := CompatibilityProfileFor("pypi")
+	legacy := StateDocument{"version": json.RawMessage("1"), "sources": json.RawMessage(
+		`{"pypi":{"catalog_complete":true,"catalog_size":1,"cursor":1,"checked":{"demo":"590:2:1.0"},"extraction_revision":` +
+			strconv.Itoa(ExtractionRevision) + `}}`)}
+	if err := WriteStateDocument(statePath, legacy); err != nil {
+		t.Fatal(err)
+	}
+	imported, document, err := LoadSourceCompatibility(statePath, filepath.Join(directory, "none.jsonl"), catalog, profile)
+	if err != nil || imported.Checks["demo"] != "590:2:1.0" {
+		t.Fatalf("legacy checks are still read for one release: %+v %v", imported.Checks, err)
+	}
+	store := openRefreshStore(t, filepath.Join(directory, "crawl.db"), fixedClock(600))
+	if err := store.Import(t.Context(), imported); err != nil {
+		t.Fatal(err)
+	}
+	paths := ExportPaths{State: statePath, Observations: filepath.Join(directory, "pypi.jsonl"), Report: filepath.Join(directory, "report.json")}
+	if err := ExportSourceStoreCompatibility(t.Context(), paths, document, store, PassReport{FinishedAt: time.Now(), StartedAt: time.Now()}, profile); err != nil {
+		t.Fatal(err)
+	}
+	after, _, _ := LoadSourceCompatibility(statePath, paths.Observations, catalog, profile)
+	if len(after.Checks) != 0 {
+		t.Fatalf("checked must be gone after one save: %v", after.Checks)
+	}
+}
+
+func TestCacheRoundTripsAndColdCacheIsHarmless(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "cache", "pypi.cache.gz")
+	if _, found, err := ReadCache(path, 1); found || err != nil {
+		t.Fatalf("a missing cache is a cold start: found=%v err=%v", found, err)
+	}
+	want := Cache{Cursor: 42, Checks: map[string]string{"a": "10:0:1.0", "b": "11:3:2.0"}}
+	if err := WriteCache(path, want, 1); err != nil {
+		t.Fatal(err)
+	}
+	got, found, err := ReadCache(path, 1)
+	if err != nil || !found || got.Cursor != 42 || len(got.Checks) != 2 || got.Checks["b"] != "11:3:2.0" {
+		t.Fatalf("got=%+v found=%v err=%v", got, found, err)
+	}
+	if _, found, _ := ReadCache(path, 2); found {
+		t.Fatal("a cache written by another extraction revision must be ignored")
+	}
+	if err := os.WriteFile(path, []byte("not gzip"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, found, err := ReadCache(path, 1); found || err == nil {
+		t.Fatalf("a corrupt cache is reported and treated as cold: found=%v err=%v", found, err)
+	}
+}
+
+func TestColdStartSpreadsDueDatesAndTheRotationStartMoves(t *testing.T) {
+	streaks := map[int]int{}
+	for index := range 400 {
+		streaks[ColdCheck(fmt.Sprintf("pkg-%d", index), "1", 1000).Streak]++
+	}
+	if len(streaks) != ColdStaggerStreaks {
+		t.Fatalf("cold checks must use every stagger tier: %v", streaks)
+	}
+	now := time.Unix(1_800_000_000, 0)
+	first := ColdRefreshStart(870_000, 3000, now)
+	second := ColdRefreshStart(870_000, 3000, now.Add(6*time.Hour))
+	if first == second || second != (first+3000)%870_000 {
+		t.Fatalf("each six-hour window starts one budget further: %d %d", first, second)
 	}
 }
 
@@ -370,5 +444,42 @@ func TestStateGoldenWithChecksIsByteIdentical(t *testing.T) {
 		if got[name] != body {
 			t.Errorf("%s differs between the Python and Go encoders", name)
 		}
+	}
+}
+
+func TestColdChecksAndCacheFileMatchThePythonGoldens(t *testing.T) {
+	body, err := os.ReadFile("testdata/refresh/cold-golden.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var golden struct {
+		Cases []struct {
+			Module, Version, Check string
+			Day                    int
+		} `json:"cases"`
+	}
+	if err := json.Unmarshal(body, &golden); err != nil {
+		t.Fatal(err)
+	}
+	for _, c := range golden.Cases {
+		if got := EncodeCheck(ColdCheck(c.Module, c.Version, c.Day)); got != c.Check {
+			t.Errorf("ColdCheck(%q) = %s, Python says %s", c.Module, got, c.Check)
+		}
+	}
+	path := filepath.Join(t.TempDir(), "c.gz")
+	cache := Cache{Cursor: 77, Checks: map[string]string{"alpha": "20001:2:1.0", "b": "20002:0:2.0", "zeta": "19990:5:9.9.9"}}
+	if err := WriteCache(path, cache, 1); err != nil {
+		t.Fatal(err)
+	}
+	file, _ := os.Open(path)
+	defer file.Close()
+	reader, err := gzip.NewReader(file)
+	if err != nil {
+		t.Fatal(err)
+	}
+	text, _ := io.ReadAll(reader)
+	want, _ := os.ReadFile("testdata/refresh/schedule-cache-golden.txt")
+	if string(text) != string(want) {
+		t.Fatalf("cache text differs from the Python golden:\n%s\nwant\n%s", text, want)
 	}
 }

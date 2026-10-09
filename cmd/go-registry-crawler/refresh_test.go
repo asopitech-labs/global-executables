@@ -344,16 +344,123 @@ func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
 	if m5-m4 > 2 || skipped < projects-3 {
 		t.Fatalf("metadata %d -> %d, skipped %d: not-due packages must cost no request", m4, m5, skipped)
 	}
-	// The state a publisher stores carries the checks, the cursor and an empty queue.
+	// History and cache are split: the state a publisher stores carries the feed
+	// position but no check; the checks live in the schedule cache.
 	document, _, err := gocrawl.ReadStateDocument(config.StatePath)
 	if err != nil {
 		t.Fatal(err)
 	}
 	var sources map[string]map[string]any
 	_ = json.Unmarshal(document["sources"], &sources)
-	if len(sources["pypi"]["checked"].(map[string]any)) != projects || sources["pypi"]["feed_cursor"] == "" {
+	if _, leaked := sources["pypi"]["checked"]; leaked || sources["pypi"]["feed_cursor"] == "" {
 		t.Fatalf("state=%v", sources["pypi"])
 	}
+	cachePath := gocrawl.DefaultCachePath(config.StatePath, "pypi")
+	cache, warm, err := gocrawl.ReadCache(cachePath, gocrawl.ExtractionRevision)
+	if err != nil || !warm || len(cache.Checks) != projects {
+		t.Fatalf("cache: warm=%v checks=%d err=%v", warm, len(cache.Checks), err)
+	}
+
+	// An all-unchanged stretch of days re-checks packages (they are due) but writes
+	// nothing to the history: the state directory and the rows stay byte-identical.
+	stateBefore, rowsBefore := readTree(t, config.StatePath), readTree(t, config.ObservationsPath)
+	cacheBefore := readTree(t, cachePath)
+	requestsBefore, _ := fake.counts()
+	for _, day := range []int64{40, 80, 120} {
+		offset.Store(day)
+		for range 2 {
+			if _, err := executePass(t.Context(), config); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	if requestsAfter, _ := fake.counts(); requestsAfter == requestsBefore {
+		t.Fatal("the unchanged days must still check packages")
+	}
+	if !maps.Equal(stateBefore, readTree(t, config.StatePath)) {
+		t.Fatal("an all-unchanged run must leave the state directory byte-identical")
+	}
+	if !maps.Equal(rowsBefore, readTree(t, config.ObservationsPath)) {
+		t.Fatal("an all-unchanged run must leave the rows byte-identical")
+	}
+	if maps.Equal(cacheBefore, readTree(t, cachePath)) {
+		t.Fatal("the checks were recorded in the cache")
+	}
+
+	// A lost cache is a cold start: every package is due again, history is untouched.
+	if err := os.Remove(cachePath); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Remove(config.DatabasePath); err != nil {
+		t.Fatal(err)
+	}
+	offset.Store(121)
+	coldBefore, _ := fake.counts()
+	for range 3 {
+		if _, err := executePass(t.Context(), config); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if coldAfter, _ := fake.counts(); coldAfter-coldBefore < projects {
+		t.Fatalf("a cold cache must re-check every package: %d requests", coldAfter-coldBefore)
+	}
+	if !maps.Equal(rowsBefore, readTree(t, config.ObservationsPath)) {
+		t.Fatal("a cold start must not alter the rows")
+	}
+
+	// One package releases: only its rows change. The state (everything but rows) is
+	// byte-identical because a version change needs no state write either.
+	fake.release("p03", "9.0.0")
+	offset.Store(200)
+	for range 3 {
+		if _, err := executePass(t.Context(), config); err != nil {
+			t.Fatal(err)
+		}
+	}
+	changed := readRows(t, config.ObservationsPath)
+	if changed["p03"] != "9.0.0" {
+		t.Fatalf("the released package must be picked up: %v", changed["p03"])
+	}
+	before, after := strings.Split(rowsBefore["."], "\n"), strings.Split(readTree(t, config.ObservationsPath)["."], "\n")
+	differing := 0
+	for _, line := range after {
+		if !slices.Contains(before, line) {
+			differing++
+			if !strings.Contains(line, `"p03"`) {
+				t.Fatalf("a row other than p03 changed: %s", line)
+			}
+		}
+	}
+	// Only the history generation counter moves (manifest summary and source.json);
+	// no shard of a map is rewritten.
+	stateAfter := readTree(t, config.StatePath)
+	for name, body := range stateAfter {
+		if body != stateBefore[name] && name != "manifest.json" && name != filepath.Join("pypi", "source.json") {
+			t.Fatalf("state file %s changed for a single released package", name)
+		}
+	}
+	if differing == 0 {
+		t.Fatal("expected the released package's row to change")
+	}
+}
+
+// readTree returns the bytes of a file or of every file under a directory, by relative path.
+func readTree(t *testing.T, root string) map[string]string {
+	t.Helper()
+	files := map[string]string{}
+	err := filepath.WalkDir(root, func(path string, entry os.DirEntry, walkErr error) error {
+		if walkErr != nil || entry.IsDir() {
+			return walkErr
+		}
+		body, err := os.ReadFile(path)
+		relative, _ := filepath.Rel(root, path)
+		files[relative] = string(body)
+		return err
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return files
 }
 
 type atomic64 struct {

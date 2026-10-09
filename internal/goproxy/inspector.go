@@ -200,10 +200,11 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 	return result
 }
 
-// recordableVersion decides whether a check is stored for the module. The Go catalog
-// holds about two million modules and almost none ships a command, so a check for each
-// would add roughly 90 MB to the state branch; only modules with rows record one. A
-// module without rows is read in full on each visit, as it was before checks existed.
+// recordableVersion decides whether a check is recorded for the module. The Go catalog
+// holds about two million modules and almost none ships a command; a check for each
+// would mean loading that many entries into the store at every cold start of the
+// schedule cache, so only modules with rows record one. A module without rows is read
+// in full on each visit, as it was before checks existed.
 func recordableVersion(version string, observations []gocrawl.Observation) string {
 	if len(observations) == 0 {
 		return ""

@@ -156,14 +156,14 @@ func (s *BoltStore) Import(ctx context.Context, snapshot ImportSnapshot) error {
 				return err
 			}
 		}
-		return importChecks(tx, snapshot)
+		return importChecks(tx, snapshot, Today(s.now()))
 	})
 }
 
 // importChecks stores the recorded checks, the feed position and the announced
 // changes. A package that has observations but no check is seeded with day zero, so it
 // is due at once yet a re-check that finds the same version can skip its artifacts.
-func importChecks(tx *bolt.Tx, snapshot ImportSnapshot) error {
+func importChecks(tx *bolt.Tx, snapshot ImportSnapshot, today int) error {
 	meta := tx.Bucket(metaBucket)
 	if err := meta.Put([]byte("feed_cursor"), []byte(snapshot.FeedCursor)); err != nil {
 		return err
@@ -184,7 +184,7 @@ func importChecks(tx *bolt.Tx, snapshot ImportSnapshot) error {
 		if observation.Version == "" || checks.Get([]byte(observation.Package)) != nil {
 			continue
 		}
-		seed := EncodeCheck(Check{Version: observation.Version})
+		seed := EncodeCheck(ColdCheck(observation.Package, observation.Version, today))
 		if err := checks.Put([]byte(observation.Package), []byte(seed)); err != nil {
 			return err
 		}
@@ -216,7 +216,13 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 		catalogSize := getUint(meta, "catalog_size")
 		var downloaded uint64
 		today := Today(s.now())
+		// An all-unchanged batch must leave the exported history as it was, so the
+		// generation counter (part of the state) moves only when a result changed it.
+		historyChanged := false
 		for _, result := range results {
+			if !result.Work.Skip && !(result.Unchanged && result.Verdict == VerdictSuccess) {
+				historyChanged = true
+			}
 			if result.Verdict == VerdictCanceled {
 				return context.Canceled
 			}
@@ -277,8 +283,10 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 		if err := putInt64(meta, "refresh_catalog_offset", refreshOffset); err != nil {
 			return err
 		}
-		if err := putUint(meta, "generation", getUint(meta, "generation")+1); err != nil {
-			return err
+		if historyChanged {
+			if err := putUint(meta, "generation", getUint(meta, "generation")+1); err != nil {
+				return err
+			}
 		}
 		if err := putUint(meta, "processed", getUint(meta, "processed")+uint64(len(results))); err != nil {
 			return err
@@ -492,6 +500,16 @@ func applyCheck(tx *bolt.Tx, result ModuleResult, today int) error {
 }
 
 // Checks returns the recorded check of each module that has one.
+// AllChecks returns every recorded check, for writing the schedule cache.
+func (s *BoltStore) AllChecks(ctx context.Context) (map[string]string, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+	var snapshot Snapshot
+	err := s.db.View(func(tx *bolt.Tx) error { return snapshotChecks(tx, &snapshot) })
+	return snapshot.Checks, err
+}
+
 func (s *BoltStore) Checks(ctx context.Context, modules []string) (map[string]Check, error) {
 	if err := ctx.Err(); err != nil {
 		return nil, err
