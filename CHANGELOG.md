@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Go toolchain: 1.26.7 → 1.26.9 (`go.mod` toolchain line and the digest-pinned
+  `golang:1.26.9-bookworm` image in `Dockerfile.go-crawler`). `govulncheck` in the
+  `go` CI job reported reachable `net/http` vulnerabilities fixed in go1.26.9
+  (GO-2026-6617 and related advisories published 2026-10-08), which failed `main`.
+  `golang.org/x/mod` moves from v0.39.0 to v0.40.0 so `govulncheck` also stops
+  listing the unreached `sumdb` advisories GO-2026-6179 and GO-2026-6180.
 - Registry crawl state: `data/production/registry-state.json` (92.7 MB on
   `artifact-data`, near GitHub's 100 MB file limit) is replaced by the
   `data/production/registry-state/` directory: a `manifest.json` commit point, one
