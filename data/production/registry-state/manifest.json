@@ -1048,8 +1048,12 @@
       "sha256": "179098c94d40ab043c194eebde902ef0db6bf53cdfcc707e79050a78d3ef75e7"
     },
     "packagist/source.json": {
-      "bytes": 55729,
-      "sha256": "1b6ddec38be5aaa7e97b3b5ff2c1b75e485431a02dd8ba5872944e8900cfae5f"
+      "bytes": 511,
+      "sha256": "96869371b2d646e4b4bb20476f48daeb96858d7898eefc9f5f1b3961c35292e5"
+    },
+    "packagist/unavailable/all.jsonl": {
+      "bytes": 52561,
+      "sha256": "608909d4b9c473672594adaca88dfcf1fad2ccef6be75367de9120a1f262340d"
     },
     "pypi/feed_pending/all.jsonl": {
       "bytes": 175681,
@@ -1180,7 +1184,12 @@
       }
     },
     "packagist": {
-      "fields": {},
+      "fields": {
+        "unavailable": {
+          "entries": 1051,
+          "prefix_length": 0
+        }
+      },
       "summary": {
         "catalog_complete": true,
         "catalog_size": 458432,
