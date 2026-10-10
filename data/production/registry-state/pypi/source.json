@@ -7,33 +7,37 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
-    "deephaven-server": 2,
-    "pyAgrum-nightly": 2,
-    "turnkey-pylib": 1,
+    "tensordict-nightly": 1,
+    "tf-nightly": 1,
+    "turnkey-pylib": 2,
     "tw.jquery": 1
   },
   "failures": {
-    "deephaven-server": "artifact size 250631847 exceeds limit 134217728",
-    "pyAgrum-nightly": "response exceeded 8388608 bytes",
+    "tensordict-nightly": "response exceeded 8388608 bytes",
+    "tf-nightly": "artifact size 383452382 exceeds limit 134217728",
     "turnkey-pylib": "archive/tar: invalid tar header",
     "tw.jquery": "archive/tar: invalid tar header"
   },
-  "feed_cursor": "42057927",
+  "feed_cursor": "42071621",
   "feed_pending": {
-    "diteko": {
-      "kind": "add source file diteko-0.1.0.tar.gz",
-      "time": 1791635819
+    "labqoat": {
+      "kind": "add source file labqoat-0.1.60.tar.gz",
+      "time": 1791668870
     },
-    "nonebot-plugin-jrrp4": {
-      "kind": "add source file nonebot_plugin_jrrp4-0.2.4.tar.gz",
-      "time": 1791635870
+    "rag-wright": {
+      "kind": "add source file rag_wright-0.5.1.tar.gz",
+      "time": 1791668891
+    },
+    "smoldyn": {
+      "kind": "add py3 file smoldyn-2.77.dev202610102144-py3-none-any.whl",
+      "time": 1791668896
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
   "retry_projects": [
-    "deephaven-server",
-    "pyAgrum-nightly",
+    "tensordict-nightly",
+    "tf-nightly",
     "turnkey-pylib",
     "tw.jquery"
   ],
