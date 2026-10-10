@@ -65,10 +65,11 @@ jobs:
           fi
       # Schedule cache (checks and rotation position): never committed, safe to lose.
       - name: Restore the schedule cache
+        continue-on-error: true  # a cache that cannot be restored or saved never fails the run
         uses: actions/cache@v4
         with:
           path: data/production/cache
-          key: schedule-v1-conan-${{ github.run_id }}
+          key: schedule-v1-conan-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             schedule-v1-conan-
       - name: Inspect a bounded batch of ConanCenter packages

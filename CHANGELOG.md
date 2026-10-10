@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Schedule cache now survives CI (#67, refs #64): the first scheduled `registry-refresh`
+  runs after #66 never saved their cache (`tar: Cannot open: Permission denied`, every run a
+  cold start) because the Go crawler container, running as root, wrote a 0600 file under
+  `/tmp` that the runner-user cache action could not read. The cache directory is now the
+  workspace-relative `data/production/cache`, created by the runner and mounted into the
+  container; cache files are written 0644; the cache steps use a per-attempt key, tolerate
+  failure, and a step hands the files back to the runner.
 - History and cache are separate (#66, refs #64): per-package check bookkeeping
   (`checked`, the refresh rotation position) is no longer written to the registry
   state. It lives in a schedule cache, `data/production/cache/<source>.cache.gz`, kept

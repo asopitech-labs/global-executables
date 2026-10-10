@@ -760,14 +760,31 @@ Consequences, all covered by tests:
   3,000,000 entries (about 25 MB compressed; 870,000 PyPI entries are 12.3 MB and read in
   about a second); beyond that the oldest checks are dropped and become due.
 - CI: `registry-refresh.yml` (go, pypi, rubygems, packagist, nuget) and
-  `cpp-registries.yml` (conan) restore `data/production/cache` with `actions/cache`
-  (key `schedule-v1-<source>-<run id>`, restore prefix `schedule-v1-<source>-`; the cache
-  is saved after the job). Self-run: the cache file sits beside the state directory
-  (`--cache` for the Go crawler, `cache_dir` for `crawl_registry_sources`).
+  `cpp-registries.yml` (conan) keep `data/production/cache` (workspace-relative,
+  git-ignored) with `actions/cache` (key `schedule-v1-<source>-<run id>-<attempt>`, restore
+  prefix `schedule-v1-<source>-`, so every run restores the newest cache and saves a fresh
+  one; `continue-on-error`, so a cache that cannot be restored or saved never fails the
+  run). In `registry-refresh.yml` the runner creates the directory before the crawl, the
+  Go container mounts it at `/cache` (`--cache /cache/<source>.cache.gz`), the NuGet crawler
+  gets `--cache-dir`, and a final step hands the files back to the runner user. Why: the
+  first scheduled runs after #66 (2026-10-09, runs 37936096526 and 38000448825) kept the
+  cache under `/tmp/ci-refresh-<source>/`; the Go crawler container runs as root and
+  `os.CreateTemp` makes 0600 files, so the post-job save (runner user) failed with
+  `tar: ...pypi.cache.gz: Cannot open: Permission denied` and every run was a cold start.
+  Cache files are now written 0644 as well. Self-run: the cache file sits beside the state
+  directory (`--cache` for the Go crawler, `--cache-dir` / `cache_dir` for the Python one).
 - Migration: #65 stored `checked` (and the rotation `refresh_cursor`) in the state. Both
   are still read for one release as a seed when no cache exists; the first save drops
   `checked` and writes `refresh_cursor` as 0, which is one change to each source's
   `source.json`/shards, after which they never churn again.
+
+What a scheduled run still publishes is real change, not bookkeeping: a feed that
+advanced (`feed_cursor`, `feed_pending`), a package that became unavailable, a release.
+`feed_pending` is durable by design (an announcement must survive a crash), so when a feed
+announces more packages than one run's feed budget reads, the remainder is committed and
+drained by the next runs; the churn is proportional to feed volume, not to unchanged packages.
+A cold cache also makes the rotation read packages it would otherwise skip, so the first
+runs after a cache loss download more.
 
 ## Change-driven refresh
 

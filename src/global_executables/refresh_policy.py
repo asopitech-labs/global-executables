@@ -210,6 +210,7 @@ def write_cache(path: Path, checks: dict[str, Any], cursor: int, revision: int =
             stream.write(f"{CACHE_MAGIC}\n# extraction {revision}\n# cursor {cursor}\n".encode("utf-8"))
             for name in names:
                 stream.write(f"{name}\t{checks[name]}\n".encode("utf-8"))
+        os.chmod(temporary, 0o644)  # readable by the CI cache action even if the writer ran as another user
         os.replace(temporary, path)
     finally:
         Path(temporary).unlink(missing_ok=True)
