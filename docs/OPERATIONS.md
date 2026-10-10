@@ -871,6 +871,122 @@ sweep after it still reads mostly unseen packages.
 Rollback: revert the PR. Old readers ignore the missing fields and the rotation restarts
 at the cold position; a leftover cache is harmless and can be deleted.
 
+## Local booster
+
+Why. PyPI has 870,264 catalogue entries and the schedule cache knows about 245,000 of
+them (2026-10-10); the other ~588,000 have never been visited. The Actions refresh spends
+3,000 packages per run and most of that on the change feed (~2,300 changed packages per run
+that must be read), leaving ~700 rotation visits per run: about seven months for the
+backlog. A booster is a crawler on your own machine (and on any extra machine) that works
+through the backlog in parallel, without breaking the history/cache split or the
+transactional guarantees. Go and NuGet already use local completion boosters; this one is
+for a source that is *finished* (cursor at the end of the catalogue) but whose rotation
+is far from covered, so it can run next to Actions instead of instead of it.
+
+Measured on 2026-10-11 against pypi.org with a 500-package random sample of the catalogue
+(read-only, own temporary state, nothing published, User-Agent naming the project):
+
+| settings | time | requests | bytes | throughput |
+| --- | --- | --- | --- | --- |
+| 24 workers, no cap | 1.7 s | 1,001 | 39.0 MB | ~290 packages/s, 23 MB/s |
+| 8 workers, 5 MB/s cap (the booster default) | 25.0 s | 990 | 119.5 MB | 20 packages/s |
+
+No 429, timeout or circuit opening in either run. The two samples differ 3x in bytes per
+package (78 KB and 239 KB; the production batches average ~253 KB), so the projection for
+the 588,000-package backlog is a range: **at the default 5 MB/s about 6 to 9 hours of
+download (588,000 packages at 20 packages/s is 8.2 h); at 20 MB/s 2 to 3 hours**, plus
+the packages that fail or are retried, against seven months for Actions alone. PyPI's
+JSON API answers with `ETag` and `Cache-Control: max-age=900`, so a conditional
+re-check (`If-None-Match`, 304) is possible; it only saves the metadata document of
+*due re-checks*, not the backlog, and is not implemented yet. HTTP/2 and connection reuse
+are already in use. I could not read PyPI's own API guidance page (the docs site answered
+429 to the tool), so the pacing below is conservative by design: the adaptive per-host
+gate (concurrency falls on 429/5xx), `Retry-After` honoured, a circuit breaker and a
+bandwidth cap, and only PyPI's own APIs are used (no new data source, no dump).
+
+### Ownership
+
+Three mechanisms, none of which needs a coordinator:
+
+1. **Buckets.** A package belongs to bucket `sha256(name)[0]` (0-255; `gocrawl.OwnerBucket`
+   in Go, `booster.owner_bucket` in Python, one golden file for both). A booster owns a
+   range of buckets (`BOOSTER_RANGES=0-255` by default, or `BOOSTER_SLICE=i/n` for equal
+   slices when several machines help).
+2. **A lease with a heartbeat** at `data/production/booster/<source>.json` on
+   `artifact-data`: `{"leases": {"<id>": {"ranges", "heartbeat", "ttl_hours", "started_at",
+   "progress"}}}`. The booster writes it on start, renews it with every publication
+   (default hourly) and releases it on exit. A lease is alive for `ttl_hours` (12) after
+   its heartbeat; an overlapping request while another lease is alive is refused
+   (exit 4). Leases are changed by applying an operation to the freshest branch head
+   (rebuild on a non-fast-forward push), so two machines never lose each other's lease.
+3. **What Actions skips.** `registry-refresh.yml` runs `tools/booster.py exclusions` and
+   passes `--rotation-exclude <ranges>` to the crawler: the *rotation* entries of leased
+   buckets advance the cursor without a request. Feed work, retries, the catalogue walk
+   and the feed cursor are never skipped, so a change in a leased bucket is still read by
+   Actions at once. When the heartbeat is older than the TTL the exclusion is empty and
+   Actions owns the whole rotation again: a laptop that sleeps or loses power returns
+   its buckets within twelve hours without anybody acting. A failed lookup also means "own
+   everything". The booster runs the same crawler with `--rotation-include <ranges>
+   --no-feed`, so it visits only its buckets and never touches the feed or its cursor.
+
+### Publication: deltas
+
+Replacing a whole source, which was safe with one writer, would let the last of two
+writers erase the other's rows and failure records. For the sources in `DELTA_SOURCES`
+(`pypi`) both writers publish a **delta** relative to the snapshot they last published
+(`<dir>/.base`, taken when seeding and promoted after every successful push):
+
+- per-package maps (`unavailable`, `failures`, `failure_attempts`, `feed_pending`...) are
+  merged key by key, retry lists member by member;
+- the rows of every package whose rows differ from the base replace the published rows of
+  that package; all other rows stay as the other writer published them;
+- the booster (`BOOSTER=1`) leaves cursors, catalogue, feed position and the report to
+  Actions (`--no-scalars`); Actions, as before, publishes those;
+- `snapshot_generation` moves by one when anything changed, and a delta that changes
+  nothing makes no commit (re-publishing is idempotent, byte for byte).
+
+A package changed by both writers between two publications takes the value of whoever
+publishes last; both read the registry, so either is a valid current answer and the next
+check settles it. A failed or rejected push leaves the base where it was, so the next
+publication carries the same delta (a crash loses nothing; the Go store, the state and
+the schedule cache resume as for every other crawl). Non-fast-forward pushes use the
+existing rebuild-from-the-latest-branch retry loop, under the machine-wide publication
+lock. Publications are batched: one commit per `PUBLISH_INTERVAL` (hourly), and the lease
+heartbeat adds one tiny commit per hour at most.
+
+History and cache are untouched: the booster's schedule cache (`<dir>/data/production/cache`)
+stays on disk between runs, which is what makes its own cold starts rare, and is never
+published; the rows and failure records are history and follow the delta rules above.
+
+### Running it
+
+Prerequisites: git with push access to `artifact-data` (your normal credentials), Python 3,
+and Docker or Podman (or Go for `MODE=native`). macOS: `brew install flock` for the
+publication lock. Windows: use WSL2 (Docker Desktop with WSL integration, or `MODE=native`
+inside WSL); run the commands inside the WSL shell. Clone the repository, then:
+
+```bash
+CONTACT=you@example.org tools/local_booster.sh pypi run        # foreground; Ctrl-C stops cleanly
+tools/local_booster.sh pypi status                             # lease, cache size, container
+tools/local_booster.sh pypi publish                            # publish now
+tools/local_booster.sh pypi stop                               # stop the crawler (keeps the lease until it expires)
+tools/local_booster.sh pypi release                            # give the buckets back at once
+CONTACT=you@example.org tools/local_booster.sh pypi unit       # print systemd / launchd / cron units
+```
+
+A second machine: `BOOSTER_SLICE=0/2` on one and `BOOSTER_SLICE=1/2` on the other (give
+each its own `BOOSTER_ID`). Settings (all environment variables): `CONTACT` (required, goes
+into the User-Agent), `BOOSTER_ID`, `BOOSTER_RANGES` / `BOOSTER_SLICE`, `WORKERS` (8),
+`MAX_BYTES_PER_SECOND` (5,000,000; 0 = none), `PUBLISH_INTERVAL` (3600), `PAUSE` (30 s,
++-30 % jitter), `PACKAGE_BUDGET` (3000), `BASE` (`~/.ge-crawl`), `MODE` (`docker` or `native`),
+`LEASE_TTL_HOURS` (12). Stop it with Ctrl-C or SIGTERM: it stops the crawler, publishes once
+more and releases the lease. After a crash or reboot start it again; the working
+directory, database and cache resume where they were. Do not run `crawl_parallel.sh start`
+for the same source at the same time.
+
+Rollback: stop the booster and `release` its lease (or wait twelve hours); Actions owns
+the rotation again. Reverting the change restores whole-source publication.
+
 ## Registry crawl state layout
 
 Every registry crawler resumes from one logical document,

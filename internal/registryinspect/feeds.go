@@ -33,6 +33,7 @@ const (
 type feedClient struct {
 	http    *http.Client
 	timeout time.Duration
+	agent   string
 }
 
 func newFeedClient(config Config) feedClient {
@@ -40,7 +41,7 @@ func newFeedClient(config Config) feedClient {
 	if timeout <= 0 {
 		timeout = 45 * time.Second
 	}
-	return feedClient{http: &http.Client{}, timeout: timeout}
+	return feedClient{http: &http.Client{}, timeout: timeout, agent: agent(config.UserAgent)}
 }
 
 func (c feedClient) do(ctx context.Context, method, target string, body []byte, contentType string) (int, []byte, error) {
@@ -50,7 +51,7 @@ func (c feedClient) do(ctx context.Context, method, target string, body []byte, 
 	if err != nil {
 		return 0, nil, err
 	}
-	req.Header.Set("User-Agent", userAgent)
+	req.Header.Set("User-Agent", c.agent)
 	req.Header.Set("Accept-Encoding", "identity")
 	if contentType != "" {
 		req.Header.Set("Content-Type", contentType)

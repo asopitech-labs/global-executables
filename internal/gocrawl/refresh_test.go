@@ -525,3 +525,48 @@ func TestOutcomesRoundTripStayBackwardCompatibleAndMatchPython(t *testing.T) {
 		t.Fatalf("%v", counts)
 	}
 }
+
+func TestOwnerBucketsAndRangesMatchThePythonGolden(t *testing.T) {
+	body, err := os.ReadFile("testdata/refresh/owner-golden.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var golden struct {
+		Cases []struct {
+			Name   string
+			Bucket int
+		}
+		Ranges []struct {
+			Text  string
+			Count int
+		}
+	}
+	if err := json.Unmarshal(body, &golden); err != nil {
+		t.Fatal(err)
+	}
+	for _, c := range golden.Cases {
+		if got := OwnerBucket(c.Name); got != c.Bucket {
+			t.Errorf("OwnerBucket(%q) = %d, Python says %d", c.Name, got, c.Bucket)
+		}
+	}
+	for _, r := range golden.Ranges {
+		set, err := ParseRanges(r.Text)
+		if err != nil {
+			t.Fatal(err)
+		}
+		count := 0
+		for bucket := range OwnerBuckets {
+			if set.bits[bucket] {
+				count++
+			}
+		}
+		if count != r.Count || set.Empty() != (r.Count == 0) {
+			t.Errorf("%q: %d buckets, want %d", r.Text, count, r.Count)
+		}
+	}
+	for _, bad := range []string{"5-2", "256", "a-b", "-3", "0-256"} {
+		if _, err := ParseRanges(bad); err == nil {
+			t.Errorf("%q must be rejected", bad)
+		}
+	}
+}

@@ -318,7 +318,7 @@ def test_publication_migrates_the_branch_in_its_normal_commit(tmp_path):
     work = tmp_path / "work"
     for relative in ("tools/crawl_parallel.sh", "tools/merge_registry_publication.py", "tools/registry_state.py",
                      "tools/transport_shards.py", "src/global_executables/__init__.py",
-                     "src/global_executables/registry_state.py"):
+                     "src/global_executables/registry_state.py", "src/global_executables/booster.py", "tools/booster.py"):
         (work / relative).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, work / relative)
     git(work, "init", "-q", "-b", "main")

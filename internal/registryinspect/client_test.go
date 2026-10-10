@@ -1,6 +1,7 @@
 package registryinspect
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"io"
@@ -171,4 +172,30 @@ type memoryCommitter struct{ results []gocrawl.ModuleResult }
 func (m *memoryCommitter) Commit(_ context.Context, results []gocrawl.ModuleResult) error {
 	m.results = append(m.results, results...)
 	return nil
+}
+
+func TestRequesterSendsTheConfiguredUserAgentAndHonoursTheBandwidthCap(t *testing.T) {
+	var agentSeen atomic.Value
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		agentSeen.Store(r.Header.Get("User-Agent"))
+		_, _ = w.Write(bytes.Repeat([]byte("x"), 50_000))
+	}))
+	defer server.Close()
+	r := newRequester(Config{UserAgent: "booster-test (mailto:me@example.org)", MaxBytesPerSecond: 100_000})
+	start := time.Now()
+	for range 3 {
+		if _, err := r.request(context.Background(), http.MethodGet, server.URL, nil, 1<<20); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if got := agentSeen.Load(); got != "booster-test (mailto:me@example.org)" {
+		t.Fatalf("user agent %v", got)
+	}
+	// 150 kB at 100 kB/s: the third response waits for the first two (0.5 s + 0.5 s).
+	if elapsed := time.Since(start); elapsed < 900*time.Millisecond {
+		t.Fatalf("the cap did not pace the downloads: %v", elapsed)
+	}
+	if plain := newRequester(Config{}); agent(plain.config.UserAgent) != userAgent {
+		t.Fatal("the default user agent must stay")
+	}
 }
