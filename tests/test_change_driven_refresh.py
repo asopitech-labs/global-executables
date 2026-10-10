@@ -737,10 +737,44 @@ def test_publication_of_an_all_unchanged_run_is_empty(tmp_path, monkeypatch):
     assert changed == ["reports/registry-artifact-crawl.json"], changed
 
 
+def workflow_steps(path):
+    import yaml
+    document = yaml.safe_load(path.read_text())
+    return next(iter(document["jobs"].values()))["steps"]
+
+
 def test_workflows_keep_the_schedule_cache_between_runs_and_git_ignores_it():
     root = Path(__file__).resolve().parents[1]
-    refresh = (root / ".github/workflows/registry-refresh.yml").read_text()
-    cpp = (root / ".github/workflows/cpp-registries.yml").read_text()
-    assert "uses: actions/cache@v4" in refresh and "/data/production/cache" in refresh
-    assert "uses: actions/cache@v4" in cpp and "path: data/production/cache" in cpp
     assert "data/production/cache/" in (root / ".gitignore").read_text().splitlines()
+    for name in ("registry-refresh.yml", "cpp-registries.yml"):
+        steps = workflow_steps(root / ".github" / "workflows" / name)
+        cache = next(step for step in steps if str(step.get("uses", "")).startswith("actions/cache@"))
+        # Workspace-relative: the runner user owns it. A /tmp path written by a root container made the
+        # post-job save fail with "Permission denied" on every 2026-10-09 scheduled run.
+        assert cache["with"]["path"] == "data/production/cache", name
+        assert "run_id" in cache["with"]["key"] and "run_attempt" in cache["with"]["key"], "a fresh key per run"
+        assert cache["with"]["restore-keys"].strip().startswith("schedule-v1-"), "restore falls back to the prefix"
+        assert cache.get("continue-on-error") is True, "a failed cache never fails the run"
+
+
+def test_registry_refresh_gives_the_crawlers_a_runner_owned_cache_directory():
+    root = Path(__file__).resolve().parents[1]
+    steps = workflow_steps(root / ".github" / "workflows" / "registry-refresh.yml")
+    names = [step.get("name", "") for step in steps]
+    prepare, restore = names.index("Prepare the schedule cache"), names.index("Restore the schedule cache")
+    assert prepare < restore < names.index("Refresh one transactional batch")
+    assert "mkdir -p data/production/cache" in steps[prepare]["run"], "created by the runner, not by Docker"
+    go = steps[names.index("Refresh one transactional batch")]["run"]
+    assert '-v "${PWD}/data/production/cache:/cache"' in go and '--cache "/cache/${SOURCE}.cache.gz"' in go
+    assert "--cache-dir data/production/cache" in steps[names.index("Refresh one NuGet batch")]["run"]
+    handback = steps[names.index("Hand the schedule cache back to the runner")]
+    assert "always()" in handback["if"] and handback.get("continue-on-error") is True
+    assert "chown" in handback["run"] and "chmod" in handback["run"]
+
+
+def test_a_cache_written_by_another_user_stays_readable(tmp_path):
+    import stat
+    path = tmp_path / "cache" / "x.cache.gz"
+    refresh_policy.write_cache(path, {"a": "1:0:1"}, 0)
+    # mkstemp makes 0600; the CI cache action (another user than a root container) must be able to read it.
+    assert stat.S_IMODE(path.stat().st_mode) == 0o644

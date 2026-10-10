@@ -127,6 +127,12 @@ func WriteCache(path string, cache Cache, revision int) error {
 		return err
 	}
 	defer os.Remove(temporary.Name())
+	// CreateTemp makes the file 0600. The crawler may run as root in a container while
+	// the CI cache action runs as the runner user and must be able to read the file
+	// (2026-10-09: "tar: Cannot open: Permission denied", every run was a cold start).
+	if err := temporary.Chmod(0o644); err != nil {
+		return err
+	}
 	writer := gzip.NewWriter(temporary)
 	buffered := bufio.NewWriter(writer)
 	fmt.Fprintf(buffered, "%s\n# extraction %d\n# cursor %d\n", cacheMagic, revision, cache.Cursor)

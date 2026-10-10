@@ -60,13 +60,20 @@ jobs:
           fi
       # The schedule cache holds when each package was last checked. It is cache, not
       # history: never committed, and a miss only makes every package due again
-      # (docs/OPERATIONS.md "History and cache").
+      # (docs/OPERATIONS.md "History and cache"). It lives in the workspace so that the
+      # runner user owns it; the directory is created here, by the runner, because a
+      # directory Docker creates for a bind mount belongs to root. A cache that cannot be
+      # restored or saved must never fail the run.
+      - name: Prepare the schedule cache
+        if: steps.restore.outputs.eligible == 'true'
+        run: mkdir -p data/production/cache
       - name: Restore the schedule cache
         if: steps.restore.outputs.eligible == 'true'
+        continue-on-error: true
         uses: actions/cache@v4
         with:
-          path: /tmp/ci-refresh-${{ matrix.source }}/data/production/cache
-          key: schedule-v1-${{ matrix.source }}-${{ github.run_id }}
+          path: data/production/cache
+          key: schedule-v1-${{ matrix.source }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             schedule-v1-${{ matrix.source }}-
       - name: Refresh one transactional batch
@@ -79,7 +86,9 @@ jobs:
           docker build --file Dockerfile.go-crawler --target runtime \
             --tag global-executables-go-crawler:ci .
           docker run --rm --init -v "/tmp/ci-refresh-${SOURCE}:/state" \
+            -v "${PWD}/data/production/cache:/cache" \
             global-executables-go-crawler:ci crawl --source "${SOURCE}" \
+            --cache "/cache/${SOURCE}.cache.gz" \
             --passes 1 --continuous --package-budget "${PACKAGE_BUDGET}" \
             --byte-budget "${BYTE_BUDGET}"
       - name: Refresh one NuGet batch
@@ -94,7 +103,15 @@ jobs:
             --state "${root}/data/production/registry-state" \
             --output-dir "${root}/data/production/intermediate" \
             --report "${root}/reports/registry-artifact-crawl.json" \
+            --cache-dir data/production/cache \
             --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}"
+      - name: Hand the schedule cache back to the runner
+        # The crawler container runs as root; the cache action saves as the runner user.
+        if: always() && steps.restore.outputs.eligible == 'true'
+        continue-on-error: true
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" data/production/cache || true
+          chmod -R u+rwX,go+rX data/production/cache || true
       - uses: actions/upload-artifact@v4
         if: steps.restore.outputs.eligible == 'true'
         with:

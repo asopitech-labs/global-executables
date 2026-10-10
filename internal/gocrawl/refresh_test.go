@@ -483,3 +483,19 @@ func TestColdChecksAndCacheFileMatchThePythonGoldens(t *testing.T) {
 		t.Fatalf("cache text differs from the Python golden:\n%s\nwant\n%s", text, want)
 	}
 }
+
+func TestCacheFileIsReadableByOtherUsers(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "cache", "pypi.cache.gz")
+	if err := WriteCache(path, Cache{Checks: map[string]string{"a": "1:0:1"}}, 1); err != nil {
+		t.Fatal(err)
+	}
+	info, err := os.Stat(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// CreateTemp is 0600: a root crawler container's cache must still be readable by the
+	// runner user that saves it (2026-10-09 "tar: Cannot open: Permission denied").
+	if info.Mode().Perm() != 0o644 {
+		t.Fatalf("mode %v", info.Mode().Perm())
+	}
+}
