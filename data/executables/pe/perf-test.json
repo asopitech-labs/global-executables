@@ -2,6 +2,18 @@
   "command": "perf-test",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "czar-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/czarhq/czar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/codenotary/immudb",
       "version": "v1.11.1",
