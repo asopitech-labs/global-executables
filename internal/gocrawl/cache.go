@@ -159,7 +159,7 @@ func WriteCache(path string, cache Cache, revision int) error {
 // name so the next looks do not all land together.
 func ColdCheck(module, version string, today int) Check {
 	streak := int(coldDigest(module) % ColdStaggerStreaks)
-	return Check{Day: today - RecheckInterval(module, streak, BackoffMaxDaysPlain), Streak: streak, Version: version}
+	return Check{Day: today - RecheckInterval(module, streak, BackoffMaxDaysPlain), Streak: streak, Outcome: HasCommands, Version: version}
 }
 
 // ColdRefreshStart is where the rotation begins when no cache says where it was: a

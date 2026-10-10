@@ -18,7 +18,7 @@ read for one release):
 
 ``internal/gocrawl/policy.go`` implements the same interval function for the Go
 crawler; ``internal/gocrawl/testdata/refresh/policy-golden.json`` is checked by both test suites.
-A check is the string ``"<day>:<streak>:<version>"``.  ETags never enter the state.
+A check is the string ``"<day>:<streak><outcome>:<version>"`` (outcome ``n``/``c``, optional).  ETags never enter the state.
 """
 
 from __future__ import annotations
@@ -61,23 +61,38 @@ def today(now: datetime | None = None) -> int:
     return int(now.timestamp() // 86400)
 
 
-def pack(day: int, streak: int, version: str) -> str:
-    return f"{day}:{streak}:{version}"
+NO_COMMANDS = "n"   # the version was read and ships no command (most of a registry)
+HAS_COMMANDS = "c"  # the version was read and has rows
+OUTCOMES = {NO_COMMANDS: "no_commands", HAS_COMMANDS: "has_commands"}
 
 
-def unpack(value: Any) -> tuple[int, int, str] | None:
+def pack(day: int, streak: int, version: str, outcome: str = "") -> str:
+    """``"<day>:<streak><outcome>:<version>"``; the outcome letter is absent when unknown."""
+    return f"{day}:{streak}{outcome}:{version}"
+
+
+def unpack_full(value: Any) -> tuple[int, int, str, str] | None:
+    """``(day, streak, version, outcome)`` of a check, or None for garbage."""
     if not isinstance(value, str):
         return None
     parts = value.split(":", 2)
     if len(parts) != 3:
         return None
+    streak_text, outcome = parts[1], ""
+    if len(streak_text) > 1 and streak_text[-1] in OUTCOMES:
+        streak_text, outcome = streak_text[:-1], streak_text[-1]
     try:
-        day, streak = int(parts[0]), int(parts[1])
+        day, streak = int(parts[0]), int(streak_text)
     except ValueError:
         return None
     if day < 0 or streak < 0:
         return None
-    return day, streak, parts[2]
+    return day, streak, parts[2], outcome
+
+
+def unpack(value: Any) -> tuple[int, int, str] | None:
+    entry = unpack_full(value)
+    return entry[:3] if entry else None
 
 
 def recheck_interval(key: str, streak: int, max_days: int) -> int:
@@ -114,13 +129,17 @@ def known_version(checked: dict[str, Any], key: str) -> str | None:
     return entry[2] if entry and entry[2] else None
 
 
-def record_check(checked: dict[str, Any], key: str, latest: str, day: int) -> bool:
-    """Record a successful look that found ``latest``; True when the version changed."""
-    previous = unpack(checked.get(key))
+def record_check(checked: dict[str, Any], key: str, latest: str, day: int, outcome: str = "") -> bool:
+    """Record a successful look that found ``latest``; True when the version changed.
+
+    ``outcome`` is NO_COMMANDS or HAS_COMMANDS; empty keeps the previous outcome of an
+    unchanged version.  Every inspected package records one, with or without commands.
+    """
+    previous = unpack_full(checked.get(key))
     if previous is not None and previous[2] == latest:
-        checked[key] = pack(day, previous[1] + 1, latest)
+        checked[key] = pack(day, previous[1] + 1, latest, outcome or previous[3])
         return False
-    checked[key] = pack(day, 0, latest)
+    checked[key] = pack(day, 0, latest, outcome)
     return True
 
 
@@ -135,7 +154,7 @@ def cold_check(key: str, version: str, day: int) -> str:
     do not all land together.  Identical to ``gocrawl.ColdCheck``.
     """
     streak = int.from_bytes(hashlib.sha256(("cold:" + key).encode("utf-8")).digest()[:2], "big") % COLD_STAGGER_STREAKS
-    return pack(day - recheck_interval(key, streak, BACKOFF_MAX_DAYS_PLAIN), streak, version)
+    return pack(day - recheck_interval(key, streak, BACKOFF_MAX_DAYS_PLAIN), streak, version, HAS_COMMANDS)
 
 
 def cold_refresh_start(size: int, budget: int, now: datetime | None = None) -> int:
@@ -270,3 +289,13 @@ class TokenBucket:
         if delay > 0:
             self._sleep(delay)
         return delay
+
+
+def outcome_summary(checked: dict[str, Any]) -> dict[str, int]:
+    """How many recorded checks found no command, found commands, or predate outcomes."""
+    counts = {"no_commands": 0, "has_commands": 0, "unknown": 0}
+    for value in checked.values():
+        entry = unpack_full(value)
+        if entry is not None:
+            counts[OUTCOMES.get(entry[3], "unknown")] += 1
+    return counts

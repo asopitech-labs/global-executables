@@ -69,11 +69,11 @@ func TestDueFollowsBackoffAndCapsAtTheSourceLimit(t *testing.T) {
 	if !long.Due("m", 101, 101, 14) {
 		t.Fatal("a check older than the due floor (a resync) is always due")
 	}
-	next, changed := Next(Check{Day: 5, Streak: 2, Version: "1"}, true, "1", 9)
+	next, changed := Next(Check{Day: 5, Streak: 2, Version: "1"}, true, "1", "", 9)
 	if changed || next.Streak != 3 || next.Day != 9 {
 		t.Fatalf("unchanged: %+v changed=%v", next, changed)
 	}
-	next, changed = Next(Check{Day: 5, Streak: 2, Version: "1"}, true, "2", 9)
+	next, changed = Next(Check{Day: 5, Streak: 2, Version: "1"}, true, "2", "", 9)
 	if !changed || next.Streak != 0 {
 		t.Fatalf("changed version must restart the backoff: %+v", next)
 	}
@@ -467,7 +467,7 @@ func TestColdChecksAndCacheFileMatchThePythonGoldens(t *testing.T) {
 		}
 	}
 	path := filepath.Join(t.TempDir(), "c.gz")
-	cache := Cache{Cursor: 77, Checks: map[string]string{"alpha": "20001:2:1.0", "b": "20002:0:2.0", "zeta": "19990:5:9.9.9"}}
+	cache := Cache{Cursor: 77, Checks: map[string]string{"alpha": "20001:2n:1.0", "b": "20002:0c:2.0", "zeta": "19990:5:9.9.9"}}
 	if err := WriteCache(path, cache, 1); err != nil {
 		t.Fatal(err)
 	}
@@ -497,5 +497,31 @@ func TestCacheFileIsReadableByOtherUsers(t *testing.T) {
 	// runner user that saves it (2026-10-09 "tar: Cannot open: Permission denied").
 	if info.Mode().Perm() != 0o644 {
 		t.Fatalf("mode %v", info.Mode().Perm())
+	}
+}
+
+func TestOutcomesRoundTripStayBackwardCompatibleAndMatchPython(t *testing.T) {
+	for value, want := range map[string]Check{
+		"20000:3n:1.2.3": {Day: 20000, Streak: 3, Outcome: NoCommands, Version: "1.2.3"},
+		"20000:3c:v1:x":  {Day: 20000, Streak: 3, Outcome: HasCommands, Version: "v1:x"},
+		"20000:3:1.2.3":  {Day: 20000, Streak: 3, Version: "1.2.3"},
+	} {
+		got, ok := ParseCheck(value)
+		if !ok || got != want || EncodeCheck(want) != value {
+			t.Errorf("%s -> %+v %v", value, got, ok)
+		}
+	}
+	for _, bad := range []string{"20000:n:1", "x:1c:1", "1:1"} {
+		if _, ok := ParseCheck(bad); ok {
+			t.Errorf("%s must not parse", bad)
+		}
+	}
+	next, _ := Next(Check{Day: 10, Version: "1", Outcome: NoCommands}, true, "1", OutcomeUnknown, 11)
+	if next != (Check{Day: 11, Streak: 1, Outcome: NoCommands, Version: "1"}) {
+		t.Fatalf("%+v", next)
+	}
+	counts := checkOutcomes(map[string]string{"a": "1:0n:1", "b": "1:0c:1", "c": "1:0:1"})
+	if counts["no_commands"] != 1 || counts["has_commands"] != 1 || counts["unknown"] != 1 {
+		t.Fatalf("%v", counts)
 	}
 }

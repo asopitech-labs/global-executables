@@ -348,17 +348,18 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 }
 
 type measuringCommitter struct {
-	store      *gocrawl.BoltStore
-	byteBudget int64
-	cancel     context.CancelFunc
-	processed  uint64
-	refreshed  uint64
-	records    uint64
-	unchanged  uint64
-	skipped    uint64
-	feedWorks  uint64
-	downloaded uint64
-	exhausted  bool
+	store                            *gocrawl.BoltStore
+	byteBudget                       int64
+	cancel                           context.CancelFunc
+	processed                        uint64
+	refreshed                        uint64
+	records                          uint64
+	unchanged                        uint64
+	readNoCommands, readWithCommands uint64
+	skipped                          uint64
+	feedWorks                        uint64
+	downloaded                       uint64
+	exhausted                        bool
 }
 
 type passExecutor func(context.Context, crawlConfig) (gocrawl.PassReport, error)
@@ -412,6 +413,10 @@ func (c *measuringCommitter) Commit(ctx context.Context, results []gocrawl.Modul
 			c.skipped++
 		case result.Unchanged:
 			c.unchanged++
+		case result.Verdict == gocrawl.VerdictSuccess && len(result.Observations) == 0:
+			c.readNoCommands++
+		case result.Verdict == gocrawl.VerdictSuccess:
+			c.readWithCommands++
 		}
 		if result.Work.Feed {
 			c.feedWorks++
@@ -531,7 +536,8 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		PackageBudget: config.PackageBudget, Refreshed: committer.refreshed, Requests: metrics.Requests,
 		RateLimited: metrics.RateLimited, Timeouts: metrics.Timeouts,
 		CircuitOpens: metrics.CircuitOpens, HostConcurrency: metrics.HostConcurrency,
-		Unchanged: committer.unchanged, Skipped: committer.skipped, FeedWorks: committer.feedWorks,
+		Unchanged: committer.unchanged, Skipped: committer.skipped,
+		ReadNoCommands: committer.readNoCommands, ReadWithCommands: committer.readWithCommands, FeedWorks: committer.feedWorks,
 		FeedEvents: uint64(feedReport.Events), FeedEnqueued: uint64(feedReport.Enqueued),
 		FeedRequests: uint64(feedReport.Requests), FeedBytes: uint64(feedReport.DownloadedBytes),
 		FeedResync: feedReport.Resync, FeedError: feedReport.Error,

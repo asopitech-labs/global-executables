@@ -46,10 +46,13 @@ class FakeNuGet:
         self.bytes += len(body)
         return body, {"downloaded_bytes": len(body)}
 
+    plain = ()  # tool names (lower case) whose package ships no command
+
     def nupkg(self, url, timeout):
         self.nupkg_requests += 1
         self.bytes += self.nupkg_bytes
-        return ["cmd-" + url.rsplit("/", 1)[1].split(".")[0]], self.nupkg_bytes
+        name = url.rsplit("/", 1)[1].split(".")[0]
+        return ([] if name in self.plain else ["cmd-" + name]), self.nupkg_bytes
 
 
 def nuget_state(tmp_path, tools):
@@ -778,3 +781,24 @@ def test_a_cache_written_by_another_user_stays_readable(tmp_path):
     refresh_policy.write_cache(path, {"a": "1:0:1"}, 0)
     # mkstemp makes 0600; the CI cache action (another user than a root container) must be able to read it.
     assert stat.S_IMODE(path.stat().st_mode) == 0o644
+
+
+def test_nuget_tools_without_commands_are_recorded_and_skipped_like_the_others(tmp_path, monkeypatch):
+    clock = Clock(monkeypatch)
+    registry = FakeNuGet(monkeypatch, {"alpha": "1.0.0", "beta": "2.0.0", "gamma": "3.0.0"})
+    registry.plain = ("beta", "gamma")
+    state = nuget_state(tmp_path, ["alpha", "beta", "gamma"])
+    output = tmp_path / "nuget.jsonl"
+
+    first = registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    assert registry.nupkg_requests == 3
+    assert {k: refresh_policy.unpack_full(v)[3] for k, v in state["checked"].items()} == {
+        "alpha": refresh_policy.HAS_COMMANDS, "beta": refresh_policy.NO_COMMANDS, "gamma": refresh_policy.NO_COMMANDS}
+    assert first["outcomes"] == {"no_commands": 2, "has_commands": 1, "unknown": 0}
+
+    clock.advance(2)
+    registry.index_requests = registry.nupkg_requests = 0
+    second = registry_artifact._crawl_nuget(state, output, 10, 10**9, 120)
+    assert registry.nupkg_requests == 0, "a tool without commands is not downloaded again either"
+    assert second["unchanged"] == 3 and second["outcomes"] == first["outcomes"]
+    assert [refresh_policy.unpack_full(v)[1] for v in state["checked"].values()] == [1, 1, 1]

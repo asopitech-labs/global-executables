@@ -91,7 +91,7 @@ def test_cold_checks_match_the_go_implementation_and_spread_over_the_stagger_tie
 
 def test_cache_file_matches_the_go_golden_and_survives_loss_and_revision_changes(tmp_path):
     import gzip
-    entries = {"alpha": "20001:2:1.0", "b": "20002:0:2.0", "zeta": "19990:5:9.9.9"}
+    entries = {"alpha": "20001:2n:1.0", "b": "20002:0c:2.0", "zeta": "19990:5:9.9.9"}
     path = tmp_path / "cache" / "pypi.cache.gz"
     policy.write_cache(path, entries, 77, revision=policy.EXTRACTION_REVISION)
     assert gzip.open(path, "rt").read() == (HERE / "schedule-cache-golden.txt").read_text()
@@ -107,3 +107,19 @@ def test_cold_refresh_start_moves_one_budget_per_window():
     now = datetime.fromtimestamp(1_800_000_000, timezone.utc)
     first, second = policy.cold_refresh_start(870_000, 3000, now), policy.cold_refresh_start(870_000, 3000, now + timedelta(hours=6))
     assert second == (first + 3000) % 870_000
+
+
+def test_outcomes_round_trip_stay_backward_compatible_and_match_go():
+    assert policy.pack(20000, 3, "1.2.3", policy.NO_COMMANDS) == "20000:3n:1.2.3"
+    assert policy.unpack_full("20000:3n:1.2.3") == (20000, 3, "1.2.3", "n")
+    assert policy.unpack_full("20000:3c:v1:x") == (20000, 3, "v1:x", "c")
+    assert policy.unpack_full("20000:3:1.2.3") == (20000, 3, "1.2.3", "")  # written before outcomes
+    assert policy.unpack_full("20000:n:1") is None and policy.unpack_full("x:1c:1") is None
+    checked = {}
+    policy.record_check(checked, "a", "1", 10, policy.NO_COMMANDS)
+    policy.record_check(checked, "a", "1", 11)  # an unchanged look keeps the outcome
+    assert checked["a"] == "11:1n:1"
+    policy.record_check(checked, "a", "2", 12, policy.HAS_COMMANDS)
+    assert checked["a"] == "12:0c:2"
+    checked["old"] = "1:0:1"
+    assert policy.outcome_summary(checked) == {"no_commands": 0, "has_commands": 1, "unknown": 1}

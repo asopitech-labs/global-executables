@@ -1207,7 +1207,8 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
                 rows.extend(package_rows)
                 replacement_rows.extend(package_rows)
                 replaced_packages.add(package)
-                refresh_policy.record_check(checked, package, version, day)
+                refresh_policy.record_check(checked, package, version, day,
+                                            refresh_policy.HAS_COMMANDS if package_rows else refresh_policy.NO_COMMANDS)
                 _clear_failure(state, failures, attempts, package)
         except Exception as error:
             _record_failure(failures, unavailable, package, error, attempts,
@@ -1251,7 +1252,8 @@ def _crawl_nuget(state: dict[str, Any], output: Path, budget: int, byte_budget: 
                 and not state.get("blocked") and not truncated)
     report = {"cursor": cursor, "refresh_cursor": refresh_cursor, "refreshed": refreshed,
               "unchanged": unchanged, "skipped_not_due": skipped, "checked": len(checked),
-              "ttl": refresh_policy.ttl_summary(checked, day, max_days), "feed": feed_report,
+              "ttl": refresh_policy.ttl_summary(checked, day, max_days),
+              "outcomes": refresh_policy.outcome_summary(checked), "feed": feed_report,
               "feed_queue": len(feed_queue),
               "catalog_size": len(tools), "processed": processed,
               "records": collected, "downloaded_bytes": downloaded, "failures": len(failures),
@@ -1643,7 +1645,8 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
             replaced_packages.add(package)
             revision = _conan_revisions.get((package, inspected_version))
             if manifest_url and revision:
-                refresh_policy.record_check(checked, reference, f"{inspected_version}@{revision}", day)
+                refresh_policy.record_check(checked, reference, f"{inspected_version}@{revision}", day,
+                                            refresh_policy.HAS_COMMANDS if package_rows else refresh_policy.NO_COMMANDS)
             else:
                 refresh_policy.forget(checked, reference)
             _clear_failure(state, failures, attempts, reference)
@@ -1695,6 +1698,7 @@ def _crawl_conan(state: dict[str, Any], output: Path, budget: int, byte_budget: 
               "catalog_pending": len(pending), "catalog_fetched_at": state.get("catalog_fetched_at"),
               "unchanged": unchanged, "skipped_not_due": skipped, "checked": len(checked),
               "ttl": refresh_policy.ttl_summary(checked, day, BACKOFF_MAX_DAYS_CONAN),
+              "outcomes": refresh_policy.outcome_summary(checked),
               "feed": feed_report,
               "failure_details": _failure_diagnostics(state, failures, "retry_recipes"),
               "complete": complete, "coverage_kind": "exhaustive" if complete else "partial"}
