@@ -162,7 +162,7 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 		if indexErr == nil && complete {
 			result.Verdict = gocrawl.VerdictSuccess
 			result.Observations = observations
-			result.Latest = recordableVersion(version, observations)
+			result.Latest = version
 			return result
 		}
 		if moduleCtx.Err() != nil {
@@ -196,20 +196,8 @@ func (i *Inspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocraw
 	}
 	result.Verdict = gocrawl.VerdictSuccess
 	result.Observations = observations
-	result.Latest = recordableVersion(version, observations)
+	result.Latest = version
 	return result
-}
-
-// recordableVersion decides whether a check is recorded for the module. The Go catalog
-// holds about two million modules and almost none ships a command; a check for each
-// would mean loading that many entries into the store at every cold start of the
-// schedule cache, so only modules with rows record one. A module without rows is read
-// in full on each visit, as it was before checks existed.
-func recordableVersion(version string, observations []gocrawl.Observation) string {
-	if len(observations) == 0 {
-		return ""
-	}
-	return version
 }
 
 func (i *Inspector) validateModulePath(

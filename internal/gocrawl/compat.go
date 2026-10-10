@@ -55,6 +55,9 @@ type PassReport struct {
 	FeedBytes    uint64
 	FeedResync   bool
 	FeedError    string
+	// Packages read in full this pass, split by what they turned out to ship.
+	ReadNoCommands   uint64
+	ReadWithCommands uint64
 }
 
 type CompatibilityProfile struct {
@@ -418,6 +421,9 @@ func exportCompatibility(
 		"feed_error":          pass.FeedError,
 		"feed_pending":        len(snapshot.FeedPending),
 		"checked":             len(snapshot.Checks),
+		"read_no_commands":    pass.ReadNoCommands,
+		"read_with_commands":  pass.ReadWithCommands,
+		"outcomes":            checkOutcomes(snapshot.Checks),
 		profile.CatalogField:  snapshot.ModulesFile,
 	}
 	if profile.Source == "go" {
@@ -505,4 +511,25 @@ func atomicWriteStream(path string, mode os.FileMode, write func(io.Writer) erro
 	}
 	defer directory.Close()
 	return directory.Sync()
+}
+
+// checkOutcomes counts the recorded checks by what the last look found, like
+// refresh_policy.outcome_summary.
+func checkOutcomes(checks map[string]string) map[string]int {
+	counts := map[string]int{"no_commands": 0, "has_commands": 0, "unknown": 0}
+	for _, value := range checks {
+		check, ok := ParseCheck(value)
+		if !ok {
+			continue
+		}
+		switch check.Outcome {
+		case NoCommands:
+			counts["no_commands"]++
+		case HasCommands:
+			counts["has_commands"]++
+		default:
+			counts["unknown"]++
+		}
+	}
+	return counts
 }

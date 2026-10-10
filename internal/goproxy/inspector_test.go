@@ -554,11 +554,23 @@ func TestInspectorSkipsModuleReadsWhenLatestVersionIsRecorded(t *testing.T) {
 	}
 }
 
-func TestRecordableVersionKeepsTheStateSmallForModulesWithoutCommands(t *testing.T) {
-	if got := recordableVersion("v1.0.0", nil); got != "" {
-		t.Fatalf("a module without rows must not add a check to the state: %q", got)
-	}
-	if got := recordableVersion("v1.0.0", []gocrawl.Observation{{Command: "demo"}}); got != "v1.0.0" {
-		t.Fatalf("got %q", got)
+func TestEveryInspectedModuleRecordsItsVersionEvenWithoutCommands(t *testing.T) {
+	// A module with no command is most of the catalogue; it must be skipped at its next
+	// visit as well, so its version is the result's Latest whatever the rows are.
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/@latest"):
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+		case strings.HasSuffix(r.URL.Path, ".mod"):
+			_, _ = w.Write([]byte("module example.com/lib\n"))
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer server.Close()
+	inspector := NewInspector(Config{BaseURL: server.URL, RequestTimeout: time.Second, ModuleTimeout: time.Second})
+	result := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "example.com/lib"})
+	if result.Verdict == gocrawl.VerdictSuccess && (len(result.Observations) != 0 || result.Latest != "v1.0.0") {
+		t.Fatalf("result=%+v", result)
 	}
 }

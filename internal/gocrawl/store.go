@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"maps"
 	"os"
 	"path/filepath"
 	"slices"
@@ -172,20 +173,23 @@ func importChecks(tx *bolt.Tx, snapshot ImportSnapshot, today int) error {
 		return err
 	}
 	checks := tx.Bucket(checkBucket)
+	// Keys go in sorted and the pages are packed full: a million random inserts into a
+	// B+tree took over ten minutes, the same million in order take seconds.
+	checks.FillPercent = 1.0
+	merged := make(map[string]string, len(snapshot.Checks))
 	for module, value := range snapshot.Checks {
-		if _, valid := ParseCheck(value); !valid {
-			continue
-		}
-		if err := checks.Put([]byte(module), []byte(value)); err != nil {
-			return err
+		if _, valid := ParseCheck(value); valid {
+			merged[module] = value
 		}
 	}
 	for _, observation := range snapshot.Observations {
-		if observation.Version == "" || checks.Get([]byte(observation.Package)) != nil {
+		if _, known := merged[observation.Package]; observation.Version == "" || known {
 			continue
 		}
-		seed := EncodeCheck(ColdCheck(observation.Package, observation.Version, today))
-		if err := checks.Put([]byte(observation.Package), []byte(seed)); err != nil {
+		merged[observation.Package] = EncodeCheck(ColdCheck(observation.Package, observation.Version, today))
+	}
+	for _, module := range slices.Sorted(maps.Keys(merged)) {
+		if err := checks.Put([]byte(module), []byte(merged[module])); err != nil {
 			return err
 		}
 	}
@@ -495,7 +499,14 @@ func applyCheck(tx *bolt.Tx, result ModuleResult, today int) error {
 	if value := checks.Get(module); value != nil {
 		previous, had = ParseCheck(string(value))
 	}
-	next, _ := Next(previous, had, result.Latest, today)
+	outcome := OutcomeUnknown // an unchanged result keeps the outcome of the version it re-confirmed
+	if !result.Unchanged {
+		outcome = NoCommands
+		if len(result.Observations) > 0 {
+			outcome = HasCommands
+		}
+	}
+	next, _ := Next(previous, had, result.Latest, outcome, today)
 	return checks.Put(module, []byte(EncodeCheck(next)))
 }
 

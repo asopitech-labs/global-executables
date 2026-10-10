@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Packages without commands are recorded like the others (#68, refs #64): the schedule
+  cache entry is now `<day>:<streak><outcome>:<version>` (`n` = no commands, `c` = has
+  commands; entries without a letter still parse) for every inspected package. Go used to
+  record a check only for modules with rows and read every other module in full on each
+  visit; it now records all of them. Reports gain `outcomes` (and `read_no_commands` /
+  `read_with_commands` for Go). Go imports checks into its working database in key order
+  (1,000,000 entries: over ten minutes before, about 3 s now). Cold-start seeds from rows
+  are `c`. Cache format version unchanged; golden files updated. `tools/measure_negative_history.py`
+  measures why a git-tracked negative history was not chosen.
 - Schedule cache now survives CI (#67, refs #64): the first scheduled `registry-refresh`
   runs after #66 never saved their cache (`tar: Cannot open: Permission denied`, every run a
   cold start) because the Go crawler container, running as root, wrote a 0600 file under

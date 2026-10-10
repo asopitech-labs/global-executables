@@ -11,6 +11,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"reflect"
 	"slices"
 	"strings"
 	"sync"
@@ -121,15 +122,17 @@ func TestPlanPassWorksKeepsTheRotationBackstopWhenAFeedFloodsTheBudget(t *testin
 // fakePyPI serves metadata, one wheel per project and the XML-RPC changelog, and
 // counts what the crawler asks for.
 type fakePyPI struct {
-	mu       sync.Mutex
-	versions map[string]string
-	serial   int64
-	changes  [][]any
-	metadata int
-	files    int
-	fileSize int64
-	now      func() time.Time
-	wheel    []byte
+	mu         sync.Mutex
+	versions   map[string]string
+	serial     int64
+	changes    [][]any
+	metadata   int
+	files      int
+	fileSize   int64
+	now        func() time.Time
+	wheel      []byte
+	plain      map[string]bool // projects whose wheel ships no command
+	plainWheel []byte
 }
 
 func newFakePyPI(t *testing.T, projects int, now func() time.Time) (*fakePyPI, *httptest.Server) {
@@ -144,7 +147,15 @@ func newFakePyPI(t *testing.T, projects int, now func() time.Time) (*fakePyPI, *
 	if err := writer.Close(); err != nil {
 		t.Fatal(err)
 	}
-	fake := &fakePyPI{versions: map[string]string{}, now: now, wheel: wheel.Bytes(), serial: 1000}
+	var plainWheel bytes.Buffer
+	plainWriter := zip.NewWriter(&plainWheel)
+	plainData, _ := plainWriter.Create("demo/data.bin")
+	_, _ = plainData.Write(bytes.Repeat([]byte("x"), 20_000))
+	if err := plainWriter.Close(); err != nil {
+		t.Fatal(err)
+	}
+	fake := &fakePyPI{versions: map[string]string{}, now: now, wheel: wheel.Bytes(), serial: 1000,
+		plain: map[string]bool{}, plainWheel: plainWheel.Bytes()}
 	for index := range projects {
 		fake.versions[fmt.Sprintf("p%02d", index)] = "1.0.0"
 	}
@@ -181,7 +192,11 @@ func newFakePyPI(t *testing.T, projects int, now func() time.Time) (*fakePyPI, *
 				name, version, name, version, len(fake.wheel), server.URL+"/files/"+name+"/"+version+".whl")
 		case strings.HasPrefix(r.URL.Path, "/files/"):
 			fake.files++
-			http.ServeContent(w, r, "x.whl", time.Unix(0, 0), bytes.NewReader(fake.wheel))
+			body := fake.wheel
+			if fake.plain[strings.Split(strings.TrimPrefix(r.URL.Path, "/files/"), "/")[0]] {
+				body = fake.plainWheel
+			}
+			http.ServeContent(w, r, "x.whl", time.Unix(0, 0), bytes.NewReader(body))
 		default:
 			http.NotFound(w, r)
 		}
@@ -473,4 +488,110 @@ func (a *atomic64) Store(v int64) {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 	a.value = v
+}
+
+// TestPackagesWithoutCommandsAreSkippedAtTheirSecondVisit replays the common case: most
+// of a registry ships no command. Their first visit reads the artifact; every later
+// visit that finds the same version costs the metadata request, or nothing when the
+// package is not due, and none of it touches the history.
+func TestPackagesWithoutCommandsAreSkippedAtTheirSecondVisit(t *testing.T) {
+	const projects, withCommands = 40, 10
+	day := time.Date(2026, 10, 1, 3, 0, 0, 0, time.UTC)
+	var offset atomic64
+	defer func(previous func() time.Time) { clock = previous }(clock)
+	clock = func() time.Time { return day.Add(time.Duration(offset.Load()) * 24 * time.Hour) }
+	fake, server := newFakePyPI(t, projects, clock)
+	names := slices.Sorted(maps.Keys(fake.versions))
+	for _, name := range names[withCommands:] {
+		fake.plain[name] = true
+	}
+	directory := t.TempDir()
+	config := crawlConfig{
+		Source: "pypi", StatePath: filepath.Join(directory, "registry-state"),
+		ObservationsPath: filepath.Join(directory, "pypi.jsonl"), ReportPath: filepath.Join(directory, "report.json"),
+		CatalogPath: filepath.Join(directory, "projects.txt"), DatabasePath: filepath.Join(directory, "crawl.db"),
+		RegistryURL: server.URL, FeedURL: server.URL, PackageBudget: projects, ByteBudget: 1 << 30, Workers: 4,
+		MaxInFlight: 8, CommitBatch: 8, RequestTimeout: 2 * time.Second, ModuleTimeout: 5 * time.Second,
+	}
+	if err := os.WriteFile(config.CatalogPath, []byte(strings.Join(names, "\n")+"\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(config.StatePath+".json", []byte(`{"version":1,"sources":{"pypi":{"cursor":0,"catalog_complete":true}}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	cachePath := gocrawl.DefaultCachePath(config.StatePath, "pypi")
+
+	walk, err := executePass(t.Context(), config)
+	if err != nil || walk.Processed != projects {
+		t.Fatalf("walk=%+v err=%v", walk, err)
+	}
+	if walk.ReadNoCommands != projects-withCommands || walk.ReadWithCommands != withCommands {
+		t.Fatalf("first visit read %d without and %d with commands", walk.ReadNoCommands, walk.ReadWithCommands)
+	}
+	cache, warm, err := gocrawl.ReadCache(cachePath, gocrawl.ExtractionRevision)
+	if err != nil || !warm || len(cache.Checks) != projects {
+		t.Fatalf("every inspected package, with or without commands, must be in the cache: warm=%v checks=%d err=%v", warm, len(cache.Checks), err)
+	}
+	outcomes := map[string]int{}
+	for _, value := range cache.Checks {
+		check, _ := gocrawl.ParseCheck(value)
+		outcomes[check.Outcome]++
+	}
+	if outcomes[gocrawl.NoCommands] != projects-withCommands || outcomes[gocrawl.HasCommands] != withCommands {
+		t.Fatalf("outcomes %v", outcomes)
+	}
+	m0, f0 := fake.counts()
+	historyBefore := readTree(t, config.StatePath)
+
+	// Second visit, two days later: the metadata request only, for CLI and non-CLI alike.
+	offset.Store(2)
+	config.Continuous = true
+	second, err := executePass(t.Context(), config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	m1, f1 := fake.counts()
+	if f1 != f0 || m1-m0 != projects || second.Unchanged != projects {
+		t.Fatalf("second=%+v metadata=%d wheel downloads=%d", second, m1-m0, f1-f0)
+	}
+	// Only the feed position (first poll) may move; no package shard or row does.
+	historyAfter := readTree(t, config.StatePath)
+	for name, body := range historyAfter {
+		if body != historyBefore[name] && name != "manifest.json" && name != filepath.Join("pypi", "source.json") {
+			t.Fatalf("an all-unchanged visit rewrote %s", name)
+		}
+	}
+	historyBefore = historyAfter
+
+	// The same day again: nothing is due, so not even the metadata request is made.
+	third, err := executePass(t.Context(), config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	m2, f2 := fake.counts()
+	if m2 != m1 || f2 != f1 || third.Unchanged != 0 {
+		t.Fatalf("third=%+v metadata=%d wheel downloads=%d", third, m2-m1, f2-f1)
+	}
+	if !reflect.DeepEqual(historyBefore, readTree(t, config.StatePath)) {
+		t.Fatal("a run that finds nothing due must leave the history byte-identical")
+	}
+
+	// A lost cache costs one more full read of what history cannot recall: the packages
+	// without commands. Packages with rows are seeded from history and stay cheap.
+	if err := os.Remove(cachePath); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Remove(config.DatabasePath); err != nil { // a CI runner starts without the working database too
+		t.Fatal(err)
+	}
+	offset.Store(3)
+	cold, err := executePass(t.Context(), config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, f3 := fake.counts()
+	if cold.Unchanged != withCommands || cold.ReadNoCommands != projects-withCommands || f3-f2 == 0 || f3-f2 >= f0 {
+		t.Fatalf("cold cache: unchanged=%d (want %d, seeded from rows) read=%d (want %d) wheel requests=%d (first visit %d)",
+			cold.Unchanged, withCommands, cold.ReadNoCommands, projects-withCommands, f3-f2, f0)
+	}
 }

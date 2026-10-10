@@ -719,7 +719,7 @@ The crawl keeps two kinds of information apart, the way shields.io does:
 
 | | history | cache |
 | --- | --- | --- |
-| what | the observations (rows), `unavailable`/failure records, catalogue cursors, change-feed cursors and queues, `due_floor`, `extraction_revision` | when each package was last looked at (`<day>:<streak>:<version>`), the position of the refresh rotation, anything that only schedules the next look (ETag/Last-Modified validators, TTL class, backoff tier) |
+| what | the observations (rows), `unavailable`/failure records, catalogue cursors, change-feed cursors and queues, `due_floor`, `extraction_revision` | when each package was last looked at (`<day>:<streak><outcome>:<version>`, one for **every** inspected package, with or without commands), the position of the refresh rotation, anything that only schedules the next look (ETag/Last-Modified validators, TTL class, backoff tier) |
 | where | `artifact-data` (git): the sharded `registry-state/` and the row transport shards | `data/production/cache/<source>.cache.gz`, never committed (`.gitignore`), kept between CI runs by `actions/cache` and between local runs by the file itself |
 | written | only when something actually changed: a new version, different extracted commands, an availability change, a feed that advanced | on every look, including "nothing changed" |
 | lost | never: it is the product | at any time: nothing is wrong, the next run is just more expensive |
@@ -824,14 +824,49 @@ Tiers (the check each one reads and writes is cache, see "History and cache"):
   (`refresh_policy.TokenBucket`); feed announcements younger than a minute wait so the
   registry's own CDN has them. The Go crawler keeps its per-host limits.
 - **TTL.** Soft TTL is the backoff interval; hard TTL (`HARD_TTL_DAYS`) is the age after
-  which a package is reported stale. Reports carry `unchanged`, `skipped_not_due`, `ttl`.
+  which a package is reported stale. Reports carry `unchanged`, `skipped_not_due`, `ttl`, `outcomes`.
   Rows do not age in git: an unchanged package's rows are by definition still current,
   and how long ago it was last confirmed is cache information.
 
-ETags and other validators are never written to git. Go records a check only for a
-module that has rows (a check for every catalogue module would mean loading about two
-million entries into the store at each cold start); a module without rows is read in
-full at each visit, as before checks existed.
+ETags and other validators are never written to git.
+
+### Packages without commands
+
+Most of a registry ships no command (on the 2026-10-10 published rows, packages with at
+least one row: PyPI 241,364 of 870,264 catalogue entries, RubyGems 39,417 of 196,126,
+Packagist 10,430 of 458,432, npm 42,425 of 44,612, Go 423,855 of 2,146,476; so roughly
+three of four visited packages are non-CLI). Each of them must be recorded as well, or
+every visit reads its artifacts again from scratch. Every inspected package therefore
+gets a cache entry `<day>:<streak><outcome>:<version>`, where `<outcome>` is `n`
+(`no_commands`) or `c` (`has_commands`); an entry without a letter was written before
+outcomes existed and is read as unknown. The extraction revision is the cache file's
+(`# extraction N`, a different revision discards the file) and an unavailable package is
+already a durable negative in history (`unavailable`). A visit that finds the recorded
+version costs the metadata request only (or nothing while the package is not due) and
+keeps its outcome. PyPI, RubyGems, Packagist, npm, Go (since #68), NuGet and Conan all do
+this; Go used to record a check only for modules with rows and read every other module
+in full on each visit.
+
+Reports carry `outcomes` (`no_commands`, `has_commands`, `unknown` over all recorded
+checks) and, for the Go crawler, `read_no_commands` / `read_with_commands` (packages read
+in full this run). Go imports its checks into the working database sorted: a million
+random inserts took over ten minutes, the same million in key order take about 3 s
+(about 90 MB database, 6 MB synthetic cache file; the Go catalogue has 2.1 million
+modules, 1.2 million of them already `unavailable`).
+
+Why the cache and not git. The knowledge of non-CLI packages is bookkeeping: it changes
+whenever a package releases (PyPI announces ~2,300 releases per run, nearly all of them
+non-CLI), so a git-tracked `name<TAB>version<TAB>revision` history of 870,000 PyPI
+packages would be about 6.4 MB packed once and then rewrite all 256 shards on every run
+(`tools/measure_negative_history.py`: 2,300 version changes touch 256 of 256 shards and
+push about 2.9 MB), roughly 35 MB a day for PyPI alone, without adding any row. The
+cache holds the same knowledge in 1.9 MB for 245,000 PyPI entries (about 6.5 MB at full
+size) at no cost to history. The price is that a lost cache forgets the non-CLI packages
+once: a cold start re-reads each of them one time (packages with rows are seeded from
+history and stay cheap). `actions/cache` evicts only entries unused for seven days and
+every source runs several times a day, so this is an exception, not the steady state;
+the 2026-10-09 window in which every cache save failed (#67) is the reason the first
+sweep after it still reads mostly unseen packages.
 
 Rollback: revert the PR. Old readers ignore the missing fields and the rotation restarts
 at the cold position; a leftover cache is harmless and can be deleted.
