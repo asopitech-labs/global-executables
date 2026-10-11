@@ -85,6 +85,8 @@ def main() -> int:
     parser.add_argument("--remote", default="origin")
     parser.add_argument("--branch", default="artifact-data")
     parser.add_argument("--attempts", type=int, default=5)
+    parser.add_argument("--min-age-hours", type=float, default=0.0,
+                        help="renew: leave a live lease alone (no commit) while its heartbeat is younger than this")
     parser.add_argument("--progress", default="", help="JSON object stored with the lease (informational)")
     parser.add_argument("--published", type=Path)
     parser.add_argument("--local", type=Path)
@@ -115,8 +117,13 @@ def main() -> int:
         return 0
     existing = read_remote_document(args.source, args.ref).get("leases", {}).get(args.id)
     ranges = args.ranges if args.command == "acquire" or not isinstance(existing, dict) else existing.get("ranges", args.ranges)
+    def renew(doc):
+        if args.command == "renew" and args.min_age_hours > 0 and booster.fresh(doc, args.id, ranges, args.min_age_hours):
+            return doc
+        return booster.acquire(doc, args.id, ranges, ttl_hours=args.ttl_hours, progress=progress)
+
     try:
-        document = publish(args.source, lambda doc: booster.acquire(doc, args.id, ranges, ttl_hours=args.ttl_hours, progress=progress),
+        document = publish(args.source, renew,
                            args.remote, args.branch, args.attempts, f"Heartbeat for {args.source} booster lease {args.id}")
     except booster.LeaseConflict as error:
         print(f"lease refused: {error}", file=sys.stderr)
