@@ -691,7 +691,7 @@ def test_publication_of_an_all_unchanged_run_is_empty(tmp_path, monkeypatch):
         subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@example.com", *args], cwd=seed, check=True)
     work = tmp_path / "work"
     for relative in ("tools/crawl_parallel.sh", "tools/merge_observations.py", "tools/merge_registry_publication.py",
-                     "tools/registry_state.py", "tools/transport_shards.py", "src/global_executables/__init__.py",
+                     "tools/registry_state.py", "tools/transport_shards.py", "tools/booster.py", "src/global_executables/__init__.py", "src/global_executables/booster.py",
                      "src/global_executables/registry_state.py"):
         (work / relative).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(root / relative, work / relative)

@@ -76,10 +76,29 @@ jobs:
           key: schedule-v1-${{ matrix.source }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             schedule-v1-${{ matrix.source }}-
+      # A local booster (tools/local_booster.sh) leases buckets of the catalogue and works
+      # through their rotation from the owner's machine. While its heartbeat is alive this
+      # run leaves them alone; a lease nobody renewed has expired and this run owns the
+      # whole catalogue again (docs/OPERATIONS.md "Local booster"). Feed work and retries
+      # are never left out.
+      - name: Find the buckets a local booster owns
+        id: booster
+        if: steps.restore.outputs.eligible == 'true'
+        env:
+          SOURCE: ${{ matrix.source }}
+        run: |
+          exclude="$(python3 tools/booster.py exclusions --source "${SOURCE}" --ref origin/artifact-data || true)"
+          echo "exclude=${exclude}" >> "$GITHUB_OUTPUT"
+          if [ -n "${exclude}" ]; then
+            echo "A local booster holds buckets ${exclude} of ${SOURCE}; their rotation is left to it."
+          else
+            echo "No live local booster lease for ${SOURCE}; this run owns the whole rotation."
+          fi
       - name: Refresh one transactional batch
         if: steps.restore.outputs.eligible == 'true' && matrix.source != 'nuget'
         env:
           SOURCE: ${{ matrix.source }}
+          EXCLUDE: ${{ steps.booster.outputs.exclude }}
           PACKAGE_BUDGET: ${{ inputs.package_budget || '3000' }}
           BYTE_BUDGET: ${{ inputs.byte_budget || '8000000000' }}
         run: |
@@ -89,6 +108,7 @@ jobs:
             -v "${PWD}/data/production/cache:/cache" \
             global-executables-go-crawler:ci crawl --source "${SOURCE}" \
             --cache "/cache/${SOURCE}.cache.gz" \
+            ${EXCLUDE:+--rotation-exclude "${EXCLUDE}"} \
             --passes 1 --continuous --package-budget "${PACKAGE_BUDGET}" \
             --byte-budget "${BYTE_BUDGET}"
       - name: Refresh one NuGet batch

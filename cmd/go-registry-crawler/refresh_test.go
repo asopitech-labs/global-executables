@@ -595,3 +595,70 @@ func TestPackagesWithoutCommandsAreSkippedAtTheirSecondVisit(t *testing.T) {
 			cold.Unchanged, withCommands, cold.ReadNoCommands, projects-withCommands, f3-f2, f0)
 	}
 }
+
+func TestRotationOwnershipSplitsTheCatalogueBetweenBoosterAndActions(t *testing.T) {
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	var names strings.Builder
+	all := make([]string, 0, 600)
+	for index := range 600 {
+		all = append(all, fmt.Sprintf("pkg-%03d", index))
+		names.WriteString(all[index] + "\n")
+	}
+	if err := os.WriteFile(catalog, []byte(names.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 600, Cursor: 600, CatalogComplete: true}}
+	visited := func(config crawlConfig) map[string]bool {
+		owns, err := ownership(config)
+		if err != nil {
+			t.Fatal(err)
+		}
+		works, err := planPassWorks(catalog, before, 600, true, passPolicy{Owns: owns, MaxDays: 60,
+			Checks: func([]string) (map[string]gocrawl.Check, error) { return nil, nil }})
+		if err != nil {
+			t.Fatal(err)
+		}
+		seen := map[string]bool{}
+		for _, work := range works {
+			if !work.Refresh {
+				t.Fatalf("not a rotation entry: %+v", work)
+			}
+			if !work.Skip {
+				seen[work.Module] = true
+			}
+		}
+		return seen
+	}
+	booster := visited(crawlConfig{RotationInclude: "0-99,200-255"})
+	actions := visited(crawlConfig{RotationExclude: "0-99,200-255"})
+	everything := visited(crawlConfig{})
+	if len(everything) != 600 {
+		t.Fatalf("no declaration must visit everything, got %d", len(everything))
+	}
+	for _, name := range all {
+		if booster[name] == actions[name] {
+			t.Fatalf("%s must be visited by exactly one of booster (%v) and actions (%v)", name, booster[name], actions[name])
+		}
+		if want := gocrawl.OwnerBucket(name) <= 99 || gocrawl.OwnerBucket(name) >= 200; booster[name] != want {
+			t.Fatalf("%s: booster=%v, bucket %d", name, booster[name], gocrawl.OwnerBucket(name))
+		}
+	}
+	if len(booster) == 0 || len(actions) == 0 {
+		t.Fatalf("both sides must get work: %d / %d", len(booster), len(actions))
+	}
+	if _, err := ownership(crawlConfig{RotationExclude: "9-3"}); err == nil {
+		t.Fatal("a bad range must be an error, not silently ignored")
+	}
+}
+
+func TestJitteredPauseStaysWithinTheFraction(t *testing.T) {
+	for range 200 {
+		got := jittered(10*time.Second, 0.3)
+		if got < 7*time.Second || got > 13*time.Second {
+			t.Fatalf("%v", got)
+		}
+	}
+	if jittered(10*time.Second, 0) != 10*time.Second {
+		t.Fatal("no jitter unless asked")
+	}
+}

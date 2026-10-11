@@ -38,8 +38,13 @@ type Config struct {
 	MinRequestInterval     time.Duration
 	CircuitThreshold       int
 	CircuitOpenDuration    time.Duration
-	Sleep                  func(context.Context, time.Duration) error
-	Jitter                 func(time.Duration) time.Duration
+	// UserAgent identifies the crawler; when empty the default names this repository. A
+	// local booster sets one with a contact address.
+	UserAgent string
+	// MaxBytesPerSecond caps the average download rate of this requester (0 = no cap).
+	MaxBytesPerSecond int64
+	Sleep             func(context.Context, time.Duration) error
+	Jitter            func(time.Duration) time.Duration
 }
 
 type Metrics struct {
@@ -82,11 +87,51 @@ func (e *HTTPError) Error() string {
 }
 
 type requester struct {
-	config  Config
-	client  *http.Client
-	metrics metricCounters
-	gatesMu sync.Mutex
-	gates   map[string]*adaptiveGate
+	config    Config
+	client    *http.Client
+	metrics   metricCounters
+	gatesMu   sync.Mutex
+	gates     map[string]*adaptiveGate
+	bandwidth *bandwidthLimit
+}
+
+// agent returns the User-Agent to send.
+func agent(configured string) string {
+	if configured != "" {
+		return configured
+	}
+	return userAgent
+}
+
+// bandwidthLimit spaces downloads so their average rate stays under a cap. Each response
+// reserves the time its bytes would take; a caller sleeps until its slot, so concurrent
+// workers share one budget and a burst is at most one response long.
+type bandwidthLimit struct {
+	mu          sync.Mutex
+	bytesPerSec int64
+	next        time.Time
+}
+
+func newBandwidthLimit(bytesPerSecond int64) *bandwidthLimit {
+	return &bandwidthLimit{bytesPerSec: bytesPerSecond}
+}
+
+func (b *bandwidthLimit) pace(ctx context.Context, bytes int64) error {
+	if b == nil || b.bytesPerSec <= 0 || bytes <= 0 {
+		return nil
+	}
+	b.mu.Lock()
+	now := time.Now()
+	if b.next.Before(now) {
+		b.next = now
+	}
+	wait := b.next.Sub(now)
+	b.next = b.next.Add(time.Duration(bytes) * time.Second / time.Duration(b.bytesPerSec))
+	b.mu.Unlock()
+	if wait <= 0 {
+		return nil
+	}
+	return sleepContext(ctx, wait)
 }
 
 func newRequester(config Config) *requester {
@@ -156,7 +201,8 @@ func newRequester(config Config) *requester {
 		transport.ForceAttemptHTTP2 = true
 		client = &http.Client{Transport: transport}
 	}
-	return &requester{config: config, client: client, gates: make(map[string]*adaptiveGate)}
+	return &requester{config: config, client: client, gates: make(map[string]*adaptiveGate),
+		bandwidth: newBandwidthLimit(config.MaxBytesPerSecond)}
 }
 func (r *requester) metricsSnapshot() Metrics {
 	metrics := r.metrics.snapshot()
@@ -211,7 +257,7 @@ func (r *requester) requestBody(ctx context.Context, method, target string, head
 				req.Header.Add(key, value)
 			}
 		}
-		req.Header.Set("User-Agent", userAgent)
+		req.Header.Set("User-Agent", agent(r.config.UserAgent))
 		req.Header.Set("Accept-Encoding", "identity")
 		r.metrics.requests.Add(1)
 		resp, err := r.client.Do(req)
@@ -235,6 +281,11 @@ func (r *requester) requestBody(ctx context.Context, method, target string, head
 		}
 		body, readErr := io.ReadAll(io.LimitReader(resp.Body, maxBytes+1))
 		closeErr := resp.Body.Close()
+		if err := r.bandwidth.pace(ctx, int64(len(body))); err != nil {
+			gate.release(resp.StatusCode, nil, 0)
+			cancel()
+			return responseData{}, err
+		}
 		gate.release(resp.StatusCode, readErr, r.retryAfter(resp.Header.Get("Retry-After")))
 		cancel()
 		if readErr != nil {

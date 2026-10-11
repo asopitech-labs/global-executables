@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"maps"
+	"math/rand/v2"
 	"os"
 	"slices"
 	"strings"
@@ -45,6 +46,16 @@ type crawlConfig struct {
 	RequestTimeout  time.Duration
 	ModuleTimeout   time.Duration
 	Continuous      bool
+	// Local booster controls (docs/OPERATIONS.md "Local booster"). RotationInclude limits
+	// the rotation to buckets this machine owns, RotationExclude leaves buckets to a
+	// booster whose lease is alive; both are "lo-hi,lo-hi" over gocrawl.OwnerBucket.
+	// NoFeed leaves the change feed (and its cursor) to the Actions refresh.
+	RotationInclude   string
+	RotationExclude   string
+	NoFeed            bool
+	UserAgent         string
+	MaxBytesPerSecond int64
+	PauseJitter       float64
 }
 
 // passPolicy carries what the change-driven refresh adds to a pass: the checks that
@@ -55,6 +66,9 @@ type passPolicy struct {
 	DueFloor int
 	MaxDays  int
 	Feed     []string
+	// Owns, when set, decides which rotation entries this run visits; the others advance
+	// the cursor without a request.
+	Owns func(module string) bool
 }
 
 func buildPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refresh bool) ([]gocrawl.ModuleWork, error) {
@@ -152,6 +166,10 @@ func planRefresh(catalogPath string, before gocrawl.Snapshot, target int, policy
 	due, cut := 0, len(batch)
 	for index := range batch {
 		batch[index].Refresh = true
+		if policy.Owns != nil && !policy.Owns(batch[index].Module) {
+			batch[index].Skip = true
+			continue
+		}
 		if check, recorded := checks[batch[index].Module]; recorded &&
 			!check.Due(batch[index].Module, policy.Today, policy.DueFloor, policy.MaxDays) {
 			batch[index].Skip = true
@@ -280,6 +298,7 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 	registryConfig := registryinspect.Config{
 		BaseURL: config.RegistryURL, RequestTimeout: config.RequestTimeout, PackageTimeout: config.ModuleTimeout,
 		InitialHostConcurrency: initialHostConcurrency, MaxHostConcurrency: config.Workers,
+		UserAgent: config.UserAgent, MaxBytesPerSecond: config.MaxBytesPerSecond,
 	}
 	if config.Source == "npm" {
 		// This runner's egress path received Retry-After under an unpaced burst. A
@@ -388,7 +407,7 @@ func executeLoop(
 		if pause <= 0 {
 			continue
 		}
-		timer := time.NewTimer(pause)
+		timer := time.NewTimer(jittered(pause, config.PauseJitter))
 		select {
 		case <-ctx.Done():
 			timer.Stop()
@@ -485,7 +504,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 	// poll leaves the cursor where it was and the next run replays it.
 	var feedReport gocrawl.FeedReport
 	var feedModules []string
-	if adapter.feed != nil && config.Continuous && (config.registryDefault || config.FeedURL != "") {
+	if adapter.feed != nil && config.Continuous && !config.NoFeed && (config.registryDefault || config.FeedURL != "") {
 		feedReport, err = gocrawl.PollFeed(ctx, store, adapter.feed, adapter.feedOptions)
 		if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
 			return gocrawl.PassReport{}, err
@@ -508,6 +527,11 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		policy.Today, policy.DueFloor = gocrawl.Today(clock()), dueFloor
 		policy.MaxDays = cmp.Or(adapter.maxBackoffDays, gocrawl.BackoffMaxDaysPlain)
 	}
+	owns, err := ownership(config)
+	if err != nil {
+		return gocrawl.PassReport{}, err
+	}
+	policy.Owns = owns
 	policy.Checks = func(modules []string) (map[string]gocrawl.Check, error) { return store.Checks(ctx, modules) }
 	works, err := planPassWorks(config.CatalogPath, before, config.PackageBudget, config.Continuous, policy)
 	if err != nil {
@@ -615,4 +639,32 @@ func loadNameSet(path string) (map[string]struct{}, error) {
 		}
 	}
 	return names, scanner.Err()
+}
+
+// ownership turns the include/exclude bucket ranges into the rotation filter, or nil when
+// this run owns the whole catalogue.
+func ownership(config crawlConfig) (func(string) bool, error) {
+	include, err := gocrawl.ParseRanges(config.RotationInclude)
+	if err != nil {
+		return nil, fmt.Errorf("-rotation-include: %w", err)
+	}
+	exclude, err := gocrawl.ParseRanges(config.RotationExclude)
+	if err != nil {
+		return nil, fmt.Errorf("-rotation-exclude: %w", err)
+	}
+	if include.Empty() && exclude.Empty() {
+		return nil, nil
+	}
+	return func(module string) bool {
+		return (include.Empty() || include.Contains(module)) && !exclude.Contains(module)
+	}, nil
+}
+
+// jittered spreads a pause by +-fraction so several machines do not poll in step.
+func jittered(pause time.Duration, fraction float64) time.Duration {
+	if fraction <= 0 || pause <= 0 {
+		return pause
+	}
+	fraction = min(fraction, 0.9)
+	return time.Duration(float64(pause) * (1 + fraction*(2*rand.Float64()-1)))
 }

@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Local booster for PyPI (#69, refs #64): `tools/local_booster.sh pypi run` crawls the
+  never-visited backlog (588,000 of 870,264 packages) from your machine in parallel with
+  Actions. Ownership by bucket (`sha256(name)[0]`, Go `OwnerBucket` / Python
+  `owner_bucket`) with a lease and heartbeat on `artifact-data`
+  (`data/production/booster/<source>.json`, 12 h TTL); while it is alive
+  `registry-refresh.yml` passes `--rotation-exclude`, afterwards Actions owns everything
+  again. Both writers publish deltas (`DELTA_SOURCES=pypi`: per-package state entries and
+  the rows of changed packages only), so neither erases the other; re-publishing is a
+  no-op. New crawler flags `--rotation-include/-exclude`, `--no-feed`, `--user-agent`
+  (`GE_USER_AGENT`), `--max-bytes-per-second`, `--pause-jitter`.
 - Packages without commands are recorded like the others (#68, refs #64): the schedule
   cache entry is now `<day>:<streak><outcome>:<version>` (`n` = no commands, `c` = has
   commands; entries without a letter still parse) for every inspected package. Go used to

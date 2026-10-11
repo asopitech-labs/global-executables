@@ -53,6 +53,12 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags.DurationVar(&config.RequestTimeout, "request-timeout", 0, "deadline per HTTP attempt (source-safe default when zero)")
 	flags.DurationVar(&config.ModuleTimeout, "module-timeout", 0, "deadline per package inspection (source-safe default when zero)")
 	flags.BoolVar(&config.Continuous, "continuous", false, "keep cycling through indexed packages after exhaustive coverage")
+	flags.StringVar(&config.RotationInclude, "rotation-include", "", "local booster: visit only these owner buckets in the rotation (lo-hi,lo-hi of 0-255)")
+	flags.StringVar(&config.RotationExclude, "rotation-exclude", "", "leave these owner buckets of the rotation to a local booster (lo-hi,lo-hi of 0-255)")
+	flags.BoolVar(&config.NoFeed, "no-feed", false, "do not poll the change feed (its cursor stays with the Actions refresh)")
+	flags.StringVar(&config.UserAgent, "user-agent", os.Getenv("GE_USER_AGENT"), "User-Agent to send (include a contact address when crawling from your own machine)")
+	flags.Int64Var(&config.MaxBytesPerSecond, "max-bytes-per-second", 0, "cap the average download rate (0 = no cap)")
+	flags.Float64Var(&config.PauseJitter, "pause-jitter", 0, "spread the pause between passes by +-this fraction")
 	flags.IntVar(&passes, "passes", 1, "number of passes; zero runs until exhaustive")
 	flags.DurationVar(&pause, "pause", 5*time.Second, "delay between passes")
 	if err := flags.Parse(args[1:]); err != nil {

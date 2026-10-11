@@ -24,8 +24,37 @@ PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"
 # history and state stay untouched (docs/OPERATIONS.md "History and cache"). 0 disables it.
 export REPORT_HEARTBEAT_HOURS="${REPORT_HEARTBEAT_HOURS:-24}"
 PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
+# Sources that two writers (the Actions refresh and a local booster) may publish at the
+# same time.  They publish a delta -- only what this writer changed since the snapshot it
+# last published -- instead of replacing the whole source (docs/OPERATIONS.md "Local booster").
+DELTA_SOURCES="${DELTA_SOURCES-pypi}"
+# BOOSTER=1: this machine is a booster.  It publishes rows and per-package state of the
+# packages it crawled, never cursors, the change feed, the catalogue or the report.
+BOOSTER="${BOOSTER:-0}"
+# Extra arguments for the Go crawler of `start` (e.g. --continuous --rotation-include ...).
+CRAWL_EXTRA_ARGS="${CRAWL_EXTRA_ARGS:-}"
 
-if [ -n "${CONTAINER_RUNTIME:-}" ]; then
+is_delta_source() {
+  case " ${DELTA_SOURCES} " in *" $1 "*) return 0 ;; esac
+  return 1
+}
+
+# The base is the state and rows as last published (or seeded): the next delta is whatever
+# this writer changed since.
+capture_base() {
+  local dir="$1" source="$2"
+  is_delta_source "${source}" || return 0
+  rm -rf "${dir}/.base"
+  mkdir -p "${dir}/.base"
+  [ -d "${dir}/data/production/registry-state" ] && cp -a "${dir}/data/production/registry-state" "${dir}/.base/registry-state"
+  [ -f "${dir}/data/production/intermediate/${source}.jsonl" ] && \
+    cp "${dir}/data/production/intermediate/${source}.jsonl" "${dir}/.base/rows.jsonl"
+  return 0
+}
+
+if [ "${NO_CONTAINER:-0}" = 1 ]; then
+  RUNTIME=""  # prepare state only; the caller runs the crawler itself (tools/local_booster.sh native)
+elif [ -n "${CONTAINER_RUNTIME:-}" ]; then
   RUNTIME="${CONTAINER_RUNTIME}"
 elif command -v podman >/dev/null 2>&1; then
   RUNTIME=podman
@@ -108,6 +137,10 @@ seed() {
       git show "origin/artifact-data:${rows}" > "${ROOT_DIR}/${rows}"
     fi
   done
+  # A run that crawls one source in this very directory (the Actions refresh) publishes
+  # a delta against what it was seeded with.
+  set -- ${SOURCES}
+  if [ "$#" -eq 1 ]; then capture_base "${BASE}" "$1"; fi
   # Report from the seeded base: the per-source directories `status` reads do not exist
   # until `start` slices them, so asking it here answers "cursor=None" for everything.
   echo "seeded ${BASE} from origin/artifact-data"
@@ -141,11 +174,12 @@ start() {
       *) needs_python=1 ;;
     esac
   done
-  if [ "${needs_python}" = 1 ]; then
+  if [ "${needs_python}" = 1 ] && [ "${NO_CONTAINER:-0}" != 1 ]; then
     "${RUNTIME}" build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
   fi
   case " ${SOURCES} " in
-    *" go "*|*" npm "*|*" pypi "*|*" rubygems "*|*" packagist "*) CONTAINER_RUNTIME="${RUNTIME}" tools/go_image.sh runtime "${GO_IMAGE}" >/dev/null ;;
+    *" go "*|*" npm "*|*" pypi "*|*" rubygems "*|*" packagist "*)
+      [ "${NO_CONTAINER:-0}" = 1 ] || CONTAINER_RUNTIME="${RUNTIME}" tools/go_image.sh runtime "${GO_IMAGE}" >/dev/null ;;
   esac
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
@@ -172,12 +206,18 @@ PY
        [ ! -f "${dir}/data/production/intermediate/${source}.jsonl" ]; then
       cp "${BASE}/data/production/intermediate/${source}.jsonl" "${dir}/data/production/intermediate/${source}.jsonl"
     fi
+    [ -d "${dir}/.base" ] || capture_base "${dir}" "${source}"
+    if [ "${NO_CONTAINER:-0}" = 1 ]; then
+      echo "prepared ${dir}"
+      continue
+    fi
     "${RUNTIME}" rm -f "ge-${source}" >/dev/null 2>&1 || true
     case "${source}" in
       go|npm|pypi|rubygems|packagist)
+        # shellcheck disable=SC2086  # CRAWL_EXTRA_ARGS is a word list by design
         "${RUNTIME}" run --detach --init --name "ge-${source}" --restart on-failure:5 \
-          -v "${dir}:/state" "${GO_IMAGE}" crawl --source "${source}" --passes 0 \
-          --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}" >/dev/null
+          ${GE_USER_AGENT:+-e GE_USER_AGENT} -v "${dir}:/state" "${GO_IMAGE}" crawl --source "${source}" --passes 0 \
+          --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}" ${CRAWL_EXTRA_ARGS} >/dev/null
         ;;
       *)
         "${RUNTIME}" run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
@@ -245,13 +285,33 @@ publish_snapshot() (
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
     local state="${dir}/data/production/registry-state"
+    local rows="data/production/intermediate/${source}.jsonl"
+    local transport="data/production/transport/${source}-observations"
+    local delta=0
     python3 "${ROOT_DIR}/tools/registry_state.py" exists --state "${state}" || continue
+    local merge_args=()
+    local local_rows="${dir}/${rows}"
+    if is_delta_source "${source}"; then
+      delta=1
+      # Work from a frozen copy: a crawler container keeps writing the live files.
+      rm -rf "${dir}/.snap"
+      mkdir -p "${dir}/.snap"
+      cp -a "${state}" "${dir}/.snap/registry-state"
+      [ -f "${dir}/${rows}" ] && cp "${dir}/${rows}" "${dir}/.snap/rows.jsonl"
+      state="${dir}/.snap/registry-state"
+      local_rows="${dir}/.snap/rows.jsonl"
+      merge_args=(--delta-base-state "${dir}/.base/registry-state")
+      [ "${BOOSTER}" = 1 ] && merge_args+=(--no-scalars)
+    fi
+    # A booster publishes no report: the Actions refresh owns it.
+    if [ "${BOOSTER}" != 1 ]; then
+      merge_args+=(--published-report "${worktree}/reports/registry-artifact-crawl.json"
+                   --local-report "${dir}/reports/registry-artifact-crawl.json")
+    fi
     if python3 "${ROOT_DIR}/tools/merge_registry_publication.py" \
         --source "${source}" \
         --published-state "${worktree}/data/production/registry-state" \
-        --local-state "${state}" \
-        --published-report "${worktree}/reports/registry-artifact-crawl.json" \
-        --local-report "${dir}/reports/registry-artifact-crawl.json"; then
+        --local-state "${state}" ${merge_args[@]+"${merge_args[@]}"}; then
       :
     else
       local merge_status=$?
@@ -260,25 +320,41 @@ publish_snapshot() (
       fi
       return "${merge_status}"
     fi
-    for name in $(catalog_for "${source}"); do
-      if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
-         [ -f "${dir}/data/production/${name}" ]; then
-        python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
-          --input "${dir}/data/production/${name}" \
-          --output-dir "${worktree}/data/production/transport/go-modules"
-        rm -f "${worktree}/data/production/go-modules.txt"
-      elif [ -f "${dir}/data/production/${name}" ]; then
-        cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
-      fi
-    done
+    if [ "${BOOSTER}" != 1 ]; then
+      for name in $(catalog_for "${source}"); do
+        if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
+           [ -f "${dir}/data/production/${name}" ]; then
+          python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
+            --input "${dir}/data/production/${name}" \
+            --output-dir "${worktree}/data/production/transport/go-modules"
+          rm -f "${worktree}/data/production/go-modules.txt"
+        elif [ -f "${dir}/data/production/${name}" ]; then
+          cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
+        fi
+      done
+    fi
     if [ "${source}" = npm ] && \
        [ -f "${dir}/data/production/npm-critical-packages.txt" ]; then
       rm -f "${worktree}/data/production/npm-packages.txt" \
         "${worktree}/data/production/npm-packages.txt.gz"
     fi
-    local rows="data/production/intermediate/${source}.jsonl"
-    local transport="data/production/transport/${source}-observations"
-    if [ -f "${dir}/${rows}" ]; then
+    if [ "${delta}" = 1 ] && [ -f "${local_rows}" ]; then
+      # Rows of the packages this writer changed replace theirs in the published rows; every
+      # other package keeps what the other writer published.
+      local published_rows="${dir}/.snap/published.jsonl"
+      : > "${published_rows}"
+      if [ -f "${worktree}/${transport}/manifest.json" ]; then
+        python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
+          --input-dir "${worktree}/${transport}" --output "${published_rows}"
+      elif [ -f "${worktree}/${rows}" ]; then
+        cp "${worktree}/${rows}" "${published_rows}"
+      fi
+      python3 "${ROOT_DIR}/tools/booster.py" rows-delta --published "${published_rows}" \
+        --local "${local_rows}" --base "${dir}/.base/rows.jsonl" --output "${dir}/.snap/merged.jsonl"
+      python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
+        --input "${dir}/.snap/merged.jsonl" --output-dir "${worktree}/${transport}"
+      rm -f "${worktree}/${rows}"
+    elif [ -f "${dir}/${rows}" ]; then
       python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
         --input "${dir}/${rows}" \
         --output-dir "${worktree}/${transport}"
@@ -325,6 +401,19 @@ publish_snapshot() (
     else
       push_status=$?
     fi
+  fi
+  if [ "${push_status}" -eq 0 ]; then
+    # What was just published is the new base for the next delta.
+    for source in ${SOURCES}; do
+      local snap="${BASE}-${source}/.snap"
+      if [ -d "${snap}" ]; then
+        rm -rf "${BASE}-${source}/.base"
+        mkdir -p "${BASE}-${source}/.base"
+        [ -d "${snap}/registry-state" ] && mv "${snap}/registry-state" "${BASE}-${source}/.base/registry-state"
+        [ -f "${snap}/rows.jsonl" ] && mv "${snap}/rows.jsonl" "${BASE}-${source}/.base/rows.jsonl"
+        rm -rf "${snap}"
+      fi
+    done
   fi
   if [ "${push_status}" -ne 0 ]; then
     if [ "${attempt}" -ge "${PUBLISH_MAX_ATTEMPTS}" ]; then
@@ -393,6 +482,7 @@ case "${1:-start}" in
   status) status ;;
   merge) merge ;;
   publish) publish_locked ;;
+  publish_unlocked) publish ;;
   watch) watch ;;
   stop) for source in ${SOURCES}; do "${RUNTIME}" stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
   *) echo "usage: $0 {seed|start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
