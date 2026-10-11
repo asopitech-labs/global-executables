@@ -7,39 +7,55 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
-    "tensordict-nightly": 1,
-    "tf-nightly": 1,
-    "turnkey-pylib": 2,
-    "tw.jquery": 1
+    "aiohttp": 1,
+    "pyAgrum-nightly": 1,
+    "tensordict-nightly": 2,
+    "tf-nightly": 2,
+    "tw.jquery": 2,
+    "txldap": 1,
+    "txpostgres": 1,
+    "txsetup": 1
   },
   "failures": {
+    "aiohttp": "response exceeded 8388608 bytes",
+    "pyAgrum-nightly": "response exceeded 8388608 bytes",
     "tensordict-nightly": "response exceeded 8388608 bytes",
     "tf-nightly": "artifact size 383452382 exceeds limit 134217728",
-    "turnkey-pylib": "archive/tar: invalid tar header",
-    "tw.jquery": "archive/tar: invalid tar header"
+    "tw.jquery": "archive/tar: invalid tar header",
+    "txldap": "archive/tar: invalid tar header",
+    "txpostgres": "archive/tar: invalid tar header",
+    "txsetup": "archive/tar: invalid tar header"
   },
-  "feed_cursor": "42071621",
+  "feed_cursor": "42081332",
   "feed_pending": {
-    "labqoat": {
-      "kind": "add source file labqoat-0.1.60.tar.gz",
-      "time": 1791668870
+    "dailo-sdk": {
+      "kind": "add source file dailo_sdk-0.1.8.tar.gz",
+      "time": 1791697912
     },
-    "rag-wright": {
-      "kind": "add source file rag_wright-0.5.1.tar.gz",
-      "time": 1791668891
+    "matrx-scheduler": {
+      "kind": "add source file matrx_scheduler-0.3.386.tar.gz",
+      "time": 1791697869
     },
-    "smoldyn": {
-      "kind": "add py3 file smoldyn-2.77.dev202610102144-py3-none-any.whl",
-      "time": 1791668896
+    "pyqplot": {
+      "kind": "add py3 file pyqplot-0.7.3-py3-none-any.whl",
+      "time": 1791697907
+    },
+    "pytest-traceoptix": {
+      "kind": "add source file pytest_traceoptix-0.4.0.tar.gz",
+      "time": 1791697862
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
   "retry_projects": [
+    "aiohttp",
+    "pyAgrum-nightly",
     "tensordict-nightly",
     "tf-nightly",
-    "turnkey-pylib",
-    "tw.jquery"
+    "tw.jquery",
+    "txldap",
+    "txpostgres",
+    "txsetup"
   ],
   "snapshot_generation": 94
 }
