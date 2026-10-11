@@ -6,45 +6,49 @@
   "cursor": 870264,
   "due_floor": 0,
   "extraction_revision": 1,
-  "failure_attempts": {},
-  "failures": {},
-  "feed_cursor": "42090731",
+  "failure_attempts": {
+    "pydantic_core": 1,
+    "tensordict-nightly": 1,
+    "tf-nightly": 1
+  },
+  "failures": {
+    "pydantic_core": "response exceeded 8388608 bytes",
+    "tensordict-nightly": "response exceeded 8388608 bytes",
+    "tf-nightly": "artifact size 383456697 exceeds limit 134217728"
+  },
+  "feed_cursor": "42105875",
   "feed_pending": {
-    "alphaspec": {
-      "kind": "add source file alphaspec-0.2.0.tar.gz",
-      "time": 1791723310
+    "chematic": {
+      "kind": "add cp313 file chematic-1.1.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "time": 1791756108
     },
-    "claude-kiosk": {
-      "kind": "add source file claude_kiosk-0.3.0.tar.gz",
-      "time": 1791723311
+    "coverart-cli": {
+      "kind": "add source file coverart_cli-0.7.3.tar.gz",
+      "time": 1791756090
     },
-    "evidor": {
-      "kind": "add source file evidor-1.4.3.tar.gz",
-      "time": 1791723289
+    "nuverse": {
+      "kind": "add source file nuverse-0.3.2.tar.gz",
+      "time": 1791756055
     },
-    "labqoat": {
-      "kind": "add source file labqoat-0.2.2.tar.gz",
-      "time": 1791723264
+    "openwish": {
+      "kind": "add source file openwish-0.6.1.tar.gz",
+      "time": 1791756105
     },
-    "netizen-cli": {
-      "kind": "add source file netizen_cli-0.11.1.tar.gz",
-      "time": 1791723307
+    "pulsar-app": {
+      "kind": "add source file pulsar_app-0.16.0.tar.gz",
+      "time": 1791756089
     },
-    "pdfjs-viewer-pyqt6": {
-      "kind": "add source file pdfjs_viewer_pyqt6-1.4.0.tar.gz",
-      "time": 1791723276
-    },
-    "raman-bench": {
-      "kind": "yank release",
-      "time": 1791723256
-    },
-    "stanli": {
-      "kind": "add py3 file stanli-0.20.0-py3-none-win_amd64.whl",
-      "time": 1791723294
+    "pulsar-galaxy-lib": {
+      "kind": "add source file pulsar_galaxy_lib-0.16.0.tar.gz",
+      "time": 1791756090
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
-  "retry_projects": [],
-  "snapshot_generation": 97
+  "retry_projects": [
+    "pydantic_core",
+    "tensordict-nightly",
+    "tf-nightly"
+  ],
+  "snapshot_generation": 98
 }
