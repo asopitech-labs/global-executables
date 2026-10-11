@@ -7,24 +7,12 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
-    "aiohttp": 1,
-    "pyAgrum-nightly": 1,
-    "tensordict-nightly": 2,
-    "tf-nightly": 2,
-    "tw.jquery": 2,
-    "txldap": 1,
-    "txpostgres": 1,
-    "txsetup": 1
+    "vis-framework": 2,
+    "vllm-xpu-kernels": 1
   },
   "failures": {
-    "aiohttp": "response exceeded 8388608 bytes",
-    "pyAgrum-nightly": "response exceeded 8388608 bytes",
-    "tensordict-nightly": "response exceeded 8388608 bytes",
-    "tf-nightly": "artifact size 383452382 exceeds limit 134217728",
-    "tw.jquery": "archive/tar: invalid tar header",
-    "txldap": "archive/tar: invalid tar header",
-    "txpostgres": "archive/tar: invalid tar header",
-    "txsetup": "archive/tar: invalid tar header"
+    "vis-framework": "archive/tar: invalid tar header",
+    "vllm-xpu-kernels": "artifact size 141438192 exceeds limit 134217728"
   },
   "feed_cursor": "42081332",
   "feed_pending": {
@@ -48,14 +36,8 @@
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
   "retry_projects": [
-    "aiohttp",
-    "pyAgrum-nightly",
-    "tensordict-nightly",
-    "tf-nightly",
-    "tw.jquery",
-    "txldap",
-    "txpostgres",
-    "txsetup"
+    "vis-framework",
+    "vllm-xpu-kernels"
   ],
-  "snapshot_generation": 94
+  "snapshot_generation": 95
 }
