@@ -148,7 +148,8 @@ class Origin:
         for relative in ("tools/crawl_parallel.sh", "tools/merge_observations.py", "tools/merge_registry_publication.py",
                          "tools/registry_state.py", "tools/transport_shards.py", "tools/booster.py",
                          "src/global_executables/__init__.py", "src/global_executables/registry_state.py",
-                         "src/global_executables/booster.py"):
+                         "src/global_executables/booster.py", "src/global_executables/refresh_policy.py",
+                         "tools/local_booster.sh"):
             (self.work / relative).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, self.work / relative)
         for args in (("init", "-q", "-b", "main"), ("add", "-A"), ("commit", "-qm", "tools"),
@@ -166,7 +167,7 @@ class Origin:
         shutil.copytree(directory / "data/production/registry-state", directory / ".base/registry-state")
         shutil.copy2(rows, directory / ".base/rows.jsonl")
         environment = {**os.environ, "BASE": str(base), "SOURCES": "pypi", "OBSERVATION_SOURCES": " ",
-                       "DELTA_SOURCES": "pypi", "BOOSTER": "1" if booster_mode else "0", "PUBLISH_MAX_ATTEMPTS": "6",
+                       "DELTA_SOURCES": "pypi", "CONTAINER_RUNTIME": "docker", "BOOSTER": "1" if booster_mode else "0", "PUBLISH_MAX_ATTEMPTS": "6",
                        "PUBLISH_LOCK": str(self.root / f"{name}.lock"), "GIT_AUTHOR_NAME": "t",
                        "GIT_AUTHOR_EMAIL": "t@example.com", "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
         return directory, environment
@@ -318,3 +319,171 @@ def test_local_booster_script_requires_a_contact_and_documents_every_platform():
     text = script.read_text()
     assert 'DELTA_SOURCES' in text and "BOOSTER=1" in text, "a booster publishes deltas, never the whole source"
     assert "--no-feed" in text and "--rotation-include" in text and "--max-bytes-per-second" in text
+
+
+# --- native mode supervisor: PID tracking, stop ordering, stale PID, double start --------------
+
+import signal  # noqa: E402
+import time  # noqa: E402
+
+FAKE_CRAWLER = """#!/usr/bin/env bash
+echo "started $$" >> "$EVENTS"
+%s
+while :; do sleep 0.2; done
+"""
+POLITE = "trap 'sleep 1; echo crawler-exited >> \"$EVENTS\"; exit 0' TERM"
+DEAF = "trap '' TERM"
+
+
+class Native:
+    def __init__(self, tmp_path, crawler_body=POLITE, stop_timeout="20"):
+        self.origin = Origin(tmp_path)
+        self.tmp = tmp_path
+        self.events = tmp_path / "events.log"
+        self.events.write_text("")
+        self.crawler = tmp_path / "fake-crawler"
+        self.crawler.write_text(FAKE_CRAWLER % crawler_body)
+        self.crawler.chmod(0o755)
+        self.base = tmp_path / "base"
+        save_state(self.base / "data/production/registry-state", {"version": 1, "sources": {"pypi": source()}})
+        self.dir = Path(f"{self.base}-pypi")
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.env = {**os.environ, "BASE": str(self.base), "CONTACT": "t@example.org", "BOOSTER_ID": "box-test",
+                    "MODE": "native", "CRAWLER_BIN": str(self.crawler), "EVENTS": str(self.events),
+                    "PUBLISH_INTERVAL": "1000", "HEARTBEAT_INTERVAL": "1000", "STOP_TIMEOUT": stop_timeout,
+                    "PUBLISH_LOCK": str(tmp_path / "publish.lock"),
+                    "PUBLISH_CMD": 'echo publish >> "$EVENTS"', "GIT_AUTHOR_NAME": "t",
+                    "GIT_AUTHOR_EMAIL": "t@example.com", "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+        self.procs = []
+
+    def lines(self):
+        return self.events.read_text().split("\n")[:-1]
+
+    def run(self, command="run", **extra):
+        process = subprocess.Popen(["bash", "tools/local_booster.sh", "pypi", command], cwd=self.origin.work,
+                                   env={**self.env, **extra}, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+                                   start_new_session=True)
+        self.procs.append(process)
+        return process
+
+    def wait_for(self, predicate, seconds=40):
+        deadline = time.time() + seconds
+        while time.time() < deadline:
+            if predicate():
+                return True
+            time.sleep(0.1)
+        return False
+
+    def lease_document(self):
+        shown = subprocess.run(["git", "show", "artifact-data:data/production/booster/pypi.json"], cwd=self.origin.bare,
+                               capture_output=True, text=True)
+        return json.loads(shown.stdout) if shown.returncode == 0 else {"leases": {}}
+
+    def crawler_processes(self):
+        found = subprocess.run(["pgrep", "-f", str(self.crawler)], capture_output=True, text=True).stdout.split()
+        return [pid for pid in found if pid != str(os.getpid())]
+
+    def cleanup(self):
+        for process in self.procs:
+            if process.poll() is None:
+                os.killpg(process.pid, signal.SIGKILL)
+        subprocess.run(["pkill", "-KILL", "-f", str(self.crawler)])
+
+
+@pytest.fixture
+def native(tmp_path):
+    harness = Native(tmp_path)
+    yield harness
+    harness.cleanup()
+
+
+def test_native_term_stops_the_crawler_first_then_publishes_then_releases_the_lease(native):
+    supervisor = native.run()
+    assert native.wait_for(lambda: len(native.lines()) == 1), "crawler never started"
+    pid = int((native.dir / "booster.pid").read_text())
+    assert str(pid) in native.lines()[0], "the PID file names the crawler itself, not a subshell"
+    assert native.lease_document()["leases"]["box-test"]["ranges"] == "0-255"
+    os.kill(supervisor.pid, signal.SIGTERM)
+    assert supervisor.wait(timeout=60) == 0
+    # The crawler exits (one second after TERM) BEFORE the final publication.
+    assert [line.split()[0] for line in native.lines()] == ["started", "crawler-exited", "publish"], native.lines()
+    assert native.lease_document()["leases"] == {}, "the lease is released last"
+    assert native.crawler_processes() == [] and not (native.dir / "booster.pid").exists(), "no orphan crawler"
+    assert not (native.dir / "supervisor.pid").exists()
+
+
+def test_a_crawler_that_ignores_term_is_killed_and_nothing_is_published_over_a_live_one(tmp_path):
+    harness = Native(tmp_path, crawler_body=DEAF, stop_timeout="2")
+    try:
+        supervisor = harness.run()
+        assert harness.wait_for(lambda: harness.lines())
+        os.kill(supervisor.pid, signal.SIGTERM)
+        assert supervisor.wait(timeout=60) == 0
+        assert harness.lines()[-1] == "publish" and harness.crawler_processes() == [], "KILL after the timeout, then publish"
+        assert harness.lease_document()["leases"] == {}
+    finally:
+        harness.cleanup()
+
+
+def test_a_stale_or_foreign_pid_file_is_ignored_and_a_second_start_is_refused(native):
+    bystander = subprocess.Popen(["sleep", "300"])
+    try:
+        (native.dir / "booster.pid").write_text("999999\n")
+        first = native.run()
+        assert native.wait_for(lambda: native.lines()), "a stale PID file must not block the start"
+        # A second supervisor for the same directory is refused and starts no second crawler.
+        second = native.run()
+        assert second.wait(timeout=60) == 3, second.stdout.read()
+        assert [line.split()[0] for line in native.lines()] == ["started"]
+        os.kill(first.pid, signal.SIGTERM)
+        assert first.wait(timeout=60) == 0
+        # A PID file naming an unrelated live process is never trusted or killed.
+        (native.dir / "booster.pid").write_text(f"{bystander.pid}\n")
+        third = native.run()
+        assert native.wait_for(lambda: native.lines().count("publish") == 1 and sum(l.startswith("started") for l in native.lines()) == 2)
+        os.kill(third.pid, signal.SIGTERM)
+        assert third.wait(timeout=60) == 0
+        assert bystander.poll() is None, "the unrelated process survived"
+    finally:
+        bystander.kill()
+
+
+def test_an_orphan_crawler_without_a_pid_file_blocks_start_and_is_stopped_by_stop(native):
+    orphan = subprocess.Popen([str(native.crawler), "crawl", "--source", "pypi", "--rotation-include", "0-255"],
+                              cwd=native.dir, env=native.env, start_new_session=True)
+    try:
+        assert native.wait_for(lambda: native.lines())
+        refused = native.run()
+        assert refused.wait(timeout=60) == 3 and "already running" in refused.stdout.read()
+        stopped = native.run("stop")
+        assert stopped.wait(timeout=60) == 0
+        assert orphan.wait(timeout=10) == 0 and native.lines()[-1] == "crawler-exited"
+    finally:
+        if orphan.poll() is None:
+            orphan.kill()
+
+
+def test_heartbeat_only_renewal_commits_nothing_until_the_lease_is_old(tmp_path):
+    origin = Origin(tmp_path)
+    environment = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.com",
+                   "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+
+    def cli(*args):
+        return subprocess.run([sys.executable, "tools/booster.py", *args, "--source", "pypi", "--id", "m"], cwd=origin.work,
+                              env=environment, capture_output=True, text=True)
+
+    assert cli("acquire", "--ranges", "0-255", "--ttl-hours", "18").returncode == 0
+    head = origin.head()
+    assert cli("renew", "--min-age-hours", "6").returncode == 0
+    assert origin.head() == head, "a fresh heartbeat is left alone: no commit"
+    time.sleep(0.2)
+    assert cli("renew", "--min-age-hours", "0.00001").returncode == 0
+    assert origin.head() != head, "an old heartbeat is renewed"
+    changed = subprocess.run(["git", "diff", "--name-only", head, origin.head()], cwd=origin.bare, capture_output=True,
+                             text=True).stdout.split()
+    assert changed == ["data/production/booster/pypi.json"], "only the lease file, no data blobs"
+    document = {"leases": {"m": {"ranges": "0-255", "heartbeat": NOW.isoformat(), "ttl_hours": 18}}}
+    assert booster.fresh(document, "m", "0-255", 6, NOW + timedelta(hours=5))
+    assert not booster.fresh(document, "m", "0-255", 6, NOW + timedelta(hours=7))
+    assert not booster.fresh(document, "m", "0-100", 6, NOW), "other ranges are never fresh"
+    assert not booster.fresh(document, "m", "0-255", 6, NOW + timedelta(hours=19)), "an expired lease is not fresh"

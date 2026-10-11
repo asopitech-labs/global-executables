@@ -180,6 +180,18 @@ def acquire(document: dict[str, Any], lease_id: str, ranges: str, now: datetime 
     return {"version": LEASE_VERSION, "leases": leases}
 
 
+def fresh(document: dict[str, Any], lease_id: str, ranges: str, min_age_hours: float,
+          now: datetime | None = None) -> bool:
+    """True when ``lease_id`` is alive with these ranges and its heartbeat is younger than
+    ``min_age_hours``: a renewal would only churn a commit."""
+    now = now or now_utc()
+    lease = document.get("leases", {}).get(lease_id)
+    if not is_live(lease, now) or lease.get("ranges") != format_ranges(parse_ranges(ranges)):
+        return False
+    beat = _parse_time(lease.get("heartbeat"))
+    return beat is not None and now - beat < timedelta(hours=min_age_hours)
+
+
 def release(document: dict[str, Any], lease_id: str) -> dict[str, Any]:
     leases = {key: value for key, value in document.get("leases", {}).items() if key != lease_id}
     return {"version": LEASE_VERSION, "leases": leases}

@@ -979,8 +979,24 @@ each its own `BOOSTER_ID`). Settings (all environment variables): `CONTACT` (req
 into the User-Agent), `BOOSTER_ID`, `BOOSTER_RANGES` / `BOOSTER_SLICE`, `WORKERS` (8),
 `MAX_BYTES_PER_SECOND` (5,000,000; 0 = none), `PUBLISH_INTERVAL` (3600), `PAUSE` (30 s,
 +-30 % jitter), `PACKAGE_BUDGET` (3000), `BASE` (`~/.ge-crawl`), `MODE` (`docker` or `native`),
-`LEASE_TTL_HOURS` (12). Stop it with Ctrl-C or SIGTERM: it stops the crawler, publishes once
-more and releases the lease. After a crash or reboot start it again; the working
+`LEASE_TTL_HOURS` (12), `HEARTBEAT_INTERVAL` (3600), `LEASE_MIN_AGE` (TTL/3 hours),
+`STOP_TIMEOUT` (300), `CRAWLER_BIN` (native: use this binary instead of building one).
+Stop it with Ctrl-C or SIGTERM: it stops the crawler and waits until it has exited
+(TERM, then KILL after `STOP_TIMEOUT`), only then publishes once more, and releases the
+lease last. If the crawler cannot be stopped it publishes nothing and keeps the lease until
+it expires. In native mode the crawler's PID is kept in `<dir>/booster.pid` (the
+supervisor's in `<dir>/supervisor.pid`); a stale file, or one naming an unrelated process,
+is ignored, and a second start for the same directory is refused (exit 3), including when
+a crawler is running without a PID file. `local_booster.sh pypi stop` also stops such a crawler.
+
+**Lease TTL and heartbeat.** The heartbeat is renewed every `HEARTBEAT_INTERVAL` seconds
+independently of the publish interval, but a renewal only commits (one small JSON file, no
+data blobs) once the stored heartbeat is older than `LEASE_MIN_AGE`; fresher ones change
+nothing. So a long `PUBLISH_INTERVAL` (say 6 h, to keep repository growth slow: each
+publication rewrites ~29 MB of transport blobs) needs no long TTL: with the defaults the
+lease costs at most ~3 tiny commits a day and survives a few missed renewals. Trade-off of
+a longer TTL: Actions leaves the buckets to a booster that has died for up to that long
+(pick 6-12 h); of a shorter one: more heartbeat commits. After a crash or reboot start it again; the working
 directory, database and cache resume where they were. Do not run `crawl_parallel.sh start`
 for the same source at the same time.
 

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Local booster, native mode: the crawler's PID was recorded as that of a waiting subshell,
+  so on SIGTERM the supervisor could not stop the crawler and the final publication raced
+  with it. The PID file now names the crawler; stop waits for it to exit (KILL after
+  `STOP_TIMEOUT`) before the final publication and the lease release, stale and foreign PID
+  files are ignored, and a second start (or a crawler without a PID file) is refused.
+  `LEASE_TTL_HOURS` is documented, and the lease heartbeat is renewed independently of the
+  publish interval (`HEARTBEAT_INTERVAL`, `LEASE_MIN_AGE`; `booster.py renew --min-age-hours`
+  commits only when the lease is getting old).
 - Local booster for PyPI (#69, refs #64): `tools/local_booster.sh pypi run` crawls the
   never-visited backlog (588,000 of 870,264 packages) from your machine in parallel with
   Actions. Ownership by bucket (`sha256(name)[0]`, Go `OwnerBucket` / Python
