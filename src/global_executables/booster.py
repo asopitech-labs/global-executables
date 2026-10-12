@@ -309,3 +309,45 @@ def merge_rows_delta(published: Path | None, local: Path, base: Path | None, out
 
 
 Operation = Callable[[dict[str, Any]], dict[str, Any]]
+
+
+# --- coverage accounting --------------------------------------------------------------------
+
+def coverage(catalog: list[str], checks: dict[str, Any], unavailable: Iterable[str], failures: Iterable[str],
+             retries: Iterable[str], rotation_cursor: int) -> dict[str, Any]:
+    """Account for every catalogue position: checked (by outcome), unavailable, failing, or
+    not visited yet.  ``unaccounted`` splits into the part at/after the rotation cursor (the
+    rest of the current lap) and the part before it; after one full lap the second must be 0.
+
+    The report's ``complete``/``cursor`` describe the catalogue *walk* (discovery), which is
+    finished; the rotation lap is ``rotation_cursor`` and this summary.
+    """
+    from .refresh_policy import HAS_COMMANDS, NO_COMMANDS, unpack_full
+
+    unavailable, failing = set(unavailable), set(failures) | set(retries)
+    outcomes = {"has_commands": 0, "no_commands": 0, "unknown_outcome": 0}
+    counts = {"unavailable": 0, "failing": 0}
+    before = after = 0
+    first = last = None
+    for index, name in enumerate(catalog):
+        if name in checks:
+            parsed = unpack_full(checks[name])
+            outcome = parsed[3] if parsed else ""
+            key = {HAS_COMMANDS: "has_commands", NO_COMMANDS: "no_commands"}.get(outcome, "unknown_outcome")
+            outcomes[key] += 1
+        elif name in unavailable:
+            counts["unavailable"] += 1
+        elif name in failing:
+            counts["failing"] += 1
+        else:
+            if index >= rotation_cursor:
+                after += 1
+            else:
+                before += 1
+            first = index if first is None else first
+            last = index
+    names = set(catalog)
+    return {"catalog_size": len(catalog), "rotation_cursor": rotation_cursor, **outcomes, **counts,
+            "unaccounted": before + after, "unaccounted_ahead_of_cursor": after, "unaccounted_behind_cursor": before,
+            "first_unaccounted_index": first, "last_unaccounted_index": last,
+            "checked_outside_catalog": sum(1 for name in checks if name not in names)}

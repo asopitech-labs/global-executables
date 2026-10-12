@@ -989,6 +989,23 @@ supervisor's in `<dir>/supervisor.pid`); a stale file, or one naming an unrelate
 is ignored, and a second start for the same directory is refused (exit 3), including when
 a crawler is running without a PID file. `local_booster.sh pypi stop` also stops such a crawler.
 
+**Native mode needs no container runtime.** `seed`, `merge` and `publish` of
+`crawl_parallel.sh` are git and Python only; only `start` (container mode), `status`,
+`watch` and `stop` require Docker or Podman. (Before this, the script refused to load
+without a runtime, so a native booster's scheduled publications failed with "Podman or
+Docker is required" while the lease heartbeat, which does not use the script, kept
+working. A failed publication never advances `.base`, so the next one carries everything.)
+
+**Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
+--source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:
+checked with an outcome (`has_commands`, `no_commands`), `unavailable` (no release, no wheel
+or sdist, 404 ...), `failing` (failures and retries), or `unaccounted` = not reached yet,
+split into ahead of and behind the rotation cursor. Note that the crawl report's
+`complete: true` and `cursor` describe the catalogue *walk* (discovery), which is finished;
+the lap is the rotation cursor (`refresh_cursor`). A lap is done when nothing is
+unaccounted. `checked_outside_catalog` counts packages known from earlier runs or the feed
+that the current catalogue snapshot no longer lists.
+
 **Lease TTL and heartbeat.** The heartbeat is renewed every `HEARTBEAT_INTERVAL` seconds
 independently of the publish interval, but a renewal only commits (one small JSON file, no
 data blobs) once the stored heartbeat is older than `LEASE_MIN_AGE`; fresher ones change

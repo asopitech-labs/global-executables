@@ -65,6 +65,7 @@ STOP_TIMEOUT="${STOP_TIMEOUT:-300}"
 # third of the TTL), so the TTL does not have to follow PUBLISH_INTERVAL.
 HEARTBEAT_INTERVAL="${HEARTBEAT_INTERVAL:-3600}"
 
+[ "${MODE}" = native ] && export NO_CONTAINER=1
 export BASE BOOSTER=1 SOURCES="${SOURCE}" OBSERVATION_SOURCES=" " DELTA_SOURCES="${DELTA_SOURCES:-${SOURCE}}"
 export PACKAGE_BUDGET PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
 
@@ -251,6 +252,8 @@ case "${COMMAND}" in
     running && echo "crawler: running" || echo "crawler: not running"
     python3 "${ROOT_DIR}/tools/booster.py" show --source "${SOURCE}" || true
     progress_json || true
+    # Every catalogue position: checked (by outcome), unavailable, failing, or not reached yet.
+    python3 "${ROOT_DIR}/tools/booster.py" coverage --source "${SOURCE}" --dir "${DIR}" || true
     ;;
   publish) publish_now ;;
   stop) stop_crawler; [ -z "${SUPERVISOR_STOP:-}" ] || true ;;

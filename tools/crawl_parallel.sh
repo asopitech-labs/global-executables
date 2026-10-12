@@ -61,9 +61,17 @@ elif command -v podman >/dev/null 2>&1; then
 elif command -v docker >/dev/null 2>&1; then
   RUNTIME=docker
 else
-  echo "Podman or Docker is required." >&2
-  exit 1
+  RUNTIME=""
 fi
+
+# Only the commands that run or inspect containers need a runtime. seed, merge and publish
+# are git and Python only, so a native booster (no Docker/Podman) can publish.
+require_runtime() {
+  if [ -z "${RUNTIME}" ]; then
+    echo "Podman or Docker is required." >&2
+    exit 1
+  fi
+}
 
 # Catalogs are per source, so each container carries only the one it reads.
 catalog_for() {
@@ -162,6 +170,7 @@ PY
 
 start() {
   cd "${ROOT_DIR}"
+  [ "${NO_CONTAINER:-0}" = 1 ] || require_runtime
   guard_npm_owner
   if ! python3 "${ROOT_DIR}/tools/registry_state.py" exists --state "${BASE}/data/production/registry-state"; then
     echo "no state at ${BASE}; seeding from origin/artifact-data first"
@@ -230,6 +239,7 @@ PY
 }
 
 status() {
+  require_runtime
   for source in ${SOURCES}; do
     local dir="${BASE}-${source}"
     printf '%-10s %-24s ' "${source}" "$("${RUNTIME}" ps --filter "name=ge-${source}" --format '{{.Status}}' || echo 'not running')"
@@ -462,6 +472,7 @@ publish_locked() (
 # someone remembers.  `watch` keeps publishing while the containers run, so stopping
 # the session strands nothing.
 watch() {
+  require_runtime
   guard_npm_owner
   local interval="${PUBLISH_INTERVAL:-1800}"
   while :; do
@@ -484,6 +495,6 @@ case "${1:-start}" in
   publish) publish_locked ;;
   publish_unlocked) publish ;;
   watch) watch ;;
-  stop) for source in ${SOURCES}; do "${RUNTIME}" stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
+  stop) require_runtime; for source in ${SOURCES}; do "${RUNTIME}" stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
   *) echo "usage: $0 {seed|start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
 esac

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Local booster, native mode: publications failed with "Podman or Docker is required"
+  because `crawl_parallel.sh` refused to load without a container runtime even for `seed`,
+  `merge` and `publish`. The runtime is now required only by the commands that use it, and
+  `MODE=native` sets `NO_CONTAINER=1`. New `tools/booster.py coverage` (also in
+  `local_booster.sh status`) accounts for every catalogue position (checked by outcome,
+  unavailable, failing, not reached yet ahead of/behind the rotation cursor).
 - Local booster, native mode: the crawler's PID was recorded as that of a waiting subshell,
   so on SIGTERM the supervisor could not stop the crawler and the final publication raced
   with it. The PID file now names the crawler; stop waits for it to exit (KILL after
