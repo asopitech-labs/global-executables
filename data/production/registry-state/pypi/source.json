@@ -8,6 +8,11 @@
   "extraction_revision": 1,
   "failure_attempts": {
     "aioesphomeapi": 1,
+    "flashinfer-cubin": 2,
+    "flo-check-homework": 1,
+    "fluentxml": 1,
+    "fluxengine": 1,
+    "flvlib": 1,
     "pyAgrum-nightly": 1,
     "pydantic_core": 1,
     "tensordict-nightly": 1,
@@ -15,6 +20,11 @@
   },
   "failures": {
     "aioesphomeapi": "response exceeded 8388608 bytes",
+    "flashinfer-cubin": "artifact size 457984995 exceeds limit 134217728",
+    "flo-check-homework": "archive/tar: invalid tar header",
+    "fluentxml": "archive/tar: invalid tar header",
+    "fluxengine": "response exceeded 134217728 bytes",
+    "flvlib": "archive/tar: invalid tar header",
     "pyAgrum-nightly": "response exceeded 8388608 bytes",
     "pydantic_core": "response exceeded 8388608 bytes",
     "tensordict-nightly": "response exceeded 8388608 bytes",
@@ -58,7 +68,12 @@
     "tensordict-nightly",
     "tf-nightly",
     "aioesphomeapi",
-    "pyAgrum-nightly"
+    "pyAgrum-nightly",
+    "flashinfer-cubin",
+    "flo-check-homework",
+    "fluentxml",
+    "fluxengine",
+    "flvlib"
   ],
-  "snapshot_generation": 99
+  "snapshot_generation": 100
 }
