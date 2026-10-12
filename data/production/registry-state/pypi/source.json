@@ -7,40 +7,48 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
+    "aioesphomeapi": 1,
+    "pyAgrum-nightly": 1,
     "pydantic_core": 1,
     "tensordict-nightly": 1,
     "tf-nightly": 1
   },
   "failures": {
+    "aioesphomeapi": "response exceeded 8388608 bytes",
+    "pyAgrum-nightly": "response exceeded 8388608 bytes",
     "pydantic_core": "response exceeded 8388608 bytes",
     "tensordict-nightly": "response exceeded 8388608 bytes",
     "tf-nightly": "artifact size 383456697 exceeds limit 134217728"
   },
-  "feed_cursor": "42105875",
+  "feed_cursor": "42117654",
   "feed_pending": {
-    "chematic": {
-      "kind": "add cp313 file chematic-1.1.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "time": 1791756108
+    "ai-agentbox": {
+      "kind": "add source file ai_agentbox-0.1.7.tar.gz",
+      "time": 1791785007
     },
-    "coverart-cli": {
-      "kind": "add source file coverart_cli-0.7.3.tar.gz",
-      "time": 1791756090
+    "graph-mind-memory": {
+      "kind": "add source file graph_mind_memory-0.5.5.tar.gz",
+      "time": 1791784963
     },
-    "nuverse": {
-      "kind": "add source file nuverse-0.3.2.tar.gz",
-      "time": 1791756055
+    "hue-run": {
+      "kind": "add source file hue_run-0.10.0.tar.gz",
+      "time": 1791784967
     },
-    "openwish": {
-      "kind": "add source file openwish-0.6.1.tar.gz",
-      "time": 1791756105
+    "llama-index-readers-anakin": {
+      "kind": "create",
+      "time": 1791785000
     },
-    "pulsar-app": {
-      "kind": "add source file pulsar_app-0.16.0.tar.gz",
-      "time": 1791756089
+    "reo-census": {
+      "kind": "add source file reo_census-0.2.0.tar.gz",
+      "time": 1791784990
     },
-    "pulsar-galaxy-lib": {
-      "kind": "add source file pulsar_galaxy_lib-0.16.0.tar.gz",
-      "time": 1791756090
+    "splitsmith": {
+      "kind": "add source file splitsmith-0.65.2.tar.gz",
+      "time": 1791784967
+    },
+    "syntviz": {
+      "kind": "add source file syntviz-0.2.0.tar.gz",
+      "time": 1791784977
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
@@ -48,7 +56,9 @@
   "retry_projects": [
     "pydantic_core",
     "tensordict-nightly",
-    "tf-nightly"
+    "tf-nightly",
+    "aioesphomeapi",
+    "pyAgrum-nightly"
   ],
-  "snapshot_generation": 98
+  "snapshot_generation": 99
 }
