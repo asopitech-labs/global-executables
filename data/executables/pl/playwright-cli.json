@@ -2,6 +2,18 @@
   "command": "playwright-cli",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "slicc-cdp",
+      "version": "1.8.0",
+      "repository": "https://github.com/ai-ecoverse/slicc-cdp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.8.0"
+    },
+    {
       "ecosystem": "homebrew",
       "package": "playwright-cli",
       "version": "0.1.18",
