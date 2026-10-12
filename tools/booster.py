@@ -76,7 +76,7 @@ def publish(source: str, operation, remote: str, branch: str, attempts: int, mes
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta"])
+    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "coverage"])
     parser.add_argument("--source", default="pypi")
     parser.add_argument("--id", default=os.environ.get("BOOSTER_ID", ""))
     parser.add_argument("--ranges", default=os.environ.get("BOOSTER_RANGES", "0-255"))
@@ -92,6 +92,7 @@ def main() -> int:
     parser.add_argument("--local", type=Path)
     parser.add_argument("--base", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--dir", type=Path, help="coverage: the booster working directory (<BASE>-<source>)")
     args = parser.parse_args()
 
     if args.command == "rows-delta":
@@ -99,6 +100,20 @@ def main() -> int:
             parser.error("rows-delta needs --local and --output")
         touched, written = booster.merge_rows_delta(args.published, args.local, args.base, args.output)
         print(f"{touched} packages changed, {written} rows applied")
+        return 0
+    if args.command == "coverage":
+        from global_executables.refresh_policy import read_cache
+        from global_executables.registry_state import load_state
+        if args.dir is None:
+            parser.error("coverage needs --dir")
+        production = args.dir / "data/production"
+        entry = load_state(production / "registry-state").get("sources", {}).get(args.source, {})
+        catalog_file = args.dir / str(entry.get("projects_file") or entry.get("names_file") or entry.get("packages_file") or "")
+        catalog = [line.split("\t", 1)[0].rstrip("\n") for line in catalog_file.open(encoding="utf-8") if line.strip()]
+        checks, cursor, _ = read_cache(production / "cache" / f"{args.source}.cache.gz")
+        retries = next((value for key, value in entry.items() if key.startswith("retry_") and isinstance(value, list)), [])
+        print(json.dumps(booster.coverage(catalog, checks, entry.get("unavailable") or {}, entry.get("failures") or {},
+                                          retries, cursor), indent=2))
         return 0
     if args.command == "show":
         print(json.dumps(read_remote_document(args.source, args.ref), indent=2, sort_keys=True))

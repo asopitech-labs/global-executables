@@ -487,3 +487,55 @@ def test_heartbeat_only_renewal_commits_nothing_until_the_lease_is_old(tmp_path)
     assert not booster.fresh(document, "m", "0-255", 6, NOW + timedelta(hours=7))
     assert not booster.fresh(document, "m", "0-100", 6, NOW), "other ranges are never fresh"
     assert not booster.fresh(document, "m", "0-255", 6, NOW + timedelta(hours=19)), "an expired lease is not fresh"
+
+
+def path_without_container_runtimes(tmp_path):
+    """A PATH with every system tool except docker and podman (CI runners have both)."""
+    bin_dir = tmp_path / "bin-no-runtime"
+    bin_dir.mkdir()
+    for directory in ("/usr/local/bin", "/usr/bin", "/bin"):
+        for tool in Path(directory).iterdir() if Path(directory).is_dir() else []:
+            if tool.name in ("docker", "podman") or (bin_dir / tool.name).exists():
+                continue
+            (bin_dir / tool.name).symlink_to(tool)
+    (bin_dir / "python3").unlink(missing_ok=True)
+    (bin_dir / "python3").symlink_to(sys.executable)
+    return str(bin_dir)
+
+
+def test_native_booster_publishes_without_any_container_runtime(tmp_path):
+    origin = Origin(tmp_path)
+    actions, actions_env = origin.writer("actions", booster_mode=False, base_state=source(), base_rows=[])
+    rewrite(actions, {}, [row("a", "1")])
+    assert origin.publish(actions_env).returncode == 0
+    _, state, _ = origin.published(tmp_path)
+    local, env = origin.writer("booster", booster_mode=True, base_state=state, base_rows=[row("a", "1")])
+    rewrite(local, {}, [row("a", "1"), row("native", "1")])
+    path = path_without_container_runtimes(tmp_path)
+    env = {key: value for key, value in env.items() if key != "CONTAINER_RUNTIME"}
+    env.update({"PATH": path, "MODE": "native", "BOOSTER_ID": "box-test"})
+    assert subprocess.run(["sh", "-c", "command -v docker || command -v podman"], env=env).returncode != 0
+    result = subprocess.run(["bash", "tools/local_booster.sh", "pypi", "publish"], cwd=origin.work, env=env,
+                            capture_output=True, text=True)
+    output = result.stdout + result.stderr
+    assert "Podman or Docker is required" not in output and "published" in output, output
+    _, _, rows = origin.published(tmp_path)
+    assert ("native", "1") in {(r["package"], r["version"]) for r in rows}
+    assert "native" in (local / ".base/rows.jsonl").read_text(), "the base advances only after a successful push"
+    # Commands that do drive containers still say so instead of failing obscurely.
+    status = subprocess.run(["bash", "tools/crawl_parallel.sh", "status"], cwd=origin.work, env={**env, "SOURCES": "pypi"},
+                            capture_output=True, text=True)
+    assert status.returncode == 1 and "Podman or Docker is required" in status.stderr
+
+
+def test_coverage_accounts_for_every_catalogue_position():
+    catalog = [f"p{i}" for i in range(10)]
+    checks = {"p0": "100:1c:1", "p1": "100:2n:1", "p2": "100:0:1", "gone-from-catalog": "100:1n:2"}
+    summary = booster.coverage(catalog, checks, {"p3": "HTTP 404"}, {"p4": "timeout"}, ["p5"], rotation_cursor=8)
+    assert (summary["has_commands"], summary["no_commands"], summary["unknown_outcome"]) == (1, 1, 1)
+    assert (summary["unavailable"], summary["failing"]) == (1, 2)
+    assert summary["unaccounted"] == 4 and summary["unaccounted_behind_cursor"] == 2 and summary["unaccounted_ahead_of_cursor"] == 2
+    assert (summary["first_unaccounted_index"], summary["last_unaccounted_index"]) == (6, 9)
+    accounted = sum(summary[k] for k in ("has_commands", "no_commands", "unknown_outcome", "unavailable", "failing", "unaccounted"))
+    assert accounted == len(catalog), "every position falls in exactly one category"
+    assert summary["checked_outside_catalog"] == 1
