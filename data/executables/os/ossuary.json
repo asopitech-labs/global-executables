@@ -2,6 +2,18 @@
   "command": "ossuary",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ossuary-cli",
+      "version": "0.12.0",
+      "repository": "https://github.com/sniner/ossuary",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "ossuary",
       "version": "0.1.0a0",
@@ -16,14 +28,14 @@
     {
       "ecosystem": "pypi",
       "package": "ossuary-risk",
-      "version": "0.11.0",
+      "version": "1.0.0",
       "repository": null,
-      "source": "https://files.pythonhosted.org/packages/d9/fe/d102714bb960d368170cb8d41d27109708daada2b82ab0b9b386a0366ad9/ossuary_risk-0.11.0-py3-none-any.whl",
+      "source": "https://files.pythonhosted.org/packages/e1/1c/2023be9b3a7be7ecf43c88450391f651941c700cc63ebfb8129aeb6d6078/ossuary_risk-1.0.0-py3-none-any.whl",
       "confidence": "direct",
       "source_type": "language_package",
       "language": "python",
       "registry": "pypi",
-      "latest_version": "0.11.0"
+      "latest_version": "1.0.0"
     }
   ],
   "first_seen": "2026-08-31",
