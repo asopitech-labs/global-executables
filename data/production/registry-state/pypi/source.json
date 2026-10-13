@@ -8,6 +8,10 @@
   "extraction_revision": 1,
   "failure_attempts": {
     "aioesphomeapi": 1,
+    "feagi-bv-macos-arm64": 1,
+    "feagi-bv-macos-x86-64": 1,
+    "isaacsim-extscache-physics": 1,
+    "karellen-llvm-core-debug": 1,
     "pyAgrum-nightly": 1,
     "pydantic_core": 1,
     "randomorg": 1,
@@ -19,6 +23,10 @@
   },
   "failures": {
     "aioesphomeapi": "response exceeded 8388608 bytes",
+    "feagi-bv-macos-arm64": "artifact size 134775458 exceeds limit 134217728",
+    "feagi-bv-macos-x86-64": "artifact size 135138301 exceeds limit 134217728",
+    "isaacsim-extscache-physics": "artifact size 252365167 exceeds limit 134217728",
+    "karellen-llvm-core-debug": "artifact size 216499473 exceeds limit 134217728",
     "pyAgrum-nightly": "response exceeded 8388608 bytes",
     "pydantic_core": "response exceeded 8388608 bytes",
     "randomorg": "archive/tar: invalid tar header",
@@ -26,9 +34,9 @@
     "rcmp": "archive/tar: invalid tar header",
     "rerun-sdk": "artifact size 147318601 exceeds limit 134217728",
     "tensordict-nightly": "response exceeded 8388608 bytes",
-    "tf-nightly": "artifact size 383456697 exceeds limit 134217728"
+    "tf-nightly": "artifact size 382758492 exceeds limit 134217728"
   },
-  "feed_cursor": "42157541",
+  "feed_cursor": "42182971",
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
   "retry_projects": [
@@ -40,7 +48,11 @@
     "rerun-sdk",
     "randomorg",
     "ravendb-embedded",
-    "rcmp"
+    "rcmp",
+    "feagi-bv-macos-arm64",
+    "feagi-bv-macos-x86-64",
+    "isaacsim-extscache-physics",
+    "karellen-llvm-core-debug"
   ],
-  "snapshot_generation": 105
+  "snapshot_generation": 106
 }
