@@ -13,7 +13,7 @@
 #      releases the lease.
 # The schedule cache lives with the working directory and survives restarts.
 #
-# Commands: run | status | publish | stop | release | unit   (default: run)
+# Commands: run | status | publish | stop | abort | release | unit   (default: run)
 # Settings (environment):
 #   CONTACT             required: an e-mail address or URL put in the User-Agent
 #   BOOSTER_ID          lease name, default: this machine's host name
@@ -60,6 +60,12 @@ DIR="${BASE}-${SOURCE}"
 NATIVE_PID="${DIR}/booster.pid"
 SUPERVISOR_PID="${DIR}/supervisor.pid"
 STOP_TIMEOUT="${STOP_TIMEOUT:-300}"
+# A crawler that dies is restarted in place (native mode) up to CRASH_LIMIT times within
+# CRASH_WINDOW seconds; beyond that the supervisor publishes what was exported, releases
+# the lease so the Actions refresh takes the buckets back at once, and exits 1.
+CRASH_LIMIT="${CRASH_LIMIT:-3}"
+CRASH_WINDOW="${CRASH_WINDOW:-1800}"
+ABORT_FILE="${DIR}/abort-requested"
 # Heartbeat: the lease is renewed every HEARTBEAT_INTERVAL seconds, but a renewal only commits
 # (one small file, no data) once the heartbeat is older than LEASE_MIN_AGE hours (default a
 # third of the TTL), so the TTL does not have to follow PUBLISH_INTERVAL.
@@ -79,7 +85,7 @@ user_agent() {
 
 crawler_args() {
   echo "--continuous --rotation-include ${BOOSTER_RANGES} --no-feed --workers ${WORKERS} \
---max-bytes-per-second ${MAX_BYTES_PER_SECOND} --pause ${PAUSE}s --pause-jitter 0.3"
+--max-bytes-per-second ${MAX_BYTES_PER_SECOND} --pause ${PAUSE}s --pause-jitter 0.3 --verify-store"
 }
 
 # The native crawler's PID. It is the PID of the crawler process itself (not of a subshell
@@ -147,7 +153,8 @@ start_crawler() {
     # shellcheck disable=SC2046,SC2086
     nohup "${binary}" crawl --source "${SOURCE}" --passes 0 --package-budget "${PACKAGE_BUDGET}" \
       $(crawler_args) >> "${DIR}/booster.log" 2>&1 &
-    echo $! > "${NATIVE_PID}"
+    CRAWLER_CHILD=$!
+    echo "${CRAWLER_CHILD}" > "${NATIVE_PID}"
     cd "${ROOT_DIR}"
   else
     CRAWL_EXTRA_ARGS="$(crawler_args)" bash "${ROOT_DIR}/tools/crawl_parallel.sh" start
@@ -217,6 +224,15 @@ case "${COMMAND}" in
     echo "$$" > "${SUPERVISOR_PID}"
     finish() {
       trap - INT TERM EXIT
+      if [ -f "${ABORT_FILE}" ]; then
+        # `abort`: stop without publishing and keep the lease (e.g. a damaged local store).
+        rm -f "${ABORT_FILE}"
+        say "aborting: stopping the crawler; no final publication, the lease is kept"
+        stop_crawler || true
+        rm -f "${SUPERVISOR_PID}"
+        [ "${1:-}" = signal ] && exit 0
+        return
+      fi
       say "stopping: crawler, one last publication, lease release"
       # Order matters: the crawler must have exited before the final publication, or the
       # publication races with a crawler that is still writing its state.
@@ -227,16 +243,36 @@ case "${COMMAND}" in
         say "crawler still alive: no final publication, the lease stays until it expires"
       fi
       rm -f "${SUPERVISOR_PID}"
+      [ "${1:-}" = signal ] && exit 0
+      return 0
     }
-    trap finish INT TERM EXIT
+    trap finish EXIT
+    trap 'finish signal' INT TERM
     start_crawler
     tick="${HEARTBEAT_INTERVAL}"
     [ "${tick}" -gt "${PUBLISH_INTERVAL}" ] && tick="${PUBLISH_INTERVAL}"
     last_publish="$(date +%s)"
     while :; do
-      sleep "${tick}" &
+      sleep "${next_tick:-${tick}}" &
       wait $! || true
-      if ! running; then say "the crawler is not running any more"; break; fi
+      next_tick=""
+      if ! running; then
+        status=0
+        [ -n "${CRAWLER_CHILD:-}" ] && { wait "${CRAWLER_CHILD}" 2>/dev/null || status=$?; }
+        now="$(date +%s)"
+        crashes="$(for at in ${crashes:-} ${now}; do [ $((now - at)) -lt "${CRASH_WINDOW}" ] && echo "${at}"; done | tr '\n' ' ')"
+        count="$(echo "${crashes}" | wc -w | tr -d ' ')"
+        if [ "${MODE}" != native ] || [ "${count}" -gt "${CRASH_LIMIT}" ]; then
+          say "the crawler is not running any more (exit ${status}, ${count} exits in ${CRASH_WINDOW}s); handing the buckets back"
+          crash_loop=1
+          break
+        fi
+        [ "${status}" = 75 ] && say "the crawler quarantined a damaged store; restarting to rebuild it"
+        say "crawler exited (status ${status}); restarting it (${count}/${CRASH_LIMIT})"
+        start_crawler
+        next_tick="${CRASH_CHECK:-60}"  # notice a crash loop quickly
+        continue
+      fi
       if [ "$(( $(date +%s) - last_publish ))" -ge "${PUBLISH_INTERVAL}" ]; then
         printf '%s ' "$(date -u +%FT%TZ)"
         publish_now
@@ -247,6 +283,7 @@ case "${COMMAND}" in
         lease renew --min-age-hours "${LEASE_MIN_AGE}" >/dev/null || say "lease heartbeat failed; will retry"
       fi
     done
+    [ "${crash_loop:-0}" = 1 ] && exit 1
     ;;
   status)
     running && echo "crawler: running" || echo "crawler: not running"
@@ -258,6 +295,21 @@ case "${COMMAND}" in
   publish) publish_now ;;
   stop) stop_crawler; [ -z "${SUPERVISOR_STOP:-}" ] || true ;;
   release) lease release ;;
+  abort)
+    # Stop the supervisor and crawler WITHOUT a final publication; the lease is kept (it
+    # expires by itself if nobody restarts the booster).
+    touch "${ABORT_FILE}"
+    other="$(cat "${SUPERVISOR_PID}" 2>/dev/null || true)"
+    if [ -n "${other}" ] && kill -0 "${other}" 2>/dev/null; then
+      kill -TERM "${other}"
+      # Wait for the supervisor to drop its pid file (a zombie still answers kill -0).
+      while [ -f "${SUPERVISOR_PID}" ] && kill -0 "${other}" 2>/dev/null; do sleep 1; done
+    else
+      rm -f "${ABORT_FILE}"
+      stop_crawler
+    fi
+    echo "aborted; lease kept"
+    ;;
   unit)
     cat <<UNIT
 # --- systemd (Linux, WSL2 with systemd): ~/.config/systemd/user/ge-booster-${SOURCE}.service

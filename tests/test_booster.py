@@ -539,3 +539,45 @@ def test_coverage_accounts_for_every_catalogue_position():
     accounted = sum(summary[k] for k in ("has_commands", "no_commands", "unknown_outcome", "unavailable", "failing", "unaccounted"))
     assert accounted == len(catalog), "every position falls in exactly one category"
     assert summary["checked_outside_catalog"] == 1
+
+
+def test_a_crawler_that_quarantined_its_store_is_restarted_and_keeps_the_lease(tmp_path):
+    body = POLITE + '\nn=$(cat "$EVENTS.count" 2>/dev/null || echo 0); echo $((n + 1)) > "$EVENTS.count"\n[ "$n" -eq 0 ] && exit 75'
+    harness = Native(tmp_path, crawler_body=body)
+    harness.env.update({"HEARTBEAT_INTERVAL": "1", "CRASH_CHECK": "1"})
+    try:
+        supervisor = harness.run()
+        assert harness.wait_for(lambda: sum(line.startswith("started") for line in harness.lines()) == 2), harness.lines()
+        assert supervisor.poll() is None and harness.lease_document()["leases"]["box-test"]["ranges"] == "0-255"
+        os.kill(supervisor.pid, signal.SIGTERM)
+        assert supervisor.wait(timeout=60) == 0
+        assert harness.lines()[-2:] == ["crawler-exited", "publish"]
+    finally:
+        harness.cleanup()
+
+
+def test_a_crash_looping_crawler_hands_the_buckets_back_to_actions(tmp_path):
+    harness = Native(tmp_path, crawler_body="exit 1")
+    harness.env.update({"HEARTBEAT_INTERVAL": "1", "CRASH_CHECK": "1", "CRASH_LIMIT": "2"})
+    try:
+        supervisor = harness.run()
+        assert supervisor.wait(timeout=90) == 1, supervisor.stdout.read()
+        assert sum(line.startswith("started") for line in harness.lines()) == 3, harness.lines()
+        assert harness.lines()[-1] == "publish", "the exported (atomic) state is still published"
+        assert harness.lease_document()["leases"] == {}, "the lease is released so Actions takes over at once"
+    finally:
+        harness.cleanup()
+
+
+def test_abort_stops_without_a_final_publication_and_keeps_the_lease(native):
+    supervisor = native.run()
+    assert native.wait_for(lambda: len(native.lines()) == 1)
+    aborted = native.run("abort")
+    assert aborted.wait(timeout=60) == 0 and supervisor.wait(timeout=60) == 0
+    assert native.lines() == [native.lines()[0], "crawler-exited"], "no publication"
+    assert native.lease_document()["leases"]["box-test"]["ranges"] == "0-255", "the lease is kept"
+    assert native.crawler_processes() == [] and not (native.dir / "abort-requested").exists()
+
+
+def test_the_booster_verifies_its_store_at_start():
+    assert "--verify-store" in (ROOT / "tools/local_booster.sh").read_text()

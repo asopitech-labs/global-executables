@@ -12,6 +12,7 @@ import (
 	"os"
 	"slices"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/asopitech-labs/global-executables/internal/gocrawl"
@@ -56,6 +57,9 @@ type crawlConfig struct {
 	UserAgent         string
 	MaxBytesPerSecond int64
 	PauseJitter       float64
+	// VerifyStore checks the whole transaction store once, before the first pass of this
+	// process; a damaged one is quarantined and rebuilt from the exported state.
+	VerifyStore bool
 }
 
 // passPolicy carries what the change-driven refresh adds to a pass: the checks that
@@ -473,7 +477,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		return gocrawl.PassReport{}, err
 	}
 
-	store, err := gocrawl.OpenBoltStore(config.DatabasePath, gocrawl.StoreOptions{FailureAttemptLimit: 3, Now: clock})
+	store, err := openStore(config)
 	if err != nil {
 		return gocrawl.PassReport{}, err
 	}
@@ -667,4 +671,30 @@ func jittered(pause time.Duration, fraction float64) time.Duration {
 	}
 	fraction = min(fraction, 0.9)
 	return time.Duration(float64(pause) * (1 + fraction*(2*rand.Float64()-1)))
+}
+
+// storeVerified makes the (slow, full) store check run once per process, not every pass.
+var storeVerified atomic.Bool
+
+// openStore opens the transaction store. A store that is damaged (a torn copy, a lost
+// write) is moved aside and a fresh one is opened: the pass then imports the exported
+// state, observations and schedule cache, which are written atomically, so at most the
+// work since the last completed pass is crawled again.
+func openStore(config crawlConfig) (*gocrawl.BoltStore, error) {
+	options := gocrawl.StoreOptions{FailureAttemptLimit: 3, Now: clock}
+	options.Verify = config.VerifyStore && !storeVerified.Load()
+	if options.Verify {
+		storeVerified.Store(true)
+	}
+	store, err := gocrawl.OpenBoltStore(config.DatabasePath, options)
+	if errors.Is(err, gocrawl.ErrCorruptStore) {
+		moved, moveErr := gocrawl.QuarantineStore(config.DatabasePath, clock())
+		if moveErr != nil {
+			return nil, fmt.Errorf("%w (and it could not be moved aside: %v)", err, moveErr)
+		}
+		fmt.Fprintf(os.Stderr, "%v; moved it to %s and rebuilding from the exported state\n", err, moved)
+		options.Verify = false
+		store, err = gocrawl.OpenBoltStore(config.DatabasePath, options)
+	}
+	return store, err
 }

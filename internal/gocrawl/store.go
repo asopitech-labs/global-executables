@@ -33,6 +33,9 @@ type StoreOptions struct {
 	FailureAttemptLimit int
 	// Now supplies the clock for check days; tests move it. Defaults to time.Now.
 	Now func() time.Time
+	// Verify runs bbolt's full consistency check after opening; a damaged store is
+	// closed and reported as ErrCorruptStore.
+	Verify bool
 }
 
 type BoltStore struct {
@@ -51,7 +54,16 @@ func OpenBoltStore(path string, options StoreOptions) (*BoltStore, error) {
 	}
 	db, err := bolt.Open(path, 0o600, &bolt.Options{Timeout: 5 * time.Second})
 	if err != nil {
+		if errors.Is(err, bolt.ErrInvalid) || errors.Is(err, bolt.ErrChecksum) || errors.Is(err, bolt.ErrVersionMismatch) {
+			return nil, fmt.Errorf("%w: %v", ErrCorruptStore, err)
+		}
 		return nil, err
+	}
+	if options.Verify {
+		if err := verifyStore(db); err != nil {
+			_ = db.Close()
+			return nil, fmt.Errorf("%w: %v", ErrCorruptStore, err)
+		}
 	}
 	store := &BoltStore{db: db, failureAttemptLimit: options.FailureAttemptLimit, now: time.Now}
 	if options.Now != nil {

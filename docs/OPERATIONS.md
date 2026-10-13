@@ -971,6 +971,7 @@ tools/local_booster.sh pypi status                             # lease, cache si
 tools/local_booster.sh pypi publish                            # publish now
 tools/local_booster.sh pypi stop                               # stop the crawler (keeps the lease until it expires)
 tools/local_booster.sh pypi release                            # give the buckets back at once
+tools/local_booster.sh pypi abort                              # stop WITHOUT a final publication; keeps the lease
 CONTACT=you@example.org tools/local_booster.sh pypi unit       # print systemd / launchd / cron units
 ```
 
@@ -995,6 +996,21 @@ a crawler is running without a PID file. `local_booster.sh pypi stop` also stops
 without a runtime, so a native booster's scheduled publications failed with "Podman or
 Docker is required" while the lease heartbeat, which does not use the script, kept
 working. A failed publication never advances `.base`, so the next one carries everything.)
+
+**A damaged local store.** The crawler's bbolt database (`<dir>/data/production/pypi-crawl.db`)
+is opened with fsync on, but it is a live file: a machine snapshot/restore that copies it
+file-by-file while the crawler writes (seen on 2026-10-13 after a box reboot: `invalid page
+type: 97544: 10` in `BoltStore.Commit`) leaves it inconsistent. The exported state (registry
+state, observation rows, schedule cache) is written atomically and is the source of truth.
+The booster therefore runs the crawler with `--verify-store`: on its first open per process
+the store is checked (`tx.Check`); a damaged store is renamed to
+`pypi-crawl.db.corrupt-<UTC timestamp>` (never deleted) and rebuilt from the exported state.
+A corruption panic found later is caught, the store is quarantined the same way and the
+crawler exits with status 75. The supervisor restarts an exited crawler; more than
+`CRASH_LIMIT` (3) exits within `CRASH_WINDOW` (1800 s) is a crash loop: the supervisor
+publishes what it has, releases the lease (Actions takes the buckets over at once) and exits 1
+so a watchdog notices. `abort` stops the supervisor and the crawler without the final
+publication and keeps the lease, for when the local state must not be published.
 
 **Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
 --source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:
