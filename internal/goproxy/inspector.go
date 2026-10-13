@@ -123,6 +123,8 @@ func NewInspector(config Config) *Inspector {
 		transport.MaxIdleConnsPerHost = 128
 		transport.IdleConnTimeout = 90 * time.Second
 		transport.ForceAttemptHTTP2 = true
+		// Ping a silent HTTP/2 connection and drop it if unanswered (see registryinspect).
+		transport.HTTP2 = &http.HTTP2Config{SendPingTimeout: 15 * time.Second, PingTimeout: 10 * time.Second}
 		client = &http.Client{Transport: transport}
 	}
 	sleep := config.Sleep

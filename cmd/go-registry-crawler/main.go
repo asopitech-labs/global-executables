@@ -64,6 +64,7 @@ func run(args []string, stdout, stderr io.Writer) (code int) {
 	flags.StringVar(&config.UserAgent, "user-agent", os.Getenv("GE_USER_AGENT"), "User-Agent to send (include a contact address when crawling from your own machine)")
 	flags.Int64Var(&config.MaxBytesPerSecond, "max-bytes-per-second", 0, "cap the average download rate (0 = no cap)")
 	flags.Float64Var(&config.PauseJitter, "pause-jitter", 0, "spread the pause between passes by +-this fraction")
+	flags.StringVar(&config.ProgressFile, "progress-file", "", "touch this file whenever a commit holds a package read successfully (for a supervisor's progress watchdog)")
 	flags.BoolVar(&config.VerifyStore, "verify-store", false, "check the whole transaction store before the first pass; quarantine and rebuild a damaged one")
 	flags.IntVar(&passes, "passes", 1, "number of passes; zero runs until exhaustive")
 	flags.DurationVar(&pause, "pause", 5*time.Second, "delay between passes")
