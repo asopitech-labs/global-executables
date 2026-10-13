@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Local booster: a bbolt store damaged by a file-level snapshot/restore of the live file
+  (`invalid page type` panic in `BoltStore.Commit` after a reboot) crash-looped the crawler.
+  New `--verify-store` (used by the booster) checks the store on first open, quarantines a
+  damaged one as `<db>.corrupt-<timestamp>` and rebuilds it from the atomic exported state;
+  a later corruption panic quarantines it and exits 75. The supervisor restarts an exited
+  crawler and, on a crash loop (`CRASH_LIMIT`/`CRASH_WINDOW`), publishes, releases the lease
+  and exits 1. New `local_booster.sh <source> abort` stops without a final publication and
+  keeps the lease. fsync was already on (no `NoSync`).
 - Local booster, native mode: publications failed with "Podman or Docker is required"
   because `crawl_parallel.sh` refused to load without a container runtime even for `seed`,
   `merge` and `publish`. The runtime is now required only by the commands that use it, and

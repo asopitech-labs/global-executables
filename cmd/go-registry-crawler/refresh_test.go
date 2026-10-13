@@ -662,3 +662,60 @@ func TestJitteredPauseStaysWithinTheFraction(t *testing.T) {
 		t.Fatal("no jitter unless asked")
 	}
 }
+
+func TestADamagedStoreIsQuarantinedAndRebuiltFromTheExportedState(t *testing.T) {
+	const projects = 20
+	defer func(previous func() time.Time) { clock = previous }(clock)
+	day := time.Date(2026, 10, 1, 3, 0, 0, 0, time.UTC)
+	clock = func() time.Time { return day }
+	fake, server := newFakePyPI(t, projects, clock)
+	names := slices.Sorted(maps.Keys(fake.versions))
+	directory := t.TempDir()
+	config := crawlConfig{
+		Source: "pypi", StatePath: filepath.Join(directory, "registry-state"),
+		ObservationsPath: filepath.Join(directory, "pypi.jsonl"), ReportPath: filepath.Join(directory, "report.json"),
+		CatalogPath: filepath.Join(directory, "projects.txt"), DatabasePath: filepath.Join(directory, "crawl.db"),
+		RegistryURL: server.URL, FeedURL: server.URL, PackageBudget: projects, ByteBudget: 1 << 30, Workers: 4,
+		MaxInFlight: 8, CommitBatch: 8, RequestTimeout: 2 * time.Second, ModuleTimeout: 5 * time.Second,
+	}
+	if err := os.WriteFile(config.CatalogPath, []byte(strings.Join(names, "\n")+"\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(config.StatePath+".json", []byte(`{"version":1,"sources":{"pypi":{"cursor":0,"catalog_complete":true}}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := executePass(t.Context(), config); err != nil {
+		t.Fatal(err)
+	}
+	rowsBefore := readRows(t, config.ObservationsPath)
+	file, err := os.OpenFile(config.DatabasePath, os.O_RDWR, 0)
+	if err != nil {
+		t.Fatal(err)
+	}
+	info, _ := file.Stat()
+	page := int64(os.Getpagesize())
+	for offset := 2 * page; offset+page <= info.Size(); offset += 2 * page {
+		_, _ = file.WriteAt([]byte(strings.Repeat("\x0a", int(page))), offset)
+	}
+	_ = file.Close()
+
+	storeVerified.Store(false)
+	config.VerifyStore = true
+	report, err := executePass(t.Context(), config)
+	if err != nil {
+		t.Fatalf("a damaged store must be rebuilt, not crash the booster: %v", err)
+	}
+	quarantined, _ := filepath.Glob(config.DatabasePath + ".corrupt-*")
+	if len(quarantined) != 1 {
+		t.Fatalf("the damaged store must be kept aside, found %v", quarantined)
+	}
+	if !report.Complete {
+		t.Fatalf("the rebuilt store resumes from the exported state: %+v", report)
+	}
+	if rowsAfter := readRows(t, config.ObservationsPath); len(rowsAfter) < len(rowsBefore) {
+		t.Fatalf("rows lost in the rebuild: %d -> %d", len(rowsBefore), len(rowsAfter))
+	}
+	if !storeVerified.Load() {
+		t.Fatal("the check runs once per process")
+	}
+}

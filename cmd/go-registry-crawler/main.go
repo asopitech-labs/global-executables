@@ -10,6 +10,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/asopitech-labs/global-executables/internal/gocrawl"
 )
 
 var version = "dev"
@@ -18,7 +20,10 @@ func main() {
 	os.Exit(run(os.Args[1:], os.Stdout, os.Stderr))
 }
 
-func run(args []string, stdout, stderr io.Writer) int {
+// exitCorruptStore: the store was damaged and moved aside; restarting rebuilds it.
+const exitCorruptStore = 75
+
+func run(args []string, stdout, stderr io.Writer) (code int) {
 	if len(args) == 1 && args[0] == "--version" {
 		_, _ = fmt.Fprintf(stdout, "go-registry-crawler %s\n", version)
 		return 0
@@ -59,6 +64,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	flags.StringVar(&config.UserAgent, "user-agent", os.Getenv("GE_USER_AGENT"), "User-Agent to send (include a contact address when crawling from your own machine)")
 	flags.Int64Var(&config.MaxBytesPerSecond, "max-bytes-per-second", 0, "cap the average download rate (0 = no cap)")
 	flags.Float64Var(&config.PauseJitter, "pause-jitter", 0, "spread the pause between passes by +-this fraction")
+	flags.BoolVar(&config.VerifyStore, "verify-store", false, "check the whole transaction store before the first pass; quarantine and rebuild a damaged one")
 	flags.IntVar(&passes, "passes", 1, "number of passes; zero runs until exhaustive")
 	flags.DurationVar(&pause, "pause", 5*time.Second, "delay between passes")
 	if err := flags.Parse(args[1:]); err != nil {
@@ -75,6 +81,18 @@ func run(args []string, stdout, stderr io.Writer) int {
 
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
+	// bbolt panics on a damaged page. Move the store aside and exit with a distinct code
+	// (75, EX_TEMPFAIL): the next start rebuilds it from the exported state.
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			if !gocrawl.IsStoreCorruption(recovered) {
+				panic(recovered)
+			}
+			moved, err := gocrawl.QuarantineStore(config.DatabasePath, time.Now())
+			_, _ = fmt.Fprintf(stderr, "transaction store is corrupt (%v); moved it to %s (%v); restart to rebuild\n", recovered, moved, err)
+			code = exitCorruptStore
+		}
+	}()
 	err := executeLoop(ctx, config, passes, pause, stdout, executePass)
 	if err == nil {
 		return 0
