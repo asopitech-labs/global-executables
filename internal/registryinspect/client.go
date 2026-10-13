@@ -20,9 +20,16 @@ import (
 const userAgent = "global-executables-registry-crawl/2.0 (+https://github.com/asopitech-labs/global-executables)"
 
 type Config struct {
-	BaseURL                string
-	Client                 *http.Client
-	RequestTimeout         time.Duration
+	BaseURL        string
+	Client         *http.Client
+	RequestTimeout time.Duration
+	// HealthCheckInterval: an HTTP/2 connection that has received nothing for this long is
+	// pinged and closed if the ping is not answered within PingTimeout, so the requests that
+	// share it fail over to a new connection (default 15 s and 10 s). Without it a connection
+	// that went silent (e.g. after the machine was suspended) keeps taking new requests that
+	// can only time out.
+	HealthCheckInterval    time.Duration
+	PingTimeout            time.Duration
 	PackageTimeout         time.Duration
 	MaxAttempts            int
 	BaseBackoff            time.Duration
@@ -134,9 +141,26 @@ func (b *bandwidthLimit) pace(ctx context.Context, bytes int64) error {
 	return sleepContext(ctx, wait)
 }
 
+// newTransport is the default transport; config must already carry its defaults.
+func newTransport(config Config) *http.Transport {
+	transport := http.DefaultTransport.(*http.Transport).Clone()
+	transport.MaxIdleConns = 256
+	transport.MaxIdleConnsPerHost = 128
+	transport.IdleConnTimeout = 90 * time.Second
+	transport.ForceAttemptHTTP2 = true
+	transport.HTTP2 = &http.HTTP2Config{SendPingTimeout: config.HealthCheckInterval, PingTimeout: config.PingTimeout}
+	return transport
+}
+
 func newRequester(config Config) *requester {
 	if config.RequestTimeout <= 0 {
 		config.RequestTimeout = 30 * time.Second
+	}
+	if config.HealthCheckInterval <= 0 {
+		config.HealthCheckInterval = 15 * time.Second
+	}
+	if config.PingTimeout <= 0 {
+		config.PingTimeout = 10 * time.Second
 	}
 	if config.PackageTimeout <= 0 {
 		config.PackageTimeout = 90 * time.Second
@@ -194,12 +218,7 @@ func newRequester(config Config) *requester {
 	}
 	client := config.Client
 	if client == nil {
-		transport := http.DefaultTransport.(*http.Transport).Clone()
-		transport.MaxIdleConns = 256
-		transport.MaxIdleConnsPerHost = 128
-		transport.IdleConnTimeout = 90 * time.Second
-		transport.ForceAttemptHTTP2 = true
-		client = &http.Client{Transport: transport}
+		client = &http.Client{Transport: newTransport(config)}
 	}
 	return &requester{config: config, client: client, gates: make(map[string]*adaptiveGate),
 		bandwidth: newBandwidthLimit(config.MaxBytesPerSecond)}

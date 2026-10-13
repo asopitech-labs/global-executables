@@ -28,6 +28,10 @@
 #   HEARTBEAT_INTERVAL  seconds between lease heartbeats, default 3600; a heartbeat commits only
 #                       once the last one is older than LEASE_MIN_AGE hours (default TTL/3)
 #   STOP_TIMEOUT        seconds to wait for the crawler to exit on stop, default 300
+#   WATCH_INTERVAL      seconds between supervisor checks of the crawler, default 60
+#   STALL_TIMEOUT       native: restart a crawler without progress for this long, default 1800
+#   CRASH_LIMIT, CRASH_WINDOW  more than CRASH_LIMIT exits/stalls in CRASH_WINDOW seconds
+#                       (default 3 in 1800) hands the lease back to Actions
 #   CRAWLER_BIN         native: use this crawler binary instead of building one
 #   BASE                working directory prefix, default ~/.ge-crawl
 #   MODE                docker (default; or podman) or native (needs Go; no container)
@@ -66,10 +70,21 @@ STOP_TIMEOUT="${STOP_TIMEOUT:-300}"
 CRASH_LIMIT="${CRASH_LIMIT:-3}"
 CRASH_WINDOW="${CRASH_WINDOW:-1800}"
 ABORT_FILE="${DIR}/abort-requested"
+# Progress watchdog (native mode): the crawler touches PROGRESS_FILE whenever it commits a
+# package the registry answered for, and after every pass. If it has not moved for
+# STALL_TIMEOUT seconds of supervisor time, the crawler gets SIGQUIT (Go prints every
+# goroutine to booster.log and exits), KILL after STOP_TIMEOUT, and is restarted; a stall
+# counts towards CRASH_LIMIT like an exit. The supervisor checks every WATCH_INTERVAL seconds.
+PROGRESS_FILE="${DIR}/progress"
+STALL_TIMEOUT="${STALL_TIMEOUT:-1800}"
 # Heartbeat: the lease is renewed every HEARTBEAT_INTERVAL seconds, but a renewal only commits
 # (one small file, no data) once the heartbeat is older than LEASE_MIN_AGE hours (default a
 # third of the TTL), so the TTL does not have to follow PUBLISH_INTERVAL.
 HEARTBEAT_INTERVAL="${HEARTBEAT_INTERVAL:-3600}"
+WATCH_INTERVAL="${WATCH_INTERVAL:-${CRASH_CHECK:-60}}"
+for limit in "${HEARTBEAT_INTERVAL}" "${PUBLISH_INTERVAL}"; do
+  [ "${WATCH_INTERVAL}" -gt "${limit}" ] && WATCH_INTERVAL="${limit}"
+done
 
 [ "${MODE}" = native ] && export NO_CONTAINER=1
 export BASE BOOSTER=1 SOURCES="${SOURCE}" OBSERVATION_SOURCES=" " DELTA_SOURCES="${DELTA_SOURCES:-${SOURCE}}"
@@ -86,6 +101,24 @@ user_agent() {
 crawler_args() {
   echo "--continuous --rotation-include ${BOOSTER_RANGES} --no-feed --workers ${WORKERS} \
 --max-bytes-per-second ${MAX_BYTES_PER_SECOND} --pause ${PAUSE}s --pause-jitter 0.3 --verify-store"
+  [ "${MODE}" != native ] || echo " --progress-file ${PROGRESS_FILE}"
+}
+
+# The progress file's modification time (empty while it does not exist).
+progress_mark() { stat -c %Y "${PROGRESS_FILE}" 2>/dev/null || stat -f %m "${PROGRESS_FILE}" 2>/dev/null || true; }
+
+# SIGQUIT makes a Go crawler print every goroutine and exit; KILL if it is still there.
+dump_and_kill_crawler() {
+  local pid waited=0
+  pid="$(crawler_pid || true)"
+  [ -n "${pid}" ] || return 0
+  kill -QUIT "${pid}" 2>/dev/null || true
+  while kill -0 "${pid}" 2>/dev/null && crawler_pid >/dev/null && [ "${waited}" -lt "${STOP_TIMEOUT}" ]; do
+    sleep 1
+    waited=$((waited + 1))
+  done
+  crawler_pid >/dev/null && { say "crawler ${pid} survived SIGQUIT; killing it"; kill -KILL "${pid}" 2>/dev/null || true; sleep 1; }
+  rm -f "${NATIVE_PID}"
 }
 
 # The native crawler's PID. It is the PID of the crawler process itself (not of a subshell
@@ -249,36 +282,61 @@ case "${COMMAND}" in
     trap finish EXIT
     trap 'finish signal' INT TERM
     start_crawler
-    tick="${HEARTBEAT_INTERVAL}"
-    [ "${tick}" -gt "${PUBLISH_INTERVAL}" ] && tick="${PUBLISH_INTERVAL}"
+    # The supervisor wakes every WATCH_INTERVAL seconds (of its own, monotonic sleep) to see
+    # whether the crawler is alive and progressing; publications and heartbeats follow the
+    # wall clock, so they are not postponed by a long sleep after the machine was suspended.
     last_publish="$(date +%s)"
+    last_heartbeat="${last_publish}"
+    seen_progress="$(progress_mark)"
+    stale=0
     while :; do
-      sleep "${next_tick:-${tick}}" &
+      sleep "${WATCH_INTERVAL}" &
       wait $! || true
-      next_tick=""
+      exit_reason=""
       if ! running; then
+        exit_reason="exited"
+      elif [ "${MODE}" = native ]; then
+        mark="$(progress_mark)"
+        if [ "${mark}" != "${seen_progress}" ]; then
+          seen_progress="${mark}"
+          stale=0
+        else
+          # Counted in supervisor wake-ups, not wall time: a suspended machine is not a stall.
+          stale=$((stale + WATCH_INTERVAL))
+        fi
+        if [ "${stale}" -ge "${STALL_TIMEOUT}" ]; then
+          say "no crawler progress for ${stale}s; dumping its goroutines to ${DIR}/booster.log and restarting it"
+          dump_and_kill_crawler
+          exit_reason="stalled"
+        fi
+      fi
+      if [ -n "${exit_reason}" ]; then
         status=0
         [ -n "${CRAWLER_CHILD:-}" ] && { wait "${CRAWLER_CHILD}" 2>/dev/null || status=$?; }
+        CRAWLER_CHILD=""
         now="$(date +%s)"
         crashes="$(for at in ${crashes:-} ${now}; do [ $((now - at)) -lt "${CRASH_WINDOW}" ] && echo "${at}"; done | tr '\n' ' ')"
         count="$(echo "${crashes}" | wc -w | tr -d ' ')"
         if [ "${MODE}" != native ] || [ "${count}" -gt "${CRASH_LIMIT}" ]; then
-          say "the crawler is not running any more (exit ${status}, ${count} exits in ${CRASH_WINDOW}s); handing the buckets back"
+          say "the crawler is not running any more (${exit_reason}, exit ${status}, ${count} in ${CRASH_WINDOW}s); handing the buckets back"
           crash_loop=1
           break
         fi
         [ "${status}" = 75 ] && say "the crawler quarantined a damaged store; restarting to rebuild it"
-        say "crawler exited (status ${status}); restarting it (${count}/${CRASH_LIMIT})"
+        say "crawler ${exit_reason} (status ${status}); restarting it (${count}/${CRASH_LIMIT})"
         start_crawler
-        next_tick="${CRASH_CHECK:-60}"  # notice a crash loop quickly
-        continue
+        seen_progress="$(progress_mark)"
+        stale=0
       fi
-      if [ "$(( $(date +%s) - last_publish ))" -ge "${PUBLISH_INTERVAL}" ]; then
+      now="$(date +%s)"
+      if [ "$((now - last_publish))" -ge "${PUBLISH_INTERVAL}" ]; then
         printf '%s ' "$(date -u +%FT%TZ)"
         publish_now
         last_publish="$(date +%s)"
+        last_heartbeat="${last_publish}"
         lease renew --progress "$(progress_json)" >/dev/null || say "lease renewal failed; will retry"
-      else
+      elif [ "$((now - last_heartbeat))" -ge "${HEARTBEAT_INTERVAL}" ]; then
+        last_heartbeat="${now}"
         # Heartbeat only: commits nothing unless the lease is older than LEASE_MIN_AGE.
         lease renew --min-age-hours "${LEASE_MIN_AGE}" >/dev/null || say "lease heartbeat failed; will retry"
       fi

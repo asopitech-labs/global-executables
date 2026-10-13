@@ -60,6 +60,10 @@ type crawlConfig struct {
 	// VerifyStore checks the whole transaction store once, before the first pass of this
 	// process; a damaged one is quarantined and rebuilt from the exported state.
 	VerifyStore bool
+	// ProgressFile, when set, is touched whenever a commit contains a package that was
+	// actually read from the registry (not skipped, not failed), so a supervisor can tell a
+	// crawler that only times out from one that works.
+	ProgressFile string
 }
 
 // passPolicy carries what the change-driven refresh adds to a pass: the checks that
@@ -383,6 +387,7 @@ type measuringCommitter struct {
 	feedWorks                        uint64
 	downloaded                       uint64
 	exhausted                        bool
+	progressFile                     string
 }
 
 type passExecutor func(context.Context, crawlConfig) (gocrawl.PassReport, error)
@@ -400,6 +405,9 @@ func executeLoop(
 		_, _ = fmt.Fprintf(output, "pass=%d processed=%d records=%d downloaded=%d\n", pass, report.Processed, report.Records, report.DownloadedBytes)
 		if err != nil {
 			return err
+		}
+		if config.ProgressFile != "" {
+			touchProgress(config.ProgressFile) // a finished pass is progress, even one of skips
 		}
 		if report.Complete && !config.Continuous {
 			_, _ = fmt.Fprintln(output, "catalog is exhaustive")
@@ -426,6 +434,9 @@ func (c *measuringCommitter) Commit(ctx context.Context, results []gocrawl.Modul
 		return err
 	}
 	c.processed += uint64(len(results))
+	if c.progressFile != "" && madeProgress(results) {
+		touchProgress(c.progressFile)
+	}
 	for _, result := range results {
 		if result.Work.Refresh {
 			c.refreshed++
@@ -545,7 +556,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 	passCtx, cancel := context.WithCancel(ctx)
 	defer cancel()
 	committer := &measuringCommitter{
-		store: store, byteBudget: config.ByteBudget, cancel: cancel,
+		store: store, byteBudget: config.ByteBudget, cancel: cancel, progressFile: config.ProgressFile,
 		downloaded: catalogReport.DownloadedBytes,
 	}
 	coordinator := gocrawl.Coordinator{
@@ -697,4 +708,26 @@ func openStore(config crawlConfig) (*gocrawl.BoltStore, error) {
 		store, err = gocrawl.OpenBoltStore(config.DatabasePath, options)
 	}
 	return store, err
+}
+
+// madeProgress reports whether a batch holds a package the registry answered for
+// (read, or definitively absent); skips and retryable failures are not progress.
+func madeProgress(results []gocrawl.ModuleResult) bool {
+	for _, result := range results {
+		if !result.Work.Skip && (result.Verdict == gocrawl.VerdictSuccess || result.Verdict == gocrawl.VerdictPermanent) {
+			return true
+		}
+	}
+	return false
+}
+
+// touchProgress bumps the progress file's modification time, creating it if needed.
+func touchProgress(path string) {
+	now := time.Now()
+	if err := os.Chtimes(path, now, now); err == nil {
+		return
+	}
+	if file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, 0o644); err == nil {
+		_ = file.Close()
+	}
 }

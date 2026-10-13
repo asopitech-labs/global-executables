@@ -581,3 +581,64 @@ def test_abort_stops_without_a_final_publication_and_keeps_the_lease(native):
 
 def test_the_booster_verifies_its_store_at_start():
     assert "--verify-store" in (ROOT / "tools/local_booster.sh").read_text()
+
+
+PROGRESSING = """trap 'echo crawler-exited >> "$EVENTS"; exit 0' TERM
+progress=""; previous=""
+for argument in "$@"; do [ "$previous" = --progress-file ] && progress="$argument"; previous="$argument"; done
+while :; do touch "$progress"; sleep 0.5; done"""
+
+
+def test_a_stalled_crawler_is_dumped_killed_and_restarted(tmp_path):
+    harness = Native(tmp_path)  # the polite fake never touches its progress file
+    harness.env.update({"WATCH_INTERVAL": "1", "STALL_TIMEOUT": "3", "STOP_TIMEOUT": "3", "CRASH_LIMIT": "5"})
+    try:
+        supervisor = harness.run()
+        assert harness.wait_for(lambda: sum(line.startswith("started") for line in harness.lines()) >= 2, 60), \
+            harness.lines()
+        assert harness.lease_document()["leases"]["box-test"]["ranges"] == "0-255", "a stall keeps the lease"
+        supervisor.send_signal(signal.SIGTERM)
+        output = supervisor.communicate(timeout=60)[0]
+        assert "no crawler progress for" in output and "restarting it" in output, output
+    finally:
+        harness.cleanup()
+
+
+def test_a_progressing_crawler_is_left_alone(tmp_path):
+    harness = Native(tmp_path, crawler_body=PROGRESSING)
+    harness.env.update({"WATCH_INTERVAL": "1", "STALL_TIMEOUT": "3"})
+    try:
+        supervisor = harness.run()
+        assert harness.wait_for(lambda: len(harness.lines()) == 1)
+        time.sleep(8)
+        assert sum(line.startswith("started") for line in harness.lines()) == 1, harness.lines()
+        supervisor.send_signal(signal.SIGTERM)
+        assert supervisor.wait(timeout=60) == 0
+    finally:
+        harness.cleanup()
+
+
+def test_stalls_count_towards_the_crash_loop_and_hand_the_lease_back(tmp_path):
+    harness = Native(tmp_path)
+    harness.env.update({"WATCH_INTERVAL": "1", "STALL_TIMEOUT": "2", "STOP_TIMEOUT": "2", "CRASH_LIMIT": "1"})
+    try:
+        supervisor = harness.run()
+        assert supervisor.wait(timeout=90) == 1, supervisor.stdout.read()
+        assert sum(line.startswith("started") for line in harness.lines()) == 2, harness.lines()
+        assert harness.lines()[-1] == "publish"
+        assert harness.lease_document()["leases"] == {}
+    finally:
+        harness.cleanup()
+
+
+def test_an_exited_crawler_is_noticed_within_a_watch_interval_not_a_heartbeat(tmp_path):
+    harness = Native(tmp_path, crawler_body="sleep 1; exit 3")
+    harness.env.update({"HEARTBEAT_INTERVAL": "3600", "PUBLISH_INTERVAL": "21600", "WATCH_INTERVAL": "1",
+                        "CRASH_LIMIT": "10"})
+    try:
+        supervisor = harness.run()
+        assert harness.wait_for(lambda: sum(line.startswith("started") for line in harness.lines()) >= 2, 30)
+        supervisor.send_signal(signal.SIGTERM)
+        supervisor.wait(timeout=60)
+    finally:
+        harness.cleanup()

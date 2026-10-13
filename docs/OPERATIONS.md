@@ -1012,6 +1012,24 @@ publishes what it has, releases the lease (Actions takes the buckets over at onc
 so a watchdog notices. `abort` stops the supervisor and the crawler without the final
 publication and keeps the lease, for when the local state must not be published.
 
+**A stalled crawler.** On 2026-10-13 the box's VM was repeatedly paused and forked
+(`random: crng reseeded due to virtual machine fork`, balloon pressure in `dmesg`). After a
+resume the crawler's HTTP/2 connection to PyPI was silently dead, but nothing noticed: every
+request multiplexed onto it waited for its 30 s timeout, retried on the same connection, and
+packages failed at the 90 s package timeout, so a 2-minute pass slowed to hours (a livelock:
+no goroutine was blocked for more than a minute). The HTTP clients now ping an HTTP/2
+connection that has been silent for 15 s and drop it if the ping is not answered within 10 s
+(`HealthCheckInterval`, `PingTimeout`), so requests fail over to a new connection.
+The supervisor used to check the crawler only once per `HEARTBEAT_INTERVAL` (an hour of
+*its own* sleep, which does not advance while the VM is paused), so an exited crawler could
+wait hours for a restart. It now checks every `WATCH_INTERVAL` (60 s), publishes and
+heartbeats by the wall clock, and in native mode watches `<dir>/progress`, which the crawler
+(`--progress-file`) touches whenever it commits a package the registry answered for and after
+each pass. Without progress for `STALL_TIMEOUT` (1800 s, counted in supervisor wake-ups so a
+paused machine is not a stall) the crawler gets SIGQUIT (its goroutines go to
+`<dir>/booster.log`), KILL after `STOP_TIMEOUT`, and is restarted; stalls count towards
+`CRASH_LIMIT` like exits.
+
 **Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
 --source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:
 checked with an outcome (`has_commands`, `no_commands`), `unavailable` (no release, no wheel

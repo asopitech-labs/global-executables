@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Local booster: after the machine was suspended, the PyPI crawler kept sending requests over
+  a silently dead HTTP/2 connection (each one timing out and retrying on it), and the
+  supervisor, which looked at the crawler only once per hour of its own sleep, neither noticed
+  the stall nor promptly relaunched the crawler after it exited. HTTP/2 connections are now
+  health-checked with pings (dropped after 15 s + 10 s of silence). The supervisor checks every
+  `WATCH_INTERVAL` (60 s), publishes and heartbeats by the wall clock, and restarts a crawler
+  whose `--progress-file` has not moved for `STALL_TIMEOUT` (1800 s) after a SIGQUIT goroutine
+  dump; stalls count towards `CRASH_LIMIT`.
 - Local booster: a bbolt store damaged by a file-level snapshot/restore of the live file
   (`invalid page type` panic in `BoltStore.Commit` after a reboot) crash-looped the crawler.
   New `--verify-store` (used by the booster) checks the store on first open, quarantines a

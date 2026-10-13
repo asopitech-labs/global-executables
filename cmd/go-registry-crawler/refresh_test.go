@@ -719,3 +719,31 @@ func TestADamagedStoreIsQuarantinedAndRebuiltFromTheExportedState(t *testing.T) 
 		t.Fatal("the check runs once per process")
 	}
 }
+
+func TestTheProgressFileMovesOnlyWhenAPackageWasReadSuccessfully(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "progress")
+	committer := &measuringCommitter{progressFile: path}
+	if madeProgress([]gocrawl.ModuleResult{{Work: gocrawl.ModuleWork{Skip: true}, Verdict: gocrawl.VerdictSuccess}}) {
+		t.Fatal("a skipped package is not progress")
+	}
+	if madeProgress([]gocrawl.ModuleResult{{Verdict: gocrawl.VerdictRetry}}) {
+		t.Fatal("a failed read is not progress")
+	}
+	if !madeProgress([]gocrawl.ModuleResult{{Verdict: gocrawl.VerdictRetry}, {Verdict: gocrawl.VerdictSuccess}}) {
+		t.Fatal("a successful read is progress")
+	}
+	touchProgress(committer.progressFile)
+	first, err := os.Stat(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	old := first.ModTime().Add(-time.Hour)
+	if err := os.Chtimes(path, old, old); err != nil {
+		t.Fatal(err)
+	}
+	touchProgress(path)
+	second, _ := os.Stat(path)
+	if !second.ModTime().After(old) {
+		t.Fatal("touch did not move the modification time")
+	}
+}
