@@ -190,8 +190,6 @@
     "mindspore-ascend-dev": 1,
     "mindspore-cuda11-dev": 1,
     "mindspore-gpu": 1,
-    "mkl": 1,
-    "mkl-static": 1,
     "mlb-showdown-bot": 2,
     "mocker": 2,
     "mrcli": 2,
@@ -334,7 +332,7 @@
     "swiftwal": 1,
     "syntactic-tagger": 1,
     "tempi": 1,
-    "tensordict-nightly": 1,
+    "tensordict-nightly": 2,
     "tensorflow": 1,
     "tensorflow-aarch64": 1,
     "tensorflow-cpu": 1,
@@ -570,8 +568,6 @@
     "mindspore-ascend-dev": "artifact size 177951073 exceeds limit 134217728",
     "mindspore-cuda11-dev": "artifact size 346264824 exceeds limit 134217728",
     "mindspore-gpu": "artifact size 345132745 exceeds limit 134217728",
-    "mkl": "artifact size 180806880 exceeds limit 134217728",
-    "mkl-static": "artifact size 233925144 exceeds limit 134217728",
     "mlb-showdown-bot": "response exceeded 134217728 bytes",
     "mocker": "archive/tar: invalid tar header",
     "mrcli": "archive/tar: invalid tar header",
@@ -714,7 +710,7 @@
     "swiftwal": "archive/tar: invalid tar header",
     "syntactic-tagger": "response exceeded 134217728 bytes",
     "tempi": "archive/tar: invalid tar header",
-    "tensordict-nightly": "response exceeded 8388608 bytes",
+    "tensordict-nightly": "response of 13128563 bytes exceeds 8388608 bytes",
     "tensorflow": "artifact size 351205371 exceeds limit 134217728",
     "tensorflow-aarch64": "artifact size 220302015 exceeds limit 134217728",
     "tensorflow-cpu": "artifact size 351205417 exceeds limit 134217728",
@@ -759,47 +755,23 @@
     "zas-rep-tools": "response exceeded 134217728 bytes",
     "zeroconf": "response exceeded 8388608 bytes"
   },
-  "feed_cursor": "42317944",
+  "feed_cursor": "42329547",
   "feed_pending": {
-    "AbstractIntegratedModule": {
-      "kind": "add cp310 file abstractintegratedmodule-1.2.8-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl",
-      "time": 1792150183
+    "cliany-site": {
+      "kind": "add source file cliany_site-0.16.388.tar.gz",
+      "time": 1792169049
     },
-    "MTPPy2.0": {
-      "kind": "add source file mtppy2_0-0.5.1.tar.gz",
-      "time": 1792150178
+    "mini-code-cli": {
+      "kind": "add source file mini_code_cli-0.1.0.3.tar.gz",
+      "time": 1792169049
     },
-    "cosmergon-decider-tree": {
-      "kind": "add source file cosmergon_decider_tree-2.3.7.tar.gz",
-      "time": 1792150170
+    "morie": {
+      "kind": "add source file morie-1.4.4.tar.gz",
+      "time": 1792169022
     },
-    "d3dtools": {
-      "kind": "add source file d3dtools-0.36.0.tar.gz",
-      "time": 1792150182
-    },
-    "nexus-raw": {
-      "kind": "add source file nexus_raw-0.18.0.tar.gz",
-      "time": 1792150151
-    },
-    "pulumi-aiven": {
-      "kind": "add source file pulumi_aiven-6.61.1.tar.gz",
-      "time": 1792150151
-    },
-    "service-ple": {
-      "kind": "add py3 file service_ple-0.2.2-py3-none-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
-      "time": 1792150151
-    },
-    "teddy-cli": {
-      "kind": "add py3 file teddy_cli-0.1.17.dev1314-py3-none-any.whl",
-      "time": 1792150195
-    },
-    "timeglance": {
-      "kind": "add source file timeglance-3.5.2.tar.gz",
-      "time": 1792150193
-    },
-    "vllm-service-ple": {
-      "kind": "add source file vllm_service_ple-0.2.2.tar.gz",
-      "time": 1792150154
+    "pyrudof": {
+      "kind": "add source file pyrudof-0.3.26.tar.gz",
+      "time": 1792169008
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
@@ -1049,8 +1021,6 @@
     "mindspore-ascend-dev",
     "mindspore-cuda11-dev",
     "mindspore-gpu",
-    "mkl",
-    "mkl-static",
     "msvclib",
     "mxnet-cu100",
     "mxnet-cu100mkl",
@@ -1184,5 +1154,5 @@
     "wutdn",
     "zeroconf"
   ],
-  "snapshot_generation": 129
+  "snapshot_generation": 130
 }
