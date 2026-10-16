@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	bolt "go.etcd.io/bbolt"
@@ -360,5 +361,65 @@ func TestBoltStoreRebuildsSameSizedReplacedCatalogIdentity(t *testing.T) {
 	}
 	if progress.RefreshCursor != 0 {
 		t.Fatalf("refresh cursor=%d", progress.RefreshCursor)
+	}
+}
+
+func TestAFailureOutsideTheRetryQueueCountsOnFromTheRecordedAttempts(t *testing.T) {
+	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{FailureAttemptLimit: 4})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.Import(context.Background(), ImportSnapshot{Retries: map[string]RetryEntry{"pkg": {Error: "x", Attempts: 2}}}); err != nil {
+		t.Fatal(err)
+	}
+	// A feed (or rotation) work carries Attempt 1; it used to reset the count to 1.
+	feed := ModuleResult{Work: ModuleWork{Module: "pkg", Feed: true, Attempt: 1}, Verdict: VerdictRetry, Error: "timeout"}
+	if err := store.Commit(context.Background(), []ModuleResult{feed}); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, err := store.Snapshot(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := snapshot.Retries["pkg"].Attempts; got != 3 {
+		t.Fatalf("attempts = %d, want 3", got)
+	}
+	if err := store.Commit(context.Background(), []ModuleResult{feed}); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, _ = store.Snapshot(context.Background())
+	if _, still := snapshot.Retries["pkg"]; still || !strings.Contains(snapshot.Unavailable["pkg"], "gave up after 4 attempts") {
+		t.Fatalf("the limit must be reached: retries=%v unavailable=%v", snapshot.Retries, snapshot.Unavailable)
+	}
+}
+
+func TestAnUnreadableVersionIsRecordedAsCheckedNotUnavailableNorRetried(t *testing.T) {
+	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{FailureAttemptLimit: 3})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.Import(context.Background(), ImportSnapshot{Retries: map[string]RetryEntry{"huge": {Error: "response exceeded", Attempts: 1}}}); err != nil {
+		t.Fatal(err)
+	}
+	result := ModuleResult{Work: ModuleWork{Module: "huge", Retry: true, Attempt: 2}, Verdict: VerdictPermanent,
+		Error: "artifact size 1 exceeds limit 0", Latest: "2.0", Outcome: Unreadable}
+	if err := store.Commit(context.Background(), []ModuleResult{result}); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, err := store.Snapshot(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	check, ok := ParseCheck(snapshot.Checks["huge"])
+	if !ok || check.Outcome != Unreadable || check.Version != "2.0" {
+		t.Fatalf("check=%q", snapshot.Checks["huge"])
+	}
+	if len(snapshot.Retries) != 0 || snapshot.Unavailable["huge"] != "" {
+		t.Fatalf("retries=%v unavailable=%v", snapshot.Retries, snapshot.Unavailable)
+	}
+	if again, ok := ParseCheck(EncodeCheck(check)); !ok || again != check {
+		t.Fatalf("round trip %+v -> %+v", check, again)
 	}
 }

@@ -516,6 +516,7 @@ func atomicWriteStream(path string, mode os.FileMode, write func(io.Writer) erro
 // checkOutcomes counts the recorded checks by what the last look found, like
 // refresh_policy.outcome_summary.
 func checkOutcomes(checks map[string]string) map[string]int {
+	// "unreadable" appears only when there is one, so existing reports stay byte-identical.
 	counts := map[string]int{"no_commands": 0, "has_commands": 0, "unknown": 0}
 	for _, value := range checks {
 		check, ok := ParseCheck(value)
@@ -527,6 +528,8 @@ func checkOutcomes(checks map[string]string) map[string]int {
 			counts["no_commands"]++
 		case HasCommands:
 			counts["has_commands"]++
+		case Unreadable:
+			counts["unreadable"]++
 		default:
 			counts["unknown"]++
 		}

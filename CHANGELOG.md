@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- Refresh/booster duplicate work and endless retries (refs #64):
+  - Retries follow bucket ownership: the Actions refresh (`--rotation-exclude`) no longer
+    retries packages in a local booster's buckets unless the change feed announced them; the
+    booster keeps retrying its own. Since 10/14 Actions retried about 375 booster-owned
+    packages in every run.
+  - A failure of a feed, walk or rotation work reset the package's attempt count to 1, so
+    packages that always fail never reached `FailureAttemptLimit`. The count now continues
+    from the recorded one, and publication merges `failure_attempts` by maximum.
+  - PyPI artifacts larger than the limit (by PyPI's JSON `size` or `Content-Length`, now
+    checked before downloading) or with an invalid tar header are final for that version:
+    recorded as checked with the new outcome `u` (unreadable), not retried, and read again
+    only when the version changes or `ExtractionRevision` rises. Reports list `unreadable`
+    only when there is one.
 - Local booster: after the machine was suspended, the PyPI crawler kept sending requests over
   a silently dead HTTP/2 connection (each one timing out and retrying on it), and the
   supervisor, which looked at the crawler only once per hour of its own sleep, neither noticed

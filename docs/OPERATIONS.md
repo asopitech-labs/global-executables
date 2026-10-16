@@ -1030,6 +1030,14 @@ paused machine is not a stall) the crawler gets SIGQUIT (its goroutines go to
 `<dir>/booster.log`), KILL after `STOP_TIMEOUT`, and is restarted; stalls count towards
 `CRASH_LIMIT` like exits.
 
+**Retries and ownership.** A run that leaves buckets to a booster also leaves it their
+retries (except packages the change feed announced, which every feed reader handles).
+Attempt counts only grow, across writers too (`failure_attempts` merges by maximum), so a
+package that keeps failing is given up after `FailureAttemptLimit` attempts. Artifacts that
+cannot be read for that version (too large, corrupt tar) are recorded with outcome `u` and
+not fetched again until a new version; deploy the booster from the same main as Actions,
+since older crawlers do not understand `u`.
+
 **Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
 --source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:
 checked with an outcome (`has_commands`, `no_commands`), `unavailable` (no release, no wheel

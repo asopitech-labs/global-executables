@@ -328,6 +328,10 @@ func (s *BoltStore) applyVerdict(tx *bolt.Tx, result ModuleResult) error {
 		if err := retries.Delete(module); err != nil {
 			return err
 		}
+		if result.Outcome == Unreadable && result.Latest != "" {
+			// The package exists; its check records why it has no rows.
+			return unavailable.Delete(module)
+		}
 		return unavailable.Put(module, []byte(result.Error))
 	case VerdictRetry:
 		var previous RetryEntry
@@ -337,10 +341,10 @@ func (s *BoltStore) applyVerdict(tx *bolt.Tx, result ModuleResult) error {
 		if result.UncountedRetry {
 			return putJSON(retries, result.Work.Module, RetryEntry{Error: result.Error, Attempts: previous.Attempts})
 		}
-		attempts := result.Work.Attempt
-		if attempts <= 0 {
-			attempts = previous.Attempts + 1
-		}
+		// Count on from what is recorded: a feed, walk or rotation work carries Attempt 1,
+		// and taking that literally reset a package's count on every such failure, so a
+		// package that always fails never reached the limit and was retried forever.
+		attempts := max(result.Work.Attempt, previous.Attempts+1)
 		if attempts >= s.failureAttemptLimit {
 			if err := retries.Delete(module); err != nil {
 				return err
@@ -501,6 +505,14 @@ func applyCheck(tx *bolt.Tx, result ModuleResult, today int) error {
 	}
 	checks := tx.Bucket(checkBucket)
 	switch {
+	case result.Verdict == VerdictPermanent && result.Outcome == Unreadable && result.Latest != "":
+		var previous Check
+		var had bool
+		if value := checks.Get(module); value != nil {
+			previous, had = ParseCheck(string(value))
+		}
+		next, _ := Next(previous, had, result.Latest, Unreadable, today)
+		return checks.Put(module, []byte(EncodeCheck(next)))
 	case result.Verdict == VerdictPermanent:
 		return checks.Delete(module)
 	case result.Verdict != VerdictSuccess || result.Work.Skip || result.Latest == "":

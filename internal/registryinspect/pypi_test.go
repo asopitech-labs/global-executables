@@ -150,3 +150,45 @@ func commands(observations []gocrawl.Observation) string {
 	}
 	return strings.Join(values, ",")
 }
+
+func TestPyPIOversizedOrCorruptArtifactsAreFinalForTheVersionAndNeverDownloaded(t *testing.T) {
+	var artifactRequests atomic.Int32
+	var server *httptest.Server
+	server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/pypi/huge/json":
+			_, _ = fmt.Fprintf(w, `{"info":{"name":"huge","version":"2.0"},"urls":[{"packagetype":"sdist","filename":"huge-2.0.tar.gz","size":%d,"url":%s}]}`,
+				200<<20, strconv.Quote(server.URL+"/files/huge.tar.gz"))
+		case "/pypi/broken/json":
+			_, _ = fmt.Fprintf(w, `{"info":{"name":"broken","version":"1.1"},"urls":[{"packagetype":"sdist","filename":"broken-1.1.tar.gz","url":%s}]}`,
+				strconv.Quote(server.URL+"/files/broken.tar.gz"))
+		case "/files/broken.tar.gz":
+			artifactRequests.Add(1)
+			_, _ = w.Write(bytes.Repeat([]byte("not a tar header "), 64))
+		default:
+			artifactRequests.Add(1)
+			http.NotFound(w, r)
+		}
+	}))
+	defer server.Close()
+	inspector := NewPyPIInspector(Config{BaseURL: server.URL, RequestTimeout: time.Second, PackageTimeout: time.Second})
+
+	huge := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "huge"})
+	if huge.Verdict != gocrawl.VerdictPermanent || huge.Outcome != gocrawl.Unreadable || huge.Latest != "2.0" ||
+		!strings.Contains(huge.Error, "exceeds limit") {
+		t.Fatalf("huge=%+v", huge)
+	}
+	if artifactRequests.Load() != 0 {
+		t.Fatal("an artifact PyPI reports as oversized must not be requested")
+	}
+	broken := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "broken"})
+	if broken.Verdict != gocrawl.VerdictPermanent || broken.Outcome != gocrawl.Unreadable || broken.Latest != "1.1" {
+		t.Fatalf("broken=%+v", broken)
+	}
+	// The next visit of the same version reads the JSON only.
+	before := artifactRequests.Load()
+	again := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "broken", Known: "1.1"})
+	if !again.Unchanged || artifactRequests.Load() != before {
+		t.Fatalf("again=%+v, artifact requests %d -> %d", again, before, artifactRequests.Load())
+	}
+}

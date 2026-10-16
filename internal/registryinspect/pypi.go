@@ -106,17 +106,19 @@ func (i *PyPIInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) go
 		repository = &payload.Info.Homepage
 	}
 	var lastErr error
+	unreadable := true // every candidate failed for a reason that cannot change for this version
 	for _, candidate := range candidates {
 		var commands []string
 		var downloaded int64
 		if strings.HasSuffix(candidate.Filename, ".whl") {
 			commands, downloaded, err = i.wheelCommands(packageCtx, candidate.URL, candidate.Size)
 		} else {
-			commands, downloaded, err = i.sdistCommands(packageCtx, candidate.URL)
+			commands, downloaded, err = i.sdistCommands(packageCtx, candidate.URL, candidate.Size)
 		}
 		result.DownloadedBytes += downloaded
 		if err != nil {
 			lastErr = err
+			unreadable = unreadable && unreadableArtifact(err)
 			continue
 		}
 		for _, command := range commands {
@@ -129,7 +131,22 @@ func (i *PyPIInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) go
 		result.Verdict = gocrawl.VerdictSuccess
 		return result
 	}
+	if unreadable && lastErr != nil && ctx.Err() == nil && packageCtx.Err() == nil {
+		// Final for this version: recorded as checked (outcome Unreadable), not retried, and
+		// not read again until the package releases another version.
+		result.Verdict, result.Error, result.Outcome = gocrawl.VerdictPermanent, lastErr.Error(), gocrawl.Unreadable
+		return result
+	}
 	return classifyResult(ctx, result, lastErr)
+}
+
+// unreadableArtifact reports whether an artifact error is a property of the file itself
+// (too large to read, or a corrupt archive), so another attempt would fail the same way.
+func unreadableArtifact(err error) bool {
+	if _, ok := errors.AsType[sizeLimitError](err); ok {
+		return true
+	}
+	return errors.Is(err, tar.ErrHeader)
 }
 
 func classifyResult(parent context.Context, result gocrawl.ModuleResult, err error) gocrawl.ModuleResult {
@@ -147,7 +164,7 @@ func (i *PyPIInspector) wheelCommands(ctx context.Context, target string, size i
 		}
 	}
 	if size > i.http.config.MaxArtifactBytes {
-		return nil, 0, fmt.Errorf("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
+		return nil, 0, tooLarge("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
 	}
 	reader := newHTTPRangeReaderAt(ctx, i.http, target, size)
 	archive, err := zip.NewReader(reader, size)
@@ -183,7 +200,7 @@ func (i *PyPIInspector) artifactSize(ctx context.Context, target string) (int64,
 		return 0, fmt.Errorf("artifact has invalid Content-Length: %s", target)
 	}
 	if size > i.http.config.MaxArtifactBytes {
-		return 0, fmt.Errorf("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
+		return 0, tooLarge("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
 	}
 	return size, nil
 }
@@ -232,7 +249,11 @@ func consoleScripts(body string) []string {
 	return sortedKeys(set)
 }
 
-func (i *PyPIInspector) sdistCommands(ctx context.Context, target string) ([]string, int64, error) {
+func (i *PyPIInspector) sdistCommands(ctx context.Context, target string, size int64) ([]string, int64, error) {
+	if size > i.http.config.MaxArtifactBytes {
+		// The size PyPI's JSON reports: never download a file that is too large.
+		return nil, 0, tooLarge("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
+	}
 	response, err := i.http.request(ctx, http.MethodGet, target, nil, i.http.config.MaxArtifactBytes)
 	if err != nil {
 		return nil, 0, err
