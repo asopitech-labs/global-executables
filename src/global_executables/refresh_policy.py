@@ -63,7 +63,8 @@ def today(now: datetime | None = None) -> int:
 
 NO_COMMANDS = "n"   # the version was read and ships no command (most of a registry)
 HAS_COMMANDS = "c"  # the version was read and has rows
-OUTCOMES = {NO_COMMANDS: "no_commands", HAS_COMMANDS: "has_commands"}
+UNREADABLE = "u"    # the version's artifacts cannot be inspected (too large, corrupt archive)
+OUTCOMES = {NO_COMMANDS: "no_commands", HAS_COMMANDS: "has_commands", UNREADABLE: "unreadable"}
 
 
 def pack(day: int, streak: int, version: str, outcome: str = "") -> str:
@@ -293,9 +294,11 @@ class TokenBucket:
 
 def outcome_summary(checked: dict[str, Any]) -> dict[str, int]:
     """How many recorded checks found no command, found commands, or predate outcomes."""
+    # "unreadable" appears only when there is one, so existing reports stay byte-identical.
     counts = {"no_commands": 0, "has_commands": 0, "unknown": 0}
     for value in checked.values():
         entry = unpack_full(value)
         if entry is not None:
-            counts[OUTCOMES.get(entry[3], "unknown")] += 1
+            key = OUTCOMES.get(entry[3], "unknown")
+            counts[key] = counts.get(key, 0) + 1
     return counts

@@ -57,6 +57,10 @@ type ModuleResult struct {
 	// Unchanged means Latest equals Work.Known: the stored observations stay as they
 	// are and only the check advances.
 	Unchanged bool
+	// Outcome, on a permanent verdict for a package that exists, records what was found
+	// (Unreadable: its artifacts cannot be inspected) in the check of Latest, so the
+	// package is not read again until it releases another version.
+	Outcome string
 }
 
 // AsUnchanged turns result into a successful look that found nothing new.

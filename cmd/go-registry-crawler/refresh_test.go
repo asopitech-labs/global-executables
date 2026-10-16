@@ -747,3 +747,59 @@ func TestTheProgressFileMovesOnlyWhenAPackageWasReadSuccessfully(t *testing.T) {
 		t.Fatal("touch did not move the modification time")
 	}
 }
+
+func TestRetriesFollowBucketOwnershipExceptAnnouncedPackages(t *testing.T) {
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	if err := os.WriteFile(catalog, []byte("a\nb\nc\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 3, Cursor: 3, CatalogComplete: true,
+		Retries: map[string]gocrawl.RetryEntry{"booster-owned": {Attempts: 1}, "announced": {Attempts: 1}, "queued-announced": {Attempts: 2}}}}
+	kinds := func(works []gocrawl.ModuleWork) map[string]string {
+		found := map[string]string{}
+		for _, work := range works {
+			switch {
+			case work.Retry:
+				found[work.Module] += "retry"
+			case work.Feed:
+				found[work.Module] += "feed"
+			}
+		}
+		return found
+	}
+	// Actions with --rotation-exclude 0-255: owns nothing.
+	actions := passPolicy{MaxDays: 60, Owns: func(string) bool { return false }, Feed: []string{"announced"}}
+	works, err := planPassWorks(catalog, before, 40, true, actions)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := kinds(works); got["booster-owned"] != "" || got["announced"] != "feed" || got["queued-announced"] != "" {
+		t.Fatalf("actions works = %v", got)
+	}
+	// With no budget left for the feed share, an announced package is still retried.
+	actions.Feed = []string{"announced", "queued-announced"}
+	works, err = planPassWorks(catalog, before, 1, true, actions)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := kinds(works); got["booster-owned"] != "" || got["announced"]+got["queued-announced"] != "retry" {
+		t.Fatalf("actions works with a full budget = %v", got)
+	}
+	// The booster (--rotation-include) retries its own packages.
+	booster := passPolicy{MaxDays: 60, Owns: func(module string) bool { return module == "booster-owned" }}
+	works, err = planPassWorks(catalog, before, 40, true, booster)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := kinds(works); got["booster-owned"] != "retry" || got["announced"] != "" {
+		t.Fatalf("booster works = %v", got)
+	}
+	// Without ownership every retry is this run's.
+	works, err = planPassWorks(catalog, before, 40, true, passPolicy{MaxDays: 60})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := kinds(works); len(got) != 3 {
+		t.Fatalf("unowned works = %v", got)
+	}
+}

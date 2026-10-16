@@ -91,7 +91,7 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 	if budget <= 0 {
 		return nil, nil
 	}
-	retryModules := slices.Sorted(maps.Keys(before.Retries))
+	retryModules := ownedRetries(before.Retries, policy)
 	retryBudget := min(len(retryModules), max(1, budget/4))
 	remaining := budget - retryBudget
 	walking := before.Cursor < before.CatalogSize
@@ -127,9 +127,16 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 		}
 		works = append(works, refreshWorks...)
 	}
+	scheduled := make(map[string]struct{}, feedUse)
+	for _, module := range policy.Feed[:feedUse] {
+		scheduled[module] = struct{}{}
+	}
 	for _, module := range retryModules[:retryBudget] {
 		if len(works) >= budget {
 			break
+		}
+		if _, ok := scheduled[module]; ok {
+			continue // already read this pass as a feed work, which also counts the attempt
 		}
 		entry := before.Retries[module]
 		works = append(works, gocrawl.ModuleWork{
@@ -143,6 +150,29 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 		works[index].Order = uint64(index)
 	}
 	return works, nil
+}
+
+// ownedRetries lists the retries this writer is responsible for, sorted: those in the
+// buckets it owns (policy.Owns; all of them when it is nil), plus any package the change
+// feed has announced, which every writer that reads the feed handles. The Actions refresh
+// excludes a local booster's buckets, so it no longer re-reads the booster's failures,
+// while the booster (--rotation-include) keeps retrying its own.
+func ownedRetries(retries map[string]gocrawl.RetryEntry, policy passPolicy) []string {
+	modules := slices.Sorted(maps.Keys(retries))
+	if policy.Owns == nil {
+		return modules
+	}
+	announced := make(map[string]struct{}, len(policy.Feed))
+	for _, module := range policy.Feed {
+		announced[module] = struct{}{}
+	}
+	owned := modules[:0]
+	for _, module := range modules {
+		if _, ok := announced[module]; ok || policy.Owns(module) {
+			owned = append(owned, module)
+		}
+	}
+	return owned
 }
 
 // planRefresh reads the next rotation entries. With checks available it reads further

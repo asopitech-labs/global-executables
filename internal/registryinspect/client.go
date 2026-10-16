@@ -298,6 +298,13 @@ func (r *requester) requestBody(ctx context.Context, method, target string, head
 			}
 			return responseData{}, err
 		}
+		if maxBytes > 0 && method != http.MethodHead && resp.ContentLength > maxBytes {
+			// Announced as too large: do not download it only to throw it away.
+			_ = resp.Body.Close()
+			gate.release(resp.StatusCode, nil, 0)
+			cancel()
+			return responseData{}, tooLarge("response of %d bytes exceeds %d bytes", resp.ContentLength, maxBytes)
+		}
 		body, readErr := io.ReadAll(io.LimitReader(resp.Body, maxBytes+1))
 		closeErr := resp.Body.Close()
 		if err := r.bandwidth.pace(ctx, int64(len(body))); err != nil {
@@ -322,7 +329,7 @@ func (r *requester) requestBody(ctx context.Context, method, target string, head
 			return responseData{}, closeErr
 		}
 		if int64(len(body)) > maxBytes {
-			return responseData{}, fmt.Errorf("response exceeded %d bytes", maxBytes)
+			return responseData{}, tooLarge("response exceeded %d bytes", maxBytes)
 		}
 		result := responseData{statusCode: resp.StatusCode, header: resp.Header.Clone(), body: body}
 		if resp.StatusCode >= 200 && resp.StatusCode < 300 {
@@ -491,6 +498,12 @@ func isTimeout(err error) bool {
 }
 
 type permanentError struct{ error }
+
+// sizeLimitError: a response or artifact is larger than this crawler reads. It is the same
+// for every attempt at the same file, so the PyPI inspector treats it as final.
+type sizeLimitError struct{ error }
+
+func tooLarge(format string, args ...any) error { return sizeLimitError{fmt.Errorf(format, args...)} }
 
 func classify(parent context.Context, err error) (gocrawlVerdict string, message string, uncountedRetry bool) {
 	if parent.Err() != nil {

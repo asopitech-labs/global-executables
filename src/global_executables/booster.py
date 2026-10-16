@@ -203,6 +203,10 @@ def _is_retry_list(key: str, value: Any) -> bool:
     return key.startswith("retry_") and isinstance(value, list)
 
 
+# Per-package counters merged by maximum rather than by last writer.
+COUNTER_MAPS = frozenset({"failure_attempts"})
+
+
 def merge_source_delta(published: dict[str, Any], local: dict[str, Any], base: dict[str, Any],
                        scalars: bool) -> tuple[dict[str, Any], bool]:
     """Apply what ``local`` changed relative to ``base`` onto ``published``.
@@ -224,7 +228,13 @@ def merge_source_delta(published: dict[str, Any], local: dict[str, Any], base: d
                 if new.get(name) == old.get(name):
                     continue
                 if name in new:
-                    if target.get(name) != new[name]:
+                    if key in COUNTER_MAPS and isinstance(target.get(name), int) and isinstance(new[name], int):
+                        # Both writers count attempts at the same package: keep the higher
+                        # count, so the other writer's attempts are never undone.
+                        if new[name] > target[name]:
+                            target[name] = new[name]
+                            changed = True
+                    elif target.get(name) != new[name]:
                         target[name] = new[name]
                         changed = True
                 elif name in target:
@@ -322,10 +332,10 @@ def coverage(catalog: list[str], checks: dict[str, Any], unavailable: Iterable[s
     The report's ``complete``/``cursor`` describe the catalogue *walk* (discovery), which is
     finished; the rotation lap is ``rotation_cursor`` and this summary.
     """
-    from .refresh_policy import HAS_COMMANDS, NO_COMMANDS, unpack_full
+    from .refresh_policy import HAS_COMMANDS, NO_COMMANDS, UNREADABLE, unpack_full
 
     unavailable, failing = set(unavailable), set(failures) | set(retries)
-    outcomes = {"has_commands": 0, "no_commands": 0, "unknown_outcome": 0}
+    outcomes = {"has_commands": 0, "no_commands": 0, "unreadable": 0, "unknown_outcome": 0}
     counts = {"unavailable": 0, "failing": 0}
     before = after = 0
     first = last = None
@@ -333,7 +343,8 @@ def coverage(catalog: list[str], checks: dict[str, Any], unavailable: Iterable[s
         if name in checks:
             parsed = unpack_full(checks[name])
             outcome = parsed[3] if parsed else ""
-            key = {HAS_COMMANDS: "has_commands", NO_COMMANDS: "no_commands"}.get(outcome, "unknown_outcome")
+            key = {HAS_COMMANDS: "has_commands", NO_COMMANDS: "no_commands",
+                   UNREADABLE: "unreadable"}.get(outcome, "unknown_outcome")
             outcomes[key] += 1
         elif name in unavailable:
             counts["unavailable"] += 1

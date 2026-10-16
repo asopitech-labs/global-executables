@@ -34,6 +34,9 @@ const (
 	OutcomeUnknown = ""  // a check written before outcomes existed
 	NoCommands     = "n" // the version was read and has no command
 	HasCommands    = "c" // the version was read and has rows
+	// Unreadable: the version's artifacts cannot be inspected (larger than the size limit,
+	// or a corrupt archive). It is final for that version and that ExtractionRevision.
+	Unreadable = "u"
 )
 
 // Check records the last successful look at a package: the day (days since the Unix
@@ -64,7 +67,7 @@ func ParseCheck(value string) (Check, bool) {
 	}
 	outcome := OutcomeUnknown
 	if last := len(streakText) - 1; last > 0 {
-		if letter := streakText[last:]; letter == NoCommands || letter == HasCommands {
+		if letter := streakText[last:]; letter == NoCommands || letter == HasCommands || letter == Unreadable {
 			outcome, streakText = letter, streakText[:last]
 		}
 	}

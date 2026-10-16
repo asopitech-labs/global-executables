@@ -642,3 +642,32 @@ def test_an_exited_crawler_is_noticed_within_a_watch_interval_not_a_heartbeat(tm
         supervisor.wait(timeout=60)
     finally:
         harness.cleanup()
+
+
+def test_attempt_counts_merge_by_maximum_so_neither_writer_undoes_the_other():
+    from global_executables.booster import merge_source_delta
+    published = {"failure_attempts": {"a": 2, "b": 1}, "failures": {"a": "x", "b": "y"}}
+    base = {"failure_attempts": {"a": 1, "b": 1}, "failures": {"a": "x", "b": "y"}}
+    local = {"failure_attempts": {"a": 1, "b": 2, "c": 1}, "failures": {"a": "x2", "b": "y", "c": "z"}}
+    base["failure_attempts"]["a"] = 0  # this writer saw "a" change (0 -> 1) since its base
+    merged, changed = merge_source_delta(published, local, base, scalars=False)
+    assert changed
+    assert merged["failure_attempts"] == {"a": 2, "b": 2, "c": 1}, "the higher count wins; new entries arrive"
+    # A package that succeeded locally (removed from the map) is still removed.
+    merged, _ = merge_source_delta(merged, {"failure_attempts": {"b": 2, "c": 1}}, {"failure_attempts": {"a": 1, "b": 2, "c": 1}},
+                                   scalars=False)
+    assert merged["failure_attempts"] == {"b": 2, "c": 1}
+    # Nothing changed locally: nothing is rewritten.
+    same, changed = merge_source_delta(merged, {"failure_attempts": {"b": 2, "c": 1}}, {"failure_attempts": {"b": 2, "c": 1}},
+                                      scalars=False)
+    assert not changed and same == merged
+
+
+def test_the_unreadable_outcome_round_trips_and_is_counted():
+    from global_executables import refresh_policy
+    value = refresh_policy.pack(20000, 0, "2.0", refresh_policy.UNREADABLE)
+    assert refresh_policy.unpack_full(value) == (20000, 0, "2.0", "u")
+    assert refresh_policy.outcome_summary({"x": value, "y": refresh_policy.pack(1, 0, "1", "n")}) == \
+        {"no_commands": 1, "has_commands": 0, "unknown": 0, "unreadable": 1}
+    assert refresh_policy.outcome_summary({"y": refresh_policy.pack(1, 0, "1", "n")}) == \
+        {"no_commands": 1, "has_commands": 0, "unknown": 0}, "reports without one stay as they were"

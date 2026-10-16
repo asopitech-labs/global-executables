@@ -3,11 +3,13 @@ package registryinspect
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -146,9 +148,42 @@ func TestRequesterEnforcesResponseLimit(t *testing.T) {
 	}))
 	defer server.Close()
 	requester := newRequester(Config{RequestTimeout: time.Second, MaxAttempts: 1})
-	if _, err := requester.request(context.Background(), http.MethodGet, server.URL, nil, 8); err == nil ||
-		!strings.Contains(err.Error(), "response exceeded 8 bytes") {
-		t.Fatalf("limit error=%v", err)
+	_, err := requester.request(context.Background(), http.MethodGet, server.URL, nil, 8)
+	if _, final := errors.AsType[sizeLimitError](err); !final || !strings.Contains(err.Error(), "exceeds 8 bytes") {
+		t.Fatalf("an announced Content-Length over the limit: error=%v", err)
+	}
+	streamed := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.(http.Flusher).Flush() // no Content-Length: the limit is found while reading
+		_, _ = w.Write([]byte("response-is-too-large"))
+	}))
+	defer streamed.Close()
+	_, err = requester.request(context.Background(), http.MethodGet, streamed.URL, nil, 8)
+	if _, final := errors.AsType[sizeLimitError](err); !final || !strings.Contains(err.Error(), "response exceeded 8 bytes") {
+		t.Fatalf("a streamed response over the limit: error=%v", err)
+	}
+}
+
+func TestAnAnnouncedOversizedResponseIsNotDownloaded(t *testing.T) {
+	var written atomic.Int64
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Length", strconv.Itoa(4<<20))
+		chunk := make([]byte, 64<<10)
+		for range 64 {
+			n, err := w.Write(chunk)
+			written.Add(int64(n))
+			if err != nil {
+				return
+			}
+		}
+	}))
+	defer server.Close()
+	requester := newRequester(Config{RequestTimeout: 2 * time.Second, MaxAttempts: 1})
+	if _, err := requester.request(context.Background(), http.MethodGet, server.URL, nil, 1<<20); err == nil {
+		t.Fatal("want a size-limit error")
+	}
+	server.Close() // waits for the handler
+	if written.Load() >= 4<<20 {
+		t.Fatalf("the whole %d-byte body was sent; the client should hang up after the headers", written.Load())
 	}
 }
 
