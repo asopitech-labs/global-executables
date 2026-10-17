@@ -7,7 +7,8 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
-    "Abr1k0s": 1,
+    "Abr1k0s": 2,
+    "bayo-raw-test": 2,
     "groupdocs-watermark-net": 1,
     "libcuopt-mathopt-cu12": 1,
     "libcuopt-mathopt-cu13": 1,
@@ -15,15 +16,18 @@
     "libcuopt-routing-cu13": 1,
     "pytest-homeassistant-custom-component-framework": 1,
     "sapilm": 1,
-    "skysset": 1,
+    "skysset": 2,
     "squidbrake": 1,
-    "wutdn": 1
+    "wutdn": 2
   },
   "failures": {
     "Abr1k0s": "unexpected EOF",
     "RapidFuzz": "gave up after 3 attempts: response of 8980125 bytes exceeds 8388608 bytes",
+    "Topsis-Nitansh-102017025": "Get \"https://pypi.org/pypi/Topsis-Nitansh-102017025/json\": context deadline exceeded",
+    "ai-zoom-notifier": "Get \"https://pypi.org/pypi/ai-zoom-notifier/json\": context deadline exceeded",
     "aioesphomeapi": "gave up after 3 attempts: response of 12787741 bytes exceeds 8388608 bytes",
     "aiohttp": "gave up after 3 attempts: response of 9472099 bytes exceeds 8388608 bytes",
+    "bayo-raw-test": "unexpected EOF",
     "groupdocs-watermark-net": "artifact size 137511558 exceeds limit 134217728",
     "libcuopt-mathopt-cu12": "artifact size 345845618 exceeds limit 134217728",
     "libcuopt-mathopt-cu13": "artifact size 266354676 exceeds limit 134217728",
@@ -33,6 +37,11 @@
     "pyAgrum-nightly": "gave up after 3 attempts: response of 11785329 bytes exceeds 8388608 bytes",
     "pydantic_core": "gave up after 3 attempts: response of 12917208 bytes exceeds 8388608 bytes",
     "pytest-homeassistant-custom-component-framework": "unexpected end of JSON input",
+    "riskmetrics": "Get \"https://pypi.org/pypi/riskmetrics/json\": context deadline exceeded",
+    "river-engine": "Get \"https://pypi.org/pypi/river-engine/json\": context deadline exceeded",
+    "riverrun": "Get \"https://pypi.org/pypi/riverrun/json\": context deadline exceeded",
+    "rivetsql-core": "Get \"https://pypi.org/pypi/rivetsql-core/json\": context deadline exceeded",
+    "rizzless-guitar-guide": "context deadline exceeded",
     "sapilm": "unexpected end of JSON input",
     "simple-equ": "gave up after 3 attempts: response of 18353070 bytes exceeds 8388608 bytes",
     "skysset": "unexpected end of JSON input",
@@ -104,7 +113,15 @@
     "Abr1k0s",
     "skysset",
     "wutdn",
-    "squidbrake"
+    "squidbrake",
+    "Topsis-Nitansh-102017025",
+    "ai-zoom-notifier",
+    "bayo-raw-test",
+    "riskmetrics",
+    "river-engine",
+    "riverrun",
+    "rivetsql-core",
+    "rizzless-guitar-guide"
   ],
-  "snapshot_generation": 138
+  "snapshot_generation": 139
 }
