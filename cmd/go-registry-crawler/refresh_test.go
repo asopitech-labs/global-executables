@@ -803,3 +803,27 @@ func TestRetriesFollowBucketOwnershipExceptAnnouncedPackages(t *testing.T) {
 		t.Fatalf("unowned works = %v", got)
 	}
 }
+
+func TestThePyPIRecoveryRuleMatchesOnlyTheProjectJSONLimit(t *testing.T) {
+	rule := recoveryRules["pypi"]
+	for _, reason := range []string{
+		"gave up after 3 attempts: response of 40877492 bytes exceeds 8388608 bytes",
+		"gave up after 3 attempts: response exceeded 8388608 bytes",
+		"response of 9135219 bytes exceeds 8388608 bytes",
+	} {
+		if !rule(reason) {
+			t.Errorf("should requeue %q", reason)
+		}
+	}
+	for _, reason := range []string{
+		"artifact size 345845618 exceeds limit 134217728", "response exceeded 134217728 bytes",
+		"HTTP 404: Not Found", "project info exceeds 1048576 bytes", "latest release has no wheel or sdist",
+	} {
+		if rule(reason) {
+			t.Errorf("must leave %q alone", reason)
+		}
+	}
+	if recoveryRules["npm"] != nil {
+		t.Error("the rule is PyPI's only")
+	}
+}

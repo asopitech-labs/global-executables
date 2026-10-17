@@ -152,6 +152,18 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 	return works, nil
 }
 
+// recoveryRules name, per source, the failures a newer crawler handles: packages given up
+// (unavailable) or waiting (retries) for such a reason are requeued with a fresh attempt
+// count. Only those packages change; once rechecked their reason is a different one, so
+// a rule matches nothing on later passes.
+var recoveryRules = map[string]func(reason string) bool{
+	// Project JSON over the 8 MiB metadata limit (pydantic_core, grpcio, ddtrace ...):
+	// read since through the release document (registryinspect largeProject).
+	"pypi": func(reason string) bool {
+		return strings.Contains(reason, "bytes exceeds 8388608 bytes") || strings.Contains(reason, "response exceeded 8388608 bytes")
+	},
+}
+
 // ownedRetries lists the retries this writer is responsible for, sorted: those in the
 // buckets it owns (policy.Owns; all of them when it is nil), plus any package the change
 // feed has announced, which every writer that reads the feed handles. The Actions refresh
@@ -540,6 +552,15 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 	}
 	if err != nil {
 		return gocrawl.PassReport{}, err
+	}
+	if rule := recoveryRules[config.Source]; rule != nil {
+		requeued, err := store.Requeue(ctx, rule)
+		if err != nil {
+			return gocrawl.PassReport{}, err
+		}
+		if requeued > 0 {
+			fmt.Fprintf(os.Stderr, "requeued %d %s packages that failed for a reason the crawler now handles\n", requeued, config.Source)
+		}
 	}
 	catalogReport, catalogErr := adapter.refresh(ctx, config.CatalogPath, store)
 	if errors.Is(catalogErr, context.Canceled) || errors.Is(catalogErr, context.DeadlineExceeded) {

@@ -192,3 +192,78 @@ func TestPyPIOversizedOrCorruptArtifactsAreFinalForTheVersionAndNeverDownloaded(
 		t.Fatalf("again=%+v, artifact requests %d -> %d", again, before, artifactRequests.Load())
 	}
 }
+
+func TestPyPIProjectJSONOverTheLimitIsReadThroughTheReleaseDocument(t *testing.T) {
+	wheel := wheelWithEntryPoints(t, "[console_scripts]\nbig = big:main\n")
+	history := strings.Repeat(`"0.0.1":[{"filename":"x"}],`, 4000)
+	var server *httptest.Server
+	var projectRanges, projectFull, release atomic.Int32
+	server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/pypi/big/json":
+			document := `{"info":{"name":"big","version":"2.0","description":"` + strings.Repeat("d", 80<<10) +
+				`"},"last_serial":1,"releases":{` + history + `"2.0":[]},"urls":[]}`
+			if r.Header.Get("Range") != "" {
+				projectRanges.Add(1)
+			} else {
+				projectFull.Add(1)
+			}
+			http.ServeContent(w, r, "big.json", time.Time{}, strings.NewReader(document))
+		case "/pypi/big/2.0/json":
+			release.Add(1)
+			_, _ = fmt.Fprintf(w, `{"info":{"name":"big","version":"2.0"},"urls":[{"packagetype":"bdist_wheel","filename":"big-2.0-py3-none-any.whl","size":%d,"url":%s}]}`,
+				len(wheel), strconv.Quote(server.URL+"/files/big.whl"))
+		case "/files/big.whl":
+			http.ServeContent(w, r, "big.whl", time.Time{}, bytes.NewReader(wheel))
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer server.Close()
+	inspector := NewPyPIInspector(Config{BaseURL: server.URL, RequestTimeout: time.Second, PackageTimeout: 5 * time.Second,
+		MaxMetadataBytes: 100 << 10})
+
+	result := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "big"})
+	if result.Verdict != gocrawl.VerdictSuccess || result.Latest != "2.0" || commands(result.Observations) != "big" {
+		t.Fatalf("result=%+v", result)
+	}
+	if projectFull.Load() != 1 || projectRanges.Load() != 2 || release.Load() != 1 {
+		t.Fatalf("project full=%d ranges=%d release=%d (want 1, 2: 64 KiB then 100 KiB, 1)", projectFull.Load(), projectRanges.Load(), release.Load())
+	}
+	// The same version again: the head of the project document only.
+	projectRanges.Store(0)
+	again := inspector.Inspect(context.Background(), gocrawl.ModuleWork{Module: "big", Known: "2.0"})
+	if !again.Unchanged || release.Load() != 1 || projectRanges.Load() != 2 {
+		t.Fatalf("again=%+v release=%d ranges=%d", again, release.Load(), projectRanges.Load())
+	}
+}
+
+func TestLeadingInfoReadsAPrefixAndSaysWhenItIsTooShort(t *testing.T) {
+	document := []byte(`{"info":{"name":"n","version":"1.2","description":"long"},"releases":{"1.2":[]}}`)
+	info, complete, err := leadingInfo(document[:40])
+	if err != nil || complete {
+		t.Fatalf("a cut inside info: %+v %v %v", info, complete, err)
+	}
+	info, complete, err = leadingInfo(document[:62])
+	if err != nil || !complete || info.Version != "1.2" {
+		t.Fatalf("info complete, the rest cut: %+v %v %v", info, complete, err)
+	}
+	if _, _, err := leadingInfo([]byte(`[1,2]`)); err == nil {
+		t.Fatal("not an object")
+	}
+}
+
+func wheelWithEntryPoints(t *testing.T, entryPoints string) []byte {
+	t.Helper()
+	var wheel bytes.Buffer
+	writer := zip.NewWriter(&wheel)
+	entry, err := writer.Create("big-2.0.dist-info/entry_points.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, _ = entry.Write([]byte(entryPoints))
+	if err := writer.Close(); err != nil {
+		t.Fatal(err)
+	}
+	return wheel.Bytes()
+}

@@ -311,6 +311,57 @@ func (s *BoltStore) Commit(ctx context.Context, results []ModuleResult) error {
 	})
 }
 
+// Requeue moves every unavailable package whose reason matches back to the retry queue,
+// and restarts the attempt count of every queued retry whose last error matches, in one
+// transaction. It returns how many packages changed; with none, nothing is written.
+func (s *BoltStore) Requeue(ctx context.Context, match func(reason string) bool) (int, error) {
+	if err := ctx.Err(); err != nil {
+		return 0, err
+	}
+	changed := 0
+	err := s.db.Update(func(tx *bolt.Tx) error {
+		retries, unavailable := tx.Bucket(retryBucket), tx.Bucket(unavailableBucket)
+		requeue := map[string]string{}
+		if err := unavailable.ForEach(func(key, value []byte) error {
+			if match(string(value)) {
+				requeue[string(key)] = string(value)
+			}
+			return nil
+		}); err != nil {
+			return err
+		}
+		if err := retries.ForEach(func(key, value []byte) error {
+			var entry RetryEntry
+			if json.Unmarshal(value, &entry) == nil && entry.Attempts > 0 && match(entry.Error) {
+				if _, queued := requeue[string(key)]; !queued {
+					requeue[string(key)] = entry.Error
+				}
+			}
+			return nil
+		}); err != nil {
+			return err
+		}
+		for module, reason := range requeue {
+			if err := unavailable.Delete([]byte(module)); err != nil {
+				return err
+			}
+			if err := putJSON(retries, module, RetryEntry{Error: reason, Attempts: 0}); err != nil {
+				return err
+			}
+		}
+		changed = len(requeue)
+		if changed == 0 {
+			return nil
+		}
+		meta := tx.Bucket(metaBucket)
+		return putUint(meta, "generation", getUint(meta, "generation")+1)
+	})
+	if err != nil {
+		return 0, err
+	}
+	return changed, nil
+}
+
 func (s *BoltStore) applyVerdict(tx *bolt.Tx, result ModuleResult) error {
 	retries := tx.Bucket(retryBucket)
 	unavailable := tx.Bucket(unavailableBucket)

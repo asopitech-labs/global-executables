@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- PyPI: projects whose `/pypi/<name>/json` exceeds the 8 MiB metadata limit (pydantic_core,
+  grpcio, aiohttp, ddtrace, zeroconf and 10 more) failed three times and dropped out as
+  unavailable. Such a project is now read with a range request for the head of that
+  document (`info.version`; an unchanged version stops there) and the release document
+  `/pypi/<name>/<version>/json` (50-250 KB) for the files. The HTTP/2 stream window is
+  512 KiB, which bounds what an abandoned oversized response still transfers. Packages given
+  up or queued for this reason are requeued once with a fresh attempt count (a recovery
+  rule keyed on the failure reason); nothing else is rewritten.
 - Refresh/booster duplicate work and endless retries (refs #64):
   - Retries follow bucket ownership: the Actions refresh (`--rotation-exclude`) no longer
     retries packages in a local booster's buckets unless the change feed announced them; the
