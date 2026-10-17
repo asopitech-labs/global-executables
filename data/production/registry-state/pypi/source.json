@@ -7,25 +7,23 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
-    "bayo-raw-test": 2,
+    "Abr1k0s": 1,
     "groupdocs-watermark-net": 1,
     "libcuopt-mathopt-cu12": 1,
     "libcuopt-mathopt-cu13": 1,
     "libcuopt-routing-cu12": 1,
     "libcuopt-routing-cu13": 1,
     "pytest-homeassistant-custom-component-framework": 1,
-    "sapilm": 1
+    "sapilm": 1,
+    "skysset": 1,
+    "wutdn": 1
   },
   "failures": {
+    "Abr1k0s": "unexpected EOF",
     "RapidFuzz": "gave up after 3 attempts: response of 8980125 bytes exceeds 8388608 bytes",
     "aioesphomeapi": "gave up after 3 attempts: response of 12787741 bytes exceeds 8388608 bytes",
     "aiohttp": "gave up after 3 attempts: response of 9472099 bytes exceeds 8388608 bytes",
-    "bayo-raw-test": "unexpected EOF",
-    "clickhouse-connect": "gave up after 3 attempts: response of 8932395 bytes exceeds 8388608 bytes",
-    "ddtrace": "gave up after 3 attempts: response of 40877492 bytes exceeds 8388608 bytes",
     "groupdocs-watermark-net": "artifact size 137511558 exceeds limit 134217728",
-    "grpcio": "gave up after 3 attempts: response of 9135219 bytes exceeds 8388608 bytes",
-    "grpcio-tools": "gave up after 3 attempts: response of 9586731 bytes exceeds 8388608 bytes",
     "libcuopt-mathopt-cu12": "artifact size 345845618 exceeds limit 134217728",
     "libcuopt-mathopt-cu13": "artifact size 266354676 exceeds limit 134217728",
     "libcuopt-routing-cu12": "artifact size 262181873 exceeds limit 134217728",
@@ -36,9 +34,11 @@
     "pytest-homeassistant-custom-component-framework": "unexpected end of JSON input",
     "sapilm": "unexpected end of JSON input",
     "simple-equ": "gave up after 3 attempts: response of 18353070 bytes exceeds 8388608 bytes",
+    "skysset": "unexpected end of JSON input",
     "spanishconjugator": "gave up after 3 attempts: response of 14753499 bytes exceeds 8388608 bytes",
     "stringzilla": "gave up after 3 attempts: response of 9094682 bytes exceeds 8388608 bytes",
     "tensordict-nightly": "gave up after 3 attempts: response of 13128563 bytes exceeds 8388608 bytes",
+    "wutdn": "unexpected EOF",
     "zeroconf": "gave up after 3 attempts: response of 8662662 bytes exceeds 8388608 bytes"
   },
   "feed_cursor": "42358494",
@@ -173,11 +173,6 @@
     "libcuopt-routing-cu13",
     "groupdocs-watermark-net",
     "sapilm",
-    "bayo-raw-test",
-    "clickhouse-connect",
-    "ddtrace",
-    "grpcio",
-    "grpcio-tools",
     "pyAgrum-nightly",
     "RapidFuzz",
     "aioesphomeapi",
@@ -189,7 +184,10 @@
     "spanishconjugator",
     "stringzilla",
     "tensordict-nightly",
-    "zeroconf"
+    "zeroconf",
+    "Abr1k0s",
+    "skysset",
+    "wutdn"
   ],
-  "snapshot_generation": 136
+  "snapshot_generation": 137
 }
