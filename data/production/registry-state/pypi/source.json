@@ -8,53 +8,160 @@
   "extraction_revision": 1,
   "failure_attempts": {
     "bayo-raw-test": 2,
-    "clickhouse-connect": 2,
-    "ddtrace": 2,
     "groupdocs-watermark-net": 1,
-    "grpcio": 2,
-    "grpcio-tools": 2,
     "libcuopt-mathopt-cu12": 1,
     "libcuopt-mathopt-cu13": 1,
     "libcuopt-routing-cu12": 1,
     "libcuopt-routing-cu13": 1,
-    "pyAgrum-nightly": 1,
+    "pytest-homeassistant-custom-component-framework": 1,
     "sapilm": 1
   },
   "failures": {
+    "RapidFuzz": "gave up after 3 attempts: response of 8980125 bytes exceeds 8388608 bytes",
+    "aioesphomeapi": "gave up after 3 attempts: response of 12787741 bytes exceeds 8388608 bytes",
+    "aiohttp": "gave up after 3 attempts: response of 9472099 bytes exceeds 8388608 bytes",
     "bayo-raw-test": "unexpected EOF",
-    "clickhouse-connect": "response of 8932395 bytes exceeds 8388608 bytes",
-    "ddtrace": "response of 40877492 bytes exceeds 8388608 bytes",
+    "clickhouse-connect": "gave up after 3 attempts: response of 8932395 bytes exceeds 8388608 bytes",
+    "ddtrace": "gave up after 3 attempts: response of 40877492 bytes exceeds 8388608 bytes",
     "groupdocs-watermark-net": "artifact size 137511558 exceeds limit 134217728",
-    "grpcio": "response of 9135219 bytes exceeds 8388608 bytes",
-    "grpcio-tools": "response of 9586731 bytes exceeds 8388608 bytes",
+    "grpcio": "gave up after 3 attempts: response of 9135219 bytes exceeds 8388608 bytes",
+    "grpcio-tools": "gave up after 3 attempts: response of 9586731 bytes exceeds 8388608 bytes",
     "libcuopt-mathopt-cu12": "artifact size 345845618 exceeds limit 134217728",
     "libcuopt-mathopt-cu13": "artifact size 266354676 exceeds limit 134217728",
     "libcuopt-routing-cu12": "artifact size 262181873 exceeds limit 134217728",
     "libcuopt-routing-cu13": "artifact size 193736251 exceeds limit 134217728",
-    "pyAgrum-nightly": "response of 11785329 bytes exceeds 8388608 bytes",
-    "sapilm": "unexpected end of JSON input"
+    "netpicker_client": "gave up after 3 attempts: response of 43079846 bytes exceeds 8388608 bytes",
+    "pyAgrum-nightly": "gave up after 3 attempts: response of 11785329 bytes exceeds 8388608 bytes",
+    "pydantic_core": "gave up after 3 attempts: response of 12917208 bytes exceeds 8388608 bytes",
+    "pytest-homeassistant-custom-component-framework": "unexpected end of JSON input",
+    "sapilm": "unexpected end of JSON input",
+    "simple-equ": "gave up after 3 attempts: response of 18353070 bytes exceeds 8388608 bytes",
+    "spanishconjugator": "gave up after 3 attempts: response of 14753499 bytes exceeds 8388608 bytes",
+    "stringzilla": "gave up after 3 attempts: response of 9094682 bytes exceeds 8388608 bytes",
+    "tensordict-nightly": "gave up after 3 attempts: response of 13128563 bytes exceeds 8388608 bytes",
+    "zeroconf": "gave up after 3 attempts: response of 8662662 bytes exceeds 8388608 bytes"
   },
-  "feed_cursor": "42349851",
+  "feed_cursor": "42358494",
   "feed_pending": {
-    "iptocc": {
-      "kind": "add source file iptocc-3.3.161.tar.gz",
-      "time": 1792211686
+    "avito-sdk": {
+      "kind": "add source file avito_sdk-0.3.2.tar.gz",
+      "time": 1792234177
     },
-    "laya": {
-      "kind": "add source file laya-0.4.9.tar.gz",
-      "time": 1792211686
+    "capo-identitystore": {
+      "kind": "add source file capo_identitystore-0.7.0.tar.gz",
+      "time": 1792234167
     },
-    "shieldcortex": {
-      "kind": "add source file shieldcortex-0.5.0.tar.gz",
-      "time": 1792211707
+    "capo-imagebuilder": {
+      "kind": "add source file capo_imagebuilder-0.7.0.tar.gz",
+      "time": 1792234174
     },
-    "sleipnirgroup-jormungandr": {
-      "kind": "add source file sleipnirgroup_jormungandr-0.6.7.dev65.tar.gz",
-      "time": 1792211716
+    "capo-migration-hub-refactor-spaces": {
+      "kind": "add source file capo_migration_hub_refactor_spaces-0.7.0.tar.gz",
+      "time": 1792234174
     },
-    "veval-sdk": {
-      "kind": "add source file veval_sdk-1.4.0.tar.gz",
-      "time": 1792211725
+    "capo-migrationhub-config": {
+      "kind": "add source file capo_migrationhub_config-0.7.0.tar.gz",
+      "time": 1792234180
+    },
+    "capo-migrationhuborchestrator": {
+      "kind": "add source file capo_migrationhuborchestrator-0.7.0.tar.gz",
+      "time": 1792234185
+    },
+    "capo-migrationhubstrategy": {
+      "kind": "add source file capo_migrationhubstrategy-0.6.0.tar.gz",
+      "time": 1792234191
+    },
+    "capo-mpa": {
+      "kind": "add source file capo_mpa-0.7.0.tar.gz",
+      "time": 1792234197
+    },
+    "capo-mq": {
+      "kind": "add source file capo_mq-0.7.0.tar.gz",
+      "time": 1792234203
+    },
+    "capo-mturk": {
+      "kind": "add source file capo_mturk-0.7.0.tar.gz",
+      "time": 1792234210
+    },
+    "capo-mwaa": {
+      "kind": "add source file capo_mwaa-0.7.0.tar.gz",
+      "time": 1792234216
+    },
+    "capo-mwaa-serverless": {
+      "kind": "add source file capo_mwaa_serverless-0.6.0.tar.gz",
+      "time": 1792234222
+    },
+    "capo-sfn": {
+      "kind": "add source file capo_sfn-0.14.0.tar.gz",
+      "time": 1792234171
+    },
+    "capo-shield": {
+      "kind": "add source file capo_shield-0.7.0.tar.gz",
+      "time": 1792234177
+    },
+    "capo-signer": {
+      "kind": "add source file capo_signer-0.7.0.tar.gz",
+      "time": 1792234184
+    },
+    "capo-signer-data": {
+      "kind": "add source file capo_signer_data-0.6.0.tar.gz",
+      "time": 1792234189
+    },
+    "capo-signin": {
+      "kind": "add source file capo_signin-0.7.0.tar.gz",
+      "time": 1792234195
+    },
+    "capo-simpledbv2": {
+      "kind": "add source file capo_simpledbv2-0.6.0.tar.gz",
+      "time": 1792234201
+    },
+    "capo-simspaceweaver": {
+      "kind": "add source file capo_simspaceweaver-0.7.0.tar.gz",
+      "time": 1792234209
+    },
+    "capo-snow-device-management": {
+      "kind": "add source file capo_snow_device_management-0.6.0.tar.gz",
+      "time": 1792234215
+    },
+    "capo-sso": {
+      "kind": "add source file capo_sso-0.15.0.tar.gz",
+      "time": 1792234186
+    },
+    "capo-sso-admin": {
+      "kind": "add source file capo_sso_admin-0.7.0.tar.gz",
+      "time": 1792234193
+    },
+    "capo-sso-oidc": {
+      "kind": "add source file capo_sso_oidc-0.15.0.tar.gz",
+      "time": 1792234197
+    },
+    "capo-storage-gateway": {
+      "kind": "add source file capo_storage_gateway-0.7.0.tar.gz",
+      "time": 1792234203
+    },
+    "capo-sts": {
+      "kind": "add source file capo_sts-0.17.0.tar.gz",
+      "time": 1792234209
+    },
+    "capo-supplychain": {
+      "kind": "add source file capo_supplychain-0.7.0.tar.gz",
+      "time": 1792234215
+    },
+    "capo-support": {
+      "kind": "add source file capo_support-0.7.0.tar.gz",
+      "time": 1792234220
+    },
+    "capo-swf": {
+      "kind": "add source file capo_swf-0.7.0.tar.gz",
+      "time": 1792234222
+    },
+    "veltro-cli": {
+      "kind": "add source file veltro_cli-0.36.3.tar.gz",
+      "time": 1792234176
+    },
+    "veltro-sdk": {
+      "kind": "add source file veltro_sdk-0.36.3.tar.gz",
+      "time": 1792234170
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
@@ -71,7 +178,18 @@
     "ddtrace",
     "grpcio",
     "grpcio-tools",
-    "pyAgrum-nightly"
+    "pyAgrum-nightly",
+    "RapidFuzz",
+    "aioesphomeapi",
+    "aiohttp",
+    "netpicker_client",
+    "pydantic_core",
+    "pytest-homeassistant-custom-component-framework",
+    "simple-equ",
+    "spanishconjugator",
+    "stringzilla",
+    "tensordict-nightly",
+    "zeroconf"
   ],
-  "snapshot_generation": 135
+  "snapshot_generation": 136
 }
