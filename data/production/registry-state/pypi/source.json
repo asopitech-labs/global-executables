@@ -16,6 +16,7 @@
     "pytest-homeassistant-custom-component-framework": 1,
     "sapilm": 1,
     "skysset": 1,
+    "squidbrake": 1,
     "wutdn": 1
   },
   "failures": {
@@ -36,132 +37,48 @@
     "simple-equ": "gave up after 3 attempts: response of 18353070 bytes exceeds 8388608 bytes",
     "skysset": "unexpected end of JSON input",
     "spanishconjugator": "gave up after 3 attempts: response of 14753499 bytes exceeds 8388608 bytes",
+    "squidbrake": "unexpected end of JSON input",
     "stringzilla": "gave up after 3 attempts: response of 9094682 bytes exceeds 8388608 bytes",
-    "tensordict-nightly": "gave up after 3 attempts: response of 13128563 bytes exceeds 8388608 bytes",
     "wutdn": "unexpected EOF",
     "zeroconf": "gave up after 3 attempts: response of 8662662 bytes exceeds 8388608 bytes"
   },
-  "feed_cursor": "42358494",
+  "feed_cursor": "42366319",
   "feed_pending": {
-    "avito-sdk": {
-      "kind": "add source file avito_sdk-0.3.2.tar.gz",
-      "time": 1792234177
+    "cloudxpl-forge": {
+      "kind": "add source file cloudxpl_forge-4.1.1.tar.gz",
+      "time": 1792251527
     },
-    "capo-identitystore": {
-      "kind": "add source file capo_identitystore-0.7.0.tar.gz",
-      "time": 1792234167
+    "memorymanagement": {
+      "kind": "add source file memorymanagement-1.7.0.tar.gz",
+      "time": 1792251578
     },
-    "capo-imagebuilder": {
-      "kind": "add source file capo_imagebuilder-0.7.0.tar.gz",
-      "time": 1792234174
+    "mycode-cli": {
+      "kind": "add py3 file mycode_cli-0.21.0-py3-none-any.whl",
+      "time": 1792251580
     },
-    "capo-migration-hub-refactor-spaces": {
-      "kind": "add source file capo_migration_hub_refactor_spaces-0.7.0.tar.gz",
-      "time": 1792234174
+    "mycode-sdk": {
+      "kind": "add py3 file mycode_sdk-0.21.0-py3-none-any.whl",
+      "time": 1792251582
     },
-    "capo-migrationhub-config": {
-      "kind": "add source file capo_migrationhub_config-0.7.0.tar.gz",
-      "time": 1792234180
+    "odoo-addon-l10n-br-cnab-structure": {
+      "kind": "add py3 file odoo_addon_l10n_br_cnab_structure-18.0.1.0.0.7-py3-none-any.whl",
+      "time": 1792251558
     },
-    "capo-migrationhuborchestrator": {
-      "kind": "add source file capo_migrationhuborchestrator-0.7.0.tar.gz",
-      "time": 1792234185
+    "scinumtools3": {
+      "kind": "remove release",
+      "time": 1792251571
     },
-    "capo-migrationhubstrategy": {
-      "kind": "add source file capo_migrationhubstrategy-0.6.0.tar.gz",
-      "time": 1792234191
+    "sidejob": {
+      "kind": "add source file sidejob-0.2.0.tar.gz",
+      "time": 1792251534
     },
-    "capo-mpa": {
-      "kind": "add source file capo_mpa-0.7.0.tar.gz",
-      "time": 1792234197
+    "spawnpoint-studio": {
+      "kind": "add source file spawnpoint_studio-0.3.0.tar.gz",
+      "time": 1792251568
     },
-    "capo-mq": {
-      "kind": "add source file capo_mq-0.7.0.tar.gz",
-      "time": 1792234203
-    },
-    "capo-mturk": {
-      "kind": "add source file capo_mturk-0.7.0.tar.gz",
-      "time": 1792234210
-    },
-    "capo-mwaa": {
-      "kind": "add source file capo_mwaa-0.7.0.tar.gz",
-      "time": 1792234216
-    },
-    "capo-mwaa-serverless": {
-      "kind": "add source file capo_mwaa_serverless-0.6.0.tar.gz",
-      "time": 1792234222
-    },
-    "capo-sfn": {
-      "kind": "add source file capo_sfn-0.14.0.tar.gz",
-      "time": 1792234171
-    },
-    "capo-shield": {
-      "kind": "add source file capo_shield-0.7.0.tar.gz",
-      "time": 1792234177
-    },
-    "capo-signer": {
-      "kind": "add source file capo_signer-0.7.0.tar.gz",
-      "time": 1792234184
-    },
-    "capo-signer-data": {
-      "kind": "add source file capo_signer_data-0.6.0.tar.gz",
-      "time": 1792234189
-    },
-    "capo-signin": {
-      "kind": "add source file capo_signin-0.7.0.tar.gz",
-      "time": 1792234195
-    },
-    "capo-simpledbv2": {
-      "kind": "add source file capo_simpledbv2-0.6.0.tar.gz",
-      "time": 1792234201
-    },
-    "capo-simspaceweaver": {
-      "kind": "add source file capo_simspaceweaver-0.7.0.tar.gz",
-      "time": 1792234209
-    },
-    "capo-snow-device-management": {
-      "kind": "add source file capo_snow_device_management-0.6.0.tar.gz",
-      "time": 1792234215
-    },
-    "capo-sso": {
-      "kind": "add source file capo_sso-0.15.0.tar.gz",
-      "time": 1792234186
-    },
-    "capo-sso-admin": {
-      "kind": "add source file capo_sso_admin-0.7.0.tar.gz",
-      "time": 1792234193
-    },
-    "capo-sso-oidc": {
-      "kind": "add source file capo_sso_oidc-0.15.0.tar.gz",
-      "time": 1792234197
-    },
-    "capo-storage-gateway": {
-      "kind": "add source file capo_storage_gateway-0.7.0.tar.gz",
-      "time": 1792234203
-    },
-    "capo-sts": {
-      "kind": "add source file capo_sts-0.17.0.tar.gz",
-      "time": 1792234209
-    },
-    "capo-supplychain": {
-      "kind": "add source file capo_supplychain-0.7.0.tar.gz",
-      "time": 1792234215
-    },
-    "capo-support": {
-      "kind": "add source file capo_support-0.7.0.tar.gz",
-      "time": 1792234220
-    },
-    "capo-swf": {
-      "kind": "add source file capo_swf-0.7.0.tar.gz",
-      "time": 1792234222
-    },
-    "veltro-cli": {
-      "kind": "add source file veltro_cli-0.36.3.tar.gz",
-      "time": 1792234176
-    },
-    "veltro-sdk": {
-      "kind": "add source file veltro_sdk-0.36.3.tar.gz",
-      "time": 1792234170
+    "stalwart-agents": {
+      "kind": "add py3 file stalwart_agents-1.0.56-py3-none-macosx_12_0_arm64.whl",
+      "time": 1792251581
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
@@ -183,11 +100,11 @@
     "simple-equ",
     "spanishconjugator",
     "stringzilla",
-    "tensordict-nightly",
     "zeroconf",
     "Abr1k0s",
     "skysset",
-    "wutdn"
+    "wutdn",
+    "squidbrake"
   ],
-  "snapshot_generation": 137
+  "snapshot_generation": 138
 }
