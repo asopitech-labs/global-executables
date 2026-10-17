@@ -29,6 +29,116 @@ type PyPIInspector struct {
 	http    *requester
 }
 
+// pypiProject is the part of a project (or release) JSON document the inspector uses.
+type pypiProject struct {
+	Info pypiInfo        `json:"info"`
+	URLs []pypiCandidate `json:"urls"`
+}
+
+type pypiInfo struct {
+	Name     string `json:"name"`
+	Version  string `json:"version"`
+	Homepage string `json:"home_page"`
+}
+
+// projectHeadBytes is the first range read of an oversized project document; "info" (the
+// first member, with the description) is almost always within it, and it grows by 4x up
+// to projectInfoLimit when it is not. A description beyond that (one project ships a
+// 43 MB one) cannot be read within the limits by any JSON endpoint and is final.
+const (
+	projectHeadBytes = 64 * 1024
+	projectInfoLimit = 1 << 20
+)
+
+// largeProject handles a project whose /pypi/<name>/json exceeds the metadata limit:
+// a range read of the document's head gives info.version, and when that version is the
+// one already recorded the package is unchanged (no further request). Otherwise the
+// release document /pypi/<name>/<version>/json (info and urls of that release only) is
+// read. Both are PyPI's JSON API; the range read keeps the transfer bounded.
+func (i *PyPIInspector) largeProject(ctx context.Context, work gocrawl.ModuleWork, projectURL string) (pypiProject, int64, bool, error) {
+	var downloaded int64
+	var info pypiInfo
+	for size := int64(projectHeadBytes); ; size *= 4 {
+		size = min(size, projectInfoLimit, i.http.config.MaxMetadataBytes)
+		headers := http.Header{"Range": {fmt.Sprintf("bytes=0-%d", size-1)}}
+		response, err := i.http.request(ctx, http.MethodGet, projectURL, headers, size)
+		if err != nil {
+			return pypiProject{}, downloaded, false, err
+		}
+		downloaded += int64(len(response.body))
+		var complete bool
+		info, complete, err = leadingInfo(response.body)
+		if err != nil {
+			return pypiProject{}, downloaded, false, err
+		}
+		if complete {
+			break
+		}
+		if size >= min(projectInfoLimit, i.http.config.MaxMetadataBytes) || response.statusCode != http.StatusPartialContent {
+			return pypiProject{}, downloaded, false, permanentError{fmt.Errorf("project info exceeds %d bytes", size)}
+		}
+	}
+	if info.Version == "" {
+		return pypiProject{}, downloaded, false, permanentError{errors.New("project document has no info.version")}
+	}
+	if work.SameVersion(info.Version) {
+		return pypiProject{Info: info}, downloaded, true, nil
+	}
+	releaseURL := strings.TrimSuffix(projectURL, "/json") + "/" + url.PathEscape(info.Version) + "/json"
+	response, err := i.http.request(ctx, http.MethodGet, releaseURL, nil, i.http.config.MaxMetadataBytes)
+	if err != nil {
+		return pypiProject{}, downloaded, false, err
+	}
+	downloaded += int64(len(response.body))
+	var release pypiProject
+	if err := json.Unmarshal(response.body, &release); err != nil {
+		return pypiProject{}, downloaded, false, err
+	}
+	if release.Info.Version == "" {
+		release.Info = info
+	}
+	return release, downloaded, false, nil
+}
+
+// leadingInfo decodes the "info" member of a JSON document from a prefix of it. complete
+// is false when the prefix ends before "info" does.
+func leadingInfo(prefix []byte) (pypiInfo, bool, error) {
+	decoder := json.NewDecoder(bytes.NewReader(prefix))
+	incomplete := func(err error) bool {
+		return errors.Is(err, io.ErrUnexpectedEOF) || errors.Is(err, io.EOF)
+	}
+	if token, err := decoder.Token(); err != nil {
+		return pypiInfo{}, false, nilIf(incomplete(err), err)
+	} else if delim, ok := token.(json.Delim); !ok || delim != '{' {
+		return pypiInfo{}, false, errors.New("project document is not an object")
+	}
+	for decoder.More() {
+		token, err := decoder.Token()
+		if err != nil {
+			return pypiInfo{}, false, nilIf(incomplete(err), err)
+		}
+		if key, _ := token.(string); key == "info" {
+			var info pypiInfo
+			if err := decoder.Decode(&info); err != nil {
+				return pypiInfo{}, false, nilIf(incomplete(err), err)
+			}
+			return info, true, nil
+		}
+		var skip json.RawMessage
+		if err := decoder.Decode(&skip); err != nil {
+			return pypiInfo{}, false, nilIf(incomplete(err), err)
+		}
+	}
+	return pypiInfo{}, true, nil
+}
+
+func nilIf(condition bool, err error) error {
+	if condition {
+		return nil
+	}
+	return err
+}
+
 type pypiCandidate struct {
 	PackageType string `json:"packagetype"`
 	Filename    string `json:"filename"`
@@ -50,21 +160,30 @@ func (i *PyPIInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) go
 	packageCtx, cancel := context.WithTimeout(ctx, i.http.config.PackageTimeout)
 	defer cancel()
 	metadataURL := i.baseURL + "/pypi/" + url.PathEscape(work.Module) + "/json"
+	var payload pypiProject
 	response, err := i.http.request(packageCtx, http.MethodGet, metadataURL, nil, i.http.config.MaxMetadataBytes)
-	if err != nil {
+	if _, tooBig := errors.AsType[sizeLimitError](err); tooBig {
+		// A project with many releases (pydantic_core, grpcio, ddtrace ...) has a project
+		// document larger than the limit, most of it the history of every release. Read
+		// the latest version from the head of that document and the files of that one
+		// release from its own, much smaller document.
+		var downloaded int64
+		var unchanged bool
+		payload, downloaded, unchanged, err = i.largeProject(packageCtx, work, metadataURL)
+		result.DownloadedBytes += downloaded
+		if err != nil {
+			return classifyResult(ctx, result, err)
+		}
+		if unchanged {
+			return result.AsUnchanged(payload.Info.Version)
+		}
+	} else if err != nil {
 		return classifyResult(ctx, result, err)
-	}
-	result.DownloadedBytes = int64(len(response.body))
-	var payload struct {
-		Info struct {
-			Name     string `json:"name"`
-			Version  string `json:"version"`
-			Homepage string `json:"home_page"`
-		} `json:"info"`
-		URLs []pypiCandidate `json:"urls"`
-	}
-	if err := json.Unmarshal(response.body, &payload); err != nil {
-		return classifyResult(ctx, result, err)
+	} else {
+		result.DownloadedBytes = int64(len(response.body))
+		if err := json.Unmarshal(response.body, &payload); err != nil {
+			return classifyResult(ctx, result, err)
+		}
 	}
 	result.Latest = payload.Info.Version
 	if work.SameVersion(payload.Info.Version) {

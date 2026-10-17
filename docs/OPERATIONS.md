@@ -1038,6 +1038,14 @@ cannot be read for that version (too large, corrupt tar) are recorded with outco
 not fetched again until a new version; deploy the booster from the same main as Actions,
 since older crawlers do not understand `u`.
 
+**Large PyPI projects.** `/pypi/<name>/json` carries every release and exceeds the 8 MiB
+limit for some popular projects (ddtrace: 41 MB). The crawler then reads the first 64 KiB of
+it with a `Range` request (growing to at most 1 MiB) for `info.version`, stops when that is
+the recorded version, and otherwise reads `/pypi/<name>/<version>/json`. A project whose
+`info` alone exceeds 1 MiB (a 43 MB description) is final (`project info exceeds`). Failures
+that a newer crawler handles are requeued by `recoveryRules` in the runner, keyed on the
+failure reason; a rule matches nothing once those packages are rechecked.
+
 **Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
 --source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:
 checked with an outcome (`has_commands`, `no_commands`), `unavailable` (no release, no wheel

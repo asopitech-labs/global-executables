@@ -423,3 +423,40 @@ func TestAnUnreadableVersionIsRecordedAsCheckedNotUnavailableNorRetried(t *testi
 		t.Fatalf("round trip %+v -> %+v", check, again)
 	}
 }
+
+func TestRequeueBringsBackOnlyTheMatchingFailuresOnce(t *testing.T) {
+	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{FailureAttemptLimit: 3})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.Import(context.Background(), ImportSnapshot{
+		Unavailable: map[string]string{"grpcio": "gave up after 3 attempts: response of 9135219 bytes exceeds 8388608 bytes", "gone": "HTTP 404: Not Found"},
+		Retries:     map[string]RetryEntry{"aiohttp": {Error: "response of 9472099 bytes exceeds 8388608 bytes", Attempts: 2}, "slow": {Error: "timeout", Attempts: 1}},
+	}); err != nil {
+		t.Fatal(err)
+	}
+	before, _ := store.Snapshot(context.Background())
+	match := func(reason string) bool { return strings.Contains(reason, "exceeds 8388608 bytes") }
+	if n, err := store.Requeue(context.Background(), match); err != nil || n != 2 {
+		t.Fatalf("requeued %d, %v", n, err)
+	}
+	after, _ := store.Snapshot(context.Background())
+	if _, still := after.Unavailable["grpcio"]; still || after.Unavailable["gone"] == "" {
+		t.Fatalf("unavailable=%v", after.Unavailable)
+	}
+	if after.Retries["grpcio"].Attempts != 0 || after.Retries["aiohttp"].Attempts != 0 || after.Retries["slow"].Attempts != 1 {
+		t.Fatalf("retries=%v", after.Retries)
+	}
+	if after.Generation == before.Generation {
+		t.Fatal("a requeue changes the exported state")
+	}
+	// Idempotent: nothing matches any more, nothing is written.
+	if n, err := store.Requeue(context.Background(), match); err != nil || n != 0 {
+		t.Fatalf("second requeue %d, %v", n, err)
+	}
+	again, _ := store.Snapshot(context.Background())
+	if again.Generation != after.Generation {
+		t.Fatal("an empty requeue must not rewrite the state")
+	}
+}

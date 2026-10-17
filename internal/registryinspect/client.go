@@ -148,7 +148,11 @@ func newTransport(config Config) *http.Transport {
 	transport.MaxIdleConnsPerHost = 128
 	transport.IdleConnTimeout = 90 * time.Second
 	transport.ForceAttemptHTTP2 = true
-	transport.HTTP2 = &http.HTTP2Config{SendPingTimeout: config.HealthCheckInterval, PingTimeout: config.PingTimeout}
+	// A 512 KiB stream window (Go's default is 4 MiB) bounds what is already in flight
+	// when a response is abandoned after its headers (an oversized document), at no cost
+	// to throughput under the crawler's bandwidth cap.
+	transport.HTTP2 = &http.HTTP2Config{SendPingTimeout: config.HealthCheckInterval, PingTimeout: config.PingTimeout,
+		MaxReceiveBufferPerStream: 512 << 10}
 	return transport
 }
 
