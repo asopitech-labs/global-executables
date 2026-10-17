@@ -2,6 +2,18 @@
   "command": "auth-worker",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "lapis-agent",
+      "version": "0.1.1",
+      "repository": "https://github.com/lapismd/lapis-ai",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/tuannm99/podzone",
       "version": "v0.0.0-20260803123114-934ced6372fd",
