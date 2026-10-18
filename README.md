@@ -12,6 +12,72 @@ This is especially useful when naming new CLI tools. Searching package names, re
 
 Global Executables collects executable-level information, publishes it as structured data on GitHub, and makes the dataset directly accessible to AI agents through MCP.
 
+<!-- mcp-name: io.github.asopitech-labs/global-executables -->
+
+## Quick start: use it from your AI agent
+
+The MCP server is read-only and needs no API key and no local dataset. It fetches
+only the files a query needs from the public `dictionary` branch and caches them
+in your user cache directory (revalidated with `ETag`; cached files keep working
+offline). It requires [uv](https://docs.astral.sh/uv/) (`uvx`) or Docker.
+
+**Claude Desktop** (`claude_desktop_config.json`) and **Cursor** (`~/.cursor/mcp.json`
+or a project's `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "global-executables": {
+      "command": "uvx",
+      "args": ["global-executables", "mcp"]
+    }
+  }
+}
+```
+
+**Claude Code**:
+
+```sh
+claude mcp add global-executables -- uvx global-executables mcp
+```
+
+**VS Code** (`.vscode/mcp.json`):
+
+```json
+{
+  "servers": {
+    "global-executables": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["global-executables", "mcp"]
+    }
+  }
+}
+```
+
+**Docker** (any client; replace the `command`/`args` above):
+
+```json
+{
+  "command": "docker",
+  "args": ["run", "-i", "--rm", "ghcr.io/asopitech-labs/global-executables-mcp:latest"]
+}
+```
+
+Then ask, for example, *"Is the command name `envc` already taken?"*. The agent calls
+`check_executables`; `found: true` is a collision, while `status: "unknown"` means
+"not in the current index", not "free", because some sources are partial.
+
+| Variable | Effect |
+|---|---|
+| `GLOBAL_EXECUTABLES_DATASET_ROOT` | use a local checkout of the `dictionary` branch instead of HTTPS |
+| `GLOBAL_EXECUTABLES_CACHE_DIR` | cache location (default `~/.cache/global-executables`, `~/Library/Caches/global-executables`, or `%LOCALAPPDATA%\global-executables\Cache`) |
+| `GLOBAL_EXECUTABLES_OFFLINE=1` | serve only cached files, never touch the network |
+
+`uvx global-executables mcp --help` lists the same options as flags. The package is
+published to PyPI from release 1.3.0; see [`docs/MCP.md`](docs/MCP.md) for HTTP transport
+and running from a source checkout.
+
 ---
 
 ## Why Global Executables?
@@ -577,8 +643,9 @@ critical population; the all-registry npm long tail is tracked separately. See
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
 commands, freshness-state scenarios, and honest measured coverage limitations.
 
-Install the program, materialize the published branch in a separate worktree,
-and query that snapshot without network access:
+For zero-setup use, see [Quick start](#quick-start-use-it-from-your-ai-agent). To
+query a pinned snapshot without network access, install the program, materialize
+the published branch in a separate worktree, and point the server at it:
 
 ```sh
 python -m pip install -e .

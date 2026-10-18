@@ -17,28 +17,39 @@ class Dataset:
         self.root = Path(root)
         self.data = self.root / "data"
 
+    def _read_bytes(self, relative: str) -> bytes | None:
+        """Return one dataset file by its path relative to the dataset root, or None."""
+        path = self.root / relative
+        return path.read_bytes() if path.is_file() else None
+
+    def _verified_index_bytes(self, relative: str, expected: str) -> bytes | None:
+        return self._read_bytes(f"data/{relative}")
+
     @property
     def metadata(self) -> dict[str, Any]:
-        return json.loads((self.data / "metadata.json").read_text())
+        raw = self._read_bytes("data/metadata.json")
+        if raw is None:
+            raise FileNotFoundError(f"dataset metadata not found: {self.data / 'metadata.json'}")
+        return json.loads(raw)
 
     @property
     def freshness(self) -> dict[str, Any]:
         """Return the latest partial-scan report without changing canonical metadata."""
-        path = self.root / "reports/freshness.json"
-        if not path.is_file():
+        raw = self._read_bytes("reports/freshness.json")
+        if raw is None:
             return {"status": "unavailable", "coverage_kind": "partial"}
         try:
-            return json.loads(path.read_text())
+            return json.loads(raw)
         except json.JSONDecodeError:
             return {"status": "invalid", "coverage_kind": "partial"}
 
     def get(self, name: str, scope: dict[str, str] | None = None) -> dict[str, Any] | None:
         if not valid_command(name):
             return None
-        path = self.data / "executables" / shard(name) / filename(name)
-        if not path.exists():
+        raw = self._read_bytes(f"data/executables/{shard(name)}/{filename(name)}")
+        if raw is None:
             return None
-        value = json.loads(path.read_text())
+        value = json.loads(raw)
         if value["command"] != name:
             return None
         if scope:
@@ -79,10 +90,9 @@ class Dataset:
     def _read_index(self, relative: str) -> set[str]:
         meta = self.metadata
         expected = meta.get("index_manifest", {}).get(relative)
-        path = self.data / relative
-        if expected is None or not path.is_file():
+        raw = None if expected is None else self._verified_index_bytes(relative, expected)
+        if raw is None:
             raise DatasetIndexError(f"required index missing from manifest or disk: {relative}")
-        raw = path.read_bytes()
         if hashlib.sha256(raw).hexdigest() != expected:
             raise DatasetIndexError(f"derived index is stale or corrupt: {relative}")
         try:

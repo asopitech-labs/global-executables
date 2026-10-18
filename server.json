@@ -1,0 +1,58 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.asopitech-labs/global-executables",
+  "title": "Global Executables",
+  "description": "Check whether a CLI command name is already taken across npm, PyPI, crates.io, Go, Debian and more",
+  "websiteUrl": "https://asopitech-labs.github.io/global-executables/",
+  "repository": {
+    "url": "https://github.com/asopitech-labs/global-executables",
+    "source": "github"
+  },
+  "version": "1.3.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "global-executables",
+      "version": "1.3.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        }
+      ],
+      "environmentVariables": [
+        {
+          "name": "GLOBAL_EXECUTABLES_DATASET_ROOT",
+          "description": "Optional local checkout of the dictionary branch; when unset, files are fetched on demand over HTTPS and cached",
+          "isRequired": false,
+          "format": "filepath"
+        },
+        {
+          "name": "GLOBAL_EXECUTABLES_CACHE_DIR",
+          "description": "Optional cache directory for fetched dataset files",
+          "isRequired": false,
+          "format": "filepath"
+        },
+        {
+          "name": "GLOBAL_EXECUTABLES_OFFLINE",
+          "description": "Set to 1 to serve only cached files and never touch the network",
+          "isRequired": false,
+          "format": "boolean"
+        }
+      ]
+    },
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/asopitech-labs/global-executables-mcp:1.3.0",
+      "runtimeHint": "docker",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

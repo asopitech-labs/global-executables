@@ -27,6 +27,26 @@ jobs:
             --root /tmp/published-dictionary \
             --schema-root . \
             --integrity-only
+  mcp-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the light stdio MCP image
+        run: docker build -f Dockerfile.mcp -t global-executables-mcp:test .
+      - name: Image answers initialize and check_executable over stdio with no baked dataset
+        run: |
+          {
+            printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}'
+            printf '%s\n' '{"jsonrpc":"2.0","method":"notifications/initialized"}'
+            printf '%s\n' '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"check_executable","arguments":{"name":"rg"}}}'
+            sleep 20
+          } | timeout 120 docker run -i --rm global-executables-mcp:test | tee /tmp/mcp.out
+          version=$(python3 -c 'import re;print(re.search(r"__version__ = \"([^\"]+)\"", open("src/global_executables/__init__.py").read()).group(1))')
+          grep -q "\"version\":\"${version}\"" /tmp/mcp.out
+          grep -q '"found":true' /tmp/mcp.out
+          docker image inspect global-executables-mcp:test \
+            --format '{{ index .Config.Labels "io.modelcontextprotocol.server.name" }}' \
+            | grep -qx 'io.github.asopitech-labs/global-executables'
   go:
     runs-on: ubuntu-latest
     steps:
