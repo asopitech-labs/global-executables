@@ -108,7 +108,8 @@ def would_regress(published: Any, local: Any) -> bool:
 
 
 def merge_state(source: str, published_path: Path, local_path: Path, base_path: Path | None = None,
-                scalars: bool = True) -> tuple[bool, int | None, int | None]:
+                scalars: bool = True, local_cache: Path | None = None,
+                base_cache: Path | None = None) -> tuple[bool, int | None, int | None]:
     # State paths may name the sharded directory or the legacy file; saving writes the
     # directory and removes the legacy file, which migrates the published branch.
     published = load_state(published_path, {"version": 1, "sources": {}})
@@ -127,8 +128,19 @@ def merge_state(source: str, published_path: Path, local_path: Path, base_path: 
             base_entry = previous if isinstance(previous, dict) else {}
         if scalars and would_regress(previous, local_entry):
             return False, before, after
+        resolved: set[str] = set()
+        succeeded: set[str] = set()
+        if local_cache is not None:
+            from global_executables import refresh_policy
+            # A newer check than the base's is a newer result: it clears the package's
+            # published failure even when another writer recorded it.
+            local_checks, _, local_found = refresh_policy.read_cache(local_cache)
+            base_checks, _, base_found = refresh_policy.read_cache(base_cache) if base_cache is not None else ({}, 0, False)
+            if local_found:
+                resolved, succeeded = booster.settled_since(
+                    local_checks, base_checks if base_found else None, local_entry, base_entry)
         merged, changed = booster.merge_source_delta(previous if isinstance(previous, dict) else {}, local_entry,
-                                                     base_entry, scalars)
+                                                     base_entry, scalars, resolved, succeeded)
         if changed or source not in published_sources:
             published_sources[source] = merged
             save_state(published_path, published)
@@ -244,6 +256,11 @@ def parse_args() -> argparse.Namespace:
                         help="publish only what the local state changed since this base state")
     parser.add_argument("--no-scalars", action="store_true",
                         help="with --delta-base-state: leave cursors and feed position to the other writer")
+    parser.add_argument("--local-cache", type=Path,
+                        help="with --delta-base-state: this writer's schedule cache; packages checked since "
+                             "the base clear their published failure entries")
+    parser.add_argument("--base-cache", type=Path,
+                        help="with --local-cache: the schedule cache captured with the base state")
     parser.add_argument("--published-report", type=Path)
     parser.add_argument("--local-report", type=Path)
     parser.add_argument("--report-heartbeat-hours", type=float, default=float(os.environ.get("REPORT_HEARTBEAT_HOURS", str(DEFAULT_HEARTBEAT_HOURS))),
@@ -256,7 +273,8 @@ def main() -> int:
     if (args.published_report is None) != (args.local_report is None):
         raise SystemExit("--published-report and --local-report must be supplied together")
     merged, before, after = merge_state(args.source, args.published_state, args.local_state,
-                                           args.delta_base_state, not args.no_scalars)
+                                           args.delta_base_state, not args.no_scalars,
+                                           args.local_cache, args.base_cache)
     if not merged:
         print(f"refusing {args.source}: local cursor {after} is behind published cursor {before}")
         # A distinct status lets callers skip this source's catalogue and JSONL too.

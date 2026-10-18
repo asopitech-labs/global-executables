@@ -750,7 +750,7 @@ func TestTheProgressFileMovesOnlyWhenAPackageWasReadSuccessfully(t *testing.T) {
 
 func TestRetriesFollowBucketOwnershipExceptAnnouncedPackages(t *testing.T) {
 	catalog := filepath.Join(t.TempDir(), "names.txt")
-	if err := os.WriteFile(catalog, []byte("a\nb\nc\n"), 0o644); err != nil {
+	if err := os.WriteFile(catalog, []byte("a\nbooster-owned\nannounced\nqueued-announced\n"), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 3, Cursor: 3, CatalogComplete: true,
@@ -768,7 +768,7 @@ func TestRetriesFollowBucketOwnershipExceptAnnouncedPackages(t *testing.T) {
 		return found
 	}
 	// Actions with --rotation-exclude 0-255: owns nothing.
-	actions := passPolicy{MaxDays: 60, Owns: func(string) bool { return false }, Feed: []string{"announced"}}
+	actions := passPolicy{MaxDays: 60, Owns: func(string) bool { return false }, Feed: []string{"announced"}, FeedReader: true}
 	works, err := planPassWorks(catalog, before, 40, true, actions)
 	if err != nil {
 		t.Fatal(err)
@@ -825,5 +825,40 @@ func TestThePyPIRecoveryRuleMatchesOnlyTheProjectJSONLimit(t *testing.T) {
 	}
 	if recoveryRules["npm"] != nil {
 		t.Error("the rule is PyPI's only")
+	}
+}
+
+func TestAPackageMissingFromTheCatalogueIsRetriedByTheFeedReaderOnly(t *testing.T) {
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	if err := os.WriteFile(catalog, []byte("listed\tx\nother\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 2, Cursor: 2, CatalogComplete: true,
+		Retries: map[string]gocrawl.RetryEntry{"listed": {Attempts: 1}, "libcuopt-routing-cu13": {Attempts: 1}}}}
+	retried := func(policy passPolicy) []string {
+		works, err := planPassWorks(catalog, before, 40, true, policy)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var names []string
+		for _, work := range works {
+			if work.Retry {
+				names = append(names, work.Module)
+			}
+		}
+		return names
+	}
+	boosterBuckets := func(string) bool { return true } // the booster holds 0-255
+	actions := passPolicy{MaxDays: 60, Owns: func(module string) bool { return !boosterBuckets(module) }, FeedReader: true}
+	booster := passPolicy{MaxDays: 60, Owns: boosterBuckets}
+	if got := retried(actions); !slices.Equal(got, []string{"libcuopt-routing-cu13"}) {
+		t.Fatalf("actions retries %v, want only the package missing from the catalogue", got)
+	}
+	if got := retried(booster); !slices.Equal(got, []string{"listed"}) {
+		t.Fatalf("booster retries %v, want only its catalogue package", got)
+	}
+	// Exactly one owner for every retry: the two sets partition the queue.
+	if len(retried(actions))+len(retried(booster)) != len(before.Retries) {
+		t.Fatal("a retry has no owner or two")
 	}
 }

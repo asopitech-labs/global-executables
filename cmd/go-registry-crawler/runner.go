@@ -77,6 +77,9 @@ type passPolicy struct {
 	// Owns, when set, decides which rotation entries this run visits; the others advance
 	// the cursor without a request.
 	Owns func(module string) bool
+	// FeedReader: this run reads the change feed, so it also owns the retries of packages
+	// missing from the catalogue (see ownedRetries).
+	FeedReader bool
 }
 
 func buildPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refresh bool) ([]gocrawl.ModuleWork, error) {
@@ -91,7 +94,10 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 	if budget <= 0 {
 		return nil, nil
 	}
-	retryModules := ownedRetries(before.Retries, policy)
+	retryModules, err := ownedRetries(before.Retries, policy, catalogPath)
+	if err != nil {
+		return nil, err
+	}
 	retryBudget := min(len(retryModules), max(1, budget/4))
 	remaining := budget - retryBudget
 	walking := before.Cursor < before.CatalogSize
@@ -164,15 +170,23 @@ var recoveryRules = map[string]func(reason string) bool{
 	},
 }
 
-// ownedRetries lists the retries this writer is responsible for, sorted: those in the
-// buckets it owns (policy.Owns; all of them when it is nil), plus any package the change
-// feed has announced, which every writer that reads the feed handles. The Actions refresh
-// excludes a local booster's buckets, so it no longer re-reads the booster's failures,
-// while the booster (--rotation-include) keeps retrying its own.
-func ownedRetries(retries map[string]gocrawl.RetryEntry, policy passPolicy) []string {
+// ownedRetries lists the retries this writer is responsible for, sorted. Ownership is
+// decided per package so that exactly one writer retries it:
+//   - no ownership filter (no booster): every retry is this writer's;
+//   - a package the change feed announced this pass: the feed reader's (it reads it anyway);
+//   - a package in the catalogue: the owner of its bucket (policy.Owns), as for the
+//     rotation, so the booster retries its buckets and Actions the rest;
+//   - a package missing from the catalogue (born from the change feed after the catalogue
+//     was taken, e.g. libcuopt-*): the feed reader's. A booster only knows its catalogue and
+//     reads no feed, so such a package would otherwise have no owner at all.
+func ownedRetries(retries map[string]gocrawl.RetryEntry, policy passPolicy, catalogPath string) ([]string, error) {
 	modules := slices.Sorted(maps.Keys(retries))
-	if policy.Owns == nil {
-		return modules
+	if policy.Owns == nil || len(modules) == 0 {
+		return modules, nil
+	}
+	listed, err := catalogMembers(catalogPath, modules)
+	if err != nil {
+		return nil, err
 	}
 	announced := make(map[string]struct{}, len(policy.Feed))
 	for _, module := range policy.Feed {
@@ -180,11 +194,46 @@ func ownedRetries(retries map[string]gocrawl.RetryEntry, policy passPolicy) []st
 	}
 	owned := modules[:0]
 	for _, module := range modules {
-		if _, ok := announced[module]; ok || policy.Owns(module) {
+		_, isAnnounced := announced[module]
+		_, inCatalog := listed[module]
+		switch {
+		case isAnnounced:
+			owned = append(owned, module)
+		case inCatalog && policy.Owns(module):
+			owned = append(owned, module)
+		case !inCatalog && policy.FeedReader:
 			owned = append(owned, module)
 		}
 	}
-	return owned
+	return owned, nil
+}
+
+// catalogMembers returns which of names the catalogue file lists (one name per line,
+// optionally followed by a tab and more fields). It streams the file once.
+func catalogMembers(catalogPath string, names []string) (map[string]struct{}, error) {
+	wanted := make(map[string]struct{}, len(names))
+	for _, name := range names {
+		wanted[name] = struct{}{}
+	}
+	found := make(map[string]struct{}, len(names))
+	file, err := os.Open(catalogPath)
+	if errors.Is(err, os.ErrNotExist) {
+		return found, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	scanner.Buffer(make([]byte, 64*1024), 4*1024*1024)
+	for scanner.Scan() && len(found) < len(wanted) {
+		name, _, _ := strings.Cut(scanner.Text(), "\t")
+		name = strings.TrimSpace(name)
+		if _, ok := wanted[name]; ok {
+			found[name] = struct{}{}
+		}
+	}
+	return found, scanner.Err()
 }
 
 // planRefresh reads the next rotation entries. With checks available it reads further
@@ -570,7 +619,8 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 	// poll leaves the cursor where it was and the next run replays it.
 	var feedReport gocrawl.FeedReport
 	var feedModules []string
-	if adapter.feed != nil && config.Continuous && !config.NoFeed && (config.registryDefault || config.FeedURL != "") {
+	readsFeed := adapter.feed != nil && config.Continuous && !config.NoFeed && (config.registryDefault || config.FeedURL != "")
+	if readsFeed {
 		feedReport, err = gocrawl.PollFeed(ctx, store, adapter.feed, adapter.feedOptions)
 		if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
 			return gocrawl.PassReport{}, err
@@ -598,6 +648,7 @@ func executePass(ctx context.Context, config crawlConfig) (gocrawl.PassReport, e
 		return gocrawl.PassReport{}, err
 	}
 	policy.Owns = owns
+	policy.FeedReader = readsFeed
 	policy.Checks = func(modules []string) (map[string]gocrawl.Check, error) { return store.Checks(ctx, modules) }
 	works, err := planPassWorks(config.CatalogPath, before, config.PackageBudget, config.Continuous, policy)
 	if err != nil {

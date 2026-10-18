@@ -207,8 +207,14 @@ def _is_retry_list(key: str, value: Any) -> bool:
 COUNTER_MAPS = frozenset({"failure_attempts"})
 
 
+# Per-package maps that record an unresolved failure; a package this writer resolved is
+# removed from them (and from the retry lists) even when its base never had the entry.
+FAILURE_MAPS = frozenset({"failures", "failure_attempts"})
+
+
 def merge_source_delta(published: dict[str, Any], local: dict[str, Any], base: dict[str, Any],
-                       scalars: bool) -> tuple[dict[str, Any], bool]:
+                       scalars: bool, resolved: Iterable[str] = (),
+                       succeeded: Iterable[str] = ()) -> tuple[dict[str, Any], bool]:
     """Apply what ``local`` changed relative to ``base`` onto ``published``.
 
     Per-package maps (``unavailable``, ``failures``, ``feed_pending`` ...) are merged key by
@@ -216,9 +222,18 @@ def merge_source_delta(published: dict[str, Any], local: dict[str, Any], base: d
     ``scalars`` the local checkpoint fields (cursors, catalogue identity, feed cursor)
     are taken as well, as the Actions writer does; a booster passes ``scalars=False`` and
     leaves them to Actions.  Returns the merged source and whether anything changed.
+
+    ``resolved`` names packages this writer settled since its base (a newer check, or a
+    newly final ``unavailable`` entry).  The key-by-key delta cannot remove an entry the
+    writer never had, e.g. a failure another writer recorded for a package the change feed
+    created; so a resolved package that the local state no longer lists as failing is
+    removed from the published failure maps and retry lists.  ``succeeded`` (read
+    successfully since the base) likewise clears a published ``unavailable`` entry.  A
+    newer result for a package supersedes an older failure of it, whoever recorded it.
     """
     merged = dict(published)
     changed = False
+    resolved_names, succeeded_names = set(resolved), set(succeeded)
     for key in sorted(set(local) | set(base)):
         value, before = local.get(key), base.get(key)
         if isinstance(value, dict) or isinstance(before, dict):
@@ -254,11 +269,72 @@ def merge_source_delta(published: dict[str, Any], local: dict[str, Any], base: d
         elif scalars and key in local and merged.get(key) != value and key != "snapshot_generation":
             merged[key] = value
             changed = True
+    if _clear_resolved(merged, local, resolved_names, succeeded_names):
+        changed = True
     if changed:
         generation = max(int(published.get("snapshot_generation") or 0),
                          int(local.get("snapshot_generation") or 0) if scalars else 0)
         merged["snapshot_generation"] = generation + 1
     return merged, changed
+
+
+def _clear_resolved(merged: dict[str, Any], local: dict[str, Any], resolved: set[str],
+                    succeeded: set[str]) -> bool:
+    """Remove the published failure (and, for successes, unavailable) entries of packages
+    this writer settled, unless the local state still lists them.  Returns whether it did."""
+    changed = False
+    for key in sorted(merged):
+        value, mine = merged[key], local.get(key)
+        names = resolved if key in FAILURE_MAPS or key.startswith("retry_") else succeeded if key == "unavailable" else None
+        if not names:
+            continue
+        if isinstance(value, dict):
+            keep = mine if isinstance(mine, dict) else {}
+            stale = [name for name in value if name in names and name not in keep]
+            if stale:
+                merged[key] = {name: entry for name, entry in value.items() if name not in stale}
+                changed = True
+        elif _is_retry_list(key, value):
+            keep_list = set(mine) if isinstance(mine, list) else set()
+            kept = [name for name in value if name not in names or name in keep_list]
+            if kept != value:
+                merged[key] = kept
+                changed = True
+    return changed
+
+
+def settled_since(local_checks: dict[str, str], base_checks: dict[str, str] | None,
+                  local: dict[str, Any], base: dict[str, Any]) -> tuple[set[str], set[str]]:
+    """``(resolved, succeeded)`` packages this writer settled since its base.
+
+    A check is written only when a package is read (outcomes n/c) or found permanently
+    unavailable (u), never for a transient failure; so a check that differs from the base
+    cache is a newer result.  A package newly listed in ``unavailable`` gave up for good,
+    which also resolves its failure.
+
+    Without a base cache (``base_checks`` None: a base captured by an older script, i.e.
+    the first publish after an upgrade) every local check and every local ``unavailable``
+    entry resolves its package's failure, and nothing counts as a success: a stale failure
+    is cleared once, while a published ``unavailable`` entry is only ever cleared against a
+    known base.
+    """
+    from . import refresh_policy
+
+    resolved: set[str] = set()
+    succeeded: set[str] = set()
+    for name, value in local_checks.items():
+        if base_checks is not None and base_checks.get(name) == value:
+            continue
+        full = refresh_policy.unpack_full(value)
+        if full is None:
+            continue
+        resolved.add(name)
+        if base_checks is not None and full[3] != "u":
+            succeeded.add(name)
+    new_unavailable = local.get("unavailable") if isinstance(local.get("unavailable"), dict) else {}
+    old_unavailable = base.get("unavailable") if isinstance(base.get("unavailable"), dict) and base_checks is not None else {}
+    resolved.update(name for name in new_unavailable if name not in old_unavailable)
+    return resolved, succeeded
 
 
 def _package_of(line: str) -> str | None:
@@ -362,3 +438,63 @@ def coverage(catalog: list[str], checks: dict[str, Any], unavailable: Iterable[s
             "unaccounted": before + after, "unaccounted_ahead_of_cursor": after, "unaccounted_behind_cursor": before,
             "first_unaccounted_index": first, "last_unaccounted_index": last,
             "checked_outside_catalog": sum(1 for name in checks if name not in names)}
+
+
+# --- retry ownership invariant --------------------------------------------------------------
+
+def failure_owners(entry: dict[str, Any], document: dict[str, Any], published_catalog: set[str],
+                   booster_catalog: set[str] | None = None, now: datetime | None = None) -> dict[str, Any]:
+    """Who retries each published failure entry; every one must have exactly one live owner.
+
+    Mirrors ``ownedRetries`` (cmd/go-registry-crawler): the Actions refresh reads the change
+    feed and excludes the buckets of live leases, so it owns a queued package that is outside
+    those buckets, announced by the feed (``feed_pending``), or missing from its catalogue
+    (the published one).  A booster owns a queued package in its buckets that its own
+    catalogue (``booster_catalog``, default the published one) lists.  A failure entry that
+    is not queued for retry has no owner at all.  ``orphans`` and ``duplicates`` must be 0.
+    """
+    now = now or now_utc()
+    booster_catalog = published_catalog if booster_catalog is None else booster_catalog
+    leased: dict[int, str] = {}
+    for lease_id, lease in sorted(document.get("leases", {}).items()):
+        if is_live(lease, now):
+            try:
+                for bucket in parse_ranges(str(lease.get("ranges", ""))):
+                    leased.setdefault(bucket, lease_id)
+            except ValueError:
+                continue
+    queued: set[str] = set()
+    for key, value in entry.items():
+        if _is_retry_list(key, value):
+            queued.update(name for name in value if isinstance(name, str))
+    failures = entry.get("failures") if isinstance(entry.get("failures"), dict) else {}
+    announced = entry.get("feed_pending") if isinstance(entry.get("feed_pending"), dict) else {}
+    owners: dict[str, list[str]] = {}
+    overlap: list[str] = []
+    for name in sorted(set(failures) | queued):
+        found: list[str] = []
+        if name in queued:
+            booster = leased.get(owner_bucket(name))
+            if booster is None or name in announced or name not in published_catalog:
+                found.append("actions")
+            if booster is not None and name in booster_catalog:
+                if name in announced:
+                    # The feed reader reads an announced package as a feed event in any
+                    # bucket; the booster's own retry of it is the documented feed overlap,
+                    # not a second owner of the failure.
+                    overlap.append(name)
+                else:
+                    found.append(f"booster:{booster}")
+        owners[name] = found
+    orphans = sorted(name for name, found in owners.items() if not found)
+    duplicates = sorted(name for name, found in owners.items() if len(found) > 1)
+    counts: dict[str, int] = {}
+    for found in owners.values():
+        for owner in found:
+            counts[owner] = counts.get(owner, 0) + 1
+    return {"failure_entries": len(failures), "queued": len(queued), "owners": dict(sorted(counts.items())),
+            "orphans": len(orphans), "orphaned": {name: {"reason": failures.get(name, ""),
+                                                          "queued": name in queued,
+                                                          "in_published_catalog": name in published_catalog,
+                                                          "bucket": owner_bucket(name)} for name in orphans},
+            "duplicates": len(duplicates), "duplicated": duplicates, "feed_overlap": overlap}

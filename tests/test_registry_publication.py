@@ -315,3 +315,33 @@ def test_a_report_that_differs_only_in_effort_is_republished_at_most_once_a_day(
     assert merger.merge_report("pypi", published, local, heartbeat_hours=0) is False
     assert merger.DEFAULT_HEARTBEAT_HOURS == 24
     assert 'REPORT_HEARTBEAT_HOURS="${REPORT_HEARTBEAT_HOURS:-24}"' in PARALLEL
+
+
+def test_delta_publish_clears_failures_resolved_since_the_base_cache(tmp_path):
+    sys.path.insert(0, str(ROOT / "src"))
+    from global_executables.refresh_policy import write_cache
+
+    published = tmp_path / "published"
+    local = tmp_path / "local"
+    base = tmp_path / "base"
+    entry = {"cursor": 5, "failures": {"sapilm": "unexpected end of JSON input", "keep": "x"},
+             "failure_attempts": {"sapilm": 1, "keep": 1}, "retry_projects": ["sapilm", "keep"]}
+    merger.save_state(published, {"version": 1, "sources": {"pypi": entry}})
+    clean = {"cursor": 5, "failures": {}, "failure_attempts": {}, "retry_projects": []}
+    merger.save_state(local, {"version": 1, "sources": {"pypi": clean}})
+    merger.save_state(base, {"version": 1, "sources": {"pypi": clean}})
+    write_cache(tmp_path / "base.cache.gz", {"keep": "20700:0n:1.0"}, 0)
+    write_cache(tmp_path / "local.cache.gz", {"keep": "20700:0n:1.0", "sapilm": "20735:1c:1.0.1"}, 0)
+    ok, _, _ = module_merge_state("pypi", published, local, base, scalars=False,
+                                  local_cache=tmp_path / "local.cache.gz", base_cache=tmp_path / "base.cache.gz")
+    assert ok
+    result = load_state(published)["sources"]["pypi"]
+    assert result["failures"] == {"keep": "x"}
+    assert result["failure_attempts"] == {"keep": 1}
+    assert result["retry_projects"] == ["keep"]
+
+
+def test_parallel_publish_keeps_the_schedule_cache_with_the_delta_base():
+    assert '"${dir}/.base/cache.gz"' in PARALLEL
+    assert "--local-cache" in PARALLEL and "--base-cache" in PARALLEL
+    assert 'mv "${snap}/cache.gz"' in PARALLEL
