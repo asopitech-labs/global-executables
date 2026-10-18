@@ -862,3 +862,102 @@ func TestAPackageMissingFromTheCatalogueIsRetriedByTheFeedReaderOnly(t *testing.
 		t.Fatal("a retry has no owner or two")
 	}
 }
+
+// writeLargeCatalog writes count names and returns its path.
+func writeLargeCatalog(t *testing.T, count int) string {
+	t.Helper()
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	var names strings.Builder
+	for index := range count {
+		fmt.Fprintf(&names, "pkg-%05d\n", index)
+	}
+	if err := os.WriteFile(catalog, []byte(names.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	return catalog
+}
+
+// tally splits a plan into skipped rotation entries, requesting works and retries.
+func tally(works []gocrawl.ModuleWork) (skipped, active int, retried []string) {
+	for _, work := range works {
+		if work.Skip {
+			skipped++
+			continue
+		}
+		active++
+		if work.Retry {
+			retried = append(retried, work.Module)
+		}
+	}
+	return skipped, active, retried
+}
+
+// Run 39122074923: with a booster holding 0-255, Actions skipped 27,480 rotation entries
+// (20x its rotation share) and those counted against the 3,000 budget, so none of the
+// catalogue-less retries (libcuopt-*, sapilm) was ever scheduled.
+func TestAnOwnerThatSkipsEveryRotationEntryStillSchedulesItsRetries(t *testing.T) {
+	const budget = 40
+	catalog := writeLargeCatalog(t, budget*gocrawl.MaxScanFactor*2)
+	retries := map[string]gocrawl.RetryEntry{
+		"libcuopt-routing-cu13": {Attempts: 1}, "sapilm": {Attempts: 1}, "pkg-00007": {Attempts: 1},
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{
+		CatalogSize: budget * gocrawl.MaxScanFactor * 2, Cursor: budget * gocrawl.MaxScanFactor * 2, CatalogComplete: true, Retries: retries}}
+	feed := make([]string, 500)
+	for index := range feed {
+		feed[index] = fmt.Sprintf("announced-%03d", index)
+	}
+	actions := passPolicy{
+		Today: 1001, MaxDays: 60, Owns: func(string) bool { return false }, FeedReader: true, Feed: feed,
+		Checks: func([]string) (map[string]gocrawl.Check, error) { return map[string]gocrawl.Check{}, nil },
+	}
+	works, err := planPassWorks(catalog, before, budget, true, actions)
+	if err != nil {
+		t.Fatal(err)
+	}
+	skipped, active, retried := tally(works)
+	if skipped < budget {
+		t.Fatalf("skipped=%d: the scenario needs more skipped entries than the budget", skipped)
+	}
+	if !slices.Equal(retried, []string{"libcuopt-routing-cu13", "sapilm"}) {
+		t.Fatalf("retried %v, want the catalogue-less packages (pkg-00007 is the booster's)", retried)
+	}
+	if active > budget {
+		t.Fatalf("active=%d exceeds the budget %d", active, budget)
+	}
+}
+
+func TestTheBoosterRetriesItsPackagesWhenMostOfTheRotationIsNotDue(t *testing.T) {
+	const budget = 40
+	size := budget * gocrawl.MaxScanFactor * 2
+	catalog := writeLargeCatalog(t, size)
+	retries := map[string]gocrawl.RetryEntry{}
+	for index := range budget { // more retries than the retry share
+		retries[fmt.Sprintf("pkg-%05d", index*7)] = gocrawl.RetryEntry{Attempts: 1}
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: uint64(size), Cursor: uint64(size), CatalogComplete: true, Retries: retries}}
+	booster := passPolicy{
+		Today: 1001, MaxDays: 60, Owns: func(string) bool { return true },
+		Checks: func(modules []string) (map[string]gocrawl.Check, error) {
+			found := map[string]gocrawl.Check{}
+			for _, module := range modules { // every entry was checked today: none is due
+				found[module] = gocrawl.Check{Day: 1001, Streak: 20, Version: "1"}
+			}
+			return found, nil
+		},
+	}
+	works, err := planPassWorks(catalog, before, budget, true, booster)
+	if err != nil {
+		t.Fatal(err)
+	}
+	skipped, active, retried := tally(works)
+	if skipped < budget {
+		t.Fatalf("skipped=%d: the scenario needs more not-due entries than the budget", skipped)
+	}
+	if len(retried) != budget/4 {
+		t.Fatalf("retried %d, want the retry share %d", len(retried), budget/4)
+	}
+	if active > budget {
+		t.Fatalf("active=%d exceeds the budget %d", active, budget)
+	}
+}

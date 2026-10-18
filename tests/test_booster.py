@@ -702,6 +702,24 @@ def test_a_resolved_package_that_still_fails_locally_keeps_its_entries():
     assert not changed and merged == published
 
 
+def test_an_unavailable_entry_clears_its_failure_in_the_published_state():
+    # artifact-data 1ba333fff: wagtail-gardentronic was a 404 and also a booster timeout.
+    published = {"failures": {"wagtail-gardentronic": "context deadline exceeded", "sapilm": "eof"},
+                 "failure_attempts": {"wagtail-gardentronic": 1, "sapilm": 1},
+                 "retry_projects": ["sapilm", "wagtail-gardentronic"],
+                 "unavailable": {"wagtail-gardentronic": "HTTP 404: Not Found"}}
+    local = {"failures": {}, "failure_attempts": {}, "retry_projects": [], "unavailable": {}}
+    merged, changed = booster.merge_source_delta(published, local, dict(local), scalars=False)
+    assert changed
+    assert merged["failures"] == {"sapilm": "eof"}
+    assert merged["failure_attempts"] == {"sapilm": 1}
+    assert merged["retry_projects"] == ["sapilm"]
+    assert merged["unavailable"] == {"wagtail-gardentronic": "HTTP 404: Not Found"}
+    # Already consistent: nothing changes, so nothing is published.
+    again, changed = booster.merge_source_delta(merged, local, dict(local), scalars=False)
+    assert not changed and again == merged
+
+
 def test_settled_since_counts_newer_checks_and_new_unavailable_entries():
     base_checks = {"same": "20700:1n:1.0", "older": "20700:0n:1.0"}
     local_checks = {"same": "20700:1n:1.0", "older": "20743:0n:1.1", "fresh": "20743:0c:2.0", "dead": "20743:0u:3.0"}

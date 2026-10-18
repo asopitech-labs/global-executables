@@ -460,3 +460,32 @@ func TestRequeueBringsBackOnlyTheMatchingFailuresOnce(t *testing.T) {
 		t.Fatal("an empty requeue must not rewrite the state")
 	}
 }
+
+func TestATransientErrorDoesNotQueueARetryForAnUnavailablePackage(t *testing.T) {
+	store, err := OpenBoltStore(filepath.Join(t.TempDir(), "crawl.db"), StoreOptions{FailureAttemptLimit: 3})
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	if err := store.Import(context.Background(), ImportSnapshot{Unavailable: map[string]string{"gone": "HTTP 404: Not Found"}}); err != nil {
+		t.Fatal(err)
+	}
+	timeout := ModuleResult{Work: ModuleWork{Module: "gone", Feed: true, Attempt: 1}, Verdict: VerdictRetry, Error: "context deadline exceeded"}
+	if err := store.Commit(context.Background(), []ModuleResult{timeout}); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, err := store.Snapshot(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(snapshot.Retries) != 0 || snapshot.Unavailable["gone"] != "HTTP 404: Not Found" {
+		t.Fatalf("an unavailable package must stay unavailable only: retries=%v unavailable=%v", snapshot.Retries, snapshot.Unavailable)
+	}
+	success := ModuleResult{Work: ModuleWork{Module: "gone", Feed: true, Attempt: 1}, Verdict: VerdictSuccess, Latest: "1.0"}
+	if err := store.Commit(context.Background(), []ModuleResult{success}); err != nil {
+		t.Fatal(err)
+	}
+	if snapshot, _ = store.Snapshot(context.Background()); snapshot.Unavailable["gone"] != "" {
+		t.Fatalf("a success still clears unavailable: %v", snapshot.Unavailable)
+	}
+}
