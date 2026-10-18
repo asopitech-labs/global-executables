@@ -12,6 +12,7 @@ from mcp import ClientSession
 from mcp.client.stdio import StdioServerParameters, stdio_client
 from mcp.client.streamable_http import streamable_http_client
 
+from global_executables import __version__
 from global_executables.mcp_server import create_server
 from global_executables.pipeline import rebuild
 
@@ -96,7 +97,7 @@ async def test_streamable_http_protocol_and_health(dictionary_root):
                 if process.poll() is not None:
                     raise AssertionError(process.stderr.read().decode())
                 await asyncio.sleep(.05)
-        assert health == {"status": "ok", "service_version": "1.2.0", "snapshot": SNAPSHOT, "coverage_scope": "unknown", "read_only": True}
+        assert health == {"status": "ok", "service_version": __version__, "snapshot": SNAPSHOT, "coverage_scope": "unknown", "read_only": True}
         async with streamable_http_client(f"http://127.0.0.1:{port}/mcp") as (read, write, _):
             async with ClientSession(read, write) as session:
                 await _assert_protocol(session)

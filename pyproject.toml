@@ -1,13 +1,41 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
 name = "global-executables"
-version = "1.2.0"
-description = "Git-native executable-name dataset and MCP search layer"
+dynamic = ["version"]
+description = "Check whether a CLI command name is already taken: a cross-ecosystem executable-name dataset and read-only MCP server"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "asopitech-labs" }]
 requires-python = ">=3.11"
 dependencies = ["jsonschema>=4.20", "mcp>=1.9,<2", "zstandard>=0.22"]
+keywords = ["mcp", "mcp-server", "model-context-protocol", "cli", "command-name", "executable",
+            "naming", "package-registry", "npm", "pypi", "crates", "homebrew", "debian"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: System :: Software Distribution",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Homepage = "https://asopitech-labs.github.io/global-executables/"
+Repository = "https://github.com/asopitech-labs/global-executables"
+Documentation = "https://github.com/asopitech-labs/global-executables/blob/main/docs/MCP.md"
+Issues = "https://github.com/asopitech-labs/global-executables/issues"
+Changelog = "https://github.com/asopitech-labs/global-executables/blob/main/CHANGELOG.md"
+Dataset = "https://github.com/asopitech-labs/global-executables/tree/dictionary"
 
 [project.optional-dependencies]
 test = ["pytest>=8", "pytest-asyncio>=0.23", "PyYAML>=6"]
@@ -16,8 +44,17 @@ test = ["pytest>=8", "pytest-asyncio>=0.23", "PyYAML>=6"]
 global-executables = "global_executables.cli:main"
 global-executables-mcp = "global_executables.mcp_server:main"
 
+[tool.hatch.version]
+path = "src/global_executables/__init__.py"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/global_executables"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"schema" = "global_executables/schema"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/", "schema/", "tests/", "fixtures/", "README.md", "LICENSE", "CHANGELOG.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

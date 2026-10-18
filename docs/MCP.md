@@ -7,7 +7,41 @@ The server is a read-only view of a materialized `dictionary` branch. Program
 schemas and published data have separate roots; the server does not copy records
 into a database and requires no network access after both roots are present.
 
-## Local stdio
+## Zero-setup stdio (recommended)
+
+```sh
+uvx global-executables mcp
+```
+
+With no local dataset the server reads the published `dictionary` branch from
+`https://raw.githubusercontent.com/asopitech-labs/global-executables/dictionary`,
+fetching only the files a query touches. Files are cached per user
+(`GLOBAL_EXECUTABLES_CACHE_DIR`, default `$XDG_CACHE_HOME/global-executables`).
+The metadata is revalidated with `If-None-Match` at most every ten minutes, and each
+cached file is revalidated with its `ETag` once per published metadata generation, so
+an unchanged file costs a `304` without a body. A derived index whose hash does not
+match the current metadata is fetched again in full. When the network is unreachable,
+cached files are served as they are; `--offline` (or `GLOBAL_EXECUTABLES_OFFLINE=1`)
+never touches the network. `--dataset-url` points at another published copy.
+
+Client configuration:
+
+```json
+{
+  "mcpServers": {
+    "global-executables": {
+      "command": "uvx",
+      "args": ["global-executables", "mcp"]
+    }
+  }
+}
+```
+
+The container image `ghcr.io/asopitech-labs/global-executables-mcp` runs the same
+stdio server (`docker run -i --rm ghcr.io/asopitech-labs/global-executables-mcp`) and
+contains no dataset. Mount a volume at `/cache` to keep its cache between runs.
+
+## Local stdio over a checkout
 
 After `pip install .`, use this generic MCP client configuration:
 

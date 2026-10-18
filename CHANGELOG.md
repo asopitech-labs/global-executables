@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- MCP (1.3.0): the server now runs with no local dataset. `uvx global-executables mcp`
+  reads only the files a query needs from the public `dictionary` branch
+  (raw.githubusercontent) and caches them per user (`GLOBAL_EXECUTABLES_CACHE_DIR`).
+  Metadata is revalidated with `If-None-Match` at most every ten minutes and each cached
+  file once per metadata generation, so unchanged files cost a `304`; an index whose hash
+  does not match the metadata is fetched again in full; an unreachable network falls back
+  to the cache, and `--offline` never touches it. An explicit `--dataset-root` still fails
+  closed when it is missing. The wheel ships the JSON Schemas, the server reports its own
+  version (it reported the MCP SDK's), and every tool carries `readOnlyHint`. Added for
+  directory listings: `server.json` (official MCP Registry,
+  `io.github.asopitech-labs/global-executables`), `glama.json`, `.mcp.json`, the
+  `mcp-name` marker and client snippets in the README, `Dockerfile.mcp` (stdio, no baked
+  data, registry label), and `release.yml` (tag: PyPI via Trusted Publishing, then GHCR,
+  then the registry via GitHub OIDC).
+
 - Crawler: retries were never scheduled while the rotation listed more skipped entries
   than the package budget. Skipped entries (another owner's bucket, not yet due) are listed
   only to advance the cursor, but they counted against the budget; with a booster holding
