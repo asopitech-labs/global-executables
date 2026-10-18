@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Crawler: retries were never scheduled while the rotation listed more skipped entries
+  than the package budget. Skipped entries (another owner's bucket, not yet due) are listed
+  only to advance the cursor, but they counted against the budget; with a booster holding
+  0-255, Actions lists about 20x its rotation share as skipped, so no retry (`libcuopt-*`,
+  `sapilm`) ran (run 39122074923: 29,099 works = 1,619 feed + 27,480 skipped). Only works
+  that make a request count now; the retry share stays a quarter of the budget. A package
+  is now either unavailable or failing, never both: a transient error no longer queues a
+  retry next to an `unavailable` entry, and a publication drops the failure and retry
+  entries of unavailable packages (`wagtail-gardentronic`: 404 plus a timeout).
+
 - Booster/Actions: failures of packages missing from the catalogue (created after it was
   taken and known only from the change feed, e.g. `libcuopt-*`) were retried by nobody once
   a booster held their bucket. They now belong to the feed reader (Actions); catalogue

@@ -271,11 +271,37 @@ def merge_source_delta(published: dict[str, Any], local: dict[str, Any], base: d
             changed = True
     if _clear_resolved(merged, local, resolved_names, succeeded_names):
         changed = True
+    if drop_failures_of_unavailable(merged):
+        changed = True
     if changed:
         generation = max(int(published.get("snapshot_generation") or 0),
                          int(local.get("snapshot_generation") or 0) if scalars else 0)
         merged["snapshot_generation"] = generation + 1
     return merged, changed
+
+
+def drop_failures_of_unavailable(entry: dict[str, Any]) -> bool:
+    """Enforce that a package is either unavailable (given up for good) or failing, never
+    both: an ``unavailable`` entry clears the package's failure and retry entries.  Two
+    writers can otherwise publish both (wagtail-gardentronic: a 404 next to a timeout
+    recorded by a later rotation visit).  Returns whether it removed anything."""
+    unavailable = entry.get("unavailable")
+    if not isinstance(unavailable, dict) or not unavailable:
+        return False
+    changed = False
+    for key in sorted(entry):
+        value = entry[key]
+        if key in FAILURE_MAPS and isinstance(value, dict):
+            kept = {name: item for name, item in value.items() if name not in unavailable}
+            if len(kept) != len(value):
+                entry[key] = kept
+                changed = True
+        elif _is_retry_list(key, value):
+            kept_list = [name for name in value if name not in unavailable]
+            if kept_list != value:
+                entry[key] = kept_list
+                changed = True
+    return changed
 
 
 def _clear_resolved(merged: dict[str, Any], local: dict[str, Any], resolved: set[str],

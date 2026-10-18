@@ -137,8 +137,18 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 	for _, module := range policy.Feed[:feedUse] {
 		scheduled[module] = struct{}{}
 	}
+	// Only works that make a request count against the budget. The rotation also lists
+	// the entries it skips (another owner's bucket, not yet due) so that its cursor
+	// advances past them; with a booster holding every bucket, or a long unchanged
+	// streak, those can be many times the budget and must not crowd the retries out.
+	active := 0
+	for _, work := range works {
+		if !work.Skip {
+			active++
+		}
+	}
 	for _, module := range retryModules[:retryBudget] {
-		if len(works) >= budget {
+		if active >= budget {
 			break
 		}
 		if _, ok := scheduled[module]; ok {
@@ -148,6 +158,7 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 		works = append(works, gocrawl.ModuleWork{
 			Order: uint64(len(works)), Module: module, Retry: true, Attempt: entry.Attempts + 1,
 		})
+		active++
 	}
 	if err := attachKnown(works, policy); err != nil {
 		return nil, err

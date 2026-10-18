@@ -155,6 +155,9 @@ func (s *BoltStore) Import(ctx context.Context, snapshot ImportSnapshot) error {
 			return err
 		}
 		for module, entry := range snapshot.Retries {
+			if _, given := snapshot.Unavailable[module]; given {
+				continue // an unavailable entry settles the package; see applyVerdict
+			}
 			if err := putJSON(tx.Bucket(retryBucket), module, entry); err != nil {
 				return err
 			}
@@ -385,6 +388,13 @@ func (s *BoltStore) applyVerdict(tx *bolt.Tx, result ModuleResult) error {
 		}
 		return unavailable.Put(module, []byte(result.Error))
 	case VerdictRetry:
+		if unavailable.Get(module) != nil {
+			// A transient error (a timeout, a reset) does not reopen a package given up for
+			// good: the rotation still visits it, and queueing a retry next to its
+			// unavailable entry published both (wagtail-gardentronic: 404 plus a timeout).
+			// Only a success, or Requeue, takes it out of unavailable.
+			return retries.Delete(module)
+		}
 		var previous RetryEntry
 		if value := retries.Get(module); value != nil {
 			_ = json.Unmarshal(value, &previous)
