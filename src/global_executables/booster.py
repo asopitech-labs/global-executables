@@ -337,6 +337,29 @@ def settled_since(local_checks: dict[str, str], base_checks: dict[str, str] | No
     return resolved, succeeded
 
 
+def owned_names(names: Iterable[str], catalog: Path | None, ranges: str | None) -> set[str]:
+    """Those of ``names`` a booster owns: listed by its ``catalog`` (one name per line,
+    optionally followed by a tab) and in its bucket ``ranges``.  A missing catalogue owns
+    nothing, so a booster that lost it clears no failure at all."""
+    wanted = set(names)
+    if ranges is not None:
+        buckets = parse_ranges(ranges)
+        wanted = {name for name in wanted if owner_bucket(name) in buckets}
+    if catalog is None or not wanted:
+        return wanted
+    if not catalog.is_file():
+        return set()
+    found: set[str] = set()
+    with catalog.open(encoding="utf-8") as stream:
+        for line in stream:
+            name = line.split("\t", 1)[0].strip()
+            if name in wanted:
+                found.add(name)
+                if len(found) == len(wanted):
+                    break
+    return found
+
+
 def _package_of(line: str) -> str | None:
     try:
         value = json.loads(line)

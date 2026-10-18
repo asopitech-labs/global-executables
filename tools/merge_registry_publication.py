@@ -109,7 +109,8 @@ def would_regress(published: Any, local: Any) -> bool:
 
 def merge_state(source: str, published_path: Path, local_path: Path, base_path: Path | None = None,
                 scalars: bool = True, local_cache: Path | None = None,
-                base_cache: Path | None = None) -> tuple[bool, int | None, int | None]:
+                base_cache: Path | None = None, owned_catalog: Path | None = None,
+                owned_ranges: str | None = None) -> tuple[bool, int | None, int | None]:
     # State paths may name the sharded directory or the legacy file; saving writes the
     # directory and removes the legacy file, which migrates the published branch.
     published = load_state(published_path, {"version": 1, "sources": {}})
@@ -139,6 +140,13 @@ def merge_state(source: str, published_path: Path, local_path: Path, base_path: 
             if local_found:
                 resolved, succeeded = booster.settled_since(
                     local_checks, base_checks if base_found else None, local_entry, base_entry)
+            if owned_catalog is not None or owned_ranges is not None:
+                # Only packages this writer owns: a check of a package missing from its
+                # catalogue (or outside its buckets) can predate a failure the feed reader
+                # recorded for a newer release, and nobody but the feed reader retries it.
+                owned = booster.owned_names(resolved | succeeded, owned_catalog, owned_ranges)
+                resolved &= owned
+                succeeded &= owned
         merged, changed = booster.merge_source_delta(previous if isinstance(previous, dict) else {}, local_entry,
                                                      base_entry, scalars, resolved, succeeded)
         if changed or source not in published_sources:
@@ -261,6 +269,10 @@ def parse_args() -> argparse.Namespace:
                              "the base clear their published failure entries")
     parser.add_argument("--base-cache", type=Path,
                         help="with --local-cache: the schedule cache captured with the base state")
+    parser.add_argument("--owned-catalog", type=Path,
+                        help="with --local-cache: clear only packages this catalogue lists (a booster's own)")
+    parser.add_argument("--owned-ranges",
+                        help="with --local-cache: clear only packages in these buckets (a booster's lease)")
     parser.add_argument("--published-report", type=Path)
     parser.add_argument("--local-report", type=Path)
     parser.add_argument("--report-heartbeat-hours", type=float, default=float(os.environ.get("REPORT_HEARTBEAT_HOURS", str(DEFAULT_HEARTBEAT_HOURS))),
@@ -274,7 +286,8 @@ def main() -> int:
         raise SystemExit("--published-report and --local-report must be supplied together")
     merged, before, after = merge_state(args.source, args.published_state, args.local_state,
                                            args.delta_base_state, not args.no_scalars,
-                                           args.local_cache, args.base_cache)
+                                           args.local_cache, args.base_cache,
+                                           args.owned_catalog, args.owned_ranges)
     if not merged:
         print(f"refusing {args.source}: local cursor {after} is behind published cursor {before}")
         # A distinct status lets callers skip this source's catalogue and JSONL too.

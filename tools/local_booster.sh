@@ -87,7 +87,7 @@ for limit in "${HEARTBEAT_INTERVAL}" "${PUBLISH_INTERVAL}"; do
 done
 
 [ "${MODE}" = native ] && export NO_CONTAINER=1
-export BASE BOOSTER=1 SOURCES="${SOURCE}" OBSERVATION_SOURCES=" " DELTA_SOURCES="${DELTA_SOURCES:-${SOURCE}}"
+export BASE BOOSTER=1 BOOSTER_RANGES SOURCES="${SOURCE}" OBSERVATION_SOURCES=" " DELTA_SOURCES="${DELTA_SOURCES:-${SOURCE}}"
 export PACKAGE_BUDGET PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
 
 say() { printf '%s %s\n' "$(date -u +%FT%TZ)" "$*"; }

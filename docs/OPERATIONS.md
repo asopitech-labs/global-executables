@@ -1065,6 +1065,14 @@ after an upgrade has no base cache yet: then every package the writer has a chec
 `unavailable` entry for clears its stale failure once, and no `unavailable` entry is
 cleared.
 
+A booster clears only packages it owns: listed by its catalogue and in its leased buckets
+(`--owned-catalog`, `--owned-ranges "${BOOSTER_RANGES}"`). Failure entries carry no time or
+version, so an older check cannot be told apart from a newer failure; a booster's old check
+of a catalogue-less package (sapilm, read at 1.0.1 before the feed announced 1.2.7) would
+otherwise clear the failure only the feed reader retries, and the package would be lost. A
+failure of an owned package cleared against an older check heals by itself: the rotation
+re-reads any package whose latest version differs from its check.
+
 `tools/booster.py owners --dir <BASE>-pypi` lists the published failure entries with their
 owner; `orphans` (no owner: not queued for retry, or outside both writers' scope) and
 `duplicates` must be 0 (`--fail-on-orphans` exits 5 otherwise). `local_booster.sh status`

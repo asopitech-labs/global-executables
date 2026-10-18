@@ -318,7 +318,17 @@ publish_snapshot() (
       local_rows="${dir}/.snap/rows.jsonl"
       merge_args=(--delta-base-state "${dir}/.base/registry-state")
       [ -f "${dir}/.snap/cache.gz" ] && merge_args+=(--local-cache "${dir}/.snap/cache.gz" --base-cache "${dir}/.base/cache.gz")
-      [ "${BOOSTER}" = 1 ] && merge_args+=(--no-scalars)
+      if [ "${BOOSTER}" = 1 ]; then
+        merge_args+=(--no-scalars)
+        # A booster clears only the failures of packages it owns (its catalogue, its buckets);
+        # the rest belong to the feed reader (docs/OPERATIONS.md "Retry ownership").
+        if [ -f "${dir}/.snap/cache.gz" ]; then
+          local owned_catalog
+          owned_catalog="$(catalog_for "${source}")"
+          merge_args+=(--owned-catalog "${dir}/data/production/${owned_catalog%% *}"
+                       --owned-ranges "${BOOSTER_RANGES:-0-255}")
+        fi
+      fi
     fi
     # A booster publishes no report: the Actions refresh owns it.
     if [ "${BOOSTER}" != 1 ]; then
