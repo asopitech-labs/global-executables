@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Booster/Actions: failures of packages missing from the catalogue (created after it was
+  taken and known only from the change feed, e.g. `libcuopt-*`) were retried by nobody once
+  a booster held their bucket. They now belong to the feed reader (Actions); catalogue
+  packages stay with the owner of their bucket, so every retry has exactly one owner. A
+  delta publish now also removes failure entries the writer resolved (a newer check, or a
+  final `unavailable`) even when its base never had them; the schedule cache is kept with
+  the base for this. `tools/booster.py owners` (in `local_booster.sh status`, the publish
+  log and the lease progress) counts failure entries with no owner or two. A booster clears only
+  failures of packages in its own catalogue and buckets, so its old check of a catalogue-less
+  package never removes a failure the feed reader still has to retry.
+
 - PyPI: projects whose `/pypi/<name>/json` exceeds the 8 MiB metadata limit (pydantic_core,
   grpcio, aiohttp, ddtrace, zeroconf and 10 more) failed three times and dropped out as
   unavailable. Such a project is now read with a range request for the head of that

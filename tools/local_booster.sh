@@ -87,7 +87,7 @@ for limit in "${HEARTBEAT_INTERVAL}" "${PUBLISH_INTERVAL}"; do
 done
 
 [ "${MODE}" = native ] && export NO_CONTAINER=1
-export BASE BOOSTER=1 SOURCES="${SOURCE}" OBSERVATION_SOURCES=" " DELTA_SOURCES="${DELTA_SOURCES:-${SOURCE}}"
+export BASE BOOSTER=1 BOOSTER_RANGES SOURCES="${SOURCE}" OBSERVATION_SOURCES=" " DELTA_SOURCES="${DELTA_SOURCES:-${SOURCE}}"
 export PACKAGE_BUDGET PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
 
 say() { printf '%s %s\n' "$(date -u +%FT%TZ)" "$*"; }
@@ -234,14 +234,26 @@ publish_now() {
   fi
 }
 
+# Retry ownership invariant (docs/OPERATIONS.md "Retry ownership"): every failure entry in
+# the published state must have exactly one live owner. `{"orphans": n, "duplicates": n}`.
+owners_summary() {
+  python3 "${ROOT_DIR}/tools/booster.py" owners --source "${SOURCE}" --dir "${DIR}" --summary 2>/dev/null \
+    || echo '{"orphans": null, "duplicates": null}'
+}
+
 progress_json() {
-  python3 - "${ROOT_DIR}" "${DIR}" "${SOURCE}" <<'PY'
+  python3 - "${ROOT_DIR}" "${DIR}" "${SOURCE}" "$(owners_summary)" <<'PY'
 import json, pathlib, sys
 sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
 from global_executables.refresh_policy import read_cache
 cache = pathlib.Path(sys.argv[2]) / "data/production/cache" / f"{sys.argv[3]}.cache.gz"
 checks, cursor, found = read_cache(cache)
-print(json.dumps({"checked": len(checks), "cache": found}))
+try:
+    owners = json.loads(sys.argv[4])
+except ValueError:
+    owners = {}
+print(json.dumps({"checked": len(checks), "cache": found, "orphans": owners.get("orphans"),
+                  "duplicates": owners.get("duplicates")}))
 PY
 }
 
@@ -332,6 +344,9 @@ case "${COMMAND}" in
       if [ "$((now - last_publish))" -ge "${PUBLISH_INTERVAL}" ]; then
         printf '%s ' "$(date -u +%FT%TZ)"
         publish_now
+        # One line per publish for the watchdog: a nonzero count means a failure entry
+        # nobody retries (or two writers do); `status` lists them.
+        say "retry owners: $(owners_summary)"
         last_publish="$(date +%s)"
         last_heartbeat="${last_publish}"
         lease renew --progress "$(progress_json)" >/dev/null || say "lease renewal failed; will retry"
@@ -349,6 +364,9 @@ case "${COMMAND}" in
     progress_json || true
     # Every catalogue position: checked (by outcome), unavailable, failing, or not reached yet.
     python3 "${ROOT_DIR}/tools/booster.py" coverage --source "${SOURCE}" --dir "${DIR}" || true
+    # Every published failure entry and its one owner (Actions or this booster); orphans
+    # and duplicates must be 0.
+    python3 "${ROOT_DIR}/tools/booster.py" owners --source "${SOURCE}" --dir "${DIR}" || true
     ;;
   publish) publish_now ;;
   stop) stop_crawler; [ -z "${SUPERVISOR_STOP:-}" ] || true ;;

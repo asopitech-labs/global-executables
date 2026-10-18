@@ -45,6 +45,28 @@ def read_remote_document(source: str, ref: str) -> dict:
     return document if isinstance(document, dict) and isinstance(document.get("leases"), dict) else booster.empty_document()
 
 
+def owners_report(source: str, ref: str, directory: Path | None) -> dict:
+    """``booster.failure_owners`` for the published state at ``ref``, the lease at ``ref``
+    and, with ``directory``, the booster's own catalogue."""
+    shown = git("show", f"{ref}:data/production/registry-state/{source}/source.json", check=False)
+    entry = json.loads(shown.stdout) if shown.returncode == 0 else {}
+    entry = entry if isinstance(entry, dict) else {}
+    projects = str(entry.get("projects_file") or entry.get("names_file") or entry.get("packages_file") or "")
+    listed = git("show", f"{ref}:{projects}", check=False) if projects else None
+    published_catalog = {line.split("\t", 1)[0].strip() for line in listed.stdout.splitlines()} if listed and listed.returncode == 0 else set()
+    published_catalog.discard("")
+    booster_catalog = None
+    if directory is not None and projects and (directory / projects).is_file():
+        with (directory / projects).open(encoding="utf-8") as stream:
+            booster_catalog = {line.split("\t", 1)[0].strip() for line in stream if line.strip()}
+    report = booster.failure_owners(entry, read_remote_document(source, ref), published_catalog, booster_catalog)
+    report["published_catalog_size"] = len(published_catalog)
+    if booster_catalog is not None:
+        report["booster_catalog_size"] = len(booster_catalog)
+        report["catalogs_match"] = booster_catalog == published_catalog
+    return report
+
+
 def publish(source: str, operation, remote: str, branch: str, attempts: int, message: str) -> dict:
     """Apply ``operation(document)`` to the freshest branch head and push; retry on a race."""
     path = booster.LEASE_PATH.format(source=source)
@@ -76,7 +98,7 @@ def publish(source: str, operation, remote: str, branch: str, attempts: int, mes
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "coverage"])
+    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "coverage", "owners"])
     parser.add_argument("--source", default="pypi")
     parser.add_argument("--id", default=os.environ.get("BOOSTER_ID", ""))
     parser.add_argument("--ranges", default=os.environ.get("BOOSTER_RANGES", "0-255"))
@@ -92,7 +114,10 @@ def main() -> int:
     parser.add_argument("--local", type=Path)
     parser.add_argument("--base", type=Path)
     parser.add_argument("--output", type=Path)
-    parser.add_argument("--dir", type=Path, help="coverage: the booster working directory (<BASE>-<source>)")
+    parser.add_argument("--dir", type=Path, help="coverage, owners: the booster working directory (<BASE>-<source>)")
+    parser.add_argument("--summary", action="store_true", help="owners: print only {orphans, duplicates} on one line")
+    parser.add_argument("--fail-on-orphans", action="store_true",
+                        help="owners: exit 5 when a published failure entry has no owner or two")
     args = parser.parse_args()
 
     if args.command == "rows-delta":
@@ -115,6 +140,13 @@ def main() -> int:
         print(json.dumps(booster.coverage(catalog, checks, entry.get("unavailable") or {}, entry.get("failures") or {},
                                           retries, cursor), indent=2))
         return 0
+    if args.command == "owners":
+        report = owners_report(args.source, args.ref, args.dir)
+        if args.summary:
+            print(json.dumps({key: report[key] for key in ("orphans", "duplicates")}, sort_keys=True))
+        else:
+            print(json.dumps(report, indent=2))
+        return 5 if args.fail_on_orphans and (report["orphans"] or report["duplicates"]) else 0
     if args.command == "show":
         print(json.dumps(read_remote_document(args.source, args.ref), indent=2, sort_keys=True))
         return 0

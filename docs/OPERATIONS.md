@@ -1046,6 +1046,39 @@ the recorded version, and otherwise reads `/pypi/<name>/<version>/json`. A proje
 that a newer crawler handles are requeued by `recoveryRules` in the runner, keyed on the
 failure reason; a rule matches nothing once those packages are rechecked.
 
+**Retry ownership.** Every failure entry in the published state has exactly one writer that
+retries it. A package listed in the catalogue belongs to the owner of its bucket, as for the
+rotation: the booster (`--rotation-include` its lease) or Actions (`--rotation-exclude` the
+live leases). A package missing from the catalogue (created on PyPI after the catalogue was
+taken, so known only from the change feed, e.g. `libcuopt-*`) belongs to the feed reader,
+Actions: the booster reads no feed and walks only its catalogue, so it never sees such a
+package. A package the feed announced this pass is read by Actions as a feed event in any
+bucket. Both writers use the same published catalogue; the check below flags a booster whose
+catalogue differs.
+
+A newer result supersedes an older failure, whoever recorded it: a delta publish takes the
+writer's schedule cache together with its base (`.base/cache.gz`), and a package checked
+since the base (read, or final with outcome `u`) or newly `unavailable` is removed from the
+published `failures`, `failure_attempts` and retry list unless the writer itself still
+lists it; a successful read also clears a published `unavailable` entry. The first publish
+after an upgrade has no base cache yet: then every package the writer has a check or an
+`unavailable` entry for clears its stale failure once, and no `unavailable` entry is
+cleared.
+
+A booster clears only packages it owns: listed by its catalogue and in its leased buckets
+(`--owned-catalog`, `--owned-ranges "${BOOSTER_RANGES}"`). Failure entries carry no time or
+version, so an older check cannot be told apart from a newer failure; a booster's old check
+of a catalogue-less package (sapilm, read at 1.0.1 before the feed announced 1.2.7) would
+otherwise clear the failure only the feed reader retries, and the package would be lost. A
+failure of an owned package cleared against an older check heals by itself: the rotation
+re-reads any package whose latest version differs from its check.
+
+`tools/booster.py owners --dir <BASE>-pypi` lists the published failure entries with their
+owner; `orphans` (no owner: not queued for retry, or outside both writers' scope) and
+`duplicates` must be 0 (`--fail-on-orphans` exits 5 otherwise). `local_booster.sh status`
+prints it, every publish logs `retry owners: {"duplicates": 0, "orphans": 0}`, and the
+lease progress carries both counts.
+
 **Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
 --source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:
 checked with an outcome (`has_commands`, `no_commands`), `unavailable` (no release, no wheel

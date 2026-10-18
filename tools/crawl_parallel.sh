@@ -49,6 +49,10 @@ capture_base() {
   [ -d "${dir}/data/production/registry-state" ] && cp -a "${dir}/data/production/registry-state" "${dir}/.base/registry-state"
   [ -f "${dir}/data/production/intermediate/${source}.jsonl" ] && \
     cp "${dir}/data/production/intermediate/${source}.jsonl" "${dir}/.base/rows.jsonl"
+  # The schedule cache tells which packages were settled since the base (a newer check),
+  # so the publish can clear their failure entries (docs/OPERATIONS.md "Retry ownership").
+  [ -f "${dir}/data/production/cache/${source}.cache.gz" ] && \
+    cp "${dir}/data/production/cache/${source}.cache.gz" "${dir}/.base/cache.gz"
   return 0
 }
 
@@ -308,10 +312,23 @@ publish_snapshot() (
       mkdir -p "${dir}/.snap"
       cp -a "${state}" "${dir}/.snap/registry-state"
       [ -f "${dir}/${rows}" ] && cp "${dir}/${rows}" "${dir}/.snap/rows.jsonl"
+      [ -f "${dir}/data/production/cache/${source}.cache.gz" ] && \
+        cp "${dir}/data/production/cache/${source}.cache.gz" "${dir}/.snap/cache.gz"
       state="${dir}/.snap/registry-state"
       local_rows="${dir}/.snap/rows.jsonl"
       merge_args=(--delta-base-state "${dir}/.base/registry-state")
-      [ "${BOOSTER}" = 1 ] && merge_args+=(--no-scalars)
+      [ -f "${dir}/.snap/cache.gz" ] && merge_args+=(--local-cache "${dir}/.snap/cache.gz" --base-cache "${dir}/.base/cache.gz")
+      if [ "${BOOSTER}" = 1 ]; then
+        merge_args+=(--no-scalars)
+        # A booster clears only the failures of packages it owns (its catalogue, its buckets);
+        # the rest belong to the feed reader (docs/OPERATIONS.md "Retry ownership").
+        if [ -f "${dir}/.snap/cache.gz" ]; then
+          local owned_catalog
+          owned_catalog="$(catalog_for "${source}")"
+          merge_args+=(--owned-catalog "${dir}/data/production/${owned_catalog%% *}"
+                       --owned-ranges "${BOOSTER_RANGES:-0-255}")
+        fi
+      fi
     fi
     # A booster publishes no report: the Actions refresh owns it.
     if [ "${BOOSTER}" != 1 ]; then
@@ -421,6 +438,7 @@ publish_snapshot() (
         mkdir -p "${BASE}-${source}/.base"
         [ -d "${snap}/registry-state" ] && mv "${snap}/registry-state" "${BASE}-${source}/.base/registry-state"
         [ -f "${snap}/rows.jsonl" ] && mv "${snap}/rows.jsonl" "${BASE}-${source}/.base/rows.jsonl"
+        [ -f "${snap}/cache.gz" ] && mv "${snap}/cache.gz" "${BASE}-${source}/.base/cache.gz"
         rm -rf "${snap}"
       fi
     done

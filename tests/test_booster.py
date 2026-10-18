@@ -671,3 +671,81 @@ def test_the_unreadable_outcome_round_trips_and_is_counted():
         {"no_commands": 1, "has_commands": 0, "unknown": 0, "unreadable": 1}
     assert refresh_policy.outcome_summary({"y": refresh_policy.pack(1, 0, "1", "n")}) == \
         {"no_commands": 1, "has_commands": 0, "unknown": 0}, "reports without one stay as they were"
+
+
+# --- orphaned failures (Refs #64) -----------------------------------------------------------
+
+def test_a_newer_result_clears_a_failure_the_writer_never_had_in_its_base():
+    # The booster read sapilm and clickhouse-connect after Actions recorded their failures,
+    # but its base never had those entries, so the key-by-key delta alone kept them.
+    published = {"failures": {"sapilm": "unexpected end of JSON input", "clickhouse-connect": "too big",
+                              "other": "kept"},
+                 "failure_attempts": {"sapilm": 1, "clickhouse-connect": 2, "other": 1},
+                 "retry_projects": ["sapilm", "other", "clickhouse-connect"],
+                 "unavailable": {"revived": "gave up", "dead": "gave up"}}
+    local = {"failures": {}, "failure_attempts": {}, "retry_projects": [], "unavailable": {}}
+    merged, changed = booster.merge_source_delta(published, local, dict(local), scalars=False,
+                                                 resolved={"sapilm", "clickhouse-connect", "revived"},
+                                                 succeeded={"sapilm", "clickhouse-connect", "revived"})
+    assert changed
+    assert merged["failures"] == {"other": "kept"}
+    assert merged["failure_attempts"] == {"other": 1}
+    assert merged["retry_projects"] == ["other"]
+    assert merged["unavailable"] == {"dead": "gave up"}
+
+
+def test_a_resolved_package_that_still_fails_locally_keeps_its_entries():
+    published = {"failures": {"a": "old"}, "retry_projects": ["a"], "unavailable": {"b": "x"}}
+    local = {"failures": {"a": "old"}, "retry_projects": ["a"], "unavailable": {"b": "x"}}
+    merged, changed = booster.merge_source_delta(published, local, dict(local), scalars=False,
+                                                 resolved={"a", "b"}, succeeded={"a", "b"})
+    assert not changed and merged == published
+
+
+def test_settled_since_counts_newer_checks_and_new_unavailable_entries():
+    base_checks = {"same": "20700:1n:1.0", "older": "20700:0n:1.0"}
+    local_checks = {"same": "20700:1n:1.0", "older": "20743:0n:1.1", "fresh": "20743:0c:2.0", "dead": "20743:0u:3.0"}
+    resolved, succeeded = booster.settled_since(local_checks, base_checks, {"unavailable": {"gaveup": "x"}}, {})
+    assert resolved == {"older", "fresh", "dead", "gaveup"}
+    assert succeeded == {"older", "fresh"}
+    # Without a base cache (first publish after an upgrade) every local result resolves
+    # its failure once, but nothing clears a published unavailable entry.
+    resolved, succeeded = booster.settled_since(local_checks, None, {"unavailable": {"gaveup": "x"}},
+                                                {"unavailable": {"gaveup": "x"}})
+    assert resolved == {"same", "older", "fresh", "dead", "gaveup"}
+    assert succeeded == set()
+
+
+def _bucketed(predicate, count=1, prefix="pkg"):
+    found, index = [], 0
+    while len(found) < count:
+        name = f"{prefix}{index}"
+        if predicate(booster.owner_bucket(name)):
+            found.append(name)
+        index += 1
+    return found
+
+
+def test_every_published_failure_has_exactly_one_owner():
+    now = datetime(2026, 10, 17, tzinfo=timezone.utc)
+    lease = {"leases": {"box-owen": {"ranges": "0-127", "heartbeat": now.isoformat(), "ttl_hours": 12}}}
+    in_booster, in_actions = _bucketed(lambda b: b < 128, 3), _bucketed(lambda b: b >= 128, 1)
+    feed_born = _bucketed(lambda b: b < 128, 1, prefix="libcuopt-")[0]
+    catalog = set(in_booster) | set(in_actions)
+    entry = {"failures": {name: "x" for name in [*in_booster, *in_actions, feed_born]},
+             "retry_projects": [*in_booster[:2], *in_actions, feed_born],
+             "feed_pending": {in_booster[1]: {"kind": "add"}}}
+    report = booster.failure_owners(entry, lease, catalog, now=now)
+    # in_booster[2] is failing but not queued: nobody retries it.
+    assert report["orphans"] == 1 and list(report["orphaned"]) == [in_booster[2]]
+    assert report["duplicates"] == 0
+    assert report["owners"] == {"actions": 3, "booster:box-owen": 1}  # feed-born + announced + its bucket
+    assert report["feed_overlap"] == [in_booster[1]]
+    # A booster whose catalogue lacks a published name orphans it: the check flags that.
+    report = booster.failure_owners(entry, lease, catalog, booster_catalog=catalog - {in_booster[0]}, now=now)
+    assert in_booster[0] in report["orphaned"]
+    # An expired lease hands everything to Actions.
+    expired = {"leases": {"box-owen": {"ranges": "0-127", "heartbeat": (now - timedelta(hours=13)).isoformat(),
+                                       "ttl_hours": 12}}}
+    report = booster.failure_owners(entry, expired, catalog, now=now)
+    assert report["owners"] == {"actions": 4} and report["orphans"] == 1
