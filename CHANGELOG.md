@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Query coverage (#79): check results now carry explicit npm coverage warnings,
+  including scope/catalog provenance, through MCP and Playground. Completed npm
+  critical catalogs remain partial registry coverage and expose `catalog_complete`
+  separately. Legacy limited coverage and filtered negative queries fail conservatively
+  as `unknown`. Browser and Python absence confidence now agree; invalid names produce
+  input errors. Shared Python/MCP/browser fixtures cover these contracts.
+
 - MCP (1.3.0): the server now runs with no local dataset. `uvx global-executables mcp`
   reads only the files a query needs from the public `dictionary` branch
   (raw.githubusercontent) and caches them per user (`GLOBAL_EXECUTABLES_CACHE_DIR`).

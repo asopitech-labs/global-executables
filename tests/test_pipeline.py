@@ -86,7 +86,7 @@ def test_rebuild_preserves_declared_coverage_scope(tmp_path):
     }
 
 
-def test_npm_exhaustive_coverage_requires_a_complete_published_checkpoint():
+def test_npm_catalog_completion_does_not_claim_registry_exhaustiveness(tmp_path):
     coverage = {"npm": {"coverage_kind": "exhaustive", "scope": "critical npm"}}
     assert sync_npm_coverage(coverage, {})["npm"]["coverage_kind"] == "partial"
     incomplete = {"sources": {"npm": {"catalog_complete": True}}}
@@ -103,11 +103,19 @@ def test_npm_exhaustive_coverage_requires_a_complete_published_checkpoint():
         "retry_npm": [],
     }}}
     synchronized = sync_npm_coverage(coverage, complete)["npm"]
-    assert synchronized["coverage_kind"] == "exhaustive"
+    assert synchronized["coverage_kind"] == "partial"
+    assert synchronized["catalog_complete"] is True
     assert synchronized["catalog_packages"] == 2295
+    rebuild(tmp_path, [ROOT / "fixtures/intermediate/npm.jsonl"], "2026-08-26",
+            coverage_kind={"npm": synchronized})
+    dataset = Dataset(tmp_path)
+    assert dataset.metadata["negative_lookup"] == "unknown"
+    assert dataset.check("missing-cli")["status"] == "unknown"
     for invalid in (0, True, None):
         complete["sources"]["npm"]["catalog_size"] = invalid
-        assert sync_npm_coverage(coverage, complete)["npm"]["coverage_kind"] == "partial"
+        invalid_coverage = sync_npm_coverage(coverage, complete)["npm"]
+        assert invalid_coverage["coverage_kind"] == "partial"
+        assert invalid_coverage["catalog_complete"] is False
 
 def test_indexed_search_matches_reference_scan_and_intersects_filters(tmp_path):
     rebuild(tmp_path,INPUTS,"2026-08-14")

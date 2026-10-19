@@ -15,6 +15,7 @@ from starlette.responses import JSONResponse
 
 from . import __version__
 from .assessment import assess
+from .coverage import coverage_scope as _scope, coverage_warnings
 from .remote import DEFAULT_DATASET_URL, RemoteDataset
 from .search import Dataset
 
@@ -74,16 +75,6 @@ def _tool(mcp: FastMCP, title: str):
     return mcp.tool(title=title, annotations=ToolAnnotations(title=title, **READ_ONLY))
 
 
-def _scope(metadata: dict[str, Any]) -> str:
-    coverage = metadata.get("coverage", {})
-    if metadata.get("negative_lookup") == "exhaustive" and coverage and all(
-        value.get("status") == "success" and value.get("coverage_kind") == "exhaustive"
-        for value in coverage.values()
-    ):
-        return "exhaustive"
-    return "unknown"
-
-
 def create_server(
     root: str | Path,
     *,
@@ -105,7 +96,8 @@ def create_server(
         transport_security = TransportSecuritySettings(allowed_hosts=allowed_hosts)
     mcp = FastMCP("Global Executables", instructions=(
         "Read-only executable collision lookup over the published Git JSON dataset. "
-        "Absence is clear_in_index only for explicitly exhaustive snapshots; otherwise unknown."
+        "Absence is clear_in_index only for explicitly exhaustive snapshots; otherwise unknown. "
+        "Read result warnings and coverage; a missing result is not permission to adopt a name."
     ), website_url="https://asopitech-labs.github.io/global-executables/",
         host=host, port=port, json_response=True, transport_security=transport_security)
     # FastMCP has no version argument; without this the SDK's own version is reported.
@@ -120,30 +112,31 @@ def create_server(
     def check_executables(names: list[str], scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Batch-check naming candidates; this is the preferred agent path."""
         metadata = dataset.metadata
-        return {"results": [dataset.check(name, scope) for name in names], "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata)}
+        return {"results": [dataset.check(name, scope) for name in names], "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "warnings": coverage_warnings(metadata)}
 
     @_tool(mcp, "Get an executable record")
     def get_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Return one canonical record, with snapshot context, if it exists."""
         metadata = dataset.metadata
-        return {"record": dataset.get(name, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata), "scope": scope}
+        return {"record": dataset.get(name, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
 
     @_tool(mcp, "Search executable names")
     def search_executables(prefix: str = "", length: int | None = None, ecosystem: str | None = None, limit: int = 100, scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Search derived indexes by prefix, length, and/or ecosystem."""
         metadata = dataset.metadata
-        return {"executables": dataset.search(prefix, length, ecosystem, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata), "scope": scope}
+        return {"executables": dataset.search(prefix, length, ecosystem, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
 
     @_tool(mcp, "Find similar executable names")
     def search_similar_executables(name: str, limit: int = 20, scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Find typo/confusion candidates using trigram postings and edit distance."""
         metadata = dataset.metadata
-        return {"matches": dataset.similar(name, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata), "scope": scope}
+        return {"matches": dataset.similar(name, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
 
     @_tool(mcp, "Get dataset coverage")
     def get_coverage() -> dict[str, Any]:
         """Return snapshot provenance and negative-query completeness."""
-        return {**dataset.metadata, "freshness": dataset.freshness}
+        return {**dataset.metadata, "negative_lookup": _scope(dataset.metadata), "freshness": dataset.freshness,
+                "warnings": coverage_warnings(dataset.metadata)}
 
     @_tool(mcp, "Assess one executable name")
     def assess_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
@@ -154,7 +147,7 @@ def create_server(
     def assess_executables(names: list[str], scope: dict[str, str] | None = None) -> dict[str, Any]:
         """Batch-assess candidate names while preserving the simple check contract."""
         return {"results": [assess(dataset, name, scope) for name in names],
-                "snapshot": dataset.metadata["snapshot"], "coverage_scope": _scope(dataset.metadata)}
+                "snapshot": dataset.metadata["snapshot"], "coverage_scope": _scope(dataset.metadata, scope)}
 
     @mcp.resource("global-executables://metadata", mime_type="application/json")
     def metadata_resource() -> str:
@@ -165,7 +158,7 @@ def create_server(
         metadata = dataset.metadata
         return json.dumps({"snapshot": metadata["snapshot"], "negative_lookup": _scope(metadata),
                            "checked_sources": metadata.get("checked_sources", []), "coverage": metadata.get("coverage", {}),
-                           "freshness": dataset.freshness})
+                           "freshness": dataset.freshness, "warnings": coverage_warnings(metadata)})
 
     @mcp.resource("global-executables://schema/{name}", mime_type="application/schema+json")
     def schema_resource(name: str) -> str:

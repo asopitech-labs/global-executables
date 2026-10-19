@@ -9,6 +9,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, Iterable
 
+from .coverage import coverage_scope
 from .model import dumps, filename, provider_key, shard, valid_command
 
 
@@ -46,10 +47,11 @@ class DatasetShrinkError(ValueError):
 
 
 def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
-    """Bind npm coverage to the published finite-catalog checkpoint."""
+    """Record critical-catalog completion separately from npm registry coverage."""
     result = dict(coverage)
     descriptor = dict(result.get("npm", {}))
     descriptor["coverage_kind"] = "partial"
+    descriptor["catalog_complete"] = False
     sources = state.get("sources", {}) if isinstance(state, dict) else {}
     npm = sources.get("npm", {}) if isinstance(sources, dict) else {}
     if not isinstance(npm, dict):
@@ -79,7 +81,7 @@ def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[s
             "catalog_scope", "catalog_snapshot", "catalog_source",
         ))
     ):
-        descriptor["coverage_kind"] = "exhaustive"
+        descriptor["catalog_complete"] = True
     result["npm"] = descriptor
     return result
 
@@ -188,6 +190,7 @@ def publish(root: Path, records: list[dict[str, Any]], coverage: dict[str, Any],
                 "unique_executables": len(records), "canonical": "data/executables", "indexes_derived": True,
                 "checked_sources": sorted(successful), "negative_lookup": "exhaustive" if coverage and all(v.get("coverage_kind") == "exhaustive" and v.get("status") == "success" for v in coverage.values()) else "unknown",
                 "coverage": coverage, "index_manifest": manifest}
+    metadata["negative_lookup"] = coverage_scope(metadata)
     data.mkdir(exist_ok=True); (data / "metadata.json").write_text(dumps(metadata))
     durable_history = dict(history or {})
     durable_history.update({record["command"]: record["first_seen"] for record in records})
