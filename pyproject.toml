@@ -54,7 +54,7 @@ packages = ["src/global_executables"]
 "schema" = "global_executables/schema"
 
 [tool.hatch.build.targets.sdist]
-include = ["src/", "schema/", "tests/", "fixtures/", "README.md", "LICENSE", "CHANGELOG.md", "pyproject.toml"]
+include = ["src/", "schema/", "tests/", "fixtures/", "README.md", "LICENSE", "NOTICE", "LICENSES/", "CHANGELOG.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

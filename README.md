@@ -747,3 +747,5 @@ verification steps, see [`docs/SETUP.md`](docs/SETUP.md).
 
 Issue completion and release evidence follow [`docs/RELEASE.md`](docs/RELEASE.md);
 implementation claims alone do not close work.
+
+Data sources, their licenses and terms, and required attribution are listed in [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
