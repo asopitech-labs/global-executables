@@ -55,6 +55,7 @@ def assess(dataset: Dataset, name: str, scope: dict[str, str] | None = None) -> 
         risk = "insufficient_evidence"
         freshness = activity = popularity = "unknown"
     return {"name": name, "found": observation["found"], "snapshot": observation["snapshot"],
+            "warnings": observation["warnings"],
             "coverage": observation.get("coverage", {}), "coverage_scope": observation["coverage_scope"],
             "assessment": {"freshness": freshness, "activity": activity, "popularity": popularity,
                            "collision_risk": risk, "methodology_version": METHODOLOGY_VERSION},

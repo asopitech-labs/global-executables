@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: "3.12", cache: pip}
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
       - run: pip install -e '.[test]'
       - run: pytest
       - run: global-executables build fixtures/intermediate/*.jsonl --root /tmp/fixture-validation --snapshot 2026-08-14 --coverage-kind partial

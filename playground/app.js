@@ -19,9 +19,19 @@ function formatDate(value, withTime = true) {
   return new Intl.DateTimeFormat(undefined, withTime ? { dateStyle: "medium", timeStyle: "short" } : { dateStyle: "medium" }).format(date);
 }
 function statusLabel(value) { return String(value || "partial").replaceAll("_", " "); }
-function coverageScope(metadata) {
+function limitedPopulation(source) {
+  return Boolean(source.scope) || Object.keys(source).some((key) => key.startsWith("catalog_"));
+}
+function coverageScope(metadata, scope = null) {
   const coverage = metadata?.coverage || {};
-  return metadata?.negative_lookup === "exhaustive" && Object.values(coverage).length && Object.values(coverage).every((item) => item.status === "success" && item.coverage_kind === "exhaustive") ? "exhaustive" : "unknown";
+  if ((scope && Object.keys(scope).length) || metadata?.negative_lookup !== "exhaustive" || !Object.keys(coverage).length) return "unknown";
+  return Object.values(coverage).every((source) => source.status === "success" && source.coverage_kind === "exhaustive" && !limitedPopulation(source)) ? "exhaustive" : "unknown";
+}
+function coverageWarnings(metadata) {
+  const npm = metadata?.coverage?.npm || {};
+  if (npm.status === "success" && npm.coverage_kind === "exhaustive" && !limitedPopulation(npm)) return [];
+  const provenance = Object.fromEntries(["status", "coverage_kind", "source", "scope", "catalog_complete", "catalog_packages", "catalog_snapshot", "catalog_source", "catalog_digest"].filter((key) => Object.hasOwn(npm, key)).map((key) => [key, npm[key]]));
+  return [{ code: "npm_coverage_incomplete", ecosystem: "npm", message: "npm coverage is incomplete or limited to a declared population. A missing result is not proof that no npm package uses this executable and is not permission to adopt the name.", coverage: provenance, reference: "https://github.com/asopitech-labs/global-executables/issues/54" }];
 }
 
 function nextScheduled(now = new Date()) {
@@ -169,13 +179,14 @@ async function scopeFromInput(value) {
 function matchesScope(provider, scope) { return !scope || Object.entries(scope).every(([key, value]) => provider[key] === value); }
 
 async function checkExecutable(name, scope) {
+  if (!name || [...name].length > 255 || /[/\\\x00-\x1f\x7f]/.test(name) || name === "." || name === "..") throw new Error("invalid executable name: expected 1–255 characters without path separators or controls");
   const record = await getExecutable(name);
   const providers = record?.providers?.filter((provider) => matchesScope(provider, scope));
   const found = Boolean(record && providers?.length);
-  const result = { name, found, status: found ? "collision" : coverageScope(state.metadata) === "exhaustive" ? "clear_in_index" : "unknown", snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata), checked_sources: state.metadata.checked_sources || [], searched_sources: state.metadata.checked_sources || [], coverage: state.metadata.coverage || {}, freshness: state.status?.freshness?.status || "unavailable" };
+  const result = { name, found, status: found ? "collision" : coverageScope(state.metadata, scope) === "exhaustive" ? "clear_in_index" : "unknown", snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), checked_sources: state.metadata.checked_sources || [], searched_sources: state.metadata.checked_sources || [], coverage: state.metadata.coverage || {}, warnings: coverageWarnings(state.metadata), freshness: state.status?.freshness?.status || "unavailable" };
   if (found) result.providers = providers;
-  else result.absence = { status: "not_found_in_current_index", confidence: "insufficient_coverage", searched_sources: state.metadata.checked_sources || [] };
-  if (scope) result.scope = scope;
+  else result.absence = { status: "not_found_in_current_index", confidence: result.coverage_scope === "exhaustive" ? "exhaustive" : "insufficient_coverage", searched_sources: state.metadata.checked_sources || [] };
+  if (scope && Object.keys(scope).length) result.scope = scope;
   return result;
 }
 async function searchExecutables({ prefix = "", length, ecosystem, limit = 100, scope }) {
@@ -207,7 +218,7 @@ async function assessExecutable(name, scope) {
   const providers = checked.providers || [];
   const signals = providers.map((provider) => { const release = provider.latest_release_at ? new Date(provider.latest_release_at) : null; const recent = release && (Date.now() - release.getTime()) / 86400000 <= 365; const stale = release && (Date.now() - release.getTime()) / 86400000 > 365; return { freshness: recent ? "recent" : stale ? "stale" : "unknown", activity: recent ? "active" : stale ? "inactive" : "unknown", popularity: "unknown", latest_release_at: provider.latest_release_at, last_observed_at: provider.last_observed_at, usage_metrics: provider.usage_metrics || [] }; });
   const active = signals.some((signal) => signal.activity === "active");
-  return { name, found: checked.found, snapshot: checked.snapshot, coverage: checked.coverage, coverage_scope: checked.coverage_scope, assessment: { freshness: active ? "recent" : providers.length ? "stale" : "unknown", activity: active ? "active" : providers.length ? "inactive" : "unknown", popularity: "unknown", collision_risk: active ? "active_common" : providers.length ? "historical_low_activity" : "insufficient_evidence", methodology_version: "playground-client/1.0" }, signals, providers, scope };
+  return { name, found: checked.found, snapshot: checked.snapshot, warnings: checked.warnings, coverage: checked.coverage, coverage_scope: checked.coverage_scope, assessment: { freshness: active ? "recent" : providers.length ? "stale" : "unknown", activity: active ? "active" : providers.length ? "inactive" : "unknown", popularity: "unknown", collision_risk: active ? "active_common" : providers.length ? "historical_low_activity" : "insufficient_evidence", methodology_version: "playground-client/1.0" }, signals, providers, scope };
 }
 
 function input(label, name, value = "", type = "text", placeholder = "") { return `<label>${label}<input name="${name}" type="${type}" value="${value}" placeholder="${placeholder}" /></label>`; }
@@ -226,7 +237,7 @@ function renderForm() {
 }
 async function runQuery(event) {
   event.preventDefault(); const form = new FormData(event.target); const op = state.operation; const scope = op === "get_coverage" ? null : await scopeFromInput(String(form.get("scope") || ""));
-  try { let result; if (op === "get_coverage") result = { ...state.metadata, freshness: state.status?.freshness || { status: "unavailable" } }; else if (op === "check_executable" || op === "get_executable" || op === "assess_executable") { const name = String(form.get("name") || "").trim(); if (op === "check_executable") result = await checkExecutable(name, scope); else if (op === "assess_executable") result = await assessExecutable(name, scope); else result = { record: await getExecutable(name), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata), scope }; } else if (op === "check_executables") { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => checkExecutable(name, scope))), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata) }; } else if (op === "search_executables") result = { executables: await searchExecutables({ prefix: String(form.get("prefix") || "").trim(), length: String(form.get("length") || "").trim(), ecosystem: String(form.get("ecosystem") || "").trim(), limit: form.get("limit"), scope }), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata), scope }; else result = { matches: await similar(String(form.get("name") || "").trim(), form.get("limit")), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata), scope };
+  try { let result; if (op === "get_coverage") result = { ...state.metadata, negative_lookup: coverageScope(state.metadata), warnings: coverageWarnings(state.metadata), freshness: state.status?.freshness || { status: "unavailable" } }; else if (op === "check_executable" || op === "get_executable" || op === "assess_executable") { const name = String(form.get("name") || "").trim(); if (op === "check_executable") result = await checkExecutable(name, scope); else if (op === "assess_executable") result = await assessExecutable(name, scope); else result = { record: await getExecutable(name), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; } else if (op === "check_executables") { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => checkExecutable(name, scope))), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), warnings: coverageWarnings(state.metadata) }; } else if (op === "search_executables") result = { executables: await searchExecutables({ prefix: String(form.get("prefix") || "").trim(), length: String(form.get("length") || "").trim(), ecosystem: String(form.get("ecosystem") || "").trim(), limit: form.get("limit"), scope }), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; else result = { matches: await similar(String(form.get("name") || "").trim(), form.get("limit")), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope };
     state.result = result; $("result").textContent = JSON.stringify(result, null, 2);
   } catch (error) { const result = { error: error.message }; state.result = result; $("result").textContent = JSON.stringify(result, null, 2); }
 }

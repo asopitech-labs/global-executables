@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .coverage import coverage_scope as negative_coverage_scope, coverage_warnings
 from .model import filename, provider_matches_scope, shard, valid_command
 
 
@@ -60,20 +61,19 @@ class Dataset:
         return value
 
     def check(self, name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
+        if not valid_command(name):
+            raise ValueError("invalid executable name: expected 1–255 characters without path separators or controls")
         meta = self.metadata
         record = self.get(name, scope)
         coverage = meta.get("coverage", {})
-        exhaustive = meta.get("negative_lookup") == "exhaustive" and bool(coverage) and all(
-            source.get("status") == "success" and source.get("coverage_kind") == "exhaustive"
-            for source in coverage.values()
-        )
-        coverage_scope = "exhaustive" if exhaustive else "unknown"
+        coverage_scope = negative_coverage_scope(meta, scope)
+        exhaustive = coverage_scope == "exhaustive"
         status = "collision" if record else ("clear_in_index" if exhaustive else "unknown")
         result = {"name": name, "found": bool(record), "status": status, "snapshot": meta["snapshot"],
                   "coverage_scope": coverage_scope,
                   "checked_sources": meta.get("checked_sources", []),
                   "searched_sources": meta.get("checked_sources", []),
-                  "coverage": coverage,
+                  "coverage": coverage, "warnings": coverage_warnings(meta),
                   "freshness": self.freshness.get("status", "unavailable")}
         if record:
             result["providers"] = record["providers"]

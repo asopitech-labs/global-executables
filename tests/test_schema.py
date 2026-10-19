@@ -21,6 +21,7 @@ def test_scoped_exhaustive_coverage_validates(tmp_path):
             "scope": "ecosyste.ms critical npm population",
             "catalog_digest": "sha256:" + "a" * 64,
             "catalog_packages": 2295,
+            "catalog_complete": True,
             "catalog_snapshot": "2026-08-25",
             "catalog_source": "https://packages.ecosyste.ms/critical?registry=npmjs.org",
         }

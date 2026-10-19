@@ -97,6 +97,36 @@ The agent should keep rejected names internal:
 4. Call `search_similar_executables` for not-found candidates.
 5. Remove confusing names and present only survivors, with snapshot/coverage caveats.
 
+### Negative results and npm coverage warnings
+
+`check_executable` returns an object even when a name is missing. `found: false`
+means no matching provider was found in this snapshot. `status: unknown` and
+`absence.confidence: insufficient_coverage` mean the search cannot establish absence.
+`clear_in_index` is restricted to an explicitly exhaustive, unfiltered snapshot with
+successful, unbounded source coverage; it is never permission to adopt a name.
+
+Both single and batch checks include `warnings` (an array, possibly empty). Each
+batch item also includes its own warnings. Incomplete, failed, missing, or limited
+npm coverage produces `code: npm_coverage_incomplete`, an explanation, the available
+scope/catalog provenance, and a link to issue #54. MCP text and structured content
+carry the same information. Coverage resources and `get_coverage` expose these
+warnings too; assessments preserve them from the underlying check.
+
+A completed 2,295-package npm critical catalog is not complete npm registry coverage.
+The builder records `coverage.npm.catalog_complete` separately and keeps its
+`coverage_kind: partial`. Query readers also treat legacy `exhaustive` descriptors
+containing scope or catalog restrictions as insufficient for negative completeness.
+The Playground public notice remains in place.
+
+Provider `scope` is a filter, not a declaration of the searched population. Scoped
+negative queries remain `unknown` until coverage can establish completeness for the
+requested dimensions; positive matching providers still return `collision`.
+Invalid command names (empty, over 255 characters, path separators, control
+characters, `.` or `..`) raise input errors, including through MCP and Playground.
+
+The Python/MCP/Playground contract fixtures run in `tests/test_query_contract.py`.
+Node.js is required for the browser checks and is installed by the validation job.
+
 There are no write tools or write HTTP routes.
 
 ## Browser playground
