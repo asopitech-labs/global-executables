@@ -36,14 +36,22 @@ Confidence means: `direct` (declared executable metadata), `filesystem`
 evidence). Package names are never substituted for executable names.
 
 `metadata.coverage[*].status` reports whether an attempted collector succeeded;
-`coverage_kind` reports whether its scope is `fixture`, `smoke`, `partial`, or
-`exhaustive`. A coverage entry may also name a finite `scope`, `catalog_source`,
-`catalog_packages`, `catalog_snapshot`, and `catalog_digest`; `exhaustive` applies
-to that declared population, never to an unstated global ecosystem. These fields are
-intentionally independent. `negative_lookup` is
-`exhaustive` only when every declared source has both exhaustive scope and a
-successful run. `index_manifest` pins every derived index by SHA-256 so readers
-can reject missing or stale index files without making indexes canonical.
+`coverage_kind` is `fixture`, `smoke`, `partial`, or `exhaustive` and describes
+registry-wide coverage for that source, not completion of a named subset.
+A coverage entry may also carry a finite `scope`, `catalog_source`,
+`catalog_packages`, `catalog_snapshot`, `catalog_digest`, and `catalog_complete`.
+`catalog_complete` means the declared catalog crawl finished; it is not
+registry-wide exhaustiveness and is not permission to adopt a missing name.
+npm keeps `coverage_kind: partial` when its critical catalog completes and sets
+`catalog_complete: true` instead. Query readers treat any source with a finite
+`scope` or `catalog_*` limit, or any non-exhaustive/`failed` source, as
+insufficient for negative completeness (including legacy descriptors that once
+labeled a completed subset `exhaustive`). `negative_lookup` is `exhaustive` only
+when every declared source has `status: success`, `coverage_kind: exhaustive`,
+and no such population limit. `clear_in_index` follows that same bar; a missing
+result is never permission to adopt a name. `index_manifest` pins every derived
+index by SHA-256 so readers can reject missing or stale index files without
+making indexes canonical.
 
 Provider records may carry independent logical dimensions for scoped queries:
 `source_type`, `package_system`, `distribution_family`, `distribution`,

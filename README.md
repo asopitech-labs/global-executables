@@ -455,22 +455,19 @@ For example:
   "name": "evpk",
   "found": false,
   "status": "unknown",
-  "absence": {
-    "status": "not_found_in_current_index",
-    "confidence": "insufficient_coverage",
-    "searched_sources": [
-      "arch",
-      "crates",
-      "debian",
-      "go",
-      "homebrew",
-      "npm",
-      "pypi",
-      "ubuntu"
-    ]
-  },
+  "snapshot": "2026-10-19",
   "coverage_scope": "unknown",
   "checked_sources": [
+    "arch",
+    "crates",
+    "debian",
+    "go",
+    "homebrew",
+    "npm",
+    "pypi",
+    "ubuntu"
+  ],
+  "searched_sources": [
     "arch",
     "crates",
     "debian",
@@ -484,23 +481,68 @@ For example:
     "arch": {
       "status": "success",
       "coverage_kind": "exhaustive",
-      "records": 1647
+      "records": 1647,
+      "source": "data/production/intermediate/arch.jsonl"
     },
     "npm": {
       "status": "success",
-      "coverage_kind": "exhaustive",
+      "coverage_kind": "partial",
+      "records": 127,
+      "source": "data/production/intermediate/npm.jsonl",
       "scope": "ecosyste.ms critical npm population covering 80% of downloads or dependent repositories",
-      "records": 127
+      "catalog_complete": true,
+      "catalog_packages": 2295,
+      "catalog_snapshot": "2026-10-18",
+      "catalog_source": "https://packages.ecosyste.ms/critical?registry=npmjs.org",
+      "catalog_digest": "sha256:4b610ce561d63b72b7a4137ed75ba5ecbec5fbafda236218fc4264c92db605b3"
     }
   },
-  "snapshot": "2026-08-15"
+  "warnings": [
+    {
+      "code": "npm_coverage_incomplete",
+      "ecosystem": "npm",
+      "message": "npm coverage is incomplete or limited to a declared population. A missing result is not proof that no npm package uses this executable and is not permission to adopt the name.",
+      "coverage": {
+        "status": "success",
+        "coverage_kind": "partial",
+        "source": "data/production/intermediate/npm.jsonl",
+        "scope": "ecosyste.ms critical npm population covering 80% of downloads or dependent repositories",
+        "catalog_complete": true,
+        "catalog_packages": 2295,
+        "catalog_snapshot": "2026-10-18",
+        "catalog_source": "https://packages.ecosyste.ms/critical?registry=npmjs.org",
+        "catalog_digest": "sha256:4b610ce561d63b72b7a4137ed75ba5ecbec5fbafda236218fc4264c92db605b3"
+      },
+      "reference": "https://github.com/asopitech-labs/global-executables/issues/54"
+    }
+  ],
+  "absence": {
+    "status": "not_found_in_current_index",
+    "confidence": "insufficient_coverage",
+    "searched_sources": [
+      "arch",
+      "crates",
+      "debian",
+      "go",
+      "homebrew",
+      "npm",
+      "pypi",
+      "ubuntu"
+    ]
+  }
 }
 ```
 
 `found:false` means that the name was not found in the current index. `unknown`
 means the available coverage is insufficient to make an exhaustive absence
 claim; it does not mean that the query was unavailable. `clear_in_index` is
-returned only when the queried snapshot is explicitly exhaustive.
+returned only when every source in the queried snapshot has
+`coverage_kind: exhaustive`, a successful run, and no finite population limit
+(`scope` or `catalog_*` fields). A completed npm critical catalog sets
+`catalog_complete: true` and keeps `coverage_kind: partial`; it never makes
+the snapshot exhaustive. Incomplete npm coverage also adds a
+`npm_coverage_incomplete` warning. None of these statuses is permission to
+adopt a name.
 
 The `coverage` object reports the per-source collection status, coverage kind,
 and record count. The example shows two representative sources; the live
@@ -637,8 +679,9 @@ The schemas, deterministic builder, production OS index collector, derived
 prefix/length/ecosystem/trigram and logical-scope indexes, collector parsers,
 read-only local/HTTP MCP server, assessment API, bounded fixture freshness
 scenarios, and CI checks are implemented in this repository. Coverage is measured
-against each declared source population. npm is exhaustive for the finite ecosyste.ms
-critical population; the all-registry npm long tail is tracked separately. See
+against each source. npm stays `coverage_kind: partial` even when its finite
+ecosyste.ms critical catalog finishes (`catalog_complete: true`); the all-registry
+npm long tail is not in the index. See
 [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) for exact naming, sharding, alias, and
 history rules and [`docs/OPERATIONS.md`](docs/OPERATIONS.md) for reproducible
 commands, freshness-state scenarios, and honest measured coverage limitations.
@@ -668,10 +711,11 @@ rotates through immutable test partitions, persists a cursor and last successful
 observations on the `freshness-data` branch, and publishes a machine-readable test
 report. It is not production freshness or a full dataset refresh. Coverage is
 snapshot-specific and reported by `get_coverage`. The
-published snapshot contains production OS/Homebrew coverage, exhaustive bounded
-registry populations, and partial PyPI/Go coverage; it is **not** full global ecosystem
-coverage, so consumers must preserve
-`clear_in_index`/`unknown` semantics and the accompanying coverage caveat.
+published snapshot contains production OS/Homebrew coverage, a completed but
+partial npm critical catalog (`catalog_complete`, not registry-wide exhaustiveness),
+and partial coverage for other registries such as PyPI and Go; it is **not** full
+global ecosystem coverage, so consumers must preserve
+`clear_in_index`/`unknown` semantics and the `npm_coverage_incomplete` warning.
 
 Registry artifact inspection is separately resumable. CI refreshes the finite npm
 critical catalog and crawls it to 100% daily, while dedicated local containers advance
@@ -685,8 +729,11 @@ The CI refresher dispatches a dictionary rebuild only when normalized observatio
 changed and redeploys Pages whenever it publishes crawl progress. Go modules, npm, PyPI, RubyGems, and Packagist use the transactional Go runtime;
 their bbolt state commits cursor, retry verdicts, and observations together. CI
 regenerates npm's bounded population; PyPI, RubyGems, and Packagist reuse sampled
-catalogs, while Go extends its index. A source is promoted to `exhaustive` only after
-its declared catalog and required artifact inspections complete successfully.
+catalogs, while Go extends its index. Finishing a declared catalog may set
+`catalog_complete`; npm is never promoted to `coverage_kind: exhaustive` from that
+catalog alone. Other sources become `exhaustive` only after their declared catalog
+and required artifact inspections complete successfully without a finite population
+limit.
 
 Successful collection does not by itself permit a negative collision claim.
 Every valid query returns a factual `found` observation. Fixture, smoke, and
