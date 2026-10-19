@@ -1,4 +1,10 @@
+import json
+import os
+import re
+import subprocess
 from pathlib import Path
+
+import yaml
 
 
 ROOT = Path(__file__).parents[1]
@@ -96,6 +102,31 @@ def test_ci_periodically_refreshes_every_completed_registry_in_parallel():
     assert refresh.index('bash tools/crawl_parallel.sh publish)') < refresh.index(
         'gh workflow run pages.yml --ref main'
     )
+
+
+def test_go_refresh_can_finish_a_catalog_after_the_page_limit_is_reached():
+    steps = yaml.safe_load(workflow("registry-refresh.yml"))["jobs"]["refresh"]["steps"]
+    restore = next(step for step in steps if step.get("name") == "Restore the completed source checkpoint")
+    crawl = next(step for step in steps if step.get("name") == "Refresh one transactional batch")
+    match = re.search(r"\| jq -e \\\n\s+'([^']+)'", restore["run"])
+    assert match is not None
+    eligibility = match.group(1)
+
+    for source, state, eligible in (
+        ("go", {"catalog_size": 100, "cursor": 100, "catalog_complete": False}, True),
+        ("go", {"catalog_size": 100, "cursor": 99, "catalog_complete": False}, False),
+        ("pypi", {"catalog_size": 100, "cursor": 100, "catalog_complete": False}, False),
+        ("pypi", {"catalog_size": 100, "cursor": 100, "catalog_complete": True}, True),
+    ):
+        result = subprocess.run(
+            ["jq", "-e", eligibility], input=json.dumps(state), text=True,
+            capture_output=True, env={**os.environ, "SOURCE": source}, check=False,
+        )
+        assert (result.returncode == 0) == eligible, (source, state, result.stderr)
+
+    assert 'if [ "${SOURCE}" = go ]; then' in crawl["run"]
+    assert "catalog_pages=100" in crawl["run"]
+    assert '--catalog-pages "${catalog_pages}"' in crawl["run"]
 
 
 def test_registry_derivations_run_only_after_a_changed_publication():
