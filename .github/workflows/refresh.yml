@@ -65,7 +65,7 @@ jobs:
             --state /tmp/registry-state
           for source in \
             arch debian ubuntu homebrew msys2 scoop winget windows \
-            npm pypi crates go rubygems packagist nuget macos shell \
+            npm npm-registry pypi crates go rubygems packagist nuget macos shell \
             conan vcpkg xmake; do
             transport="data/production/transport/${source}-observations"
             if git cat-file -e "origin/artifact-data:${transport}/manifest.json" 2>/dev/null; then
@@ -148,6 +148,7 @@ jobs:
             data/production/intermediate/crates.jsonl \
             data/production/intermediate/go.jsonl \
             data/production/intermediate/npm.jsonl \
+            data/production/intermediate/npm-registry.jsonl \
             data/production/intermediate/pypi.jsonl \
             data/production/intermediate/rubygems.jsonl \
             data/production/intermediate/packagist.jsonl \

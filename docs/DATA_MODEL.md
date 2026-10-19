@@ -43,7 +43,11 @@ A coverage entry may also carry a finite `scope`, `catalog_source`,
 `catalog_complete` means the declared catalog crawl finished; it is not
 registry-wide exhaustiveness and is not permission to adopt a missing name.
 npm keeps `coverage_kind: partial` when its critical catalog completes and sets
-`catalog_complete: true` instead. Query readers treat any source with a finite
+`catalog_complete: true` instead.
+`npm-registry` is a separate source and records progress through the full npm
+name-index snapshot; its cursor never inherits the critical subset's 100%.
+Both sources contribute npm executable records to the same dictionary.
+Query readers treat any source with a finite
 `scope` or `catalog_*` limit, or any non-exhaustive/`failed` source, as
 insufficient for negative completeness (including legacy descriptors that once
 labeled a completed subset `exhaustive`). `negative_lookup` is `exhaustive` only

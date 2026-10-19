@@ -123,13 +123,14 @@ function renderOverview() {
 
   const grid = $("source-grid");
   grid.replaceChildren();
-  const order = ["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget", "conan"];
+  const order = ["npm", "npm-registry", "pypi", "crates", "go", "rubygems", "packagist", "nuget", "conan"];
   for (const name of order) {
     const source = sources[name] || { coverage_kind: "pending", complete: false };
     const card = document.createElement("article");
     card.className = "source-card";
     const complete = source.coverage_kind === "exhaustive" || source.complete;
-    const label = name === "npm" && complete ? "critical 100%" : complete ? "exhaustive" : statusLabel(source.coverage_kind);
+    const npmCritical = name === "npm";
+    const label = npmCritical && complete ? "critical 100%" : complete ? "exhaustive" : statusLabel(source.coverage_kind);
     const progress = source.catalog_size ? Math.min(100, (Number(source.cursor || 0) / Number(source.catalog_size)) * 100) : complete ? 100 : 3;
     // npm's cursor is a replication sequence, Go's is a timestamp; "through 2537341"
     // read like a truncated date.
@@ -139,12 +140,15 @@ function renderOverview() {
     const position = source.refresh_cursor != null ? `refresh ${formatNumber(source.refresh_cursor)} / ${formatNumber(source.catalog_size)}`
       : source.catalog_size ? `${formatNumber(source.cursor || 0)} / ${formatNumber(source.catalog_size)}`
       : source.since ? cursorLabel : complete ? "catalog complete" : "in progress";
+    const npmPosition = npmCritical ? `critical ${position}` : name === "npm-registry" && !source.catalog_size
+      ? "registry: pending (historical public checkpoint 218,774 / 4.3 million)"
+      : position;
     const errors = Number(source.failures || 0);
     // Records and failures are separate facts: a run that collected thousands of records
     // alongside two failures used to report only the failures.
     const stats = [`${formatNumber(source.records || 0)} records`];
     if (errors) stats.push(`${formatNumber(errors)} failures`);
-    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${label}</span></div><div class="source-bar"><i style="width:${progress}%"></i></div><div class="source-stats"><span>${position}</span><span>${stats.join(" · ")}</span></div>`;
+    card.innerHTML = `<div class="source-card-top"><span class="source-name">${name}</span><span class="source-status ${complete ? "exhaustive" : ""}">${label}</span></div><div class="source-bar"><i style="width:${progress}%"></i></div><div class="source-stats"><span>${npmPosition}</span><span>${stats.join(" · ")}</span></div>`;
     grid.append(card);
   }
 }

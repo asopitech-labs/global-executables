@@ -83,6 +83,28 @@ def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[s
     ):
         descriptor["catalog_complete"] = True
     result["npm"] = descriptor
+    broad = sources.get("npm-registry", {}) if isinstance(sources, dict) else {}
+    if isinstance(broad, dict) and (broad or "npm-registry" in result):
+        registry = dict(result.get("npm-registry", {}))
+        registry["coverage_kind"] = "partial"
+        for target, source in {
+            "catalog_digest": "catalog_digest",
+            "catalog_snapshot": "catalog_snapshot",
+            "catalog_source": "catalog_source",
+            "scope": "catalog_scope",
+        }.items():
+            if isinstance(broad.get(source), str) and broad[source]:
+                registry[target] = broad[source]
+        registry_size = broad.get("catalog_size")
+        if type(registry_size) is int and registry_size > 0:
+            registry["catalog_packages"] = registry_size
+        registry["catalog_complete"] = (
+            broad.get("catalog_complete") is True
+            and type(registry_size) is int and registry_size > 0
+            and broad.get("cursor") == registry_size
+            and not broad.get("failures")
+        )
+        result["npm-registry"] = registry
     return result
 
 

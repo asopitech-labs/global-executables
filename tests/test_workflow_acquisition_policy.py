@@ -68,6 +68,18 @@ def test_daily_ci_owns_the_bounded_npm_critical_population():
     assert "--source npm --passes 0" in npm_job
     assert "SOURCES=npm" in npm_job
     assert "ALLOW_CI_OWNED_NPM=1" in npm_job
+
+
+def test_broad_npm_crawl_keeps_a_separate_source_and_dictionary_input():
+    broad = workflow("npm-registry.yml")
+    refresh = workflow("refresh.yml")
+    critical = workflow("registry-artifacts.yml")
+    assert "SOURCES: npm-registry" in broad
+    assert "tools/npm_full_catalog.py" in broad
+    assert "tools/npm_registry_crawl.py" in broad
+    assert "--source npm --passes 0" in critical
+    assert "npm npm-registry pypi" in refresh
+    assert "data/production/intermediate/npm-registry.jsonl" in refresh
     assert 'SOURCES="${SOURCES-pypi rubygems packagist nuget go}"' in (
         ROOT / "tools/crawl_parallel.sh"
     ).read_text()

@@ -47,7 +47,7 @@ or a point could not be confirmed.
 | Source | Hosts | What we take | Data license | Terms and usage policy | Attribution required | Status |
 |---|---|---|---|---|---|---|
 | ecosyste.ms Packages | packages.ecosyste.ms | Names of the 2,295 "critical" npm packages, scraped from HTML pages | CC BY-SA 4.0 | ecosyste.ms Terms of Service; polite pool needs a `mailto` | Yes: "ecosyste.ms" as the source, CC BY-SA 4.0 | **Gap** (share-alike, scraping clause) |
-| npm registry | registry.npmjs.org, replicate.npmjs.com | `bin` of each listed package's latest version; change feed | Not stated for metadata; package contents under each package's license | npm Open-Source Terms; Public APIs allowed; under 5 million requests a month | No | OK |
+| npm registry | registry.npmjs.org, replicate.npmjs.com | `bin` of each listed package's latest version; change feed and package-name index | Not stated for metadata; package contents under each package's license | npm Open-Source Terms; Public APIs allowed; under 5 million requests a month | No | OK |
 | PyPI | pypi.org, files.pythonhosted.org | Project list, JSON metadata, entry points read from wheels and sdists, XML-RPC changelog | Not stated for metadata; files under each project's license | PyPI Terms of Service, API policies | No | OK, with a gap on XML-RPC |
 | crates.io | static.crates.io, index.crates.io, crates.io | `bin_names` from the daily database dump | Not stated in the dump | crates.io Data Access Policy | No | OK |
 | Go module mirror and index | proxy.golang.org, index.golang.org | Module list, versions, `.mod` files, module zips (`package main` directories) | Each module's own license | Go module services page; `/cached-only` for bulk use | No | OK |
@@ -157,10 +157,12 @@ Options, for a decision by the maintainer (none is chosen here):
 ### npm registry
 
 - Code: `internal/registryinspect/npm.go` reads
-  `https://registry.npmjs.org/<name>/latest` for each listed package and keeps
-  `bin`. `internal/registryinspect/feeds.go` reads
-  `https://replicate.npmjs.com/_changes`. `src/global_executables/production.py`
-  names `https://replicate.npmjs.com/_all_docs` as the npm index URL, and
+  `https://registry.npmjs.org/<name>/latest` for the critical set and keeps
+  `bin`. `tools/npm_registry_crawl.py` reads the same endpoint for a separate
+  broad crawl, and `tools/npm_full_catalog.py` obtains package names from
+  `https://replicate.npmjs.com/_all_docs`.
+  `internal/registryinspect/feeds.go` reads
+  `https://replicate.npmjs.com/_changes`, and
   `src/global_executables/live_sources.py` reads one package for a smoke test.
   No package tarball is downloaded.
 - Terms: npm Open-Source Terms (https://docs.npmjs.com/policies/open-source-terms).
@@ -173,8 +175,9 @@ Options, for a decision by the maintainer (none is chosen here):
 - Data license: the terms leave package content to its publishers ("You
   decide whether and how to license it") and grant no separate license for
   registry metadata.
-- Volume: the npm crawl reads about 2,300 packages, with a 200 ms floor
-  between requests on one runner.
+- Volume: the critical sweep reads about 2,300 packages. The broad workflow
+  budgets 10,000 package reads every four hours, with a 200 ms floor between
+  requests on one runner, plus a paginated name-index read on its first run.
 - Status: OK.
 
 ### PyPI
