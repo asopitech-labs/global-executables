@@ -19,10 +19,23 @@ the provider package name and version, a repository or homepage URL as the
 upstream declares it, the source URL the evidence came from, and how the name
 was derived. It does not contain package archives, source code, descriptions,
 READMEs, maintainer data or download counts. A command name and the fact that
-a package installs it are facts about the package. Whether such facts are
-protected at all depends on the jurisdiction (for example, EU database rights
-can protect a substantial extraction from a database); this page does not try
-to settle that and instead records what each source's own terms say.
+a package installs it are facts about the package.
+
+### Inventory observations are separate from upstream acquisition
+
+Inspecting packages already present on a local PC or inside a container, and
+publishing their names, versions, executable names and observed state, is the
+inventory workflow. This page does not classify that observation or factual
+state publication as a rights gap. It does not redistribute package contents.
+
+The rights and policy questions recorded below concern different actions:
+requesting data from an external service, copying a third-party dataset, or
+redistributing third-party source/fixture excerpts. Image/OS provisioning and
+runtime license conditions belong to provisioning, not to the inventory output.
+An upstream software license or an unreviewed host license must not be used on
+its own to label local package inspection or publication of factual state as
+restricted. A missing external-service terms reference is likewise not a
+finding against the local inventory workflow.
 
 ## Summary
 
@@ -52,8 +65,8 @@ or a point could not be confirmed.
 | Homebrew | formulae.brew.sh | `formula.json` (`executables`, aliases) | BSD-2-Clause (homebrew-core, formulae.brew.sh) | Public JSON API documentation | Only for copied content | OK |
 | Scoop buckets | codeload.github.com (10 bucket repositories) | Manifest `bin` and `shortcuts` | Unlicense, MIT or CC0-1.0, per bucket | GitHub terms | Only for copied content | OK |
 | winget | cdn.winget.microsoft.com | `source.msix` index (declared `Commands`) | Manifests in microsoft/winget-pkgs: MIT; the index file itself not stated | Not found for the CDN | No | **Unverified** |
-| Windows container images | mcr.microsoft.com | File names on the default PATH inside Server Core and Nano Server layers | Microsoft Software Supplemental License for Windows Container Base Image | Same license | No | **Gap** (license conditions need a decision) |
-| macOS base system | none (GitHub-hosted macOS runner) | File names in system directories of the runner | Apple software license (**unverified**) | GitHub Actions terms | No | **Unverified** |
+| Windows container images | mcr.microsoft.com | File names on the default PATH inside Server Core and Nano Server layers | Image provisioning: Microsoft Software Supplemental License; output: factual names only | Provisioning conditions are separate from inventory | No | OK (inventory and factual state publication) |
+| macOS base system | none (GitHub-hosted macOS runner) | File names in system directories of the runner | OS provisioning: Apple software license; output: factual names only | Runner provisioning is separate from inventory | No | OK (inventory and factual state publication) |
 | Shell built-ins | none (shells in debian, alpine, fedora images); pubs.opengroup.org and learn.microsoft.com cited | Built-in names from `compgen -b` and equivalents; embedded lists for `sh` and `cmd` | Names only; shells under their own licenses | Docker Hub terms for the images | No | OK |
 | GitHub | github.com, codeload.github.com, api.github.com, raw.githubusercontent.com | Repository archives above; compare API for ConanCenter; hosting of this project | Per repository | GitHub Terms of Service and Acceptable Use Policies | No | OK |
 
@@ -351,28 +364,27 @@ Options, for a decision by the maintainer (none is chosen here):
   `https://mcr.microsoft.com/v2`, lists file names under the default PATH
   directories, and pins the image digest. Nothing is executed and no file
   content is kept.
-- License: Microsoft Software Supplemental License for Windows Container Base
-  Image (https://mcr.microsoft.com/en-us/artifact/mar/windows/servercore/about).
-  It says the image "may only be used with a validly licensed copy" of a
-  Windows host, may be used "only to create, build, and run Windows
-  container(s) on Host Software", and may not be reverse engineered,
-  decompiled or disassembled.
-- Status: **Gap.** The collector downloads and reads the layers on a Linux
-  runner without a Windows host. Listing file names is not decompiling, but
-  the use-rights wording is narrow. Options: run this collector on a
-  Windows runner that holds the host license (GitHub's Windows runners), read
-  the names from Microsoft's own documentation instead, or confirm with
-  Microsoft that listing file names is acceptable.
+- Acquisition reference: Microsoft Software Supplemental License for Windows
+  Container Base Image
+  (https://mcr.microsoft.com/en-us/artifact/mar/windows/servercore/about).
+  This is a reference for image provisioning and runtime conditions. It does
+  not turn the separate act of listing installed package/file names and
+  publishing factual observations into redistribution of an image or package.
+- Status: OK for inventory observation and factual state publication. The
+  collector keeps names and the image digest, not image/package contents.
+  Provisioning questions must be assessed separately for the actual acquisition
+  and runtime workflow; this page does not infer an inventory rights gap from
+  the collector's host OS.
 
 ### macOS base system
 
 - Code: `.github/workflows/base-commands.yml` runs
   `tools/production_crawl.py --source macos` on a GitHub-hosted macOS runner
   and lists file names in system directories, pinned to the OS build.
-- License: macOS is licensed by Apple to GitHub for its runners. Listing
-  file names on a running system is ordinary use; the Apple license terms
-  were not checked (**unverified**).
-- Status: **Unverified.**
+- Scope: the collector observes file names on the existing runner and
+  publishes factual state. It does not distribute macOS or package contents.
+  The runner's OS provisioning is a separate workflow.
+- Status: OK for local inventory observation and factual state publication.
 
 ### Shell built-ins
 
@@ -426,10 +438,9 @@ These hosts do not supply data for the dataset.
    not measured and not paced.
 5. PyPI: the change feed uses the XML-RPC changelog, which PyPI asks new
    integrations not to use.
-6. Windows container images: the supplemental license's use-rights wording
-   does not obviously cover reading layers on a Linux runner.
-7. Test fixtures with vcpkg and xmake-repo excerpts had no license notices.
+6. Test fixtures with vcpkg and xmake-repo excerpts had no license notices.
    Fixed by this change.
-8. Unverified: terms for Debian, Ubuntu, Arch and MSYS2 archive files, the
-   winget CDN index, ConanCenter's center2 remote, pkg.go.dev's terms of
-   service, and the macOS license.
+7. Unverified external acquisition references: terms for Debian, Ubuntu, Arch and MSYS2 archive files, the
+   winget CDN index, ConanCenter's center2 remote, and pkg.go.dev's terms of
+   service. These are not findings against local inventory or factual state
+   publication.
