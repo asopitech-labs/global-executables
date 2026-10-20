@@ -94,6 +94,8 @@ the service version, dataset snapshot, coverage scope, and `read_only: true`.
 `resolve_installations(names, environment, preferences?)` return the versioned
 `installation-v1` contract. The browser Playground exposes the same operations.
 The initial managers are Homebrew on macOS, apt on Debian/Ubuntu, npm, and pip.
+The Playground provides target OS, manager, distribution, architecture, runtime,
+scope and privilege selectors; advanced JSON can supply additional target facts.
 Pass `package_manager`; apt also needs `distribution` (`debian` or `ubuntu`) and
 `has_admin: true`, plus `distribution_release` and `architecture`. Homebrew needs
 `os: macos`; npm/pip need `runtime_version` and `install_scope` (`user` or
@@ -106,8 +108,9 @@ ordered `install` and `invoke` argv steps, invocation/PATH guidance, and source,
 observation, version, and confidence evidence. These are recipes derived from the
 index; the service does not run the command on the target host. Until a recipe has
 target-specific install-and-invoke validation, it remains `unverified`, even when
-candidate steps are shown. Apt records without matching release provenance also
-remain `unverified`. Only direct or
+candidate steps are shown. The bounded set of verified recipes and their target
+conditions are listed in the [validation record](INSTALLATION_VALIDATION.md).
+Other provider/target combinations remain `unverified`. Only direct or
 filesystem command evidence is eligible. Aliases and inferred command names are
 `unverified`; multiple packages are `ambiguous`. `method.documentation` links the
 package manager's installation syntax; `verification` separately reports whether
@@ -115,7 +118,7 @@ the selected package is known to be available and runnable on the target. For ap
 missing release provenance adds a `check_availability` step before install.
 Missing names retain the index
 coverage and absence caveats. Do not treat a first provider as a recommendation.
-The response's `method_validation` field reports disposable npm/pip method probes;
+The response's `method_validation` field reports earlier disposable method probes;
 it does not validate the selected provider. See the
 [validation record](INSTALLATION_VALIDATION.md) for targets, versions, dates, and
 results.

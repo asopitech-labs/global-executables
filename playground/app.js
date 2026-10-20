@@ -193,6 +193,43 @@ async function checkExecutable(name, scope) {
   if (scope && Object.keys(scope).length) result.scope = scope;
   return result;
 }
+function verifiedPublishedRecipe(name, provider, environment, system) {
+  if (!["direct", "filesystem"].includes(provider.confidence) || provider.alias_of || provider.package?.startsWith("-")) return null;
+  if (system === "brew" && name === "hello" && provider.ecosystem === "homebrew" &&
+      provider.package === "hello" && (provider.version || provider.latest_version) === "2.12.3" &&
+      provider.source === "https://formulae.brew.sh/api/formula.json" &&
+      environment.os === "macos" && environment.distribution_release === "15" &&
+      environment.architecture === "arm64") {
+    return {package_spec: "hello", package_version: "2.12.3", target: "macOS 15 arm64"};
+  }
+  if (environment.os !== "linux" || environment.distribution !== "ubuntu" ||
+      environment.distribution_release !== "24.04" || environment.architecture !== "amd64") return null;
+  if (system === "apt" && name === "hello" && provider.ecosystem === "ubuntu" &&
+      provider.package === "hello" && provider.source === "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz" &&
+      provider.version == null && provider.latest_version == null &&
+      environment.has_admin === true) {
+    return {package_spec: "hello", package_version: null,
+      target: "Ubuntu 24.04 amd64; apt repository hello", source_release: "24.04"};
+  }
+  const version = provider.version || provider.latest_version;
+  const scope = environment.install_scope;
+  if (scope !== "project") return null;
+  if (system === "npm" && name === "tsc" && provider.ecosystem === "npm" &&
+      provider.package === "typescript" && provider.source === "https://registry.npmjs.org/typescript/latest" &&
+      version === "7.0.2" &&
+      /^v?24(?:\.|$)/.test(String(environment.runtime_version))) {
+    return {package_spec: "typescript@7.0.2", package_version: "7.0.2",
+      target: `Ubuntu 24.04 amd64; Node.js 24; ${scope} scope`};
+  }
+  if (system === "pip" && name === "black" && provider.ecosystem === "pypi" &&
+      provider.package === "black" && provider.source?.startsWith("https://files.pythonhosted.org/") &&
+      version === "26.10.1" &&
+      /^3\.12(?:\.|$)/.test(String(environment.runtime_version))) {
+    return {package_spec: "black==26.10.1", package_version: "26.10.1",
+      target: `Ubuntu 24.04 amd64; Python 3.12; ${scope} scope`};
+  }
+  return null;
+}
 function resolveInstallationFromCheck(checked, environment, preferences = {}) {
   const result = { contract_version: "installation-v1", name: checked.name, status: "needs_context", environment,
     snapshot: checked.snapshot, coverage_scope: checked.coverage_scope, warnings: checked.warnings,
@@ -219,23 +256,30 @@ function resolveInstallationFromCheck(checked, environment, preferences = {}) {
   candidates = candidates.filter((p) => !preferences.package || p.package === preferences.package);
   result.candidates = candidates;
   if (!candidates.length) { result.status = "unsupported"; return result; }
-  if (new Set(candidates.map((p) => JSON.stringify([p.ecosystem, p.package]))).size > 1) { result.status = "ambiguous"; return result; }
-  const provider = candidates[0]; result.provider = provider;
-  result.applicability = {target: environment, source_distribution_release: provider.distribution_release ?? null,
+  const verifiedCandidates = candidates.filter((p) => verifiedPublishedRecipe(checked.name, p, environment, system));
+  const identities = new Set(candidates.map((p) => JSON.stringify([p.ecosystem, p.package])));
+  if (identities.size > 1 && verifiedCandidates.length !== 1) { result.status = "ambiguous"; return result; }
+  const provider = verifiedCandidates.length === 1 ? verifiedCandidates[0] : candidates[0];
+  if (identities.size > 1) result.selection_reason = "Selected the only provider with a public install-and-invoke verification for this target; other observed providers remain candidates.";
+  result.provider = provider;
+  const verifiedRecipe = verifiedPublishedRecipe(checked.name, provider, environment, system);
+  const sourceRelease = verifiedRecipe?.source_release ?? provider.distribution_release ?? null;
+  result.applicability = {target: environment, source_distribution_release: sourceRelease,
     source_architecture: provider.architecture ?? null, validated_on_target: false};
-  const releaseMatches = system !== "apt" || provider.distribution_release === environment.distribution_release;
+  const releaseMatches = system !== "apt" || sourceRelease === environment.distribution_release;
   if (!["direct", "filesystem"].includes(provider.confidence) || provider.alias_of || provider.package.startsWith("-")) { result.status = "unverified"; return result; }
   const pkg = provider.package;
+  const packageSpec = verifiedRecipe?.package_spec ?? pkg;
   let argv;
   if (system === "apt") {
     if (environment.has_admin !== true) { result.required_context = ["has_admin"]; return result; }
     argv = ["sudo", "apt-get", "install", "--", pkg];
   } else if (system === "brew") argv = ["brew", "install", "--", pkg];
-  else if (system === "npm") argv = environment.install_scope === "project" ? ["npm", "install", "--", pkg] : ["npm", "install", "--global", "--", pkg];
+  else if (system === "npm") argv = environment.install_scope === "project" ? ["npm", "install", "--", packageSpec] : ["npm", "install", "--global", "--", packageSpec];
   else {
     if (environment.install_scope === "project" && !environment.virtualenv_bin) { result.required_context = ["virtualenv_bin"]; return result; }
     const python = environment.install_scope === "project" ? environment.virtualenv_bin.replace(/\/$/, "") + "/python" : "python";
-    argv = environment.install_scope === "project" ? [python, "-m", "pip", "install", "--", pkg] : [python, "-m", "pip", "install", "--user", "--", pkg];
+    argv = environment.install_scope === "project" ? [python, "-m", "pip", "install", "--", packageSpec] : [python, "-m", "pip", "install", "--user", "--", packageSpec];
   }
   const invoke = system === "npm" && environment.install_scope === "project" ? ["npm", "exec", "--", checked.name] : system === "pip" && environment.install_scope === "project" ? [environment.virtualenv_bin.replace(/\/$/, "") + "/" + checked.name] : [checked.name];
   result.status = "unverified";
@@ -247,9 +291,22 @@ function resolveInstallationFromCheck(checked, environment, preferences = {}) {
     "pip:project": {result: "pass", observed_at: "2026-10-19T10:46:00Z", target: "Debian 13 amd64", manager_version: "pip (Python 3.12.14)", runtime_version: "Python 3.12.14", fixture: "local ge-install-probe 1.0.0", invocation: "venv/bin/ge-install-probe"},
   })[`${system}:${environment.install_scope}`] ?? null;
   result.steps = [...(system === "apt" && !releaseMatches ? [{action: "check_availability", argv: ["apt-cache", "show", "--", pkg], platform: environment}] : []), {action: "install", argv, platform: environment}, {action: "invoke", argv: invoke, platform: environment}];
-  result.invocation = {argv: invoke, path_note: "Ensure the selected package manager's executable directory is on PATH; verify the installed command before use."};
+  result.invocation = {argv: invoke, path_note: system === "npm" && environment.install_scope === "project"
+    ? "Run from the project directory where this package was installed."
+    : "Ensure the selected package manager's executable directory is on PATH; verify the installed command before use."};
   result.verification = {confidence: provider.confidence, source: provider.source, observed_at: provider.last_observed_at ?? null,
     version: provider.version, note: "Package-manager syntax is documented; availability and entry-point behavior of this package on the target have not been verified.", source_release_matches_target: releaseMatches};
+  if (verifiedRecipe) {
+    result.status = "ready";
+    result.applicability.validated_on_target = true;
+    result.method.target_package_available = "verified";
+    result.verification.note = "The public package installation and command invocation were verified on the stated target in CI.";
+    result.verification.recipe_validation = {
+      result: "pass", target: verifiedRecipe.target,
+      package_version: verifiedRecipe.package_version, observed_at: "2026-10-20",
+      evidence_url: "https://github.com/asopitech-labs/global-executables/actions/runs/39363743911",
+    };
+  }
   return result;
 }
 async function resolveInstallation(name, environment, preferences = {}) {
@@ -290,6 +347,34 @@ async function assessExecutable(name, scope) {
 
 function input(label, name, value = "", type = "text", placeholder = "") { return `<label>${label}<input name="${name}" type="${type}" value="${value}" placeholder="${placeholder}" /></label>`; }
 function scopeInput() { return `<label>Scope <textarea name="scope" placeholder='{"language":"python"}'></textarea></label><span class="scope-hint">Optional JSON filter, e.g. {"registry":"npm"}</span>`; }
+function installationEnvironmentFields() {
+  return `<div class="form-grid">
+    <label>Target OS <select name="target_os"><option value="">Choose OS</option><option value="linux">Linux</option><option value="macos">macOS</option><option value="windows">Windows</option></select></label>
+    ${input("OS version", "os_version", "", "text", "e.g. macOS 15")}
+    <label>Package manager <select name="package_manager"><option value="">Choose manager</option><option value="apt">apt</option><option value="brew">Homebrew</option><option value="npm">npm</option><option value="pip">pip</option></select></label>
+    <label>Distribution <select name="distribution"><option value="">If applicable</option><option value="debian">Debian</option><option value="ubuntu">Ubuntu</option></select></label>
+    ${input("Distribution release", "distribution_release", "", "text", "e.g. 13 or 24.04")}
+    <label>Architecture <select name="architecture"><option value="">Choose architecture</option><option value="amd64">amd64 / x86_64</option><option value="arm64">arm64 / Apple Silicon</option></select></label>
+    ${input("Runtime version", "runtime_version", "", "text", "e.g. Node.js 24 or Python 3.12")}
+    <label>Install scope <select name="install_scope"><option value="">Choose scope</option><option value="project">Project / virtualenv</option><option value="user">User</option></select></label>
+    <label>Administrator access <select name="has_admin"><option value="">Unknown</option><option value="true">Available</option><option value="false">Unavailable</option></select></label>
+    ${input("Virtualenv bin directory", "virtualenv_bin", "", "text", "for project pip, e.g. /app/.venv/bin")}
+  </div><label>Advanced environment overrides (JSON) <textarea name="environment" placeholder='{"execution_context":"container"}'></textarea></label><span class="scope-hint">Advanced JSON overrides the selected values.</span><label>Preferences (JSON) <textarea name="preferences" placeholder='{"package":"example"}'></textarea></label>`;
+}
+function installationEnvironmentFromForm(form) {
+  const environment = {};
+  for (const [inputName, fieldName] of [["target_os", "os"], ["os_version", "os_version"], ["package_manager", "package_manager"], ["distribution", "distribution"], ["distribution_release", "distribution_release"], ["architecture", "architecture"], ["runtime_version", "runtime_version"], ["install_scope", "install_scope"], ["virtualenv_bin", "virtualenv_bin"]]) {
+    const value = String(form.get(inputName) || "").trim();
+    if (value) environment[fieldName] = value;
+  }
+  const hasAdmin = String(form.get("has_admin") || "");
+  if (hasAdmin) environment.has_admin = hasAdmin === "true";
+  const overrides = JSON.parse(String(form.get("environment") || "{}"));
+  if (!overrides || typeof overrides !== "object" || Array.isArray(overrides)) throw new Error("Environment overrides must be a JSON object.");
+  const target = {...environment, ...overrides};
+  if (target.os === "macos" && target.os_version && !target.distribution_release) target.distribution_release = target.os_version;
+  return target;
+}
 function renderInstallationCard(result) {
   const card = $("installation-card");
   if (!card?.replaceChildren) return;
@@ -305,10 +390,31 @@ function renderInstallationCard(result) {
       ? "The package mapping or target applicability has not been verified. Check these steps on the target before relying on them."
       : item.required_context?.length ? `Needed context: ${item.required_context.join(", ")}` : "Review coverage and provider evidence below.";
     card.append(explanation);
+    const validation = item.verification?.recipe_validation;
+    if (validation) {
+      const detail = document.createElement("span");
+      const target = typeof validation.target === "string" ? validation.target : JSON.stringify(validation.target);
+      detail.textContent = `Install and invoke check: ${validation.result} on ${target} (${validation.observed_at})`;
+      card.append(detail);
+      if (/^https:\/\//.test(validation.evidence_url || "")) {
+        const evidence = document.createElement("a");
+        evidence.href = validation.evidence_url;
+        evidence.textContent = "Verification run";
+        evidence.target = "_blank";
+        evidence.rel = "noopener noreferrer";
+        card.append(evidence);
+      }
+    }
     for (const step of item.steps || []) {
       const line = document.createElement("span");
       line.textContent = `${step.action}: ${step.argv.join(" ")}`;
       card.append(line);
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "copy-button";
+      copy.textContent = `Copy ${step.action} argv`;
+      copy.addEventListener("click", () => navigator.clipboard?.writeText(JSON.stringify(step.argv)));
+      card.append(copy);
     }
     if (item.provider?.repository) {
       const link = document.createElement("a");
@@ -320,6 +426,14 @@ function renderInstallationCard(result) {
         card.append(link);
       }
     }
+    if (/^https:\/\//.test(item.method?.documentation || "")) {
+      const method = document.createElement("a");
+      method.href = item.method.documentation;
+      method.textContent = "Installation method documentation";
+      method.target = "_blank";
+      method.rel = "noopener noreferrer";
+      card.append(method);
+    }
   }
 }
 function renderForm() {
@@ -329,8 +443,8 @@ function renderForm() {
   $("operation-title").textContent = titles[operation];
   if (operation === "get_coverage") { form.innerHTML = `<div class="run-row"><span class="scope-hint">Return snapshot, source coverage, and freshness context.</span><button class="run-button">Run query ↗</button></div>`; return; }
   let fields = "";
-  if (operation === "resolve_installations") fields = `<label>Names <textarea name="names" placeholder="git\nenvcp">git\nenvcp</textarea></label><label>Environment (JSON) <textarea name="environment" placeholder='{"os":"macos","package_manager":"brew"}'></textarea></label><label>Preferences (JSON) <textarea name="preferences" placeholder="{}"></textarea></label>`;
-  else if (operation === "resolve_installation") fields = `${input("Executable name", "name", "git", "text", "e.g. git")}<label>Environment (JSON) <textarea name="environment" placeholder='{"os":"macos","package_manager":"brew"}'></textarea></label><label>Preferences (JSON) <textarea name="preferences" placeholder="{}"></textarea></label>`;
+  if (operation === "resolve_installations") fields = `<label>Names <textarea name="names" placeholder="git\nblack">git\nblack</textarea></label>${installationEnvironmentFields()}`;
+  else if (operation === "resolve_installation") fields = `${input("Executable name", "name", "git", "text", "e.g. git")}${installationEnvironmentFields()}`;
   else if (operation === "check_executables") fields = `<label>Names <textarea name="names" placeholder="envcp\nevpk\nphpunit">envcp\nevpk</textarea></label>${scopeInput()}`;
   else if (operation === "search_executables") fields = `<div class="form-grid">${input("Prefix", "prefix", "do", "text", "two or more characters")}${input("Length", "length", "", "number", "optional")}${input("Ecosystem", "ecosystem", "", "text", "npm, pypi, crates…")}${input("Limit", "limit", "25", "number", "1–500")}</div>${scopeInput()}`;
   else { fields = input("Executable name", "name", operation === "search_similar_executables" ? "kubctl" : "phpunit", "text", "e.g. docker"); if (operation === "search_similar_executables") fields += input("Limit", "limit", "20", "number", "1–100"); else fields += scopeInput(); }
@@ -338,7 +452,7 @@ function renderForm() {
 }
 async function runQuery(event) {
   event.preventDefault(); const form = new FormData(event.target); const op = state.operation; const scope = ["get_coverage", "resolve_installation", "resolve_installations"].includes(op) ? null : await scopeFromInput(String(form.get("scope") || ""));
-  try { let result; if (op === "resolve_installation" || op === "resolve_installations") { const environment = JSON.parse(String(form.get("environment") || "{}")); const preferences = JSON.parse(String(form.get("preferences") || "{}")); if (op === "resolve_installation") result = await resolveInstallation(String(form.get("name") || "").trim(), environment, preferences); else { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => resolveInstallation(name, environment, preferences))), snapshot: state.metadata.snapshot, contract_version: "installation-v1", warnings: coverageWarnings(state.metadata) }; } } else if (op === "get_coverage") result = { ...state.metadata, negative_lookup: coverageScope(state.metadata), warnings: coverageWarnings(state.metadata), freshness: state.status?.freshness || { status: "unavailable" } }; else if (op === "check_executable" || op === "get_executable" || op === "assess_executable") { const name = String(form.get("name") || "").trim(); if (op === "check_executable") result = await checkExecutable(name, scope); else if (op === "assess_executable") result = await assessExecutable(name, scope); else result = { record: await getExecutable(name), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; } else if (op === "check_executables") { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => checkExecutable(name, scope))), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), warnings: coverageWarnings(state.metadata) }; } else if (op === "search_executables") result = { executables: await searchExecutables({ prefix: String(form.get("prefix") || "").trim(), length: String(form.get("length") || "").trim(), ecosystem: String(form.get("ecosystem") || "").trim(), limit: form.get("limit"), scope }), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; else result = { matches: await similar(String(form.get("name") || "").trim(), form.get("limit")), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope };
+  try { let result; if (op === "resolve_installation" || op === "resolve_installations") { const environment = installationEnvironmentFromForm(form); const preferences = JSON.parse(String(form.get("preferences") || "{}")); if (op === "resolve_installation") result = await resolveInstallation(String(form.get("name") || "").trim(), environment, preferences); else { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => resolveInstallation(name, environment, preferences))), snapshot: state.metadata.snapshot, contract_version: "installation-v1", warnings: coverageWarnings(state.metadata) }; } } else if (op === "get_coverage") result = { ...state.metadata, negative_lookup: coverageScope(state.metadata), warnings: coverageWarnings(state.metadata), freshness: state.status?.freshness || { status: "unavailable" } }; else if (op === "check_executable" || op === "get_executable" || op === "assess_executable") { const name = String(form.get("name") || "").trim(); if (op === "check_executable") result = await checkExecutable(name, scope); else if (op === "assess_executable") result = await assessExecutable(name, scope); else result = { record: await getExecutable(name), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; } else if (op === "check_executables") { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => checkExecutable(name, scope))), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), warnings: coverageWarnings(state.metadata) }; } else if (op === "search_executables") result = { executables: await searchExecutables({ prefix: String(form.get("prefix") || "").trim(), length: String(form.get("length") || "").trim(), ecosystem: String(form.get("ecosystem") || "").trim(), limit: form.get("limit"), scope }), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; else result = { matches: await similar(String(form.get("name") || "").trim(), form.get("limit")), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope };
     state.result = result; renderInstallationCard(result); $("result").textContent = JSON.stringify(result, null, 2);
   } catch (error) { const result = { error: error.message }; state.result = result; renderInstallationCard(result); $("result").textContent = JSON.stringify(result, null, 2); }
 }
