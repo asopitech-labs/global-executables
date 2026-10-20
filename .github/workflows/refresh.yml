@@ -1,0 +1,31 @@
+name: Refresh generated dataset
+on:
+  schedule:
+    - cron: "31 3 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -e '.[test]'
+      - name: Rebuild from normalized collector outputs
+        run: python tools/refresh.py fixtures/intermediate/*.jsonl --snapshot 2026-08-14 --coverage-kind partial
+      - run: pytest -q
+      - run: git diff --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: refresh-report
+          path: reports/refresh.json
+      - name: Publish idempotent generated state
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data reports/refresh.json
+          git diff --cached --quiet || git commit -m "Refresh generated dataset"
+          git push origin HEAD:generated-data
