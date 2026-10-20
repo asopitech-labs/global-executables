@@ -143,25 +143,25 @@ def create_server(
 
     @_tool(mcp, "Check one executable name")
     def check_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
-        """Check one proposed command name for an indexed executable collision.
+        """Check one exact command name for a collision in the indexed snapshot.
 
-        Use this exact, case-sensitive lookup for one candidate; use check_executables for several.
-        Do not use it for fuzzy discovery; use search_similar_executables for confusingly close names.
-        The tool only reads the published dataset and never runs or installs software. A collision
-        returns found=true with providers. A miss is clear only when coverage_scope is exhaustive;
-        otherwise status=unknown, so inspect coverage and warnings before adopting the name.
+        Use this for one candidate; use check_executables for several, and do not use it for fuzzy
+        discovery—use search_similar_executables. name is case-sensitive and is not normalized;
+        scope filters providers with AND semantics before the collision decision, so a scoped miss is
+        non-exhaustive. The tool makes no live registry call and never runs or installs software; a
+        hit returns providers, while a miss is clear only when coverage_scope is exhaustive.
         """
         return dataset.check(name, scope)
 
     @_tool(mcp, "Check executable names in batch")
     def check_executables(names: ExecutableNames, scope: ProviderScope = None) -> dict[str, Any]:
-        """Check several proposed command names for indexed collisions in one request.
+        """Check several exact command names for collisions in one indexed snapshot.
 
-        Use this tool when comparing or validating multiple names; use check_executable for one.
-        Do not use it to rank similar spellings; use search_similar_executables for that task.
-        Results preserve input order and include the shared snapshot, coverage scope, and warnings.
-        The lookup is read-only and never runs software. Treat each miss as unknown unless the
-        returned coverage_scope is exhaustive, especially when a provider scope is supplied.
+        Use this for multiple candidates; use check_executable for one, and do not use it to rank
+        similar spellings—use search_similar_executables. One scope filters every name with AND
+        semantics; each name is evaluated independently and results, including duplicates, preserve
+        input order. The tool makes no live registry call and never runs software; treat misses as
+        unknown unless coverage_scope is exhaustive, which a supplied scope never is.
         """
         metadata = dataset.metadata
         return {"results": [dataset.check(name, scope) for name in names], "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "warnings": coverage_warnings(metadata)}
@@ -169,27 +169,27 @@ def create_server(
     @_tool(mcp, "Resolve installation for one executable")
     def resolve_installation(name: ExecutableName, environment: TargetEnvironment,
                              preferences: InstallPreferences = None) -> dict[str, Any]:
-        """Resolve advisory install and invocation steps for one indexed command provider.
+        """Resolve advisory install and invocation argv for one indexed command provider.
 
-        Use this after a check or lookup when the target environment is known; use
-        resolve_installations for several commands. The tool never executes the returned argv.
-        Do not use it to decide whether a name is available; use check_executable for that decision.
-        status explains whether a recipe is ready, ambiguous, unsupported, unverified, missing from
-        the index, or needs more context; required_context names missing environment fields. Review
-        candidates, verification, applicability, coverage, and warnings before running any step.
+        Use this after lookup for one known target; use resolve_installations for several commands,
+        and do not use it for name availability—use check_executable. environment maps its package
+        manager to a provider ecosystem before preferences.package narrows candidates; omitted target
+        facts are returned in required_context rather than guessed. The tool never executes argv or
+        probes package availability; status and verification distinguish ready, ambiguous,
+        unsupported, unverified, missing-index, and incomplete-context outcomes.
         """
         return _resolve_installation(dataset, name, environment, preferences)
 
     @_tool(mcp, "Resolve installations in batch")
     def resolve_installations(names: ExecutableNames, environment: TargetEnvironment,
                               preferences: InstallPreferences = None) -> dict[str, Any]:
-        """Resolve advisory install and invocation steps for several commands on one target.
+        """Resolve advisory install and invocation argv for several commands on one target.
 
-        Use this batch form when every command shares the same environment and preferences; use
-        resolve_installation for one command. Do not use it for name availability; use
-        check_executables instead. Results preserve input order. The tool never executes
-        its argv. Inspect each result's status, required_context, candidates, verification, and
-        warnings because indexed presence does not guarantee installability on the target.
+        Use this when all commands share an environment and preferences; use resolve_installation
+        for one, and do not use it for availability—use check_executables. The shared environment
+        selects an ecosystem before preferences.package narrows each command independently; results,
+        including duplicates, preserve input order. The tool never executes argv or probes package
+        availability, and each result reports its own status, required_context, and verification.
         """
         return {"results": [_resolve_installation(dataset, name, environment, preferences) for name in names],
                 "snapshot": dataset.metadata["snapshot"], "contract_version": "installation-v1",
@@ -197,13 +197,13 @@ def create_server(
 
     @_tool(mcp, "Get an executable record")
     def get_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
-        """Return the canonical provider record for one exact command name, if indexed.
+        """Return the canonical provider record for one exact indexed command name.
 
-        Use this to inspect package, ecosystem, source, version, and provenance after finding a name;
-        use check_executable when deciding whether a proposed name collides. record is null when no
-        matching provider remains after scope filtering. Do not use a null record as an availability
-        decision; check_executable supplies the required coverage and warning details. A null record
-        is not proof of global absence; interpret it with coverage_scope and the snapshot context.
+        Use this to inspect package, ecosystem, source, version, and provenance; use check_executable
+        for collision decisions, and do not treat a null record as availability. name is not
+        normalized; scope applies AND filters to providers before deciding whether record is null, so
+        a known command can disappear when no provider matches. The tool reads one fixed snapshot and
+        performs no live lookup; interpret null with coverage_scope.
         """
         metadata = dataset.metadata
         return {"record": dataset.get(name, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
@@ -212,13 +212,14 @@ def create_server(
     def search_executables(prefix: SearchPrefix = "", length: SearchLength = None,
                            ecosystem: SearchEcosystem = None, limit: ResultLimit = 100,
                            scope: ProviderScope = None) -> dict[str, Any]:
-        """Discover indexed command names using prefix, length, ecosystem, and provider filters.
+        """Discover indexed command names matching prefix, length, ecosystem, and provider filters.
 
-        Use this for name exploration or filtered listings; use check_executable for an exact
-        collision decision and search_similar_executables for typo/confusion candidates. Filters are
-        combined, results are deterministically sorted and capped by limit, and the tool is read-only.
-        Do not use search results to infer exact-name availability.
-        An empty result describes only the indexed snapshot and is not proof that no command exists.
+        Use this for exploration; use check_executable for exact collisions and
+        search_similar_executables for confusable names. All active filters intersect; ecosystem and
+        scope.ecosystem must both match, so conflicting values return none, and limit applies only
+        after deterministic case-insensitive sorting with case-sensitive tie-breaking. Do not use an
+        empty result to infer availability: the tool makes no live registry call and fails instead of
+        returning partial data when a required derived index is missing or corrupt.
         """
         metadata = dataset.metadata
         return {"executables": dataset.search(prefix, length, ecosystem, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
@@ -226,26 +227,26 @@ def create_server(
     @_tool(mcp, "Find similar executable names")
     def search_similar_executables(name: ExecutableName, limit: ResultLimit = 20,
                                    scope: ProviderScope = None) -> dict[str, Any]:
-        """Find indexed command names that may be confused with a proposed name.
+        """Find indexed command names that may be confused with one proposed name.
 
-        Use this after an exact check to review typo and visual-similarity risk; it does not determine
-        whether the exact name exists. Candidates come from trigram overlap and are ranked by edit
-        distance, trigram similarity, and name, then capped by limit. matches report both metrics.
-        Do not use it as an exact collision check; use check_executable for that decision.
-        An empty match list is limited to the indexed snapshot and optional provider scope.
+        Use this after an exact check for typo risk; use check_executable for exact existence, and do
+        not substitute this fuzzy result. name seeds case-folded trigram candidates, scope filters
+        them before scoring, and limit applies after ranking by edit distance, trigram similarity,
+        then name. The tool makes no live registry call; an empty match list covers only the fixed
+        snapshot and optional scope, not global absence.
         """
         metadata = dataset.metadata
         return {"matches": dataset.similar(name, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
 
     @_tool(mcp, "Get dataset coverage")
     def get_coverage() -> dict[str, Any]:
-        """Explain the dataset snapshot, source coverage, freshness, and negative-result limits.
+        """Explain snapshot provenance, source coverage, freshness, and negative-result limits.
 
-        Call this before treating any missing command as available, or when check/search warnings need
-        interpretation. negative_lookup is exhaustive only when every declared source is complete;
-        otherwise absence remains unknown. freshness may be unavailable because it is a separate
-        partial scan. Do not use it to look up a command; use check_executable or check_executables.
-        This read-only metadata tool takes no parameters.
+        Call this with no parameters before interpreting a miss; use check_executable to look up a
+        command, and do not use coverage metadata as an existence result. negative_lookup becomes
+        exhaustive only when every declared source succeeded with exhaustive, unrestricted coverage;
+        otherwise absence remains unknown. The tool reads fixed metadata without probing registries,
+        and freshness may be unavailable because its partial scan is stored separately.
         """
         return {**dataset.metadata, "negative_lookup": _scope(dataset.metadata), "freshness": dataset.freshness,
                 "warnings": coverage_warnings(dataset.metadata)}
@@ -254,11 +255,11 @@ def create_server(
     def assess_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
         """Assess freshness, activity, popularity, and collision risk for one command name.
 
-        Use this after checking existence when release age or observed usage affects a naming decision;
-        use assess_executables for several names. The assessment derives from indexed provider facts
-        and never probes live registries. unknown or insufficient_evidence means the snapshot lacks
-        enough signals, not that the name is safe. Do not use the assessment as an existence check;
-        use check_executable for that. Existence and coverage remain separate fields.
+        Use this after an existence check; use assess_executables for several names, and do not use it
+        instead of check_executable. scope filters providers before signals are aggregated; release
+        age is measured against request time with a 365-day threshold, while usage counts can still
+        establish activity. The tool makes no live registry call; unknown or insufficient_evidence
+        means missing snapshot evidence, not that the name is safe.
         """
         return assess(dataset, name, scope)
 
@@ -266,11 +267,11 @@ def create_server(
     def assess_executables(names: ExecutableNames, scope: ProviderScope = None) -> dict[str, Any]:
         """Assess freshness, activity, popularity, and collision risk for several command names.
 
-        Use this batch form to compare candidates; use assess_executable for one. Results preserve
-        input order and derive only from indexed provider facts, without live registry probes. Treat
-        unknown or insufficient_evidence as missing evidence rather than safety, and use the returned
-        coverage_scope plus each result's existence fields when making a naming decision. Do not use
-        it as a batch existence check; use check_executables for that cheaper, simpler task.
+        Use this to compare candidates; use assess_executable for one, and do not use it instead of
+        check_executables. One scope filters every name before per-name signal aggregation; release
+        age uses request time and results, including duplicates, preserve input order. The tool makes
+        no live registry call; unknown or insufficient_evidence means missing snapshot evidence, not
+        safety, so retain each result's existence and coverage context.
         """
         return {"results": [assess(dataset, name, scope) for name in names],
                 "snapshot": dataset.metadata["snapshot"], "coverage_scope": _scope(dataset.metadata, scope)}

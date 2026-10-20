@@ -1,5 +1,6 @@
 import asyncio
 import json
+import re
 import socket
 import subprocess
 import sys
@@ -130,7 +131,7 @@ async def test_server_exposes_no_write_contract_directly(dictionary_root):
     for tool in tools:
         assert tool.description and len(tool.description) >= 200
         assert "Use this" in tool.description or "Call this" in tool.description
-        assert "Do not use" in tool.description
+        assert re.search(r"do\s+not\s+", tool.description, re.IGNORECASE)
         for parameter, schema in tool.inputSchema.get("properties", {}).items():
             assert schema.get("description"), f"{tool.name}.{parameter} lacks a description"
 
