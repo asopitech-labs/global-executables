@@ -1,0 +1,67 @@
+{
+  "command": "stress",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "stress",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.apache.org/thrift.git",
+      "version": "v0.0.0-20180807212849-6e67faa92827",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.apache.org/thrift.git/@v/v0.0.0-20180807212849-6e67faa92827.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180807212849-6e67faa92827"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.apache.org/thrift.git",
+      "version": "v0.0.0-20180902110319-2566ecd5d999",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.apache.org/thrift.git/@v/v0.0.0-20180902110319-2566ecd5d999.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180902110319-2566ecd5d999"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "stress",
+      "version": "1.0.7",
+      "repository": "https://github.com/resurrecting-open-source-projects/stress",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "stress",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-08-15"
+}

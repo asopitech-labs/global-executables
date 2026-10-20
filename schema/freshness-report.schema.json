@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://global-executables.dev/schema/freshness-report.schema.json",
+  "title": "Incremental freshness report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "run_id", "checked_at", "duration_seconds", "coverage_kind", "status", "scheduler", "budget", "partitions", "partition_staleness", "summary", "quality_gate"],
+  "properties": {
+    "version": {"const": 1},
+    "run_id": {"type": "string", "format": "date-time"},
+    "checked_at": {"type": "string", "format": "date-time"},
+    "duration_seconds": {"type": "number", "minimum": 0},
+    "coverage_kind": {"const": "partial"},
+    "status": {"enum": ["success", "failed"]},
+    "scheduler": {"type": "object"},
+    "budget": {"type": "object"},
+    "attempted_partitions": {"type": "array", "items": {"type": "string"}},
+    "succeeded_partitions": {"type": "array", "items": {"type": "string"}},
+    "failed_partitions": {"type": "array", "items": {"type": "string"}},
+    "skipped_partitions": {"type": "array", "items": {"type": "string"}},
+    "partitions": {"type": "array"},
+    "partition_staleness": {"type": "object", "additionalProperties": {"type": ["integer", "null"], "minimum": 0}},
+    "summary": {"type": "object"},
+    "quality_gate": {"type": "object"}
+  }
+}
