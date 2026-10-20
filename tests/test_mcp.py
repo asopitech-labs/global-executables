@@ -123,8 +123,16 @@ async def test_streamable_http_protocol_and_health(dictionary_root):
 
 async def test_server_exposes_no_write_contract_directly(dictionary_root):
     server = create_server(ROOT, dataset_root=dictionary_root)
-    names = {tool.name for tool in await server.list_tools()}
+    tools = await server.list_tools()
+    names = {tool.name for tool in tools}
     assert names == EXPECTED_TOOLS
+
+    for tool in tools:
+        assert tool.description and len(tool.description) >= 200
+        assert "Use this" in tool.description or "Call this" in tool.description
+        assert "Do not use" in tool.description
+        for parameter, schema in tool.inputSchema.get("properties", {}).items():
+            assert schema.get("description"), f"{tool.name}.{parameter} lacks a description"
 
 
 async def test_server_fails_closed_for_missing_dataset(tmp_path):

@@ -5,11 +5,12 @@ import argparse
 import json
 import os
 from pathlib import Path
-from typing import Any
+from typing import Annotated, Any
 
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 from mcp.types import ToolAnnotations
+from pydantic import Field
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
@@ -71,6 +72,42 @@ def schema_text(root: Path, name: str) -> str:
 
 READ_ONLY = dict(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
 
+ExecutableName = Annotated[str, Field(description=(
+    "Exact, case-sensitive executable command name, not a package name or filesystem path; "
+    "must be 1-255 characters without path separators or control characters."
+))]
+ExecutableNames = Annotated[list[str], Field(description=(
+    "Executable command names to process in one request. Each value follows the same exact, "
+    "case-sensitive rules as name, and results preserve input order."
+))]
+ProviderScope = Annotated[dict[str, str] | None, Field(description=(
+    "Optional provider filters: source_type, package_system, distribution_family, distribution, "
+    "distribution_release, language, registry, or ecosystem. All supplied key-value pairs must "
+    "match; scoped negative results remain non-exhaustive."
+))]
+TargetEnvironment = Annotated[dict[str, Any], Field(description=(
+    "Target installation context. Set package_manager to apt, brew, npm, or pip. Depending on the "
+    "manager, also provide os, distribution, distribution_release, architecture, runtime_version, "
+    "install_scope (user or project), virtualenv_bin, and has_admin as requested by the result."
+))]
+InstallPreferences = Annotated[dict[str, Any] | None, Field(description=(
+    "Optional provider-selection preferences. Use package to select an exact package when more "
+    "than one indexed provider exposes the command."
+))]
+SearchPrefix = Annotated[str, Field(description=(
+    "Case-sensitive command-name prefix. Leave empty to search all indexed names subject to the "
+    "other filters and limit."
+))]
+SearchLength = Annotated[int | None, Field(description=(
+    "Optional exact character length of the executable name."
+))]
+SearchEcosystem = Annotated[str | None, Field(description=(
+    "Optional exact provider ecosystem identifier, for example npm, pypi, homebrew, debian, or ubuntu."
+))]
+ResultLimit = Annotated[int, Field(description=(
+    "Maximum number of sorted results to return."
+))]
+
 
 def _tool(mcp: FastMCP, title: str):
     return mcp.tool(title=title, annotations=ToolAnnotations(title=title, **READ_ONLY))
@@ -105,60 +142,136 @@ def create_server(
     mcp._mcp_server.version = __version__
 
     @_tool(mcp, "Check one executable name")
-    def check_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
-        """Check one exact, case-sensitive executable name."""
+    def check_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
+        """Check one proposed command name for an indexed executable collision.
+
+        Use this exact, case-sensitive lookup for one candidate; use check_executables for several.
+        Do not use it for fuzzy discovery; use search_similar_executables for confusingly close names.
+        The tool only reads the published dataset and never runs or installs software. A collision
+        returns found=true with providers. A miss is clear only when coverage_scope is exhaustive;
+        otherwise status=unknown, so inspect coverage and warnings before adopting the name.
+        """
         return dataset.check(name, scope)
 
     @_tool(mcp, "Check executable names in batch")
-    def check_executables(names: list[str], scope: dict[str, str] | None = None) -> dict[str, Any]:
-        """Batch-check naming candidates; this is the preferred agent path."""
+    def check_executables(names: ExecutableNames, scope: ProviderScope = None) -> dict[str, Any]:
+        """Check several proposed command names for indexed collisions in one request.
+
+        Use this tool when comparing or validating multiple names; use check_executable for one.
+        Do not use it to rank similar spellings; use search_similar_executables for that task.
+        Results preserve input order and include the shared snapshot, coverage scope, and warnings.
+        The lookup is read-only and never runs software. Treat each miss as unknown unless the
+        returned coverage_scope is exhaustive, especially when a provider scope is supplied.
+        """
         metadata = dataset.metadata
         return {"results": [dataset.check(name, scope) for name in names], "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "warnings": coverage_warnings(metadata)}
 
     @_tool(mcp, "Resolve installation for one executable")
-    def resolve_installation(name: str, environment: dict[str, Any], preferences: dict[str, Any] | None = None) -> dict[str, Any]:
-        """Give conservative, environment-specific install and invoke steps."""
+    def resolve_installation(name: ExecutableName, environment: TargetEnvironment,
+                             preferences: InstallPreferences = None) -> dict[str, Any]:
+        """Resolve advisory install and invocation steps for one indexed command provider.
+
+        Use this after a check or lookup when the target environment is known; use
+        resolve_installations for several commands. The tool never executes the returned argv.
+        Do not use it to decide whether a name is available; use check_executable for that decision.
+        status explains whether a recipe is ready, ambiguous, unsupported, unverified, missing from
+        the index, or needs more context; required_context names missing environment fields. Review
+        candidates, verification, applicability, coverage, and warnings before running any step.
+        """
         return _resolve_installation(dataset, name, environment, preferences)
 
     @_tool(mcp, "Resolve installations in batch")
-    def resolve_installations(names: list[str], environment: dict[str, Any], preferences: dict[str, Any] | None = None) -> dict[str, Any]:
-        """Resolve several commands against the same target environment."""
+    def resolve_installations(names: ExecutableNames, environment: TargetEnvironment,
+                              preferences: InstallPreferences = None) -> dict[str, Any]:
+        """Resolve advisory install and invocation steps for several commands on one target.
+
+        Use this batch form when every command shares the same environment and preferences; use
+        resolve_installation for one command. Do not use it for name availability; use
+        check_executables instead. Results preserve input order. The tool never executes
+        its argv. Inspect each result's status, required_context, candidates, verification, and
+        warnings because indexed presence does not guarantee installability on the target.
+        """
         return {"results": [_resolve_installation(dataset, name, environment, preferences) for name in names],
                 "snapshot": dataset.metadata["snapshot"], "contract_version": "installation-v1",
                 "warnings": coverage_warnings(dataset.metadata)}
 
     @_tool(mcp, "Get an executable record")
-    def get_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
-        """Return one canonical record, with snapshot context, if it exists."""
+    def get_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
+        """Return the canonical provider record for one exact command name, if indexed.
+
+        Use this to inspect package, ecosystem, source, version, and provenance after finding a name;
+        use check_executable when deciding whether a proposed name collides. record is null when no
+        matching provider remains after scope filtering. Do not use a null record as an availability
+        decision; check_executable supplies the required coverage and warning details. A null record
+        is not proof of global absence; interpret it with coverage_scope and the snapshot context.
+        """
         metadata = dataset.metadata
         return {"record": dataset.get(name, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
 
     @_tool(mcp, "Search executable names")
-    def search_executables(prefix: str = "", length: int | None = None, ecosystem: str | None = None, limit: int = 100, scope: dict[str, str] | None = None) -> dict[str, Any]:
-        """Search derived indexes by prefix, length, and/or ecosystem."""
+    def search_executables(prefix: SearchPrefix = "", length: SearchLength = None,
+                           ecosystem: SearchEcosystem = None, limit: ResultLimit = 100,
+                           scope: ProviderScope = None) -> dict[str, Any]:
+        """Discover indexed command names using prefix, length, ecosystem, and provider filters.
+
+        Use this for name exploration or filtered listings; use check_executable for an exact
+        collision decision and search_similar_executables for typo/confusion candidates. Filters are
+        combined, results are deterministically sorted and capped by limit, and the tool is read-only.
+        Do not use search results to infer exact-name availability.
+        An empty result describes only the indexed snapshot and is not proof that no command exists.
+        """
         metadata = dataset.metadata
         return {"executables": dataset.search(prefix, length, ecosystem, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
 
     @_tool(mcp, "Find similar executable names")
-    def search_similar_executables(name: str, limit: int = 20, scope: dict[str, str] | None = None) -> dict[str, Any]:
-        """Find typo/confusion candidates using trigram postings and edit distance."""
+    def search_similar_executables(name: ExecutableName, limit: ResultLimit = 20,
+                                   scope: ProviderScope = None) -> dict[str, Any]:
+        """Find indexed command names that may be confused with a proposed name.
+
+        Use this after an exact check to review typo and visual-similarity risk; it does not determine
+        whether the exact name exists. Candidates come from trigram overlap and are ranked by edit
+        distance, trigram similarity, and name, then capped by limit. matches report both metrics.
+        Do not use it as an exact collision check; use check_executable for that decision.
+        An empty match list is limited to the indexed snapshot and optional provider scope.
+        """
         metadata = dataset.metadata
         return {"matches": dataset.similar(name, limit, scope), "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "scope": scope}
 
     @_tool(mcp, "Get dataset coverage")
     def get_coverage() -> dict[str, Any]:
-        """Return snapshot provenance and negative-query completeness."""
+        """Explain the dataset snapshot, source coverage, freshness, and negative-result limits.
+
+        Call this before treating any missing command as available, or when check/search warnings need
+        interpretation. negative_lookup is exhaustive only when every declared source is complete;
+        otherwise absence remains unknown. freshness may be unavailable because it is a separate
+        partial scan. Do not use it to look up a command; use check_executable or check_executables.
+        This read-only metadata tool takes no parameters.
+        """
         return {**dataset.metadata, "negative_lookup": _scope(dataset.metadata), "freshness": dataset.freshness,
                 "warnings": coverage_warnings(dataset.metadata)}
 
     @_tool(mcp, "Assess one executable name")
-    def assess_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
-        """Assess factual freshness/activity signals separately from existence."""
+    def assess_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
+        """Assess freshness, activity, popularity, and collision risk for one command name.
+
+        Use this after checking existence when release age or observed usage affects a naming decision;
+        use assess_executables for several names. The assessment derives from indexed provider facts
+        and never probes live registries. unknown or insufficient_evidence means the snapshot lacks
+        enough signals, not that the name is safe. Do not use the assessment as an existence check;
+        use check_executable for that. Existence and coverage remain separate fields.
+        """
         return assess(dataset, name, scope)
 
     @_tool(mcp, "Assess executable names in batch")
-    def assess_executables(names: list[str], scope: dict[str, str] | None = None) -> dict[str, Any]:
-        """Batch-assess candidate names while preserving the simple check contract."""
+    def assess_executables(names: ExecutableNames, scope: ProviderScope = None) -> dict[str, Any]:
+        """Assess freshness, activity, popularity, and collision risk for several command names.
+
+        Use this batch form to compare candidates; use assess_executable for one. Results preserve
+        input order and derive only from indexed provider facts, without live registry probes. Treat
+        unknown or insufficient_evidence as missing evidence rather than safety, and use the returned
+        coverage_scope plus each result's existence fields when making a naming decision. Do not use
+        it as a batch existence check; use check_executables for that cheaper, simpler task.
+        """
         return {"results": [assess(dataset, name, scope) for name in names],
                 "snapshot": dataset.metadata["snapshot"], "coverage_scope": _scope(dataset.metadata, scope)}
 
