@@ -89,6 +89,8 @@
           <div class="operation-list" role="tablist" aria-label="API operations">
             <button class="operation active" data-operation="check_executable" role="tab"><span>⌕</span><span><b>check_executable</b><small>Exact collision check</small></span></button>
             <button class="operation" data-operation="check_executables" role="tab"><span>≋</span><span><b>check_executables</b><small>Batch candidate check</small></span></button>
+            <button class="operation" data-operation="resolve_installation" role="tab"><span>↓</span><span><b>resolve_installation</b><small>Install and invoke guidance</small></span></button>
+            <button class="operation" data-operation="resolve_installations" role="tab"><span>⇣</span><span><b>resolve_installations</b><small>Batch install guidance</small></span></button>
             <button class="operation" data-operation="get_executable" role="tab"><span>◈</span><span><b>get_executable</b><small>Read providers</small></span></button>
             <button class="operation" data-operation="search_executables" role="tab"><span>⌕</span><span><b>search_executables</b><small>Prefix / scope search</small></span></button>
             <button class="operation" data-operation="search_similar_executables" role="tab"><span>≈</span><span><b>search_similar_executables</b><small>Find close names</small></span></button>
@@ -100,6 +102,7 @@
         <section class="panel query-panel">
           <div class="query-header"><div><div class="section-kicker">LIVE REQUEST</div><h2 id="operation-title">check_executable</h2></div><span class="method-pill">STATIC JSON</span></div>
           <form id="query-form"></form>
+          <div id="installation-card" class="installation-card" hidden></div>
           <div class="result-heading"><span>Response</span><button class="copy-button" id="copy-result" type="button">Copy JSON</button></div>
           <pre class="result" id="result" aria-live="polite">Select an operation and run a query.</pre>
         </section>

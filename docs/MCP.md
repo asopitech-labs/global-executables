@@ -88,6 +88,34 @@ the service version, dataset snapshot, coverage scope, and `read_only: true`.
 
 ## Naming-agent workflow
 
+### Environment-specific installation guidance
+
+`resolve_installation(name, environment, preferences?)` and
+`resolve_installations(names, environment, preferences?)` return the versioned
+`installation-v1` contract. The browser Playground exposes the same operations.
+The initial managers are Homebrew on macOS, apt on Debian/Ubuntu, npm, and pip.
+Pass `package_manager`; apt also needs `distribution` (`debian` or `ubuntu`) and
+`has_admin: true`, plus `distribution_release` and `architecture`. Homebrew needs
+`os: macos`; npm/pip need `runtime_version` and `install_scope` (`user` or
+`project`). Project pip requires `virtualenv_bin`, the path to that environment's bin directory. An optional
+`preferences.package` selects a particular package when several supply the name.
+
+The result reports `ready`, `needs_context`, `ambiguous`, `unsupported`,
+`unverified`, or `not_found_in_index`. A `ready` result contains the exact provider,
+ordered `install` and `invoke` argv steps, invocation/PATH guidance, and source,
+observation, version, and confidence evidence. These are recipes derived from the
+index; the service does not run the command on the target host. Until a recipe has
+target-specific install-and-invoke validation, it remains `unverified`, even when
+candidate steps are shown. Apt records without matching release provenance also
+remain `unverified`. Only direct or
+filesystem command evidence is eligible. Aliases and inferred command names are
+`unverified`; multiple packages are `ambiguous`. Missing names retain the index
+coverage and absence caveats. Do not treat a first provider as a recommendation.
+The response's `method_validation` field reports disposable npm/pip method probes;
+it does not validate the selected provider. See the
+[validation record](INSTALLATION_VALIDATION.md) for targets, versions, dates, and
+results.
+
 The agent should keep rejected names internal:
 
 1. Generate candidate names internally.

@@ -107,6 +107,9 @@ input:focus, textarea:focus, select:focus { border-color: rgba(200,255,99,.6); b
 .scope-hint { color: var(--dim); font-size: .66rem; }
 .run-button { padding: 10px 15px; color: var(--canvas); background: var(--lime); border: 0; border-radius: 8px; font-size: .75rem; font-weight: 800; }
 .result-heading { align-items: center; margin-bottom: 8px; color: var(--muted); font-size: .69rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.installation-card { margin-bottom: 18px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: rgba(112,225,206,.045); color: var(--ink); font-size: .78rem; line-height: 1.6; }
+.installation-card strong, .installation-card span { display: block; }
+.installation-card a { color: var(--cyan); text-decoration: underline; }
 .copy-button { padding: 5px 8px; color: var(--dim); background: transparent; border: 1px solid var(--line); border-radius: 6px; font-size: .63rem; text-transform: none; letter-spacing: 0; }
 .result { min-height: 265px; max-height: 550px; margin: 0; padding: 16px; overflow: auto; color: #c9d8cd; background: #07100e; border: 1px solid rgba(157,184,166,.1); border-radius: 9px; font: .72rem/1.65 "SFMono-Regular", Consolas, monospace; white-space: pre-wrap; word-break: break-word; }
 .footer { display: flex; justify-content: space-between; gap: 20px; padding: 28px 0 45px; color: var(--dim); font-size: .68rem; }
