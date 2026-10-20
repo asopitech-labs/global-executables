@@ -21,15 +21,18 @@ evidence and adds an availability-check step when that evidence is missing.
 
 ## Published package checks
 
-[Verify installation methods run 39361901443](https://github.com/asopitech-labs/global-executables/actions/runs/39361901443)
-installed and invoked public packages on hosted targets. The Linux job ran on
-Ubuntu 24.04; the Homebrew job ran on macOS 15. Both jobs passed.
+[Verify installation methods run 39362250172](https://github.com/asopitech-labs/global-executables/actions/runs/39362250172)
+installed and invoked public packages on hosted targets. The jobs ran on
+Ubuntu 24.04, Debian 13, and macOS 15; all three passed.
 
 | Method | Published package and target | Install and invoke result |
 | --- | --- | --- |
 | apt | `hello` on Ubuntu 24.04 | `apt-get install --reinstall --no-install-recommends hello` succeeded, `dpkg-query` reported `install ok installed`, and `hello` printed `Hello, world!`. |
+| apt | `hello` on Debian 13 | A fresh Debian container ran `apt-get install --no-install-recommends hello`; `dpkg-query` reported `install ok installed` and `hello` printed `Hello, world!`. |
 | npm project | `cowsay@1.6.0` on Ubuntu 24.04 with Node.js 24 | `npm install --prefix <project> -- cowsay@1.6.0` succeeded, and `npm exec -- cowsay INSTALL_OK` printed `INSTALL_OK`. Registry metadata declares `cowsay` as a binary entry point. |
+| npm user | `cowsay@1.6.0` on Ubuntu 24.04 with Node.js 24 | `npm install --global -- cowsay@1.6.0` succeeded with `NPM_CONFIG_PREFIX` set to a disposable user directory, and the installed binary printed `INSTALL_OK`. |
 | pip project | `black==25.9.0` on Ubuntu 24.04 with Python 3.12 | A venv's Python installed the published wheel and its `black --version` command succeeded. |
+| pip user | `black==25.9.0` on Ubuntu 24.04 with Python 3.12 | `python -m pip install --user black==25.9.0` succeeded with `PYTHONUSERBASE` set to a disposable user directory, and its `black --version` command succeeded. |
 | Homebrew | `hello` formula on macOS 15 | `brew install hello` (or `brew reinstall hello` if already present) succeeded and the formula's `hello` binary printed `Hello, world!`. |
 
 These public-package checks prove that the supported package-manager commands can install and
