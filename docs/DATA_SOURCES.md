@@ -11,6 +11,18 @@ a primary document is marked **unverified**.
 `tests/test_data_sources_doc.py` fails when a host that appears in a collector,
 crawler, tool, workflow, Dockerfile or the playground is missing from this page.
 
+## Installation-method references
+
+The installation resolver links package-manager command documentation for users.
+It does not fetch these pages or copy their content into the dictionary. These
+links establish command syntax, not whether an indexed package is available or
+installs the expected executable on a particular target:
+
+- `manpages.debian.org`: Debian apt-get manual.
+- `docs.brew.sh`: Homebrew install command manual.
+- `docs.npmjs.com`: npm install command manual.
+- `pip.pypa.io`: pip install command manual.
+
 ## What the dataset contains
 
 The published dataset (the `dictionary` branch, the GitHub Pages playground and
@@ -177,7 +189,9 @@ Options, for a decision by the maintainer (none is chosen here):
   registry metadata.
 - Volume: the critical sweep reads about 2,300 packages. The broad workflow
   budgets 10,000 package reads every four hours, with a 200 ms floor between
-  requests on one runner, plus a paginated name-index read on its first run.
+  requests on one runner, plus a paginated name-index read on its first run and
+  every seven days thereafter. New names append to the existing crawl catalog
+  so its cursor remains valid.
 - Status: OK.
 
 ### PyPI
