@@ -10,8 +10,9 @@ import argparse
 import hashlib
 import json
 import os
+import sqlite3
 import time
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import Request, urlopen
@@ -110,6 +111,7 @@ def write_manifest(output: Path, manifest: Path) -> None:
         "catalog_source": BASE_URL,
         "catalog_snapshot": date.today().isoformat(),
         "catalog_size": count,
+        "catalog_bytes": output.stat().st_size,
         "catalog_digest": digest_file(output),
         "catalog_complete": True,
         "catalog_scope": "npm registry package-name index",
@@ -117,12 +119,61 @@ def write_manifest(output: Path, manifest: Path) -> None:
     temporary.replace(manifest)
 
 
+def refresh_catalog(output: Path, checkpoint: Path, *, today: date | None = None,
+                    max_age_days: int = 7, page_size: int = 10000) -> int:
+    """Append new names from a fresh snapshot without invalidating old cursors."""
+    today = today or date.today()
+    manifest = output.with_suffix(output.suffix + ".manifest.json")
+    if not manifest.exists():
+        return build_catalog(output, checkpoint, page_size)
+    details = json.loads(manifest.read_text())
+    old_bytes = details.get("catalog_bytes")
+    if not isinstance(old_bytes, int) or old_bytes < 0 or not output.exists():
+        raise RuntimeError("npm catalog manifest has no recovery byte count")
+    # Recover an interrupted append using the last committed manifest.
+    if output.stat().st_size > old_bytes:
+        with output.open("rb+") as stream:
+            stream.truncate(old_bytes)
+    if output.stat().st_size != old_bytes or digest_file(output) != details["catalog_digest"]:
+        raise RuntimeError("completed npm catalog digest does not match")
+    if today - date.fromisoformat(details["catalog_snapshot"]) < timedelta(days=max_age_days):
+        return 0
+
+    candidate = output.with_name(output.name + ".refresh")
+    candidate_checkpoint = checkpoint.with_name(checkpoint.name + ".refresh")
+    build_catalog(candidate, candidate_checkpoint, page_size)
+    database = output.with_name(output.name + ".names.sqlite")
+    database.unlink(missing_ok=True)
+    added = 0
+    try:
+        with sqlite3.connect(database) as connection:
+            connection.execute("CREATE TABLE names (name TEXT PRIMARY KEY)")
+            with output.open() as stream:
+                connection.executemany("INSERT INTO names VALUES (?)", ((line.rstrip("\n"),) for line in stream))
+            with output.open("a") as result, candidate.open() as fresh:
+                for raw in fresh:
+                    name = raw.rstrip("\n")
+                    inserted = connection.execute("INSERT OR IGNORE INTO names VALUES (?)", (name,)).rowcount
+                    if inserted:
+                        result.write(raw)
+                        added += 1
+                result.flush()
+                os.fsync(result.fileno())
+        write_manifest(output, manifest)
+    finally:
+        database.unlink(missing_ok=True)
+    candidate.unlink(missing_ok=True)
+    candidate.with_suffix(candidate.suffix + ".manifest.json").unlink(missing_ok=True)
+    return added
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=Path("data/production/npm-packages.txt"))
     parser.add_argument("--checkpoint", type=Path, default=Path("data/production/npm-packages.cursor"))
+    parser.add_argument("--max-age-days", type=int, default=7)
     args = parser.parse_args()
-    print(f"new_packages={build_catalog(args.output, args.checkpoint)} output={args.output}")
+    print(f"new_packages={refresh_catalog(args.output, args.checkpoint, max_age_days=args.max_age_days)} output={args.output}")
 
 
 if __name__ == "__main__":

@@ -80,17 +80,24 @@ def crawl(catalog: Path, manifest: Path, state_path: Path, observations: Path,
         raise ValueError("npm registry catalog has no complete npm _all_docs manifest")
     digest = hashlib.sha256()
     catalog_count = 0
+    state = load_state(state_path)
+    current = state.setdefault("sources", {}).setdefault(SOURCE, {})
+    old_size = current.get("catalog_size")
+    old_digest = current.get("catalog_digest")
+    prefix_digest = None
     with catalog.open("rb") as stream:
         for line in stream:
             digest.update(line)
             catalog_count += 1
+            if catalog_count == old_size:
+                prefix_digest = "sha256:" + digest.hexdigest()
     if details.get("catalog_digest") != "sha256:" + digest.hexdigest() or details.get("catalog_size") != catalog_count:
         raise ValueError("npm registry catalog does not match its manifest")
-    state = load_state(state_path)
-    current = state.setdefault("sources", {}).setdefault(SOURCE, {})
     digest = details["catalog_digest"]
     if current.get("catalog_digest") not in (None, digest):
-        raise ValueError("npm registry catalog changed; migrate the existing cursor before crawling")
+        if not (type(old_size) is int and old_size > 0 and catalog_count >= old_size
+                and prefix_digest == old_digest):
+            raise ValueError("npm registry catalog changed without preserving the old prefix")
     current.update({key: details[key] for key in (
         "catalog_complete", "catalog_digest", "catalog_size", "catalog_snapshot",
         "catalog_source", "catalog_scope",
