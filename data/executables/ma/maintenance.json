@@ -2,6 +2,18 @@
   "command": "maintenance",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "maintenance",
+      "version": "0.1.0",
+      "repository": "https://github.com/1o-llc/maintenance",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/Zamiell/hanabi-live/maintenance",
       "version": "v0.0.0-20260826213204-054e859b97eb",
@@ -219,5 +231,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-10-19"
+  "last_seen": "2026-10-20"
 }
