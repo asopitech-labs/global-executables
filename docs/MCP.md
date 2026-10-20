@@ -109,7 +109,11 @@ target-specific install-and-invoke validation, it remains `unverified`, even whe
 candidate steps are shown. Apt records without matching release provenance also
 remain `unverified`. Only direct or
 filesystem command evidence is eligible. Aliases and inferred command names are
-`unverified`; multiple packages are `ambiguous`. Missing names retain the index
+`unverified`; multiple packages are `ambiguous`. `method.documentation` links the
+package manager's installation syntax; `verification` separately reports whether
+the selected package is known to be available and runnable on the target. For apt,
+missing release provenance adds a `check_availability` step before install.
+Missing names retain the index
 coverage and absence caveats. Do not treat a first provider as a recommendation.
 The response's `method_validation` field reports disposable npm/pip method probes;
 it does not validate the selected provider. See the

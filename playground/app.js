@@ -223,7 +223,7 @@ function resolveInstallationFromCheck(checked, environment, preferences = {}) {
   const provider = candidates[0]; result.provider = provider;
   result.applicability = {target: environment, source_distribution_release: provider.distribution_release ?? null,
     source_architecture: provider.architecture ?? null, validated_on_target: false};
-  if (system === "apt" && provider.distribution_release !== environment.distribution_release) { result.status = "unverified"; return result; }
+  const releaseMatches = system !== "apt" || provider.distribution_release === environment.distribution_release;
   if (!["direct", "filesystem"].includes(provider.confidence) || provider.alias_of || provider.package.startsWith("-")) { result.status = "unverified"; return result; }
   const pkg = provider.package;
   let argv;
@@ -239,14 +239,16 @@ function resolveInstallationFromCheck(checked, environment, preferences = {}) {
   }
   const invoke = system === "npm" && environment.install_scope === "project" ? ["npm", "exec", "--", checked.name] : system === "pip" && environment.install_scope === "project" ? [environment.virtualenv_bin.replace(/\/$/, "") + "/" + checked.name] : [checked.name];
   result.status = "unverified";
+  const methodDocs = {apt: "https://manpages.debian.org/apt-get.8", brew: "https://docs.brew.sh/Manpage#install-options-formulacask-", npm: "https://docs.npmjs.com/cli/commands/npm-install", pip: "https://pip.pypa.io/en/stable/cli/pip_install/"};
+  result.method = {package_manager: system, documentation: methodDocs[system], basis: "package-manager command syntax", target_package_available: "unknown"};
   result.method_validation = ({
     "npm:project": {result: "pass", observed_at: "2026-10-19T10:45:00Z", target: "Debian 13 amd64", manager_version: "npm 11.9.0", runtime_version: "Node.js 24.19.0", fixture: "local ge-install-probe 1.0.0", invocation: "npm exec -- ge-install-probe"},
     "pip:project": {result: "pass", observed_at: "2026-10-19T10:46:00Z", target: "Debian 13 amd64", manager_version: "pip (Python 3.12.14)", runtime_version: "Python 3.12.14", fixture: "local ge-install-probe 1.0.0", invocation: "venv/bin/ge-install-probe"},
   })[`${system}:${environment.install_scope}`] ?? null;
-  result.steps = [{action: "install", argv, platform: environment}, {action: "invoke", argv: invoke, platform: environment}];
+  result.steps = [...(system === "apt" && !releaseMatches ? [{action: "check_availability", argv: ["apt-cache", "show", "--", pkg], platform: environment}] : []), {action: "install", argv, platform: environment}, {action: "invoke", argv: invoke, platform: environment}];
   result.invocation = {argv: invoke, path_note: "Ensure the selected package manager's executable directory is on PATH; verify the installed command before use."};
   result.verification = {confidence: provider.confidence, source: provider.source, observed_at: provider.last_observed_at ?? null,
-    version: provider.version, note: "The index observes a package-to-command mapping; this recipe has not been executed on the target machine."};
+    version: provider.version, note: "Package-manager syntax is documented; availability and entry-point behavior of this package on the target have not been verified.", source_release_matches_target: releaseMatches};
   return result;
 }
 async function resolveInstallation(name, environment, preferences = {}) {

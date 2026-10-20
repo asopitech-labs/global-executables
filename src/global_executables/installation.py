@@ -7,6 +7,12 @@ from .model import valid_command
 
 CONTRACT_VERSION = "installation-v1"
 SUPPORTED = {"homebrew": "brew", "debian": "apt", "ubuntu": "apt", "npm": "npm", "pypi": "pip"}
+METHOD_DOCS = {
+    "apt": "https://manpages.debian.org/apt-get.8",
+    "brew": "https://docs.brew.sh/Manpage#install-options-formulacask-",
+    "npm": "https://docs.npmjs.com/cli/commands/npm-install",
+    "pip": "https://pip.pypa.io/en/stable/cli/pip_install/",
+}
 METHOD_PROBES = {
     ("npm", "project"): {"result": "pass", "observed_at": "2026-10-19T10:45:00Z",
                           "target": "Debian 13 amd64", "manager_version": "npm 11.9.0",
@@ -89,9 +95,7 @@ def resolve_installation(dataset: Any, name: str, environment: dict[str, Any],
     result["applicability"] = {"target": environment, "source_distribution_release": provider.get("distribution_release"),
                                "source_architecture": provider.get("architecture"),
                                "validated_on_target": False}
-    if system == "apt" and provider.get("distribution_release") != environment["distribution_release"]:
-        result["status"] = "unverified"
-        return result
+    release_matches = system != "apt" or provider.get("distribution_release") == environment["distribution_release"]
     if provider["confidence"] not in {"direct", "filesystem"}:
         result["status"] = "unverified"
         return result
@@ -120,10 +124,15 @@ def resolve_installation(dataset: Any, name: str, environment: dict[str, Any],
     invoke = ["npm", "exec", "--", name] if system == "npm" and environment["install_scope"] == "project" else ([str(environment["virtualenv_bin"]).rstrip("/") + "/" + name] if system == "pip" and environment["install_scope"] == "project" else [name])
     result["status"] = "unverified"
     result["method_validation"] = METHOD_PROBES.get((system, environment.get("install_scope")))
-    result["steps"] = [{"action": "install", "argv": argv, "platform": environment},
-                       {"action": "invoke", "argv": invoke, "platform": environment}]
+    result["method"] = {"package_manager": system, "documentation": METHOD_DOCS[system],
+                        "basis": "package-manager command syntax", "target_package_available": "unknown"}
+    result["steps"] = ([{"action": "check_availability", "argv": ["apt-cache", "show", "--", package], "platform": environment}]
+                       if system == "apt" and not release_matches else []) + [
+        {"action": "install", "argv": argv, "platform": environment},
+        {"action": "invoke", "argv": invoke, "platform": environment}]
     result["invocation"] = {"argv": invoke, "path_note": "Ensure the selected package manager's executable directory is on PATH; verify the installed command before use."}
     result["verification"] = {"confidence": provider["confidence"], "source": provider["source"],
                               "observed_at": provider.get("last_observed_at"), "version": provider.get("version"),
-                              "note": "The index observes a package-to-command mapping; this recipe has not been executed on the target machine."}
+                              "note": "Package-manager syntax is documented; availability and entry-point behavior of this package on the target have not been verified.",
+                              "source_release_matches_target": release_matches}
     return result

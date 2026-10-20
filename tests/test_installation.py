@@ -79,3 +79,13 @@ def test_project_method_probe_is_separate_from_provider_validation(tmp_path):
     assert npm["invocation"]["argv"] == ["npm", "exec", "--", "envcp"]
     assert pip["invocation"]["argv"] == ["/tmp/venv/bin/pygo"]
     assert pip["steps"][0]["argv"][:4] == ["/tmp/venv/bin/python", "-m", "pip", "install"]
+
+
+def test_apt_method_is_shown_with_an_availability_check_when_release_is_unknown(tmp_path):
+    dataset = make_dataset(tmp_path, "partial")
+    result = resolve_installation(dataset, "envcp", {"package_manager": "apt", "distribution": "debian", "distribution_release": "13", "architecture": "amd64", "has_admin": True})
+    assert result["status"] == "unverified"
+    assert [step["action"] for step in result["steps"]] == ["check_availability", "install", "invoke"]
+    assert result["steps"][1]["argv"] == ["sudo", "apt-get", "install", "--", "envcp-deb"]
+    assert result["verification"]["source_release_matches_target"] is False
+    assert result["method"]["documentation"].startswith("https://manpages.debian.org/")
