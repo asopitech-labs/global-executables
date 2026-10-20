@@ -1,0 +1,394 @@
+import importlib.util
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).parents[1]
+MERGER = ROOT / "tools/merge_registry_publication.py"
+spec = importlib.util.spec_from_file_location("merge_registry_publication", MERGER)
+merger = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(merger)
+module_merge_state = merger.merge_state
+WORKFLOW = (ROOT / ".github/workflows/registry-artifacts.yml").read_text()
+load_state = merger.load_state
+PARALLEL = (ROOT / "tools/crawl_parallel.sh").read_text()
+
+
+def merged_state_is_sharded(legacy: Path) -> bool:
+    return (legacy.with_suffix("") / "manifest.json").is_file() and not legacy.exists()
+
+
+def write_json(path: Path, value: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value))
+
+
+def run_merge(
+    tmp_path: Path,
+    source: str,
+    published_cursor: int,
+    local_cursor: int,
+    expected_returncode: int = 0,
+) -> tuple[dict, dict]:
+    published_state = tmp_path / "published-state.json"
+    local_state = tmp_path / "local-state.json"
+    published_report = tmp_path / "published-report.json"
+    local_report = tmp_path / "local-report.json"
+    write_json(
+        published_state,
+        {"version": 1, "sources": {"crates": {"cursor": 100}, source: {"cursor": published_cursor}}},
+    )
+    write_json(local_state, {"version": 1, "sources": {source: {"cursor": local_cursor}}})
+    write_json(
+        published_report,
+        {
+            "status": "success",
+            "coverage_kind": "partial",
+            "sources": {
+                # Older source reports predate the per-source status field. Missing
+                # means no reported failure, not a failed aggregate publication.
+                "crates": {"cursor": 100, "coverage_kind": "exhaustive"},
+                source: {"cursor": published_cursor, "status": "success", "coverage_kind": "partial"},
+            },
+        },
+    )
+    write_json(
+        local_report,
+        {
+            "status": "success",
+            "coverage_kind": "partial",
+            "finished_at": "2026-08-24T19:00:00Z",
+            "sources": {
+                source: {
+                    "cursor": local_cursor,
+                    "catalog_size": 2_000_000,
+                    "status": "success",
+                    "coverage_kind": "partial",
+                }
+            },
+        },
+    )
+    completed = subprocess.run(
+        [
+            sys.executable,
+            MERGER,
+            "--source",
+            source,
+            "--published-state",
+            published_state,
+            "--local-state",
+            local_state,
+            "--published-report",
+            published_report,
+            "--local-report",
+            local_report,
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == expected_returncode, completed.stderr
+    # Publishing migrates the legacy file to the sharded directory beside it.
+    assert merged_state_is_sharded(published_state) == (expected_returncode == 0)
+    return load_state(published_state), json.loads(published_report.read_text())
+
+
+def test_merger_updates_only_the_owned_source(tmp_path):
+    state, report = run_merge(tmp_path, "go", published_cursor=23_638, local_cursor=29_612)
+
+    assert state["sources"] == {"crates": {"cursor": 100}, "go": {"cursor": 29_612}}
+    assert report["sources"]["crates"]["cursor"] == 100
+    assert report["sources"]["go"]["cursor"] == 29_612
+    assert report["sources"]["go"]["catalog_size"] == 2_000_000
+    assert report["coverage_kind"] == "partial"
+    assert report["status"] == "success"
+
+
+def test_merger_refuses_state_and_report_regression(tmp_path):
+    state, report = run_merge(
+        tmp_path,
+        "go",
+        published_cursor=29_612,
+        local_cursor=23_638,
+        expected_returncode=3,
+    )
+
+    assert state["sources"]["go"]["cursor"] == 29_612
+    assert report["sources"]["go"]["cursor"] == 29_612
+
+
+def test_merger_accepts_cursor_reset_for_a_new_catalog(tmp_path):
+    published_state = tmp_path / "published-state.json"
+    local_state = tmp_path / "local-state.json"
+    published_report = tmp_path / "published-report.json"
+    local_report = tmp_path / "local-report.json"
+    write_json(published_state, {"sources": {"npm": {
+        "cursor": 344_774,
+        "catalog_size": 4_311_362,
+        "packages_file": "data/production/npm-packages.txt",
+    }}})
+    write_json(local_state, {"sources": {"npm": {
+        "cursor": 2_295,
+        "catalog_size": 2_295,
+        "packages_file": "data/production/npm-critical-packages.txt",
+    }}})
+    write_json(published_report, {"sources": {"npm": {
+        "cursor": 344_774,
+        "catalog_size": 4_311_362,
+        "coverage_kind": "partial",
+    }}})
+    write_json(local_report, {"sources": {"npm": {
+        "cursor": 2_295,
+        "catalog_size": 2_295,
+        "packages_file": "data/production/npm-critical-packages.txt",
+        "coverage_kind": "exhaustive",
+        "status": "success",
+    }}})
+
+    completed = subprocess.run(
+        [sys.executable, MERGER, "--source", "npm",
+         "--published-state", published_state, "--local-state", local_state,
+         "--published-report", published_report, "--local-report", local_report],
+        check=False, capture_output=True, text=True,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert load_state(published_state)["sources"]["npm"]["cursor"] == 2_295
+    assert json.loads(published_report.read_text())["sources"]["npm"]["coverage_kind"] == "exhaustive"
+
+
+def test_merger_uses_digest_to_distinguish_daily_catalog_generations(tmp_path):
+    published_state = tmp_path / "published-state.json"
+    local_state = tmp_path / "local-state.json"
+    write_json(published_state, {"sources": {"npm": {
+        "cursor": 2_295,
+        "catalog_digest": "sha256:" + "a" * 64,
+        "catalog_snapshot": "2026-08-25",
+        "packages_file": "data/production/npm-critical-packages.txt",
+    }}})
+    write_json(local_state, {"sources": {"npm": {
+        "cursor": 0,
+        "catalog_digest": "sha256:" + "b" * 64,
+        "catalog_snapshot": "2026-08-26",
+        "packages_file": "data/production/npm-critical-packages.txt",
+    }}})
+
+    merged, before, after = module_merge_state("npm", published_state, local_state)
+
+    assert merged is True
+    assert (before, after) == (2_295, 0)
+
+
+def test_merger_rejects_regression_with_the_same_catalog_digest(tmp_path):
+    published_state = tmp_path / "published-state.json"
+    local_state = tmp_path / "local-state.json"
+    entry = {
+        "catalog_digest": "sha256:" + "a" * 64,
+        "catalog_snapshot": "2026-08-25",
+        "packages_file": "data/production/npm-critical-packages.txt",
+    }
+    write_json(published_state, {"sources": {"npm": {**entry, "cursor": 2_295}}})
+    write_json(local_state, {"sources": {"npm": {**entry, "cursor": 0}}})
+
+    merged, before, after = module_merge_state("npm", published_state, local_state)
+
+    assert merged is False
+    assert (before, after) == (2_295, 0)
+
+
+def test_merger_rejects_replay_of_an_older_catalog_generation(tmp_path):
+    published_state = tmp_path / "published-state.json"
+    local_state = tmp_path / "local-state.json"
+    write_json(published_state, {"sources": {"npm": {
+        "cursor": 2_295,
+        "catalog_digest": "sha256:" + "b" * 64,
+        "catalog_snapshot": "2026-08-26",
+    }}})
+    write_json(local_state, {"sources": {"npm": {
+        "cursor": 0,
+        "catalog_digest": "sha256:" + "a" * 64,
+        "catalog_snapshot": "2026-08-25",
+    }}})
+
+    merged, before, after = module_merge_state("npm", published_state, local_state)
+
+    assert merged is False
+    assert (before, after) == (2_295, 0)
+
+
+def test_merger_rejects_newer_snapshot_without_a_catalog_digest(tmp_path):
+    published_state = tmp_path / "published-state.json"
+    local_state = tmp_path / "local-state.json"
+    write_json(published_state, {"sources": {"npm": {
+        "cursor": 2_295,
+        "catalog_snapshot": "2026-08-25",
+    }}})
+    write_json(local_state, {"sources": {"npm": {
+        "cursor": 0,
+        "catalog_snapshot": "2026-08-26",
+    }}})
+
+    merged, before, after = module_merge_state("npm", published_state, local_state)
+
+    assert merged is False
+    assert (before, after) == (2_295, 0)
+
+
+def test_both_publishers_use_source_owned_merge():
+    assert "bash tools/crawl_parallel.sh publish" in WORKFLOW
+    assert "SOURCES=crates" in WORKFLOW
+    assert "cp data/production/registry-state.json /tmp/artifact-publish" not in WORKFLOW
+    assert '--published-state "${worktree}/data/production/registry-state"' in PARALLEL
+    assert "merge_registry_publication.py" in PARALLEL
+    assert "merge_status" in PARALLEL
+
+
+def test_ci_publisher_reports_whether_canonical_data_changed():
+    publish = WORKFLOW.split("Publish resumable state and normalized observations", 1)[1].split(
+        "Queue the next crawl or the generated refresh", 1
+    )[0]
+
+    assert "id: publish" in publish
+    assert 'echo "changed=true" >> "$GITHUB_OUTPUT"' in publish
+    assert 'echo "changed=false" >> "$GITHUB_OUTPUT"' in publish
+
+
+def test_unchanged_crates_dump_does_not_republish_a_run_only_report_change():
+    publish = WORKFLOW.split("Publish resumable state and normalized observations", 1)[1].split(
+        "Queue the next crawl or the generated refresh", 1
+    )[0]
+
+    unchanged_guard = "'.sources.crates.unchanged == true'"
+    assert unchanged_guard in publish
+    assert publish.index(unchanged_guard) < publish.index("bash tools/crawl_parallel.sh publish")
+    assert "The crates dump is unchanged; skipping canonical publication." in publish
+
+
+def test_shared_publisher_retries_from_a_fresh_remote_snapshot():
+    assert 'PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"' in PARALLEL
+    assert 'local attempt="${PUBLISH_ATTEMPT:-1}"' in PARALLEL
+    assert 'PUBLISH_ATTEMPT=$((attempt + 1)) publish_snapshot' in PARALLEL
+    assert 'PUBLISH_MAX_ATTEMPTS=3' in WORKFLOW
+
+
+def test_shared_publisher_isolates_sources_and_uses_disposable_worktrees():
+    assert 'for source in ${SOURCES}; do' in PARALLEL
+    assert 'SOURCES="${source}" OBSERVATION_SOURCES="" publish_snapshot' in PARALLEL
+    assert 'mktemp -d /tmp/ge-artifact-publish.XXXXXX' in PARALLEL
+    assert 'local worktree=/tmp/ge-artifact-publish' not in PARALLEL
+
+
+def test_a_report_that_differs_only_in_effort_is_republished_at_most_once_a_day(tmp_path):
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    stamp = lambda hours: (now - timedelta(hours=hours)).isoformat()  # noqa: E731
+    entry = {"status": "success", "coverage_kind": "exhaustive", "cursor": 10, "catalog_size": 10, "failures": 0,
+             "unavailable": 2, "snapshot_generation": 7, "processed": 3000, "requests": 3000, "downloaded_bytes": 5,
+             "duration_seconds": 12.5, "unchanged": 2900, "skipped_not_due": 0, "finished_at": stamp(5),
+             "started_at": stamp(5), "checked": 10, "feed_events": 4, "refresh_cursor": 3000}
+    published, local = tmp_path / "published.json", tmp_path / "local.json"
+
+    def publish_report(published_hours_ago, **changes):
+        write_json(published, {"sources": {"pypi": {**entry, "finished_at": stamp(published_hours_ago)}},
+                               "finished_at": stamp(published_hours_ago)})
+        idle = {**entry, "requests": 1, "downloaded_bytes": 99, "duration_seconds": 3.0, "refresh_cursor": 6000,
+                "finished_at": stamp(0), "started_at": stamp(0), **changes}
+        write_json(local, {"sources": {"pypi": idle}, "finished_at": stamp(0)})
+        before = published.read_text()
+        merged = merger.merge_report("pypi", published, local)
+        return merged, published.read_text() != before
+
+    # Idle within 24 hours: nothing is written, so the publication has no diff.
+    assert publish_report(5) == (False, False)
+    assert publish_report(23) == (False, False)
+    # Idle after 24 hours: only the report moves (its last-crawl time); the next idle run is quiet again.
+    assert publish_report(25) == (True, True)
+    assert merger.merge_report("pypi", published, local) is False
+    # Anything that is not effort is published at once, heartbeat or not.
+    for change in ({"failures": 1}, {"status": "partial"}, {"snapshot_generation": 8}, {"unavailable": 3}):
+        assert publish_report(1, **change) == (True, True)
+    # The heartbeat can be turned off.
+    write_json(local, {"sources": {"pypi": {**entry, "requests": 1, "finished_at": stamp(0)}}, "finished_at": stamp(0)})
+    write_json(published, {"sources": {"pypi": {**entry, "finished_at": stamp(500)}}, "finished_at": stamp(500)})
+    assert merger.merge_report("pypi", published, local, heartbeat_hours=0) is False
+    assert merger.DEFAULT_HEARTBEAT_HOURS == 24
+    assert 'REPORT_HEARTBEAT_HOURS="${REPORT_HEARTBEAT_HOURS:-24}"' in PARALLEL
+
+
+def test_delta_publish_clears_failures_resolved_since_the_base_cache(tmp_path):
+    sys.path.insert(0, str(ROOT / "src"))
+    from global_executables.refresh_policy import write_cache
+
+    published = tmp_path / "published"
+    local = tmp_path / "local"
+    base = tmp_path / "base"
+    entry = {"cursor": 5, "failures": {"sapilm": "unexpected end of JSON input", "keep": "x"},
+             "failure_attempts": {"sapilm": 1, "keep": 1}, "retry_projects": ["sapilm", "keep"]}
+    merger.save_state(published, {"version": 1, "sources": {"pypi": entry}})
+    clean = {"cursor": 5, "failures": {}, "failure_attempts": {}, "retry_projects": []}
+    merger.save_state(local, {"version": 1, "sources": {"pypi": clean}})
+    merger.save_state(base, {"version": 1, "sources": {"pypi": clean}})
+    write_cache(tmp_path / "base.cache.gz", {"keep": "20700:0n:1.0"}, 0)
+    write_cache(tmp_path / "local.cache.gz", {"keep": "20700:0n:1.0", "sapilm": "20735:1c:1.0.1"}, 0)
+    ok, _, _ = module_merge_state("pypi", published, local, base, scalars=False,
+                                  local_cache=tmp_path / "local.cache.gz", base_cache=tmp_path / "base.cache.gz")
+    assert ok
+    result = load_state(published)["sources"]["pypi"]
+    assert result["failures"] == {"keep": "x"}
+    assert result["failure_attempts"] == {"keep": 1}
+    assert result["retry_projects"] == ["keep"]
+
+
+def test_parallel_publish_keeps_the_schedule_cache_with_the_delta_base():
+    assert '"${dir}/.base/cache.gz"' in PARALLEL
+    assert "--local-cache" in PARALLEL and "--base-cache" in PARALLEL
+    assert 'mv "${snap}/cache.gz"' in PARALLEL
+
+
+def test_a_booster_clears_only_the_failures_of_packages_it_owns(tmp_path):
+    """A booster's old check of a package missing from its catalogue (sapilm, checked
+    1.0.1 on 10/8) must not clear the failure the feed reader recorded for a newer release
+    (1.2.7): only the feed reader retries such a package.  The first publish after the
+    upgrade has no base cache, so every local check would otherwise count."""
+    sys.path.insert(0, str(ROOT / "src"))
+    from global_executables.refresh_policy import write_cache
+
+    published, local, base = tmp_path / "published", tmp_path / "local", tmp_path / "base"
+    entry = {"cursor": 5, "failures": {"sapilm": "unexpected end of JSON input", "zeroconf": "gave up after 3 attempts"},
+             "failure_attempts": {"sapilm": 1}, "retry_projects": ["sapilm", "zeroconf"]}
+    merger.save_state(published, {"version": 1, "sources": {"pypi": entry}})
+    clean = {"cursor": 5, "failures": {}, "failure_attempts": {}, "retry_projects": []}
+    merger.save_state(local, {"version": 1, "sources": {"pypi": clean}})
+    merger.save_state(base, {"version": 1, "sources": {"pypi": clean}})
+    write_cache(tmp_path / "local.cache.gz", {"zeroconf": "20744:1n:0.151.5", "sapilm": "20735:1c:1.0.1"}, 0)
+    catalog = tmp_path / "pypi-projects.txt"
+    catalog.write_text("zeroconf\nother\n", encoding="utf-8")
+    ok, _, _ = module_merge_state("pypi", published, local, base, scalars=False,
+                                  local_cache=tmp_path / "local.cache.gz", base_cache=tmp_path / "missing.gz",
+                                  owned_catalog=catalog, owned_ranges="0-255")
+    assert ok
+    result = load_state(published)["sources"]["pypi"]
+    assert result["failures"] == {"sapilm": "unexpected end of JSON input"}
+    assert result["failure_attempts"] == {"sapilm": 1}
+    assert result["retry_projects"] == ["sapilm"]
+
+
+def test_a_booster_without_its_catalogue_or_outside_its_buckets_clears_nothing(tmp_path):
+    sys.path.insert(0, str(ROOT / "src"))
+    from global_executables import booster
+
+    catalog = tmp_path / "names.txt"
+    catalog.write_text("a\tx\nb\n", encoding="utf-8")
+    assert booster.owned_names({"a", "b", "c"}, catalog, None) == {"a", "b"}
+    assert booster.owned_names({"a", "b"}, tmp_path / "missing.txt", None) == set()
+    bucket = booster.owner_bucket("a")
+    assert booster.owned_names({"a"}, catalog, str(bucket)) == {"a"}
+    assert booster.owned_names({"a"}, catalog, str((bucket + 1) % 256)) == set()
+
+
+def test_a_booster_publish_restricts_clearing_to_its_catalogue_and_lease():
+    assert "--owned-catalog" in PARALLEL and '--owned-ranges "${BOOSTER_RANGES:-0-255}"' in PARALLEL
+    booster_script = (ROOT / "tools/local_booster.sh").read_text()
+    assert "export BASE BOOSTER=1 BOOSTER_RANGES " in booster_script

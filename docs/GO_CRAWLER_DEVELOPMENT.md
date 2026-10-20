@@ -1,0 +1,301 @@
+# Go crawler development and build contract
+
+## Purpose
+
+This document defines the development, build, and runtime contract for the
+transactional Go registry crawler. The crawler is a durable, network-heavy pipeline,
+so a successful build is not just compilation: the same source must pass the same
+dependency, concurrency, security, and container checks locally and in CI.
+
+The target is `linux/amd64`, matching the rootless Podman host. Go is the only
+supported runtime for the transactional `go`, `npm`, `pypi`, `rubygems`, and
+`packagist` sources. Python owns crates.io and NuGet and is not retained as a rollback
+implementation for transactional sources.
+
+## At a glance
+
+- Exact compiler: Go 1.26.9 with `GOTOOLCHAIN=local`.
+- Development: digest-pinned official container; host Go is optional.
+- Style: JetBrains Modern Go Guidelines v0.1.1 plus the Go 1.26 standard fixers.
+- Validation: one shared format, modernization, vet, test, race, vulnerability, and build pipeline.
+- Runtime: dedicated scratch image and an explicit `crawl` subcommand.
+- Sources: Go modules, npm, PyPI, RubyGems, and Packagist share one engine.
+- Durable state: one bbolt database per source commits observations, retries, cursor,
+  and generation together.
+- Compatibility: state, JSONL, and report are streamed from one database snapshot.
+- Recovery: a new source database can import its last published compatibility export.
+
+## Quick start
+
+No host Go installation is required. Podman is preferred; Docker is supported.
+
+```console
+./tools/go_container.sh go run github.com/JetBrains/go-modern-guidelines@v0.1.1 list --file-path internal/gocrawl/coordinator.go
+./tools/go_container.sh ./tools/go_pipeline.sh modern
+./tools/go_container.sh ./tools/go_pipeline.sh check
+./tools/go_container.sh ./tools/go_pipeline.sh build
+./tools/go_image.sh go-test global-executables-go-test:local
+./tools/go_image.sh runtime global-executables-go-crawler:local
+podman run --rm global-executables-go-crawler:local --version
+```
+
+Native Go development is also supported when the installed toolchain exactly
+matches the `toolchain` directive in `go.mod`:
+
+```console
+GOTOOLCHAIN=local ./tools/go_pipeline.sh check
+```
+
+`go.mod` is the canonical Go version and dependency contract. The development
+container, CI setup, and pipeline version check must all agree with it.
+
+## Modern Go development policy
+
+The project follows the [JetBrains Modern Go Guidelines](https://github.com/JetBrains/go-modern-guidelines)
+for the Go version declared by `go.mod`. Before editing a Go file, a developer or agent
+runs the versioned CLI `list --file-path` command shown above and reads the complete,
+unfiltered output. The developer or agent runs `explain ID...` only for returned rules
+that require a behavior decision. Relevant rules apply unless they would change the
+intended behavior or fail to compile for the declared Go version.
+
+The JetBrains CLI is the review reference; `go fix -diff ./...` is the enforceable
+repository gate. The command uses the exact Go 1.26.9 standard analyzers and fails when
+source still has safe modernization fixes. A developer applies those fixes with
+`./tools/go_container.sh go fix ./...`, reviews the diff, and then runs the full shared
+pipeline. Pinning the advisory CLI in the command avoids an unreviewed guideline change
+while keeping it out of the production module dependency graph.
+
+| Path | Current role | Target role | Action | Delete when | Proof |
+| --- | --- | --- | --- | --- | --- |
+| `go.mod` | Go version, toolchain, dependencies | unchanged canonical contract | keep | never | pipeline environment gate |
+| `Dockerfile.go-crawler` | exact development and runtime images | unchanged container contract | keep | never | container test and smoke build |
+| `tools/go_container.sh` | host-independent Go command runner | unchanged local entrypoint | keep | never | container `modern` and `check` commands |
+| `tools/go_pipeline.sh` | format, test, security, build gates | also owns modernization enforcement | replace | old format-only policy is gone | `modern` rejects a non-empty `go fix -diff` |
+| `cmd/**/*.go`, `internal/**/*.go` | crawler implementation and tests | Go 1.26 idioms without behavior changes | replace | standard fixer reports no diff | `go fix -diff ./...` exits zero |
+| `.github/workflows/validate.yml` | delegates validation to the shared pipeline | unchanged delegation boundary | keep | never | native and container jobs call the shared pipeline |
+| `AGENTS.md`, this guide | human and agent instructions | name the same pre-edit and validation flow | replace | old format-only instructions are gone | policy tests and document review |
+
+CI does not install a second style tool or duplicate guideline logic. The shared
+pipeline remains the single blocker, while the external guideline list informs code
+review for recommendations that standard fixers do not automate.
+
+## Implementation gate
+
+Crawler behavior was allowed only after all of these became true, and these remain
+release gates:
+
+- the digest-pinned development image reports the exact `go.mod` toolchain;
+- the native and container pipeline entrypoints both pass;
+- the Go test stage and final runtime image build in CI;
+- the Docker build context excludes repository history and crawl state;
+- a bind-mounted write creates files owned by the invoking user;
+- the placeholder binary is not routed to production; and
+- issue #40 records the environment contract and issue #42 records the npm/PyPI
+  migration and measured throughput evidence.
+
+The gate passed before crawler behavior was added. Any toolchain or dependency update
+must pass it again; Go 1.26.5 was replaced by 1.26.7, and 1.26.7 by 1.26.9 (GO-2026-6617
+and related `net/http` advisories of 2026-10-08), when `govulncheck` found reachable
+standard-library vulnerabilities, rather than weakening the security gate.
+
+## Environment decision
+
+| Concern | Contract | Reason |
+| --- | --- | --- |
+| Language | Go, not Java | The workload is dominated by HTTP, ZIP inspection, bounded concurrency, and a static local executable. Go fits the repository and deployment footprint without introducing a JVM. |
+| Toolchain | Go 1.26.9, exact patch | This is the maintained Go 1.26 patch release as of 2026-10-08. Patch-level pinning prevents developer and CI drift. |
+| Toolchain switching | `GOTOOLCHAIN=local` | A build must fail on a mismatched toolchain instead of silently downloading a different compiler. |
+| Local setup | Digest-pinned official Go container | Container-first setup is reproducible and avoids depending on host toolchain state. |
+| Deployment target | `linux/amd64`, `CGO_ENABLED=0` | This matches the current crawler host and produces a portable static crawler binary. |
+| Runtime image | Dedicated minimal Go crawler image | The transactional sources can be built and operated independently of the Python registry crawlers. |
+| Dependencies | Go modules with committed `go.mod` and `go.sum` | Versions and downloaded module contents are reviewable and checksum-verified. |
+| Developer tools | Pinned `tool` directives in `go.mod` | Security tools use the same reviewed version locally and in CI. |
+
+The official Go toolchain documentation explains that `go` and `toolchain` in
+`go.mod` participate in toolchain selection and that automatic switching may
+download a compiler. For this repository, the container and CI install the requested
+compiler explicitly, then set `GOTOOLCHAIN=local` to make drift a hard failure.
+
+## Build topology
+
+```text
+go.mod + go.sum
+       |
+       +--> exact Go development image --> local check/build
+       |
+       +--> setup-go in CI -------------> identical pipeline script
+       |
+       +--> Dockerfile.go-crawler
+              |-- go-development  exact compiler and environment
+              |-- go-test         module, vet, test, race gates
+              |-- go-build        static, trimpath binary
+              `-- runtime         binary + CA certificates only
+```
+
+## Runtime topology and recovery
+
+```text
+cached source catalog ---------------------------> bounded work coordinator
+  |-- index.golang.org (incremental refresh)       |-- Go module inspector
+  |-- npm package snapshot (import once)           |-- npm metadata inspector
+  |-- PyPI project snapshot (import once)          |-- PyPI range/archive inspector
+  |-- RubyGems name snapshot (import once)         |-- gem metadata/range inspector
+  `-- Packagist package snapshot (import once)     `-- Composer metadata inspector
+                                                        |
+                                                        v
+                          per-source bbolt transaction: observations + retry + cursor
+                                                        |
+                                                        v
+                          one read generation --> JSONL + state + report
+```
+
+Workers do not write files or mutable state. Results may finish out of order, but the
+coordinator commits only the largest contiguous catalog prefix. A process stop can
+waste HTTP work; it cannot move the cursor past an uncommitted module.
+
+The first migration imports each source's Python-era JSONL/state into its
+`<source>-crawl.db`. The selected database is then
+canonical locally. Compatibility files remain the durable publication and recovery
+contract and can rebuild a missing database. A fixed-record derived index serves the
+cached immutable catalog prefix without duplicating millions of names in bbolt. Go
+alone refreshes its chronological upstream index before inspection; the other four
+sources reuse complete imported catalog snapshots instead of enumerating them on
+every pass. Derived indexes and databases stay in the mounted state directory and
+are not built into or published with the image.
+
+Every module has a whole-inspection deadline in addition to each HTTP-attempt deadline.
+A transient HTTP-attempt failure returns to the durable retry queue without consuming
+an attempt. A whole-module deadline consumes one, because a module that cannot be
+inspected inside its own budget fails the same way on every pass and would otherwise
+hold a retry slot and a share of the byte budget forever. Permanent proxy responses and
+a failure that reaches the attempt limit move to `unavailable`, which the next catalog
+refresh sweep re-inspects. Cancellation never crosses a missing ordered result.
+
+Archive inspection reads one candidate `.go` file per directory through a range reader
+that caches a small window of blocks. The inspector probes those directories in archive
+order so each block is fetched once; probing in map order refetches the same blocks per
+directory and downloads a wide archive many times over. Go's default whole-module budget
+is ten minutes, wider than the metadata-driven sources, because a Go module is inspected
+by reading its archive and the catalog is complete enough that no pass needs to hurry.
+
+Run one bounded pass explicitly:
+
+```console
+podman run --rm --init --userns=keep-id --user "$(id -u):$(id -g)" \
+  --volume /path/to/go-state:/state \
+  global-executables-go-crawler:local crawl --source npm --passes 1
+```
+
+`--passes 0` continues until the catalog is current, the committed cursor reaches its
+end, and no retry remains. Starting the image without `crawl` is intentionally an
+error, so merely building or pulling it cannot mutate production state.
+
+The Python crawler image remains separate for crates.io and NuGet. Orchestration
+always sends all five transactional sources to the Go image; the Python entrypoint
+rejects those source names. Recovery rebuilds a source database from its published
+compatibility export instead of switching implementations.
+
+## One pipeline, explicit gates
+
+`tools/go_pipeline.sh` is the only supported validation entrypoint. CI invokes the
+same file used by developers.
+
+| Gate | Command intent | Failure caught |
+| --- | --- | --- |
+| Toolchain | compare `go env GOVERSION` with `go.mod` | compiler drift or implicit switching |
+| Dependency hygiene | `go mod tidy -diff`, `go mod verify` | stale manifests or modified module cache |
+| Formatting | `gofmt` check | non-canonical source formatting |
+| Modern Go | `go fix -diff ./...` | safe Go-version-specific modernization still required |
+| Static analysis | `go vet ./...` | suspicious standard-library and concurrency constructs |
+| Unit/integration | `go test ./...` | functional regressions |
+| Concurrency | `go test -race ./...` | exercised data races |
+| Security | pinned `govulncheck ./...` | reachable known vulnerabilities |
+| Build | `CGO_ENABLED=0 go build -trimpath -buildvcs=false` | non-portable or path-dependent binary builds |
+| Image | build the `go-test` and final runtime stages | Dockerfile/source drift and missing runtime assets |
+
+The race detector observes only executed paths. Concurrency tests therefore need to
+exercise cancellation, retry, ordered commit, and shutdown paths rather than merely
+starting workers. Fuzz targets are added for proxy escaping, ZIP metadata parsing,
+and persisted-state decoding after those packages exist.
+
+## Filesystem and cache rules
+
+- The source tree is bind-mounted into the development container as the invoking
+  user; generated files must never become root-owned.
+- Go build and module caches live outside tracked source and may be deleted without
+  losing durable crawler state.
+- `.dockerignore` excludes `.git`, local crawl state, published data, virtual
+  environments, caches, and build outputs. At discovery time the unfiltered build
+  context was about 1.3 GB (`.git` 584 MB and `.local-crawl` 605 MB).
+- Docker automatically applies `Dockerfile.go-crawler.dockerignore`; the shared image
+  wrapper passes that same file through Podman's explicit `--ignorefile` option.
+- Crawler checkpoints and observations are runtime data mounted at `/state`; they
+  are never copied into a build image or a Go build cache.
+- Secrets and GitHub credentials are not build arguments and are not present in
+  either build stages or the runtime image.
+
+## CI and dependency maintenance
+
+The validation workflow has two Go boundaries:
+
+1. A native CI job reads `go.mod`, installs the exact requested toolchain, caches by
+   `go.sum`, and runs the full pipeline.
+2. A container job builds the named test stage and the final image, then smoke-tests
+   the produced binary. This proves that local deployment does not depend on files
+   present only on a GitHub runner.
+
+Dependency changes use Go commands rather than hand-editing version graphs:
+
+```console
+./tools/go_container.sh go get example.com/module@v1.2.3
+./tools/go_container.sh go mod tidy
+./tools/go_container.sh ./tools/go_pipeline.sh check
+```
+
+Every dependency update includes the `go.mod` and `go.sum` diff, tests, race check,
+and vulnerability scan. The official Go base image is pinned by digest in the
+Dockerfile. Updating it is an explicit reviewed change that reruns both CI boundaries.
+
+## Recovery boundary
+
+The Go, npm, PyPI, RubyGems, and Packagist cutovers are complete and their Python
+paths have been removed. Crates.io and NuGet remain on Python. A recovery stops only
+the affected container, preserves its failed database for diagnosis, and imports the
+last published compatibility export into a new Go-owned store. Never translate a
+partially committed transaction back into the JSON state file or publish a cursor
+below the shared branch.
+
+## Troubleshooting
+
+- **Toolchain mismatch:** run the container entrypoint. Do not enable automatic
+  toolchain download to make the check pass.
+- **Root-owned files:** remove only the generated file after inventory, then confirm
+  that the container is using the invoking UID before rerunning it.
+- **Module drift:** run `go mod tidy`, review both manifest files, and rerun the full
+  pipeline. Do not accept an unexplained checksum change.
+- **Modernization gate fails:** review `go fix -diff ./...`, apply it with
+  `./tools/go_container.sh go fix ./...`, and rerun the full pipeline. Do not suppress
+  a fixer globally to preserve an older spelling.
+- **Race check fails only in CI:** preserve the failing seed/log and reproduce in the
+  exact development image; do not disable `-race` for the package.
+- **Container build sends crawl data:** stop the build and fix `.dockerignore`; runtime
+  state must never be part of the context.
+- **Catalog index is missing or corrupt:** leave the module catalog intact; the derived
+  `.index` file is rebuilt atomically on the next pass.
+- **Compatibility export is interrupted:** restart the same Go state directory. The
+  database is canonical and regenerates all compatibility views from one generation.
+- **Crawler repeatedly exits nonzero:** inspect `podman logs ge-<source>`, preserve the
+  DB and compatibility files, then use the recovery procedure in `docs/OPERATIONS.md`.
+
+## Primary references
+
+- [Go toolchain selection](https://go.dev/doc/toolchain)
+- [Go dependency and tool management](https://go.dev/doc/modules/managing-dependencies)
+- [Go security best practices](https://go.dev/doc/security/best-practices)
+- [Go race detector](https://go.dev/doc/articles/race_detector)
+- [JetBrains Modern Go Guidelines](https://github.com/JetBrains/go-modern-guidelines)
+- [GitHub `setup-go`](https://github.com/actions/setup-go/blob/main/README.md)
+- [Docker build contexts and `.dockerignore`](https://docs.docker.com/build/concepts/context/)
+- [Docker multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
+- [Docker build best practices](https://docs.docker.com/build/building/best-practices/)
+- [Podman build context and `--ignorefile`](https://docs.podman.io/en/stable/markdown/podman-build.1.html)

@@ -1,0 +1,247 @@
+name: Registry artifact crawl
+
+# CI owns the bounded npm critical population and the crates.io dump. Local containers
+# own the remaining long catalog walks. Both writers share artifact-data, so they must
+# never share a source.
+on:
+  schedule:
+    - cron: "47 4 * * *"
+  workflow_dispatch:
+    inputs:
+      package_budget:
+        description: "Maximum packages/crates per source for this run"
+        required: false
+        default: "1000"
+      byte_budget:
+        description: "Maximum downloaded artifact bytes for this run"
+        required: false
+        default: "5000000000"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: registry-artifact-crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[test]'
+      - name: Restore resumable registry state
+        run: |
+          git fetch --depth=1 origin artifact-data || true
+          mkdir -p data/production/intermediate
+          # Reads the sharded layout, or the legacy registry-state.json until the first
+          # publication after the layout change migrates the branch.
+          python3 tools/registry_state.py restore --ref origin/artifact-data \
+            --state data/production/registry-state
+          if git cat-file -e origin/artifact-data:data/production/transport/crates-observations/manifest.json 2>/dev/null; then
+            rm -rf /tmp/crates-observation-transport
+            mkdir -p /tmp/crates-observation-transport
+            git archive origin/artifact-data data/production/transport/crates-observations \
+              | tar -x -C /tmp/crates-observation-transport
+            python3 tools/transport_shards.py unpack \
+              --input-dir /tmp/crates-observation-transport/data/production/transport/crates-observations \
+              --output data/production/intermediate/crates.jsonl
+          elif git cat-file -e origin/artifact-data:data/production/intermediate/crates.jsonl 2>/dev/null; then
+            git show origin/artifact-data:data/production/intermediate/crates.jsonl \
+              > data/production/intermediate/crates.jsonl
+          fi
+      - name: Run bounded artifact inspection
+        id: crawl
+        continue-on-error: true
+        env:
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '1000' }}
+          BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
+        run: |
+          # The report is checked in, so a crawl that dies before writing one would
+          # otherwise leave the repository's stale copy to be published over the
+          # branch's real progress.
+          rm -f reports/registry-artifact-crawl.json
+          python tools/registry_artifact_crawl.py \
+            --source crates \
+            --state data/production/registry-state \
+            --output-dir data/production/intermediate \
+            --report reports/registry-artifact-crawl.json \
+            --package-budget "$PACKAGE_BUDGET" \
+            --byte-budget "$BYTE_BUDGET"
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: registry-artifact-crawl-report
+          path: reports/registry-artifact-crawl.json
+      - name: Publish resumable state and normalized observations
+        id: publish
+        if: ${{ !cancelled() }}
+        run: |
+          if test -f reports/registry-artifact-crawl.json && \
+             jq -e '.sources.crates.unchanged == true' reports/registry-artifact-crawl.json >/dev/null; then
+            echo "The crates dump is unchanged; skipping canonical publication."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          rm -rf /tmp/ci-registry-crates
+          mkdir -p /tmp/ci-registry-crates/data/production/intermediate \
+            /tmp/ci-registry-crates/reports
+          python3 tools/registry_state.py copy --from data/production/registry-state \
+            --to /tmp/ci-registry-crates/data/production/registry-state
+          if test -f data/production/intermediate/crates.jsonl; then
+            cp data/production/intermediate/crates.jsonl \
+              /tmp/ci-registry-crates/data/production/intermediate/crates.jsonl
+          fi
+          if test -f reports/registry-artifact-crawl.json; then
+            cp reports/registry-artifact-crawl.json \
+              /tmp/ci-registry-crates/reports/registry-artifact-crawl.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          publish_output="$(BASE=/tmp/ci-registry SOURCES=crates OBSERVATION_SOURCES=' ' \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "$publish_output"
+          if printf '%s\n' "$publish_output" | grep -qx published; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Queue the next crawl or the generated refresh
+        if: ${{ !cancelled() && steps.publish.outcome == 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '1000' }}
+          BYTE_BUDGET: ${{ inputs.byte_budget || '5000000000' }}
+          PUBLISHED_CHANGED: ${{ steps.publish.outputs.changed || 'false' }}
+        run: |
+          if test ! -f reports/registry-artifact-crawl.json; then
+            echo "::warning::No crawl report was produced; not queueing a follow-up."
+            exit 0
+          fi
+          if jq -e '.coverage_kind == "exhaustive" and .status == "success"' reports/registry-artifact-crawl.json >/dev/null; then
+            if test "$PUBLISHED_CHANGED" = true; then
+              # refresh.yml rebuilds dictionary and dispatches Pages after publication.
+              gh workflow run refresh.yml --ref main
+            else
+              echo "The crates dump is unchanged; no derived workflow is needed."
+            fi
+          elif jq -e '(.sources.crates.catalog_grew // false) == true or
+                     (.sources.crates.cursor // 0) < (.sources.crates.catalog_size // 0)' \
+              reports/registry-artifact-crawl.json >/dev/null; then
+            gh workflow run registry-artifacts.yml --ref main \
+              -f package_budget="$PACKAGE_BUDGET" \
+              -f byte_budget="$BYTE_BUDGET"
+          else
+            echo "The crates crawl keeps its durable retry queue for the next scheduled run."
+          fi
+      - name: Fail on an unrecoverable crawl error
+        if: steps.crawl.outcome == 'failure'
+        run: exit 1
+
+  npm-critical:
+    needs: crawl
+    if: ${{ !cancelled() && needs.crawl.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Build the current critical npm catalog
+        run: python3 tools/npm_critical_catalog.py
+      - name: Restore npm evidence and reset the bounded sweep
+        run: |
+          git fetch --depth=1 origin artifact-data || true
+          mkdir -p data/production/intermediate reports
+          # Reads the sharded layout, or the legacy registry-state.json until the first
+          # publication after the layout change migrates the branch.
+          python3 tools/registry_state.py restore --ref origin/artifact-data \
+            --state data/production/registry-state
+          if git cat-file -e origin/artifact-data:data/production/transport/npm-observations/manifest.json 2>/dev/null; then
+            rm -rf /tmp/npm-observation-transport
+            mkdir -p /tmp/npm-observation-transport
+            git archive origin/artifact-data data/production/transport/npm-observations \
+              | tar -x -C /tmp/npm-observation-transport
+            python3 tools/transport_shards.py unpack \
+              --input-dir /tmp/npm-observation-transport/data/production/transport/npm-observations \
+              --output data/production/intermediate/npm.jsonl
+          elif git cat-file -e origin/artifact-data:data/production/intermediate/npm.jsonl 2>/dev/null; then
+            git show origin/artifact-data:data/production/intermediate/npm.jsonl \
+              > data/production/intermediate/npm.jsonl
+          fi
+          python3 - <<'PY'
+          import hashlib
+          import sys
+          from datetime import date
+          from pathlib import Path
+
+          sys.path.insert(0, "src")
+          from global_executables.registry_state import load_state, save_state
+
+          path = Path("data/production/registry-state")
+          catalog = Path("data/production/npm-critical-packages.txt")
+          state = load_state(path)
+          state.setdefault("sources", {})["npm"] = {
+              "catalog_complete": True,
+              "catalog_digest": "sha256:" + hashlib.sha256(catalog.read_bytes()).hexdigest(),
+              "catalog_scope": "ecosyste.ms critical npm population covering 80% of downloads or dependent repositories",
+              "catalog_size": len(catalog.read_text().splitlines()),
+              "catalog_snapshot": date.today().isoformat(),
+              "catalog_source": "https://packages.ecosyste.ms/critical?registry=npmjs.org",
+              "cursor": 0,
+              "failure_attempts": {},
+              "failures": {},
+              "packages_file": "data/production/npm-critical-packages.txt",
+              "retry_npm": [],
+              "unavailable": {},
+          }
+          save_state(path, state)
+          PY
+      - name: Inspect the complete critical npm population
+        run: |
+          docker build --file Dockerfile.go-crawler --target runtime \
+            --tag global-executables-go-crawler:ci .
+          docker run --rm --init -v "$PWD:/state" global-executables-go-crawler:ci \
+            crawl --source npm --passes 0 --package-budget 3000
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: npm-critical-crawl-report
+          path: reports/registry-artifact-crawl.json
+      - name: Publish critical npm state and observations
+        id: publish
+        run: |
+          mkdir -p /tmp/ci-registry-npm/data/production/intermediate \
+            /tmp/ci-registry-npm/reports
+          python3 tools/registry_state.py copy --from data/production/registry-state \
+            --to /tmp/ci-registry-npm/data/production/registry-state
+          cp data/production/npm-critical-packages.txt \
+            /tmp/ci-registry-npm/data/production/npm-critical-packages.txt
+          cp data/production/intermediate/npm.jsonl \
+            /tmp/ci-registry-npm/data/production/intermediate/npm.jsonl
+          cp reports/registry-artifact-crawl.json \
+            /tmp/ci-registry-npm/reports/registry-artifact-crawl.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          publish_output="$(BASE=/tmp/ci-registry SOURCES=npm OBSERVATION_SOURCES=' ' \
+            ALLOW_CI_OWNED_NPM=1 \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "$publish_output"
+          if printf '%s\n' "$publish_output" | grep -qx published; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Refresh the dictionary after npm changes
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh.yml --ref main
