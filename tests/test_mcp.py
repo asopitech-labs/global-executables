@@ -45,6 +45,18 @@ async def _assert_protocol(session: ClientSession):
     assessment = await session.call_tool("assess_executables", {"names": ["envcp", "evpk"]})
     assert not assessment.isError
     assert assessment.structuredContent["results"][0]["found"] is True
+    environment = {"package_manager": "npm", "runtime_version": "24", "install_scope": "project"}
+    guidance = await session.call_tool("resolve_installation", {"name": "envcp", "environment": environment})
+    assert not guidance.isError
+    assert guidance.structuredContent["contract_version"] == "installation-v1"
+    assert guidance.structuredContent["method"]["package_manager"] == "npm"
+    assert guidance.structuredContent["steps"][0]["argv"] == ["npm", "install", "--", "envcp"]
+    assert json.loads(guidance.content[0].text) == guidance.structuredContent
+    guidance_batch = await session.call_tool("resolve_installations", {"names": ["envcp", "missing-cli"], "environment": environment})
+    assert not guidance_batch.isError
+    assert guidance_batch.structuredContent["results"][0] == guidance.structuredContent
+    assert guidance_batch.structuredContent["results"][1]["status"] == "not_found_in_index"
+    assert json.loads(guidance_batch.content[0].text) == guidance_batch.structuredContent
     coverage = await session.call_tool("get_coverage", {})
     assert not coverage.isError
     assert coverage.structuredContent["freshness"]["status"] == "unavailable"
