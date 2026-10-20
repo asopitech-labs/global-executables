@@ -1,0 +1,55 @@
+# Issue #84: on-demand public-package discovery lifecycle (design, not implemented)
+
+Status: design for review. On-demand acquisition and automatic publication are not live. Human submissions, publisher identity claims, Issue forms, and write-capable public MCP tools are outside this design.
+
+## Intent and operating boundary
+
+An MCP client or CLI user supplies an exact public package identity, such as npm `typescript` or PyPI `black`, and optionally a version and executable name. Global Executables fetches current authoritative registry metadata and a bounded release artifact, checks the declared installed entry point, and returns a fresh, evidence-bearing observation immediately. This answers whether a **known package** currently publishes a command without waiting for the next broad crawl. It cannot prove that an arbitrary command name is absent from all registries; command-only reverse lookup remains a query over the published partial index.
+
+The first supported on-demand sources should be PyPI, crates.io and npm because their release metadata and executable declarations can be checked concretely. The portfolio smoke test in [ISSUE_84_PORTFOLIO_SMOKE.md](ISSUE_84_PORTFOLIO_SMOKE.md) requires PyPI and crates.io to distinguish Alopex's Python library from its separate CLI crate and Skulk's library-only crate. GitHub release assets such as Nimino need a later source adapter with checksum, executable-file and target rules; they must return `unsupported` until that adapter exists. The same acquisition engine serves MCP and CLI. No ecosystem may inherit another's entry-point rules.
+
+## Two different results
+
+**Live observation:** `discover_published_package(ecosystem, package, version?, command?, target?)` reads the public registry and returns `verified_entry_point`, `unverified`, `not_published`, `temporarily_unavailable`, or `unsupported`. It includes canonical package ID, exact version, observed command(s), entry-point path/declaration, artifact digest, authoritative metadata and artifact URLs, acquisition time, cache age, verification method, target constraints, and any unresolved conditions. This is a factual response from a specific source at a specific time, not a dictionary snapshot or an installation recipe. A registry timeout must never become `not_published`.
+
+**Published dictionary observation:** a verified live result can later be recorded as a source-owned observation and incorporated by the normal refresh pipeline. Only after the generated `dictionary` snapshot contains that claim may MCP/Pages lookup call it indexed. A fresh live result must carry `publication_status: not_indexed` or the matching snapshot ID. The public MCP tool remains read-only and never dispatches CI or writes a branch. An authorized collection job/CLI can perform the durable promotion, rechecking evidence before commit. This keeps public query traffic from controlling shared publication.
+
+CLI and MCP return the same versioned JSON contract for the same input and evidence. If a check exceeds the bounded synchronous budget, return an explicit timeout/unavailable state; add a persistent job ID only if a durable job service is later designed. A process-local cache alone cannot support a cross-process `pending` status.
+
+## Acquisition state and freshness
+
+For each `(ecosystem, canonical package ID, exact release version, target variant)` record immutable evidence: registry release metadata, artifact digest, parsed entry-point declaration, checked time, verifier version and source URLs. Command names and entry-point paths are verified claims attached to the release. Reject a repository-name match or arbitrary matching file in an archive as insufficient. npm `bin` must point to a member in the exact tarball; PyPI console-script metadata must come from the selected wheel and be matched to that wheel's supported tags/target. Archive parsing must be bounded and must not execute package scripts. An install-and-invoke check, if available, is separately recorded and is required before #83 can promote a target recipe to `ready`.
+
+Live cache states are `fresh`, `stale`, `revalidating`, and `failed_revalidation`. Cache identity includes ecosystem, normalized package, exact version or moving alias, target, verifier version and relevant evidence digest. Use conditional requests where supported; enforce a short, source-specific TTL for moving aliases such as `latest`, a longer TTL for immutable version artifacts, and a short negative cache. The first implementation must choose and test numeric TTLs. Expired evidence can be displayed as historical with its checked time, but cannot be presented as currently verified when revalidation fails. Keep source failure distinct from authoritative 404/withdrawal. Coalesce concurrent identical requests and bound per-source concurrency and cost.
+
+An exact old release may remain available while the registry's `latest` moves; do not treat an old observation as a current-version update. Use registry-specific publication time and release status rather than lexical or universal SemVer ordering. Yanked, unpublished or withdrawn releases and removed entry points transition their **current** source claim to `withdrawn` only after an authoritative check; transient failures mark it `stale_unknown`. Distinguish an authoritative 404/410, an access restriction such as 451, and temporary 429/5xx responses. Historical evidence remains available for audit. Reappearance creates a new verified observation. A deprecation warning is not a removal.
+
+## Durable publication lifecycle
+
+The authorized collection process stores verified on-demand observations as a distinct, source-owned input on `artifact-data`. The normal refresh restores those inputs, merges them with crawler observations, validates the canonical output, publishes `dictionary`, then triggers Pages. Writing directly to `dictionary` would be erased by the next refresh. The durable source stores a current-state projection plus an append-only observation/event history, so failed jobs and withdrawal decisions can be replayed.
+
+Publication states are `observed → verified → queued_for_refresh → indexed(snapshot)` or `failed(reason, retry_after)`. `indexed` requires a read-back of the published snapshot and matching provider evidence. Failure leaves the observation queued; a reconciler retries safely. Use source-owned compare-and-swap updates against the latest branch head, deterministic claim keys and idempotent event digests. A delayed old observation cannot overwrite a newer verification. A withdrawal is an explicit source event/tombstone, never an omitted row: the current partial-source merge preserves omissions. Package-level replacement must retire obsolete entry points from this source while leaving independent crawler observations intact; the current observation merger's row-level retention needs a deliberate change for this source. If a command disappears entirely, the normal shrink guard needs an auditable withdrawal reason.
+
+The canonical provider schema needs provenance for multiple independent observations of one claim. Today `provider_key` includes version/source and `pipeline.merge()` copies a fixed field list, so naively appending a live result either duplicates a provider or drops its evidence. Define a stable provider/claim identity and a provenance list or equivalent sidecar before enabling promotion. Preserve crawler and on-demand evidence, same-name unrelated packages, existing collision results, and `partial` coverage. Query-time live results must not mutate the historical canonical lookup contract.
+
+## Query and publication safety
+
+The public tool accepts ecosystem/package/version/target values, never an arbitrary URL. Construct official registry endpoints in code; treat artifact URLs supplied by registry metadata as untrusted and check HTTPS host allowlists, redirects, destination IP/port, size and time limits. Limit archive member count, expanded bytes and paths; do not run package scripts. Set per-source concurrency/rate limits and return rate-limit evidence with a retry time. Keep network collection opt-in/offline-aware for local CLI and MCP deployments. A remote MCP service must have a bounded shared-cache policy and a way to disable live acquisition.
+
+The authorized publish operation is a separate local/CI command with explicit credentials and a fresh verification. Public MCP remains read-only. Pages can display indexed provenance and offer a read-only live-query route only if a separately operated backend exists; static Pages itself cannot fetch arbitrary package artifacts or hold a write credential.
+
+## Tests and release gates
+
+1. Shared MCP/CLI fixtures prove identical structured results for exact package/version, moving `latest`, mismatched command, target-incompatible wheel, missing release, registry timeout, rate limit and unsupported ecosystem. A timeout never means absence.
+2. Fixed metadata and artifact fixtures verify npm `bin`, PyPI wheel `console_scripts`, and crates.io `[[bin]]`/implicit binary rules against exact archive members and target constraints. A library-only crate must return an explicit no-command result. Malformed archives, absent target files, oversized responses and unsafe redirects fail closed. One pinned real-public-package smoke test per first-stage ecosystem confirms current upstream behavior.
+3. Fake clock and HTTP fixtures cover cache hit, conditional revalidation, TTL expiry, negative cache, concurrent request coalescing, temporary failure, authoritative withdrawal, reappearance and historical evidence display.
+4. Durable integration follows a verified observation through `artifact-data` source state, normal refresh, canonical dictionary, MCP and Pages. Failed publication remains queued; retry is idempotent; an old result cannot rewind a newer result; withdrawal removes only its source claim; crawler observations and partial coverage survive.
+5. #83 regression: a verified entry point alone never yields a `ready` install recipe. A target-specific install-and-invoke check is required. Existing lookup tools and published snapshot responses remain compatible.
+
+## Decisions to settle before implementation
+
+- Exact MCP/CLI operation name and whether `version` omitted means registry `latest` or all currently published versions. The first implementation should default to one explicit registry-selected version, with its selection rule in the response.
+- Numeric request budgets, concurrency limits and TTLs per source, plus behavior when a remote MCP deployment has no writable cache.
+- The `artifact-data` source layout, publication lock and reconciliation trigger for authorized promotion. On-demand user queries alone do not enqueue central publication.
+- Stable claim/provenance schema and source-specific withdrawal semantics, especially when a crawler still observes the same package.
+- Whether a later authenticated API is needed to persist live query results. It is not necessary for read-only real-time collection and is outside the first delivery.
