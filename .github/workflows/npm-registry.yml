@@ -1,0 +1,85 @@
+name: npm registry crawl
+
+# A separate source key keeps this broad crawl's cursor and observations apart
+# from the daily critical npm sweep in registry-artifacts.yml.
+on:
+  schedule:
+    - cron: "13 */4 * * *"
+  workflow_dispatch:
+    inputs:
+      package_budget:
+        description: "Maximum broad npm packages to inspect"
+        required: false
+        default: "10000"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: npm-registry-crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e '.[test]'
+      - name: Restore broad npm state and catalog
+        env:
+          BASE: /tmp/ci-registry
+          SOURCES: npm-registry
+          OBSERVATION_SOURCES: " "
+        run: bash tools/crawl_parallel.sh seed
+      - name: Fetch a complete npm registry package-name snapshot when needed
+        run: |
+          mkdir -p data/production/intermediate
+          if test -f /tmp/ci-registry/data/production/npm-packages.txt; then
+            cp /tmp/ci-registry/data/production/npm-packages.txt data/production/npm-packages.txt
+            cp /tmp/ci-registry/data/production/npm-packages.txt.manifest.json data/production/npm-packages.txt.manifest.json
+          fi
+          python3 tools/npm_full_catalog.py
+      - name: Inspect a bounded broad npm batch
+        env:
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '10000' }}
+        run: |
+          python3 tools/registry_state.py copy \
+            --from /tmp/ci-registry/data/production/registry-state \
+            --to data/production/registry-state
+          if test -f /tmp/ci-registry/data/production/intermediate/npm-registry.jsonl; then
+            cp /tmp/ci-registry/data/production/intermediate/npm-registry.jsonl \
+              data/production/intermediate/npm-registry.jsonl
+          fi
+          python3 tools/npm_registry_crawl.py --budget "$PACKAGE_BUDGET" \
+            --report reports/registry-artifact-crawl.json
+      - name: Publish broad npm state and observations
+        id: publish
+        run: |
+          mkdir -p /tmp/ci-registry-npm-registry/data/production/intermediate \
+            /tmp/ci-registry-npm-registry/reports
+          python3 tools/registry_state.py copy --from data/production/registry-state \
+            --to /tmp/ci-registry-npm-registry/data/production/registry-state
+          cp data/production/npm-packages.txt* /tmp/ci-registry-npm-registry/data/production/
+          cp data/production/intermediate/npm-registry.jsonl \
+            /tmp/ci-registry-npm-registry/data/production/intermediate/npm-registry.jsonl
+          cp reports/registry-artifact-crawl.json \
+            /tmp/ci-registry-npm-registry/reports/registry-artifact-crawl.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          publish_output="$(BASE=/tmp/ci-registry SOURCES=npm-registry OBSERVATION_SOURCES=' ' \
+            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
+          printf '%s\n' "$publish_output"
+          if printf '%s\n' "$publish_output" | grep -qx published; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Refresh dictionary after broad npm changes
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh.yml --ref main

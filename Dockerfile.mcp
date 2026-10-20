@@ -1,0 +1,28 @@
+# Light stdio image for the read-only MCP server. It contains no dataset: files are
+# fetched on demand from the public dictionary branch and cached under /cache.
+#   docker build -f Dockerfile.mcp -t global-executables-mcp .
+#   docker run -i --rm -v global-executables-cache:/cache global-executables-mcp
+FROM python:3.12-slim AS build
+WORKDIR /src
+COPY pyproject.toml README.md LICENSE CHANGELOG.md ./
+COPY src ./src
+COPY schema ./schema
+RUN pip install --no-cache-dir build && python -m build --wheel --outdir /dist
+
+FROM python:3.12-slim
+LABEL io.modelcontextprotocol.server.name="io.github.asopitech-labs/global-executables" \
+      org.opencontainers.image.title="Global Executables MCP server" \
+      org.opencontainers.image.description="Read-only MCP server: is this CLI command name already taken across package ecosystems?" \
+      org.opencontainers.image.source="https://github.com/asopitech-labs/global-executables" \
+      org.opencontainers.image.url="https://asopitech-labs.github.io/global-executables/" \
+      org.opencontainers.image.licenses="MIT"
+COPY --from=build /dist/*.whl /tmp/
+RUN pip install --no-cache-dir /tmp/*.whl && rm /tmp/*.whl \
+    && useradd --create-home --uid 10001 mcp \
+    && mkdir /cache && chown mcp /cache
+USER mcp
+WORKDIR /home/mcp
+ENV GLOBAL_EXECUTABLES_CACHE_DIR=/cache \
+    PYTHONUNBUFFERED=1
+VOLUME ["/cache"]
+ENTRYPOINT ["global-executables", "mcp"]

@@ -1,0 +1,171 @@
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+from typing import Any
+
+from .coverage import coverage_scope as negative_coverage_scope, coverage_warnings
+from .model import filename, provider_matches_scope, shard, valid_command
+
+
+class DatasetIndexError(RuntimeError):
+    """A required derived index is absent, malformed, or not from this build."""
+
+
+class Dataset:
+    def __init__(self, root: str | Path):
+        self.root = Path(root)
+        self.data = self.root / "data"
+
+    def _read_bytes(self, relative: str) -> bytes | None:
+        """Return one dataset file by its path relative to the dataset root, or None."""
+        path = self.root / relative
+        return path.read_bytes() if path.is_file() else None
+
+    def _verified_index_bytes(self, relative: str, expected: str) -> bytes | None:
+        return self._read_bytes(f"data/{relative}")
+
+    @property
+    def metadata(self) -> dict[str, Any]:
+        raw = self._read_bytes("data/metadata.json")
+        if raw is None:
+            raise FileNotFoundError(f"dataset metadata not found: {self.data / 'metadata.json'}")
+        return json.loads(raw)
+
+    @property
+    def freshness(self) -> dict[str, Any]:
+        """Return the latest partial-scan report without changing canonical metadata."""
+        raw = self._read_bytes("reports/freshness.json")
+        if raw is None:
+            return {"status": "unavailable", "coverage_kind": "partial"}
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            return {"status": "invalid", "coverage_kind": "partial"}
+
+    def get(self, name: str, scope: dict[str, str] | None = None) -> dict[str, Any] | None:
+        if not valid_command(name):
+            return None
+        raw = self._read_bytes(f"data/executables/{shard(name)}/{filename(name)}")
+        if raw is None:
+            return None
+        value = json.loads(raw)
+        if value["command"] != name:
+            return None
+        if scope:
+            providers = [p for p in value["providers"] if provider_matches_scope(p, scope)]
+            if not providers:
+                return None
+            value = {**value, "providers": providers}
+        return value
+
+    def check(self, name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:
+        if not valid_command(name):
+            raise ValueError("invalid executable name: expected 1–255 characters without path separators or controls")
+        meta = self.metadata
+        record = self.get(name, scope)
+        coverage = meta.get("coverage", {})
+        coverage_scope = negative_coverage_scope(meta, scope)
+        exhaustive = coverage_scope == "exhaustive"
+        status = "collision" if record else ("clear_in_index" if exhaustive else "unknown")
+        result = {"name": name, "found": bool(record), "status": status, "snapshot": meta["snapshot"],
+                  "coverage_scope": coverage_scope,
+                  "checked_sources": meta.get("checked_sources", []),
+                  "searched_sources": meta.get("checked_sources", []),
+                  "coverage": coverage, "warnings": coverage_warnings(meta),
+                  "freshness": self.freshness.get("status", "unavailable")}
+        if record:
+            result["providers"] = record["providers"]
+        else:
+            result["absence"] = {
+                "status": "not_found_in_current_index",
+                "confidence": "exhaustive" if exhaustive else "insufficient_coverage",
+                "searched_sources": meta.get("checked_sources", []),
+            }
+        if scope:
+            result["scope"] = scope
+        return result
+
+    def _read_index(self, relative: str) -> set[str]:
+        meta = self.metadata
+        expected = meta.get("index_manifest", {}).get(relative)
+        raw = None if expected is None else self._verified_index_bytes(relative, expected)
+        if raw is None:
+            raise DatasetIndexError(f"required index missing from manifest or disk: {relative}")
+        if hashlib.sha256(raw).hexdigest() != expected:
+            raise DatasetIndexError(f"derived index is stale or corrupt: {relative}")
+        try:
+            values = json.loads(raw)
+        except json.JSONDecodeError as error:
+            raise DatasetIndexError(f"invalid JSON index: {relative}") from error
+        if not isinstance(values, list) or any(not isinstance(value, str) for value in values):
+            raise DatasetIndexError(f"invalid index entries: {relative}")
+        return set(values)
+
+    def _all_from_group(self, group: str) -> set[str]:
+        paths = sorted(relative for relative in self.metadata.get("index_manifest", {}) if relative.startswith(f"indexes/{group}/"))
+        if not paths:
+            raise DatasetIndexError(f"index group is missing: {group}")
+        return set().union(*(self._read_index(path) for path in paths))
+
+    def _read_optional_index(self, relative: str) -> set[str]:
+        if relative not in self.metadata.get("index_manifest", {}):
+            return set()
+        return self._read_index(relative)
+
+    def search(self, prefix: str = "", length: int | None = None, ecosystem: str | None = None,
+               limit: int = 100, scope: dict[str, str] | None = None) -> list[str]:
+        candidates: list[set[str]] = []
+        if prefix:
+            # Two-character safe prefixes map to one shard. One-character and
+            # unusual prefixes read the bounded prefix-index group, never canonical files.
+            if len(prefix) >= 2 and shard(prefix)[:1] != "_":
+                candidates.append(self._read_optional_index(f"indexes/prefix/{shard(prefix)}.json"))
+            else:
+                candidates.append(self._all_from_group("prefix"))
+        if length is not None:
+            candidates.append(self._read_optional_index(f"indexes/length/{length}.json"))
+        if ecosystem:
+            candidates.append(self._read_optional_index(f"indexes/ecosystem/{ecosystem}.json"))
+        if scope:
+            for dimension, value in scope.items():
+                candidates.append(self._read_optional_index(f"indexes/scope/{dimension}/{value}.json"))
+        names = set.intersection(*candidates) if candidates else self._all_from_group("prefix")
+        filtered = (name for name in names if (not prefix or name.startswith(prefix)) and (length is None or len(name) == length))
+        return sorted(filtered, key=lambda value: (value.casefold(), value))[:limit]
+
+    def similar(self, name: str, limit: int = 20, scope: dict[str, str] | None = None) -> list[dict[str, Any]]:
+        def distance(a: str, b: str) -> int:
+            row = list(range(len(b) + 1))
+            for i, left in enumerate(a, 1):
+                following = [i] + [0] * len(b)
+                for j, right in enumerate(b, 1):
+                    following[j] = min(following[j - 1] + 1, row[j] + 1, row[j - 1] + (left != right))
+                row = following
+            return row[-1]
+
+        def grams(value: str) -> set[str]:
+            padded = f"  {value.casefold()}  "
+            return {padded[i:i + 3] for i in range(len(padded) - 2)}
+
+        target = grams(name)
+        postings = []
+        manifest = self.metadata.get("index_manifest", {})
+        for trigram in target:
+            relative = f"indexes/trigram/{trigram.encode().hex()}.json"
+            if relative in manifest:
+                postings.append(self._read_index(relative))
+        candidates = set().union(*postings) if postings else set()
+        if scope:
+            scope_sets = [self._read_optional_index(f"indexes/scope/{dimension}/{value}.json")
+                          for dimension, value in scope.items()]
+            candidates &= set.intersection(*scope_sets) if scope_sets else candidates
+        found = []
+        for candidate in candidates:
+            candidate_grams = grams(candidate)
+            similarity = len(target & candidate_grams) / len(target | candidate_grams)
+            edit_distance = distance(name.casefold(), candidate.casefold())
+            if candidate.startswith(name) or name.startswith(candidate) or edit_distance <= 2 or similarity >= .3:
+                found.append({"name": candidate, "edit_distance": edit_distance, "trigram_similarity": round(similarity, 3)})
+        return sorted(found, key=lambda value: (value["edit_distance"], -value["trigram_similarity"], value["name"]))[:limit]

@@ -1,0 +1,536 @@
+package registryinspect
+
+import (
+	"archive/tar"
+	"archive/zip"
+	"bufio"
+	"bytes"
+	"cmp"
+	"compress/gzip"
+	"context"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"maps"
+	"net/http"
+	"net/url"
+	"path"
+	"regexp"
+	"slices"
+	"strconv"
+	"strings"
+
+	"github.com/asopitech-labs/global-executables/internal/gocrawl"
+)
+
+type PyPIInspector struct {
+	baseURL string
+	http    *requester
+}
+
+// pypiProject is the part of a project (or release) JSON document the inspector uses.
+type pypiProject struct {
+	Info pypiInfo        `json:"info"`
+	URLs []pypiCandidate `json:"urls"`
+}
+
+type pypiInfo struct {
+	Name     string `json:"name"`
+	Version  string `json:"version"`
+	Homepage string `json:"home_page"`
+}
+
+// projectHeadBytes is the first range read of an oversized project document; "info" (the
+// first member, with the description) is almost always within it, and it grows by 4x up
+// to projectInfoLimit when it is not. A description beyond that (one project ships a
+// 43 MB one) cannot be read within the limits by any JSON endpoint and is final.
+const (
+	projectHeadBytes = 64 * 1024
+	projectInfoLimit = 1 << 20
+)
+
+// largeProject handles a project whose /pypi/<name>/json exceeds the metadata limit:
+// a range read of the document's head gives info.version, and when that version is the
+// one already recorded the package is unchanged (no further request). Otherwise the
+// release document /pypi/<name>/<version>/json (info and urls of that release only) is
+// read. Both are PyPI's JSON API; the range read keeps the transfer bounded.
+func (i *PyPIInspector) largeProject(ctx context.Context, work gocrawl.ModuleWork, projectURL string) (pypiProject, int64, bool, error) {
+	var downloaded int64
+	var info pypiInfo
+	for size := int64(projectHeadBytes); ; size *= 4 {
+		size = min(size, projectInfoLimit, i.http.config.MaxMetadataBytes)
+		headers := http.Header{"Range": {fmt.Sprintf("bytes=0-%d", size-1)}}
+		response, err := i.http.request(ctx, http.MethodGet, projectURL, headers, size)
+		if err != nil {
+			return pypiProject{}, downloaded, false, err
+		}
+		downloaded += int64(len(response.body))
+		var complete bool
+		info, complete, err = leadingInfo(response.body)
+		if err != nil {
+			return pypiProject{}, downloaded, false, err
+		}
+		if complete {
+			break
+		}
+		if size >= min(projectInfoLimit, i.http.config.MaxMetadataBytes) || response.statusCode != http.StatusPartialContent {
+			return pypiProject{}, downloaded, false, permanentError{fmt.Errorf("project info exceeds %d bytes", size)}
+		}
+	}
+	if info.Version == "" {
+		return pypiProject{}, downloaded, false, permanentError{errors.New("project document has no info.version")}
+	}
+	if work.SameVersion(info.Version) {
+		return pypiProject{Info: info}, downloaded, true, nil
+	}
+	releaseURL := strings.TrimSuffix(projectURL, "/json") + "/" + url.PathEscape(info.Version) + "/json"
+	response, err := i.http.request(ctx, http.MethodGet, releaseURL, nil, i.http.config.MaxMetadataBytes)
+	if err != nil {
+		return pypiProject{}, downloaded, false, err
+	}
+	downloaded += int64(len(response.body))
+	var release pypiProject
+	if err := json.Unmarshal(response.body, &release); err != nil {
+		return pypiProject{}, downloaded, false, err
+	}
+	if release.Info.Version == "" {
+		release.Info = info
+	}
+	return release, downloaded, false, nil
+}
+
+// leadingInfo decodes the "info" member of a JSON document from a prefix of it. complete
+// is false when the prefix ends before "info" does.
+func leadingInfo(prefix []byte) (pypiInfo, bool, error) {
+	decoder := json.NewDecoder(bytes.NewReader(prefix))
+	incomplete := func(err error) bool {
+		return errors.Is(err, io.ErrUnexpectedEOF) || errors.Is(err, io.EOF)
+	}
+	if token, err := decoder.Token(); err != nil {
+		return pypiInfo{}, false, nilIf(incomplete(err), err)
+	} else if delim, ok := token.(json.Delim); !ok || delim != '{' {
+		return pypiInfo{}, false, errors.New("project document is not an object")
+	}
+	for decoder.More() {
+		token, err := decoder.Token()
+		if err != nil {
+			return pypiInfo{}, false, nilIf(incomplete(err), err)
+		}
+		if key, _ := token.(string); key == "info" {
+			var info pypiInfo
+			if err := decoder.Decode(&info); err != nil {
+				return pypiInfo{}, false, nilIf(incomplete(err), err)
+			}
+			return info, true, nil
+		}
+		var skip json.RawMessage
+		if err := decoder.Decode(&skip); err != nil {
+			return pypiInfo{}, false, nilIf(incomplete(err), err)
+		}
+	}
+	return pypiInfo{}, true, nil
+}
+
+func nilIf(condition bool, err error) error {
+	if condition {
+		return nil
+	}
+	return err
+}
+
+type pypiCandidate struct {
+	PackageType string `json:"packagetype"`
+	Filename    string `json:"filename"`
+	Size        int64  `json:"size"`
+	URL         string `json:"url"`
+}
+
+func NewPyPIInspector(config Config) *PyPIInspector {
+	if config.BaseURL == "" {
+		config.BaseURL = "https://pypi.org"
+	}
+	return &PyPIInspector{baseURL: strings.TrimRight(config.BaseURL, "/"), http: newRequester(config)}
+}
+
+func (i *PyPIInspector) Metrics() Metrics { return i.http.metricsSnapshot() }
+
+func (i *PyPIInspector) Inspect(ctx context.Context, work gocrawl.ModuleWork) gocrawl.ModuleResult {
+	result := gocrawl.ModuleResult{Work: work}
+	packageCtx, cancel := context.WithTimeout(ctx, i.http.config.PackageTimeout)
+	defer cancel()
+	metadataURL := i.baseURL + "/pypi/" + url.PathEscape(work.Module) + "/json"
+	var payload pypiProject
+	response, err := i.http.request(packageCtx, http.MethodGet, metadataURL, nil, i.http.config.MaxMetadataBytes)
+	if _, tooBig := errors.AsType[sizeLimitError](err); tooBig {
+		// A project with many releases (pydantic_core, grpcio, ddtrace ...) has a project
+		// document larger than the limit, most of it the history of every release. Read
+		// the latest version from the head of that document and the files of that one
+		// release from its own, much smaller document.
+		var downloaded int64
+		var unchanged bool
+		payload, downloaded, unchanged, err = i.largeProject(packageCtx, work, metadataURL)
+		result.DownloadedBytes += downloaded
+		if err != nil {
+			return classifyResult(ctx, result, err)
+		}
+		if unchanged {
+			return result.AsUnchanged(payload.Info.Version)
+		}
+	} else if err != nil {
+		return classifyResult(ctx, result, err)
+	} else {
+		result.DownloadedBytes = int64(len(response.body))
+		if err := json.Unmarshal(response.body, &payload); err != nil {
+			return classifyResult(ctx, result, err)
+		}
+	}
+	result.Latest = payload.Info.Version
+	if work.SameVersion(payload.Info.Version) {
+		// The release is the one already recorded: skip the wheel/sdist reads.
+		return result.AsUnchanged(payload.Info.Version)
+	}
+	candidates := make([]pypiCandidate, 0, len(payload.URLs))
+	for _, candidate := range payload.URLs {
+		if candidate.PackageType == "bdist_wheel" || candidate.PackageType == "sdist" {
+			candidates = append(candidates, candidate)
+		}
+	}
+	slices.SortFunc(candidates, func(left, right pypiCandidate) int {
+		leftWheel, rightWheel := strings.HasSuffix(left.Filename, ".whl"), strings.HasSuffix(right.Filename, ".whl")
+		if leftWheel != rightWheel {
+			if leftWheel {
+				return -1
+			}
+			return 1
+		}
+		leftAny, rightAny := strings.Contains(left.Filename, "none-any"), strings.Contains(right.Filename, "none-any")
+		if leftAny != rightAny {
+			if leftAny {
+				return -1
+			}
+			return 1
+		}
+		return cmp.Compare(left.Filename, right.Filename)
+	})
+	if len(candidates) == 0 {
+		return classifyResult(ctx, result, permanentError{errors.New("latest release has no wheel or sdist")})
+	}
+	packageName := payload.Info.Name
+	if packageName == "" {
+		packageName = work.Module
+	}
+	var repository *string
+	if payload.Info.Homepage != "" {
+		repository = &payload.Info.Homepage
+	}
+	var lastErr error
+	unreadable := true // every candidate failed for a reason that cannot change for this version
+	for _, candidate := range candidates {
+		var commands []string
+		var downloaded int64
+		if strings.HasSuffix(candidate.Filename, ".whl") {
+			commands, downloaded, err = i.wheelCommands(packageCtx, candidate.URL, candidate.Size)
+		} else {
+			commands, downloaded, err = i.sdistCommands(packageCtx, candidate.URL, candidate.Size)
+		}
+		result.DownloadedBytes += downloaded
+		if err != nil {
+			lastErr = err
+			unreadable = unreadable && unreadableArtifact(err)
+			continue
+		}
+		for _, command := range commands {
+			result.Observations = append(result.Observations, gocrawl.Observation{
+				Command: command, Confidence: "direct", Ecosystem: "pypi", Language: "python",
+				LatestVersion: payload.Info.Version, Package: packageName, Registry: "pypi", Repository: repository,
+				Source: candidate.URL, SourceType: "language_package", Version: payload.Info.Version,
+			})
+		}
+		result.Verdict = gocrawl.VerdictSuccess
+		return result
+	}
+	if unreadable && lastErr != nil && ctx.Err() == nil && packageCtx.Err() == nil {
+		// Final for this version: recorded as checked (outcome Unreadable), not retried, and
+		// not read again until the package releases another version.
+		result.Verdict, result.Error, result.Outcome = gocrawl.VerdictPermanent, lastErr.Error(), gocrawl.Unreadable
+		return result
+	}
+	return classifyResult(ctx, result, lastErr)
+}
+
+// unreadableArtifact reports whether an artifact error is a property of the file itself
+// (too large to read, or a corrupt archive), so another attempt would fail the same way.
+func unreadableArtifact(err error) bool {
+	if _, ok := errors.AsType[sizeLimitError](err); ok {
+		return true
+	}
+	return errors.Is(err, tar.ErrHeader)
+}
+
+func classifyResult(parent context.Context, result gocrawl.ModuleResult, err error) gocrawl.ModuleResult {
+	verdict, message, uncountedRetry := classify(parent, err)
+	result.Verdict, result.Error, result.UncountedRetry = gocrawl.Verdict(verdict), message, uncountedRetry
+	return result
+}
+
+func (i *PyPIInspector) wheelCommands(ctx context.Context, target string, size int64) ([]string, int64, error) {
+	var err error
+	if size <= 0 {
+		size, err = i.artifactSize(ctx, target)
+		if err != nil {
+			return nil, 0, err
+		}
+	}
+	if size > i.http.config.MaxArtifactBytes {
+		return nil, 0, tooLarge("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
+	}
+	reader := newHTTPRangeReaderAt(ctx, i.http, target, size)
+	archive, err := zip.NewReader(reader, size)
+	if err == nil {
+		commands, inspectErr := commandsFromWheel(archive)
+		if inspectErr == nil {
+			return commands, reader.Downloaded(), nil
+		}
+		err = inspectErr
+	}
+	if size > i.http.config.MaxFullDownloadBytes {
+		return nil, reader.Downloaded(), err
+	}
+	response, fullErr := i.http.request(ctx, http.MethodGet, target, nil, i.http.config.MaxFullDownloadBytes)
+	if fullErr != nil {
+		return nil, reader.Downloaded(), fullErr
+	}
+	archive, fullErr = zip.NewReader(bytes.NewReader(response.body), int64(len(response.body)))
+	if fullErr != nil {
+		return nil, reader.Downloaded() + int64(len(response.body)), fullErr
+	}
+	commands, fullErr := commandsFromWheel(archive)
+	return commands, reader.Downloaded() + int64(len(response.body)), fullErr
+}
+
+func (i *PyPIInspector) artifactSize(ctx context.Context, target string) (int64, error) {
+	response, err := i.http.request(ctx, http.MethodHead, target, nil, 0)
+	if err != nil {
+		return 0, err
+	}
+	size, err := strconv.ParseInt(response.header.Get("Content-Length"), 10, 64)
+	if err != nil || size <= 0 {
+		return 0, fmt.Errorf("artifact has invalid Content-Length: %s", target)
+	}
+	if size > i.http.config.MaxArtifactBytes {
+		return 0, tooLarge("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
+	}
+	return size, nil
+}
+
+func commandsFromWheel(archive *zip.Reader) ([]string, error) {
+	set := make(map[string]struct{})
+	for _, file := range archive.File {
+		if strings.HasSuffix(file.Name, ".dist-info/entry_points.txt") {
+			handle, err := file.Open()
+			if err != nil {
+				return nil, err
+			}
+			body, readErr := io.ReadAll(io.LimitReader(handle, 2*1024*1024))
+			closeErr := handle.Close()
+			if readErr != nil {
+				return nil, readErr
+			}
+			if closeErr != nil {
+				return nil, closeErr
+			}
+			for _, command := range consoleScripts(string(body)) {
+				set[command] = struct{}{}
+			}
+		} else if strings.Contains(file.Name, ".data/scripts/") && !strings.HasSuffix(file.Name, "/") {
+			if command := declaredCommand(path.Base(file.Name)); command != "" {
+				set[command] = struct{}{}
+			}
+		}
+	}
+	return sortedKeys(set), nil
+}
+
+func consoleScripts(body string) []string {
+	set := make(map[string]struct{})
+	section := ""
+	for raw := range strings.SplitSeq(body, "\n") {
+		line := strings.TrimSpace(raw)
+		if strings.HasPrefix(line, "[") {
+			section = line
+		} else if section == "[console_scripts]" && strings.Contains(line, "=") {
+			if command := strings.TrimSpace(strings.SplitN(line, "=", 2)[0]); command != "" {
+				set[command] = struct{}{}
+			}
+		}
+	}
+	return sortedKeys(set)
+}
+
+func (i *PyPIInspector) sdistCommands(ctx context.Context, target string, size int64) ([]string, int64, error) {
+	if size > i.http.config.MaxArtifactBytes {
+		// The size PyPI's JSON reports: never download a file that is too large.
+		return nil, 0, tooLarge("artifact size %d exceeds limit %d", size, i.http.config.MaxArtifactBytes)
+	}
+	response, err := i.http.request(ctx, http.MethodGet, target, nil, i.http.config.MaxArtifactBytes)
+	if err != nil {
+		return nil, 0, err
+	}
+	files, err := metadataFiles(response.body)
+	if err != nil {
+		return nil, int64(len(response.body)), err
+	}
+	return commandsFromMetadata(files), int64(len(response.body)), nil
+}
+
+func metadataFiles(body []byte) (map[string][]byte, error) {
+	if archive, err := zip.NewReader(bytes.NewReader(body), int64(len(body))); err == nil {
+		files := make(map[string][]byte)
+		for _, file := range archive.File {
+			if !interestingMetadata(file.Name) {
+				continue
+			}
+			handle, err := file.Open()
+			if err != nil {
+				return nil, err
+			}
+			value, err := io.ReadAll(io.LimitReader(handle, 2*1024*1024))
+			_ = handle.Close()
+			if err != nil {
+				return nil, err
+			}
+			files[file.Name] = value
+		}
+		return files, nil
+	}
+	reader := bytes.NewReader(body)
+	var tarReader *tar.Reader
+	if zipped, err := gzip.NewReader(reader); err == nil {
+		defer zipped.Close()
+		tarReader = tar.NewReader(zipped)
+	} else {
+		tarReader = tar.NewReader(bytes.NewReader(body))
+	}
+	files := make(map[string][]byte)
+	for {
+		header, err := tarReader.Next()
+		if errors.Is(err, io.EOF) {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
+		if header.Typeflag != tar.TypeReg || !interestingMetadata(header.Name) {
+			continue
+		}
+		value, err := io.ReadAll(io.LimitReader(tarReader, 2*1024*1024))
+		if err != nil {
+			return nil, err
+		}
+		files[header.Name] = value
+	}
+	return files, nil
+}
+
+func interestingMetadata(name string) bool {
+	return strings.HasSuffix(name, ".dist-info/entry_points.txt") ||
+		strings.HasSuffix(name, ".egg-info/entry_points.txt") ||
+		strings.HasSuffix(name, "pyproject.toml") || strings.HasSuffix(name, "setup.cfg") ||
+		strings.HasSuffix(name, "setup.py")
+}
+
+func commandsFromMetadata(files map[string][]byte) []string {
+	set := make(map[string]struct{})
+	for name, body := range files {
+		text := string(body)
+		switch {
+		case strings.HasSuffix(name, "entry_points.txt"):
+			for _, command := range consoleScripts(text) {
+				set[command] = struct{}{}
+			}
+		case strings.HasSuffix(name, "pyproject.toml"):
+			collectTOMLScripts(text, set)
+		case strings.HasSuffix(name, "setup.cfg"):
+			collectSetupCFG(text, set)
+		case strings.HasSuffix(name, "setup.py"):
+			collectSetupPy(text, set)
+		}
+	}
+	return sortedKeys(set)
+}
+
+func collectTOMLScripts(body string, set map[string]struct{}) {
+	section := ""
+	for raw := range strings.SplitSeq(body, "\n") {
+		line := strings.TrimSpace(raw)
+		if strings.HasPrefix(line, "[") {
+			section = strings.ToLower(line)
+			continue
+		}
+		if section != "[project.scripts]" && section != "[project.entry-points.console_scripts]" && section != "[tool.poetry.scripts]" {
+			continue
+		}
+		if strings.Contains(line, "=") {
+			command := strings.Trim(strings.TrimSpace(strings.SplitN(line, "=", 2)[0]), "\"'")
+			if command != "" {
+				set[command] = struct{}{}
+			}
+		}
+	}
+}
+
+func collectSetupCFG(body string, set map[string]struct{}) {
+	inEntryPoints := false
+	inConsoleScripts := false
+	for raw := range strings.SplitSeq(body, "\n") {
+		line := strings.TrimSpace(raw)
+		if strings.HasPrefix(line, "[") {
+			inEntryPoints = strings.EqualFold(line, "[options.entry_points]")
+			inConsoleScripts = false
+			continue
+		}
+		if !inEntryPoints || line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		if strings.TrimLeft(raw, " \t") == raw {
+			group, remainder, found := strings.Cut(line, "=")
+			inConsoleScripts = found && strings.EqualFold(strings.TrimSpace(group), "console_scripts")
+			if inConsoleScripts {
+				collectScriptDeclaration(remainder, set)
+			}
+			continue
+		}
+		if inConsoleScripts {
+			collectScriptDeclaration(line, set)
+		}
+	}
+}
+
+func collectScriptDeclaration(line string, set map[string]struct{}) {
+	command, _, found := strings.Cut(strings.TrimSpace(line), "=")
+	if found && strings.TrimSpace(command) != "" {
+		set[strings.TrimSpace(command)] = struct{}{}
+	}
+}
+
+var setupPyScripts = regexp.MustCompile(`(?s)console_scripts[^\[\(]*[\[\(](.*?)[\]\)]`)
+
+func collectSetupPy(body string, set map[string]struct{}) {
+	for _, match := range setupPyScripts.FindAllStringSubmatch(body, -1) {
+		scanner := bufio.NewScanner(strings.NewReader(strings.ReplaceAll(match[1], ",", "\n")))
+		for scanner.Scan() {
+			line := strings.Trim(strings.TrimSpace(scanner.Text()), "\"'")
+			if strings.Contains(line, "=") {
+				command := strings.TrimSpace(strings.SplitN(line, "=", 2)[0])
+				if command != "" {
+					set[command] = struct{}{}
+				}
+			}
+		}
+	}
+}
+
+func sortedKeys(set map[string]struct{}) []string {
+	return slices.Sorted(maps.Keys(set))
+}

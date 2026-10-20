@@ -1,0 +1,250 @@
+from __future__ import annotations
+
+import json
+import hashlib
+import shutil
+from collections import defaultdict
+from dataclasses import dataclass
+from datetime import date
+from pathlib import Path
+from typing import Any, Iterable
+
+from .coverage import coverage_scope
+from .model import dumps, filename, provider_key, shard, valid_command
+
+
+@dataclass(frozen=True)
+class RebuildPolicy:
+    """Explicit exceptions to the default safe publication policy."""
+
+    shrink_reason: str | None = None
+
+
+@dataclass(frozen=True)
+class MergeResult:
+    records: list[dict[str, Any]]
+    rejected: tuple[dict[str, Any], ...]
+
+
+@dataclass(frozen=True)
+class RebuildResult:
+    input_records: int
+    unique_executables: int
+    previous_unique_executables: int
+    rejected_records: int
+    rejected: tuple[dict[str, Any], ...]
+    shrink_reason: str | None
+
+
+class DatasetShrinkError(ValueError):
+    def __init__(self, previous: int, current: int):
+        self.previous = previous
+        self.current = current
+        super().__init__(
+            f"refusing to shrink the dictionary from {previous} to {current} unique executables; "
+            "pass an explicit shrink reason when the drop is intentional"
+        )
+
+
+def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
+    """Record critical-catalog completion separately from npm registry coverage."""
+    result = dict(coverage)
+    descriptor = dict(result.get("npm", {}))
+    descriptor["coverage_kind"] = "partial"
+    descriptor["catalog_complete"] = False
+    sources = state.get("sources", {}) if isinstance(state, dict) else {}
+    npm = sources.get("npm", {}) if isinstance(sources, dict) else {}
+    if not isinstance(npm, dict):
+        npm = {}
+    for target, source in {
+        "catalog_digest": "catalog_digest",
+        "catalog_snapshot": "catalog_snapshot",
+        "catalog_source": "catalog_source",
+        "scope": "catalog_scope",
+    }.items():
+        if isinstance(npm.get(source), str) and npm[source]:
+            descriptor[target] = npm[source]
+    size, cursor = npm.get("catalog_size"), npm.get("cursor")
+    if type(size) is int and size > 0:
+        descriptor["catalog_packages"] = size
+    failures, retries = npm.get("failures"), npm.get("retry_npm")
+    digest = npm.get("catalog_digest")
+    if (
+        npm.get("catalog_complete") is True
+        and type(size) is int and size > 0
+        and type(cursor) is int and cursor == size
+        and isinstance(failures, dict) and not failures
+        and isinstance(retries, list) and not retries
+        and isinstance(digest, str) and len(digest) == 71 and digest.startswith("sha256:")
+        and all(character in "0123456789abcdef" for character in digest[7:])
+        and all(isinstance(npm.get(key), str) and npm[key] for key in (
+            "catalog_scope", "catalog_snapshot", "catalog_source",
+        ))
+    ):
+        descriptor["catalog_complete"] = True
+    result["npm"] = descriptor
+    broad = sources.get("npm-registry", {}) if isinstance(sources, dict) else {}
+    if isinstance(broad, dict) and (broad or "npm-registry" in result):
+        registry = dict(result.get("npm-registry", {}))
+        registry["coverage_kind"] = "partial"
+        for target, source in {
+            "catalog_digest": "catalog_digest",
+            "catalog_snapshot": "catalog_snapshot",
+            "catalog_source": "catalog_source",
+            "scope": "catalog_scope",
+        }.items():
+            if isinstance(broad.get(source), str) and broad[source]:
+                registry[target] = broad[source]
+        registry_size = broad.get("catalog_size")
+        if type(registry_size) is int and registry_size > 0:
+            registry["catalog_packages"] = registry_size
+        registry["catalog_complete"] = (
+            broad.get("catalog_complete") is True
+            and type(registry_size) is int and registry_size > 0
+            and broad.get("cursor") == registry_size
+            and not broad.get("failures")
+        )
+        result["npm-registry"] = registry
+    return result
+
+
+def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]] | None, seen: str,
+          history: dict[str, str] | None = None,
+          preserve_ecosystems: set[str] | None = None) -> MergeResult:
+    grouped: dict[str, dict[tuple[str, ...], dict[str, Any]]] = defaultdict(dict)
+    rejected: list[dict[str, Any]] = []
+    observed_by_ecosystem: dict[str, set[str]] = defaultdict(set)
+    observed_commands: set[str] = set()
+    for raw in records:
+        command = raw["command"]
+        if not isinstance(command, str) or not valid_command(command):
+            rejected.append({
+                "command": command,
+                "ecosystem": raw.get("ecosystem"),
+                "package": raw.get("package"),
+                "reason": "invalid executable name",
+            })
+            continue
+        observed_commands.add(command)
+        ecosystem = raw.get("ecosystem")
+        if isinstance(ecosystem, str):
+            observed_by_ecosystem[ecosystem].add(command)
+        provider = {k: raw.get(k) for k in ("ecosystem", "package", "version", "repository", "source", "confidence")}
+        for key in (
+            "alias_of", "source_type", "package_system", "distribution_family", "distribution",
+            "distribution_release", "language", "registry", "latest_release_at", "latest_version",
+            "last_observed_at", "release_history", "usage_metrics",
+        ):
+            if raw.get(key) is not None:
+                provider[key] = raw[key]
+        grouped[command][provider_key(provider)] = provider
+    output = []
+    previous = previous or {}
+    history = history or {}
+    for command, old in previous.items():
+        for provider in old.get("providers", ()):
+            ecosystem = provider.get("ecosystem")
+            if (preserve_ecosystems and ecosystem in preserve_ecosystems
+                    and command not in observed_by_ecosystem.get(ecosystem, ())):
+                grouped[command][provider_key(provider)] = provider
+    for command in sorted(grouped, key=lambda x: (x.casefold(), x)):
+        old = previous.get(command, {})
+        output.append({"command": command, "providers": sorted(grouped[command].values(), key=provider_key),
+                       "first_seen": old.get("first_seen", history.get(command, seen)),
+                       "last_seen": seen if command in observed_commands else old.get("last_seen", seen)})
+    return MergeResult(output, tuple(rejected))
+
+
+def load_canonical(root: Path) -> dict[str, dict[str, Any]]:
+    result = {}
+    for path in sorted((root / "data/executables").glob("**/*.json")):
+        record = json.loads(path.read_text())
+        result[record["command"]] = record
+    return result
+
+
+def load_history(root: Path) -> dict[str, str]:
+    path = root / "data/history.json"
+    if not path.is_file():
+        return {}
+    value = json.loads(path.read_text())
+    return value if isinstance(value, dict) else {}
+
+
+def publish(root: Path, records: list[dict[str, Any]], coverage: dict[str, Any], snapshot: str,
+            history: dict[str, str] | None = None) -> None:
+    data = root / "data"
+    shutil.rmtree(data / "executables", ignore_errors=True)
+    shutil.rmtree(data / "indexes", ignore_errors=True)
+    prefixes: dict[str, list[str]] = defaultdict(list); lengths: dict[int, list[str]] = defaultdict(list)
+    ecosystems: dict[str, list[str]] = defaultdict(list); trigrams: dict[str, list[str]] = defaultdict(list)
+    scopes: dict[tuple[str, str], list[str]] = defaultdict(list)
+    for record in records:
+        command = record["command"]
+        out = data / "executables" / shard(command) / filename(command)
+        out.parent.mkdir(parents=True, exist_ok=True); out.write_text(dumps(record))
+        prefixes[shard(command)].append(command); lengths[len(command)].append(command)
+        for eco in sorted({p["ecosystem"] for p in record["providers"]}): ecosystems[eco].append(command)
+        for provider in record["providers"]:
+            for dimension in ("source_type", "package_system", "distribution_family", "distribution",
+                              "distribution_release", "language", "registry", "ecosystem"):
+                if provider.get(dimension) is not None:
+                    scopes[(dimension, str(provider[dimension]))].append(command)
+        padded = f"  {command.casefold()}  "
+        for tri in set(padded[i:i+3] for i in range(len(padded)-2)): trigrams[tri].append(command)
+    for group, values in (("prefix", prefixes), ("length", lengths), ("ecosystem", ecosystems), ("trigram", trigrams)):
+        for key, names in sorted(values.items(), key=lambda x: str(x[0])):
+            safe = str(key) if group != "trigram" else key.encode().hex()
+            path = data / "indexes" / group / f"{safe}.json"
+            path.parent.mkdir(parents=True, exist_ok=True); path.write_text(dumps(sorted(names, key=lambda x:(x.casefold(),x))))
+    for (dimension, value), names in sorted(scopes.items()):
+        path = data / "indexes" / "scope" / dimension / f"{value}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(dumps(sorted(set(names), key=lambda x:(x.casefold(),x))))
+    manifest = {}
+    for path in sorted((data / "indexes").glob("**/*.json")):
+        relative = path.relative_to(data).as_posix()
+        manifest[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+    successful = [k for k,v in coverage.items() if v.get("status") == "success"]
+    # A snapshot identifier determines serialized output. Wall-clock collection
+    # timings belong in collector coverage, never in reproducible canonical output.
+    metadata = {"snapshot": snapshot, "generated_at": f"{snapshot}T00:00:00+00:00",
+                "unique_executables": len(records), "canonical": "data/executables", "indexes_derived": True,
+                "checked_sources": sorted(successful), "negative_lookup": "exhaustive" if coverage and all(v.get("coverage_kind") == "exhaustive" and v.get("status") == "success" for v in coverage.values()) else "unknown",
+                "coverage": coverage, "index_manifest": manifest}
+    metadata["negative_lookup"] = coverage_scope(metadata)
+    data.mkdir(exist_ok=True); (data / "metadata.json").write_text(dumps(metadata))
+    durable_history = dict(history or {})
+    durable_history.update({record["command"]: record["first_seen"] for record in records})
+    (data / "history.json").write_text(dumps(dict(sorted(durable_history.items()))))
+
+
+def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
+            coverage_kind: str | dict[str, Any] = "fixture", *,
+            policy: RebuildPolicy = RebuildPolicy()) -> RebuildResult:
+    snapshot = snapshot or date.today().isoformat()
+    previous = load_canonical(root)
+    history = load_history(root)
+    rows = []; coverage = {}; partial_ecosystems = set()
+    for path in inputs:
+        current = [json.loads(line) for line in path.read_text().splitlines() if line]
+        rows.extend(current); eco = path.stem
+        descriptor = coverage_kind.get(eco, "partial") if isinstance(coverage_kind, dict) else coverage_kind
+        descriptor = {"coverage_kind": descriptor} if isinstance(descriptor, str) else dict(descriptor)
+        coverage[eco] = {"status": "success", "records": len(current), "source": str(path), **descriptor}
+        # Partial inputs are observations, not deletion claims; exhaustive inputs remain authoritative.
+        if descriptor.get("coverage_kind") == "partial":
+            partial_ecosystems.add(eco)
+    merged = merge(rows, previous, snapshot, history,
+                   partial_ecosystems if not policy.shrink_reason else None)
+    if len(merged.records) < len(previous) and not policy.shrink_reason:
+        raise DatasetShrinkError(len(previous), len(merged.records))
+    publish(root, merged.records, coverage, snapshot, history)
+    return RebuildResult(
+        input_records=len(rows),
+        unique_executables=len(merged.records),
+        previous_unique_executables=len(previous),
+        rejected_records=len(merged.rejected),
+        rejected=merged.rejected,
+        shrink_reason=policy.shrink_reason,
+    )
