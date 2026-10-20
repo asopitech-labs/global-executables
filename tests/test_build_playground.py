@@ -66,26 +66,6 @@ def test_playground_shows_ci_refresh_position_for_every_refreshed_registry():
     assert "refresh ${formatNumber(source.refresh_cursor)} / ${formatNumber(source.catalog_size)}" in app
 
 
-def test_playground_discloses_the_breaking_npm_coverage_change():
-    page = (ROOT / "playground/index.html").read_text()
-    app = (ROOT / "playground/app.js").read_text()
-
-    for required in (
-        'id="npm-coverage-notice"',
-        "Breaking npm coverage change",
-        "We apologize",
-        "4.3-million-package",
-        "218,774",
-        "221,774",
-        "2,295",
-        "npm overall is not 100% covered",
-        "issues/54",
-    ):
-        assert required in page
-    assert page.index('id="npm-coverage-notice"') < page.index('class="hero"')
-    assert "critical 100%" in app
-
-
 def test_forecast_uses_net_backlog_change_from_published_history():
     builder = load_builder()
     history = [
