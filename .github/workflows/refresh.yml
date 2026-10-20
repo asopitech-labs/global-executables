@@ -1,0 +1,63 @@
+name: Refresh generated dataset
+on:
+  schedule:
+    - cron: "31 3 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -e '.[test]'
+      - name: Acquire production OS indexes
+        run: |
+          python tools/production_crawl.py \
+            --source debian --source ubuntu --source arch --source homebrew \
+            --output-dir data/production/intermediate \
+            --report reports/production-crawl.json
+      - name: Restore latest registry artifact observations
+        run: |
+          git fetch origin artifact-data || true
+          for source in npm pypi crates go; do
+            if git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
+              git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
+            else
+              if test -f fixtures/intermediate/$source.jsonl; then
+                cp fixtures/intermediate/$source.jsonl data/production/intermediate/$source.jsonl
+              else
+                : > data/production/intermediate/$source.jsonl
+              fi
+            fi
+          done
+      - name: Rebuild from production and registry inputs
+        run: |
+          python tools/refresh.py \
+            data/production/intermediate/arch.jsonl \
+            data/production/intermediate/debian.jsonl \
+            data/production/intermediate/homebrew.jsonl \
+            data/production/intermediate/ubuntu.jsonl \
+            data/production/intermediate/crates.jsonl \
+            data/production/intermediate/go.jsonl \
+            data/production/intermediate/npm.jsonl \
+            data/production/intermediate/pypi.jsonl \
+            --snapshot "$(date -u +%F)" \
+            --coverage-map data/production/coverage-map.json \
+            --report reports/production-refresh.json
+      - run: pytest -q
+      - run: git diff --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: refresh-report
+          path: reports/refresh.json
+      - name: Publish idempotent generated state
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/executables data/indexes data/metadata.json data/history.json reports/production-crawl.json reports/production-refresh.json
+          git diff --cached --quiet || git commit -m "Refresh generated dataset"
+          git push origin HEAD:generated-data
