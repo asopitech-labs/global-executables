@@ -89,3 +89,4 @@ def test_apt_method_is_shown_with_an_availability_check_when_release_is_unknown(
     assert result["steps"][1]["argv"] == ["sudo", "apt-get", "install", "--", "envcp-deb"]
     assert result["verification"]["source_release_matches_target"] is False
     assert result["method"]["documentation"].startswith("https://manpages.debian.org/")
+    assert result["method_validation"]["result"] == "pass"

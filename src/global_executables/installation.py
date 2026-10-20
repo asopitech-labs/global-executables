@@ -14,6 +14,10 @@ METHOD_DOCS = {
     "pip": "https://pip.pypa.io/en/stable/cli/pip_install/",
 }
 METHOD_PROBES = {
+    ("apt", None): {"result": "pass", "observed_at": "2026-10-20T00:58:00Z",
+                    "target": "Debian 13 amd64", "manager_version": "apt 3.0.3",
+                    "fixture": "local ge-install-probe 1.0.0 .deb in an isolated root",
+                    "invocation": "isolated-root/usr/bin/ge-install-probe"},
     ("npm", "project"): {"result": "pass", "observed_at": "2026-10-19T10:45:00Z",
                           "target": "Debian 13 amd64", "manager_version": "npm 11.9.0",
                           "runtime_version": "Node.js 24.19.0", "fixture": "local ge-install-probe 1.0.0",
