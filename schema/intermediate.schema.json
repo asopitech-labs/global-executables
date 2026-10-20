@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["command", "ecosystem", "package", "version", "repository", "source", "confidence"],
+  "properties": {
+    "command": {"type": "string", "minLength": 1, "maxLength": 255, "pattern": "^[^/\\\\\\u0000-\\u001f\\u007f]+$"},
+    "ecosystem": {"type": "string"}, "package": {"type": "string", "minLength": 1},
+    "version": {"type": ["string", "null"]}, "repository": {"type": ["string", "null"]},
+    "source": {"type": "string"}, "confidence": {"enum": ["direct", "filesystem", "inferred"]},
+    "alias_of": {"type": "string"}
+  }
+}
