@@ -18,7 +18,7 @@ from global_executables.pipeline import rebuild
 
 ROOT = Path(__file__).parents[1]
 SNAPSHOT = "2026-08-14"
-EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage", "assess_executable", "assess_executables"}
+EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage", "assess_executable", "assess_executables", "resolve_installation", "resolve_installations"}
 
 
 @pytest.fixture(scope="module")
