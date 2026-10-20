@@ -1,0 +1,58 @@
+name: Verify installation methods
+
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/verify-installation-methods.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: apt installs and invokes a published Debian package
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --reinstall --no-install-recommends hello
+          test "$(dpkg-query -W -f='${Status}' hello)" = 'install ok installed'
+          hello | grep -Fx 'Hello, world!'
+          dpkg-query -W -f='hello ${Version} ${Architecture}\n' hello
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: npm installs and invokes a published command package in a project
+        run: |
+          mkdir -p "$RUNNER_TEMP/npm-project"
+          npm install --prefix "$RUNNER_TEMP/npm-project" --ignore-scripts --no-audit --no-fund -- cowsay@1.6.0
+          cd "$RUNNER_TEMP/npm-project"
+          npm exec -- cowsay INSTALL_OK | grep -F 'INSTALL_OK'
+          npm view cowsay@1.6.0 bin --json
+          node --version
+          npm --version
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: pip installs and invokes a published Python command in a venv
+        run: |
+          python -m venv "$RUNNER_TEMP/pip-project"
+          "$RUNNER_TEMP/pip-project/bin/python" -m pip install --disable-pip-version-check black==25.9.0
+          "$RUNNER_TEMP/pip-project/bin/black" --version
+
+  macos:
+    runs-on: macos-15
+    steps:
+      - name: Homebrew installs and invokes a published formula
+        run: |
+          brew update
+          if brew list --versions hello >/dev/null 2>&1; then
+            brew reinstall hello
+          else
+            brew install hello
+          fi
+          "$(brew --prefix hello)/bin/hello" | grep -Fx 'Hello, world!'
+          brew list --versions hello
+          sw_vers -productVersion
+          uname -m
