@@ -1,6 +1,8 @@
 name: Verify installation methods
 
 on:
+  pull_request:
+    paths: [".github/workflows/verify-installation-methods.yml"]
   push:
     branches: [main]
     paths: [".github/workflows/verify-installation-methods.yml"]
