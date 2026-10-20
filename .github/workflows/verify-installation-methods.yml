@@ -19,6 +19,7 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --reinstall --no-install-recommends hello
+          sudo apt-get install -y -- hello
           test "$(dpkg-query -W -f='${Status}' hello)" = 'install ok installed'
           hello | grep -Fx 'Hello, world!'
           dpkg-query -W -f='hello ${Version} ${Architecture}\n' hello
@@ -80,7 +81,10 @@ jobs:
             brew install hello
           fi
           "$(brew --prefix hello)/bin/hello" | grep -Fx 'Hello, world!'
+          hello | grep -Fx 'Hello, world!'
           brew list --versions hello
           test "$(brew list --versions hello | awk '{print $2}')" = '2.12.3'
           sw_vers -productVersion
           uname -m
+          test "$(sw_vers -productVersion | cut -d. -f1)" = '15'
+          test "$(uname -m)" = 'x86_64'
