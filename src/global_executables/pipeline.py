@@ -49,7 +49,8 @@ class DatasetShrinkError(ValueError):
 def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
     """Record critical-catalog completion separately from npm registry coverage."""
     result = dict(coverage)
-    descriptor = dict(result.get("npm", {}))
+    existing_npm = result.get("npm", {})
+    descriptor = dict(existing_npm) if isinstance(existing_npm, dict) else {}
     descriptor["coverage_kind"] = "partial"
     descriptor["catalog_complete"] = False
     sources = state.get("sources", {}) if isinstance(state, dict) else {}
@@ -85,7 +86,8 @@ def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[s
     result["npm"] = descriptor
     broad = sources.get("npm-registry", {}) if isinstance(sources, dict) else {}
     if isinstance(broad, dict) and (broad or "npm-registry" in result):
-        registry = dict(result.get("npm-registry", {}))
+        existing_registry = result.get("npm-registry", {})
+        registry = dict(existing_registry) if isinstance(existing_registry, dict) else {}
         registry["coverage_kind"] = "partial"
         for target, source in {
             "catalog_digest": "catalog_digest",

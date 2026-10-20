@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/asopitech-labs/global-executables/main/.github/assets/readme-cover.webp" alt="Global Executables checks whether a CLI command name is already taken by indexing executable names across package ecosystems" width="100%">
-</p>
+![Global Executables checks whether a CLI command name is already taken by indexing executable names across package ecosystems](https://raw.githubusercontent.com/asopitech-labs/global-executables/main/.github/assets/readme-cover.webp)
 
 <h1 align="center">Global Executables</h1>
 

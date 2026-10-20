@@ -125,6 +125,22 @@ def test_npm_catalog_completion_does_not_claim_registry_exhaustiveness(tmp_path)
         assert invalid_coverage["coverage_kind"] == "partial"
         assert invalid_coverage["catalog_complete"] is False
 
+
+def test_npm_registry_coverage_accepts_legacy_string_descriptor():
+    coverage = {"npm": "partial", "npm-registry": "partial"}
+    state = {"sources": {"npm-registry": {
+        "catalog_size": 4300000,
+        "cursor": 221774,
+    }}}
+
+    synchronized = sync_npm_coverage(coverage, state)
+
+    assert synchronized["npm-registry"] == {
+        "coverage_kind": "partial",
+        "catalog_packages": 4300000,
+        "catalog_complete": False,
+    }
+
 def test_indexed_search_matches_reference_scan_and_intersects_filters(tmp_path):
     rebuild(tmp_path,INPUTS,"2026-08-14")
     dataset=Dataset(tmp_path)
