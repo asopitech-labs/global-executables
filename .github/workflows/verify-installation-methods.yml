@@ -34,6 +34,13 @@ jobs:
           npm view cowsay@1.6.0 bin --json
           node --version
           npm --version
+      - name: npm installs and invokes a published command in user scope
+        env:
+          NPM_CONFIG_PREFIX: ${{ runner.temp }}/npm-user
+        run: |
+          mkdir -p "$NPM_CONFIG_PREFIX"
+          npm install --global --ignore-scripts --no-audit --no-fund -- cowsay@1.6.0
+          "$NPM_CONFIG_PREFIX/bin/cowsay" INSTALL_OK | grep -F 'INSTALL_OK'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -42,6 +49,24 @@ jobs:
           python -m venv "$RUNNER_TEMP/pip-project"
           "$RUNNER_TEMP/pip-project/bin/python" -m pip install --disable-pip-version-check black==25.9.0
           "$RUNNER_TEMP/pip-project/bin/black" --version
+      - name: pip installs and invokes a published command in user scope
+        env:
+          PYTHONUSERBASE: ${{ runner.temp }}/pip-user
+        run: |
+          python -m pip install --disable-pip-version-check --user black==25.9.0
+          "$PYTHONUSERBASE/bin/black" --version
+
+  debian:
+    runs-on: ubuntu-24.04
+    container: debian:trixie-slim
+    steps:
+      - name: apt installs and invokes a published Debian package
+        run: |
+          apt-get update -qq
+          apt-get install -y --no-install-recommends hello
+          test "$(dpkg-query -W -f='${Status}' hello)" = 'install ok installed'
+          hello | grep -Fx 'Hello, world!'
+          dpkg-query -W -f='hello ${Version} ${Architecture}\n' hello
 
   macos:
     runs-on: macos-15
