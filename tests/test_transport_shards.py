@@ -80,9 +80,10 @@ def test_unpack_missing_part_fails_closed(tmp_path):
 def test_publisher_shards_every_registry_observation_and_removes_legacy_files():
     assert "tools/transport_shards.py\" pack" in PARALLEL
     assert 'transport/${source}-observations' in PARALLEL
-    assert "transport/go-modules" in PARALLEL
+    assert "catalog_transport=go-modules" in PARALLEL
+    assert 'transport/${catalog_transport}' in PARALLEL
     assert 'rm -f "${worktree}/${rows}"' in PARALLEL
-    assert 'rm -f "${worktree}/data/production/go-modules.txt"' in PARALLEL
+    assert 'rm -f "${worktree}/data/production/${name}"' in PARALLEL
 
 
 def test_seed_and_refresh_prefer_verified_shards_with_legacy_fallback():
