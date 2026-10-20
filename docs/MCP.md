@@ -148,7 +148,8 @@ A completed 2,295-package npm critical catalog is not complete npm registry cove
 The builder records `coverage.npm.catalog_complete` separately and keeps its
 `coverage_kind: partial`. Query readers also treat legacy `exhaustive` descriptors
 containing scope or catalog restrictions as insufficient for negative completeness.
-The Playground public notice remains in place.
+The Playground reports the critical subset as such and keeps its negative-result
+coverage warnings.
 
 Provider `scope` is a filter, not a declaration of the searched population. Scoped
 negative queries remain `unknown` until coverage can establish completeness for the
