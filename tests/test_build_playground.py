@@ -61,7 +61,7 @@ def test_playground_fallback_and_placeholder_match_ci_refresh_schedule():
 def test_playground_shows_ci_refresh_position_for_every_refreshed_registry():
     app = (ROOT / "playground/app.js").read_text()
 
-    assert '["npm", "pypi", "crates", "go", "rubygems", "packagist", "nuget", "conan"]' in app
+    assert '["npm", "npm-registry", "pypi", "crates", "go", "rubygems", "packagist", "nuget", "conan"]' in app
     assert "source.refresh_cursor" in app
     assert "refresh ${formatNumber(source.refresh_cursor)} / ${formatNumber(source.catalog_size)}" in app
 

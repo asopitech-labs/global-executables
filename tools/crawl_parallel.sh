@@ -86,6 +86,7 @@ catalog_for() {
     nuget) echo "nuget-tools.txt nuget-tools.txt.gz" ;;
     conan) echo "conan-recipes.txt conan-recipes.txt.gz" ;;
     npm) echo "npm-critical-packages.txt" ;;
+    npm-registry) echo "npm-packages.txt npm-packages.txt.manifest.json" ;;
     # Go's live catalogue is appended page by page so an interrupted sweep resumes, so
     # it has no gzip twin locally: one left beside it goes stale the moment the sweep
     # continues. The Git transport representation is sharded separately at publish time.
@@ -113,15 +114,18 @@ seed() {
     --ref origin/artifact-data --state "${BASE}/data/production/registry-state"
   for source in ${SOURCES}; do
     for name in $(catalog_for "${source}"); do
-      if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
-         git cat-file -e "origin/artifact-data:data/production/transport/go-modules/manifest.json" 2>/dev/null; then
-        rm -rf "${BASE}/data/production/transport/go-modules"
-        git archive origin/artifact-data data/production/transport/go-modules \
+      local catalog_transport=""
+      if [ "${source}" = go ] && [ "${name}" = go-modules.txt ]; then catalog_transport=go-modules; fi
+      if [ "${source}" = npm-registry ] && [ "${name}" = npm-packages.txt ]; then catalog_transport=npm-packages; fi
+      if [ -n "${catalog_transport}" ] && \
+         git cat-file -e "origin/artifact-data:data/production/transport/${catalog_transport}/manifest.json" 2>/dev/null; then
+        rm -rf "${BASE}/data/production/transport/${catalog_transport}"
+        git archive origin/artifact-data "data/production/transport/${catalog_transport}" \
           | tar -x -C "${BASE}"
         python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
-          --input-dir "${BASE}/data/production/transport/go-modules" \
-          --output "${BASE}/data/production/go-modules.txt"
-        rm -rf "${BASE}/data/production/transport/go-modules"
+          --input-dir "${BASE}/data/production/transport/${catalog_transport}" \
+          --output "${BASE}/data/production/${name}"
+        rm -rf "${BASE}/data/production/transport/${catalog_transport}"
       elif git cat-file -e "origin/artifact-data:data/production/${name}" 2>/dev/null; then
         git show "origin/artifact-data:data/production/${name}" > "${BASE}/data/production/${name}"
       elif [ -f "${ROOT_DIR}/data/production/${name}" ]; then
@@ -349,21 +353,19 @@ publish_snapshot() (
     fi
     if [ "${BOOSTER}" != 1 ]; then
       for name in $(catalog_for "${source}"); do
-        if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
+        if { [ "${source}" = go ] && [ "${name}" = go-modules.txt ]; } || \
+           { [ "${source}" = npm-registry ] && [ "${name}" = npm-packages.txt ]; } && \
            [ -f "${dir}/data/production/${name}" ]; then
+          local catalog_transport=go-modules
+          [ "${source}" = npm-registry ] && catalog_transport=npm-packages
           python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
             --input "${dir}/data/production/${name}" \
-            --output-dir "${worktree}/data/production/transport/go-modules"
-          rm -f "${worktree}/data/production/go-modules.txt"
+            --output-dir "${worktree}/data/production/transport/${catalog_transport}"
+          rm -f "${worktree}/data/production/${name}"
         elif [ -f "${dir}/data/production/${name}" ]; then
           cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
         fi
       done
-    fi
-    if [ "${source}" = npm ] && \
-       [ -f "${dir}/data/production/npm-critical-packages.txt" ]; then
-      rm -f "${worktree}/data/production/npm-packages.txt" \
-        "${worktree}/data/production/npm-packages.txt.gz"
     fi
     if [ "${delta}" = 1 ] && [ -f "${local_rows}" ]; then
       # Rows of the packages this writer changed replace theirs in the published rows; every

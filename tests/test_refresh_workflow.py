@@ -66,8 +66,8 @@ def test_transactional_sources_use_dedicated_go_runtime_with_failure_restart():
     assert 'go|npm|pypi|rubygems|packagist) ;;' in PARALLEL_CRAWL
     assert 'if [ "${needs_python}" = 1 ]' in PARALLEL_CRAWL
     assert 'npm) echo "npm-critical-packages.txt"' in PARALLEL_CRAWL
-    assert 'rm -f "${worktree}/data/production/npm-packages.txt"' in PARALLEL_CRAWL
-    assert '"${worktree}/data/production/npm-packages.txt.gz"' in PARALLEL_CRAWL
+    assert 'npm-registry) echo "npm-packages.txt npm-packages.txt.manifest.json"' in PARALLEL_CRAWL
+    assert 'catalog_transport=npm-packages' in PARALLEL_CRAWL
 
 
 def test_local_start_requires_an_explicit_npm_ownership_takeover(tmp_path):

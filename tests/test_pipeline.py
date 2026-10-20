@@ -89,6 +89,14 @@ def test_rebuild_preserves_declared_coverage_scope(tmp_path):
 def test_npm_catalog_completion_does_not_claim_registry_exhaustiveness(tmp_path):
     coverage = {"npm": {"coverage_kind": "exhaustive", "scope": "critical npm"}}
     assert sync_npm_coverage(coverage, {})["npm"]["coverage_kind"] == "partial"
+    separate = sync_npm_coverage(coverage, {"sources": {"npm-registry": {
+        "catalog_complete": True, "catalog_size": 4300000, "cursor": 221774,
+        "catalog_source": "https://replicate.npmjs.com/_all_docs",
+        "catalog_scope": "npm registry package-name index",
+    }}})
+    assert separate["npm-registry"]["catalog_packages"] == 4300000
+    assert separate["npm-registry"]["catalog_complete"] is False
+    assert separate["npm"]["catalog_complete"] is False
     incomplete = {"sources": {"npm": {"catalog_complete": True}}}
     assert sync_npm_coverage(coverage, incomplete)["npm"]["coverage_kind"] == "partial"
     complete = {"sources": {"npm": {

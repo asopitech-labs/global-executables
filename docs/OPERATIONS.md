@@ -48,6 +48,21 @@ re-samples an installed OS, shell, or immutable fixture.
 
 ### npm primary scope
 
+The critical catalog's 2,295 / 2,295 position measures only that named subset.
+It is not a registry-wide completion percentage. The last recorded broad npm
+checkpoints were 218,774 packages publicly and 221,774 locally against an
+approximately 4.3-million-name index; neither is a current crawl cursor.
+`npm-registry.yml` acquires a broad package-name snapshot from npm's `_all_docs`
+endpoint. `tools/npm_full_catalog.py` writes a resumable cursor while fetching,
+then records the source URL, snapshot date, count, and SHA-256 digest in a
+manifest. The workflow retains that immutable snapshot on `artifact-data` and
+inspects at most 10,000 packages every four hours with a separate
+`npm-registry` state and observation file. At a 4.3-million-name denominator,
+the configured ceiling implies at least 430 runs (about 72 days), before
+retries and scheduler delays. It does not imply current registry completion.
+The snapshot remains pinned during the first pass; catalog renewal requires a
+separate migration so the cursor cannot silently switch to a different order.
+
 | Responsibility | Source | Completion rule |
 | --- | --- | --- |
 | Select the high-value population | ecosyste.ms critical npm list | Every listed package is present in the tracked catalog |
