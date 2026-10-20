@@ -1,0 +1,81 @@
+name: Deploy index playground
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "playground/**"
+      - "tools/build_playground.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Restore published reports
+        run: |
+          git fetch --shallow-since='7 days ago' origin artifact-data
+          git fetch --depth=1 origin dictionary
+          if git cat-file -e origin/artifact-data:reports/registry-artifact-crawl.json 2>/dev/null; then
+            git show origin/artifact-data:reports/registry-artifact-crawl.json > /tmp/registry-artifact-crawl.json
+            ARTIFACT_DATA_COMMIT=$(git rev-parse origin/artifact-data)
+          else
+            printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/registry-artifact-crawl.json
+            ARTIFACT_DATA_COMMIT=
+          fi
+          if git cat-file -e origin/artifact-data:reports/cpp-registry-crawl.json 2>/dev/null; then
+            git show origin/artifact-data:reports/cpp-registry-crawl.json > /tmp/cpp-registry-crawl.json
+          else
+            printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/cpp-registry-crawl.json
+          fi
+          if git cat-file -e origin/dictionary:reports/production-crawl.json 2>/dev/null; then
+            git show origin/dictionary:reports/production-crawl.json > /tmp/production-crawl.json
+          else
+            printf '%s\n' '{"status":"unavailable","coverage_kind":"partial","sources":{}}' > /tmp/production-crawl.json
+          fi
+          DICTIONARY_COMMIT=$(git rev-parse origin/dictionary)
+          : > /tmp/go-crawl-history.jsonl
+          while read -r commit observed_at; do
+            git show "$commit:reports/registry-artifact-crawl.json" \
+              | jq -c --arg observed_at "$observed_at" \
+                'select(.sources.go) | {observed_at: $observed_at, source: .sources.go}' \
+              >> /tmp/go-crawl-history.jsonl
+          done < <(git log origin/artifact-data --since='7 days ago' --reverse \
+            --format='%H %cI' -- reports/registry-artifact-crawl.json)
+          echo "ARTIFACT_DATA_COMMIT=$ARTIFACT_DATA_COMMIT" >> "$GITHUB_ENV"
+          echo "DICTIONARY_COMMIT=$DICTIONARY_COMMIT" >> "$GITHUB_ENV"
+      - name: Build static playground
+        run: |
+          rm -rf _site
+          python tools/build_playground.py \
+            --output _site \
+            --crawl-report /tmp/registry-artifact-crawl.json \
+            --crawl-history /tmp/go-crawl-history.jsonl \
+            --production-report /tmp/production-crawl.json \
+            --recipe-report /tmp/cpp-registry-crawl.json \
+            --artifact-data-commit "$ARTIFACT_DATA_COMMIT" \
+            --dictionary-commit "$DICTIONARY_COMMIT" \
+            --main-commit "$GITHUB_SHA"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

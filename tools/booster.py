@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+"""Local booster helper: leases on artifact-data, the Actions exclusion and delta rows.
+
+    tools/booster.py show      --source pypi
+    tools/booster.py exclusions --source pypi [--ref origin/artifact-data]
+    tools/booster.py acquire   --source pypi --id my-laptop --ranges 0-255 [--ttl-hours 12]
+    tools/booster.py renew     --source pypi --id my-laptop     (same as acquire, keeps the ranges)
+    tools/booster.py release   --source pypi --id my-laptop
+    tools/booster.py rows-delta --published P --local L --base B --output O
+
+``acquire``/``renew``/``release`` commit to ``artifact-data`` through a throw-away worktree
+and your own git credentials; a non-fast-forward push re-reads the branch and applies the
+operation again.  Only ``data/production/booster/<source>.json`` is written.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from global_executables import booster  # noqa: E402
+
+
+def git(*args: str, cwd: Path = ROOT, check: bool = True) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", *args], cwd=cwd, check=check, capture_output=True, text=True)
+
+
+def read_remote_document(source: str, ref: str) -> dict:
+    shown = git("show", f"{ref}:{booster.LEASE_PATH.format(source=source)}", check=False)
+    if shown.returncode != 0:
+        return booster.empty_document()
+    try:
+        document = json.loads(shown.stdout)
+    except ValueError:
+        return booster.empty_document()
+    return document if isinstance(document, dict) and isinstance(document.get("leases"), dict) else booster.empty_document()
+
+
+def owners_report(source: str, ref: str, directory: Path | None) -> dict:
+    """``booster.failure_owners`` for the published state at ``ref``, the lease at ``ref``
+    and, with ``directory``, the booster's own catalogue."""
+    shown = git("show", f"{ref}:data/production/registry-state/{source}/source.json", check=False)
+    entry = json.loads(shown.stdout) if shown.returncode == 0 else {}
+    entry = entry if isinstance(entry, dict) else {}
+    projects = str(entry.get("projects_file") or entry.get("names_file") or entry.get("packages_file") or "")
+    listed = git("show", f"{ref}:{projects}", check=False) if projects else None
+    published_catalog = {line.split("\t", 1)[0].strip() for line in listed.stdout.splitlines()} if listed and listed.returncode == 0 else set()
+    published_catalog.discard("")
+    booster_catalog = None
+    if directory is not None and projects and (directory / projects).is_file():
+        with (directory / projects).open(encoding="utf-8") as stream:
+            booster_catalog = {line.split("\t", 1)[0].strip() for line in stream if line.strip()}
+    report = booster.failure_owners(entry, read_remote_document(source, ref), published_catalog, booster_catalog)
+    report["published_catalog_size"] = len(published_catalog)
+    if booster_catalog is not None:
+        report["booster_catalog_size"] = len(booster_catalog)
+        report["catalogs_match"] = booster_catalog == published_catalog
+    return report
+
+
+def publish(source: str, operation, remote: str, branch: str, attempts: int, message: str) -> dict:
+    """Apply ``operation(document)`` to the freshest branch head and push; retry on a race."""
+    path = booster.LEASE_PATH.format(source=source)
+    for attempt in range(1, attempts + 1):
+        git("fetch", "--quiet", "--depth=1", remote, branch)
+        worktree = Path(tempfile.mkdtemp(prefix="ge-booster-"))
+        shutil.rmtree(worktree)
+        try:
+            git("worktree", "add", "--quiet", "--detach", str(worktree), f"{remote}/{branch}")
+            target = worktree / path
+            document = operation(booster.read_document(target))
+            before = target.read_text() if target.is_file() else None
+            booster.write_document(target, document)
+            if target.read_text() == before:
+                return document
+            git("add", "-f", path, cwd=worktree)
+            git("commit", "--quiet", "-m", message, cwd=worktree)
+            pushed = git("push", "--quiet", remote, f"HEAD:{branch}", cwd=worktree, check=False)
+            if pushed.returncode == 0:
+                return document
+            if attempt == attempts:
+                raise SystemExit(f"lease publish failed after {attempts} attempts: {pushed.stderr.strip()}")
+        finally:
+            git("worktree", "remove", "--force", str(worktree), check=False)
+            shutil.rmtree(worktree, ignore_errors=True)
+        time.sleep(min(30, attempt * 3))
+    raise SystemExit("unreachable")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "coverage", "owners"])
+    parser.add_argument("--source", default="pypi")
+    parser.add_argument("--id", default=os.environ.get("BOOSTER_ID", ""))
+    parser.add_argument("--ranges", default=os.environ.get("BOOSTER_RANGES", "0-255"))
+    parser.add_argument("--ttl-hours", type=float, default=float(os.environ.get("BOOSTER_TTL_HOURS", booster.DEFAULT_TTL_HOURS)))
+    parser.add_argument("--ref", default="origin/artifact-data")
+    parser.add_argument("--remote", default="origin")
+    parser.add_argument("--branch", default="artifact-data")
+    parser.add_argument("--attempts", type=int, default=5)
+    parser.add_argument("--min-age-hours", type=float, default=0.0,
+                        help="renew: leave a live lease alone (no commit) while its heartbeat is younger than this")
+    parser.add_argument("--progress", default="", help="JSON object stored with the lease (informational)")
+    parser.add_argument("--published", type=Path)
+    parser.add_argument("--local", type=Path)
+    parser.add_argument("--base", type=Path)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--dir", type=Path, help="coverage, owners: the booster working directory (<BASE>-<source>)")
+    parser.add_argument("--summary", action="store_true", help="owners: print only {orphans, duplicates} on one line")
+    parser.add_argument("--fail-on-orphans", action="store_true",
+                        help="owners: exit 5 when a published failure entry has no owner or two")
+    args = parser.parse_args()
+
+    if args.command == "rows-delta":
+        if not (args.local and args.output):
+            parser.error("rows-delta needs --local and --output")
+        touched, written = booster.merge_rows_delta(args.published, args.local, args.base, args.output)
+        print(f"{touched} packages changed, {written} rows applied")
+        return 0
+    if args.command == "coverage":
+        from global_executables.refresh_policy import read_cache
+        from global_executables.registry_state import load_state
+        if args.dir is None:
+            parser.error("coverage needs --dir")
+        production = args.dir / "data/production"
+        entry = load_state(production / "registry-state").get("sources", {}).get(args.source, {})
+        catalog_file = args.dir / str(entry.get("projects_file") or entry.get("names_file") or entry.get("packages_file") or "")
+        catalog = [line.split("\t", 1)[0].rstrip("\n") for line in catalog_file.open(encoding="utf-8") if line.strip()]
+        checks, cursor, _ = read_cache(production / "cache" / f"{args.source}.cache.gz")
+        retries = next((value for key, value in entry.items() if key.startswith("retry_") and isinstance(value, list)), [])
+        print(json.dumps(booster.coverage(catalog, checks, entry.get("unavailable") or {}, entry.get("failures") or {},
+                                          retries, cursor), indent=2))
+        return 0
+    if args.command == "owners":
+        report = owners_report(args.source, args.ref, args.dir)
+        if args.summary:
+            print(json.dumps({key: report[key] for key in ("orphans", "duplicates")}, sort_keys=True))
+        else:
+            print(json.dumps(report, indent=2))
+        return 5 if args.fail_on_orphans and (report["orphans"] or report["duplicates"]) else 0
+    if args.command == "show":
+        print(json.dumps(read_remote_document(args.source, args.ref), indent=2, sort_keys=True))
+        return 0
+    if args.command == "exclusions":
+        # Nothing but the ranges on stdout: callers put it on a command line.
+        print(booster.actions_exclusion(read_remote_document(args.source, args.ref)))
+        return 0
+    if not args.id:
+        parser.error("--id (or BOOSTER_ID) names this machine's lease")
+    progress = json.loads(args.progress) if args.progress else None
+    if args.command == "release":
+        publish(args.source, lambda document: booster.release(document, args.id), args.remote, args.branch,
+                args.attempts, f"Release {args.source} booster lease {args.id}")
+        print(f"released {args.id}")
+        return 0
+    existing = read_remote_document(args.source, args.ref).get("leases", {}).get(args.id)
+    ranges = args.ranges if args.command == "acquire" or not isinstance(existing, dict) else existing.get("ranges", args.ranges)
+    def renew(doc):
+        if args.command == "renew" and args.min_age_hours > 0 and booster.fresh(doc, args.id, ranges, args.min_age_hours):
+            return doc
+        return booster.acquire(doc, args.id, ranges, ttl_hours=args.ttl_hours, progress=progress)
+
+    try:
+        document = publish(args.source, renew,
+                           args.remote, args.branch, args.attempts, f"Heartbeat for {args.source} booster lease {args.id}")
+    except booster.LeaseConflict as error:
+        print(f"lease refused: {error}", file=sys.stderr)
+        return 4
+    print(f"{args.id} holds {document['leases'][args.id]['ranges']} (ttl {args.ttl_hours} h)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
