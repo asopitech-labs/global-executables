@@ -1,6 +1,7 @@
 """Conservative, read-only installation guidance over observed provider records."""
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from .model import valid_command
@@ -27,6 +28,58 @@ METHOD_PROBES = {
                           "runtime_version": "Python 3.12.14", "fixture": "local ge-install-probe 1.0.0",
                           "invocation": "venv/bin/ge-install-probe"},
 }
+
+VERIFIED_RUN = "https://github.com/asopitech-labs/global-executables/actions/runs/39363743911"
+
+
+def _verified_published_recipe(name: str, provider: dict[str, Any],
+                               environment: dict[str, Any], system: str) -> dict[str, str | None] | None:
+    """Match CI evidence to one indexed provider and one explicit target."""
+    if (provider.get("confidence") not in {"direct", "filesystem"}
+            or provider.get("alias_of") or str(provider.get("package", "")).startswith("-")):
+        return None
+    if (system == "apt" and name == "hello" and provider.get("ecosystem") == "ubuntu"
+            and provider.get("package") == "hello"
+            and provider.get("version") is None and provider.get("latest_version") is None
+            and provider.get("source") == "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz"
+            and environment.get("os") == "linux" and environment.get("distribution") == "ubuntu"
+            and environment.get("distribution_release") == "24.04"
+            and environment.get("architecture") == "amd64"
+            and environment.get("has_admin") is True):
+        return {"package_spec": "hello", "package_version": None,
+                "target": "Ubuntu 24.04 amd64; apt repository hello",
+                "source_release": "24.04"}
+    version = provider.get("version") or provider.get("latest_version")
+    if (system == "brew" and name == "hello" and provider.get("ecosystem") == "homebrew"
+            and provider.get("package") == "hello" and version == "2.12.3"
+            and provider.get("source") == "https://formulae.brew.sh/api/formula.json"
+            and environment.get("os") == "macos"
+            and environment.get("distribution_release") == "15"
+            and environment.get("architecture") == "arm64"):
+        return {"package_spec": "hello", "package_version": "2.12.3",
+                "target": "macOS 15 arm64"}
+    if any(environment.get(key) != value for key, value in {
+        "os": "linux", "distribution": "ubuntu", "distribution_release": "24.04",
+        "architecture": "amd64",
+    }.items()):
+        return None
+    scope = environment.get("install_scope")
+    if scope != "project":
+        return None
+    runtime = str(environment.get("runtime_version", ""))
+    if (system == "npm" and name == "tsc" and provider.get("ecosystem") == "npm"
+            and provider.get("package") == "typescript" and version == "7.0.2"
+            and provider.get("source") == "https://registry.npmjs.org/typescript/latest"
+            and re.match(r"^v?24(?:\.|$)", runtime)):
+        return {"package_spec": "typescript@7.0.2", "package_version": "7.0.2",
+                "target": "Ubuntu 24.04 amd64; Node.js 24; project scope"}
+    if (system == "pip" and name == "black" and provider.get("ecosystem") == "pypi"
+            and provider.get("package") == "black" and version == "26.10.1"
+            and str(provider.get("source", "")).startswith("https://files.pythonhosted.org/")
+            and re.match(r"^3\.12(?:\.|$)", runtime)):
+        return {"package_spec": "black==26.10.1", "package_version": "26.10.1",
+                "target": "Ubuntu 24.04 amd64; Python 3.12; project scope"}
+    return None
 
 
 def resolve_installation(dataset: Any, name: str, environment: dict[str, Any],
@@ -90,16 +143,26 @@ def resolve_installation(dataset: Any, name: str, environment: dict[str, Any],
     if not candidates:
         result["status"] = "unsupported"
         return result
+    verified = [(p, recipe) for p in candidates
+                if (recipe := _verified_published_recipe(name, p, environment, system))]
     identities = {(p["ecosystem"], p["package"]) for p in candidates}
-    if len(identities) > 1:
+    if len(verified) == 1:
+        provider, verified_recipe = verified[0]
+        if len(identities) > 1:
+            result["selection_reason"] = ("Selected the only provider with a public install-and-invoke "
+                                          "verification for this target; other observed providers remain candidates.")
+    elif len(identities) > 1:
         result["status"] = "ambiguous"
         return result
-    provider = candidates[0]
+    else:
+        provider = candidates[0]
+        verified_recipe = _verified_published_recipe(name, provider, environment, system)
     result["provider"] = provider
-    result["applicability"] = {"target": environment, "source_distribution_release": provider.get("distribution_release"),
+    result["applicability"] = {"target": environment, "source_distribution_release": (verified_recipe.get("source_release") if verified_recipe else None) or provider.get("distribution_release"),
                                "source_architecture": provider.get("architecture"),
                                "validated_on_target": False}
-    release_matches = system != "apt" or provider.get("distribution_release") == environment["distribution_release"]
+    release_matches = (system != "apt" or provider.get("distribution_release") == environment["distribution_release"]
+                       or bool(verified_recipe and verified_recipe.get("source_release") == environment["distribution_release"]))
     if provider["confidence"] not in {"direct", "filesystem"}:
         result["status"] = "unverified"
         return result
@@ -110,6 +173,7 @@ def resolve_installation(dataset: Any, name: str, environment: dict[str, Any],
     if package.startswith("-"):
         result["status"] = "unverified"
         return result
+    package_spec = verified_recipe["package_spec"] if verified_recipe else package
     if system == "apt":
         if environment.get("has_admin") is not True:
             result["required_context"] = ["has_admin"]
@@ -118,13 +182,13 @@ def resolve_installation(dataset: Any, name: str, environment: dict[str, Any],
     elif system == "brew":
         argv = ["brew", "install", "--", package]
     elif system == "npm":
-        argv = ["npm", "install", "--", package] if environment["install_scope"] == "project" else ["npm", "install", "--global", "--", package]
+        argv = ["npm", "install", "--", package_spec] if environment["install_scope"] == "project" else ["npm", "install", "--global", "--", package_spec]
     else:
         if environment["install_scope"] == "project" and not environment.get("virtualenv_bin"):
             result["required_context"] = ["virtualenv_bin"]
             return result
         python = str(environment["virtualenv_bin"]).rstrip("/") + "/python" if environment["install_scope"] == "project" else "python"
-        argv = [python, "-m", "pip", "install", "--", package] if environment["install_scope"] == "project" else [python, "-m", "pip", "install", "--user", "--", package]
+        argv = [python, "-m", "pip", "install", "--", package_spec] if environment["install_scope"] == "project" else [python, "-m", "pip", "install", "--user", "--", package_spec]
     invoke = ["npm", "exec", "--", name] if system == "npm" and environment["install_scope"] == "project" else ([str(environment["virtualenv_bin"]).rstrip("/") + "/" + name] if system == "pip" and environment["install_scope"] == "project" else [name])
     result["status"] = "unverified"
     result["method_validation"] = METHOD_PROBES.get((system, environment.get("install_scope")))
@@ -134,9 +198,23 @@ def resolve_installation(dataset: Any, name: str, environment: dict[str, Any],
                        if system == "apt" and not release_matches else []) + [
         {"action": "install", "argv": argv, "platform": environment},
         {"action": "invoke", "argv": invoke, "platform": environment}]
-    result["invocation"] = {"argv": invoke, "path_note": "Ensure the selected package manager's executable directory is on PATH; verify the installed command before use."}
+    path_note = ("Run from the project directory where this package was installed."
+                 if system == "npm" and environment["install_scope"] == "project" else
+                 "Ensure the selected package manager's executable directory is on PATH; verify the installed command before use.")
+    result["invocation"] = {"argv": invoke, "path_note": path_note}
     result["verification"] = {"confidence": provider["confidence"], "source": provider["source"],
                               "observed_at": provider.get("last_observed_at"), "version": provider.get("version"),
                               "note": "Package-manager syntax is documented; availability and entry-point behavior of this package on the target have not been verified.",
                               "source_release_matches_target": release_matches}
+    if verified_recipe:
+        result["status"] = "ready"
+        result["applicability"]["validated_on_target"] = True
+        result["method"]["target_package_available"] = "verified"
+        result["verification"]["note"] = "The public package installation and command invocation were verified on the stated target in CI."
+        result["verification"]["recipe_validation"] = {
+            "result": "pass",
+            "target": verified_recipe["target"],
+            "package_version": verified_recipe["package_version"], "observed_at": "2026-10-20",
+            "evidence_url": VERIFIED_RUN,
+        }
     return result

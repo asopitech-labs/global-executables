@@ -87,4 +87,4 @@ jobs:
           sw_vers -productVersion
           uname -m
           test "$(sw_vers -productVersion | cut -d. -f1)" = '15'
-          test "$(uname -m)" = 'x86_64'
+          test "$(uname -m)" = 'arm64'
