@@ -16,6 +16,7 @@ from starlette.responses import JSONResponse
 from . import __version__
 from .assessment import assess
 from .coverage import coverage_scope as _scope, coverage_warnings
+from .installation import resolve_installation as _resolve_installation
 from .remote import DEFAULT_DATASET_URL, RemoteDataset
 from .search import Dataset
 
@@ -113,6 +114,18 @@ def create_server(
         """Batch-check naming candidates; this is the preferred agent path."""
         metadata = dataset.metadata
         return {"results": [dataset.check(name, scope) for name in names], "snapshot": metadata["snapshot"], "coverage_scope": _scope(metadata, scope), "warnings": coverage_warnings(metadata)}
+
+    @_tool(mcp, "Resolve installation for one executable")
+    def resolve_installation(name: str, environment: dict[str, Any], preferences: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Give conservative, environment-specific install and invoke steps."""
+        return _resolve_installation(dataset, name, environment, preferences)
+
+    @_tool(mcp, "Resolve installations in batch")
+    def resolve_installations(names: list[str], environment: dict[str, Any], preferences: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Resolve several commands against the same target environment."""
+        return {"results": [_resolve_installation(dataset, name, environment, preferences) for name in names],
+                "snapshot": dataset.metadata["snapshot"], "contract_version": "installation-v1",
+                "warnings": coverage_warnings(dataset.metadata)}
 
     @_tool(mcp, "Get an executable record")
     def get_executable(name: str, scope: dict[str, str] | None = None) -> dict[str, Any]:

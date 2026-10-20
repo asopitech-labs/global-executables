@@ -352,6 +352,23 @@ Global Executables is intended to be directly usable by AI agents.
 
 The MCP interface provides structured access to the public dataset.
 
+It also exposes `resolve_installation` and `resolve_installations` for
+environment-specific installation guidance. The [MCP guide](docs/MCP.md)
+describes the required target context and the `installation-v1` result contract.
+Guidance without target-specific install-and-invoke validation is marked
+`unverified`.
+Agents can use the MCP tools directly; people can enter the same target context in
+the [browser Playground](https://asopitech-labs.github.io/global-executables/).
+The CLI exposes the same resolver against a local dictionary:
+
+```sh
+global-executables resolve-installation pygo --root ./dictionary \
+  --environment '{"package_manager":"pip","runtime_version":"3.12","install_scope":"project","virtualenv_bin":"./.venv/bin"}'
+```
+
+The [method validation record](docs/INSTALLATION_VALIDATION.md) distinguishes tested
+package-manager syntax from untested package identities.
+
 The current read-only tools are:
 
 ### `check_executable`

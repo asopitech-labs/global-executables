@@ -11,5 +11,6 @@
     "/data/executables/{shard}/{name}.json": {"get": {"summary": "Get one executable record", "parameters": [{"name": "shard", "in": "path", "required": true, "schema": {"type": "string"}}, {"name": "name", "in": "path", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"description": "Canonical executable record"}, "404": {"description": "Not found"}}}},
     "/data/indexes/prefix/{prefix}.json": {"get": {"summary": "Search a bounded prefix index", "parameters": [{"name": "prefix", "in": "path", "required": true, "schema": {"type": "string", "minLength": 2}}], "responses": {"200": {"description": "Executable names"}}}}
   },
-  "x-playground-operations": ["check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "assess_executable", "get_coverage"]
+  "x-playground-operations": ["check_executable", "check_executables", "resolve_installation", "resolve_installations", "get_executable", "search_executables", "search_similar_executables", "assess_executable", "get_coverage"],
+  "x-installation-contract-version": "installation-v1"
 }

@@ -193,6 +193,69 @@ async function checkExecutable(name, scope) {
   if (scope && Object.keys(scope).length) result.scope = scope;
   return result;
 }
+function resolveInstallationFromCheck(checked, environment, preferences = {}) {
+  const result = { contract_version: "installation-v1", name: checked.name, status: "needs_context", environment,
+    snapshot: checked.snapshot, coverage_scope: checked.coverage_scope, warnings: checked.warnings,
+    required_context: [], candidates: [], steps: [] };
+  if (!checked.found) { result.status = "not_found_in_index"; result.absence = checked.absence; return result; }
+  const system = environment.package_manager;
+  if (!system) { result.required_context = ["package_manager"]; return result; }
+  if (!["brew", "apt", "npm", "pip"].includes(system)) { result.status = "unsupported"; return result; }
+  const distribution = environment.distribution;
+  if (system === "apt" && !distribution) { result.required_context = ["distribution"]; return result; }
+  if (system === "apt" && !["debian", "ubuntu"].includes(distribution)) { result.status = "unsupported"; return result; }
+  if (system === "apt" && !environment.distribution_release) { result.required_context = ["distribution_release"]; return result; }
+  if (system === "apt" && !environment.architecture) { result.required_context = ["architecture"]; return result; }
+  if (system === "brew" && environment.os !== "macos") {
+    result.required_context = environment.os ? [] : ["os"];
+    result.status = result.required_context.length ? "needs_context" : "unsupported"; return result;
+  }
+  if (["npm", "pip"].includes(system) && !environment.runtime_version) { result.required_context = ["runtime_version"]; return result; }
+  if (["npm", "pip"].includes(system) && !environment.install_scope) { result.required_context = ["install_scope"]; return result; }
+  if (["npm", "pip"].includes(system) && !["user", "project"].includes(environment.install_scope)) { result.status = "unsupported"; return result; }
+  const ecosystem = ({brew: "homebrew", npm: "npm", pip: "pypi"})[system] || distribution;
+  let candidates = checked.providers.filter((p) => p.ecosystem === ecosystem);
+  if (system === "apt") candidates = candidates.filter((p) => [undefined, distribution].includes(p.distribution) && [undefined, "deb", "apt"].includes(p.package_system));
+  candidates = candidates.filter((p) => !preferences.package || p.package === preferences.package);
+  result.candidates = candidates;
+  if (!candidates.length) { result.status = "unsupported"; return result; }
+  if (new Set(candidates.map((p) => JSON.stringify([p.ecosystem, p.package]))).size > 1) { result.status = "ambiguous"; return result; }
+  const provider = candidates[0]; result.provider = provider;
+  result.applicability = {target: environment, source_distribution_release: provider.distribution_release ?? null,
+    source_architecture: provider.architecture ?? null, validated_on_target: false};
+  const releaseMatches = system !== "apt" || provider.distribution_release === environment.distribution_release;
+  if (!["direct", "filesystem"].includes(provider.confidence) || provider.alias_of || provider.package.startsWith("-")) { result.status = "unverified"; return result; }
+  const pkg = provider.package;
+  let argv;
+  if (system === "apt") {
+    if (environment.has_admin !== true) { result.required_context = ["has_admin"]; return result; }
+    argv = ["sudo", "apt-get", "install", "--", pkg];
+  } else if (system === "brew") argv = ["brew", "install", "--", pkg];
+  else if (system === "npm") argv = environment.install_scope === "project" ? ["npm", "install", "--", pkg] : ["npm", "install", "--global", "--", pkg];
+  else {
+    if (environment.install_scope === "project" && !environment.virtualenv_bin) { result.required_context = ["virtualenv_bin"]; return result; }
+    const python = environment.install_scope === "project" ? environment.virtualenv_bin.replace(/\/$/, "") + "/python" : "python";
+    argv = environment.install_scope === "project" ? [python, "-m", "pip", "install", "--", pkg] : [python, "-m", "pip", "install", "--user", "--", pkg];
+  }
+  const invoke = system === "npm" && environment.install_scope === "project" ? ["npm", "exec", "--", checked.name] : system === "pip" && environment.install_scope === "project" ? [environment.virtualenv_bin.replace(/\/$/, "") + "/" + checked.name] : [checked.name];
+  result.status = "unverified";
+  const methodDocs = {apt: "https://manpages.debian.org/apt-get.8", brew: "https://docs.brew.sh/Manpage#install-options-formulacask-", npm: "https://docs.npmjs.com/cli/commands/npm-install", pip: "https://pip.pypa.io/en/stable/cli/pip_install/"};
+  result.method = {package_manager: system, documentation: methodDocs[system], basis: "package-manager command syntax", target_package_available: "unknown"};
+  result.method_validation = ({
+    "apt:undefined": {result: "pass", observed_at: "2026-10-20T00:58:00Z", target: "Debian 13 amd64", manager_version: "apt 3.0.3", fixture: "local ge-install-probe 1.0.0 .deb in an isolated root", invocation: "isolated-root/usr/bin/ge-install-probe"},
+    "npm:project": {result: "pass", observed_at: "2026-10-19T10:45:00Z", target: "Debian 13 amd64", manager_version: "npm 11.9.0", runtime_version: "Node.js 24.19.0", fixture: "local ge-install-probe 1.0.0", invocation: "npm exec -- ge-install-probe"},
+    "pip:project": {result: "pass", observed_at: "2026-10-19T10:46:00Z", target: "Debian 13 amd64", manager_version: "pip (Python 3.12.14)", runtime_version: "Python 3.12.14", fixture: "local ge-install-probe 1.0.0", invocation: "venv/bin/ge-install-probe"},
+  })[`${system}:${environment.install_scope}`] ?? null;
+  result.steps = [...(system === "apt" && !releaseMatches ? [{action: "check_availability", argv: ["apt-cache", "show", "--", pkg], platform: environment}] : []), {action: "install", argv, platform: environment}, {action: "invoke", argv: invoke, platform: environment}];
+  result.invocation = {argv: invoke, path_note: "Ensure the selected package manager's executable directory is on PATH; verify the installed command before use."};
+  result.verification = {confidence: provider.confidence, source: provider.source, observed_at: provider.last_observed_at ?? null,
+    version: provider.version, note: "Package-manager syntax is documented; availability and entry-point behavior of this package on the target have not been verified.", source_release_matches_target: releaseMatches};
+  return result;
+}
+async function resolveInstallation(name, environment, preferences = {}) {
+  return resolveInstallationFromCheck(await checkExecutable(name, null), environment, preferences);
+}
+
 async function searchExecutables({ prefix = "", length, ecosystem, limit = 100, scope }) {
   const sets = [];
   if (prefix) {
@@ -227,23 +290,57 @@ async function assessExecutable(name, scope) {
 
 function input(label, name, value = "", type = "text", placeholder = "") { return `<label>${label}<input name="${name}" type="${type}" value="${value}" placeholder="${placeholder}" /></label>`; }
 function scopeInput() { return `<label>Scope <textarea name="scope" placeholder='{"language":"python"}'></textarea></label><span class="scope-hint">Optional JSON filter, e.g. {"registry":"npm"}</span>`; }
+function renderInstallationCard(result) {
+  const card = $("installation-card");
+  if (!card?.replaceChildren) return;
+  card.replaceChildren();
+  const items = result?.results || (result?.contract_version === "installation-v1" ? [result] : []);
+  card.hidden = !items.length;
+  for (const item of items) {
+    const title = document.createElement("strong");
+    title.textContent = `${item.name}: ${item.status}`;
+    card.append(title);
+    const explanation = document.createElement("span");
+    explanation.textContent = item.status === "unverified"
+      ? "The package mapping or target applicability has not been verified. Check these steps on the target before relying on them."
+      : item.required_context?.length ? `Needed context: ${item.required_context.join(", ")}` : "Review coverage and provider evidence below.";
+    card.append(explanation);
+    for (const step of item.steps || []) {
+      const line = document.createElement("span");
+      line.textContent = `${step.action}: ${step.argv.join(" ")}`;
+      card.append(line);
+    }
+    if (item.provider?.repository) {
+      const link = document.createElement("a");
+      if (/^https:\/\//.test(item.provider.repository)) {
+        link.href = item.provider.repository;
+        link.textContent = "Provider source";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        card.append(link);
+      }
+    }
+  }
+}
 function renderForm() {
   const form = $("query-form");
   const operation = state.operation;
-  const titles = { check_executable: "check_executable", check_executables: "check_executables", get_executable: "get_executable", search_executables: "search_executables", search_similar_executables: "search_similar_executables", assess_executable: "assess_executable", get_coverage: "get_coverage" };
+  const titles = { check_executable: "check_executable", check_executables: "check_executables", get_executable: "get_executable", search_executables: "search_executables", search_similar_executables: "search_similar_executables", assess_executable: "assess_executable", resolve_installation: "resolve_installation", resolve_installations: "resolve_installations", get_coverage: "get_coverage" };
   $("operation-title").textContent = titles[operation];
   if (operation === "get_coverage") { form.innerHTML = `<div class="run-row"><span class="scope-hint">Return snapshot, source coverage, and freshness context.</span><button class="run-button">Run query ↗</button></div>`; return; }
   let fields = "";
-  if (operation === "check_executables") fields = `<label>Names <textarea name="names" placeholder="envcp\nevpk\nphpunit">envcp\nevpk</textarea></label>${scopeInput()}`;
+  if (operation === "resolve_installations") fields = `<label>Names <textarea name="names" placeholder="git\nenvcp">git\nenvcp</textarea></label><label>Environment (JSON) <textarea name="environment" placeholder='{"os":"macos","package_manager":"brew"}'></textarea></label><label>Preferences (JSON) <textarea name="preferences" placeholder="{}"></textarea></label>`;
+  else if (operation === "resolve_installation") fields = `${input("Executable name", "name", "git", "text", "e.g. git")}<label>Environment (JSON) <textarea name="environment" placeholder='{"os":"macos","package_manager":"brew"}'></textarea></label><label>Preferences (JSON) <textarea name="preferences" placeholder="{}"></textarea></label>`;
+  else if (operation === "check_executables") fields = `<label>Names <textarea name="names" placeholder="envcp\nevpk\nphpunit">envcp\nevpk</textarea></label>${scopeInput()}`;
   else if (operation === "search_executables") fields = `<div class="form-grid">${input("Prefix", "prefix", "do", "text", "two or more characters")}${input("Length", "length", "", "number", "optional")}${input("Ecosystem", "ecosystem", "", "text", "npm, pypi, crates…")}${input("Limit", "limit", "25", "number", "1–500")}</div>${scopeInput()}`;
   else { fields = input("Executable name", "name", operation === "search_similar_executables" ? "kubctl" : "phpunit", "text", "e.g. docker"); if (operation === "search_similar_executables") fields += input("Limit", "limit", "20", "number", "1–100"); else fields += scopeInput(); }
   form.innerHTML = `${fields}<div class="run-row"><span class="scope-hint">Read-only · no request leaves GitHub Pages.</span><button class="run-button">Run query ↗</button></div>`;
 }
 async function runQuery(event) {
-  event.preventDefault(); const form = new FormData(event.target); const op = state.operation; const scope = op === "get_coverage" ? null : await scopeFromInput(String(form.get("scope") || ""));
-  try { let result; if (op === "get_coverage") result = { ...state.metadata, negative_lookup: coverageScope(state.metadata), warnings: coverageWarnings(state.metadata), freshness: state.status?.freshness || { status: "unavailable" } }; else if (op === "check_executable" || op === "get_executable" || op === "assess_executable") { const name = String(form.get("name") || "").trim(); if (op === "check_executable") result = await checkExecutable(name, scope); else if (op === "assess_executable") result = await assessExecutable(name, scope); else result = { record: await getExecutable(name), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; } else if (op === "check_executables") { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => checkExecutable(name, scope))), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), warnings: coverageWarnings(state.metadata) }; } else if (op === "search_executables") result = { executables: await searchExecutables({ prefix: String(form.get("prefix") || "").trim(), length: String(form.get("length") || "").trim(), ecosystem: String(form.get("ecosystem") || "").trim(), limit: form.get("limit"), scope }), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; else result = { matches: await similar(String(form.get("name") || "").trim(), form.get("limit")), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope };
-    state.result = result; $("result").textContent = JSON.stringify(result, null, 2);
-  } catch (error) { const result = { error: error.message }; state.result = result; $("result").textContent = JSON.stringify(result, null, 2); }
+  event.preventDefault(); const form = new FormData(event.target); const op = state.operation; const scope = ["get_coverage", "resolve_installation", "resolve_installations"].includes(op) ? null : await scopeFromInput(String(form.get("scope") || ""));
+  try { let result; if (op === "resolve_installation" || op === "resolve_installations") { const environment = JSON.parse(String(form.get("environment") || "{}")); const preferences = JSON.parse(String(form.get("preferences") || "{}")); if (op === "resolve_installation") result = await resolveInstallation(String(form.get("name") || "").trim(), environment, preferences); else { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => resolveInstallation(name, environment, preferences))), snapshot: state.metadata.snapshot, contract_version: "installation-v1", warnings: coverageWarnings(state.metadata) }; } } else if (op === "get_coverage") result = { ...state.metadata, negative_lookup: coverageScope(state.metadata), warnings: coverageWarnings(state.metadata), freshness: state.status?.freshness || { status: "unavailable" } }; else if (op === "check_executable" || op === "get_executable" || op === "assess_executable") { const name = String(form.get("name") || "").trim(); if (op === "check_executable") result = await checkExecutable(name, scope); else if (op === "assess_executable") result = await assessExecutable(name, scope); else result = { record: await getExecutable(name), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; } else if (op === "check_executables") { const names = String(form.get("names") || "").split(/[,\n]/).map((name) => name.trim()).filter(Boolean); result = { results: await Promise.all(names.map((name) => checkExecutable(name, scope))), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), warnings: coverageWarnings(state.metadata) }; } else if (op === "search_executables") result = { executables: await searchExecutables({ prefix: String(form.get("prefix") || "").trim(), length: String(form.get("length") || "").trim(), ecosystem: String(form.get("ecosystem") || "").trim(), limit: form.get("limit"), scope }), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope }; else result = { matches: await similar(String(form.get("name") || "").trim(), form.get("limit")), snapshot: state.metadata.snapshot, coverage_scope: coverageScope(state.metadata, scope), scope };
+    state.result = result; renderInstallationCard(result); $("result").textContent = JSON.stringify(result, null, 2);
+  } catch (error) { const result = { error: error.message }; state.result = result; renderInstallationCard(result); $("result").textContent = JSON.stringify(result, null, 2); }
 }
 async function boot() {
   try { state.metadata = await json(`${RAW_BASE}/data/metadata.json`); } catch (error) { $("result").textContent = JSON.stringify({ error: error.message }, null, 2); }
