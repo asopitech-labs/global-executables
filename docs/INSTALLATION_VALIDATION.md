@@ -41,3 +41,20 @@ every indexed provider or turn a different provider's `unverified` result into
 `ready`. The workflow can be dispatched again after an environment or manager
 change. `unverified` describes the selected package on the target, not whether
 the package manager has a documented installation command.
+
+## Indexed recipe checks for v1.4.1
+
+[Run 39363743911](https://github.com/asopitech-labs/global-executables/actions/runs/39363743911)
+passed on Ubuntu 24.04, Debian 13, and macOS 15. These checks use package and
+command pairs present in the published dictionary rather than unrelated probes.
+
+| Command | Published package | Target and result |
+| --- | --- | --- |
+| `tsc` | npm `typescript@7.0.2` | Node.js 24 on Ubuntu 24.04; project and user-scope installs both ran `tsc --version` and returned `Version 7.0.2`. npm metadata lists `tsc` as a package binary. |
+| `black` | PyPI `black==26.10.1` | Python 3.12 on Ubuntu 24.04; venv and user-scope installs both ran `black --version` and returned `26.10.1`. |
+| `hello` | Debian/Ubuntu `hello` | Debian 13 and Ubuntu 24.04 apt installs recorded `install ok installed`; `hello` printed `Hello, world!`. |
+| `hello` | Homebrew `hello` 2.12.3 | macOS 15 installed or reinstalled the formula; its executable printed `Hello, world!`, and the installed formula version matched 2.12.3. |
+
+The resolver may call one of these recipes `ready` only when the selected
+provider, supported target, and verified package version or repository source
+match the evidence. Other providers and target variants remain `unverified`.

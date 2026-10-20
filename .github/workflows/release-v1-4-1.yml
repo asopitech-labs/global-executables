@@ -1,0 +1,40 @@
+name: Start v1.4.1 release
+
+# The connected GitHub integration cannot create a tag. This one-time workflow
+# creates the tag with the repository's Actions token and dispatches the release
+# workflow explicitly: tags pushed with GITHUB_TOKEN do not trigger push jobs.
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/release-v1-4-1.yml"]
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check release identity, create tag, and dispatch publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import re
+          version = re.search(r'__version__ = "([^"]+)"', Path('src/global_executables/__init__.py').read_text()).group(1)
+          server = json.loads(Path('server.json').read_text())
+          assert version == '1.4.1' == server['version']
+          assert {item.get('version', item['identifier'].rsplit(':', 1)[-1]) for item in server['packages']} == {version}
+          PY
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/v1.4.1" >/dev/null 2>&1; then
+            echo 'v1.4.1 already exists; refusing to move the tag' >&2
+            exit 1
+          fi
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/git/refs" \
+            -f ref='refs/tags/v1.4.1' -f sha="${GITHUB_SHA}"
+          gh workflow run release.yml --ref v1.4.1
