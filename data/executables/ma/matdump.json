@@ -1,0 +1,93 @@
+{
+  "command": "matdump",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libmatio-1.5.30-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "matio",
+      "version": "1.5.27",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/matio/1.5.27/_/_/revisions/f6b740c597f223a29a61115c9edc48d9/packages/5f1cb7649256840deeec052048b3cafd060418c7/revisions/e1e829c7b21a369382e2f335673b552e/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.5.27"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "matio-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "matio-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libmatio",
+      "version": "1.5.30",
+      "repository": "https://matio.sourceforge.net/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "matio-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "matio",
+      "version": "1.5.30",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "1.5.30"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

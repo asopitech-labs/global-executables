@@ -1,0 +1,55 @@
+{
+  "command": "dpid",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "dillo-3.3.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Mishini/dpid",
+      "version": "v0.0.0-20210303112542-0605741ae5fb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!mishini/dpid/@v/v0.0.0-20210303112542-0605741ae5fb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210303112542-0605741ae5fb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mishini/dpid",
+      "version": "v0.0.0-20210303112542-0605741ae5fb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mishini/dpid/@v/v0.0.0-20210303112542-0605741ae5fb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210303112542-0605741ae5fb"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "dillo",
+      "version": "3.2.0",
+      "repository": "https://dillo-browser.github.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

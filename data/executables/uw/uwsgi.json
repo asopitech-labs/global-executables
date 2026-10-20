@@ -1,0 +1,55 @@
+{
+  "command": "uwsgi",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "uwsgi-2.0.31-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "uwsgi",
+      "version": "2.0.31",
+      "repository": "https://uwsgi-docs.readthedocs.io/en/latest/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyuwsgi",
+      "version": "2.0.30.post1",
+      "repository": "https://uwsgi-docs.readthedocs.io/en/latest/",
+      "source": "https://files.pythonhosted.org/packages/16/c3/ec0aa8842ed4040e0383c645e8a61461cfba070544e7ffe97329f6a64e7e/pyuwsgi-2.0.30.post1-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.30.post1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "uwsgi",
+      "version": "2.0.19",
+      "repository": "http://projects.unbit.it/uwsgi",
+      "source": "https://rubygems.org/gems/uwsgi-2.0.19.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.19"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

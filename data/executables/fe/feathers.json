@@ -1,0 +1,43 @@
+{
+  "command": "feathers",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "chicken-5.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "feathers",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "feathers-cli",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/55/36/42f6ab5e97cc16e2432e25750134125bd4d7f404b3ef21ccba228a345262/feathers_cli-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

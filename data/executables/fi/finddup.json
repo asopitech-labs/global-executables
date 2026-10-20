@@ -1,0 +1,79 @@
+{
+  "command": "finddup",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "perforate",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aca/kata/finddup",
+      "version": "v0.0.0-20260531050759-c7f4f33b6ecc",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/aca/kata/finddup?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260531050759-c7f4f33b6ecc",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260531050759-c7f4f33b6ecc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/reusee/finddup",
+      "version": "v0.0.0-20190820061914-4e2efbed64ff",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/reusee/finddup/@v/v0.0.0-20190820061914-4e2efbed64ff.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190820061914-4e2efbed64ff"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vps2/finddup",
+      "version": "v0.0.0-20210818190352-0b61bd1a735b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vps2/finddup/@v/v0.0.0-20210818190352-0b61bd1a735b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210818190352-0b61bd1a735b"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "finddup",
+      "version": "0.1",
+      "repository": "http://github.com/jammi/finddup/",
+      "source": "https://rubygems.org/gems/finddup-0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "perforate",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

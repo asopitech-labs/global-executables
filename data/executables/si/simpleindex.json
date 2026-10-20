@@ -1,0 +1,56 @@
+{
+  "command": "simpleindex",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "xapian-core-1:2.1.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "xapian-core",
+      "version": "1.4.24",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/xapian-core/1.4.24/_/_/revisions/0e88448bec816b5ea5668ebb080080d0/packages/5bff4369dd4f36dbafd7b645e38cc2fdbe8fbd63/revisions/a6c2bc3417c41d0af5f62b0ce52a55c3/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.4.24"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "xapian",
+      "version": "2.1.0",
+      "repository": "https://xapian.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "simpleindex",
+      "version": "0.6.3",
+      "repository": "https://github.com/uranusjr/simpleindex",
+      "source": "https://files.pythonhosted.org/packages/5a/3b/62de8176c4e0491616e7ae67bb29b1682068f757cda42bc20534d292dc2b/simpleindex-0.6.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.3"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "nessie",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "nessie",
+      "version": "0.108.4",
+      "repository": "https://projectnessie.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pynessie",
+      "version": "0.67.0",
+      "repository": "https://github.com/projectnessie/nessie",
+      "source": "https://files.pythonhosted.org/packages/c1/ed/c1422f7513a7d1d4dc2da6bc02707efa474c205935ad0e443c65e21b7c32/pynessie-0.67.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.67.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

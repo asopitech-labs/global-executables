@@ -1,0 +1,91 @@
+{
+  "command": "basket",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "basket",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "basket",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/minond/basket",
+      "version": "v0.0.0-20210130221418-ec70e2c779f9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/minond/basket/@v/v0.0.0-20210130221418-ec70e2c779f9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210130221418-ec70e2c779f9"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "ysocode/peach",
+      "version": "v1.5.2",
+      "repository": "https://github.com/ysocode/peach.git",
+      "source": "https://repo.packagist.org/p2/ysocode/peach.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.5.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Basket",
+      "version": "1.0",
+      "repository": "http://packages.python.org/Basket",
+      "source": "https://files.pythonhosted.org/packages/c1/cf/b84af837de63fcc302527b358ae99ba42cf6df76d3a81cd5888344c6c5cc/Basket-1.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "orchard-basket",
+      "version": "0.1.1",
+      "repository": "https://github.com/OrchardUniverse/basket",
+      "source": "https://files.pythonhosted.org/packages/04/87/bb2028bd5c89f21c359c6c9b429837535b90125a00348a818de69252b794/orchard_basket-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "basket",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

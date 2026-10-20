@@ -1,0 +1,103 @@
+{
+  "command": "udm",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "unihedron-device-manager",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "unihedron-device-manager",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/knwoop/udm",
+      "version": "v0.0.0-20260410015829-bb8a2f99e2b4",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/knwoop/udm?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260410015829-bb8a2f99e2b4",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260410015829-bb8a2f99e2b4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/labora-inf-ufg/udm",
+      "version": "v0.0.0-20200928131410-ca59477a23b9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/labora-inf-ufg/udm/@v/v0.0.0-20200928131410-ca59477a23b9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200928131410-ca59477a23b9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyudm",
+      "version": "1.0.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/70/24/5f4ae2217e0a91d6a1c2dbb7677de2c603bb13b97dbaf033452c331792ec/pyudm-1.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "udm-rest-api-client",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5a/98/0745b4e4343aea5f04cc2120d1ab1373bb71fb2addccd19f8d333e3de270/udm_rest_api_client-0.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "unihedron-device-manager",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "ppmd",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-ppmd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ppmd",
+      "version": "0.1.1",
+      "repository": "https://github.com/nathancastle/ppmd",
+      "source": "https://files.pythonhosted.org/packages/63/2b/75b347c828b1e62489878a89b3c10ffdd1619d7af61095fb20be0f38338a/ppmd-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ppmd-cffi",
+      "version": "0.5.0",
+      "repository": "http://github.com/miurahr/ppmd",
+      "source": "https://files.pythonhosted.org/packages/01/09/f9e899eff48c9ff6da43f9e88793e11371fae377dae9f517082d0c92ba45/ppmd_cffi-0.5.0-cp36-cp36m-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-ppmd",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

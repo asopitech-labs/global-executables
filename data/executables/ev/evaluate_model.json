@@ -1,0 +1,67 @@
+{
+  "command": "evaluate_model",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "estscan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "estscan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "TransferDOJO",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fa/2b/07766812446f989ce01d7204786df319cc25b9f5b4ac1b9f87be8805d882/TransferDOJO-0.1.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "biobb-pytorch",
+      "version": "5.3.0",
+      "repository": "https://github.com/bioexcel/biobb_pytorch",
+      "source": "https://files.pythonhosted.org/packages/55/7b/4faeb7f9223fbf8d7be1215e0f901e0740543f57968d91f6a675ff6820fe/biobb_pytorch-5.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.3.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "estscan",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

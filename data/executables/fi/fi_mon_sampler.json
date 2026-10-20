@@ -1,0 +1,44 @@
+{
+  "command": "fi_mon_sampler",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libfabric-2.6.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "libfabric",
+      "version": "2.5.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/libfabric/2.5.1/_/_/revisions/b5033c579c78e827d5dee104c1c4dee3/packages/17561cbc2922b459119809d525458e11e7bcb047/revisions/685cd057ca6295323b4fc5ddc68ba49c/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "2.5.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libfabric",
+      "version": "2.6.0",
+      "repository": "https://ofiwg.github.io/libfabric/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

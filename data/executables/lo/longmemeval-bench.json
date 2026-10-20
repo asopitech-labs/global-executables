@@ -1,0 +1,31 @@
+{
+  "command": "longmemeval-bench",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "engram_mcp",
+      "version": "0.12.2",
+      "repository": "https://github.com/edg-l/engram-mcp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/iome-sh/memory",
+      "version": "v1.5.7",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/iome-sh/memory?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.5.7",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.7"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

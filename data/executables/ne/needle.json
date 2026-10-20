@@ -1,0 +1,163 @@
+{
+  "command": "needle",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "needle-cli",
+      "version": "0.15.0",
+      "repository": "https://github.com/cesarferreira/needle",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "needle-rs",
+      "version": "0.1.5",
+      "repository": "https://github.com/aksiksi/needle",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/FlameInTheDark/needle-go",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/FlameInTheDark/needle-go?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kaliwin/needle",
+      "version": "v1.0.22",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kaliwin/needle/@v/v1.0.22.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.22"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "needle",
+      "version": "0.25.1",
+      "repository": "https://github.com/uber/needle",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ash0080/needle",
+      "version": "2.3.3",
+      "repository": "git+https://github.com/ash0080/needle.git",
+      "source": "https://registry.npmjs.org/@ash0080%2Fneedle/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.3.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "needle",
+      "version": "3.5.0",
+      "repository": "git+https://github.com/tomas/needle.git",
+      "source": "https://registry.npmjs.org/needle/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cactus-needle",
+      "version": "3.2.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/23/14/a3f3101da8c99c59ceb7847e4d199a1adcdc944645b63be754d2913320f9/cactus_needle-3.2.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.2.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "needle-cli",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/93/66/cbc05ed2b9c3b3bb843ef29da56c5eae4a6ea5159489b9014915c7b6241d/needle_cli-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "needlesearch-local",
+      "version": "0.1.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ba/16/393fb2f4877a8261072b5158fad5ed2463a536d71f51ffc0cefd4bc6bdaf/needlesearch_local-0.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

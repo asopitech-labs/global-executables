@@ -1,0 +1,67 @@
+{
+  "command": "kubetui",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "kubetui-1.14.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kubetui",
+      "version": "1.14.0",
+      "repository": "https://github.com/sarub0b0/kubetui",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.14.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Xenon1507/k8s-tui",
+      "version": "v0.0.0-20251105220817-9d5c668c3cde",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Xenon1507/k8s-tui?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20251105220817-9d5c668c3cde",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251105220817-9d5c668c3cde"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kubetui",
+      "version": "1.14.0",
+      "repository": "https://github.com/sarub0b0/kubetui",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "kosay.kubetui",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "iredis",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "iredis",
+      "version": "1.16.1",
+      "repository": "https://iredis.xbin.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "iredis",
+      "version": "1.16.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/85/69/428c6f8c42d324e7d0d1d6e243577b2db6c5695d343ed0d84e7c4dd614cb/iredis-1.16.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.16.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "iredis-bin",
+      "version": "1.9.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5f/23/a793e71672814330d584309f9282ee0dd40aa888c5e68b351aed71130f7f/iredis_bin-1.9.4-cp27-cp27mu-manylinux2010_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.9.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "iredis",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

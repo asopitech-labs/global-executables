@@ -1,0 +1,79 @@
+{
+  "command": "jupyter-migrate",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-jupyter-core-5.9.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "jupyterlab",
+      "version": "4.6.3",
+      "repository": "https://jupyter.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jupyter-core",
+      "version": "5.9.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e7/e7/80988e32bf6f73919a113473a604f5a8f09094de312b9d52b79c2df7612b/jupyter_core-5.9.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.9.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "peritus-matrixprofile",
+      "version": "1.1.112",
+      "repository": "https://github.com/aiacovella/matrixprofile.git",
+      "source": "https://files.pythonhosted.org/packages/5e/43/b670490bdf1a2261dd41a5f340f4ddfb4ecddd2b1882c3ec65723d97adcf/peritus-matrixprofile-1.1.112.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.112"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sahilsHousePredicition",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/25/1d/edf7c151c829758d506d990378ad6592333e4568173cf11e129938dbf7b8/sahilsHousePredicition-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "jupyter-core",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

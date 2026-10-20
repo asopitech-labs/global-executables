@@ -1,0 +1,31 @@
+{
+  "command": "knot-exporter",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "knot-exporter",
+      "version": "3.6.1",
+      "repository": "https://gitlab.nic.cz/knot/knot-dns/-/tree/master/python/knot_exporter",
+      "source": "https://files.pythonhosted.org/packages/f6/72/7d297d2df01274756a7c2e81879aeecd9032477912a2ca608708ecb449b4/knot_exporter-3.6.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.6.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "knot-exporter",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

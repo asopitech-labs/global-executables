@@ -1,0 +1,43 @@
+{
+  "command": "benchmark_app",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "openvino",
+      "version": "2026.3.0",
+      "repository": "https://docs.openvino.ai",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "openvino",
+      "version": "2026.4.1",
+      "repository": "https://docs.openvino.ai/2023.0/index.html",
+      "source": "https://files.pythonhosted.org/packages/3e/d2/745eb23be29c24a0f57635019c3f0879f8d08eff43d41560c585fd677bd0/openvino-2026.4.1-22982-cp310-cp310-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2026.4.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "openvino-nightly",
+      "version": "2024.5.0.dev20241105",
+      "repository": "https://docs.openvino.ai/nightly/index.html",
+      "source": "https://files.pythonhosted.org/packages/d4/25/2f94969cfad2686267b17297851a712fa05fc27c01fbf08bf9e1ec775c79/openvino_nightly-2024.5.0.dev20241105-17277-cp310-cp310-macosx_10_15_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2024.5.0.dev20241105"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

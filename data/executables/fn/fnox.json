@@ -1,0 +1,43 @@
+{
+  "command": "fnox",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "fnox",
+      "version": "1.40.0",
+      "repository": "https://github.com/jdx/fnox",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.40.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "fnox",
+      "version": "1.34.0",
+      "repository": "https://fnox.jdx.dev/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "fnox-py",
+      "version": "1.31.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2d/eb/d19b931569757d9c6791a87ce4d9882521e1e2de637162e53df381def9ca/fnox_py-1.31.0-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.31.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,141 @@
+{
+  "command": "certutil",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "nss-3.127-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "nss",
+      "version": "3.119",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/nss/3.119/_/_/revisions/73a1f4ffb090b38bc362fa4e9c25100d/packages/ee5787a60b5d812bf1dd43142f7ccf761e63f240/revisions/ffbfd939a3376f4d649b2a7aa24ea2b1/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "3.119"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libnss3-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libnss3-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Fristiner/certutil",
+      "version": "v0.0.0-20240531110126-d88334efe222",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!fristiner/certutil/@v/v0.0.0-20240531110126-d88334efe222.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240531110126-d88334efe222"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nss",
+      "version": "3.127",
+      "repository": "https://firefox-source-docs.mozilla.org/security/nss/index.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "certutil",
+      "version": "0.2.0",
+      "repository": "",
+      "source": "https://rubygems.org/gems/certutil-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "libnss3-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "nss",
+      "version": "3.113.1",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "3.113.1"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2022-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:6b43c814ed2a800563083ce3193e5f1951d4d6a18fd2879ff45173851db82bd5",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
+    },
+    {
+      "ecosystem": "windows",
+      "package": "servercore",
+      "version": "ltsc2025-amd64",
+      "repository": null,
+      "source": "windows/servercore@sha256:2cd01bf7793879d5e1756b46045ea5dd61d040837e36d48c340f6e17d3263507",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "windows-image",
+      "distribution_family": "windows",
+      "distribution": "servercore"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "check_http",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "monitoring-plugins",
+      "version": "3.0.3",
+      "repository": "https://www.monitoring-plugins.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nagios-plugins",
+      "version": "2.5",
+      "repository": "https://www.nagios-plugins.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "check_http",
+      "version": "0.1.1",
+      "repository": "https://github.com/gorsuch/check_http",
+      "source": "https://rubygems.org/gems/check_http-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

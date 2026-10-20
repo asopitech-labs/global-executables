@@ -1,0 +1,31 @@
+{
+  "command": "check_patroni",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "check-patroni",
+      "version": "2.2.0",
+      "repository": "https://github.com/dalibo/check_patroni",
+      "source": "https://files.pythonhosted.org/packages/48/ce/50de07c741e3b160763cd37bba745069ab115d81b5bdd57a519a4f461353/check_patroni-2.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "check-patroni",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

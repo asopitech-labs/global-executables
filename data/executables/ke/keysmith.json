@@ -1,0 +1,91 @@
+{
+  "command": "keysmith",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "keysmith-26.04.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "keysmith-26.08.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "keysmith",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "keysmith",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dfinity/keysmith",
+      "version": "v1.6.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dfinity/keysmith/@v/v1.6.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "keysmith",
+      "version": "3.0.1",
+      "repository": "https://github.com/dmtucker/keysmith",
+      "source": "https://files.pythonhosted.org/packages/87/17/f861b6024a53980db88d4e0d554a3879e2949160d8def3d77843e4f2f937/keysmith-3.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "keysmith-mcp",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fb/ed/c40bb29fe077d3c2c5912bbe1bf5c38f5d26ab3484b2e2887dcdc3fda7b7/keysmith_mcp-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

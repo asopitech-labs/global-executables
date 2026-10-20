@@ -1,0 +1,79 @@
+{
+  "command": "sticky",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "sticky-1.32-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sticky",
+      "version": "1.0.0",
+      "repository": "https://github.com/moddedBear/sticky",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jakecoffman/cp",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jakecoffman/cp/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lesismal/nbio_examples",
+      "version": "v0.0.0-20260717135320-037bdbfee72f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lesismal/nbio_examples/@v/v0.0.0-20260717135320-037bdbfee72f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260717135320-037bdbfee72f"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sticky-brain",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/88/6b/e957b8560a548da0e87ff59986a29fdc7146a764925b7710ce0ae479d859/sticky_brain-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "sticky",
+      "version": "1.0.1",
+      "repository": "https://github.com/arturts/sticky",
+      "source": "https://rubygems.org/gems/sticky-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

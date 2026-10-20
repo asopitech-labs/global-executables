@@ -1,0 +1,55 @@
+{
+  "command": "falco",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/ysugimoto/falco",
+      "version": "v1.21.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ysugimoto/falco/@v/v1.21.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.21.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "falco",
+      "version": "2.3.0",
+      "repository": "https://github.com/ysugimoto/falco",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aptera/falco",
+      "version": "0.3.5",
+      "repository": "git+https://github.com/aptera/falco.git",
+      "source": "https://registry.npmjs.org/@aptera%2Ffalco/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "falco-cli",
+      "version": "0.29.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/77/9d/cd293dcd44654079fa8968055306fa4fca23bf93e1e8c03e544ce4d60efc/falco_cli-0.29.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.29.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

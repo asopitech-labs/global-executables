@@ -1,0 +1,43 @@
+{
+  "command": "cataclysm",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "cataclysm-dda-0.I-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cataclysm",
+      "version": "0.I",
+      "repository": "https://github.com/CleverRaven/Cataclysm-DDA",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cataclysm",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/78/31/3b7387901431d22dcdd7ef83a4ad3d40971cd0bcdaad7091e3e1592395d2/cataclysm-0.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "vitrage-notifier",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "vitrage",
+      "version": "15.0.1",
+      "repository": "https://docs.openstack.org/vitrage/latest/",
+      "source": "https://files.pythonhosted.org/packages/27/0b/b54f65bc62be2d967ef78a1f6e7bc7f50e61a0f862c1a5858fc05298a911/vitrage-15.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "15.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-vitrage",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

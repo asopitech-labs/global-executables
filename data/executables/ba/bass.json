@@ -1,0 +1,43 @@
+{
+  "command": "bass",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bass-1.2-16",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vito/bass",
+      "version": "v0.12.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vito/bass/@v/v0.12.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bassjs/cli",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@bassjs%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

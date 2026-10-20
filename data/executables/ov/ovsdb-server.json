@@ -1,0 +1,139 @@
+{
+  "command": "ovsdb-server",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "openvswitch-4.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "openvswitch-common",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "openvswitch-common",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "g.yxqyang.asia/ovn-org/libovsdb",
+      "version": "v0.0.0-20250702120510-8a0705fef3ad",
+      "repository": null,
+      "source": "https://proxy.golang.org/g.yxqyang.asia/ovn-org/libovsdb/@v/v0.0.0-20250702120510-8a0705fef3ad.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250702120510-8a0705fef3ad"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Peanut-5/ovsdb",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!peanut-5/ovsdb/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/npinaeva/libovsdb",
+      "version": "v0.0.0-20240710124642-95e9dd28a5d4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/npinaeva/libovsdb/@v/v0.0.0-20240710124642-95e9dd28a5d4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240710124642-95e9dd28a5d4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ovn-kubernetes/libovsdb",
+      "version": "v0.8.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ovn-kubernetes/libovsdb/@v/v0.8.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ovn-org/libovsdb",
+      "version": "v0.0.0-20250702120510-8a0705fef3ad",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ovn-org/libovsdb/@v/v0.0.0-20250702120510-8a0705fef3ad.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250702120510-8a0705fef3ad"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/peanut-5/ovsdb",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/peanut-5/ovsdb/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/socketplane/libovsdb",
+      "version": "v0.8.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/socketplane/libovsdb/@v/v0.8.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "openvswitch-common",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

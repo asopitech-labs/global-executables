@@ -1,0 +1,55 @@
+{
+  "command": "gitlab-shell-authorized-principals-check",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "gitlab-shell",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gitlabhq/gitlab-shell/v14",
+      "version": "v14.56.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gitlabhq/gitlab-shell/v14/@v/v14.56.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v14.56.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/gitlab-org/gitlab-shell/v14",
+      "version": "v14.56.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/gitlab-org/gitlab-shell/v14/@v/v14.56.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v14.56.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "projecttick.net/uppfinna-shell",
+      "version": "v0.0.0-20260819201422-68348dd08e26",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/projecttick.net/uppfinna-shell?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260819201422-68348dd08e26",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819201422-68348dd08e26"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

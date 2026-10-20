@@ -1,0 +1,31 @@
+{
+  "command": "grout",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "grout",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "proxy.py",
+      "version": "2.4.10",
+      "repository": "https://github.com/abhinavsingh/proxy.py",
+      "source": "https://files.pythonhosted.org/packages/c1/38/e2546d82f769550a54cca9b1ae81f229871c9bb8b9eca55d766c74a83b03/proxy.py-2.4.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.4.10"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

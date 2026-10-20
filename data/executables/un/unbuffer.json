@@ -1,0 +1,115 @@
+{
+  "command": "unbuffer",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "expect-5.45.4-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "expect",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "expect",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "crdx.org/cmd",
+      "version": "v1.13.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/crdx.org/cmd?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.13.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.13.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-training/training",
+      "version": "v0.0.0-20251108043735-fae1c1fcd352",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-training/training/@v/v0.0.0-20251108043735-fae1c1fcd352.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251108043735-fae1c1fcd352"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-training/workshop-20220520",
+      "version": "v0.0.0-20220522082447-c8e17d9ed492",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-training/workshop-20220520/@v/v0.0.0-20220522082447-c8e17d9ed492.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220522082447-c8e17d9ed492"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "expect",
+      "version": "5.45.4",
+      "repository": "https://core.tcl-lang.org/expect/index",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "expect-5.45.4-6",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "expect",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

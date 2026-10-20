@@ -1,0 +1,55 @@
+{
+  "command": "xml-analyze",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "xml-rs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xml-rs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "xml-analysis-framework",
+      "version": "2.0.0",
+      "repository": "https://github.com/redhat-ai-americas/xml-analysis-framework",
+      "source": "https://files.pythonhosted.org/packages/44/da/7c18257dc0e6d6ce640ddcfc379ed6b8d68aab3c4136e590d9203263cdc0/xml_analysis_framework-2.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "xml-rs",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

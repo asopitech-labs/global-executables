@@ -1,0 +1,31 @@
+{
+  "command": "oracle-feeder",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "precolator-program",
+      "version": "1.0.0",
+      "repository": "https://github.com/precolator/precolator-prog",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/persistenceOne/oracle-feeder",
+      "version": "v1.0.1-alpha",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/persistence!one/oracle-feeder/@v/v1.0.1-alpha.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1-alpha"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

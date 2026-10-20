@@ -1,0 +1,43 @@
+{
+  "command": "qparse",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/sid-agrawal/quantumfs",
+      "version": "v0.21.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/sid-agrawal/quantumfs?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.21.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.21.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "jena",
+      "version": "6.2.0",
+      "repository": "https://jena.apache.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@accountmade/questionnaire-parser",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/accountmade/questionnaire-parser.git",
+      "source": "https://registry.npmjs.org/@accountmade%2Fquestionnaire-parser/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

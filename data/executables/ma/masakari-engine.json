@@ -1,0 +1,31 @@
+{
+  "command": "masakari-engine",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "masakari",
+      "version": "22.0.0",
+      "repository": "https://docs.openstack.org/masakari/latest/",
+      "source": "https://files.pythonhosted.org/packages/e5/18/5e3582fa445bf2e57bea1dcc89a0bfe5b7a20973aea782fc5083a841cff7/masakari-22.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "22.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-masakari",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "rebound",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/smitssjors/rebound",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/smitssjors/rebound/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rebound-cli",
+      "version": "2.1.0",
+      "repository": "https://github.com/shobrook/rebound",
+      "source": "https://files.pythonhosted.org/packages/97/78/9c58358a116849a5b24601ae2003d228b04c3476c9847edb8c6ec8b4ed13/rebound-cli-2.1.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "rebound",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

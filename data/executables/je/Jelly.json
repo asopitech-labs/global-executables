@@ -1,0 +1,43 @@
+{
+  "command": "Jelly",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "Jelly",
+      "version": "0.2.1",
+      "repository": "https://github.com/teufelchen1/jelly",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/chepchan/Jelly",
+      "version": "v0.0.0-20230424211304-c17cd6faf543",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/chepchan/!jelly/@v/v0.0.0-20230424211304-c17cd6faf543.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230424211304-c17cd6faf543"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pbjelly",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "nvidia-container-runtime",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "nvidia-container-toolkit-1.20.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/elezar/nvidia-container-toolkit",
+      "version": "v1.17.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/elezar/nvidia-container-toolkit/@v/v1.17.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.17.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nvidia/container-toolkit",
+      "version": "v1.20.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nvidia/container-toolkit/@v/v1.20.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.20.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nvidia/nvidia-container-toolkit",
+      "version": "v1.20.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nvidia/nvidia-container-toolkit/@v/v1.20.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.20.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/nvidia/container-toolkit/container-toolkit.git",
+      "version": "v1.15.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/nvidia/container-toolkit/container-toolkit.git/@v/v1.15.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.15.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.palpant.us/justin/nvidia-container-toolkit",
+      "version": "v1.17.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.palpant.us/justin/nvidia-container-toolkit/@v/v1.17.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.17.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

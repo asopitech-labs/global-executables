@@ -1,0 +1,103 @@
+{
+  "command": "journalctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "systemd-261.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "systemd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "systemd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/netdata/systemd-journal-sdk/go",
+      "version": "v0.8.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/netdata/systemd-journal-sdk/go/@v/v0.8.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "systemd",
+      "version": "261.2",
+      "repository": "https://systemd.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dystemctl",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/76/e8/ceca97db1ae74c462ede42646a19aa099df7befa2b0a6ac4871a1af7d0b0/dystemctl-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "runspec-linux",
+      "version": "0.20.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/3b/26/bb664c99ae30a8adb2bce8210412a1c3ead1bbe045ca1ea5d0f2d9aca73d/runspec_linux-0.20.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.20.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "systemd",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

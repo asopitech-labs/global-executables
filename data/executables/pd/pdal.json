@@ -1,0 +1,69 @@
+{
+  "command": "pdal",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pdal-2.10.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "pdal",
+      "version": "2.10.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/pdal/2.10.1/_/_/revisions/cb99d52e21a6751284e203283609361b/packages/235835f3edef3f177447170b0b974b530643229a/revisions/e6861e268a318e82cd5ebe8aebeb1084/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "2.10.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pdal",
+      "version": "2.10.2",
+      "repository": "https://pdal.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pointcloud-extraction",
+      "version": "0.0.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ff/93/4df0cf1553aa6fb2d751cfd5a29478e78d56ab95a269e8cb608a3a2408a1/pointcloud_extraction-0.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "pdal",
+      "version": "2.10.1",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "2.10.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

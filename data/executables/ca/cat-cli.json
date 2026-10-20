@@ -1,0 +1,43 @@
+{
+  "command": "cat-cli",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "cat-token",
+      "version": "0.2.0",
+      "repository": "https://github.com/Quicr/cat-token",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/JasonSatherr/cat-cli",
+      "version": "v0.0.0-20220614093334-67b53f501af7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!jason!satherr/cat-cli/@v/v0.0.0-20220614093334-67b53f501af7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220614093334-67b53f501af7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cat-kit/cli",
+      "version": "1.0.6",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@cat-kit%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.6"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

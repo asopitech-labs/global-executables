@@ -1,0 +1,103 @@
+{
+  "command": "kraft",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "kraft",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/unikraft/kraftkit",
+      "version": "v0.12.15",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/unikraft/kraftkit/@v/v0.12.15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "kraftkit.sh",
+      "version": "v0.12.15",
+      "repository": null,
+      "source": "https://proxy.golang.org/kraftkit.sh/@v/v0.12.15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.15"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kraftkit",
+      "version": "0.12.15",
+      "repository": "https://unikraft.org/docs/cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Kraft",
+      "version": "10.0.9",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/kraft/10.0.9/kraft.10.0.9.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "10.0.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kraft-cli",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a8/89/cfa0857771f717073db1e0021dd17de33e81954e8f5cb6a3565c19c4d8ff/kraft_cli-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kraft-sdlc",
+      "version": "2.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/31/c8/ed7268c6c49e32b37f8af23aef12a10baf8ce12c55caf6216d86f6cc5d73/kraft_sdlc-2.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "kraft",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

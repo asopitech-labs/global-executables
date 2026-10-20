@@ -1,0 +1,43 @@
+{
+  "command": "dbtoepub",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "docbook-xsl",
+      "version": "1.79.2",
+      "repository": "https://github.com/docbook/xslt10-stylesheets",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "dbtoepub",
+      "version": "1.0.1",
+      "repository": "https://github.com/docbook/xslt10-stylesheets",
+      "source": "https://rubygems.org/gems/dbtoepub-1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "dbtoepub",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

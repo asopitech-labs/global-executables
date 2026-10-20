@@ -1,0 +1,31 @@
+{
+  "command": "bamboo-mcp",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "bamboo-mcp-rs",
+      "version": "0.8.9",
+      "repository": "https://github.com/guercheLE/bamboo-mcp-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bamboocss/mcp",
+      "version": "1.46.3",
+      "repository": "git+https://github.com/gajus/bamboocss.git",
+      "source": "https://registry.npmjs.org/@bamboocss%2Fmcp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.46.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

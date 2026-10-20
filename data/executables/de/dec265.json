@@ -1,0 +1,45 @@
+{
+  "command": "dec265",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libde265-1.1.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "libde265",
+      "version": "1.0.15",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/libde265/1.0.15/_/_/revisions/487f0a141295cf2c5ce2436e0ea82174/packages/5efa74a6fa6b04b8a3d519eecb87e863f8255d10/revisions/bbfd4e4c52f703dd0bc85be291e51931/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.0.15"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "libde265",
+      "version": "1.1.3",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "1.1.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "trash-empty",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "trash-cli-0.24.5.26-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "trash-cli",
+      "version": "0.24.5.26",
+      "repository": "https://github.com/andreafrancia/trash-cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "toolrm",
+      "version": "0.24.5.26",
+      "repository": "https://github.com/andreafrancia/trash-cli",
+      "source": "https://files.pythonhosted.org/packages/57/55/1c220dcbca0d22f0c9b949c76aeabbe5bca1415482333a1d2472f9164c5b/toolrm-0.24.5.26-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.24.5.26"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "trash-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "pgpp",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-pglast",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-pglast",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pg_query",
+      "version": "0.29",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b3/0a/4d17b3b3f07ed32f6105bba63c5ba6364432598ef6b25c0ecb8e0d20c490/pg_query-0.29.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.29"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pglast",
+      "version": "8.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b9/01/b78d58cc58a78eefb2facab0b501e715e86f38316862a8a5e9a5c8e92deb/pglast-8.7-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pglast",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

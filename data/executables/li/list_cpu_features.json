@@ -1,0 +1,45 @@
+{
+  "command": "list_cpu_features",
+  "providers": [
+    {
+      "ecosystem": "conan",
+      "package": "cpu_features",
+      "version": "0.10.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/cpu_features/0.10.1/_/_/revisions/3719ea2532880488f7977e0a0e6bc11b/packages/17561cbc2922b459119809d525458e11e7bcb047/revisions/6130d697c0a79de2fba3c00a8feaaea4/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "0.10.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cpu_features",
+      "version": "0.11.0",
+      "repository": "https://github.com/google/cpu_features",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "cpu-features",
+      "version": "0.11.0",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "0.11.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

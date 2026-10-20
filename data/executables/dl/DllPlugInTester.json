@@ -1,0 +1,57 @@
+{
+  "command": "DllPlugInTester",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "cppunit-1.15.1-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "cppunit",
+      "version": "1.15.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/cppunit/1.15.1/_/_/revisions/ab7aa369cbf20014946964574a427088/packages/13be611585c95453f1cbbd053cea04b3e64470ca/revisions/7303d5ef513722dfb1d19403169dafd4/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.15.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cppunit",
+      "version": "1.15.1",
+      "repository": "https://wiki.freedesktop.org/www/Software/cppunit/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "cppunit",
+      "version": "1.15.1",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "1.15.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

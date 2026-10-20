@@ -1,0 +1,31 @@
+{
+  "command": "livekit-server",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/Livekit/livekit-server",
+      "version": "v1.13.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!livekit/livekit-server/@v/v1.13.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.13.6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "livekit",
+      "version": "1.13.5",
+      "repository": "https://livekit.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

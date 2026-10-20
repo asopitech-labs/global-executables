@@ -1,0 +1,55 @@
+{
+  "command": "ncview",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ncview",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ncview",
+      "version": "2.1.11",
+      "repository": "https://cirrus.ucsd.edu/ncview/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ncview",
+      "version": "0.3.29",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2e/69/1873eb8080d32210ebe5f2112966ce416cfc2b4f7a167809f28564223e3d/ncview-0.3.29-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.29"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ncview",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

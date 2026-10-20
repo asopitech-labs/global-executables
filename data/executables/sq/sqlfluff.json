@@ -1,0 +1,67 @@
+{
+  "command": "sqlfluff",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "sqlfluff-4.3.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "sqlfluff",
+      "version": "4.3.0",
+      "repository": "https://docs.sqlfluff.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "collate-sqlfluff",
+      "version": "3.5.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/29/f1/a8a878b20c3dd575ff54f45180da5bebe39935cc2576ddc2cf1e68596d11/collate_sqlfluff-3.5.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.5.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sqlfluff",
+      "version": "4.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/24/41/436e2d0f2beed494a92f6f9bc1bd87b1a7dbd6bf37038093aa7d353e5153/sqlfluff-4.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.4.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "sqlfluff",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,127 @@
+{
+  "command": "cdi",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "container-device-interface",
+      "version": "1.1.1",
+      "repository": "https://github.com/cncf-tags/container-device-interface-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cdo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cdo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cncf-tags/container-device-interface/cmd/cdi",
+      "version": "v0.0.0-20260828125525-73444d1f71f2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cncf-tags/container-device-interface/cmd/cdi/@v/v0.0.0-20260828125525-73444d1f71f2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260828125525-73444d1f71f2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/container-orchestrated-devices/container-device-interface/cmd/cdi",
+      "version": "v0.0.0-20260824122712-0da23f543fec",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/container-orchestrated-devices/container-device-interface/cmd/cdi/@v/v0.0.0-20260824122712-0da23f543fec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260824122712-0da23f543fec"
+    },
+    {
+      "ecosystem": "go",
+      "package": "tags.cncf.io/container-device-interface/cmd/cdi",
+      "version": "v0.0.0-20260824122712-0da23f543fec",
+      "repository": null,
+      "source": "https://proxy.golang.org/tags.cncf.io/container-device-interface/cmd/cdi/@v/v0.0.0-20260824122712-0da23f543fec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260824122712-0da23f543fec"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cdi",
+      "version": "2.6.3",
+      "repository": "https://code.mpimet.mpg.de/projects/cdi",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ChemicalDice",
+      "version": "1.0.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/44/64/c771592426c34d0dde686bc7010b47c390a8046f06930d93c45c840df32e/chemicaldice-1.0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "cdo",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

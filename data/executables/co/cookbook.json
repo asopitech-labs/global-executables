@@ -1,0 +1,91 @@
+{
+  "command": "cookbook",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ccfits-2.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cookbook",
+      "version": "0.1.1",
+      "repository": "https://gitlab.com/gustavhaglandproject/gustav-page",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cookm353/cookbook",
+      "version": "v0.0.0-20231223213308-a48877a9ba24",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cookm353/cookbook/@v/v0.0.0-20231223213308-a48877a9ba24.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231223213308-a48877a9ba24"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tarantool/doc",
+      "version": "v0.0.0-20260803093853-18035077c4d6",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/tarantool/doc?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260803093853-18035077c4d6",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260803093853-18035077c4d6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/timtoronto634/runn_examples/cookbook",
+      "version": "v0.0.0-20241014051748-d7ef6d7e8cd5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/timtoronto634/runn_examples/cookbook/@v/v0.0.0-20241014051748-d7ef6d7e8cd5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241014051748-d7ef6d7e8cd5"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ccfits",
+      "version": "2.7",
+      "repository": "https://heasarc.gsfc.nasa.gov/docs/software/fitsio/CCfits/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wikimedia-spicerack",
+      "version": "14.0.0",
+      "repository": "https://github.com/wikimedia/operations-software-spicerack",
+      "source": "https://files.pythonhosted.org/packages/61/e2/725cc18e16ad05ce934a2f5632ad04901d97ee9da8996dfd29e70b9905cd/wikimedia_spicerack-14.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "14.0.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "oc-mirror",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/RedHatGov/bundle",
+      "version": "v0.1.1-alpha.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!red!hat!gov/bundle/@v/v0.1.1-alpha.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1-alpha.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/openshift/oc-mirror/v2",
+      "version": "v2.0.0-20231019101302-443e6bfc9726",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/openshift/oc-mirror/v2?filter=name+%3D%3D+%22main%22&limit=1000&version=v2.0.0-20231019101302-443e6bfc9726",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0-20231019101302-443e6bfc9726"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "oc-mirror",
+      "version": "0.1.7",
+      "repository": "https://pypi.org/project/oc-mirror/",
+      "source": "https://files.pythonhosted.org/packages/d8/94/ebd41da293196a5b2004a2ce8659a68e4540b61f71516b7aa56cc019a4b7/oc_mirror-0.1.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.7"
+    }
+  ],
+  "first_seen": "2026-08-31",
+  "last_seen": "2026-10-19"
+}

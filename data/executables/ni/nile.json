@@ -1,0 +1,56 @@
+{
+  "command": "nile",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "nile-markets-cli",
+      "version": "0.3.3",
+      "repository": "https://github.com/nil3labs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cairo-nile",
+      "version": "0.14.0",
+      "repository": "https://github.com/martriay/nile",
+      "source": "https://files.pythonhosted.org/packages/48/30/89edcff84a33ad681f539dca1143c93af112025180e8d708edf117f93a46/cairo_nile-0.14.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.14.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "nile",
+      "version": "1.2.0",
+      "repository": "https://github.com/imLinguin/nile",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "imLinguin.nile",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,127 @@
+{
+  "command": "john",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "john-1.9.0.jumbo1-13",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "john",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "john",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "john",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jbdamask/john-code",
+      "version": "v0.0.0-20251130141326-dbac096bd2de",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/jbdamask/john-code?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20251130141326-dbac096bd2de",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251130141326-dbac096bd2de"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "john",
+      "version": "1.9.0",
+      "repository": "https://www.openwall.com/john/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "john-jumbo",
+      "version": "1.9.0",
+      "repository": "https://www.openwall.com/john/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "hashcrack",
+      "version": "0.9",
+      "repository": "https://github.com/bannsec/hashcrack",
+      "source": "https://files.pythonhosted.org/packages/31/ea/8d081858d42a06c6fa10717126aa20de6201cf5f2d11a503f00e8ddf9495/hashcrack-0.9.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "hashcrack-jtr",
+      "version": "23.3.26",
+      "repository": "https://github.com/bannsec/hashcrack-jtr",
+      "source": "https://files.pythonhosted.org/packages/1d/56/b1aacc4223e466322186655183ea1c96c86177f6c94964886e3592cf70d5/hashcrack_jtr-23.3.26-py3-none-manylinux1_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "23.3.26"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "john",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

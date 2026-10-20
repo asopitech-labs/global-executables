@@ -1,0 +1,55 @@
+{
+  "command": "wamp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-autobahn-26.7.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ark-us/wamp",
+      "version": "1.0.9-alpha.8",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ark-us%2Fwamp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.9-alpha.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autobahn",
+      "version": "26.10.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a1/18/fd2f2d16435615948ed1efa38a5873aa00435d411e0b1444b4336e21a750/autobahn-26.10.1-cp311-cp311-macosx_15_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.10.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-autobahn",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

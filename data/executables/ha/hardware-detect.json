@@ -1,0 +1,31 @@
+{
+  "command": "hardware-detect",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "hardware",
+      "version": "0.33.0",
+      "repository": "https://github.com/redhat-cip/hardware",
+      "source": "https://files.pythonhosted.org/packages/84/92/3149b6c01b6c5e00ea1c94335cd918b42f3adfa4691d673b6ef6b3e4f23b/hardware-0.33.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.33.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-hardware",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

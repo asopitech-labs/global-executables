@@ -1,0 +1,56 @@
+{
+  "command": "xml_split",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "perl-xml-twig-3.54-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "strawberryperl",
+      "version": "5.40.2.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/strawberryperl/5.40.2.1/_/_/revisions/e0770bb04d17e7a98fcc66cd1aad849a/packages/522dcea5982a3f8a5b624c16477e47195da2f84f/revisions/52752a90c284621eed854f213dcb50c8/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "5.40.2.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "xml_split",
+      "version": "0.0.2",
+      "repository": "https://github.com/seamusabshere/xml_split",
+      "source": "https://rubygems.org/gems/xml_split-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "xml-twig-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

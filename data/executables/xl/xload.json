@@ -1,0 +1,79 @@
+{
+  "command": "xload",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "xorg-xload-1.2.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "x11-apps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "x11-apps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vaxx99/xload",
+      "version": "v0.0.0-20171011105041-516c5f3f1408",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vaxx99/xload/@v/v0.0.0-20171011105041-516c5f3f1408.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20171011105041-516c5f3f1408"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "xdump",
+      "version": "0.6.0",
+      "repository": "https://github.com/Stranger6667/xdump",
+      "source": "https://files.pythonhosted.org/packages/46/bc/86d43a197c2948e2c10749bd7ff8fd213a97baf2bad37bffc351b8ec79d8/xdump-0.6.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "x11-apps",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

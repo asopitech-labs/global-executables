@@ -1,0 +1,92 @@
+{
+  "command": "gitu",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gitu-0.43.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gitu",
+      "version": "0.43.0",
+      "repository": "https://github.com/altsem/gitu",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.43.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/haunt98/gitu",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/haunt98/gitu/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gitu",
+      "version": "0.43.0",
+      "repository": "https://github.com/altsem/gitu",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cloudnativetoolkit/git-client",
+      "version": "1.14.7",
+      "repository": "git+https://github.com/cloud-native-toolkit/git-client.git",
+      "source": "https://registry.npmjs.org/@cloudnativetoolkit%2Fgit-client/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.14.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gitu",
+      "version": "0.1.0",
+      "repository": "https://github.com/HowyoungZhou/gitu",
+      "source": "https://files.pythonhosted.org/packages/b4/82/14ece51f8012ee2a3496481d0a09ab3156ff5623a1d4f6d8c084882de330/gitu-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gitu",
+      "version": "0.43.0",
+      "repository": "https://github.com/altsem/gitu",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.43.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

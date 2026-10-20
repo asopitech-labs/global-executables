@@ -1,0 +1,55 @@
+{
+  "command": "generate_signing_key",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "matrix-synapse-1.156.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/t2bot/matrix-media-repo",
+      "version": "v1.3.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/t2bot/matrix-media-repo/@v/v1.3.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/turt2live/matrix-media-repo",
+      "version": "v1.3.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/turt2live/matrix-media-repo/@v/v1.3.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "matrix-synapse",
+      "version": "1.163.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7e/95/96146a360d14e7bc1d2e93dd6d78a7b27a852797557dbb8727df74326df0/matrix_synapse-1.163.0-cp310-abi3-manylinux_2_28_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.163.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

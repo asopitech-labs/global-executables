@@ -1,0 +1,127 @@
+{
+  "command": "testpkg",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pacman-7.1.0.r9.g54d9411-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "makepkg",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "makepkg",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/chengxilo/testpkg",
+      "version": "v0.0.0-20250725053929-0ab8bf38ee3e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/chengxilo/testpkg/@v/v0.0.0-20250725053929-0ab8bf38ee3e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250725053929-0ab8bf38ee3e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ultrarays/testpkg",
+      "version": "v0.0.0-20240424213344-54aa51680f77",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ultrarays/testpkg/@v/v0.0.0-20240424213344-54aa51680f77.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240424213344-54aa51680f77"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "makepkg",
+      "version": "7.1.0",
+      "repository": "https://wiki.archlinux.org/index.php/makepkg",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "pacman-6.1.0-25",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-testpkg",
+      "version": "0.3",
+      "repository": "https://github.com/weijarz/python-testpkg",
+      "source": "https://files.pythonhosted.org/packages/74/6b/4a24c288736aa392efddbbd1cf4cf23dccfb4f043796c1f8731d2d5ac1a6/python-testpkg-0.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "test-base-package",
+      "version": "1.0.4",
+      "repository": "https://gitee.com/yxytj/test_base_package",
+      "source": "https://files.pythonhosted.org/packages/66/fb/9a2ebab50499972397f4ef65d9b012d656ddea835e83ae2319ecf29c5f7d/test_base_package-1.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "makepkg",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

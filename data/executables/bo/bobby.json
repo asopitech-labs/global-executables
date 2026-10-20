@@ -1,0 +1,31 @@
+{
+  "command": "bobby",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "bobby",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nicolasgere/bobby",
+      "version": "v0.0.0-20200204154246-20c9767caef9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nicolasgere/bobby/@v/v0.0.0-20200204154246-20c9767caef9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200204154246-20c9767caef9"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "amoeba",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "amoeba",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/contrib/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/revzim/amoeba",
+      "version": "v0.0.19",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/revzim/amoeba/@v/v0.0.19.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.19"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@amoebajs/cli",
+      "version": "0.0.1-alpha.1585290707301",
+      "repository": "https://github.com/amoebajs/cli.git",
+      "source": "https://registry.npmjs.org/@amoebajs%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1-alpha.1585290707301"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "amoeba_deploy_tools",
+      "version": "0.0.10",
+      "repository": "https://github.com/AmoebaLabs/amoeba_deploy_tools",
+      "source": "https://rubygems.org/gems/amoeba_deploy_tools-0.0.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.10"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "amoeba",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

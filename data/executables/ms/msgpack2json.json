@@ -1,0 +1,55 @@
+{
+  "command": "msgpack2json",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "msgpack-tools",
+      "version": "0.6",
+      "repository": "https://github.com/ludocode/msgpack-tools",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "remarshal",
+      "version": "2.1.4",
+      "repository": "https://github.com/remarshal-project/remarshal",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "msgpack2json",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/msgpack2json/0.0.1/msgpack2json.0.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "remarshal",
+      "version": "2.1.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/65/98/960d6acd045c01231c02179703989f3698883069811e563cb1a73805c4c7/remarshal-2.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

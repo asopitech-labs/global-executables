@@ -1,0 +1,79 @@
+{
+  "command": "wobble",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cs-wobble",
+      "version": "0.2.1.dev1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6e/34/8ad870e7698a0de6459ffd3380d63ecdbff2e31bd74286e70729af03fcc4/cs_wobble-0.2.1.dev1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1.dev1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wobble",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a7/b3/fae25b8d0e1557fcb327d10e37ce358237f1b9d738e944ab675fd6148211/wobble-0.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "wobble",
+      "version": "1.1.0",
+      "repository": "https://github.com/2a6U37Nn/wobble",
+      "source": "https://rubygems.org/gems/wobble-1.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

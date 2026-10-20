@@ -1,0 +1,115 @@
+{
+  "command": "arp-scan",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "arp-scan-1.10.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "arp-scan",
+      "version": "0.15.1",
+      "repository": "https://github.com/kongbytes/arp-scan-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "arp-scan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "arp-scan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/SystemEngineeringTeam/geekcamp-2023-vol9/arp-scan",
+      "version": "v0.0.0-20231006011752-61f10d0b1bdd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!system!engineering!team/geekcamp-2023-vol9/arp-scan/@v/v0.0.0-20231006011752-61f10d0b1bdd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231006011752-61f10d0b1bdd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shoriwe/CAPitan",
+      "version": "v0.1.3-alpha",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/shoriwe/!c!a!pitan/@v/v0.1.3-alpha.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.3-alpha"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "arp-scan",
+      "version": "1.10.0",
+      "repository": "https://github.com/royhills/arp-scan",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "arp-scan-rs",
+      "version": "0.15.1",
+      "repository": "https://github.com/kongbytes/arp-scan-rs",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "arp-scan",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

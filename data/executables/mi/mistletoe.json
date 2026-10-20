@@ -1,0 +1,55 @@
+{
+  "command": "mistletoe",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-mistletoe-1.6.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mistletoe",
+      "version": "1.6.0",
+      "repository": "https://github.com/miyuchina/mistletoe",
+      "source": "https://files.pythonhosted.org/packages/e0/5c/3681c676d79726e3b8b72bc78e83ac472b0c96e3c99b28d72b9470f12170/mistletoe-1.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mistletoe-ebp",
+      "version": "0.10.0",
+      "repository": "https://github.com/ExecutableBookProject/mistletoe-ebp",
+      "source": "https://files.pythonhosted.org/packages/78/4a/1aa994653459889b68d560c9f2280631ac6e6e92707cf3c64b577909118b/mistletoe_ebp-0.10.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-mistletoe",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

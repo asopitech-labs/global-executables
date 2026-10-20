@@ -1,0 +1,55 @@
+{
+  "command": "action-validator",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "action-validator",
+      "version": "0.9.0",
+      "repository": "https://github.com/mpalmer/action-validator",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "action-validator",
+      "version": "0.9.0",
+      "repository": "https://github.com/mpalmer/action-validator",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@action-validator/cli",
+      "version": "0.6.0",
+      "repository": "git+https://github.com/mpalmer/action-validator.git",
+      "source": "https://registry.npmjs.org/@action-validator%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bcheidemann__test/action-validator-cli",
+      "version": "0.0.5",
+      "repository": "git+https://github.com/mpalmer/action-validator.git",
+      "source": "https://registry.npmjs.org/@bcheidemann__test%2Faction-validator-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

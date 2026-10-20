@@ -1,0 +1,31 @@
+{
+  "command": "validate-manifest",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/perplext/LLMrecon",
+      "version": "v0.12.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/perplext/LLMrecon?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.12.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cubbles/webpackage-document-api",
+      "version": "0.2.3",
+      "repository": "git+https://github.com/cubbles/coder-toolset.git",
+      "source": "https://registry.npmjs.org/@cubbles%2Fwebpackage-document-api/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.3"
+    }
+  ],
+  "first_seen": "2026-08-25",
+  "last_seen": "2026-10-19"
+}

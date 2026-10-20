@@ -1,0 +1,79 @@
+{
+  "command": "blogin",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "rancid",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "rancid",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rancid",
+      "version": "3.14",
+      "repository": "https://www.shrubbery.net/rancid/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@catlair/blogin",
+      "version": "0.2.4",
+      "repository": "git+https://github.com/catlair/node-blogin.git",
+      "source": "https://registry.npmjs.org/@catlair%2Fblogin/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "blogin",
+      "version": "1.1",
+      "repository": "https://github.com/BotolMehedi/bdroid",
+      "source": "https://files.pythonhosted.org/packages/4d/17/e6b2ea4c3eb9d00a3bd9e61d67202792e56ded12b058577e32dc6eb5960d/blogin-1.1-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "rancid",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

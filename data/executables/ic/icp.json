@@ -1,0 +1,115 @@
+{
+  "command": "icp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "renameutils-0.12.0-8",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "renameutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "renameutils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fghwett/icp",
+      "version": "v0.0.0-20211012072823-6d196a674cfa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fghwett/icp/@v/v0.0.0-20211012072823-6d196a674cfa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211012072823-6d196a674cfa"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "icp-cli",
+      "version": "1.3.0",
+      "repository": "https://dfinity.github.io/icp-cli/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "renameutils",
+      "version": "0.12.0",
+      "repository": "https://www.nongnu.org/renameutils/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "lcsb-icommands",
+      "version": "1.1.2",
+      "repository": "https://gitlab.com/uniluxembourg/lcsb/BioCore/RDMS/irods/lcsb-icai",
+      "source": "https://files.pythonhosted.org/packages/07/8a/24ff6b4a7ee742d18e6e08285ad966a181210a173024ed15defc012de13c/lcsb_icommands-1.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "renameutils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

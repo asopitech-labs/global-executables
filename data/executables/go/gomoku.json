@@ -1,0 +1,67 @@
+{
+  "command": "gomoku",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bsd-games-3.3-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gomoku",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gomoku-terminal",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/bf/78/e5b1bf8b2601e0f02f8e2b1750245c330bfcc1785f01a92a473c0f05084f/gomoku_terminal-1.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gomokubench",
+      "version": "0.1.10",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/51/82/afb243315d7e2aa15a84115c7a6389b8fe5b8605aec34f72ae046d27664b/gomokubench-0.1.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gomoku",
+      "version": "0.2.0",
+      "repository": "https://github.com/dtcristo/gomoku",
+      "source": "https://rubygems.org/gems/gomoku-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

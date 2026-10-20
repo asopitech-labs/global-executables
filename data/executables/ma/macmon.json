@@ -1,0 +1,43 @@
+{
+  "command": "macmon",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "macmon",
+      "version": "0.10.0",
+      "repository": "https://github.com/vladkens/macmon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "macmon",
+      "version": "0.8.2",
+      "repository": "https://github.com/vladkens/macmon",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "macmon",
+      "version": "1.1.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/60/12/5a8fd0f54850bd5cd1341b6eeb2382b330b0686d9cfc6c97c550d5c3e476/macmon-1.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

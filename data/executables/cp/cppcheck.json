@@ -1,0 +1,130 @@
+{
+  "command": "cppcheck",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "cppcheck-2.21.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "cppcheck",
+      "version": "2.21.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/cppcheck/2.21.1/_/_/revisions/d3d328a92d66f315134d9b9265fd3dcc/packages/b9cdb15189a916540022c742914543f4d30e2dbd/revisions/31b4d06e16aa4572df16c8beffdb6bff/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "2.21.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cppcheck",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cppcheck",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cppcheck",
+      "version": "2.21.0",
+      "repository": "https://sourceforge.net/projects/cppcheck/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "comma-deps-cppcheck",
+      "version": "2.21.0.post103",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8e/4d/b6cf5af8f2153c4037ab7976bc9a8c85734b45754dfa79c02ed071b408e0/comma_deps_cppcheck-2.21.0.post103-py3-none-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.21.0.post103"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cppcheck",
+      "version": "1.5.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/da/16/c9224732488df77734acb2e8a9755391a5a386dd47c036966850c5e181c3/cppcheck-1.5.3-py3-none-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "cppcheck",
+      "version": "2.21.0",
+      "repository": "https://cppcheck.sourceforge.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.21.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "cppcheck",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "xmake",
+      "package": "cppcheck",
+      "version": "2.21.1",
+      "repository": "https://github.com/xmake-io/xmake-repo",
+      "source": "https://codeload.github.com/xmake-io/xmake-repo/tar.gz/refs/heads/master",
+      "confidence": "inferred",
+      "source_type": "language_package",
+      "package_system": "xmake",
+      "language": "c++",
+      "registry": "xmake-repo",
+      "latest_version": "2.21.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

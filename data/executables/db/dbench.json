@@ -1,0 +1,79 @@
+{
+  "command": "dbench",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "dbench",
+      "version": "0.1.0",
+      "repository": "https://github.com/giovanniberti/dbench",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dbench",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dbench",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/dmars8047/dbench",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/dmars8047/dbench?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dez",
+      "version": "0.10.10.55",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1d/92/b2e26711055f8d2cd8c4e493dfc720dea354b21b038b157c7594b9cbca65/dez-0.10.10.55-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.10.55"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "dbench",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "uncalled",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "uncalled",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "uncalled",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "proxy-git.cwkhome.fun/stevenh/go-uncalled",
+      "version": "v0.8.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/proxy-git.cwkhome.fun/stevenh/go-uncalled/@v/v0.8.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "uncalled",
+      "version": "0.1.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e2/1a/b0565b4ee866f6de1c118ff8f66f17cb68d8bf47b299c9d1a6c5e4363191/uncalled-0.1.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "uncalled",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

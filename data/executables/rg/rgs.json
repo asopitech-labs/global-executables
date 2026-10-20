@@ -1,0 +1,55 @@
+{
+  "command": "rgs",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "rgs",
+      "version": "0.0.1",
+      "repository": "https://github.com/game-recon/rgs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/y-yagi/rgs",
+      "version": "v0.0.0-20250727081720-4cd540b6a7b6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/y-yagi/rgs/@v/v0.0.0-20250727081720-4cd540b6a7b6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250727081720-4cd540b6a7b6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "rgpio-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

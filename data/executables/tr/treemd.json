@@ -1,0 +1,55 @@
+{
+  "command": "treemd",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "treemd-0.6.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "treemd",
+      "version": "0.9.1",
+      "repository": "https://github.com/epistates/treemd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "treemd",
+      "version": "0.6.0",
+      "repository": "https://github.com/epistates/treemd",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "treemd",
+      "version": "1.0.0",
+      "repository": "https://github.com/asinerum/treemd",
+      "source": "https://files.pythonhosted.org/packages/b6/54/0acbdaa48c71d9e5c5cc7712068e732272ad13010fa0e73a5d47cf3d8505/treemd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

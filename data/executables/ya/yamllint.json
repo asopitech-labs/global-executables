@@ -1,0 +1,103 @@
+{
+  "command": "yamllint",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "yamllint-1.38.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wasilibs/go-yamllint",
+      "version": "v1.38.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wasilibs/go-yamllint/@v/v1.38.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.38.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "yamllint",
+      "version": "1.38.0",
+      "repository": "https://github.com/adrienverge/yamllint",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@asymmetric-effort/yamllint",
+      "version": "0.0.6",
+      "repository": "git+https://github.com/asymmetric-effort/yamllint.git",
+      "source": "https://registry.npmjs.org/@asymmetric-effort%2Fyamllint/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "laueagle",
+      "version": "0.0.3",
+      "repository": "https://liqiang.io/opensource/python/laueagle",
+      "source": "https://files.pythonhosted.org/packages/09/08/77eab6e79dabd1de56bafe337907e699c3dc72403db17c958117cd0ee953/laueagle-0.0.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "yamllint",
+      "version": "1.38.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/05/92/aed08e68de6e6a3d7c2328ce7388072cd6affc26e2917197430b646aed02/yamllint-1.38.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.38.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "yamllint",
+      "version": "0.0.9",
+      "repository": "https://github.com/shortdudey123/yamllint",
+      "source": "https://rubygems.org/gems/yamllint-0.0.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "yamllint",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

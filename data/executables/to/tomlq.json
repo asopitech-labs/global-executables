@@ -1,0 +1,67 @@
+{
+  "command": "tomlq",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "yq-4.1.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "python-yq",
+      "version": "4.1.2",
+      "repository": "https://kislyuk.github.io/yq/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tomlq",
+      "version": "0.1.0",
+      "repository": "https://github.com/cmeister2/tomlq",
+      "source": "https://files.pythonhosted.org/packages/a7/08/a409df2a47dcb99a690b94b71eaf081eb24f1e0f0f8b70efa422828178fe/tomlq-0.1.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "yq",
+      "version": "4.4.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fd/38/cca2b04f284c788ded19a9401e3049fd1f82d0467c1d6bd361915a77c063/yq-4.4.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.4.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "yq",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

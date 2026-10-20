@@ -1,0 +1,67 @@
+{
+  "command": "termtime",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "termrec",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aykay76/termtime",
+      "version": "v0.0.0-20260513210503-2a00dbd8e527",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aykay76/termtime/@v/v0.0.0-20260513210503-2a00dbd8e527.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260513210503-2a00dbd8e527"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "termrec",
+      "version": "0.19",
+      "repository": "https://angband.pl/termrec.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "termtime",
+      "version": "0.2.2",
+      "repository": "https://github.com/vimist/termtime",
+      "source": "https://files.pythonhosted.org/packages/d6/61/b8cc926b8ea529e32bd400f11912bc612473d53296b0e6cc29b6b978c381/termtime-0.2.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "termrec",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

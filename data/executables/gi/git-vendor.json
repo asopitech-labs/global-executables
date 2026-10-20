@@ -1,0 +1,55 @@
+{
+  "command": "git-vendor",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "git-vendor",
+      "version": "0.2.0",
+      "repository": "https://github.com/git-ents/git-vendor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/EmundoT/git-vendor",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/EmundoT/git-vendor?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-vendor",
+      "version": "1.3.0",
+      "repository": "https://brettlangdon.github.io/git-vendor",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-vendor",
+      "version": "0.0.3",
+      "repository": "http://github.com/chuckbutler/git-vendor",
+      "source": "https://files.pythonhosted.org/packages/c5/81/2ac980e1b4a39d924ec4f221f0c71de7fa96a1ceb16bd332bcf1592ce681/git-vendor-0.0.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

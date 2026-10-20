@@ -1,0 +1,43 @@
+{
+  "command": "virtme-mkinitramfs",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "virtme-ng-1.41-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "virtme-ng",
+      "version": "1.42",
+      "repository": "https://github.com/arighi/virtme-ng",
+      "source": "https://files.pythonhosted.org/packages/d1/41/838216899c6b1af87b1f32823589619cb1ed95b29e45b616482f84b45988/virtme_ng-1.42-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.42"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "virtme",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

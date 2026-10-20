@@ -1,0 +1,43 @@
+{
+  "command": "docaudit",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "mercs2_probe",
+      "version": "3.0.0",
+      "repository": "https://github.com/Mercenaries-Fan-Build/notes-on-the-released-game",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lockyc/docaudit",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/lockyc/docaudit?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/the-protobuf-project/buffers",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/the-protobuf-project/buffers?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.2.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "rpc_test_server",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "unitree_sdk2_rs",
+      "version": "0.3.0",
+      "repository": "https://github.com/unitreerobotics/unitree_sdk2_rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kakao/varlog",
+      "version": "v0.30.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kakao/varlog/@v/v0.30.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.30.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

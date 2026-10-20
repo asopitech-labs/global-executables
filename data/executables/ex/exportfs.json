@@ -1,0 +1,79 @@
+{
+  "command": "exportfs",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "nfs-utils-2.9.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nfs-kernel-server",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nfs-kernel-server",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kennylevinsen/g9ptools",
+      "version": "v0.0.0-20201028211329-9c61578b4616",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kennylevinsen/g9ptools/@v/v0.0.0-20201028211329-9c61578b4616.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20201028211329-9c61578b4616"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.inria.fr/mrakotoj/qptools",
+      "version": "v0.4.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.inria.fr/mrakotoj/qptools/@v/v0.4.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "nfs-kernel-server",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

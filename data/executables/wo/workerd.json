@@ -1,0 +1,55 @@
+{
+  "command": "workerd",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "workerd-1.20260818.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "workerd",
+      "version": "0.1.5",
+      "repository": "https://github.com/zhangjianshe/workerd.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.cern.ch/flutter/fts",
+      "version": "v0.0.0-20161129155959-1f45a274849b",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/gitlab.cern.ch/flutter/fts?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20161129155959-1f45a274849b",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20161129155959-1f45a274849b"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cloud-cli/workerd",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/cloud-cli/workerd.git",
+      "source": "https://registry.npmjs.org/@cloud-cli%2Fworkerd/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

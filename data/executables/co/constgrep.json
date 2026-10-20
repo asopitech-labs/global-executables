@@ -1,0 +1,55 @@
+{
+  "command": "constgrep",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "pwntools",
+      "version": "4.15.0",
+      "repository": "https://github.com/Gallopsled/pwntools",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "angr-pwntools",
+      "version": "4.5.0",
+      "repository": "https://pwntools.com",
+      "source": "https://files.pythonhosted.org/packages/5c/78/a0398e9934b29764b633f471a492d64d7a5ecff910eb38cbf316d6b5b94d/angr-pwntools-4.5.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pwntools",
+      "version": "4.15.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/87/03/b5aab57706d61c65aaf6ed181727e7621c7cf32109b22245ac04f1c76094/pwntools-4.15.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.15.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pwntools-elf-only",
+      "version": "4.12.3.dev0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/01/96/04d7ad4fc90cbeb66a2cb48f1fa6b05d5653c6a93ba0faa6a4d2c8303971/pwntools_elf_only-4.12.3.dev0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.12.3.dev0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

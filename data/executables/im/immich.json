@@ -1,0 +1,43 @@
+{
+  "command": "immich",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "immich-cli",
+      "version": "3.1.0",
+      "repository": "https://immich.app/docs/features/command-line-interface",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@conneryn/immich",
+      "version": "0.27.0",
+      "repository": "git+https://github.com/alextran1502/immich-cli.git",
+      "source": "https://registry.npmjs.org/@conneryn%2Fimmich/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.27.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "immich",
+      "version": "1.7.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b5/66/12af16dc187cac9e34ce31be95d251f0393cfcff32ff0185bea7ee11da2a/immich-1.7.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.7.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

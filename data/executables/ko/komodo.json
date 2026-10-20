@@ -1,0 +1,55 @@
+{
+  "command": "komodo",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "komodo-1.6.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "komodo_cli",
+      "version": "1.15.8",
+      "repository": "https://github.com/mbecker20/komodo",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.15.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "komodo",
+      "version": "3.4.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e8/b8/ff26c16cae97d7992faff765f5110ffae31f13caf4e39f78a7fd96ec972a/komodo-3.4.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.4.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pykomodo",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e1/c0/4ce0e5b4828d37e29aa65afb4868b927e0b66f4790f4cae54f715200db40/pykomodo-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

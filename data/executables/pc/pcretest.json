@@ -1,0 +1,92 @@
+{
+  "command": "pcretest",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pcre-8.45-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "modernc.org/libpcre16",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/modernc.org/libpcre16/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "modernc.org/libpcre32",
+      "version": "v0.2.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/modernc.org/libpcre32/@v/v0.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "modernc.org/libpcreposix",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/modernc.org/libpcreposix/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pcre",
+      "version": "8.45",
+      "repository": "https://www.pcre.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "pcre-8.45-5",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pcregrep",
+      "version": "8.45",
+      "repository": "https://pcre.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "8.45"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

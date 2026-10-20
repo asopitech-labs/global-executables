@@ -1,0 +1,130 @@
+{
+  "command": "doxygen",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "doxygen-1.18.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "doxygen",
+      "version": "1.18.0",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/doxygen/1.18.0/_/_/revisions/c0838172822a57579c750bd90dea67be/packages/af2039b68c45cc6a6b906ee602ac7f70f02efef7/revisions/384a95fd56f6a2eb4a1f2e8470575e15/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.18.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "doxygen",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "doxygen",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "doxygen",
+      "version": "1.18.0",
+      "repository": "https://www.doxygen.nl/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "doxygen-1.14.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "DemaConsulting.DoxygenTool",
+      "version": "1.16.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/demaconsulting.doxygentool/1.16.1/demaconsulting.doxygentool.1.16.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.16.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "doxygen",
+      "version": "1.18.0",
+      "repository": "https://www.doxygen.nl/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.18.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "doxygen",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "xmake",
+      "package": "doxygen",
+      "version": "1.10.0",
+      "repository": "https://github.com/xmake-io/xmake-repo",
+      "source": "https://codeload.github.com/xmake-io/xmake-repo/tar.gz/refs/heads/master",
+      "confidence": "inferred",
+      "source_type": "language_package",
+      "package_system": "xmake",
+      "language": "c++",
+      "registry": "xmake-repo",
+      "latest_version": "1.10.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

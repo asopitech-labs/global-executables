@@ -1,0 +1,43 @@
+{
+  "command": "nanopb_generator",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "nanopb",
+      "version": "0.4.9.1",
+      "repository": "https://jpa.kapsi.fi/nanopb/docs/index.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nanopb",
+      "version": "0.4.9.1",
+      "repository": "https://jpa.kapsi.fi/nanopb/",
+      "source": "https://files.pythonhosted.org/packages/7f/46/6f8f5681fbe546945b9aca566866d3738c8328d4f6e6086191043be451f0/nanopb-0.4.9.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.9.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "nanopb",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

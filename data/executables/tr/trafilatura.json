@@ -1,0 +1,43 @@
+{
+  "command": "trafilatura",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "trafilatura",
+      "version": "0.5.0",
+      "repository": "https://github.com/nchapman/trafilatura-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "trafilatura",
+      "version": "2.2.0",
+      "repository": "https://trafilatura.readthedocs.io/en/latest/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "trafilatura",
+      "version": "2.3.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f5/20/e95d135c417aceaa3d34d1b4dff9aceb85e98800480eca1b033933717169/trafilatura-2.3.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.3.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

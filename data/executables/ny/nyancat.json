@@ -1,0 +1,116 @@
+{
+  "command": "nyancat",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "nyancat-1.5.2-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nyancat",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nyancat",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nyancat",
+      "version": "1.5.2",
+      "repository": "https://nyancat.dakko.us/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "nyancat",
+      "version": "1.5.0",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/nyancat/1.5.0/nyancat.1.5.0.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nyancat",
+      "version": "0.1.2",
+      "repository": "https://github.com/taizilongxu/nyancat",
+      "source": "https://files.pythonhosted.org/packages/3c/50/84a628214221bd15034ecfbefd8ad081019ea7b1c5a0a858e44aed7da7ef/nyancat-0.1.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "nyancat",
+      "version": "0.2.1",
+      "repository": "https://github.com/andatche/ruby_nyancat/",
+      "source": "https://rubygems.org/gems/nyancat-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "nyancat",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "nyan-lang",
+      "version": "0.3.1",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "0.3.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "slackdump",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/rusq/slackdump/v3",
+      "version": "v3.1.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rusq/slackdump/v3/@v/v3.1.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.1.13"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rusq/slackdump/v4",
+      "version": "v4.4.4",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/rusq/slackdump/v4?filter=name+%3D%3D+%22main%22&limit=1000&version=v4.4.4",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.4.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "slackdump",
+      "version": "4.4.4",
+      "repository": "https://github.com/rusq/slackdump",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "slackdump",
+      "version": "0.0.5",
+      "repository": "https://github.com/sloev/slackdump",
+      "source": "https://files.pythonhosted.org/packages/be/f7/5920f3551e6e1bfc7d880d9701aaabc75f7c5f7dadd658d26649c614d605/slackdump-0.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

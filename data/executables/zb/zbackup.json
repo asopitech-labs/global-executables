@@ -1,0 +1,55 @@
+{
+  "command": "zbackup",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "zbackup",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "zbackup",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zfs-tools-zbackup",
+      "version": "0.5.1",
+      "repository": "http://github.com/tesujimath/zfs-tools-zbackup",
+      "source": "https://files.pythonhosted.org/packages/a8/d2/dc5350a1635ad5fe48df64e8ef6f44adfa0567ff6e49c210790fc4793628/zfs_tools_zbackup-0.5.1-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "zbackup",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

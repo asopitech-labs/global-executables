@@ -1,0 +1,92 @@
+{
+  "command": "capnpc",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "capnproto-1.5.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "capnproto",
+      "version": "1.5.0",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/capnproto/1.5.0/_/_/revisions/50b2e14c58a3840a4eed6ac9d887e622/packages/457d4a413044184f00810d3a8bb918f415f52850/revisions/0e45723e40cbbb61021959a9dcca973e/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.5.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "capnproto",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "capnproto",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "capnp",
+      "version": "1.5.0",
+      "repository": "https://capnproto.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "comma-deps-capnproto",
+      "version": "1.0.1.post103",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/61/ef/a108b56be5bd6a655c4acaf9c7d6a11c4397d5440bd192314dc2b4e5b997/comma_deps_capnproto-1.0.1.post103-py3-none-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1.post103"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "capnproto",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

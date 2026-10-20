@@ -1,0 +1,31 @@
+{
+  "command": "martin-cp",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "martin",
+      "version": "1.16.1",
+      "repository": "https://github.com/maplibre/martin",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.16.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "martin",
+      "version": "1.14.0",
+      "repository": "https://martin.maplibre.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

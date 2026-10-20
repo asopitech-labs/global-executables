@@ -1,0 +1,55 @@
+{
+  "command": "deluge",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "deluge-1:2.2.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ofux/deluge",
+      "version": "v0.0.0-20191023135033-25e473c37656",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ofux/deluge/@v/v0.0.0-20191023135033-25e473c37656.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191023135033-25e473c37656"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "lm-deluge",
+      "version": "0.0.168",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1e/28/113a3964ff9c618d4ceafaaf31e6086a63c14f17149a7171ce4441184106/lm_deluge-0.0.168-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.168"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "deluge",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

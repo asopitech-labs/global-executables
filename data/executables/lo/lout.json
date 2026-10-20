@@ -1,0 +1,43 @@
+{
+  "command": "lout",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "lout-3.43.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nekonoshiri/lout-go",
+      "version": "v0.0.0-20250325130018-7553ed02db17",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nekonoshiri/lout-go/@v/v0.0.0-20250325130018-7553ed02db17.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250325130018-7553ed02db17"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "lout",
+      "version": "3.43.4",
+      "repository": "https://savannah.nongnu.org/projects/lout",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

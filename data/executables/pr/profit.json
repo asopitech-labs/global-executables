@@ -1,0 +1,79 @@
+{
+  "command": "profit",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/min65535/demo",
+      "version": "v0.0.0-20240828143209-19a0c2fed3e7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/min65535/demo/@v/v0.0.0-20240828143209-19a0c2fed3e7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240828143209-19a0c2fed3e7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "profit",
+      "version": "0.6",
+      "repository": "https://github.com/redmod-team/profit",
+      "source": "https://files.pythonhosted.org/packages/a4/15/097897b8d9d6b17536b85de3c8c68b7b3c8300107bd3baf4832d8f13a20f/profit-0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "step3",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/24/ba/7ae4410e739dc5e8a95f41ffc9c7abffd5f5f0dd0aeceaf3a62e75f22df8/step3-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

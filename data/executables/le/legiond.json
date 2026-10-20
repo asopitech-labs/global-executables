@@ -1,0 +1,43 @@
+{
+  "command": "legiond",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "legiond",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "legiond",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "legiond",
+      "version": "0.2.4",
+      "repository": "https://gitlab.com/legion-robotnik/legiond",
+      "source": "https://files.pythonhosted.org/packages/23/51/93c0ca594481ce7ff85d7458f60763aa7d9a9b5ebb3448495a4be2862f37/legiond-0.2.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

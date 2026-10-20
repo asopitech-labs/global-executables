@@ -1,0 +1,163 @@
+{
+  "command": "fsck",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "util-linux-2.42.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "util-linux",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "util-linux",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/chubaofs/chubaofs",
+      "version": "v3.0.0-beta-rc.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/chubaofs/chubaofs/@v/v3.0.0-beta-rc.1+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0-beta-rc.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cubefs/cubefs",
+      "version": "v1.34.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cubefs/cubefs/@v/v1.34.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.34.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/transparency-dev/tessera",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/transparency-dev/tessera/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/transparency-dev/tesseract",
+      "version": "v0.1.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/transparency-dev/tesseract/@v/v0.1.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/transparency-dev/trillian-tessera",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/transparency-dev/trillian-tessera/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "e2fsprogs",
+      "version": "1.47.4",
+      "repository": "https://e2fsprogs.sourceforge.net/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "14.8.7",
+      "repository": null,
+      "source": "macos@14.8.7-23J520-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "15.7.7",
+      "repository": null,
+      "source": "macos@15.7.7-24G720-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "util-linux",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

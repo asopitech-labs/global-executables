@@ -1,0 +1,43 @@
+{
+  "command": "lock_jars",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "jruby",
+      "version": "10.1.1.0",
+      "repository": "https://www.jruby.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jar-dependencies",
+      "version": "0.5.7",
+      "repository": "https://github.com/jruby/jar-dependencies",
+      "source": "https://rubygems.org/gems/jar-dependencies-0.5.7.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ruby-jar-dependencies",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

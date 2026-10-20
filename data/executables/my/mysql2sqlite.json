@@ -1,0 +1,67 @@
+{
+  "command": "mysql2sqlite",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "torm",
+      "version": "0.4.0",
+      "repository": "https://github.com/WLmutou/torm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/atc0005/mysql2sqlite",
+      "version": "v0.4.4-rc.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/atc0005/mysql2sqlite/@v/v0.4.4-rc.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.4-rc.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/camry/mysql2sqlite",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/camry/mysql2sqlite/@v/v1.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mysql-to-sqlite3",
+      "version": "2.6.0",
+      "repository": "https://techouse.github.io/mysql-to-sqlite3/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mysql-to-sqlite3",
+      "version": "2.6.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/02/1e/c458168f1bd9e6fd3fd09f5ee3270a31bde4df85ed96137be6dc410f48d1/mysql_to_sqlite3-2.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.6.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

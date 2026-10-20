@@ -1,0 +1,103 @@
+{
+  "command": "logwatch",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "logwatch-7.15-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "logwatch",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "logwatch-tui",
+      "version": "0.1.0",
+      "repository": "https://github.com/matthart1983/logwatch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "logwatch",
+      "version": "0.3.1",
+      "repository": "https://www.bitbucket.org/johannestaas/logwatch",
+      "source": "https://files.pythonhosted.org/packages/9b/36/1ccd521b6ba8edc47929e48e0ef2dc3e5491cb61b337a6ba5376791ae02f/logwatch-0.3.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "logwatch-analyzer",
+      "version": "0.1.10.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/12/bd/eb80e860fc9125b3b5480aa39f960b3a63dabdff3d69081fd42966e650dd/logwatch_analyzer-0.1.10.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.10.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "logwatch-cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d5/d5/d553a9609d54e0292c73f3c17a74a7c23546b153baf311c41293037ef0d5/logwatch_cli-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "logwatch-client",
+      "version": "0.1.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e9/0b/b0dad0db6c740c31c0da95d9db674deb17923613460f8b1ba4eb425e5040/logwatch_client-0.1.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.6"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "logwatch",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

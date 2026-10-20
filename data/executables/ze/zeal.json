@@ -1,0 +1,104 @@
+{
+  "command": "zeal",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "zeal-0.9.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zeal",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "zeal",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "zeal",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/richardheath/zeal",
+      "version": "v0.0.0-20170609060225-c567a8ee9246",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/richardheath/zeal?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20170609060225-c567a8ee9246",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170609060225-c567a8ee9246"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/thought-machine/please-servers",
+      "version": "v6.3.8+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/thought-machine/please-servers/@v/v6.3.8+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v6.3.8+incompatible"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zeal",
+      "version": "0.9.1",
+      "repository": "https://zealdocs.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "zeal",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

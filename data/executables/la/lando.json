@@ -1,0 +1,79 @@
+{
+  "command": "lando",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "lando-cli",
+      "version": "3.26.9",
+      "repository": "https://docs.lando.dev/cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "torfs-ict/lando-symfony",
+      "version": "1.0.1",
+      "repository": "https://github.com/torfs-ict/lando-symfony.git",
+      "source": "https://repo.packagist.org/p2/torfs-ict/lando-symfony.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "lando",
+      "version": "0.11.3",
+      "repository": "https://github.com/Duke-GCB/lando",
+      "source": "https://files.pythonhosted.org/packages/3e/40/62e0d7f80421e5e7720d9f7aa796eb2f3104594142b4375bb3d206fd4a1b/lando-0.11.3-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "lando-cli",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/94/b7/1093db09d8b0f66880bad198b454e089e8d874c5545912d42f6c7c3116a1/lando_cli-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lando",
+      "version": "0.2.1",
+      "repository": "http://github.com/montadigital/lando",
+      "source": "https://rubygems.org/gems/lando-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Lando.Lando",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

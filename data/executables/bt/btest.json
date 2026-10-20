@@ -1,0 +1,68 @@
+{
+  "command": "btest",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/dwoske/btest",
+      "version": "v0.0.0-20190704144044-e7efd53a6563",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/dwoske/btest/@v/v0.0.0-20190704144044-e7efd53a6563.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190704144044-e7efd53a6563"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/uileyar/helloworld",
+      "version": "v0.0.0-20160422152047-6ca1a2092e70",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/uileyar/helloworld/@v/v0.0.0-20160422152047-6ca1a2092e70.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160422152047-6ca1a2092e70"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "zeek",
+      "version": "8.2.2",
+      "repository": "https://zeek.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "btest",
+      "version": "7.20.4",
+      "repository": "https://mikrotik.com/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.20.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "btest",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

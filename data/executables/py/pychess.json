@@ -1,0 +1,44 @@
+{
+  "command": "pychess",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pychess-1.1.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "terminal-chess",
+      "version": "0.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f3/4f/8be727ec3843dee96ab79db18e3d4d213b10c27e64f4fe44bdef0675b209/terminal_chess-0.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pychess",
+      "version": "1.1.0",
+      "repository": "https://pychess.github.io/",
+      "source": "https://codeload.github.com/Calinou/scoop-games/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

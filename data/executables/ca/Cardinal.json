@@ -1,0 +1,43 @@
+{
+  "command": "Cardinal",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "cardinal-standalone-26.02-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/P0H1ng/Cardinal",
+      "version": "v0.0.0-20240915153632-0f58b75ebb1a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!p0!h1ng/!cardinal/@v/v0.0.0-20240915153632-0f58b75ebb1a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240915153632-0f58b75ebb1a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vidar-team/Cardinal",
+      "version": "v0.7.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vidar-team/!cardinal/@v/v0.7.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

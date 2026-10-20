@@ -1,0 +1,43 @@
+{
+  "command": "immortaldir",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "immortal",
+      "version": "0.1.0",
+      "repository": "https://github.com/immortal/rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.opdaxia.com/immortal/immortal",
+      "version": "v0.24.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.opdaxia.com/immortal/immortal/@v/v0.24.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "immortal",
+      "version": "0.24.7",
+      "repository": "https://immortal.run/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

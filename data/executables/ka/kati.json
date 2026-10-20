@@ -1,0 +1,67 @@
+{
+  "command": "kati",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "kati",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kati",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/disclosureos/platform_build_kati",
+      "version": "v0.0.0-20190207131553-af8d57415a4d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/disclosureos/platform_build_kati/@v/v0.0.0-20190207131553-af8d57415a4d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190207131553-af8d57415a4d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/raulwalter/kati",
+      "version": "v0.0.0-20200403101111-96be0de7895c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/raulwalter/kati/@v/v0.0.0-20200403101111-96be0de7895c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200403101111-96be0de7895c"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "kati",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

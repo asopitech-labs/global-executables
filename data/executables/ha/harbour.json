@@ -1,0 +1,55 @@
+{
+  "command": "harbour",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "harbour",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/phildenhoff/harbour",
+      "version": "v0.0.1-alpha",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/phildenhoff/harbour/@v/v0.0.1-alpha.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1-alpha"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "harbour",
+      "version": "3.0.0",
+      "repository": "https://harbour.github.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "harbour",
+      "version": "0.0.21",
+      "repository": "https://github.com/ebanx/harbour",
+      "source": "https://files.pythonhosted.org/packages/f6/ee/55cc5b5434050fd136aec72561fa9927e6c616cd4daedb4e27659f2bd56b/harbour-0.0.21.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.21"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "ptrepack",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pytables-3.11.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sistr-cmd",
+      "version": "1.1.3",
+      "repository": "https://github.com/phac-nml/sistr_cmd",
+      "source": "https://files.pythonhosted.org/packages/40/1d/53bdc3de3b13ecc05cac918264a5c7f7a8e62e7a72e83736bf0ec4ebfce1/sistr_cmd-1.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tables",
+      "version": "3.11.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fa/bb/4a9cde6628563388db26fa86c64adb0f2475a757e72af0ec185fd520b72f/tables-3.11.1-cp311-abi3-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.11.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-tables",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

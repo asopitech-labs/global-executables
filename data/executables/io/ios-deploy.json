@@ -1,0 +1,31 @@
+{
+  "command": "ios-deploy",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "ios-deploy",
+      "version": "1.12.2",
+      "repository": "https://github.com/ios-control/ios-deploy",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ios-deploy",
+      "version": "1.5.0",
+      "repository": "https://github.com/mokagio/ios-deploy-gem",
+      "source": "https://rubygems.org/gems/ios-deploy-1.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.5.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

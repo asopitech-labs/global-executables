@@ -1,0 +1,67 @@
+{
+  "command": "dsctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "389-ds-base-3.3.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tabboud/directory-service",
+      "version": "v0.0.0-20211224204509-0ca0b2035262",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tabboud/directory-service/@v/v0.0.0-20211224204509-0ca0b2035262.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211224204509-0ca0b2035262"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wwqdrh/ds-connect",
+      "version": "v0.0.0-20221026054735-0cc9b0095608",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wwqdrh/ds-connect/@v/v0.0.0-20221026054735-0cc9b0095608.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20221026054735-0cc9b0095608"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dolphinscheduler-cli",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/70/b6/a689aa2414604a16e36bd39c294ce6e6c3be31f2ce833ef1c8415896dd52/dolphinscheduler_cli-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-lib389",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

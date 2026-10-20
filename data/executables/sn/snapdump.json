@@ -1,0 +1,55 @@
+{
+  "command": "snapdump",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "fuse-emulator-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fuse-emulator-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "snapdump",
+      "version": "1.0.7",
+      "repository": "https://github.com/omry/snapdump",
+      "source": "https://files.pythonhosted.org/packages/cd/82/5a7c3c2c3c8053797540510f5e1c970d92e237a711f1f8b906b5e4e16882/snapdump-1.0.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "fuse-emulator-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,92 @@
+{
+  "command": "silicon",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "silicon-0.5.3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "silicon",
+      "version": "0.5.2",
+      "repository": "https://github.com/Aloxaf/silicon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "silicon",
+      "version": "0.5.3",
+      "repository": "https://github.com/Aloxaf/silicon/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "silicon",
+      "version": "1.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/31/67/77982a25f9dabf34a60cdd01c5f3385ac3df8a93ded0d3ec8906eb2063cd/silicon-1.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "silicon-cli",
+      "version": "1.0.61",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8c/1e/48332d3224539ad304b5276fed615253606e43b9c443434dd44f2eff0cc9/silicon_cli-1.0.61-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.61"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "silicon",
+      "version": "0.5.1",
+      "repository": "https://github.com/cylon-v/silicon",
+      "source": "https://rubygems.org/gems/silicon-0.5.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "silicon",
+      "version": "0.5.2",
+      "repository": "https://github.com/Aloxaf/silicon",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.5.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "murano-pkg-check",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "murano-pkg-check",
+      "version": "0.3.0",
+      "repository": "http://docs.openstack.org/developer/murano/",
+      "source": "https://files.pythonhosted.org/packages/5f/58/99d1f0f58881af891fbf72f87c9cf36394071b74bc8ec626bdda75529c9d/murano_pkg_check-0.3.0-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-murano-pkg-check",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

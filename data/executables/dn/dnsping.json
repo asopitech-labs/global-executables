@@ -1,0 +1,55 @@
+{
+  "command": "dnsping",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "dnsping",
+      "version": "0.2.0",
+      "repository": "https://github.com/zhxie/dnsping",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "fortio.org/dnsping",
+      "version": "v1.11.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/fortio.org/dnsping/@v/v1.11.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dnsdiag",
+      "version": "2.10.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/85/ba/9e1c6eba38a3e5f3a71d1a3d4c91078ba10e2df6bc00ec5a157d3b9837ce/dnsdiag-2.10.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.10.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "dnsdiag",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

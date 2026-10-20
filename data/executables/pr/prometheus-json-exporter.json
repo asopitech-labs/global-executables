@@ -1,0 +1,67 @@
+{
+  "command": "prometheus-json-exporter",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "prometheus-json-exporter-0.8.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gazebo-web/prometheus-json-exporter",
+      "version": "v0.0.0-20200813204209-74ac2e507bb7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gazebo-web/prometheus-json-exporter/@v/v0.0.0-20200813204209-74ac2e507bb7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200813204209-74ac2e507bb7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kawamuray/prometheus-json-exporter",
+      "version": "v0.8.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kawamuray/prometheus-json-exporter/@v/v0.8.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/konikvranik/prometheus-json-exporter",
+      "version": "v0.0.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/konikvranik/prometheus-json-exporter?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/prometheus-community/prometheus-json-exporter",
+      "version": "v0.8.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/prometheus-community/prometheus-json-exporter/@v/v0.8.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

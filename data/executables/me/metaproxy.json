@@ -1,0 +1,43 @@
+{
+  "command": "metaproxy",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "metaproxy",
+      "version": "0.0.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-i2p/go-meta-listener",
+      "version": "v0.0.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/go-i2p/go-meta-listener/@v/v0.0.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.7"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "metaproxy",
+      "version": "1.22.4",
+      "repository": "https://www.indexdata.com/resources/software/metaproxy/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

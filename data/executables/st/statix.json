@@ -1,0 +1,43 @@
+{
+  "command": "statix",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "statix",
+      "version": "4.8.3",
+      "repository": "https://github.com/Octalbyte/statix",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "4.8.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/khulnasoft-lab/statix",
+      "version": "v0.0.0-20240813210732-d2b4888ab539",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/khulnasoft-lab/statix/@v/v0.0.0-20240813210732-d2b4888ab539.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240813210732-d2b4888ab539"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "statix",
+      "version": "0.5.8",
+      "repository": "https://github.com/oppiliappan/statix",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,80 @@
+{
+  "command": "sclient",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "krb5-1.22.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "krb5",
+      "version": "1.21.2",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/krb5/1.21.2/_/_/revisions/33afc5a9dd18127998c8319727a5a04c/packages/95325579e4a193e633223c2b733391082ff8568d/revisions/e167c7d4681fc6f97e6e95d2bc20bffa/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.21.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.rootprojects.org/root/sclient.go",
+      "version": "v1.5.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.rootprojects.org/root/sclient.go/@v/v1.5.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/schweigert/mmosandbox",
+      "version": "v0.0.0-20191103172648-10e2223fcc50",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/schweigert/mmosandbox/@v/v0.0.0-20191103172648-10e2223fcc50.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191103172648-10e2223fcc50"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/villanel/tinykv-scheduler",
+      "version": "v0.0.0-20250325124853-085a5180fb96",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/villanel/tinykv-scheduler/@v/v0.0.0-20250325124853-085a5180fb96.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250325124853-085a5180fb96"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "krb5",
+      "version": "1.22.2",
+      "repository": "https://web.mit.edu/kerberos/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

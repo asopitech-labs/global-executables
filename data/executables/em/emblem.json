@@ -1,0 +1,43 @@
+{
+  "command": "emblem",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "emblem-1.6.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "image2emblem",
+      "version": "1.0.0",
+      "repository": "https://github.com/fzerocentral/fzgx-image2emblem-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "emblem",
+      "version": "1.0.4",
+      "repository": "https://github.com/alopezrivera/emblem",
+      "source": "https://files.pythonhosted.org/packages/ba/b2/022bde816b5f6cf6a77322d27a8252bd6cbe831fe57092e200a15ed8d0ea/emblem-1.0.4.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

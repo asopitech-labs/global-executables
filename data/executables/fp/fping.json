@@ -1,0 +1,139 @@
+{
+  "command": "fping",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "fping-5.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fping-rust",
+      "version": "0.3.0",
+      "repository": "https://github.com/gsnw/fping-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fping",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "fping",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Sinnohd/fping",
+      "version": "v0.0.0-20240730100601-95ef26314797",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!sinnohd/fping/@v/v0.0.0-20240730100601-95ef26314797.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240730100601-95ef26314797"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sinnohd/fping",
+      "version": "v0.0.0-20240730100601-95ef26314797",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sinnohd/fping/@v/v0.0.0-20240730100601-95ef26314797.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240730100601-95ef26314797"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "fping",
+      "version": "5.5",
+      "repository": "https://fping.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "15.7.7",
+      "repository": null,
+      "source": "macos@15.7.7-24G720-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ipscan",
+      "version": "1.4.0",
+      "repository": "https://github.com/Wing9897/ipscan.git",
+      "source": "https://files.pythonhosted.org/packages/cc/c8/0a384d7f3effd43d4d30d4d4fd6bde73f312d4b2adabd258583c8fd7dc98/ipscan-1.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "fping",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

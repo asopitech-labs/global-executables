@@ -1,0 +1,43 @@
+{
+  "command": "shotman",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "shotman",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "shotman",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "shotman",
+      "version": "0.1.3",
+      "repository": "https://gitlab.com/whynothugo/shotman",
+      "source": "https://files.pythonhosted.org/packages/76/bd/a37a0f370ac12a0bf801da54a460e3fe0367aa3ff5934d6064215fd87632/shotman-0.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.3"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

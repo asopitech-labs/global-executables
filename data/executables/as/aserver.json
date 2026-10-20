@@ -1,0 +1,68 @@
+{
+  "command": "aserver",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "alsa-lib-1.2.16.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "libalsa",
+      "version": "1.2.16.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/libalsa/1.2.16.1/_/_/revisions/f1f84174d706f61048a3e55eb5c2daac/packages/0ae38841c7567e11ef9058ad376ee301173f5029/revisions/9236e02a11ca0d17dc9dfaf6cbb40037/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.2.16.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/acoustid/go-acoustid",
+      "version": "v0.0.0-20250311115738-cc9d2431d781",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/acoustid/go-acoustid/@v/v0.0.0-20250311115738-cc9d2431d781.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250311115738-cc9d2431d781"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "alsa-lib",
+      "version": "1.2.16.1",
+      "repository": "https://www.alsa-project.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aserver",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f3/8d/0657df225c6dd733c94195002eed1675af931f83959fb191b01882e5b7e8/aserver-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,103 @@
+{
+  "command": "batmon",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "batmon",
+      "version": "0.2.0",
+      "repository": "https://github.com/6543/batmon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "batmon.app",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "batmon.app",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/NotAShelf/batmon",
+      "version": "v0.0.0-20250615220028-0889634e565e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!not!a!shelf/batmon/@v/v0.0.0-20250615220028-0889634e565e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250615220028-0889634e565e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/notashelf/batmon",
+      "version": "v0.0.0-20250615220028-0889634e565e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/notashelf/batmon/@v/v0.0.0-20250615220028-0889634e565e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250615220028-0889634e565e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/region23/batmon",
+      "version": "v1.0.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/region23/batmon/@v/v1.0.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "batmon",
+      "version": "0.0.5",
+      "repository": "https://github.com/rcoh/batmon",
+      "source": "https://files.pythonhosted.org/packages/4a/21/fa02941af1349a68ecec3e968030c1e6e18252d328a7602adadf8a255eb8/batmon-0.0.5-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "batmon.app",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

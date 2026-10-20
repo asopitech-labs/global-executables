@@ -1,0 +1,31 @@
+{
+  "command": "k-harness",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "k-carrier",
+      "version": "0.3.4",
+      "repository": "https://github.com/botiverse/k-carrier",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@botiverse/k-carrier",
+      "version": "0.1.6",
+      "repository": "git+https://github.com/botiverse/k-carrier.git",
+      "source": "https://registry.npmjs.org/@botiverse%2Fk-carrier/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.6"
+    }
+  ],
+  "first_seen": "2026-08-25",
+  "last_seen": "2026-10-19"
+}

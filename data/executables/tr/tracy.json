@@ -1,0 +1,79 @@
+{
+  "command": "tracy",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "tracy",
+      "version": "0.2.0",
+      "repository": "https://github.com/tomrford/tracy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sekthor/tracy",
+      "version": "v0.0.0-20240516141735-45c76c242860",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sekthor/tracy/@v/v0.0.0-20240516141735-45c76c242860.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240516141735-45c76c242860"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "tracy",
+      "version": "0.13.1",
+      "repository": "https://tracy.nereid.pl/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "tracy-genomics",
+      "version": "0.9.1",
+      "repository": "https://www.gear-genomics.com/docs/tracy/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tracy-binary",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2b/60/3ba76aaf4e7ddd0347583875d6c8b9c2d857c4bcd7073d3f1b61ce3828ee/tracy_binary-0.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "stack_tracy",
+      "version": "0.1.9",
+      "repository": "https://github.com/archan937/stack_tracy",
+      "source": "https://rubygems.org/gems/stack_tracy-0.1.9.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.9"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

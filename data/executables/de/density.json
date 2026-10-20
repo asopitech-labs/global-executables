@@ -1,0 +1,91 @@
+{
+  "command": "density",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/drinkcoffee/density",
+      "version": "v0.0.0-20201015031131-c0a75bd10f81",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/drinkcoffee/density/@v/v0.0.0-20201015031131-c0a75bd10f81.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20201015031131-c0a75bd10f81"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hyunminko/go-concurrency-pratice",
+      "version": "v0.0.0-20201118233123-3ade0470dafb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hyunminko/go-concurrency-pratice/@v/v0.0.0-20201118233123-3ade0470dafb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20201118233123-3ade0470dafb"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "density",
+      "version": "1.0.1",
+      "repository": "https://github.com/microprediction/density",
+      "source": "https://files.pythonhosted.org/packages/c0/29/9377573c3593a021e595a7a382390fa4ead16eccb611fef0f9e10b0bbfa6/density-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "densitypdf",
+      "version": "0.1.4",
+      "repository": "https://github.com/microprediction/density",
+      "source": "https://files.pythonhosted.org/packages/10/4b/3a012548f203ae8bd2a107c50739bc71a6e0b343e3de630d8ceac8bb4a33/densitypdf-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

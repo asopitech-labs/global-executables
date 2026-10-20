@@ -1,0 +1,55 @@
+{
+  "command": "tiny-agents",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-huggingface-hub-1:1.28.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "hf",
+      "version": "1.28.0",
+      "repository": "https://huggingface.co/docs/huggingface_hub/guides/cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "huggingface-hub",
+      "version": "2.2.0",
+      "repository": "https://github.com/huggingface/huggingface_hub",
+      "source": "https://files.pythonhosted.org/packages/eb/b0/0f7b430fd100b3a3b037fdbb314878200241082e607b3383c63d91a13a72/huggingface_hub-2.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "huggingface-hub-gomall",
+      "version": "0.33.0.dev0",
+      "repository": "https://github.com/huggingface/huggingface_hub",
+      "source": "https://files.pythonhosted.org/packages/8e/9f/c7c84010dcfdc6500dd39b5a1ab4de8823b1d67a0c6b0a04bd5a488430d5/huggingface_hub_gomall-0.33.0.dev0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.33.0.dev0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

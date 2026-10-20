@@ -1,0 +1,55 @@
+{
+  "command": "barman-cloud-backup-delete",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "barman",
+      "version": "3.19.1",
+      "repository": "https://www.pgbarman.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "barman",
+      "version": "3.20.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/28/80/18f27e1769cca7d0aa8a7912d95db22579bec1a468db837d51ebdd35309e/barman-3.20.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.20.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "elizabeth-dev-barman",
+      "version": "3.14.0.post1",
+      "repository": "https://www.pgbarman.org/",
+      "source": "https://files.pythonhosted.org/packages/7c/61/844dc0b901cd1ba75dca496e80e776ddd8e43cb1655743d85934b77f32aa/elizabeth_dev_barman-3.14.0.post1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.14.0.post1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "barman-cli-cloud",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

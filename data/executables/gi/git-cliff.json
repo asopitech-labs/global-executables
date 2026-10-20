@@ -1,0 +1,68 @@
+{
+  "command": "git-cliff",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "git-cliff-2.13.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "git-cliff",
+      "version": "2.14.2",
+      "repository": "https://github.com/orhun/git-cliff",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.14.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-cliff",
+      "version": "2.13.1",
+      "repository": "https://git-cliff.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-cliff",
+      "version": "2.14.2",
+      "repository": "https://github.com/orhun/git-cliff",
+      "source": "https://files.pythonhosted.org/packages/12/86/f7896dd979fa20d62cc6edd59296ae189cef809121f1a47b93c26d554aeb/git_cliff-2.14.2-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.14.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "git-cliff",
+      "version": "2.13.1",
+      "repository": "https://git-cliff.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.13.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,91 @@
+{
+  "command": "impala",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "impala-0.7.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "impala",
+      "version": "0.8.1",
+      "repository": "https://github.com/pythops/impala",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/abdelaziz-ouhammou/go-impala",
+      "version": "v0.0.0-20250707081620-66899b915c54",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/abdelaziz-ouhammou/go-impala/@v/v0.0.0-20250707081620-66899b915c54.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250707081620-66899b915c54"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sclgo/impala",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sclgo/impala/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yu1ec/go-impala",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yu1ec/go-impala/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yu1ec/go-impala-beeswax",
+      "version": "v0.0.0-20241105094315-71644e626d98",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yu1ec/go-impala-beeswax/@v/v0.0.0-20241105094315-71644e626d98.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241105094315-71644e626d98"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "impala-aur-helper",
+      "version": "1.0b2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/83/fc/27acc8548d354d48075f66ee82a486b045617afcb7a0979fa8df35f68893/impala_aur_helper-1.0b2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0b2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

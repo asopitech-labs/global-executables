@@ -1,0 +1,67 @@
+{
+  "command": "texi2any",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "texinfo-7.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "texinfo",
+      "version": "7.3",
+      "repository": "https://www.gnu.org/software/texinfo/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "texinfo-7.2-3",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cmeel-texinfo",
+      "version": "7.1",
+      "repository": "https://github.com/cmake-wheel/cmeel-texinfo",
+      "source": "https://files.pythonhosted.org/packages/f2/14/9fc924e02be15daca181ff8ef3bf78c4b7eccc44fba027cadb350a2b381e/cmeel_texinfo-7.1-0-py3-none-macosx_12_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "7.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "texinfo",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "grafana-agent",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "grafana-agent-0.44.8-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grafana/agent",
+      "version": "v0.44.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grafana/agent/@v/v0.44.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.44.8"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

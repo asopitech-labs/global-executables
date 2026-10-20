@@ -1,0 +1,55 @@
+{
+  "command": "sqlfuzz",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "sqlfuzz",
+      "version": "0.3.0",
+      "repository": "https://github.com/andygrove/sqlfuzz",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/PumpkinSeed/sqlfuzz",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!pumpkin!seed/sqlfuzz/@v/v0.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Vulnpire/sqlfuzz",
+      "version": "v0.0.0-20250207064250-53260a4ae333",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!vulnpire/sqlfuzz/@v/v0.0.0-20250207064250-53260a4ae333.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250207064250-53260a4ae333"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vulnpire/sqlfuzz",
+      "version": "v0.0.0-20250207064250-53260a4ae333",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vulnpire/sqlfuzz/@v/v0.0.0-20250207064250-53260a4ae333.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250207064250-53260a4ae333"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "snyk",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudquery/cloudquery/plugins/source/snyk",
+      "version": "v0.0.0-20231013213247-1ecef25b6cfe",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/cloudquery/cloudquery/plugins/source/snyk?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20231013213247-1ecef25b6cfe",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231013213247-1ecef25b6cfe"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "snyk-cli",
+      "version": "1.1306.4",
+      "repository": "https://snyk.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@candrewsintegralblue/snyk",
+      "version": "1.1296.2",
+      "repository": "git+https://github.com/snyk/snyk.git",
+      "source": "https://registry.npmjs.org/@candrewsintegralblue%2Fsnyk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1296.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

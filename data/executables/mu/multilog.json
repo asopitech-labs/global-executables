@@ -1,0 +1,79 @@
+{
+  "command": "multilog",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "daemontools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "daemontools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "daemontools",
+      "version": "0.76",
+      "repository": "https://cr.yp.to/daemontools.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "karabo.daemontools",
+      "version": "3.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5b/de/c2768a311cc27ca4998d6ae991b9c04eac046918ec65eba474c5c37a88be/karabo_daemontools-3.1.2-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "multilog",
+      "version": "1.1.0",
+      "repository": "https://github.com/humangeo/multilog",
+      "source": "https://files.pythonhosted.org/packages/3c/2e/609b8488313cefa6c3ce757357155de7be1014d823224a88a2ffba32f725/multilog-1.1.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "daemontools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

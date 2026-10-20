@@ -1,0 +1,43 @@
+{
+  "command": "fault",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "fault-cli",
+      "version": "1.2.1",
+      "repository": "https://github.com/fault-project/fault",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/joeabbey/fault",
+      "version": "v0.7.6",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/joeabbey/fault?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.7.6",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "fault-dft",
+      "version": "0.9.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/89/34/c4d934e29ae6e7835c030981cff6cd16b7b17a9b487862e8736ba5255b20/fault_dft-0.9.4-cp310-cp310-macosx_12_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

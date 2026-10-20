@@ -1,0 +1,115 @@
+{
+  "command": "slurm",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "slurm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "slurm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cedana/cedana",
+      "version": "v0.9.299",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cedana/cedana/@v/v0.9.299.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.299"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cpusoft/go-study/src",
+      "version": "v0.0.0-20260811055635-4075431d37f6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cpusoft/go-study/src/@v/v0.0.0-20260811055635-4075431d37f6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260811055635-4075431d37f6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/etm1226/nimbix_jarvice-hpc",
+      "version": "v0.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/etm1226/nimbix_jarvice-hpc/@v/v0.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "slurm",
+      "version": "0.4.4",
+      "repository": "https://github.com/mattthias/slurm/wiki/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "slurm-sdk",
+      "version": "0.4.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6b/d8/9357cfe59e68ca78cd68bd2e8cc6c82cb1498f46a568f84d7c40a6cada4a/slurm_sdk-0.4.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sysflow",
+      "version": "0.1.18",
+      "repository": "https://github.com/pypa/sampleproject",
+      "source": "https://files.pythonhosted.org/packages/66/0e/29d962bdb25ae8073a87fa01168cf70edad2d2278a2149beb7ff307830e9/sysflow-0.1.18-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.18"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "slurm",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

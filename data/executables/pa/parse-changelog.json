@@ -1,0 +1,55 @@
+{
+  "command": "parse-changelog",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "parse-changelog",
+      "version": "0.6.17",
+      "repository": "https://github.com/taiki-e/parse-changelog",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.17"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vold-lu/validate-a-changelog",
+      "version": "v0.0.0-20260325083559-a715809fa294",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/vold-lu/validate-a-changelog?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260325083559-a715809fa294",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260325083559-a715809fa294"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "parse-changelog",
+      "version": "1.0.11",
+      "repository": "https://github.com/cseelye/parse-changelog",
+      "source": "https://files.pythonhosted.org/packages/20/8b/69ca69526e198634ee0b71447ea8636e4d813e31213f1da49c71cee12888/parse_changelog-1.0.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.11"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "taiki-e.parse-changelog",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

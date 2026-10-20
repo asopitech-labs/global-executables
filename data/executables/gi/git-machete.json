@@ -1,0 +1,44 @@
+{
+  "command": "git-machete",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "git-machete",
+      "version": "3.44.1",
+      "repository": "https://github.com/VirtusLab/git-machete",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-machete",
+      "version": "3.46.1",
+      "repository": "https://github.com/VirtusLab/git-machete",
+      "source": "https://files.pythonhosted.org/packages/04/53/39b14e5f16ff8b4b6054f00154c40785c0fe0002125886f0ba8ef78d5c71/git_machete-3.46.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.46.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "git-machete",
+      "version": "3.44.1",
+      "repository": "https://github.com/VirtusLab/git-machete",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.44.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "cocotb-config",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-cocotb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cocotb",
+      "version": "2.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0e/da/bebf281220ea73813299e2e3ea5f7c7f53837e336de1e043fcd2ae338430/cocotb-2.1.0-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rapidstream-cocotb",
+      "version": "1.8.1.dev0",
+      "repository": "https://www.cocotb.org",
+      "source": "https://files.pythonhosted.org/packages/c6/79/9664fdaabb5a5b75ee1ceff019697fee45e40ba4723dff8e004ddadb4b10/rapidstream_cocotb-1.8.1.dev0-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.8.1.dev0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

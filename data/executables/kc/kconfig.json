@@ -1,0 +1,79 @@
+{
+  "command": "kconfig",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "kconfig-frontends",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kconfig-frontends",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hermeticbuild/linux.bzl",
+      "version": "v0.0.3",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/hermeticbuild/linux.bzl?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.3",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "k8scmd",
+      "version": "1.0.1",
+      "repository": "https://github.com/shigebeyond/k8scmd",
+      "source": "https://files.pythonhosted.org/packages/e6/69/f5e2a36134160b770395e67f41defe7128f4870bf50fc63799c325b9053d/k8scmd-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ksubmit",
+      "version": "0.1.10",
+      "repository": "https://github.com/obistack/ksubmit",
+      "source": "https://files.pythonhosted.org/packages/1b/54/6952dbbf25e18d2757a1baccf844fcc8fd9ff71017c6171050c1d6895e4e/ksubmit-0.1.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "kconfig-frontends",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

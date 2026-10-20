@@ -1,0 +1,67 @@
+{
+  "command": "gnomon",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gnomon-1.5.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gnomon",
+      "version": "0.0.2",
+      "repository": "https://github.com/libliflin/gnomon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "gnomon-pgs",
+      "version": "0.2.0",
+      "repository": "https://github.com/SauersML/gnomon/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bodal/gnomon",
+      "version": "2.0.3",
+      "repository": "git+https://github.com/jensbodal/gnomon.git",
+      "source": "https://registry.npmjs.org/@bodal%2Fgnomon/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gnomon-eval",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/33/91/4ef5faf94ca50355e910eb0d7c3c19dee52cc6b89c6282429e1289030068/gnomon_eval-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "aida",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "aida-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/joemooney/aida",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/metalagman/aida",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/metalagman/aida?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aida-dev/cli",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/ceccode/aida-metrics.git",
+      "source": "https://registry.npmjs.org/@aida-dev%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aida/cli",
+      "version": "0.0.7",
+      "repository": "https://github.com/sradevski/aida/tree/master/packages/cli",
+      "source": "https://registry.npmjs.org/@aida%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "aida-workbench",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/72/e1/3fc475a80ac14d7cc2d9084dac80a3a0ba2ce53d19e333e29e2fba683121/aida_workbench-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-17",
+  "last_seen": "2026-10-19"
+}

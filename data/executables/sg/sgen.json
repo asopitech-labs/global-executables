@@ -1,0 +1,91 @@
+{
+  "command": "sgen",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mono-6.12.0.206-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mono-devel",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/southerncrossedtech/sgen",
+      "version": "v0.0.0-20220817064832-3b91dd1d62fa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/southerncrossedtech/sgen/@v/v0.0.0-20220817064832-3b91dd1d62fa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220817064832-3b91dd1d62fa"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mono",
+      "version": "6.14.1",
+      "repository": "https://www.mono-project.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sgen-tool",
+      "version": "1.0.1",
+      "repository": "https://github.com/timomono/sgen",
+      "source": "https://files.pythonhosted.org/packages/03/10/b4f3858622de633f4df2e1bfa386ab84c5c6a53963422a56bda79953ceb9/sgen_tool-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "slurmgen",
+      "version": "3.14.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5f/ec/6c1a3bce3b97b2ce0c1e3a2dfdc48f046229917192572d078cceaf62f0a6/slurmgen-3.14.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.14.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "mono-devel",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

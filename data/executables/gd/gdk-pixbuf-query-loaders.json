@@ -1,0 +1,44 @@
+{
+  "command": "gdk-pixbuf-query-loaders",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gdk-pixbuf2-2.44.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "gdk-pixbuf",
+      "version": "2.44.4",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/gdk-pixbuf/2.44.4/_/_/revisions/66f46a47aae52bbf105bbbbda4898654/packages/8d90cedd32ad8e60b9163069f73d1f9d20933604/revisions/fe1c9804b530cd9ea2ec474d7b5af15c/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "2.44.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gdk-pixbuf",
+      "version": "2.44.8",
+      "repository": "https://gtk.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

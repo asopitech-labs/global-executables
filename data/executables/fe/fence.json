@@ -1,0 +1,67 @@
+{
+  "command": "fence",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "fence-cli",
+      "version": "0.1.0-alpha.2",
+      "repository": "https://github.com/22elix3r/fence",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0-alpha.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fencesandbox/fence",
+      "version": "v0.1.67",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/fencesandbox/fence?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.67",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.67"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "fence",
+      "version": "0.1.66",
+      "repository": "https://github.com/fencesandbox/fence",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "fence-file-encryption-engine",
+      "version": "0.1.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/45/28/2ab1aaa155f140a8cae5c6172e4b264b87d9703990a0c46b943ebd9a47c7/fence_file_encryption_engine-0.1.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "runtime-fence",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/db/7c/6cdafea689b5f29417e74dcb0422d9f1b725087e57e2bdd472e3923bc05d/runtime_fence-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

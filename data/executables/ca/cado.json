@@ -1,0 +1,67 @@
+{
+  "command": "cado",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "cado",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cado",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wojtechnology/cado",
+      "version": "v0.0.0-20200915023624-dbc54f26add8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wojtechnology/cado/@v/v0.0.0-20200915023624-dbc54f26add8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200915023624-dbc54f26add8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cado",
+      "version": "0.1.8",
+      "repository": "https://github.com/gregorybchris/cado",
+      "source": "https://files.pythonhosted.org/packages/fe/ad/442b77aca6172937f8c0df9e24cf6e5d7d1a771eab076db710ed5f063870/cado-0.1.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "cado",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

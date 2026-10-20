@@ -1,0 +1,79 @@
+{
+  "command": "pdfcrop",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "texlive-binextra-2026.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pdfcrop",
+      "version": "0.1.0",
+      "repository": "https://github.com/pdfcrop/pdfcrop",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "texlive",
+      "version": "20260301",
+      "repository": "https://www.tug.org/texlive/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bitool",
+      "version": "0.1.20",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2f/d9/20aa20880ce9ae0f3c156a142bfea847d1787ed3c5e6421cb491fbe58a40/bitool-0.1.20-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.20"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "climaf",
+      "version": "2.0.1.0",
+      "repository": "https://github.com/rigoudyg/climaf",
+      "source": "https://files.pythonhosted.org/packages/37/cf/c517c7b545d066b67028fbb35b15fe9739d18ec624787c4b50239a66b685/climaf-2.0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "texlive-extra-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

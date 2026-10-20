@@ -1,0 +1,81 @@
+{
+  "command": "pypy",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pypy-7.3.23-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pypy",
+      "version": "7.3.23",
+      "repository": "https://pypy.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pypy-pkg",
+      "version": "0.1",
+      "repository": "https://github.com/snevs/pypy",
+      "source": "https://files.pythonhosted.org/packages/c9/34/a4e3ab9bcb78d1fd9a1abad2f3d5439f542520d7791e7a0435d8aaaabe2a/pypy_pkg-0.1-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "test-for-travis",
+      "version": "0.1",
+      "repository": "https://testupload.test",
+      "source": "https://files.pythonhosted.org/packages/9b/59/1c988e5caeb942b34484e3fa0ca0a1c3ba4fd82a66672de88c7a1cb7af3f/test_for_travis-0.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pypy2",
+      "version": "7.3.23",
+      "repository": "https://www.pypy.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.3.23"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pypy3",
+      "version": "7.3.23",
+      "repository": "https://www.pypy.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.3.23"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "autoimport",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/meloshub/meloshub-tools",
+      "version": "v0.1.3",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/meloshub/meloshub-tools?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.3",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xyproto/importmatcher",
+      "version": "v1.5.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xyproto/importmatcher/@v/v1.5.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "autoimport",
+      "version": "1.6.1",
+      "repository": "https://github.com/lyz-code/autoimport",
+      "source": "https://files.pythonhosted.org/packages/6e/b0/a5b37094c2b9f202061825e72584a7c25bd86cbb3b2df4b12e09652602a5/autoimport-1.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "autoimport",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "cpdf",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "cpdf",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cpdf",
+      "version": "2.9.1",
+      "repository": "https://github.com/johnwhitington/cpdf-source",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cpdf",
+      "version": "0.0.7",
+      "repository": "https://github.com/py-pdf/cpdf",
+      "source": "https://files.pythonhosted.org/packages/57/80/37162b735a9e6ea31fcffe1688e3d6b03f081efaf6d011edf9e0e1d19968/cpdf-0.0.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.7"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "CoherentGraphics.Cpdf",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

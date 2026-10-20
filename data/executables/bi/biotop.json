@@ -1,0 +1,43 @@
+{
+  "command": "biotop",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bcc-libbpf-tools-0.36.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "biotop",
+      "version": "0.5.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/aa/d5/529420f214316ae288bd7e85e5dc770ffe096e56ac3975afb64237d50cb5/biotop-0.5.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "libbpf-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

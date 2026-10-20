@@ -1,0 +1,79 @@
+{
+  "command": "saveme",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "tsocks",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tsocks",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Noziop/s4v3my4ss",
+      "version": "v0.0.0-20250712111655-141ea8fd4f28",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!noziop/s4v3my4ss/@v/v0.0.0-20250712111655-141ea8fd4f28.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250712111655-141ea8fd4f28"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rbagrov/saveme",
+      "version": "v0.0.0-20190620143118-f756c1dfa11d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rbagrov/saveme/@v/v0.0.0-20190620143118-f756c1dfa11d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190620143118-f756c1dfa11d"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "saveme",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/02/0e/bff3b8de4e175f6fd3cc4de63b9e859488f6c6eeefa6bf8e843c9690b5ef/saveme-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "tsocks",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

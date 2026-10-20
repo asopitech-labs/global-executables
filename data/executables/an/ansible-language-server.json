@@ -1,0 +1,31 @@
+{
+  "command": "ansible-language-server",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "ansible-language-server",
+      "version": "26.6.0",
+      "repository": "https://github.com/ansible/vscode-ansible",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ansible/ansible-language-server",
+      "version": "26.6.0",
+      "repository": "git+https://github.com/ansible/vscode-ansible.git",
+      "source": "https://registry.npmjs.org/@ansible%2Fansible-language-server/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "26.6.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

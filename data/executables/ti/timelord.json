@@ -1,0 +1,79 @@
+{
+  "command": "timelord",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "timelord-cli",
+      "version": "3.0.1",
+      "repository": "https://github.com/fasterthanlime/timelord",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.0.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "timelord",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "timelord",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/n7down/displays",
+      "version": "v0.0.0-20190715201117-a81b2cf3e79a",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/n7down/displays?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20190715201117-a81b2cf3e79a",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190715201117-a81b2cf3e79a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/n7down/pitftdisplays",
+      "version": "v0.0.0-20190715201117-a81b2cf3e79a",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/n7down/pitftdisplays?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20190715201117-a81b2cf3e79a",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190715201117-a81b2cf3e79a"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "netatalk",
+      "version": "4.5.1",
+      "repository": "https://netatalk.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

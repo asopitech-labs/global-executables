@@ -1,0 +1,67 @@
+{
+  "command": "vacation",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "vacation",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "vacation",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "vacation",
+      "version": "0.4.7",
+      "repository": "https://github.com/pulseenergy/vacation",
+      "source": "https://files.pythonhosted.org/packages/87/d7/bac0b5a373c0a23307e8197f3dd60516cf3ddf72e91ac2289f94f7cdf8cb/vacation-0.4.7.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "vacation",
+      "version": "0.1.2",
+      "repository": "http://github.com/ohrite/vacation",
+      "source": "https://rubygems.org/gems/vacation-0.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "vacation",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

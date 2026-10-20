@@ -1,0 +1,31 @@
+{
+  "command": "text-generation-server",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "moenarch-text-generation-server",
+      "version": "0.1.1",
+      "repository": "https://github.com/moritzbrantner/nlp-stack",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "vllm-tgis-adapter",
+      "version": "0.10.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/18/09/4b3ce86da62bd70d52e2e5cb28816b3f705d4de79ec2dc7057f74563ed18/vllm_tgis_adapter-0.10.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

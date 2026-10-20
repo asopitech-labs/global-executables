@@ -1,0 +1,43 @@
+{
+  "command": "xmlpatch",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "xmldiff-3.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "xmldiff",
+      "version": "3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/72/be/b85bcfd17a163f05674b3c8586d60b9dc8a008f967090b652d3e138ed590/xmldiff-3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "xmldiff",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

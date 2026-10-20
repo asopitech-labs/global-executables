@@ -1,0 +1,55 @@
+{
+  "command": "tombo",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "tombo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tombo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ont-tombo",
+      "version": "1.5.1",
+      "repository": "https://github.com/nanoporetech/tombo",
+      "source": "https://files.pythonhosted.org/packages/97/ae/369eafa6f61fe9c10c3dd4dc4043df4a2d3026f10e2f3666a1041a17f1ed/ont_tombo-1.5.1-cp37-cp37m-macosx_10_14_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "tombo",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

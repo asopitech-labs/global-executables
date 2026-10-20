@@ -1,0 +1,31 @@
+{
+  "command": "mockdocker",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "renew",
+      "version": "0.1.0",
+      "repository": "https://github.com/hyperiondb/renew",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/codeswhat/portwing",
+      "version": "v0.9.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/codeswhat/portwing/@v/v0.9.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.13"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

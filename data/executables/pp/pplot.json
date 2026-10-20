@@ -1,0 +1,67 @@
+{
+  "command": "pplot",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "xfoil",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xfoil",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "process_plot",
+      "version": "0.5.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/82/11/aa51682f77072b6a8c51c900c9e5fce8659c5fb2896130b56310b65850e1/process_plot-0.5.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "prodimopy",
+      "version": "2.7.0",
+      "repository": "https://gitlab.astro.rug.nl/prodimo/prodimopy/",
+      "source": "https://files.pythonhosted.org/packages/98/0a/8d2d588287ff6cc646987889647bf38b25bf556cb13f499aaf602ad42154/prodimopy-2.7.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.7.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "xfoil",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "snapcraft",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "snapcraft",
+      "version": "9.0.1",
+      "repository": "https://snapcraft.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "snapcraft",
+      "version": "4.8.1",
+      "repository": "https://github.com/snapcore/snapcraft",
+      "source": "https://files.pythonhosted.org/packages/90/4d/a9180fbdc2d7de7a55a68ef539f5391562dbf0cb356177c282471c1eb665/snapcraft-4.8.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.8.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

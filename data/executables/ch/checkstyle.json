@@ -1,0 +1,67 @@
+{
+  "command": "checkstyle",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "checkstyle",
+      "version": "14.0.0",
+      "repository": "https://checkstyle.sourceforge.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aleen42/ci-common",
+      "version": "0.1.9-2",
+      "repository": "git+https://github.com/Coremail/ci-common.git",
+      "source": "https://registry.npmjs.org/@aleen42%2Fci-common/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.9-2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@coremail/ci-common",
+      "version": "0.2.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@coremail%2Fci-common/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "checkstyle-cli",
+      "version": "0.7.2",
+      "repository": "https://github.com/junghoon-vans/checkstyle-cli",
+      "source": "https://files.pythonhosted.org/packages/c9/cd/47d0ce753358e1836bb8398a0441468c6f85a0844366aa9eae80f6ff0059/checkstyle_cli-0.7.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "checkstyle",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

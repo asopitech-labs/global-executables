@@ -1,0 +1,116 @@
+{
+  "command": "nerdctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "nerdctl-2.3.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/nerdctl",
+      "version": "v1.7.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/nerdctl/@v/v1.7.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/nerdctl/v2",
+      "version": "v2.3.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/nerdctl/v2/@v/v2.3.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gemini-platform/nerdctl",
+      "version": "v0.0.0-20230731061715-b33a58f288bc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gemini-platform/nerdctl/@v/v0.0.0-20230731061715-b33a58f288bc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230731061715-b33a58f288bc"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/labring/nerdctl",
+      "version": "v1.7.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/labring/nerdctl/@v/v1.7.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/luanshaotong/nerdctl/v2",
+      "version": "v2.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/luanshaotong/nerdctl/v2/@v/v2.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/walteh/runm",
+      "version": "v0.0.0-20250819130814-834d68677575",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/walteh/runm/@v/v0.0.0-20250819130814-834d68677575.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250819130814-834d68677575"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nerdctl",
+      "version": "2.3.5",
+      "repository": "https://github.com/containerd/nerdctl",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "nerdctl",
+      "version": "2.3.5",
+      "repository": "https://github.com/containerd/nerdctl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.3.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

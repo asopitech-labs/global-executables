@@ -1,0 +1,103 @@
+{
+  "command": "scip",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "scip-10.0.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "serial-console",
+      "version": "1.0.1",
+      "repository": "https://gitlab.com/w0lff/serial-console",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scip",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/scip-code/scip",
+      "version": "v0.9.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/scip-code/scip?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.9.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sourcegraph/scip",
+      "version": "v0.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sourcegraph/scip/@v/v0.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "sourcegraph.com/sourcegraph/scip",
+      "version": "v0.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/sourcegraph.com/sourcegraph/scip/@v/v0.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "scip",
+      "version": "10.0.3",
+      "repository": "https://scipopt.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "scip",
+      "version": "0.1.12",
+      "repository": "https://github.com/ScalableCytometryImageProcessing/SCIP",
+      "source": "https://files.pythonhosted.org/packages/05/ed/a948a2ba75513e581167a291a1f02c262923ef18bb28511740a39370051c/scip-0.1.12-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.12"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

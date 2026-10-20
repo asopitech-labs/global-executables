@@ -1,0 +1,67 @@
+{
+  "command": "vedit",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ex-vi-compat-3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vypal/vedit",
+      "version": "v0.0.0-20240705155638-4231cc613ce4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vypal/vedit/@v/v0.0.0-20240705155638-4231cc613ce4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240705155638-4231cc613ce4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ex-vi",
+      "version": "050325",
+      "repository": "https://ex-vi.sourceforge.net/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gpg-vault",
+      "version": "1.5.1",
+      "repository": "https://github.com/ptaylor/gpg-vault",
+      "source": "https://files.pythonhosted.org/packages/4b/f9/f2cc5b8eb1caa7bb9d340bc8163358f702b372181e1cbd9883902c3dc43c/gpg_vault-1.5.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "vedit-mcp",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f5/76/ff5f4f5c128b278cc3e8e7b54ad3af0e7f6913bdc3f9edf1344f5d2c35be/vedit_mcp-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

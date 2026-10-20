@@ -1,0 +1,43 @@
+{
+  "command": "vosk-transcriber",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-vosk-0.3.50-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "platypush-vosk",
+      "version": "0.3.45.post2",
+      "repository": "https://github.com/alphacep/vosk-api",
+      "source": "https://files.pythonhosted.org/packages/91/5a/a113218df6e5c5626f11c70612ad34c7d64fc2267529ebc2981ccce75818/platypush_vosk-0.3.45.post2-py3-none-linux_armv7l.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.45.post2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "vosk",
+      "version": "0.3.45",
+      "repository": "https://github.com/alphacep/vosk-api",
+      "source": "https://files.pythonhosted.org/packages/32/6d/728d89a4fe8d0573193eb84761b6a55e25690bac91e5bbf30308c7f80051/vosk-0.3.45-py3-none-linux_armv7l.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.45"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

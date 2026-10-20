@@ -1,0 +1,31 @@
+{
+  "command": "elm-format",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "elm-format",
+      "version": "0.8.8",
+      "repository": "https://github.com/avh4/elm-format",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atb-as/elm-format",
+      "version": "1.0.1",
+      "repository": "git+https://github.com/mjenssen/elm-format.git",
+      "source": "https://registry.npmjs.org/@atb-as%2Felm-format/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

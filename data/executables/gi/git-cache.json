@@ -1,0 +1,56 @@
+{
+  "command": "git-cache",
+  "providers": [
+    {
+      "ecosystem": "conan",
+      "package": "depot_tools",
+      "version": "cci.20241206",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/depot_tools/cci.20241206/_/_/revisions/bd87b4fc6037558982825c139d31e680/packages/da39a3ee5e6b4b0d3255bfef95601890afd80709/revisions/9feff4904a3c61c0ec0c7fc981157393/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "cci.20241206"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "git-cache",
+      "version": "0.2.8",
+      "repository": "https://github.com/kaspar030/git-cache-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sluongng/git-cache",
+      "version": "v0.0.0-20210816185307-e92b4a035dc1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sluongng/git-cache/@v/v0.0.0-20210816185307-e92b4a035dc1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210816185307-e92b4a035dc1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-cache-clone",
+      "version": "0.2.0",
+      "repository": "https://github.com/jallard-007/git-cache-clone",
+      "source": "https://files.pythonhosted.org/packages/a6/de/3d5f69428a0526bf67f31fdb8d3883f518f7c721bc08d899e3f544786563/git_cache_clone-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

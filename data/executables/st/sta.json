@@ -1,0 +1,91 @@
+{
+  "command": "sta",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "opensta",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "opensta",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shutu-ai/shutu-agent",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/shutu-ai/shutu-agent/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aleclarson/swagger-typescript-api",
+      "version": "13.0.3",
+      "repository": "git://github.com/acacode/swagger-typescript-api.git",
+      "source": "https://registry.npmjs.org/@aleclarson%2Fswagger-typescript-api/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "13.0.3"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@blackdark/swagger-typescript-api",
+      "version": "13.0.22-ky.2",
+      "repository": "git+https://github.com/acacode/swagger-typescript-api.git",
+      "source": "https://registry.npmjs.org/@blackdark%2Fswagger-typescript-api/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "13.0.22-ky.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "wakame-vdc-agents",
+      "version": "11.12.0",
+      "repository": "https://github.com/axsh/wakame-vdc",
+      "source": "https://rubygems.org/gems/wakame-vdc-agents-11.12.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "11.12.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

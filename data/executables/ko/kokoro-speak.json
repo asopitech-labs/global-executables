@@ -1,0 +1,31 @@
+{
+  "command": "kokoro-speak",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "kokoro-tiny",
+      "version": "0.1.0",
+      "repository": "https://github.com/8b-is/kokoro-tiny",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kokoro-speakd",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5b/be/b5ec84ab1e30a599888c8f469119fdb445c35d33dc227746f68f8d84438c/kokoro_speakd-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

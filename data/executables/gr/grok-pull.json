@@ -1,0 +1,43 @@
+{
+  "command": "grok-pull",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "grokmirror",
+      "version": "2.0.12",
+      "repository": "https://github.com/mricon/grokmirror",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "grokmirror",
+      "version": "2.0.12",
+      "repository": "https://git.kernel.org/pub/scm/utils/grokmirror/grokmirror.git",
+      "source": "https://files.pythonhosted.org/packages/ea/d0/ced523c20b92c07565a4be45194f7a6571428f5a26291b9f8791ad5b88d5/grokmirror-2.0.12-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.12"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "grokmirror",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

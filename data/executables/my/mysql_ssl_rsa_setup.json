@@ -1,0 +1,68 @@
+{
+  "command": "mysql_ssl_rsa_setup",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "mysql-client@8.0",
+      "version": "8.0.46",
+      "repository": "https://github.com/mysql/mysql-server",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mysql@8.0",
+      "version": "8.0.46",
+      "repository": "https://github.com/mysql/mysql-server",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "percona-server@8.0",
+      "version": "8.0.46-37",
+      "repository": "https://www.percona.com",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "mysql57",
+      "version": "5.7.44",
+      "repository": "https://dev.mysql.com/downloads/mysql/5.7.html",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.7.44"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "mysql-server-core-8.0",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

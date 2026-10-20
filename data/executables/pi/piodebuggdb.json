@@ -1,0 +1,67 @@
+{
+  "command": "piodebuggdb",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "platformio-core-6.1.19-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "platformio",
+      "version": "6.1.19",
+      "repository": "https://platformio.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pioarduino",
+      "version": "6.2.0",
+      "repository": "https://github.com/pioarduino",
+      "source": "https://files.pythonhosted.org/packages/b7/d6/2a672a9cc93e7aff37f72a7d4a3ad6ad090452f1483063fd1f9d73794104/pioarduino-6.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "platformio",
+      "version": "6.2.0",
+      "repository": "https://platformio.org",
+      "source": "https://files.pythonhosted.org/packages/bf/98/6c5cc249129c72b076ca238a435c48b48568d866c12890e01ee50fb8f322/platformio-6.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "platformio",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

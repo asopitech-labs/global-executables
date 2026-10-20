@@ -1,0 +1,103 @@
+{
+  "command": "distrobuilder",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "distrobuilder-3.3.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "distrobuilder",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "distrobuilder",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/brauner/distrobuilder",
+      "version": "v0.0.0-20180313230014-38ab1a138b93",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/brauner/distrobuilder/@v/v0.0.0-20180313230014-38ab1a138b93.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180313230014-38ab1a138b93"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/distrobuilder",
+      "version": "v0.0.0-20260223203401-232e78c93721",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lxc/distrobuilder/@v/v0.0.0-20260223203401-232e78c93721.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260223203401-232e78c93721"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lxc/distrobuilder/v3",
+      "version": "v3.3.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/lxc/distrobuilder/v3?filter=name+%3D%3D+%22main%22&limit=1000&version=v3.3.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/solidDoWant/distrobuilder",
+      "version": "v0.0.0-20231116044627-f555f18a7df5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/solid!do!want/distrobuilder/@v/v0.0.0-20231116044627-f555f18a7df5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231116044627-f555f18a7df5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tymbur/distrobuilder",
+      "version": "v0.0.0-20200611224127-828e816a5041",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tymbur/distrobuilder/@v/v0.0.0-20200611224127-828e816a5041.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200611224127-828e816a5041"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

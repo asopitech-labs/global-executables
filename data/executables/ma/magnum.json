@@ -1,0 +1,43 @@
+{
+  "command": "magnum",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-magnumclient-4.11.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "deputy",
+      "version": "0.0.1",
+      "repository": "https://github.com/redhill-embedded/magnum.git",
+      "source": "https://files.pythonhosted.org/packages/80/7d/45df67feb97b842c8767e7704d4123688ab8547691b4b1676d144087f04b/deputy-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-magnumclient",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

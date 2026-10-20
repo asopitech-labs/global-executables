@@ -1,0 +1,91 @@
+{
+  "command": "ij",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "hypre-3.1.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/efritz/ij",
+      "version": "v0.0.0-20190603193015-3015c2b24226",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/efritz/ij/@v/v0.0.0-20190603193015-3015c2b24226.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190603193015-3015c2b24226"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ij-build/ij",
+      "version": "v0.2.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ij-build/ij/@v/v0.2.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "derby",
+      "version": "10.17.1.0",
+      "repository": "https://db.apache.org/derby/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ij",
+      "version": "0.1.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e6/cf/562c523a7b809c08d254140ef8f6ba121394dc9dd1181eba524707080bc8/ij-0.1.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "derby-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

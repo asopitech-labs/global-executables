@@ -1,0 +1,68 @@
+{
+  "command": "ksu",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "krb5-1.22.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "krb5",
+      "version": "1.21.2",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/krb5/1.21.2/_/_/revisions/33afc5a9dd18127998c8319727a5a04c/packages/95325579e4a193e633223c2b733391082ff8568d/revisions/e167c7d4681fc6f97e6e95d2bc20bffa/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.21.2"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "heimdal-7.8.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ksu",
+      "version": "0.5.1",
+      "repository": "https://github.com/nimroha/ksu_classifier",
+      "source": "https://files.pythonhosted.org/packages/7b/8e/bbb3abc78774cb23d9d5ccda43a953abfc8c7681e685d35c2937b5dc2d54/ksu-0.5.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

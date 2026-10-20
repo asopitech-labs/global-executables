@@ -1,0 +1,55 @@
+{
+  "command": "terser",
+  "providers": [
+    {
+      "ecosystem": "npm",
+      "package": "@bazel/terser",
+      "version": "5.8.1",
+      "repository": "git+https://github.com/bazelbuild/rules_nodejs.git",
+      "source": "https://registry.npmjs.org/@bazel%2Fterser/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.8.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "terser",
+      "version": "5.51.2",
+      "repository": "git+https://github.com/terser/terser.git",
+      "source": "https://registry.npmjs.org/terser/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "5.51.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "py-terser",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/47/5c/fd3172cb8fddaecdbb208c13e297f30f5942c55b2fc69011dc6b28c4fff1/py_terser-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "terser",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

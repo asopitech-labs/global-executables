@@ -1,0 +1,141 @@
+{
+  "command": "openvpn",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "openvpn-2.7.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "openvpn",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "openvpn",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/danielnelson/telegraf-execd-plugins",
+      "version": "v0.0.11",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/danielnelson/telegraf-execd-plugins/@v/v0.0.11.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/inovacc/openvpn3-go",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/inovacc/openvpn3-go?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "openvpn",
+      "version": "2.7.6",
+      "repository": "https://openvpn.net/community/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "inqbus.ocf.agents",
+      "version": "0.11",
+      "repository": "http://inqbus.de",
+      "source": "https://files.pythonhosted.org/packages/85/a2/07b0a55bff32a5a077ab19ae9cd5d96dca83a55156a444a5c35f77124312/inqbus.ocf.agents-0.11.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "openvpn",
+      "version": "2.7.6-I001",
+      "repository": "https://openvpn.net",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.7.6-I001"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "openvpn-w7",
+      "version": "2.4.11",
+      "repository": "https://openvpn.net",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.4.11"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "openvpn",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "OpenVPNTechnologies.OpenVPN",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

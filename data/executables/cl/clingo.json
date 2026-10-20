@@ -1,0 +1,92 @@
+{
+  "command": "clingo",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "gringo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gringo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kallanseto/clingo",
+      "version": "v0.0.0-20200309093740-f58ab8b5b06e",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/kallanseto/clingo?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20200309093740-f58ab8b5b06e",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200309093740-f58ab8b5b06e"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "clingo",
+      "version": "5.8.2",
+      "repository": "https://potassco.org/clingo/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "clyngor-with-clingo",
+      "version": "5.8.0.post1",
+      "repository": "https://github.com/aluriak/clyngor-with-clingo",
+      "source": "https://files.pythonhosted.org/packages/b3/3d/6823b55e2d8b215ef62beb1cb22b779697b2c0ef41f38c2cb4e741d3fe70/clyngor_with_clingo-5.8.0.post1-py3-none-macosx_10_13_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.8.0.post1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "clingo",
+      "version": "5.4.0",
+      "repository": "https://potassco.org/clingo/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.4.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gringo",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

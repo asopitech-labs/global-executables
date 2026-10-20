@@ -1,0 +1,55 @@
+{
+  "command": "tcp-echo",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "proxima-net",
+      "version": "0.1.0",
+      "repository": "https://github.com/brianbruggeman/proxima",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tcp-echo",
+      "version": "0.1.2",
+      "repository": "https://github.com/dbeck/tcp-echo-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vzendara/tcp-echo",
+      "version": "v0.0.0-20240310022606-44e8e49cb292",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vzendara/tcp-echo/@v/v0.0.0-20240310022606-44e8e49cb292.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240310022606-44e8e49cb292"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zianke/tcp-echo",
+      "version": "v0.0.0-20200729192807-344e5cc22564",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zianke/tcp-echo/@v/v0.0.0-20200729192807-344e5cc22564.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200729192807-344e5cc22564"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

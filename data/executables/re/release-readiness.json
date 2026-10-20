@@ -1,0 +1,31 @@
+{
+  "command": "release-readiness",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/0x63616c/agent-runtime",
+      "version": "v0.0.0-20260813123310-804b95473a84",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/0x63616c/agent-runtime?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260813123310-804b95473a84",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260813123310-804b95473a84"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "release-readiness-core",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a8/1a/65b1c21b809bce71b0544d806996a66ee225be079bb53f8d6fce476bd148/release_readiness_core-0.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
+    }
+  ],
+  "first_seen": "2026-08-31",
+  "last_seen": "2026-10-19"
+}

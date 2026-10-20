@@ -1,0 +1,67 @@
+{
+  "command": "ducker",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ducker-0.6.5-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ducker",
+      "version": "0.6.5",
+      "repository": "https://github.com/robertpsoane/ducker",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gilsgil/ducker",
+      "version": "v1.0.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gilsgil/ducker/@v/v1.0.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ducker",
+      "version": "0.6.5",
+      "repository": "https://ducker.soane.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ducker",
+      "version": "2.0.1",
+      "repository": "https://www.freakspot.net/programas/ducker/",
+      "source": "https://files.pythonhosted.org/packages/0c/59/ae8e3ea1446a5c9e46c9d3670a70cf1ac61c0e3181f1cff6535cf31b13ff/ducker-2.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

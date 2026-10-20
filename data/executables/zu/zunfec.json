@@ -1,0 +1,55 @@
+{
+  "command": "zunfec",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-zfec",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-zfec",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zfec",
+      "version": "1.6.0.0",
+      "repository": "https://github.com/tahoe-lafs/zfec",
+      "source": "https://files.pythonhosted.org/packages/96/84/14525d17bae5a55f65dbe4c70bf9ca87816d645e86e1f233edd3863a1e4a/zfec-1.6.0.0-cp310-cp310-macosx_10_9_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-zfec",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

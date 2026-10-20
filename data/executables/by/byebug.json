@@ -1,0 +1,91 @@
+{
+  "command": "byebug",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ruby-byebug-13.0.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ruby-byebug",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ruby-byebug",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "byebug",
+      "version": "13.0.0",
+      "repository": "https://github.com/deivid-rodriguez/byebug",
+      "source": "https://rubygems.org/gems/byebug-13.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "13.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "runger_byebug",
+      "version": "11.4.0",
+      "repository": "https://github.com/davidrunger/runger_byebug",
+      "source": "https://rubygems.org/gems/runger_byebug-11.4.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "11.4.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "unite",
+      "version": "2.0.0",
+      "repository": "https://github.com/stellard/unite",
+      "source": "https://rubygems.org/gems/unite-2.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ruby-byebug",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

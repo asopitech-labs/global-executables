@@ -1,0 +1,79 @@
+{
+  "command": "cdown",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "cdown",
+      "version": "0.1.0",
+      "repository": "https://github.com/elpnt/cdown",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cdtool",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cdtool",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@changedown/cli",
+      "version": "0.5.0",
+      "repository": "git+https://github.com/hackerbara/changedown.git",
+      "source": "https://registry.npmjs.org/@changedown%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cdown",
+      "version": "0.1.0",
+      "repository": "https://github.com/andreoliwa/python-cdown",
+      "source": "https://files.pythonhosted.org/packages/1d/3c/47f7a638af8337b9dae397314400d1f3d8fe55c1a1bf0362f798e640a6af/cdown-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "cdtool",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

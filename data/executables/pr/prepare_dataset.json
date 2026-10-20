@@ -1,0 +1,31 @@
+{
+  "command": "prepare_dataset",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "satoridb",
+      "version": "0.1.2",
+      "repository": "https://github.com/satoridb/satoridb",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "psearch",
+      "version": "0.0.4",
+      "repository": "https://github.com/meddwl/psearch",
+      "source": "https://files.pythonhosted.org/packages/26/aa/89a3d679a953ca0b06553d2377439e79585a05f4fcd94ac8b84b740388f5/psearch-0.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

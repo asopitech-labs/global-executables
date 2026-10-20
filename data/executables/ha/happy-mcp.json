@@ -1,0 +1,31 @@
+{
+  "command": "happy-mcp",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "happy-coder",
+      "version": "0.13.0",
+      "repository": "https://happy.engineering",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@buzzni/happy-cli",
+      "version": "1.1.10-aplus.132",
+      "repository": "git+https://github.com/buzzni/happy.git",
+      "source": "https://registry.npmjs.org/@buzzni%2Fhappy-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.10-aplus.132"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

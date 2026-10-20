@@ -1,0 +1,31 @@
+{
+  "command": "update_rubygems",
+  "providers": [
+    {
+      "ecosystem": "rubygems",
+      "package": "rubygems-update",
+      "version": "4.0.22",
+      "repository": "https://github.com/ruby/rubygems",
+      "source": "https://rubygems.org/gems/rubygems-update-4.0.22.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "4.0.22"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ruby-rubygems",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

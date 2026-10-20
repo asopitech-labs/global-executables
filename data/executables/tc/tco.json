@@ -1,0 +1,103 @@
+{
+  "command": "tco",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "flang",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "flang",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "flang",
+      "version": "22.1.8",
+      "repository": "https://flang.llvm.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tenderloin",
+      "version": "0.2.3",
+      "repository": "UNKNOWN",
+      "source": "https://files.pythonhosted.org/packages/e3/70/6309dc1453f34e8764f37f870c74e9fe2d759de274597f4cf24c85cd92c3/tenderloin-0.2.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "translate-comment-out",
+      "version": "1.2",
+      "repository": "https://github.com/koboriakira/translate_comment_out",
+      "source": "https://files.pythonhosted.org/packages/f5/f6/915b00f61cdd13196c61eba3579c16a002e616ec8026bb3df66c69883fe5/translate-comment-out-1.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "tco",
+      "version": "0.1.8",
+      "repository": "https://github.com/pazdera/tco",
+      "source": "https://rubygems.org/gems/tco-0.1.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "flang",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

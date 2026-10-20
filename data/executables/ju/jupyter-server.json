@@ -1,0 +1,79 @@
+{
+  "command": "jupyter-server",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "jupyter-server-2.20.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/webankfintech/prophecis/mllabis/notebook-server",
+      "version": "v0.0.0-20240627053610-2a81f3da9799",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/webankfintech/prophecis/mllabis/notebook-server/@v/v0.0.0-20240627053610-2a81f3da9799.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240627053610-2a81f3da9799"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "jupyterlab",
+      "version": "4.6.3",
+      "repository": "https://jupyter.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jupyter-server",
+      "version": "2.21.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1d/39/91bc08650cc8e3efeb7a83c25e20ebddcc9b70d28b4eb6f51a4fb55da7a4/jupyter_server-2.21.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.21.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ocean-jupyter-server",
+      "version": "2.10.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5f/e5/3093b9300aa7daf4a1ccac693d8155b62ec5ffd7687643f66e257e7400ed/ocean_jupyter_server-2.10.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.10.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "jupyter-server",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

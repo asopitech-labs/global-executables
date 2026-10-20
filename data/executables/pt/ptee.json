@@ -1,0 +1,67 @@
+{
+  "command": "ptee",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "pipexec",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pipexec",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "powerful-pipes-notifier",
+      "version": "1.0.5",
+      "repository": "https://github.com/42Crunch/powerful-pipes-notifier",
+      "source": "https://files.pythonhosted.org/packages/75/b1/4160fee1186f3bca0f3f21793ee45206026c276f9df82bdc5c992b97a517/powerful-pipes-notifier-1.0.5.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ptee",
+      "version": "0.4.1",
+      "repository": "https://github.com/drmikehenry/ptee",
+      "source": "https://files.pythonhosted.org/packages/ae/36/bbffe59aacab26a64426996f8d8c4b01583d2fc3157135dc2d276c4842d1/ptee-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pipexec",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

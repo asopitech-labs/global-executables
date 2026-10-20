@@ -1,0 +1,43 @@
+{
+  "command": "hookd",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "hookd",
+      "version": "0.1.2",
+      "repository": "https://gitlab.com/famedly/devops/services/hookd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nais/deploy",
+      "version": "v0.0.0-20260806073330-849e900e3cfa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nais/deploy/@v/v0.0.0-20260806073330-849e900e3cfa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260806073330-849e900e3cfa"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "capt-hook",
+      "version": "12.101.12",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1e/40/90a2e706309b6a4864e530c7ddf32f8746c6fe854002f292d5e879476c36/capt_hook-12.101.12-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "12.101.12"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

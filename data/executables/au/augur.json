@@ -1,0 +1,67 @@
+{
+  "command": "augur",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "augur",
+      "version": "1.0.0",
+      "repository": "https://github.com/0xdea/augur",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tpt-augur-cli",
+      "version": "0.1.0",
+      "repository": "https://github.com/tpt-solutions/tpt-augur",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "augur-cli",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d2/ab/ca0c3a74b1905b37c357a45ffda6d32ca2499cb68d960467bb6188942c51/augur_cli-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nextstrain-augur",
+      "version": "34.2.1",
+      "repository": "https://github.com/nextstrain/augur",
+      "source": "https://files.pythonhosted.org/packages/fd/94/d8fbce513a04bbbf2c029cca6862c18e6a8961865f6d5d2b854235cf7193/nextstrain_augur-34.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "34.2.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "augur",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

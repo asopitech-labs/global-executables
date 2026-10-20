@@ -1,0 +1,43 @@
+{
+  "command": "cargo-chef",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "cargo-chef",
+      "version": "0.1.78",
+      "repository": "https://github.com/LukeMathWalker/cargo-chef",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.78"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "torrust-cargo-chef",
+      "version": "0.1.78",
+      "repository": "https://github.com/torrust/cargo-chef",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.78"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cargo-chef",
+      "version": "0.1.78",
+      "repository": "https://github.com/LukeMathWalker/cargo-chef",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

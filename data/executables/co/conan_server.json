@@ -1,0 +1,55 @@
+{
+  "command": "conan_server",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "conan@1",
+      "version": "1.66.0",
+      "repository": "https://conan.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "conan-server",
+      "version": "2.33.0",
+      "repository": "https://conan.io",
+      "source": "https://files.pythonhosted.org/packages/ab/b8/f680da6f60077565d3289a84ad4673886f4204c12715b8344b5625fd7f28/conan_server-2.33.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.33.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "conan-zbuild",
+      "version": "1.66.9",
+      "repository": "https://conan.io",
+      "source": "https://files.pythonhosted.org/packages/7e/ad/1751e9a5d057b1fc997a79ececbc4032bf2b191ee49f4894d07b8c9ca305/conan_zbuild-1.66.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.66.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "soda-conan-server",
+      "version": "2025.1.27.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7a/af/8a086cce0ffce1bd07050d68e4ec649e0442444d334e9a9b37c0440325b0/soda_conan_server-2025.1.27.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2025.1.27.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

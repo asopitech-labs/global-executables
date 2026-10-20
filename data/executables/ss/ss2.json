@@ -1,0 +1,55 @@
+{
+  "command": "ss2",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pyroute2-0.9.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyroute2",
+      "version": "0.9.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/14/f5/77292e847cb2bcd94f0e7be214ad09972de5db6a6914e47117293ed0f4a8/pyroute2-0.9.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyroute2.core",
+      "version": "0.6.13",
+      "repository": "https://github.com/svinota/pyroute2",
+      "source": "https://files.pythonhosted.org/packages/41/f9/a5f9ab3d668b9bea36ef2fe8e7dbd9428aff519e6c6996d30672af6cc19b/pyroute2.core-0.6.13.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.13"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pyroute2",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

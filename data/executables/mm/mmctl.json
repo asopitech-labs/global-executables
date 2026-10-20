@@ -1,0 +1,67 @@
+{
+  "command": "mmctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mmctl-11.10.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "mmctl-11.10.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattermost/mattermost/server/v8",
+      "version": "v8.0.0-20260824183150-9b4ab46cc200",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattermost/mattermost/server/v8/@v/v8.0.0-20260824183150-9b4ab46cc200.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v8.0.0-20260824183150-9b4ab46cc200"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/urbullet/mattermost/server/v8",
+      "version": "v8.0.0-20241105132450-fbee99e870df",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/urbullet/mattermost/server/v8/@v/v8.0.0-20241105132450-fbee99e870df.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v8.0.0-20241105132450-fbee99e870df"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mmctl",
+      "version": "11.10.0",
+      "repository": "https://mattermost.com",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

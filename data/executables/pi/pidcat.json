@@ -1,0 +1,55 @@
+{
+  "command": "pidcat",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "pidcat",
+      "version": "0.2.1",
+      "repository": "https://github.com/borneygit/pidcat",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rtfmkiesel/pidcat",
+      "version": "v0.0.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rtfmkiesel/pidcat/@v/v0.0.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pidcat",
+      "version": "2.1.0",
+      "repository": "https://github.com/JakeWharton/pidcat",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pidcat",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

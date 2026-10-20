@@ -1,0 +1,103 @@
+{
+  "command": "seqkit",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "seqkit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "seqkit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mutantjoo0/seqkit",
+      "version": "v0.13.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mutantjoo0/seqkit/@v/v0.13.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.13.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shenwei356/seqkit",
+      "version": "v0.16.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/shenwei356/seqkit/@v/v0.16.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.16.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shenwei356/seqkit/v2",
+      "version": "v2.13.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/shenwei356/seqkit/v2/@v/v2.13.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.13.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xxz19900/seqkit",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/xxz19900/seqkit?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.7.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "seqkit",
+      "version": "2.13.0",
+      "repository": "https://bioinf.shenwei.me/seqkit",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "seqkit",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

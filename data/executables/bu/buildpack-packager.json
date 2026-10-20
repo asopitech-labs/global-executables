@@ -1,0 +1,31 @@
+{
+  "command": "buildpack-packager",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudfoundry/libbuildpack",
+      "version": "v0.0.0-20260415084012-70e599bbe72c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudfoundry/libbuildpack/@v/v0.0.0-20260415084012-70e599bbe72c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260415084012-70e599bbe72c"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "buildpack-packager",
+      "version": "2.3.4",
+      "repository": "https://github.com/cloudfoundry/buildpack-packager",
+      "source": "https://rubygems.org/gems/buildpack-packager-2.3.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.3.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

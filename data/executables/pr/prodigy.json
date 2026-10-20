@@ -1,0 +1,43 @@
+{
+  "command": "prodigy",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "prodigy",
+      "version": "0.4.4",
+      "repository": "https://github.com/iepathos/prodigy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "prodigy-prot",
+      "version": "2.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/77/4c/d41ed158a955939d8b72618daba1b8c4ad12326719370d2216a21c0b6b9a/prodigy_prot-2.4.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.4.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-prodigy",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

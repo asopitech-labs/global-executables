@@ -1,0 +1,79 @@
+{
+  "command": "clips",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "clips",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "code.bas.es/arne/clips",
+      "version": "v0.0.0-20260315131613-c6011dca1454",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/code.bas.es/arne/clips?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260315131613-c6011dca1454",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260315131613-c6011dca1454"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/btschwartz12/clips",
+      "version": "v0.0.0-20250313232705-26e57fe3cc7b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/btschwartz12/clips/@v/v0.0.0-20250313232705-26e57fe3cc7b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250313232705-26e57fe3cc7b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tomasfarias/clips",
+      "version": "v0.0.0-20200620232358-9e71942c0e8b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tomasfarias/clips/@v/v0.0.0-20200620232358-9e71942c0e8b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200620232358-9e71942c0e8b"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "guitarpoet/clips-tool",
+      "version": "0.9.0",
+      "repository": "https://github.com/guitarpoet/clips-tool.git",
+      "source": "https://repo.packagist.org/p2/guitarpoet/clips-tool.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "clips",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

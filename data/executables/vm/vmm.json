@@ -1,0 +1,91 @@
+{
+  "command": "vmm",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "valheim-mod-manager",
+      "version": "0.4.0",
+      "repository": "https://github.com/Endoze/valheim-mod-manager",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/raesene/baremetalvmm",
+      "version": "v0.12.5",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/raesene/baremetalvmm?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.12.5",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sagoresarker/firecracker-first-vmm",
+      "version": "v0.0.0-20241022135917-d596a9ccd036",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sagoresarker/firecracker-first-vmm/@v/v0.0.0-20241022135917-d596a9ccd036.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241022135917-d596a9ccd036"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sagoresarker/firecracker-second-vmm",
+      "version": "v0.0.0-20250131080925-740eb2e7e81d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sagoresarker/firecracker-second-vmm/@v/v0.0.0-20250131080925-740eb2e7e81d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250131080925-740eb2e7e81d"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "vllm-metrics-monitor",
+      "version": "0.4.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8f/6c/16ff6ae4ce2996d72e97a059323d9f3304c9cfb79f26683847e903762568/vllm_metrics_monitor-0.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "vmm",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

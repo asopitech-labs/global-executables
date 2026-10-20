@@ -1,0 +1,43 @@
+{
+  "command": "bashate",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "bashate",
+      "version": "2.1.1",
+      "repository": "https://opendev.org/openstack/bashate",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bashate",
+      "version": "2.1.1",
+      "repository": "https://docs.openstack.org/bashate/latest/",
+      "source": "https://files.pythonhosted.org/packages/7a/af/4a6c74d83aa323cf643f2ca30977b3c684a1ce7769f762227d9c0af00dc2/bashate-2.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-bashate",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

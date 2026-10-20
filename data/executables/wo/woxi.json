@@ -1,0 +1,43 @@
+{
+  "command": "woxi",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "woxi",
+      "version": "0.3.0",
+      "repository": "https://github.com/ad-si/Woxi",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "woxi",
+      "version": "0.3.0",
+      "repository": "https://github.com/ad-si/Woxi",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "woxi",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ee/f1/9daffa71f3cc55a9c3a949581c860fa1453a5137833c23a421eb1c551bb9/woxi-0.3.0-cp310-abi3-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "fisher",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "fisher",
+      "version": "1.0.0",
+      "repository": "https://github.com/pietroalbini/fisher",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nbsdgames",
+      "version": "6.0.2",
+      "repository": "https://github.com/abakh/nbsdgames",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "minecraft-auto-fisher",
+      "version": "1.0.0",
+      "repository": "https://github.com/elias123tre/minecraft-auto-fisher",
+      "source": "https://files.pythonhosted.org/packages/5d/1a/0271177348df963848bccb29559c989a915d286fae4f240881a82c25ad24/minecraft_auto_fisher-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

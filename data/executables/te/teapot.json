@@ -1,0 +1,67 @@
+{
+  "command": "teapot",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mesa-demos-9.0.0-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/btwiuse/teapot",
+      "version": "v0.0.0-20260622144008-0aeae2fe01dd",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/btwiuse/teapot?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260622144008-0aeae2fe01dd",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260622144008-0aeae2fe01dd"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "teapot",
+      "version": "2.5",
+      "repository": "http://teapot-builder.readthedocs.org/en/latest/index.html",
+      "source": "https://files.pythonhosted.org/packages/94/6b/14873a8e8f487d62b99f35728aae9184ecd3e82d9166d2e52ccf790c1bdf/teapot-2.5.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "teapot-nlp",
+      "version": "0.2.2",
+      "repository": "https://github.com/pmichel31415/teapot-nlp",
+      "source": "https://files.pythonhosted.org/packages/34/5d/8320761775b9a0ee263abc1436d3cc1b549f96458ba8882f207bcdeba8a5/teapot-nlp-0.2.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "teapot",
+      "version": "3.7.0",
+      "repository": "https://github.com/ioquatix/teapot",
+      "source": "https://rubygems.org/gems/teapot-3.7.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.7.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

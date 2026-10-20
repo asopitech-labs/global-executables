@@ -1,0 +1,43 @@
+{
+  "command": "nala",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "nala",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/volian/nala/-/tree/nala-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nala",
+      "version": "0.180.0",
+      "repository": "https://github.com/eerimoq/nala",
+      "source": "https://files.pythonhosted.org/packages/3a/18/fa5841c98d05c94a5e9c8ee394c7acb90bbf4276e24ec45e281eb5c9d335/nala-0.180.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.180.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "nala",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

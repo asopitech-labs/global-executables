@@ -1,0 +1,31 @@
+{
+  "command": "fakebmc",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "pyghmi",
+      "version": "1.6.19",
+      "repository": "http://github.com/openstack/pyghmi/",
+      "source": "https://files.pythonhosted.org/packages/1a/46/b53a56ca81cdff545b360baf15027ea97e159297c08b3da0ceaa9eb8a2dd/pyghmi-1.6.19-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.19"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pyghmi",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "csvclean",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "csvkit-2.2.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "csvkit",
+      "version": "2.2.0",
+      "repository": "https://csvkit.readthedocs.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "csvkit",
+      "version": "2.2.0",
+      "repository": "https://github.com/wireservice/csvkit",
+      "source": "https://files.pythonhosted.org/packages/41/76/7ffa26fcd79eb0a51daf73d18481d4d5214685545d27aadc5e76e01d522d/csvkit-2.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kryptorious-csvclean",
+      "version": "1.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/9f/fb/f49fc3cec77be56d05e7af93faaba12bd17a72320c76b5700abdbf0bd03f/kryptorious_csvclean-1.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "csvkit",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

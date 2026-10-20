@@ -1,0 +1,80 @@
+{
+  "command": "llmfit",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "llmfit-1.1.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "llmfit",
+      "version": "1.1.17",
+      "repository": "https://github.com/AlexsJones/llmfit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.17"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "llmfit-x",
+      "version": "1.2.1",
+      "repository": "https://github.com/THEGENTLEMAN31/llmfit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "llmfit",
+      "version": "1.1.10",
+      "repository": "https://github.com/AlexsJones/llmfit",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "llmfit",
+      "version": "1.1.17",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0c/cb/88cd97eed6accf186d145c959c4a8037d143c4aa70f6e0b498ba75fdff01/llmfit-1.1.17-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.17"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "llmfit",
+      "version": "1.1.10",
+      "repository": "https://github.com/AlexsJones/llmfit",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.1.10"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

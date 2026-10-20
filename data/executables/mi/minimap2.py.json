@@ -1,0 +1,67 @@
+{
+  "command": "minimap2.py",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-mappy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-mappy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mappy",
+      "version": "2.31",
+      "repository": "https://github.com/lh3/minimap2",
+      "source": "https://files.pythonhosted.org/packages/ec/15/c007658d6a04bd1c2c370c4ee174a0f64e2de844e42849b9fdeda5d6ead7/mappy-2.31-cp314-cp314-macosx_15_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.31"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ont-mappy",
+      "version": "2.28",
+      "repository": "https://github.com/lh3/minimap2",
+      "source": "https://files.pythonhosted.org/packages/31/53/f4073a3a09d40b41cc6a7cce58cdfe189510742ab784f3b6e634714a7710/ont_mappy-2.28-cp310-cp310-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.28"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-mappy",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

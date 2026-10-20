@@ -1,0 +1,43 @@
+{
+  "command": "wfuzz",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "jarvis-pentest",
+      "version": "1.0.0",
+      "repository": "https://github.com/BastienFaure/jarvis",
+      "source": "https://files.pythonhosted.org/packages/06/a6/4df6e387e6177709659f02c0e426adc9626cb53220d31f0799b81b2247a9/jarvis-pentest-1.0.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wfuzz",
+      "version": "3.1.0",
+      "repository": "http://wfuzz.org",
+      "source": "https://files.pythonhosted.org/packages/7d/19/551b10d27bdeecd93564034ac1e7b42fbd7a9bea12501723bde5abf7f227/wfuzz-3.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "wfuzz",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

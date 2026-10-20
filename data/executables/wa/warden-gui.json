@@ -1,0 +1,31 @@
+{
+  "command": "warden-gui",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "modelwarden",
+      "version": "0.5.0",
+      "repository": "https://github.com/unclebucklarson/model-warden",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wardengui",
+      "version": "1.0.19",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/48/69/9dbc00b62734847b6f2c0001a8391418cb738b28646bb6ef912ec49683fc/wardengui-1.0.19-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.19"
+    }
+  ],
+  "first_seen": "2026-08-26",
+  "last_seen": "2026-10-19"
+}

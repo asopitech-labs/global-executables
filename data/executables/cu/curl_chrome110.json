@@ -1,0 +1,31 @@
+{
+  "command": "curl_chrome110",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "curl-impersonate-2.1.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "wm-oleksii/curl-client",
+      "version": "1.2.1",
+      "repository": "https://github.com/wm-oleksii/curl-client.git",
+      "source": "https://repo.packagist.org/p2/wm-oleksii/curl-client.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "1.2.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

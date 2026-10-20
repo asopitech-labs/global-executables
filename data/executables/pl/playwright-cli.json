@@ -1,0 +1,55 @@
+{
+  "command": "playwright-cli",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "slicc-cdp",
+      "version": "1.30.4",
+      "repository": "https://github.com/ai-ecoverse/slicc-cdp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.30.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "playwright-cli",
+      "version": "0.1.18",
+      "repository": "https://playwright.dev",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@armynante/playwright-cli",
+      "version": "1.1.9",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@armynante%2Fplaywright-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@carbonid1/testing",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/carbonid1/packages.git",
+      "source": "https://registry.npmjs.org/@carbonid1%2Ftesting/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

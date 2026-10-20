@@ -1,0 +1,43 @@
+{
+  "command": "sc-config",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "libsc-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "siliconcompiler",
+      "version": "0.38.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6c/83/bff2447418908c3b3e4554571c35c756cb813f7aa4c4cf4abd93698d0ad9/siliconcompiler-0.38.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.38.11"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "libsc-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

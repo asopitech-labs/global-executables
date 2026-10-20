@@ -1,0 +1,103 @@
+{
+  "command": "getcert",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "certmonger",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "certmonger",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/BTrDB/smartgridstore",
+      "version": "v4.15.9+incompatible",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/BTrDB/smartgridstore?filter=name+%3D%3D+%22main%22&limit=1000&version=v4.15.9%2Bincompatible",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.15.9+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/btrdb/smartgridstore",
+      "version": "v4.15.9+incompatible",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/btrdb/smartgridstore?filter=name+%3D%3D+%22main%22&limit=1000&version=v4.15.9%2Bincompatible",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.15.9+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/caiguanhao/certutils/getcert",
+      "version": "v0.0.0-20241221060231-0796eb690c17",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/caiguanhao/certutils/getcert/@v/v0.0.0-20241221060231-0796eb690c17.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241221060231-0796eb690c17"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/immesys/smartgridstore",
+      "version": "v4.15.9+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/immesys/smartgridstore/@v/v4.15.9+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v4.15.9+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rickar/getcert",
+      "version": "v0.0.0-20250323233919-544de1cc2c0e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rickar/getcert/@v/v0.0.0-20250323233919-544de1cc2c0e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250323233919-544de1cc2c0e"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "certmonger",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

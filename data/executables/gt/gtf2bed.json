@@ -1,0 +1,91 @@
+{
+  "command": "gtf2bed",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "bedops",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bedops",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "bedops",
+      "version": "2.4.42",
+      "repository": "https://github.com/bedops/bedops",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "how-are-we-stranded-here",
+      "version": "1.0.1",
+      "repository": "https://github.com/betsig/how_are_we_stranded_here",
+      "source": "https://files.pythonhosted.org/packages/12/b5/483a02769e127eba72873cf537e5673841c93a98ac75f4ca38f843353c03/how_are_we_stranded_here-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "isocirc",
+      "version": "1.0.7",
+      "repository": "https://github.com/Xinglab/isoCirc",
+      "source": "https://files.pythonhosted.org/packages/78/c0/a5834658a2602b2725280cf1478f4ae09467204519fed0f02aa823d135d5/isocirc-1.0.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pybiotk",
+      "version": "1.3.6",
+      "repository": "https://github.com/liqiming-whu/pybiotk",
+      "source": "https://files.pythonhosted.org/packages/b1/b8/6ad74523c0321c8f0e8926f6afd08d56b4ef05375db21a22cbb4b242d688/pybiotk-1.3.6.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.6"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "bedops",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

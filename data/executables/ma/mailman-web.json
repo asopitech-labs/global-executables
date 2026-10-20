@@ -1,0 +1,43 @@
+{
+  "command": "mailman-web",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mailman-web-0.0.9-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mailman-web",
+      "version": "0.0.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/10/34/dfd1eb66851caa1acbb4061f548a96ad737268ee6a34f2978c1c85efb397/mailman_web-0.0.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "mailman3-web",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

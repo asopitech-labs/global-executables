@@ -1,0 +1,79 @@
+{
+  "command": "stringify",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "opensubdiv-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "opensubdiv-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/threeport/threeport",
+      "version": "v0.6.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/threeport/threeport/@v/v0.6.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xHyroM/benchmarks",
+      "version": "v0.0.0-20240424130909-0c528182e7ad",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/x!hyro!m/benchmarks/@v/v0.0.0-20240424130909-0c528182e7ad.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240424130909-0c528182e7ad"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xhyrom/benchmarks",
+      "version": "v0.0.0-20240424130909-0c528182e7ad",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xhyrom/benchmarks/@v/v0.0.0-20240424130909-0c528182e7ad.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240424130909-0c528182e7ad"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bicycle-codes/stringify",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/bicycle-codes/stringify.git",
+      "source": "https://registry.npmjs.org/@bicycle-codes%2Fstringify/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

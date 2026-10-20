@@ -1,0 +1,55 @@
+{
+  "command": "sheldon",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "sheldon-0.8.5-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sheldon",
+      "version": "0.8.5",
+      "repository": "https://github.com/rossmacarthur/sheldon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.5"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "sheldon",
+      "version": "0.8.5",
+      "repository": "https://sheldon.cli.rs",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "sheldon",
+      "version": "6.2.2",
+      "repository": "https://github.com/dvjones89/sheldon",
+      "source": "https://rubygems.org/gems/sheldon-6.2.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "6.2.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "apsw",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-apsw-3.53.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-apsw",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apsw",
+      "version": "3.54.1.0",
+      "repository": "https://github.com/rogerbinns/apsw",
+      "source": "https://files.pythonhosted.org/packages/d0/1e/05674287c665640a32c5b1694e76b7275e350c43565e148e571b57f983a8/apsw-3.54.1.0-cp311-cp311-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.54.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apsw-sqlite3mc",
+      "version": "3.54.0.0",
+      "repository": "https://github.com/utelle/apsw-sqlite3mc",
+      "source": "https://files.pythonhosted.org/packages/78/10/0179bc8e53c3e936daeba610eec1b7caccdf2d7105ab25794423ec7f13b5/apsw_sqlite3mc-3.54.0.0-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.54.0.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

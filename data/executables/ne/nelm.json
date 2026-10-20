@@ -1,0 +1,43 @@
+{
+  "command": "nelm",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/werf/nelm",
+      "version": "v1.30.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/werf/nelm/@v/v1.30.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.30.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/werf/nelm-for-werf-helm",
+      "version": "v0.0.0-20241217155925-b0e6734d1dbf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/werf/nelm-for-werf-helm/@v/v0.0.0-20241217155925-b0e6734d1dbf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241217155925-b0e6734d1dbf"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nelm",
+      "version": "1.27.0",
+      "repository": "https://github.com/werf/nelm",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

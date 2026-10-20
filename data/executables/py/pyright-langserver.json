@@ -1,0 +1,67 @@
+{
+  "command": "pyright-langserver",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pyright-1.1.412-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pyright",
+      "version": "1.1.413",
+      "repository": "https://github.com/microsoft/pyright",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@anvil-works/anvil-pyright",
+      "version": "0.0.3",
+      "repository": "git+https://github.com/anvil-works/anvil-pyright.git",
+      "source": "https://registry.npmjs.org/@anvil-works%2Fanvil-pyright/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyright",
+      "version": "1.1.411",
+      "repository": "https://github.com/RobertCraigie/pyright-python",
+      "source": "https://files.pythonhosted.org/packages/0a/49/385be530a6a5b78d1cbcd5c2e38debc8959a2fc6bdb716f4e581002979fc/pyright-1.1.411-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.411"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyright",
+      "version": "1.1.414",
+      "repository": "https://github.com/RobertCraigie/pyright-python",
+      "source": "https://files.pythonhosted.org/packages/d7/ba/18b6e682ead424ad24bcc134339ae5d1b931cd9ae260540592a058a91279/pyright-1.1.414-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.414"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

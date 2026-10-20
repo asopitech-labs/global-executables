@@ -1,0 +1,55 @@
+{
+  "command": "telegram-send",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/tetafro/telegram-send",
+      "version": "v0.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tetafro/telegram-send/@v/v0.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "telegram-send",
+      "version": "0.39.2",
+      "repository": "https://pypi.org/project/telegram-send/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "telegram-send",
+      "version": "0.39.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/46/e1/ef09ecee4602a15d22c5278c236d84c95f5caa91f1898a154bfb9b7dcee0/telegram_send-0.39.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.39.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "telegram-send",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

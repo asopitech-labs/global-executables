@@ -1,0 +1,43 @@
+{
+  "command": "py-spy",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "py-spy",
+      "version": "0.4.2",
+      "repository": "https://github.com/benfred/py-spy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "py-spy",
+      "version": "0.4.2",
+      "repository": "https://github.com/benfred/py-spy",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "py-spy",
+      "version": "0.4.2",
+      "repository": "https://github.com/benfred/py-spy",
+      "source": "https://files.pythonhosted.org/packages/ef/21/ec030145a0c7992bd4b9eafb2f06f56358b3a5339eab4a16534baf3c69aa/py_spy-0.4.2-py2.py3-none-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

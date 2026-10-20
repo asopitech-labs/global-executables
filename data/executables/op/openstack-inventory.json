@@ -1,0 +1,43 @@
+{
+  "command": "openstack-inventory",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-openstacksdk-4.18.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "openstacksdk",
+      "version": "4.21.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a0/03/090c9f768db8913defa60737685c7433729f66e0476f0efb94453e9c6778/openstacksdk-4.21.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.21.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-openstacksdk",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

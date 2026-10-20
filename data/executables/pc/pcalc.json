@@ -1,0 +1,55 @@
+{
+  "command": "pcalc",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "pcalc",
+      "version": "3.0",
+      "repository": "https://github.com/alt-romes/programmer-calculator",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "ParseCalc",
+      "version": "0.3.3",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/parsecalc/0.3.3/parsecalc.0.3.3.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.3.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pancalc-tools",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d1/4e/4a7652f6a5182ee1d2eb739196967d49614b882d11f38df56eb6c355e64f/pancalc_tools-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pcalc",
+      "version": "1.0",
+      "repository": "https://github.com/geowurster/pcalc",
+      "source": "https://files.pythonhosted.org/packages/46/31/d5cb06a70a458b44de3a3d921f6325a5afefe41b01f33621ce9c0aec430f/pcalc-1.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

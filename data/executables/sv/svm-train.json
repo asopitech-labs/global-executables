@@ -1,0 +1,141 @@
+{
+  "command": "svm-train",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libsvm-3.37-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "libsvm",
+      "version": "333",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/libsvm/333/_/_/revisions/a13b86740587e12724f9656622af24af/packages/13be611585c95453f1cbbd053cea04b3e64470ca/revisions/812d0ee7a9910794cc00c577b825eabe/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "333"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libsvm-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libsvm-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ChengWu-NJ/libSvm",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!cheng!wu-!n!j/lib!svm/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/icoder528/libsvm-go",
+      "version": "v0.0.0-20160920071318-67f268dadeb4",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/icoder528/libsvm-go?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20160920071318-67f268dadeb4",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160920071318-67f268dadeb4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kachaje/libsvm-go",
+      "version": "v1.19.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kachaje/libsvm-go/@v/v1.19.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.19.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kachaje/libsvm-go/v3",
+      "version": "v3.18.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kachaje/libsvm-go/v3/@v/v3.18.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.18.7"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libsvm",
+      "version": "3.37",
+      "repository": "https://www.csie.ntu.edu.tw/~cjlin/libsvm/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "libsvm-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "libsvm",
+      "version": "3.37",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "3.37"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

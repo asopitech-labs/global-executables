@@ -1,0 +1,31 @@
+{
+  "command": "sshpk-verify",
+  "providers": [
+    {
+      "ecosystem": "npm",
+      "package": "sshpk",
+      "version": "1.18.0",
+      "repository": "git+https://github.com/joyent/node-sshpk.git",
+      "source": "https://registry.npmjs.org/sshpk/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.18.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "node-sshpk",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

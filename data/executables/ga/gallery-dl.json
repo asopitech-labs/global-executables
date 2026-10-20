@@ -1,0 +1,81 @@
+{
+  "command": "gallery-dl",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "gallery-dl",
+      "version": "1.32.9",
+      "repository": "https://codeberg.org/mikf/gallery-dl",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gallery-dl",
+      "version": "1.32.17",
+      "repository": "https://codeberg.org/mikf/gallery-dl",
+      "source": "https://files.pythonhosted.org/packages/50/2f/10d3f717e3dc38688ce07424652d7e6c5f606d8b7644af4c16e0dc016527/gallery_dl-1.32.17-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.32.17"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gallery-dl",
+      "version": "1.32.9",
+      "repository": "https://codeberg.org/mikf/gallery-dl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.32.9"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gallery-dl-nightly",
+      "version": "2026.08.24",
+      "repository": "https://github.com/mikf/gallery-dl",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2026.08.24"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gallery-dl",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "mikf.gallery-dl",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

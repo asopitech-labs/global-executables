@@ -1,0 +1,55 @@
+{
+  "command": "vm-agent",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "arcbox-vm",
+      "version": "0.7.0",
+      "repository": "https://github.com/arcboxlabs/arcbox",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "arcbox-vm-agent",
+      "version": "0.9.0",
+      "repository": "https://github.com/arcboxlabs/arcbox",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Ignaciojeria/sync",
+      "version": "v1.1.5",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Ignaciojeria/sync?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.1.5",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/giantswarm/vm-manager",
+      "version": "v0.19.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/giantswarm/vm-manager?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.19.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.19.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

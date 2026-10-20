@@ -1,0 +1,55 @@
+{
+  "command": "fmtutil",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "texlive-basic-2026.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "texlive",
+      "version": "20260301",
+      "repository": "https://www.tug.org/texlive/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "fmtutil",
+      "version": "1.0.15",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/62/7b/0b0132d9739a34cb37e750aadf10a64ed96deb5898d133aff45fae955361/fmtutil-1.0.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.15"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "texlive-base",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

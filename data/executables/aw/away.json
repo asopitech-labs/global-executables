@@ -1,0 +1,67 @@
+{
+  "command": "away",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "away",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "away",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gonzolino/gotado/v2",
+      "version": "v2.3.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gonzolino/gotado/v2/@v/v2.3.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "project-away",
+      "version": "0.1.28",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6e/fa/8b60d5941791b6d2d853a75291aecaae9f0754d1aec1e20385db73de8119/project_away-0.1.28-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.28"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "away",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

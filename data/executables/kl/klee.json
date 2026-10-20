@@ -1,0 +1,43 @@
+{
+  "command": "klee",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "klee",
+      "version": "3.2",
+      "repository": "https://klee-se.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kleene-cli",
+      "version": "0.1.0rc4",
+      "repository": "https://kleene.dev/",
+      "source": "https://files.pythonhosted.org/packages/4c/85/a396e810286b75cb8663ea0efd58a2466459b9b8df1b6c91f7058c43b0d8/kleene_cli-0.1.0rc4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0rc4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "klee",
+      "version": "1.0.0",
+      "repository": "https://github.com/saturnflyer/klee",
+      "source": "https://rubygems.org/gems/klee-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

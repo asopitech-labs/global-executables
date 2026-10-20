@@ -1,0 +1,31 @@
+{
+  "command": "pyeclib-backend",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-pyeclib",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyeclib",
+      "version": "1.8.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d1/b8/6e53c3145ac1bdcdf8142d89d0765ff6ab6ab6f8deafcd1ef1032f559369/pyeclib-1.8.0-cp310-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.8.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

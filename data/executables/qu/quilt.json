@@ -1,0 +1,127 @@
+{
+  "command": "quilt",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "quilt-0.69-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "quilt-cli",
+      "version": "0.36.2",
+      "repository": "https://github.com/quiltdata/quilt-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.36.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "quilt-lang",
+      "version": "0.1.1",
+      "repository": "https://github.com/quilt-lang/quilt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "quiltlang",
+      "version": "0.5.0",
+      "repository": "https://github.com/QuiltLang/quilt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/brendan-mcmahon/quilt",
+      "version": "v0.0.0-20240730135702-31de83745e18",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/brendan-mcmahon/quilt/@v/v0.0.0-20240730135702-31de83745e18.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240730135702-31de83745e18"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "quilt",
+      "version": "0.69",
+      "repository": "https://savannah.nongnu.org/projects/quilt",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "quilt-0.69-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "quilt",
+      "version": "2.9.15",
+      "repository": "https://github.com/quiltdata/quilt",
+      "source": "https://files.pythonhosted.org/packages/cf/17/5f30e1726fb8a311bb5b976f8deb37580f931d077ceeefb263424955ce4a/quilt-2.9.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.9.15"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "quilt-hp-python",
+      "version": "0.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/17/8d/9cb947b320e8c8e75b7ffc8b4c5cf9d32a0552d6edb970a656ba39df0f45/quilt_hp_python-0.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "quilt",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

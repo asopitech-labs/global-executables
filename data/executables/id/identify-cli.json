@@ -1,0 +1,55 @@
+{
+  "command": "identify-cli",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-identify-2.6.19-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ghdehrl12345/identify_sdk",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/ghdehrl12345/identify_sdk?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "identify",
+      "version": "2.6.20",
+      "repository": "https://github.com/pre-commit/identify",
+      "source": "https://files.pythonhosted.org/packages/fa/70/fffc9613501877c0a10a1ef73a165e6ded3e53f6e7502227fef56d973933/identify-2.6.20-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.6.20"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-identify",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

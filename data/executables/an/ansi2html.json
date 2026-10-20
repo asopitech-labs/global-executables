@@ -1,0 +1,115 @@
+{
+  "command": "ansi2html",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-ansi2html-1.9.2-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ansi2html",
+      "version": "0.2.2",
+      "repository": "https://github.com/ahaoboy/ansi2",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "ansiconv",
+      "version": "1.2.3",
+      "repository": "https://gitlab.com/cnrgh/infotools/ansiconv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "colorized-logs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "colorized-logs",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/draugr-dev/draugr",
+      "version": "v0.114.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/draugr-dev/draugr/@v/v0.114.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.114.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ansi2html",
+      "version": "1.9.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c2/d4/104cba52b1aa94d1c60ae342c264d4308af59d3d8832b4975802e9fe8978/ansi2html-1.9.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.9.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ansi2html",
+      "version": "5.3.4",
+      "repository": "http://github.com/aslakhellesoy/#{s.name}",
+      "source": "https://rubygems.org/gems/ansi2html-5.3.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "5.3.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "colorized-logs",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

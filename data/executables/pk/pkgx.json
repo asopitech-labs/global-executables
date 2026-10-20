@@ -1,0 +1,67 @@
+{
+  "command": "pkgx",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "pkgx",
+      "version": "2.11.0",
+      "repository": "https://github.com/pkgxdev/pkgx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.11.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/go-pkgx/pkgx",
+      "version": "v0.1.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/go-pkgx/pkgx?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pkgx",
+      "version": "2.11",
+      "repository": "https://pkgx.sh",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@blastz/pkgx",
+      "version": "1.1.0",
+      "repository": "git+https://github.com/blastZ/pkgx.git",
+      "source": "https://registry.npmjs.org/@blastz%2Fpkgx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pkgx",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7f/a6/77f81511c39db8a4d42fe3758a0e19a32e55aa5ebb460c04880582d33a42/pkgx-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

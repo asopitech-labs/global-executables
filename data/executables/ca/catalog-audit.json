@@ -1,0 +1,31 @@
+{
+  "command": "catalog-audit",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "mcpforge-registry",
+      "version": "0.2.1",
+      "repository": "https://github.com/nordicnode/mcpforge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Neo-Isshin/MuxLM/v2",
+      "version": "v2.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/!neo-!isshin/!mux!l!m/v2/@v/v2.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.6.0"
+    }
+  ],
+  "first_seen": "2026-09-14",
+  "last_seen": "2026-10-19"
+}

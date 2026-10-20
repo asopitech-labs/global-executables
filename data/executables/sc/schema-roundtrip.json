@@ -1,0 +1,31 @@
+{
+  "command": "schema-roundtrip",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "openapi-to-rust",
+      "version": "0.22.0",
+      "repository": "https://github.com/gpu-cli/openapi-to-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.22.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bentley/schema-roundtrip",
+      "version": "1.0.14",
+      "repository": "git+https://github.com/iTwin/bis-schema-validation.git",
+      "source": "https://registry.npmjs.org/@bentley%2Fschema-roundtrip/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.14"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

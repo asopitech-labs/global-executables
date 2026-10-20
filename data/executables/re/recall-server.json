@@ -1,0 +1,55 @@
+{
+  "command": "recall-server",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "recall-server",
+      "version": "0.4.17",
+      "repository": "https://github.com/pimlabs/recall",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.17"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/deagy/recall",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/deagy/recall?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.5.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-recallworks",
+      "version": "0.5.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/fc/e5/bfed6eec11a9f663c172cb4e7d45839e19bfaeed32fcc0db36877776616e/ai_recallworks-0.5.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kb-recall",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/19/4c/c70dfe392c6269719f6edcc1045da400296288f8362665bccac21f802de9/kb_recall-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

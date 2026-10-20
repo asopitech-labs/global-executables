@@ -1,0 +1,31 @@
+{
+  "command": "rboot",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ruptime",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ghaoo/wxwork/rboot",
+      "version": "v0.0.0-20220623232729-0aec128cf24f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ghaoo/wxwork/rboot/@v/v0.0.0-20220623232729-0aec128cf24f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220623232729-0aec128cf24f"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

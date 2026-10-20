@@ -1,0 +1,67 @@
+{
+  "command": "tini",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "tini",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tini",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cox96de/go-tini",
+      "version": "v0.0.0-20230714191138-7f6cd794f217",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cox96de/go-tini/@v/v0.0.0-20230714191138-7f6cd794f217.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230714191138-7f6cd794f217"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tini-editor",
+      "version": "1.2.2",
+      "repository": "https://codeberg.org/WolfQuery/tini-editor",
+      "source": "https://files.pythonhosted.org/packages/86/7e/fbfa93c3565fd7eb82a16cf09de49dbca32d305dced3b8a9aec9934ce6d1/tini_editor-1.2.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "tini",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

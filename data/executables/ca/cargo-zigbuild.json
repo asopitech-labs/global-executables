@@ -1,0 +1,67 @@
+{
+  "command": "cargo-zigbuild",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "cargo-zigbuild-0.23.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "cargo-zigbuild-0.23.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-zigbuild",
+      "version": "0.23.4",
+      "repository": "https://github.com/rust-cross/cargo-zigbuild",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.23.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cargo-zigbuild",
+      "version": "0.23.0",
+      "repository": "https://github.com/rust-cross/cargo-zigbuild",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cargo-zigbuild",
+      "version": "0.23.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/98/21/17304b9e86e101be945dcabd7cbe8df4f1ce9b3931f5d277799e1e13533f/cargo_zigbuild-0.23.4-py3-none-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.23.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

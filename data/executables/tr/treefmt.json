@@ -1,0 +1,55 @@
+{
+  "command": "treefmt",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "treefmt",
+      "version": "0.6.1",
+      "repository": "https://github.com/numtide/treefmt",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "treefmt",
+      "version": "2.5.0",
+      "repository": "https://treefmt.com/latest/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "treefmt",
+      "version": "2.3.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2e/d9/30d6faab18ac2de4ba1e02e4c4c10ec5753eec627044c826ada5a370af09/treefmt-2.3.1-py3-none-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.3.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "treefmt-pre-commit",
+      "version": "2.5.0",
+      "repository": "https://github.com/MaxMatti/treefmt-pre-commit",
+      "source": "https://files.pythonhosted.org/packages/66/8e/f3fe5a3ba77a7e89d2206921224fa74fcc51aa109888ce9bbc5b47062fd9/treefmt_pre_commit-2.5.0-py3-none-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.5.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

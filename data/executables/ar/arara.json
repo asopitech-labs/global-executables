@@ -1,0 +1,55 @@
+{
+  "command": "arara",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "texlive-binextra-2026.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ararahq/cli",
+      "version": "v0.1.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/ararahq/cli?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "texlive",
+      "version": "20260301",
+      "repository": "https://www.tug.org/texlive/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "texlive-extra-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

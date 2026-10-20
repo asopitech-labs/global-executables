@@ -1,0 +1,80 @@
+{
+  "command": "gbase",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "scotch-7.0.13-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scotch",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/luxiaotong/go_practice",
+      "version": "v0.0.0-20240410023027-b0f603cade3f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/luxiaotong/go_practice/@v/v0.0.0-20240410023027-b0f603cade3f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240410023027-b0f603cade3f"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "scotch",
+      "version": "7.0.13",
+      "repository": "https://gitlab.inria.fr/scotch/scotch",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gbase",
+      "version": "0.6.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/cf/62/f68976c59b98a8a5b5aee0bd55ae0bc81d8d61ace8c9357c8e39fd301bd9/gbase-0.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "scotch",
+      "version": "7.0.5",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "7.0.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

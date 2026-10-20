@@ -1,0 +1,43 @@
+{
+  "command": "vk-gen",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "sp1-gpu-perf",
+      "version": "6.0.0-beta.1",
+      "repository": "https://github.com/succinctlabs/sp1",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "6.0.0-beta.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/KCoen/vk",
+      "version": "v0.0.0-20260820221332-66f90be30d39",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/KCoen/vk?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260820221332-66f90be30d39",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820221332-66f90be30d39"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gogpu/wgpu",
+      "version": "v0.34.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/gogpu/wgpu?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.34.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.34.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

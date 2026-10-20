@@ -1,0 +1,31 @@
+{
+  "command": "swift-dispersion-populate",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "swift",
+      "version": "2.38.2",
+      "repository": "https://docs.openstack.org/swift/latest/",
+      "source": "https://files.pythonhosted.org/packages/09/9c/0d8234a0c8878ca68bd5d6b60e6c160df057c8a944e78bd696b1ed8923cd/swift-2.38.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.38.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "swift",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

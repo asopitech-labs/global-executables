@@ -1,0 +1,80 @@
+{
+  "command": "htmlq",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "htmlq-0.4.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "htmlq",
+      "version": "0.4.0",
+      "repository": "https://github.com/mgdm/htmlq",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/avan06/htmlq",
+      "version": "v1.1.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/avan06/htmlq/@v/v1.1.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "htmlq",
+      "version": "0.4.0",
+      "repository": "https://github.com/mgdm/htmlq",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "htmlq",
+      "version": "0.1.8",
+      "repository": "https://github.com/dealfonso/htmlq",
+      "source": "https://files.pythonhosted.org/packages/ce/c6/942d9fc46edf55725a2b140264aac6bfb7b9e1c3ab53b8a418f921824ad4/htmlq-0.1.8.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "htmlq",
+      "version": "0.4.0",
+      "repository": "https://github.com/mgdm/htmlq",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.4.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

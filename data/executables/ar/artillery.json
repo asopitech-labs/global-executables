@@ -1,0 +1,31 @@
+{
+  "command": "artillery",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "artillery",
+      "version": "2.0.34",
+      "repository": "https://www.artillery.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@capaj/artillery",
+      "version": "1.6.0-19",
+      "repository": "git+https://github.com/shoreditch-ops/artillery.git",
+      "source": "https://registry.npmjs.org/@capaj%2Fartillery/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.6.0-19"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

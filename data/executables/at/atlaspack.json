@@ -1,0 +1,55 @@
+{
+  "command": "atlaspack",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "atlaspack",
+      "version": "1.0.0",
+      "repository": "https://github.com/vinybrun/atlaspack",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devthicket/willow/cmd/atlaspack",
+      "version": "v0.0.0-20260820193053-b483782119e1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/devthicket/willow/cmd/atlaspack?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260820193053-b483782119e1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260820193053-b483782119e1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alshdavid/atlaspack",
+      "version": "2.13.1",
+      "repository": "git+https://github.com/atlassian-labs/atlaspack.git",
+      "source": "https://registry.npmjs.org/@alshdavid%2Fatlaspack/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.13.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@atlaspack/cli",
+      "version": "2.15.27",
+      "repository": "git+https://github.com/atlassian-labs/atlaspack.git",
+      "source": "https://registry.npmjs.org/@atlaspack%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.15.27"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

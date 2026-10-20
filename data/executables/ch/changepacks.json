@@ -1,0 +1,55 @@
+{
+  "command": "changepacks",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "changepacks",
+      "version": "0.3.6",
+      "repository": "https://github.com/changepacks/changepacks",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.6"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@changepacks/cli",
+      "version": "0.3.4",
+      "repository": "git+https://github.com/changepacks/changepacks.git",
+      "source": "https://registry.npmjs.org/@changepacks%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "changepacks",
+      "version": "0.3.6",
+      "repository": "https://github.com/changepacks/changepacks",
+      "source": "https://files.pythonhosted.org/packages/6e/6e/aa7f2150825f4ebbec2a9e46beb670ff59d3fb3c9d49675d2b7dac18ca06/changepacks-0.3.6-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.6"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Changepacks.Changepacks",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

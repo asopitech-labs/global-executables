@@ -1,0 +1,79 @@
+{
+  "command": "titlecase",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-titlecase-2.4.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "titlecase",
+      "version": "3.6.0",
+      "repository": "https://github.com/wezm/titlecase",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jftuga/changecase",
+      "version": "v1.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jftuga/changecase/@v/v1.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "titlecase",
+      "version": "1.015",
+      "repository": "http://plasmasturm.org/code/titlecase/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "titlecase",
+      "version": "2.4.1",
+      "repository": "https://github.com/ppannuto/python-titlecase",
+      "source": "https://files.pythonhosted.org/packages/63/17/04d2d3e30e2bc5a3eefa1060b08e3fb628510440f938eaecabbe08976a26/titlecase-2.4.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.4.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "title_case",
+      "version": "0.2.6",
+      "repository": "http://github.com/nbirnel/titlecase",
+      "source": "https://rubygems.org/gems/title_case-0.2.6.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.6"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

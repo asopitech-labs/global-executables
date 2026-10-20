@@ -1,0 +1,43 @@
+{
+  "command": "mock-agent",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "jamsession",
+      "version": "0.1.0",
+      "repository": "https://github.com/nikomatsakis/jamsession",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/MochaCosine1206/orchestra",
+      "version": "v0.0.0-20260827190341-9b65b5478e60",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/MochaCosine1206/orchestra?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260827190341-9b65b5478e60",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260827190341-9b65b5478e60"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "luml-prisma",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/30/a3/00321ab0b0acf0575dd93b6d85c08fdd678c2ddc07e955445ea4789a7ab8/luml_prisma-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

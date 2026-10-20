@@ -1,0 +1,79 @@
+{
+  "command": "readms",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "casacore-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "casacore-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/miku/expo",
+      "version": "v0.0.0-20260313104413-7ffc3ca26f42",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/miku/expo/@v/v0.0.0-20260313104413-7ffc3ca26f42.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260313104413-7ffc3ca26f42"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "readms",
+      "version": "0.1.0",
+      "repository": "https://github.com/nekomamoushi/readms",
+      "source": "https://files.pythonhosted.org/packages/6b/89/1d91c598d39b17a6e576f890edd6341c14ec5069a176f91ee71de4aa1dd7/readms-0.1.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "readms-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/dslizardo/readms-cli",
+      "source": "https://files.pythonhosted.org/packages/4b/d8/3d0dd6c4c2311b2c9f5d890a848f4e4d2693dfc321ead54cc1311605e8b6/readms-cli-0.1.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "casacore-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

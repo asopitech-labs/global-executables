@@ -1,0 +1,31 @@
+{
+  "command": "tickets-mcp",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "trusty-common",
+      "version": "0.63.0",
+      "repository": "https://github.com/bobmatnyc/trusty-tools",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.63.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@coldsurf/tickets",
+      "version": "0.10.2",
+      "repository": "git+https://github.com/coldsurfers/kopis-cli.git",
+      "source": "https://registry.npmjs.org/@coldsurf%2Ftickets/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.10.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

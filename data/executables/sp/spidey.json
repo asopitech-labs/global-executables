@@ -1,0 +1,67 @@
+{
+  "command": "spidey",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ncbi-tools-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ncbi-tools-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/anirudhsudhir/spidey",
+      "version": "v0.0.0-20240406152554-58794fc0a6ef",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/anirudhsudhir/spidey/@v/v0.0.0-20240406152554-58794fc0a6ef.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240406152554-58794fc0a6ef"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spidey.py",
+      "version": "0.4.5",
+      "repository": "https://github.com/khilnani/spidey.py",
+      "source": "https://files.pythonhosted.org/packages/63/ab/a640c7c0e233ec3a7908e97a76d12dd7bb55e5026547744095e2e55a13bd/spidey.py-0.4.5-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ncbi-tools-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

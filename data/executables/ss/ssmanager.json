@@ -1,0 +1,68 @@
+{
+  "command": "ssmanager",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "shadowsocks-rust-1.24.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "shadowsocks-rust",
+      "version": "1.25.0",
+      "repository": "https://github.com/shadowsocks/shadowsocks-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.25.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "shadowsocks-rust",
+      "version": "1.24.0",
+      "repository": "https://shadowsocks.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bsn-ss-new",
+      "version": "0.1.1",
+      "repository": "https://github.com/your_github_username/bsn-ss-new",
+      "source": "https://files.pythonhosted.org/packages/8a/44/18eb6f3ccfd005dd059eca7af12baa581f2612123643aceffd5542053de0/bsn_ss_new-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "shadowsocks-rust",
+      "version": "1.24.0",
+      "repository": "https://shadowsocks.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.24.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

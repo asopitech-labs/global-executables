@@ -1,0 +1,43 @@
+{
+  "command": "synapse_worker",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "matrix-synapse-1.156.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "matrix-synapse",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "matrix-synapse",
+      "version": "1.163.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7e/95/96146a360d14e7bc1d2e93dd6d78a7b27a852797557dbb8727df74326df0/matrix_synapse-1.163.0-cp310-abi3-manylinux_2_28_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.163.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

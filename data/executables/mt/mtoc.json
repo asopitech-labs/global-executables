@@ -1,0 +1,55 @@
+{
+  "command": "mtoc",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "mtoc",
+      "version": "0.5.0",
+      "repository": "https://github.com/containerscrew/mtoc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mtoc",
+      "version": "1035.1.102",
+      "repository": "https://opensource.apple.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ocmtoc",
+      "version": "1.0.4",
+      "repository": "https://github.com/acidanthera/ocmtoc",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pnu-mtoc",
+      "version": "1.1.3",
+      "repository": "https://github.com/HubTou/mtoc/",
+      "source": "https://files.pythonhosted.org/packages/08/88/18d1181c993ef220d9ea129b6069cd2a7719c2f216f6a868787152f37004/pnu_mtoc-1.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.3"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

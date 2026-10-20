@@ -1,0 +1,55 @@
+{
+  "command": "gst-validate-media-check-1.0",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gst-devtools-1.28.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "gst-devtools-1.28.6-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gstreamer",
+      "version": "1.28.6",
+      "repository": "https://gstreamer.freedesktop.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gstreamer-cli",
+      "version": "1.28.8",
+      "repository": "http://gstreamer.freedesktop.org",
+      "source": "https://files.pythonhosted.org/packages/fb/30/716cb172d00c6bbd756d692d74704ebeb54fe243489dbfb4231b671ef4ce/gstreamer_cli-1.28.8-cp313-cp313t-win32.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.28.8"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

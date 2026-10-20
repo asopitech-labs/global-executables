@@ -1,0 +1,67 @@
+{
+  "command": "zipserver",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-zipstream-ng-1.9.3-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/itchio/zipserver",
+      "version": "v0.0.0-20260727142641-522a83dc52b1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/itchio/zipserver/@v/v0.0.0-20260727142641-522a83dc52b1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260727142641-522a83dc52b1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/leafo/zipserver",
+      "version": "v0.0.0-20260727142641-522a83dc52b1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/leafo/zipserver/@v/v0.0.0-20260727142641-522a83dc52b1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260727142641-522a83dc52b1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zipstream-ng",
+      "version": "1.9.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/75/44/e6d863aebd6d57a1de20d2350328379b5b970c29a217af349793f12d753c/zipstream_ng-1.9.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.9.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-zipstream-ng",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

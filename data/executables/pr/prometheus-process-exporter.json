@@ -1,0 +1,55 @@
+{
+  "command": "prometheus-process-exporter",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "prometheus-process-exporter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "prometheus-process-exporter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/caoimhechaos/prometheus-process-exporter",
+      "version": "v0.0.0-20170426013506-4affff371fb1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/caoimhechaos/prometheus-process-exporter/@v/v0.0.0-20170426013506-4affff371fb1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170426013506-4affff371fb1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "prometheus-process-exporter",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,91 @@
+{
+  "command": "telnetd",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "inetutils-2.8-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "inetutils-telnetd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "inetutils-telnetd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "esyshub.st101.workers.dev/honeynet/riotpot",
+      "version": "v0.0.0-20240103141618-6d13c90eba5c",
+      "repository": null,
+      "source": "https://proxy.golang.org/esyshub.st101.workers.dev/honeynet/riotpot/@v/v0.0.0-20240103141618-6d13c90eba5c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240103141618-6d13c90eba5c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.tiyicn.workers.dev/honeynet/riotpot",
+      "version": "v0.0.0-20240103141618-6d13c90eba5c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.tiyicn.workers.dev/honeynet/riotpot/@v/v0.0.0-20240103141618-6d13c90eba5c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240103141618-6d13c90eba5c"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "telnetd",
+      "version": "308",
+      "repository": "https://opensource.apple.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "inetutils-telnetd",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

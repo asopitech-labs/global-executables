@@ -1,0 +1,43 @@
+{
+  "command": "agent-docs",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "nils-agent-docs",
+      "version": "1.21.9",
+      "repository": "https://github.com/sympoies/nils-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.21.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aki-0421/agent-docs",
+      "version": "v0.1.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/aki-0421/agent-docs?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@damenor/agent-docs",
+      "version": "0.8.1",
+      "repository": "git+https://github.com/damenordev/agent-docs.git",
+      "source": "https://registry.npmjs.org/@damenor%2Fagent-docs/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.8.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

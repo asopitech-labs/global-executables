@@ -1,0 +1,43 @@
+{
+  "command": "stitch_patterns",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-xypattern",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-xypattern",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "xypattern",
+      "version": "1.2.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d8/08/33740be31d2233270f7ddb481c87ae2ff786fc438f74d5e4b7814c22f339/xypattern-1.2.4-cp310-cp310-macosx_26_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

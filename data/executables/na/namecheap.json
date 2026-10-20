@@ -1,0 +1,79 @@
+{
+  "command": "namecheap",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "namecheap",
+      "version": "0.1.0",
+      "repository": "https://github.com/floris-xlx/namecheap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "namecheap-cli",
+      "version": "1.0.0",
+      "repository": "https://github.com/uradical/namecheap-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jsgv/namecheap-go",
+      "version": "v0.0.13",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jsgv/namecheap-go/@v/v0.0.13.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.13"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/liujed/dns01proxy",
+      "version": "v0.1.19",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/liujed/dns01proxy/@v/v0.1.19.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.19"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "namecheap-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/connorodea/namecheap-cli",
+      "source": "https://files.pythonhosted.org/packages/29/f7/9e39cd31ce8287f1e2daacd1460b743f86830dcff13145039103322514ea/namecheap_cli-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "namecheap",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

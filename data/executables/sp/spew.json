@@ -1,0 +1,79 @@
+{
+  "command": "spew",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "spew",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "spew",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/earthboundkid/shitpic",
+      "version": "v0.0.0-20250121043238-7f384b269503",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/earthboundkid/shitpic/@v/v0.0.0-20250121043238-7f384b269503.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250121043238-7f384b269503"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jppunnett/spew",
+      "version": "v0.0.0-20191125160508-c23f71fda27e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jppunnett/spew/@v/v0.0.0-20191125160508-c23f71fda27e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191125160508-c23f71fda27e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mmcquillan/spew",
+      "version": "v0.0.0-20220929135049-265046896693",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/mmcquillan/spew?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20220929135049-265046896693",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220929135049-265046896693"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "spew",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

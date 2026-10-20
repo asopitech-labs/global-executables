@@ -1,0 +1,31 @@
+{
+  "command": "ironic-inspector-status",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "ironic-inspector",
+      "version": "12.5.0",
+      "repository": "https://docs.openstack.org/ironic-inspector/latest/",
+      "source": "https://files.pythonhosted.org/packages/ea/19/1731d2c5d27b63c2752c0185a44355b1e934ec62a741b7ffd0688b403e67/ironic_inspector-12.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "12.5.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-ironic-inspector",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

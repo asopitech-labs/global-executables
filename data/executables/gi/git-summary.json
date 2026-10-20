@@ -1,0 +1,103 @@
+{
+  "command": "git-summary",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "git-summary",
+      "version": "0.1.1",
+      "repository": "https://github.com/scottschroeder/git-summary-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "nils-git-summary",
+      "version": "1.21.9",
+      "repository": "https://github.com/sympoies/nils-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.21.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ripperdev/git-summary",
+      "version": "v0.0.0-20250715092919-425be5665fd1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ripperdev/git-summary/@v/v0.0.0-20250715092919-425be5665fd1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250715092919-425be5665fd1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tonbiattack/git-plus",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/tonbiattack/git-plus?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-extras",
+      "version": "7.5.0",
+      "repository": "https://github.com/tj/git-extras",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "git-extras-7.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@chengyixu/git-summary",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/chengyixu/git-summary.git",
+      "source": "https://registry.npmjs.org/@chengyixu%2Fgit-summary/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "git-extras",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

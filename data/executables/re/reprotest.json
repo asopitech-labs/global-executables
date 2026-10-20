@@ -1,0 +1,43 @@
+{
+  "command": "reprotest",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "reprotest-0.7.32-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "reprotest",
+      "version": "0.7.33",
+      "repository": "https://salsa.debian.org/reproducible-builds/reprotest",
+      "source": "https://files.pythonhosted.org/packages/d6/97/9fc1f6cf71c6e91e4c9d195868ab82e65b530c4f7ce8ce9f99219eaefd90/reprotest-0.7.33.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.33"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "reprotest",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

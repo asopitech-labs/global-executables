@@ -1,0 +1,139 @@
+{
+  "command": "sql2csv",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "csvkit-2.2.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sql2csv",
+      "version": "0.4.0",
+      "repository": "https://github.com/nottxy/sql2csv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/caltechlibrary/datatools",
+      "version": "v1.3.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/caltechlibrary/datatools/@v/v1.3.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gossterrible/sql2csv",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gossterrible/sql2csv/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "csvkit",
+      "version": "2.2.0",
+      "repository": "https://csvkit.readthedocs.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "csvkit",
+      "version": "2.2.0",
+      "repository": "https://github.com/wireservice/csvkit",
+      "source": "https://files.pythonhosted.org/packages/41/76/7ffa26fcd79eb0a51daf73d18481d4d5214685545d27aadc5e76e01d522d/csvkit-2.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dataporter",
+      "version": "0.1.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b3/3b/d7ac091b76495d765ee1b8066f0d672747350e7287985dd1bf769b022cb7/dataporter-0.1.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "datasimple",
+      "version": "1.0.7",
+      "repository": "https://github.com/CraigKelly/datasimple",
+      "source": "https://files.pythonhosted.org/packages/ec/3a/8b1e509fe04608394b29c61b25438363175fac99a84f2c3a5f0233d0460f/datasimple-1.0.7-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sql2csv",
+      "version": "1.3",
+      "repository": "https://github.com/gabfl/sql2csv",
+      "source": "https://files.pythonhosted.org/packages/dd/f5/31c860129ac9a65aaf97892878d2de7eb7180c479d90afff155192f591da/sql2csv-1.3-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "sql_csv",
+      "version": "0.2.4",
+      "repository": "https://github.com/bobf/sql_csv",
+      "source": "https://rubygems.org/gems/sql_csv-0.2.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "csvkit",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

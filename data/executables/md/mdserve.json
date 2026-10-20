@@ -1,0 +1,91 @@
+{
+  "command": "mdserve",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mdserve-1.1.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdserve",
+      "version": "1.1.0",
+      "repository": "https://github.com/jfernandez/mdserve",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/3n3a/mdserve",
+      "version": "v0.0.0-20260603114711-11e459917ff1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/3n3a/mdserve?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260603114711-11e459917ff1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260603114711-11e459917ff1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/badiwidya/mdserve",
+      "version": "v0.0.0-20260507135806-22c4cc702dd6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/badiwidya/mdserve/@v/v0.0.0-20260507135806-22c4cc702dd6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260507135806-22c4cc702dd6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.astrophena.name/tools",
+      "version": "v1.16.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.astrophena.name/tools/@v/v1.16.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.16.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mdserve",
+      "version": "1.1.0",
+      "repository": "https://github.com/jfernandez/mdserve",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mdserve",
+      "version": "1.4.4",
+      "repository": "https://github.com/openjw/mdserve",
+      "source": "https://files.pythonhosted.org/packages/65/74/45f6a73a42f811ab0b9b326d5f0652b936ac7da7d830ff02bc698e7eec9a/mdserve-1.4.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

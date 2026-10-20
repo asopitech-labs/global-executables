@@ -1,0 +1,43 @@
+{
+  "command": "ladybug",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-ladybug-core-0.44.56-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "akar-main",
+      "version": "0.2.5",
+      "repository": "https://github.com/mlengse/akar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ladybug-core",
+      "version": "0.44.62",
+      "repository": "https://github.com/ladybug-tools/ladybug",
+      "source": "https://files.pythonhosted.org/packages/d6/32/ecd65ee253a1682b641af9c542ff524f3a0d2cc38eb9c3a00380cd8eed2d/ladybug_core-0.44.62-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.44.62"
+    }
+  ],
+  "first_seen": "2026-08-17",
+  "last_seen": "2026-10-19"
+}

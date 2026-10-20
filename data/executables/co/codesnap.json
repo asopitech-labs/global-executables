@@ -1,0 +1,80 @@
+{
+  "command": "codesnap",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "codesnap-0.13.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "codesnap-cli",
+      "version": "0.14.0",
+      "repository": "https://github.com/mistricky/CodeSnap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.14.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wyattcupp/codesnap",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wyattcupp/codesnap/@v/v1.0.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "codesnap",
+      "version": "0.13.4",
+      "repository": "https://codesnap-docs.netlify.app/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "codesnapper",
+      "version": "0.1.7",
+      "repository": "https://github.com/yourusername/codesnapper",
+      "source": "https://files.pythonhosted.org/packages/e6/d0/ddc92c6eda8cc88431e5a2bb2c2bac930c061ae7f2bf3e3a6db16ce18a51/codesnapper-0.1.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "codesnap",
+      "version": "0.13.4",
+      "repository": "https://github.com/codesnap-rs/codesnap",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.13.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

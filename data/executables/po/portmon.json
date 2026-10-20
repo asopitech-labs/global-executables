@@ -1,0 +1,43 @@
+{
+  "command": "portmon",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "portmon",
+      "version": "0.1.1",
+      "repository": "https://github.com/JNC4/portmon",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/LFroesch/portmon",
+      "version": "v1.0.4",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/LFroesch/portmon?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.4",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/peterzandbergen/iec62056",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/peterzandbergen/iec62056/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

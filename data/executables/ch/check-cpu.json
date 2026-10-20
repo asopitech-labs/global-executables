@@ -1,0 +1,31 @@
+{
+  "command": "check-cpu",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "tabin-plugins",
+      "version": "0.3.1",
+      "repository": "https://github.com/quodlibetor/tabin-plugins",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sicsoftwaregmbh/sensu-plugins-windows-simple",
+      "version": "v0.0.0-20190524172343-a8b43b2e413d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sicsoftwaregmbh/sensu-plugins-windows-simple/@v/v0.0.0-20190524172343-a8b43b2e413d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190524172343-a8b43b2e413d"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

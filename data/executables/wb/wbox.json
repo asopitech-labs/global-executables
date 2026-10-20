@@ -1,0 +1,67 @@
+{
+  "command": "wbox",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "wbox",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "wbox",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wealthbox-cli",
+      "version": "2.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/9c/c4/19b83126df6a2d6c97d1244c9b4caf62bf89214064db5dd6f0b6ebcea310/wealthbox_cli-2.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wtools",
+      "version": "1.0.13",
+      "repository": "https://bitbucket.org/Moo7/wtools",
+      "source": "https://files.pythonhosted.org/packages/93/c6/0ab8cf1dc24493be188295ae4bb6870ec216a03885f036cccdee6289c46c/wtools-1.0.13-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.13"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "wbox",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

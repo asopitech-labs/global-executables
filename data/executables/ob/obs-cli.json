@@ -1,0 +1,79 @@
+{
+  "command": "obs-cli",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "obs-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "obs-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ashpect/obs-cli",
+      "version": "v0.0.0-20230807211337-7d8239cb08cf",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ashpect/obs-cli/@v/v0.0.0-20230807211337-7d8239cb08cf.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230807211337-7d8239cb08cf"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "obs-cli",
+      "version": "0.9.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/90/c0/871af5b3bc357b9728350306d5ebb4c426eea7f83762f0f60a051423a0d8/obs_cli-0.9.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "redducklabs-platform-observability-sdk",
+      "version": "1.0.2",
+      "repository": "https://github.com/redducklabs/platform-observability",
+      "source": "https://files.pythonhosted.org/packages/26/b3/3aed9b9204569722f62c37fde65e52a3fbd0d26ab0d32dd98ccacce2103a/redducklabs_platform_observability_sdk-1.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "obs-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

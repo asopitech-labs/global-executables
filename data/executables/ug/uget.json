@@ -1,0 +1,68 @@
+{
+  "command": "uget",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "uget",
+      "version": "0.1.9",
+      "repository": "https://github.com/ararog/uget",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/skypeus/uget",
+      "version": "v0.0.0-20180319195501-4ef773417b24",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/skypeus/uget?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20180319195501-4ef773417b24",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180319195501-4ef773417b24"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ugetcli",
+      "version": "0.4.2",
+      "repository": "https://github.com/AgeOfLearning/ugetcli",
+      "source": "https://files.pythonhosted.org/packages/6d/04/a9898398dd2551c395227fbbdfaa43e2911c2624b2fdd12cf13b5c105608/ugetcli-0.4.2-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "uget",
+      "version": "2.2.3",
+      "repository": "https://ugetdm.com/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.2.3"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "uGetdm.uGet",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

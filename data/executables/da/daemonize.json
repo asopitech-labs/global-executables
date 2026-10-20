@@ -1,0 +1,91 @@
+{
+  "command": "daemonize",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "blivet",
+      "version": "0.15.0",
+      "repository": "https://github.com/camercu/blivet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.15.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "daemonize",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "daemonize",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "byjg/php-daemonize",
+      "version": "5.0.1",
+      "repository": "https://github.com/byjg/php-daemonize.git",
+      "source": "https://repo.packagist.org/p2/byjg/php-daemonize.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "5.0.1"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "fsth/swoole-daemonize",
+      "version": "v0.1.0",
+      "repository": "https://github.com/findsomething/swoole-daemonize.git",
+      "source": "https://repo.packagist.org/p2/fsth/swoole-daemonize.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sdsstools",
+      "version": "1.9.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/93/59/268de551e9f2ad50a22ffa6a9db8f46dee27275b2d15746d19e62665da86/sdsstools-1.9.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.9.9"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "daemonize",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

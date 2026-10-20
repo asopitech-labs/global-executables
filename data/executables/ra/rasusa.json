@@ -1,0 +1,31 @@
+{
+  "command": "rasusa",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "rasusa",
+      "version": "5.1.0",
+      "repository": "https://github.com/mbhall88/rasusa",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "5.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rasusa",
+      "version": "5.1.0",
+      "repository": "https://doi.org/10.21105/joss.03941",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

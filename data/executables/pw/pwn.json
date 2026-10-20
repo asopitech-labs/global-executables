@@ -1,0 +1,139 @@
+{
+  "command": "pwn",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pwntools-4.15.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/teamom3ga/writeups",
+      "version": "v0.0.0-20220803060501-0ddea4adc48d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/teamom3ga/writeups/@v/v0.0.0-20220803060501-0ddea4adc48d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220803060501-0ddea4adc48d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.jolheiser.com/pwn",
+      "version": "v0.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.jolheiser.com/pwn/@v/v0.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pwntools",
+      "version": "4.15.0",
+      "repository": "https://github.com/Gallopsled/pwntools",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "angr-pwntools",
+      "version": "4.5.0",
+      "repository": "https://pwntools.com",
+      "source": "https://files.pythonhosted.org/packages/5c/78/a0398e9934b29764b633f471a492d64d7a5ecff910eb38cbf316d6b5b94d/angr-pwntools-4.5.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pwntools",
+      "version": "4.15.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/87/03/b5aab57706d61c65aaf6ed181727e7621c7cf32109b22245ac04f1c76094/pwntools-4.15.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.15.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pwntools-elf-only",
+      "version": "4.12.3.dev0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/01/96/04d7ad4fc90cbeb66a2cb48f1fa6b05d5653c6a93ba0faa6a4d2c8303971/pwntools_elf_only-4.12.3.dev0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.12.3.dev0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "thglib",
+      "version": "0.0.2.dev0",
+      "repository": "https://darkcode0x00/thg",
+      "source": "https://files.pythonhosted.org/packages/08/df/22ea1ce756340644f1a90cc3d4692b76d71b93dc30a6b54f304d39aa8cec/thglib-0.0.2.dev0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.2.dev0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "pwn",
+      "version": "0.5.749",
+      "repository": "https://github.com/0dayinc/pwn",
+      "source": "https://rubygems.org/gems/pwn-0.5.749.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.749"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pwntools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

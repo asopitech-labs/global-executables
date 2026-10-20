@@ -1,0 +1,55 @@
+{
+  "command": "pamtester",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "pamtester",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pamtester",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/phuslu/pamtester",
+      "version": "v0.0.0-20260901130850-309db0a5920f",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/phuslu/pamtester?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260901130850-309db0a5920f",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260901130850-309db0a5920f"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pamtester",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

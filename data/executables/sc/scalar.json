@@ -1,0 +1,151 @@
+{
+  "command": "scalar",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "git-2.55.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "git",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "git",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/GiedriusS/go-bp",
+      "version": "v0.0.0-20240129101850-8b1dee8e32a2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!giedrius!s/go-bp/@v/v0.0.0-20240129101850-8b1dee8e32a2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240129101850-8b1dee8e32a2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/adammck/collector",
+      "version": "v0.0.0-20250907063230-17ae75fefdc0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/adammck/collector/@v/v0.0.0-20250907063230-17ae75fefdc0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250907063230-17ae75fefdc0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/clementd64/x",
+      "version": "v0.0.0-20250523203928-e777e58e2f52",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/clementd64/x/@v/v0.0.0-20250523203928-e777e58e2f52.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250523203928-e777e58e2f52"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudwego/eino-ext/components/retriever/milvus2",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/cloudwego/eino-ext/components/retriever/milvus2?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git",
+      "version": "2.55.0",
+      "repository": "https://git-scm.com",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "git-2.55.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bgrcs/cli",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@bgrcs%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-wheel",
+      "version": "2.50.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/95/ea/150497b5fca72b5f701abe062b360580d7b99c96ecd4682f04d6bda0b518/git_wheel-2.50.1-py2.py3-none-macosx_14_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.50.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "git",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

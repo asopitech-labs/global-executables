@@ -1,0 +1,67 @@
+{
+  "command": "taurus",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "taurus",
+      "version": "0.1.1",
+      "repository": "https://github.com/m-cat/taurus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stones-hub/taurus-pro-core",
+      "version": "v0.2.16",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stones-hub/taurus-pro-core/@v/v0.2.16.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.16"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "boxunphp/taurus-installer",
+      "version": "v0.0.3",
+      "repository": "https://github.com/boxunphp/Taurus-Installer.git",
+      "source": "https://repo.packagist.org/p2/boxunphp/taurus-installer.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "taurus",
+      "version": "5.4.1",
+      "repository": "http://www.taurus-scada.org",
+      "source": "https://files.pythonhosted.org/packages/70/a6/356fd21fc055d13559e87e8c7fa79f4bd91174a7bfac5bb03b0fc9a96cfd/taurus-5.4.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.4.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-taurus",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

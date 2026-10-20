@@ -1,0 +1,43 @@
+{
+  "command": "tfenv",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/henrriusdev/tfenv",
+      "version": "v1.2.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/henrriusdev/tfenv/@v/v1.2.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "tfenv",
+      "version": "3.2.2",
+      "repository": "https://github.com/tfutils/tfenv",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "tfenv",
+      "version": "0.2.1",
+      "repository": "https://github.com/jbussdieker/tfenv",
+      "source": "https://rubygems.org/gems/tfenv-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,91 @@
+{
+  "command": "skewer",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "skewer",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "skewer",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Ameb8/skewer",
+      "version": "v0.0.0-20260829212103-a3ba375ea2d9",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Ameb8/skewer?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260829212103-a3ba375ea2d9",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260829212103-a3ba375ea2d9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "skewer",
+      "version": "0.1.1",
+      "repository": "http://www.build-doctor.com/skewer",
+      "source": "https://rubygems.org/gems/skewer-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "sp-squealer",
+      "version": "1.0",
+      "repository": "https://github.com/spadidar/squealer",
+      "source": "https://rubygems.org/gems/sp-squealer-1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "squealer",
+      "version": "2.2.2",
+      "repository": "http://github.com/delitescere/squealer/",
+      "source": "https://rubygems.org/gems/squealer-2.2.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.2.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "skewer",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

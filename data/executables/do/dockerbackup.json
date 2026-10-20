@@ -1,0 +1,31 @@
+{
+  "command": "dockerbackup",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "dockerbackup",
+      "version": "3.1.1",
+      "repository": "https://github.com/radek00/dockerbackup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/chrisduboisaalst/dockerbackup",
+      "version": "v0.0.0-20210212095824-684289a4ce73",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/chrisduboisaalst/dockerbackup/@v/v0.0.0-20210212095824-684289a4ce73.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210212095824-684289a4ce73"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

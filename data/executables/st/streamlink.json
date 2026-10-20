@@ -1,0 +1,92 @@
+{
+  "command": "streamlink",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "streamlink-8.5.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "streamlink",
+      "version": "0.3.1",
+      "repository": "https://github.com/filalex77/streamlink-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "streamlink",
+      "version": "8.5.0",
+      "repository": "https://streamlink.github.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "streamlink",
+      "version": "8.6.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/40/3b/3befb07ec4dc3be5826b6f0b7e2745a2ccc44a7c2789d5a633cb1f318486/streamlink-8.6.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.6.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "streamlink-lanroth",
+      "version": "1.4.1.999",
+      "repository": "https://github.com/streamlink/streamlink",
+      "source": "https://files.pythonhosted.org/packages/37/8f/5a1400087380b9c7344a8e32ff595c582160c607bfcffaa52f79a19cf921/streamlink_lanroth-1.4.1.999-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.1.999"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "streamlink",
+      "version": "8.5.0-1",
+      "repository": "https://streamlink.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "8.5.0-1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "streamlink",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

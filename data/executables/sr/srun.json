@@ -1,0 +1,127 @@
+{
+  "command": "srun",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "slurm-llnl-26.05.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "srun",
+      "version": "0.0.7",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.7"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "slurm-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "slurm-client",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/W0n9/BUCTNet-Login",
+      "version": "v1.1.8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!w0n9/!b!u!c!t!net-!login/@v/v1.1.8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SumsJob",
+      "version": "0.7.2",
+      "repository": "https://github.com/lululxvi/sumsjob",
+      "source": "https://files.pythonhosted.org/packages/9d/0e/a6b4a78a95cbb48a89130dc33f993e8b93d8ee2832f89876dac012288a3e/SumsJob-0.7.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "amlhpc",
+      "version": "0.7.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/9c/01/4707830d13cda8d591c670868f59762d66ef376118daa5f13ed46ed559e2/amlhpc-0.7.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "screen-master",
+      "version": "0.0.2",
+      "repository": "https://github.com/chienfeng0719/screen-master",
+      "source": "https://files.pythonhosted.org/packages/87/3b/bd4ece9f364c34b3110a9a5ff26854e64fbc96363c08bc0c8927ee4283bc/screen_master-0.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "srun-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/CHN-STUDENT/srun-cli",
+      "source": "https://files.pythonhosted.org/packages/23/f6/668a3dd969033a150d5bb37a765e96bd3ecc3367844ec87012ac8d091bbd/srun-cli-0.1.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "slurm-client",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,93 @@
+{
+  "command": "ykman",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "yubikey-manager-1:5.9.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ykman",
+      "version": "5.9.2",
+      "repository": "https://developers.yubico.com/yubikey-manager/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "seedkeeper-manager",
+      "version": "5.9.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/52/b8/2a1a33cf513b2c233a1cf6c0beb6ce0e84beaefcaec9a186027869ae9d84/seedkeeper_manager-5.9.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.9.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "yubikey-manager",
+      "version": "5.9.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4c/ba/8109010c02f98a373e72c926c823dea259c8e5bcf3b620365e49fcb2b1e3/yubikey_manager-5.9.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.9.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "yubikey-manager-cli",
+      "version": "5.9.2",
+      "repository": "https://developers.yubico.com/yubikey-manager/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "5.9.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "yubikey-manager-qt",
+      "version": "1.2.6",
+      "repository": "https://developers.yubico.com/yubikey-manager-qt/",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.2.6"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "yubikey-manager",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

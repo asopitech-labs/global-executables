@@ -1,0 +1,67 @@
+{
+  "command": "gstat",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "gstat",
+      "version": "0.1.9",
+      "repository": "https://github.com/asomers/gstat-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.9"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ganglia-monitor",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "coreutils",
+      "version": "9.11",
+      "repository": "https://www.gnu.org/software/coreutils/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gc3pie",
+      "version": "2.6.8",
+      "repository": "http://gc3pie.readthedocs.io/",
+      "source": "https://files.pythonhosted.org/packages/e1/d8/523efabd7dffbbf1c25b23b23dcb8847469322239be498343dc5f9957841/gc3pie-2.6.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.6.8"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ganglia-monitor",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

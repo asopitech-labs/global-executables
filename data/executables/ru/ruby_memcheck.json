@@ -1,0 +1,31 @@
+{
+  "command": "ruby_memcheck",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ruby-ruby_memcheck-3.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "ruby_memcheck",
+      "version": "3.0.1",
+      "repository": "https://github.com/Shopify/ruby_memcheck",
+      "source": "https://rubygems.org/gems/ruby_memcheck-3.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.0.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

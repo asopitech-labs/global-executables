@@ -1,0 +1,104 @@
+{
+  "command": "kubeseal",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "kubeseal-0.35.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "g.yxqyang.asia/bitnami-labs/sealed-secrets",
+      "version": "v0.30.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/g.yxqyang.asia/bitnami-labs/sealed-secrets/@v/v0.30.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.30.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.chickoi.com/bitnami-labs/sealed-secrets",
+      "version": "v0.26.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.chickoi.com/bitnami-labs/sealed-secrets/@v/v0.26.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.26.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bitnami-labs/sealed-secrets",
+      "version": "v0.39.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bitnami-labs/sealed-secrets/@v/v0.39.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.39.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bitnami/sealed-secrets",
+      "version": "v0.39.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bitnami/sealed-secrets/@v/v0.39.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.39.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/devjoes/sealed-secrets",
+      "version": "v0.9.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/devjoes/sealed-secrets/@v/v0.9.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.9"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kubeseal",
+      "version": "0.39.1",
+      "repository": "https://github.com/bitnami/sealed-secrets",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "kubeseal",
+      "version": "0.39.1",
+      "repository": "https://github.com/bitnami/sealed-secrets",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.39.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

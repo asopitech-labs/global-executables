@@ -1,0 +1,31 @@
+{
+  "command": "pimport",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "pass-import",
+      "version": "3.5",
+      "repository": "https://www.passwordstore.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pass-import",
+      "version": "3.5",
+      "repository": "https://github.com/roddhjav/pass-import",
+      "source": "https://files.pythonhosted.org/packages/03/f9/4ace612611243865bc4f9a87634296431a91b10063bcd5f0d1df4d4eab4c/pass_import-3.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

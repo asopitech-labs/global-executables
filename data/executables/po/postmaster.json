@@ -1,0 +1,43 @@
+{
+  "command": "postmaster",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/RaghavSood/postmaster",
+      "version": "v0.0.0-20210223174013-0a488c298051",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!raghav!sood/postmaster/@v/v0.0.0-20210223174013-0a488c298051.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210223174013-0a488c298051"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "postgresql@14",
+      "version": "14.24",
+      "repository": "https://www.postgresql.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "postgresql@15",
+      "version": "15.19",
+      "repository": "https://www.postgresql.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "init_db",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "do-harness-db",
+      "version": "0.3.0",
+      "repository": "https://github.com/d-o-hub/do-harness",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/arx-net/easytv-service-manager",
+      "version": "v0.0.0-20200630135033-6049a1a5abc8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/arx-net/easytv-service-manager/@v/v0.0.0-20200630135033-6049a1a5abc8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200630135033-6049a1a5abc8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "imio.dataexchange.db",
+      "version": "0.4.1",
+      "repository": "https://github.com/imio/",
+      "source": "https://files.pythonhosted.org/packages/3c/ee/bda90027f18b12595811b00b306c7ee604672e4eda7e669aa77432458502/imio.dataexchange.db-0.4.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mocksql",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7f/08/65b38016a1f5f9a462c8b9d21c5627739e90d36fe890960a198e59c2f1f2/mocksql-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wifi-tools",
+      "version": "0.7",
+      "repository": "https://github.com/pepe/wifi_tools",
+      "source": "https://files.pythonhosted.org/packages/a6/9e/625fa5f1e96e20cb42e903f1c60df3cae054a41212bb48f86c0d9a4c1c7e/wifi_tools-0.7-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7"
+    }
+  ],
+  "first_seen": "2026-08-31",
+  "last_seen": "2026-10-19"
+}

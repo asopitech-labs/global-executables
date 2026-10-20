@@ -1,0 +1,43 @@
+{
+  "command": "rolldice",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "rolldice",
+      "version": "0.1.4",
+      "repository": "https://github.com/MichaelAquilina/rolldice",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rolldice",
+      "version": "1.16",
+      "repository": "https://github.com/sstrickl/rolldice",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rolldice-binding",
+      "version": "0.1",
+      "repository": "https://github.com/bsmaldon/rolldice-binding",
+      "source": "https://files.pythonhosted.org/packages/57/cf/7c9c064fe1ed25d9e5bd8d187a529e12f1fd305adf0495977cd66f68c64d/rolldice_binding-0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

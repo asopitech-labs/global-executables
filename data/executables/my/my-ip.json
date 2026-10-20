@@ -1,0 +1,43 @@
+{
+  "command": "my-ip",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "my-ip",
+      "version": "1.1.0",
+      "repository": "https://github.com/dinglebit/ip.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jeremy-cxf/go",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jeremy-cxf/go/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "my-ip-cli",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/32/bf/0135191c9d657b58ef7f7b5c389b329971923eeddffa7d6fe63f9ce09df6/my_ip_cli-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

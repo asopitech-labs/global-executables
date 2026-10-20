@@ -1,0 +1,55 @@
+{
+  "command": "rmux",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "rmux",
+      "version": "0.10.0",
+      "repository": "https://github.com/Helvesec/rmux",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rmux",
+      "version": "0.10.0",
+      "repository": "https://rmux.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cookedoss/rmux",
+      "version": "0.1.2",
+      "repository": "git+https://github.com/lassejlv/rmux.git",
+      "source": "https://registry.npmjs.org/@cookedoss%2Frmux/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rmux",
+      "version": "1.0.6",
+      "repository": "https://github.com/pycontribs/rmux/",
+      "source": "https://files.pythonhosted.org/packages/29/fc/f68f9f18f51fa84d12ec2efe19b76b1b5416b30821ef64e1d7d81e8c5e0f/rmux-1.0.6-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.6"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

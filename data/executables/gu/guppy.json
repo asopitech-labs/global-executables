@@ -1,0 +1,55 @@
+{
+  "command": "guppy",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "guppy-protocol",
+      "version": "0.1.1",
+      "repository": "https://github.com/mark-ik/serval",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pplacer",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/storacha/guppy",
+      "version": "v0.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/storacha/guppy/@v/v0.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "guppy-neuro",
+      "version": "2.0.0b4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/65/90/aaf973805472b22ccea306adb39fa2dfa74b7f46b86a263304fc9e8d46a3/guppy_neuro-2.0.0b4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0b4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "tzap",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "tzap",
+      "version": "0.2.5",
+      "repository": "https://github.com/tzap-org/tzap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tzap-opt",
+      "version": "0.8.0",
+      "repository": "https://github.com/qqq-wisc/tzap",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dvb-apps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dvb-apps",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tzap",
+      "version": "0.8.0",
+      "repository": "https://github.com/qqq-wisc/tzap",
+      "source": "https://files.pythonhosted.org/packages/46/bc/a4b9a72202f0462576c7d7184188fd8ec6e43fd6185de39a7770fee75f01/tzap-0.8.0-cp310-abi3-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "dvb-apps",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,91 @@
+{
+  "command": "gpw",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "gpw",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gpw",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/muquit/libgpw-go",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/muquit/libgpw-go?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sidecut/gpw",
+      "version": "v0.0.0-20220331172959-a9a41d9fd2cc",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sidecut/gpw/@v/v0.0.0-20220331172959-a9a41d9fd2cc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220331172959-a9a41d9fd2cc"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "github-pr-watcher",
+      "version": "1.27.0",
+      "repository": "https://github.com/gm2211/github-watcher",
+      "source": "https://files.pythonhosted.org/packages/90/df/fe4fbc5829fc81f7009fa81c4b84b54e01830de068a86c58bcf724a421a1/github_pr_watcher-1.27.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.27.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gpw",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,93 @@
+{
+  "command": "memcp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libmemcached-awesome-1.1.4-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "libmemcached",
+      "version": "1.0.18",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/libmemcached/1.0.18/_/_/revisions/e76dde9b09c85c7b284ebc64cbdf1ca6/packages/7f80638a78c0f0c59095b9ee35a4be16d31cee92/revisions/d9af277db8e834d5b14d189696d995c3/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.0.18"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libmemcached",
+      "version": "1.0.18",
+      "repository": "https://libmemcached.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "claude-memory-mcp",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a0/48/54ea196654cd5d521e38bc76f44229e27cd1ee04d979aab6f4cbf7432610/claude_memory_mcp-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "memcp",
+      "version": "2025.6.28.7206",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/40/08/b0ad6415410957d70da4e25ddbf5b94f00a8bdec926712998c413f89be6c/memcp-2025.6.28.7206-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2025.6.28.7206"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "memcp-server",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/53/25/d9beda31143aa8c1045448dcd366e856214b1c31067dbfca5b7c638afb0d/memcp_server-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "libmemcached-awesome",
+      "version": "1.1.4",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "1.1.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

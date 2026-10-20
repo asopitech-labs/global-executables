@@ -1,0 +1,104 @@
+{
+  "command": "git2",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libgit2-1:1.9.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/git2-project/git2",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/git2-project/git2?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/osman-yahya/git2",
+      "version": "v0.10.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/osman-yahya/git2?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.10.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libgit2",
+      "version": "1.9.7",
+      "repository": "https://libgit2.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libgit2@1.8",
+      "version": "1.8.7",
+      "repository": "https://libgit2.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "libgit2-1.9.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "git2",
+      "version": "0.2.0",
+      "repository": "https://github.com/pmq20/git2",
+      "source": "https://rubygems.org/gems/git2-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "libgit2",
+      "version": "1.9.7",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "1.9.7"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

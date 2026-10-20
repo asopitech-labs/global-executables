@@ -1,0 +1,115 @@
+{
+  "command": "csvjoin",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "csvkit-2.2.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/caltechlibrary/datatools",
+      "version": "v1.3.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/caltechlibrary/datatools/@v/v1.3.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/onozaty/csvjoin",
+      "version": "v0.0.0-20210726145342-2ee64928bda7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/onozaty/csvjoin/@v/v0.0.0-20210726145342-2ee64928bda7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210726145342-2ee64928bda7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pdk/csvjoin",
+      "version": "v0.0.0-20191127100408-4571d2c17c85",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pdk/csvjoin/@v/v0.0.0-20191127100408-4571d2c17c85.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191127100408-4571d2c17c85"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "csvkit",
+      "version": "2.2.0",
+      "repository": "https://csvkit.readthedocs.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "csv-join",
+      "version": "1.0.15",
+      "repository": "https://github.com/walkerever/csv-join",
+      "source": "https://files.pythonhosted.org/packages/34/57/5da5b4c4a10a51547c48a671887417d669f28db707627126e6deb9b89cca/csv-join-1.0.15.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.15"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "csvkit",
+      "version": "2.2.0",
+      "repository": "https://github.com/wireservice/csvkit",
+      "source": "https://files.pythonhosted.org/packages/41/76/7ffa26fcd79eb0a51daf73d18481d4d5214685545d27aadc5e76e01d522d/csvkit-2.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jinx-migrate",
+      "version": "2.1.2",
+      "repository": "http://github.com/jinx/migrate",
+      "source": "https://rubygems.org/gems/jinx-migrate-2.1.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.1.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "csvkit",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

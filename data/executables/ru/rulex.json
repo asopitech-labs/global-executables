@@ -1,0 +1,79 @@
+{
+  "command": "rulex",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "rulex-bin",
+      "version": "0.4.5",
+      "repository": "https://github.com/rulex-rs/pomsky",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.5"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "rulex",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "rulex",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hootrhino/rulex",
+      "version": "v0.6.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hootrhino/rulex/@v/v0.6.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/i4de/rulex",
+      "version": "v0.6.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/i4de/rulex/@v/v0.6.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.7"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "rulex",
+      "version": "0.1.8",
+      "repository": "https://www.github.com/Nicowcow/rulex",
+      "source": "https://rubygems.org/gems/rulex-0.1.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.8"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

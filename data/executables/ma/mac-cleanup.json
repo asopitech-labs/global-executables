@@ -1,0 +1,55 @@
+{
+  "command": "mac-cleanup",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "mac-cleanup",
+      "version": "0.2.3",
+      "repository": "https://github.com/Yurzs/mac-cleanup",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mac-cleanup-go",
+      "version": "1.6.0",
+      "repository": "https://github.com/2ykwang/mac-cleanup-go",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mac-cleanup-py",
+      "version": "3.3.0",
+      "repository": "https://github.com/mac-cleanup/mac-cleanup-py",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mac_cleanup",
+      "version": "3.3.0",
+      "repository": "https://github.com/mac-cleanup/mac-cleanup-py",
+      "source": "https://files.pythonhosted.org/packages/d2/68/3040c7bc34392b16732e54cc8472da61bd5e703c6b2b3135be4d66295a31/mac_cleanup-3.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

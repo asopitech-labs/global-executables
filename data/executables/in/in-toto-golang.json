@@ -1,0 +1,67 @@
+{
+  "command": "in-toto-golang",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "in-toto-golang",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "in-toto-golang",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/in-toto/in-toto-golang",
+      "version": "v0.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/in-toto/in-toto-golang/@v/v0.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shibumi/in-toto-golang",
+      "version": "v0.3.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/shibumi/in-toto-golang/@v/v0.3.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.jpy.wang/in-toto/in-toto-golang",
+      "version": "v0.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.jpy.wang/in-toto/in-toto-golang/@v/v0.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "finddeps",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "devtools-1:1.5.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zope.dependencytool",
+      "version": "3.4.0",
+      "repository": "http://cheeseshop.python.org/pypi/zope.dependencytool",
+      "source": "https://files.pythonhosted.org/packages/e7/6d/cced393c75d66828c707e887f3b2103d4f0e0e7fe23e5dd048cc8b63dc9e/zope.dependencytool-3.4.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.4.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

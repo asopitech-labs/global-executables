@@ -1,0 +1,80 @@
+{
+  "command": "pipx",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pipx-1.15.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pipx",
+      "version": "1.16.7",
+      "repository": "https://pipx.pypa.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pip-no",
+      "version": "0.0.15",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/46/87/89ac222db0f1397fe6907fb2541a23ca40a7c0c97f25716a45491d5ad8c3/pip_no-0.0.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.15"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pipx",
+      "version": "1.18.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/69/5b/328f48e372f18627b75557c3ca58f07b7c77203369a5005b6adcd28f97bc/pipx-1.18.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.18.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pipx",
+      "version": "1.16.7",
+      "repository": "https://pipx.pypa.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.16.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pipx",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "fghack",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "daemontools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "daemontools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "daemontools",
+      "version": "0.76",
+      "repository": "https://cr.yp.to/daemontools.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "karabo.daemontools",
+      "version": "3.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ad/53/d48ca782305f275c63517f82a197e291e24ee964beb9e204b71dc2feda5d/karabo_daemontools-3.1.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "karabo.daemontools",
+      "version": "3.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5b/de/c2768a311cc27ca4998d6ae991b9c04eac046918ec65eba474c5c37a88be/karabo_daemontools-3.1.2-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "daemontools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

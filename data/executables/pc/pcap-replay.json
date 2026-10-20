@@ -1,0 +1,43 @@
+{
+  "command": "pcap-replay",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "virtfw-varstore",
+      "version": "0.6.6",
+      "repository": "https://gitlab.com/kraxel/virt-firmware-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Eyevinn/pcap-tools",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!eyevinn/pcap-tools/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/eyevinn/pcap-tools",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/eyevinn/pcap-tools/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

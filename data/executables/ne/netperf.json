@@ -1,0 +1,139 @@
+{
+  "command": "netperf",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "netperf-2.7.0-8",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "netperf",
+      "version": "0.2.9",
+      "repository": "https://github.com/AhmedSoliman/netperf",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.9"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "netperf",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "netperf",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Azure/perf-tests/network/benchmarks/netperf",
+      "version": "v0.0.0-20260220150933-c67d1d3db2cb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!azure/perf-tests/network/benchmarks/netperf/@v/v0.0.0-20260220150933-c67d1d3db2cb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260220150933-c67d1d3db2cb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/azure/perf-tests/network/benchmarks/netperf",
+      "version": "v0.0.0-20260220150933-c67d1d3db2cb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/azure/perf-tests/network/benchmarks/netperf/@v/v0.0.0-20260220150933-c67d1d3db2cb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260220150933-c67d1d3db2cb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/galal-hussein/perf-tests",
+      "version": "v0.0.0-20191031200753-102694f4c202",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/galal-hussein/perf-tests?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20191031200753-102694f4c202",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191031200753-102694f4c202"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/iwanlebron/netperf",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/iwanlebron/netperf/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mac2394q/performance-testing-script",
+      "version": "v0.0.0-20201216001124-392b1d93e0bb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mac2394q/performance-testing-script/@v/v0.0.0-20201216001124-392b1d93e0bb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20201216001124-392b1d93e0bb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "k8s.io/perf-tests/network",
+      "version": "v0.0.0-20220613084612-07a84bcb1ea0",
+      "repository": null,
+      "source": "https://proxy.golang.org/k8s.io/perf-tests/network/@v/v0.0.0-20220613084612-07a84bcb1ea0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220613084612-07a84bcb1ea0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "netperf",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

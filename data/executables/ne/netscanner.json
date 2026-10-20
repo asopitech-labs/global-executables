@@ -1,0 +1,55 @@
+{
+  "command": "netscanner",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "netscanner-0.6.43-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "netscanner",
+      "version": "0.6.43",
+      "repository": "https://github.com/Chleba/netscanner",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.6.43"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "netscanner",
+      "version": "0.6.43",
+      "repository": "https://github.com/Chleba/netscanner",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "simple-network-scanner",
+      "version": "1.0.5",
+      "repository": "https://github.com/Zeusfail/Simple-Network-Scanner",
+      "source": "https://files.pythonhosted.org/packages/99/56/e4aaa77d88c32d60947266dd848cb348380cd34659bf4b1ee309eeffad20/simple_network_scanner-1.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

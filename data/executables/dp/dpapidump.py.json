@@ -1,0 +1,31 @@
+{
+  "command": "dpapidump.py",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "impacket-0.13.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "impacket",
+      "version": "0.13.1",
+      "repository": "https://www.coresecurity.com",
+      "source": "https://files.pythonhosted.org/packages/72/44/c28ecebffd4c08d4f2caf4f7d4fd3fd9eb0124dcf15e9bf8a1e20287bcb0/impacket-0.13.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.13.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

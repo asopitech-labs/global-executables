@@ -1,0 +1,152 @@
+{
+  "command": "primesieve",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "primesieve-12.15-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "libprimesieve",
+      "version": "0.3.0",
+      "repository": "https://github.com/AlexWeslowski/LibPrimesieve",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "primesieve-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "primesieve-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ikerlb/kattis",
+      "version": "v0.0.0-20260818054048-a93fecfaf701",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ikerlb/kattis/@v/v0.0.0-20260818054048-a93fecfaf701.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818054048-a93fecfaf701"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jreisinger/gokatas",
+      "version": "v0.0.0-20260812115421-79f73fc3ed22",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jreisinger/gokatas/@v/v0.0.0-20260812115421-79f73fc3ed22.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260812115421-79f73fc3ed22"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nickng/gopherlyzer",
+      "version": "v0.0.0-20170403111316-7a1345530686",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nickng/gopherlyzer/@v/v0.0.0-20170403111316-7a1345530686.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170403111316-7a1345530686"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rairden/kattis",
+      "version": "v0.0.0-20210701092458-af58057a855f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rairden/kattis/@v/v0.0.0-20210701092458-af58057a855f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210701092458-af58057a855f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shihongbai/golang-first-step",
+      "version": "v0.0.0-20250114162408-cfa197464ac2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/shihongbai/golang-first-step/@v/v0.0.0-20250114162408-cfa197464ac2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250114162408-cfa197464ac2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "primesieve",
+      "version": "12.15",
+      "repository": "https://github.com/kimwalisch/primesieve",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "primesieve",
+      "version": "12.15",
+      "repository": "https://github.com/kimwalisch/primesieve",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "12.15"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "primesieve-bin",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

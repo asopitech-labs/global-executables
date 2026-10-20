@@ -1,0 +1,79 @@
+{
+  "command": "cansend",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "can-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "can-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/schwinn/go-socketcan",
+      "version": "v0.0.0-20260225173726-7f4a36e414fe",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/schwinn/go-socketcan?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260225173726-7f4a36e414fe",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260225173726-7f4a36e414fe"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/wmem/go-can",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wmem/go-can/@v/v0.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "trucksim",
+      "version": "0.1.0",
+      "repository": "https://github.com/yourusername/trucksim",
+      "source": "https://files.pythonhosted.org/packages/0a/5a/f1359b2d6b93f0cffc8bf81f02637b61abe024656280bf1f4efa5f1f11d2/trucksim-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "can-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

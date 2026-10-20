@@ -1,0 +1,55 @@
+{
+  "command": "fennel",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "fennel-1.6.1-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "fennel",
+      "version": "0.1.0",
+      "repository": "https://github.com/tomouellette/fennel",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "fennel",
+      "version": "1.6.1",
+      "repository": "https://fennel-lang.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "fennel",
+      "version": "0.3.0",
+      "repository": "https://fennel.dev",
+      "source": "https://files.pythonhosted.org/packages/29/61/1e33e1be7003096607e8b9735969ca27e9f40d7700318cbec23cd5df184c/fennel-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "check_ssh",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/kiselev84/check_ssh",
+      "version": "v0.0.0-20220421112352-8454fe78b571",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kiselev84/check_ssh/@v/v0.0.0-20220421112352-8454fe78b571.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220421112352-8454fe78b571"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "monitoring-plugins",
+      "version": "3.0.3",
+      "repository": "https://www.monitoring-plugins.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nagios-plugins",
+      "version": "2.5",
+      "repository": "https://www.nagios-plugins.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

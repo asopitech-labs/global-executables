@@ -1,0 +1,91 @@
+{
+  "command": "logserver",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "logserver",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/4kprogrammer/logserver",
+      "version": "v0.0.0-20230310043940-20f2cd32c35a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/4kprogrammer/logserver/@v/v0.0.0-20230310043940-20f2cd32c35a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230310043940-20f2cd32c35a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/f4ah6o/direct-go-sdk/daab-go",
+      "version": "v0.0.0-20260812133515-33225ff638a6",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/f4ah6o/direct-go-sdk/daab-go?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260812133515-33225ff638a6",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260812133515-33225ff638a6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/futurez/gobackend",
+      "version": "v0.0.0-20160308025346-4f5569b5dd36",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/futurez/gobackend?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20160308025346-4f5569b5dd36",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160308025346-4f5569b5dd36"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/howmanyeyes/utils",
+      "version": "v0.0.0-20260612230450-dcb14e791232",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/howmanyeyes/utils/@v/v0.0.0-20260612230450-dcb14e791232.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260612230450-dcb14e791232"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kinluek/logserver",
+      "version": "v0.0.0-20191101095602-2398e03a75e7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kinluek/logserver/@v/v0.0.0-20191101095602-2398e03a75e7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191101095602-2398e03a75e7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nhomble/toy-gorouter",
+      "version": "v0.0.0-20200609014926-faf0f4e5e127",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nhomble/toy-gorouter/@v/v0.0.0-20200609014926-faf0f4e5e127.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200609014926-faf0f4e5e127"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

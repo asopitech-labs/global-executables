@@ -1,0 +1,31 @@
+{
+  "command": "ehco",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "coretilus",
+      "version": "0.7.0",
+      "repository": "https://github.com/titilambert/coretilus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ehco",
+      "version": "1.1.6",
+      "repository": "https://github.com/Ehco1996/ehco",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

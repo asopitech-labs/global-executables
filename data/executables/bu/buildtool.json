@@ -1,0 +1,67 @@
+{
+  "command": "buildtool",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "xcode-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ooni/probe-cli/v3",
+      "version": "v3.30.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ooni/probe-cli/v3/@v/v3.30.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.30.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ooni/probe-engine",
+      "version": "v0.36.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ooni/probe-engine/@v/v0.36.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.36.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "buildtool",
+      "version": "0.2.9",
+      "repository": "https://github.com/Cal-CS-61A-Staff/cs61a-apps/tree/master/buildtool",
+      "source": "https://files.pythonhosted.org/packages/e0/ec/85ec9143a90013551fb1d0397e4695dff5887a6436cca0e5518b82820d2f/buildtool-0.2.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cosent.buildtools",
+      "version": "1.2.1",
+      "repository": "http://cosent.nl",
+      "source": "https://files.pythonhosted.org/packages/82/50/b6e357144885237cd23f2fafb0b2e1b51b8cbf1327d30ff045ed1b00060e/cosent.buildtools-1.2.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

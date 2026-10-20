@@ -1,0 +1,55 @@
+{
+  "command": "gftp",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "gftp",
+      "version": "0.4.1",
+      "repository": "https://github.com/golemfactory/yagna",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vbatushev/gftp",
+      "version": "v0.0.0-20190709075321-bd4fd957af16",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vbatushev/gftp/@v/v0.0.0-20190709075321-bd4fd957af16.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190709075321-bd4fd957af16"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "inetutils",
+      "version": "2.8",
+      "repository": "https://www.gnu.org/software/inetutils/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gftp-common",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

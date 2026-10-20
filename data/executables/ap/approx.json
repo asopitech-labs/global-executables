@@ -1,0 +1,79 @@
+{
+  "command": "approx",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "approx",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "approx",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jaqmol/approx",
+      "version": "v0.0.0-20200426160933-a4290f852427",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jaqmol/approx/@v/v0.0.0-20200426160933-a4290f852427.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200426160933-a4290f852427"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bgtbeigulol-png/approx",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/bgtbeigulol-png/Approx.git",
+      "source": "https://registry.npmjs.org/@bgtbeigulol-png%2Fapprox/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "capablanca",
+      "version": "3.3",
+      "repository": "https://github.com/frankvegadelgado/capablanca",
+      "source": "https://files.pythonhosted.org/packages/43/04/86a054542326b96efaafc0eee09517d72417d27d1a40087b8cb331655da0/capablanca-3.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "approx",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

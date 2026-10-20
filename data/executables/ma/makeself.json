@@ -1,0 +1,44 @@
+{
+  "command": "makeself",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "makeself",
+      "version": "2.7.1",
+      "repository": "https://makeself.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "makeself",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "xmake",
+      "package": "makeself",
+      "version": "2.5.0",
+      "repository": "https://github.com/xmake-io/xmake-repo",
+      "source": "https://codeload.github.com/xmake-io/xmake-repo/tar.gz/refs/heads/master",
+      "confidence": "inferred",
+      "source_type": "language_package",
+      "package_system": "xmake",
+      "language": "c++",
+      "registry": "xmake-repo",
+      "latest_version": "2.5.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

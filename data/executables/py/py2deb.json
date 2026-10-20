@@ -1,0 +1,31 @@
+{
+  "command": "py2deb",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "py2deb",
+      "version": "0.5.4",
+      "repository": "https://github.com/Arch-genue/py2deb-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "py2deb",
+      "version": "5.0",
+      "repository": "https://py2deb.readthedocs.io",
+      "source": "https://files.pythonhosted.org/packages/12/ee/4394dcaf879675f2122cb758bad84f627b802053452fd5c4b8831d8d1d93/py2deb-5.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.0"
+    }
+  ],
+  "first_seen": "2026-08-31",
+  "last_seen": "2026-10-19"
+}

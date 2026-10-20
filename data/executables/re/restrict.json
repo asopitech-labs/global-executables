@@ -1,0 +1,79 @@
+{
+  "command": "restrict",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/LowTechTurtle/100-Go-Mistakes",
+      "version": "v0.0.0-20250822094520-da923f1121a3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!low!tech!turtle/100-!go-!mistakes/@v/v0.0.0-20250822094520-da923f1121a3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250822094520-da923f1121a3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lowtechturtle/100-go-mistakes",
+      "version": "v0.0.0-20250822094520-da923f1121a3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lowtechturtle/100-go-mistakes/@v/v0.0.0-20250822094520-da923f1121a3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250822094520-da923f1121a3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "y4d",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b3/61/bc791be85a3a28a3bbc90dc6562b6bab52ff045bfb9f5aa8f13bee61dcf8/y4d-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

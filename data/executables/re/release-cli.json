@@ -1,0 +1,104 @@
+{
+  "command": "release-cli",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "release-cli-0.24.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/0x1306e6d/release-cli",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/0x1306e6d/release-cli?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.5.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Sakura-Industries-LLC/release",
+      "version": "v0.1.22",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Sakura-Industries-LLC/release?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.22",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.22"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/caicloud/release-controller",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/caicloud/release-controller/@v/v0.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/gitlab-org/container-registry",
+      "version": "v0.0.0-20260824191257-8264c067573e",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/gitlab-org/container-registry/@v/v0.0.0-20260824191257-8264c067573e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260824191257-8264c067573e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/gitlab-org/release-cli",
+      "version": "v0.24.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/gitlab-org/release-cli/@v/v0.24.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gitlab-release-cli",
+      "version": "0.24.0",
+      "repository": "https://gitlab.com/gitlab-org/release-cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gitlab-release-cli",
+      "version": "0.24.0",
+      "repository": "https://gitlab.com/gitlab-org/release-cli",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.24.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

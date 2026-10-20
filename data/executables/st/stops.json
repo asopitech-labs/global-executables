@@ -1,0 +1,43 @@
+{
+  "command": "stops",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "git.sr.ht/~mil/mobroute",
+      "version": "v0.10.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/git.sr.ht/~mil/mobroute/@v/v0.10.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "vasttrafik-cli",
+      "version": "1.17",
+      "repository": "https://codeberg.org/ltworf/vasttrafik-cli",
+      "source": "https://files.pythonhosted.org/packages/39/70/55ca93b08a407a9691034ef5d6d5581ce2ce62430f37ae9ab78879e8cac0/vasttrafik_cli-1.17-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.17"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "vasttrafik-cli",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

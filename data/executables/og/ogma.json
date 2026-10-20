@@ -1,0 +1,43 @@
+{
+  "command": "ogma",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "haskell-ogma-cli-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ogma",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ogma",
+      "version": "0.1.0",
+      "repository": "https://www.github.com/jdevera/ogma",
+      "source": "https://files.pythonhosted.org/packages/cd/e3/8e0b964f969d5dad66633fef5bdf5bc9ff9d82cc9653f1150920327ffdb8/ogma-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

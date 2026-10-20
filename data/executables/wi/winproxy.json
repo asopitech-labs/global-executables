@@ -1,0 +1,43 @@
+{
+  "command": "winproxy",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "winproxy-cli",
+      "version": "0.7.5",
+      "repository": "https://github.com/fhluo/winproxy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.7.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fhluo/winproxy/go",
+      "version": "v0.5.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fhluo/winproxy/go/@v/v0.5.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "winproxy",
+      "version": "0.3.0a1",
+      "repository": "https://github.com/andrebell/winproxy",
+      "source": "https://files.pythonhosted.org/packages/b2/bb/732a5767681933aac627c3fc3ef362bfc3bbfa0899ada530fb243c87ae60/winproxy-0.3.0a1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0a1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

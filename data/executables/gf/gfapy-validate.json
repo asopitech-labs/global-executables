@@ -1,0 +1,55 @@
+{
+  "command": "gfapy-validate",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-gfapy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-gfapy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gfapy",
+      "version": "1.2.3",
+      "repository": "https://github.com/ggonnella/gfapy",
+      "source": "https://files.pythonhosted.org/packages/e1/6d/14d65ce8e2c522968501a866a99cba59a7ee16a10517d90606dbfed2eaf8/gfapy-1.2.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-gfapy",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

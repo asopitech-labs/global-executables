@@ -1,0 +1,103 @@
+{
+  "command": "doxx",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "doxx-0.1.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "doxx",
+      "version": "0.1.4",
+      "repository": "https://github.com/bgreenwell/doxx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "doxx",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/keskinonur/doxx-go",
+      "version": "v0.0.0-20250818140517-6a2796f8b7d2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/keskinonur/doxx-go/@v/v0.0.0-20250818140517-6a2796f8b7d2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250818140517-6a2796f8b7d2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "doxx",
+      "version": "0.1.4",
+      "repository": "https://bgreenwell.github.io/doxx/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@balena/doxx",
+      "version": "1.0.4",
+      "repository": "git://github.com/balena-io/doxx.git",
+      "source": "https://registry.npmjs.org/@balena%2Fdoxx/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "doxx",
+      "version": "0.9.4",
+      "repository": "http://doxx.org",
+      "source": "https://files.pythonhosted.org/packages/d6/fd/f03a2c40c4e7fb4046035042d50c5e5d16c59be6fad164c6d2c0ce652bc5/doxx-0.9.4-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.4"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "bgreenwell.doxx",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

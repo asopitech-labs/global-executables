@@ -1,0 +1,79 @@
+{
+  "command": "goss",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "goss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "goss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aelsabbahy/goss",
+      "version": "v0.4.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aelsabbahy/goss/@v/v0.4.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goss-org/goss",
+      "version": "v0.4.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goss-org/goss/@v/v0.4.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.10"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "goss",
+      "version": "0.1.8",
+      "repository": "https://github.com/wxnacy/goss",
+      "source": "https://files.pythonhosted.org/packages/36/71/9dbe4101027652e9b83faacfffb1c0bcab47cb74c9b683e8b60d43475d4a/goss-0.1.8.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pygoss",
+      "version": "0.4.2",
+      "repository": "https://github.com/ComputationalPhysiology/goss",
+      "source": "https://files.pythonhosted.org/packages/bf/09/619f192d0c81db932f86967a5c7d812d5a222a9a14b7eeffaa25b3effd49/pygoss-0.4.2-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

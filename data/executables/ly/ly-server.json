@@ -1,0 +1,55 @@
+{
+  "command": "ly-server",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-ly-0.9.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ly",
+      "version": "0.9.10",
+      "repository": "https://github.com/frescobaldi/python-ly",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-ly",
+      "version": "0.9.10",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4f/7b/5f246bbd2626340f8778a11f4074a4151c99c2eb818d1569336b2b85de24/python_ly-0.9.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.10"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-ly",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

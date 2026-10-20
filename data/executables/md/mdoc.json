@@ -1,0 +1,151 @@
+{
+  "command": "mdoc",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "mono-6.12.0.206-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mdoc",
+      "version": "0.3.0",
+      "repository": "https://github.com/kmaasrud/mdoc",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mono-devel",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gwaycc/mdoc",
+      "version": "v0.0.0-20211016031820-5be9e78d8d43",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gwaycc/mdoc/@v/v0.0.0-20211016031820-5be9e78d8d43.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211016031820-5be9e78d8d43"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gwaysys/mdoc",
+      "version": "v0.0.0-20211016031820-5be9e78d8d43",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gwaysys/mdoc/@v/v0.0.0-20211016031820-5be9e78d8d43.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20211016031820-5be9e78d8d43"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hinkolas/mdoc",
+      "version": "v0.2.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/hinkolas/mdoc?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.2.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mono",
+      "version": "6.14.1",
+      "repository": "https://www.mono-project.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "notmdoc",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/notmdoc/0.0.1/notmdoc.0.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mdoc",
+      "version": "0.0.9",
+      "repository": "https://github.com/eshapiro42/mdoc",
+      "source": "https://files.pythonhosted.org/packages/f2/a8/77b500d1cbad8060880528015d9860c93d536d25d4f26470c7b94beebdd9/mdoc-0.0.9-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mercury-toolkit",
+      "version": "0.9.86",
+      "repository": "http://github.com/binarymachines/mercury",
+      "source": "https://files.pythonhosted.org/packages/8d/34/cff79344cdc9e89c1720494491a1ea2811627d214f9dbab97a427e055798/mercury_toolkit-0.9.86-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.86"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mdoc",
+      "version": "0.0.11",
+      "repository": "https://github.com/7lime/mdoc-gem",
+      "source": "https://rubygems.org/gems/mdoc-0.0.11.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.11"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "monodoc-base",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

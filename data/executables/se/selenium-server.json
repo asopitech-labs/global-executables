@@ -1,0 +1,31 @@
+{
+  "command": "selenium-server",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "selenium-server",
+      "version": "4.47.0",
+      "repository": "https://www.selenium.dev/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "selenose",
+      "version": "1.3",
+      "repository": "https://github.com/shiningpanda/selenose/",
+      "source": "https://files.pythonhosted.org/packages/6c/60/7c86c4565b67e8ef4cbfde0f3c886bdf25b102e101a053709391ef8cf6b1/selenose-1.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

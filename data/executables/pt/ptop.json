@@ -1,0 +1,91 @@
+{
+  "command": "ptop",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "fpc-3.2.2-11",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "presentar-terminal",
+      "version": "0.3.5",
+      "repository": "https://github.com/paiml/presentar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "fpc",
+      "version": "3.2.2",
+      "repository": "https://www.freepascal.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "px",
+      "version": "3.9.0",
+      "repository": "https://github.com/walles/px",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ptop",
+      "version": "1.0",
+      "repository": "https://github.com/darxtrix/ptop",
+      "source": "https://files.pythonhosted.org/packages/b1/b9/d8c6615f43151b8f2e9adc1c7bb15a7e9e2a18bd55693d95fb7319de3ba3/ptop-1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pxpx",
+      "version": "3.9.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7b/a9/cc559798bbee7e2811968ca58faaed8a88bd449bfd998dfd1033055e2322/pxpx-3.9.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.9.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "px",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

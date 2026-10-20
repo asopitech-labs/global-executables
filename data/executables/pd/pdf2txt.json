@@ -1,0 +1,67 @@
+{
+  "command": "pdf2txt",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "bolivar-cli",
+      "version": "2.2.1",
+      "repository": "https://github.com/harubi/bolivar",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/RubenOlsen/pdf2txt",
+      "version": "v0.0.0-20240804164406-9386329f4b55",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!ruben!olsen/pdf2txt/@v/v0.0.0-20240804164406-9386329f4b55.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240804164406-9386329f4b55"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rubenolsen/pdf2txt",
+      "version": "v0.0.0-20240804164406-9386329f4b55",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rubenolsen/pdf2txt/@v/v0.0.0-20240804164406-9386329f4b55.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240804164406-9386329f4b55"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zcmds",
+      "version": "1.5.41",
+      "repository": "https://github.com/zackees/zcmds",
+      "source": "https://files.pythonhosted.org/packages/1b/30/0ba2ee003a1c80ff6116156f37e5743a56db8c9daa508f33f0b002b9f304/zcmds-1.5.41-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.41"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pdfminer",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,129 @@
+{
+  "command": "mvn",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "maven-3.9.16-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "maven",
+      "version": "3.9.6",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/maven/3.9.6/_/_/revisions/55c5e520fab7d7ef982d7eb9e983c23a/packages/9a4eb3c8701508aa9458b1a73d0633783ecc2270/revisions/abdb68a441e41721b7d3f16def65db3f/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "3.9.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/locrep/mvn",
+      "version": "v0.0.0-20201009132946-ddb2350cbf6c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/locrep/mvn/@v/v0.0.0-20201009132946-ddb2350cbf6c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20201009132946-ddb2350cbf6c"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "maven",
+      "version": "3.9.16",
+      "repository": "https://maven.apache.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mvnvm",
+      "version": "1.0.29",
+      "repository": "https://bitbucket.org/mjensen/mvnvm/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@aleen42/ci-common",
+      "version": "0.1.9-2",
+      "repository": "git+https://github.com/Coremail/ci-common.git",
+      "source": "https://registry.npmjs.org/@aleen42%2Fci-common/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.9-2"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@coremail/ci-common",
+      "version": "0.2.3",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@coremail%2Fci-common/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mvn",
+      "version": "0.1.3",
+      "repository": "https://github.com/cogsys-io/mvn",
+      "source": "https://files.pythonhosted.org/packages/55/09/5c9cb9b36dbfdf061d5805253ad774bd71fec5b06662c68af01f52c8f6a6/mvn-0.1.3-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "maven4",
+      "version": "4.0.0-rc-6",
+      "repository": "https://maven.apache.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.0.0-rc-6"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,127 @@
+{
+  "command": "moar",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "moarvm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "moarvm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/accurateapplication/animated-couscous",
+      "version": "v0.0.0-20210330201556-06796ceb1726",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/accurateapplication/animated-couscous/@v/v0.0.0-20210330201556-06796ceb1726.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210330201556-06796ceb1726"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lapo-luchini/moar",
+      "version": "v0.0.0-20241027085913-fc59adefd067",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lapo-luchini/moar/@v/v0.0.0-20241027085913-fc59adefd067.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241027085913-fc59adefd067"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/walles/moar",
+      "version": "v1.33.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/walles/moar/@v/v1.33.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.33.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "moarvm",
+      "version": "2026.08",
+      "repository": "https://moarvm.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "moor",
+      "version": "2.17.0",
+      "repository": "https://github.com/walles/moor",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rakudo-star",
+      "version": "2026.07",
+      "repository": "https://rakudo.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "moa",
+      "version": "0.11.24",
+      "repository": "http://mfiers.github.com/Moa/",
+      "source": "https://files.pythonhosted.org/packages/bc/c1/1d8d27e20512e4f2f92c926e1b9e18a47c861d66edf9b1dd29fc59251ec5/moa-0.11.24.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.24"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "moarvm",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

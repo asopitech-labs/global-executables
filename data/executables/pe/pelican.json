@@ -1,0 +1,103 @@
+{
+  "command": "pelican",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pelican-4.11.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mostafa-asg/pelican",
+      "version": "v0.0.0-20190119085238-6c3e9b67d519",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mostafa-asg/pelican/@v/v0.0.0-20190119085238-6c3e9b67d519.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190119085238-6c3e9b67d519"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/usagiga/pelican",
+      "version": "v0.0.0-20200630103538-ea1f8e26de74",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/usagiga/pelican/@v/v0.0.0-20200630103538-ea1f8e26de74.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200630103538-ea1f8e26de74"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pelican",
+      "version": "4.12.0",
+      "repository": "https://getpelican.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pelican",
+      "version": "4.12.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6e/55/4adcce41a45f8f77e69d7e84ea447819dae1a78b4b9762a104599e5ec811/pelican-4.12.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.12.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pelican-migration",
+      "version": "0.1.4a0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/95/03/49e8c0fe476eeeced5d8b5677297063b5174acb831939a2b78b5931b1870/pelican_migration-0.1.4a0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4a0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pelidoc",
+      "version": "0.0.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/59/f6/fce4f778d7ddbb5b711a9a600779c25ea9df8cc50ca02dcb1473aadf6779/pelidoc-0.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pelican",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

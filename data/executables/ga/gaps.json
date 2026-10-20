@@ -1,0 +1,67 @@
+{
+  "command": "gaps",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "mummer",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mummer",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "NLR-GAPs",
+      "version": "0.11.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/3d/04/9e10c925843c5e0acda795d834f4a64e26d76ce263e15f2734391585f326/nlr_gaps-0.11.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "NREL-gaps",
+      "version": "0.8.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b8/28/028777aa1da14d073cadbb87a413ba7e727ca786f64a1c70e0c7d4c13fd8/nrel_gaps-0.8.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.11"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "mummer",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

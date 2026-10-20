@@ -1,0 +1,115 @@
+{
+  "command": "mender-artifact",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "mender-artifact",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mender-artifact",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "d.zyszy.best/mendersoftware/mender-artifact",
+      "version": "v0.0.0-20250424123832-cb31cfe7dffb",
+      "repository": null,
+      "source": "https://proxy.golang.org/d.zyszy.best/mendersoftware/mender-artifact/@v/v0.0.0-20250424123832-cb31cfe7dffb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250424123832-cb31cfe7dffb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/EcoG-io/mender-artifact",
+      "version": "v0.0.0-20230314221521-e0ee0a912747",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!eco!g-io/mender-artifact/@v/v0.0.0-20230314221521-e0ee0a912747.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230314221521-e0ee0a912747"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ecog-io/mender-artifact",
+      "version": "v0.0.0-20230314221521-e0ee0a912747",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ecog-io/mender-artifact/@v/v0.0.0-20230314221521-e0ee0a912747.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230314221521-e0ee0a912747"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grid-x/mender-artifact",
+      "version": "v0.0.0-20241016071718-0f1f1270e5c8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grid-x/mender-artifact/@v/v0.0.0-20241016071718-0f1f1270e5c8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241016071718-0f1f1270e5c8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pasinskim/artifacts",
+      "version": "v0.0.0-20180824113022-83dacd4a27e0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pasinskim/artifacts/@v/v0.0.0-20180824113022-83dacd4a27e0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180824113022-83dacd4a27e0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mender-artifact",
+      "version": "4.4.1",
+      "repository": "https://mender.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "mender-artifact",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

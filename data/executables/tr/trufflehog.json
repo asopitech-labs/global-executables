@@ -1,0 +1,68 @@
+{
+  "command": "trufflehog",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "trufflehog",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/scan-io-git/scan-io",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/scan-io-git/scan-io/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "trufflehog",
+      "version": "3.97.0",
+      "repository": "https://trufflesecurity.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "truffleHog",
+      "version": "2.2.1",
+      "repository": "https://github.com/dxa4481/truffleHog",
+      "source": "https://files.pythonhosted.org/packages/23/4d/54d244c106941403b5881533af03dd070554262a7e101fdbac79c2092705/truffleHog-2.2.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.2.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "trufflehog",
+      "version": "3.97.0",
+      "repository": "https://github.com/trufflesecurity/trufflehog",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "3.97.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

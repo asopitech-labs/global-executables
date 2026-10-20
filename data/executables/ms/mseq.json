@@ -1,0 +1,67 @@
+{
+  "command": "mseq",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "mblaze",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "mblaze",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/figoxu/goPraticse",
+      "version": "v0.0.0-20241031134508-448fbc1a3c82",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/figoxu/go!praticse/@v/v0.0.0-20241031134508-448fbc1a3c82.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241031134508-448fbc1a3c82"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/figoxu/gopraticse",
+      "version": "v0.0.0-20241031134508-448fbc1a3c82",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/figoxu/gopraticse/@v/v0.0.0-20241031134508-448fbc1a3c82.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241031134508-448fbc1a3c82"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "mblaze",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

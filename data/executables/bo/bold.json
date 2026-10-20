@@ -1,0 +1,55 @@
+{
+  "command": "bold",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "bold",
+      "version": "0.2.0",
+      "repository": "https://codeberg.org/kubkon/bold",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@boldtech/cli",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/bold-si/core.git",
+      "source": "https://registry.npmjs.org/@boldtech%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bold",
+      "version": "0.3",
+      "repository": "https://github.com/fillest/bold",
+      "source": "https://files.pythonhosted.org/packages/16/70/7dbd12c99976ab7136bb194fd16e5f8d8b49b631815d6ad4a2eb56c2dd2c/bold-0.3.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "potato-tool",
+      "version": "0.0.6",
+      "repository": "https://potato.gold",
+      "source": "https://files.pythonhosted.org/packages/20/23/538cc3379af4cc76eb57986ad32ad974cd8fa5f4037108614a846300497e/potato_tool-0.0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.6"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

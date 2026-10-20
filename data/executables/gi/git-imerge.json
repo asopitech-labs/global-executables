@@ -1,0 +1,43 @@
+{
+  "command": "git-imerge",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "git-imerge",
+      "version": "1.2.0",
+      "repository": "https://github.com/mhagger/git-imerge",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-imerge",
+      "version": "1.2.0",
+      "repository": "https://github.com/mhagger/git-imerge",
+      "source": "https://files.pythonhosted.org/packages/42/72/dc19db2a8f543da167fa39a865a3e335fe1af682fd5a2dbe2ba3232a41c4/git_imerge-1.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "git-imerge",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

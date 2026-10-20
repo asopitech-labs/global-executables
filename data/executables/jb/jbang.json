@@ -1,0 +1,31 @@
+{
+  "command": "jbang",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "wukong",
+      "version": "0.3.5",
+      "repository": "https://github.com/linux-china/wukong",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.5"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "jbang",
+      "version": "0.141.0",
+      "repository": "https://jbang.dev/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

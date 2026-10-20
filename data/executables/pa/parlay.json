@@ -1,0 +1,56 @@
+{
+  "command": "parlay",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/ddwht/parlay",
+      "version": "v0.10.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/ddwht/parlay?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.10.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.10.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/snyk/parlay",
+      "version": "v0.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/snyk/parlay/@v/v0.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.11.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "parlay",
+      "version": "0.11.0",
+      "repository": "https://github.com/snyk/parlay",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "parlay",
+      "version": "0.11.0",
+      "repository": "https://github.com/snyk/parlay",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.11.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

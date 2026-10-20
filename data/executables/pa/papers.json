@@ -1,0 +1,115 @@
+{
+  "command": "papers",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "papers-50.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "papers-cli",
+      "version": "0.3.1",
+      "repository": "https://github.com/mmgeorge/papers",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "papers",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "papers",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gnome-papers",
+      "version": "50.2",
+      "repository": "https://apps.gnome.org/Papers/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "papers",
+      "version": "0.2.0",
+      "repository": "https://github.com/jan-matthis/papers",
+      "source": "https://files.pythonhosted.org/packages/94/fb/32e7fc8636e120152ad854b19264254723f8a861a3cc37a13ca2f8b508ec/papers-0.2.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "papers-cli",
+      "version": "2.17.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/03/03/6f2fa22c2394f942f5339de1528b70c9369a014f2c2d3b60f4be1d07d7c1/papers_cli-2.17.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.17.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "papers-fork",
+      "version": "0.0.3",
+      "repository": "https://github.com/perrette/papers",
+      "source": "https://files.pythonhosted.org/packages/86/e3/bb791cbbf5d71b6f79636d54173a303af52e80a82b67100a405c0ddad07f/papers_fork-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "papers",
+      "version": "2.4.4",
+      "repository": "http://github.com/newrelic/papers",
+      "source": "https://rubygems.org/gems/papers-2.4.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "2.4.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

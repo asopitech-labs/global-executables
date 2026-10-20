@@ -1,0 +1,43 @@
+{
+  "command": "evtx_dump",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "evtx",
+      "version": "0.12.3",
+      "repository": "https://github.com/omerbenamram/EVTX",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.12.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "evtx",
+      "version": "0.12.2",
+      "repository": "https://github.com/omerbenamram/evtx",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-evtx",
+      "version": "0.8.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/32/12/f16a7a2f118a07649633b8f72803b932c8d9f0d24a2822cc08a1879ddf6f/python_evtx-0.8.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

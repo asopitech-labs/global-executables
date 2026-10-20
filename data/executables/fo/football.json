@@ -1,0 +1,67 @@
+{
+  "command": "football",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "sgb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/non-free/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/r523/football",
+      "version": "v0.0.0-20231226051045-6f75589392bb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/r523/football/@v/v0.0.0-20231226051045-6f75589392bb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231226051045-6f75589392bb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/slimjim777/football",
+      "version": "v0.0.0-20210315205944-1601d80f49c1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/slimjim777/football/@v/v0.0.0-20210315205944-1601d80f49c1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210315205944-1601d80f49c1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "football__data",
+      "version": "0.2.3",
+      "repository": "https://github.com/delta4d/football-data",
+      "source": "https://rubygems.org/gems/football__data-0.2.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "sgb",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

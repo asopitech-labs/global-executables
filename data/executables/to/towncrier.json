@@ -1,0 +1,55 @@
+{
+  "command": "towncrier",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "towncrier-25.8.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/uchebuego/towncrier",
+      "version": "v0.0.0-20250926095225-944f05d8a375",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/uchebuego/towncrier?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20250926095225-944f05d8a375",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250926095225-944f05d8a375"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "towncrier",
+      "version": "26.9.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/82/88/f9340b545dafa64de053798e760515a2736fbb60092cf9aa6b146ccf3ede/towncrier-26.9.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.9.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "towncrier",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

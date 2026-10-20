@@ -1,0 +1,55 @@
+{
+  "command": "virt-clone",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "virt-install-5.1.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "virt-manager",
+      "version": "5.1.0",
+      "repository": "https://virt-manager.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "virt-manager-pure-cli-yen3",
+      "version": "1.5.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c4/f8/4485acfb0b04ded5c9ca36ce88a1b79c989470eba56d12b3b8bcbe02ca1c/virt_manager_pure_cli_yen3-1.5.0.3-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "virtinst",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,103 @@
+{
+  "command": "wakeonlan",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "wakeonlan-0.50-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/TheRedNet/wakeonlan",
+      "version": "v0.0.0-20240912161048-2838e5bec412",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!the!red!net/wakeonlan/@v/v0.0.0-20240912161048-2838e5bec412.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240912161048-2838e5bec412"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/krzysdabro/wakeonlan",
+      "version": "v0.0.0-20250131184041-9140888f0d0c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/krzysdabro/wakeonlan/@v/v0.0.0-20250131184041-9140888f0d0c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250131184041-9140888f0d0c"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "wakeonlan",
+      "version": "0.50",
+      "repository": "https://github.com/jpoliv/wakeonlan",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "eg.wakeonlan",
+      "version": "2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ba/bc/2b2f9ff84ba51dabd03fb500b40b47123cb48c1bd62ca11676efb82068da/eg_wakeonlan-2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wakeonlan",
+      "version": "4.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5c/80/ecebf7b1b32ebe4a10d72a09e21c4c76a2460fac159752ec9ab88508b7d0/wakeonlan-4.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "wakeonlan",
+      "version": "0.0.3",
+      "repository": "http://wakeonlan.rubyforge.org/svn/",
+      "source": "https://rubygems.org/gems/wakeonlan-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "wakeonlan",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

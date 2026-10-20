@@ -1,0 +1,115 @@
+{
+  "command": "selftest",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "cdc-ir",
+      "version": "0.2.1",
+      "repository": "https://github.com/Yinyuan34513/cdc-ir",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "yagiuda",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "yagiuda",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/monogon-dev/monogon",
+      "version": "v0.0.0-20251124194026-785df0d6ca7f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/monogon-dev/monogon/@v/v0.0.0-20251124194026-785df0d6ca7f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251124194026-785df0d6ca7f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "source.monogon.dev",
+      "version": "v0.0.0-20251124194026-785df0d6ca7f",
+      "repository": null,
+      "source": "https://proxy.golang.org/source.monogon.dev/@v/v0.0.0-20251124194026-785df0d6ca7f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251124194026-785df0d6ca7f"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mbedtls",
+      "version": "4.2.0",
+      "repository": "https://www.trustedfirmware.org/projects/mbed-tls/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ahr-ahr/selftest",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/ahr-ahr/SelfTest.git",
+      "source": "https://registry.npmjs.org/@ahr-ahr%2Fselftest/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "selftest",
+      "version": "0.5.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/51/6c/526835dae743984d27a96ab1db1274eca06466341d49418d83481340dd56/selftest-0.5.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "yagiuda",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

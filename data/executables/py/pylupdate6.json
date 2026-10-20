@@ -1,0 +1,67 @@
+{
+  "command": "pylupdate6",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pyqt6-6.11.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pyqt",
+      "version": "6.11.0",
+      "repository": "https://www.riverbankcomputing.com/software/pyqt/intro",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyQt6",
+      "version": "6.11.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/33/44/fcd3dd3f64c83c96bf9bce76ec16cca64bd9b91702c3d08fd8e3dafc73d9/pyqt6-6.11.0-cp310-abi3-macosx_10_14_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.11.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyqt6-without-qt",
+      "version": "6.7.1.post1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/86/6c/cd4c0d9cac20bfe9c2caa79c4d58014074cf4358ef7cd0c5004160576a70/pyqt6_without_qt-6.7.1.post1-cp38-abi3-macosx_11_0_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.7.1.post1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pyqt6-dev-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

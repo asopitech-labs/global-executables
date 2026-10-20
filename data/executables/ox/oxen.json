@@ -1,0 +1,43 @@
+{
+  "command": "oxen",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "oxen-cli",
+      "version": "0.63.0",
+      "repository": "https://github.com/Oxen-AI/Oxen",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.63.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "oxen",
+      "version": "0.53.4",
+      "repository": "https://www.oxen.ai/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "oxen-orm",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d6/ee/7df87cb66b2b235781078a53589c993e8a3313f75ae59373deb6bb70fb37/oxen_orm-0.2.0-cp312-cp312-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "gitit",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gitit-0.16-45",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gitit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/andersonbargas/gitit",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/andersonbargas/gitit/@v/v0.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-it",
+      "version": "0.0.16",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/68/d7/e6d460597b95ed8e2ce660082f8dbbdc4c61a6c4bc5710aeaf0ed5b17fe8/git_it-0.0.16-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.16"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gitintel",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/76/00/52e9b79f0a9cb6b65f47ef35b3560b1e4f37cdbd4223aaae495730a9ce0c/gitintel-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gitit",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "opener",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/peterstace/opener",
+      "version": "v0.0.0-20210108221913-45dc9c54cd06",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/peterstace/opener/@v/v0.0.0-20210108221913-45dc9c54cd06.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210108221913-45dc9c54cd06"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "opener",
+      "version": "1.5.2",
+      "repository": "git+https://github.com/domenic/opener.git",
+      "source": "https://registry.npmjs.org/opener/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.5.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "node-opener",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

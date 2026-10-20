@@ -1,0 +1,67 @@
+{
+  "command": "git-alias",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "git-alias",
+      "version": "2.1.2",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-extras",
+      "version": "7.5.0",
+      "repository": "https://github.com/tj/git-extras",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "git-extras-7.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "git-alias",
+      "version": "0.0.2",
+      "repository": "https://github.com/larsks/git-alias/",
+      "source": "https://files.pythonhosted.org/packages/8a/d9/a3568004e7c5b41c0a134637493a4923d231db953c078a2c78823a3caea6/git_alias-0.0.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "git-extras",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

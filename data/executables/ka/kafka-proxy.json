@@ -1,0 +1,43 @@
+{
+  "command": "kafka-proxy",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "kafka-proxy",
+      "version": "1.0.0",
+      "repository": "https://github.com/SecurityInsanity/kafka-proxy",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grepplabs/kafka-proxy",
+      "version": "v0.4.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grepplabs/kafka-proxy/@v/v0.4.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kafka-http-proxy",
+      "version": "1.0.1",
+      "repository": "https://github.com/fedorovvl/kafka-http-proxy",
+      "source": "https://files.pythonhosted.org/packages/dc/0b/2038c3f717873faa22804a6dd2b1706b8b16363e5c15790fff3d1d9f53f8/kafka_http_proxy-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

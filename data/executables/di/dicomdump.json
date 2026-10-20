@@ -1,0 +1,67 @@
+{
+  "command": "dicomdump",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "vtk-dicom-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "vtk-dicom-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cocosip/go-dicom",
+      "version": "v0.7.4",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/cocosip/go-dicom?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.7.4",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dicomsdl",
+      "version": "0.109.4",
+      "repository": "https://github.com/tsangel/dicomsdl",
+      "source": "https://files.pythonhosted.org/packages/a7/29/ac1294a474d70d5311deae2b49fb713d7e5337154a29cae75eff251e52c6/dicomsdl-0.109.4-cp310-cp310-macosx_10_9_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.109.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "vtk-dicom-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

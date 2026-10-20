@@ -1,0 +1,67 @@
+{
+  "command": "tickr",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "tickr",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "tickr",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tyleruk2000/cli-news-ticker",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/tyleruk2000/cli-news-ticker?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tickr-cron",
+      "version": "1.0.5",
+      "repository": "https://github.com/Bugra020/tickr",
+      "source": "https://files.pythonhosted.org/packages/b1/fd/7a5594f848b578b31e304921b7178ef707dadd08a9774be3a7167b322701/tickr_cron-1.0.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "tickr",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

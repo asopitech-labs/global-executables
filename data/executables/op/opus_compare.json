@@ -1,0 +1,43 @@
+{
+  "command": "opus_compare",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "opuscule",
+      "version": "0.2.1",
+      "repository": "https://codeberg.org/jojo-laplace/opuscule",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "unopus",
+      "version": "0.0.1",
+      "repository": "https://github.com/twlite/unopus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/skrashevich/go-opus",
+      "version": "v0.0.0-20260702013832-a5b3880d806b",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/skrashevich/go-opus?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260702013832-a5b3880d806b",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260702013832-a5b3880d806b"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

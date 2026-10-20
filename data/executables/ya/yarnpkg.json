@@ -1,0 +1,115 @@
+{
+  "command": "yarnpkg",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "yarn-1.22.22-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "corepack",
+      "version": "0.35.0",
+      "repository": "https://github.com/nodejs/corepack",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "yarn",
+      "version": "1.22.22",
+      "repository": "https://yarnpkg.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@alancnet/yarn",
+      "version": "1.17.0-7",
+      "repository": "git+https://github.com/yarnpkg/yarn.git",
+      "source": "https://registry.npmjs.org/@alancnet%2Fyarn/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.17.0-7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cloud-computer/yarn",
+      "version": "1.14.1",
+      "repository": "git+https://github.com/yarnpkg/yarn.git",
+      "source": "https://registry.npmjs.org/@cloud-computer%2Fyarn/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.14.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@daniel15/yarn-test",
+      "version": "0.0.1",
+      "repository": "git+https://github.com/yarnpkg/yarn.git",
+      "source": "https://registry.npmjs.org/@daniel15%2Fyarn-test/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "yarn",
+      "version": "1.22.22",
+      "repository": "git+https://github.com/yarnpkg/yarn.git",
+      "source": "https://registry.npmjs.org/yarn/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.22.22"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "yarnpkg",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Volta.Volta",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

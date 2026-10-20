@@ -1,0 +1,55 @@
+{
+  "command": "fast-import-info",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-fastimport-0.9.16-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "python-fastimport-0.9.16-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "fastimport",
+      "version": "0.9.16",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6a/e3/354dd0c7c16f1d9eab89bff22e40ac6e3030f08aeedc66497b49ca48a925/fastimport-0.9.16-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.16"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-fastimport",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

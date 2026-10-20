@@ -1,0 +1,31 @@
+{
+  "command": "ramdisk-image-create",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "diskimage-builder",
+      "version": "3.43.0",
+      "repository": "https://docs.openstack.org/diskimage-builder/latest/",
+      "source": "https://files.pythonhosted.org/packages/b3/8e/b481e221303670e0047e9f427a825e2b9d72bbbfbb354defcdabd091001b/diskimage_builder-3.43.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.43.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-diskimage-builder",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

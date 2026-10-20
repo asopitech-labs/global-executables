@@ -1,0 +1,43 @@
+{
+  "command": "tosca-parser",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "nfv-toscaparser",
+      "version": "1.1.1",
+      "repository": "https://wiki.opnfv.org/display/parser",
+      "source": "https://files.pythonhosted.org/packages/3c/ea/2ff619ea331e386592bd2b6d2d8564cb5d2b738188c8f371cad22f14b15a/nfv_toscaparser-1.1.1-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tosca-parser",
+      "version": "2.15.0",
+      "repository": "https://docs.openstack.org/tosca-parser/latest/",
+      "source": "https://files.pythonhosted.org/packages/d9/09/684944ae0a992315e5d5ab6d870921468f71205abb342ca4ef3aa5bea2f4/tosca_parser-2.15.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.15.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-tosca-parser",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

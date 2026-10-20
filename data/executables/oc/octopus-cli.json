@@ -1,0 +1,43 @@
+{
+  "command": "octopus-cli",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "octopus-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/richo225/octopus",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/HorseArcher567/octopus",
+      "version": "v0.0.0-20260424073302-763dc4db39f0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/HorseArcher567/octopus?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260424073302-763dc4db39f0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260424073302-763dc4db39f0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@9octopus/octopus-cli",
+      "version": "0.2.0",
+      "repository": "git+https://github.com/9OctopusDev/9octopus-cli-oss.git",
+      "source": "https://registry.npmjs.org/@9octopus%2Foctopus-cli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

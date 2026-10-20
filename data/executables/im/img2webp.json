@@ -1,0 +1,152 @@
+{
+  "command": "img2webp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libwebp-utils-1.6.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "webp",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "webp",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Wohlgemuth-Dev/img2webp",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Wohlgemuth-Dev/img2webp?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zoulux/img2webp",
+      "version": "v1.1.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/zoulux/img2webp?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.1.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "webp",
+      "version": "1.6.0",
+      "repository": "https://developers.google.com/speed/webp/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@akurasiudara/img2webp",
+      "version": "1.2.0",
+      "repository": "git+https://github.com/akurasiudara/img2webp.git",
+      "source": "https://registry.npmjs.org/@akurasiudara%2Fimg2webp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "img2webp",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0e/b2/2e495020ae0d7b62b30c82acea32c9fe15af7978f1acb42638455e8f3d90/img2webp-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zcmds",
+      "version": "1.5.41",
+      "repository": "https://github.com/zackees/zcmds",
+      "source": "https://files.pythonhosted.org/packages/1b/30/0ba2ee003a1c80ff6116156f37e5743a56db8c9daa508f33f0b002b9f304/zcmds-1.5.41-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.41"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "libwebp",
+      "version": "1.6.0",
+      "repository": "https://developers.google.com/speed/webp",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.6.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "webp",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Google.Libwebp",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

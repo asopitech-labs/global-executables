@@ -1,0 +1,151 @@
+{
+  "command": "pio",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "platformio-core-6.1.19-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/embeddedgo/pico",
+      "version": "v0.1.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/embeddedgo/pico/@v/v0.1.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fkcurrie/fluidnc-led-golang",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fkcurrie/fluidnc-led-golang/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/shyang107/go-twinvoices",
+      "version": "v0.0.0-20170830170905-b92452e5af1d",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/shyang107/go-twinvoices?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20170830170905-b92452e5af1d",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170830170905-b92452e5af1d"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "platformio",
+      "version": "6.1.19",
+      "repository": "https://platformio.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pio",
+      "version": "0.0.3",
+      "repository": "https://github.com/Richienb/pio",
+      "source": "https://files.pythonhosted.org/packages/c5/9a/14fc0c3d823bd907b5e058ed5d0f6b394c686e501f5b9854e8b12c66d7b2/pio-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pio-cli",
+      "version": "0.87",
+      "repository": "https://github.com/fluxcapacitor/pipeline/cli",
+      "source": "https://files.pythonhosted.org/packages/e8/8a/78c7bbb231638835110657927775f334106cba73042190f836fbf5de6221/pio_cli-0.87-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.87"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pioarduino",
+      "version": "6.2.0",
+      "repository": "https://github.com/pioarduino",
+      "source": "https://files.pythonhosted.org/packages/b7/d6/2a672a9cc93e7aff37f72a7d4a3ad6ad090452f1483063fd1f9d73794104/pioarduino-6.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pioreactor",
+      "version": "26.11.0",
+      "repository": "https://github.com/pioreactor/pioreactor",
+      "source": "https://files.pythonhosted.org/packages/6d/24/b5c3f7eb1bf53f05ebc5279750df316f873cfbff9208e7cfa54ca8f518c3/pioreactor-26.11.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.11.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "platformio",
+      "version": "6.2.0",
+      "repository": "https://platformio.org",
+      "source": "https://files.pythonhosted.org/packages/bf/98/6c5cc249129c72b076ca238a435c48b48568d866c12890e01ee50fb8f322/platformio-6.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spamcmd",
+      "version": "1.0.0",
+      "repository": "https://github.com/donno2048/spamcmd",
+      "source": "https://files.pythonhosted.org/packages/e7/27/459b9e7527b197d3f1fd6b3531734d1c66dc0d5df1f2268852dc99e55b1d/spamcmd-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "platformio",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

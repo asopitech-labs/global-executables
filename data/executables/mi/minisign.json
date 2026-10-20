@@ -1,0 +1,140 @@
+{
+  "command": "minisign",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "minisign-0.12-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "minisign",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "minisign",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "aead.dev/minisign",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/aead.dev/minisign/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "minisign",
+      "version": "0.12",
+      "repository": "https://jedisct1.github.io/minisign/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "soatok/minisign",
+      "version": "v0.6.0",
+      "repository": "https://github.com/soatok/minisign-php.git",
+      "source": "https://repo.packagist.org/p2/soatok/minisign.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.6.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "minisign",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/hackancuba/minisign-py",
+      "source": "https://files.pythonhosted.org/packages/51/f6/8f83f581b8837583da66eaa417fef60063a4e29482aa47fefe5a8386e6b5/minisign-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "minisign",
+      "version": "0.2.1",
+      "repository": "https://github.com/jshawl/minisign/tree/v0.2.1",
+      "source": "https://rubygems.org/gems/minisign-0.2.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "minisign",
+      "version": "0.12",
+      "repository": "https://jedisct1.github.io/minisign/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.12"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "minisign",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "jedisct1.minisign",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

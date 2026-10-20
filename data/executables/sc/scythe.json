@@ -1,0 +1,103 @@
+{
+  "command": "scythe",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "scythe-cli",
+      "version": "0.20.0",
+      "repository": "https://github.com/Goldziher/scythe",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.20.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scythe",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scythe",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "artifact-scythe",
+      "version": "0.7.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/43/ed/9aff2bef0cf5873ff5447879424138f07c7ff37da6062060d69350f1654f/artifact_scythe-0.7.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "scythe-cli",
+      "version": "1.4.2",
+      "repository": "https://github.com/seanrcollings/scythe",
+      "source": "https://files.pythonhosted.org/packages/0c/47/22f64c2034c11c695e4924dde9c0545193802982039b61342ee79951f5e2/scythe_cli-1.4.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "scythe-sql",
+      "version": "0.19.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b5/83/ccb9eb040c61104314abec7600569015dcb15ba3cdb165bf49804c984c44/scythe_sql-0.19.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.19.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "scythe-ttp",
+      "version": "0.18.22",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6a/b7/48720537b73f8d7ab11f7695f3d7b1c42d1d3785d7261d89d266baaaab49/scythe_ttp-0.18.22-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.18.22"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "scythe",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "bean-price",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-beanprice",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-beanprice",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "beanprice",
+      "version": "2.1.0",
+      "repository": "http://github.com/beancount/beanprice",
+      "source": "https://files.pythonhosted.org/packages/0a/21/636de4fcfb73e4452801f06a8868be0633797c0cf7b4119cac3ae94682a0/beanprice-2.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "beanprice2",
+      "version": "2.1.3",
+      "repository": "http://github.com/beancount/beanprice",
+      "source": "https://files.pythonhosted.org/packages/6c/43/b004fd54210a83625678386be03d373278104cbba17c5864016e78a066f8/beanprice2-2.1.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "g8fyi-beancount",
+      "version": "1.0.9",
+      "repository": "http://furius.ca/beancount",
+      "source": "https://files.pythonhosted.org/packages/21/e6/65f34a0eb3e8fb92e12f4c7a97de69ddf2cfad70a97291fd23695b74a138/g8fyi-beancount-1.0.9.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.9"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "beancount",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

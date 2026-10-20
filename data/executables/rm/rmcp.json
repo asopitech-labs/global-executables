@@ -1,0 +1,91 @@
+{
+  "command": "rmcp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "nilfs-utils-2.3.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nilfs-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nilfs-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/chainreactors/aiscan",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/chainreactors/aiscan?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.4.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mseep-rmcp",
+      "version": "0.3.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a7/04/e8aa04d0a6082c0b76532c1912ee67ab69729e8d8e4147405bd928281225/mseep_rmcp-0.3.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rmcp",
+      "version": "0.12.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/86/19/280d428ebf86d7f7282aa5eab17da70e932d06e4afb20606a93dd432e55d/rmcp-0.12.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.12.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "nilfs-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

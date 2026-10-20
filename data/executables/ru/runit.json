@@ -1,0 +1,151 @@
+{
+  "command": "runit",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "runit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "runit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kanthorlabs/runit/cmd/runit",
+      "version": "v0.0.0-20250428022602-6241f3e7d332",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kanthorlabs/runit/cmd/runit/@v/v0.0.0-20250428022602-6241f3e7d332.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250428022602-6241f3e7d332"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "runit",
+      "version": "2.3.1",
+      "repository": "https://smarden.org/runit/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@buildingopen/cli",
+      "version": "0.1.2",
+      "repository": "git+https://github.com/buildingopen/runit.git",
+      "source": "https://registry.npmjs.org/@buildingopen%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "profiler-runit",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a9/dd/a6a8ab3c01195ccb448956c09eadefdd658c9ecdff28a29bc664ca6b80e8/profiler_runit-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-runit",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b6/a0/963dedb8905ea176c805fb9972240e93cd12ffcb82ad1e3919529cc57d45/python_runit-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "reportxl",
+      "version": "0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/51/93/7de6e0ef434931f014f6398d8d15a5652514413cd4e7bdee1e6878e8afc3/reportxl-0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "runit-cli",
+      "version": "0.4.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/45/72/a4e432ea6650b96ea83dfb3ea7e1c9626e54e121c77ff8a81a0013eb7eef/runit_cli-0.4.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "runit-dev",
+      "version": "0.1.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/df/a1/4cd953e7d23bb4dc9f69448c263ee76bbd06dcc1dbb702b8e031ccf280e6/runit_dev-0.1.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "runit-parallel",
+      "version": "0.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/30/75/1212197fd823134a8f2c5072dccf2d25d05f90a1dd12b66b92dc392d5d4b/runit_parallel-0.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "runit",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

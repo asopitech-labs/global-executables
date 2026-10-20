@@ -1,0 +1,115 @@
+{
+  "command": "viking",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "viking-1.11-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "viking",
+      "version": "0.2.2",
+      "repository": "https://github.com/replicadse/viking",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "viking",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "viking",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/KosmoMoustache/viking",
+      "version": "v0.0.0-20240827130942-62792b1efca4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!kosmo!moustache/viking/@v/v0.0.0-20240827130942-62792b1efca4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240827130942-62792b1efca4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kosmomoustache/viking",
+      "version": "v0.0.0-20240827130942-62792b1efca4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kosmomoustache/viking/@v/v0.0.0-20240827130942-62792b1efca4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240827130942-62792b1efca4"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "viking",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/viking/1.0.1/viking.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "viking",
+      "version": "1.0.4",
+      "repository": "https://github.com/FRC6854",
+      "source": "https://files.pythonhosted.org/packages/73/90/c7863003a4682a3aea51b7cfbb3b7b7cc7c2fd50ff11678af84ae6bece71/viking-1.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "viking",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

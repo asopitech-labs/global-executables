@@ -1,0 +1,67 @@
+{
+  "command": "nicotine",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "nicotine+-3.3.10-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "httm",
+      "version": "0.50.2",
+      "repository": "https://github.com/kimono-koans/httm",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nicotine-plus",
+      "version": "3.3.10",
+      "repository": "https://nicotine-plus.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nicotine-plus",
+      "version": "3.3.11",
+      "repository": "https://nicotine-plus.org",
+      "source": "https://files.pythonhosted.org/packages/36/69/404fd1cc7fafbd9cd7c738b8755cb7896dff55d2adb6c8996048ac799afb/nicotine_plus-3.3.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3.11"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "nicotine",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

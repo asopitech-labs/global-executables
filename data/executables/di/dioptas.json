@@ -1,0 +1,43 @@
+{
+  "command": "dioptas",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "dioptas",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "dioptas",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dioptas",
+      "version": "0.11.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d3/6b/5d45e6403586a9e3f4012214aa0ba442bf50b60cb582e525b7b520c547a5/dioptas-0.11.0-cp311-cp311-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

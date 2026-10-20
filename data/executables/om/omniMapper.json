@@ -1,0 +1,79 @@
+{
+  "command": "omniMapper",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "omniorb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "omniorb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "omniorb",
+      "version": "4.3.4",
+      "repository": "https://omniorb.sourceforge.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cmeel-omniorb",
+      "version": "4.3.4",
+      "repository": "https://github.com/cmake-wheel/cmeel-omniorb",
+      "source": "https://files.pythonhosted.org/packages/90/d4/b08634c64204c55451f6ad846284d5ee1ab73686cec7f9e35b0d6572b54a/cmeel_omniorb-4.3.4-1-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jeteve-omniorb",
+      "version": "4.3.3.post7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/29/3c/85fa7b27dedb28d5395cb7237f760b6ea6a867d800b400e8965f2a3e4e75/jeteve_omniorb-4.3.3.post7-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.3.post7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "omniorb",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

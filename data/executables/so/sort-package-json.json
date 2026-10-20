@@ -1,0 +1,43 @@
+{
+  "command": "sort-package-json",
+  "providers": [
+    {
+      "ecosystem": "npm",
+      "package": "@aaa-backend-stack/build-tools",
+      "version": "2.4.4",
+      "repository": "git+ssh://github.com/allaboutapps/aaa-backend-stack.git",
+      "source": "https://registry.npmjs.org/@aaa-backend-stack%2Fbuild-tools/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.4.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@common-stack/common-tools",
+      "version": "9.0.6-alpha.1",
+      "repository": "git+https://github.com/cdmbase/fullstack-pro.git",
+      "source": "https://registry.npmjs.org/@common-stack%2Fcommon-tools/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "9.0.6-alpha.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "node-sort-package-json",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

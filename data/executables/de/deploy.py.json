@@ -1,0 +1,43 @@
+{
+  "command": "deploy.py",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pyside6-tools-6.11.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "assisipy",
+      "version": "0.16.1",
+      "repository": "https://github.com/larics/assisi-python",
+      "source": "https://files.pythonhosted.org/packages/2a/78/80b76580dfbdb23f2cc42c1e2e7e56bc80831ac71d5735c977f60b90e2fd/assisipy-0.16.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.16.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cremma",
+      "version": "0.0.4",
+      "repository": "https://github.com/jeanjean1/cremma",
+      "source": "https://files.pythonhosted.org/packages/ae/92/896b0eb67ec736d643fdfbe73ff717d755506cb4bdb53c1b457abf5a5c70/cremma-0.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

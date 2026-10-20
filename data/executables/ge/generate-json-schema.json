@@ -1,0 +1,31 @@
+{
+  "command": "generate-json-schema",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "falsec-types",
+      "version": "0.1.2",
+      "repository": "https://github.com/MixusMinimax/falsec",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "json-schema-generator2",
+      "version": "0.1.15",
+      "repository": "https://github.com/weaming/json-schema-generator",
+      "source": "https://files.pythonhosted.org/packages/9a/30/9af134a1d23c310786ed256442183fbade8e62958d71d9559c5894c1d4de/json_schema_generator2-0.1.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.15"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

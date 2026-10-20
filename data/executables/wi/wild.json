@@ -1,0 +1,79 @@
+{
+  "command": "wild",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "wild-0.10.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wild-linker",
+      "version": "0.10.0",
+      "repository": "https://github.com/wild-linker/wild",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "wild-vibes",
+      "version": "0.2.0",
+      "repository": "https://github.com/charly-vibes/wild",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aitsvet/llama-cpp",
+      "version": "v0.0.0-20240606161548-4ff1d3f45908",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aitsvet/llama-cpp/@v/v0.0.0-20240606161548-4ff1d3f45908.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240606161548-4ff1d3f45908"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "wild",
+      "version": "0.10.0",
+      "repository": "https://github.com/wild-linker/wild",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wild",
+      "version": "1.0.4",
+      "repository": "https://github.com/n3nc/wild-cli",
+      "source": "https://files.pythonhosted.org/packages/c5/f3/f6b8012cf2f0f1833641093a70d654a3a2436a839185f3e6eccb5f1f8422/wild-1.0.4.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

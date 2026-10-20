@@ -1,0 +1,68 @@
+{
+  "command": "unity",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/skysibe/unity",
+      "version": "v0.0.0-20240726151738-4e92c232efec",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/skysibe/unity/@v/v0.0.0-20240726151738-4e92c232efec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240726151738-4e92c232efec"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "Pillsgood.UnityTools",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/pillsgood.unitytools/1.0.1/pillsgood.unitytools.1.0.1.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "unity-cli-beta",
+      "version": "1.0.0-beta.6",
+      "repository": "https://docs.unity.com/en-us/unity-cli/use-unity-cli",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.0.0-beta.6"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "unity",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Unity.CLI",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

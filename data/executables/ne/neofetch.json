@@ -1,0 +1,80 @@
+{
+  "command": "neofetch",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "neofetch",
+      "version": "0.2.0",
+      "repository": "https://github.com/ahaoboy/neofetch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "neofetch-7.1.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "neofetch-python",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ae/19/460e815a31c848d42d391ab565a522a2c85d7542205e2ad1d7343694b293/neofetch_python-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "neofetch-win",
+      "version": "1.4.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f5/37/e8c71a5cb703847bc310a8f6b5d4e60703cddece762deff175504d870c5e/neofetch_win-1.4.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "neofetch",
+      "version": "7.1.0",
+      "repository": "https://github.com/dylanaraps/neofetch",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "7.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "neofetch",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

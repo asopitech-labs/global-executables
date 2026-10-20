@@ -1,0 +1,43 @@
+{
+  "command": "umis",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "umis",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "umis",
+      "version": "1.0.3",
+      "repository": "https://github.com/vals/umis",
+      "source": "https://files.pythonhosted.org/packages/0b/30/489213cb0c7b9d65524465e12867d8bd1422423c928c757e6872a5503969/umis-1.0.3-cp36-cp36m-macosx_10_7_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "umis",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

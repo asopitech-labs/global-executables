@@ -1,0 +1,43 @@
+{
+  "command": "in-toto-mock",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "in-toto-3.0.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "in-toto",
+      "version": "3.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ef/1a/455c559161721c272a9a23e14cf022112abebd6ffb8a4cc85e48d5042683/in_toto-3.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "in-toto",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

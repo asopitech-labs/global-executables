@@ -1,0 +1,43 @@
+{
+  "command": "cfn-signal",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/uswitch/instance-signals",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/uswitch/instance-signals/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "heat-cfntools",
+      "version": "2.0.0",
+      "repository": "https://docs.openstack.org/heat-cfntools/latest/",
+      "source": "https://files.pythonhosted.org/packages/1c/31/d2e53f4a2a669e1a67bcf13e698ecb0e7ecde4c47a9403294f278e0eea10/heat_cfntools-2.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "heat-cfntools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

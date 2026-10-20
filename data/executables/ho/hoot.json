@@ -1,0 +1,55 @@
+{
+  "command": "hoot",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "guile-hoot",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Mars7attack/hoot",
+      "version": "v0.0.0-20260719120631-0c5f7ffb75a2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Mars7attack/hoot?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260719120631-0c5f7ffb75a2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260719120631-0c5f7ffb75a2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/codeshaine/hoot",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/codeshaine/hoot/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hoot",
+      "version": "0.3.0",
+      "repository": "https://github.com/ruddfawcett/hoot",
+      "source": "https://rubygems.org/gems/hoot-0.3.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

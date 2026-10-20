@@ -1,0 +1,43 @@
+{
+  "command": "ldd2bloodhound",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-ldapdomaindump-0.10.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ldapdomaindump",
+      "version": "0.10.0",
+      "repository": "https://github.com/dirkjanm/ldapdomaindump/",
+      "source": "https://files.pythonhosted.org/packages/8a/91/5a0015375d5bcc3667f92692e9a244803b9a0e4b651b29a5682e1647669a/ldapdomaindump-0.10.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-ldapdomaindump",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

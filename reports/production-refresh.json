@@ -1,0 +1,889 @@
+{
+  "accepted_records": 2087614,
+  "coverage_kind": "partial",
+  "failed": [],
+  "input_records": 2087756,
+  "inputs": [
+    "data/production/intermediate/arch.jsonl",
+    "data/production/intermediate/debian.jsonl",
+    "data/production/intermediate/homebrew.jsonl",
+    "data/production/intermediate/ubuntu.jsonl",
+    "data/production/intermediate/crates.jsonl",
+    "data/production/intermediate/go.jsonl",
+    "data/production/intermediate/npm.jsonl",
+    "data/production/intermediate/pypi.jsonl",
+    "data/production/intermediate/rubygems.jsonl",
+    "data/production/intermediate/packagist.jsonl",
+    "data/production/intermediate/nuget.jsonl",
+    "data/production/intermediate/conan.jsonl",
+    "data/production/intermediate/vcpkg.jsonl",
+    "data/production/intermediate/xmake.jsonl",
+    "data/production/intermediate/msys2.jsonl",
+    "data/production/intermediate/scoop.jsonl",
+    "data/production/intermediate/winget.jsonl",
+    "data/production/intermediate/windows.jsonl",
+    "data/production/intermediate/macos.jsonl",
+    "data/production/intermediate/shell.jsonl"
+  ],
+  "previous_unique_executables": 899377,
+  "records": 2087756,
+  "rejected": [
+    {
+      "command": "#\t\t\t\"toyecc",
+      "ecosystem": "pypi",
+      "package": "toyecc",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t\t'calcpkg",
+      "ecosystem": "pypi",
+      "package": "xkcd",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t\"binwb",
+      "ecosystem": "pypi",
+      "package": "binwb-cli",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t\"dokuwiki2html",
+      "ecosystem": "pypi",
+      "package": "PyDokuwiki",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t'doc_crawler.py",
+      "ecosystem": "pypi",
+      "package": "doc_crawler",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t'streak_client",
+      "ecosystem": "pypi",
+      "package": "streak_client",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t\t'streak_client%s",
+      "ecosystem": "pypi",
+      "package": "streak_client",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "#\t'sudoshreplay",
+      "ecosystem": "pypi",
+      "package": "sudosh-replay",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\t'sample",
+      "ecosystem": "pypi",
+      "package": "BFG-Y2H",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_bed_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_custom_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_domain_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"build_gene_database",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"collate_counts",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"collate_studies",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"gffindex",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"gffquant",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \t\"split_table",
+      "ecosystem": "pypi",
+      "package": "gqlib",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tXY-steroids",
+      "ecosystem": "pypi",
+      "package": "XY-Steroid",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tXY-steroids",
+      "ecosystem": "pypi",
+      "package": "XY-Steroids",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "O2",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "appraisal",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "deeds",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "earring",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "estimates",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "forensic",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "fortunes",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "glamour",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "loyal",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "loyalty",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "sovereignty",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "winrate",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# \tthis_module",
+      "ecosystem": "pypi",
+      "package": "wins",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# As from http://pypi.python.org/pypi?%3Aaction",
+      "ecosystem": "pypi",
+      "package": "cool-ascii-faces",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# As from http://pypi.python.org/pypi?%3Aaction",
+      "ecosystem": "pypi",
+      "package": "keyme",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# Full list: https://pypi.python.org/pypi?%3Aaction",
+      "ecosystem": "pypi",
+      "package": "days-until",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# Get more strings from http://pypi.python.org/pypi?%3Aaction",
+      "ecosystem": "pypi",
+      "package": "pdf2text",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "# http://pypi.python.org/pypi?%3Aaction",
+      "ecosystem": "pypi",
+      "package": "pigeonhole",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "https://github.com/mtigas/django-medusa/tarball/master#egg",
+      "ecosystem": "pypi",
+      "package": "django-things",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "https://github.com/sklfihggczx/every_hello_tools",
+      "ecosystem": "pypi",
+      "package": "every-hello-tools-zs",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "https://svn.openplans.org/svn/topp.utils#egg",
+      "ecosystem": "pypi",
+      "package": "externalator",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/base64id",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/begonecr",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/bodycurl",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/diff",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/diffdirs",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/dircopy",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/env",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-env",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/f",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/fcopy",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/fileregrename",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/findfile",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/finds",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/findsbin",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/ftpcopy",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/gitv",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-git",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/gitvpyproject",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-git",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/hashdirs",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/hashf",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/jsonbeau",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/jumble",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/listdirs",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/listvar",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/maven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/mavenaccio",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/mavendeployfile",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/mavengithub",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/miko",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/ppcmd",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/pphtml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/ppjava",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-java",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/ppmaven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/pptoml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/ppyaml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/printfile",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/printfilebin",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/printfiles",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/pwd",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/pycdel",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/recurse",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/swjava",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-java",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/swmaven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/swxml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/tcplisten",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/tcpt",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/tcptalk",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/uuidd",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/version",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/vtmaven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/vtpyproject",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/wikimaker",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95-pytools/wsclient",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/base64id",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/begonecr",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/bodycurl",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/diff",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/diffdirs",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/dircopy",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/env",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-env",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/f",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/fcopy",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/fileregrename",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/findfile",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/finds",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/findsbin",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/ftpcopy",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/hashdirs",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/hashf",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/jsonbeau",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/jumble",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/listdirs",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/listvar",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/maven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/mavenaccio",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/mavendeployfile",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/mavengithub",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/miko",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/ppcmd",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/pphtml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/ppjava",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-java",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/ppmaven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/pptoml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/pptoml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp-toml",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/ppyaml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-pp",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/printfile",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/printfilebin",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/printfiles",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/pwd",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/pycdel",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/recurse",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/swjava",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-java",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/swmaven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/swxml",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/tcplisten",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/tcpt",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/tcptalk",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/uuidd",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/version",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/vtmaven",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools-maven",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/vtpyproject",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/wikimaker",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    },
+    {
+      "command": "jl95terceira-pytools/wsclient",
+      "ecosystem": "pypi",
+      "package": "jl95terceira-pytools",
+      "reason": "invalid executable name"
+    }
+  ],
+  "rejected_records": 142,
+  "shrink_reason": null,
+  "snapshot": "2026-10-19",
+  "status": "success",
+  "unique_executables": 899377
+}

@@ -1,0 +1,55 @@
+{
+  "command": "evnx",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "evnx",
+      "version": "0.10.8",
+      "repository": "https://github.com/urwithajit9/evnx",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.8"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "evnx",
+      "version": "0.3.8",
+      "repository": "https://evnx.dev",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "evnx",
+      "version": "0.10.8",
+      "repository": "https://evnx.dev",
+      "source": "https://files.pythonhosted.org/packages/5a/51/8a9cc155e35ba610345ee99d7af51061033b82ae44b9e1af6966b4276381/evnx-0.10.8-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.8"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "urwithajit9.evnx",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

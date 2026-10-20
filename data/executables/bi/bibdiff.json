@@ -1,0 +1,43 @@
+{
+  "command": "bibdiff",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bibutils-7.2-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "bibutils",
+      "version": "7.2",
+      "repository": "https://sourceforge.net/p/bibutils/home/Bibutils/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "orcid2bib",
+      "version": "0.4.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0d/78/1dc5e797db8eb725fc255a4d96ee732bbad245b9bc99a19b4aba30a34890/orcid2bib-0.4.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

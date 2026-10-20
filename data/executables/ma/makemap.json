@@ -1,0 +1,127 @@
+{
+  "command": "makemap",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "opensmtpd-7.8.0p1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "opensmtpd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "opensmtpd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cpunion/llgo",
+      "version": "v0.999.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cpunion/llgo/@v/v0.999.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.999.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goplus/llgo",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goplus/llgo/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/goplus/llgo/compiler",
+      "version": "v0.0.0-20250403035532-0a8a4eb6a653",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/goplus/llgo/compiler/@v/v0.0.0-20250403035532-0a8a4eb6a653.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250403035532-0a8a4eb6a653"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/luoliwoshang/llgo",
+      "version": "v0.12.15",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/luoliwoshang/llgo/@v/v0.12.15.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.12.15"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/visualfc/llgo",
+      "version": "v0.0.0-20260708013727-b3c50cc747a3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/visualfc/llgo/@v/v0.0.0-20260708013727-b3c50cc747a3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260708013727-b3c50cc747a3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xgo-dev/llgo",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/xgo-dev/llgo?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "opensmtpd",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

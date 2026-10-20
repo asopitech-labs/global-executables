@@ -1,0 +1,31 @@
+{
+  "command": "spark-pipelines",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "apache-spark",
+      "version": "4.2.0",
+      "repository": "https://spark.apache.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spark-pipelines",
+      "version": "1.6.8",
+      "repository": "https://github.com/NileshPise/spark_pipelines",
+      "source": "https://files.pythonhosted.org/packages/95/04/5dfd31b553c5ef9db9719ee02a3f60f1d333655c14be50d46ff66f539626/spark_pipelines-1.6.8-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.8"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

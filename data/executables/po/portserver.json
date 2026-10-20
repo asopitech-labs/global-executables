@@ -1,0 +1,31 @@
+{
+  "command": "portserver",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/donomii/menu",
+      "version": "v0.0.0-20260612131626-101ef5fddabc",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/donomii/menu/@v/v0.0.0-20260612131626-101ef5fddabc.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260612131626-101ef5fddabc"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-portpicker",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

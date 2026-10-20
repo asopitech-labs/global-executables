@@ -1,0 +1,103 @@
+{
+  "command": "apprise",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "apprise-1.10.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/scttfrdmn/apprise-go",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/scttfrdmn/apprise-go/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/unraid/apprise-go",
+      "version": "v0.3.3",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/unraid/apprise-go?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.3.3",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "apprise",
+      "version": "1.13.0",
+      "repository": "https://pypi.org/project/apprise/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apprise",
+      "version": "2.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/db/0e/b0ca7dde275f100ecc199dba362a8f1783c906393ab0d3f2c148d8500ddc/apprise-2.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mka142-apprise",
+      "version": "0.9.4",
+      "repository": "https://github.com/caronc/apprise",
+      "source": "https://files.pythonhosted.org/packages/d0/a9/3ed1a8749d879e00affba507f00dd4069ddbe5421f0801396d666b7ef1af/mka142_apprise-0.9.4-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.4"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "apprise",
+      "version": "0.9.10",
+      "repository": "http://github.com/Fingertips/apprise",
+      "source": "https://rubygems.org/gems/apprise-0.9.10.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.10"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "apprise",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

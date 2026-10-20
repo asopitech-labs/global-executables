@@ -1,0 +1,43 @@
+{
+  "command": "repomix",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "repomix-cli",
+      "version": "2.0.1",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "repomix",
+      "version": "1.18.0",
+      "repository": "https://repomix.com",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "repomix",
+      "version": "0.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d1/15/6d91c580c715f140cf8f12ca4d96b9c542694088845f0dfc0385d2b0fb5e/repomix-0.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

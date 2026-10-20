@@ -1,0 +1,93 @@
+{
+  "command": "lzip",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "lzip-1.26-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "lzip",
+      "version": "1.23",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/lzip/1.23/_/_/revisions/0213efe2a242dcffe074d0c0ac7f3e5a/packages/63fead0844576fc02943e16909f08fcdddd6f44b/revisions/eb03ad1cc430c3b4e03c5b4a6d5c2cef/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.23"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "lzip-parallel",
+      "version": "0.2.12",
+      "repository": "https://codeberg.org/nordisk/znippy-zoomies",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.12"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "lzip",
+      "version": "1.26",
+      "repository": "https://www.nongnu.org/lzip/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "lzip-1.26-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "binary-refinery",
+      "version": "0.11.2",
+      "repository": "https://github.com/binref/refinery/",
+      "source": "https://files.pythonhosted.org/packages/d2/50/8a3763bdcf018d6d8da379c19893ef1dd8ee29e6a95ade1674fe62a247d5/binary_refinery-0.11.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "lzip",
+      "version": "1.22",
+      "repository": "https://www.nongnu.org/lzip/lzip.html",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.22"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

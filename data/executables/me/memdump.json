@@ -1,0 +1,117 @@
+{
+  "command": "memdump",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libmemcached-awesome-1.1.4-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "libmemcached",
+      "version": "1.0.18",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/libmemcached/1.0.18/_/_/revisions/e76dde9b09c85c7b284ebc64cbdf1ca6/packages/7f80638a78c0f0c59095b9ee35a4be16d31cee92/revisions/d9af277db8e834d5b14d189696d995c3/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.0.18"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "memdump",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "memdump",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.gammaspectra.live/WeebDataHoarder/pana-init",
+      "version": "v0.0.0-20260516211617-bd327b1e37e9",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/git.gammaspectra.live/WeebDataHoarder/pana-init?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260516211617-bd327b1e37e9",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260516211617-bd327b1e37e9"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libmemcached",
+      "version": "1.0.18",
+      "repository": "https://libmemcached.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "memdump",
+      "version": "0.2.0",
+      "repository": "https://github.com/doudou/memdump",
+      "source": "https://rubygems.org/gems/memdump-0.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "memdump",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "libmemcached-awesome",
+      "version": "1.1.4",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "1.1.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

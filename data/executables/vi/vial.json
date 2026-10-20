@@ -1,0 +1,55 @@
+{
+  "command": "vial",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "vial-cli",
+      "version": "0.4.0",
+      "repository": "https://github.com/TheRustyPickle/Vial",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cheesejaguar/vial",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/cheesejaguar/vial?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.2.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jrgf/go-vial",
+      "version": "v0.18.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/jrgf/go-vial?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.18.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.18.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "vial-ml",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ca/82/340aa3ba067eff1077a603f21e3d81e565e55639f95be2971e94018cc426/vial_ml-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

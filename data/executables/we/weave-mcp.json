@@ -1,0 +1,55 @@
+{
+  "command": "weave-mcp",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "weave-mcp",
+      "version": "0.5.4",
+      "repository": "https://github.com/Ataraxy-Labs/weave",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "weave",
+      "version": "0.5.2",
+      "repository": "https://ataraxy-labs.github.io/weave/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@ataraxy-labs/weave",
+      "version": "0.5.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@ataraxy-labs%2Fweave/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.5.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "thinkweave",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f1/30/9cb772a241564db025809c6762861c46325c81f44861a907003e0e34e153/thinkweave-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,68 @@
+{
+  "command": "scrcpy",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "scrcpy-4.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pubgo/scrcpy",
+      "version": "v0.0.0-20190807123552-f86caa1d85af",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pubgo/scrcpy/@v/v0.0.0-20190807123552-f86caa1d85af.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190807123552-f86caa1d85af"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "scrcpy",
+      "version": "4.1",
+      "repository": "https://github.com/Genymobile/scrcpy",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "scrcpy",
+      "version": "4.1",
+      "repository": "https://github.com/Genymobile/scrcpy",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "scrcpy",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

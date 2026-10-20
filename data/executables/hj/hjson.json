@@ -1,0 +1,80 @@
+{
+  "command": "hjson",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-hjson-3.1.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hjson",
+      "version": "1.1.0",
+      "repository": "https://github.com/hjson/hjson-rust",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pavelhank/hjson",
+      "version": "v0.0.0-20200404132357-bf680def56ac",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pavelhank/hjson/@v/v0.0.0-20200404132357-bf680def56ac.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200404132357-bf680def56ac"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "hjson",
+      "version": "4.7.0",
+      "repository": "https://hjson.github.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "hjson",
+      "version": "3.1.0",
+      "repository": "http://github.com/hjson/hjson-py",
+      "source": "https://files.pythonhosted.org/packages/1f/7f/13cd798d180af4bf4c0ceddeefba2b864a63c71645abc0308b768d67bb81/hjson-3.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "hjson",
+      "version": "4.7.0",
+      "repository": "https://hjson.github.io/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.7.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

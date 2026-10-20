@@ -1,0 +1,55 @@
+{
+  "command": "cli53",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "cli53",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/barnybug/cli53",
+      "version": "v0.9.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/barnybug/cli53/@v/v0.9.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.9.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/seansith/cli53",
+      "version": "v0.0.0-20210117113732-4c07f89c5109",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/seansith/cli53/@v/v0.0.0-20210117113732-4c07f89c5109.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210117113732-4c07f89c5109"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cli53",
+      "version": "0.9.0",
+      "repository": "https://github.com/barnybug/cli53",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

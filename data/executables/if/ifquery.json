@@ -1,0 +1,55 @@
+{
+  "command": "ifquery",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ifupdown",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ifupdown",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ifupdown2",
+      "version": "1.2.1",
+      "repository": "https://github.com/CumulusNetworks/ifupdown2",
+      "source": "https://files.pythonhosted.org/packages/d1/08/218a67bf4579ece75d3058cd24442f72e8d7b1c44efd8b75ca3ee3c60d50/ifupdown2-1.2.1-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ifupdown",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

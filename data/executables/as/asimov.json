@@ -1,0 +1,43 @@
+{
+  "command": "asimov",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "asimov-cli",
+      "version": "25.8.1",
+      "repository": "https://github.com/asimov-platform/asimov-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "25.8.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "asimov",
+      "version": "0.12.0",
+      "repository": "https://github.com/AsimovMac/asimov",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "asimov",
+      "version": "0.8.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/89/c1/5f56db2b10220da2cd128d78de6ad670ff52c5629e4d7fb0dec14e98046d/asimov-0.8.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.8.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

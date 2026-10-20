@@ -1,0 +1,91 @@
+{
+  "command": "jake",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "jake-12.10.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "jake",
+      "version": "0.10.1",
+      "repository": "https://github.com/AstraBert/jake",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/strobes-security/jake",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/strobes-security/jake/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "jake",
+      "version": "13.0.3",
+      "repository": "git://github.com/jakejs/jake.git",
+      "source": "https://registry.npmjs.org/jake/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "13.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jake",
+      "version": "4.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/56/fc/7790f497a9afde10c001010d398eeb7423a7cfe2f805a1648db89be87b65/jake-4.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "jake",
+      "version": "1.1.1",
+      "repository": "http://github.com/jcoglan/jake",
+      "source": "https://rubygems.org/gems/jake-1.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "node-jake",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

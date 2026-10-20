@@ -1,0 +1,31 @@
+{
+  "command": "hotbuild",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/wandercn/hotbuild",
+      "version": "v1.0.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/wandercn/hotbuild/@v/v1.0.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.9"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "hotbuild",
+      "version": "1.0.9",
+      "repository": "https://hotbuild.rustpub.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

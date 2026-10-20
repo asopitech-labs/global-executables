@@ -1,0 +1,56 @@
+{
+  "command": "libtool-next-version",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "libtool-2.6.2-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "libtool",
+      "version": "2.6.2",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/libtool/2.6.2/_/_/revisions/b58ff18f889b904984ef056b590c2e98/packages/17561cbc2922b459119809d525458e11e7bcb047/revisions/8edf6312861ff377fd2c56c3b83f7b48/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "2.6.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libtool",
+      "version": "2.6.2",
+      "repository": "https://www.gnu.org/software/libtool/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "libtool-2.6.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

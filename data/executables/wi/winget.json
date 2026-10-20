@@ -1,0 +1,69 @@
+{
+  "command": "winget",
+  "providers": [
+    {
+      "ecosystem": "nuget",
+      "package": "winget",
+      "version": "42.42.42",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/winget/42.42.42/winget.42.42.42.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "42.42.42"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wingit-gui",
+      "version": "0.2.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/33/aa/7fa46dc502ea8e9f7e58d31b18a0947a9c03bfa4d72b0afccfa3466f9239/wingit_gui-0.2.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.2"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "winget",
+      "version": "1.29.280",
+      "repository": "https://github.com/microsoft/winget-cli",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.29.280"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "winget-preview",
+      "version": "1.30.100",
+      "repository": "https://github.com/microsoft/winget-cli",
+      "source": "https://codeload.github.com/ScoopInstaller/Versions/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.30.100"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Microsoft.AppInstaller",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

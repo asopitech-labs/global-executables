@@ -1,0 +1,31 @@
+{
+  "command": "base-builder",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/hugelgupf/oss-fuzz",
+      "version": "v0.0.0-20230812124605-92be4cbc6249",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/github.com/hugelgupf/oss-fuzz/@v/v0.0.0-20230812124605-92be4cbc6249.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230812124605-92be4cbc6249"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bricking/base-builder",
+      "version": "3.0.11",
+      "repository": "git+ssh://github.com/qoxop/bricking.git",
+      "source": "https://registry.npmjs.org/@bricking%2Fbase-builder/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.11"
+    }
+  ],
+  "first_seen": "2026-08-25",
+  "last_seen": "2026-10-19"
+}

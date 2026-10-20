@@ -1,0 +1,79 @@
+{
+  "command": "prophet",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "linusshops/prophet",
+      "version": "v0.8.5",
+      "repository": "https://github.com/linusshops/prophet.git",
+      "source": "https://repo.packagist.org/p2/linusshops/prophet.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.8.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ai-prophet",
+      "version": "0.1.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/81/e6/4bc0377134aaa0cc163e110beaf5b05f26f0cb98d48c6409e8d077450d63/ai_prophet-0.1.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "prophet-cli",
+      "version": "0.27.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4e/bd/7729a1d32e5b6301db328af2c4fe15f6a64a0e74f6127db04e2ac502451f/prophet_cli-0.27.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.27.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "emboss",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

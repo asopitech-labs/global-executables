@@ -1,0 +1,55 @@
+{
+  "command": "ditaa",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ditaa-0.11.0-4",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rakutentech/plummy/plummy-cli",
+      "version": "v0.0.0-20210712134709-ecd97ca261f0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rakutentech/plummy/plummy-cli/@v/v0.0.0-20210712134709-ecd97ca261f0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210712134709-ecd97ca261f0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ditaa",
+      "version": "0.11.0",
+      "repository": "https://ditaa.sourceforge.net/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ditaa",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

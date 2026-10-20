@@ -1,0 +1,79 @@
+{
+  "command": "slice2rb",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "zeroc-ice-3.7.10-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "zeroc-ice-compilers",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "zeroc-ice",
+      "version": "3.8.3",
+      "repository": "https://github.com/zeroc-ice/ice",
+      "source": "https://rubygems.org/gems/zeroc-ice-3.8.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.8.3"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "zeroc-ice-x64-mingw",
+      "version": "3.6.5",
+      "repository": "https://github.com/zeroc-ice/ice",
+      "source": "https://rubygems.org/gems/zeroc-ice-x64-mingw-3.6.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.6.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "zeroc-ice-x86-mingw",
+      "version": "3.6.5",
+      "repository": "https://github.com/zeroc-ice/ice",
+      "source": "https://rubygems.org/gems/zeroc-ice-x86-mingw-3.6.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "3.6.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "zeroc-ice-compilers",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

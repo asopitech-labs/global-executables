@@ -1,0 +1,55 @@
+{
+  "command": "users-admin",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "gnome-system-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gnome-system-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/beergash/users-admin",
+      "version": "v0.0.0-20190419133510-239aa59c4c4b",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/beergash/users-admin?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20190419133510-239aa59c4c4b",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190419133510-239aa59c4c4b"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gnome-system-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

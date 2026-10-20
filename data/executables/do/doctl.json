@@ -1,0 +1,92 @@
+{
+  "command": "doctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "doctl-1.167.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gh.neting.cc/digitalocean/doctl",
+      "version": "v1.120.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gh.neting.cc/digitalocean/doctl/@v/v1.120.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.120.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/digitalocean/doctl",
+      "version": "v1.167.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/digitalocean/doctl/@v/v1.167.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.167.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xo/ox",
+      "version": "v0.0.0-20260826020025-6fcd48b711a6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xo/ox/@v/v0.0.0-20260826020025-6fcd48b711a6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260826020025-6fcd48b711a6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "doctl",
+      "version": "1.167.0",
+      "repository": "https://docs.digitalocean.com/reference/doctl/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "doctl",
+      "version": "0.4.3",
+      "repository": "https://rubygems.org/gems/doctl",
+      "source": "https://rubygems.org/gems/doctl-0.4.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.3"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "doctl",
+      "version": "1.167.0",
+      "repository": "https://github.com/digitalocean/doctl",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.167.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

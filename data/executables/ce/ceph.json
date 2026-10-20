@@ -1,0 +1,67 @@
+{
+  "command": "ceph",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ceph-common",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ceph-common",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hashicorp/nomad-driver-virt",
+      "version": "v0.0.2-beta.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hashicorp/nomad-driver-virt/@v/v0.0.2-beta.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.2-beta.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kowabunga-cloud/kowabunga",
+      "version": "v0.64.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kowabunga-cloud/kowabunga/@v/v0.64.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.64.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ceph-common",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

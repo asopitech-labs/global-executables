@@ -1,0 +1,55 @@
+{
+  "command": "cargo-nextest",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "cargo-nextest-0.9.143-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-nextest",
+      "version": "0.9.148",
+      "repository": "https://github.com/nextest-rs/nextest",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.148"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cargo-nextest",
+      "version": "0.9.143",
+      "repository": "https://nexte.st",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "astral-dev-toolchain-cargo-nextest",
+      "version": "0.9.148",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2a/88/1f2dca063ccdf300fc94b3f88f6166b049f561cffbc1ef8cda80fe372eb4/astral_dev_toolchain_cargo_nextest-0.9.148-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.148"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

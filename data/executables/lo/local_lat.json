@@ -1,0 +1,31 @@
+{
+  "command": "local_lat",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "zeromq-4.3.5-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/CapillarySoftware/goiostat",
+      "version": "v0.0.0-20160511231506-fd4faf220e1d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!capillary!software/goiostat/@v/v0.0.0-20160511231506-fd4faf220e1d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20160511231506-fd4faf220e1d"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

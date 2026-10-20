@@ -1,0 +1,31 @@
+{
+  "command": "ostree-receive-1",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "ostree-push",
+      "version": "1.2.0",
+      "repository": "https://github.com/dbnicholson/ostree-push",
+      "source": "https://files.pythonhosted.org/packages/67/2b/a52ddc282122305ed681ac07a694d5ab1b93787b9f50436e7e8a24837842/ostree_push-1.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ostree-push",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

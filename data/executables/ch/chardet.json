@@ -1,0 +1,43 @@
+{
+  "command": "chardet",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "chardet-cli",
+      "version": "0.2.0",
+      "repository": "https://github.com/ljh-sh/chardet",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cocoricofm",
+      "version": "1.4",
+      "repository": "https://gitlab.com/philn/CocoRicoFM/",
+      "source": "https://files.pythonhosted.org/packages/29/19/eb9989716ee8c9eb126fad4729b4214a6fe5eb7bbb56ee45f3f59db738c3/cocoricofm-1.4.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-chardet",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

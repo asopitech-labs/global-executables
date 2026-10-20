@@ -1,0 +1,79 @@
+{
+  "command": "poeditor",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "poedit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "poedit",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "poeditor-client",
+      "version": "0.0.10",
+      "repository": "https://github.com/lukin0110/poeditor-client",
+      "source": "https://files.pythonhosted.org/packages/00/73/cc4c529e1dfd65bddaa76ecc5a6023be3576ea3565357a6eabb2aa9b4ffc/poeditor_client-0.0.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.10"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "poeditor-sync",
+      "version": "0.6",
+      "repository": "https://github.com/mick88/poeditor-sync",
+      "source": "https://files.pythonhosted.org/packages/36/a1/b003e4a1a970c0e4f501f027c30e30c475e5252d8a795eb754b517a799b9/poeditor_sync-0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "poeditor-cli",
+      "version": "0.5.0",
+      "repository": "https://github.com/devxoul/poeditor-cli",
+      "source": "https://rubygems.org/gems/poeditor-cli-0.5.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "poedit",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

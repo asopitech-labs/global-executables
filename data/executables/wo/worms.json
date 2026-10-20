@@ -1,0 +1,79 @@
+{
+  "command": "worms",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "raster3d",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "raster3d",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/centrifugal/centrifuge/_examples",
+      "version": "v0.0.0-20260822075818-1d8f99f1d0d4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/centrifugal/centrifuge/_examples/@v/v0.0.0-20260822075818-1d8f99f1d0d4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260822075818-1d8f99f1d0d4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/virvaldium/centrifuge",
+      "version": "v0.0.0-20181116124815-b165c2301b30",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/virvaldium/centrifuge?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20181116124815-b165c2301b30",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20181116124815-b165c2301b30"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wormstools",
+      "version": "1.3.7",
+      "repository": "https://github.com/Ulises-Rosas/WoRMStools",
+      "source": "https://files.pythonhosted.org/packages/17/bd/747ccbfa8dbf986401ed329c5853e5eb8f8e7bf1c14ff9b02bab89abd4fd/wormstools-1.3.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.3.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "raster3d",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

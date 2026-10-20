@@ -1,0 +1,91 @@
+{
+  "command": "ctr-remote",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "stargz-snapshotter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "stargz-snapshotter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/akihirosuda/ktock-remote-snapshotter",
+      "version": "v0.0.0-20200107050629-0bd21fd53532",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/akihirosuda/ktock-remote-snapshotter?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20200107050629-0bd21fd53532",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200107050629-0bd21fd53532"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/containerd/stargz-snapshotter/cmd",
+      "version": "v0.18.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/containerd/stargz-snapshotter/cmd/@v/v0.18.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.18.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ktock/remote-snapshotter/cmd",
+      "version": "v0.18.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ktock/remote-snapshotter/cmd/@v/v0.18.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.18.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ktock/stargz-snapshotter/cmd",
+      "version": "v0.0.0-20230110013727-b93c40d5832c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ktock/stargz-snapshotter/cmd/@v/v0.0.0-20230110013727-b93c40d5832c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230110013727-b93c40d5832c"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "stargz-snapshotter",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

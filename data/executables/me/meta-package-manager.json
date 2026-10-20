@@ -1,0 +1,31 @@
+{
+  "command": "meta-package-manager",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "meta-package-manager",
+      "version": "7.6.1",
+      "repository": "https://kdeldycke.github.io/meta-package-manager/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "meta-package-manager",
+      "version": "8.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/38/cf/e0b60cce4e0e5cf6a106a0d73d31d0ffc6a02ec518b42e758b7aef7dc66e/meta_package_manager-8.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "8.1.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

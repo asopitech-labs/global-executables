@@ -1,0 +1,67 @@
+{
+  "command": "cargo-insta",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "cargo-insta-1.48.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "cargo-insta",
+      "version": "1.49.0",
+      "repository": "https://github.com/mitsuhiko/insta",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.49.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cargo-insta",
+      "version": "1.48.0",
+      "repository": "https://insta.rs",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "astral-dev-toolchain-cargo-insta",
+      "version": "1.49.0",
+      "repository": "https://insta.rs/",
+      "source": "https://files.pythonhosted.org/packages/f1/2d/21e4dd077b3dc5e1384876a68462d9df52107b8adc243a7257e416755d71/astral_dev_toolchain_cargo_insta-1.49.0-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.49.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cargo-insta",
+      "version": "1.26.0",
+      "repository": "https://insta.rs/",
+      "source": "https://files.pythonhosted.org/packages/f9/07/ca0a47a3bbc05c7c6271f35a68bdfb1097b925014eeba2ae005d1adf7603/cargo_insta-1.26.0-py3-none-macosx_10_7_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.26.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

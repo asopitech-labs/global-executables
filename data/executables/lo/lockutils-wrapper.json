@@ -1,0 +1,43 @@
+{
+  "command": "lockutils-wrapper",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-oslo-concurrency-7.6.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "oslo.concurrency",
+      "version": "7.6.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/f0/fd/c3d55e23b7de17704563364b40613b63a244fa9535bb5dc41f67067d8d54/oslo_concurrency-7.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "7.6.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-oslo.concurrency",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

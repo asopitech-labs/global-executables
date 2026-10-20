@@ -1,0 +1,55 @@
+{
+  "command": "glim",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "glim-0.2.1-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "glim-tui",
+      "version": "0.2.1",
+      "repository": "https://github.com/junkdog/glim",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "glim",
+      "version": "0.11.2",
+      "repository": "https://github.com/aacanakin/glim",
+      "source": "https://files.pythonhosted.org/packages/73/d3/fe4bf9bd0398b031807dc5b4ad3f8624542b38139f6a05593507daccc0b3/glim-0.11.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.11.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "glim",
+      "version": "0.1.5",
+      "repository": "https://github.com/sorbits/glim/",
+      "source": "https://rubygems.org/gems/glim-0.1.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.5"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

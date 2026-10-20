@@ -1,0 +1,55 @@
+{
+  "command": "compiledb",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "compiledb",
+      "version": "1.2.0",
+      "repository": "https://github.com/a5ehren/compiledb-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fcying/compiledb-go",
+      "version": "v1.7.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fcying/compiledb-go/@v/v1.7.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.7.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "compiledb",
+      "version": "0.10.7",
+      "repository": "https://github.com/nickdiego/compiledb",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "compiledb",
+      "version": "0.10.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/53/1a/34e78486c39af6f0e37b0e23558dcd3d7472a6bf6127b3cb4525f2398923/compiledb-0.10.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.7"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

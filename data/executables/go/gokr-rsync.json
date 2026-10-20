@@ -1,0 +1,91 @@
+{
+  "command": "gokr-rsync",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "gokr-rsync",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/f-luo/rsync",
+      "version": "v0.0.0-20260422234135-c84164e0ea7d",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/f-luo/rsync/@v/v0.0.0-20260422234135-c84164e0ea7d.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260422234135-c84164e0ea7d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gcv/rsync",
+      "version": "v0.0.0-20250802172551-41a09c6fb4da",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gcv/rsync/@v/v0.0.0-20250802172551-41a09c6fb4da.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250802172551-41a09c6fb4da"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gokrazy/rsync",
+      "version": "v0.3.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gokrazy/rsync/@v/v0.3.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/runpod/rsync",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/runpod/rsync?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/superrxan/rsync",
+      "version": "v0.0.0-20240218083717-ecd39dc03b14",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/superrxan/rsync/@v/v0.0.0-20240218083717-ecd39dc03b14.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240218083717-ecd39dc03b14"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/yxd-ym/rsync",
+      "version": "v0.0.0-20250420083350-06a95dbb766e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/yxd-ym/rsync/@v/v0.0.0-20250420083350-06a95dbb766e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250420083350-06a95dbb766e"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

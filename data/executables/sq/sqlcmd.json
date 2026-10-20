@@ -1,0 +1,44 @@
+{
+  "command": "sqlcmd",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "sqlcmd",
+      "version": "1.10.0",
+      "repository": "https://github.com/microsoft/go-sqlcmd",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sqlbridge",
+      "version": "0.1.68",
+      "repository": "https://github.com/lgfausak/sqlbridge",
+      "source": "https://files.pythonhosted.org/packages/22/2d/7ac1e22772ad97902455a4195da4570fa1c3e887836a2134a4535c5eca97/sqlbridge-0.1.68.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.68"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "go-sqlcmd",
+      "version": "1.10.0",
+      "repository": "https://github.com/microsoft/go-sqlcmd",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.10.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,31 @@
+{
+  "command": "driftwood",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "driftwood",
+      "version": "1.0.1",
+      "repository": "https://trufflesecurity.com/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "driftwood",
+      "version": "0.0.8",
+      "repository": "https://github.com/puppetlabs/driftwood",
+      "source": "https://rubygems.org/gems/driftwood-0.0.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.8"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

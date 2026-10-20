@@ -1,0 +1,55 @@
+{
+  "command": "vidcat",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "w3cam",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dapple",
+      "version": "0.9.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/81/04/b12d7c5f3576cc6288e673f5f3382f65e149a25ffde57ac20a041d9490a2/dapple-0.9.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zcmds",
+      "version": "1.5.41",
+      "repository": "https://github.com/zackees/zcmds",
+      "source": "https://files.pythonhosted.org/packages/1b/30/0ba2ee003a1c80ff6116156f37e5743a56db8c9daa508f33f0b002b9f304/zcmds-1.5.41-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.41"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "w3cam",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

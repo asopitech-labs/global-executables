@@ -1,0 +1,31 @@
+{
+  "command": "strace.py",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-ptrace-0.9.9-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-ptrace",
+      "version": "0.9.9",
+      "repository": "http://python-ptrace.readthedocs.io/",
+      "source": "https://files.pythonhosted.org/packages/3e/33/0865143ddf633d27881296e77bd66b24df5faa9d744267c1d29aeb902a07/python_ptrace-0.9.9-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9.9"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,56 @@
+{
+  "command": "git-rename-branch",
+  "providers": [
+    {
+      "ecosystem": "conan",
+      "package": "depot_tools",
+      "version": "cci.20241206",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/depot_tools/cci.20241206/_/_/revisions/bd87b4fc6037558982825c139d31e680/packages/da39a3ee5e6b4b0d3255bfef95601890afd80709/revisions/9feff4904a3c61c0ec0c7fc981157393/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "cci.20241206"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-extras",
+      "version": "7.5.0",
+      "repository": "https://github.com/tj/git-extras",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "git-extras-7.4.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "git-extras",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

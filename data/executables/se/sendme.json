@@ -1,0 +1,80 @@
+{
+  "command": "sendme",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "sendme-0.36.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "sendme",
+      "version": "0.37.0",
+      "repository": "https://github.com/n0-computer/sendme",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.37.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jackdoe/updown",
+      "version": "v0.0.0-20240517134813-a4fcd86226c4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jackdoe/updown/@v/v0.0.0-20240517134813-a4fcd86226c4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240517134813-a4fcd86226c4"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "sendme",
+      "version": "0.36.0",
+      "repository": "https://iroh.computer/sendme",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sendme",
+      "version": "2024.9.28",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ea/12/0a9589ab071a8022f216944f3a8f64e9f825020e8000bd07493079120a3f/sendme-2024.9.28-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2024.9.28"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "sendme",
+      "version": "0.36.0",
+      "repository": "https://github.com/n0-computer/sendme",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.36.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

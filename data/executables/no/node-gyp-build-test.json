@@ -1,0 +1,31 @@
+{
+  "command": "node-gyp-build-test",
+  "providers": [
+    {
+      "ecosystem": "npm",
+      "package": "@bratel/prebuild-install",
+      "version": "8.0.0",
+      "repository": "git+https://github.com/prebuild/prebuild-install.git",
+      "source": "https://registry.npmjs.org/@bratel%2Fprebuild-install/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "8.0.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "node-gyp-build",
+      "version": "4.8.4",
+      "repository": "git+https://github.com/prebuild/node-gyp-build.git",
+      "source": "https://registry.npmjs.org/node-gyp-build/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.8.4"
+    }
+  ],
+  "first_seen": "2026-08-25",
+  "last_seen": "2026-10-19"
+}

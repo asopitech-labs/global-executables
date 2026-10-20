@@ -1,0 +1,79 @@
+{
+  "command": "havn",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "havn-0.3.8-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "arch",
+      "package": "havn-0.3.9-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "havn",
+      "version": "0.3.10",
+      "repository": "https://github.com/mrjackwills/havn",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jorgengundersen/havn",
+      "version": "v0.0.0-20260625123007-ac86271bdc78",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/jorgengundersen/havn?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260625123007-ac86271bdc78",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260625123007-ac86271bdc78"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "havn",
+      "version": "0.3.9",
+      "repository": "https://github.com/mrjackwills/havn",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "havn",
+      "version": "0.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/95/ca/5aa47247dbefb72cbabdbd4c77236788b0de7b5d9a76f699454d8667eceb/havn-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

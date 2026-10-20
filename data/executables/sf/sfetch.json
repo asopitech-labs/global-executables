@@ -1,0 +1,91 @@
+{
+  "command": "sfetch",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "sfetch",
+      "version": "1.4.0",
+      "repository": "https://github.com/MattTheNub/sfetch.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.4.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "biosquid",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "biosquid",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/3leaps/sfetch",
+      "version": "v0.4.11",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/3leaps/sfetch?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.4.11",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.11"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flaboy/sfetch",
+      "version": "v0.0.0-20240605020422-997b79c5d889",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flaboy/sfetch/@v/v0.0.0-20240605020422-997b79c5d889.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240605020422-997b79c5d889"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sfetch",
+      "version": "1.0.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ca/e8/83d3104501e4b1f1917b3897719a7aca0aaced86abe333aea0c7ecccc0f2/sfetch-1.0.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "biosquid",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

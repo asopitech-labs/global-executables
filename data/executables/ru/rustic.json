@@ -1,0 +1,104 @@
+{
+  "command": "rustic",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "rustic-0.11.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rustic-backup",
+      "version": "0.2.1",
+      "repository": "https://github.com/bnavetta/rustic.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rustic-rs",
+      "version": "0.11.4",
+      "repository": "https://github.com/rustic-rs/rustic",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.11.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/v2Kamikaze/rustic",
+      "version": "v0.0.0-20250418090856-5def83ccf376",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/v2!kamikaze/rustic/@v/v0.0.0-20250418090856-5def83ccf376.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250418090856-5def83ccf376"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/v2kamikaze/rustic",
+      "version": "v0.0.0-20250418090856-5def83ccf376",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/v2kamikaze/rustic/@v/v0.0.0-20250418090856-5def83ccf376.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250418090856-5def83ccf376"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rustic",
+      "version": "0.11.4",
+      "repository": "https://rustic.cli.rs",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rustic",
+      "version": "0.0.1",
+      "repository": "https://github.com/pyrustic/rustic",
+      "source": "https://files.pythonhosted.org/packages/2a/7b/1de7dbf628f5a0b8f10bd7894b2bf3f5d0197d15546c892fa2eed3766d32/rustic-0.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "rustic",
+      "version": "0.11.4",
+      "repository": "https://rustic.cli.rs",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.11.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

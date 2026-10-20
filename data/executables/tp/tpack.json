@@ -1,0 +1,55 @@
+{
+  "command": "tpack",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "tpack-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/pluveto/tpack",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tmuxpack/tpack",
+      "version": "v1.2.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/tmuxpack/tpack?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.2.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "tpack",
+      "version": "2.0.5",
+      "repository": "https://github.com/tmuxpack/tpack",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tpack",
+      "version": "1.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/07/bc/22c4b9e53b6665ab3b20f2e549e0bb694c0fbb89109c3afa8c557d7588a9/tpack-1.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

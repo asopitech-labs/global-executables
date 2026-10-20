@@ -1,0 +1,55 @@
+{
+  "command": "uefi-boot-menu",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "virt-firmware-26.8-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "virtfw-efi-tools",
+      "version": "0.1.14",
+      "repository": "https://gitlab.com/kraxel/virt-firmware-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.14"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "virt-firmware",
+      "version": "26.10",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/44/04/d85ffdb5d96cbff786a9f19a073419e2f13e46a10e8c7c6bffc732193b2a/virt_firmware-26.10-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "26.10"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-virt-firmware",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

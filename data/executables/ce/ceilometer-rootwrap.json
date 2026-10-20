@@ -1,0 +1,31 @@
+{
+  "command": "ceilometer-rootwrap",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "ceilometer",
+      "version": "27.0.0",
+      "repository": "https://docs.openstack.org/ceilometer/latest/",
+      "source": "https://files.pythonhosted.org/packages/22/33/2688f75c60ec37bc243c80efbbe6a591a78f6d73e3f0046b16edee28086c/ceilometer-27.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "27.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-ceilometer",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

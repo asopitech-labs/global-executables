@@ -1,0 +1,43 @@
+{
+  "command": "git-list",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "git-get",
+      "version": "0.6.1",
+      "repository": "https://github.com/grdl/git-get",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-number",
+      "version": "1.0.1",
+      "repository": "https://github.com/holygeek/git-number",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@blackglory/git-list",
+      "version": "0.3.0",
+      "repository": "git+ssh://github.com/BlackGlory/git-list.git",
+      "source": "https://registry.npmjs.org/@blackglory%2Fgit-list/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,91 @@
+{
+  "command": "biff",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "biff",
+      "version": "0.2.5",
+      "repository": "https://github.com/EngosSoftware/biff.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.5"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "biff-datetime-cli",
+      "version": "0.1.3",
+      "repository": "https://github.com/BurntSushi/biff",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "biff",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "biff",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jvzantvoort/biff",
+      "version": "v0.0.0-20240714152053-401f3b21d535",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jvzantvoort/biff/@v/v0.0.0-20240714152053-401f3b21d535.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240714152053-401f3b21d535"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "punt-biff",
+      "version": "1.19.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4e/5c/5fe2bf9015ab3ee7c2cd8226d48d432dce6a5306859c7884289d3f74f0a9/punt_biff-1.19.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.19.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "biff",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "hachoir-metadata",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-hachoir-3.3.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "hachoir",
+      "version": "3.4.0",
+      "repository": "http://hachoir.readthedocs.io/",
+      "source": "https://files.pythonhosted.org/packages/24/3c/a1ea410b41cf69e1a2b42cb28fca44f53f567490ba398bb832315ce39d83/hachoir-3.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.4.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "hachoir",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

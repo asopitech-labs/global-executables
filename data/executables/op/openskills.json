@@ -1,0 +1,43 @@
+{
+  "command": "openskills",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "openskills",
+      "version": "1.5.0",
+      "repository": "https://github.com/numman-ali/openskills",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@andysama/openskills",
+      "version": "1.3.2",
+      "repository": "git+https://github.com/andysama-work/openskills.git",
+      "source": "https://registry.npmjs.org/@andysama%2Fopenskills/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.3.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "openskills-sdk",
+      "version": "0.0.8",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ad/7c/b3d35c340607a27910269a12ede8a8bee8ef2344157d8158460d56738674/openskills_sdk-0.0.8-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.8"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

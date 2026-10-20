@@ -1,0 +1,79 @@
+{
+  "command": "bsparse",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "burp",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "burp",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/VageLO/bsparse",
+      "version": "v1.0.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/VageLO/bsparse?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.0.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "burp",
+      "version": "3.2.0",
+      "repository": "https://burp.grke.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bsparse",
+      "version": "0.3.1",
+      "repository": "https://github.com/hltcoe/bsparse",
+      "source": "https://files.pythonhosted.org/packages/42/2b/c849d4b602e06a9f0cffaa97d774aaa950558c015376e08ba1a5023a039f/bsparse-0.3.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "burp",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

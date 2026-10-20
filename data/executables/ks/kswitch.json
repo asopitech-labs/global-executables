@@ -1,0 +1,140 @@
+{
+  "command": "kswitch",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "krb5-1.22.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "krb5",
+      "version": "1.21.2",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/krb5/1.21.2/_/_/revisions/33afc5a9dd18127998c8319727a5a04c/packages/95325579e4a193e633223c2b733391082ff8568d/revisions/e167c7d4681fc6f97e6e95d2bc20bffa/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.21.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kswitch",
+      "version": "1.1.0",
+      "repository": "https://github.com/Twonkular/kswitch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/MichaelSp/kswitch",
+      "version": "v0.0.0-20260830125356-1e9270250a7b",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/MichaelSp/kswitch?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260830125356-1e9270250a7b",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260830125356-1e9270250a7b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.seankhliao.com/mono",
+      "version": "v0.0.0-20260823193720-8563168acaca",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.seankhliao.com/mono/@v/v0.0.0-20260823193720-8563168acaca.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260823193720-8563168acaca"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "heimdal",
+      "version": "7.8.0",
+      "repository": "https://github.com/heimdal/heimdal",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "krb5",
+      "version": "1.22.2",
+      "repository": "https://web.mit.edu/kerberos/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "14.8.7",
+      "repository": null,
+      "source": "macos@14.8.7-23J520-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "15.7.7",
+      "repository": null,
+      "source": "macos@15.7.7-24G720-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "macos",
+      "package": "macos-base",
+      "version": "26.5.2",
+      "repository": null,
+      "source": "macos@26.5.2-25F84-arm64",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "macos-base",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "heimdal-7.8.0-5",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

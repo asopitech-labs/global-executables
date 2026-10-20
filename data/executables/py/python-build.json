@@ -1,0 +1,55 @@
+{
+  "command": "python-build",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pyenv-1:2.8.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pyenv",
+      "version": "2.8.4",
+      "repository": "https://github.com/pyenv/pyenv",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "multi-lang-build",
+      "version": "0.4.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/64/25/98572f169e20db8418276341bdeaa9182bc51a99c0f0aaf5b2c2b09bb231/multi_lang_build-0.4.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-build",
+      "version": "0.2.13",
+      "repository": "UNKNOWN",
+      "source": "https://files.pythonhosted.org/packages/58/0a/6390b678c9c45606fcbb429c8e66fb8c4838dc24f0363fd7c974e3501f11/python-build-0.2.13.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.13"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

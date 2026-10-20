@@ -1,0 +1,31 @@
+{
+  "command": "zeek",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "zeek",
+      "version": "8.2.2",
+      "repository": "https://zeek.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zeek",
+      "version": "0.1.5",
+      "repository": "http://github.com/krockode/zeek",
+      "source": "https://files.pythonhosted.org/packages/34/62/8a5957ad91aeec8cde357bc7ed6af75bee2b8aacc73b158aca692d73d2f1/zeek-0.1.5.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

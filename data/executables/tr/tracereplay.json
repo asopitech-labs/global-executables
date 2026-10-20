@@ -1,0 +1,67 @@
+{
+  "command": "tracereplay",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "libtrace-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libtrace-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lab1702/traffic-sim",
+      "version": "v0.0.0-20260606014135-3382a5a9e84b",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/lab1702/traffic-sim?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260606014135-3382a5a9e84b",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260606014135-3382a5a9e84b"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "libtrace",
+      "version": "4.0.34",
+      "repository": "https://github.com/LibtraceTeam/libtrace",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "libtrace-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "sasm",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "sasm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "sasm",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sasm",
+      "version": "0.2.1",
+      "repository": "https://github.com/ymyzk/sasm",
+      "source": "https://files.pythonhosted.org/packages/46/f7/e4e0df19fa2611c285962b93b53b2b2055d0ef2170bf81229bb099a76a40/sasm-0.2.1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "toolchain-simplez",
+      "version": "0.0.15",
+      "repository": "https://github.com/Obijuan/simplez-fpga",
+      "source": "https://files.pythonhosted.org/packages/d7/43/018df904ab4b5e66abb5cc428b663ccfc1c04ae47ef3e73bd34430a4df5b/toolchain-simplez-0.0.15.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.15"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "sasm",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

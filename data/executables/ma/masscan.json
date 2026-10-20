@@ -1,0 +1,103 @@
+{
+  "command": "masscan",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "masscan-1.3.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "masscan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "masscan",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/DeteMin/masscan",
+      "version": "v0.0.0-20231122102825-8a2a6762f5c9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!dete!min/masscan/@v/v0.0.0-20231122102825-8a2a6762f5c9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231122102825-8a2a6762f5c9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/detemin/masscan",
+      "version": "v0.0.0-20231122102825-8a2a6762f5c9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/detemin/masscan/@v/v0.0.0-20231122102825-8a2a6762f5c9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231122102825-8a2a6762f5c9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/raylax/masscan",
+      "version": "v0.0.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/raylax/masscan/@v/v0.0.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "masscan",
+      "version": "1.3.2",
+      "repository": "https://github.com/robertdavidgraham/masscan/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "masscan",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

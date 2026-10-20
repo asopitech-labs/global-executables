@@ -1,0 +1,43 @@
+{
+  "command": "connect-migrate",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "apollo-federation",
+      "version": "2.18.0",
+      "repository": "https://github.com/apollographql/router",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.18.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@arcjet-vendor/connectrpc-connect-migrate",
+      "version": "1.7.1",
+      "repository": "git+https://github.com/connectrpc/connect-es.git",
+      "source": "https://registry.npmjs.org/@arcjet-vendor%2Fconnectrpc-connect-migrate/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.7.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@connectrpc/connect-migrate",
+      "version": "2.1.2",
+      "repository": "git+https://github.com/connectrpc/connect-es.git",
+      "source": "https://registry.npmjs.org/@connectrpc%2Fconnect-migrate/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "2.1.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

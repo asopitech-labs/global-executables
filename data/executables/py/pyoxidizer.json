@@ -1,0 +1,56 @@
+{
+  "command": "pyoxidizer",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "pyoxidizer",
+      "version": "0.24.0",
+      "repository": "https://github.com/indygreg/PyOxidizer.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.24.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pyoxidizer",
+      "version": "0.24.0",
+      "repository": "https://github.com/indygreg/PyOxidizer",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyoxidizer",
+      "version": "0.24.0",
+      "repository": "https://github.com/indygreg/PyOxidizer",
+      "source": "https://files.pythonhosted.org/packages/7a/93/aae15e73855e6e9a327528b506b4ae2e6e0f94d301fed8f27015bbe047e4/pyoxidizer-0.24.0-py3-none-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.24.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "pyoxidizer",
+      "version": "0.24.0",
+      "repository": "https://github.com/indygreg/PyOxidizer",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.24.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

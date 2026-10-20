@@ -1,0 +1,55 @@
+{
+  "command": "puppet-lint",
+  "providers": [
+    {
+      "ecosystem": "rubygems",
+      "package": "halyard-puppet-lint",
+      "version": "1.2.0",
+      "repository": "https://github.com/rodjek/puppet-lint/",
+      "source": "https://rubygems.org/gems/halyard-puppet-lint-1.2.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "puppet-lint",
+      "version": "5.1.1",
+      "repository": "https://github.com/puppetlabs/puppet-lint/",
+      "source": "https://rubygems.org/gems/puppet-lint-5.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "5.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "puppet-lint-halyard",
+      "version": "1.1.0.1",
+      "repository": "https://github.com/rodjek/puppet-lint/",
+      "source": "https://rubygems.org/gems/puppet-lint-halyard-1.1.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "puppet-lint",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

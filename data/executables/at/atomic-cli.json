@@ -1,0 +1,31 @@
+{
+  "command": "atomic-cli",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "atomic-cli",
+      "version": "0.40.0",
+      "repository": "https://github.com/atomicdata-dev/atomic-server",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.40.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/libatomic/atomic-cli",
+      "version": "v1.2.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/libatomic/atomic-cli/@v/v1.2.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

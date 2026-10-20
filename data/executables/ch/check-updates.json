@@ -1,0 +1,43 @@
+{
+  "command": "check-updates",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "check-updates-cli",
+      "version": "0.5.0",
+      "repository": "https://github.com/explodingcamera/check-updates",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@badisi/check-updates",
+      "version": "1.2.1",
+      "repository": "git+https://github.com/Badisi/check-updates.git",
+      "source": "https://registry.npmjs.org/@badisi%2Fcheck-updates/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.2.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "check-updates",
+      "version": "0.0.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/59/88/0fc712e32b4b50ea59466346760b1f0f8ee83d38c168155214b46b14d814/check_updates-0.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.4"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

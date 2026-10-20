@@ -1,0 +1,31 @@
+{
+  "command": "dep-check",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "dep-check",
+      "version": "0.1.0",
+      "repository": "https://github.com/ryankurte/rust-dep-check",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@commitlint/utils",
+      "version": "8.3.6",
+      "repository": "git+https://github.com/conventional-changelog/commitlint.git",
+      "source": "https://registry.npmjs.org/@commitlint%2Futils/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "8.3.6"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

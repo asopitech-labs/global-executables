@@ -1,0 +1,79 @@
+{
+  "command": "checkmake",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "checkmake",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ashmckenzie/checkmake",
+      "version": "v0.0.0-20230817110936-bd26d7905e47",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ashmckenzie/checkmake/@v/v0.0.0-20230817110936-bd26d7905e47.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230817110936-bd26d7905e47"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/checkmake/checkmake",
+      "version": "v0.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/checkmake/checkmake/@v/v0.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mrtazz/checkmake",
+      "version": "v0.0.0-20180701185753-ff21564a952c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mrtazz/checkmake/@v/v0.0.0-20180701185753-ff21564a952c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180701185753-ff21564a952c"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mrtazz/checkmake",
+      "version": "v0.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mrtazz/checkmake/@v/v0.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "checkmake",
+      "version": "0.3.2",
+      "repository": "https://github.com/checkmake/checkmake",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

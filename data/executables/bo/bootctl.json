@@ -1,0 +1,139 @@
+{
+  "command": "bootctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "systemd-261.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "systemd-boot-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "systemd-boot-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "d.zyszy.best/ironcore-dev/boot-operator",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/d.zyszy.best/ironcore-dev/boot-operator/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/appkins-org/go-redfish-uefi",
+      "version": "v0.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/appkins-org/go-redfish-uefi/@v/v0.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bmcpi/pibmc",
+      "version": "v0.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bmcpi/pibmc/@v/v0.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/trainking/goboot",
+      "version": "v0.1.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/trainking/goboot/@v/v0.1.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "proxy-git.cwkhome.fun/ironcore-dev/boot-operator",
+      "version": "v0.2.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/proxy-git.cwkhome.fun/ironcore-dev/boot-operator/@v/v0.2.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "systemd",
+      "version": "261.2",
+      "repository": "https://systemd.io",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bootctl",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5c/e8/47be17edfe6131af6b24861c6da5ff60fbe418430b4fbdadfcc394e1af77/bootctl-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "systemd-boot",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

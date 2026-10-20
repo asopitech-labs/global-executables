@@ -1,0 +1,56 @@
+{
+  "command": "topgrade",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "topgrade",
+      "version": "17.13.1",
+      "repository": "https://github.com/topgrade-rs/topgrade",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "17.13.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "topgrade",
+      "version": "17.9.0",
+      "repository": "https://github.com/topgrade-rs/topgrade",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "topgrade",
+      "version": "17.14.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/e2/c2/c0d2f4a4462d625c5cd7f3b17cc50fc0748a8281cbe390f1e1f5f19ced7c/topgrade-17.14.0-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "17.14.0"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "topgrade",
+      "version": "17.9.0",
+      "repository": "https://github.com/topgrade-rs/topgrade",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "17.9.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

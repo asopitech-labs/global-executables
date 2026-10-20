@@ -1,0 +1,67 @@
+{
+  "command": "marmite",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "marmite-0.4.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "marmite",
+      "version": "0.4.2",
+      "repository": "https://github.com/rochacbruno/marmite",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "marmite",
+      "version": "0.4.2",
+      "repository": "https://rochacbruno.github.io/marmite/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "marmite",
+      "version": "0.4.2",
+      "repository": "https://marmite.blog",
+      "source": "https://files.pythonhosted.org/packages/9a/c2/476a279c96f073629be38bd700b786b708293c5fce449b0cd9fa0bdfbd5f/marmite-0.4.2-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "marmite",
+      "version": "0.0.1",
+      "repository": "",
+      "source": "https://rubygems.org/gems/marmite-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

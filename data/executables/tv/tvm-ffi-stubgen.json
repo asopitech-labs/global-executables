@@ -1,0 +1,31 @@
+{
+  "command": "tvm-ffi-stubgen",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-tvm-ffi",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "apache-tvm-ffi",
+      "version": "0.1.15",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a5/33/6fe7516433c0ded9cfffa20f57b9f2a9f8bd61a9e54d107603aca47fa60a/apache_tvm_ffi-0.1.15-cp310-cp310-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.15"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

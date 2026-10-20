@@ -1,0 +1,55 @@
+{
+  "command": "gersemi",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-gersemi-0.28.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gersemi",
+      "version": "0.28.1",
+      "repository": "https://github.com/BlankSpruce/gersemi",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gersemi",
+      "version": "0.29.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/38/ae/12c9cd02391227eae5b92865b335a2aebe94814702cb20289b7a3ebc85f3/gersemi-0.29.2-cp310-cp310-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.29.2"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "BlankSpruce.Gersemi",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

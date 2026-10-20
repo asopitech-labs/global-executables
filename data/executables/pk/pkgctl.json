@@ -1,0 +1,67 @@
+{
+  "command": "pkgctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "devtools-1:1.5.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kform-dev/pkg-server",
+      "version": "v0.0.0-20240512110814-1cde5fb8f4c8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kform-dev/pkg-server/@v/v0.0.0-20240512110814-1cde5fb8f4c8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240512110814-1cde5fb8f4c8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pkgserver-dev/pkgctl",
+      "version": "v0.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pkgserver-dev/pkgctl/@v/v0.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jctl",
+      "version": "1.1.24",
+      "repository": "https://github.com/univ-of-utah-marriott-library-apple/jctl",
+      "source": "https://files.pythonhosted.org/packages/9f/78/de9c31e3a1017d007f32b0f78c11b02397f61ef1c138e324f0f2ad13c16d/jctl-1.1.24-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.24"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-jamf",
+      "version": "0.10.1",
+      "repository": "https://github.com/univ-of-utah-marriott-library-apple/python-jamf",
+      "source": "https://files.pythonhosted.org/packages/76/ae/cda25190fafa4e8ac7c29ead41de706e7408d7776c82f71cd712dc4d758b/python_jamf-0.10.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

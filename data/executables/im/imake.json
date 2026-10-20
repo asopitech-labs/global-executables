@@ -1,0 +1,104 @@
+{
+  "command": "imake",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "imake-1.0.11-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "imake",
+      "version": "1.0.9",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/imake/1.0.9/_/_/revisions/d95f3f63a19566dee1ac65d875f36739/packages/0e1ea21aad1d779dc00492f47d8acff0aa57573c/revisions/4c5a64630b3b023e0722293483d0baaa/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.0.9"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xutils-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xutils-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gshireesh/imake",
+      "version": "v0.14.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gshireesh/imake/@v/v0.14.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.14.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "imake",
+      "version": "1.0.11",
+      "repository": "https://xorg.freedesktop.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "imake",
+      "version": "0.3.1",
+      "repository": "https://github.com/snakypy/imake",
+      "source": "https://files.pythonhosted.org/packages/09/51/126c3741084f29dbe0d72fecf9009d94e96e651d2ba18869088718b50abc/imake-0.3.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "xutils-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

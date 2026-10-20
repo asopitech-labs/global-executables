@@ -1,0 +1,163 @@
+{
+  "command": "doh-server",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "dns-over-https-2.3.10-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Sherlock-Holo/dns-over-https",
+      "version": "v1.4.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Sherlock-Holo/dns-over-https?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.4.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/doorbash/doh-server",
+      "version": "v0.0.0-20250930161843-3b7b0fb2494d",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/doorbash/doh-server?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20250930161843-3b7b0fb2494d",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250930161843-3b7b0fb2494d"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/m13253/dns-over-https",
+      "version": "v1.4.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/m13253/dns-over-https/@v/v1.4.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/m13253/dns-over-https/v2",
+      "version": "v2.3.10",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/m13253/dns-over-https/v2/@v/v2.3.10.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.3.10"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/potterli20/doh-server",
+      "version": "v0.0.0-20260819092820-7166b049e693",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/potterli20/doh-server/@v/v0.0.0-20260819092820-7166b049e693.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260819092820-7166b049e693"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/qdm12/dns",
+      "version": "v1.11.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/qdm12/dns/@v/v1.11.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.11.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/qdm12/dns/v2",
+      "version": "v2.0.0-rc9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/qdm12/dns/v2/@v/v2.0.0-rc9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v2.0.0-rc9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sherlock-holo/dns-over-https",
+      "version": "v1.4.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/sherlock-holo/dns-over-https?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.4.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.4.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/soyelmismo/gluetun-dns",
+      "version": "v0.0.0-20241129011132-ca4b2cdca1a0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/soyelmismo/gluetun-dns/@v/v0.0.0-20241129011132-ca4b2cdca1a0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241129011132-ca4b2cdca1a0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/stenstromen/dns-over-https",
+      "version": "v1.0.20",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/stenstromen/dns-over-https/@v/v1.0.20.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.20"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/telnetdoogie/dns",
+      "version": "v1.0.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/telnetdoogie/dns/@v/v1.0.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "quart-doh",
+      "version": "0.1.0",
+      "repository": "https://github.com/treussart/quart-doh",
+      "source": "https://files.pythonhosted.org/packages/89/6a/e1e27910cf707c689d2587dd593817e1b29fb115bbe8ceed86a5f9f06ad7/quart-doh-0.1.0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

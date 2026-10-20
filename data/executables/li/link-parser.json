@@ -1,0 +1,103 @@
+{
+  "command": "link-parser",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "link-grammar-5.13.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "link-grammar",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "link-grammar",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/grintheone/link-parser",
+      "version": "v0.0.0-20250619073805-2e22e29314e2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/grintheone/link-parser/@v/v0.0.0-20250619073805-2e22e29314e2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250619073805-2e22e29314e2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/samjove/link-parser",
+      "version": "v0.0.0-20240928050527-ff766a0ac71e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/samjove/link-parser/@v/v0.0.0-20240928050527-ff766a0ac71e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240928050527-ff766a0ac71e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/thai56/link-parser",
+      "version": "v0.0.0-20191228062944-78796f2db62e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/thai56/link-parser/@v/v0.0.0-20191228062944-78796f2db62e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191228062944-78796f2db62e"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "link-grammar",
+      "version": "5.13.0",
+      "repository": "https://github.com/opencog/link-grammar",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "link-grammar",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

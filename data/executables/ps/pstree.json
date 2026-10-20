@@ -1,0 +1,127 @@
+{
+  "command": "pstree",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "psmisc-23.7-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "procutils-pstree",
+      "version": "0.2.0",
+      "repository": "https://gitlab.com/rustutils/procutils",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "psmisc",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "psmisc",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "codeberg.org/bananazon/pstree",
+      "version": "v1.1.2",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/codeberg.org/bananazon/pstree?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.1.2",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/gdanko/pstree",
+      "version": "v0.8.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/gdanko/pstree/@v/v0.8.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.8.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.iscode.ca/goreap",
+      "version": "v0.0.0-20260314130323-5921c008ff3d",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/go.iscode.ca/goreap?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260314130323-5921c008ff3d",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260314130323-5921c008ff3d"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pstree",
+      "version": "2.40",
+      "repository": "https://github.com/FredHucht/pstree",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "psmisc-23.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "psmisc",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

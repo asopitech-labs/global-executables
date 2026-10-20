@@ -1,0 +1,31 @@
+{
+  "command": "tf-policy-validator",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "terraform-iam-policy-validator",
+      "version": "0.0.9",
+      "repository": "https://github.com/awslabs/terraform-iam-policy-validator",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tf-policy-validator",
+      "version": "0.0.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8e/84/99f141ebde301dca545f58247425d117f328772e5bba12fc6281b90f7397/tf_policy_validator-0.0.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.9"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

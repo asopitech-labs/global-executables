@@ -1,0 +1,67 @@
+{
+  "command": "repose",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "repose-7.1-14",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "repose",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/rlnorthcutt/repose",
+      "version": "v0.0.0-20250927001756-81fe7276f8a8",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/rlnorthcutt/repose/@v/v0.0.0-20250927001756-81fe7276f8a8.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250927001756-81fe7276f8a8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tamasfe/repose",
+      "version": "v0.1.0-alpha",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tamasfe/repose/@v/v0.1.0-alpha.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0-alpha"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "repose",
+      "version": "0.0.1.alpha2",
+      "repository": "https://github.com/matthewrudy/repose",
+      "source": "https://rubygems.org/gems/repose-0.0.1.alpha2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1.alpha2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

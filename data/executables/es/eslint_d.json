@@ -1,0 +1,43 @@
+{
+  "command": "eslint_d",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "eslint_d-15.0.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "eslint_d",
+      "version": "15.0.3",
+      "repository": "https://github.com/mantoni/eslint_d.js",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bruitt/eslint-config-lint-base",
+      "version": "4.0.3",
+      "repository": "git+ssh://github.com/bruitt/build.git",
+      "source": "https://registry.npmjs.org/@bruitt%2Feslint-config-lint-base/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.0.3"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "barrage",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "barrage-1.0.7-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/codetesla51/barrage",
+      "version": "v0.3.9",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/codetesla51/barrage?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.3.9",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "barrage",
+      "version": "0.6.0",
+      "repository": "https://github.com/briannemsick/barrage/",
+      "source": "https://files.pythonhosted.org/packages/ef/7b/8c02cc7330431abb88921bc79749f413783dd2b86546239e978a36638e3b/barrage-0.6.0-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "barrage_bench",
+      "version": "0.0.2",
+      "repository": "http://github.com/kellabyte/barrage",
+      "source": "https://rubygems.org/gems/barrage_bench-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

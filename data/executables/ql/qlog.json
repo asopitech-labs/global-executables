@@ -1,0 +1,43 @@
+{
+  "command": "qlog",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "qlog",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/janpereira-dev/quantum_log",
+      "version": "v0.3.1",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/janpereira-dev/quantum_log?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.3.1",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "qlog-cli",
+      "version": "0.2.1",
+      "repository": "https://github.com/Cosm00/qlog",
+      "source": "https://files.pythonhosted.org/packages/59/e8/a3b70eaed3bd4e6798d4854e52d517c8665048bd2f977855f5925dc5073c/qlog_cli-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

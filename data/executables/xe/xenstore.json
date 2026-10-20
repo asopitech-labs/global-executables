@@ -1,0 +1,91 @@
+{
+  "command": "xenstore",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "xenstore-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "xenstore-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/joelnb/xenstore-go",
+      "version": "v0.3.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/joelnb/xenstore-go/@v/v0.3.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vyos/vyos-xe-guest-utilities",
+      "version": "v7.13.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vyos/vyos-xe-guest-utilities/@v/v7.13.0+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.13.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xcp-ng/xe-guest-utilities",
+      "version": "v7.22.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xcp-ng/xe-guest-utilities/@v/v7.22.0+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.22.0+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xenserver/xe-guest-utilities",
+      "version": "v7.23.0+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xenserver/xe-guest-utilities/@v/v7.23.0+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v7.23.0+incompatible"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "xenstore-utils",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "stalwart",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "stalwart-0.16.17-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "stalwart-lite",
+      "version": "0.16.0",
+      "repository": "https://github.com/arkiecompany/stalwart-lite",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.16.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "stalwart-agents",
+      "version": "1.0.58",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/60/0d/d6aaa748ae11b3d555942f67a709ff5cf465fe5554acd8e2f45a927372d5/stalwart_agents-1.0.58-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.58"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

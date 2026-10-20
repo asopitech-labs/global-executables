@@ -1,0 +1,43 @@
+{
+  "command": "git-subrepo",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "git-subrepo",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-subrepo",
+      "version": "0.4.9",
+      "repository": "https://github.com/ingydotnet/git-subrepo",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nr.git-subrepo",
+      "version": "1.0.1",
+      "repository": "https://git.niklasrosenstein.com/NiklasRosenstein/git-subrepo",
+      "source": "https://files.pythonhosted.org/packages/1f/99/1e6af9b4a5f9f0f45752c6e23ebdc3e3e54012ce866e7702ee4ab2d67822/nr.git-subrepo-1.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

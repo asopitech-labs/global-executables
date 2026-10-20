@@ -1,0 +1,55 @@
+{
+  "command": "gif2png",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gif2png-3.0.3-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/makotome/gif2png",
+      "version": "v0.0.0-20241025100645-db2f792234e6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/makotome/gif2png/@v/v0.0.0-20241025100645-db2f792234e6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241025100645-db2f792234e6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/esr/gif2png",
+      "version": "v0.0.0-20260809175534-a0e7377597bd",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/gitlab.com/esr/gif2png?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260809175534-a0e7377597bd",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260809175534-a0e7377597bd"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gif2png",
+      "version": "3.0.5",
+      "repository": "http://www.catb.org/~esr/gif2png/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

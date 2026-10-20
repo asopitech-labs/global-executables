@@ -1,0 +1,43 @@
+{
+  "command": "promptfoo",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/tmc/pe",
+      "version": "v0.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tmc/pe/@v/v0.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "promptfoo",
+      "version": "0.122.0",
+      "repository": "https://promptfoo.dev/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "promptfoo",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5a/15/aa0d50afacc25faa7683f8a439b8f514b63786045863924083c3b1de229e/promptfoo-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

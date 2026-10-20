@@ -1,0 +1,43 @@
+{
+  "command": "kdash",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "kdash",
+      "version": "2.1.1",
+      "repository": "https://github.com/kdash-rs/kdash",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/serjaum/kdash",
+      "version": "v0.0.0-20190711011532-160341c42659",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/serjaum/kdash/@v/v0.0.0-20190711011532-160341c42659.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190711011532-160341c42659"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kdash",
+      "version": "2.1.1",
+      "repository": "https://kdash-rs.github.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

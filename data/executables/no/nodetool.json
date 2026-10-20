@@ -1,0 +1,55 @@
+{
+  "command": "nodetool",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "cassandra",
+      "version": "5.0.9",
+      "repository": "https://cassandra.apache.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "emqx",
+      "version": "5.8.8",
+      "repository": "https://www.emqx.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "libpipe",
+      "version": "0.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/68/38/dcbcc1d58aa29a179dfdd0adc63c60b25bccfb983e63ab8bab7d4000a2e7/libpipe-0.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nodetool",
+      "version": "0.5.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/78/39/fd0d6ff11b53a50dbb01aa1078339f127925e84c459619989e087996017d/nodetool-0.5.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.3"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "barectf",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-barectf-3.1.2-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "barectf",
+      "version": "3.1.2",
+      "repository": "https://barectf.org/",
+      "source": "https://files.pythonhosted.org/packages/94/c2/9f423d775cfe5dcbace2510e642a3c136b228c024a05460f06f410f2bc2f/barectf-3.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.1.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-barectf",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

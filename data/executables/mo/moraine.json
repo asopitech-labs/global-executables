@@ -1,0 +1,55 @@
+{
+  "command": "moraine",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "moraine",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "moraine-cli",
+      "version": "0.7.3",
+      "repository": "https://github.com/eric-tramel/moraine",
+      "source": "https://files.pythonhosted.org/packages/3b/7b/970501fadc6ccd1a8468fd300f1bf7250742688cd63851acf5a8fd67ce3a/moraine_cli-0.7.3-py3-none-macosx_11_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.7.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "moraine3d",
+      "version": "0.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c6/ba/f82a51ce824977bb83127c3829b27ca4d24047b8e7ca7c608a14630776e6/moraine3d-0.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "TheJonaz.Moraine",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,103 @@
+{
+  "command": "transmute",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ncbi-entrez-direct",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ncbi-entrez-direct",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/MawCeron/transmute",
+      "version": "v0.0.0-20260401224847-064b7a0b120b",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/MawCeron/transmute?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260401224847-064b7a0b120b",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260401224847-064b7a0b120b"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "collective.transmute",
+      "version": "1.0.0b3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6d/c9/6276619c2226e1aed9440e5680779098314385d2865c76e3f782e9b1575f/collective_transmute-1.0.0b3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0b3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "transmutator",
+      "version": "0.1",
+      "repository": "https://transmutator.readthedocs.org/",
+      "source": "https://files.pythonhosted.org/packages/86/c2/679df7678834b1c2ead84fca835519f44845bf0cde1d6265ece509667c55/transmutator-0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "transmute-mtg",
+      "version": "1.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/56/7d/78f655c93c72f0877206c6168e3c36e015d7d7a1492afeb00733a61c7999/transmute_mtg-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "transmuter",
+      "version": "0.0.3",
+      "repository": "https://github.com/TechnoGate/transmuter",
+      "source": "https://rubygems.org/gems/transmuter-0.0.3.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ncbi-entrez-direct",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

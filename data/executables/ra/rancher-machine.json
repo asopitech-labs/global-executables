@@ -1,0 +1,43 @@
+{
+  "command": "rancher-machine",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/krunalhinguu/machine",
+      "version": "v1.33.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/krunalhinguu/machine/@v/v1.33.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.33.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/pjbgf/machine",
+      "version": "v0.0.0-20240805223657-3aae66cc4c17",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pjbgf/machine/@v/v0.0.0-20240805223657-3aae66cc4c17.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240805223657-3aae66cc4c17"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rancher-machine",
+      "version": "0.15.0-rancher145",
+      "repository": "https://github.com/rancher/machine",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

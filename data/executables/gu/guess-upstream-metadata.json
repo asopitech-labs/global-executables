@@ -1,0 +1,31 @@
+{
+  "command": "guess-upstream-metadata",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "upstream-ontologist",
+      "version": "0.3.23",
+      "repository": "https://github.com/jelmer/upstream-ontologist.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.23"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-upstream-ontologist",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

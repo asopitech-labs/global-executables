@@ -1,0 +1,103 @@
+{
+  "command": "bosh",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "bosh",
+      "version": "0.0.0",
+      "repository": "https://github.com/heyitsmeuralex/bosh.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bosh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bosh",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "wearebase/base-bash-bosh",
+      "version": "v1.0.27",
+      "repository": "https://github.com/wearebase/base-bash-bosh.git",
+      "source": "https://repo.packagist.org/p2/wearebase/base-bash-bosh.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v1.0.27"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "bosh",
+      "version": "0.2.28",
+      "repository": "https://github.com/bigobject-inc/bosh.git",
+      "source": "https://files.pythonhosted.org/packages/3a/24/7b166e89f77cfbf89c1c03a35d02c190d1b89bc3fc1b9d23583ddf90f061/bosh-0.2.28.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.28"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "boutiques",
+      "version": "0.5.33",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6d/a0/c4a85ba46b477f0e0a6441d535a4a8a1c573eeb97bf4fb0db3897d1d89ee/boutiques-0.5.33-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.33"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "bosh_cli",
+      "version": "1.3262.26.0",
+      "repository": "https://github.com/cloudfoundry/bosh",
+      "source": "https://rubygems.org/gems/bosh_cli-1.3262.26.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.3262.26.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "bosh",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

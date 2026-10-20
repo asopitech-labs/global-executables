@@ -1,0 +1,67 @@
+{
+  "command": "gofish",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bsd-games-3.3-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "card",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/alde/go-fish",
+      "version": "v0.0.0-20260611152328-df695ecc9fbf",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/alde/go-fish?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260611152328-df695ecc9fbf",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260611152328-df695ecc9fbf"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/csmith/gofish",
+      "version": "v0.0.0-20260514124723-96a4c9f6a12f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/csmith/gofish/@v/v0.0.0-20260514124723-96a4c9f6a12f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260514124723-96a4c9f6a12f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fishworks/gofish",
+      "version": "v0.15.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fishworks/gofish/@v/v0.15.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.15.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

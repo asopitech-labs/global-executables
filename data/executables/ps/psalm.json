@@ -1,0 +1,103 @@
+{
+  "command": "psalm",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "psalm-6.16.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "psalm",
+      "version": "0.1.1",
+      "repository": "https://gitlab.com/chipaltman/psalm",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "psalm",
+      "version": "6.16.1",
+      "repository": "https://psalm.dev",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "sn1054/psalm-moodle",
+      "version": "5.6.0",
+      "repository": "https://github.com/SN1054/psalm.git",
+      "source": "https://repo.packagist.org/p2/sn1054/psalm-moodle.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "5.6.0"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "testanull/psalm",
+      "version": "3.5.3",
+      "repository": "https://github.com/testanull/psalm.git",
+      "source": "https://repo.packagist.org/p2/testanull/psalm.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "3.5.3"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "vimeo/psalm",
+      "version": "7.0.0-rc2",
+      "repository": "https://github.com/vimeo/psalm.git",
+      "source": "https://repo.packagist.org/p2/vimeo/psalm.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "7.0.0-rc2"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "webgriffe/psalm-dist",
+      "version": "6.20.0",
+      "repository": "https://github.com/webgriffe/psalm-dist.git",
+      "source": "https://repo.packagist.org/p2/webgriffe/psalm-dist.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "6.20.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "protein-sequence-annotation",
+      "version": "2.1.13",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/04/42/eb21824b1eca461117dc404c7d8e0b608b4e52b1d1fb6e18872614c8efda/protein_sequence_annotation-2.1.13-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.13"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

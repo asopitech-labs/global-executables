@@ -1,0 +1,91 @@
+{
+  "command": "hostess",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "hostess-0.5.2-5",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "hostess",
+      "version": "0.2.6",
+      "repository": "https://github.com/chaixb/hostess",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cbednarski/hostess",
+      "version": "v0.5.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cbednarski/hostess/@v/v0.5.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jessemillar/hostess",
+      "version": "v0.0.0-20251231171955-96e38467b08a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jessemillar/hostess/@v/v0.0.0-20251231171955-96e38467b08a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251231171955-96e38467b08a"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "hostess",
+      "version": "0.5.2",
+      "repository": "https://github.com/cbednarski/hostess",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "hostess",
+      "version": "0.1.8",
+      "repository": "http://chrisroos.co.uk",
+      "source": "https://rubygems.org/gems/hostess-0.1.8.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "lazyatom-hostess",
+      "version": "0.1.1",
+      "repository": "http://chrisroos.co.uk",
+      "source": "https://rubygems.org/gems/lazyatom-hostess-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

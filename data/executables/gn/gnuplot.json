@@ -1,0 +1,56 @@
+{
+  "command": "gnuplot",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gnuplot-6.0.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gnuplot",
+      "version": "6.0.5",
+      "repository": "http://www.gnuplot.info/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gnuplot-wheel",
+      "version": "6.0.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2e/88/7693186e31d916a27a41579d923f300a703626f92fa2999151f336f3a2df/gnuplot_wheel-6.0.4-cp310-cp310-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.0.4"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "gnuplot",
+      "version": "6.0.5",
+      "repository": "http://www.gnuplot.info",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "6.0.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "faketty",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "faketty",
+      "version": "1.0.20",
+      "repository": "https://github.com/dtolnay/faketty",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.20"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "faketty-lib",
+      "version": "2.0.18",
+      "repository": "https://github.com/bryango/faketty-lib",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.18"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/charmbracelet/x/examples",
+      "version": "v0.0.0-20260823001701-96af6d2cb5f6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/charmbracelet/x/examples/@v/v0.0.0-20260823001701-96af6d2cb5f6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260823001701-96af6d2cb5f6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "faketty",
+      "version": "1.0.20",
+      "repository": "https://github.com/dtolnay/faketty",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

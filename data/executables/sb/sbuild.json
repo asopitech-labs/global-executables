@@ -1,0 +1,67 @@
+{
+  "command": "sbuild",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "sbuild",
+      "version": "0.7.7",
+      "repository": "http://sbuild.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bennof/sbuild",
+      "version": "0.1.0",
+      "repository": "git+https://github.com/bennof/sbuild.git",
+      "source": "https://registry.npmjs.org/@bennof%2Fsbuild/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "screen-master",
+      "version": "0.0.2",
+      "repository": "https://github.com/chienfeng0719/screen-master",
+      "source": "https://files.pythonhosted.org/packages/87/3b/bd4ece9f364c34b3110a9a5ff26854e64fbc96363c08bc0c8927ee4283bc/screen_master-0.0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "sbbuild",
+      "version": "1.1.1",
+      "repository": "https://github.com/yusheng00",
+      "source": "https://rubygems.org/gems/sbbuild-1.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "sbuild",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

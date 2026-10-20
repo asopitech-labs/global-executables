@@ -1,0 +1,67 @@
+{
+  "command": "if2",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ctsim",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ctsim",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/nickng/gopherlyzer",
+      "version": "v0.0.0-20170403111316-7a1345530686",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/nickng/gopherlyzer/@v/v0.0.0-20170403111316-7a1345530686.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20170403111316-7a1345530686"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/taeho8822/go-basic",
+      "version": "v0.0.0-20200616074951-49cdb331e66c",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/taeho8822/go-basic/@v/v0.0.0-20200616074951-49cdb331e66c.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200616074951-49cdb331e66c"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ctsim",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "vspipe",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "vapoursynth-77-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "vapoursynth",
+      "version": "79",
+      "repository": "https://www.vapoursynth.com",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "VapourSynth",
+      "version": "81",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/63/61/2183a243f51f43d03019203f5040d050b6732a2b8293bb692de3c7f9943e/vapoursynth-81-cp312-abi3-macosx_13_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "81"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "VapourSynth.VapourSynth",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,92 @@
+{
+  "command": "sshs",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "sshs-4.7.2-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/davemcphee/sshs",
+      "version": "v0.0.0-20190602170314-ba54a906cd72",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/davemcphee/sshs/@v/v0.0.0-20190602170314-ba54a906cd72.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190602170314-ba54a906cd72"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lixiangzhong/sshs",
+      "version": "v1.19.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lixiangzhong/sshs/@v/v1.19.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.19.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mrosset/unix",
+      "version": "v0.0.0-20120504131639-623fde05f1eb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mrosset/unix/@v/v0.0.0-20120504131639-623fde05f1eb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20120504131639-623fde05f1eb"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/str1ngs/unix",
+      "version": "v0.0.0-20120504131639-623fde05f1eb",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/str1ngs/unix/@v/v0.0.0-20120504131639-623fde05f1eb.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20120504131639-623fde05f1eb"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "sshs",
+      "version": "4.7.2",
+      "repository": "https://github.com/quantumsheep/sshs",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "sshs",
+      "version": "4.7.2",
+      "repository": "https://github.com/quantumsheep/sshs",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "4.7.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

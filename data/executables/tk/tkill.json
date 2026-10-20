@@ -1,0 +1,55 @@
+{
+  "command": "tkill",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "lam-runtime",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "lam-runtime",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tsc-auto",
+      "version": "0.54",
+      "repository": "https://github.com/aitsc/tsc-auto",
+      "source": "https://files.pythonhosted.org/packages/3e/12/b66925bb97b2d7caf0e2dd33ab65f877a877fd79488d2dcf3628426b48c0/tsc_auto-0.54-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.54"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "lam-runtime",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

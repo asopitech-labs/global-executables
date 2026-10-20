@@ -1,0 +1,68 @@
+{
+  "command": "smem",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "rsfitsio",
+      "version": "0.470.6",
+      "repository": "https://github.com/cruzzil/rsfitsio",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.470.6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cfitsio",
+      "version": "4.7.0",
+      "repository": "https://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "surreal-memory",
+      "version": "3.12.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7d/0d/660677207525ee09ac75f51e449ae50d88e415e6ca6a19e5e4a8f68d2f1b/surreal_memory-3.12.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.12.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "smem",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "cfitsio",
+      "version": "4.7.0",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "4.7.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

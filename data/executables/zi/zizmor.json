@@ -1,0 +1,80 @@
+{
+  "command": "zizmor",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "zizmor-1.29.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "zizmor",
+      "version": "1.31.1",
+      "repository": "https://github.com/zizmorcore/zizmor",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.31.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "zizmor",
+      "version": "1.29.0",
+      "repository": "https://docs.zizmor.sh/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zizmor",
+      "version": "1.31.1",
+      "repository": "https://docs.zizmor.sh",
+      "source": "https://files.pythonhosted.org/packages/57/05/a5274bb38456ab8b73a0b0a906d4029fc720b2041847649458e8938c3a47/zizmor-1.31.1-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.31.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "zizmor",
+      "version": "1.29.0",
+      "repository": "https://docs.zizmor.sh/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.29.0"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "zizmor.zizmor",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

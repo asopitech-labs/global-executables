@@ -1,0 +1,67 @@
+{
+  "command": "slice2py",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-zeroc-ice",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "zeroc-ice-compilers",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ice",
+      "version": "3.8.2",
+      "repository": "https://zeroc.com",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zeroc-ice",
+      "version": "3.8.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4e/36/7c39157c3ac09898e2784c3b62ea8b64d872d1e9ec11c736b135d3af6d4d/zeroc_ice-3.8.3-cp312-cp312-macosx_10_13_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.8.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "zeroc-ice-compilers",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

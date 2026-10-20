@@ -1,0 +1,55 @@
+{
+  "command": "kingfisher",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "kingfisher-bin",
+      "version": "2.13.0",
+      "repository": "https://github.com/mongodb/kingfisher",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.13.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kingfisher",
+      "version": "1.113.0",
+      "repository": "https://mongodb.github.io/kingfisher/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kingfisher",
+      "version": "0.5.0",
+      "repository": "https://github.com/wwood/kingfisher-download",
+      "source": "https://files.pythonhosted.org/packages/eb/c5/9a3a8c994e06e9a887dad11382988c11d39a2b8d9195df786b6a6e3af054/kingfisher-0.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kingfisher-bin",
+      "version": "2.13.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/64/5a/ad326860800eb0757edd14d8b5be85c1e49987ac1b6484eb0f47b7d8c0fc/kingfisher_bin-2.13.0-py3-none-macosx_10_9_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.13.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "vrc-get",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "vrc-get",
+      "version": "1.9.2",
+      "repository": "https://github.com/anatawa12/vrc-get",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.9.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "vrc-get",
+      "version": "1.9.2",
+      "repository": "https://github.com/vrc-get/vrc-get",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "anatawa12.vrc-get",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

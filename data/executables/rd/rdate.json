@@ -1,0 +1,79 @@
+{
+  "command": "rdate",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "rdate",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "rdate",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lotusirous/cmd/rdate",
+      "version": "v0.0.0-20260823144449-14a88d714de9",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/lotusirous/cmd/rdate?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260823144449-14a88d714de9",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260823144449-14a88d714de9"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rdate",
+      "version": "1.5",
+      "repository": "https://www.aelius.com/njh/rdate/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "rdate",
+      "version": "0.0.4",
+      "repository": null,
+      "source": "https://rubygems.org/gems/rdate-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "rdate",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

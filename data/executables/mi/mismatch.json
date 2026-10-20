@@ -1,0 +1,43 @@
+{
+  "command": "mismatch",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "cve-bin-tool",
+      "version": "3.4",
+      "repository": "https://github.com/ossf/cve-bin-tool",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cve-bin-tool",
+      "version": "3.4",
+      "repository": "https://github.com/intel/cve-bin-tool",
+      "source": "https://files.pythonhosted.org/packages/56/d2/55eed26f78146fb9077f99c9f463b9c566001ffc702c5f2cde5dbc39d017/cve_bin_tool-3.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mismatch",
+      "version": "0.1.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ea/29/259c9c8282752d5f66a25ea1d83bf67f6d9d07a37ad0e2f17102c5937c87/mismatch-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

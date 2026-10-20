@@ -1,0 +1,43 @@
+{
+  "command": "gdir",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "coreutils",
+      "version": "9.11",
+      "repository": "https://www.gnu.org/software/coreutils/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@8zali9/shell-z",
+      "version": "1.0.0",
+      "repository": "git+https://github.com/8zali9/shell-z.git",
+      "source": "https://registry.npmjs.org/@8zali9%2Fshell-z/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gdir",
+      "version": "0.3.2",
+      "repository": "https://github.com/pafoster/gdir",
+      "source": "https://files.pythonhosted.org/packages/40/a2/23d2b588bded7d593b5d3f26b7ea695c6520bf37db1f3dd0b8cef2ca880b/gdir-0.3.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,103 @@
+{
+  "command": "minica",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "minica",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "minica",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bjornsnoen/minica",
+      "version": "v1.3.9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bjornsnoen/minica/@v/v1.3.9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.3.9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/emaballarin/minica",
+      "version": "v0.0.0-20251113153754-2d407061da8f",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/emaballarin/minica?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20251113153754-2d407061da8f",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251113153754-2d407061da8f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ikidou/minica",
+      "version": "v0.0.0-20240124194345-225d849867df",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/ikidou/minica/@v/v0.0.0-20240124194345-225d849867df.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240124194345-225d849867df"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/jsha/minica",
+      "version": "v1.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/jsha/minica/@v/v1.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "minica",
+      "version": "1.1.0",
+      "repository": "https://github.com/jsha/minica",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "minica",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

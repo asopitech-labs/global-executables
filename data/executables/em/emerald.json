@@ -1,0 +1,79 @@
+{
+  "command": "emerald",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "emerald-cli",
+      "version": "0.23.0",
+      "repository": "https://github.com/ETCDEVTeam/emerald-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.23.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emerald",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "emerald",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "emerald",
+      "version": "0.0.1.dev0",
+      "repository": "https://github.com/vladcalin/emerald",
+      "source": "https://files.pythonhosted.org/packages/80/6a/5d0d861c2552e765116e591af0e3423b78339e797c7d6bb8f26e8d99947b/emerald-0.0.1.dev0.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1.dev0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "emerald-lang",
+      "version": "1.0.0",
+      "repository": "https://github.com/emerald-lang/emerald",
+      "source": "https://rubygems.org/gems/emerald-lang-1.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "emerald",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

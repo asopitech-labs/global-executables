@@ -1,0 +1,43 @@
+{
+  "command": "pydle-irccat",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pydle-1.1.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pydle",
+      "version": "1.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/30/2d/970a49495d2eae0261ab4aad9a575acd6a1b0c7fbaa67f9d66e54ad25193/pydle-1.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pydle",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "waterfall",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "gwaterfall",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "gwaterfall",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cloudflare/waterfall",
+      "version": "0.1.1",
+      "repository": "git+https://github.com/cloudflare/telescope.git",
+      "source": "https://registry.npmjs.org/@cloudflare%2Fwaterfall/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "hydrogenline",
+      "version": "0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/9d/3f/6d83727e9bcd4950482fd9a0f7735a700c49d3e930f35dc257102c53fc51/hydrogenline-0.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pypi-flow",
+      "version": "19.8.0",
+      "repository": "https://github.com/ZenosParadox/pypi_flow",
+      "source": "https://files.pythonhosted.org/packages/db/48/04d1bb7d7716cf3fc632e4d11597d8fecbb28cdff281194797545ee43d15/pypi_flow-19.8.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "19.8.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gwaterfall",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,103 @@
+{
+  "command": "preload",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "preload",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/appvia/terranetes-controller",
+      "version": "v0.5.7",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/appvia/terranetes-controller/@v/v0.5.7.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/chubaofs/chubaofs",
+      "version": "v3.0.0-beta-rc.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/chubaofs/chubaofs/@v/v3.0.0-beta-rc.1+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v3.0.0-beta-rc.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cubefs/cubefs",
+      "version": "v1.34.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cubefs/cubefs/@v/v1.34.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.34.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/godsarmy/htmx-nunjucks-example",
+      "version": "v1.9.12-6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/godsarmy/htmx-nunjucks-example/@v/v1.9.12-6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.12-6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tedmax100/CouponRushSystem",
+      "version": "v0.0.0-20240501105334-c3e4549b07ec",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tedmax100/!coupon!rush!system/@v/v0.0.0-20240501105334-c3e4549b07ec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240501105334-c3e4549b07ec"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tedmax100/couponrushsystem",
+      "version": "v0.0.0-20240501105334-c3e4549b07ec",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tedmax100/couponrushsystem/@v/v0.0.0-20240501105334-c3e4549b07ec.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240501105334-c3e4549b07ec"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "preload",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

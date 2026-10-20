@@ -1,0 +1,31 @@
+{
+  "command": "scp-relay",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "scp-relay",
+      "version": "0.1.0-beta.2",
+      "repository": "https://github.com/limn/scp",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0-beta.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/noook/scp-relay",
+      "version": "v0.0.0-20191117134958-3d05994fe27a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/noook/scp-relay/@v/v0.0.0-20191117134958-3d05994fe27a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191117134958-3d05994fe27a"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

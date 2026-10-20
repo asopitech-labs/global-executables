@@ -1,0 +1,43 @@
+{
+  "command": "ephemeral-port-reserve",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-ephemeral-port-reserve-1.1.4-7",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ephemeral-port-reserve",
+      "version": "1.1.4",
+      "repository": "https://github.com/Yelp/ephemeral-port-reserve/",
+      "source": "https://files.pythonhosted.org/packages/2d/2f/28948390896745afd561dad6a39daf49f74637b7b3398582a649b5acc4c5/ephemeral_port_reserve-1.1.4-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-ephemeral-port-reserve",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

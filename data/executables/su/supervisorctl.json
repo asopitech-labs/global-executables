@@ -1,0 +1,151 @@
+{
+  "command": "supervisorctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "supervisor-4.3.0-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "supervisor",
+      "version": "4.3.0",
+      "repository": "https://supervisord.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor",
+      "version": "4.3.0",
+      "repository": "http://supervisord.org/",
+      "source": "https://files.pythonhosted.org/packages/0e/65/5e726c372da8a5e35022a94388b12252710aad0c2351699c3d76ae8dba78/supervisor-4.3.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-dev",
+      "version": "4.3.0.dev0",
+      "repository": "http://supervisord.org/",
+      "source": "https://files.pythonhosted.org/packages/a5/22/200bab54abe5bc97f42f332d4cdc4f9d7667fa5b38a095702ab50828ad00/supervisor_dev-4.3.0.dev0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.0.dev0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-fork",
+      "version": "4.3.0.dev3",
+      "repository": "https://github.com/xiewendan/supervisor-fork",
+      "source": "https://files.pythonhosted.org/packages/ae/69/eb5fd4ecf35d38ad73ca35bd643406ebf43d160e7d0f8483d5aefce07ec9/supervisor_fork-4.3.0.dev3-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.0.dev3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-lrn",
+      "version": "4.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2a/72/6c619d171830dae112e5de1605cae83c078a0ab340bf6c796f3d3046b314/supervisor_lrn-4.0.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-plus-cron",
+      "version": "1.0.15201",
+      "repository": "https://github.com/klahnakoski/supervisor-plus-cron",
+      "source": "https://files.pythonhosted.org/packages/63/6c/75a47b9cde4778717013c7cc49d62fd33d2f1cd6a7d11a2e6ab7918a265c/supervisor-plus-cron-1.0.15201.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.15201"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-refined",
+      "version": "4.3.0.dev1",
+      "repository": "http://supervisord.org/",
+      "source": "https://files.pythonhosted.org/packages/1c/77/42b6b81f80d92e7c166e95e0983d516ad2b1ac137e9748af50e066c02e76/supervisor_refined-4.3.0.dev1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.0.dev1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-sp",
+      "version": "1.0.1",
+      "repository": "http://supervisord.org/",
+      "source": "https://files.pythonhosted.org/packages/36/00/379e892786e1e8485a617701a6c87bfbce8981cc3c6a266889c8298ef8bb/supervisor-sp-1.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-tianhei-enhanced",
+      "version": "4.3.0.post1",
+      "repository": "https://github.com/tianhei/supervisor-enhanced",
+      "source": "https://files.pythonhosted.org/packages/94/69/f75fcb2fda2119ef41d5433aa0b044cb22d3156e8d80b07cf0f39cc322ae/supervisor_tianhei_enhanced-4.3.0.post1-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.3.0.post1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "supervisor-win",
+      "version": "4.7.0",
+      "repository": "http://supervisord.org/",
+      "source": "https://files.pythonhosted.org/packages/69/4d/3a493f15f5b80608857ef157f382ace494f51d9031e6bee6082437dd1403/supervisor_win-4.7.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.7.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "supervisor",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

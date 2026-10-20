@@ -1,0 +1,115 @@
+{
+  "command": "rdma",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "iproute2-7.2.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "iproute2",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "iproute2",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Mellanox/rdma-cni",
+      "version": "v0.0.0-20260807011032-4fe736a61482",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!mellanox/rdma-cni/@v/v0.0.0-20260807011032-4fe736a61482.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260807011032-4fe736a61482"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/baidubce/baiducloud-cce-cni-driver",
+      "version": "v1.9.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/baidubce/baiducloud-cce-cni-driver/@v/v1.9.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.9.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/k8snetworkplumbingwg/rdma-cni",
+      "version": "v1.6.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/k8snetworkplumbingwg/rdma-cni/@v/v1.6.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.6.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mellanox/rdma-cni",
+      "version": "v0.0.0-20260807011032-4fe736a61482",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mellanox/rdma-cni/@v/v0.0.0-20260807011032-4fe736a61482.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260807011032-4fe736a61482"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitproxy.zycloud.tk/k8snetworkplumbingwg/rdma-cni",
+      "version": "v1.5.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitproxy.zycloud.tk/k8snetworkplumbingwg/rdma-cni/@v/v1.5.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "iproute2",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

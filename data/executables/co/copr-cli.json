@@ -1,0 +1,31 @@
+{
+  "command": "copr-cli",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "copr-cli-2.6-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "copr-cli",
+      "version": "2.6",
+      "repository": "https://github.com/fedora-copr/copr",
+      "source": "https://files.pythonhosted.org/packages/c0/1c/635cadda5f8a97a92812230725811cf79b0f9837ed602db2a210be18bdfd/copr_cli-2.6.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.6"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

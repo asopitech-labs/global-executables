@@ -1,0 +1,103 @@
+{
+  "command": "transcriber",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "transcriber",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "transcriber",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "git.vakhrushev.me/av/transcriber",
+      "version": "v0.0.0-20260823181430-c1dab24de10e",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/git.vakhrushev.me/av/transcriber?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260823181430-c1dab24de10e",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260823181430-c1dab24de10e"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mattermost/calls-transcriber",
+      "version": "v0.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mattermost/calls-transcriber/@v/v0.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mylordkaz/mtg-gotranscriber",
+      "version": "v0.0.0-20241208080010-1f849c720f55",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mylordkaz/mtg-gotranscriber/@v/v0.0.0-20241208080010-1f849c720f55.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241208080010-1f849c720f55"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "transcriber-sh",
+      "version": "0.1.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/17/96/270737cba9c0896811d3c5c3af81be98059774e3c41d7b8b218a7e2b7172/transcriber_sh-0.1.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "transcriber",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "winget",
+      "package": "Augchan42.Transcriber",
+      "version": null,
+      "repository": null,
+      "source": "https://cdn.winget.microsoft.com/cache/source.msix",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "winget",
+      "distribution_family": "windows",
+      "distribution": "windows"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

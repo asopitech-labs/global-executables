@@ -1,0 +1,43 @@
+{
+  "command": "update-manager",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/eclipse-kanto/update-manager",
+      "version": "v1.0.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/eclipse-kanto/update-manager/@v/v1.0.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.0.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/t-l3/update-manager",
+      "version": "v0.0.0-20250528171349-9fc2d23798b6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/t-l3/update-manager/@v/v0.0.0-20250528171349-9fc2d23798b6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250528171349-9fc2d23798b6"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "update-manager",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

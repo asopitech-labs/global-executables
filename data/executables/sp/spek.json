@@ -1,0 +1,80 @@
+{
+  "command": "spek",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "spek",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "spek",
+      "version": "0.8.5",
+      "repository": "https://www.spek.cc",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SPEK",
+      "version": "0.0.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/24/30/50a028e35038845f1702d8a9fc2e21c25fff2e1f3f1680baf49d2cf1694c/spek-0.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spek-cli",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/5c/df/eb20320dd1fb4b90a2d6f39678af1c990870cb1b70e457c38c21066f03c0/spek_cli-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "spek",
+      "version": "0.8.2",
+      "repository": "http://spek.cc",
+      "source": "https://codeload.github.com/ScoopInstaller/Extras/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.8.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "spek",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

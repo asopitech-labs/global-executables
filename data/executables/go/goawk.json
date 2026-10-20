@@ -1,0 +1,67 @@
+{
+  "command": "goawk",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "goawk",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "goawk",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/benhoyt/goawk",
+      "version": "v1.31.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/benhoyt/goawk/@v/v1.31.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.31.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/benhoyt/goawk",
+      "version": "v1.5.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/benhoyt/goawk/@v/v1.5.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.5.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "goawk",
+      "version": "1.31.0",
+      "repository": "https://benhoyt.com/writings/goawk/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

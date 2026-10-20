@@ -1,0 +1,55 @@
+{
+  "command": "gurk",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gurk-0.10.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gurk",
+      "version": "0.10.1",
+      "repository": "https://github.com/boxdot/gurk-rs",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "gurk",
+      "version": "2.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d7/0b/e466e97995f10e4ef0b5479e35256fcd50c387ae325752289935def77d1f/gurk-2.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gurk",
+      "version": "0.0.1",
+      "repository": "http://github.com/vixon/gurk",
+      "source": "https://rubygems.org/gems/gurk-0.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

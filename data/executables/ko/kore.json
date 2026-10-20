@@ -1,0 +1,91 @@
+{
+  "command": "kore",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "nornir-rs",
+      "version": "0.2.0",
+      "repository": "https://gitlab.com/kolbash_pub/kore",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kore",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kore",
+      "version": "4.2.3",
+      "repository": "https://kore.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kore-fileformat",
+      "version": "1.8.15",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0b/3b/2b1dd0d74973422b4fc4d4cef7c985d61299f7f2d087dd1474f1e973c76f/kore_fileformat-1.8.15-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.8.15"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kore-memory",
+      "version": "3.0.4",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ac/78/93579563c74f0a5c5c2f554e37367579421e20c3f53645c65525a02477e9/kore_memory-3.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kore-platform",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/07/2e/4f1a7b1bf25ebc4bec7a22c84f15fe03b94d483104459176da32810ce8c7/kore_platform-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "kore",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

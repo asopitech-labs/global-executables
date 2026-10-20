@@ -1,0 +1,31 @@
+{
+  "command": "ss.cli",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "statesmith",
+      "version": "0.22.2",
+      "repository": "https://github.com/StateSmith/StateSmith",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "nuget",
+      "package": "StateSmith.Cli",
+      "version": "0.22.2",
+      "repository": null,
+      "source": "https://api.nuget.org/v3-flatcontainer/statesmith.cli/0.22.2/statesmith.cli.0.22.2.nupkg",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "dotnet",
+      "registry": "nuget",
+      "latest_version": "0.22.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

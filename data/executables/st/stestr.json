@@ -1,0 +1,43 @@
+{
+  "command": "stestr",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-stestr-4.2.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "stestr",
+      "version": "4.2.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/97/bc/96eb2598b616ab403c5023abb833052b3810a7c0124a69401d06d75ab732/stestr-4.2.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "4.2.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-stestr",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

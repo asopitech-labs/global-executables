@@ -1,0 +1,55 @@
+{
+  "command": "gherkin",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "ruby-cucumber-gherkin-42.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hydronica/go-openapi/cmd/gherkin",
+      "version": "v0.0.0-20250729161226-bf89e1987668",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hydronica/go-openapi/cmd/gherkin/@v/v0.0.0-20250729161226-bf89e1987668.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250729161226-bf89e1987668"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "cucumber-gherkin",
+      "version": "42.0.1",
+      "repository": "https://github.com/cucumber/gherkin/blob/main/ruby",
+      "source": "https://rubygems.org/gems/cucumber-gherkin-42.0.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "42.0.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gherkin",
+      "version": "9.0.0",
+      "repository": "https://github.com/cucumber/cucumber/blob/master/gherkin/ruby",
+      "source": "https://rubygems.org/gems/gherkin-9.0.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "9.0.0"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

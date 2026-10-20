@@ -1,0 +1,79 @@
+{
+  "command": "pydoc",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-3.14.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "python-3.12.13-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "python-3.12.14-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "docstring-cli",
+      "version": "1.0.0",
+      "repository": "https://github.com/vijasuryabaka/Docstring_CLI",
+      "source": "https://files.pythonhosted.org/packages/c5/a0/b6eedf85dbc9dd4f2b892999ec5ff96942de77b0522e44bbc8cba53e12b5/docstring_cli-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pydoc-fork",
+      "version": "3.4.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/22/f2/304f144279d858eb2576095b14529c50a912da806932bb1956e1c014c5eb/pydoc_fork-3.4.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.4.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python-is-python3",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,80 @@
+{
+  "command": "itstool",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "itstool-1:2.0.7-3",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "itstool",
+      "version": "2.0.7",
+      "repository": "https://itstool.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "itstool-2.0.7-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "itstool",
+      "version": "2.0.7",
+      "repository": "http://itstool.org/",
+      "source": "https://files.pythonhosted.org/packages/2a/03/764ef82381e58d051cb87068b2f958ee506f39ecaff24ca3263f14b40dc2/itstool-2.0.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "itstool",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    },
+    {
+      "ecosystem": "xmake",
+      "package": "itstool",
+      "version": "2.0.7",
+      "repository": "https://github.com/xmake-io/xmake-repo",
+      "source": "https://codeload.github.com/xmake-io/xmake-repo/tar.gz/refs/heads/master",
+      "confidence": "inferred",
+      "source_type": "language_package",
+      "package_system": "xmake",
+      "language": "c++",
+      "registry": "xmake-repo",
+      "latest_version": "2.0.7"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

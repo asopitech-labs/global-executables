@@ -1,0 +1,91 @@
+{
+  "command": "attest-tool",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "attest-tool",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/fraunhofer-aisec/go-attestation",
+      "version": "v0.5.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/fraunhofer-aisec/go-attestation/@v/v0.5.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.5.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/go-attestation",
+      "version": "v0.6.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/go-attestation/@v/v0.6.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hslatman/go-attestation",
+      "version": "v0.4.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/hslatman/go-attestation/@v/v0.4.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/smallstep/go-attestation",
+      "version": "v0.4.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/smallstep/go-attestation/@v/v0.4.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.3"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zhsh/go-attestation",
+      "version": "v0.0.0-20260810064451-3938203ed2d9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zhsh/go-attestation/@v/v0.0.0-20260810064451-3938203ed2d9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260810064451-3938203ed2d9"
+    },
+    {
+      "ecosystem": "go",
+      "package": "go.step.sm/go-attestation",
+      "version": "v0.4.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/go.step.sm/go-attestation/@v/v0.4.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

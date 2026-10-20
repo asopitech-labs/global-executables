@@ -1,0 +1,43 @@
+{
+  "command": "newrelic-infra-ctl",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/deepaucksharma/infrastructure-agent",
+      "version": "v0.0.0-20250425063028-4aa6fd992a84",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/deepaucksharma/infrastructure-agent/@v/v0.0.0-20250425063028-4aa6fd992a84.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250425063028-4aa6fd992a84"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/newrelic/infrastructure-agent",
+      "version": "v1.67.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/newrelic/infrastructure-agent/@v/v1.67.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.67.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "newrelic-infra-agent",
+      "version": "1.79.0",
+      "repository": "https://github.com/newrelic/infrastructure-agent",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

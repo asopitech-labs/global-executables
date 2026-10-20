@@ -1,0 +1,55 @@
+{
+  "command": "scalene",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "python3-scalene",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "python3-scalene",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "scalene",
+      "version": "2.3.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/3b/3b/bfbf84e390007980bdc8911ed34c16600fd0d3ee69af7eea24b89e0685a4/scalene-2.3.0-cp310-cp310-macosx_15_0_universal2.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.3.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-scalene",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

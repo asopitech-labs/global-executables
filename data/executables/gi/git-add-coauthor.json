@@ -1,0 +1,43 @@
+{
+  "command": "git-add-coauthor",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "git_mob",
+      "version": "0.4.1",
+      "repository": "https://github.com/Frost/git-mob",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.1"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "git_mob_rs",
+      "version": "0.5.0",
+      "repository": "https://github.com/jplsek/git-mob-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "git-mob",
+      "version": "4.0.1",
+      "repository": "https://github.com/rkotze/git-mob/blob/master/packages/git-mob",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "rdfs2dot",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-rdflib-7.6.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "neurdflib",
+      "version": "5.0.1",
+      "repository": "https://github.com/tgbugs/rdflib",
+      "source": "https://files.pythonhosted.org/packages/41/66/304a1ad40fecee3504a315d831afcaebe156a62ff1628311bac3cb8d55c8/neurdflib-5.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "5.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rdfextras",
+      "version": "0.4",
+      "repository": "http://github.com/RDFLib/rdfextras",
+      "source": "https://files.pythonhosted.org/packages/9f/1a/55fd2e8f7f08ddc6b86fa891f0fad0ba23ebbc82ae0b8a8f1f0fe2326137/rdfextras-0.4.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rdflib",
+      "version": "7.6.0",
+      "repository": "https://github.com/RDFLib/rdflib",
+      "source": "https://files.pythonhosted.org/packages/10/c2/6604a71269e0c1bd75656d5a001432d16f2cc5b8c057140ec797155c295e/rdflib-7.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "7.6.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python-rdflib-tools",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

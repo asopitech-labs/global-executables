@@ -1,0 +1,43 @@
+{
+  "command": "deadwood",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "deadwood",
+      "version": "0.1.8",
+      "repository": "https://github.com/fn/deadwood",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "deadwood-sec",
+      "version": "0.5.3",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a7/6f/a8f77740ead2b2c0d2e529bebd636ca4c2f4a7ad1eabae7142a8996270ce/deadwood_sec-0.5.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.3"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "maradns-deadwood",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

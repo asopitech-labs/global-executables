@@ -1,0 +1,67 @@
+{
+  "command": "muscle",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "muscle",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "muscle",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "muscle-musedev",
+      "version": "0.0.6.1",
+      "repository": "https://gitlab.com/musedev/muscle",
+      "source": "https://files.pythonhosted.org/packages/c6/2e/c4558a2b95cb1124adfb9091252356072dff29db72840e2c94d935b28584/muscle_musedev-0.0.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.6.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "muscle-xz18",
+      "version": "0.1.1",
+      "repository": "https://github.com/xz18/muscle",
+      "source": "https://files.pythonhosted.org/packages/11/21/c46c1c12e34072912f8557ea96512ac3a91d8d4ef8f288e61479bfeb73fc/muscle_xz18-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "muscle",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

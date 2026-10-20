@@ -1,0 +1,43 @@
+{
+  "command": "catcat",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "catcat",
+      "version": "0.2.1",
+      "repository": "https://github.com/Miatonin/catcat/",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/crptmem/catcat",
+      "version": "v0.0.0-20231106133955-ee23be5c2d6b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/crptmem/catcat/@v/v0.0.0-20231106133955-ee23be5c2d6b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20231106133955-ee23be5c2d6b"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cdsclient",
+      "version": "4.07",
+      "repository": "https://cdsarc.cds.unistra.fr/doc/cdsclient.html",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

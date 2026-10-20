@@ -1,0 +1,43 @@
+{
+  "command": "gitlab-zip-cat",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gitlab-19.2.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/gitlab-org/gitlab-workhorse",
+      "version": "v8.8.1+incompatible",
+      "repository": null,
+      "source": "https://proxy.golang.org/gitlab.com/gitlab-org/gitlab-workhorse/@v/v8.8.1+incompatible.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v8.8.1+incompatible"
+    },
+    {
+      "ecosystem": "go",
+      "package": "gitlab.com/gitlab-org/gitlab/workhorse",
+      "version": "v0.0.0-20260903031451-aedc1474fa39",
+      "repository": null,
+      "source": "https://proxy.golang.org/cached-only/gitlab.com/gitlab-org/gitlab/workhorse/@v/v0.0.0-20260903031451-aedc1474fa39.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260903031451-aedc1474fa39"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

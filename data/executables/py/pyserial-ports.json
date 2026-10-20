@@ -1,0 +1,55 @@
+{
+  "command": "pyserial-ports",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pyserial-3.5-8",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyserial",
+      "version": "3.5",
+      "repository": "https://github.com/pyserial/pyserial",
+      "source": "https://files.pythonhosted.org/packages/07/bc/587a445451b253b285629263eb51c2d8e9bcea4fc97826266d186f96f558/pyserial-3.5-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyserial-labgrid",
+      "version": "3.5.0.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/42/4e/bd1f71b7889cc1d34aeca3b162d5b5dd7eccd47631b5a59449288a5e3bb0/pyserial_labgrid-3.5.0.2-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.5.0.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-serial",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

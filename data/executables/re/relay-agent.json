@@ -1,0 +1,43 @@
+{
+  "command": "relay-agent",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "relay-agent",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/relay-mail/rust/agent",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@bitmacro/relay-agent",
+      "version": "0.2.9",
+      "repository": "git+https://github.com/bitmacro/relay-agent.git",
+      "source": "https://registry.npmjs.org/@bitmacro%2Frelay-agent/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.9"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cryptoskeet/relay-agent",
+      "version": "0.3.5",
+      "repository": "git+https://github.com/relay-network/agent-sdk.git",
+      "source": "https://registry.npmjs.org/@cryptoskeet%2Frelay-agent/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.3.5"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

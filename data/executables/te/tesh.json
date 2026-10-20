@@ -1,0 +1,91 @@
+{
+  "command": "tesh",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "libsimgrid-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "libsimgrid-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/feloy/tesh",
+      "version": "v0.4.5",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/feloy/tesh?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.4.5",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.5"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mickael-menu/tesh",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/mickael-menu/tesh?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "simgrid",
+      "version": "4.1",
+      "repository": "https://simgrid.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tesh",
+      "version": "0.3.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/42/b3/762bb6c5dccf0206edeb1c1064dedfc0616df147944881a67a9cc70d911b/tesh-0.3.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "libsimgrid-dev",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

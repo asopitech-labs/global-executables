@@ -1,0 +1,45 @@
+{
+  "command": "wasmedgec",
+  "providers": [
+    {
+      "ecosystem": "conan",
+      "package": "wasmedge",
+      "version": "0.14.1",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/wasmedge/0.14.1/_/_/revisions/203fa5caf4f58211d7b5f42dd242ae0c/packages/e946f6f64b72533529476333780d624bfa8690b4/revisions/2f95bf87b515266505c293a5ce392614/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "0.14.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "wasmedge",
+      "version": "0.17.1",
+      "repository": "https://WasmEdge.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "wasmedge",
+      "version": "0.17.1",
+      "repository": "https://wasmedge.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "0.17.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

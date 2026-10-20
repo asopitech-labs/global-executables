@@ -1,0 +1,31 @@
+{
+  "command": "ip2host",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/pikpikcu/ip2host",
+      "version": "v0.0.0-20240914093200-1406b3b74c4b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/pikpikcu/ip2host/@v/v0.0.0-20240914093200-1406b3b74c4b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240914093200-1406b3b74c4b"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ip2host",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

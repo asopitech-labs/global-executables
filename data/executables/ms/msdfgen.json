@@ -1,0 +1,45 @@
+{
+  "command": "msdfgen",
+  "providers": [
+    {
+      "ecosystem": "conan",
+      "package": "msdfgen",
+      "version": "1.12",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/msdfgen/1.12/_/_/revisions/4f6a89625f092ed29a318e5395cd117d/packages/7f11dc2be036a3bef32632aaf555abd0e616071d/revisions/258cb1c72648bc1d84313c53faf9c20b/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "1.12"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "msdfgen",
+      "version": "1.13",
+      "repository": "https://github.com/Chlumsky/msdfgen",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "msdfgen",
+      "version": "1.13+new-skia-api",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "1.13+new-skia-api"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

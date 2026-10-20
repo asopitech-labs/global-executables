@@ -1,0 +1,79 @@
+{
+  "command": "cstream",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "cstream",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "cstream",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ZhuoZhuoCrayon/wasm-demo/src/timeseriesqueryservice",
+      "version": "v0.0.0-20240913064926-cb77044e2269",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!zhuo!zhuo!crayon/wasm-demo/src/timeseriesqueryservice/@v/v0.0.0-20240913064926-cb77044e2269.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240913064926-cb77044e2269"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/ZhuoZhuoCrayon/wasm-demo/src/trpc_timeseriesqueryservice",
+      "version": "v0.0.0-20240913064926-cb77044e2269",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!zhuo!zhuo!crayon/wasm-demo/src/trpc_timeseriesqueryservice/@v/v0.0.0-20240913064926-cb77044e2269.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240913064926-cb77044e2269"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zhuozhuocrayon/wasm-demo/src/timeseriesqueryservice",
+      "version": "v0.0.0-20240913064926-cb77044e2269",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/zhuozhuocrayon/wasm-demo/src/timeseriesqueryservice/@v/v0.0.0-20240913064926-cb77044e2269.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240913064926-cb77044e2269"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "cstream",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "proxycheck",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "proxycheck",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "proxycheck",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Mohammadrce/ProxyAtlas",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/Mohammadrce/ProxyAtlas?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/burukuru/proxycheck",
+      "version": "v0.0.0-20200628213900-98c53f7925d0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/burukuru/proxycheck/@v/v0.0.0-20200628213900-98c53f7925d0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200628213900-98c53f7925d0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "proxycheck-cli",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/0b/29/18e870da72aa0aa8bb24e47018c1ecd3a4797629fdd4eb00bbcf99afeff2/proxycheck_cli-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "proxycheck",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

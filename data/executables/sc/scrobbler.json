@@ -1,0 +1,67 @@
+{
+  "command": "scrobbler",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "scrobbler",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "scrobbler",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/deathrashed/lastfm-scrobbler",
+      "version": "v1.2.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/deathrashed/lastfm-scrobbler?filter=name+%3D%3D+%22main%22&limit=1000&version=v1.2.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "scrobblerh",
+      "version": "1.1.4",
+      "repository": "https://github.com/hauzer/scrobbler/",
+      "source": "https://files.pythonhosted.org/packages/85/cc/c5b26911650e77d7087ee8dea2e16a1fcea137cc1b21a242b3c3db0288a0/scrobblerh-1.1.4.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "scrobbler",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

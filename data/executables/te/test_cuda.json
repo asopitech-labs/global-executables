@@ -1,0 +1,31 @@
+{
+  "command": "test_cuda",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ringkernel-wavesim",
+      "version": "1.1.0",
+      "repository": "https://github.com/mivertowski/RustCompute",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "llm-codegen-research",
+      "version": "2.19",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/b2/21/bf2e8ad0086c43bb2203191cc7e394156c55997c2783226b434c3c50d943/llm_codegen_research-2.19-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.19"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

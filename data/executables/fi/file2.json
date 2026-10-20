@@ -1,0 +1,79 @@
+{
+  "command": "file2",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "file-kanji",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "file-kanji",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cpusoft/go-study/src",
+      "version": "v0.0.0-20260811055635-4075431d37f6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cpusoft/go-study/src/@v/v0.0.0-20260811055635-4075431d37f6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260811055635-4075431d37f6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/maheshkamasani/assignments",
+      "version": "v0.0.0-20210120161055-5e0d57848a9b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/maheshkamasani/assignments/@v/v0.0.0-20210120161055-5e0d57848a9b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210120161055-5e0d57848a9b"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tusharroy23/gopractice",
+      "version": "v0.0.0-20210605123744-4bcf7590112e",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tusharroy23/gopractice/@v/v0.0.0-20210605123744-4bcf7590112e.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20210605123744-4bcf7590112e"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "file-kanji",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

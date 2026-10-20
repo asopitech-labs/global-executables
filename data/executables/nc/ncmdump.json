@@ -1,0 +1,43 @@
+{
+  "command": "ncmdump",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ncmdump-bin",
+      "version": "0.8.0",
+      "repository": "https://github.com/iqiziqi/ncmdump.rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "ncmdump",
+      "version": "1.5.1",
+      "repository": "https://github.com/taurusxin/ncmdump",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "ncmdump",
+      "version": "0.1.1",
+      "repository": "http://github.com/nondanee/ncmdump",
+      "source": "https://files.pythonhosted.org/packages/22/10/cefada6c710845fb24d93fb9d1cbdf63e7b2940491a1dd30c8753820ef3e/ncmdump-0.1.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "jenkins-jobs",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "jenkins-job-builder",
+      "version": "6.5.0",
+      "repository": "https://docs.openstack.org/infra/jenkins-job-builder/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jenkins-job-builder",
+      "version": "6.5.0",
+      "repository": "https://jenkins-job-builder.readthedocs.io/en/latest/",
+      "source": "https://files.pythonhosted.org/packages/20/c5/e0e52cd353ff0128ea1eba9f13354014550b5bc9d5e89c41b4edf8f56779/jenkins_job_builder-6.5.0-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.5.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jenkins_jobs",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ab/98/faa14038471e8b7641d947e46a7d18302c3be8db2c5d1c63f51b05fb1eec/jenkins_jobs-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jjb-puppetlabs",
+      "version": "1.2.1.dev147",
+      "repository": "http://docs.openstack.org/infra/system-config/jjb.html",
+      "source": "https://files.pythonhosted.org/packages/93/63/2ffa799a7faf23975f38c7aacbf060ca1e3ab5d9f63eb9dbd6bdf7959933/jjb-puppetlabs-1.2.1.dev147.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.2.1.dev147"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "zerotk.jenkins-job-builder",
+      "version": "2.0.0.0b2",
+      "repository": "http://docs.openstack.org/infra/system-config/jjb.html",
+      "source": "https://files.pythonhosted.org/packages/8d/7e/8b9ba11112151b2471d1157ce3ee1c0ef0f519e75fff96be1785095af8a6/zerotk.jenkins-job-builder-2.0.0.0b2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0.0b2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "jenkins-job-builder",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

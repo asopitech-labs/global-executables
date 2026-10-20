@@ -1,0 +1,67 @@
+{
+  "command": "rtrmon",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "stayrtr",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "stayrtr",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bgp/stayrtr",
+      "version": "v0.6.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bgp/stayrtr/@v/v0.6.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.6.4"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudflare/gortr",
+      "version": "v0.15.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudflare/gortr/@v/v0.15.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.15.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "stayrtr",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

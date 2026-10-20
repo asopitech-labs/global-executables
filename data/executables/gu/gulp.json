@@ -1,0 +1,79 @@
+{
+  "command": "gulp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "gulp-5.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "gulp-cli",
+      "version": "3.1.0",
+      "repository": "https://github.com/gulpjs/gulp-cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@acanto/gulp",
+      "version": "4.0.2",
+      "repository": "git+https://github.com/gulpjs/gulp.git",
+      "source": "https://registry.npmjs.org/@acanto%2Fgulp/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "4.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mentat-gulp",
+      "version": "1.7.605",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/ae/ca/06ecc02cd2780383b484b3f5fe45554afd2366f9ca1bb3121f78d4c06a58/mentat_gulp-1.7.605-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.7.605"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "gulp",
+      "version": "0.1.1",
+      "repository": "http://github.com/andrewcarpenter/gulp",
+      "source": "https://rubygems.org/gems/gulp-0.1.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "gulp",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

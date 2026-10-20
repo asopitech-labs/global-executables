@@ -1,0 +1,43 @@
+{
+  "command": "sagittarius",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "sagittarius",
+      "version": "0.3.1",
+      "repository": "https://github.com/LHelge/sagittarius",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.1"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "sagittarius-scheme",
+      "version": "0.9.15",
+      "repository": "https://github.com/ktakashi/sagittarius-scheme",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "sagittarius-py",
+      "version": "1.0.11",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a7/d7/845d52437ed35ed6f74d8afc84188069f51141d0a2bc91ed9bf19a1a35b9/sagittarius_py-1.0.11-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.11"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

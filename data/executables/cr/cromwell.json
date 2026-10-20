@@ -1,0 +1,43 @@
+{
+  "command": "cromwell",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "cromwell",
+      "version": "0.1.5",
+      "repository": "https://github.com/guni1192/cromwell",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cromwell",
+      "version": "92",
+      "repository": "https://github.com/broadinstitute/cromwell",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@cromwell/cli",
+      "version": "3.0.7",
+      "repository": "git+https://github.com/CromwellCMS/Cromwell.git",
+      "source": "https://registry.npmjs.org/@cromwell%2Fcli/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.0.7"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,163 @@
+{
+  "command": "detox",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "detox-3.0.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "detox",
+      "version": "0.1.2",
+      "repository": "https://github.com/whitfin/detox",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "detox",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "detox",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/xav-b/detox",
+      "version": "v0.0.0-20251023153003-9237824acc35",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/xav-b/detox/@v/v0.0.0-20251023153003-9237824acc35.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20251023153003-9237824acc35"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "detox",
+      "version": "3.0.1",
+      "repository": "https://detox.sourceforge.net/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@avinashbharti97/detox",
+      "version": "20.38.0",
+      "repository": "git+https://github.com/browserstack/cloud_detox_support.git",
+      "source": "https://registry.npmjs.org/@avinashbharti97%2Fdetox/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "20.38.0"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@browserstack/detox",
+      "version": "20.51.3-cloud.1",
+      "repository": "git+https://github.com/browserstack/cloud_detox_support.git",
+      "source": "https://registry.npmjs.org/@browserstack%2Fdetox/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "20.51.3-cloud.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "detox",
+      "version": "0.19",
+      "repository": "https://github.com/tox-dev/detox",
+      "source": "https://files.pythonhosted.org/packages/d7/20/0279047eb006ada8cd98d16583dc5ae40d04b95586b82e8efa9e8b39263a/detox-0.19-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.19"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "detox-jar",
+      "version": "1.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/05/86/58c52d8ad67f98a645a95f617fff26b0fb5899cb97dbb260c4529d8d36a6/detox_jar-1.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "detoxpy",
+      "version": "0.1.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1f/92/50b62513dbaead7ce0caced1f23decbe944489a44b59a65f66adb9ed36d0/detoxpy-0.1.5-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "twitchdetox",
+      "version": "0.0.4",
+      "repository": "https://github.com/Fittiboy/twitch-detox",
+      "source": "https://files.pythonhosted.org/packages/b0/25/2aede685055edab9c8059c48bace97cf319014f93c75593df92a576b7287/twitchdetox-0.0.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "detox",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

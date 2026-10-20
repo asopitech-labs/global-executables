@@ -1,0 +1,43 @@
+{
+  "command": "kiwi-ng",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "kiwi",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kiwi",
+      "version": "11.1.5",
+      "repository": "https://osinside.github.io/kiwi/",
+      "source": "https://files.pythonhosted.org/packages/05/c3/0a0a8599ae7889ef8a93095ccab56996fc17a4e15b05476d3b21a5aefe7b/kiwi-11.1.5.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "11.1.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "kiwi",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

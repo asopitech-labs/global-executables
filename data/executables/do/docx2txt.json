@@ -1,0 +1,91 @@
+{
+  "command": "docx2txt",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "docx2txt-1.4-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kstlv/docx2txt",
+      "version": "v0.0.0-20220423081857-400780b8ac67",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kstlv/docx2txt/@v/v0.0.0-20220423081857-400780b8ac67.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20220423081857-400780b8ac67"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/terratensor/docx2txt",
+      "version": "v0.0.0-20250216215132-599aa394fd95",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/terratensor/docx2txt/@v/v0.0.0-20250216215132-599aa394fd95.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250216215132-599aa394fd95"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "docx2txt-1.4-2",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "docx2txt",
+      "version": "0.9",
+      "repository": "https://github.com/ankushshah89/python-docx2txt",
+      "source": "https://files.pythonhosted.org/packages/d6/51/756e71bec48ece0ecc2a10e921ef2756e197dcb7e478f2b43673b6683902/docx2txt-0.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.9"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "docx2txt",
+      "version": "0.0.2",
+      "repository": "https://github.com/ticolucci/docx2txt",
+      "source": "https://rubygems.org/gems/docx2txt-0.0.2.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "docx2txt",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

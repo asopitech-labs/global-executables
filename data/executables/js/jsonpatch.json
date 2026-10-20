@@ -1,0 +1,55 @@
+{
+  "command": "jsonpatch",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-jsonpatch-1.33-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Wing924/d2r-wing",
+      "version": "v1.13.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!wing924/d2r-wing/@v/v1.13.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.13.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "jsonpatch",
+      "version": "1.36",
+      "repository": "https://github.com/stefankoegl/python-json-patch",
+      "source": "https://files.pythonhosted.org/packages/d9/c0/f2b34ce5fa98bde1bab4ff25f48064d09a078c40f4f53f65276a812d5e8a/jsonpatch-1.36-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.36"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-jsonpatch",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

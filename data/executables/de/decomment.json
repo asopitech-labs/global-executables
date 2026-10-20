@@ -1,0 +1,67 @@
+{
+  "command": "decomment",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "pmccabe",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "pmccabe",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/zachahn/vomit",
+      "version": "v0.0.0-20260831040659-f471d77ea81c",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/zachahn/vomit?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20260831040659-f471d77ea81c",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260831040659-f471d77ea81c"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "pmccabe",
+      "version": "2.9",
+      "repository": "https://gitlab.com/pmccabe/pmccabe",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pmccabe",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

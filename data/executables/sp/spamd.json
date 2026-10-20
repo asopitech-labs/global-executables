@@ -1,0 +1,55 @@
+{
+  "command": "spamd",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "spamassassin-4.0.2-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/kwilteam/kwil-db/test",
+      "version": "v0.0.0-20260716185119-ae25828cab6a",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/kwilteam/kwil-db/test/@v/v0.0.0-20260716185119-ae25828cab6a.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260716185119-ae25828cab6a"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/vui-chee/spamd",
+      "version": "v0.1.5",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/vui-chee/spamd/@v/v0.1.5.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "spamd",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,43 @@
+{
+  "command": "neovim-ruby-host",
+  "providers": [
+    {
+      "ecosystem": "rubygems",
+      "package": "neovim",
+      "version": "0.10.0",
+      "repository": "https://github.com/neovim/neovim-ruby",
+      "source": "https://rubygems.org/gems/neovim-0.10.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "nvim",
+      "version": "1.17",
+      "repository": "https://github.com/BertramScharpf/ruby-nvim",
+      "source": "https://rubygems.org/gems/nvim-1.17.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "1.17"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ruby-neovim",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

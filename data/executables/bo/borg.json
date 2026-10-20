@@ -1,0 +1,139 @@
+{
+  "command": "borg",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "borg-1.4.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "borg",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "borgbackup",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "borgbackup",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.hscsec.cn/ok-borg/borg",
+      "version": "v0.0.3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.hscsec.cn/ok-borg/borg/@v/v0.0.3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.3"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "borgbackup",
+      "version": "1.4.5",
+      "repository": "https://www.borgbackup.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "agent-borg",
+      "version": "3.4.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/cc/b0/5e13bc9b649126e4d65178005ff4e0b2fa8b581984d8e7a4a358554c848f/agent_borg-3.4.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.4.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "borg-collective",
+      "version": "0.6.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/04/36/ab2f313ddd6c7321544ad80d99fa989f24b355d30ccda03ae8c4175aa4ca/borg_collective-0.6.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "borgbackup",
+      "version": "1.4.5",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/62/5b/aec6c069840f64f744d661c5eea1c648d407bebb836b2e12d8a3b9939bb4/borgbackup-1.4.5.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.5"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "borg-rb",
+      "version": "0.1.5",
+      "repository": "https://github.com/B0RG/borg",
+      "source": "https://rubygems.org/gems/borg-rb-0.1.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "borgbackup",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "usgs",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "quakeml",
+      "version": "0.1.8",
+      "repository": "https://github.com/HerrMuellerluedenscheid/quakeml",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.8"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/200106-uta-go/usgs",
+      "version": "v0.0.0-20200116183401-6b7653993441",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/200106-uta-go/usgs/@v/v0.0.0-20200116183401-6b7653993441.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20200116183401-6b7653993441"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tamnd/usgs-cli",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/tamnd/usgs-cli?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "usgs",
+      "version": "0.3.7",
+      "repository": "https://github.com/kapadia/usgs",
+      "source": "https://files.pythonhosted.org/packages/2d/8f/8334ec9e19b586d3e7301c4a161a35a8413e9f2cb4ae030477e26c711b36/usgs-0.3.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "usgs",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

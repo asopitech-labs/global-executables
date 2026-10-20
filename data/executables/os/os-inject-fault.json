@@ -1,0 +1,31 @@
+{
+  "command": "os-inject-fault",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "os-faults",
+      "version": "0.3.0",
+      "repository": "http://os-faults.readthedocs.io/",
+      "source": "https://files.pythonhosted.org/packages/e0/c4/7ae02a4474a056c1876f8e8865630e7b1c8281af5247e109526114b8d4ba/os_faults-0.3.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-os-faults",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

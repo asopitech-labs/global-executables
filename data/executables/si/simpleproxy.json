@@ -1,0 +1,91 @@
+{
+  "command": "simpleproxy",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "simpleproxy",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/hyposcaler-bot/simpleproxy",
+      "version": "v0.0.0-20250618235050-842a709743c7",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/hyposcaler-bot/simpleproxy?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20250618235050-842a709743c7",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250618235050-842a709743c7"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/merith-tk/simpleproxy",
+      "version": "v0.0.0-20250716210930-f73095ed3626",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/merith-tk/simpleproxy/@v/v0.0.0-20250716210930-f73095ed3626.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250716210930-f73095ed3626"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/orvice/simpleproxy",
+      "version": "v0.0.0-20250824164138-bed4bf8658d0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/orvice/simpleproxy/@v/v0.0.0-20250824164138-bed4bf8658d0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250824164138-bed4bf8658d0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/target/goalert",
+      "version": "v0.34.1",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/target/goalert/@v/v0.34.1.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.34.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cwhite-simple-proxy",
+      "version": "0.2.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a4/5b/83b8602e1b53c5fc017305b3bc1513ec992b30fa7d7661d665d3b614a8bd/cwhite_simple_proxy-0.2.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.2.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "simpleproxy",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

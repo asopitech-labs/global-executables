@@ -1,0 +1,55 @@
+{
+  "command": "dekit",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "dekit",
+      "version": "0.10.2",
+      "repository": "https://github.com/pvolok/dekit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.2"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "mprocs",
+      "version": "0.9.6",
+      "repository": "https://github.com/pvolok/mprocs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.9.6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mprocs",
+      "version": "0.9.6",
+      "repository": "https://github.com/pvolok/dekit",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "dekit-cli",
+      "version": "0.10.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/af/88/13d79f596147ab1984278abf690067fc70d08ff9f0ab9d8caabb14491edc/dekit_cli-0.10.2-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.10.2"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

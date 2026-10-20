@@ -1,0 +1,43 @@
+{
+  "command": "pmbootstrap",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "pmbootstrap-3.11.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pmbootstrap",
+      "version": "2.1.0",
+      "repository": "https://www.postmarketos.org",
+      "source": "https://files.pythonhosted.org/packages/e1/f8/38fb31e149a5ab4294e20f295199614054e5c861c9c2317134f6172dc46c/pmbootstrap-2.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pmbootstrap",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

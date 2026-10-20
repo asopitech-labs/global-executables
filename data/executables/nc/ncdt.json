@@ -1,0 +1,67 @@
+{
+  "command": "ncdt",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "ncdt",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "ncdt",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/namecoin/ncdns",
+      "version": "v0.3.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/namecoin/ncdns/@v/v0.3.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/robertmin1/ncdns",
+      "version": "v0.0.0-20221228044221-cfe9e112aa41",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/robertmin1/ncdns?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20221228044221-cfe9e112aa41",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20221228044221-cfe9e112aa41"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "ncdt",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

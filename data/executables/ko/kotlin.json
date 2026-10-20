@@ -1,0 +1,80 @@
+{
+  "command": "kotlin",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "kotlin-2.4.10-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "kotlinrs",
+      "version": "0.1.10",
+      "repository": "https://github.com/MenkeTechnologies/kotlinrs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.10"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "kotlin",
+      "version": "2.4.10",
+      "repository": "https://kotlinlang.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "kotlin-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/yourusername/kotlin-cli",
+      "source": "https://files.pythonhosted.org/packages/cb/00/7287ba546ea69e09821cd211508cc2ccd3399064104d7361666767702b70/kotlin_cli-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "kotlin",
+      "version": "2.4.10",
+      "repository": "https://kotlinlang.org/",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "2.4.10"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "kotlin",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,79 @@
+{
+  "command": "mibdump",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-pysmi-2.0.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lukeod/gosmi",
+      "version": "v0.0.0-20250501052547-e8bf3e8ec3fa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/lukeod/gosmi/@v/v0.0.0-20250501052547-e8bf3e8ec3fa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250501052547-e8bf3e8ec3fa"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pysmi",
+      "version": "2.0.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/08/6c/646a251c5e5d0858b3956b9f0f6b7bbda538ddbf271f17da6cf3a5aebdd2/pysmi-2.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pysmi-lextudio",
+      "version": "1.4.3",
+      "repository": "https://github.com/lextudio/pysmi",
+      "source": "https://files.pythonhosted.org/packages/0e/f4/8a64590456991348c99b526aec421ced5d0b4e7c1f05baf02a8338be4464/pysmi_lextudio-1.4.3-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.4.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pysnmp-pysmi",
+      "version": "6.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/d8/d3/cc55e3bfae2c96aac37b3a07963ccfe8f138ebd2b8b956239b53c2e934cb/pysnmp_pysmi-6.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "6.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pysmi",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,56 @@
+{
+  "command": "mvnDebug",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "maven-3.9.16-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "conan",
+      "package": "maven",
+      "version": "3.9.6",
+      "repository": "https://github.com/conan-io/conan-center-index",
+      "source": "https://center2.conan.io/v2/conans/maven/3.9.6/_/_/revisions/55c5e520fab7d7ef982d7eb9e983c23a/packages/9a4eb3c8701508aa9458b1a73d0633783ecc2270/revisions/abdb68a441e41721b7d3f16def65db3f/files/conanmanifest.txt",
+      "confidence": "filesystem",
+      "source_type": "language_package",
+      "package_system": "conan",
+      "language": "c++",
+      "registry": "conancenter",
+      "latest_version": "3.9.6"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "maven",
+      "version": "3.9.16",
+      "repository": "https://maven.apache.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "mvnvm",
+      "version": "1.0.29",
+      "repository": "https://bitbucket.org/mjensen/mvnvm/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

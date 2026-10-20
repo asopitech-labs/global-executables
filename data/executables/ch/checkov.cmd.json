@@ -1,0 +1,55 @@
+{
+  "command": "checkov.cmd",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "checkov",
+      "version": "3.3.10",
+      "repository": "https://www.checkov.io/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "checkov",
+      "version": "3.3.29",
+      "repository": "https://github.com/bridgecrewio/checkov",
+      "source": "https://files.pythonhosted.org/packages/63/4a/26ecbf2abac34993b7dba06379c6b8a03f078323856a917ed47370610a67/checkov-3.3.29-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "3.3.29"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "checkov2",
+      "version": "1.0.970",
+      "repository": "https://github.com/nimrodkor/checkov",
+      "source": "https://files.pythonhosted.org/packages/95/14/0be552c8cbebce378644b2826abb6cc39efae16e789decf42e1f784212f3/checkov2-1.0.970-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.970"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "psgraph",
+      "version": "2.3.199",
+      "repository": "https://github.com/bridgecrewio/checkov",
+      "source": "https://files.pythonhosted.org/packages/bf/14/f13ccd03ff73b25232fb7ae2e8e8cb9c3716d6fd458a09c61fbd0ceee624/psgraph-2.3.199-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "2.3.199"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,67 @@
+{
+  "command": "arduino-language-server",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "arduino-language-server-0.7.7-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "arduino-language-server",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/arduino/arduino-language-server",
+      "version": "v0.0.0-20260728082150-dec72c89e883",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/arduino/arduino-language-server/@v/v0.0.0-20260728082150-dec72c89e883.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260728082150-dec72c89e883"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/bcmi-labs/arduino-language-server",
+      "version": "v0.0.0-20260728082150-dec72c89e883",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/bcmi-labs/arduino-language-server/@v/v0.0.0-20260728082150-dec72c89e883.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260728082150-dec72c89e883"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/speelbarrow/arduino-language-server",
+      "version": "v0.0.0-20250129222142-ee17a87081a3",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/speelbarrow/arduino-language-server/@v/v0.0.0-20250129222142-ee17a87081a3.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250129222142-ee17a87081a3"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

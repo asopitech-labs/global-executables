@@ -1,0 +1,31 @@
+{
+  "command": "zaqar-bench",
+  "providers": [
+    {
+      "ecosystem": "pypi",
+      "package": "zaqar",
+      "version": "23.0.1",
+      "repository": "https://docs.openstack.org/zaqar/latest/",
+      "source": "https://files.pythonhosted.org/packages/f7/ba/83c77c25016fde2c27e746571f628a4f699964dcb5e44a8f5e479b85e1dd/zaqar-23.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "23.0.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-zaqar",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

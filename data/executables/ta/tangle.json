@@ -1,0 +1,103 @@
+{
+  "command": "tangle",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "texlive-bin-2026.0-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "texlive-binaries",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "texlive-binaries",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/flaglab/ssanchez59_blockchain",
+      "version": "v0.0.0-20190516145542-2cfc8dd9a279",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/flaglab/ssanchez59_blockchain/@v/v0.0.0-20190516145542-2cfc8dd9a279.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20190516145542-2cfc8dd9a279"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "texlive",
+      "version": "20260301",
+      "repository": "https://www.tug.org/texlive/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tangle-cli",
+      "version": "0.1.34",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/1b/23/6fe41d74b39d628942b7c93338b6c3b2ef6ccb62fb74d4cda1d9b628eea2/tangle_cli-0.1.34-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.34"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tangle-node-editor",
+      "version": "1.0.9a0",
+      "repository": "https://www.github.com/nielsvaes/tangle",
+      "source": "https://files.pythonhosted.org/packages/95/6c/61e059f4def36c515abe3b5c585bde9f7430cd4dfbc9298a2940ec9c3190/tangle_node_editor-1.0.9a0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.9a0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "texlive-binaries",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

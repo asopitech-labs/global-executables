@@ -1,0 +1,104 @@
+{
+  "command": "duckdb",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "duckdb-1.5.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "duckdb",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/Tencent/WeKnora",
+      "version": "v0.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!tencent/!we!knora/@v/v0.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/cloudquery/cloudquery/plugins/destination/duckdb",
+      "version": "v0.0.0-20241202111525-7332e2e85e2f",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/cloudquery/cloudquery/plugins/destination/duckdb/@v/v0.0.0-20241202111525-7332e2e85e2f.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241202111525-7332e2e85e2f"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/tencent/weknora",
+      "version": "v0.7.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/tencent/weknora/@v/v0.7.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.7.2"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "duckdb",
+      "version": "1.5.5",
+      "repository": "https://www.duckdb.org",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "duckdb-cli",
+      "version": "1.5.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/08/bb/fbc6f6ea745970b72c6413bc20d13367438363b8300c592ca1936d12c278/duckdb_cli-1.5.6-py3-none-macosx_12_0_arm64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.6"
+    },
+    {
+      "ecosystem": "scoop",
+      "package": "duckdb",
+      "version": "1.5.5",
+      "repository": "https://duckdb.org",
+      "source": "https://codeload.github.com/ScoopInstaller/Main/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "os_package",
+      "package_system": "scoop",
+      "distribution_family": "windows",
+      "distribution": "windows",
+      "latest_version": "1.5.5"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

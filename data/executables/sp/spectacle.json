@@ -1,0 +1,91 @@
+{
+  "command": "spectacle",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "spectacle-1:6.7.4-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kde-spectacle",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "kde-spectacle",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/MayukhSobo/spectacle",
+      "version": "v0.0.0-20250127172048-54c6cd9beeaa",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!mayukh!sobo/spectacle/@v/v0.0.0-20250127172048-54c6cd9beeaa.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20250127172048-54c6cd9beeaa"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/getgauge/spectacle",
+      "version": "v0.2.4",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/getgauge/spectacle/@v/v0.2.4.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.2.4"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@codelenny/spectacle-docs",
+      "version": "0.2.1",
+      "repository": "git+https://github.com/sourcey/spectacle.git",
+      "source": "https://registry.npmjs.org/@codelenny%2Fspectacle-docs/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "0.2.1"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "kde-spectacle",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

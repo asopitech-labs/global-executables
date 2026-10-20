@@ -1,0 +1,43 @@
+{
+  "command": "berg",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "codeberg-cli",
+      "version": "0.5.5",
+      "repository": "https://codeberg.org/Aviac/codeberg-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.5"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "codeberg-cli",
+      "version": "0.5.5",
+      "repository": "https://codeberg.org/Aviac/codeberg-cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "berg-iceberg",
+      "version": "1.5.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a2/c1/f38ac4230a9fe3a82a84d5fe04601d3b8f7e0160ebef36ec75844143c5c0/berg_iceberg-1.5.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.5.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

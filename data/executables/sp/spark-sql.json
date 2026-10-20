@@ -1,0 +1,31 @@
+{
+  "command": "spark-sql",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "apache-spark",
+      "version": "4.2.0",
+      "repository": "https://spark.apache.org/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "spark8t",
+      "version": "1.6.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/6f/27/ddb7012536a492fa599a1c0ec303dfa95c5d89560892dac25c4d1c3143e4/spark8t-1.6.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.6.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

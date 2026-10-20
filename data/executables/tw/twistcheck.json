@@ -1,0 +1,55 @@
+{
+  "command": "twistcheck",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "wycheproof",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/C2SP/wycheproof",
+      "version": "v0.0.0-20260818164548-dac1dd4729fd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!c2!s!p/wycheproof/@v/v0.0.0-20260818164548-dac1dd4729fd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818164548-dac1dd4729fd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/c2sp/wycheproof",
+      "version": "v0.0.0-20260818164548-dac1dd4729fd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/c2sp/wycheproof/@v/v0.0.0-20260818164548-dac1dd4729fd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818164548-dac1dd4729fd"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/google/wycheproof",
+      "version": "v0.0.0-20260818164548-dac1dd4729fd",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/google/wycheproof/@v/v0.0.0-20260818164548-dac1dd4729fd.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20260818164548-dac1dd4729fd"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

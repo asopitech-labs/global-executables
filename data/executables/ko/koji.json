@@ -1,0 +1,55 @@
+{
+  "command": "koji",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "koji",
+      "version": "3.4.0",
+      "repository": "https://github.com/cococonscious/koji",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "3.4.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "koji",
+      "version": "3.4.0",
+      "repository": "https://github.com/cococonscious/koji",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "koji",
+      "version": "1.36.1",
+      "repository": "http://pagure.io/koji/",
+      "source": "https://files.pythonhosted.org/packages/e0/c6/579e9b299b26c735f6de986b2b7818c7e8704e6890e6ada2e701029d0f8b/koji-1.36.1-py2-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.36.1"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "koji",
+      "version": "0.1.0",
+      "repository": "https://github.com/ninoseki/koji",
+      "source": "https://rubygems.org/gems/koji-0.1.0.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

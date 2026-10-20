@@ -1,0 +1,55 @@
+{
+  "command": "cfn-lint",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-cfn-lint-1.48.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "cfn-lint",
+      "version": "1.55.1",
+      "repository": "https://github.com/aws-cloudformation/cfn-lint/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cfn-lint",
+      "version": "1.57.2",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/2e/02/523307f365b693ee8e55564a13bef7767f5b6650fd22958dcd3d0390136e/cfn_lint-1.57.2-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.57.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cfnlint",
+      "version": "0.0.9",
+      "repository": "http://github.com/fatbasstard/cfnlinter",
+      "source": "https://files.pythonhosted.org/packages/9f/8e/2de82d66980668c4d853d30b0bcba3c0598676cd1a0cb1ee5db4f2fe6155/cfnlint-0.0.9.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.9"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

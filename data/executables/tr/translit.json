@@ -1,0 +1,91 @@
+{
+  "command": "translit",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "perl-lingua-translit-0.29-6",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/digitalbiblesociety/transliterate",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/digitalbiblesociety/transliterate?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.1.0",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/eevan78/translit",
+      "version": "v0.4.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/eevan78/translit/@v/v0.4.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/macroblock/imed",
+      "version": "v0.0.0-20240607035936-9f5860feeac9",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/macroblock/imed/@v/v0.0.0-20240607035936-9f5860feeac9.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20240607035936-9f5860feeac9"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "prereform2modern",
+      "version": "1.0.0",
+      "repository": "https://github.com/dhhse/prereform2modern",
+      "source": "https://files.pythonhosted.org/packages/a3/3f/5a21aa40a86f150094f3415860d72c0c9ab468ddfa80204c1fdb7676019a/prereform2modern-1.0.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.0"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "translit",
+      "version": "0.1.5",
+      "repository": "http://github.com/tjbladez/translit",
+      "source": "https://rubygems.org/gems/translit-0.1.5.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.1.5"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "liblingua-translit-perl",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

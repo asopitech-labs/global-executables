@@ -1,0 +1,67 @@
+{
+  "command": "tgpt",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "tgpt-2.11.1-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "tgpt",
+      "version": "0.4.0",
+      "repository": null,
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.0"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/aandrew-me/tgpt",
+      "version": "v1.10.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/aandrew-me/tgpt/@v/v1.10.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v1.10.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "tgpt",
+      "version": "2.13.0",
+      "repository": "https://github.com/aandrew-me/tgpt",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "tgpt",
+      "version": "0.1.0",
+      "repository": "https://github.com/indeedion/TGPT",
+      "source": "https://files.pythonhosted.org/packages/c7/78/14f5fd9012a1bf5f72d060c2aa7121b02c190446c9cf6a4e4c3fcab79c29/tgpt-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

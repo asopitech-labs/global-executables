@@ -1,0 +1,55 @@
+{
+  "command": "pinto",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "pinto-cli",
+      "version": "0.4.4",
+      "repository": "https://github.com/moriturus/pinto",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.4.4"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "pinto-rs",
+      "version": "0.13.2",
+      "repository": "https://github.com/causalpathlab/pinto-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pinto",
+      "version": "0.1.4",
+      "repository": "https://github.com/SeanDS/pinto",
+      "source": "https://files.pythonhosted.org/packages/cd/86/e5f3b93de0347cf6a1b4d0c7846d53c35ec54c7b8fa919b0848f1d2c1ca1/pinto-0.1.4-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.4"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "pinto",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

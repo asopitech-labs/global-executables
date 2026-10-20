@@ -1,0 +1,43 @@
+{
+  "command": "mock-mcp-server",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "mcpd",
+      "version": "1.0.7",
+      "repository": "https://github.com/xandwr/mcpd",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.7"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@agentbox/mock-mcp-server",
+      "version": "1.0.1",
+      "repository": null,
+      "source": "https://registry.npmjs.org/@agentbox%2Fmock-mcp-server/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "mock-mcp-server",
+      "version": "0.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/87/f6/e89405ccd618919c59ecc403adc395cc6c3c73f10554b12dd2f9ed7c3f72/mock_mcp_server-0.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

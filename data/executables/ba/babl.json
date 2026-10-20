@@ -1,0 +1,56 @@
+{
+  "command": "babl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "babl-0.1.128-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "babl",
+      "version": "0.1.128",
+      "repository": "https://www.gegl.org/babl/",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "packagist",
+      "package": "mlo/babl",
+      "version": "v0.4.0",
+      "repository": "https://github.com/mloberg/Babl.git",
+      "source": "https://repo.packagist.org/p2/mlo/babl.json",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "php",
+      "registry": "packagist",
+      "latest_version": "v0.4.0"
+    },
+    {
+      "ecosystem": "vcpkg",
+      "package": "babl",
+      "version": "0.1.128",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "source": "https://codeload.github.com/microsoft/vcpkg/tar.gz/refs/heads/master",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "package_system": "vcpkg",
+      "language": "c++",
+      "registry": "vcpkg",
+      "latest_version": "0.1.128"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

@@ -1,0 +1,55 @@
+{
+  "command": "mailbot",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "maildrop",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "maildrop",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/matthewhartstonge/graph",
+      "version": "v0.0.0-20191006023724-5a28473e8483",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/matthewhartstonge/graph/@v/v0.0.0-20191006023724-5a28473e8483.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20191006023724-5a28473e8483"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "mailbot",
+      "version": "0.0.4",
+      "repository": "https://github.com/monzou/mailbot",
+      "source": "https://rubygems.org/gems/mailbot-0.0.4.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.0.4"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

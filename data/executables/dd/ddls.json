@@ -1,0 +1,43 @@
+{
+  "command": "ddls",
+  "providers": [
+    {
+      "ecosystem": "crates",
+      "package": "ddls",
+      "version": "0.0.0",
+      "repository": "https://github.com/raphaeldarley/ddls",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "deepdish",
+      "version": "0.3.7",
+      "repository": "https://github.com/uchicago-cs/deepdish",
+      "source": "https://files.pythonhosted.org/packages/d5/9b/7a0e11d7858feac24372ae770575802833436a050f93dfd012d8025e4ae9/deepdish-0.3.7-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-deepdish",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

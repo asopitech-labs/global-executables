@@ -1,0 +1,91 @@
+{
+  "command": "certspotter",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "certspotter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "certspotter",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/SSLMate/certspotter",
+      "version": "v0.24.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!s!s!l!mate/certspotter/@v/v0.24.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/lanrat/certspotter",
+      "version": "v0.0.0-20180719231217-6991be261c84",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/lanrat/certspotter?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.0.0-20180719231217-6991be261c84",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20180719231217-6991be261c84"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/sslmate/certspotter",
+      "version": "v0.24.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/sslmate/certspotter/@v/v0.24.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.2"
+    },
+    {
+      "ecosystem": "go",
+      "package": "software.sslmate.com/src/certspotter",
+      "version": "v0.24.2",
+      "repository": null,
+      "source": "https://proxy.golang.org/software.sslmate.com/src/certspotter/@v/v0.24.2.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.24.2"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "certspotter",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

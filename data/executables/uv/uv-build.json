@@ -1,0 +1,67 @@
+{
+  "command": "uv-build",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-uv-build-0.12.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "uv-build",
+      "version": "0.13.1",
+      "repository": "https://github.com/astral-sh/uv",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.13.1"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "python-uv-build-0.11.19-4",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "msys2",
+      "package": "python-uv-build-0.12.5-1",
+      "version": null,
+      "repository": null,
+      "source": "https://repo.msys2.org/msys/x86_64/msys.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "windows",
+      "distribution": "msys2"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "uv-build",
+      "version": "0.13.1",
+      "repository": "https://pypi.org/project/uv/",
+      "source": "https://files.pythonhosted.org/packages/e6/32/8cbaa017809f63b7f7a82feae8ea2884ea96ecd3f1f95abe08a74438bad5/uv_build-0.13.1-py3-none-linux_armv6l.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.13.1"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

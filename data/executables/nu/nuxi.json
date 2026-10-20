@@ -1,0 +1,43 @@
+{
+  "command": "nuxi",
+  "providers": [
+    {
+      "ecosystem": "homebrew",
+      "package": "nuxi",
+      "version": "3.37.0",
+      "repository": "https://github.com/nuxt/cli",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@axxy/nuxt",
+      "version": "3.7.1",
+      "repository": "git+https://github.com/nuxt/nuxt.git",
+      "source": "https://registry.npmjs.org/@axxy%2Fnuxt/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.7.1"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@barbapapazes/nuxi",
+      "version": "3.14.0",
+      "repository": "git+https://github.com/nuxt/cli.git",
+      "source": "https://registry.npmjs.org/@barbapapazes%2Fnuxi/latest",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "javascript",
+      "registry": "npm",
+      "latest_version": "3.14.0"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

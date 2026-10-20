@@ -1,0 +1,43 @@
+{
+  "command": "netcalc",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "netcalc-2.1.7-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/KhangBBBB/netcalc",
+      "version": "v0.1.0",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!khang!b!b!b!b/netcalc/@v/v0.1.0.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "netcalc",
+      "version": "0.6.2",
+      "repository": "https://github.com/israel-lugo/netcalc",
+      "source": "https://files.pythonhosted.org/packages/d5/33/a9decb3888d74e5e5b243f2b3432c9caf5a55a7d85a51532e477ca26305c/netcalc-0.6.2-py2.py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.6.2"
+    }
+  ],
+  "first_seen": "2026-08-24",
+  "last_seen": "2026-10-19"
+}

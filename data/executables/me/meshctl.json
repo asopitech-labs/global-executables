@@ -1,0 +1,91 @@
+{
+  "command": "meshctl",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "bluez-deprecated-tools-5.87-2",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bluez-meshd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bluez-meshd",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/RiV-chain/RiV-mesh",
+      "version": "v0.4.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!ri!v-chain/!ri!v-mesh/@v/v0.4.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.6"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/riv-chain/riv-mesh",
+      "version": "v0.4.6",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/riv-chain/riv-mesh/@v/v0.4.6.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.4.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "meshctl",
+      "version": "0.1.7",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/4a/08/98b8a4eac98b9c75c94c307b65adca77e9dec063e018aa74943e0e7045d4/meshctl-0.1.7-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.7"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "bluez-meshd",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

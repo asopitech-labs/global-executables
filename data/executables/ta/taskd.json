@@ -1,0 +1,31 @@
+{
+  "command": "taskd",
+  "providers": [
+    {
+      "ecosystem": "go",
+      "package": "github.com/bborn/workflow",
+      "version": "v0.3.27",
+      "repository": null,
+      "source": "https://pkg.go.dev/v1/packages/github.com/bborn/workflow?filter=name+%3D%3D+%22main%22&limit=1000&version=v0.3.27",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.3.27"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "taskd",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

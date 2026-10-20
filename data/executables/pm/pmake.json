@@ -1,0 +1,103 @@
+{
+  "command": "pmake",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "bmake",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "bmake",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/CalebDepatie/pmake",
+      "version": "v0.0.0-20230724212626-594bd820ba94",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/!caleb!depatie/pmake/@v/v0.0.0-20230724212626-594bd820ba94.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20230724212626-594bd820ba94"
+    },
+    {
+      "ecosystem": "go",
+      "package": "github.com/mckeenicholas/pmake",
+      "version": "v0.0.0-20241022161228-c6f8e6dedd3b",
+      "repository": null,
+      "source": "https://proxy.golang.org/github.com/mckeenicholas/pmake/@v/v0.0.0-20241022161228-c6f8e6dedd3b.zip",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "go",
+      "registry": "go",
+      "latest_version": "v0.0.0-20241022161228-c6f8e6dedd3b"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "api2db",
+      "version": "1.0.1",
+      "repository": "https://github.com/TristenHarr/api2db",
+      "source": "https://files.pythonhosted.org/packages/5a/18/874df8d4bfa12ce4f2ddd5a8a17c0d59cf6a30d29e31b8bad5eac18aa2a1/api2db-1.0.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pastor",
+      "version": "1.0.6",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/7c/e9/42b5c6507d0d7e9bd3b8de83cb16a2af919de62376f5f18451feecc42536/pastor-1.0.6-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.0.6"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-pmake",
+      "version": "0.1.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/92/0e/21d94853cd85b43294a9f825bde6946010c4006fa1c9ab430c3f575d23ae/python_pmake-0.1.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.0"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "bmake",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

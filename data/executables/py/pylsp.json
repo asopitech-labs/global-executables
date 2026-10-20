@@ -1,0 +1,91 @@
+{
+  "command": "pylsp",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "python-lsp-server-1.15.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "python-lsp-server",
+      "version": "1.15.0",
+      "repository": "https://github.com/python-lsp/python-lsp-server",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Forge-Games",
+      "version": "0.0.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/a5/e0/632a5d4ea1763fa5985f6535f668d42b176635f3806a75c9fa170995e1ec/Forge-Games-0.0.1.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.0.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "deepnote-python-lsp-server",
+      "version": "1.13.1.1",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/41/9d/6928544f82e5efcfaa24ede6e08b0db2f71f7b60ea1fe8b46abde33db5de/deepnote_python_lsp_server-1.13.1.1-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.13.1.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "python-lsp-server",
+      "version": "1.15.0",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/c2/4a/b4abc04dcc65c985fa66d6486393ad3051ff485ccabd9727aea43a242f88/python_lsp_server-1.15.0-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.15.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "replit-python-lsp-server",
+      "version": "1.15.9",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/09/42/44ff903505cefa2b2d06fcc164ddff74510eece259e30da6a0c2c68976c8/replit_python_lsp_server-1.15.9-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "1.15.9"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "python3-pylsp",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

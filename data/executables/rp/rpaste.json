@@ -1,0 +1,67 @@
+{
+  "command": "rpaste",
+  "providers": [
+    {
+      "ecosystem": "arch",
+      "package": "rustypaste-cli-0.10.0-1",
+      "version": null,
+      "repository": null,
+      "source": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.files",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "pacman",
+      "distribution_family": "arch",
+      "distribution": "archlinux"
+    },
+    {
+      "ecosystem": "crates",
+      "package": "rustypaste-cli",
+      "version": "0.10.0",
+      "repository": "https://github.com/orhun/rustypaste-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.10.0"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "rustypaste-cli",
+      "version": "0.10.0",
+      "repository": "https://blog.orhun.dev/blazingly-fast-file-sharing",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "rpaste",
+      "version": "0.1.2",
+      "repository": "https://github.com/rpaste/rpaste",
+      "source": "https://files.pythonhosted.org/packages/5a/7a/07773e725702d14c2619c6cd7f52079fcb5d84870c01e5f7fb2a7360e001/rpaste-0.1.2.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.1.2"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "copypaste",
+      "version": "0.9.1",
+      "repository": "http://github.com/cardmagic/copypaste",
+      "source": "https://rubygems.org/gems/copypaste-0.9.1.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.9.1"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}

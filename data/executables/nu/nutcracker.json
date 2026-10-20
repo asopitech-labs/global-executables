@@ -1,0 +1,79 @@
+{
+  "command": "nutcracker",
+  "providers": [
+    {
+      "ecosystem": "debian",
+      "package": "nutcracker",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/sid/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "debian",
+      "package": "nutcracker",
+      "version": null,
+      "repository": null,
+      "source": "https://deb.debian.org/debian/dists/stable/main/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "debian"
+    },
+    {
+      "ecosystem": "homebrew",
+      "package": "nutcracker",
+      "version": "0.5.0",
+      "repository": "https://github.com/twitter/twemproxy",
+      "source": "https://formulae.brew.sh/api/formula.json",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "homebrew",
+      "distribution_family": "macos",
+      "distribution": "macos"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "nutcracker",
+      "version": "0.3.14159",
+      "repository": null,
+      "source": "https://files.pythonhosted.org/packages/8e/34/ed3f8c9888b3db17170eab6e30a401f92ecc4d9edcdb52677ea76475ad8b/nutcracker-0.3.14159-py3-none-any.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.3.14159"
+    },
+    {
+      "ecosystem": "rubygems",
+      "package": "nutcracker",
+      "version": "0.4.1.23",
+      "repository": "https://github.com/kontera-technologies/nutcracker",
+      "source": "https://rubygems.org/gems/nutcracker-0.4.1.23.gem",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "ruby",
+      "registry": "rubygems",
+      "latest_version": "0.4.1.23"
+    },
+    {
+      "ecosystem": "ubuntu",
+      "package": "nutcracker",
+      "version": null,
+      "repository": null,
+      "source": "https://archive.ubuntu.com/ubuntu/dists/noble/Contents-amd64.gz",
+      "confidence": "filesystem",
+      "source_type": "os_package",
+      "package_system": "deb",
+      "distribution_family": "debian",
+      "distribution": "ubuntu"
+    }
+  ],
+  "first_seen": "2026-08-15",
+  "last_seen": "2026-10-19"
+}
