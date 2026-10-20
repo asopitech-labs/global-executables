@@ -1,0 +1,231 @@
+name: Refresh generated dataset
+on:
+  schedule:
+    - cron: "31 3 * * 1"
+  workflow_dispatch:
+    inputs:
+      refresh_os_samples:
+        description: "Explicitly reacquire and publish the sampled OS package indexes"
+        required: false
+        default: false
+        type: boolean
+permissions:
+  actions: write
+  contents: write
+  issues: write
+
+concurrency:
+  group: generated-dataset-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # The 2026-09-14 run needed 6m to restore the dictionary, 12m to restore durable
+    # observations, 8m to rebuild, and was still publishing when the 30-minute limit
+    # cancelled it, which stalled publication from 2026-09-03. The budget leaves room
+    # for the dataset to keep growing.
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -e '.[test]'
+      - name: Restore published dictionary
+        run: |
+          set -o pipefail
+          git fetch --depth=1 origin dictionary
+          git archive origin/dictionary data | tar -x -C .
+          mkdir -p reports
+          if git cat-file -e origin/dictionary:reports/production-crawl.json; then
+            git show origin/dictionary:reports/production-crawl.json > reports/production-crawl.json
+          else
+            printf '%s\n' '{"coverage_kind":"partial","note":"OS samples have not been acquired yet","status":"unavailable"}' > reports/production-crawl.json
+          fi
+          test -s data/metadata.json
+          test -d data/executables
+          test -d data/indexes
+      - name: Restore latest durable observations
+        run: |
+          set -o pipefail
+          if artifact_ref=$(git ls-remote --heads origin artifact-data); then
+            if test -n "$artifact_ref"; then
+              git fetch --depth=1 origin artifact-data
+            else
+              echo "artifact-data does not exist yet; using fixture inputs for the initial refresh"
+            fi
+          else
+            echo "::error::Unable to inspect the artifact-data branch; refusing to refresh with incomplete inputs"
+            exit 1
+          fi
+          mkdir -p data/production/intermediate
+          rm -rf /tmp/registry-state /tmp/registry-state.json
+          python3 tools/registry_state.py restore --ref origin/artifact-data \
+            --state /tmp/registry-state
+          for source in \
+            arch debian ubuntu homebrew msys2 scoop winget windows \
+            npm pypi crates go rubygems packagist nuget macos shell \
+            conan vcpkg xmake; do
+            transport="data/production/transport/${source}-observations"
+            if git cat-file -e "origin/artifact-data:${transport}/manifest.json" 2>/dev/null; then
+              rm -rf /tmp/artifact-transport
+              mkdir -p /tmp/artifact-transport
+              git archive origin/artifact-data "$transport" \
+                | tar -x -C /tmp/artifact-transport
+              python tools/transport_shards.py unpack \
+                --input-dir "/tmp/artifact-transport/$transport" \
+                --output "data/production/intermediate/$source.jsonl"
+            elif git cat-file -e origin/artifact-data:data/production/intermediate/$source.jsonl 2>/dev/null; then
+              git show origin/artifact-data:data/production/intermediate/$source.jsonl > data/production/intermediate/$source.jsonl
+            else
+              if test -f fixtures/intermediate/$source.jsonl; then
+                cp fixtures/intermediate/$source.jsonl data/production/intermediate/$source.jsonl
+              else
+                : > data/production/intermediate/$source.jsonl
+              fi
+            fi
+          done
+      - name: Acquire production OS indexes
+        if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples
+        run: |
+          python tools/production_crawl.py \
+            --source debian --source ubuntu --source arch --source homebrew \
+            --source msys2 --source scoop --source winget --source windows \
+            --source vcpkg --source xmake \
+            --output-dir data/production/intermediate \
+            --report reports/production-crawl.json
+      - name: Publish refreshed OS observations
+        if: github.event_name == 'workflow_dispatch' && inputs.refresh_os_samples
+        run: |
+          git fetch --depth=1 origin artifact-data || true
+          rm -rf /tmp/os-observation-publish
+          if git show-ref --verify --quiet refs/remotes/origin/artifact-data; then
+            git worktree add /tmp/os-observation-publish origin/artifact-data
+          else
+            git worktree add -b artifact-data /tmp/os-observation-publish HEAD
+          fi
+          mkdir -p /tmp/os-observation-publish/data/production/intermediate
+          for source in arch debian ubuntu homebrew msys2 scoop winget windows vcpkg xmake; do
+            cp data/production/intermediate/${source}.jsonl \
+              /tmp/os-observation-publish/data/production/intermediate/${source}.jsonl
+          done
+          git -C /tmp/os-observation-publish config user.name github-actions[bot]
+          git -C /tmp/os-observation-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/os-observation-publish add -f \
+            data/production/intermediate/arch.jsonl \
+            data/production/intermediate/debian.jsonl \
+            data/production/intermediate/ubuntu.jsonl \
+            data/production/intermediate/homebrew.jsonl \
+            data/production/intermediate/msys2.jsonl \
+            data/production/intermediate/scoop.jsonl \
+            data/production/intermediate/winget.jsonl \
+            data/production/intermediate/windows.jsonl \
+            data/production/intermediate/vcpkg.jsonl \
+            data/production/intermediate/xmake.jsonl
+          git -C /tmp/os-observation-publish diff --cached --quiet || \
+            git -C /tmp/os-observation-publish commit -m "Preserve production OS observations"
+          for attempt in 1 2 3; do
+            if git -C /tmp/os-observation-publish fetch origin artifact-data; then
+              git -C /tmp/os-observation-publish rebase origin/artifact-data
+            fi
+            if git -C /tmp/os-observation-publish push origin HEAD:artifact-data; then
+              break
+            fi
+            if test "$attempt" = 3; then
+              echo "::error::Unable to publish OS observations after three attempts"
+              exit 1
+            fi
+            sleep 5
+          done
+      - name: Rebuild from production and registry inputs
+        run: |
+          python tools/refresh.py \
+            data/production/intermediate/arch.jsonl \
+            data/production/intermediate/debian.jsonl \
+            data/production/intermediate/homebrew.jsonl \
+            data/production/intermediate/ubuntu.jsonl \
+            data/production/intermediate/crates.jsonl \
+            data/production/intermediate/go.jsonl \
+            data/production/intermediate/npm.jsonl \
+            data/production/intermediate/pypi.jsonl \
+            data/production/intermediate/rubygems.jsonl \
+            data/production/intermediate/packagist.jsonl \
+            data/production/intermediate/nuget.jsonl \
+            data/production/intermediate/conan.jsonl \
+            data/production/intermediate/vcpkg.jsonl \
+            data/production/intermediate/xmake.jsonl \
+            data/production/intermediate/msys2.jsonl \
+            data/production/intermediate/scoop.jsonl \
+            data/production/intermediate/winget.jsonl \
+            data/production/intermediate/windows.jsonl \
+            data/production/intermediate/macos.jsonl \
+            data/production/intermediate/shell.jsonl \
+            --snapshot "$(date -u +%F)" \
+            --coverage-map data/production/coverage-map.json \
+            --registry-state /tmp/registry-state \
+            --report reports/production-refresh.json
+      - run: pytest -q
+      - run: git diff --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: refresh-report
+          path: reports/production-refresh.json
+      - name: Publish generated dictionary
+        id: publish_dictionary
+        run: |
+          git fetch --depth=1 origin dictionary
+          rm -rf /tmp/dictionary-publish
+          git worktree add /tmp/dictionary-publish origin/dictionary
+          rm -rf \
+            /tmp/dictionary-publish/data/executables \
+            /tmp/dictionary-publish/data/indexes
+          mkdir -p /tmp/dictionary-publish/data /tmp/dictionary-publish/reports
+          cp -a data/executables /tmp/dictionary-publish/data/executables
+          cp -a data/indexes /tmp/dictionary-publish/data/indexes
+          cp data/metadata.json data/history.json /tmp/dictionary-publish/data/
+          cp reports/production-crawl.json reports/production-refresh.json \
+            /tmp/dictionary-publish/reports/
+          python tools/validate_dictionary.py \
+            --root /tmp/dictionary-publish \
+            --schema-root "$GITHUB_WORKSPACE"
+          git -C /tmp/dictionary-publish config user.name github-actions[bot]
+          git -C /tmp/dictionary-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/dictionary-publish add \
+            data/executables data/indexes data/metadata.json data/history.json \
+            reports/production-crawl.json reports/production-refresh.json
+          if git -C /tmp/dictionary-publish diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git -C /tmp/dictionary-publish commit -m "Refresh generated dictionary"
+            git -C /tmp/dictionary-publish push origin HEAD:dictionary
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Deploy Pages for the new dictionary
+        if: steps.publish_dictionary.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
+
+  alert-refresh-failure:
+    needs: refresh
+    # A run that exceeds timeout-minutes ends as cancelled rather than failure, so
+    # alerting on failure alone hid an eleven-day publication outage. A run cancelled
+    # while still queued never starts this job, so superseded dispatches stay silent.
+    if: always() && (needs.refresh.result == 'failure' || needs.refresh.result == 'cancelled')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open or update the refresh failure alert
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Alert: generated dataset refresh failed"
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          body="The generated dataset refresh did not complete (${{ needs.refresh.result }}): ${run_url}"
+          issue=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --search "$title in:title" --json number --jq '.[0].number // empty')
+          if test -n "$issue"; then
+            gh issue comment "$issue" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
+          fi

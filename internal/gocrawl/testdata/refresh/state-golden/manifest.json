@@ -1,0 +1,41 @@
+{
+  "document": {
+    "version": 1
+  },
+  "files": {
+    "pypi/checked/all.jsonl": {
+      "bytes": 45345,
+      "sha256": "378713df75eebe379a83a9a7294ac461734320f16e01ab626fc38f6a3c81172e"
+    },
+    "pypi/feed_pending/all.jsonl": {
+      "bytes": 72000,
+      "sha256": "1b063220ab64572d2186314cc0ede7cc483869215c4919842606229dd3e97933"
+    },
+    "pypi/source.json": {
+      "bytes": 172,
+      "sha256": "f91dd0bc1e30720e28833a2d8f7e5eb27ea2ee2e79781b7955aa20338637566b"
+    }
+  },
+  "format": "global-executables-registry-state",
+  "layout_version": 1,
+  "sources": {
+    "pypi": {
+      "fields": {
+        "checked": {
+          "entries": 1500,
+          "prefix_length": 0
+        },
+        "feed_pending": {
+          "entries": 1200,
+          "prefix_length": 0
+        }
+      },
+      "summary": {
+        "catalog_complete": true,
+        "catalog_size": 1500,
+        "cursor": 1500,
+        "refresh_cursor": 10
+      }
+    }
+  }
+}

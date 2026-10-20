@@ -1,0 +1,1451 @@
+# Operations and measured baseline
+
+The durable operating model has separate sources of truth: normalized observations and
+crawl state live on `artifact-data`; the queryable dictionary and its derived indexes
+live on the orphan `dictionary` branch; program source lives on `main`. A refresh seeds every observation before collecting, preserves stored
+evidence when an upstream source fails, and refuses an unexplained decrease in unique
+names. Invalid individual command names are quarantined in the refresh report rather
+than stopping publication; malformed input and unexplained shrinkage still block it.
+
+## Current operating state
+
+- Go modules, npm, PyPI, RubyGems, and Packagist run only in the transactional Go
+  runtime; their Python implementations and Python CLI routes are removed.
+- Every indexed registry package remains on a bounded refresh cycle after exhaustive
+  coverage. New catalog entries keep priority; completed catalogs use a separate
+  `refresh_cursor`, and successful refreshes replace that package's prior observations.
+- Local containers are temporary completion boosters and stop at 100%. The
+  `registry-refresh.yml` CI matrix owns steady-state refreshes every six hours and
+  redeploys Pages after publishing progress; it rebuilds the dictionary only when
+  normalized observations changed.
+- The 2026-08-25 critical npm sweep finished 2,295 / 2,295 packages in 455 seconds
+  (302 packages/min), with zero failures, retries, `429`, or timeouts.
+- The RubyGems/Packagist cutover measured 805 and 2,434 packages/min respectively;
+  both first live passes had zero `429`, zero timeouts, and zero circuit opens.
+- npm uses a 200 ms request floor because this runner's egress path hit a two-minute
+  throttle window without pacing. This is a local safety setting, not a global npm
+  quota shared by every runner or every user. PyPI uses 24 adaptive workers.
+- The current cursors and rows are in [Registry crawl status](#registry-crawl-status);
+  recovery starts at [Transactional-source recovery](#transactional-source-recovery).
+
+## Acquisition policy
+
+Acquisition cadence follows the lifetime of the fact, rather than the cadence of a
+dictionary rebuild.
+
+| Class | Examples | Trigger | Canonical result |
+| --- | --- | --- | --- |
+| Durable environment sample | Windows/macOS PATH, shell built-ins, runner images | Manual, when intentionally adding an environment or release | `artifact-data` observations |
+| Moving registry catalog | CI npm critical population and crates.io dump; ConanCenter recipe walk; local completion boosters; CI refresh matrix for completed catalogs | Daily discovery sweep, temporary local booster, or six-hour CI refresh | `artifact-data` discovery cursor, refresh cursor, and current observations |
+| Recipe repository snapshot | vcpkg ports, xmake-repo packages | Daily single-request snapshot | `artifact-data` observations |
+| Derived rebuild | Dictionary indexes and Pages | Only after canonical publication changes; weekly refresh is a recovery backstop | `dictionary` and Pages |
+| Advisory live monitor | Representative upstream protocol/package probes | Weekly | Smoke artifact only; never canonical data |
+| Fixture scenario | Bounded freshness scheduler and parser fixtures | Manual or test suite | Test report/state only |
+
+An unchanged crates.io dump queues no dictionary or Pages work. Feature pull requests
+run validation once; the push trigger is reserved for `main`. No scheduled workflow
+re-samples an installed OS, shell, or immutable fixture.
+
+### npm primary scope
+
+| Responsibility | Source | Completion rule |
+| --- | --- | --- |
+| Select the high-value population | ecosyste.ms critical npm list | Every listed package is present in the tracked catalog |
+| Resolve executable facts | npm registry latest release `bin` | Cursor reaches catalog size with no retryable failures |
+| Preserve optional long-tail evidence | Retired full-registry crawl state | Historical rows remain; expansion continues only as separate work |
+
+This split makes the primary denominator finite without treating an aggregator as the
+authority for executable metadata.
+
+The current main snapshot includes a measured production OS crawl plus scoped
+language-registry inputs. Homebrew's complete formula
+catalog is exhaustive for the supported API scope. The 2026-09-03 published snapshot
+contains 854,022 unique names, 1,992,672 provider observations, 854,022
+canonical files, and 58,921 derived index files. Debian stable, Ubuntu noble,
+and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
+Homebrew's complete formula catalog is also marked `exhaustive` because its
+official API supplies the executable inventory. npm is `exhaustive` for the declared
+ecosyste.ms critical population; crates.io, RubyGems, Packagist, and NuGet are
+exhaustive for their declared catalogs. That snapshot still records PyPI and Go as
+`partial`; PyPI's crawl has since reached its full catalog and carries the exhaustive
+marking into the next publication, while Go stays `partial` until its retry set clears.
+
+The registry artifact crawler is resumable and budgeted. CI regenerates npm's finite
+critical catalog from ecosyste.ms and reuses the PyPI catalog snapshot, reads the crates.io database dump,
+distils Go's module index into a module catalog, enumerates RubyGems' compact-index
+names catalog, and enumerates Packagist's package catalog. For
+each selected package it reads authoritative package metadata, or the smallest
+part of an artifact that can carry the answer, and extracts declared console
+scripts, npm bins, Cargo binary targets, Go `package main` directories, RubyGems
+gemspec executables, or Composer `bin` declarations. Packagist rows are emitted only when the newest package
+metadata contains `bin`; the command is the basename Composer exposes through
+`vendor/bin`. The `registry-artifacts.yml` workflow performs one daily
+`Last-Modified` check for the crates.io dump and persists crates-owned state,
+normalized observations, and its report on the `artifact-data` branch only when the
+dump changed. PyPI and Go are advanced by their dedicated local containers. A
+source cannot be marked exhaustive while any cursor, artifact, or failure remains
+unresolved.
+
+The crawler asks each registry for the executable names before it asks for an
+artifact, because most of them already publish the answer.
+
+* crates.io states `bin_names` per version, so no `.crate` is downloaded at all.
+  The database dump carries the whole registry — every crate, every version, fully
+  backfilled — in one request, which is the bulk access route crates.io points
+  crawlers to when they hit the API's pagination limit. crates.io reaches
+  `exhaustive` in a single run.
+* ecosyste.ms supplies npm's critical population: the packages representing 80% of
+  npm downloads or dependent repositories. The npm registry remains authoritative
+  for each selected package's latest `bin` metadata. CI refreshes this finite catalog
+  and inspects all of it daily. The retired 4.3-million-name `_all_docs` catalog is a
+  separate long-tail expansion, not the denominator of the primary 100% target.
+* Packagist already answered from registry metadata (`bin`).
+* PyPI does not expose console scripts in its JSON API, so a wheel still has to be
+  read — but a wheel is a ZIP, so the range reader reads the trailing central directory
+  and then the one small member that names the commands. Wheels that ship a
+  prebuilt binary declare it under `.data/scripts/` rather than as a console
+  script; both are collected.
+* RubyGems does not expose executables in its API and its "quick" gemspec omits
+  them, so the `.gem` is still needed — but its `metadata.gz` sits at the front of
+  an uncompressed tar, so the first 64KB usually suffices.
+* Go needs the module source to see which directories declare `package main`.
+  Every `.go` file in a directory must declare the same package, so one file per
+  directory decides it, and those files are read from the archive by range.
+
+The Go module index lists every version of every module — tens of millions of
+entries, overwhelmingly republished copies of modules already inspected. Reading
+the index is cheap, so a catalog phase distils the feed into distinct module paths
+in `data/production/go-modules.txt` and the inspection phase spends the artifact
+budget on one archive per module, at the version `@latest` reports.
+
+Requests to the crates.io API host are paced to one per second, the rate crates.io
+asks crawlers to hold; `fetch` retries 429 and transient 5xx responses with the
+advertised `Retry-After` when present. Every Python registry request opening, including
+NuGet HEAD/range reads and the crates.io dump stream, uses three bounded attempts.
+A terminal failure records the operation, URL, category, elapsed time, HTTP status,
+and attempt count in `failure_details`; a failed streaming dump is retained as a
+source-level diagnostic instead of being replayed blindly.
+`--source-package-budget SOURCE=N` raises the per-run package budget for one selected
+Python source. All five transactional sources use `--package-budget` in the Go runtime.
+
+### Retry, interruption, and resume contract
+
+An item-level network failure enters `retry_*` with a durable next-attempt time and
+exponential delay from one hour to 24 hours. Six failed item passes move the item to
+`blocked` with its last diagnostic; a scheduled crawl does not spin on a permanently
+unreachable endpoint. A retry whose due time has not arrived is reported as
+`retry_waiting` and is not executed. Permanent HTTP answers and malformed artifacts
+remain recorded as `unavailable` rather than entering that queue.
+
+The Python crawler checkpoints every 32 items or 30 seconds, whichever comes first.
+State, catalogues, observations, and reports are replaced atomically after an fsync;
+catalog digests pin the ordered list that a cursor describes. A catalog that grows
+resets its cursor and replays observations by package key, while an unchanged partial
+catalog waits for the next schedule. A signal stops at the next checkpoint. CI avoids
+publishing or dispatching follow-up work after cancellation, so the next run resumes
+from the last published checkpoint and safely replays only the bounded in-flight batch.
+An item-level partial result exits successfully for publication; only a fatal crawl
+error fails the job. Inspect the durable diagnosis with:
+
+```sh
+python3 tools/registry_state.py restore --ref origin/artifact-data --state /tmp/registry-state
+python3 tools/registry_state.py get --state /tmp/registry-state --source conan \
+  | jq '{cursor, retry_pending, retry_waiting, blocked, failure_details}'
+```
+
+## Registry crawl status
+
+Cursor snapshot read from `artifact-data` at 2026-09-14 15:00 JST. The catalogue
+percentage is the cursor against the enumerated name list, not against rows collected —
+most packages ship no executable, so rows grow far more slowly than the cursor. Every
+catalog cursor has now reached its enumerated name list. The row column is the
+2026-09-03 published dictionary's count, the most recent rebuild actually published.
+
+| Source | Coverage | Cursor | Rows (2026-09-03 dictionary) | Runs on |
+| --- | --- | --- | --- | --- |
+| crates.io | `exhaustive` | 333,039 / 333,039 (100%) | 90,609 | CI, one dump per run |
+| NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
+| RubyGems | `exhaustive` | 196,126 / 196,126 (100%) | 51,383 | CI refresh matrix |
+| Packagist | `exhaustive` | 458,432 / 458,432 (100%) | 13,253 | CI refresh matrix |
+| PyPI | `exhaustive` | 870,264 / 870,264 (100%) | 388,484 | CI refresh matrix |
+| npm critical | `exhaustive` | 2,295 / 2,295 (100%) | 50,309 including retained long-tail evidence | CI daily; verified locally |
+| Go | `partial` | 2,145,565 / 2,145,565 (100%) | 1,188,518 | CI refresh matrix |
+
+Go alone remains `partial` after reaching its cursor: its retry set still holds the
+widest module archives, so no pass has yet finished inside its budget with an empty
+retry set. A source cannot be marked exhaustive while any cursor, artifact, or failure
+remains unresolved.
+
+CI owns crates.io and the bounded npm critical population; both finish comfortably
+inside one job. The `registry-refresh.yml` matrix owns the steady-state refresh of every
+completed catalog. The local default excludes npm, and `start` rejects npm unless an
+operator explicitly sets `ALLOW_CI_OWNED_NPM=1`; these guards prevent an accidental
+CI/workstation cursor race. `watch` publishes local progress to `artifact-data` on an
+interval.
+
+The npm critical catalog is regenerated in CI. Go checks its incremental index edge;
+the other transactional catalogs remain cached until their operator refreshes them.
+Go's row count is large against its cursor because a module can contribute one row per
+`package main` directory.
+
+## Windows and .NET coverage
+
+Linux's base command set is packaged, so Debian and Ubuntu carry it. Windows' and
+macOS' are not, which is why a package-manager-only index answers "not in use" for
+commands that exist on every machine of those platforms. Four sources close part of
+that gap:
+
+* **Scoop** states each package's shims in the manifest `bin` field, so ten bucket
+  repositories — 1.9MB of tarballs — are read without touching an artifact.
+* **MSYS2** publishes pacman databases, so the Arch reader applies unchanged; its
+  databases are zstd-compressed rather than gzip.
+* **winget** ships a SQLite source index whose `commands` table covers the whole
+  catalog in one download. It stays `partial`: only manifests that opt in declare
+  `Commands`, and the table also carries silent-install switches like `/VERYSILENT`,
+  which are rejected as command names.
+* **NuGet** exposes .NET tools, whose `DotnetToolSettings.xml` names the command; a
+  `.nupkg` is a ZIP, so that declaration costs a range read. One search query stops
+  paging at 4,000 of the 9,190 tools it advertises, but that cap is per query rather
+  than per catalogue: the empty term plus a–z and 0–9 reach every one of them, and the
+  union matches the advertised count exactly. Pre-release-only tools are included,
+  since a command name is taken either way.
+
+Windows command names are recorded without the extension the filesystem carries.
+`curl.exe` has to collide with `curl` or a cross-ecosystem index cannot answer the
+question it exists for; before that normalisation MSYS2 appeared to contribute 1,426
+new names, of which only 474 were genuinely new.
+
+Distributions are not one index either. Arch keeps almost everything outside `core`,
+which was the only repository being read, and Debian's `stable/main` is a fraction of
+the archive; both now read every pool.
+
+The Windows base command set is not packaged by anything, so it is read from the
+official images instead — a container layer is an ordinary tar, so Microsoft's
+`servercore` and `nanoserver` images are inspected without running Windows. The tag
+moves and the digest does not, so each record cites the image digest and the release
+it was shipped in, which pins that release's command set reproducibly. Names fold to
+lower case there: the images ship `ARP.EXE` beside `attrib.exe`, and on a
+case-insensitive filesystem the command a user types has to collide with the `arp`
+every Linux index already carries.
+
+What makes a file a command is that its directory is on the default PATH, which is
+wider than System32: `Wbem` holds WMIC, and PowerShell and the bundled OpenSSH client
+each sit in their own directory. Reading System32 alone missed all of them.
+servercore ltsc2022 yields 347 commands, 295 of them new to the dataset.
+
+Two gaps remain, and neither is reachable by inspecting a filesystem:
+
+* **Shell built-ins and aliases.** `path`, `dir`, `copy` and `set` are cmd.exe
+  built-ins, and `ls`, `cat` and `curl` are PowerShell aliases; none exists as a file.
+  The same is true of `cd`, `echo` and `test` under bash. The count is small but the
+  names are short and heavily contested, so their weight is not proportional to it.
+macOS' base command set is read the same way, from an installed system rather than a
+published artifact, because Apple publishes no manifest for it. `/etc/paths` states
+the default PATH, `/usr/local/bin` is excluded as a third-party prefix that Homebrew
+already covers, and the observation is pinned to `ProductBuildVersion` and the
+architecture — a build identifies a release as precisely as a digest does, and the
+command set differs between Apple Silicon and Intel.
+
+No observation of a base command set is privileged: a maintainer's laptop and a CI
+runner are both single samples, so a manual `base-commands.yml` run adds chosen runner
+images to whatever is observed locally and the samples accumulate. It has no schedule:
+run it only to sample a deliberately new environment or release. Every record cites
+the build it came from, so a second machine, architecture or release widens coverage
+rather than replacing it. macOS 26.5.2 (25F84, arm64) contributes 1,258 commands, 586
+of them new.
+
+A system binary that refuses `stat` to an unprivileged reader is still recorded: the
+name occupies a PATH directory, and dropping it would turn "could not read" into
+"name is free". Chocolatey was investigated and rejected — its feed answers 504 to
+repeated requests, its metadata never names an executable, and its packages often
+contain no binary at all because the install script downloads one.
+
+## Interruption and resume
+
+A crawl is expected to be stopped: a job hits six hours, a container is stopped, a
+run is cancelled. What matters is what an interruption costs.
+
+State used to be written once, after every source in the run had finished, so a kill
+anywhere discarded the cursors of the sources that had already completed as well as
+the work in flight — and because rows are appended per source, those sources would
+re-crawl and write their observations twice. State is now saved after each source,
+and every 200 packages inside a source, together with the rows collected so far, so
+the cursor and the observations always agree.
+
+`SIGTERM` and `SIGINT` no longer kill the process between checkpoints, which is when
+the unsaved work is largest. They set a flag the crawl loops check, so the run stops
+at its next checkpoint and reports `interrupted`.
+
+A catalogue is what a pass cannot cheaply redo — npm's costs 431 requests, NuGet's
+37 queries, Go's thousands of index pages — so each is persisted the moment it is
+built rather than when the pass returns. Without that, a truncated response during
+inspection unwound the pass and discarded a catalogue that was already complete on
+disk. A test asserts every crawler does this, because the same gap was found and
+closed three separate times.
+
+crates.io is asked for the dump's `Last-Modified` once daily before downloading it.
+The dump is republished daily and its observations replace rather than extend, so an
+unchanged response skips the 1.7GB download, publication, dictionary rebuild, and
+Pages deployment.
+
+## When a package is gone
+
+A registry keeps listing packages it will no longer serve. Every one of them is a
+failure that no retry can resolve, and a source cannot reach `exhaustive` while a
+failure is outstanding — so misclassifying one holds a whole registry back forever.
+Failures are therefore split in two: `failures` are worth another attempt,
+`unavailable` records a settled negative answer and is a result, not a loss.
+
+Each registry expresses withdrawal differently, and the difference was measured
+rather than assumed:
+
+| Registry | How withdrawal appears | Handling |
+| --- | --- | --- |
+| crates.io | `yanked` per version in the dump | yanked versions are filtered before a crate is considered |
+| RubyGems | API reports `yanked: true`, CDN answers `403 AccessDenied` for the artifact | the flag is read first, so the artifact is never requested |
+| npm | unpublished packages 404 on `/<name>/latest` | permanent on the first answer |
+| PyPI | yanked releases keep serving their files; `info.version` already skips them | nothing to skip; a release with no wheel or sdist is permanent |
+| Go | the proxy excludes retracted versions from `@latest` | nothing to skip; unknown modules 404 |
+| NuGet | the search catalogue omits unlisted packages; deleted ones 404 | permanent on the first answer |
+| Packagist | removed packages 404 | permanent on the first answer |
+
+The two that need the flag read first are the two where metadata answers `200` while
+the artifact host refuses. Fetching those bought a `403` on every pass: 38 yanked gems
+were retried indefinitely before the flag was consulted.
+
+`404` was once the only answer treated as final. Three more are:
+
+* `410` and `451` — how a registry reports a withdrawal or a legal takedown.
+* `405` — what npm returns for the package literally named `-`, whose path collides
+  with the registry's own `/-/` API namespace.
+
+Anything that is neither a permanent withdrawal nor a transient network/upstream
+condition gives up after `FAILURE_ATTEMPT_LIMIT` attempts and is recorded as
+`gave up after N attempts: <reason>`. Without a bound, one truncated artifact keeps a
+source `partial` permanently. DNS failures, 429 responses, and transient 5xx responses
+are exempt on purpose: they say nothing about the package, and the crawler retries them
+with bounded backoff before leaving them in the retry queue. That exemption is not
+theoretical — of twelve RubyGems failures outstanding at one restart, eleven were
+transient name-resolution errors that succeeded on the next attempt.
+
+Which is also why every crawler now revisits its failures. Three did not. RubyGems and
+npm had no queue at all, and PyPI's held only projects owed an sdist read, so any other
+failure was left behind the cursor with nothing to bring it back. Since completion is
+refused while a failure stands, that was not merely lost data — those sources could
+never have reached `exhaustive` at all, and nothing in the report said so.
+
+Each retry queue is bounded to its length at the start of the pass, so a package that
+fails again is revisited next pass rather than consuming this pass's budget over and
+over. The bound and the queue are a pair: without the queue an unreadable artifact is
+never re-attempted, so the attempt limit never fires and the deadlock stands.
+
+`test_every_crawler_that_blocks_on_failures_can_revisit_one` asserts the invariant
+directly — a crawler that gates completion on `not failures` must put a recorded
+failure back on a retry queue. It is a test rather than a note because the same gap was
+found in three crawlers separately, each time by reading one of them for another reason.
+
+## Crawling in a container
+
+Long catalog sweeps are driven locally; the bounded npm critical sweep and crates.io
+dump run in CI. `Dockerfile.crawl` remains the Python runtime for crates.io and
+NuGet. Go modules, npm, PyPI, RubyGems, and Packagist use
+`Dockerfile.go-crawler`, the dedicated transactional runtime.
+`tools/crawl_container.sh` is the single Python-container path;
+`tools/crawl_parallel.sh` routes each source to its correct image.
+
+```sh
+tools/crawl_container.sh                                    # remaining Python sources
+SOURCES=crates PASSES=1 tools/crawl_container.sh            # one Python source, one pass
+SOURCES="pypi go" PACKAGE_BUDGET=3000 tools/crawl_parallel.sh start
+python3 tools/npm_critical_catalog.py                    # refresh the tracked npm denominator
+```
+
+`tools/crawl_parallel.sh` runs one local container per registry. CI owns npm critical
+and crates.io; the local default excludes npm, and local npm startup requires the
+explicit `ALLOW_CI_OWNED_NPM=1` takeover flag. Each remaining registry
+answers from its own hosts, so crawling them serially spends most of the wall clock
+waiting on one of them; four containers together held 16% of the VM's two cores,
+because the work is entirely I/O. Every container gets its own state directory — a
+shared one would put four writers on a single cursor file — and `merge` folds the
+per-source states back into one publishable tree.
+
+The six-hour CI refresh gives each completed source one bounded continuous-mode pass.
+That pass spends its package budget on a circular `refresh_cursor`; each package is
+inspected at most once per pass. New catalog entries and unresolved retries retain
+priority over refresh work. A local booster never enables continuous mode and exits
+when its discovery cursor reaches exhaustive coverage.
+
+Each pass is budgeted. Python sources checkpoint on their existing cadence. The Go
+runtime commits ordered batches transactionally, so stopping it loses only uncommitted
+HTTP work, not the entire pass. Measured on the local runtime, crates.io reaches
+`exhaustive` in a single pass — 319,466 crates, 88,610 executable names — at a peak of
+347MB.
+
+### Transactional runtime: Go modules, npm, PyPI, RubyGems, and Packagist
+
+`SOURCES="go pypi rubygems packagist" tools/crawl_parallel.sh start` builds the
+dedicated Go runtime, then starts one `ge-<source>` container with
+`crawl --source <source> --passes 0` for each source. A nonzero local failure is
+restarted up to five times; exhaustive coverage terminates the booster. The CI refresh
+matrix accepts that source only after its published cursor reaches the catalog size.
+The Python CLI and loop reject the five transactional source names, preventing two
+implementations from writing the same source.
+
+Each mounted source state directory contains:
+
+- `registry-state/` (see [Registry crawl state layout](#registry-crawl-state-layout)),
+  `intermediate/<source>.jsonl`, its cached catalog, and the report: plain
+  Python-compatible runtime snapshot views;
+- `<source>-crawl.db`: the canonical local transaction store; and
+- `<catalog>.txt.index`: a rebuildable exact membership index for the immutable
+  catalog prefix.
+
+The DB and derived index are local operational state and are not published. Go extends
+its catalog from the chronological upstream index, and CI replaces npm's critical
+catalog before each daily sweep. PyPI, RubyGems, and Packagist reuse their sampled
+catalogs until an operator deliberately refreshes them. A stop
+between a Go catalog replacement and DB metadata commit is reconciled from the file
+tail on restart.
+
+The lifecycle boundary is explicit:
+
+| Path | Current responsibility | Target responsibility | Action | Delete when | Verification |
+| --- | --- | --- | --- | --- | --- |
+| `<source>-crawl.db` | Discovery cursor, retry verdicts, observations | Add the circular refresh cursor and package-level replacement index | keep | The transactional runtime is replaced | Store transaction tests and restart replay |
+| `<catalog>.txt.index` | Exact membership cache | Also provides offsets for bounded refresh batches | keep | The catalog reader no longer needs random restart offsets | Catalog replacement and append tests |
+| catalog text snapshot | Discovery denominator | Go extends incrementally; npm replaces daily; other sources replace on intentional resample | keep | An authoritative change feed replaces the snapshot | Catalog digest and size checks |
+| `registry-state/`, JSONL, report | Published compatibility views | Publish discovery and refresh progress; replace stale package observations | keep | All consumers read a future canonical store directly | Export/re-import and publication tests |
+| Exhaustive-stop branch in continuous workers | Stops work at 100% | Illegal in continuous mode; retained only for explicit single-run jobs | shrink | No bounded single-run job requires it | Loop and shell-routing tests |
+| Python transactional-source runners | No owner | Remain deleted | delete | Already satisfied | Python rejects all five source names |
+
+The bbolt transaction is the fact and refresh-state owner. Source adapters own external
+IO, the compatibility exporter owns machine-facing JSON, `registry-refresh.yml` owns
+steady-state scheduling and publication, and `refresh.yml` owns derived dictionary replacement.
+A failed inspection preserves the last good package observation and queues a retry; a
+successful inspection, including a package that now exposes no command, atomically
+replaces the old package observation set.
+
+### Throughput and upstream safety
+
+All five adapters share one reusable HTTP transport with per-host concurrency,
+attempt timeouts, whole-package deadlines, adaptive reduction after `429`, bounded
+backoff with jitter, `Retry-After`, and a circuit breaker. A queued request starts its
+attempt timeout only after it acquires the host gate, so local backpressure cannot make
+an unsent request look like an upstream timeout.
+
+The 2026-08-25 cutover measurements used bounded live passes on the production host:
+
+| Source | Retired Python rate | Go live rate | Production constraint |
+| --- | ---: | ---: | --- |
+| npm | about 60 packages/min | 302–328 packages/min | fixed 200 ms interval per runner plus adaptive concurrency |
+| PyPI | about 23 packages/min | 1,901–2,285 packages/min | 24 workers; wheel range reads avoid full downloads when supported |
+| RubyGems | about 48 packages/min | 805 packages/min | 16 workers; 65,536-byte gem head with bounded full fallback |
+| Packagist | about 67 packages/min | 2,434 packages/min | 24 workers; one bounded metadata response per package |
+
+npm's unconstrained 64-worker run from one production host produced 4,741 `429`
+responses in 5,798 requests, and that edge advertised `Retry-After: 122`. This
+measurement justifies pacing that runner; it does not establish a global 300-request
+quota across npm, GitHub Actions, other hosts, or other users. Advertised retry time is
+honored separately from the normal 15-second backoff cap. PyPI's validation completed
+without `429`; its concurrency remains adaptive if that changes. Reusing the artifact
+size already present in PyPI JSON removed the redundant wheel `HEAD` request and cut a
+representative 3,000-package pass from 8,543 to 5,965 requests (30.2%).
+RubyGems and Packagist also completed their cited live passes with zero `429`, zero
+timeouts, and zero circuit opens.
+
+### C and C++ recipe registries
+
+C and C++ distribute through several recipe repositories rather than one registry, so
+`conan`, `vcpkg`, and `xmake` are collected as three separate sources with their own
+coverage entries. Each one is read for the strongest evidence it carries, and the
+record's confidence says which that was.
+
+| Source | Population | Evidence | Confidence | Why it is not exhaustive |
+| --- | --- | --- | --- | --- |
+| vcpkg | `ports/*` of the `microsoft/vcpkg` snapshot | `vcpkg_copy_tools(TOOL_NAMES ...)` in `portfile.cmake` | `direct` | A port can install a command without calling `vcpkg_copy_tools`, and a name built from a CMake variable is counted rather than guessed at |
+| conan | `recipes/*/config.yml` of the `conan-io/conan-center-index` snapshot | `bin/` entries of the built package, read from `conanmanifest.txt` | `filesystem` | A recipe nobody has built publishes no file list, and those recipes are counted as `uninspected`; a recipe the remote does not publish is counted as `unavailable`, and both hold the source short of complete |
+| xmake | `packages/*/*/xmake.lua` of the `xmake-io/xmake-repo` snapshot | `set_kind("binary")` | `inferred` | xmake declares that a package installs a command but never what the command is called, so the package name stands in for it |
+
+`cpp-registries.yml` owns all three daily. The vcpkg and xmake populations are one
+repository tarball each, so its `recipes` job collects both in a single request through
+`production_crawl.py` and merges them into the published observations. ConanCenter needs
+one artifact inspection per recipe, so its `conan` job runs the budgeted, resumable
+registry crawler instead: `registry_artifact_crawl.py --source conan` walks the recipe
+catalogue from a durable cursor and re-dispatches itself until the cursor reaches the
+end. That continuation is keyed on the cursor rather than on coverage, because
+ConanCenter is never exhaustive while recipes remain that nobody has built and a
+self-dispatch on that condition would queue a run forever. The 2026-09-14 measurement
+read the 1,944 recipe catalogue in one 4.7 MB request, and `conanmanifest.txt` keeps
+each inspection to a small text file rather than the package archive it describes.
+
+The vcpkg parser removes CMake line comments (`# ...`) and bracket comments
+(`#[[ ... ]]`) before it reads `TOOL_NAMES`, because portfiles use comments to list tools
+they deliberately do not install (`openexr`: `# not installed: exrcheck`) and to disable
+whole calls (`mnn`). When a vcpkg port or xmake package is present in the snapshot and
+parsed, its new rows replace every older row for that package, so a name an earlier
+parser produced by mistake is dropped on the next run. A package that has left the
+snapshot keeps its rows as durable evidence that the name was published.
+
+Versions in `config.yml` may be double-quoted, single-quoted (`fff`: `'1.1'`), or bare;
+the quote is stripped before the reference is built. The newest declared version is
+inspected first. When the remote answers 404 for it (`gcc/16.1.0` is declared before it
+is published) or has no built package for it, the remote's `search` endpoint lists the
+published versions and up to `CONAN_FALLBACK_VERSIONS` (3) older ones are tried, newest
+first. A row's `version` is the version actually inspected and `latest_version` is the
+version the recipe declares. A 404 that no fallback resolves leaves the recipe
+`unavailable`, which now counts against completeness like `uninspected`.
+
+The recipe catalogue is re-read once the walk has reached its end and the catalogue on
+file is older than seven days (`CONAN_CATALOG_MAX_AGE`); a catalogue with no
+`catalog_fetched_at` is re-read on the next run. The re-read rolls over instead of
+restarting the walk: recipes and versions that are new are queued in `catalog_pending`
+and inspected ahead of the refresh rotation, the cursor moves to the end of the new
+catalogue, and retry, failure, `unavailable`, and `uninspected` bookkeeping for
+references that left the catalogue is dropped. Published rows for a package stay until
+a newer version of it is inspected. A failed re-read keeps the catalogue already walked
+and is retried on the next run, and a catalogue on file whose digest differs from the
+walked one restarts the walk from the beginning rather than failing it. The report
+carries `catalog_pending`, `catalog_fetched_at`, and, on a run that re-read the
+catalogue, `catalog_refresh`.
+
+An xmake record's version is the newest version the recipe declares, compared
+numerically with pre-releases before releases and a URL alias such as `github:`
+stripped; the order of `add_versions` lines carries no meaning (`meson` lists 1.12.1
+first and 0.50.1 last). A short, explicit list of bundle and build-helper packages never
+yields an inferred command, because their name is not a command any of them installs:
+`autotools`, `binutils`, `gz-cmake`, `jrl-cmakemodules`, `policycoreutils`,
+`shared-mime-info`, `texinfo`, and every package ending in `-tools` or `_tools`
+(`depot_tools`, `linux-tools`, `qt-tools`, `vulkan-tools`, ...). On the 2026-10-08
+snapshot this leaves 104 of the 117 binary packages.
+
+`conanmanifest.txt` lists files without their executable bit, so `bin/` entries are
+filtered by name, conservatively: libraries (`.dll`, `.so`, `.so.1.2`, `.dylib`, `.lib`,
+...), configuration and packaging metadata (`.cfg`, `.conf`, `.config`, `.ini`, `.toml`,
+`.in`, `.json`, `.txt`, ...), documentation and resources (`.md`, `.html`, `.rst`,
+`.png`, `.jar`, ...), and upper-case documentation or ownership files (`LICENSE`,
+`COPYING`, `NOTICE`, `README`, `OWNERS`, `*_OWNERS`, `PKG-INFO`, `DIR_METADATA`,
+`MANIFEST`). Scripts such as `.py`, `.sh`, and `.pl` are kept, because a script in
+`bin/` is a command. On the published 2026-10-07 rows this drops 23 of 1,818, all of
+them non-commands; the per-package replacement removes them as the refresh rotation
+re-inspects each recipe.
+
+Only a built package is evidence. `7zip` yields `7z`, `7zFM`, `7zG`, `7za`, `7zcl`,
+`7zr`, and `7zz`; `activemq-cpp` is a library recipe that nonetheless installs
+`activemqcpp-config`, which is why the whole recipe population is walked rather than
+only the recipes that declare `package_type = "application"`.
+
+Go's inspection cost is the module archive itself rather than a metadata document. The
+inspector reads one candidate `.go` file per directory through a range reader with a
+small block cache, and it walks those directories in archive order so each block is
+fetched once. Probing them in map order refetched the same blocks for every directory:
+a regression test measures 9,597,532 bytes downloaded for an 850,222-byte archive, an
+11.3x amplification, and the 2026-09-14 CI refresh spent 11.1 GB and its whole byte
+budget on 96 modules. A 2026-09-14 live measurement on the production host read
+`gopkg.in/Azure/azure-sdk-for-go.v68` (68.7 MB archive) with 68.2 MB downloaded in
+1m45s, `github.com/cdktf/cdktf-provider-aws-go/aws/v21` (113.3 MB) with 71.1 MB in
+1m29s, and `github.com/alibaba/kubernetes` (22.5 MB) with 20.0 MB in 27s; that last
+module contributed 78 commands the amplified walk never reached. Because Go's catalog
+is complete and its crawl only refreshes, Go's whole-module budget is ten minutes
+rather than the two minutes the metadata-driven sources use, and a budget overrun now
+costs an attempt so a module retires into `unavailable` instead of holding a retry slot
+and a share of the byte budget forever.
+
+Git is a transport boundary, not the runtime format. GitHub rejects individual blobs
+above 100 MiB, so `artifact-data` stores every registry observation snapshot and the
+growing Go module catalog under `data/production/transport/` as deterministic gzip
+parts with at most 32 MiB uncompressed content each. A manifest pins part order, compressed and
+uncompressed sizes, per-part SHA-256 digests, and the whole restored-file digest.
+`seed` and `refresh.yml` verify every part before atomically replacing the plain local
+file; missing or corrupt parts fail closed. They retain a plain-file fallback only for
+legacy migration checkpoints. Publication deletes each legacy registry blob in the
+same commit that adds its verified shards.
+
+`crawl_parallel.sh publish` publishes one registry per commit and push, merges only the
+state and crawl-report entry that registry owns, and refuses a source whose local cursor
+is behind the published one — the check that stopped Go's catalogue being rolled back
+fifteen months. A failed source is reported after the publisher attempts the remaining
+sources, so a PyPI transfer failure cannot strand a valid Go checkpoint. Each attempt
+uses a disposable worktree; an interrupted attempt cannot lock the next publication to
+a stale fixed path. The daily crates writer
+uses the same source-owned merge, restores and publishes only crates-owned observations
+plus the shared source-merged state; it must not copy an unrelated catalog, stale
+whole-state, or whole-report snapshot over other writers. `watch` runs the
+publisher on an interval, because publishing by hand leaves the crawl's progress on one
+machine until someone remembers. The merged report is the input Pages exposes as
+`status.json` after a dictionary refresh. The weekly refresh is a recovery backstop for
+locally published checkpoints; dispatch `refresh.yml` when the public display must
+advance immediately.
+If another writer wins the push race, the shared publisher discards its temporary
+worktree, fetches the new branch head, and rebuilds the source-owned merge up to three
+times. It does not rebase a stale combined JSON snapshot. Pass `OBSERVATION_SOURCES`
+explicitly: a registry-only supervisor should leave it blank because OS observations
+are durable samples, which shortens the conflict window and avoids reprocessing large
+unchanged files.
+Each observation source is merged by `tools/merge_observations.py`: a newly observed
+row wins and a published row the run did not observe is kept. A recipe snapshot
+(vcpkg, xmake) also writes `<source>.reparsed.json` beside its rows, naming every
+package it parsed; published rows for those packages are dropped before the merge, so a
+parser fix removes the rows it no longer produces. The sidecar stays in the runner's
+ignored `data/production/intermediate/` and is never published.
+
+The single-source container holds no credentials and never pushes. `STATE_DIR` is laid out
+exactly like the `artifact-data` branch, so publishing a local run is a copy into a
+worktree of that branch. Do it deliberately: the scheduled workflow writes the same
+branch, and two writers produce a rejected push rather than a merge. Stop the
+chained CI runs first, or crawl a source locally that CI is not advancing.
+
+## Checking a running crawl
+
+`tools/crawl_parallel.sh status` gives the cursor per source. Crates.io and NuGet
+resume from Python state files. The five transactional sources resume from bbolt and
+regenerate state files as publishable views; each report summarizes the last pass.
+
+```sh
+tools/crawl_parallel.sh status                    # container status and cursor
+podman logs --tail 20 ge-rubygems                 # transactional gem passes
+podman logs --tail 20 ge-packagist                # transactional Composer passes
+podman logs --tail 20 ge-go                       # transactional Go-module passes
+podman logs --tail 20 ge-pypi                     # concurrent PyPI passes
+gh run list --workflow registry-artifacts.yml     # CI-owned npm/crates passes
+git show origin/artifact-data:reports/registry-artifact-crawl.json | jq '.sources'
+```
+
+`status` shows `cursor/catalog_size` when the collector exports both values. For older
+source snapshots without `catalog_size`, compare the cursor with the catalogue file:
+
+```sh
+python3 - <<'PY'
+import gzip, pathlib, sys
+sys.path.insert(0, "src")  # run from the repository root
+from global_executables.registry_state import load_state
+for src, cat in (("pypi", "pypi-projects"), ("go", "go-modules"),
+                 ("rubygems", "rubygems-names"), ("packagist", "packagist-packages")):
+    d = pathlib.Path.home() / f".ge-crawl-{src}/data/production"
+    # Go updates the plain file atomically. Static sources retain imported plain
+    # snapshots; gzip files are publication-compatible copies.
+    order = (".txt",)
+    f = next((d / f"{cat}{e}" for e in order if (d / f"{cat}{e}").is_file()), None)
+    if not f:
+        continue
+    total = sum(1 for _ in (gzip.open if f.suffix == ".gz" else open)(f, "rt"))
+    s = load_state(d / "registry-state")["sources"][src]
+    print(f"{src:10} {s.get('cursor', 0):>9,}/{total:<9,} {s.get('cursor', 0) / total:6.1%}")
+PY
+```
+
+Go refreshes its denominator from the chronological module index before each pass.
+`catalog_complete` means the index reader reached the current edge for that snapshot;
+new module versions may make it grow on a later pass. CI replaces npm's critical
+denominator daily. Other denominators stay on their sampled complete catalogs until an
+operator deliberately replaces the sample.
+
+## Transactional-source recovery
+
+Go modules, npm, PyPI, RubyGems, and Packagist have one supported crawler: the
+transactional runtime started with
+`SOURCES="go pypi rubygems packagist" tools/crawl_parallel.sh start` for locally owned
+sources, while CI invokes the same runtime for npm. Retired Python implementations are
+not kept as alternate execution paths; Git preserves the history.
+
+If a local source database is unusable, stop only its `ge-<source>` container, preserve
+the database for diagnosis, and restore the last published compatibility snapshot from
+`artifact-data`. Start the transactional runtime against that source directory so it
+imports the published cursor and observations into a new database. Before publishing,
+verify that the exported cursor is not below the published cursor and let the
+source-owned merge perform its normal no-regression check.
+
+To check that withdrawals are being classified rather than retried, group the
+outstanding failures by kind. A kind that recurs across passes without changing is a
+condition the crawler is not recognising — that is how the RubyGems `403` storm and
+npm's `405` were found:
+
+```sh
+python3 - <<'PY'
+import collections, pathlib, re, sys
+sys.path.insert(0, "src")  # run from the repository root
+from global_executables.registry_state import load_state
+for p in sorted(pathlib.Path.home().glob(".ge-crawl-*/data/production")):
+    for name, s in load_state(p / "registry-state").get("sources", {}).items():
+        f = s.get("failures", {})
+        if not f:
+            continue
+        print(f"{name:10} failures={len(f):<4} unavailable={len(s.get('unavailable', {})):<6} "
+              f"attempts={len(s.get('failure_attempts', {})):<4} "
+              f"queued={len(s.get('retry_gems') or s.get('retry_projects') or s.get('retry_modules') or [])}")
+        kinds = collections.Counter(
+            (m.group(0) if (m := re.search(r"HTTP Error \d{3}", v)) else v.split("(")[0][:40])
+            for v in f.values())
+        for kind, n in kinds.most_common(5):
+            print(f"           {n:>4}  {kind}")
+PY
+```
+
+`failure_attempts` counts only failures that are neither settled nor network errors, so
+a healthy source has it at or near zero while `failures` fluctuates with connectivity.
+An entry in `unavailable` beginning `gave up after` is a package the crawler could not
+read after `FAILURE_ATTEMPT_LIMIT` tries; those are worth reading occasionally, because
+a cluster of them sharing one reason is a parser gap rather than a set of bad packages.
+
+The first four to appear were all PyPI projects reading `File is not a zip file`, and
+they split three to one. `Abr1k0s` is 21 bytes of SVG and `Jeiji` is a RAR archive named
+`.tar.gz` — genuine rubbish, correctly settled. `Task_allocator` is a well-formed
+tarball that PyPI records as a `bdist_wheel`, so the crawler read it as a ZIP and failed
+on an artifact whose commands an sdist read finds immediately. The reader is now chosen
+by the filename rather than by the declared type. Reading the give-up list is how that
+was found; the count alone said nothing.
+
+Before trusting any of it, confirm the containers are on the build you think they are.
+A state file written by the previous container survives the restart, so reading it too
+early shows the old shape and looks like the fix did not take:
+
+```sh
+docker inspect ge-rubygems --format '{{.Image}} {{.State.StartedAt}}'
+docker images global-executables-go-crawler:local --format '{{.ID}} {{.CreatedSince}}'
+```
+
+This machine runs Colima, not Docker Desktop. Two consequences:
+
+* **Lima only shares `$HOME`.** A bind mount of any other host path silently becomes
+  a directory inside the VM — writable, and invisible to the host. Keep `STATE_DIR`
+  under `$HOME`; the default `.local-crawl` in the repository already is.
+* `docker` needs `docker-credential-osxkeychain` on `PATH` to pull base images. If it
+  is missing, point `DOCKER_CONFIG` at a directory whose `config.json` is `{}` and
+  set `DOCKER_HOST=unix://$HOME/.colima/default/docker.sock`, because a replacement
+  config also drops the `colima` context.
+
+## History and cache
+
+The crawl keeps two kinds of information apart, the way shields.io does:
+
+| | history | cache |
+| --- | --- | --- |
+| what | the observations (rows), `unavailable`/failure records, catalogue cursors, change-feed cursors and queues, `due_floor`, `extraction_revision` | when each package was last looked at (`<day>:<streak><outcome>:<version>`, one for **every** inspected package, with or without commands), the position of the refresh rotation, anything that only schedules the next look (ETag/Last-Modified validators, TTL class, backoff tier) |
+| where | `artifact-data` (git): the sharded `registry-state/` and the row transport shards | `data/production/cache/<source>.cache.gz`, never committed (`.gitignore`), kept between CI runs by `actions/cache` and between local runs by the file itself |
+| written | only when something actually changed: a new version, different extracted commands, an availability change, a feed that advanced | on every look, including "nothing changed" |
+| lost | never: it is the product | at any time: nothing is wrong, the next run is just more expensive |
+
+Consequences, all covered by tests:
+
+- A check that finds the package unchanged (same version, same `extraction_revision`)
+  writes **nothing** to history: no `checked_at`, no row rewrite, no shard rewrite, no
+  commit. A run where nothing changed publishes no state, rows or shards
+  (`nothing to publish`). Only the report (`reports/registry-artifact-crawl.json`, with
+  its last-crawl time) is republished by an idle run, and at most once per 24 hours
+  (`REPORT_HEARTBEAT_HOURS`, default 24 in `tools/crawl_parallel.sh` and
+  `tools/merge_registry_publication.py`; 0 turns it off): a report that differs from the
+  published one only in effort (`EFFORT_KEYS`: request counts, bytes, timings, cursors of the
+  rotation) is skipped until the published report is a day old, and any real change
+  (status, coverage, failures, generation, catalogue) is published at once. The status
+  page therefore keeps moving while the history stays zero-diff.
+  An all-unchanged 3,000-package batch measured with `tools/measure_state_churn.py` at
+  PyPI scale (870,000 packages): before (#65) 256 of 256 shard files, 52,864 B pushed;
+  now 0 files, 0 B.
+- A new version, new commands or a vanished package changes only that package's rows and
+  failure record. The generation counter (`snapshot_generation`, in `manifest.json` and
+  the source's `source.json`) moves only when history moved.
+- A missing, corrupt, oversized-and-trimmed or other-revision cache is a **cold start**,
+  never an error. Every package is due again, staggered: its streak is spread over the
+  first backoff tiers by a hash of its name (`ColdCheck` / `cold_check`, identical in Go
+  and Python) so the next looks do not fall on the same day; its known version is taken
+  from its stored row, so an unchanged package still costs one metadata request and no
+  artifact read (Conan cannot: its recipe revision is not in the row, so a cold Conan
+  re-reads its recipes within the run budget). The rotation starts at a position derived
+  from the time, advancing one budget per six-hour window, so even a cache that is lost
+  on every run sweeps the whole catalogue instead of re-reading its first entries. History
+  is never altered by a cold start.
+- Format (versioned, shared by Go `internal/gocrawl/cache.go` and Python
+  `refresh_policy.read_cache`): gzip text; `# global-executables schedule cache v1`,
+  `# extraction <revision>`, `# cursor <rotation position>`, then `<name>\t<check>` lines
+  sorted by name. A different format or extraction revision is ignored. At most
+  3,000,000 entries (about 25 MB compressed; 870,000 PyPI entries are 12.3 MB and read in
+  about a second); beyond that the oldest checks are dropped and become due.
+- CI: `registry-refresh.yml` (go, pypi, rubygems, packagist, nuget) and
+  `cpp-registries.yml` (conan) keep `data/production/cache` (workspace-relative,
+  git-ignored) with `actions/cache` (key `schedule-v1-<source>-<run id>-<attempt>`, restore
+  prefix `schedule-v1-<source>-`, so every run restores the newest cache and saves a fresh
+  one; `continue-on-error`, so a cache that cannot be restored or saved never fails the
+  run). In `registry-refresh.yml` the runner creates the directory before the crawl, the
+  Go container mounts it at `/cache` (`--cache /cache/<source>.cache.gz`), the NuGet crawler
+  gets `--cache-dir`, and a final step hands the files back to the runner user. Why: the
+  first scheduled runs after #66 (2026-10-09, runs 37936096526 and 38000448825) kept the
+  cache under `/tmp/ci-refresh-<source>/`; the Go crawler container runs as root and
+  `os.CreateTemp` makes 0600 files, so the post-job save (runner user) failed with
+  `tar: ...pypi.cache.gz: Cannot open: Permission denied` and every run was a cold start.
+  Cache files are now written 0644 as well. Self-run: the cache file sits beside the state
+  directory (`--cache` for the Go crawler, `--cache-dir` / `cache_dir` for the Python one).
+- Migration: #65 stored `checked` (and the rotation `refresh_cursor`) in the state. Both
+  are still read for one release as a seed when no cache exists; the first save drops
+  `checked` and writes `refresh_cursor` as 0, which is one change to each source's
+  `source.json`/shards, after which they never churn again.
+
+What a scheduled run still publishes is real change, not bookkeeping: a feed that
+advanced (`feed_cursor`, `feed_pending`), a package that became unavailable, a release.
+`feed_pending` is durable by design (an announcement must survive a crash), so when a feed
+announces more packages than one run's feed budget reads, the remainder is committed and
+drained by the next runs; the churn is proportional to feed volume, not to unchanged packages.
+A cold cache also makes the rotation read packages it would otherwise skip, so the first
+runs after a cache loss download more.
+
+## Change-driven refresh
+
+Latest-version refresh used to be a fixed rotation that re-read every package's
+artifacts. It now spends requests where something changed (issues #64, #66). The
+rotation is still the backstop: no feed is trusted to be complete.
+
+History fields (per source in `registry-state/<source>/source.json`):
+
+| field | meaning |
+| --- | --- |
+| `feed_cursor` | Opaque position in the registry change feed (PyPI serial, npm `update_seq`, Packagist timestamp, Conan commit SHA, NuGet catalog `commitTimeStamp`). Committed in the same Bolt transaction as the queue it produced; it changes only when the feed advanced. |
+| `feed_queue` | NuGet's equivalent of `feed_pending` (a list of tool ids), stored in the same checkpoint as `feed_cursor`. |
+| `feed_pending` | Announced changes not yet committed as observations. An entry is removed in the transaction that commits the package's observations, so a crash replays it. |
+| `due_floor` | Every check older than this day is due (set by a feed `resync`). |
+| `extraction_revision` | Version of the code that turns a registry document into rows. A state with a lower revision does not seed checks from its rows and ignores older caches, so a fixed extractor re-reads everything. Raise `ExtractionRevision` (Go, `internal/gocrawl/policy.go`) and `EXTRACTION_REVISION` (Python, `refresh_policy.py`) together when extraction changes. |
+
+Tiers (the check each one reads and writes is cache, see "History and cache"):
+
+- **P0, version-equal skip.** The inspector fetches the registry's latest version; if it
+  equals the recorded one the artifact reads and the row rewrite are skipped and only
+  the cache advances. A changed or failed package keeps working as before.
+- **P1, change feed.** PyPI (`changelog_since_serial`), npm (`_changes`), Packagist
+  (`metadata/changes.json`, including `resync`), Conan (GitHub compare of
+  conan-center-index) and NuGet (V3 catalog: pages newer than the stored
+  `commitTimeStamp`, `PackageDetails` and `PackageDelete` leaves, at most 24 pages, only
+  commits older than five minutes; `feed_queue` holds the announced tools until their rows
+  are committed) enqueue the changed packages. A gap too large to replay, a
+  Packagist `resync`, or a diverged Conan history sets `due_floor` to today instead.
+  The cursor advances only after the page and queue are stored. Go's index.golang.org
+  catalog walk queues known modules it reports again.
+- **P2, backoff.** Each unchanged check doubles the re-check interval (1 day up to 60;
+  npm, Conan and feed-backed sources use their own caps), with deterministic jitter
+  shared by Go and Python (`internal/gocrawl/testdata/refresh/policy-golden.json`). Rotation entries
+  that are not due advance the cursor and cost no request or budget.
+- **P3, pacing.** Python hosts use a token bucket with ordered reservation
+  (`refresh_policy.TokenBucket`); feed announcements younger than a minute wait so the
+  registry's own CDN has them. The Go crawler keeps its per-host limits.
+- **TTL.** Soft TTL is the backoff interval; hard TTL (`HARD_TTL_DAYS`) is the age after
+  which a package is reported stale. Reports carry `unchanged`, `skipped_not_due`, `ttl`, `outcomes`.
+  Rows do not age in git: an unchanged package's rows are by definition still current,
+  and how long ago it was last confirmed is cache information.
+
+ETags and other validators are never written to git.
+
+### Packages without commands
+
+Most of a registry ships no command (on the 2026-10-10 published rows, packages with at
+least one row: PyPI 241,364 of 870,264 catalogue entries, RubyGems 39,417 of 196,126,
+Packagist 10,430 of 458,432, npm 42,425 of 44,612, Go 423,855 of 2,146,476; so roughly
+three of four visited packages are non-CLI). Each of them must be recorded as well, or
+every visit reads its artifacts again from scratch. Every inspected package therefore
+gets a cache entry `<day>:<streak><outcome>:<version>`, where `<outcome>` is `n`
+(`no_commands`) or `c` (`has_commands`); an entry without a letter was written before
+outcomes existed and is read as unknown. The extraction revision is the cache file's
+(`# extraction N`, a different revision discards the file) and an unavailable package is
+already a durable negative in history (`unavailable`). A visit that finds the recorded
+version costs the metadata request only (or nothing while the package is not due) and
+keeps its outcome. PyPI, RubyGems, Packagist, npm, Go (since #68), NuGet and Conan all do
+this; Go used to record a check only for modules with rows and read every other module
+in full on each visit.
+
+Reports carry `outcomes` (`no_commands`, `has_commands`, `unknown` over all recorded
+checks) and, for the Go crawler, `read_no_commands` / `read_with_commands` (packages read
+in full this run). Go imports its checks into the working database sorted: a million
+random inserts took over ten minutes, the same million in key order take about 3 s
+(about 90 MB database, 6 MB synthetic cache file; the Go catalogue has 2.1 million
+modules, 1.2 million of them already `unavailable`).
+
+Why the cache and not git. The knowledge of non-CLI packages is bookkeeping: it changes
+whenever a package releases (PyPI announces ~2,300 releases per run, nearly all of them
+non-CLI), so a git-tracked `name<TAB>version<TAB>revision` history of 870,000 PyPI
+packages would be about 6.4 MB packed once and then rewrite all 256 shards on every run
+(`tools/measure_negative_history.py`: 2,300 version changes touch 256 of 256 shards and
+push about 2.9 MB), roughly 35 MB a day for PyPI alone, without adding any row. The
+cache holds the same knowledge in 1.9 MB for 245,000 PyPI entries (about 6.5 MB at full
+size) at no cost to history. The price is that a lost cache forgets the non-CLI packages
+once: a cold start re-reads each of them one time (packages with rows are seeded from
+history and stay cheap). `actions/cache` evicts only entries unused for seven days and
+every source runs several times a day, so this is an exception, not the steady state;
+the 2026-10-09 window in which every cache save failed (#67) is the reason the first
+sweep after it still reads mostly unseen packages.
+
+Rollback: revert the PR. Old readers ignore the missing fields and the rotation restarts
+at the cold position; a leftover cache is harmless and can be deleted.
+
+## Local booster
+
+Why. PyPI has 870,264 catalogue entries and the schedule cache knows about 245,000 of
+them (2026-10-10); the other ~588,000 have never been visited. The Actions refresh spends
+3,000 packages per run and most of that on the change feed (~2,300 changed packages per run
+that must be read), leaving ~700 rotation visits per run: about seven months for the
+backlog. A booster is a crawler on your own machine (and on any extra machine) that works
+through the backlog in parallel, without breaking the history/cache split or the
+transactional guarantees. Go and NuGet already use local completion boosters; this one is
+for a source that is *finished* (cursor at the end of the catalogue) but whose rotation
+is far from covered, so it can run next to Actions instead of instead of it.
+
+Measured on 2026-10-11 against pypi.org with a 500-package random sample of the catalogue
+(read-only, own temporary state, nothing published, User-Agent naming the project):
+
+| settings | time | requests | bytes | throughput |
+| --- | --- | --- | --- | --- |
+| 24 workers, no cap | 1.7 s | 1,001 | 39.0 MB | ~290 packages/s, 23 MB/s |
+| 8 workers, 5 MB/s cap (the booster default) | 25.0 s | 990 | 119.5 MB | 20 packages/s |
+
+No 429, timeout or circuit opening in either run. The two samples differ 3x in bytes per
+package (78 KB and 239 KB; the production batches average ~253 KB), so the projection for
+the 588,000-package backlog is a range: **at the default 5 MB/s about 6 to 9 hours of
+download (588,000 packages at 20 packages/s is 8.2 h); at 20 MB/s 2 to 3 hours**, plus
+the packages that fail or are retried, against seven months for Actions alone. PyPI's
+JSON API answers with `ETag` and `Cache-Control: max-age=900`, so a conditional
+re-check (`If-None-Match`, 304) is possible; it only saves the metadata document of
+*due re-checks*, not the backlog, and is not implemented yet. HTTP/2 and connection reuse
+are already in use. I could not read PyPI's own API guidance page (the docs site answered
+429 to the tool), so the pacing below is conservative by design: the adaptive per-host
+gate (concurrency falls on 429/5xx), `Retry-After` honoured, a circuit breaker and a
+bandwidth cap, and only PyPI's own APIs are used (no new data source, no dump).
+
+### Ownership
+
+Three mechanisms, none of which needs a coordinator:
+
+1. **Buckets.** A package belongs to bucket `sha256(name)[0]` (0-255; `gocrawl.OwnerBucket`
+   in Go, `booster.owner_bucket` in Python, one golden file for both). A booster owns a
+   range of buckets (`BOOSTER_RANGES=0-255` by default, or `BOOSTER_SLICE=i/n` for equal
+   slices when several machines help).
+2. **A lease with a heartbeat** at `data/production/booster/<source>.json` on
+   `artifact-data`: `{"leases": {"<id>": {"ranges", "heartbeat", "ttl_hours", "started_at",
+   "progress"}}}`. The booster writes it on start, renews it with every publication
+   (default hourly) and releases it on exit. A lease is alive for `ttl_hours` (12) after
+   its heartbeat; an overlapping request while another lease is alive is refused
+   (exit 4). Leases are changed by applying an operation to the freshest branch head
+   (rebuild on a non-fast-forward push), so two machines never lose each other's lease.
+3. **What Actions skips.** `registry-refresh.yml` runs `tools/booster.py exclusions` and
+   passes `--rotation-exclude <ranges>` to the crawler: the *rotation* entries of leased
+   buckets advance the cursor without a request. Feed work, retries, the catalogue walk
+   and the feed cursor are never skipped, so a change in a leased bucket is still read by
+   Actions at once. When the heartbeat is older than the TTL the exclusion is empty and
+   Actions owns the whole rotation again: a laptop that sleeps or loses power returns
+   its buckets within twelve hours without anybody acting. A failed lookup also means "own
+   everything". The booster runs the same crawler with `--rotation-include <ranges>
+   --no-feed`, so it visits only its buckets and never touches the feed or its cursor.
+
+### Publication: deltas
+
+Replacing a whole source, which was safe with one writer, would let the last of two
+writers erase the other's rows and failure records. For the sources in `DELTA_SOURCES`
+(`pypi`) both writers publish a **delta** relative to the snapshot they last published
+(`<dir>/.base`, taken when seeding and promoted after every successful push):
+
+- per-package maps (`unavailable`, `failures`, `failure_attempts`, `feed_pending`...) are
+  merged key by key, retry lists member by member;
+- the rows of every package whose rows differ from the base replace the published rows of
+  that package; all other rows stay as the other writer published them;
+- the booster (`BOOSTER=1`) leaves cursors, catalogue, feed position and the report to
+  Actions (`--no-scalars`); Actions, as before, publishes those;
+- `snapshot_generation` moves by one when anything changed, and a delta that changes
+  nothing makes no commit (re-publishing is idempotent, byte for byte).
+
+A package changed by both writers between two publications takes the value of whoever
+publishes last; both read the registry, so either is a valid current answer and the next
+check settles it. A failed or rejected push leaves the base where it was, so the next
+publication carries the same delta (a crash loses nothing; the Go store, the state and
+the schedule cache resume as for every other crawl). Non-fast-forward pushes use the
+existing rebuild-from-the-latest-branch retry loop, under the machine-wide publication
+lock. Publications are batched: one commit per `PUBLISH_INTERVAL` (hourly), and the lease
+heartbeat adds one tiny commit per hour at most.
+
+History and cache are untouched: the booster's schedule cache (`<dir>/data/production/cache`)
+stays on disk between runs, which is what makes its own cold starts rare, and is never
+published; the rows and failure records are history and follow the delta rules above.
+
+### Running it
+
+Prerequisites: git with push access to `artifact-data` (your normal credentials), Python 3,
+and Docker or Podman (or Go for `MODE=native`). macOS: `brew install flock` for the
+publication lock. Windows: use WSL2 (Docker Desktop with WSL integration, or `MODE=native`
+inside WSL); run the commands inside the WSL shell. Clone the repository, then:
+
+```bash
+CONTACT=you@example.org tools/local_booster.sh pypi run        # foreground; Ctrl-C stops cleanly
+tools/local_booster.sh pypi status                             # lease, cache size, container
+tools/local_booster.sh pypi publish                            # publish now
+tools/local_booster.sh pypi stop                               # stop the crawler (keeps the lease until it expires)
+tools/local_booster.sh pypi release                            # give the buckets back at once
+tools/local_booster.sh pypi abort                              # stop WITHOUT a final publication; keeps the lease
+CONTACT=you@example.org tools/local_booster.sh pypi unit       # print systemd / launchd / cron units
+```
+
+A second machine: `BOOSTER_SLICE=0/2` on one and `BOOSTER_SLICE=1/2` on the other (give
+each its own `BOOSTER_ID`). Settings (all environment variables): `CONTACT` (required, goes
+into the User-Agent), `BOOSTER_ID`, `BOOSTER_RANGES` / `BOOSTER_SLICE`, `WORKERS` (8),
+`MAX_BYTES_PER_SECOND` (5,000,000; 0 = none), `PUBLISH_INTERVAL` (3600), `PAUSE` (30 s,
++-30 % jitter), `PACKAGE_BUDGET` (3000), `BASE` (`~/.ge-crawl`), `MODE` (`docker` or `native`),
+`LEASE_TTL_HOURS` (12), `HEARTBEAT_INTERVAL` (3600), `LEASE_MIN_AGE` (TTL/3 hours),
+`STOP_TIMEOUT` (300), `CRAWLER_BIN` (native: use this binary instead of building one).
+Stop it with Ctrl-C or SIGTERM: it stops the crawler and waits until it has exited
+(TERM, then KILL after `STOP_TIMEOUT`), only then publishes once more, and releases the
+lease last. If the crawler cannot be stopped it publishes nothing and keeps the lease until
+it expires. In native mode the crawler's PID is kept in `<dir>/booster.pid` (the
+supervisor's in `<dir>/supervisor.pid`); a stale file, or one naming an unrelated process,
+is ignored, and a second start for the same directory is refused (exit 3), including when
+a crawler is running without a PID file. `local_booster.sh pypi stop` also stops such a crawler.
+
+**Native mode needs no container runtime.** `seed`, `merge` and `publish` of
+`crawl_parallel.sh` are git and Python only; only `start` (container mode), `status`,
+`watch` and `stop` require Docker or Podman. (Before this, the script refused to load
+without a runtime, so a native booster's scheduled publications failed with "Podman or
+Docker is required" while the lease heartbeat, which does not use the script, kept
+working. A failed publication never advances `.base`, so the next one carries everything.)
+
+**A damaged local store.** The crawler's bbolt database (`<dir>/data/production/pypi-crawl.db`)
+is opened with fsync on, but it is a live file: a machine snapshot/restore that copies it
+file-by-file while the crawler writes (seen on 2026-10-13 after a box reboot: `invalid page
+type: 97544: 10` in `BoltStore.Commit`) leaves it inconsistent. The exported state (registry
+state, observation rows, schedule cache) is written atomically and is the source of truth.
+The booster therefore runs the crawler with `--verify-store`: on its first open per process
+the store is checked (`tx.Check`); a damaged store is renamed to
+`pypi-crawl.db.corrupt-<UTC timestamp>` (never deleted) and rebuilt from the exported state.
+A corruption panic found later is caught, the store is quarantined the same way and the
+crawler exits with status 75. The supervisor restarts an exited crawler; more than
+`CRASH_LIMIT` (3) exits within `CRASH_WINDOW` (1800 s) is a crash loop: the supervisor
+publishes what it has, releases the lease (Actions takes the buckets over at once) and exits 1
+so a watchdog notices. `abort` stops the supervisor and the crawler without the final
+publication and keeps the lease, for when the local state must not be published.
+
+**A stalled crawler.** On 2026-10-13 the box's VM was repeatedly paused and forked
+(`random: crng reseeded due to virtual machine fork`, balloon pressure in `dmesg`). After a
+resume the crawler's HTTP/2 connection to PyPI was silently dead, but nothing noticed: every
+request multiplexed onto it waited for its 30 s timeout, retried on the same connection, and
+packages failed at the 90 s package timeout, so a 2-minute pass slowed to hours (a livelock:
+no goroutine was blocked for more than a minute). The HTTP clients now ping an HTTP/2
+connection that has been silent for 15 s and drop it if the ping is not answered within 10 s
+(`HealthCheckInterval`, `PingTimeout`), so requests fail over to a new connection.
+The supervisor used to check the crawler only once per `HEARTBEAT_INTERVAL` (an hour of
+*its own* sleep, which does not advance while the VM is paused), so an exited crawler could
+wait hours for a restart. It now checks every `WATCH_INTERVAL` (60 s), publishes and
+heartbeats by the wall clock, and in native mode watches `<dir>/progress`, which the crawler
+(`--progress-file`) touches whenever it commits a package the registry answered for and after
+each pass. Without progress for `STALL_TIMEOUT` (1800 s, counted in supervisor wake-ups so a
+paused machine is not a stall) the crawler gets SIGQUIT (its goroutines go to
+`<dir>/booster.log`), KILL after `STOP_TIMEOUT`, and is restarted; stalls count towards
+`CRASH_LIMIT` like exits.
+
+**Retries and ownership.** A run that leaves buckets to a booster also leaves it their
+retries (except packages the change feed announced, which every feed reader handles).
+Attempt counts only grow, across writers too (`failure_attempts` merges by maximum), so a
+package that keeps failing is given up after `FailureAttemptLimit` attempts. Artifacts that
+cannot be read for that version (too large, corrupt tar) are recorded with outcome `u` and
+not fetched again until a new version; deploy the booster from the same main as Actions,
+since older crawlers do not understand `u`.
+
+**Large PyPI projects.** `/pypi/<name>/json` carries every release and exceeds the 8 MiB
+limit for some popular projects (ddtrace: 41 MB). The crawler then reads the first 64 KiB of
+it with a `Range` request (growing to at most 1 MiB) for `info.version`, stops when that is
+the recorded version, and otherwise reads `/pypi/<name>/<version>/json`. A project whose
+`info` alone exceeds 1 MiB (a 43 MB description) is final (`project info exceeds`). Failures
+that a newer crawler handles are requeued by `recoveryRules` in the runner, keyed on the
+failure reason; a rule matches nothing once those packages are rechecked.
+
+**Retry ownership.** Every failure entry in the published state has exactly one writer that
+retries it. A package listed in the catalogue belongs to the owner of its bucket, as for the
+rotation: the booster (`--rotation-include` its lease) or Actions (`--rotation-exclude` the
+live leases). A package missing from the catalogue (created on PyPI after the catalogue was
+taken, so known only from the change feed, e.g. `libcuopt-*`) belongs to the feed reader,
+Actions: the booster reads no feed and walks only its catalogue, so it never sees such a
+package. A package the feed announced this pass is read by Actions as a feed event in any
+bucket. Both writers use the same published catalogue; the check below flags a booster whose
+catalogue differs.
+
+A newer result supersedes an older failure, whoever recorded it: a delta publish takes the
+writer's schedule cache together with its base (`.base/cache.gz`), and a package checked
+since the base (read, or final with outcome `u`) or newly `unavailable` is removed from the
+published `failures`, `failure_attempts` and retry list unless the writer itself still
+lists it; a successful read also clears a published `unavailable` entry. The first publish
+after an upgrade has no base cache yet: then every package the writer has a check or an
+`unavailable` entry for clears its stale failure once, and no `unavailable` entry is
+cleared.
+
+A booster clears only packages it owns: listed by its catalogue and in its leased buckets
+(`--owned-catalog`, `--owned-ranges "${BOOSTER_RANGES}"`). Failure entries carry no time or
+version, so an older check cannot be told apart from a newer failure; a booster's old check
+of a catalogue-less package (sapilm, read at 1.0.1 before the feed announced 1.2.7) would
+otherwise clear the failure only the feed reader retries, and the package would be lost. A
+failure of an owned package cleared against an older check heals by itself: the rotation
+re-reads any package whose latest version differs from its check.
+
+`tools/booster.py owners --dir <BASE>-pypi` lists the published failure entries with their
+owner; `orphans` (no owner: not queued for retry, or outside both writers' scope) and
+`duplicates` must be 0 (`--fail-on-orphans` exits 5 otherwise). `local_booster.sh status`
+prints it, every publish logs `retry owners: {"duplicates": 0, "orphans": 0}`, and the
+lease progress carries both counts.
+
+**Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
+--source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:
+checked with an outcome (`has_commands`, `no_commands`), `unavailable` (no release, no wheel
+or sdist, 404 ...), `failing` (failures and retries), or `unaccounted` = not reached yet,
+split into ahead of and behind the rotation cursor. Note that the crawl report's
+`complete: true` and `cursor` describe the catalogue *walk* (discovery), which is finished;
+the lap is the rotation cursor (`refresh_cursor`). A lap is done when nothing is
+unaccounted. `checked_outside_catalog` counts packages known from earlier runs or the feed
+that the current catalogue snapshot no longer lists.
+
+**Lease TTL and heartbeat.** The heartbeat is renewed every `HEARTBEAT_INTERVAL` seconds
+independently of the publish interval, but a renewal only commits (one small JSON file, no
+data blobs) once the stored heartbeat is older than `LEASE_MIN_AGE`; fresher ones change
+nothing. So a long `PUBLISH_INTERVAL` (say 6 h, to keep repository growth slow: each
+publication rewrites ~29 MB of transport blobs) needs no long TTL: with the defaults the
+lease costs at most ~3 tiny commits a day and survives a few missed renewals. Trade-off of
+a longer TTL: Actions leaves the buckets to a booster that has died for up to that long
+(pick 6-12 h); of a shorter one: more heartbeat commits. After a crash or reboot start it again; the working
+directory, database and cache resume where they were. Do not run `crawl_parallel.sh start`
+for the same source at the same time.
+
+Rollback: stop the booster and `release` its lease (or wait twelve hours); Actions owns
+the rotation again. Reverting the change restores whole-source publication.
+
+## Registry crawl state layout
+
+Every registry crawler resumes from one logical document,
+`{"version": 1, "sources": {"<source>": {...}}}`, written by the Python crawlers
+(crates.io, NuGet, ConanCenter) and by the Go transactional crawler. It used to be one
+`data/production/registry-state.json`; on `artifact-data` that file reached 92.7 MB,
+close to GitHub's 100 MB hard limit, almost all of it Go's `unavailable` map
+(1.18 million modules). The same document is now a directory of small files:
+
+```text
+data/production/registry-state/
+├── manifest.json              # commit point: layout version, summaries, size + SHA-256 of every file
+├── conan/source.json          # a source's checkpoint without its large maps
+├── go/source.json
+├── go/unavailable/00-00.jsonl # 256 shards of sorted ["module", "reason"] lines
+├── go/unavailable/01-10.jsonl
+├── ...
+├── pypi/source.json
+├── pypi/unavailable/0-0.jsonl # 16 shards
+└── ...
+```
+
+- **Sharding.** A map field (`unavailable`, `failures`, ...) with 1,024 or more entries
+  moves out of `source.json` into JSONL shards of `["key", value]` lines sorted by key.
+  A key's shard is the first hex digits of `sha256(key)`: one file (`all.jsonl`) up to
+  8,192 entries, then 16, 256, or 4,096 shards so a shard averages at most 8,192
+  entries (about 330 KB for Go). A run that changes a few keys rewrites only the shards
+  that hold them plus the manifest; unchanged files are not rewritten at all. The
+  shard name repeats its prefix reversed (`a3-3a.jsonl`) because Git pairs a changed
+  blob with its previous version by a hash of the path's last 16 characters: with
+  plain `a3.jsonl` names 112 of 256 hashes collided and a Go pass that touches every
+  shard pushed 7.5 MB of whole files instead of 43 KB of deltas.
+  `tests/test_registry_state.py` keeps the names collision-free.
+- **No compression.** Shards are plain text on purpose. Git already zlib-compresses
+  every object and delta-compresses text between versions; a gzip shard would turn a
+  three-line change into a whole new blob on every push. Catalogues are separate files
+  and keep their existing `.gz` and transport-shard forms.
+- **Canonical bytes.** `src/global_executables/registry_state.py` and
+  `internal/gocrawl/statestore.go` encode identically: UTF-8, sorted keys, compact
+  shard lines, two-space indented `manifest.json` and `source.json`, U+2028/U+2029
+  escaped, numbers kept as written. A Python publisher re-saving a Go checkpoint
+  therefore changes no bytes.
+  `internal/gocrawl/testdata/registry-state/manifest.golden.json` pins the SHA-256 of
+  every file produced from a trimmed real `artifact-data` sample, and both test suites
+  must reproduce it; the Go suite also round-trips through Python when
+  `python3` is available. `schema/registry-state-manifest.schema.json` describes the
+  manifest.
+- **Atomic replacement.** A save writes the changed files under `.staging/files/`,
+  then `.staging/manifest.json` (the commit point), renames the staged files into
+  place, renames the manifest last, and deletes files the new manifest no longer lists.
+  A writer stopped before the commit point leaves the previous state untouched and its
+  staging is discarded; one stopped after it is rolled forward by the next save or
+  `recover`. Readers prefer a committed staging area, verify every file against the
+  manifest's size and SHA-256, and retry when a concurrent save replaces files
+  underneath them, so they never assemble a mixture. One writer per state directory
+  still applies; the publication lock and per-source container directories keep it so.
+- **Paths.** Every `--state` option accepts the directory or the legacy `.json` path;
+  `data/production/registry-state.json` means "the layout at
+  `data/production/registry-state/`, falling back to the legacy file".
+
+Shell steps never touch the files directly. Use `tools/registry_state.py`:
+
+```sh
+python3 tools/registry_state.py restore --ref origin/artifact-data --state data/production/registry-state
+python3 tools/registry_state.py summary --state data/production/registry-state   # sizes and cursors
+python3 tools/registry_state.py get --state data/production/registry-state --source go --scalars
+python3 tools/registry_state.py copy --from A --to B [--only-source go]
+python3 tools/registry_state.py migrate --state legacy/registry-state.json --to /tmp/registry-state
+```
+
+Measured against `artifact-data` at `876e2c5` (2026-10-08 08:09 JST): the legacy file
+was 1 file of 92,679,802 bytes; the layout is 281 files and 83,001,850 bytes, the
+largest 331,367 bytes. Over the twelve publications of 2026-10-07 (UTC), the Git
+data each push sends fell from 39.5 KB to 11.6 KB in total (2.9–3.8 KB per push
+before, 0.7–1.5 KB after), each commit touching 2–6 files. A simulated Go pass that
+adds 600 and clears 50 `unavailable` modules touches 233 shards and pushes 43 KB,
+against 10 KB for the single file: the cost of spreading one map's changes across
+shards, and still small. The one-time migration commit pushes about 21 MB.
+
+### Migration and rollback
+
+Migration needs no manual step and no direct edit of a data branch. Until it happens,
+restores read the legacy file. The first publication after this layout reaches `main`
+(`tools/crawl_parallel.sh publish`, used by every CI publisher and the local booster)
+loads the published state, writes `registry-state/`, deletes
+`registry-state.json`, and records both in its ordinary "Record crawl data" commit.
+Local per-source directories migrate the same way the first time a crawler saves.
+
+Readers keep the legacy fallback for one release. To roll back after the branch has
+migrated, revert the code change and, before the next scheduled crawl, publish a
+legacy file regenerated from the directory (the old code cannot read the layout and
+would otherwise start every cursor from zero):
+
+```sh
+python3 tools/registry_state.py restore --ref origin/artifact-data --state /tmp/registry-state
+python3 - <<'PY'
+import json, sys
+sys.path.insert(0, "src")
+from global_executables.registry_state import load_state
+state = load_state("/tmp/registry-state")
+open("registry-state.json", "w").write(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+PY
+```
+
+## Durable observation lifecycle
+
+Normal registry-triggered and scheduled refreshes perform the lifecycle in this order:
+
+1. Restore every OS, registry, macOS, and shell observation from `artifact-data`.
+2. Reuse the durable OS observations as environment/package-set samples. They are not
+   reacquired just because a registry cursor advanced.
+3. Rebuild the dictionary. Unusable command names are counted under
+   `rejected_records` in `reports/production-refresh.json`; malformed JSON remains a
+   hard failure.
+4. Preserve records omitted by partial sources, while exhaustive-source removals
+   still pass through the shrink guard. An intentional removal requires
+   `--allow-shrink-reason "..."`, which is recorded in the refresh report.
+5. Publish canonical data and reports to `dictionary`. A failed scheduled refresh opens or
+   updates a GitHub issue with the failed run URL.
+
+OS sampling is an explicit maintenance operation, not part of normal dictionary
+publication. Run it only when the environment sample intentionally needs to change:
+
+```sh
+gh workflow run refresh.yml --ref main -f refresh_os_samples=true
+```
+
+That opt-in run reacquires the eight production OS indexes, publishes the refreshed
+observations to `artifact-data`, and then rebuilds the dictionary. Without the input,
+`refresh.yml` restores the last production crawl report from `dictionary` and performs
+no OS network acquisition.
+
+For a local OS crawl, seed first so the collector extends durable evidence, then
+publish the result:
+
+```sh
+tools/crawl_parallel.sh seed
+python tools/production_crawl.py \
+  --source debian --source ubuntu --source arch --source homebrew \
+  --source msys2 --source scoop --source winget --source windows \
+  --output-dir data/production/intermediate \
+  --report reports/production-crawl.json
+tools/crawl_parallel.sh publish
+```
+
+The fixture inputs remain in the tree for parser and protocol tests;
+they are not presented as exhaustive upstream coverage. `upstream-smoke.yml`
+downloads representative real indexes/packages from every planned ecosystem,
+inspects executable evidence inside them, and retains a measured report. It
+does not claim to be a full collector or publish canonical data.
+
+On 2026-08-14 the probe successfully downloaded and inspected Debian stable and
+Ubuntu noble Contents indexes, the Arch core files database, a Homebrew bottle,
+an npm tarball, a PyPI wheel, a crates.io crate, and a Go module archive. It
+found the expected executable evidence in all eight sources.
+The machine-readable observation is checked in at
+[`reports/upstream-smoke.json`](../reports/upstream-smoke.json). This establishes
+representative content accessibility only; it does not establish full-crawl
+cost, completeness, or ongoing availability.
+
+Local rebuild:
+
+```sh
+pip install -e '.[test]'
+global-executables build fixtures/intermediate/*.jsonl \
+  --root /tmp/global-executables-fixture --snapshot 2026-08-14
+pytest
+```
+
+Production-source rebuild:
+
+```sh
+python tools/production_crawl.py \
+  --source debian --source ubuntu --source arch --source homebrew \
+  --source msys2 --source scoop --source winget --source windows \
+  --output-dir data/production/intermediate \
+  --report reports/production-crawl.json
+python tools/refresh.py \
+  data/production/intermediate/arch.jsonl \
+  data/production/intermediate/debian.jsonl \
+  data/production/intermediate/homebrew.jsonl \
+  data/production/intermediate/ubuntu.jsonl \
+  data/production/intermediate/crates.jsonl \
+  data/production/intermediate/go.jsonl \
+  data/production/intermediate/npm.jsonl data/production/intermediate/pypi.jsonl \
+  data/production/intermediate/rubygems.jsonl \
+  data/production/intermediate/packagist.jsonl \
+  data/production/intermediate/msys2.jsonl \
+  data/production/intermediate/scoop.jsonl \
+  data/production/intermediate/winget.jsonl \
+  data/production/intermediate/windows.jsonl \
+  data/production/intermediate/macos.jsonl \
+  data/production/intermediate/shell.jsonl \
+  data/production/intermediate/nuget.jsonl \
+  --snapshot "$(date -u +%F)" \
+  --coverage-map data/production/coverage-map.json \
+  --report reports/production-refresh.json
+```
+
+The scheduled refresh records transfer bytes, URL, HTTP status, duration, fallback
+use, and per-source coverage in `reports/production-crawl.json`. It fails closed when
+there is neither a successful observation nor a readable stored fallback.
+
+## GitHub Pages playground
+
+The `pages.yml` workflow builds the static index playground and deploys it with
+the GitHub Pages artifact/deploy actions. It runs after relevant pushes to
+`main`, whenever the CI refresher publishes crawl progress, and when a changed
+dictionary is published.
+During the build it snapshots
+the latest `artifact-data` crawl report into `status.json`, including the next
+scheduled refresh time, discovery and refresh cursors, failures, and coverage kind.
+
+The page renders three groups because the sources answer in three different shapes.
+OS file indexes and C/C++ recipe repositories are read whole on every run and report
+records and a coverage kind but never a cursor, while the language registries advance
+a cursor through a catalogue. ConanCenter inspects one artifact per recipe, so it
+belongs with the registries and publishes into the same crawl report. vcpkg and xmake
+advance no cursor and have nothing to merge into that report, so `cpp-registries.yml`
+publishes `reports/cpp-registry-crawl.json` beside it and `pages.yml` passes it to the
+builder as `--recipe-report`. Their bar is the share of the population that declares a
+command, which is the honest measure for a source whose index was read completely and
+whose upstream still describes only part of it.
+
+The same build reads up to seven days of published Go checkpoints, selects the rolling
+24-hour operating window, and writes an advisory completion forecast into `status.json`.
+The short window excludes delayed bulk publication and migration catch-up from normal
+crawler throughput. Its backlog is
+`catalog_size - cursor + retry_pending`, so catalog growth and unresolved retries
+cannot make the estimate look faster than the observed net trend. The forecast uses
+the first and last distinct checkpoint in the 24-hour window. If fewer than two checkpoints
+exist or the backlog is flat or growing, Pages reports no finite completion date
+instead of extrapolating a misleading ETA. The crawl report history remains the source
+of truth; the rendered forecast is disposable and reproducible.
+
+The browser client reads canonical metadata and executable/index shards from
+the public `dictionary` JSON tree. It implements the read-only query surface for
+exact checks, batch checks, provider reads, bounded prefix/scope searches,
+similar-name searches, coverage, and freshness assessment. No query payload is
+sent to an application server. The repository Pages setting must use
+**GitHub Actions** as its source the first time the workflow is enabled.
+
+```sh
+python tools/refresh.py fixtures/intermediate/*.jsonl \
+  --root /tmp/global-executables-fixture \
+  --snapshot 2026-08-14 --coverage-kind partial \
+  --report /tmp/global-executables-fixture/refresh.json
+```
+
+It writes the requested refresh report, refuses missing collector inputs, and
+validates the generated tree. This local command does not publish to GitHub;
+the scheduled `refresh.yml` workflow runs the production equivalent and
+publishes the complete generated replacement to `dictionary`. A source using stored evidence
+is recorded as a fallback with unknown current coverage; a source with no usable
+fallback fails and cannot be represented as successful coverage.
+
+Real-content smoke test (network, substantial downloads, and Cargo required):
+
+```sh
+pytest -m live -o addopts= -q
+python tools/live_smoke.py --output reports/upstream-smoke.json
+```
+
+Local MCP (no network):
+
+```sh
+git fetch origin dictionary
+git worktree add .dictionary origin/dictionary
+global-executables-mcp --root . --dataset-root .dictionary
+```
+
+Remote Streamable HTTP:
+
+```sh
+global-executables-mcp --root . --dataset-root .dictionary \
+  --transport streamable-http --host 0.0.0.0 --port 8000
+```
+
+An agent should generate candidates privately and call `check_executables`. It
+should discard factual collisions, retain `found:false` candidates together
+with their absence confidence, similarity-check those not-found candidates,
+and show only survivors with snapshot and coverage caveats. `unknown` means
+insufficient coverage, not an unavailable query. `clear_in_index` requires an
+explicitly exhaustive queried snapshot; it never means globally or legally
+available.
+
+Collector execution status and negative-query completeness are separate.
+Coverage entries are marked `fixture`, `smoke`, `partial`, or `exhaustive`.
+An absent name returns `clear_in_index` only when every declared source is both
+successful and explicitly exhaustive; fixture/smoke/partial snapshots return
+`unknown`. A matching record always returns `collision`.
+
+Search reads the reproducible JSON indexes rather than scanning canonical
+records. Each index is SHA-256 pinned in `data/metadata.json`. An index listed
+in the manifest that is missing or whose bytes do not match fails closed with
+an index error; a filter value with no corresponding index produces no
+candidates. Regenerate indexes with `global-executables build`.
+
+Provider scope dimensions are independent: OS records may include
+`source_type`, `package_system`, `distribution_family`, `distribution`, and
+`distribution_release`; language records may include `language` and `registry`.
+Freshness and usage observations are provider facts. Missing metrics are
+`unknown`, not zero, and cross-ecosystem counts are never compared without a
+documented normalization method. `assess_executable` exposes derived risk with
+methodology version `1.0.0` while preserving the underlying observations.
+
+## Fixture freshness scenarios
+
+The partition manifest under `fixtures/freshness/manifest.json` contains immutable
+test data. It exercises the bounded scheduler and state contract; it is not production
+freshness evidence and is never run on a schedule. A manual scenario advances a
+persisted round-robin cursor, scans a limited number of fixture partitions and
+normalized records, and writes:
+
+- `data/freshness/state.json` — cursor, source checksums, completed cycles,
+  last successful observations, and staleness state;
+- `reports/freshness.json` — run ID, selected/skipped/failed partitions,
+  source checksum, cursor, bytes, changes, removals, and rate-limit metadata.
+
+Run it locally with:
+
+```sh
+global-executables freshness \
+  --root . \
+  --manifest fixtures/freshness/manifest.json \
+  --state data/freshness/state.json \
+  --report reports/freshness.json \
+  --partition-budget 1 \
+  --record-budget 1000
+```
+
+The scheduler is deterministic and fair: every enabled partition is selected
+in manifest order over successive runs, including partitions skipped by a
+previous run budget. A source checksum change starts a new cycle. New and
+changed observations are reported immediately; removals are reported only when
+the changed source partition completes a full cycle. A missing or malformed
+source preserves the last successful observation and marks the partition
+stale/unavailable.
+
+Scenario output is intentionally separate from `data/executables`. A partial
+scan always remains `coverage_kind=partial`, cannot make an absence
+`clear_in_index`, and cannot set dataset metadata to exhaustive. The manual
+workflow publishes only state and the report to the `freshness-data` branch;
+failed partitions remain visible and fail the workflow after the report is
+published. The result is test evidence, not a production freshness or full-coverage
+claim.

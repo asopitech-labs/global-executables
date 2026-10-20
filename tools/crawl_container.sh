@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Build and run the registry crawl in a container, against a local state directory.
+#
+# The container never pushes: it writes into STATE_DIR, laid out exactly like the
+# artifact-data branch.  Seeding from the published branch makes a local run resume
+# the shared cursor rather than restart it; publishing back is a deliberate step
+# (see docs/OPERATIONS.md), because CI writes the same branch.
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+IMAGE="${IMAGE:-global-executables-crawl:local}"
+STATE_DIR="${STATE_DIR:-${ROOT_DIR}/.local-crawl}"
+SEED="${SEED:-1}"
+
+if [ -n "${CONTAINER_RUNTIME:-}" ]; then
+  RUNTIME="${CONTAINER_RUNTIME}"
+elif command -v podman >/dev/null 2>&1; then
+  RUNTIME=podman
+elif command -v docker >/dev/null 2>&1; then
+  RUNTIME=docker
+else
+  echo "Podman or Docker is required." >&2
+  exit 1
+fi
+
+cd "${ROOT_DIR}"
+mkdir -p "${STATE_DIR}/data/production/intermediate" "${STATE_DIR}/reports"
+
+if [ "${SEED}" = "1" ] && \
+   ! python3 tools/registry_state.py exists --state "${STATE_DIR}/data/production/registry-state"; then
+  echo "==> Seeding ${STATE_DIR} from origin/artifact-data"
+  git fetch --quiet --depth=1 origin artifact-data || true
+  python3 tools/registry_state.py restore --ref origin/artifact-data \
+    --state "${STATE_DIR}/data/production/registry-state"
+  for path in data/production/nuget-tools.txt \
+              reports/registry-artifact-crawl.json; do
+    if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
+      git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"
+      echo "    ${path}"
+    fi
+  done
+  for source in crates nuget; do
+    path="data/production/intermediate/${source}.jsonl"
+    if git cat-file -e "origin/artifact-data:${path}" 2>/dev/null; then
+      git show "origin/artifact-data:${path}" > "${STATE_DIR}/${path}"
+    fi
+  done
+fi
+
+echo "==> Building ${IMAGE}"
+"${RUNTIME}" build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
+
+echo "==> Crawling into ${STATE_DIR}"
+exec "${RUNTIME}" run --rm --init \
+  --volume "${STATE_DIR}:/state" \
+  --env "SOURCES=${SOURCES:-crates nuget}" \
+  --env "PACKAGE_BUDGET=${PACKAGE_BUDGET:-2000}" \
+  --env "SOURCE_PACKAGE_BUDGETS=${SOURCE_PACKAGE_BUDGETS:-}" \
+  --env "BYTE_BUDGET=${BYTE_BUDGET:-5000000000}" \
+  --env "PASSES=${PASSES:-0}" \
+  "${IMAGE}"

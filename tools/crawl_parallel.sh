@@ -1,0 +1,518 @@
+#!/usr/bin/env bash
+# Run one crawl container per registry, so the sources stop queueing behind each other.
+#
+# Each registry answers from its own hosts, so crawling them serially spends most of
+# the wall clock waiting on one of them.  Every container gets its own state directory
+# — a shared one would have four writers racing over a single cursor file — and
+# `merge` folds the per-source states back into one publishable tree.
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+IMAGE="${IMAGE:-global-executables-crawl:local}"
+GO_IMAGE="${GO_IMAGE:-global-executables-go-crawler:local}"
+BASE="${BASE:-${HOME}/.ge-crawl}"
+# An explicitly empty value is useful when publishing checkout observations only.
+SOURCES="${SOURCES-pypi rubygems packagist nuget go}"
+# Non-registry observations are produced in the checkout by production_crawl.py.  They
+# share artifact-data as their durable source of truth even though they have no cursor
+# state or per-source crawl container.
+OBSERVATION_SOURCES="${OBSERVATION_SOURCES:-arch debian ubuntu homebrew msys2 scoop winget windows macos shell}"
+PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
+BYTE_BUDGET="${BYTE_BUDGET:-8000000000}"
+PUBLISH_MAX_ATTEMPTS="${PUBLISH_MAX_ATTEMPTS:-3}"
+# An idle run republishes only the report (last-crawl time) at most this often, in hours;
+# history and state stay untouched (docs/OPERATIONS.md "History and cache"). 0 disables it.
+export REPORT_HEARTBEAT_HOURS="${REPORT_HEARTBEAT_HOURS:-24}"
+PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
+# Sources that two writers (the Actions refresh and a local booster) may publish at the
+# same time.  They publish a delta -- only what this writer changed since the snapshot it
+# last published -- instead of replacing the whole source (docs/OPERATIONS.md "Local booster").
+DELTA_SOURCES="${DELTA_SOURCES-pypi}"
+# BOOSTER=1: this machine is a booster.  It publishes rows and per-package state of the
+# packages it crawled, never cursors, the change feed, the catalogue or the report.
+BOOSTER="${BOOSTER:-0}"
+# Extra arguments for the Go crawler of `start` (e.g. --continuous --rotation-include ...).
+CRAWL_EXTRA_ARGS="${CRAWL_EXTRA_ARGS:-}"
+
+is_delta_source() {
+  case " ${DELTA_SOURCES} " in *" $1 "*) return 0 ;; esac
+  return 1
+}
+
+# The base is the state and rows as last published (or seeded): the next delta is whatever
+# this writer changed since.
+capture_base() {
+  local dir="$1" source="$2"
+  is_delta_source "${source}" || return 0
+  rm -rf "${dir}/.base"
+  mkdir -p "${dir}/.base"
+  [ -d "${dir}/data/production/registry-state" ] && cp -a "${dir}/data/production/registry-state" "${dir}/.base/registry-state"
+  [ -f "${dir}/data/production/intermediate/${source}.jsonl" ] && \
+    cp "${dir}/data/production/intermediate/${source}.jsonl" "${dir}/.base/rows.jsonl"
+  # The schedule cache tells which packages were settled since the base (a newer check),
+  # so the publish can clear their failure entries (docs/OPERATIONS.md "Retry ownership").
+  [ -f "${dir}/data/production/cache/${source}.cache.gz" ] && \
+    cp "${dir}/data/production/cache/${source}.cache.gz" "${dir}/.base/cache.gz"
+  return 0
+}
+
+if [ "${NO_CONTAINER:-0}" = 1 ]; then
+  RUNTIME=""  # prepare state only; the caller runs the crawler itself (tools/local_booster.sh native)
+elif [ -n "${CONTAINER_RUNTIME:-}" ]; then
+  RUNTIME="${CONTAINER_RUNTIME}"
+elif command -v podman >/dev/null 2>&1; then
+  RUNTIME=podman
+elif command -v docker >/dev/null 2>&1; then
+  RUNTIME=docker
+else
+  RUNTIME=""
+fi
+
+# Only the commands that run or inspect containers need a runtime. seed, merge and publish
+# are git and Python only, so a native booster (no Docker/Podman) can publish.
+require_runtime() {
+  if [ -z "${RUNTIME}" ]; then
+    echo "Podman or Docker is required." >&2
+    exit 1
+  fi
+}
+
+# Catalogs are per source, so each container carries only the one it reads.
+catalog_for() {
+  case "$1" in
+    pypi) echo "pypi-projects.txt pypi-projects.txt.gz" ;;
+    rubygems) echo "rubygems-names.txt rubygems-names.txt.gz" ;;
+    packagist) echo "packagist-packages.txt packagist-packages.txt.gz" ;;
+    nuget) echo "nuget-tools.txt nuget-tools.txt.gz" ;;
+    conan) echo "conan-recipes.txt conan-recipes.txt.gz" ;;
+    npm) echo "npm-critical-packages.txt" ;;
+    # Go's live catalogue is appended page by page so an interrupted sweep resumes, so
+    # it has no gzip twin locally: one left beside it goes stale the moment the sweep
+    # continues. The Git transport representation is sharded separately at publish time.
+    go) echo "go-modules.txt go-modules.cursor.json" ;;
+    *) echo "" ;;
+  esac
+}
+
+guard_npm_owner() {
+  if [ "${ALLOW_CI_OWNED_NPM:-0}" != 1 ]; then
+    case " ${SOURCES} " in
+      *" npm "*) echo "npm is CI-owned; set ALLOW_CI_OWNED_NPM=1 only for an explicit takeover" >&2; exit 2 ;;
+    esac
+  fi
+}
+
+# `start` slices each container's state out of ${BASE}.  On a machine that has never run
+# a crawl that file does not exist, so every source would begin at cursor zero and
+# re-crawl what the branch already records.  Seeding is therefore part of starting.
+seed() {
+  cd "${ROOT_DIR}"
+  mkdir -p "${BASE}/data/production/intermediate" "${BASE}/reports"
+  git fetch --quiet --depth=1 origin artifact-data
+  python3 "${ROOT_DIR}/tools/registry_state.py" restore --require --repo "${ROOT_DIR}" \
+    --ref origin/artifact-data --state "${BASE}/data/production/registry-state"
+  for source in ${SOURCES}; do
+    for name in $(catalog_for "${source}"); do
+      if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
+         git cat-file -e "origin/artifact-data:data/production/transport/go-modules/manifest.json" 2>/dev/null; then
+        rm -rf "${BASE}/data/production/transport/go-modules"
+        git archive origin/artifact-data data/production/transport/go-modules \
+          | tar -x -C "${BASE}"
+        python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
+          --input-dir "${BASE}/data/production/transport/go-modules" \
+          --output "${BASE}/data/production/go-modules.txt"
+        rm -rf "${BASE}/data/production/transport/go-modules"
+      elif git cat-file -e "origin/artifact-data:data/production/${name}" 2>/dev/null; then
+        git show "origin/artifact-data:data/production/${name}" > "${BASE}/data/production/${name}"
+      elif [ -f "${ROOT_DIR}/data/production/${name}" ]; then
+        cp "${ROOT_DIR}/data/production/${name}" "${BASE}/data/production/${name}"
+      fi
+    done
+    local rows="data/production/intermediate/${source}.jsonl"
+    local transport="data/production/transport/${source}-observations"
+    if git cat-file -e "origin/artifact-data:${transport}/manifest.json" 2>/dev/null; then
+      rm -rf "${BASE}/${transport}"
+      git archive origin/artifact-data "${transport}" \
+        | tar -x -C "${BASE}"
+      python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
+        --input-dir "${BASE}/${transport}" \
+        --output "${BASE}/${rows}"
+      rm -rf "${BASE}/${transport}"
+    elif git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
+      git show "origin/artifact-data:${rows}" > "${BASE}/${rows}"
+    fi
+  done
+  mkdir -p "${ROOT_DIR}/data/production/intermediate"
+  for source in ${OBSERVATION_SOURCES}; do
+    local rows="data/production/intermediate/${source}.jsonl"
+    if [ ! -f "${ROOT_DIR}/${rows}" ] && git cat-file -e "origin/artifact-data:${rows}" 2>/dev/null; then
+      git show "origin/artifact-data:${rows}" > "${ROOT_DIR}/${rows}"
+    fi
+  done
+  # A run that crawls one source in this very directory (the Actions refresh) publishes
+  # a delta against what it was seeded with.
+  set -- ${SOURCES}
+  if [ "$#" -eq 1 ]; then capture_base "${BASE}" "$1"; fi
+  # Report from the seeded base: the per-source directories `status` reads do not exist
+  # until `start` slices them, so asking it here answers "cursor=None" for everything.
+  echo "seeded ${BASE} from origin/artifact-data"
+  python3 - "${ROOT_DIR}" "${BASE}" "${SOURCES}" <<'PY'
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
+from global_executables.registry_state import load_state
+base, sources = pathlib.Path(sys.argv[2]), sys.argv[3].split()
+state = load_state(base / "data/production/registry-state").get("sources", {})
+for source in sources:
+    entry = state.get(source) or {}
+    queued = next((len(v) for k, v in entry.items() if k.startswith("retry_") and isinstance(v, list)), 0)
+    rows = base / f"data/production/intermediate/{source}.jsonl"
+    counted = sum(1 for _ in rows.open()) if rows.is_file() else 0
+    print(f"  {source:10} cursor={entry.get('cursor', 0):>9,}  rows={counted:<8} "
+          f"failures={len(entry.get('failures', {})):<5} queued={queued}")
+PY
+}
+
+start() {
+  cd "${ROOT_DIR}"
+  [ "${NO_CONTAINER:-0}" = 1 ] || require_runtime
+  guard_npm_owner
+  if ! python3 "${ROOT_DIR}/tools/registry_state.py" exists --state "${BASE}/data/production/registry-state"; then
+    echo "no state at ${BASE}; seeding from origin/artifact-data first"
+    seed
+  fi
+  local needs_python=0
+  for source in ${SOURCES}; do
+    case "${source}" in
+      go|npm|pypi|rubygems|packagist) ;;
+      *) needs_python=1 ;;
+    esac
+  done
+  if [ "${needs_python}" = 1 ] && [ "${NO_CONTAINER:-0}" != 1 ]; then
+    "${RUNTIME}" build --file Dockerfile.crawl --tag "${IMAGE}" . >/dev/null
+  fi
+  case " ${SOURCES} " in
+    *" go "*|*" npm "*|*" pypi "*|*" rubygems "*|*" packagist "*)
+      [ "${NO_CONTAINER:-0}" = 1 ] || CONTAINER_RUNTIME="${RUNTIME}" tools/go_image.sh runtime "${GO_IMAGE}" >/dev/null ;;
+  esac
+  for source in ${SOURCES}; do
+    local dir="${BASE}-${source}"
+    mkdir -p "${dir}/data/production/intermediate" "${dir}/reports"
+    # Split this source's slice out of the combined state rather than re-seeding it.
+    python3 - "${ROOT_DIR}" "$dir" "$source" "$BASE" <<'PY'
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
+from global_executables.registry_state import load_state, save_state, state_exists
+directory, source = pathlib.Path(sys.argv[2]), sys.argv[3]
+target = directory / "data/production/registry-state"
+if state_exists(target):
+    raise SystemExit(0)
+# Read the base this run was told to use; hardcoding the default silently ignored BASE.
+state = load_state(pathlib.Path(sys.argv[4]) / "data/production/registry-state")
+save_state(target, {"version": 1, "sources": {source: state.get("sources", {}).get(source, {})}})
+PY
+    for name in $(catalog_for "${source}"); do
+      if [ -f "${BASE}/data/production/${name}" ] && [ ! -f "${dir}/data/production/${name}" ]; then
+        cp "${BASE}/data/production/${name}" "${dir}/data/production/${name}"
+      fi
+    done
+    if [ -f "${BASE}/data/production/intermediate/${source}.jsonl" ] && \
+       [ ! -f "${dir}/data/production/intermediate/${source}.jsonl" ]; then
+      cp "${BASE}/data/production/intermediate/${source}.jsonl" "${dir}/data/production/intermediate/${source}.jsonl"
+    fi
+    [ -d "${dir}/.base" ] || capture_base "${dir}" "${source}"
+    if [ "${NO_CONTAINER:-0}" = 1 ]; then
+      echo "prepared ${dir}"
+      continue
+    fi
+    "${RUNTIME}" rm -f "ge-${source}" >/dev/null 2>&1 || true
+    case "${source}" in
+      go|npm|pypi|rubygems|packagist)
+        # shellcheck disable=SC2086  # CRAWL_EXTRA_ARGS is a word list by design
+        "${RUNTIME}" run --detach --init --name "ge-${source}" --restart on-failure:5 \
+          ${GE_USER_AGENT:+-e GE_USER_AGENT} -v "${dir}:/state" "${GO_IMAGE}" crawl --source "${source}" --passes 0 \
+          --package-budget "${PACKAGE_BUDGET}" --byte-budget "${BYTE_BUDGET}" ${CRAWL_EXTRA_ARGS} >/dev/null
+        ;;
+      *)
+        "${RUNTIME}" run --detach --rm --init --name "ge-${source}" -v "${dir}:/state" \
+          -e "SOURCES=${source}" -e "PACKAGE_BUDGET=${PACKAGE_BUDGET}" \
+          -e "BYTE_BUDGET=${BYTE_BUDGET}" -e "PASSES=0" "${IMAGE}" >/dev/null
+        ;;
+    esac
+    echo "started ge-${source} against ${dir}"
+  done
+}
+
+status() {
+  require_runtime
+  for source in ${SOURCES}; do
+    local dir="${BASE}-${source}"
+    printf '%-10s %-24s ' "${source}" "$("${RUNTIME}" ps --filter "name=ge-${source}" --format '{{.Status}}' || echo 'not running')"
+    python3 - "${ROOT_DIR}" "$dir" "$source" <<'PY'
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
+from global_executables.registry_state import load_state
+state = load_state(pathlib.Path(sys.argv[2]) / "data/production/registry-state")
+source = state.get("sources", {}).get(sys.argv[3], {})
+size, cursor = source.get("catalog_size"), source.get("cursor")
+print(f"{cursor:,}/{size:,}" if isinstance(size, int) and isinstance(cursor, int) else f"cursor={cursor}")
+PY
+  done
+}
+
+merge() {
+  local out="${BASE}"
+  mkdir -p "${out}/data/production/intermediate"
+  local slices=()
+  for source in ${SOURCES}; do
+    slices+=(--from "${BASE}-${source}/data/production/registry-state")
+  done
+  python3 "${ROOT_DIR}/tools/registry_state.py" merge-sources \
+    --into "${out}/data/production/registry-state" ${slices[@]+"${slices[@]}"}
+  for source in ${SOURCES}; do
+    local dir="${BASE}-${source}"
+    for name in $(catalog_for "${source}"); do
+      [ -f "${dir}/data/production/${name}" ] && cp "${dir}/data/production/${name}" "${out}/data/production/${name}"
+    done
+    if [ -f "${dir}/data/production/intermediate/${source}.jsonl" ]; then
+      cp "${dir}/data/production/intermediate/${source}.jsonl" "${out}/data/production/intermediate/${source}.jsonl"
+      printf '  %-10s %s rows\n' "${source}" "$(wc -l < "${dir}/data/production/intermediate/${source}.jsonl" | tr -d ' ')"
+    fi
+  done
+}
+
+# Publish only the sources this machine owns.  CI writes crates.io to the same branch,
+# so replacing the whole state would overwrite whichever writer published second — the
+# mistake that nearly rolled Go's catalog back fifteen months.
+publish_snapshot() (
+  guard_npm_owner
+  local worktree
+  worktree=$(mktemp -d /tmp/ge-artifact-publish.XXXXXX)
+  rmdir "${worktree}"
+  local attempt="${PUBLISH_ATTEMPT:-1}"
+  local push_status=0
+  trap 'git worktree remove "${worktree}" --force >/dev/null 2>&1 || true; rm -rf "${worktree}"' EXIT
+  cd "${ROOT_DIR}"
+  git fetch --quiet --depth=1 origin artifact-data
+  git worktree prune
+  git worktree add --quiet "${worktree}" origin/artifact-data
+  mkdir -p "${worktree}/data/production/intermediate" "${worktree}/reports"
+  for source in ${SOURCES}; do
+    local dir="${BASE}-${source}"
+    local state="${dir}/data/production/registry-state"
+    local rows="data/production/intermediate/${source}.jsonl"
+    local transport="data/production/transport/${source}-observations"
+    local delta=0
+    python3 "${ROOT_DIR}/tools/registry_state.py" exists --state "${state}" || continue
+    local merge_args=()
+    local local_rows="${dir}/${rows}"
+    if is_delta_source "${source}"; then
+      delta=1
+      # Work from a frozen copy: a crawler container keeps writing the live files.
+      rm -rf "${dir}/.snap"
+      mkdir -p "${dir}/.snap"
+      cp -a "${state}" "${dir}/.snap/registry-state"
+      [ -f "${dir}/${rows}" ] && cp "${dir}/${rows}" "${dir}/.snap/rows.jsonl"
+      [ -f "${dir}/data/production/cache/${source}.cache.gz" ] && \
+        cp "${dir}/data/production/cache/${source}.cache.gz" "${dir}/.snap/cache.gz"
+      state="${dir}/.snap/registry-state"
+      local_rows="${dir}/.snap/rows.jsonl"
+      merge_args=(--delta-base-state "${dir}/.base/registry-state")
+      [ -f "${dir}/.snap/cache.gz" ] && merge_args+=(--local-cache "${dir}/.snap/cache.gz" --base-cache "${dir}/.base/cache.gz")
+      if [ "${BOOSTER}" = 1 ]; then
+        merge_args+=(--no-scalars)
+        # A booster clears only the failures of packages it owns (its catalogue, its buckets);
+        # the rest belong to the feed reader (docs/OPERATIONS.md "Retry ownership").
+        if [ -f "${dir}/.snap/cache.gz" ]; then
+          local owned_catalog
+          owned_catalog="$(catalog_for "${source}")"
+          merge_args+=(--owned-catalog "${dir}/data/production/${owned_catalog%% *}"
+                       --owned-ranges "${BOOSTER_RANGES:-0-255}")
+        fi
+      fi
+    fi
+    # A booster publishes no report: the Actions refresh owns it.
+    if [ "${BOOSTER}" != 1 ]; then
+      merge_args+=(--published-report "${worktree}/reports/registry-artifact-crawl.json"
+                   --local-report "${dir}/reports/registry-artifact-crawl.json")
+    fi
+    if python3 "${ROOT_DIR}/tools/merge_registry_publication.py" \
+        --source "${source}" \
+        --published-state "${worktree}/data/production/registry-state" \
+        --local-state "${state}" ${merge_args[@]+"${merge_args[@]}"}; then
+      :
+    else
+      local merge_status=$?
+      if [ "${merge_status}" -eq 3 ]; then
+        continue
+      fi
+      return "${merge_status}"
+    fi
+    if [ "${BOOSTER}" != 1 ]; then
+      for name in $(catalog_for "${source}"); do
+        if [ "${source}" = go ] && [ "${name}" = go-modules.txt ] && \
+           [ -f "${dir}/data/production/${name}" ]; then
+          python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
+            --input "${dir}/data/production/${name}" \
+            --output-dir "${worktree}/data/production/transport/go-modules"
+          rm -f "${worktree}/data/production/go-modules.txt"
+        elif [ -f "${dir}/data/production/${name}" ]; then
+          cp "${dir}/data/production/${name}" "${worktree}/data/production/${name}"
+        fi
+      done
+    fi
+    if [ "${source}" = npm ] && \
+       [ -f "${dir}/data/production/npm-critical-packages.txt" ]; then
+      rm -f "${worktree}/data/production/npm-packages.txt" \
+        "${worktree}/data/production/npm-packages.txt.gz"
+    fi
+    if [ "${delta}" = 1 ] && [ -f "${local_rows}" ]; then
+      # Rows of the packages this writer changed replace theirs in the published rows; every
+      # other package keeps what the other writer published.
+      local published_rows="${dir}/.snap/published.jsonl"
+      : > "${published_rows}"
+      if [ -f "${worktree}/${transport}/manifest.json" ]; then
+        python3 "${ROOT_DIR}/tools/transport_shards.py" unpack \
+          --input-dir "${worktree}/${transport}" --output "${published_rows}"
+      elif [ -f "${worktree}/${rows}" ]; then
+        cp "${worktree}/${rows}" "${published_rows}"
+      fi
+      python3 "${ROOT_DIR}/tools/booster.py" rows-delta --published "${published_rows}" \
+        --local "${local_rows}" --base "${dir}/.base/rows.jsonl" --output "${dir}/.snap/merged.jsonl"
+      python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
+        --input "${dir}/.snap/merged.jsonl" --output-dir "${worktree}/${transport}"
+      rm -f "${worktree}/${rows}"
+    elif [ -f "${dir}/${rows}" ]; then
+      python3 "${ROOT_DIR}/tools/transport_shards.py" pack \
+        --input "${dir}/${rows}" \
+        --output-dir "${worktree}/${transport}"
+      rm -f "${worktree}/${rows}"
+    fi
+  done
+  for source in ${OBSERVATION_SOURCES}; do
+    local rows="data/production/intermediate/${source}.jsonl"
+    local observed="${ROOT_DIR}/${rows}"
+    local target="${worktree}/${rows}"
+    if [ -f "${observed}" ]; then
+      # Moving package indexes are evidence over time: merge by provider identity so
+      # a newly observed version wins without deleting a command that disappeared.
+      # Packages a recipe snapshot just re-parsed are replaced, not merged.
+      python3 "${ROOT_DIR}/tools/merge_observations.py" --observed "${observed}" --target "${target}"
+    fi
+  done
+  # A snapshot collector advances no cursor, so it has nothing to merge into the
+  # registry report, but its run still has to be visible on the published page.
+  if [ -n "${OBSERVATION_REPORT:-}" ] && [ -f "${ROOT_DIR}/${OBSERVATION_REPORT}" ]; then
+    mkdir -p "${worktree}/$(dirname "${OBSERVATION_REPORT}")"
+    cp "${ROOT_DIR}/${OBSERVATION_REPORT}" "${worktree}/${OBSERVATION_REPORT}"
+    git -C "${worktree}" add -f "${OBSERVATION_REPORT}"
+  fi
+  git -C "${worktree}" add -f data/production
+  if [ -f "${worktree}/reports/registry-artifact-crawl.json" ]; then
+    git -C "${worktree}" add -f reports/registry-artifact-crawl.json
+  fi
+  if git -C "${worktree}" diff --cached --quiet; then
+    echo "nothing to publish"
+  else
+    local observations_changed=0
+    if ! git -C "${worktree}" diff --cached --quiet -- \
+      data/production/intermediate ':(glob)data/production/transport/*-observations/**'; then
+      observations_changed=1
+    fi
+    local message="Record crawl data"
+    [ -n "${SOURCES}" ] && message="${message}; registries: ${SOURCES}"
+    [ -n "${OBSERVATION_SOURCES}" ] && message="${message}; observations: ${OBSERVATION_SOURCES}"
+    git -C "${worktree}" commit --quiet -m "${message}"
+    if git -C "${worktree}" push --quiet origin HEAD:artifact-data; then
+      echo "published"
+      [ "${observations_changed}" = 1 ] && echo "observations changed"
+    else
+      push_status=$?
+    fi
+  fi
+  if [ "${push_status}" -eq 0 ]; then
+    # What was just published is the new base for the next delta.
+    for source in ${SOURCES}; do
+      local snap="${BASE}-${source}/.snap"
+      if [ -d "${snap}" ]; then
+        rm -rf "${BASE}-${source}/.base"
+        mkdir -p "${BASE}-${source}/.base"
+        [ -d "${snap}/registry-state" ] && mv "${snap}/registry-state" "${BASE}-${source}/.base/registry-state"
+        [ -f "${snap}/rows.jsonl" ] && mv "${snap}/rows.jsonl" "${BASE}-${source}/.base/rows.jsonl"
+        [ -f "${snap}/cache.gz" ] && mv "${snap}/cache.gz" "${BASE}-${source}/.base/cache.gz"
+        rm -rf "${snap}"
+      fi
+    done
+  fi
+  if [ "${push_status}" -ne 0 ]; then
+    if [ "${attempt}" -ge "${PUBLISH_MAX_ATTEMPTS}" ]; then
+      echo "artifact-data publish failed after ${attempt} attempts" >&2
+      return "${push_status}"
+    fi
+    echo "artifact-data advanced concurrently; rebuilding from the latest branch (attempt $((attempt + 1))/${PUBLISH_MAX_ATTEMPTS})" >&2
+    sleep "$((attempt * 5))"
+    PUBLISH_ATTEMPT=$((attempt + 1)) publish_snapshot
+  fi
+)
+
+publish() {
+  guard_npm_owner
+  local source status=0 publish_status
+  for source in ${SOURCES}; do
+    if SOURCES="${source}" OBSERVATION_SOURCES="" publish_snapshot; then
+      :
+    else
+      publish_status=$?
+      status="${publish_status}"
+      echo "${source} publication failed; continuing with the remaining sources" >&2
+    fi
+  done
+  if [ -n "${OBSERVATION_SOURCES}" ]; then
+    if SOURCES="" publish_snapshot; then
+      :
+    else
+      status=$?
+    fi
+  fi
+  return "${status}"
+}
+
+# The manual command and the long-running supervisor share BASE. Serialise the entire
+# publication so both writers do not publish the same snapshots concurrently.
+publish_locked() (
+  if ! flock -n 9; then
+    echo "publication already in progress for ${BASE}; skipping"
+    return 0
+  fi
+  publish
+) 9>"${PUBLISH_LOCK}"
+
+# Publishing by hand means the crawl's progress lives only on this machine until
+# someone remembers.  `watch` keeps publishing while the containers run, so stopping
+# the session strands nothing.
+watch() {
+  require_runtime
+  guard_npm_owner
+  local interval="${PUBLISH_INTERVAL:-1800}"
+  while :; do
+    sleep "${interval}"
+    if ! "${RUNTIME}" ps --format '{{.Names}}' | grep -q '^ge-'; then
+      echo "$(date -u +%FT%TZ) no crawl containers left; stopping the publisher"
+      break
+    fi
+    printf '%s ' "$(date -u +%FT%TZ)"
+    publish_locked 2>&1 | grep -vE '^remote:' | tr '\n' ' '
+    echo
+  done
+}
+
+case "${1:-start}" in
+  start) start ;;
+  seed) seed ;;
+  status) status ;;
+  merge) merge ;;
+  publish) publish_locked ;;
+  publish_unlocked) publish ;;
+  watch) watch ;;
+  stop) require_runtime; for source in ${SOURCES}; do "${RUNTIME}" stop -t 120 "ge-${source}" >/dev/null 2>&1 && echo "stopped ge-${source}"; done ;;
+  *) echo "usage: $0 {seed|start|status|merge|publish|watch|stop}" >&2; exit 2 ;;
+esac

@@ -1,0 +1,422 @@
+#!/usr/bin/env bash
+# Crawl one registry's backlog from your own machine, in parallel with the Actions refresh.
+#
+#   CONTACT=you@example.org tools/local_booster.sh pypi run
+#
+# What it does (docs/OPERATIONS.md "Local booster"):
+#   1. leases buckets of the catalogue on artifact-data, so the Actions refresh leaves their
+#      rotation to you while the lease heartbeat is alive (a stopped machine simply expires);
+#   2. seeds a local working directory from artifact-data (first run only) and starts the Go
+#      crawler on those buckets only, without the change feed, politely paced;
+#   3. every PUBLISH_INTERVAL seconds publishes what it found as a *delta* (only the packages
+#      you changed) and renews the lease; on a signal it stops, publishes once more and
+#      releases the lease.
+# The schedule cache lives with the working directory and survives restarts.
+#
+# Commands: run | status | publish | stop | abort | release | unit   (default: run)
+# Settings (environment):
+#   CONTACT             required: an e-mail address or URL put in the User-Agent
+#   BOOSTER_ID          lease name, default: this machine's host name
+#   BOOSTER_RANGES      buckets to own, default 0-255 (everything); BOOSTER_SLICE=i/n takes the
+#                       i-th of n equal slices instead (extra machines: 0/2 and 1/2)
+#   WORKERS             concurrent inspections, default 8
+#   MAX_BYTES_PER_SECOND  download cap, default 5000000 (5 MB/s); 0 = none
+#   PUBLISH_INTERVAL    seconds between publications, default 3600
+#   PAUSE               seconds between passes, default 30 (+-30 % jitter)
+#   PACKAGE_BUDGET      packages per pass, default 3000
+#   LEASE_TTL_HOURS     how long a heartbeat keeps the lease alive, default 12
+#   HEARTBEAT_INTERVAL  seconds between lease heartbeats, default 3600; a heartbeat commits only
+#                       once the last one is older than LEASE_MIN_AGE hours (default TTL/3)
+#   STOP_TIMEOUT        seconds to wait for the crawler to exit on stop, default 300
+#   WATCH_INTERVAL      seconds between supervisor checks of the crawler, default 60
+#   STALL_TIMEOUT       native: restart a crawler without progress for this long, default 1800
+#   CRASH_LIMIT, CRASH_WINDOW  more than CRASH_LIMIT exits/stalls in CRASH_WINDOW seconds
+#                       (default 3 in 1800) hands the lease back to Actions
+#   CRAWLER_BIN         native: use this crawler binary instead of building one
+#   BASE                working directory prefix, default ~/.ge-crawl
+#   MODE                docker (default; or podman) or native (needs Go; no container)
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SOURCE="${1:-pypi}"
+COMMAND="${2:-run}"
+case "${SOURCE}" in pypi|rubygems|packagist) ;; *) echo "usage: $0 {pypi|rubygems|packagist} [run|status|publish|stop|release|unit]" >&2; exit 2 ;; esac
+
+BASE="${BASE:-${HOME}/.ge-crawl}"
+BOOSTER_ID="${BOOSTER_ID:-$(hostname -s 2>/dev/null || hostname)}"
+if [ -n "${BOOSTER_SLICE:-}" ]; then
+  BOOSTER_RANGES="$(PYTHONPATH="${ROOT_DIR}/src" python3 -c "
+import sys
+from global_executables.booster import slice_ranges
+index, _, count = sys.argv[1].partition('/')
+print(slice_ranges(int(index), int(count)))" "${BOOSTER_SLICE}")"
+fi
+BOOSTER_RANGES="${BOOSTER_RANGES:-0-255}"
+WORKERS="${WORKERS:-8}"
+MAX_BYTES_PER_SECOND="${MAX_BYTES_PER_SECOND:-5000000}"
+PUBLISH_INTERVAL="${PUBLISH_INTERVAL:-3600}"
+PAUSE="${PAUSE:-30}"
+PACKAGE_BUDGET="${PACKAGE_BUDGET:-3000}"
+MODE="${MODE:-docker}"
+LEASE_TTL_HOURS="${LEASE_TTL_HOURS:-12}"
+LEASE_MIN_AGE="${LEASE_MIN_AGE:-$(python3 -c "print(${LEASE_TTL_HOURS} / 3)")}"
+DIR="${BASE}-${SOURCE}"
+NATIVE_PID="${DIR}/booster.pid"
+SUPERVISOR_PID="${DIR}/supervisor.pid"
+STOP_TIMEOUT="${STOP_TIMEOUT:-300}"
+# A crawler that dies is restarted in place (native mode) up to CRASH_LIMIT times within
+# CRASH_WINDOW seconds; beyond that the supervisor publishes what was exported, releases
+# the lease so the Actions refresh takes the buckets back at once, and exits 1.
+CRASH_LIMIT="${CRASH_LIMIT:-3}"
+CRASH_WINDOW="${CRASH_WINDOW:-1800}"
+ABORT_FILE="${DIR}/abort-requested"
+# Progress watchdog (native mode): the crawler touches PROGRESS_FILE whenever it commits a
+# package the registry answered for, and after every pass. If it has not moved for
+# STALL_TIMEOUT seconds of supervisor time, the crawler gets SIGQUIT (Go prints every
+# goroutine to booster.log and exits), KILL after STOP_TIMEOUT, and is restarted; a stall
+# counts towards CRASH_LIMIT like an exit. The supervisor checks every WATCH_INTERVAL seconds.
+PROGRESS_FILE="${DIR}/progress"
+STALL_TIMEOUT="${STALL_TIMEOUT:-1800}"
+# Heartbeat: the lease is renewed every HEARTBEAT_INTERVAL seconds, but a renewal only commits
+# (one small file, no data) once the heartbeat is older than LEASE_MIN_AGE hours (default a
+# third of the TTL), so the TTL does not have to follow PUBLISH_INTERVAL.
+HEARTBEAT_INTERVAL="${HEARTBEAT_INTERVAL:-3600}"
+WATCH_INTERVAL="${WATCH_INTERVAL:-${CRASH_CHECK:-60}}"
+for limit in "${HEARTBEAT_INTERVAL}" "${PUBLISH_INTERVAL}"; do
+  [ "${WATCH_INTERVAL}" -gt "${limit}" ] && WATCH_INTERVAL="${limit}"
+done
+
+[ "${MODE}" = native ] && export NO_CONTAINER=1
+export BASE BOOSTER=1 BOOSTER_RANGES SOURCES="${SOURCE}" OBSERVATION_SOURCES=" " DELTA_SOURCES="${DELTA_SOURCES:-${SOURCE}}"
+export PACKAGE_BUDGET PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-artifact-publish.lock}"
+
+say() { printf '%s %s\n' "$(date -u +%FT%TZ)" "$*"; }
+lease() { python3 "${ROOT_DIR}/tools/booster.py" "$1" --source "${SOURCE}" --id "${BOOSTER_ID}" --ranges "${BOOSTER_RANGES}" --ttl-hours "${LEASE_TTL_HOURS}" "${@:2}"; }
+
+user_agent() {
+  [ -n "${CONTACT:-}" ] || { echo "set CONTACT to an e-mail address or URL: it goes into the User-Agent so the registry can reach you" >&2; exit 2; }
+  echo "global-executables-booster/1 (+https://github.com/asopitech-labs/global-executables; ${CONTACT})"
+}
+
+crawler_args() {
+  echo "--continuous --rotation-include ${BOOSTER_RANGES} --no-feed --workers ${WORKERS} \
+--max-bytes-per-second ${MAX_BYTES_PER_SECOND} --pause ${PAUSE}s --pause-jitter 0.3 --verify-store"
+  [ "${MODE}" != native ] || echo " --progress-file ${PROGRESS_FILE}"
+}
+
+# The progress file's modification time (empty while it does not exist).
+progress_mark() { stat -c %Y "${PROGRESS_FILE}" 2>/dev/null || stat -f %m "${PROGRESS_FILE}" 2>/dev/null || true; }
+
+# SIGQUIT makes a Go crawler print every goroutine and exit; KILL if it is still there.
+dump_and_kill_crawler() {
+  local pid waited=0
+  pid="$(crawler_pid || true)"
+  [ -n "${pid}" ] || return 0
+  kill -QUIT "${pid}" 2>/dev/null || true
+  while kill -0 "${pid}" 2>/dev/null && crawler_pid >/dev/null && [ "${waited}" -lt "${STOP_TIMEOUT}" ]; do
+    sleep 1
+    waited=$((waited + 1))
+  done
+  crawler_pid >/dev/null && { say "crawler ${pid} survived SIGQUIT; killing it"; kill -KILL "${pid}" 2>/dev/null || true; sleep 1; }
+  rm -f "${NATIVE_PID}"
+}
+
+# The native crawler's PID. It is the PID of the crawler process itself (not of a subshell
+# that waits for it): the file is written by the shell that started it with `$!` of a
+# simple background command, so TERM reaches the crawler and `kill -0` tells the truth.
+# A stale file (the process died, or the PID was reused by something else) is ignored and
+# removed: only a live process whose command line names the crawler counts.
+crawler_pid() {
+  local pid
+  if [ -f "${NATIVE_PID}" ]; then
+    pid="$(cat "${NATIVE_PID}" 2>/dev/null || true)"
+    if [ -n "${pid}" ] && kill -0 "${pid}" 2>/dev/null && ps -p "${pid}" -o command= 2>/dev/null | grep -q 'crawl --source'; then
+      echo "${pid}"
+      return 0
+    fi
+    rm -f "${NATIVE_PID}"
+  fi
+  return 1
+}
+
+# Any crawler for this source working in this directory, with or without a PID file (one
+# started by an older version of this script left none).
+orphan_pids() {
+  pgrep -f "crawl --source ${SOURCE} .*--rotation-include" 2>/dev/null | while read -r pid; do
+    [ "$(readlink "/proc/${pid}/cwd" 2>/dev/null || true)" = "${DIR}" ] && echo "${pid}"
+  done
+  return 0
+}
+
+running() {
+  if [ "${MODE}" = native ]; then
+    crawler_pid >/dev/null
+  else
+    local runtime="${CONTAINER_RUNTIME:-$(command -v podman >/dev/null 2>&1 && echo podman || echo docker)}"
+    "${runtime}" ps --format '{{.Names}}' | grep -qx "ge-${SOURCE}"
+  fi
+}
+
+refuse_double_start() {
+  if running || [ -n "$(orphan_pids)" ]; then
+    echo "a ${SOURCE} booster crawler is already running for ${DIR}; stop it first (tools/local_booster.sh ${SOURCE} stop)" >&2
+    exit 3
+  fi
+  if [ -f "${SUPERVISOR_PID}" ]; then
+    local other
+    other="$(cat "${SUPERVISOR_PID}" 2>/dev/null || true)"
+    if [ -n "${other}" ] && [ "${other}" != "$$" ] && kill -0 "${other}" 2>/dev/null \
+       && ps -p "${other}" -o command= 2>/dev/null | grep -q 'local_booster'; then
+      echo "another booster supervisor (pid ${other}) is already running for ${DIR}" >&2
+      exit 3
+    fi
+  fi
+}
+
+start_crawler() {
+  if [ "${MODE}" = native ]; then
+    NO_CONTAINER=1 bash "${ROOT_DIR}/tools/crawl_parallel.sh" start
+    local binary="${CRAWLER_BIN:-${BASE}-bin/go-registry-crawler}"
+    if [ -z "${CRAWLER_BIN:-}" ]; then
+      mkdir -p "$(dirname "${binary}")"
+      (cd "${ROOT_DIR}" && go build -o "${binary}" ./cmd/go-registry-crawler)
+    fi
+    cd "${DIR}"
+    # A simple background command, so $! is the crawler (nohup execs it) and not a subshell.
+    # shellcheck disable=SC2046,SC2086
+    nohup "${binary}" crawl --source "${SOURCE}" --passes 0 --package-budget "${PACKAGE_BUDGET}" \
+      $(crawler_args) >> "${DIR}/booster.log" 2>&1 &
+    CRAWLER_CHILD=$!
+    echo "${CRAWLER_CHILD}" > "${NATIVE_PID}"
+    cd "${ROOT_DIR}"
+  else
+    CRAWL_EXTRA_ARGS="$(crawler_args)" bash "${ROOT_DIR}/tools/crawl_parallel.sh" start
+  fi
+}
+
+# Stops the crawler and returns only when it has exited (TERM first: it cancels the pass and
+# saves; KILL only after STOP_TIMEOUT seconds). Returns non-zero if it is still alive.
+stop_crawler() {
+  if [ "${MODE}" = native ]; then
+    local pids pid waited=0
+    pids="$(crawler_pid || true) $(orphan_pids)"
+    for pid in ${pids}; do kill -TERM "${pid}" 2>/dev/null || true; done
+    while [ -n "$(echo "$(crawler_pid || true) $(orphan_pids)" | tr -d ' ')" ] && [ "${waited}" -lt "${STOP_TIMEOUT}" ]; do
+      sleep 1
+      waited=$((waited + 1))
+    done
+    for pid in $(crawler_pid || true) $(orphan_pids); do
+      say "crawler ${pid} ignored TERM for ${STOP_TIMEOUT}s; killing it"
+      kill -KILL "${pid}" 2>/dev/null || true
+      sleep 1
+    done
+    if [ -n "$(echo "$(crawler_pid || true) $(orphan_pids)" | tr -d ' ')" ]; then
+      echo "the crawler is still alive; not publishing over it" >&2
+      return 1
+    fi
+    [ -z "${pids// /}" ] || say "native crawler stopped"
+    rm -f "${NATIVE_PID}"
+  else
+    bash "${ROOT_DIR}/tools/crawl_parallel.sh" stop || true
+  fi
+}
+
+publish_now() {
+  if [ -n "${PUBLISH_CMD:-}" ]; then
+    bash -c "${PUBLISH_CMD}" || true
+  elif command -v flock >/dev/null 2>&1; then
+    bash "${ROOT_DIR}/tools/crawl_parallel.sh" publish 2>&1 | grep -vE '^remote:' | tr '\n' ' ' || true
+    echo
+  else
+    echo "flock is missing (macOS: brew install flock); publishing without the machine-wide lock" >&2
+    bash "${ROOT_DIR}/tools/crawl_parallel.sh" publish_unlocked 2>&1 | grep -vE '^remote:' | tr '\n' ' ' || true
+    echo
+  fi
+}
+
+# Retry ownership invariant (docs/OPERATIONS.md "Retry ownership"): every failure entry in
+# the published state must have exactly one live owner. `{"orphans": n, "duplicates": n}`.
+owners_summary() {
+  python3 "${ROOT_DIR}/tools/booster.py" owners --source "${SOURCE}" --dir "${DIR}" --summary 2>/dev/null \
+    || echo '{"orphans": null, "duplicates": null}'
+}
+
+progress_json() {
+  python3 - "${ROOT_DIR}" "${DIR}" "${SOURCE}" "$(owners_summary)" <<'PY'
+import json, pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
+from global_executables.refresh_policy import read_cache
+cache = pathlib.Path(sys.argv[2]) / "data/production/cache" / f"{sys.argv[3]}.cache.gz"
+checks, cursor, found = read_cache(cache)
+try:
+    owners = json.loads(sys.argv[4])
+except ValueError:
+    owners = {}
+print(json.dumps({"checked": len(checks), "cache": found, "orphans": owners.get("orphans"),
+                  "duplicates": owners.get("duplicates")}))
+PY
+}
+
+case "${COMMAND}" in
+  run)
+    GE_USER_AGENT="$(user_agent)"
+    export GE_USER_AGENT
+    git -C "${ROOT_DIR}" ls-remote --exit-code origin artifact-data >/dev/null \
+      || { echo "cannot reach origin/artifact-data with your git credentials" >&2; exit 1; }
+    refuse_double_start
+    say "leasing buckets ${BOOSTER_RANGES} of ${SOURCE} as ${BOOSTER_ID}"
+    lease acquire || { echo "the lease was refused: another live booster holds part of ${BOOSTER_RANGES}" >&2; exit 4; }
+    echo "$$" > "${SUPERVISOR_PID}"
+    finish() {
+      trap - INT TERM EXIT
+      if [ -f "${ABORT_FILE}" ]; then
+        # `abort`: stop without publishing and keep the lease (e.g. a damaged local store).
+        rm -f "${ABORT_FILE}"
+        say "aborting: stopping the crawler; no final publication, the lease is kept"
+        stop_crawler || true
+        rm -f "${SUPERVISOR_PID}"
+        [ "${1:-}" = signal ] && exit 0
+        return
+      fi
+      say "stopping: crawler, one last publication, lease release"
+      # Order matters: the crawler must have exited before the final publication, or the
+      # publication races with a crawler that is still writing its state.
+      if stop_crawler; then
+        publish_now
+        lease release || true
+      else
+        say "crawler still alive: no final publication, the lease stays until it expires"
+      fi
+      rm -f "${SUPERVISOR_PID}"
+      [ "${1:-}" = signal ] && exit 0
+      return 0
+    }
+    trap finish EXIT
+    trap 'finish signal' INT TERM
+    start_crawler
+    # The supervisor wakes every WATCH_INTERVAL seconds (of its own, monotonic sleep) to see
+    # whether the crawler is alive and progressing; publications and heartbeats follow the
+    # wall clock, so they are not postponed by a long sleep after the machine was suspended.
+    last_publish="$(date +%s)"
+    last_heartbeat="${last_publish}"
+    seen_progress="$(progress_mark)"
+    stale=0
+    while :; do
+      sleep "${WATCH_INTERVAL}" &
+      wait $! || true
+      exit_reason=""
+      if ! running; then
+        exit_reason="exited"
+      elif [ "${MODE}" = native ]; then
+        mark="$(progress_mark)"
+        if [ "${mark}" != "${seen_progress}" ]; then
+          seen_progress="${mark}"
+          stale=0
+        else
+          # Counted in supervisor wake-ups, not wall time: a suspended machine is not a stall.
+          stale=$((stale + WATCH_INTERVAL))
+        fi
+        if [ "${stale}" -ge "${STALL_TIMEOUT}" ]; then
+          say "no crawler progress for ${stale}s; dumping its goroutines to ${DIR}/booster.log and restarting it"
+          dump_and_kill_crawler
+          exit_reason="stalled"
+        fi
+      fi
+      if [ -n "${exit_reason}" ]; then
+        status=0
+        [ -n "${CRAWLER_CHILD:-}" ] && { wait "${CRAWLER_CHILD}" 2>/dev/null || status=$?; }
+        CRAWLER_CHILD=""
+        now="$(date +%s)"
+        crashes="$(for at in ${crashes:-} ${now}; do [ $((now - at)) -lt "${CRASH_WINDOW}" ] && echo "${at}"; done | tr '\n' ' ')"
+        count="$(echo "${crashes}" | wc -w | tr -d ' ')"
+        if [ "${MODE}" != native ] || [ "${count}" -gt "${CRASH_LIMIT}" ]; then
+          say "the crawler is not running any more (${exit_reason}, exit ${status}, ${count} in ${CRASH_WINDOW}s); handing the buckets back"
+          crash_loop=1
+          break
+        fi
+        [ "${status}" = 75 ] && say "the crawler quarantined a damaged store; restarting to rebuild it"
+        say "crawler ${exit_reason} (status ${status}); restarting it (${count}/${CRASH_LIMIT})"
+        start_crawler
+        seen_progress="$(progress_mark)"
+        stale=0
+      fi
+      now="$(date +%s)"
+      if [ "$((now - last_publish))" -ge "${PUBLISH_INTERVAL}" ]; then
+        printf '%s ' "$(date -u +%FT%TZ)"
+        publish_now
+        # One line per publish for the watchdog: a nonzero count means a failure entry
+        # nobody retries (or two writers do); `status` lists them.
+        say "retry owners: $(owners_summary)"
+        last_publish="$(date +%s)"
+        last_heartbeat="${last_publish}"
+        lease renew --progress "$(progress_json)" >/dev/null || say "lease renewal failed; will retry"
+      elif [ "$((now - last_heartbeat))" -ge "${HEARTBEAT_INTERVAL}" ]; then
+        last_heartbeat="${now}"
+        # Heartbeat only: commits nothing unless the lease is older than LEASE_MIN_AGE.
+        lease renew --min-age-hours "${LEASE_MIN_AGE}" >/dev/null || say "lease heartbeat failed; will retry"
+      fi
+    done
+    [ "${crash_loop:-0}" = 1 ] && exit 1
+    ;;
+  status)
+    running && echo "crawler: running" || echo "crawler: not running"
+    python3 "${ROOT_DIR}/tools/booster.py" show --source "${SOURCE}" || true
+    progress_json || true
+    # Every catalogue position: checked (by outcome), unavailable, failing, or not reached yet.
+    python3 "${ROOT_DIR}/tools/booster.py" coverage --source "${SOURCE}" --dir "${DIR}" || true
+    # Every published failure entry and its one owner (Actions or this booster); orphans
+    # and duplicates must be 0.
+    python3 "${ROOT_DIR}/tools/booster.py" owners --source "${SOURCE}" --dir "${DIR}" || true
+    ;;
+  publish) publish_now ;;
+  stop) stop_crawler; [ -z "${SUPERVISOR_STOP:-}" ] || true ;;
+  release) lease release ;;
+  abort)
+    # Stop the supervisor and crawler WITHOUT a final publication; the lease is kept (it
+    # expires by itself if nobody restarts the booster).
+    touch "${ABORT_FILE}"
+    other="$(cat "${SUPERVISOR_PID}" 2>/dev/null || true)"
+    if [ -n "${other}" ] && kill -0 "${other}" 2>/dev/null; then
+      kill -TERM "${other}"
+      # Wait for the supervisor to drop its pid file (a zombie still answers kill -0).
+      while [ -f "${SUPERVISOR_PID}" ] && kill -0 "${other}" 2>/dev/null; do sleep 1; done
+    else
+      rm -f "${ABORT_FILE}"
+      stop_crawler
+    fi
+    echo "aborted; lease kept"
+    ;;
+  unit)
+    cat <<UNIT
+# --- systemd (Linux, WSL2 with systemd): ~/.config/systemd/user/ge-booster-${SOURCE}.service
+[Unit]
+Description=global-executables ${SOURCE} booster
+After=network-online.target
+[Service]
+Environment=CONTACT=${CONTACT:-you@example.org} BOOSTER_ID=${BOOSTER_ID}
+ExecStart=${ROOT_DIR}/tools/local_booster.sh ${SOURCE} run
+Restart=on-failure
+RestartSec=300
+[Install]
+WantedBy=default.target
+#   systemctl --user daemon-reload && systemctl --user enable --now ge-booster-${SOURCE}
+#   loginctl enable-linger \$USER      # keep it running when you are logged out
+
+# --- launchd (macOS): ~/Library/LaunchAgents/org.global-executables.booster.${SOURCE}.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0"><dict>
+  <key>Label</key><string>org.global-executables.booster.${SOURCE}</string>
+  <key>ProgramArguments</key><array><string>${ROOT_DIR}/tools/local_booster.sh</string><string>${SOURCE}</string><string>run</string></array>
+  <key>EnvironmentVariables</key><dict><key>CONTACT</key><string>${CONTACT:-you@example.org}</string>
+    <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string></dict>
+  <key>RunAtLoad</key><true/><key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>${HOME}/.ge-crawl-${SOURCE}.log</string><key>StandardErrorPath</key><string>${HOME}/.ge-crawl-${SOURCE}.log</string>
+</dict></plist>
+#   launchctl load ~/Library/LaunchAgents/org.global-executables.booster.${SOURCE}.plist
+
+# --- cron (any): start it at boot and let the lease heartbeat tell Actions it is alive.
+#   @reboot CONTACT=${CONTACT:-you@example.org} ${ROOT_DIR}/tools/local_booster.sh ${SOURCE} run >> \$HOME/.ge-crawl-${SOURCE}.log 2>&1
+UNIT
+    ;;
+  *) echo "usage: $0 ${SOURCE} {run|status|publish|stop|release|unit}" >&2; exit 2 ;;
+esac
