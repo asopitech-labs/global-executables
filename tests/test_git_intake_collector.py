@@ -133,7 +133,7 @@ def test_crash_after_merge_before_ref_cleanup_replays_without_duplicate(tmp_path
     original = collector._git
 
     def lost_cleanup(root, *args, **kwargs):
-        if args[:2] == ("push", "origin") and str(args[2]).startswith(":refs/heads/intake/"):
+        if args[0] == "push" and str(args[-1]).startswith(":refs/heads/intake/"):
             return subprocess.CompletedProcess(args, 1, "", "simulated cleanup outage")
         return original(root, *args, **kwargs)
 
@@ -148,6 +148,57 @@ def test_crash_after_merge_before_ref_cleanup_replays_without_duplicate(tmp_path
     assert second["accepted"] == 0
     assert git(runner, "ls-remote", "--heads", "origin", reserved["branch"]) == ""
     assert git(runner, "ls-remote", "--heads", "origin", "artifact-data").split()[0] == accepted_head
+
+
+def test_cleanup_does_not_delete_ref_that_moved_after_collection(tmp_path, monkeypatch):
+    remote, runner = repository(tmp_path)
+    reserved = reserve_observation(observation(), runner)
+    from global_executables import git_intake_collector as collector
+    original = collector._git
+
+    replacement = git(runner, "rev-parse", "HEAD")
+    moved = False
+
+    def move_before_cleanup(root, *args, **kwargs):
+        nonlocal moved
+        if not moved and args[0] == "push" and str(args[-1]).startswith(":refs/heads/intake/"):
+            moved = True
+            git(remote, "update-ref", "refs/heads/" + reserved["branch"],
+                replacement, reserved["commit"])
+        return original(root, *args, **kwargs)
+
+    monkeypatch.setattr(collector, "_git", move_before_cleanup)
+    assert collector.run(runner, discovery_engine=Discovery(observation()))["accepted"] == 1
+    assert moved
+    assert git(runner, "ls-remote", "--heads", "origin", reserved["branch"]).split()[0] == replacement
+
+
+def test_oversized_proposal_is_rejected_before_reading_blob(tmp_path, monkeypatch):
+    _remote, runner = repository(tmp_path)
+    reserved = reserve_observation(observation(), runner)
+    git(runner, "fetch", "origin", reserved["branch"])
+    git(runner, "checkout", "--detach", "FETCH_HEAD")
+    path = "data/production/on-demand/intake/" + reserved["reservation_id"] + ".json"
+    payload = git(runner, "show", "HEAD:" + path)
+    (runner / path).write_text(payload + " " * 33_000)
+    git(runner, "add", path)
+    git(runner, "-c", "user.name=Fixture", "-c", "user.email=fixture@example.test",
+        "commit", "--amend", "--no-edit")
+    git(runner, "push", "--force", "origin", "HEAD:refs/heads/" + reserved["branch"])
+
+    from global_executables import git_intake_collector as collector
+    original = collector._git
+
+    def refuse_blob_read(root, *args, **kwargs):
+        if args[0] == "show" and str(args[1]).endswith(":" + path):
+            raise AssertionError("oversized proposal blob was read")
+        return original(root, *args, **kwargs)
+
+    monkeypatch.setattr(collector, "_git", refuse_blob_read)
+    assert collector.run(runner, discovery_engine=Discovery(observation()))["rejected"] == 1
+    ledger = json.loads(git(runner, "show", "origin/artifact-data:data/production/on-demand/intake-ledger/"
+                            + reserved["reservation_id"] + ".json"))
+    assert "size limit" in ledger["reason"]
 
 
 def test_moving_latest_retains_verified_previous_release_as_history(tmp_path):
