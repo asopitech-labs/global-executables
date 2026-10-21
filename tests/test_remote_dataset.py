@@ -143,13 +143,16 @@ def test_dataset_source_selection(origin, tmp_path, monkeypatch):
         open_dataset(tmp_path, tmp_path / "missing").metadata
 
 
-async def test_server_over_remote_dataset_reports_its_version_and_read_only_tools(origin, tmp_path, monkeypatch):
+async def test_server_over_remote_dataset_reports_tool_side_effects(origin, tmp_path, monkeypatch):
     monkeypatch.setattr("global_executables.mcp_server.RemoteDataset",
                         lambda url, cache_dir, offline=False: RemoteDataset(BASE, tmp_path / "cache", fetcher=origin))
     server = create_server(tmp_path / "no-checkout")
     assert server._mcp_server.version == __version__
     tools = await server.list_tools()
-    assert tools and all(tool.annotations.readOnlyHint and not tool.annotations.destructiveHint for tool in tools)
+    assert tools
+    assert all(not tool.annotations.destructiveHint for tool in tools)
+    assert {tool.name for tool in tools if not tool.annotations.readOnlyHint} == {
+        "discover_published_package"}
     schema = await server.read_resource("global-executables://schema/executable")
     assert json.loads(schema[0].content)["title"] == "Canonical executable record"
 
