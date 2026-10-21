@@ -55,7 +55,7 @@ def main(argv: list[str] | None = None) -> None:
                "--intake-repository", str(Path.cwd())]
     if version:
         command.extend(("--version", version))
-    cli = subprocess.run(command, text=True, capture_output=True, timeout=180, check=True)
+    cli = subprocess.run(command, text=True, capture_output=True, timeout=360, check=True)
     cli_result = json.loads(cli.stdout)
     mcp_result = asyncio.run(_mcp(args.ecosystem, args.package, version, cache / "mcp"))
     summaries = {"cli": _require_reservation("CLI", cli_result),

@@ -209,9 +209,15 @@ def reserve_observation(observation: dict[str, Any], repository: str | Path, *,
     except IntakeError:
         return {"status": "not_eligible"}
     identifier = proposal["id"]
+    configured_timeout = os.getenv("GLOBAL_EXECUTABLES_INTAKE_GIT_TIMEOUT")
+    if configured_timeout:
+        try:
+            timeout = int(configured_timeout)
+        except ValueError:
+            return {"status": "unavailable", "reason": "invalid Git timeout"}
     if not isinstance(remote, str) or not re.fullmatch(r"[A-Za-z0-9_.-]{1,64}", remote):
         return {"status": "unavailable", "reason": "invalid Git remote"}
-    if not isinstance(timeout, int) or not 1 <= timeout <= 60:
+    if not isinstance(timeout, int) or not 1 <= timeout <= 180:
         return {"status": "unavailable", "reason": "invalid Git timeout"}
     repository = Path(repository)
     branch = INTAKE_PREFIX + identifier
@@ -272,5 +278,8 @@ def reserve_observation(observation: dict[str, Any], repository: str | Path, *,
                     return {"status": "already_processed", "reservation_id": identifier,
                             "outcome": ledger.get("outcome"), "snapshot": ledger.get("snapshot")}
         return {"status": "unavailable", "reason": "intake ref could not be read back"}
-    except (OSError, subprocess.TimeoutExpired, RuntimeError, IntakeError):
+    except subprocess.TimeoutExpired as error:
+        operation = error.cmd[3] if isinstance(error.cmd, list) and len(error.cmd) > 3 else "operation"
+        return {"status": "unavailable", "reason": f"Git {operation} timed out"}
+    except (OSError, RuntimeError, IntakeError):
         return {"status": "unavailable", "reason": "Git intake could not be confirmed"}
