@@ -9,13 +9,13 @@
   "failure_attempts": {
     "aegis-bio": 2,
     "evo-objects": 2,
-    "subt-ai-tles": 2,
     "youngcan-wyckoff-analysis": 2
   },
   "failures": {
     "aegis-bio": "unexpected end of JSON input",
     "evo-objects": "unexpected end of JSON input",
-    "subt-ai-tles": "unexpected end of JSON input",
+    "nc1709": "context deadline exceeded",
+    "ncbiparser": "context deadline exceeded",
     "youngcan-wyckoff-analysis": "unexpected end of JSON input"
   },
   "feed_cursor": "42539835",
@@ -83,7 +83,8 @@
     "youngcan-wyckoff-analysis",
     "evo-objects",
     "aegis-bio",
-    "subt-ai-tles"
+    "nc1709",
+    "ncbiparser"
   ],
-  "snapshot_generation": 159
+  "snapshot_generation": 160
 }
