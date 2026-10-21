@@ -93,7 +93,8 @@ One Actions concurrency group serializes scheduled collector runs. A run
 fetches the latest `artifact-data` head and a bounded set of intake refs.
 It validates each branch before using it: its merge base must be an expected
 `artifact-data` ancestor; its tree delta may contain only the one correctly
-named proposal file; the JSON must match the branch ID, package identity,
+named proposal file; the JSON blob must be at most 32 KiB and match the branch
+ID, package identity,
 target, verifier, and digest constraints. A malformed or unexpected branch
 cannot alter the dictionary or run code. Its candidate SHA and rejection
 reason are recorded on `artifact-data` before the ref is removed.
@@ -127,7 +128,9 @@ records a rejection or retryable conflict and leaves unrelated providers
 untouched. An accepted branch commit becomes a parent of the merge commit,
 so Git history retains exactly which proposal was accepted. A rejected
 proposal's metadata, SHA, and reason are copied to an audit event before its
-branch is removed. Unprocessed branches are never deleted. After an accepted
+branch is removed. The cleanup push uses the processed candidate SHA as a ref
+lease; if another writer moved the ref, cleanup leaves the new tip for the next
+collector pass. Unprocessed branches are never deleted. After an accepted
 or rejected outcome is durable on `artifact-data`, branch deletion is only
 cleanup; a crash before deletion is harmless because the ledger deduplicates
 the branch on the next run.
