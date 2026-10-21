@@ -57,14 +57,15 @@ exact version. It does not contain executable code or an already-authoritative
 dictionary row. It is a request for the collector to check a claim, not a
 trusted source observation.
 
-The agent pushes the branch without force and fetches the ref to confirm the
-same commit and proposal digest before returning its reservation ID. If
-another agent created the identical branch first, the loser fetches it and
-returns the same ID only when the immutable proposal matches. A different
-payload at the same name is an integrity conflict, not an occasion to replace
-the winner. A push that succeeded while its response was lost is recovered
-by this read-back. Git operations are non-interactive, time-bounded, and have
-a bounded conflict retry; a credential prompt must not block a query.
+The agent pushes the branch without force and fetches the ref to confirm its
+commit before returning a reservation ID. If another agent created the branch
+first, the loser fetches it and compares the claim identity and artifact
+digest. Different acquisition times for the same evidence coalesce; the
+first proposal's time remains in the immutable commit. A different identity
+or evidence digest at the same name is an integrity conflict, not an occasion
+to replace the winner. A push that succeeded while its response was lost is
+recovered by this read-back. Git operations are non-interactive, time-bounded,
+and have a bounded conflict retry; a credential prompt must not block a query.
 
 Distinct proposals use distinct branches. Agents never need to merge each
 other's work or contend on one shared queue file. GitHub's ref and commit
@@ -104,7 +105,7 @@ choosing `ours` or `theirs`:
 | Conflict or duplicate | Decision |
 | --- | --- |
 | Same ID and same evidence already accepted | Reuse the prior outcome; make no duplicate provider. |
-| Same ID with different payload | Reject and record the conflicting candidate SHA. |
+| Same ID with different claim identity or artifact evidence | Reject and record the conflicting candidate SHA; a later checked time alone is a duplicate. |
 | Different releases of one package | Recheck registry-selected current release; keep older evidence as history and update the current claim only from an authoritative current check. |
 | Concurrent crawler update to another source | Rebuild the merge from the newest `artifact-data` head, retaining both source-owned observations. |
 | Non-fast-forward push after validation | Fetch the new head, re-evaluate affected claim and merge; after bounded retries leave the intake branch pending. |
