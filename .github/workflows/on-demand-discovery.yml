@@ -1,6 +1,9 @@
 name: Verify and reserve published package discovery
 
 on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/on-demand-discovery.yml]
   workflow_dispatch:
     inputs:
       ecosystem:
@@ -37,8 +40,8 @@ jobs:
       - run: pip install -e .
       - name: Verify through CLI and MCP protocol and reserve Git intake
         env:
-          ECOSYSTEM: ${{ inputs.ecosystem }}
-          PACKAGE: ${{ inputs.package }}
+          ECOSYSTEM: ${{ github.event_name == 'push' && 'pypi' || inputs.ecosystem }}
+          PACKAGE: ${{ github.event_name == 'push' && 'global-executables' || inputs.package }}
           VERSION: ${{ inputs.version }}
           GLOBAL_EXECUTABLES_INTAKE_REPOSITORY: ${{ github.workspace }}
           GLOBAL_EXECUTABLES_CACHE_DIR: ${{ runner.temp }}/global-executables-cache

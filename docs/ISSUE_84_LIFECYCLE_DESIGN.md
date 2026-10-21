@@ -16,6 +16,9 @@ split. The Actions runner uses `GITHUB_TOKEN` with `contents: write` to create
 intake refs. This token is repository-scoped, so the approved branch permission
 split additionally needs an explicit repository ruleset or separate GitHub App
 identity before the production gate can be considered complete.
+The first merge of the runner workflow starts a bounded bootstrap probe of
+the current PyPI `global-executables` release. Later package probes are
+agent-triggered `workflow_dispatch` runs.
 
 An MCP/CLI operation on that runner verifies a **known published package**
 from authoritative registry metadata and a bounded exact release artifact.
