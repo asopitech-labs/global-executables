@@ -66,7 +66,7 @@ jobs:
           for source in \
             arch debian ubuntu homebrew msys2 scoop winget windows \
             npm npm-registry pypi crates go rubygems packagist nuget macos shell \
-            conan vcpkg xmake; do
+            conan vcpkg xmake on-demand; do
             transport="data/production/transport/${source}-observations"
             if git cat-file -e "origin/artifact-data:${transport}/manifest.json" 2>/dev/null; then
               rm -rf /tmp/artifact-transport
@@ -162,9 +162,11 @@ jobs:
             data/production/intermediate/windows.jsonl \
             data/production/intermediate/macos.jsonl \
             data/production/intermediate/shell.jsonl \
+            data/production/intermediate/on-demand.jsonl \
             --snapshot "$(date -u +%F)" \
             --coverage-map data/production/coverage-map.json \
             --registry-state /tmp/registry-state \
+            --replace-source on-demand \
             --report reports/production-refresh.json
       - run: pytest -q
       - run: git diff --check
@@ -201,6 +203,37 @@ jobs:
             git -C /tmp/dictionary-publish commit -m "Refresh generated dictionary"
             git -C /tmp/dictionary-publish push origin HEAD:dictionary
             echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Mark on-demand observations indexed after dictionary read-back
+        run: |
+          set -o pipefail
+          git fetch --depth=1 origin artifact-data
+          rm -rf /tmp/on-demand-reconcile
+          git worktree add /tmp/on-demand-reconcile origin/artifact-data
+          if ! test -d /tmp/on-demand-reconcile/data/production/on-demand/claims; then
+            echo "No durable on-demand claims to reconcile"
+            exit 0
+          fi
+          global-executables reconcile-discovery \
+            --artifact-root /tmp/on-demand-reconcile \
+            --dictionary-root /tmp/dictionary-publish
+          git -C /tmp/on-demand-reconcile config user.name github-actions[bot]
+          git -C /tmp/on-demand-reconcile config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/on-demand-reconcile add -f data/production/on-demand/claims
+          if ! git -C /tmp/on-demand-reconcile diff --cached --quiet; then
+            git -C /tmp/on-demand-reconcile commit -m "Mark on-demand observations indexed"
+            for attempt in 1 2 3; do
+              git -C /tmp/on-demand-reconcile fetch origin artifact-data
+              git -C /tmp/on-demand-reconcile rebase origin/artifact-data
+              if git -C /tmp/on-demand-reconcile push origin HEAD:artifact-data; then
+                break
+              fi
+              if test "$attempt" = 3; then
+                echo "::error::Unable to publish on-demand reconciliation after three attempts"
+                exit 1
+              fi
+              sleep 5
+            done
           fi
       - name: Deploy Pages for the new dictionary
         if: steps.publish_dictionary.outputs.changed == 'true'

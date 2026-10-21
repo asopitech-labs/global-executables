@@ -42,6 +42,22 @@
           "count": {"type": "integer", "minimum": 0},
           "observed_at": {"type": "string", "format": "date-time"}
         }}
-    }
+    },
+    "claim_id": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "provenance": {"type": "array", "minItems": 1, "items": {
+      "type": "object",
+      "required": ["event_digest", "checked_at", "entry_point", "target"],
+      "properties": {
+        "event_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "checked_at": {"type": "string", "format": "date-time"},
+        "entry_point": {"type": "string"},
+        "target": {"type": "object"},
+        "metadata_url": {"type": "string", "format": "uri"},
+        "artifact_url": {"type": "string", "format": "uri"},
+        "artifact_digest": {"type": "string"},
+        "verification_method": {"type": "string"}
+      },
+      "additionalProperties": false
+    }}
   }
 }

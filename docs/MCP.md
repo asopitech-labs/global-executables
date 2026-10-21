@@ -88,6 +88,40 @@ the service version, dataset snapshot, coverage scope, and `read_only: true`.
 
 ## Naming-agent workflow
 
+### On-demand package discovery
+
+`discover_published_package(ecosystem, package, version?, command?, target?)` checks
+one known npm or PyPI package against current authoritative metadata and its exact
+release artifact. npm `bin` targets must exist in the tarball; PyPI `console_scripts`
+targets must resolve to a module in a target-compatible wheel. The versioned
+`package-discovery-v1` response distinguishes `verified_entry_point`, `unverified`,
+`not_published`, `temporarily_unavailable`, and `unsupported`. A timeout, throttle, or
+5xx response is never converted to an absence claim.
+
+The operation is read-only: it caches bounded evidence locally and reports
+`publication_status: not_indexed`; it does not write `artifact-data` or `dictionary`.
+An omitted version means the registry-selected current release. CLI and MCP use the
+same engine:
+
+```sh
+global-executables discover-package npm typescript --version 5.9.3 --command tsc
+global-executables discover-package pypi global-executables --command global-executables \
+  --target '{"python_tag":"py3","platform_tag":"any"}'
+```
+
+Use this operation only when the package identity is already known. It cannot perform
+complete command-name reverse search; use the snapshot lookup tools for that purpose.
+
+Maintainer-triggered durable promotion is deliberately separate from the MCP operation.
+The `Publish on-demand package observation` workflow performs a fresh, uncached check of
+the registry-selected current release only. It writes an append-only observation event,
+the package's current claim, and the `on-demand` intermediate projection to
+`artifact-data`. The normal refresh replaces only providers owned by that source and
+publishes the dictionary. A final read-back records `indexed` on the claim only when the
+published provider contains the same claim and event digests; otherwise the claim remains
+queued for retry. Exact-version checks remain read-only so a later query for an old
+release cannot rewind current durable evidence.
+
 ### Environment-specific installation guidance
 
 `resolve_installation(name, environment, preferences?)` and

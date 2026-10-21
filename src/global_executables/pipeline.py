@@ -18,6 +18,7 @@ class RebuildPolicy:
     """Explicit exceptions to the default safe publication policy."""
 
     shrink_reason: str | None = None
+    replace_sources: frozenset[str] = frozenset()
 
 
 @dataclass(frozen=True)
@@ -112,7 +113,8 @@ def sync_npm_coverage(coverage: dict[str, Any], state: dict[str, Any]) -> dict[s
 
 def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]] | None, seen: str,
           history: dict[str, str] | None = None,
-          preserve_ecosystems: set[str] | None = None) -> MergeResult:
+          preserve_ecosystems: set[str] | None = None,
+          replace_sources: frozenset[str] = frozenset()) -> MergeResult:
     grouped: dict[str, dict[tuple[str, ...], dict[str, Any]]] = defaultdict(dict)
     rejected: list[dict[str, Any]] = []
     observed_by_ecosystem: dict[str, set[str]] = defaultdict(set)
@@ -136,6 +138,7 @@ def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]]
             "alias_of", "source_type", "package_system", "distribution_family", "distribution",
             "distribution_release", "language", "registry", "latest_release_at", "latest_version",
             "last_observed_at", "release_history", "usage_metrics",
+            "claim_id", "provenance",
         ):
             if raw.get(key) is not None:
                 provider[key] = raw[key]
@@ -145,6 +148,8 @@ def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]]
     history = history or {}
     for command, old in previous.items():
         for provider in old.get("providers", ()):
+            if provider.get("source") in replace_sources:
+                continue
             ecosystem = provider.get("ecosystem")
             if (preserve_ecosystems and ecosystem in preserve_ecosystems
                     and command not in observed_by_ecosystem.get(ecosystem, ())):
@@ -238,9 +243,20 @@ def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
         if descriptor.get("coverage_kind") == "partial":
             partial_ecosystems.add(eco)
     merged = merge(rows, previous, snapshot, history,
-                   partial_ecosystems if not policy.shrink_reason else None)
+                   partial_ecosystems if not policy.shrink_reason else None,
+                   policy.replace_sources)
     if len(merged.records) < len(previous) and not policy.shrink_reason:
-        raise DatasetShrinkError(len(previous), len(merged.records))
+        current_commands = {record["command"] for record in merged.records}
+        removed = [record for command, record in previous.items() if command not in current_commands]
+        source_owned = bool(policy.replace_sources) and all(
+            record.get("providers") and all(
+                provider.get("source") in policy.replace_sources
+                for provider in record.get("providers", [])
+            )
+            for record in removed
+        )
+        if not source_owned:
+            raise DatasetShrinkError(len(previous), len(merged.records))
     publish(root, merged.records, coverage, snapshot, history)
     return RebuildResult(
         input_records=len(rows),

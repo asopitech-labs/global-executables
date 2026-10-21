@@ -1,0 +1,77 @@
+name: Publish on-demand package observation
+
+on:
+  workflow_dispatch:
+    inputs:
+      ecosystem:
+        description: Authoritative registry
+        required: true
+        type: choice
+        options: [npm, pypi]
+      package:
+        description: Exact registry package ID
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: on-demand-discovery-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -e '.[test]'
+      - name: Restore artifact-data publication checkout
+        run: |
+          set -o pipefail
+          git fetch --depth=1 origin artifact-data
+          rm -rf /tmp/on-demand-publish
+          git worktree add /tmp/on-demand-publish origin/artifact-data
+      - name: Reverify and persist source-owned observation
+        env:
+          ECOSYSTEM: ${{ inputs.ecosystem }}
+          PACKAGE: ${{ inputs.package }}
+        run: |
+          global-executables persist-discovery "$ECOSYSTEM" "$PACKAGE" \
+            --artifact-root /tmp/on-demand-publish
+      - name: Publish artifact-data with compare-and-retry
+        id: publish
+        run: |
+          set -o pipefail
+          git -C /tmp/on-demand-publish config user.name github-actions[bot]
+          git -C /tmp/on-demand-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git -C /tmp/on-demand-publish add -f \
+            data/production/on-demand \
+            data/production/intermediate/on-demand.jsonl
+          if git -C /tmp/on-demand-publish diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git -C /tmp/on-demand-publish commit -m "Record on-demand package observation"
+          for attempt in 1 2 3; do
+            git -C /tmp/on-demand-publish fetch origin artifact-data
+            git -C /tmp/on-demand-publish rebase origin/artifact-data
+            if git -C /tmp/on-demand-publish push origin HEAD:artifact-data; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if test "$attempt" = 3; then
+              echo "::error::Unable to publish on-demand observation after three attempts"
+              exit 1
+            fi
+            sleep 5
+          done
+      - name: Queue normal dictionary refresh
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh.yml --ref main -f refresh_os_samples=false
