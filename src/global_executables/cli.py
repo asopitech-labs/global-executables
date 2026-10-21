@@ -12,6 +12,7 @@ from .installation import resolve_installation
 from .coverage import coverage_warnings
 from .discovery import PackageDiscovery
 from .on_demand import persist_observation, reconcile_indexed
+from .reservation_client import reserve_discovery
 
 def main(argv=None):
     argv=sys.argv[1:] if argv is None else list(argv)
@@ -20,7 +21,7 @@ def main(argv=None):
         from .mcp_server import main as mcp_main
         return mcp_main(argv[1:])
     p=argparse.ArgumentParser(prog="global-executables"); sub=p.add_subparsers(dest="action",required=True)
-    sub.add_parser("mcp", help="run the read-only MCP server (stdio by default; see `mcp --help`)")
+    sub.add_parser("mcp", help="run the MCP server (stdio by default; see `mcp --help`)")
     build=sub.add_parser("build"); build.add_argument("inputs",nargs="+",type=Path); build.add_argument("--root",type=Path,default=Path.cwd()); build.add_argument("--snapshot"); build.add_argument("--coverage-kind",choices=["fixture","smoke","partial","exhaustive"],default="fixture"); build.add_argument("--allow-shrink-reason")
     collect=sub.add_parser("collect"); collect.add_argument("ecosystem",choices=["debian","ubuntu","arch","homebrew","npm","crates"]); collect.add_argument("input",type=Path); collect.add_argument("output",type=Path)
     discover=sub.add_parser("discover-package", help="verify commands published by one npm or PyPI package")
@@ -74,6 +75,8 @@ def main(argv=None):
                 raise ValueError("--target must be a JSON object")
             result = PackageDiscovery(a.cache_dir, offline=a.offline, timeout=a.timeout).discover(
                 a.ecosystem, a.package, a.version, a.command, target)
+            result["reservation"] = (reserve_discovery(result) if not a.offline else
+                                     {"status": "unavailable", "reason": "offline mode"})
         except (ValueError, TypeError) as error:
             p.error(str(error))
         print(json.dumps(result, indent=2, sort_keys=True)); return

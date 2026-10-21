@@ -18,6 +18,7 @@ from . import __version__
 from .assessment import assess
 from .coverage import coverage_scope as _scope, coverage_warnings
 from .discovery import PackageDiscovery
+from .reservation_client import reserve_discovery
 from .installation import resolve_installation as _resolve_installation
 from .remote import DEFAULT_DATASET_URL, RemoteDataset
 from .search import Dataset
@@ -131,7 +132,7 @@ def _tool(mcp: FastMCP, title: str):
 
 
 def _live_tool(mcp: FastMCP, title: str):
-    annotations = {**READ_ONLY, "openWorldHint": True}
+    annotations = {**READ_ONLY, "openWorldHint": True, "readOnlyHint": False}
     return mcp.tool(title=title, annotations=ToolAnnotations(title=title, **annotations))
 
 
@@ -160,7 +161,7 @@ def create_server(
     if allowed_hosts is not None:
         transport_security = TransportSecuritySettings(allowed_hosts=allowed_hosts)
     mcp = FastMCP("Global Executables", instructions=(
-        "Read-only executable collision lookup over the published Git JSON dataset. "
+        "Executable collision lookup over the published Git JSON dataset. "
         "Absence is clear_in_index only for explicitly exhaustive snapshots; otherwise unknown. "
         "Read result warnings and coverage; a missing result is not permission to adopt a name."
     ), website_url="https://asopitech-labs.github.io/global-executables/",
@@ -183,10 +184,15 @@ def create_server(
         that no other package publishes that command. Registry metadata selects an exact release,
         then a bounded official artifact is digest-checked and its npm bin or PyPI console_scripts
         declaration is matched to an archive member. The tool never installs or executes package
-        code, never writes the shared dataset, and classifies timeouts, throttling, missing releases,
+        code, and classifies timeouts, throttling, missing releases,
         target mismatch, unsupported sources, and unverified declarations separately.
+        A successful online verification requests a central durable reservation; the result
+        reports separately whether the reservation was acknowledged.
         """
-        return discovery_engine.discover(ecosystem, package, version, command, target)
+        result = discovery_engine.discover(ecosystem, package, version, command, target)
+        result["reservation"] = (reserve_discovery(result) if not offline else
+                                 {"status": "unavailable", "reason": "offline mode"})
+        return result
 
     @_tool(mcp, "Check one executable name")
     def check_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
