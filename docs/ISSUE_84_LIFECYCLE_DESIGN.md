@@ -1,21 +1,25 @@
 # Issue #84: Git-branch-based distributed discovery lifecycle
 
-Status: design approved; implementation in progress, not deployed. The designated runner and its agent
-do the live work; GitHub branches and commits hold every shared state. There
+Status: correction proposed for review after the GitHub Actions
+runner-to-dictionary smoke passed on 2026-10-21. The Git-native access model
+below replaces the proposed per-branch credential gate if accepted.
+The designated runner and its agent do the live work; GitHub branches and commits hold every shared state. There
 is no separate intake API, database, or human package-submission flow.
 
 ## System boundary
 
 `main` contains code and workflows. `artifact-data` is the durable source and
 publication ledger. `dictionary` is a generated snapshot, never an agent's
-direct write target. The designated GitHub Actions runner starts the MCP/CLI agent with Git
-push rights to a restricted `intake/` branch namespace. A scheduled GitHub
-Actions collector has rights to update `artifact-data`. The agent need not
-hold permission to push `artifact-data`; branch rules should enforce this
-split. The Actions runner uses `GITHUB_TOKEN` with `contents: write` to create
-intake refs. This token is repository-scoped, so the approved branch permission
-split additionally needs an explicit repository ruleset or separate GitHub App
-identity before the production gate can be considered complete.
+direct write target. The designated GitHub Actions runner starts the MCP/CLI agent.
+Its writer code creates only `intake/*` refs. A scheduled GitHub Actions collector
+updates `artifact-data`; the normal refresh updates `dictionary`. These workflows
+use GitHub's repository-scoped `GITHUB_TOKEN` with `contents: write`. Branch
+ownership is a workflow protocol, not a claim that the token has branch-scoped
+authority. The trusted code is the repository's reviewed workflow and agent;
+public registry responses and intake payloads are untrusted. Git's ref lease,
+read-back, commit history, collector validation, and durable ledger enforce
+the protocol's race, replay, and recovery properties without a separate API,
+database, App, or ruleset.
 The first merge of the runner workflow starts a bounded bootstrap probe of
 the current PyPI `global-executables` release. Later package probes are
 agent-triggered `workflow_dispatch` runs.
@@ -45,7 +49,7 @@ sequenceDiagram
     C->>S: Mark indexed
 ```
 
-Only the designated, Git-authorized runner can promise automatic reservation.
+Only the designated, Git-authorized runner executes automatic reservation.
 If a copy of the CLI/MCP server has no Git write authority, it can still return
 live verification but reports `reservation.status=unavailable`. It cannot
 claim that shared publication was scheduled. Offline mode has the same clear
@@ -196,7 +200,7 @@ source history. The cleanup job must be idempotent.
    observation, dictionary refresh, MCP/Pages lookup, and indexed read-back.
    It verifies old-release monotonicity, explicit withdrawal, unchanged
    crawler evidence, and partial coverage.
-4. On the designated runner, verify actual branch permissions and do one
+4. On the designated runner, verify the create-only ref lease and do one
    real MCP and one CLI reservation. Confirm the intake refs, accepted merge
    parent, `artifact-data` event, scheduled collector run, and matching
    `dictionary` snapshot before closing #84. Simulate Git outage and an
@@ -206,9 +210,11 @@ source history. The cleanup job must be idempotent.
    wheel has two console scripts; Nimino release assets require their own
    target-aware adapter. See [the evidence report](ISSUE_84_PORTFOLIO_SMOKE.md).
 
-## Approved decisions
+## Corrected decisions for review
 
-The designated agents push only `intake/*`, while the scheduled collector owns
-`artifact-data`. Exact old releases remain in history. Only an independently
-confirmed current release can enter the current dictionary. Deployment still
-requires runner permission checks and the end-to-end verification above.
+The designated agent's writer pushes only `intake/*`, while the scheduled
+collector writes `artifact-data`. This is a code and Git-history invariant,
+not an ACL on the shared `GITHUB_TOKEN`. Exact old releases remain in history.
+Only an independently confirmed current release can enter the current
+dictionary. The runner-to-dictionary production smoke and Git failure tests
+are the release gate; repository rulesets or extra GitHub Apps are not.
