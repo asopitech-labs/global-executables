@@ -1043,9 +1043,13 @@
       "bytes": 322550,
       "sha256": "8e5382755479699a23c9a3c1908d62d091316171d5d6cad16b183cb4a25e3ea7"
     },
+    "npm-registry/failures/all.jsonl": {
+      "bytes": 242989,
+      "sha256": "ffbcb174e8952a2e327f5f572dea73895ad30c7702bdd00c3db6002357e6d838"
+    },
     "npm-registry/source.json": {
       "bytes": 798,
-      "sha256": "3d073a26e12828cc03ff83399074a5f83db1036e9cbe2fb6b579289b6fef1a50"
+      "sha256": "2c77fe6feac47262e8b38593c77252a82eb27481c480df0f144f3ce064e76ce1"
     },
     "npm/source.json": {
       "bytes": 708,
@@ -1186,13 +1190,18 @@
       }
     },
     "npm-registry": {
-      "fields": {},
+      "fields": {
+        "failures": {
+          "entries": 6010,
+          "prefix_length": 0
+        }
+      },
       "summary": {
         "catalog_complete": true,
         "catalog_digest": "sha256:8ec9e5bb53b156ef37f3381391cb2397e0af859ab757cdf43639eb522e11a870",
         "catalog_size": 4510312,
         "catalog_snapshot": "2026-10-20",
-        "cursor": 29998
+        "cursor": 39997
       }
     },
     "nuget": {
