@@ -2,7 +2,7 @@ module github.com/asopitech-labs/global-executables
 
 go 1.26.0
 
-toolchain go1.26.9
+toolchain go1.26.10
 
 tool golang.org/x/vuln/cmd/govulncheck
 

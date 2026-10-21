@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- On-demand package discovery (#84): CLI `discover-package` and MCP
+  `discover_published_package` now share a read-only `package-discovery-v1` engine for
+  npm `bin` and PyPI wheel `console_scripts`. It verifies registry-selected versions,
+  artifact digests, declared entry points and referenced archive members under bounded
+  download/expansion limits; classifies authoritative absence separately from
+  timeouts, throttling and upstream failures; supports target wheel constraints;
+  conditionally revalidates a local TTL cache; and never installs code. A separate,
+  serialized publication workflow re-verifies the registry-selected current release,
+  records append-only evidence and a source-owned projection on `artifact-data`, queues
+  the normal dictionary refresh, and marks the claim indexed only after dictionary
+  read-back confirms the same evidence digest.
+
+- Go toolchain: 1.26.9 to 1.26.10 in `go.mod` and the digest-pinned crawler
+  image, fixing the reachable standard-library vulnerability GO-2026-6809.
+
 - Documentation: redesigned the README with a purpose-built logo and explanatory cover,
   clearer value proposition,
   no-install Playground path, package-search comparison, evidence-backed example,

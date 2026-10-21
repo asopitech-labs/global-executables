@@ -17,6 +17,7 @@ from starlette.responses import JSONResponse
 from . import __version__
 from .assessment import assess
 from .coverage import coverage_scope as _scope, coverage_warnings
+from .discovery import PackageDiscovery
 from .installation import resolve_installation as _resolve_installation
 from .remote import DEFAULT_DATASET_URL, RemoteDataset
 from .search import Dataset
@@ -107,10 +108,31 @@ SearchEcosystem = Annotated[str | None, Field(description=(
 ResultLimit = Annotated[int, Field(description=(
     "Maximum number of sorted results to return."
 ))]
+PackageEcosystem = Annotated[str, Field(description=(
+    "Authoritative package ecosystem identifier. The first implementation supports exact values "
+    "npm and pypi; other values return an explicit unsupported outcome."
+))]
+PackageId = Annotated[str, Field(description=(
+    "Exact registry package identifier, such as @scope/name for npm or global-executables for PyPI."
+))]
+PackageVersion = Annotated[str | None, Field(description=(
+    "Optional exact published version. When omitted, the registry-selected current release is checked."
+))]
+PublishedCommand = Annotated[str | None, Field(description=(
+    "Optional exact command declaration to require in the selected release artifact."
+))]
+PackageTarget = Annotated[dict[str, Any] | None, Field(description=(
+    "Optional target constraints. PyPI accepts python_tag, abi_tag, and platform_tag to select a wheel."
+))]
 
 
 def _tool(mcp: FastMCP, title: str):
     return mcp.tool(title=title, annotations=ToolAnnotations(title=title, **READ_ONLY))
+
+
+def _live_tool(mcp: FastMCP, title: str):
+    annotations = {**READ_ONLY, "openWorldHint": True}
+    return mcp.tool(title=title, annotations=ToolAnnotations(title=title, **annotations))
 
 
 def create_server(
@@ -123,10 +145,15 @@ def create_server(
     host: str = "127.0.0.1",
     port: int = 8000,
     allowed_hosts: list[str] | None = None,
+    discovery_engine: PackageDiscovery | None = None,
 ) -> FastMCP:
     root = Path(root).resolve()
     dataset = open_dataset(root, dataset_root, dataset_url=dataset_url, cache_dir=cache_dir, offline=offline)
     dataset.metadata  # Fail at startup if the checkout has no dataset.
+    discovery_engine = discovery_engine or PackageDiscovery(
+        Path(cache_dir) / "package-discovery-v1" if cache_dir else None,
+        offline=offline,
+    )
     transport_security = None
     if allowed_hosts is None and host not in {"127.0.0.1", "localhost", "::1"}:
         allowed_hosts = [f"{host}:{port}", f"127.0.0.1:{port}", f"localhost:{port}"]
@@ -140,6 +167,26 @@ def create_server(
         host=host, port=port, json_response=True, transport_security=transport_security)
     # FastMCP has no version argument; without this the SDK's own version is reported.
     mcp._mcp_server.version = __version__
+
+    @_live_tool(mcp, "Discover commands published by one package")
+    def discover_published_package(
+        ecosystem: PackageEcosystem,
+        package: PackageId,
+        version: PackageVersion = None,
+        command: PublishedCommand = None,
+        target: PackageTarget = None,
+    ) -> dict[str, Any]:
+        """Fetch and verify installed commands for one exact public package release.
+
+        Use this for a known npm or PyPI package when the fixed dictionary may lag; use snapshot
+        lookup tools for command-name reverse search, and do not treat a command mismatch as proof
+        that no other package publishes that command. Registry metadata selects an exact release,
+        then a bounded official artifact is digest-checked and its npm bin or PyPI console_scripts
+        declaration is matched to an archive member. The tool never installs or executes package
+        code, never writes the shared dataset, and classifies timeouts, throttling, missing releases,
+        target mismatch, unsupported sources, and unverified declarations separately.
+        """
+        return discovery_engine.discover(ecosystem, package, version, command, target)
 
     @_tool(mcp, "Check one executable name")
     def check_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:

@@ -28,6 +28,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--report", type=Path, default=Path("reports/refresh.json"))
     parser.add_argument("--allow-shrink-reason",
                         help="required explanation when intentionally publishing fewer executable names")
+    parser.add_argument("--replace-source", action="append", default=[],
+                        help="replace all prior providers owned by this source with the supplied projection")
     args = parser.parse_args(argv)
 
     missing = [str(path) for path in args.inputs if not path.is_file()]
@@ -50,7 +52,8 @@ def main(argv: list[str] | None = None) -> int:
             args.inputs,
             args.snapshot,
             coverage,
-            policy=RebuildPolicy(shrink_reason=args.allow_shrink_reason),
+            policy=RebuildPolicy(shrink_reason=args.allow_shrink_reason,
+                                 replace_sources=frozenset(args.replace_source)),
         )
     except Exception as error:
         report.update({"status": "failed", "error": str(error)})

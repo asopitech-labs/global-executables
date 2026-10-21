@@ -10,6 +10,8 @@ from .freshness import run_scan
 from .search import Dataset
 from .installation import resolve_installation
 from .coverage import coverage_warnings
+from .discovery import PackageDiscovery
+from .on_demand import persist_observation, reconcile_indexed
 
 def main(argv=None):
     argv=sys.argv[1:] if argv is None else list(argv)
@@ -21,6 +23,24 @@ def main(argv=None):
     sub.add_parser("mcp", help="run the read-only MCP server (stdio by default; see `mcp --help`)")
     build=sub.add_parser("build"); build.add_argument("inputs",nargs="+",type=Path); build.add_argument("--root",type=Path,default=Path.cwd()); build.add_argument("--snapshot"); build.add_argument("--coverage-kind",choices=["fixture","smoke","partial","exhaustive"],default="fixture"); build.add_argument("--allow-shrink-reason")
     collect=sub.add_parser("collect"); collect.add_argument("ecosystem",choices=["debian","ubuntu","arch","homebrew","npm","crates"]); collect.add_argument("input",type=Path); collect.add_argument("output",type=Path)
+    discover=sub.add_parser("discover-package", help="verify commands published by one npm or PyPI package")
+    discover.add_argument("ecosystem", choices=["npm", "pypi"])
+    discover.add_argument("package")
+    discover.add_argument("--version")
+    discover.add_argument("--command")
+    discover.add_argument("--target", default="{}", help="target constraints as a JSON object")
+    discover.add_argument("--cache-dir", type=Path)
+    discover.add_argument("--offline", action="store_true")
+    discover.add_argument("--timeout", type=float, default=20.0)
+    persist=sub.add_parser("persist-discovery", help="reverify and persist one package to artifact-data")
+    persist.add_argument("ecosystem", choices=["npm", "pypi"])
+    persist.add_argument("package")
+    persist.add_argument("--artifact-root", type=Path, required=True)
+    persist.add_argument("--cache-dir", type=Path)
+    persist.add_argument("--timeout", type=float, default=20.0)
+    reconcile=sub.add_parser("reconcile-discovery", help="mark durable claims indexed after dictionary read-back")
+    reconcile.add_argument("--artifact-root", type=Path, required=True)
+    reconcile.add_argument("--dictionary-root", type=Path, required=True)
     query=sub.add_parser("assess"); query.add_argument("name"); query.add_argument("--root",type=Path,default=Path.cwd()); query.add_argument("--scope",action="append",default=[],help="dimension=value; repeatable")
     for action in ("resolve-installation", "resolve-installations"):
         resolve = sub.add_parser(action, help="show environment-specific installation guidance")
@@ -47,6 +67,30 @@ def main(argv=None):
     if a.action=="assess":
         scope=dict(item.split("=",1) for item in a.scope)
         print(json.dumps(assess(Dataset(a.root),a.name,scope),indent=2,sort_keys=True)); return
+    if a.action == "discover-package":
+        try:
+            target = json.loads(a.target)
+            if not isinstance(target, dict):
+                raise ValueError("--target must be a JSON object")
+            result = PackageDiscovery(a.cache_dir, offline=a.offline, timeout=a.timeout).discover(
+                a.ecosystem, a.package, a.version, a.command, target)
+        except (ValueError, TypeError) as error:
+            p.error(str(error))
+        print(json.dumps(result, indent=2, sort_keys=True)); return
+    if a.action == "persist-discovery":
+        observation = PackageDiscovery(a.cache_dir, timeout=a.timeout).discover(
+            a.ecosystem, a.package, revalidate=True)
+        try:
+            result = persist_observation(a.artifact_root, observation)
+        except ValueError as error:
+            p.error(str(error))
+        print(json.dumps(result, indent=2, sort_keys=True)); return
+    if a.action == "reconcile-discovery":
+        try:
+            result = reconcile_indexed(a.artifact_root, a.dictionary_root)
+        except (OSError, ValueError, KeyError) as error:
+            p.error(str(error))
+        print(json.dumps(result, indent=2, sort_keys=True)); return
     if a.action in {"resolve-installation", "resolve-installations"}:
         try:
             environment = json.loads(a.environment)

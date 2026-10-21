@@ -19,7 +19,7 @@ from global_executables.pipeline import rebuild
 
 ROOT = Path(__file__).parents[1]
 SNAPSHOT = "2026-08-14"
-EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage", "assess_executable", "assess_executables", "resolve_installation", "resolve_installations"}
+EXPECTED_TOOLS = {"check_executable", "check_executables", "get_executable", "search_executables", "search_similar_executables", "get_coverage", "assess_executable", "assess_executables", "resolve_installation", "resolve_installations", "discover_published_package"}
 
 
 @pytest.fixture(scope="module")
@@ -134,6 +134,30 @@ async def test_server_exposes_no_write_contract_directly(dictionary_root):
         assert re.search(r"do\s+not\s+", tool.description, re.IGNORECASE)
         for parameter, schema in tool.inputSchema.get("properties", {}).items():
             assert schema.get("description"), f"{tool.name}.{parameter} lacks a description"
+
+
+async def test_mcp_discovery_uses_the_shared_engine_contract(dictionary_root):
+    expected = {"contract_version": "package-discovery-v1", "outcome": "verified_entry_point"}
+
+    class FakeEngine:
+        def __init__(self):
+            self.calls = []
+
+        def discover(self, *args):
+            self.calls.append(args)
+            return expected
+
+    engine = FakeEngine()
+    server = create_server(ROOT, dataset_root=dictionary_root, discovery_engine=engine)
+    result = await server.call_tool("discover_published_package", {
+        "ecosystem": "npm", "package": "sample", "version": "1.0",
+        "command": "sample", "target": {},
+    })
+
+    content, structured = result
+    assert structured == expected
+    assert json.loads(content[0].text) == expected
+    assert engine.calls == [("npm", "sample", "1.0", "sample", {})]
 
 
 async def test_server_fails_closed_for_missing_dataset(tmp_path):

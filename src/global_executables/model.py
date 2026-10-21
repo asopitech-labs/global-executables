@@ -12,6 +12,7 @@ PROVIDER_KEYS = (
     "source_type", "package_system", "distribution_family", "distribution",
     "distribution_release", "language", "registry", "latest_release_at",
     "latest_version", "last_observed_at", "release_history", "usage_metrics",
+    "claim_id", "provenance",
 )
 SCOPE_KEYS = (
     "source_type", "package_system", "distribution_family", "distribution",
