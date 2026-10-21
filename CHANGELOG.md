@@ -14,6 +14,9 @@
   the normal dictionary refresh, and marks the claim indexed only after dictionary
   read-back confirms the same evidence digest.
 
+- Go toolchain: 1.26.9 to 1.26.10 in `go.mod` and the digest-pinned crawler
+  image, fixing the reachable standard-library vulnerability GO-2026-6809.
+
 - Documentation: redesigned the README with a purpose-built logo and explanatory cover,
   clearer value proposition,
   no-install Playground path, package-search comparison, evidence-backed example,
