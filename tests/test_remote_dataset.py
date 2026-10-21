@@ -173,3 +173,10 @@ def test_versions_and_packaging_metadata_agree():
         assert version == __version__
     assert f"mcp-name: {server['name']}" in (ROOT / "README.md").read_text()
     assert f'io.modelcontextprotocol.server.name="{server["name"]}"' in (ROOT / "Dockerfile.mcp").read_text()
+
+
+def test_registry_metadata_keeps_browser_launch_zero_configuration():
+    server = json.loads((ROOT / "server.json").read_text())
+    pypi_package = next(package for package in server["packages"] if package["registryType"] == "pypi")
+
+    assert "environmentVariables" not in pypi_package

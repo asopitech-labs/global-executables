@@ -24,26 +24,6 @@
           "type": "positional",
           "value": "mcp"
         }
-      ],
-      "environmentVariables": [
-        {
-          "name": "GLOBAL_EXECUTABLES_DATASET_ROOT",
-          "description": "Optional local checkout of the dictionary branch; when unset, files are fetched on demand over HTTPS and cached",
-          "isRequired": false,
-          "format": "filepath"
-        },
-        {
-          "name": "GLOBAL_EXECUTABLES_CACHE_DIR",
-          "description": "Optional cache directory for fetched dataset files",
-          "isRequired": false,
-          "format": "filepath"
-        },
-        {
-          "name": "GLOBAL_EXECUTABLES_OFFLINE",
-          "description": "Set to 1 to serve only cached files and never touch the network",
-          "isRequired": false,
-          "format": "boolean"
-        }
       ]
     },
     {
