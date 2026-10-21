@@ -38,6 +38,20 @@ shows why Alopex DB's Python package, the separate Alopex CLI crate, and
 Skulk's library-only crate must not be conflated. A GitHub release asset such
 as Nimino likewise needs a separate checksum and target-aware adapter.
 
+```mermaid
+sequenceDiagram
+    participant A as Designated MCP/CLI agent
+    participant G as GitHub artifact-data
+    participant C as Scheduled collector
+    participant D as Generated dictionary
+    A->>G: Commit deterministic reservation
+    G-->>A: Read back committed ID
+    C->>G: Lease, revalidate, commit source event
+    C->>D: Trigger normal refresh
+    C->>D: Read back matching snapshot
+    C->>G: Mark indexed
+```
+
 ## GitHub state and identity
 
 The reservation queue belongs on `artifact-data`, alongside the existing
@@ -126,6 +140,15 @@ failure. An authoritative package/release change records `superseded` or
 `withdrawn` without erasing the prior immutable event. Status writes compare
 the lease ID and request generation so a late worker cannot overwrite a newer
 reservation.
+
+Delivery is at least once. Git commits, immutable event IDs, and package-level
+replacement make replay idempotent; no cross-branch transaction is assumed.
+Queue health is measured by queued count, oldest due age, expired leases,
+retry attempts, and `refresh_pending` age. Keep terminal reservation files for
+90 days after indexing or supersession, then prune them in a separate audited
+maintenance commit; immutable observation events and Git history remain. Set a
+batch limit and alert when queue age grows beyond the collector's expected
+capacity rather than claiming that the cron interval guarantees publication.
 
 ## Failure and permission cases
 
