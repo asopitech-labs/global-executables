@@ -16,6 +16,7 @@
     "npm",
     "npm-registry",
     "nuget",
+    "on-demand",
     "packagist",
     "pypi",
     "rubygems",
@@ -165,6 +166,12 @@
       "status": "success",
       "records": 466,
       "source": "data/production/intermediate/shell.jsonl",
+      "coverage_kind": "partial"
+    },
+    "on-demand": {
+      "status": "success",
+      "records": 2,
+      "source": "data/production/intermediate/on-demand.jsonl",
       "coverage_kind": "partial"
     }
   },
@@ -1939,6 +1946,7 @@
     "indexes/scope/package_system/homebrew.json": "8647db09afbc0f6f7f7ad6ff8d43f4915736de9d0af5ac0b3c88b64de294a515",
     "indexes/scope/package_system/macos-base.json": "14b98ae31f65416d85c6c1645eb5057bd78544a51d76daf31ba35ccd71967a85",
     "indexes/scope/package_system/pacman.json": "5da718530b82402c742bc84dcfbda3148ae477254cdc9852329e7b1e7186e565",
+    "indexes/scope/package_system/pip.json": "93af5cd3f79777867209c85f95f1938c1e35bea057603fa4b57f3cf1ab1372f5",
     "indexes/scope/package_system/scoop.json": "464976d96bd16c66a8b28b941956a3b948077331c2af36378c8caf94506f4bb1",
     "indexes/scope/package_system/shell-builtin.json": "6db8a0f8acdb426a19cadc042176300f8dc78c7b73defbbcc54ce82543312f67",
     "indexes/scope/package_system/vcpkg.json": "00b4dcc855d9c3fe60c4b4866f8237b10214eed380e114cd1d7f470f3d24590e",
