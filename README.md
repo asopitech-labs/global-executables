@@ -204,10 +204,11 @@ The agent will normally call `check_executables` for a batch and
 
 ## How it works
 
-The server is read-only. It fetches only the public `dictionary` branch files a
-query needs, caches them in the current user's cache directory, and revalidates
-them with `ETag`. Cached files remain usable when the network is temporarily
-unavailable.
+The lookup tools fetch only the public `dictionary` branch files a query needs,
+cache them in the current user's cache directory, and revalidate them with
+`ETag`. Cached files remain usable when the network is temporarily unavailable.
+The discovery tool also reads public registry artifacts and can reserve a verified
+package for central collection when that service is configured.
 
 | Requirement | Details |
 |---|---|
@@ -215,7 +216,7 @@ unavailable.
 | Local dataset | Not required |
 | Default transport | stdio |
 | Data access | On-demand HTTPS from the public `dictionary` branch |
-| Writes or command execution | None; every MCP tool is read-only |
+| Writes or command execution | No package code execution; discovery can reserve a verified package centrally |
 | Supported Python | 3.11+ (handled automatically by `uvx`) |
 
 | Variable | Effect |
@@ -223,6 +224,7 @@ unavailable.
 | `GLOBAL_EXECUTABLES_DATASET_ROOT` | use a local checkout of the `dictionary` branch instead of HTTPS |
 | `GLOBAL_EXECUTABLES_CACHE_DIR` | cache location (default `~/.cache/global-executables`, `~/Library/Caches/global-executables`, or `%LOCALAPPDATA%\global-executables\Cache`) |
 | `GLOBAL_EXECUTABLES_OFFLINE=1` | serve only cached files, never touch the network |
+| `GLOBAL_EXECUTABLES_RESERVATION_URL` | central HTTPS `/v1/reservations` endpoint for automatic reservation after successful live discovery; deployment pending |
 
 `uvx global-executables mcp --help` lists the same options as flags. The package is
 published to PyPI from release 1.3.0. See the [MCP guide](docs/MCP.md) for HTTP

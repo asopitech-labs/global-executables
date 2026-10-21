@@ -3,7 +3,7 @@
 For a step-by-step Codex CLI setup, see
 [`CODEX_MCP_TUTORIAL.md`](CODEX_MCP_TUTORIAL.md).
 
-The server is a read-only view of a materialized `dictionary` branch. Program
+The lookup tools are a read-only view of a materialized `dictionary` branch. Program
 schemas and published data have separate roots; the server does not copy records
 into a database and requires no network access after both roots are present.
 
