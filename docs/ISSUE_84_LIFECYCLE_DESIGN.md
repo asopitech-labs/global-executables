@@ -1,55 +1,173 @@
-# Issue #84: on-demand public-package discovery lifecycle (design, not implemented)
+# Issue #84: Git-backed distributed discovery lifecycle
 
-Status: design for review. On-demand acquisition, automatic reservation and publication are not live. Human submissions, publisher identity claims and Issue forms are outside this design.
+Status: design for review, not deployed. This replaces the separate central API
+assumption. PR #101 was closed unmerged because that assumption was wrong.
 
-## Intent and operating boundary
+## System boundary
 
-An MCP client or CLI user supplies an exact public package identity, such as npm `typescript` or PyPI `black`, and optionally a version and executable name. In the default online mode, both clients call one central acquisition endpoint. It fetches current authoritative registry metadata and a bounded release artifact, checks the declared installed entry point, durably reserves a successful claim, and returns fresh evidence plus the reservation ID in one operation. An explicit local-only mode may fetch the same evidence without central reservation. This answers whether a **known package** currently publishes a command without waiting for the next broad crawl. It cannot prove that an arbitrary command name is absent from all registries; command-only reverse lookup remains a query over the published partial index.
+Global Executables has three GitHub states: `main` holds code and workflows,
+`artifact-data` holds durable source observations and collection state, and
+`dictionary` holds a generated, queryable snapshot. A designated runner starts
+the MCP or CLI agent. That runner already has Git push authority for
+`artifact-data`; it does not need an additional hosted service. GitHub Actions
+is the periodic collector. Human publisher submissions and Issue forms are out
+of scope.
 
-The first supported on-demand sources should be PyPI, crates.io and npm because their release metadata and executable declarations can be checked concretely. The portfolio smoke test in [ISSUE_84_PORTFOLIO_SMOKE.md](ISSUE_84_PORTFOLIO_SMOKE.md) requires PyPI and crates.io to distinguish Alopex's Python library from its separate CLI crate and Skulk's library-only crate. GitHub release assets such as Nimino need a later source adapter with checksum, executable-file and target rules; they must return `unsupported` until that adapter exists. The same acquisition engine serves MCP and CLI. No ecosystem may inherit another's entry-point rules.
+Only the designated, trusted runner may make an automatically reserving query.
+A copy of the CLI or MCP server without Git write authority may still verify a
+package live, but it must return `reservation.status=unavailable` and must never
+promise shared publication. Credentials belong to the runner's Git transport,
+not to package metadata, the generated dictionary, or a public MCP response.
+No anonymous GitHub write path exists. This permission boundary is explicit;
+the client must not embed a reusable repository token.
 
-## Two different results
+## The two clocks
 
-**Live observation:** `discover_published_package(ecosystem, package, version?, command?, target?)` reads the public registry and returns `verified_entry_point`, `unverified`, `not_published`, `temporarily_unavailable`, or `unsupported`. It includes canonical package ID, exact version, observed command(s), entry-point path/declaration, artifact digest, authoritative metadata and artifact URLs, acquisition time, cache age, verification method, target constraints, and any unresolved conditions. This is a factual response from a specific source at a specific time, not a dictionary snapshot or an installation recipe. A registry timeout must never become `not_published`.
+An MCP/CLI query of a **known package** fetches current registry metadata and a
+bounded release artifact, checks the declared installed command, and returns a
+time-stamped result immediately. The current shared dictionary changes only
+after a separate scheduled collector rechecks that package, commits evidence to
+`artifact-data`, and the normal refresh publishes `dictionary`. A live fact, a
+durably reserved item, and an indexed snapshot are different states. An absent
+command in the partial dictionary never proves that no public package uses it.
 
-**Reserved and published observation:** every successful online verification automatically reserves the canonical package/release claim in a durable central queue and returns a reservation ID. The periodic central collector reads that queue, rechecks the public evidence, records a source-owned observation in `artifact-data`, and runs the normal refresh. Only after the generated `dictionary` snapshot contains that claim may MCP/Pages lookup call it indexed. A live result carries a separate `reservation_status` (`queued`, `already_queued`, or `failed`) and `publication_status` (`not_indexed` or a matching snapshot ID). The query never writes to `dictionary` or directly dispatches its publication workflow.
+The first live verifiers cover npm `bin` and PyPI wheel `console_scripts`.
+crates.io needs its own `[[bin]]` and implicit-binary rules before it can make
+verified claims. The [portfolio smoke report](ISSUE_84_PORTFOLIO_SMOKE.md)
+shows why Alopex DB's Python package, the separate Alopex CLI crate, and
+Skulk's library-only crate must not be conflated. A GitHub release asset such
+as Nimino likewise needs a separate checksum and target-aware adapter.
 
-CLI and MCP return the same versioned JSON contract for the same input and evidence. If a check exceeds the bounded synchronous budget, return an explicit timeout/unavailable state. A reservation ID is returned only after the central queue durably acknowledges the claim. Package verification may succeed while reservation fails; the response must say so and must not imply the observation will be indexed. Online operation is the default for automatic reservation. Offline/local-only mode can return a live observation but explicitly reports `reservation_status: unavailable_offline`.
+## GitHub state and identity
 
-## Acquisition state and freshness
+The reservation queue belongs on `artifact-data`, alongside the existing
+on-demand claims and immutable observation events. Use sharded files under
+`data/production/on-demand/reservations/<prefix>/<id>.json`, not one shared
+JSON document. The deterministic ID hashes ecosystem, canonical package ID,
+exact selected release, target variant, and verifier contract version. A file
+records the checked time, metadata/artifact digest and URLs, request kind
+(`latest` or exact), status, attempt count, retry time, lease, and the source
+event/snapshot IDs once known. It stores factual references rather than raw
+artifacts. Repeating the same verified release/target produces the same ID and
+does not make another queue item; a new release or changed verifier produces
+another item. The client observation is **untrusted for publication** even
+though the runner is trusted to reserve: the central job independently checks
+the authoritative source.
 
-For each `(ecosystem, canonical package ID, exact release version, target variant)` record immutable evidence: registry release metadata, artifact digest, parsed entry-point declaration, checked time, verifier version and source URLs. Command names and entry-point paths are verified claims attached to the release. Reject a repository-name match or arbitrary matching file in an archive as insufficient. npm `bin` must point to a member in the exact tarball; PyPI console-script metadata must come from the selected wheel and be matched to that wheel's supported tags/target. Archive parsing must be bounded and must not execute package scripts. An install-and-invoke check, if available, is separately recorded and is required before #83 can promote a target recipe to `ready`.
+The mutable current provider claim remains keyed by ecosystem and canonical
+package. Reservation events are release-specific so an old exact-version query
+cannot replace the current claim. The collector records exact old releases as
+historical evidence. It promotes an observation into the current dictionary
+only if an independent check confirms that the observed release is still the
+registry-selected current release at publication time. This is a proposed
+policy for review; an all-versions dictionary would require a distinct query
+and provider contract.
 
-Live cache states are `fresh`, `stale`, `revalidating`, and `failed_revalidation`. Cache identity includes ecosystem, normalized package, exact version or moving alias, target, verifier version and relevant evidence digest. Use conditional requests where supported; enforce a short, source-specific TTL for moving aliases such as `latest`, a longer TTL for immutable version artifacts, and a short negative cache. The first implementation must choose and test numeric TTLs. Expired evidence can be displayed as historical with its checked time, but cannot be presented as currently verified when revalidation fails. Keep source failure distinct from authoritative 404/withdrawal. Coalesce concurrent identical requests and bound per-source concurrency and cost.
+## Reserving from MCP and CLI
 
-An exact old release may remain available while the registry's `latest` moves; do not treat an old observation as a current-version update. Use registry-specific publication time and release status rather than lexical or universal SemVer ordering. Yanked, unpublished or withdrawn releases and removed entry points transition their **current** source claim to `withdrawn` only after an authoritative check; transient failures mark it `stale_unknown`. Distinguish an authoritative 404/410, an access restriction such as 451, and temporary 429/5xx responses. Historical evidence remains available for audit. Reappearance creates a new verified observation. A deprecation warning is not a removal.
+Both interfaces call the same acquisition and Git-reservation library. After
+`verified_entry_point`, the runner fetches the latest `artifact-data` head,
+creates or reads the deterministic reservation file in an isolated checkout,
+commits it, and pushes. It reports a reservation ID only after the push
+succeeds and a fresh read confirms the same content. An existing matching
+reservation is also an ACK. A failed push, missing permission, or read-back
+failure leaves the live verification intact but reports reservation failure.
+The Git command must be non-interactive and time-bounded, so a query cannot
+hang waiting for a credential prompt.
 
-## Durable publication lifecycle
+Concurrent runner agents may reserve the same or different packages. The
+writer applies its operation to the newest branch head and retries a bounded
+number of non-fast-forward conflicts; it never force-pushes. A deterministic
+file and event digest make duplicate delivery safe. Per-package files reduce
+contention, while the branch-head retry handles unrelated simultaneous
+commits. No client writes directly to `dictionary` or publishes its own
+unchecked observation. Because discovery reserves work, its MCP tool must not
+carry a read-only annotation; existing snapshot lookup tools remain read-only.
 
-The on-demand path and the periodic collector form one pipeline: successful online verification durably upserts a queue item keyed by canonical package, release, target and verifier version; the collector drains it, independently revalidates the public release, and stores verified observations as a distinct, source-owned input on `artifact-data`. The normal refresh restores those inputs, merges them with crawler observations, validates the canonical output, publishes `dictionary`, then triggers Pages. Writing directly to `dictionary` would be erased by the next refresh. The queue and durable source retain event history so failed jobs and withdrawal decisions can be replayed. Repeated MCP/CLI queries coalesce under one queue key and refresh its evidence rather than creating duplicate providers.
+## Periodic collector and commit boundary
 
-Publication states are `verified_live → reserved → revalidating → verified_for_publication → queued_for_refresh → indexed(snapshot)` or `retryable_failure(reason, retry_after)` / `rejected(reason)`. `reserved` means the central queue acknowledged the item, not that it is indexed. `indexed` requires a read-back of the published snapshot and matching provider evidence. Failure leaves the item durable for retry; a reconciler checks stalled reservations. Use source-owned compare-and-swap updates against the latest branch head, deterministic claim keys and idempotent event digests. A delayed old observation cannot overwrite a newer verification. A withdrawal is an explicit source event/tombstone, never an omitted row: the current partial-source merge preserves omissions. Package-level replacement must retire obsolete entry points from this source while leaving independent crawler observations intact; the current observation merger's row-level retention needs a deliberate change for this source. If a command disappears entirely, the normal shrink guard needs an auditable withdrawal reason.
+A scheduled GitHub Actions job reads due reservations from `artifact-data` in
+bounded batches. Its workflow has one concurrency group; a per-item lease with
+an expiry also prevents a second runner or a restarted job from treating an
+active attempt as free work. Claiming a lease is a Git commit against the latest
+head. If the job dies, the item becomes eligible again after expiry. GitHub
+Actions schedules can be delayed or skipped, so a later run also scans for
+expired leases and stalled publication; the schedule is not a real-time
+delivery guarantee.
 
-The canonical provider schema needs provenance for multiple independent observations of one claim. Today `provider_key` includes version/source and `pipeline.merge()` copies a fixed field list, so naively appending a live result either duplicates a provider or drops its evidence. Define a stable provider/claim identity and a provenance list or equivalent sidecar before enabling promotion. Preserve crawler and on-demand evidence, same-name unrelated packages, existing collision results, and `partial` coverage. Query-time live results must not mutate the historical canonical lookup contract.
+For each leased item, the collector independently revalidates the registry
+release and artifact. In **one `artifact-data` commit**, it records the
+source-owned observation/event, updates that package's on-demand projection,
+and moves the matching reservation generation to `refresh_pending`. A failed
+push causes rebase/reconstruction from the newest head, not blind overwrite.
+If revalidation times out, gets 429/5xx, or encounters unverifiable evidence,
+the item stays retryable with a reason and next attempt time; no provider is
+retired. An authoritative removal/withdrawal creates an explicit tombstone for
+the on-demand source and preserves unrelated crawler providers. The collector
+also revisits active current claims after a bounded freshness interval even
+without new queries, so removed commands can be retired.
 
-## Query and publication safety
+The normal refresh restores source observations from `artifact-data`, merges
+them with other collectors, validates the canonical records, and publishes
+`dictionary`. A `refresh_pending` reservation survives a crash between source
+commit and workflow dispatch. Each scheduled collector run reconciles pending
+refreshes and may dispatch refresh again idempotently. Only a read-back of the
+published dictionary with the matching claim/event digest moves the claim to
+`indexed(snapshot)`. A failed refresh remains pending, not indexed. The
+existing on-demand source replacement and shrink guard must remain in the
+path; omission alone is never a withdrawal event.
 
-The public tool accepts ecosystem/package/version/target values, never an arbitrary URL. Construct official registry endpoints in code; treat artifact URLs supplied by registry metadata as untrusted and check HTTPS host allowlists, redirects, destination IP/port, size and time limits. Limit archive member count, expanded bytes and paths; do not run package scripts. Set per-source concurrency/rate limits and return rate-limit evidence with a retry time. The central endpoint accepts only a canonical package claim, verifies it itself, and atomically reserves successful evidence; it never trusts a caller-supplied "verified" result. Deduplicate and rate-limit reservations so public queries cannot flood the periodic collector. Offline/local-only acquisition remains possible but cannot promise central reservation.
+State progression is:
 
-The periodic collector alone has credentials to write `artifact-data` and publish the dictionary. The new discovery operation has the limited side effect of reserving a candidate, so it must **not** be annotated as read-only; existing lookup tools remain read-only. For local `uvx` MCP and CLI to reserve automatically without distributing write credentials, both need a centrally operated verification/reservation endpoint. The endpoint must durably acknowledge a reservation before the client reports it as queued. Pages can display indexed provenance; static Pages itself cannot fetch arbitrary package artifacts or hold a write credential.
+`verified_live -> reserved -> leased -> refresh_pending -> indexed(snapshot)`
 
-## Tests and release gates
+`leased -> retryable(reason, next_attempt_at) -> leased` handles temporary
+failure. An authoritative package/release change records `superseded` or
+`withdrawn` without erasing the prior immutable event. Status writes compare
+the lease ID and request generation so a late worker cannot overwrite a newer
+reservation.
 
-1. Shared MCP/CLI fixtures prove identical structured results for exact package/version, moving `latest`, mismatched command, target-incompatible wheel, missing release, registry timeout, rate limit and unsupported ecosystem. A timeout never means absence.
-2. Fixed metadata and artifact fixtures verify npm `bin`, PyPI wheel `console_scripts`, and crates.io `[[bin]]`/implicit binary rules against exact archive members and target constraints. A library-only crate must return an explicit no-command result. Malformed archives, absent target files, oversized responses and unsafe redirects fail closed. One pinned real-public-package smoke test per first-stage ecosystem confirms current upstream behavior.
-3. Fake clock and HTTP fixtures cover cache hit, conditional revalidation, TTL expiry, negative cache, concurrent request coalescing, temporary failure, authoritative withdrawal, reappearance and historical evidence display.
-4. End-to-end integration follows a successful MCP/CLI verification through durable central reservation, the periodic collector's independent recheck, `artifact-data` source state, normal refresh, canonical dictionary, MCP and Pages. Repeated local/remote queries return one reservation; queue outage is reported separately from verification; a stalled item is retried; failed publication remains queued; an old result cannot rewind a newer result; withdrawal removes only its source claim; crawler observations and partial coverage survive.
-5. #83 regression: a verified entry point alone never yields a `ready` install recipe. A target-specific install-and-invoke check is required. Existing lookup tools and published snapshot responses remain compatible.
+## Failure and permission cases
 
-## Decisions to settle before implementation
+| Event | Durable result and recovery |
+| --- | --- |
+| Two agents reserve the same release | One deterministic item; the losing Git push rereads and acknowledges the winner. |
+| Git push succeeds but the client loses the response | Retry reads the matching file and returns the same ID. |
+| Runner lacks Git write access or GitHub is unavailable | Live verification may succeed; reservation explicitly fails and no publication is promised. |
+| Collector dies after leasing | Lease expires; the next scheduled run retries. |
+| Collector commits evidence but refresh dispatch fails | `refresh_pending` remains in Git; the next run dispatches again. |
+| Refresh fails or publishes unrelated changes | The claim remains pending until matching dictionary read-back. |
+| Old exact-version result arrives after a new current release | Its historical event is retained; it cannot rewind the current claim. |
+| Upstream times out versus confirms withdrawal | Timeout keeps prior claim and schedules retry; confirmed withdrawal tombstones only the on-demand claim. |
 
-- Exact MCP/CLI operation name and whether `version` omitted means registry `latest` or all currently published versions. The first implementation should default to one explicit registry-selected version, with its selection rule in the response.
-- Numeric request budgets, concurrency limits and TTLs per source, plus behavior when a remote MCP deployment has no writable cache.
-- The central verification/reservation endpoint and durable queue implementation, its authentication/abuse limits, the `artifact-data` source layout, publication lock and reconciler. Successful online on-demand verification must enqueue; the periodic collector alone commits.
-- Stable claim/provenance schema and source-specific withdrawal semantics, especially when a crawler still observes the same package.
-- The explicit offline/local-only behavior when central reservation is unavailable. It may provide live evidence but must not claim automatic publication.
+## Validation before closing #84
+
+1. Test the shared npm/PyPI acquisition fixtures for verified command, library
+   only, mismatch, unsupported target, 404/410, 429/5xx, timeout, unsafe URL,
+   malformed archive, and cache expiry. MCP and CLI must report the same live
+   result and reservation state.
+2. Use a local bare Git remote and two independent runner worktrees to test
+   same-key deduplication, different-key concurrent pushes, lost ACK, bounded
+   conflict retries, no credential prompt, and an unavailable remote.
+3. Inject collector crashes before and after the source commit and refresh
+   dispatch. Verify lease expiry, idempotent retry, immutable events, current
+   claim monotonicity, explicit withdrawal, and unchanged independent
+   providers/partial coverage.
+4. On the designated runner, verify its Git permissions and branch rules,
+   perform a real MCP and CLI reservation, inspect the committed reservation
+   on `artifact-data`, run the scheduled collector, and read back the matching
+   `dictionary` snapshot. Test a queue outage and a withdrawal. Keep #84 open
+   until this path works; passing fixtures alone is insufficient.
+5. Repeat live portfolio smoke checks: Alopex DB on PyPI must not invent a
+   console script, Alopex CLI and Skulk require the crates adapter before
+   reservation, and Global Executables' PyPI commands must be identified from
+   the actual wheel. Do not claim crates coverage from an npm/PyPI-only build.
+
+## Review decisions
+
+The proposed current dictionary contains registry-selected current releases;
+exact old releases remain historical evidence. The designated runner must have
+Git push access to `artifact-data`; an agent without it gets a live answer and
+an explicit reservation failure. These are the two policy choices to review
+before changing the MCP/CLI implementation. No separate HTTP intake service,
+Issue-form submission, or human package report is part of this design.
