@@ -172,7 +172,8 @@ def test_workflows_keep_artifact_and_dictionary_publication_separate():
 
     assert "tools/git_intake_runner_smoke.py" in acquisition
     assert "GLOBAL_EXECUTABLES_INTAKE_REPOSITORY" in acquisition
-    assert "paths: [.github/workflows/on-demand-discovery.yml]" in acquisition
+    assert "- .github/workflows/on-demand-discovery.yml" in acquisition
+    assert "- src/global_executables/git_intake_collector.py" in acquisition
     assert "github.event_name == 'push' && 'global-executables'" in acquisition
     assert "HEAD:artifact-data" not in acquisition
     assert "gh workflow run git-intake-collector.yml" in acquisition
