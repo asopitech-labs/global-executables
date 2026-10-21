@@ -3,7 +3,7 @@
 For a step-by-step Codex CLI setup, see
 [`CODEX_MCP_TUTORIAL.md`](CODEX_MCP_TUTORIAL.md).
 
-The server is a read-only view of a materialized `dictionary` branch. Program
+Snapshot lookup is a read-only view of a materialized `dictionary` branch. Program
 schemas and published data have separate roots; the server does not copy records
 into a database and requires no network access after both roots are present.
 
@@ -77,7 +77,8 @@ curl http://127.0.0.1:8000/health
 ```
 
 Connect an MCP client to `http://127.0.0.1:8000/mcp`. The health response exposes
-the service version, dataset snapshot, coverage scope, and `read_only: true`.
+the service version, dataset snapshot, coverage scope, and whether the instance is
+configured to reserve Git intake branches (`read_only: false` when configured).
 
 ## Resources
 

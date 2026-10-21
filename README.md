@@ -40,7 +40,7 @@ ships your proposed command.
 | Searches package and repository names | Searches the actual installed command name |
 | Leaves evidence scattered across registries | Normalizes providers across ecosystems |
 | A missing result can look deceptively final | Reports coverage and absence confidence |
-| Requires a person to repeat the work | Gives AI agents a read-only batch workflow |
+| Requires a person to repeat the work | Lets AI agents check names in batches and verify known packages |
 
 The index preserves the relationship that matters:
 
@@ -204,8 +204,8 @@ The agent will normally call `check_executables` for a batch and
 
 ## How it works
 
-The server is read-only. It fetches only the public `dictionary` branch files a
-query needs, caches them in the current user's cache directory, and revalidates
+Snapshot lookups fetch only the public `dictionary` branch files a
+query needs, cache them in the current user's cache directory, and revalidate
 them with `ETag`. Cached files remain usable when the network is temporarily
 unavailable.
 
@@ -215,7 +215,7 @@ unavailable.
 | Local dataset | Not required |
 | Default transport | stdio |
 | Data access | On-demand HTTPS from the public `dictionary` branch |
-| Writes or command execution | None; every MCP tool is read-only |
+| Writes or command execution | Lookup never executes software; verified discovery can reserve a Git branch only on a configured runner |
 | Supported Python | 3.11+ (handled automatically by `uvx`) |
 
 | Variable | Effect |
@@ -849,8 +849,9 @@ MCP makes that dataset immediately useful to agents.
 
 The schemas, deterministic builder, production OS index collector, derived
 prefix/length/ecosystem/trigram and logical-scope indexes, collector parsers,
-read-only local/HTTP MCP server, assessment API, bounded fixture freshness
-scenarios, and CI checks are implemented in this repository. Coverage is measured
+local/HTTP MCP server with Git intake for verified npm/PyPI discovery,
+assessment API, bounded fixture freshness scenarios, and CI checks are implemented
+in this repository. Coverage is measured
 against each source. npm stays `coverage_kind: partial` even when its finite
 ecosyste.ms critical catalog finishes (`catalog_complete: true`); the all-registry
 npm long tail is not in the index. See
