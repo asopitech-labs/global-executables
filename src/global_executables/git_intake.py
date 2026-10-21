@@ -158,7 +158,7 @@ def _checked_git(repository: Path, *args: str, timeout: int) -> str:
 
 
 def _read_remote_proposal(repository: Path, remote: str, identifier: str,
-                          timeout: int) -> tuple[dict[str, Any], str] | None:
+                          base_sha: str, timeout: int) -> tuple[dict[str, Any], str] | None:
     branch = INTAKE_PREFIX + identifier
     refs = _checked_git(repository, "ls-remote", "--heads", remote, branch, timeout=timeout)
     if not refs:
@@ -166,12 +166,15 @@ def _read_remote_proposal(repository: Path, remote: str, identifier: str,
     sha = refs.split()[0]
     _checked_git(repository, "fetch", "--no-tags", remote, sha, timeout=timeout)
     path = f"{PROPOSAL_DIR}/{identifier}.json"
-    names = _checked_git(repository, "diff-tree", "--no-commit-id", "--name-only", "-r",
+    names = _checked_git(repository, "diff-tree", "--no-commit-id", "--name-status", "-r",
                          sha, timeout=timeout).splitlines()
     parents = _checked_git(repository, "rev-list", "--parents", "-n", "1", sha,
                            timeout=timeout).split()
-    if names != [path] or len(parents) != 2:
+    if names != [f"A\t{path}"] or len(parents) != 2:
         raise IntakeError("existing intake branch changes unexpected files")
+    if _git(repository, "merge-base", "--is-ancestor", parents[1], base_sha,
+            timeout=timeout).returncode:
+        raise IntakeError("existing intake branch is outside artifact-data history")
     size = int(_checked_git(repository, "cat-file", "-s", f"{sha}:{path}", timeout=timeout))
     if size > 32_768:
         raise IntakeError("existing intake proposal exceeds size limit")
@@ -224,7 +227,7 @@ def reserve_observation(observation: dict[str, Any], repository: str | Path, *,
         if ledger:
             return {"status": "already_processed", "reservation_id": identifier,
                     "outcome": ledger.get("outcome"), "snapshot": ledger.get("snapshot")}
-        existing = _read_remote_proposal(repository, remote, identifier, timeout)
+        existing = _read_remote_proposal(repository, remote, identifier, base_sha, timeout)
         if existing:
             if _canonical({key: existing[0][key] for key in existing[0] if key != "checked_at"}) != _canonical(
                     {key: proposal[key] for key in proposal if key != "checked_at"}):
@@ -252,7 +255,7 @@ def reserve_observation(observation: dict[str, Any], repository: str | Path, *,
         # Read back even after an apparent push success: a lost reply is not proof
         # of failure, and an unconfirmed local commit is not a durable ACK.
         for _ in range(3):
-            existing = _read_remote_proposal(repository, remote, identifier, timeout)
+            existing = _read_remote_proposal(repository, remote, identifier, base_sha, timeout)
             if existing:
                 if _canonical({key: existing[0][key] for key in existing[0] if key != "checked_at"}) != _canonical(
                         {key: proposal[key] for key in proposal if key != "checked_at"}):
