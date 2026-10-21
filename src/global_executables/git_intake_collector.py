@@ -284,7 +284,9 @@ def _process(root: Path, ref: str, engine: PackageDiscovery) -> str:
         try:
             sha, proposal = _candidate(root, ref, identifier)
             checked, current = _reverify(engine, proposal)
-            _git(root, "merge", "--no-ff", "--no-commit", sha)
+            _git(root, "-c", "user.name=github-actions[bot]",
+                 "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com",
+                 "merge", "--no-ff", "--no-commit", sha)
             persisted = persist_observation(root, current) if current else None
             claim = persisted["claim"] if persisted else None
             entry = {"id": identifier, "status": "accepted", "outcome": "current" if current else "historical",
