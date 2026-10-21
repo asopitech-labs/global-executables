@@ -298,7 +298,8 @@ def test_cli_returns_the_shared_engine_contract(monkeypatch, capsys):
 
     cli.main(["discover-package", "npm", "sample", "--version", "1.0"])
 
-    assert json.loads(capsys.readouterr().out) == expected
+    assert json.loads(capsys.readouterr().out) == {**expected, "reservation": {
+        "status": "unavailable", "reason": "intake_repository_not_configured"}}
 
 
 @pytest.mark.live

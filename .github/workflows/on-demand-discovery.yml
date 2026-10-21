@@ -1,6 +1,9 @@
-name: Publish on-demand package observation
+name: Verify and reserve published package discovery
 
 on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/on-demand-discovery.yml]
   workflow_dispatch:
     inputs:
       ecosystem:
@@ -9,8 +12,12 @@ on:
         type: choice
         options: [npm, pypi]
       package:
-        description: Exact registry package ID
+        description: Exact published package ID supplied by the agent
         required: true
+        type: string
+      version:
+        description: Optional exact release; empty selects the registry current release
+        required: false
         type: string
 
 permissions:
@@ -18,60 +25,31 @@ permissions:
   actions: write
 
 concurrency:
-  group: on-demand-discovery-publication
+  group: on-demand-discovery-runner
   cancel-in-progress: false
 
 jobs:
-  publish:
+  reserve:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: "3.12", cache: pip}
-      - run: pip install -e '.[test]'
-      - name: Restore artifact-data publication checkout
-        run: |
-          set -o pipefail
-          git fetch --depth=1 origin artifact-data
-          rm -rf /tmp/on-demand-publish
-          git worktree add /tmp/on-demand-publish origin/artifact-data
-      - name: Reverify and persist source-owned observation
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -e .
+      - name: Verify through CLI and MCP protocol and reserve Git intake
         env:
-          ECOSYSTEM: ${{ inputs.ecosystem }}
-          PACKAGE: ${{ inputs.package }}
+          ECOSYSTEM: ${{ github.event_name == 'push' && 'pypi' || inputs.ecosystem }}
+          PACKAGE: ${{ github.event_name == 'push' && 'global-executables' || inputs.package }}
+          VERSION: ${{ inputs.version }}
+          GLOBAL_EXECUTABLES_INTAKE_REPOSITORY: ${{ github.workspace }}
+          GLOBAL_EXECUTABLES_CACHE_DIR: ${{ runner.temp }}/global-executables-cache
+          GIT_TERMINAL_PROMPT: '0'
         run: |
-          global-executables persist-discovery "$ECOSYSTEM" "$PACKAGE" \
-            --artifact-root /tmp/on-demand-publish
-      - name: Publish artifact-data with compare-and-retry
-        id: publish
-        run: |
-          set -o pipefail
-          git -C /tmp/on-demand-publish config user.name github-actions[bot]
-          git -C /tmp/on-demand-publish config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git -C /tmp/on-demand-publish add -f \
-            data/production/on-demand \
-            data/production/intermediate/on-demand.jsonl
-          if git -C /tmp/on-demand-publish diff --cached --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          git -C /tmp/on-demand-publish commit -m "Record on-demand package observation"
-          for attempt in 1 2 3; do
-            git -C /tmp/on-demand-publish fetch origin artifact-data
-            git -C /tmp/on-demand-publish rebase origin/artifact-data
-            if git -C /tmp/on-demand-publish push origin HEAD:artifact-data; then
-              echo "changed=true" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-            if test "$attempt" = 3; then
-              echo "::error::Unable to publish on-demand observation after three attempts"
-              exit 1
-            fi
-            sleep 5
-          done
-      - name: Queue normal dictionary refresh
-        if: steps.publish.outputs.changed == 'true'
+          python tools/git_intake_runner_smoke.py \
+            --ecosystem "$ECOSYSTEM" --package "$PACKAGE" --version "$VERSION"
+      - name: Start central collector
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run refresh.yml --ref main -f refresh_os_samples=false
+        run: gh workflow run git-intake-collector.yml --ref main

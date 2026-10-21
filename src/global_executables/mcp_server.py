@@ -1,4 +1,4 @@
-"""Read-only MCP and HTTP transports over a checked-out JSON dataset."""
+"""MCP and HTTP lookup transports with optional verified Git intake."""
 from __future__ import annotations
 
 import argparse
@@ -131,7 +131,7 @@ def _tool(mcp: FastMCP, title: str):
 
 
 def _live_tool(mcp: FastMCP, title: str):
-    annotations = {**READ_ONLY, "openWorldHint": True}
+    annotations = {**READ_ONLY, "openWorldHint": True, "readOnlyHint": False}
     return mcp.tool(title=title, annotations=ToolAnnotations(title=title, **annotations))
 
 
@@ -146,6 +146,8 @@ def create_server(
     port: int = 8000,
     allowed_hosts: list[str] | None = None,
     discovery_engine: PackageDiscovery | None = None,
+    intake_repository: str | Path | None = None,
+    intake_remote: str = "origin",
 ) -> FastMCP:
     root = Path(root).resolve()
     dataset = open_dataset(root, dataset_root, dataset_url=dataset_url, cache_dir=cache_dir, offline=offline)
@@ -154,13 +156,15 @@ def create_server(
         Path(cache_dir) / "package-discovery-v1" if cache_dir else None,
         offline=offline,
     )
+    intake_repository = intake_repository or os.getenv("GLOBAL_EXECUTABLES_INTAKE_REPOSITORY")
     transport_security = None
     if allowed_hosts is None and host not in {"127.0.0.1", "localhost", "::1"}:
         allowed_hosts = [f"{host}:{port}", f"127.0.0.1:{port}", f"localhost:{port}"]
     if allowed_hosts is not None:
         transport_security = TransportSecuritySettings(allowed_hosts=allowed_hosts)
     mcp = FastMCP("Global Executables", instructions=(
-        "Read-only executable collision lookup over the published Git JSON dataset. "
+        "Executable collision lookup over the published Git JSON dataset. Lookup tools are read-only; "
+        "verified package discovery can reserve an intake Git branch on a configured runner. "
         "Absence is clear_in_index only for explicitly exhaustive snapshots; otherwise unknown. "
         "Read result warnings and coverage; a missing result is not permission to adopt a name."
     ), website_url="https://asopitech-labs.github.io/global-executables/",
@@ -183,10 +187,20 @@ def create_server(
         that no other package publishes that command. Registry metadata selects an exact release,
         then a bounded official artifact is digest-checked and its npm bin or PyPI console_scripts
         declaration is matched to an archive member. The tool never installs or executes package
-        code, never writes the shared dataset, and classifies timeouts, throttling, missing releases,
-        target mismatch, unsupported sources, and unverified declarations separately.
+        code or writes the shared dataset. On a configured runner, a verified result also reserves
+        an immutable intake Git branch; otherwise the reservation status is unavailable. Timeouts,
+        throttling, missing releases, target mismatch, unsupported sources, and unverified
+        declarations remain separate outcomes.
         """
-        return discovery_engine.discover(ecosystem, package, version, command, target)
+        result = discovery_engine.discover(ecosystem, package, version, command, target)
+        if result.get("outcome") == "verified_entry_point" and intake_repository:
+            from .git_intake import reserve_observation
+            return {**result, "reservation": reserve_observation(
+                result, Path(intake_repository), remote=intake_remote)}
+        return {**result, "reservation": (
+            {"status": "unavailable", "reason": "intake_repository_not_configured"}
+            if not intake_repository else
+            {"status": "not_eligible", "reason": "entry_point_not_verified"})}
 
     @_tool(mcp, "Check one executable name")
     def check_executable(name: ExecutableName, scope: ProviderScope = None) -> dict[str, Any]:
@@ -349,7 +363,7 @@ def create_server(
     async def health(_: Request) -> JSONResponse:
         metadata = dataset.metadata
         return JSONResponse({"status": "ok", "service_version": __version__, "snapshot": metadata["snapshot"],
-                             "coverage_scope": _scope(metadata), "read_only": True})
+                             "coverage_scope": _scope(metadata), "read_only": not bool(intake_repository)})
 
     return mcp
 
@@ -362,13 +376,14 @@ def create_app():
         dataset_url=os.getenv("GLOBAL_EXECUTABLES_DATASET_URL"),
         cache_dir=os.getenv("GLOBAL_EXECUTABLES_CACHE_DIR"),
         offline=_truthy(os.getenv("GLOBAL_EXECUTABLES_OFFLINE")),
+        intake_repository=os.getenv("GLOBAL_EXECUTABLES_INTAKE_REPOSITORY"),
     ).streamable_http_app()
 
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="global-executables mcp",
-        description="Read-only MCP server over the Global Executables dataset. With no local "
+        description="MCP lookup server over the Global Executables dataset. With no local "
                     "dataset, files are fetched on demand from the public dictionary branch and cached.")
     parser.add_argument("--root", default=os.getenv("GLOBAL_EXECUTABLES_ROOT", Path.cwd()))
     parser.add_argument(
@@ -387,6 +402,9 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--allowed-host", action="append", default=None)
+    parser.add_argument("--intake-repository", default=os.getenv("GLOBAL_EXECUTABLES_INTAKE_REPOSITORY"),
+                        help="designated Git checkout for automatic intake reservation")
+    parser.add_argument("--intake-remote", default="origin")
     args = parser.parse_args(argv)
     server = create_server(
         args.root,
@@ -397,6 +415,8 @@ def main(argv: list[str] | None = None) -> None:
         host=args.host,
         port=args.port,
         allowed_hosts=args.allowed_host,
+        intake_repository=args.intake_repository,
+        intake_remote=args.intake_remote,
     )
     if args.transport == "streamable-http":
         server.settings.host = args.host

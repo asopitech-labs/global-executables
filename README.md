@@ -40,7 +40,7 @@ ships your proposed command.
 | Searches package and repository names | Searches the actual installed command name |
 | Leaves evidence scattered across registries | Normalizes providers across ecosystems |
 | A missing result can look deceptively final | Reports coverage and absence confidence |
-| Requires a person to repeat the work | Gives AI agents a read-only batch workflow |
+| Requires a person to repeat the work | Lets AI agents check names in batches and verify known packages |
 
 The index preserves the relationship that matters:
 
@@ -204,8 +204,8 @@ The agent will normally call `check_executables` for a batch and
 
 ## How it works
 
-The server is read-only. It fetches only the public `dictionary` branch files a
-query needs, caches them in the current user's cache directory, and revalidates
+Snapshot lookups fetch only the public `dictionary` branch files a
+query needs, cache them in the current user's cache directory, and revalidate
 them with `ETag`. Cached files remain usable when the network is temporarily
 unavailable.
 
@@ -215,7 +215,7 @@ unavailable.
 | Local dataset | Not required |
 | Default transport | stdio |
 | Data access | On-demand HTTPS from the public `dictionary` branch |
-| Writes or command execution | None; every MCP tool is read-only |
+| Writes or command execution | Lookup never executes software; verified discovery can reserve a Git branch only on a configured runner |
 | Supported Python | 3.11+ (handled automatically by `uvx`) |
 
 | Variable | Effect |
@@ -242,14 +242,21 @@ transport, offline operation, and running from a source checkout.
 | `resolve_installation` / `resolve_installations` | derive environment-specific install and invoke guidance |
 | `discover_published_package` | verify commands declared by one current npm or PyPI release |
 
-All tools are read-only. `discover_published_package` makes bounded live registry and
-artifact requests but never executes package code or mutates the published dictionary.
+Snapshot lookup tools are read-only. `discover_published_package` makes bounded live
+registry and artifact requests without executing package code. On a designated runner
+configured with Git write access, successful verification also reserves an immutable
+`intake/<id>` branch for central revalidation. The result reports `reservation.status`;
+an unconfigured copy reports `unavailable` and does not claim publication. Neither
+MCP nor CLI writes the published dictionary directly.
+The repository's `Verify and reserve published package discovery` GitHub Actions
+workflow is the designated runner; it invokes both CLI and MCP before the collector.
 Installation resolvers return instructions; they never install or execute software.
 Full inputs and result contracts are documented in the [MCP guide](docs/MCP.md).
 
-Maintainers can promote a verified current-release observation through the serialized
-`Publish on-demand package observation` workflow. The workflow stores source evidence on
-`artifact-data`; the regular refresh remains the only writer of the dictionary branch.
+The scheduled intake collector validates and rechecks reserved evidence before merging
+it into `artifact-data`. The regular refresh remains the only writer of the dictionary
+branch. See the [MCP guide](docs/MCP.md) for runner configuration and the reservation
+lifecycle.
 
 ## Supported ecosystems
 
@@ -844,8 +851,9 @@ MCP makes that dataset immediately useful to agents.
 
 The schemas, deterministic builder, production OS index collector, derived
 prefix/length/ecosystem/trigram and logical-scope indexes, collector parsers,
-read-only local/HTTP MCP server, assessment API, bounded fixture freshness
-scenarios, and CI checks are implemented in this repository. Coverage is measured
+local/HTTP MCP server with Git intake for verified npm/PyPI discovery,
+assessment API, bounded fixture freshness scenarios, and CI checks are implemented
+in this repository. Coverage is measured
 against each source. npm stays `coverage_kind: partial` even when its finite
 ecosyste.ms critical catalog finishes (`catalog_complete: true`); the all-registry
 npm long tail is not in the index. See
