@@ -28,7 +28,8 @@ def repository(tmp_path: Path) -> tuple[Path, Path]:
     git(seed, "config", "user.name", "Fixture")
     git(seed, "config", "user.email", "fixture@example.test")
     (seed / "README").write_text("artifact fixture\n")
-    git(seed, "add", "README")
+    (seed / ".gitignore").write_text("data/production/intermediate/\n")
+    git(seed, "add", "README", ".gitignore")
     git(seed, "commit", "-m", "Seed artifact data")
     git(seed, "remote", "add", "origin", str(remote))
     git(seed, "push", "origin", "HEAD:artifact-data")
@@ -195,7 +196,8 @@ def test_aged_active_claim_is_rechecked_and_authoritative_withdrawal_is_publishe
     _remote, runner = repository(tmp_path)
     old = observation(checked_at="2026-10-01T00:00:00Z")
     persist_observation(runner, old)
-    git(runner, "add", "data/production/on-demand", "data/production/intermediate/on-demand.jsonl")
+    git(runner, "add", "data/production/on-demand")
+    git(runner, "add", "-f", "data/production/intermediate/on-demand.jsonl")
     git(runner, "-c", "user.name=Fixture", "-c", "user.email=fixture@example.test",
         "commit", "-m", "Seed old current claim")
     git(runner, "push", "origin", "HEAD:artifact-data")
@@ -286,7 +288,8 @@ def test_sweep_cursor_advances_past_repeated_transient_failures(tmp_path):
                     metadata_url=f"https://registry.npmjs.org/{package}/1.0",
                     artifact_url=f"https://registry.npmjs.org/{package}/-/archive.tgz")
         persist_observation(runner, item)
-    git(runner, "add", "data/production/on-demand", "data/production/intermediate/on-demand.jsonl")
+    git(runner, "add", "data/production/on-demand")
+    git(runner, "add", "-f", "data/production/intermediate/on-demand.jsonl")
     git(runner, "-c", "user.name=Fixture", "-c", "user.email=fixture@example.test",
         "commit", "-m", "Seed aged claims")
     git(runner, "push", "origin", "HEAD:artifact-data")
