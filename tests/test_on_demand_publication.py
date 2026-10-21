@@ -170,10 +170,10 @@ def test_workflows_keep_artifact_and_dictionary_publication_separate():
     acquisition = (ROOT / ".github/workflows/on-demand-discovery.yml").read_text(encoding="utf-8")
     refresh = (ROOT / ".github/workflows/refresh.yml").read_text(encoding="utf-8")
 
-    assert "persist-discovery" in acquisition
-    assert "HEAD:artifact-data" in acquisition
-    assert "--version" not in acquisition
-    assert "gh workflow run refresh.yml" in acquisition
+    assert "tools/git_intake_runner_smoke.py" in acquisition
+    assert "GLOBAL_EXECUTABLES_INTAKE_REPOSITORY" in acquisition
+    assert "HEAD:artifact-data" not in acquisition
+    assert "gh workflow run git-intake-collector.yml" in acquisition
     assert "--replace-source on-demand" in refresh
     assert "reconcile-discovery" in refresh
     assert "--dictionary-root /tmp/dictionary-publish" in refresh

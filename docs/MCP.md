@@ -105,6 +105,10 @@ The operation caches bounded evidence locally and reports
 branch. Set `GLOBAL_EXECUTABLES_INTAKE_REPOSITORY` to a Git checkout with an
 `artifact-data` remote branch and permission to create `intake/*` refs. CLI also accepts
 `--intake-repository` and `--intake-remote`; the MCP server accepts the same settings.
+The repository's `Verify and reserve published package discovery` GitHub Actions
+workflow is the designated runner for this project. An agent can dispatch it with
+an exact npm/PyPI package ID; it runs the CLI and MCP stdio protocol and then starts
+the central collector. The workflow never writes `artifact-data` directly.
 The result includes `reservation.status=reserved` only after the ref read-back. An
 unconfigured or inaccessible remote yields `unavailable` while retaining the live
 verification result. Neither interface writes `artifact-data` or `dictionary` directly.

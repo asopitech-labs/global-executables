@@ -248,6 +248,8 @@ configured with Git write access, successful verification also reserves an immut
 `intake/<id>` branch for central revalidation. The result reports `reservation.status`;
 an unconfigured copy reports `unavailable` and does not claim publication. Neither
 MCP nor CLI writes the published dictionary directly.
+The repository's `Verify and reserve published package discovery` GitHub Actions
+workflow is the designated runner; it invokes both CLI and MCP before the collector.
 Installation resolvers return instructions; they never install or execute software.
 Full inputs and result contracts are documented in the [MCP guide](docs/MCP.md).
 

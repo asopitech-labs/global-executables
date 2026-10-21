@@ -8,11 +8,14 @@ is no separate intake API, database, or human package-submission flow.
 
 `main` contains code and workflows. `artifact-data` is the durable source and
 publication ledger. `dictionary` is a generated snapshot, never an agent's
-direct write target. A designated runner starts the MCP/CLI agent with Git
+direct write target. The designated GitHub Actions runner starts the MCP/CLI agent with Git
 push rights to a restricted `intake/` branch namespace. A scheduled GitHub
 Actions collector has rights to update `artifact-data`. The agent need not
 hold permission to push `artifact-data`; branch rules should enforce this
-split, and the real runner's permission must be checked before deployment.
+split. The Actions runner uses `GITHUB_TOKEN` with `contents: write` to create
+intake refs. This token is repository-scoped, so the approved branch permission
+split additionally needs an explicit repository ruleset or separate GitHub App
+identity before the production gate can be considered complete.
 
 An MCP/CLI operation on that runner verifies a **known published package**
 from authoritative registry metadata and a bounded exact release artifact.
