@@ -44,6 +44,7 @@ jobs:
           PACKAGE: ${{ github.event_name == 'push' && 'global-executables' || inputs.package }}
           VERSION: ${{ inputs.version }}
           GLOBAL_EXECUTABLES_INTAKE_REPOSITORY: ${{ github.workspace }}
+          GLOBAL_EXECUTABLES_INTAKE_GIT_TIMEOUT: '180'
           GLOBAL_EXECUTABLES_CACHE_DIR: ${{ runner.temp }}/global-executables-cache
           GIT_TERMINAL_PROMPT: '0'
         run: |

@@ -120,6 +120,24 @@ def test_no_remote_or_unverified_result_cannot_ack(repo):
     assert git_intake.reserve_observation(observation(), checkout)["status"] == "unavailable"
 
 
+def test_actions_runner_can_extend_git_timeout(repo, monkeypatch):
+    checkout, _remote = repo
+    observed = []
+    original = git_intake._git
+
+    def record_timeout(directory, *args, timeout):
+        observed.append(timeout)
+        return original(directory, *args, timeout=timeout)
+
+    monkeypatch.setattr(git_intake, "_git", record_timeout)
+    monkeypatch.setenv("GLOBAL_EXECUTABLES_INTAKE_GIT_TIMEOUT", "180")
+    assert git_intake.reserve_observation(observation(), checkout)["status"] == "reserved"
+    assert observed and set(observed) == {180}
+    monkeypatch.setenv("GLOBAL_EXECUTABLES_INTAKE_GIT_TIMEOUT", "invalid")
+    assert git_intake.reserve_observation(observation(), checkout) == {
+        "status": "unavailable", "reason": "invalid Git timeout"}
+
+
 def test_processed_ledger_prevents_recreating_deleted_branch(repo):
     checkout, remote = repo
     first = git_intake.reserve_observation(observation(), checkout)
