@@ -98,8 +98,12 @@ targets must resolve to a module in a target-compatible wheel. The versioned
 `not_published`, `temporarily_unavailable`, and `unsupported`. A timeout, throttle, or
 5xx response is never converted to an absence claim.
 
-The operation is read-only: it caches bounded evidence locally and reports
-`publication_status: not_indexed`; it does not write `artifact-data` or `dictionary`.
+The operation caches bounded evidence locally and reports
+`publication_status: not_indexed`. When `GLOBAL_EXECUTABLES_RESERVATION_URL` points to
+the deployed central HTTPS intake, a successful verification requests durable collection.
+The response's `reservation.status` is `reserved` only after the central queue confirms
+the write; otherwise it explains why reservation is unavailable. The operation never
+writes `dictionary` directly.
 An omitted version means the registry-selected current release. CLI and MCP use the
 same engine:
 
@@ -112,15 +116,16 @@ global-executables discover-package pypi global-executables --command global-exe
 Use this operation only when the package identity is already known. It cannot perform
 complete command-name reverse search; use the snapshot lookup tools for that purpose.
 
-Maintainer-triggered durable promotion is deliberately separate from the MCP operation.
-The `Publish on-demand package observation` workflow performs a fresh, uncached check of
-the registry-selected current release only. It writes an append-only observation event,
+The central collector runs every 15 minutes and performs a fresh, uncached check of
+the registry-selected current release for due reservations. It writes an append-only observation event,
 the package's current claim, and the `on-demand` intermediate projection to
 `artifact-data`. The normal refresh replaces only providers owned by that source and
 publishes the dictionary. A final read-back records `indexed` on the claim only when the
 published provider contains the same claim and event digests; otherwise the claim remains
-queued for retry. Exact-version checks remain read-only so a later query for an old
-release cannot rewind current durable evidence.
+queued for retry. A query for an old release reserves the package identity, while the
+central collector independently checks the current release, so old evidence cannot
+rewind the durable claim. The endpoint is not yet deployed; see
+[deployment status](ISSUE_84_IMPLEMENTATION_STATUS.md).
 
 ### Environment-specific installation guidance
 

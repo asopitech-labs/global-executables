@@ -242,14 +242,17 @@ transport, offline operation, and running from a source checkout.
 | `resolve_installation` / `resolve_installations` | derive environment-specific install and invoke guidance |
 | `discover_published_package` | verify commands declared by one current npm or PyPI release |
 
-All tools are read-only. `discover_published_package` makes bounded live registry and
-artifact requests but never executes package code or mutates the published dictionary.
+Lookup tools are read-only. `discover_published_package` makes bounded live registry and
+artifact requests and, when a central reservation endpoint is configured, requests
+durable collection of a verified package. It never executes package code or directly
+mutates the published dictionary. The result reports the reservation outcome separately.
 Installation resolvers return instructions; they never install or execute software.
 Full inputs and result contracts are documented in the [MCP guide](docs/MCP.md).
 
-Maintainers can promote a verified current-release observation through the serialized
-`Publish on-demand package observation` workflow. The workflow stores source evidence on
-`artifact-data`; the regular refresh remains the only writer of the dictionary branch.
+The scheduled central collector rechecks acknowledged reservations and stores source
+evidence on `artifact-data`; the regular refresh remains the only writer of the
+dictionary branch. The central service must be deployed before automatic reservation
+is operational (see [deployment status](docs/ISSUE_84_IMPLEMENTATION_STATUS.md)).
 
 ## Supported ecosystems
 
@@ -844,7 +847,7 @@ MCP makes that dataset immediately useful to agents.
 
 The schemas, deterministic builder, production OS index collector, derived
 prefix/length/ecosystem/trigram and logical-scope indexes, collector parsers,
-read-only local/HTTP MCP server, assessment API, bounded fixture freshness
+local/HTTP MCP server, assessment API, bounded fixture freshness
 scenarios, and CI checks are implemented in this repository. Coverage is measured
 against each source. npm stays `coverage_kind: partial` even when its finite
 ecosyste.ms critical catalog finishes (`catalog_complete: true`); the all-registry
