@@ -131,7 +131,9 @@ def _commit(root: Path, message: str) -> bool:
     _git(root, "add", "-A", "--", ROOT.as_posix())
     if (root / PROJECTION).exists() or _git(root, "ls-files", "--error-unmatch",
                                              PROJECTION.as_posix(), check=False).returncode == 0:
-        _git(root, "add", "-A", "--", PROJECTION.as_posix())
+        # Production ignores intermediate outputs. This one projection is an
+        # intentional source artifact on artifact-data, so stage it explicitly.
+        _git(root, "add", "-f", "-A", "--", PROJECTION.as_posix())
     if _git(root, "diff", "--cached", "--quiet", check=False).returncode == 0:
         return False
     _git(root, "-c", "user.name=github-actions[bot]",
