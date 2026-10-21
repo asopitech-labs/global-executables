@@ -7,14 +7,13 @@
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {
-    "aegis-bio": 1,
-    "evo-objects": 1,
-    "indipyclient": 1,
-    "langchain-sourcey": 1,
-    "licos-dev-sdk": 1,
-    "prefect": 1,
-    "subt-ai-tles": 1,
-    "youngcan-wyckoff-analysis": 1
+    "aegis-bio": 2,
+    "evo-objects": 2,
+    "indipyclient": 2,
+    "langchain-sourcey": 2,
+    "licos-dev-sdk": 2,
+    "subt-ai-tles": 2,
+    "youngcan-wyckoff-analysis": 2
   },
   "failures": {
     "aegis-bio": "unexpected end of JSON input",
@@ -22,75 +21,30 @@
     "indipyclient": "unexpected end of JSON input",
     "langchain-sourcey": "unexpected end of JSON input",
     "licos-dev-sdk": "invalid character ' ' in literal null (expecting 'l')",
-    "prefect": "unexpected end of JSON input",
     "subt-ai-tles": "unexpected end of JSON input",
     "youngcan-wyckoff-analysis": "unexpected end of JSON input"
   },
-  "feed_cursor": "42513764",
+  "feed_cursor": "42526077",
   "feed_pending": {
-    "MemoryFrames": {
-      "kind": "add source file memoryframes-0.6.21.tar.gz",
-      "time": 1792532409
+    "behaviorgpt": {
+      "kind": "add source file behaviorgpt-0.6.0.tar.gz",
+      "time": 1792558470
     },
-    "apiverve-interestrate": {
-      "kind": "add source file apiverve_interestrate-1.2.2.tar.gz",
-      "time": 1792532412
+    "grasp-atomic-kit": {
+      "kind": "remove release",
+      "time": 1792558468
     },
-    "apiverve-ipblacklistlookup": {
-      "kind": "add source file apiverve_ipblacklistlookup-1.2.2.tar.gz",
-      "time": 1792532424
+    "gtsam-develop": {
+      "kind": "add cp314 file gtsam_develop-4.3.2.dev202610210342-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "time": 1792558439
     },
-    "apiverve-ipdemographics": {
-      "kind": "add source file apiverve_ipdemographics-1.2.2.tar.gz",
-      "time": 1792532430
+    "hitlist": {
+      "kind": "add source file hitlist-1.82.14.tar.gz",
+      "time": 1792558444
     },
-    "apiverve-iplookup": {
-      "kind": "add source file apiverve_iplookup-1.2.2.tar.gz",
-      "time": 1792532438
-    },
-    "apiverve-jsonschemavalidator": {
-      "kind": "add source file apiverve_jsonschemavalidator-1.2.2.tar.gz",
-      "time": 1792532448
-    },
-    "apiverve-jsontocsvconverter": {
-      "kind": "add source file apiverve_jsontocsvconverter-1.2.2.tar.gz",
-      "time": 1792532458
-    },
-    "apiverve-juliandaycalculator": {
-      "kind": "add py3 file apiverve_juliandaycalculator-1.2.2-py3-none-any.whl",
-      "time": 1792532465
-    },
-    "dbml-sharepoint": {
-      "kind": "add source file dbml_sharepoint-0.26.2.tar.gz",
-      "time": 1792532438
-    },
-    "decimalai": {
-      "kind": "add source file decimalai-0.22.1.tar.gz",
-      "time": 1792532427
-    },
-    "diffio": {
-      "kind": "add source file diffio-0.2.49.tar.gz",
-      "time": 1792532424
-    },
-    "p123api": {
-      "kind": "add source file p123api-3.1.1a4.tar.gz",
-      "time": 1792532446
-    },
-    "qorechain-rdk": {
-      "kind": "add source file qorechain_rdk-0.6.0.tar.gz",
-      "time": 1792532443
-    },
-    "souleyez": {
-      "kind": "add source file souleyez-5.0.15.tar.gz",
-      "time": 1792532434
-    },
-    "tet-py": {
-      "kind": "add source file tet_py-0.5.1.tar.gz",
-      "time": 1792532431
-    },
-    "wayza-human": {
-      "kind": "add source file wayza_human-0.1.4.tar.gz",
-      "time": 1792532432
+    "radiomicsj": {
+      "kind": "add source file radiomicsj-2.5.1.tar.gz",
+      "time": 1792558434
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
@@ -100,10 +54,9 @@
     "langchain-sourcey",
     "youngcan-wyckoff-analysis",
     "evo-objects",
-    "prefect",
     "aegis-bio",
     "licos-dev-sdk",
     "subt-ai-tles"
   ],
-  "snapshot_generation": 156
+  "snapshot_generation": 157
 }
