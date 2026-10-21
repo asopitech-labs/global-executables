@@ -3,7 +3,9 @@ name: Verify and reserve published package discovery
 on:
   push:
     branches: [main]
-    paths: [.github/workflows/on-demand-discovery.yml]
+    paths:
+      - .github/workflows/on-demand-discovery.yml
+      - src/global_executables/git_intake_collector.py
   workflow_dispatch:
     inputs:
       ecosystem:
