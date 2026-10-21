@@ -242,14 +242,19 @@ transport, offline operation, and running from a source checkout.
 | `resolve_installation` / `resolve_installations` | derive environment-specific install and invoke guidance |
 | `discover_published_package` | verify commands declared by one current npm or PyPI release |
 
-All tools are read-only. `discover_published_package` makes bounded live registry and
-artifact requests but never executes package code or mutates the published dictionary.
+Snapshot lookup tools are read-only. `discover_published_package` makes bounded live
+registry and artifact requests without executing package code. On a designated runner
+configured with Git write access, successful verification also reserves an immutable
+`intake/<id>` branch for central revalidation. The result reports `reservation.status`;
+an unconfigured copy reports `unavailable` and does not claim publication. Neither
+MCP nor CLI writes the published dictionary directly.
 Installation resolvers return instructions; they never install or execute software.
 Full inputs and result contracts are documented in the [MCP guide](docs/MCP.md).
 
-Maintainers can promote a verified current-release observation through the serialized
-`Publish on-demand package observation` workflow. The workflow stores source evidence on
-`artifact-data`; the regular refresh remains the only writer of the dictionary branch.
+The scheduled intake collector validates and rechecks reserved evidence before merging
+it into `artifact-data`. The regular refresh remains the only writer of the dictionary
+branch. See the [MCP guide](docs/MCP.md) for runner configuration and the reservation
+lifecycle.
 
 ## Supported ecosystems
 

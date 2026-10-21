@@ -1,5 +1,5 @@
 from __future__ import annotations
-import argparse, json, sys
+import argparse, json, os, sys
 from datetime import datetime
 from pathlib import Path
 from .collectors import crates_manifest, homebrew_metadata, npm_metadata, package_files
@@ -20,7 +20,7 @@ def main(argv=None):
         from .mcp_server import main as mcp_main
         return mcp_main(argv[1:])
     p=argparse.ArgumentParser(prog="global-executables"); sub=p.add_subparsers(dest="action",required=True)
-    sub.add_parser("mcp", help="run the read-only MCP server (stdio by default; see `mcp --help`)")
+    sub.add_parser("mcp", help="run the MCP lookup server (stdio by default; see `mcp --help`)")
     build=sub.add_parser("build"); build.add_argument("inputs",nargs="+",type=Path); build.add_argument("--root",type=Path,default=Path.cwd()); build.add_argument("--snapshot"); build.add_argument("--coverage-kind",choices=["fixture","smoke","partial","exhaustive"],default="fixture"); build.add_argument("--allow-shrink-reason")
     collect=sub.add_parser("collect"); collect.add_argument("ecosystem",choices=["debian","ubuntu","arch","homebrew","npm","crates"]); collect.add_argument("input",type=Path); collect.add_argument("output",type=Path)
     discover=sub.add_parser("discover-package", help="verify commands published by one npm or PyPI package")
@@ -32,6 +32,11 @@ def main(argv=None):
     discover.add_argument("--cache-dir", type=Path)
     discover.add_argument("--offline", action="store_true")
     discover.add_argument("--timeout", type=float, default=20.0)
+    discover.add_argument("--intake-repository", type=Path,
+                          default=os.getenv("GLOBAL_EXECUTABLES_INTAKE_REPOSITORY"),
+                          help="designated Git checkout for automatic intake reservation")
+    discover.add_argument("--intake-remote", default="origin",
+                          help="Git remote for intake reservation (default: origin)")
     persist=sub.add_parser("persist-discovery", help="reverify and persist one package to artifact-data")
     persist.add_argument("ecosystem", choices=["npm", "pypi"])
     persist.add_argument("package")
@@ -76,6 +81,15 @@ def main(argv=None):
                 a.ecosystem, a.package, a.version, a.command, target)
         except (ValueError, TypeError) as error:
             p.error(str(error))
+        if result.get("outcome") == "verified_entry_point" and a.intake_repository:
+            from .git_intake import reserve_observation
+            result = {**result, "reservation": reserve_observation(
+                result, Path(a.intake_repository), remote=a.intake_remote)}
+        else:
+            result = {**result, "reservation": (
+                {"status": "unavailable", "reason": "intake_repository_not_configured"}
+                if not a.intake_repository else
+                {"status": "not_eligible", "reason": "entry_point_not_verified"})}
         print(json.dumps(result, indent=2, sort_keys=True)); return
     if a.action == "persist-discovery":
         observation = PackageDiscovery(a.cache_dir, timeout=a.timeout).discover(

@@ -155,8 +155,10 @@ async def test_mcp_discovery_uses_the_shared_engine_contract(dictionary_root):
     })
 
     content, structured = result
-    assert structured == expected
-    assert json.loads(content[0].text) == expected
+    expected_with_reservation = {**expected, "reservation": {
+        "status": "unavailable", "reason": "intake_repository_not_configured"}}
+    assert structured == expected_with_reservation
+    assert json.loads(content[0].text) == expected_with_reservation
     assert engine.calls == [("npm", "sample", "1.0", "sample", {})]
 
 
