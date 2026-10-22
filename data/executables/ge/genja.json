@@ -2,6 +2,18 @@
   "command": "genja",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "genja-cli",
+      "version": "0.5.0",
+      "repository": "https://github.com/Smertan/genja",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.5.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "genja",
       "version": "25.10",
@@ -12,8 +24,20 @@
       "language": "python",
       "registry": "pypi",
       "latest_version": "25.10"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "genja-cli",
+      "version": "0.5.0",
+      "repository": "https://docs.genja.co.uk",
+      "source": "https://files.pythonhosted.org/packages/e7/34/2a1e9f419ed787bcd18ca86d4431c96c1e2c50fa1b49ad8c71a77e93f645/genja_cli-0.5.0-py3-none-macosx_10_12_x86_64.whl",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "python",
+      "registry": "pypi",
+      "latest_version": "0.5.0"
     }
   ],
   "first_seen": "2026-08-25",
-  "last_seen": "2026-10-21"
+  "last_seen": "2026-10-22"
 }

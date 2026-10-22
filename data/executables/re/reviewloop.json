@@ -2,6 +2,18 @@
   "command": "reviewloop",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "reviewloop",
+      "version": "0.0.1",
+      "repository": "https://github.com/Acture/reviewloop",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.0.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/formancehq/ledger/v3",
       "version": "v3.0.0-beta.1",
@@ -39,5 +51,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-10-21"
+  "last_seen": "2026-10-22"
 }

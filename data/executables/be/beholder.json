@@ -2,6 +2,18 @@
   "command": "beholder",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "beholder-cli",
+      "version": "0.1.1",
+      "repository": "https://github.com/wyrd-company/beholder",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/dhleong/beholder",
       "version": "v0.0.0-20260628010639-a481ea5e7b98",
@@ -75,5 +87,5 @@
     }
   ],
   "first_seen": "2026-08-24",
-  "last_seen": "2026-10-21"
+  "last_seen": "2026-10-22"
 }
