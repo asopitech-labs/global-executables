@@ -65,7 +65,7 @@ or a point could not be confirmed.
 | Go module mirror and index | proxy.golang.org, index.golang.org | Module list, versions, `.mod` files, module zips (`package main` directories) | Each module's own license | Go module services page; `/cached-only` for bulk use | No | OK |
 | pkg.go.dev API | pkg.go.dev | `name == "main"` packages of a module | Not stated | API documentation: 45 queries per second per IP block | No | OK; terms of service **unverified** |
 | RubyGems.org | rubygems.org | Gem metadata JSON and `.gem` files (`executables`) | Not stated for metadata; gems under each gem's license | RubyGems.org Terms of Service; 10 requests per second for API | No | OK |
-| Packagist | repo.packagist.org, packagist.org | Composer v2 metadata (`bin`), metadata change feed | Not stated | Packagist API best practices: `mailto` in User-Agent, at most 10 (or 20 for static files) concurrent requests | No | OK |
+| Packagist | repo.packagist.org, packagist.org | Composer v2 metadata (`bin`), metadata change feed | Not stated | Packagist API best practices: `mailto` in User-Agent, at most 10 (or 20 for static files) concurrent requests | No | **Accepted risk** (repository URL identifies the client; no e-mail is disclosed) |
 | NuGet | api.nuget.org, azuresearch-usnc.nuget.org | Search results, `.nupkg` files (tool commands), catalog | Not stated for metadata; packages under each package's license | NuGet.org Terms of Use; rate limits page | No | OK |
 | ConanCenter | center2.conan.io, codeload.github.com (conan-io/conan-center-index), api.github.com | Recipe index, package manifests, recipe change feed | Recipes: MIT; manifests not stated | conan.io Terms and Conditions (website); GitHub terms | No | OK; center2 terms **unverified** |
 | vcpkg | codeload.github.com (microsoft/vcpkg) | Port files (`vcpkg_copy_tools`) | MIT | GitHub terms | Only for copied excerpts | OK (excerpts noticed in `NOTICE`) |
@@ -202,7 +202,8 @@ Options, for a decision by the maintainer (none is chosen here):
   `entry_points.txt` and console scripts. The bounded exhaustive rotation
   revisits every project instead of using PyPI's deprecated XML-RPC changelog.
   `src/global_executables/production.py` uses `https://pypi.org/simple/`.
-  Both Actions and the local booster send a contact address in the User-Agent.
+  Actions identifies the public repository in the User-Agent. A local booster
+  may add a contact value explicitly through `CONTACT`.
 - Terms: PyPI Terms of Service, effective 2025-02-25
   (https://policies.python.org/pypi.org/Terms-of-Service/), API Terms:
   abuse or excessively frequent requests may lead to suspension. API policies
@@ -213,8 +214,9 @@ Options, for a decision by the maintainer (none is chosen here):
   and users a license to reproduce and distribute content uploaded without a
   license. No separate license is stated for metadata.
 - Status: OK. The crawler uses the JSON and Simple APIs plus artifact files;
-  it does not use the deprecated XML-RPC API. The repository variable
-  `REGISTRY_CONTACT` supplies the Actions User-Agent contact address.
+  it does not use the deprecated XML-RPC API. Its Actions User-Agent uniquely
+  identifies the public repository; PyPI describes contact information as
+  helpful rather than required, so Actions does not disclose an e-mail address.
 
 ### crates.io
 
@@ -271,11 +273,11 @@ Options, for a decision by the maintainer (none is chosen here):
   that includes `mailto=you@example.com`; at most 10 concurrent requests, or
   up to 20 if only fetching static files; avoid running scheduled jobs on the
   hour.
-- Status: OK. The crawler defaults to 20 workers. GitHub Actions reads the
-  operator e-mail address from the `REGISTRY_CONTACT` repository variable and
-  includes it as `mailto` in the User-Agent; the workflow fails clearly when
-  the variable is absent. The schedule (`17 */6 * * *`) avoids the top of the
-  hour.
+- Status: **Accepted risk.** The crawler defaults to 20 workers and the
+  schedule (`17 */6 * * *`) avoids the top of the hour. Its User-Agent links
+  to the public repository, but deliberately does not disclose an operator
+  e-mail address. This does not follow Packagist's `mailto` recommendation and
+  may make blocking more likely if Packagist needs to contact the operator.
 
 ### NuGet
 
@@ -444,8 +446,10 @@ These hosts do not supply data for the dataset.
 2. Dataset license: the `dictionary` branch carries no license file, and the
    README points to the repository's MIT license. The dataset's license needs
    to be stated, and the choice depends on item 1.
-3. Packagist: default concurrency and the Actions contact User-Agent were
-   fixed in #110.
+3. Packagist: #110 reduced default concurrency to 20. The maintainer chose not
+   to disclose an e-mail address in automated requests; the public repository
+   URL remains in the User-Agent. This is an accepted risk rather than full
+   compliance with Packagist's `mailto` recommendation.
 4. RubyGems.org: process-wide request pacing was added in #110 to enforce the
    10 requests per second API limit.
 5. PyPI: #110 removed the deprecated XML-RPC change feed; bounded exhaustive

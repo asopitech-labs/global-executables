@@ -95,16 +95,6 @@ jobs:
           else
             echo "No live local booster lease for ${SOURCE}; this run owns the whole rotation."
           fi
-      - name: Configure the registry contact
-        if: steps.restore.outputs.eligible == 'true' && matrix.source != 'nuget'
-        env:
-          REGISTRY_CONTACT: ${{ vars.REGISTRY_CONTACT }}
-        run: |
-          if [ -z "${REGISTRY_CONTACT}" ]; then
-            echo "::error::Set the repository variable REGISTRY_CONTACT to the crawler operator's e-mail address."
-            exit 1
-          fi
-          echo "CRAWLER_USER_AGENT=global-executables-registry-crawl/2.0 (+https://github.com/asopitech-labs/global-executables; mailto:${REGISTRY_CONTACT})" >> "$GITHUB_ENV"
       - name: Refresh one transactional batch
         if: steps.restore.outputs.eligible == 'true' && matrix.source != 'nuget'
         env:
@@ -125,7 +115,6 @@ jobs:
             -v "${PWD}/data/production/cache:/cache" \
             global-executables-go-crawler:ci crawl --source "${SOURCE}" \
             --cache "/cache/${SOURCE}.cache.gz" \
-            --user-agent "${CRAWLER_USER_AGENT}" \
             ${EXCLUDE:+--rotation-exclude "${EXCLUDE}"} \
             --passes 1 --continuous --catalog-pages "${catalog_pages}" \
             --package-budget "${PACKAGE_BUDGET}" \
