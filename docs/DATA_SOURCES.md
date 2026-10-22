@@ -60,12 +60,12 @@ or a point could not be confirmed.
 |---|---|---|---|---|---|---|
 | ecosyste.ms Packages | packages.ecosyste.ms | Names of the 2,295 "critical" npm packages, scraped from HTML pages | CC BY-SA 4.0 | ecosyste.ms Terms of Service; polite pool needs a `mailto` | Yes: "ecosyste.ms" as the source, CC BY-SA 4.0 | **Gap** (share-alike, scraping clause) |
 | npm registry | registry.npmjs.org, replicate.npmjs.com | `bin` of each listed package's latest version; change feed and package-name index | Not stated for metadata; package contents under each package's license | npm Open-Source Terms; Public APIs allowed; under 5 million requests a month | No | OK |
-| PyPI | pypi.org, files.pythonhosted.org | Project list, JSON metadata, entry points read from wheels and sdists, XML-RPC changelog | Not stated for metadata; files under each project's license | PyPI Terms of Service, API policies | No | OK, with a gap on XML-RPC |
+| PyPI | pypi.org, files.pythonhosted.org | Project list, JSON metadata, entry points read from wheels and sdists | Not stated for metadata; files under each project's license | PyPI Terms of Service, API policies | No | OK |
 | crates.io | static.crates.io, index.crates.io, crates.io | `bin_names` from the daily database dump | Not stated in the dump | crates.io Data Access Policy | No | OK |
 | Go module mirror and index | proxy.golang.org, index.golang.org | Module list, versions, `.mod` files, module zips (`package main` directories) | Each module's own license | Go module services page; `/cached-only` for bulk use | No | OK |
 | pkg.go.dev API | pkg.go.dev | `name == "main"` packages of a module | Not stated | API documentation: 45 queries per second per IP block | No | OK; terms of service **unverified** |
-| RubyGems.org | rubygems.org | Gem metadata JSON and `.gem` files (`executables`) | Not stated for metadata; gems under each gem's license | RubyGems.org Terms of Service; 10 requests per second for API | No | **Unverified** (request rate not measured) |
-| Packagist | repo.packagist.org, packagist.org | Composer v2 metadata (`bin`), metadata change feed | Not stated | Packagist API best practices: `mailto` in User-Agent, at most 10 (or 20 for static files) concurrent requests | No | **Gap** (concurrency, contact) |
+| RubyGems.org | rubygems.org | Gem metadata JSON and `.gem` files (`executables`) | Not stated for metadata; gems under each gem's license | RubyGems.org Terms of Service; 10 requests per second for API | No | OK |
+| Packagist | repo.packagist.org, packagist.org | Composer v2 metadata (`bin`), metadata change feed | Not stated | Packagist API best practices: `mailto` in User-Agent, at most 10 (or 20 for static files) concurrent requests | No | **Accepted risk** (repository URL identifies the client; no e-mail is disclosed) |
 | NuGet | api.nuget.org, azuresearch-usnc.nuget.org | Search results, `.nupkg` files (tool commands), catalog | Not stated for metadata; packages under each package's license | NuGet.org Terms of Use; rate limits page | No | OK |
 | ConanCenter | center2.conan.io, codeload.github.com (conan-io/conan-center-index), api.github.com | Recipe index, package manifests, recipe change feed | Recipes: MIT; manifests not stated | conan.io Terms and Conditions (website); GitHub terms | No | OK; center2 terms **unverified** |
 | vcpkg | codeload.github.com (microsoft/vcpkg) | Port files (`vcpkg_copy_tools`) | MIT | GitHub terms | Only for copied excerpts | OK (excerpts noticed in `NOTICE`) |
@@ -199,11 +199,11 @@ Options, for a decision by the maintainer (none is chosen here):
 - Code: `internal/registryinspect/pypi.go` reads `/pypi/<project>/json`
   (with a Range read for projects whose JSON is over 8 MB) and downloads the
   wheel or sdist it lists from files.pythonhosted.org to read
-  `entry_points.txt` and console scripts. `internal/registryinspect/feeds.go`
-  calls the XML-RPC changelog (`changelog_since_serial`) at `pypi.org/pypi`.
-  `src/global_executables/production.py` uses `https://pypi.org/simple/`. The
-  local booster (`tools/local_booster.sh`) sends a contact address in the
-  User-Agent.
+  `entry_points.txt` and console scripts. The bounded exhaustive rotation
+  revisits every project instead of using PyPI's deprecated XML-RPC changelog.
+  `src/global_executables/production.py` uses `https://pypi.org/simple/`.
+  Actions identifies the public repository in the User-Agent. A local booster
+  may add a contact value explicitly through `CONTACT`.
 - Terms: PyPI Terms of Service, effective 2025-02-25
   (https://policies.python.org/pypi.org/Terms-of-Service/), API Terms:
   abuse or excessively frequent requests may lead to suspension. API policies
@@ -213,11 +213,10 @@ Options, for a decision by the maintainer (none is chosen here):
 - Data license: uploaded content keeps its own license; the terms grant PSF
   and users a license to reproduce and distribute content uploaded without a
   license. No separate license is stated for metadata.
-- Status: OK for the JSON API and files. **Gap:** the change feed uses the
-  XML-RPC changelog that PyPI asks new integrations not to use; moving to the
-  RSS feeds or another supported feed fixes it. The Actions crawler sends the
-  default User-Agent with the repository URL but no e-mail; PyPI calls contact
-  information "helpful", not required.
+- Status: OK. The crawler uses the JSON and Simple APIs plus artifact files;
+  it does not use the deprecated XML-RPC API. Its Actions User-Agent uniquely
+  identifies the public repository; PyPI describes contact information as
+  helpful rather than required, so Actions does not disclose an e-mail address.
 
 ### crates.io
 
@@ -260,10 +259,9 @@ Options, for a decision by the maintainer (none is chosen here):
   content; other use follows each gem's license. Rate limits
   (https://guides.rubygems.org/rubygems-org-rate-limits/): API and website 10
   requests per second; the team may block IPs in extreme cases.
-- Status: **Unverified.** The crawler runs 16 workers by default with no
-  per-request pacing for RubyGems, so it can exceed 10 requests per second on
-  the API endpoint. The actual request rate has not been measured. Measuring
-  it, or adding a minimum request interval as the npm crawler has, closes this.
+- Status: OK. The crawler keeps its 16 workers for artifact processing, but a
+  process-wide 100 ms request interval gates every RubyGems HTTP request and
+  keeps aggregate throughput at or below 10 requests per second.
 
 ### Packagist
 
@@ -275,12 +273,11 @@ Options, for a decision by the maintainer (none is chosen here):
   that includes `mailto=you@example.com`; at most 10 concurrent requests, or
   up to 20 if only fetching static files; avoid running scheduled jobs on the
   hour.
-- Status: **Gap.** The crawler's default is 24 workers, and the User-Agent
-  sent from GitHub Actions carries the repository URL but no `mailto`. Passing
-  `--workers` of 20 or fewer for Packagist and a User-Agent with a contact
-  address (`--user-agent` or `GE_USER_AGENT`) in `registry-refresh.yml` fixes
-  both. The workflow schedule
-  (`17 */6 * * *`) already avoids the top of the hour.
+- Status: **Accepted risk.** The crawler defaults to 20 workers and the
+  schedule (`17 */6 * * *`) avoids the top of the hour. Its User-Agent links
+  to the public repository, but deliberately does not disclose an operator
+  e-mail address. This does not follow Packagist's `mailto` recommendation and
+  may make blocking more likely if Packagist needs to contact the operator.
 
 ### NuGet
 
@@ -449,12 +446,14 @@ These hosts do not supply data for the dataset.
 2. Dataset license: the `dictionary` branch carries no license file, and the
    README points to the repository's MIT license. The dataset's license needs
    to be stated, and the choice depends on item 1.
-3. Packagist: default concurrency (24) is above the 20 that Packagist asks
-   for, and no `mailto` is sent from GitHub Actions.
-4. RubyGems.org: request rate against the 10 requests per second API limit is
-   not measured and not paced.
-5. PyPI: the change feed uses the XML-RPC changelog, which PyPI asks new
-   integrations not to use.
+3. Packagist: #110 reduced default concurrency to 20. The maintainer chose not
+   to disclose an e-mail address in automated requests; the public repository
+   URL remains in the User-Agent. This is an accepted risk rather than full
+   compliance with Packagist's `mailto` recommendation.
+4. RubyGems.org: process-wide request pacing was added in #110 to enforce the
+   10 requests per second API limit.
+5. PyPI: #110 removed the deprecated XML-RPC change feed; bounded exhaustive
+   rotation now discovers updates.
 6. Test fixtures with vcpkg and xmake-repo excerpts had no license notices.
    Fixed by this change.
 7. Unverified external acquisition references: terms for Debian, Ubuntu, Arch and MSYS2 archive files, the
