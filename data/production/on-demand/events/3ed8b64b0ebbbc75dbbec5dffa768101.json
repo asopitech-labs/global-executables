@@ -1,0 +1,63 @@
+{
+  "claim": {
+    "checked_at": "2026-10-24T18:51:55.909187Z",
+    "claim_id": "fb22a998cc2af3613fc31ad38530c4c0e78c431e3264b51188b6e7d8151de4ca",
+    "commands": [
+      {
+        "command": "global-executables",
+        "entry_point": "global_executables.cli:main"
+      },
+      {
+        "command": "global-executables-mcp",
+        "entry_point": "global_executables.mcp_server:main"
+      }
+    ],
+    "ecosystem": "pypi",
+    "event_digest": "3ed8b64b0ebbbc75dbbec5dffa768101880de1fabe6baa0574b331d19f5b6f92",
+    "layout_version": 1,
+    "normalized_package": "global-executables",
+    "observation": {
+      "artifact_digest": "sha256:f107c150b848cd6ffaab64e450f427559eeffcdcd827681ef02c6353061e3e53",
+      "artifact_url": "https://files.pythonhosted.org/packages/63/e1/fb394ce90ce4c51bcf6a01b425421c10fe7dada7a91638030d9b8aad1f5f/global_executables-1.4.1-py3-none-any.whl",
+      "cache": {
+        "age_seconds": 0,
+        "status": "miss"
+      },
+      "canonical_package": "global-executables",
+      "checked_at": "2026-10-24T18:51:55.909187Z",
+      "commands": [
+        {
+          "command": "global-executables",
+          "entry_point": "global_executables.cli:main"
+        },
+        {
+          "command": "global-executables-mcp",
+          "entry_point": "global_executables.mcp_server:main"
+        }
+      ],
+      "contract_version": "package-discovery-v1",
+      "ecosystem": "pypi",
+      "metadata_url": "https://pypi.org/pypi/global-executables/json",
+      "outcome": "verified_entry_point",
+      "package": "global-executables",
+      "publication_status": "not_indexed",
+      "requested_command": null,
+      "requested_version": null,
+      "target": {},
+      "unresolved": [],
+      "verification_complete": true,
+      "verification_method": "pypi-wheel-console-scripts-and-module-member",
+      "version": "1.4.1"
+    },
+    "package": "global-executables",
+    "previous_event_digest": "987e70f4da69ba024a09534e67f77a6a2eb71476986a08abbf65798222f2e9bc",
+    "publication": {
+      "snapshot": null,
+      "status": "queued_for_refresh"
+    },
+    "release_version": "1.4.1",
+    "status": "active"
+  },
+  "event_digest": "3ed8b64b0ebbbc75dbbec5dffa768101880de1fabe6baa0574b331d19f5b6f92",
+  "event_type": "observation"
+}
