@@ -6,25 +6,47 @@
   "cursor": 870264,
   "due_floor": 0,
   "extraction_revision": 1,
-  "failure_attempts": {},
-  "failures": {},
-  "feed_cursor": "42727041",
+  "failure_attempts": {
+    "meta-package-manager": 1
+  },
+  "failures": {
+    "meta-package-manager": "unexpected end of JSON input"
+  },
+  "feed_cursor": "42734552",
   "feed_pending": {
-    "kibonet-python-sdk": {
-      "kind": "add source file kibonet_python_sdk-0.1.1.tar.gz",
-      "time": 1792945636
+    "cisternal": {
+      "kind": "add source file cisternal-0.1.5.tar.gz",
+      "time": 1792961753
     },
-    "proxytool": {
-      "kind": "add source file proxytool-0.4.1.tar.gz",
-      "time": 1792945642
+    "fhlmi": {
+      "kind": "add source file fhlmi-1.10.0.tar.gz",
+      "time": 1792961808
     },
-    "runspec-confluence-core": {
-      "kind": "add source file runspec_confluence_core-0.10.1.tar.gz",
-      "time": 1792945660
+    "hypgraph": {
+      "kind": "add source file hypgraph-0.4.0.tar.gz",
+      "time": 1792961783
+    },
+    "k9-aif": {
+      "kind": "add source file k9_aif-1.20.1.tar.gz",
+      "time": 1792961797
+    },
+    "koebelt-dash-scripts": {
+      "kind": "add source file koebelt_dash_scripts-1.3.0b4.tar.gz",
+      "time": 1792961811
+    },
+    "ldp": {
+      "kind": "add source file ldp-1.10.0.tar.gz",
+      "time": 1792961803
+    },
+    "qtoggleserver": {
+      "kind": "add source file qtoggleserver-0.37.0a1.tar.gz",
+      "time": 1792961762
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
-  "retry_projects": [],
-  "snapshot_generation": 178
+  "retry_projects": [
+    "meta-package-manager"
+  ],
+  "snapshot_generation": 179
 }
