@@ -6,33 +6,39 @@
   "cursor": 870264,
   "due_floor": 0,
   "extraction_revision": 1,
-  "failure_attempts": {},
-  "failures": {},
-  "feed_cursor": "42700101",
+  "failure_attempts": {
+    "acdp": 1
+  },
+  "failures": {
+    "acdp": "unexpected end of JSON input"
+  },
+  "feed_cursor": "42709929",
   "feed_pending": {
-    "dex-python-sdk": {
-      "kind": "add source file dex_python_sdk-1.16.0.tar.gz",
-      "time": 1792875334
+    "cluebase-backend-sdk": {
+      "kind": "add source file cluebase_backend_sdk-0.0.6.tar.gz",
+      "time": 1792903627
     },
-    "inventor-mcp-server": {
-      "kind": "create",
-      "time": 1792875302
+    "keywharf": {
+      "kind": "add source file keywharf-1.1.1.tar.gz",
+      "time": 1792903624
     },
-    "mars-agents": {
-      "kind": "add source file mars_agents-0.18.0.tar.gz",
-      "time": 1792875330
+    "ladybug": {
+      "kind": "add source file ladybug-0.22.0.tar.gz",
+      "time": 1792903591
     },
-    "modelly-abm": {
-      "kind": "add cp313 file modelly_abm-1.3.1-cp313-cp313-macosx_11_0_arm64.whl",
-      "time": 1792875351
+    "sapphyre-tools": {
+      "kind": "add cp312 file sapphyre_tools-0.13.17-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "time": 1792903643
     },
-    "pkpdsim": {
-      "kind": "add py3 file pkpdsim-0.12.1-py3-none-any.whl",
-      "time": 1792875351
+    "vaxrank": {
+      "kind": "add source file vaxrank-3.46.12.tar.gz",
+      "time": 1792903618
     }
   },
   "projects_file": "data/production/pypi-projects.txt",
   "refresh_cursor": 0,
-  "retry_projects": [],
-  "snapshot_generation": 175
+  "retry_projects": [
+    "acdp"
+  ],
+  "snapshot_generation": 176
 }
