@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"encoding/xml"
 	"errors"
 	"fmt"
 	"io"
@@ -18,10 +17,6 @@ import (
 )
 
 const (
-	// pypiMaxSerialGap is the largest number of PyPI changelog entries one poll replays
-	// (about a week of traffic). A longer gap is reported as a resynchronisation
-	// instead, and the rotation re-checks everything.
-	pypiMaxSerialGap = 300_000
 	// npmChangesPage and npmMaxPages bound one poll of the npm replication feed.
 	npmChangesPage = 5000
 	npmMaxPages    = 40
@@ -63,144 +58,6 @@ func (c feedClient) do(ctx context.Context, method, target string, body []byte, 
 	defer resp.Body.Close()
 	data, err := io.ReadAll(io.LimitReader(resp.Body, feedBodyLimit))
 	return resp.StatusCode, data, err
-}
-
-// PyPIFeed reads the PyPI XML-RPC changelog. The cursor is a serial number.
-type PyPIFeed struct {
-	baseURL string
-	client  feedClient
-}
-
-func NewPyPIFeed(config Config) *PyPIFeed {
-	if config.BaseURL == "" {
-		config.BaseURL = "https://pypi.org"
-	}
-	return &PyPIFeed{baseURL: strings.TrimRight(config.BaseURL, "/"), client: newFeedClient(config)}
-}
-
-type xmlRPCValue struct {
-	String *string `xml:"string"`
-	Int    *int64  `xml:"int"`
-	I4     *int64  `xml:"i4"`
-	Array  *struct {
-		Values []xmlRPCValue `xml:"data>value"`
-	} `xml:"array"`
-}
-
-type xmlRPCResponse struct {
-	Value xmlRPCValue `xml:"params>param>value"`
-	Fault *struct{}   `xml:"fault"`
-}
-
-func (v xmlRPCValue) integer() (int64, bool) {
-	switch {
-	case v.Int != nil:
-		return *v.Int, true
-	case v.I4 != nil:
-		return *v.I4, true
-	}
-	return 0, false
-}
-
-func xmlRPCCall(method string, serial *int64) []byte {
-	var body strings.Builder
-	body.WriteString(`<?xml version="1.0"?><methodCall><methodName>` + method + `</methodName>`)
-	if serial != nil {
-		body.WriteString(`<params><param><value><int>` + strconv.FormatInt(*serial, 10) + `</int></value></param></params>`)
-	}
-	body.WriteString(`</methodCall>`)
-	return []byte(body.String())
-}
-
-func (f *PyPIFeed) call(ctx context.Context, method string, serial *int64) (xmlRPCResponse, int64, error) {
-	status, data, err := f.client.do(ctx, http.MethodPost, f.baseURL+"/pypi", xmlRPCCall(method, serial), "text/xml")
-	if err != nil {
-		return xmlRPCResponse{}, 0, err
-	}
-	if status != http.StatusOK {
-		return xmlRPCResponse{}, int64(len(data)), fmt.Errorf("pypi %s: status %d", method, status)
-	}
-	var response xmlRPCResponse
-	if err := xml.Unmarshal(data, &response); err != nil {
-		return xmlRPCResponse{}, int64(len(data)), fmt.Errorf("pypi %s: %w", method, err)
-	}
-	if response.Fault != nil {
-		return xmlRPCResponse{}, int64(len(data)), fmt.Errorf("pypi %s: fault", method)
-	}
-	return response, int64(len(data)), nil
-}
-
-// pypiRelevantAction reports whether a changelog action can change which release is
-// the latest or what it contains. Ownership and metadata edits cannot.
-func pypiRelevantAction(action string) bool {
-	switch {
-	case strings.Contains(action, "Owner"), strings.Contains(action, "Maintainer"):
-		return false
-	case strings.HasPrefix(action, "new release"), strings.HasPrefix(action, "create"),
-		strings.HasPrefix(action, "remove"), strings.HasPrefix(action, "yank"), strings.HasPrefix(action, "unyank"):
-		return true
-	case strings.HasPrefix(action, "add ") && strings.Contains(action, " file"):
-		return true
-	}
-	return false
-}
-
-func (f *PyPIFeed) Poll(ctx context.Context, cursor string) (gocrawl.FeedPage, error) {
-	page := gocrawl.FeedPage{}
-	last, bytesRead, err := f.call(ctx, "changelog_last_serial", nil)
-	page.Requests++
-	page.DownloadedBytes += bytesRead
-	if err != nil {
-		return page, err
-	}
-	latest, ok := last.Value.integer()
-	if !ok {
-		return page, errors.New("pypi changelog_last_serial: no serial in response")
-	}
-	page.Cursor = strconv.FormatInt(latest, 10)
-	if cursor == "" {
-		return page, nil
-	}
-	since, err := strconv.ParseInt(cursor, 10, 64)
-	if err != nil {
-		return page, fmt.Errorf("pypi feed cursor %q: %w", cursor, err)
-	}
-	if latest <= since {
-		page.Cursor = cursor
-		return page, nil
-	}
-	if latest-since > pypiMaxSerialGap {
-		page.Resync = true
-		return page, nil
-	}
-	changes, bytesRead, err := f.call(ctx, "changelog_since_serial", &since)
-	page.Requests++
-	page.DownloadedBytes += bytesRead
-	if err != nil {
-		return gocrawl.FeedPage{Requests: page.Requests, DownloadedBytes: page.DownloadedBytes}, err
-	}
-	if changes.Value.Array == nil {
-		return gocrawl.FeedPage{Requests: page.Requests, DownloadedBytes: page.DownloadedBytes}, errors.New("pypi changelog_since_serial: no array in response")
-	}
-	highest := since
-	for _, row := range changes.Value.Array.Values {
-		if row.Array == nil || len(row.Array.Values) < 5 {
-			continue
-		}
-		fields := row.Array.Values
-		if serial, ok := fields[4].integer(); ok {
-			highest = max(highest, serial)
-		}
-		if fields[0].String == nil || fields[3].String == nil || !pypiRelevantAction(*fields[3].String) {
-			continue
-		}
-		stamp, _ := fields[2].integer()
-		page.Events = append(page.Events, gocrawl.FeedEvent{Name: *fields[0].String, Time: stamp, Kind: *fields[3].String})
-	}
-	// Advance only as far as the rows actually read, not to the serial seen before the
-	// second call: a row appended in between is read by the next poll.
-	page.Cursor = strconv.FormatInt(highest, 10)
-	return page, nil
 }
 
 // NPMFeed reads the npm replication _changes feed. The cursor is a sequence number.

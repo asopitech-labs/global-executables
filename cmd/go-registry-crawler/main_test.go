@@ -37,13 +37,14 @@ func TestRunReportsBootstrapVersion(t *testing.T) {
 func TestSourceDefaultsKeepDatabasesAndCompatibilityViewsIsolated(t *testing.T) {
 	tests := []struct {
 		source, catalog, database, output string
+		workers                           int
 		moduleTimeout                     time.Duration
 	}{
-		{"go", "data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", 10 * time.Minute},
-		{"npm", "data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", 5 * time.Minute},
-		{"pypi", "data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", 2 * time.Minute},
-		{"rubygems", "data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl", 2 * time.Minute},
-		{"packagist", "data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl", 2 * time.Minute},
+		{"go", "data/production/go-modules.txt", "data/production/go-crawl.db", "data/production/intermediate/go.jsonl", 32, 10 * time.Minute},
+		{"npm", "data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", 64, 5 * time.Minute},
+		{"pypi", "data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", 24, 2 * time.Minute},
+		{"rubygems", "data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl", 16, 2 * time.Minute},
+		{"packagist", "data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl", 20, 2 * time.Minute},
 	}
 	for _, test := range tests {
 		t.Run(test.source, func(t *testing.T) {
@@ -59,7 +60,26 @@ func TestSourceDefaultsKeepDatabasesAndCompatibilityViewsIsolated(t *testing.T) 
 			if config.ModuleTimeout != test.moduleTimeout {
 				t.Fatalf("module timeout=%s want=%s", config.ModuleTimeout, test.moduleTimeout)
 			}
+			if config.Workers != test.workers {
+				t.Fatalf("workers=%d want=%d", config.Workers, test.workers)
+			}
 		})
+	}
+}
+
+func TestRegistryPolicyDefaults(t *testing.T) {
+	rubyGems := registryClientConfig(crawlConfig{Source: "rubygems", Workers: 16})
+	if rubyGems.MinRequestInterval != 100*time.Millisecond || rubyGems.MaxHostConcurrency != 16 {
+		t.Fatalf("RubyGems config=%+v", rubyGems)
+	}
+
+	config := crawlConfig{Source: "pypi", Workers: 24}
+	adapter, err := buildAdapter(config)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if adapter.feed != nil || adapter.maxBackoffDays != gocrawl.BackoffMaxDaysPlain {
+		t.Fatalf("PyPI must use bounded rotation without a change feed: %+v", adapter)
 	}
 }
 

@@ -260,7 +260,7 @@ func (r *requester) request(ctx context.Context, method, target string, headers 
 	return r.requestBody(ctx, method, target, headers, nil, maxBytes)
 }
 
-// requestBody is request with a request body, used by the XML-RPC change feed.
+// requestBody is request with an optional request body.
 func (r *requester) requestBody(ctx context.Context, method, target string, headers http.Header, body []byte, maxBytes int64) (responseData, error) {
 	var lastErr error
 	for attempt := 1; attempt <= r.config.MaxAttempts; attempt++ {
