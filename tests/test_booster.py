@@ -495,9 +495,10 @@ def path_without_container_runtimes(tmp_path):
     bin_dir.mkdir()
     for directory in ("/usr/local/bin", "/usr/bin", "/bin"):
         for tool in Path(directory).iterdir() if Path(directory).is_dir() else []:
-            if tool.name in ("docker", "podman") or (bin_dir / tool.name).exists():
+            destination = bin_dir / tool.name
+            if tool.name in ("docker", "podman") or destination.exists() or destination.is_symlink():
                 continue
-            (bin_dir / tool.name).symlink_to(tool)
+            destination.symlink_to(tool)
     (bin_dir / "python3").unlink(missing_ok=True)
     (bin_dir / "python3").symlink_to(sys.executable)
     return str(bin_dir)
