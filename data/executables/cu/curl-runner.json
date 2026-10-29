@@ -2,6 +2,18 @@
   "command": "curl-runner",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "curl-runner",
+      "version": "2.1.1",
+      "repository": "https://github.com/alexvcasillas/curl-runner",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.1.1"
+    },
+    {
       "ecosystem": "npm",
       "package": "@curl-runner/cli",
       "version": "1.25.0",
