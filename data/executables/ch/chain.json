@@ -2,6 +2,18 @@
   "command": "chain",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "cargo-scan",
+      "version": "0.3.0",
+      "repository": "https://github.com/PLSysSec/cargo-scan",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.3.0"
+    },
+    {
       "ecosystem": "go",
       "package": "azul3d.org/engine",
       "version": "v0.0.0-20180624221640-25c8eab2d474",
