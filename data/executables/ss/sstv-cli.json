@@ -2,6 +2,18 @@
   "command": "sstv-cli",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "sstv-encoder",
+      "version": "0.1.0",
+      "repository": "https://github.com/tcasaniv/sstv-encoder-rs",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "git.brokenmouse.studio/ever/go-sstv",
       "version": "v0.0.1",
