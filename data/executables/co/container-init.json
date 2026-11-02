@@ -2,6 +2,18 @@
   "command": "container-init",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "rust-judge",
+      "version": "0.1.0",
+      "repository": "https://github.com/criyle/rust-judge",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/observiq/bindplane-otel-collector/cmd/container-init",
       "version": "v1.107.0",
