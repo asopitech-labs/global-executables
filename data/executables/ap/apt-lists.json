@@ -2,6 +2,18 @@
   "command": "apt-lists",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "apt-lists",
+      "version": "0.1.0",
+      "repository": "https://github.com/ak1ra-lab/apt-lists",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "chaos-box",
       "version": "0.6.0",
