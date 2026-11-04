@@ -1118,6 +1118,46 @@ for the same source at the same time.
 Rollback: stop the booster and `release` its lease (or wait twelve hours); Actions owns
 the rotation again. Reverting the change restores whole-source publication.
 
+## Coordinator-free npm work ledger
+
+The broad npm crawl does not have a scheduler or a machine that assigns work. Every
+authorized site independently reads `data/production/work-ledger/npm-registry.json`
+from `artifact-data`, chooses one unfinished hash bucket, and attempts to push that
+reservation. Git's rejected non-fast-forward push is the compare-and-swap: the loser
+reloads the new head and chooses again. GitHub stores the shared history, but no
+GitHub Actions process is the coordinator.
+
+The catalog is split into 256 stable `sha256(package) % 256` units. A reservation
+contains the actor, catalog digest, units, heartbeat, and TTL. A unit records its
+catalog-relative position, retryable failure count, attempts, and the exact
+`artifact-data` result commit. A worker publishes row/state deltas first and advances
+the ledger only afterward. Consequently, a crash can cause a later duplicate request
+but cannot mark unpublished evidence complete. Expired reservations become available
+without an administrator. A refreshed append-only catalog retains each bucket's
+position and reopens only units that gained packages.
+
+Run one independent worker from any clone with push access and a configured Git
+identity:
+
+```sh
+pip install -e '.[test]'
+ACTOR=tokyo-01 PACKAGE_BUDGET=10000 GE_USER_AGENT='contact@example.invalid' \
+  bash tools/npm_distributed_worker.sh
+```
+
+Run it repeatedly from cron/systemd if desired. `ACTOR` must be stable enough to
+identify the site in history; concurrent copies should use distinct suffixes. Each
+invocation refreshes the shared append-only npm catalog when it is stale, reserves
+one available unit, restores the current rows/state, crawls only that unit, publishes
+a merge-safe delta, and checkpoints the reservation. `KEEP_WORKDIR=1` preserves the
+temporary files for diagnosis. `python tools/work_ledger.py status --source
+npm-registry` prints remaining packages and live reservations directly from the
+branch.
+
+Trust is currently the repository's push permission: the ledger prevents accidental
+overlap and stale writes, not a malicious authorized writer. Result commits provide
+an auditable causal link; stronger signed-worker attestation is tracked separately.
+
 ## Registry crawl state layout
 
 Every registry crawler resumes from one logical document,
