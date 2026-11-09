@@ -2,6 +2,18 @@
   "command": "tscc",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "compiler",
+      "version": "0.1.3",
+      "repository": "https://github.com/yingkitw/compiler.git",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.3"
+    },
+    {
       "ecosystem": "npm",
       "package": "@bretkikehara/typescript-closure-compiler",
       "version": "1.8.10",
