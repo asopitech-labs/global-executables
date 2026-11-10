@@ -2,6 +2,18 @@
   "command": "intermediates",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "upki-mirror",
+      "version": "0.2.0",
+      "repository": "https://github.com/rustls/upki",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "intermediate-generator",
       "version": "0.1.0",
