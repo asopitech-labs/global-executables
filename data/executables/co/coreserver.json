@@ -2,6 +2,18 @@
   "command": "coreserver",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "coreserver-cli",
+      "version": "0.1.2",
+      "repository": "https://github.com/ao1607/coreserver-cli",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.2"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/Seneca-AI/seneca",
       "version": "v0.0.0-20210812163910-1a8210d4b9cd",

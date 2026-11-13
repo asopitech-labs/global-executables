@@ -2,6 +2,18 @@
   "command": "fusee",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "fusee-cli",
+      "version": "1.0.1",
+      "repository": "https://github.com/bitsinfra/fusee",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "1.0.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/jasonrogena/fusee",
       "version": "v0.0.0-20220328215414-9b3919d9da43",
