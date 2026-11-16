@@ -2,6 +2,18 @@
   "command": "port-scanner",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "open-port-scanner",
+      "version": "2.0.0",
+      "repository": "https://github.com/open-port-tools/port-scanner",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "2.0.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/artyang/port-scanner",
       "version": "v0.0.0-20230707192929-8c7b79c29a33",
