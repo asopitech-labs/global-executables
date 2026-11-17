@@ -2,6 +2,18 @@
   "command": "web-vuln-scanner",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "website-vulnerability-scanner",
+      "version": "0.2.1",
+      "repository": "https://github.com/websecaudit/website-vulnerability-scanner",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.1"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/saleheddinetouil/web-vuln-scanner",
       "version": "v0.0.0-20241117152304-52ba2d061c1f",
