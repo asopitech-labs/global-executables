@@ -2,6 +2,18 @@
   "command": "monitor-agent",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "monitor-agent",
+      "version": "0.2.0",
+      "repository": "https://github.com/houseme/service-watch",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.2.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/noxaaa/prism-oss",
       "version": "v0.1.27",
