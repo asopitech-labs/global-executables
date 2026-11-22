@@ -2,6 +2,18 @@
   "command": "ocpp",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "ocpp-kit",
+      "version": "0.8.0",
+      "repository": "https://github.com/hupe1980/ocpp-kit",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.8.0"
+    },
+    {
       "ecosystem": "go",
       "package": "github.com/mabunixda/evcc",
       "version": "v0.0.0-20260416081021-995e0044bc44",
