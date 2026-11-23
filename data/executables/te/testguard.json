@@ -2,6 +2,18 @@
   "command": "testguard",
   "providers": [
     {
+      "ecosystem": "crates",
+      "package": "testguard",
+      "version": "0.1.0",
+      "repository": "https://gitlab.com/mateuszkj/testguard",
+      "source": "https://static.crates.io/db-dump.tar.gz",
+      "confidence": "direct",
+      "source_type": "language_package",
+      "language": "rust",
+      "registry": "crates.io",
+      "latest_version": "0.1.0"
+    },
+    {
       "ecosystem": "pypi",
       "package": "testguard-cli",
       "version": "0.26.2",
