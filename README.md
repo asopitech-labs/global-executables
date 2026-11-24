@@ -24,7 +24,7 @@
   <a href="https://pypi.org/project/global-executables/"><img alt="PyPI downloads" src="https://img.shields.io/pypi/dm/global-executables"></a>
   <a href="https://github.com/asopitech-labs/global-executables/actions/workflows/validate.yml"><img alt="Validation" src="https://github.com/asopitech-labs/global-executables/actions/workflows/validate.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
-  <a href="https://glama.ai/mcp/servers/asopitech-labs/global-executables"><img alt="View on Glama" src="https://img.shields.io/badge/Glama-Global_Executables-06B6D4"></a>
+  <a href="https://glama.ai/mcp/servers/asopitech-labs/global-executables"><img alt="asopitech-labs/global-executables MCP server" src="https://glama.ai/mcp/servers/asopitech-labs/global-executables/badges/score.svg"></a>
 </p>
 
 <!-- mcp-name: io.github.asopitech-labs/global-executables -->
