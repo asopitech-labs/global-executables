@@ -24,6 +24,36 @@ def valid_command(command: str) -> bool:
     return bool(COMMAND.fullmatch(command)) and command not in {".", ".."}
 
 
+# `go install` names a binary after the last element of its import path, and the go
+# command accepts only elements that pass golang.org/x/mod/module.CheckImportPath.
+# This mirrors that check (importPath kind) so names the Go extractor skips since
+# #120 also leave the dictionary instead of surviving from earlier walks.
+_GO_IMPORT_ELEMENT = re.compile(r"^[A-Za-z0-9._~+-]+$")
+_WINDOWS_RESERVED = frozenset(
+    ["CON", "PRN", "AUX", "NUL"]
+    + [f"COM{suffix}" for suffix in "123456789\u00b9\u00b2\u00b3"]
+    + [f"LPT{suffix}" for suffix in "123456789\u00b9\u00b2\u00b3"]
+)
+
+
+def go_installable_command(command: str) -> bool:
+    """Whether a Go binary can carry this name (a valid import path element)."""
+    if not _GO_IMPORT_ELEMENT.fullmatch(command):
+        return False
+    if command.count(".") == len(command) or command.endswith("."):
+        return False
+    short = command.split(".", 1)[0]
+    if short.upper() in _WINDOWS_RESERVED:
+        return False
+    tilde = short.rfind("~")
+    return not (0 <= tilde < len(short) - 1 and short[tilde + 1:].isdigit())
+
+
+def installable_provider(command: str, provider: dict[str, Any]) -> bool:
+    """Ecosystem rules beyond `valid_command` for names an install can create."""
+    return provider.get("ecosystem") != "go" or go_installable_command(command)
+
+
 def shard(command: str) -> str:
     """Two normalized characters; unsafe/non-ASCII names use a stable hash shard."""
     folded = command.casefold()

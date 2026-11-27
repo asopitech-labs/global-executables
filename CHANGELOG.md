@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Dictionary: Go names that `go install` can never produce (not a valid import path
+  element, e.g. `" 01_facade"`, `"Zadatak 1"`, `"01_选择排序"`) are dropped. The Go
+  walk stopped extracting them in #120, but 8,852 names published by earlier walks
+  (63 with leading/trailing whitespace) stayed because partial Go coverage preserves
+  unobserved providers. The rebuild now rejects such Go rows and drops such Go
+  providers already in the dictionary, without re-reading any module; a removal is
+  accepted without a shrink reason only when every removed provider fails the rule.
+  The rule mirrors `module.CheckImportPath`; a shared fixture is checked from Go and
+  Python.
+
 - Local booster: the whole-store check (`--verify-store`) is now opt-in through
   `VERIFY_STORE=1`. On a 15 GB machine it was OOM-killed on every start for an ~840 MB
   PyPI store, so the booster never crawled. A corruption found later is still

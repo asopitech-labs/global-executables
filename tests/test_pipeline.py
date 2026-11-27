@@ -244,3 +244,75 @@ def test_scope_indexes_filter_logical_provider_dimensions(tmp_path):
     assert dataset.search(scope={"language":"javascript"}) == ["envcp", "foocli"]
     assert dataset.check("envcp", {"language":"javascript", "distribution":"debian"})["found"] is False
     assert dataset.check("envcp", {"registry":"npm"})["found"] is True
+
+
+def test_go_name_rule_matches_the_go_import_path_check():
+    """The Go test reads the same fixture through module.CheckImportPath."""
+    from global_executables.model import go_installable_command
+    fixture=json.loads((ROOT/"fixtures/go/command-names.json").read_text())
+    assert [n for n in fixture["installable"] if not go_installable_command(n)] == []
+    assert [n for n in fixture["uninstallable"] if go_installable_command(n)] == []
+
+
+def _go_row(command, package="example.com/m"):
+    return {"command":command,"ecosystem":"go","package":package,"version":"v1.0.0",
+            "repository":None,"source":"fixture","confidence":"direct"}
+
+
+def test_uninstallable_go_names_already_published_leave_without_a_shrink_reason(tmp_path):
+    """Before #120 the Go walk published directory names such as " 01_facade" that
+    `go install` cannot build; partial Go coverage kept them on every refresh."""
+    first=tmp_path/"go.jsonl"
+    first.write_text("".join(json.dumps(r)+"\n" for r in (
+        _go_row("gofmt"), _go_row(" 01_facade"), _go_row("Zadatak 1"), _go_row("{}"))))
+    pypi=tmp_path/"pypi.jsonl"
+    pypi.write_text(json.dumps({"command":"{}","ecosystem":"pypi","package":"braces",
+                                "version":"1","repository":None,"source":"fixture",
+                                "confidence":"direct"})+"\n")
+    # Publish the old state the way it was published before the rule existed.
+    from global_executables import pipeline
+    original=pipeline.installable_provider
+    pipeline.installable_provider=lambda command, provider: True
+    try:
+        rebuild(tmp_path,[first,pypi],"2026-11-26",coverage_kind="partial")
+    finally:
+        pipeline.installable_provider=original
+    assert {" 01_facade","Zadatak 1","{}","gofmt"} <= set(load_canonical(tmp_path))
+
+    # The Go observations are unchanged (modules are not re-read), and the walk
+    # may not even list the old rows: both cases must drop the names.
+    for go_input in (first, tmp_path/"empty-go.jsonl"):
+        if not go_input.exists():
+            go_input.write_text(json.dumps(_go_row("gofmt"))+"\n")
+        result=rebuild(tmp_path,[go_input,pypi],"2026-11-27",coverage_kind="partial")
+        records=load_canonical(tmp_path)
+        assert set(records) == {"gofmt","{}"}
+        assert [p["ecosystem"] for p in records["{}"]["providers"]] == ["pypi"]
+        assert result.unique_executables == 2 and result.shrink_reason is None
+
+
+def test_uninstallable_go_rows_are_reported_as_rejected(tmp_path):
+    rows=tmp_path/"go.jsonl"
+    rows.write_text(json.dumps(_go_row("ok"))+"\n"+json.dumps(_go_row("tugas13 "))+"\n")
+    result=rebuild(tmp_path,[rows],"2026-11-27")
+    assert set(load_canonical(tmp_path)) == {"ok"}
+    assert result.rejected_records == 1
+    assert result.rejected[0]["command"] == "tugas13 "
+    assert result.rejected[0]["reason"] == "not an installable command name for this ecosystem"
+
+
+def test_a_real_shrink_is_still_refused_alongside_go_cleanup(tmp_path):
+    first=tmp_path/"in.jsonl"
+    first.write_text(json.dumps(_go_row("Zadatak 1"))+"\n"+json.dumps(
+        {"command":"keepme","ecosystem":"npm","package":"keepme","version":"1",
+         "repository":None,"source":"fixture","confidence":"direct"})+"\n")
+    from global_executables import pipeline
+    original=pipeline.installable_provider
+    pipeline.installable_provider=lambda command, provider: True
+    try:
+        rebuild(tmp_path,[first],"2026-11-26",coverage_kind="exhaustive")
+    finally:
+        pipeline.installable_provider=original
+    empty=tmp_path/"empty.jsonl"; empty.write_text("")
+    with pytest.raises(DatasetShrinkError):
+        rebuild(tmp_path,[empty],"2026-11-27",coverage_kind="exhaustive")

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .coverage import coverage_scope
-from .model import dumps, filename, provider_key, shard, valid_command
+from .model import dumps, filename, installable_provider, provider_key, shard, valid_command
 
 
 @dataclass(frozen=True)
@@ -129,6 +129,14 @@ def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]]
                 "reason": "invalid executable name",
             })
             continue
+        if not installable_provider(command, raw):
+            rejected.append({
+                "command": command,
+                "ecosystem": raw.get("ecosystem"),
+                "package": raw.get("package"),
+                "reason": "not an installable command name for this ecosystem",
+            })
+            continue
         observed_commands.add(command)
         ecosystem = raw.get("ecosystem")
         if isinstance(ecosystem, str):
@@ -149,6 +157,10 @@ def merge(records: Iterable[dict[str, Any]], previous: dict[str, dict[str, Any]]
     for command, old in previous.items():
         for provider in old.get("providers", ()):
             if provider.get("source") in replace_sources:
+                continue
+            # Names published before an ecosystem rule existed leave with it
+            # rather than being preserved as unobserved partial coverage.
+            if not installable_provider(command, provider):
                 continue
             ecosystem = provider.get("ecosystem")
             if (preserve_ecosystems and ecosystem in preserve_ecosystems
@@ -247,15 +259,18 @@ def rebuild(root: Path, inputs: list[Path], snapshot: str | None = None,
                    policy.replace_sources)
     if len(merged.records) < len(previous) and not policy.shrink_reason:
         current_commands = {record["command"] for record in merged.records}
-        removed = [record for command, record in previous.items() if command not in current_commands]
-        source_owned = bool(policy.replace_sources) and all(
+        removed = [(command, record) for command, record in previous.items() if command not in current_commands]
+        # A removal is authorized when every provider of the removed name was
+        # owned by a replaced source or could never have installed that name.
+        explained = all(
             record.get("providers") and all(
                 provider.get("source") in policy.replace_sources
+                or not installable_provider(command, provider)
                 for provider in record.get("providers", [])
             )
-            for record in removed
+            for command, record in removed
         )
-        if not source_owned:
+        if not explained:
             raise DatasetShrinkError(len(previous), len(merged.records))
     publish(root, merged.records, coverage, snapshot, history)
     return RebuildResult(
