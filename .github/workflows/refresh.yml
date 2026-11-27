@@ -209,7 +209,11 @@ jobs:
           set -o pipefail
           git fetch --depth=1 origin artifact-data
           rm -rf /tmp/on-demand-reconcile
-          git worktree add /tmp/on-demand-reconcile origin/artifact-data
+          # The artifact branch contains many unrelated crawl files. Check out
+          # only claims to avoid filling the runner after dictionary publish.
+          git worktree add --no-checkout /tmp/on-demand-reconcile origin/artifact-data
+          git -C /tmp/on-demand-reconcile sparse-checkout set --cone data/production/on-demand/claims
+          git -C /tmp/on-demand-reconcile reset --hard HEAD
           if ! test -d /tmp/on-demand-reconcile/data/production/on-demand/claims; then
             echo "No durable on-demand claims to reconcile"
             exit 0

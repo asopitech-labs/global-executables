@@ -71,7 +71,7 @@ def test_verified_intake_is_merged_and_marks_refresh_pending(tmp_path):
     assert reserved["status"] == "reserved"
 
     engine = Discovery(selected)
-    result = run(runner, discovery_engine=engine)
+    result = run(runner, sweep_limit=0, discovery_engine=engine)
     assert result == {"accepted": 1, "rejected": 0, "retryable": 0,
                       "needs_refresh": True}
     assert engine.calls == [("npm", "sample-package", None, None, {}, True)]
@@ -138,13 +138,13 @@ def test_crash_after_merge_before_ref_cleanup_replays_without_duplicate(tmp_path
         return original(root, *args, **kwargs)
 
     monkeypatch.setattr(collector, "_git", lost_cleanup)
-    first = collector.run(runner, discovery_engine=Discovery(observation()))
+    first = collector.run(runner, sweep_limit=0, discovery_engine=Discovery(observation()))
     assert first["accepted"] == 1
     assert git(runner, "ls-remote", "--heads", "origin", reserved["branch"])
     accepted_head = git(runner, "ls-remote", "--heads", "origin", "artifact-data").split()[0]
 
     monkeypatch.setattr(collector, "_git", original)
-    second = collector.run(runner, discovery_engine=Discovery(observation()))
+    second = collector.run(runner, sweep_limit=0, discovery_engine=Discovery(observation()))
     assert second["accepted"] == 0
     assert git(runner, "ls-remote", "--heads", "origin", reserved["branch"]) == ""
     assert git(runner, "ls-remote", "--heads", "origin", "artifact-data").split()[0] == accepted_head
