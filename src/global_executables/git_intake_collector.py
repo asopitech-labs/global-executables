@@ -80,6 +80,9 @@ def _candidate(root: Path, ref: str, identifier: str) -> tuple[str, dict[str, An
     tree = _git(root, "ls-tree", sha, path).stdout.strip()
     if not tree.startswith("100644 blob "):
         raise IntakeBranchError("proposal must be a regular JSON blob")
+    size = int(_git(root, "cat-file", "-s", f"{sha}:{path}").stdout.strip())
+    if size > 32_768:
+        raise IntakeBranchError("proposal exceeds size limit")
     try:
         proposal = json.loads(_git(root, "show", f"{sha}:{path}").stdout)
         proposal = validate_proposal(proposal)
@@ -144,6 +147,13 @@ def _commit(root: Path, message: str) -> bool:
 
 def _push(root: Path) -> bool:
     return _git(root, "push", "origin", "HEAD:artifact-data", check=False).returncode == 0
+
+
+def _delete_intake_ref(root: Path, identifier: str, expected_sha: str) -> bool:
+    """Clean up only the candidate that has a durable ledger outcome."""
+    ref = f"refs/heads/intake/{identifier}"
+    return _git(root, "push", f"--force-with-lease={ref}:{expected_sha}",
+                "origin", f":{ref}", check=False).returncode == 0
 
 
 def _reset(root: Path) -> None:
@@ -259,7 +269,7 @@ def _process(root: Path, ref: str, engine: PackageDiscovery) -> str:
         tip = _git(root, "rev-parse", ref).stdout.strip()
         if existing and existing.get("status") in {"accepted", "rejected"}:
             if existing.get("candidate_sha") == tip:
-                _git(root, "push", "origin", ":refs/heads/intake/" + identifier, check=False)
+                _delete_intake_ref(root, identifier, tip)
                 return "already_processed"
             try:
                 _sha, replay = _candidate(root, ref, identifier)
@@ -267,7 +277,7 @@ def _process(root: Path, ref: str, engine: PackageDiscovery) -> str:
             except IntakeBranchError:
                 same = False
             if same:
-                _git(root, "push", "origin", ":refs/heads/intake/" + identifier, check=False)
+                _delete_intake_ref(root, identifier, tip)
                 return "already_processed"
             _save(root / ROOT / "intake-conflicts" / identifier / f"{tip}.json", {
                 "id": identifier, "candidate_sha": tip,
@@ -276,7 +286,7 @@ def _process(root: Path, ref: str, engine: PackageDiscovery) -> str:
             })
             _commit(root, f"Audit conflicting intake {identifier[:12]}")
             if _push(root):
-                _git(root, "push", "origin", ":refs/heads/intake/" + identifier, check=False)
+                _delete_intake_ref(root, identifier, tip)
                 return "rejected"
             continue
         if existing and existing.get("status") == "retryable":
@@ -325,7 +335,7 @@ def _process(root: Path, ref: str, engine: PackageDiscovery) -> str:
                 return "retryable"
             continue
         if _push(root):
-            _git(root, "push", "origin", ":refs/heads/intake/" + identifier, check=False)
+            _delete_intake_ref(root, identifier, tip)
             return outcome
     return "retryable"
 
