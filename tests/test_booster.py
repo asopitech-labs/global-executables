@@ -580,8 +580,23 @@ def test_abort_stops_without_a_final_publication_and_keeps_the_lease(native):
     assert native.crawler_processes() == [] and not (native.dir / "abort-requested").exists()
 
 
-def test_the_booster_verifies_its_store_at_start():
-    assert "--verify-store" in (ROOT / "tools/local_booster.sh").read_text()
+ARGUMENTS = POLITE + '\necho "args $*" >> "$EVENTS"'
+
+
+@pytest.mark.parametrize("verify, expected", [(None, False), ("0", False), ("1", True)])
+def test_the_full_store_check_runs_only_when_asked_for(tmp_path, verify, expected):
+    """The whole-store check was OOM-killed on a 15 GB machine on every start
+    (2026-11-27), so it is opt-in through VERIFY_STORE=1."""
+    harness = Native(tmp_path, crawler_body=ARGUMENTS)
+    try:
+        supervisor = harness.run(**({} if verify is None else {"VERIFY_STORE": verify}))
+        assert harness.wait_for(lambda: any(line.startswith("args ") for line in harness.lines()))
+        arguments = next(line for line in harness.lines() if line.startswith("args ")).split()
+        assert ("--verify-store" in arguments) is expected, arguments
+        os.kill(supervisor.pid, signal.SIGTERM)
+        assert supervisor.wait(timeout=60) == 0
+    finally:
+        harness.cleanup()
 
 
 PROGRESSING = """trap 'echo crawler-exited >> "$EVENTS"; exit 0' TERM
