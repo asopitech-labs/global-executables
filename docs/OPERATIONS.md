@@ -1005,6 +1005,38 @@ supervisor's in `<dir>/supervisor.pid`); a stale file, or one naming an unrelate
 is ignored, and a second start for the same directory is refused (exit 3), including when
 a crawler is running without a PID file. `local_booster.sh pypi stop` also stops such a crawler.
 
+### Running it in a container
+
+For an always-on machine, `Dockerfile.booster` packs the supervisor, the Go crawler and the
+git-based publication into one image (native mode inside the container, no Docker socket),
+and `deploy/booster/compose.yml` runs it with `restart: unless-stopped`, a health check and
+the working directory on the named volume `booster-data` (`/data`: `ge-crawl`, `ge-crawl-pypi`
+with the bbolt store, and the git object store `git`). On the host:
+
+```bash
+git clone https://github.com/asopitech-labs/global-executables && cd global-executables/deploy/booster
+cp booster.env.example booster.env          # CONTACT, BOOSTER_ID (one lease name per machine)
+install -m 600 /dev/null github_token       # then write a token that may push to artifact-data
+docker compose up -d --build
+docker compose logs -f pypi                 # "<id> holds 0-255"; docker inspect shows the health
+```
+
+The image carries no credentials. `github_token` is mounted as a Compose secret at
+`/run/secrets/github_token` and read by a git credential helper at push time; it never
+enters the environment, the image or the logs. It needs only `contents: write` on this
+repository (a fine-grained token limited to it is enough; it pushes to `artifact-data`
+only). `booster.env` and `github_token` are git-ignored and excluded from the build context.
+
+`docker stop` / `docker restart` send SIGTERM through tini: the supervisor stops the crawler,
+publishes once more and releases the lease, so `stop_grace_period` is 20 minutes. A
+re-created container keeps its state and resumes. The container is `unhealthy` when the
+supervisor is gone or the crawler has not committed a package for `HEALTH_MAX_STALE` seconds
+(3600); the supervisor's own `STALL_TIMEOUT` restart acts first. To move a booster to another
+machine: stop the old one cleanly (it releases its lease), optionally copy its `<BASE>` and
+`<BASE>-pypi` directories into the volume (skip `*.corrupt-*` stores) to avoid re-reading the
+published state, then start the new one under its own `BOOSTER_ID`. Starting the new one
+while the old lease is alive is refused (exit 4, the container restarts and retries).
+
 **Native mode needs no container runtime.** `seed`, `merge` and `publish` of
 `crawl_parallel.sh` are git and Python only; only `start` (container mode), `status`,
 `watch` and `stop` require Docker or Podman. (Before this, the script refused to load

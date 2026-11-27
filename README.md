@@ -895,7 +895,8 @@ global ecosystem coverage, so consumers must preserve
 Registry artifact inspection is separately resumable. CI refreshes the finite npm
 critical catalog and crawls it to 100% daily, while dedicated local containers advance
 PyPI and Go module cursors and publish checkpoints to `artifact-data`; these local
-containers are temporary completion boosters and stop at 100%. After a source reaches
+containers are temporary completion boosters and stop at 100%. The PyPI booster can run as an always-on
+container (`deploy/booster/compose.yml`, docs/OPERATIONS.md "Running it in a container"). After a source reaches
 100%, a six-hour GitHub Actions matrix cycles through every indexed package with a
 persisted refresh cursor. Successful results replace stale package observations,
 including commands removed by a newer release. CI also performs

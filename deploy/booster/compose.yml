@@ -1,0 +1,35 @@
+# PyPI local booster as an always-on container (docs/OPERATIONS.md "Running it in a container").
+#
+#   cd deploy/booster
+#   cp booster.env.example booster.env        # set CONTACT and BOOSTER_ID
+#   install -m 600 /dev/null github_token     # then write a token with push access to artifact-data
+#   docker compose up -d --build
+#
+# booster.env and github_token stay on the host and are ignored by git and by the image build.
+name: ge-booster
+services:
+  pypi:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.booster
+    image: global-executables-booster:local
+    container_name: ge-booster-pypi
+    env_file: booster.env
+    restart: unless-stopped
+    # docker stop/restart: the supervisor stops the crawler (up to STOP_TIMEOUT, 300 s),
+    # publishes once more and releases the lease; give it time instead of the default 10 s.
+    stop_grace_period: 20m
+    volumes:
+      - booster-data:/data
+    secrets:
+      - github_token
+    logging:
+      driver: json-file
+      options:
+        max-size: 20m
+        max-file: "3"
+secrets:
+  github_token:
+    file: ./github_token
+volumes:
+  booster-data:
