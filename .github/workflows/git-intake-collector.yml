@@ -1,0 +1,49 @@
+name: Collect verified package intake branches
+
+on:
+  schedule:
+    - cron: '2,17,32,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: git-intake-collector
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -e .
+      - name: Revalidate and merge bounded intake batch
+        id: collect
+        env:
+          GIT_TERMINAL_PROMPT: '0'
+        run: |
+          python -m global_executables.git_intake_collector \
+            --repository "$GITHUB_WORKSPACE" --limit 20 \
+            > "$RUNNER_TEMP/intake-result.json"
+          cat "$RUNNER_TEMP/intake-result.json"
+          python -c 'import json,os; value=json.load(open(os.environ["RUNNER_TEMP"]+"/intake-result.json")); open(os.environ["GITHUB_OUTPUT"],"a").write("needs_refresh="+str(value["needs_refresh"]).lower()+"\n")'
+      - name: Queue normal dictionary refresh
+        if: steps.collect.outputs.needs_refresh == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list --workflow refresh.yml --limit 20 --json status \
+            > "$RUNNER_TEMP/refresh-runs.json"
+          if python -c 'import json,os,sys; runs=json.load(open(os.environ["RUNNER_TEMP"]+"/refresh-runs.json")); sys.exit(0 if any(run["status"] != "completed" for run in runs) else 1)'; then
+            echo "A dictionary refresh is already active"
+            exit 0
+          fi
+          gh workflow run refresh.yml --ref main -f refresh_os_samples=false

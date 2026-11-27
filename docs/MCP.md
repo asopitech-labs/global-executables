@@ -3,7 +3,7 @@
 For a step-by-step Codex CLI setup, see
 [`CODEX_MCP_TUTORIAL.md`](CODEX_MCP_TUTORIAL.md).
 
-The server is a read-only view of a materialized `dictionary` branch. Program
+Snapshot lookup is a read-only view of a materialized `dictionary` branch. Program
 schemas and published data have separate roots; the server does not copy records
 into a database and requires no network access after both roots are present.
 
@@ -77,7 +77,8 @@ curl http://127.0.0.1:8000/health
 ```
 
 Connect an MCP client to `http://127.0.0.1:8000/mcp`. The health response exposes
-the service version, dataset snapshot, coverage scope, and `read_only: true`.
+the service version, dataset snapshot, coverage scope, and whether the instance is
+configured to reserve Git intake branches (`read_only: false` when configured).
 
 ## Resources
 
@@ -98,8 +99,19 @@ targets must resolve to a module in a target-compatible wheel. The versioned
 `not_published`, `temporarily_unavailable`, and `unsupported`. A timeout, throttle, or
 5xx response is never converted to an absence claim.
 
-The operation is read-only: it caches bounded evidence locally and reports
-`publication_status: not_indexed`; it does not write `artifact-data` or `dictionary`.
+The operation caches bounded evidence locally and reports
+`publication_status: not_indexed`. On the designated Git-authorized runner, a
+`verified_entry_point` result also creates and reads back an immutable `intake/<id>`
+branch. Set `GLOBAL_EXECUTABLES_INTAKE_REPOSITORY` to a Git checkout with an
+`artifact-data` remote branch and permission to create `intake/*` refs. CLI also accepts
+`--intake-repository` and `--intake-remote`; the MCP server accepts the same settings.
+The repository's `Verify and reserve published package discovery` GitHub Actions
+workflow is the designated runner for this project. An agent can dispatch it with
+an exact npm/PyPI package ID; it runs the CLI and MCP stdio protocol and then starts
+the central collector. The workflow never writes `artifact-data` directly.
+The result includes `reservation.status=reserved` only after the ref read-back. An
+unconfigured or inaccessible remote yields `unavailable` while retaining the live
+verification result. Neither interface writes `artifact-data` or `dictionary` directly.
 An omitted version means the registry-selected current release. CLI and MCP use the
 same engine:
 
@@ -112,15 +124,13 @@ global-executables discover-package pypi global-executables --command global-exe
 Use this operation only when the package identity is already known. It cannot perform
 complete command-name reverse search; use the snapshot lookup tools for that purpose.
 
-Maintainer-triggered durable promotion is deliberately separate from the MCP operation.
-The `Publish on-demand package observation` workflow performs a fresh, uncached check of
-the registry-selected current release only. It writes an append-only observation event,
-the package's current claim, and the `on-demand` intermediate projection to
-`artifact-data`. The normal refresh replaces only providers owned by that source and
-publishes the dictionary. A final read-back records `indexed` on the claim only when the
-published provider contains the same claim and event digests; otherwise the claim remains
-queued for retry. Exact-version checks remain read-only so a later query for an old
-release cannot rewind current durable evidence.
+The scheduled intake collector checks each reserved branch and independently reacquires
+the public release before merging accepted evidence into `artifact-data`. Exact old
+releases remain historical; only a separately checked current release updates the
+current on-demand claim. The normal refresh replaces providers owned by that source and
+publishes the dictionary. A matching dictionary read-back marks the claim indexed.
+The [lifecycle design](ISSUE_84_LIFECYCLE_DESIGN.md) explains branch conflicts,
+rejections, and recovery.
 
 ### Environment-specific installation guidance
 

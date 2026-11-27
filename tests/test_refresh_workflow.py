@@ -6,8 +6,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
 REFRESH = (ROOT / ".github/workflows/refresh.yml").read_text()
+GIT_INTAKE = (ROOT / ".github/workflows/git-intake-collector.yml").read_text()
 PARALLEL_CRAWL = (ROOT / "tools/crawl_parallel.sh").read_text()
 OS_SOURCES = {"arch", "debian", "ubuntu", "homebrew", "msys2", "scoop", "winget", "windows"}
+
+
+def test_git_intake_collector_is_serial_and_dispatches_only_pending_refresh():
+    assert "group: git-intake-collector" in GIT_INTAKE
+    assert "cancel-in-progress: false" in GIT_INTAKE
+    assert "if: github.ref == 'refs/heads/main'" in GIT_INTAKE
+    assert "--repository \"$GITHUB_WORKSPACE\" --limit 20" in GIT_INTAKE
+    assert "needs_refresh=" in GIT_INTAKE
+    assert "if: steps.collect.outputs.needs_refresh == 'true'" in GIT_INTAKE
+    assert "gh workflow run refresh.yml --ref main" in GIT_INTAKE
 
 
 def test_refresh_reuses_durable_os_samples_by_default():
