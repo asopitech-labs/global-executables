@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Local booster: the whole-store check (`--verify-store`) is now opt-in through
+  `VERIFY_STORE=1`. On a 15 GB machine it was OOM-killed on every start for an ~840 MB
+  PyPI store, so the booster never crawled. A corruption found later is still
+  quarantined (exit 75); run the check by hand after a snapshot/restore.
+
 - On-demand package discovery (#84): CLI `discover-package` and MCP
   `discover_published_package` now share a read-only `package-discovery-v1` engine for
   npm `bin` and PyPI wheel `console_scripts`. It verifies registry-selected versions,

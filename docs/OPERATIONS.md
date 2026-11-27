@@ -1017,9 +1017,14 @@ is opened with fsync on, but it is a live file: a machine snapshot/restore that 
 file-by-file while the crawler writes (seen on 2026-10-13 after a box reboot: `invalid page
 type: 97544: 10` in `BoltStore.Commit`) leaves it inconsistent. The exported state (registry
 state, observation rows, schedule cache) is written atomically and is the source of truth.
-The booster therefore runs the crawler with `--verify-store`: on its first open per process
-the store is checked (`tx.Check`); a damaged store is renamed to
+With `VERIFY_STORE=1` the booster runs the crawler with `--verify-store`: on its first open
+per process the store is checked (`tx.Check`); a damaged store is renamed to
 `pypi-crawl.db.corrupt-<UTC timestamp>` (never deleted) and rebuilt from the exported state.
+The check is off by default since 2026-11-27: it needs time and memory proportional to the
+store, and on a 15 GB machine an ~840 MB PyPI store ran for over 30 minutes, grew past 11 GB
+and was OOM-killed on every start, so the booster never crawled. Run it by hand after a
+snapshot/restore or a suspected crash, when the machine has the memory to spare:
+`VERIFY_STORE=1 tools/local_booster.sh pypi run` (or `go-registry-crawler crawl ... --verify-store`).
 A corruption panic found later is caught, the store is quarantined the same way and the
 crawler exits with status 75. The supervisor restarts an exited crawler; more than
 `CRASH_LIMIT` (3) exits within `CRASH_WINDOW` (1800 s) is a crash loop: the supervisor
