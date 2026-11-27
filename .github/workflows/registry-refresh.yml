@@ -55,6 +55,14 @@ jobs:
             'select((.catalog_size | type) == "number") | select(.cursor >= .catalog_size) | select(.catalog_complete != false or env.SOURCE == "go")' \
             >/dev/null; then
             echo "eligible=true" >> "$GITHUB_OUTPUT"
+          elif [ "${SOURCE}" = go ] && \
+               [ -z "$(python3 tools/booster.py exclusions --source go --ref origin/artifact-data || echo held)" ]; then
+            # The Go walk was left to a local container that stopped on 2026-10-22,
+            # 1,816 modules short of the catalog; nothing advanced it for five weeks.
+            # Without a live local lease this run continues the walk itself (the
+            # crawler walks from the cursor before it refreshes).
+            echo "eligible=true" >> "$GITHUB_OUTPUT"
+            echo "No live local lease for go; this run continues the catalog walk."
           else
             echo "eligible=false" >> "$GITHUB_OUTPUT"
             echo "${SOURCE} is still owned by the local completion booster."

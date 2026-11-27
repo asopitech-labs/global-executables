@@ -390,6 +390,45 @@ func TestInspectorDeduplicatesCommandNamesAcrossDirectories(t *testing.T) {
 	}
 }
 
+// A directory that is not a valid import path element cannot be installed with
+// `go install`, so it must not become a command (" 01_facade" reached the dictionary).
+func TestInspectorSkipsDirectoriesThatAreNotImportPaths(t *testing.T) {
+	var archive bytes.Buffer
+	writer := zip.NewWriter(&archive)
+	for _, name := range []string{
+		"example.com/demo@v1.0.0/cmd/tool/main.go",
+		"example.com/demo@v1.0.0/ 01_facade/main.go",
+		"example.com/demo@v1.0.0/Error handling/main.go",
+		"example.com/demo@v1.0.0/trailing./main.go",
+	} {
+		entry, err := writer.Create(name)
+		if err != nil {
+			t.Fatal(err)
+		}
+		_, _ = entry.Write([]byte("package main\n"))
+	}
+	if err := writer.Close(); err != nil {
+		t.Fatal(err)
+	}
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/@latest"):
+			_, _ = w.Write([]byte(`{"Version":"v1.0.0"}`))
+		case r.Method == http.MethodHead:
+			w.Header().Set("Content-Length", strconv.Itoa(archive.Len()))
+		default:
+			_, _ = w.Write(archive.Bytes())
+		}
+	}))
+	defer server.Close()
+	result := NewInspector(Config{BaseURL: server.URL, Client: server.Client(), MaxAttempts: 1}).Inspect(
+		context.Background(), gocrawl.ModuleWork{Module: "example.com/demo", Attempt: 1},
+	)
+	if result.Verdict != gocrawl.VerdictSuccess || len(result.Observations) != 1 || result.Observations[0].Command != "tool" {
+		t.Fatalf("result=%+v", result)
+	}
+}
+
 func TestRangeReaderSupportsZIP64CentralDirectory(t *testing.T) {
 	var archive bytes.Buffer
 	writer := zip.NewWriter(&archive)
