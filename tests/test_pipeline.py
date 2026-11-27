@@ -249,7 +249,7 @@ def test_scope_indexes_filter_logical_provider_dimensions(tmp_path):
 def test_go_name_rule_matches_the_go_import_path_check():
     """The Go test reads the same fixture through module.CheckImportPath."""
     from global_executables.model import go_installable_command
-    fixture=json.loads((ROOT/"fixtures/go/command-names.json").read_text())
+    fixture=json.loads((ROOT/"internal/goproxy/testdata/command-names.json").read_text())
     assert [n for n in fixture["installable"] if not go_installable_command(n)] == []
     assert [n for n in fixture["uninstallable"] if go_installable_command(n)] == []
 

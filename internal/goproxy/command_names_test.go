@@ -13,7 +13,7 @@ import (
 // produce. Its rule must match the check commandCandidates applies, so both read
 // the same expectations.
 func TestCommandNameFixtureMatchesImportPathCheck(t *testing.T) {
-	raw, err := os.ReadFile(filepath.Join("..", "..", "fixtures", "go", "command-names.json"))
+	raw, err := os.ReadFile(filepath.Join("testdata", "command-names.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
