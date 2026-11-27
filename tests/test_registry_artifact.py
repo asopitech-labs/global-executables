@@ -870,6 +870,11 @@ def test_a_declared_entry_becomes_the_command_an_install_creates():
                          "bin": {"": "x", "@a/ivue-cli": "y", "ok": "z"}}, "s")
     assert sorted(row["command"] for row in rows) == ["ivue-cli", "ok"]
 
+    # A malformed `bin` (npm links nothing for it) must not abort a broad batch;
+    # `"bin": true` stopped the npm registry crawl from 2026-10-23.
+    for malformed in (True, False, None, 7, ["x"]):
+        assert npm_metadata({"name": "m", "version": "1.0", "bin": malformed}, "s") == []
+
 
 def test_a_budget_for_an_unselected_source_is_rejected(tmp_path):
     """CI kept --source-package-budget go=10000 after Go moved to local containers, and
