@@ -121,6 +121,9 @@ def npm_metadata(value, source="npm"):
     for p in packages:
         bins=p.get("bin",{})
         if isinstance(bins,str): bins={p["name"].split("/")[-1]:bins}
+        # npm installs commands only from a string or an object `bin`; any other
+        # value (e.g. `true`, a list, null) is malformed metadata that links nothing.
+        if not isinstance(bins,dict): bins={}
         latest_version = p.get("version")
         times = p.get("time", {})
         latest_release_at = times.get(latest_version) if isinstance(times, dict) else None
