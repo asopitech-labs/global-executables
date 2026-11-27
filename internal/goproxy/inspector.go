@@ -453,6 +453,12 @@ func commandCandidates(archive *zip.Reader, modulePath, version, escapedPath, es
 		if directory == "." {
 			directory = ""
 		}
+		// `go install` takes an import path, so a directory that cannot be one
+		// (spaces, non-ASCII, a leading dot, ...) yields no installable command.
+		// Without this check names such as " 01_facade" reached the dictionary.
+		if directory != "" && module.CheckImportPath(modulePath+"/"+directory) != nil {
+			continue
+		}
 		if _, exists := seen[directory]; !exists {
 			seen[directory] = struct{}{}
 			directories = append(directories, moduleDirectory{directory: directory, file: file})
