@@ -149,18 +149,25 @@ portion of the licensed database contents, that database is Adapted Material.
   `dictionary` branch has no license file today, and the README says the data
   is reusable under the repository license, which is MIT.
 
-Options, for a decision by the maintainer (none is chosen here):
+The maintainer selected option 2 below. Issue #109 tracks replacing the
+ecosyste.ms-derived list with a reproducible population built from npm's own
+data. Until that replacement is complete, the existing list remains under CC
+BY-SA 4.0 as stated in `NOTICE`; the code remains under MIT. After the
+replacement, the npm-native generated data will be distributed under the same
+MIT license as the code.
+
+Options considered:
 
 1. Keep the list. Add attribution (done in `NOTICE` by this change) and state
    that `data/production/npm-critical-packages.txt` is licensed under CC BY-SA
    4.0, separately from the MIT code; also decide and state which license the
    dataset carries, and add the same attribution where the dataset is
    published (the `dictionary` branch, the playground and `get_coverage`).
-2. Replace the list with one built from a source already in use and not under
-   share-alike, for example npm's own data (the registry, its replication
-   feed, or download counts from api.npmjs.org, which is not used today and
-   whose terms would need the same review). This changes what "critical"
-   means and needs its own coverage wording.
+2. **Selected:** replace the list with one built from a source already in use
+   and not under share-alike, for example npm's own data (the registry, its
+   replication feed, or download counts from api.npmjs.org, which is not used
+   today and whose terms need the same review). This changes what "critical"
+   means and needs its own coverage wording. Tracked in issue #109.
 3. Ask ecosyste.ms (support@ecosyste.ms) whether using the list as a crawl
    seed and publishing only npm-derived command records needs share-alike,
    and whether automated use of the API is permitted, or obtain a license
