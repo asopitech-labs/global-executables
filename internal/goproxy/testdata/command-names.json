@@ -1,0 +1,5 @@
+{
+  "_comment": "Expected go-installability of a binary name (last import path element). Checked by internal/goproxy (module.CheckImportPath) and by tests/test_pipeline.py (Python mirror), so both stay in step.",
+  "installable": ["hello", "0-go", "gofmt", "a+b", "foo.bar", "x_y-z~w", ".hidden", "_tool", "V2", "com10", "a~b", "~1a", "a.b~12"],
+  "uninstallable": [" 01_facade", "tugas13 ", "Zadatak 1", "{}", "无序链表删除重复项", "01_选择排序", "#21-Errors", "008.Arrays&Slices", "conversão_de_tipos", "trailing.", "..", "...", "con", "CON.txt", "Nul", "lpt9", "COM\u00b9", "prog~1", "ab~12.txt", "tab\there", "semi;colon", "at@sign", "percent%"]
+}
