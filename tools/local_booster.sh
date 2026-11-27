@@ -30,6 +30,10 @@
 #   STOP_TIMEOUT        seconds to wait for the crawler to exit on stop, default 300
 #   WATCH_INTERVAL      seconds between supervisor checks of the crawler, default 60
 #   STALL_TIMEOUT       native: restart a crawler without progress for this long, default 1800
+#   VERIFY_STORE        1 = check the whole local store (bbolt tx.Check) before the first pass,
+#                       default 0. The full check needs memory and time proportional to the store
+#                       (an ~840 MB store took >30 min and >11 GB, and was OOM-killed on a 15 GB
+#                       machine); a corruption found later is still quarantined (exit 75).
 #   CRASH_LIMIT, CRASH_WINDOW  more than CRASH_LIMIT exits/stalls in CRASH_WINDOW seconds
 #                       (default 3 in 1800) hands the lease back to Actions
 #   CRAWLER_BIN         native: use this crawler binary instead of building one
@@ -100,7 +104,8 @@ user_agent() {
 
 crawler_args() {
   echo "--continuous --rotation-include ${BOOSTER_RANGES} --no-feed --workers ${WORKERS} \
---max-bytes-per-second ${MAX_BYTES_PER_SECOND} --pause ${PAUSE}s --pause-jitter 0.3 --verify-store"
+--max-bytes-per-second ${MAX_BYTES_PER_SECOND} --pause ${PAUSE}s --pause-jitter 0.3"
+  [ "${VERIFY_STORE:-0}" != 1 ] || echo " --verify-store"
   [ "${MODE}" != native ] || echo " --progress-file ${PROGRESS_FILE}"
 }
 
