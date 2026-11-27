@@ -1,11 +1,9 @@
 package registryinspect
 
 import (
-	"bytes"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -92,87 +90,6 @@ func TestNPMAndPackagistInspectorsReportUnchangedVersions(t *testing.T) {
 	result = NewPackagistInspector(Config{BaseURL: packagist.URL, RequestTimeout: time.Second}).Inspect(t.Context(), gocrawl.ModuleWork{Module: "acme/demo", Known: "3.0.0"})
 	if result.Unchanged || len(result.Observations) != 1 || result.Latest != "3.1.0" {
 		t.Fatalf("a new version must be extracted: %+v", result)
-	}
-}
-
-func TestPyPIFeedReadsRecordedChangelogAndDropsOwnershipActions(t *testing.T) {
-	body, err := os.ReadFile("testdata/pypi-changelog.xml")
-	if err != nil {
-		t.Fatal(err)
-	}
-	var calls []string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		request := new(bytes.Buffer)
-		_, _ = request.ReadFrom(r.Body)
-		switch {
-		case strings.Contains(request.String(), "changelog_last_serial"):
-			calls = append(calls, "last")
-			_, _ = fmt.Fprint(w, `<?xml version='1.0'?><methodResponse><params><param><value><int>42006270</int></value></param></params></methodResponse>`)
-		case strings.Contains(request.String(), "<int>42006254</int>"):
-			calls = append(calls, "since")
-			_, _ = w.Write(body)
-		default:
-			t.Errorf("unexpected request %s", request.String())
-		}
-	}))
-	defer server.Close()
-	feed := NewPyPIFeed(Config{BaseURL: server.URL, RequestTimeout: time.Second})
-
-	first, err := feed.Poll(t.Context(), "")
-	if err != nil || first.Cursor != "42006270" || len(first.Events) != 0 {
-		t.Fatalf("an empty cursor only reports the current serial: %+v %v", first, err)
-	}
-	page, err := feed.Poll(t.Context(), "42006254")
-	if err != nil {
-		t.Fatal(err)
-	}
-	names := map[string]bool{}
-	for _, event := range page.Events {
-		names[event.Name] = true
-	}
-	if !names["nopaldb"] || !names["torchrl-nightly"] || len(names) < 2 {
-		t.Fatalf("events=%+v", page.Events)
-	}
-	// The cursor is the highest serial actually read, not the serial seen first.
-	if page.Cursor != "42006261" || strings.Join(calls, ",") != "last,last,since" {
-		t.Fatalf("cursor=%s calls=%v", page.Cursor, calls)
-	}
-	for _, action := range []string{"add Owner someone", "remove Maintainer x", "update summary", "invite Owner y"} {
-		if pypiRelevantAction(action) {
-			t.Fatalf("%q must not trigger a re-check", action)
-		}
-	}
-	for _, action := range []string{"new release", "add source file demo.tar.gz", "yank release", "remove release", "unyank release", "create"} {
-		if !pypiRelevantAction(action) {
-			t.Fatalf("%q must trigger a re-check", action)
-		}
-	}
-}
-
-func TestPyPIFeedReportsResyncForAGapTooLargeToReplay(t *testing.T) {
-	var sinceCalls atomic.Int64
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		request := new(bytes.Buffer)
-		_, _ = request.ReadFrom(r.Body)
-		if strings.Contains(request.String(), "changelog_since_serial") {
-			sinceCalls.Add(1)
-		}
-		_, _ = fmt.Fprintf(w, `<?xml version='1.0'?><methodResponse><params><param><value><int>%d</int></value></param></params></methodResponse>`, 5_000_000)
-	}))
-	defer server.Close()
-	page, err := NewPyPIFeed(Config{BaseURL: server.URL, RequestTimeout: time.Second}).Poll(t.Context(), "100")
-	if err != nil || !page.Resync || page.Cursor != "5000000" || sinceCalls.Load() != 0 {
-		t.Fatalf("page=%+v err=%v since calls=%d", page, err, sinceCalls.Load())
-	}
-}
-
-func TestPyPIFeedKeepsCursorWhenRegistryFails(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		http.Error(w, "boom", http.StatusBadGateway)
-	}))
-	defer server.Close()
-	if _, err := NewPyPIFeed(Config{BaseURL: server.URL, RequestTimeout: time.Second}).Poll(t.Context(), "100"); err == nil {
-		t.Fatal("a failed poll must be reported so the cursor is not advanced")
 	}
 }
 

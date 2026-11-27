@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
 	"maps"
 	"net/http"
 	"net/http/httptest"
@@ -119,23 +118,20 @@ func TestPlanPassWorksKeepsTheRotationBackstopWhenAFeedFloodsTheBudget(t *testin
 	}
 }
 
-// fakePyPI serves metadata, one wheel per project and the XML-RPC changelog, and
-// counts what the crawler asks for.
+// fakePyPI serves metadata and one wheel per project, and counts what the crawler
+// asks for.
 type fakePyPI struct {
 	mu         sync.Mutex
 	versions   map[string]string
-	serial     int64
-	changes    [][]any
 	metadata   int
 	files      int
 	fileSize   int64
-	now        func() time.Time
 	wheel      []byte
 	plain      map[string]bool // projects whose wheel ships no command
 	plainWheel []byte
 }
 
-func newFakePyPI(t *testing.T, projects int, now func() time.Time) (*fakePyPI, *httptest.Server) {
+func newFakePyPI(t *testing.T, projects int) (*fakePyPI, *httptest.Server) {
 	t.Helper()
 	var wheel bytes.Buffer
 	writer := zip.NewWriter(&wheel)
@@ -154,7 +150,7 @@ func newFakePyPI(t *testing.T, projects int, now func() time.Time) (*fakePyPI, *
 	if err := plainWriter.Close(); err != nil {
 		t.Fatal(err)
 	}
-	fake := &fakePyPI{versions: map[string]string{}, now: now, wheel: wheel.Bytes(), serial: 1000,
+	fake := &fakePyPI{versions: map[string]string{}, wheel: wheel.Bytes(),
 		plain: map[string]bool{}, plainWheel: plainWheel.Bytes()}
 	for index := range projects {
 		fake.versions[fmt.Sprintf("p%02d", index)] = "1.0.0"
@@ -164,22 +160,6 @@ func newFakePyPI(t *testing.T, projects int, now func() time.Time) (*fakePyPI, *
 		fake.mu.Lock()
 		defer fake.mu.Unlock()
 		switch {
-		case r.Method == http.MethodPost && r.URL.Path == "/pypi":
-			body, _ := io.ReadAll(r.Body)
-			if strings.Contains(string(body), "changelog_last_serial") {
-				fmt.Fprintf(w, `<?xml version='1.0'?><methodResponse><params><param><value><int>%d</int></value></param></params></methodResponse>`, fake.serial)
-				return
-			}
-			var since int64
-			fmt.Sscanf(string(body[strings.Index(string(body), "<int>")+5:]), "%d", &since)
-			var rows strings.Builder
-			for _, change := range fake.changes {
-				if change[3].(int64) > since {
-					fmt.Fprintf(&rows, `<value><array><data><value><string>%s</string></value><value><string>%s</string></value><value><int>%d</int></value><value><string>new release</string></value><value><int>%d</int></value></data></array></value>`,
-						change[0], change[1], change[2], change[3])
-				}
-			}
-			fmt.Fprintf(w, `<?xml version='1.0'?><methodResponse><params><param><value><array><data>%s</data></array></value></param></params></methodResponse>`, rows.String())
 		case strings.HasSuffix(r.URL.Path, "/json"):
 			name := strings.TrimSuffix(strings.TrimPrefix(r.URL.Path, "/pypi/"), "/json")
 			version, ok := fake.versions[name]
@@ -211,13 +191,6 @@ func (f *fakePyPI) release(name, version string) {
 	f.versions[name] = version
 }
 
-func (f *fakePyPI) announce(name, version string) {
-	f.mu.Lock()
-	defer f.mu.Unlock()
-	f.serial++
-	f.changes = append(f.changes, []any{name, version, f.now().Add(-10 * time.Minute).Unix(), f.serial})
-}
-
 func (f *fakePyPI) counts() (metadata, files int) {
 	f.mu.Lock()
 	defer f.mu.Unlock()
@@ -247,17 +220,16 @@ func readRows(t *testing.T, path string) map[string]string {
 	return versions
 }
 
-// TestPyPIChangeDrivenRefreshReplay replays three days of a registry against the
-// crawler and compares what it requests with what the fixed rotation would: the
-// baseline is the first pass (every package read in full), which is also what every
-// rotation visit cost before checks existed.
-func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
+// TestPyPIRotationRefreshReplay replays a registry against the supported bounded
+// rotation. The baseline is the first pass (every package read in full), which is
+// also what every rotation visit cost before checks existed.
+func TestPyPIRotationRefreshReplay(t *testing.T) {
 	const projects = 40
 	day := time.Date(2026, 10, 1, 3, 0, 0, 0, time.UTC)
 	var offset atomic64
 	defer func(previous func() time.Time) { clock = previous }(clock)
 	clock = func() time.Time { return day.Add(time.Duration(offset.Load()) * 24 * time.Hour) }
-	fake, server := newFakePyPI(t, projects, clock)
+	fake, server := newFakePyPI(t, projects)
 
 	directory := t.TempDir()
 	config := crawlConfig{
@@ -290,7 +262,7 @@ func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
 	}
 
 	// Day 2: continuous refresh. Nothing changed: every package is due, one metadata
-	// request each, and no wheel is read. The feed poll only records its position.
+	// request each, and no wheel is read.
 	offset.Store(2)
 	config.Continuous = true
 	second, err := executePass(t.Context(), config)
@@ -307,24 +279,20 @@ func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
 		t.Fatalf("downloaded %d bytes, expected under half of the baseline %d", second.DownloadedBytes, baseBytes)
 	}
 
-	// Day 4: p07 releases and the feed announces it; p21 releases but the feed misses
-	// it. The announced package is read first; the rotation finds the other.
+	// Day 4: p07 and p21 release. The bounded rotation finds both without a change
+	// feed, possibly across multiple passes when due work consumes the first budget.
 	offset.Store(4)
 	fake.release("p07", "2.0.0")
-	fake.announce("p07", "2.0.0")
 	fake.release("p21", "2.0.0")
 	third, err := executePass(t.Context(), config)
 	if err != nil {
 		t.Fatal(err)
 	}
 	versions := readRows(t, config.ObservationsPath)
-	if versions["p07"] != "2.0.0" {
-		t.Fatalf("an announced release must be picked up: %v", versions["p07"])
-	}
-	// The rotation reaches the missed release within a few passes (one pass may spend
-	// its budget on other due entries); that is the backstop's guarantee.
+	// The rotation reaches both releases within a few passes (one pass may spend its
+	// budget on other due entries).
 	for range 3 {
-		if versions["p21"] == "2.0.0" {
+		if versions["p07"] == "2.0.0" && versions["p21"] == "2.0.0" {
 			break
 		}
 		if _, err := executePass(t.Context(), config); err != nil {
@@ -332,10 +300,10 @@ func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
 		}
 		versions = readRows(t, config.ObservationsPath)
 	}
-	if versions["p21"] != "2.0.0" {
-		t.Fatalf("the rotation backstop must find a release the feed missed: %v", versions["p21"])
+	if versions["p07"] != "2.0.0" || versions["p21"] != "2.0.0" {
+		t.Fatalf("the rotation must find both releases: p07=%v p21=%v", versions["p07"], versions["p21"])
 	}
-	if third.FeedWorks != 1 || third.FeedEnqueued != 1 {
+	if third.FeedWorks != 0 || third.FeedEnqueued != 0 {
 		t.Fatalf("third=%+v", third)
 	}
 	// Day 5: everything was checked yesterday and backed off, except the two packages
@@ -352,22 +320,22 @@ func TestPyPIChangeDrivenRefreshReplay(t *testing.T) {
 		}
 		skipped += fourth.Skipped
 		if fourth.FeedError != "" || second.FeedError != "" {
-			t.Fatalf("feed errors: %q %q", second.FeedError, fourth.FeedError)
+			t.Fatalf("unexpected feed state: %q %q", second.FeedError, fourth.FeedError)
 		}
 	}
 	m5, _ := fake.counts()
 	if m5-m4 > 2 || skipped < projects-3 {
 		t.Fatalf("metadata %d -> %d, skipped %d: not-due packages must cost no request", m4, m5, skipped)
 	}
-	// History and cache are split: the state a publisher stores carries the feed
-	// position but no check; the checks live in the schedule cache.
+	// History and cache are split: the state a publisher stores carries no checks;
+	// the checks live in the schedule cache.
 	document, _, err := gocrawl.ReadStateDocument(config.StatePath)
 	if err != nil {
 		t.Fatal(err)
 	}
 	var sources map[string]map[string]any
 	_ = json.Unmarshal(document["sources"], &sources)
-	if _, leaked := sources["pypi"]["checked"]; leaked || sources["pypi"]["feed_cursor"] == "" {
+	if _, leaked := sources["pypi"]["checked"]; leaked || sources["pypi"]["feed_cursor"] != "" {
 		t.Fatalf("state=%v", sources["pypi"])
 	}
 	cachePath := gocrawl.DefaultCachePath(config.StatePath, "pypi")
@@ -500,7 +468,7 @@ func TestPackagesWithoutCommandsAreSkippedAtTheirSecondVisit(t *testing.T) {
 	var offset atomic64
 	defer func(previous func() time.Time) { clock = previous }(clock)
 	clock = func() time.Time { return day.Add(time.Duration(offset.Load()) * 24 * time.Hour) }
-	fake, server := newFakePyPI(t, projects, clock)
+	fake, server := newFakePyPI(t, projects)
 	names := slices.Sorted(maps.Keys(fake.versions))
 	for _, name := range names[withCommands:] {
 		fake.plain[name] = true
@@ -668,7 +636,7 @@ func TestADamagedStoreIsQuarantinedAndRebuiltFromTheExportedState(t *testing.T) 
 	defer func(previous func() time.Time) { clock = previous }(clock)
 	day := time.Date(2026, 10, 1, 3, 0, 0, 0, time.UTC)
 	clock = func() time.Time { return day }
-	fake, server := newFakePyPI(t, projects, clock)
+	fake, server := newFakePyPI(t, projects)
 	names := slices.Sorted(maps.Keys(fake.versions))
 	directory := t.TempDir()
 	config := crawlConfig{

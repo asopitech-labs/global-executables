@@ -333,7 +333,7 @@ func (c *crawlConfig) applyDefaults() error {
 		"npm":       {"data/production/npm-critical-packages.txt", "data/production/npm-crawl.db", "data/production/intermediate/npm.jsonl", "https://registry.npmjs.org", 64, 45 * time.Second, 5 * time.Minute},
 		"pypi":      {"data/production/pypi-projects.txt", "data/production/pypi-crawl.db", "data/production/intermediate/pypi.jsonl", "https://pypi.org", 24, 45 * time.Second, 2 * time.Minute},
 		"rubygems":  {"data/production/rubygems-names.txt", "data/production/rubygems-crawl.db", "data/production/intermediate/rubygems.jsonl", "https://rubygems.org", 16, 45 * time.Second, 2 * time.Minute},
-		"packagist": {"data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl", "https://repo.packagist.org", 24, 45 * time.Second, 2 * time.Minute},
+		"packagist": {"data/production/packagist-packages.txt", "data/production/packagist-crawl.db", "data/production/intermediate/packagist.jsonl", "https://repo.packagist.org", 20, 45 * time.Second, 2 * time.Minute},
 	}
 	selected, exists := defaults[c.Source]
 	if !exists {
@@ -401,21 +401,7 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 		progress, err := store.Progress(ctx)
 		return gocrawl.CatalogRefreshReport{Complete: progress.CatalogComplete}, err
 	}
-	initialHostConcurrency := config.Workers
-	if config.Source == "npm" {
-		initialHostConcurrency = min(8, config.Workers)
-	}
-	registryConfig := registryinspect.Config{
-		BaseURL: config.RegistryURL, RequestTimeout: config.RequestTimeout, PackageTimeout: config.ModuleTimeout,
-		InitialHostConcurrency: initialHostConcurrency, MaxHostConcurrency: config.Workers,
-		UserAgent: config.UserAgent, MaxBytesPerSecond: config.MaxBytesPerSecond,
-	}
-	if config.Source == "npm" {
-		// This runner's egress path received Retry-After under an unpaced burst. A
-		// burst-free 200ms floor avoids repeating that local observation; it is not
-		// a global npm quota shared by other runners.
-		registryConfig.MinRequestInterval = 200 * time.Millisecond
-	}
+	registryConfig := registryClientConfig(config)
 	switch config.Source {
 	case "go":
 		packageIndexURL, cachedOnlyURL := "", ""
@@ -453,11 +439,12 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 			feedFloor:   5 * time.Minute, maxBackoffDays: gocrawl.BackoffMaxDaysFeed}, nil
 	case "pypi":
 		inspector := registryinspect.NewPyPIInspector(registryConfig)
+		// PyPI asks new integrations not to use its deprecated XML-RPC APIs. The
+		// bounded exhaustive rotation is the supported polling strategy here: it
+		// eventually revisits every project and does not depend on a lossy RSS window.
 		return crawlAdapter{profile: gocrawl.CompatibilityProfileFor("pypi"), inspector: inspector,
 			refresh: staticCatalog, metrics: inspector.Metrics,
-			feed:        registryinspect.NewPyPIFeed(registryConfig),
-			feedOptions: gocrawl.FeedOptions{AdmitUnknown: true},
-			feedFloor:   time.Minute, maxBackoffDays: gocrawl.BackoffMaxDaysFeed}, nil
+			maxBackoffDays: gocrawl.BackoffMaxDaysPlain}, nil
 	case "rubygems":
 		inspector := registryinspect.NewRubyGemsInspector(registryConfig)
 		// RubyGems has no complete feed (just_updated lists only the newest 50 gems), so
@@ -474,6 +461,31 @@ func buildAdapter(config crawlConfig) (crawlAdapter, error) {
 	default:
 		return crawlAdapter{}, fmt.Errorf("unsupported source %q", config.Source)
 	}
+}
+
+func registryClientConfig(config crawlConfig) registryinspect.Config {
+	initialHostConcurrency := config.Workers
+	if config.Source == "npm" {
+		initialHostConcurrency = min(8, config.Workers)
+	}
+	registryConfig := registryinspect.Config{
+		BaseURL: config.RegistryURL, RequestTimeout: config.RequestTimeout, PackageTimeout: config.ModuleTimeout,
+		InitialHostConcurrency: initialHostConcurrency, MaxHostConcurrency: config.Workers,
+		UserAgent: config.UserAgent, MaxBytesPerSecond: config.MaxBytesPerSecond,
+	}
+	if config.Source == "npm" {
+		// This runner's egress path received Retry-After under an unpaced burst. A
+		// burst-free 200ms floor avoids repeating that local observation; it is not
+		// a global npm quota shared by other runners.
+		registryConfig.MinRequestInterval = 200 * time.Millisecond
+	}
+	if config.Source == "rubygems" {
+		// RubyGems publishes a 10 requests/second API limit. The requester gate is
+		// shared by every worker, so this interval limits the whole process rather
+		// than allowing each worker its own quota.
+		registryConfig.MinRequestInterval = 100 * time.Millisecond
+	}
+	return registryConfig
 }
 
 type measuringCommitter struct {
