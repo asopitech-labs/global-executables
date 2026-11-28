@@ -247,19 +247,8 @@ owners_summary() {
 }
 
 progress_json() {
-  python3 - "${ROOT_DIR}" "${DIR}" "${SOURCE}" "$(owners_summary)" <<'PY'
-import json, pathlib, sys
-sys.path.insert(0, str(pathlib.Path(sys.argv[1]) / "src"))
-from global_executables.refresh_policy import read_cache
-cache = pathlib.Path(sys.argv[2]) / "data/production/cache" / f"{sys.argv[3]}.cache.gz"
-checks, cursor, found = read_cache(cache)
-try:
-    owners = json.loads(sys.argv[4])
-except ValueError:
-    owners = {}
-print(json.dumps({"checked": len(checks), "cache": found, "orphans": owners.get("orphans"),
-                  "duplicates": owners.get("duplicates")}))
-PY
+  python3 "${ROOT_DIR}/tools/booster.py" progress --source "${SOURCE}" --dir "${DIR}" \
+    --owners-summary "$(owners_summary)"
 }
 
 case "${COMMAND}" in
@@ -358,7 +347,8 @@ case "${COMMAND}" in
       elif [ "$((now - last_heartbeat))" -ge "${HEARTBEAT_INTERVAL}" ]; then
         last_heartbeat="${now}"
         # Heartbeat only: commits nothing unless the lease is older than LEASE_MIN_AGE.
-        lease renew --min-age-hours "${LEASE_MIN_AGE}" >/dev/null || say "lease heartbeat failed; will retry"
+        lease renew --min-age-hours "${LEASE_MIN_AGE}" --progress "$(progress_json)" >/dev/null \
+          || say "lease heartbeat failed; will retry"
       fi
     done
     [ "${crash_loop:-0}" = 1 ] && exit 1
@@ -366,7 +356,6 @@ case "${COMMAND}" in
   status)
     running && echo "crawler: running" || echo "crawler: not running"
     python3 "${ROOT_DIR}/tools/booster.py" show --source "${SOURCE}" || true
-    progress_json || true
     # Every catalogue position: checked (by outcome), unavailable, failing, or not reached yet.
     python3 "${ROOT_DIR}/tools/booster.py" coverage --source "${SOURCE}" --dir "${DIR}" || true
     # Every published failure entry and its one owner (Actions or this booster); orphans

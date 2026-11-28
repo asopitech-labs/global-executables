@@ -2,6 +2,7 @@ import importlib.util
 import json
 import subprocess
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -281,7 +282,6 @@ def test_shared_publisher_isolates_sources_and_uses_disposable_worktrees():
 
 
 def test_a_report_that_differs_only_in_effort_is_republished_at_most_once_a_day(tmp_path):
-    from datetime import datetime, timedelta, timezone
     now = datetime.now(timezone.utc)
     stamp = lambda hours: (now - timedelta(hours=hours)).isoformat()  # noqa: E731
     entry = {"status": "success", "coverage_kind": "exhaustive", "cursor": 10, "catalog_size": 10, "failures": 0,
@@ -315,6 +315,118 @@ def test_a_report_that_differs_only_in_effort_is_republished_at_most_once_a_day(
     assert merger.merge_report("pypi", published, local, heartbeat_hours=0) is False
     assert merger.DEFAULT_HEARTBEAT_HOURS == 24
     assert 'REPORT_HEARTBEAT_HOURS="${REPORT_HEARTBEAT_HOURS:-24}"' in PARALLEL
+
+
+FIXED_NOW = datetime(2026, 11, 28, 0, 0, tzinfo=timezone.utc)
+
+
+def report_entry(**changes):
+    entry = {
+        "cursor": 100,
+        "checked": 90,
+        "outcomes": {"has_commands": 20, "no_commands": 70},
+        "coverage_kind": "partial",
+        "complete": True,
+        "status": "success",
+    }
+    entry.update(changes)
+    return entry
+
+
+def write_lease(path: Path, heartbeat: datetime, progress: dict | None, ttl_hours: float = 12) -> None:
+    lease = {
+        "ranges": "0-255",
+        "heartbeat": heartbeat.isoformat(),
+        "ttl_hours": ttl_hours,
+    }
+    if progress is not None:
+        lease["progress"] = progress
+    write_json(path, {"version": 1, "leases": {"hayabusa": lease}})
+
+
+def test_live_booster_coverage_is_overlaid_without_changing_canonical_report_fields(tmp_path):
+    published = tmp_path / "published.json"
+    local = tmp_path / "local.json"
+    lease = tmp_path / "pypi-lease.json"
+    canonical = report_entry()
+    write_json(published, {"finished_at": FIXED_NOW.isoformat(), "sources": {"pypi": canonical}})
+    write_json(local, {"finished_at": FIXED_NOW.isoformat(), "sources": {"pypi": canonical}})
+    write_lease(lease, FIXED_NOW - timedelta(hours=1), {
+        "checked": 870_264,
+        "cache": True,
+        "orphans": 0,
+        "duplicates": 0,
+        "catalog_size": 870_264,
+        "has_commands": 240_457,
+        "no_commands": 590_575,
+        "unreadable": 349,
+        "unavailable": 38_883,
+        "unaccounted": 0,
+        "rotation_cursor": 870_264,
+        "checked_outside_catalog": 24_270,
+        "computed_at": "2026-11-27T23:00:00+00:00",
+    })
+
+    assert merger.merge_report("pypi", published, local, heartbeat_hours=0,
+                               now=FIXED_NOW, lease_path=lease) is True
+    source = json.loads(published.read_text())["sources"]["pypi"]
+    overlay = source.pop("booster")
+    assert source == canonical
+    assert overlay == {
+        "owner": "hayabusa",
+        "ranges": "0-255",
+        "heartbeat": (FIXED_NOW - timedelta(hours=1)).isoformat(),
+        "catalog_size": 870_264,
+        "outcomes": {"has_commands": 240_457, "no_commands": 590_575, "unreadable": 349},
+        "unavailable": 38_883,
+        "unaccounted": 0,
+        "rotation_cursor": 870_264,
+        "computed_at": "2026-11-27T23:00:00+00:00",
+    }
+    assert merger.merge_report("pypi", published, local, heartbeat_hours=0,
+                               now=FIXED_NOW, lease_path=lease) is False
+
+
+def test_expired_booster_lease_removes_a_previously_published_overlay(tmp_path):
+    published = tmp_path / "published.json"
+    local = tmp_path / "local.json"
+    lease = tmp_path / "pypi-lease.json"
+    canonical = report_entry()
+    stale = {"owner": "hayabusa", "ranges": "0-255", "heartbeat": "old"}
+    write_json(published, {"finished_at": FIXED_NOW.isoformat(),
+                           "sources": {"pypi": {**canonical, "booster": stale}}})
+    write_json(local, {"finished_at": FIXED_NOW.isoformat(), "sources": {"pypi": canonical}})
+    write_lease(lease, FIXED_NOW - timedelta(hours=12), {"catalog_size": 1})
+
+    assert merger.merge_report("pypi", published, local, heartbeat_hours=0,
+                               now=FIXED_NOW, lease_path=lease) is True
+    assert json.loads(published.read_text())["sources"]["pypi"] == canonical
+
+
+def test_old_format_booster_progress_only_adds_lease_identity(tmp_path):
+    published = tmp_path / "published.json"
+    local = tmp_path / "local.json"
+    lease = tmp_path / "pypi-lease.json"
+    canonical = report_entry()
+    write_json(published, {"finished_at": FIXED_NOW.isoformat(), "sources": {"pypi": canonical}})
+    write_json(local, {"finished_at": FIXED_NOW.isoformat(), "sources": {"pypi": canonical}})
+    write_lease(lease, FIXED_NOW, {"checked": 10, "cache": True, "orphans": 0, "duplicates": 0})
+
+    assert merger.merge_report("pypi", published, local, heartbeat_hours=0,
+                               now=FIXED_NOW, lease_path=lease) is True
+    assert json.loads(published.read_text())["sources"]["pypi"]["booster"] == {
+        "owner": "hayabusa", "ranges": "0-255", "heartbeat": FIXED_NOW.isoformat(),
+    }
+
+
+def test_booster_overlay_is_ignored_by_outcome_and_regression_comparisons():
+    canonical = report_entry()
+    with_booster = {**canonical, "booster": {"owner": "box", "heartbeat": FIXED_NOW.isoformat()}}
+
+    assert merger.outcome(with_booster) == merger.outcome(canonical)
+    assert merger.would_regress(with_booster, canonical) is False
+    assert merger.would_regress(canonical, with_booster) is False
+    assert merger.would_regress(with_booster, {**canonical, "cursor": 99}) is True
 
 
 def test_delta_publish_clears_failures_resolved_since_the_base_cache(tmp_path):

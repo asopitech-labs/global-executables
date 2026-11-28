@@ -6,6 +6,7 @@
     tools/booster.py acquire   --source pypi --id my-laptop --ranges 0-255 [--ttl-hours 12]
     tools/booster.py renew     --source pypi --id my-laptop     (same as acquire, keeps the ranges)
     tools/booster.py release   --source pypi --id my-laptop
+    tools/booster.py progress  --source pypi --dir ~/.ge-crawl-pypi
     tools/booster.py rows-delta --published P --local L --base B --output O
 
 ``acquire``/``renew``/``release`` commit to ``artifact-data`` through a throw-away worktree
@@ -22,6 +23,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -98,7 +100,7 @@ def publish(source: str, operation, remote: str, branch: str, attempts: int, mes
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "coverage", "owners"])
+    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "coverage", "progress", "owners"])
     parser.add_argument("--source", default="pypi")
     parser.add_argument("--id", default=os.environ.get("BOOSTER_ID", ""))
     parser.add_argument("--ranges", default=os.environ.get("BOOSTER_RANGES", "0-255"))
@@ -115,6 +117,8 @@ def main() -> int:
     parser.add_argument("--base", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--dir", type=Path, help="coverage, owners: the booster working directory (<BASE>-<source>)")
+    parser.add_argument("--owners-summary", default="{}", help="progress: JSON object with orphans and duplicates")
+    parser.add_argument("--now", help="progress: UTC ISO timestamp override")
     parser.add_argument("--summary", action="store_true", help="owners: print only {orphans, duplicates} on one line")
     parser.add_argument("--fail-on-orphans", action="store_true",
                         help="owners: exit 5 when a published failure entry has no owner or two")
@@ -139,6 +143,25 @@ def main() -> int:
         retries = next((value for key, value in entry.items() if key.startswith("retry_") and isinstance(value, list)), [])
         print(json.dumps(booster.coverage(catalog, checks, entry.get("unavailable") or {}, entry.get("failures") or {},
                                           retries, cursor), indent=2))
+        return 0
+    if args.command == "progress":
+        if args.dir is None:
+            parser.error("progress needs --dir")
+        try:
+            owners = json.loads(args.owners_summary)
+        except ValueError:
+            owners = {}
+        if not isinstance(owners, dict):
+            owners = {}
+        now = None
+        if args.now:
+            try:
+                now = datetime.fromisoformat(args.now.replace("Z", "+00:00"))
+            except ValueError:
+                parser.error("--now must be an ISO timestamp")
+            if now.tzinfo is None:
+                parser.error("--now must include a UTC offset")
+        print(json.dumps(booster.progress_summary(args.dir, args.source, owners, now)))
         return 0
     if args.command == "owners":
         report = owners_report(args.source, args.ref, args.dir)

@@ -542,6 +542,64 @@ def test_coverage_accounts_for_every_catalogue_position():
     assert summary["checked_outside_catalog"] == 1
 
 
+def test_progress_summary_adds_coverage_and_falls_back_for_a_broken_cache(tmp_path):
+    from global_executables.refresh_policy import write_cache
+
+    directory = tmp_path / "booster-pypi"
+    production = directory / "data/production"
+    catalog = production / "pypi-projects.txt"
+    catalog.parent.mkdir(parents=True)
+    catalog.write_text("".join(f"p{i}\n" for i in range(6)))
+    save_state(production / "registry-state", {"version": 1, "sources": {"pypi": {
+        "projects_file": "data/production/pypi-projects.txt",
+        "unavailable": {"p3": "HTTP 404"},
+        "failures": {"p4": "timeout"},
+        "retry_projects": ["p4"],
+    }}})
+    cache = production / "cache/pypi.cache.gz"
+    write_cache(cache, {
+        "p0": "100:1c:1", "p1": "100:2n:1", "p2": "100:0u:1",
+        "outside": "100:1c:1",
+    }, 5)
+    owners = {"orphans": 2, "duplicates": 3}
+
+    progress = booster.progress_summary(directory, "pypi", owners, NOW)
+
+    assert progress == {
+        "checked": 4,
+        "cache": True,
+        "orphans": 2,
+        "duplicates": 3,
+        "catalog_size": 6,
+        "has_commands": 1,
+        "no_commands": 1,
+        "unreadable": 1,
+        "unavailable": 1,
+        "unaccounted": 1,
+        "rotation_cursor": 5,
+        "checked_outside_catalog": 1,
+        "computed_at": NOW.isoformat(),
+    }
+    command = [
+        sys.executable, str(ROOT / "tools/booster.py"), "progress", "--source", "pypi",
+        "--dir", str(directory), "--owners-summary", json.dumps(owners), "--now", NOW.isoformat(),
+    ]
+    completed = subprocess.run(command, check=True, capture_output=True, text=True)
+    assert json.loads(completed.stdout) == progress, "progress_json's CLI path emits the same fixed-clock coverage"
+
+    cache.write_bytes(b"not a gzip cache")
+    fallback = {"checked": 0, "cache": False, "orphans": 2, "duplicates": 3}
+    assert booster.progress_summary(directory, "pypi", owners, NOW) == fallback
+    completed = subprocess.run(command, check=True, capture_output=True, text=True)
+    assert json.loads(completed.stdout) == fallback
+    assert fallback == {
+        "checked": 0, "cache": False, "orphans": 2, "duplicates": 3,
+    }
+    script = (ROOT / "tools/local_booster.sh").read_text()
+    assert 'tools/booster.py" progress' in script
+    assert script.count('--progress "$(progress_json)"') == 2, "publication and heartbeat both attach coverage"
+
+
 def test_a_crawler_that_quarantined_its_store_is_restarted_and_keeps_the_lease(tmp_path):
     body = POLITE + '\nn=$(cat "$EVENTS.count" 2>/dev/null || echo 0); echo $((n + 1)) > "$EVENTS.count"\n[ "$n" -eq 0 ] && exit 75'
     harness = Native(tmp_path, crawler_body=body)
