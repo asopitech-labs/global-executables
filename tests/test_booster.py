@@ -133,18 +133,27 @@ def test_rows_delta_replaces_only_the_packages_the_writer_changed(tmp_path):
 # --- end to end: two publishers against one bare origin -----------------------------------
 
 GIT = ["git", "-c", "user.name=t", "-c", "user.email=t@example.com"]
+GIT_ENV = {
+    **os.environ,
+    "GIT_AUTHOR_NAME": "t",
+    "GIT_AUTHOR_EMAIL": "t@example.com",
+    "GIT_COMMITTER_NAME": "t",
+    "GIT_COMMITTER_EMAIL": "t@example.com",
+    "GIT_CONFIG_GLOBAL": os.devnull,
+    "GIT_CONFIG_NOSYSTEM": "1",
+}
 
 
 class Origin:
     def __init__(self, tmp_path):
         self.root = tmp_path
         self.bare = tmp_path / "origin.git"
-        subprocess.run(["git", "init", "-q", "--bare", str(self.bare)], check=True)
+        subprocess.run(["git", "init", "-q", "--bare", str(self.bare)], check=True, env=GIT_ENV)
         seed = tmp_path / "seed"
         seed.mkdir()
         for args in (("init", "-q", "-b", "artifact-data"), ("commit", "--allow-empty", "-qm", "seed"),
                      ("push", "-q", f"file://{self.bare}", "artifact-data")):
-            subprocess.run([*GIT, *args], cwd=seed, check=True)
+            subprocess.run([*GIT, *args], cwd=seed, check=True, env=GIT_ENV)
         self.work = tmp_path / "work"
         for relative in ("tools/crawl_parallel.sh", "tools/merge_observations.py", "tools/merge_registry_publication.py",
                          "tools/registry_state.py", "tools/transport_shards.py", "tools/booster.py", "tools/cache_handover.py",
@@ -155,7 +164,7 @@ class Origin:
             shutil.copy2(ROOT / relative, self.work / relative)
         for args in (("init", "-q", "-b", "main"), ("add", "-A"), ("commit", "-qm", "tools"),
                      ("remote", "add", "origin", f"file://{self.bare}")):
-            subprocess.run([*GIT, *args], cwd=self.work, check=True)
+            subprocess.run([*GIT, *args], cwd=self.work, check=True, env=GIT_ENV)
 
     def writer(self, name, *, booster_mode, base_state, base_rows):
         """A writer's crawl directory ``<base>-pypi`` seeded with the published base."""
@@ -167,10 +176,9 @@ class Origin:
         rows.write_text("".join(line + "\n" for line in base_rows))
         shutil.copytree(directory / "data/production/registry-state", directory / ".base/registry-state")
         shutil.copy2(rows, directory / ".base/rows.jsonl")
-        environment = {**os.environ, "BASE": str(base), "SOURCES": "pypi", "OBSERVATION_SOURCES": " ",
+        environment = {**GIT_ENV, "BASE": str(base), "SOURCES": "pypi", "OBSERVATION_SOURCES": " ",
                        "DELTA_SOURCES": "pypi", "CONTAINER_RUNTIME": "docker", "BOOSTER": "1" if booster_mode else "0", "PUBLISH_MAX_ATTEMPTS": "6",
-                       "PUBLISH_LOCK": str(self.root / f"{name}.lock"), "GIT_AUTHOR_NAME": "t",
-                       "GIT_AUTHOR_EMAIL": "t@example.com", "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+                       "PUBLISH_LOCK": str(self.root / f"{name}.lock")}
         return directory, environment
 
     def publish(self, environment):
@@ -178,12 +186,14 @@ class Origin:
                               capture_output=True, text=True)
 
     def head(self):
-        return subprocess.run(["git", "rev-parse", "artifact-data"], cwd=self.bare, capture_output=True, text=True).stdout.strip()
+        return subprocess.run(["git", "rev-parse", "artifact-data"], cwd=self.bare, env=GIT_ENV,
+                              capture_output=True, text=True).stdout.strip()
 
     def published(self, tmp):
         clone = tmp / "clone"
         shutil.rmtree(clone, ignore_errors=True)
-        subprocess.run(["git", "clone", "-q", "-b", "artifact-data", f"file://{self.bare}", str(clone)], check=True)
+        subprocess.run(["git", "clone", "-q", "-b", "artifact-data", f"file://{self.bare}", str(clone)],
+                       check=True, env=GIT_ENV)
         state = load_state(clone / "data/production/registry-state")["sources"]["pypi"]
         rows = subprocess.run([sys.executable, "tools/transport_shards.py", "unpack", "--input-dir",
                                str(clone / "data/production/transport/pypi-observations"), "--output", str(tmp / "rows.jsonl")],
@@ -302,8 +312,7 @@ def test_booster_publication_throttles_and_forces_the_byte_identical_cache_hando
 
 def test_lease_cli_acquire_conflict_exclusion_expiry_and_release(tmp_path):
     origin = Origin(tmp_path)
-    environment = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.com",
-                   "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+    environment = GIT_ENV
 
     def cli(*args):
         return subprocess.run([sys.executable, "tools/booster.py", *args], cwd=origin.work, env=environment,
@@ -311,22 +320,24 @@ def test_lease_cli_acquire_conflict_exclusion_expiry_and_release(tmp_path):
 
     assert cli("exclusions", "--source", "pypi", "--ref", "origin/artifact-data").stdout.strip() == ""
     assert cli("acquire", "--source", "pypi", "--id", "laptop", "--ranges", "0-127").returncode == 0
-    subprocess.run(["git", "fetch", "-q", "origin", "artifact-data"], cwd=origin.work, check=True)
+    subprocess.run(["git", "fetch", "-q", "origin", "artifact-data"], cwd=origin.work, check=True, env=GIT_ENV)
     assert cli("exclusions", "--source", "pypi", "--ref", "FETCH_HEAD").stdout.strip() == "0-127"
     clash = cli("acquire", "--source", "pypi", "--id", "other", "--ranges", "64-200")
     assert clash.returncode == 4 and "held by another live lease" in clash.stderr
     assert cli("acquire", "--source", "pypi", "--id", "desktop", "--ranges", "128-255").returncode == 0
-    head = subprocess.run(["git", "rev-parse", "artifact-data"], cwd=origin.bare, capture_output=True, text=True).stdout
+    head = subprocess.run(["git", "rev-parse", "artifact-data"], cwd=origin.bare, env=GIT_ENV,
+                          capture_output=True, text=True).stdout
     assert cli("renew", "--source", "pypi", "--id", "laptop").returncode == 0, "renew keeps the ranges"
-    document = json.loads(subprocess.run(["git", "show", "artifact-data:data/production/booster/pypi.json"], cwd=origin.bare,
+    document = json.loads(subprocess.run(["git", "show", "artifact-data:data/production/booster/pypi.json"],
+                                         cwd=origin.bare, env=GIT_ENV,
                                          capture_output=True, text=True).stdout)
     assert document["leases"]["laptop"]["ranges"] == "0-127" and document["leases"]["desktop"]["ranges"] == "128-255"
     assert cli("release", "--source", "pypi", "--id", "laptop").returncode == 0
-    subprocess.run(["git", "fetch", "-q", "origin", "artifact-data"], cwd=origin.work, check=True)
+    subprocess.run(["git", "fetch", "-q", "origin", "artifact-data"], cwd=origin.work, check=True, env=GIT_ENV)
     assert cli("exclusions", "--source", "pypi", "--ref", "FETCH_HEAD").stdout.strip() == "128-255"
     # A lease that is never renewed expires by itself (ttl in the past): Actions owns everything again.
     assert cli("acquire", "--source", "pypi", "--id", "sleepy", "--ranges", "0-9", "--ttl-hours", "0.0000001").returncode == 0
-    subprocess.run(["git", "fetch", "-q", "origin", "artifact-data"], cwd=origin.work, check=True)
+    subprocess.run(["git", "fetch", "-q", "origin", "artifact-data"], cwd=origin.work, check=True, env=GIT_ENV)
     assert "0-9" not in cli("exclusions", "--source", "pypi", "--ref", "FETCH_HEAD").stdout
     assert head != ""
 
@@ -337,7 +348,7 @@ def test_lease_cli_distinguishes_publish_failures_from_conflicts(tmp_path, comma
     result = subprocess.run(
         [sys.executable, "tools/booster.py", command, "--source", "pypi", "--id", "laptop",
          "--remote", "missing-remote", "--attempts", "1"],
-        cwd=origin.work, capture_output=True, text=True,
+        cwd=origin.work, env=GIT_ENV, capture_output=True, text=True,
     )
     assert result.returncode == 6
     assert result.stderr.count("\n") == 1
@@ -352,7 +363,7 @@ def test_lease_cli_formats_a_rejected_push_as_exit_6(tmp_path):
     hook.chmod(0o755)
     result = subprocess.run(
         [sys.executable, "tools/booster.py", "acquire", "--source", "pypi", "--id", "laptop",
-         "--attempts", "1"], cwd=origin.work, capture_output=True, text=True,
+         "--attempts", "1"], cwd=origin.work, env=GIT_ENV, capture_output=True, text=True,
     )
     assert result.returncode == 6
     assert result.stderr.count("\n") == 1
@@ -439,12 +450,11 @@ class Native:
         save_state(self.base / "data/production/registry-state", {"version": 1, "sources": {"pypi": source()}})
         self.dir = Path(f"{self.base}-pypi")
         self.dir.mkdir(parents=True, exist_ok=True)
-        self.env = {**os.environ, "BASE": str(self.base), "CONTACT": "t@example.org", "BOOSTER_ID": "box-test",
+        self.env = {**GIT_ENV, "BASE": str(self.base), "CONTACT": "t@example.org", "BOOSTER_ID": "box-test",
                     "MODE": "native", "CRAWLER_BIN": str(self.crawler), "EVENTS": str(self.events),
                     "PUBLISH_INTERVAL": "1000", "HEARTBEAT_INTERVAL": "1000", "STOP_TIMEOUT": stop_timeout,
                     "PUBLISH_LOCK": str(tmp_path / "publish.lock"),
-                    "PUBLISH_CMD": 'echo publish >> "$EVENTS"', "GIT_AUTHOR_NAME": "t",
-                    "GIT_AUTHOR_EMAIL": "t@example.com", "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+                    "PUBLISH_CMD": 'echo publish >> "$EVENTS"'}
         self.procs = []
 
     def lines(self):
@@ -467,6 +477,7 @@ class Native:
 
     def lease_document(self):
         shown = subprocess.run(["git", "show", "artifact-data:data/production/booster/pypi.json"], cwd=self.origin.bare,
+                               env=GIT_ENV,
                                capture_output=True, text=True)
         return json.loads(shown.stdout) if shown.returncode == 0 else {"leases": {}}
 
@@ -556,8 +567,7 @@ def test_an_orphan_crawler_without_a_pid_file_blocks_start_and_is_stopped_by_sto
 
 def test_heartbeat_only_renewal_commits_nothing_until_the_lease_is_old(tmp_path):
     origin = Origin(tmp_path)
-    environment = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.com",
-                   "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.com"}
+    environment = GIT_ENV
 
     def cli(*args):
         return subprocess.run([sys.executable, "tools/booster.py", *args, "--source", "pypi", "--id", "m"], cwd=origin.work,
@@ -570,8 +580,8 @@ def test_heartbeat_only_renewal_commits_nothing_until_the_lease_is_old(tmp_path)
     time.sleep(0.2)
     assert cli("renew", "--min-age-hours", "0.00001").returncode == 0
     assert origin.head() != head, "an old heartbeat is renewed"
-    changed = subprocess.run(["git", "diff", "--name-only", head, origin.head()], cwd=origin.bare, capture_output=True,
-                             text=True).stdout.split()
+    changed = subprocess.run(["git", "diff", "--name-only", head, origin.head()], cwd=origin.bare, env=GIT_ENV,
+                             capture_output=True, text=True).stdout.split()
     assert changed == ["data/production/booster/pypi.json"], "only the lease file, no data blobs"
     document = {"leases": {"m": {"ranges": "0-255", "heartbeat": NOW.isoformat(), "ttl_hours": 18}}}
     assert booster.fresh(document, "m", "0-255", 6, NOW + timedelta(hours=5))
@@ -788,13 +798,13 @@ def test_supervisor_syncs_the_pypi_catalog_periodically_without_restarting_the_c
     harness = Native(tmp_path, crawler_body=PROGRESSING)
     publisher = tmp_path / "catalog-publisher"
     subprocess.run(["git", "clone", "-q", "-b", "artifact-data", f"file://{harness.origin.bare}", str(publisher)],
-                   check=True)
+                   check=True, env=GIT_ENV)
     catalog = publisher / "data/production/pypi-projects.txt"
     catalog.parent.mkdir(parents=True, exist_ok=True)
     catalog.write_text("alpha\n", encoding="utf-8")
     for arguments in (("add", str(catalog.relative_to(publisher))), ("commit", "-qm", "seed catalog"),
                       ("push", "-q", "origin", "artifact-data")):
-        subprocess.run([*GIT, *arguments], cwd=publisher, check=True)
+        subprocess.run([*GIT, *arguments], cwd=publisher, check=True, env=GIT_ENV)
 
     harness.env.update({"WATCH_INTERVAL": "1", "PUBLISH_INTERVAL": "4", "HEARTBEAT_INTERVAL": "1000"})
     local_catalog = harness.dir / "data/production/pypi-projects.txt"
@@ -802,11 +812,12 @@ def test_supervisor_syncs_the_pypi_catalog_periodically_without_restarting_the_c
         supervisor = harness.run()
         assert harness.wait_for(lambda: local_catalog.is_file() and local_catalog.read_text() == "alpha\n")
 
-        subprocess.run([*GIT, "pull", "-q", "--rebase", "origin", "artifact-data"], cwd=publisher, check=True)
+        subprocess.run([*GIT, "pull", "-q", "--rebase", "origin", "artifact-data"], cwd=publisher,
+                       check=True, env=GIT_ENV)
         catalog.write_text("alpha\nbeta\n", encoding="utf-8")
         for arguments in (("add", str(catalog.relative_to(publisher))), ("commit", "-qm", "append catalog"),
                           ("push", "-q", "origin", "artifact-data")):
-            subprocess.run([*GIT, *arguments], cwd=publisher, check=True)
+            subprocess.run([*GIT, *arguments], cwd=publisher, check=True, env=GIT_ENV)
 
         time.sleep(1.5)
         assert local_catalog.read_text() == "alpha\n", "catalog sync must be throttled, not run every watch tick"
