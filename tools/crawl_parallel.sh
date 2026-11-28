@@ -426,6 +426,7 @@ publish_snapshot() (
     git -C "${worktree}" commit --quiet -m "${message}"
     if git -C "${worktree}" push --quiet origin HEAD:artifact-data; then
       echo "published"
+      echo "published commit $(git -C "${worktree}" rev-parse HEAD)"
       [ "${observations_changed}" = 1 ] && echo "observations changed"
     else
       push_status=$?

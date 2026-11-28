@@ -86,7 +86,7 @@ def test_withdrawn_retry_removes_stale_observation(tmp_path, monkeypatch):
 
 def test_appended_catalog_keeps_old_cursor_position(tmp_path, monkeypatch):
     catalog = tmp_path / "npm-packages.txt"
-    catalog.write_text("a\nb\naa\nc\n")
+    catalog.write_bytes(b"a\nb\naa\nc\n")
     old_digest = "sha256:" + hashlib.sha256(b"a\nb\n").hexdigest()
     manifest = tmp_path / "npm-packages.txt.manifest.json"
     manifest.write_text(json.dumps({
@@ -125,3 +125,42 @@ def test_changed_catalog_prefix_refuses_to_reuse_cursor(tmp_path):
     }}})
     with pytest.raises(ValueError, match="preserving the old prefix"):
         module.crawl(catalog, manifest, state, tmp_path / "rows.jsonl", tmp_path / "report.json", 1, interval=0)
+
+
+def test_bucket_worker_only_advances_its_owned_position(tmp_path, monkeypatch):
+    candidates = [f"package-{index}" for index in range(4096)]
+    groups = {}
+    for name in candidates:
+        groups.setdefault(module.owner_bucket(name), []).append(name)
+    bucket, owned = next((key, names) for key, names in groups.items() if len(names) >= 3)
+    foreign = next(name for name in candidates if module.owner_bucket(name) != bucket)
+    names = [owned[0], foreign, owned[1], owned[2]]
+    catalog = tmp_path / "npm-packages.txt"
+    catalog.write_bytes("".join(f"{name}\n" for name in names).encode())
+    manifest = tmp_path / "npm-packages.txt.manifest.json"
+    manifest.write_text(json.dumps({
+        "catalog_complete": True, "catalog_source": module.CATALOG_SOURCE,
+        "catalog_digest": "sha256:" + hashlib.sha256(catalog.read_bytes()).hexdigest(),
+        "catalog_size": len(names), "catalog_snapshot": "2026-10-21",
+        "catalog_scope": "npm registry package-name index",
+    }))
+    state = tmp_path / "registry-state"
+    save_state(state, {"version": 1, "sources": {"npm-registry": {
+        "cursor": 99, "failures": {foreign: "HTTP 503", owned[0]: "HTTP 503"},
+    }}})
+    inspected = []
+    monkeypatch.setattr(module, "inspect", lambda name: inspected.append(name) or [
+        {"package": name, "command": name}])
+
+    report = module.crawl(
+        catalog, manifest, state, tmp_path / "rows.jsonl", tmp_path / "report.json",
+        2, interval=0, bucket=bucket, position=1,
+    )
+
+    task = report["sources"][module.SOURCE]["task"]
+    assert inspected == [owned[0], owned[1]]
+    assert task == {"unit": f"{bucket:02x}", "position": 2, "size": 3,
+                    "failures": 0, "complete": False}
+    updated = load_state(state)["sources"]["npm-registry"]
+    assert updated["cursor"] == 99
+    assert updated["failures"] == {foreign: "HTTP 503"}

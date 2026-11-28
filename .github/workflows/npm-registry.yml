@@ -1,24 +1,20 @@
-name: npm registry crawl
+name: npm registry distributed crawl
 
-# A separate source key keeps this broad crawl's cursor and observations apart
-# from the daily critical npm sweep in registry-artifacts.yml.
+# Runs are intentionally concurrent. artifact-data reservations prevent duplicate
+# ownership, while optimistic Git pushes serialize only the tiny ledger update.
 on:
   schedule:
     - cron: "13 */4 * * *"
   workflow_dispatch:
     inputs:
       package_budget:
-        description: "Maximum broad npm packages to inspect"
+        description: "Maximum npm requests for this independently reserved unit"
         required: false
         default: "10000"
 
 permissions:
   contents: write
   actions: write
-
-concurrency:
-  group: npm-registry-crawl
-  cancel-in-progress: false
 
 jobs:
   crawl:
@@ -31,55 +27,20 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -e '.[test]'
-      - name: Restore broad npm state and catalog
-        env:
-          BASE: /tmp/ci-registry
-          SOURCES: npm-registry
-          OBSERVATION_SOURCES: " "
-        run: bash tools/crawl_parallel.sh seed
-      - name: Fetch a complete npm registry package-name snapshot when needed
+      - name: Configure Git identity
         run: |
-          mkdir -p data/production/intermediate
-          if test -f /tmp/ci-registry/data/production/npm-packages.txt; then
-            cp /tmp/ci-registry/data/production/npm-packages.txt data/production/npm-packages.txt
-            cp /tmp/ci-registry/data/production/npm-packages.txt.manifest.json data/production/npm-packages.txt.manifest.json
-          fi
-          python3 tools/npm_full_catalog.py
-      - name: Inspect a bounded broad npm batch
-        env:
-          PACKAGE_BUDGET: ${{ inputs.package_budget || '10000' }}
-        run: |
-          python3 tools/registry_state.py copy \
-            --from /tmp/ci-registry/data/production/registry-state \
-            --to data/production/registry-state
-          if test -f /tmp/ci-registry/data/production/intermediate/npm-registry.jsonl; then
-            cp /tmp/ci-registry/data/production/intermediate/npm-registry.jsonl \
-              data/production/intermediate/npm-registry.jsonl
-          fi
-          python3 tools/npm_registry_crawl.py --budget "$PACKAGE_BUDGET" \
-            --report reports/registry-artifact-crawl.json
-      - name: Publish broad npm state and observations
-        id: publish
-        run: |
-          mkdir -p /tmp/ci-registry-npm-registry/data/production/intermediate \
-            /tmp/ci-registry-npm-registry/reports
-          python3 tools/registry_state.py copy --from data/production/registry-state \
-            --to /tmp/ci-registry-npm-registry/data/production/registry-state
-          cp data/production/npm-packages.txt* /tmp/ci-registry-npm-registry/data/production/
-          cp data/production/intermediate/npm-registry.jsonl \
-            /tmp/ci-registry-npm-registry/data/production/intermediate/npm-registry.jsonl
-          cp reports/registry-artifact-crawl.json \
-            /tmp/ci-registry-npm-registry/reports/registry-artifact-crawl.json
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          publish_output="$(BASE=/tmp/ci-registry SOURCES=npm-registry OBSERVATION_SOURCES=' ' \
-            PUBLISH_MAX_ATTEMPTS=3 bash tools/crawl_parallel.sh publish)"
-          printf '%s\n' "$publish_output"
-          if printf '%s\n' "$publish_output" | grep -qx published; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Refresh dictionary after broad npm changes
-        if: steps.publish.outputs.changed == 'true'
+      - name: Reserve, crawl, publish, and checkpoint one unit
+        env:
+          ACTOR: github-${{ github.run_id }}-${{ github.run_attempt }}
+          PACKAGE_BUDGET: ${{ inputs.package_budget || '10000' }}
+          GE_USER_AGENT: global-executables/1.0 (+https://github.com/${{ github.repository }}; run=${{ github.run_id }})
+        run: bash tools/npm_distributed_worker.sh
+      - name: Refresh dictionary and status
+        if: success()
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run refresh.yml --ref main
+        run: |
+          gh workflow run refresh.yml --ref main
+          gh workflow run pages.yml --ref main

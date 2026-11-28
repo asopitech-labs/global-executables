@@ -72,11 +72,16 @@ def test_daily_ci_owns_the_bounded_npm_critical_population():
 
 def test_broad_npm_crawl_keeps_a_separate_source_and_dictionary_input():
     broad = workflow("npm-registry.yml")
+    worker = (ROOT / "tools/npm_distributed_worker.sh").read_text()
     refresh = workflow("refresh.yml")
     critical = workflow("registry-artifacts.yml")
-    assert "SOURCES: npm-registry" in broad
-    assert "tools/npm_full_catalog.py" in broad
-    assert "tools/npm_registry_crawl.py" in broad
+    assert "tools/npm_distributed_worker.sh" in broad
+    assert "concurrency:" not in broad
+    assert "SOURCES=npm-registry" in worker
+    assert "tools/work_ledger.py claim" in worker
+    assert "tools/npm_full_catalog.py" in worker
+    assert "tools/npm_registry_crawl.py" in worker
+    assert "tools/work_ledger.py checkpoint" in worker
     assert "--source npm --passes 0" in critical
     assert "npm npm-registry pypi" in refresh
     assert "data/production/intermediate/npm-registry.jsonl" in refresh
