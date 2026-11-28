@@ -1,214 +1,155 @@
-# Issue #84: Git-branch-based distributed discovery lifecycle
+# Issue #84: Git-backed candidate and crawl lifecycle
 
-Status: design approved; implementation in progress, not deployed. The designated runner and its agent
-do the live work; GitHub branches and commits hold every shared state. There
-is no separate intake API, database, or human package-submission flow.
+Status: revised design for user review. The deployed implementation and its
+2026-10-21 smoke test follow a different lifecycle. They must not be used as
+evidence that this design has been implemented or that #84 can close.
 
-## System boundary
+## Three distinct roles
 
-`main` contains code and workflows. `artifact-data` is the durable source and
-publication ledger. `dictionary` is a generated snapshot, never an agent's
-direct write target. The designated GitHub Actions runner starts the MCP/CLI agent with Git
-push rights to a restricted `intake/` branch namespace. A scheduled GitHub
-Actions collector has rights to update `artifact-data`. The agent need not
-hold permission to push `artifact-data`; branch rules should enforce this
-split. The Actions runner uses `GITHUB_TOKEN` with `contents: write` to create
-intake refs. This token is repository-scoped, so the approved branch permission
-split additionally needs an explicit repository ruleset or separate GitHub App
-identity before the production gate can be considered complete.
-The first merge of the runner workflow starts a bounded bootstrap probe of
-the current PyPI `global-executables` release. Later package probes are
-agent-triggered `workflow_dispatch` runs.
+MCP and CLI run on the **user side**. They may fetch and verify current public
+package information for the user's immediate answer. They submit a **reference
+entry** so that the shared crawlers check this package first. Their result is
+not itself an update to the Git-recorded crawl data or the public dictionary.
+No Git write permission for the user-side process is assumed.
 
-An MCP/CLI operation on that runner verifies a **known published package**
-from authoritative registry metadata and a bounded exact release artifact.
-The live answer includes source URLs, artifact digest, checked time, command
-declaration, target constraints, and unresolved conditions. A command-only
-reverse search still uses the partial published dictionary. A successful live
-verification starts a Git reservation automatically, but the live answer is
-not a dictionary snapshot or a #83 install-and-invoke result.
+The central collection workflow and runners launched separately by the user
+are peers as **crawl producers**. Both select reference entries ahead of
+ordinary crawl work, fetch official registry metadata and bounded release
+artifacts themselves, and record only their own resulting crawl observations
+in Git. Neither producer treats an MCP/CLI result as authoritative shared
+data. They have the same authority to produce crawl history.
+
+The **merge stage** has a narrower job: it merges crawl observation commits
+into `artifact-data` history. It does not access a registry, repeat a package
+check, choose a release, rewrite a current claim, or decide whether the
+user-side entry was true. The central workflow may contain both a crawl
+stage and a merge stage; saying that the merge stage only makes merge commits
+does not prevent its crawl stage from checking packages. The normal refresh
+later derives a view from merged history and publishes `dictionary` and Pages.
 
 ```mermaid
-sequenceDiagram
-    participant A as Designated MCP/CLI agent
-    participant R as GitHub intake branch
-    participant C as Scheduled collector
-    participant S as artifact-data
-    participant D as dictionary
-    A->>R: Push immutable verified proposal
-    R-->>A: Read back ref and commit (reservation ACK)
-    C->>R: Fetch and validate proposal
-    C->>C: Independently reverify public artifact
-    C->>S: Merge accepted branch and commit source event
-    C->>D: Invoke normal refresh
-    C->>D: Read back matching snapshot
-    C->>S: Mark indexed
+flowchart LR
+  U[User-side MCP or CLI] -->|verified reference entry| Q[GitHub candidate queue]
+  Q -->|priority| C[Central crawl stage]
+  Q -->|priority| R[Separately launched runner]
+  C -->|own observation commit| B[Git crawl branch]
+  R -->|own observation commit| B
+  B --> M[Merge-only stage]
+  M --> A[artifact-data history]
+  A --> F[Refresh and read-back]
+  F --> D[dictionary and Pages]
 ```
 
-Only the designated, Git-authorized runner can promise automatic reservation.
-If a copy of the CLI/MCP server has no Git write authority, it can still return
-live verification but reports `reservation.status=unavailable`. It cannot
-claim that shared publication was scheduled. Offline mode has the same clear
-separation. No credential is embedded in the Python package or MCP result.
+GitHub stores the queue, observation branches, merge history, publication
+state, and workflow results. There is no separately hosted intake API or
+database. GitHub Actions' repository-scoped token does not imply a
+branch-specific ACL. The role boundary is about which result can update the
+shared crawl history, not about treating MCP/CLI as a privileged runner.
 
-## Branch is the reservation
+## User-side reference entries
 
-For a verified release, the agent derives a deterministic ID from ecosystem,
-canonical package ID, exact selected release, target variant, verifier
-contract version, and artifact digest. It creates `intake/<id>` from the
-current `artifact-data` head and commits exactly one immutable proposal file
-at `data/production/on-demand/intake/<id>.json`. The proposal records the
-source evidence references and whether the caller requested `latest` or an
-exact version. It does not contain executable code or an already-authoritative
-dictionary row. It is a request for the collector to check a claim, not a
-trusted source observation.
+MCP/CLI returns its verified result to the user immediately, with the
+registry/artifact source, acquisition time, digest, target, and unresolved
+conditions. It also attempts to submit a small candidate entry containing
+the canonical ecosystem/package, optional version and target, evidence
+references, user-side checked time, and candidate ID. A completed submission
+means only that GitHub durably holds a **priority hint**. It does not mean
+that a crawler has checked the package, that a crawl observation was merged,
+or that the dictionary is updated. If submission fails, the live result stays
+usable and the submission status reports that failure explicitly.
 
-The agent pushes the branch with an empty expected-ref lease, which permits only
-creation and never updates an existing branch, then fetches the ref to confirm its
-commit before returning a reservation ID. If another agent created the branch
-first, the loser fetches it and compares the claim identity and artifact
-digest. Different acquisition times for the same evidence coalesce; the
-first proposal's time remains in the immutable commit. A different identity
-or evidence digest at the same name is an integrity conflict, not an occasion
-to replace the winner. A push that succeeded while its response was lost is
-recovered by this read-back. Git operations are non-interactive, time-bounded,
-and have a bounded conflict retry; a credential prompt must not block a query.
+Candidate entries are immutable and deduplicated by package, selector,
+target, and evidence identity. Repeated hints for the same work can be
+coalesced for scheduling, but a later hint must not be mistaken for a new
+official crawl observation. The queue must be bounded and fair: pending
+candidates run before routine work, while a sustained stream cannot starve
+periodic rechecks of already published claims. A candidate is considered
+handled only when a crawl result in Git references its ID; a temporary
+registry error leaves it eligible for a later runner retry.
 
-Distinct proposals use distinct branches. Agents never need to merge each
-other's work or contend on one shared queue file. GitHub's ref and commit
-history are the durable queue. The collector enumerates `intake/*` refs in
-bounded batches. A branch stays pending through temporary failures, so an
-Actions delay or crash does not erase the request. The collector maintains an
-accepted/rejected ID ledger on `artifact-data`; the client checks that ledger
-before creating a branch, and the collector checks it again before work. This
-also deduplicates a repeated query after a processed branch is deleted.
+The **submission transport and authentication remain a review decision**.
+The implementation must persist candidates in GitHub without embedding a
+repository credential in a public MCP/CLI package or presuming that every
+user can push to the repository. A GitHub-native workflow may write a
+candidate branch after receiving an authenticated request, but this is not a
+new independently hosted API. Until the authenticated ingress is defined,
+MCP/CLI may return a verified reference entry but must not report it queued.
 
-## Collector: validate, merge, or reject
+## Crawl observations from equal-authority producers
 
-One Actions concurrency group serializes scheduled collector runs. A run
-fetches the latest `artifact-data` head and a bounded set of intake refs.
-It validates each branch before using it: its merge base must be an expected
-`artifact-data` ancestor; its tree delta may contain only the one correctly
-named proposal file; the JSON must match the branch ID, package identity,
-target, verifier, and digest constraints. A malformed or unexpected branch
-cannot alter the dictionary or run code. Its candidate SHA and rejection
-reason are recorded on `artifact-data` before the ref is removed.
+Both the central crawl stage and separately launched runners use the same
+package discovery engine and outcome contract. For a selected candidate,
+the producer **reacquires** official metadata and the exact bounded artifact;
+it does not import the client's commands or digest as the crawl result. The
+candidate ID is provenance and priority only. Scheduled producer runs also
+recheck aged active claims, so withdrawal, changed entry points, and
+reappearance are observed without another user-side request.
 
-For a valid proposal, the collector independently reacquires official release
-metadata and its exact artifact. Client evidence is useful for comparison but
-never substitutes for this recheck. A timeout, 429, 5xx, or unverifiable
-artifact leaves the branch pending with a retry record and next-attempt time
-on `artifact-data`. An authoritative 404/410, withdrawal, changed artifact,
-or superseded current release gets an explicit outcome; it is never inferred
-from omission. A separate bounded sweep rechecks active current claims even
-without new intake branches so later withdrawals can be observed.
+A successful producer writes one immutable `crawl/<event-id>` branch from the
+`artifact-data` head it read before the acquisition. Its single event file
+contains the producer's outcome, official evidence, checked time, source
+identity, selector, target, and any triggering candidate IDs. The event ID
+includes the actual crawl acquisition time: observing the same artifact again
+must create fresh evidence rather than be absorbed as a duplicate. Creating
+the ref with an empty expected-ref lease and reading it back prevents one
+producer from overwriting another's branch. An unavailable Git remote leaves
+the observation uncommitted and visibly failed, rather than falsely queued.
 
-After successful revalidation, the collector merges the proposal branch into
-the latest `artifact-data` head and writes the source-owned observation event,
-current claim/projection update, and `refresh_pending` ledger entry in the
-same merge commit. A merge conflict is handled by meaning, not by blindly
-choosing `ours` or `theirs`:
+Only authoritative outcomes can alter the source view. Verified installed
+entry points add or refresh a provider. Proven package absence or proven
+absence of installed commands can withdraw the on-demand provider. Ambiguous
+metadata, timeout, 429, or 5xx must not become a withdrawal. Exact-release
+observations are history; a complete target-neutral `latest` crawl can
+affect the current view. A successful entry-point check alone never proves
+the target-specific install-and-invoke status required by #83.
 
-| Conflict or duplicate | Decision |
-| --- | --- |
-| Same ID and same evidence already accepted | Reuse the prior outcome; make no duplicate provider. |
-| Same ID with different claim identity or artifact evidence | Reject and record the conflicting candidate SHA; a later checked time alone is a duplicate. |
-| Different releases of one package | Recheck registry-selected current release; keep older evidence as history and update the current claim only from an authoritative current check. |
-| Concurrent crawler update to another source | Rebuild the merge from the newest `artifact-data` head, retaining both source-owned observations. |
-| Non-fast-forward push after validation | Fetch the new head, re-evaluate affected claim and merge; after bounded retries leave the intake branch pending. |
+## Merge, materialization, and recovery
 
-The collector must not merge arbitrary agent changes. If the tree delta,
-current-claim rule, or source ownership cannot be reconciled safely, it
-records a rejection or retryable conflict and leaves unrelated providers
-untouched. An accepted branch commit becomes a parent of the merge commit,
-so Git history retains exactly which proposal was accepted. A rejected
-proposal's metadata, SHA, and reason are copied to an audit event before its
-branch is removed. Unprocessed branches are never deleted. After an accepted
-or rejected outcome is durable on `artifact-data`, branch deletion is only
-cleanup; a crash before deletion is harmless because the ledger deduplicates
-the branch on the next run.
+The merge stage scans bounded `crawl/*` refs. It checks mechanical Git shape:
+one commit, a parent in `artifact-data` history, and one correctly named,
+size-bounded event file. It skips a tip already reachable from
+`artifact-data`; otherwise it makes a no-fast-forward merge commit so the
+producer's observation remains a parent in Git history. On a non-fast-forward
+push, it fetches the new head and repeats the same merge. Unexpected branch
+shapes or tree conflicts stay unmerged and visible for repair. The merge
+stage does not requery public sites or adjudicate the content. Ref deletion
+is not required for correctness; a later cleanup may remove only a known
+merged SHA with a ref lease.
 
-## Publication and withdrawal
+The refresh derives the current on-demand projection from merged crawl
+events. A delayed old event cannot rewind a causally later event. Two
+incompatible concurrent latest observations cannot be ordered merely by
+merge order or client timestamps: the prior unambiguous public provider is
+retained as stale/unresolved and a producer rechecks from a head containing
+both events. Other sources and same-name providers are unaffected. The
+review must settle this conflict rule before the fold is implemented.
 
-The collector's merge commit creates a `refresh_pending` state, not
-`indexed`. The normal refresh restores the on-demand source from
-`artifact-data`, merges it with other collectors, validates the canonical
-records, publishes `dictionary`, and triggers Pages. A collector run
-reconciles `refresh_pending` entries and can dispatch a missed refresh again.
-Only a read-back of a published dictionary snapshot containing the matching
-claim and event digest changes the state to `indexed(snapshot)`. Git does not
-offer a transaction across `artifact-data` and `dictionary`, so this
-reconciliation is required; dispatch success alone proves nothing.
+The refresh publishes through the normal dictionary pipeline. It records a
+selected event digest for each active or withdrawn claim and marks publication
+`indexed(snapshot)` only after reading back the matching dictionary provider,
+or its absence after an authoritative withdrawal. A merged crawl event is
+durable even if refresh or Pages fails; the next refresh can retry. Candidate
+status, crawl event reachability, and indexed publication are separate facts.
 
-Current source claims are keyed by ecosystem and canonical package. An exact
-old-release proposal can be retained as historical evidence, but it cannot
-rewind the current claim. The proposed current dictionary contains releases
-independently confirmed as registry-selected current at merge time; an
-all-versions index would need a different query and provider contract.
-Authoritative removal writes an explicit tombstone for the on-demand source.
-Temporary source failure leaves the prior claim with a stale/unknown state.
-Independent crawler observations and same-name providers survive both paths,
-and overall coverage remains partial. A verified entry point alone never
-promotes a #83 installation recipe to `ready` without an install-and-invoke
-check for the target environment.
+## Required migration and tests
 
-## Delivery and recovery invariants
+The current code mixes these roles. User-side MCP/CLI discovery calls the Git
+intake writer as if its result were a crawl observation. The collector
+recontacts registries and sweeps claims. The existing intake ID omits the
+acquisition time and would swallow repeated observations of unchanged
+artifacts. The claim projection is not yet derived solely from merged crawl
+events. Merely removing a network call from the collector would break
+freshness and withdrawal handling.
 
-Delivery is at least once. Immutable intake commits, deterministic IDs,
-source event digests, and accepted/rejected ledger entries make replay
-idempotent. There is one serialized central collector, so a per-item lease is
-unnecessary for the first version: an unprocessed branch itself is recoverable
-work. If a second collector is introduced, it must use a Git-backed claim or
-branch-owner protocol before parallel processing. Other `artifact-data`
-writers remain concurrent; their non-fast-forward pushes require a fresh
-semantic merge, not a force push.
-
-| Failure | Durable recovery |
-| --- | --- |
-| Agent push succeeds but ACK is lost | Fetch the deterministic intake ref and verify its commit/payload. |
-| Runner cannot push or GitHub is unavailable | Return live evidence plus explicit reservation failure. |
-| Actions does not start on time | Intake branch remains; the next run discovers it. |
-| Collector dies before merge | Intake branch remains and retry state survives in `artifact-data`. |
-| Merge succeeds but branch deletion fails | Accepted ledger and merge parent prevent duplicate processing. |
-| Merge succeeds but refresh dispatch fails | `refresh_pending` survives; the next collector run dispatches again. |
-| Refresh fails or publishes unrelated records | Wait for matching dictionary read-back; never mark indexed early. |
-
-Monitor count and age of intake refs, retry attempts, rejected branches,
-oldest `refresh_pending` entry, and dictionary read-back delay. Batch size
-and source request rates bound a run. GitHub schedules can be delayed; the
-cron interval is not a publication deadline. Prune accepted/rejected intake
-refs only after the outcome commit is confirmed, and retain audit events and
-source history. The cleanup job must be idempotent.
-
-## Verification and release gate
-
-1. Shared npm/PyPI fixtures verify entry points from exact artifacts, wrong
-   declarations, target mismatch, malformed or oversized archives, unsafe
-   URLs, 404/410, 429/5xx, timeout, and cache expiry. MCP and CLI return the
-   same live and reservation contracts. Crates.io requires its own `[[bin]]`
-   and implicit-binary adapter before it can reserve verified claims.
-2. Two independent worktrees against a local bare Git remote test same-ID
-   creation races, different-ID concurrent pushes, lost ACK, unexpected tree
-   delta rejection, merge conflict, non-fast-forward rebuild, and refusal to
-   update an existing intake ref. Crash injection tests each boundary before/after the merge, refresh
-   dispatch, dictionary read-back, and ref cleanup.
-3. A full fixture follows intake branch to validated merge commit, source
-   observation, dictionary refresh, MCP/Pages lookup, and indexed read-back.
-   It verifies old-release monotonicity, explicit withdrawal, unchanged
-   crawler evidence, and partial coverage.
-4. On the designated runner, verify actual branch permissions and do one
-   real MCP and one CLI reservation. Confirm the intake refs, accepted merge
-   parent, `artifact-data` event, scheduled collector run, and matching
-   `dictionary` snapshot before closing #84. Simulate Git outage and an
-   authoritative withdrawal. Fixture tests alone are insufficient.
-5. Repeat portfolio smoke checks: Alopex DB's PyPI wheel must not invent a
-   CLI; Alopex CLI and Skulk require the crates adapter; Global Executables'
-   wheel has two console scripts; Nimino release assets require their own
-   target-aware adapter. See [the evidence report](ISSUE_84_PORTFOLIO_SMOKE.md).
-
-## Approved decisions
-
-The designated agents push only `intake/*`, while the scheduled collector owns
-`artifact-data`. Exact old releases remain in history. Only an independently
-confirmed current release can enter the current dictionary. Deployment still
-requires runner permission checks and the end-to-end verification above.
+Implementation must separate the candidate queue from producer crawl event
+branches, move all official shared-data checks to the central crawl stage and
+separately launched runners, make merging history-only, and migrate the
+previously indexed provider without losing it. Tests must cover a user-side
+result whose candidate is later disproved by a producer; priority ahead of
+routine work without starvation; equal-authority producers and concurrent
+branches; duplicate and lost-ACK Git operations; repeated same-artifact
+checks; temporary failure versus authoritative withdrawal; concurrent latest
+conflict and a resolving recheck; non-fast-forward merge; failed publication
+and matching dictionary read-back. A new production MCP/CLI candidate →
+central or separate runner crawl → Git merge → dictionary/Pages smoke test is
+required before #84 closes.
