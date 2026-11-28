@@ -283,10 +283,13 @@ func TestBoltStoreReconcilesCatalogAppendBeforeCheckpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer store.Close()
-	if err := store.Import(context.Background(), ImportSnapshot{CatalogSize: 2, RefreshCursor: 1}); err != nil {
+	if err := store.Import(t.Context(), ImportSnapshot{
+		Cursor: 2, CatalogSize: 2, RefreshCursor: 1,
+		Checks: map[string]string{"example.com/a": "20700:0n:1.0"},
+	}); err != nil {
 		t.Fatal(err)
 	}
-	if err := store.SyncCatalog(context.Background(), catalogPath); err != nil {
+	if err := store.SyncCatalog(t.Context(), catalogPath); err != nil {
 		t.Fatal(err)
 	}
 
@@ -305,10 +308,10 @@ func TestBoltStoreReconcilesCatalogAppendBeforeCheckpoint(t *testing.T) {
 	if err := file.Close(); err != nil {
 		t.Fatal(err)
 	}
-	if err := store.SyncCatalog(context.Background(), catalogPath); err != nil {
+	if err := store.SyncCatalog(t.Context(), catalogPath); err != nil {
 		t.Fatal(err)
 	}
-	newModules, err := store.FilterNewCatalogModules(context.Background(), []string{
+	newModules, err := store.FilterNewCatalogModules(t.Context(), []string{
 		"example.com/b", "example.com/c", "example.com/d", "example.com/e", "example.com/e",
 	})
 	if err != nil {
@@ -317,15 +320,15 @@ func TestBoltStoreReconcilesCatalogAppendBeforeCheckpoint(t *testing.T) {
 	if len(newModules) != 1 || newModules[0] != "example.com/e" {
 		t.Fatalf("new modules=%v", newModules)
 	}
-	progress, err := store.Progress(context.Background())
+	snapshot, err := store.Snapshot(t.Context())
 	if err != nil {
 		t.Fatal(err)
 	}
-	if progress.CatalogSize != 4 {
-		t.Fatalf("catalog size=%d", progress.CatalogSize)
+	if snapshot.CatalogSize != 4 {
+		t.Fatalf("catalog size=%d", snapshot.CatalogSize)
 	}
-	if progress.RefreshCursor != 1 {
-		t.Fatalf("refresh cursor=%d", progress.RefreshCursor)
+	if snapshot.Cursor != 2 || snapshot.RefreshCursor != 1 || snapshot.Checks["example.com/a"] != "20700:0n:1.0" {
+		t.Fatalf("append changed existing progress or checks: %+v", snapshot)
 	}
 }
 

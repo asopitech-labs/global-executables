@@ -119,8 +119,7 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 	}
 	var walk []gocrawl.ModuleWork
 	if walking {
-		var err error
-		walk, err = gocrawl.ReadCatalogBatch(catalogPath, before.Cursor, before.CatalogOffset, catalogBudget, 0)
+		walk, err = planCatalogWalk(catalogPath, before, catalogBudget, policy)
 		if err != nil {
 			return nil, err
 		}
@@ -167,6 +166,33 @@ func planPassWorks(catalogPath string, before gocrawl.Snapshot, budget int, refr
 		works[index].Order = uint64(index)
 	}
 	return works, nil
+}
+
+// planCatalogWalk applies the same bucket ownership as the steady-state rotation.
+// Skipped entries still advance the contiguous discovery cursor, but do not consume the
+// request budget. Scanning is bounded so an unowned tail cannot make one pass unbounded.
+func planCatalogWalk(catalogPath string, before gocrawl.Snapshot, target int, policy passPolicy) ([]gocrawl.ModuleWork, error) {
+	scan := target
+	if policy.Owns != nil {
+		scan *= gocrawl.MaxScanFactor
+	}
+	batch, err := gocrawl.ReadCatalogBatch(catalogPath, before.Cursor, before.CatalogOffset, scan, 0)
+	if err != nil || policy.Owns == nil {
+		return batch, err
+	}
+	owned, cut := 0, len(batch)
+	for index := range batch {
+		if !policy.Owns(batch[index].Module) {
+			batch[index].Skip = true
+			continue
+		}
+		owned++
+		if owned >= target {
+			cut = index + 1
+			break
+		}
+	}
+	return batch[:cut], nil
 }
 
 // recoveryRules name, per source, the failures a newer crawler handles: packages given up

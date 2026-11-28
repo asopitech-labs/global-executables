@@ -109,6 +109,23 @@ crawler_args() {
   [ "${MODE}" != native ] || echo " --progress-file ${PROGRESS_FILE}"
 }
 
+# Actions publishes PyPI's catalogue as an append-only file. Import its tail before
+# every crawler start (including supervisor restarts), but never replace a local
+# catalogue whose prefix differs: its cursor and owner buckets describe that order.
+sync_catalog() {
+  [ "${SOURCE}" = pypi ] || return 0
+  local published
+  published="$(mktemp "${TMPDIR:-/tmp}/ge-pypi-catalog.XXXXXX")"
+  if git -C "${ROOT_DIR}" fetch --quiet --depth=1 origin artifact-data && \
+     git -C "${ROOT_DIR}" show "FETCH_HEAD:data/production/pypi-projects.txt" > "${published}"; then
+    python3 "${ROOT_DIR}/tools/booster.py" sync-catalog \
+      --published "${published}" --local "${DIR}/data/production/pypi-projects.txt"
+  else
+    say "could not read the published PyPI catalogue; keeping the local catalogue"
+  fi
+  rm -f "${published}"
+}
+
 # The progress file's modification time (empty while it does not exist).
 progress_mark() { stat -c %Y "${PROGRESS_FILE}" 2>/dev/null || stat -f %m "${PROGRESS_FILE}" 2>/dev/null || true; }
 
@@ -179,6 +196,7 @@ refuse_double_start() {
 }
 
 start_crawler() {
+  sync_catalog
   if [ "${MODE}" = native ]; then
     NO_CONTAINER=1 bash "${ROOT_DIR}/tools/crawl_parallel.sh" start
     local binary="${CRAWLER_BIN:-${BASE}-bin/go-registry-crawler}"

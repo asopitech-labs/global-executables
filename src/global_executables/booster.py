@@ -27,10 +27,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Callable, Iterable
+from typing import Any, Callable, Iterable, NamedTuple
 
 BUCKETS = 256
 LEASE_VERSION = 1
@@ -43,6 +45,36 @@ _ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}\Z")
 
 class LeaseConflict(Exception):
     """Another live lease already owns part of the requested range."""
+
+
+class CatalogSyncResult(NamedTuple):
+    appended: int
+    reason: str
+
+
+def sync_catalog_append(local: Path, published: Path) -> CatalogSyncResult:
+    """Import ``published`` only when it is byte-for-byte equal or appends to ``local``."""
+    published_body = published.read_bytes()
+    local_body = local.read_bytes() if local.is_file() else b""
+    if published_body == local_body:
+        return CatalogSyncResult(0, "unchanged")
+    if (local_body and not local_body.endswith(b"\n")) or not published_body.endswith(b"\n"):
+        return CatalogSyncResult(0, "not-strict-append")
+    if not published_body.startswith(local_body):
+        return CatalogSyncResult(0, "not-strict-append")
+    local.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{local.name}.", suffix=".tmp", dir=local.parent)
+    temporary = Path(temporary_name)
+    try:
+        os.fchmod(descriptor, 0o644)
+        with os.fdopen(descriptor, "wb") as stream:
+            stream.write(published_body)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, local)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return CatalogSyncResult(published_body[len(local_body):].count(b"\n"), "appended")
 
 
 def owner_bucket(name: str) -> int:

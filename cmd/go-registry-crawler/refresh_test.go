@@ -71,6 +71,30 @@ func TestPlanPassWorksSkipsNotDueEntriesWithoutSpendingBudget(t *testing.T) {
 	}
 }
 
+func TestCatalogWalkSkipsBucketsOwnedByABoosterWithoutSpendingBudget(t *testing.T) {
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	var names strings.Builder
+	for index := range 100 {
+		fmt.Fprintf(&names, "pkg-%03d\n", index)
+	}
+	if err := os.WriteFile(catalog, []byte(names.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 100}}
+	works, err := planPassWorks(catalog, before, 10, true, passPolicy{Owns: func(string) bool { return false }})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(works) != 100 {
+		t.Fatalf("walked=%d, want all 100 ownership skips", len(works))
+	}
+	for index, work := range works {
+		if !work.Skip || work.Refresh || work.CatalogIndex != uint64(index) {
+			t.Fatalf("work %d must be a contiguous catalog skip: %+v", index, work)
+		}
+	}
+}
+
 func TestPlanPassWorksKeepsTheRotationBackstopWhenAFeedFloodsTheBudget(t *testing.T) {
 	catalog := filepath.Join(t.TempDir(), "names.txt")
 	var names strings.Builder

@@ -81,12 +81,13 @@ and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
 official API supplies the executable inventory. npm is `exhaustive` for the declared
 ecosyste.ms critical population; crates.io, RubyGems, Packagist, and NuGet are
-exhaustive for their declared catalogs. PyPI and Go remain `partial`: finishing a walk of
-PyPI's static catalog does not prove that the catalog is current, while Go stays `partial`
-until its retry set clears.
+exhaustive for their declared catalogs. PyPI and Go remain `partial`: finishing PyPI's
+current catalog walk does not prove that its moving project population or every
+artifact is exhaustive, while Go stays `partial` until its retry set clears.
 
 The registry artifact crawler is resumable and budgeted. CI regenerates npm's finite
-critical catalog from ecosyste.ms and reuses the PyPI catalog snapshot, reads the crates.io database dump,
+critical catalog from ecosyste.ms, conditionally refreshes PyPI's Simple JSON catalog
+at most daily, reads the crates.io database dump,
 distils Go's module index into a module catalog, enumerates RubyGems' compact-index
 names catalog, and enumerates Packagist's package catalog. For
 each selected package it reads authoritative package metadata, or the smallest
@@ -182,14 +183,15 @@ catalog cursor has now reached its enumerated name list. The row column is the
 | NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
 | RubyGems | `exhaustive` | 196,126 / 196,126 (100%) | 51,383 | CI refresh matrix |
 | Packagist | `exhaustive` | 458,432 / 458,432 (100%) | 13,253 | CI refresh matrix |
-| PyPI | `partial` | 870,264 / 870,264 (100%) | 388,484 | CI refresh matrix, local booster |
+| PyPI | `partial` | 870,264 / 870,264 (100%) at this snapshot | 388,484 | CI refresh matrix and local booster |
 | npm critical | `exhaustive` | 2,295 / 2,295 (100%) | 50,309 including retained long-tail evidence | CI daily; verified locally |
 | Go | `partial` | 2,145,565 / 2,145,565 (100%) | 1,188,518 | CI refresh matrix |
 
-Go alone remains `partial` after reaching its cursor: its retry set still holds the
+Go remains `partial` after reaching its cursor: its retry set still holds the
 widest module archives, so no pass has yet finished inside its budget with an empty
-retry set. A source cannot be marked exhaustive while any cursor, artifact, or failure
-remains unresolved.
+retry set. PyPI also remains `partial`: a completed cursor covers the published catalog,
+not all projects or all executable declarations. A source cannot be marked exhaustive
+while any cursor, artifact, catalog-freshness gap, or failure remains unresolved.
 
 CI owns crates.io and the bounded npm critical population; both finish comfortably
 inside one job. The `registry-refresh.yml` matrix owns the steady-state refresh of every
@@ -417,8 +419,12 @@ Each mounted source state directory contains:
 
 The DB and derived index are local operational state and are not published. Go extends
 its catalog from the chronological upstream index, and CI replaces npm's critical
-catalog before each daily sweep. PyPI, RubyGems, and Packagist reuse their sampled
-catalogs until an operator deliberately refreshes them. A stop
+catalog before each daily sweep. The PyPI matrix leg conditionally fetches the Simple
+JSON catalog at most once every 24 hours and appends only new names; disappeared names
+remain in place so cursor positions and ownership buckets do not change. A booster
+imports that published tail only when its local catalog is an exact prefix. RubyGems
+and Packagist reuse their sampled catalogs until an operator deliberately refreshes
+them. A stop
 between a Go catalog replacement and DB metadata commit is reconciled from the file
 tail on restart.
 

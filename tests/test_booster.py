@@ -841,3 +841,33 @@ def test_every_published_failure_has_exactly_one_owner():
                                        "ttl_hours": 12}}}
     report = booster.failure_owners(entry, expired, catalog, now=now)
     assert report["owners"] == {"actions": 4} and report["orphans"] == 1
+
+
+def test_booster_catalog_sync_accepts_only_a_strict_append(tmp_path):
+    local = tmp_path / "local.txt"
+    published = tmp_path / "published.txt"
+    local.write_text("a\nb\n", encoding="utf-8")
+    published.write_text("a\nb\nc\n", encoding="utf-8")
+
+    result = booster.sync_catalog_append(local, published)
+
+    assert result.appended == 1 and result.reason == "appended"
+    assert local.read_text(encoding="utf-8") == "a\nb\nc\n"
+
+    published.write_text("a\nchanged\nc\nd\n", encoding="utf-8")
+    result = booster.sync_catalog_append(local, published)
+    assert result.appended == 0 and result.reason == "not-strict-append"
+    assert local.read_text(encoding="utf-8") == "a\nb\nc\n"
+
+
+def test_booster_catalog_sync_leaves_equal_catalog_untouched(tmp_path):
+    local = tmp_path / "local.txt"
+    published = tmp_path / "published.txt"
+    local.write_text("a\n", encoding="utf-8")
+    published.write_text("a\n", encoding="utf-8")
+    before = local.stat().st_mtime_ns
+
+    result = booster.sync_catalog_append(local, published)
+
+    assert result.appended == 0 and result.reason == "unchanged"
+    assert local.stat().st_mtime_ns == before

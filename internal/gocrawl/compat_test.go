@@ -28,6 +28,12 @@ func TestCompatibilityImportAndExportPreserveOtherSources(t *testing.T) {
       "cursor": 1,
       "catalog_complete": true,
       "catalog_since": "2026-08-21T03:30:55Z",
+      "catalog_etag": "\"pypi-etag\"",
+      "catalog_fetched_at": "2026-11-28T01:02:03Z",
+      "catalog_live_size": 951489,
+      "catalog_missing": 3558,
+      "catalog_refresh_error": "",
+      "catalog_serial": 44281061,
       "modules_file": "data/production/go-modules.txt",
       "failures": {"example.com/retry": "HTTP 503"},
       "failure_attempts": {"example.com/retry": 2},
@@ -108,6 +114,12 @@ func TestCompatibilityImportAndExportPreserveOtherSources(t *testing.T) {
 	}
 	if exportedReport["snapshot_generation"] != float64(snapshot.Generation) {
 		t.Fatalf("report=%s", reportBytes)
+	}
+	reportedSource := exportedReport["sources"].(map[string]any)["go"].(map[string]any)
+	if reportedSource["catalog_missing"] != float64(3558) ||
+		reportedSource["catalog_serial"] != float64(44281061) ||
+		reportedSource["catalog_etag"] != `"pypi-etag"` {
+		t.Fatalf("catalog refresh metadata missing from report: %s", reportBytes)
 	}
 }
 
