@@ -86,6 +86,29 @@ def test_rebuild_preserves_declared_coverage_scope(tmp_path):
     }
 
 
+def test_pypi_catalog_scope_stays_partial_through_rebuild(tmp_path):
+    coverage = json.loads((ROOT / "data/production/coverage-map.json").read_text())
+    pypi_input = ROOT / "fixtures/intermediate/pypi.jsonl"
+
+    rebuild(tmp_path, [pypi_input], "2026-11-28", coverage_kind=coverage)
+
+    metadata = json.loads((tmp_path / "data/metadata.json").read_text())
+    assert metadata["coverage"]["pypi"] == {
+        "status": "success",
+        "records": 1,
+        "source": str(pypi_input),
+        "coverage_kind": "partial",
+        "catalog_packages": 870264,
+        "catalog_snapshot": "2026-10-20",
+        "catalog_source": "https://pypi.org/simple/",
+        "scope": (
+            "Static snapshot of PyPI's simple index; projects created later are not covered "
+            "until the catalog refresh lands."
+        ),
+    }
+    assert metadata["negative_lookup"] == "unknown"
+
+
 def test_npm_catalog_completion_does_not_claim_registry_exhaustiveness(tmp_path):
     coverage = {"npm": {"coverage_kind": "exhaustive", "scope": "critical npm"}}
     assert sync_npm_coverage(coverage, {})["npm"]["coverage_kind"] == "partial"
