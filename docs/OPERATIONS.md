@@ -422,9 +422,12 @@ its catalog from the chronological upstream index, and CI replaces npm's critica
 catalog before each daily sweep. The PyPI matrix leg conditionally fetches the Simple
 JSON catalog at most once every 24 hours and appends only new names; disappeared names
 remain in place so cursor positions and ownership buckets do not change. A booster
-imports that published tail only when its local catalog is an exact prefix. RubyGems
-and Packagist reuse their sampled catalogs until an operator deliberately refreshes
-them. A stop
+imports that published tail only when its local catalog is an exact prefix. Its supervisor
+checks at crawler start and every `min(PUBLISH_INTERVAL, 1 hour)` while the crawler keeps
+running. The Go crawler calls `SyncCatalog` at the start of each pass, reuses the immutable
+prefix index, and indexes the new tail without a restart; fetch, validation, or prefix
+divergence errors are logged and leave the local catalog unchanged. RubyGems and Packagist
+reuse their sampled catalogs until an operator deliberately refreshes them. A stop
 between a Go catalog replacement and DB metadata commit is reconciled from the file
 tail on restart.
 
@@ -948,9 +951,11 @@ Three mechanisms, none of which needs a coordinator:
    report commit for each lease heartbeat.
 3. **What Actions skips.** `registry-refresh.yml` runs `tools/booster.py exclusions` and
    passes `--rotation-exclude <ranges>` to the crawler: the *rotation* entries of leased
-   buckets advance the cursor without a request. Feed work, retries, the catalogue walk
-   and the feed cursor are never skipped, so a change in a leased bucket is still read by
-   Actions at once. When the heartbeat is older than the TTL the exclusion is empty and
+   buckets advance the cursor without a request. The catalogue walk applies the same
+   ownership rule: Actions advances leased positions without requesting them, while the
+   booster reads its owned tail after the periodic catalogue sync. Feed work and its cursor
+   stay with Actions, so an announced change in a leased bucket is still read there at once.
+   When the heartbeat is older than the TTL the exclusion is empty and
    Actions owns the whole rotation again: a laptop that sleeps or loses power returns
    its buckets within twelve hours without anybody acting. A failed lookup also means "own
    everything". The booster runs the same crawler with `--rotation-include <ranges>
@@ -1117,8 +1122,10 @@ live leases). A package missing from the catalogue (created on PyPI after the ca
 taken, so known only from the change feed, e.g. `libcuopt-*`) belongs to the feed reader,
 Actions: the booster reads no feed and walks only its catalogue, so it never sees such a
 package. A package the feed announced this pass is read by Actions as a feed event in any
-bucket. Both writers use the same published catalogue; the check below flags a booster whose
-catalogue differs.
+bucket. Both writers converge on the same published catalogue. If Actions publishes a new
+tail before the booster's next periodic sync, `owners` reports those queued names as
+`catalog_lag` rather than fatal `orphans`; the next successful sync makes the booster their
+active owner. Other catalogue differences remain visible through `catalogs_match`.
 
 A newer result supersedes an older failure, whoever recorded it: a delta publish takes the
 writer's schedule cache together with its base (`.base/cache.gz`), and a package checked
@@ -1140,8 +1147,10 @@ re-reads any package whose latest version differs from its check.
 `tools/booster.py owners --dir <BASE>-pypi` lists the published failure entries with their
 owner; `orphans` (no owner: not queued for retry, or outside both writers' scope) and
 `duplicates` must be 0 (`--fail-on-orphans` exits 5 otherwise). `local_booster.sh status`
-prints it, every publish logs `retry owners: {"duplicates": 0, "orphans": 0}`, and the
-lease progress carries both counts.
+prints it, every publish logs
+`retry owners: {"catalog_lag": 0, "duplicates": 0, "orphans": 0}`, and the lease progress
+carries all three counts alongside its coverage fields. `catalog_lag` is informational
+propagation delay and does not make `--fail-on-orphans` fail.
 
 **Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
 --source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:

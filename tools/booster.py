@@ -118,9 +118,11 @@ def main() -> int:
     parser.add_argument("--base", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--dir", type=Path, help="coverage, owners: the booster working directory (<BASE>-<source>)")
-    parser.add_argument("--owners-summary", default="{}", help="progress: JSON object with orphans and duplicates")
+    parser.add_argument("--owners-summary", default="{}",
+                        help="progress: JSON object with orphans, duplicates, and catalog_lag")
     parser.add_argument("--now", help="progress: UTC ISO timestamp override")
-    parser.add_argument("--summary", action="store_true", help="owners: print only {orphans, duplicates} on one line")
+    parser.add_argument("--summary", action="store_true",
+                        help="owners: print only {orphans, duplicates, catalog_lag} on one line")
     parser.add_argument("--fail-on-orphans", action="store_true",
                         help="owners: exit 5 when a published failure entry has no owner or two")
     args = parser.parse_args()
@@ -173,7 +175,7 @@ def main() -> int:
     if args.command == "owners":
         report = owners_report(args.source, args.ref, args.dir)
         if args.summary:
-            print(json.dumps({key: report[key] for key in ("orphans", "duplicates")}, sort_keys=True))
+            print(json.dumps({key: report[key] for key in ("orphans", "duplicates", "catalog_lag")}, sort_keys=True))
         else:
             print(json.dumps(report, indent=2))
         return 5 if args.fail_on_orphans and (report["orphans"] or report["duplicates"]) else 0

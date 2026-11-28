@@ -523,10 +523,10 @@ def coverage(catalog: list[str], checks: dict[str, Any], unavailable: Iterable[s
 
 def progress_summary(directory: Path, source: str, owners: dict[str, Any],
                      now: datetime | None = None) -> dict[str, Any]:
-    """Return lease progress, retaining the old four-key shape when coverage is unavailable.
+    """Return lease progress, retaining the base ownership shape when coverage is unavailable.
 
     Coverage is informational and must never prevent a heartbeat.  In particular, a missing,
-    damaged or obsolete cache is a cold start and leaves only the pre-coverage progress keys.
+    damaged or obsolete cache is a cold start and leaves only the ownership progress keys.
     """
     from .refresh_policy import read_cache
 
@@ -537,6 +537,7 @@ def progress_summary(directory: Path, source: str, owners: dict[str, Any],
         "cache": found,
         "orphans": owners.get("orphans"),
         "duplicates": owners.get("duplicates"),
+        "catalog_lag": owners.get("catalog_lag"),
     }
     if not found:
         return result
@@ -585,7 +586,10 @@ def failure_owners(entry: dict[str, Any], document: dict[str, Any], published_ca
     those buckets, announced by the feed (``feed_pending``), or missing from its catalogue
     (the published one).  A booster owns a queued package in its buckets that its own
     catalogue (``booster_catalog``, default the published one) lists.  A failure entry that
-    is not queued for retry has no owner at all.  ``orphans`` and ``duplicates`` must be 0.
+    is not queued for retry has no owner at all. A newly published name can temporarily be
+    absent from the booster's catalogue until its next periodic sync; ``catalog_lag`` reports
+    that separately instead of treating expected propagation delay as a fatal orphan.
+    ``orphans`` and ``duplicates`` must be 0.
     """
     now = now or now_utc()
     booster_catalog = published_catalog if booster_catalog is None else booster_catalog
@@ -605,6 +609,7 @@ def failure_owners(entry: dict[str, Any], document: dict[str, Any], published_ca
     announced = entry.get("feed_pending") if isinstance(entry.get("feed_pending"), dict) else {}
     owners: dict[str, list[str]] = {}
     overlap: list[str] = []
+    lagging: dict[str, dict[str, Any]] = {}
     for name in sorted(set(failures) | queued):
         found: list[str] = []
         if name in queued:
@@ -619,8 +624,11 @@ def failure_owners(entry: dict[str, Any], document: dict[str, Any], published_ca
                     overlap.append(name)
                 else:
                     found.append(f"booster:{booster}")
+            elif booster is not None and name in published_catalog and name not in announced:
+                lagging[name] = {"booster": booster, "bucket": owner_bucket(name),
+                                 "reason": failures.get(name, "")}
         owners[name] = found
-    orphans = sorted(name for name, found in owners.items() if not found)
+    orphans = sorted(name for name, found in owners.items() if not found and name not in lagging)
     duplicates = sorted(name for name, found in owners.items() if len(found) > 1)
     counts: dict[str, int] = {}
     for found in owners.values():
@@ -631,4 +639,5 @@ def failure_owners(entry: dict[str, Any], document: dict[str, Any], published_ca
                                                           "queued": name in queued,
                                                           "in_published_catalog": name in published_catalog,
                                                           "bucket": owner_bucket(name)} for name in orphans},
-            "duplicates": len(duplicates), "duplicated": duplicates, "feed_overlap": overlap}
+            "duplicates": len(duplicates), "duplicated": duplicates, "feed_overlap": overlap,
+            "catalog_lag": len(lagging), "lagging": lagging}
