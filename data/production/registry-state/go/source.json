@@ -1,15 +1,19 @@
 {
   "catalog_complete": false,
-  "catalog_since": "2026-09-20T20:46:05.575869Z",
-  "catalog_size": 2176366,
-  "cursor": 2161476,
+  "catalog_since": "2026-09-22T03:47:28.188663Z",
+  "catalog_size": 2180467,
+  "cursor": 2164476,
   "due_floor": 0,
   "extraction_revision": 1,
   "failure_attempts": {},
-  "failures": {},
+  "failures": {
+    "go-micro.dev/v4/codec/jsonrpc/broker": "Get \"https://proxy.golang.org/go-micro.dev/v4/codec/jsonrpc/broker/@latest\": context deadline exceeded"
+  },
   "feed_cursor": "",
   "modules_file": "data/production/go-modules.txt",
   "refresh_cursor": 0,
-  "retry_modules": null,
+  "retry_modules": [
+    "go-micro.dev/v4/codec/jsonrpc/broker"
+  ],
   "snapshot_generation": 94
 }
