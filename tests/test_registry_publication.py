@@ -274,6 +274,11 @@ def test_shared_publisher_retries_from_a_fresh_remote_snapshot():
     assert 'PUBLISH_MAX_ATTEMPTS=3' in WORKFLOW
 
 
+def test_shared_publisher_fetches_only_the_artifact_data_tip():
+    assert "git fetch --quiet --depth=1 origin artifact-data" in PARALLEL
+    assert "shallow-since" not in PARALLEL
+
+
 def test_shared_publisher_isolates_sources_and_uses_disposable_worktrees():
     assert 'for source in ${SOURCES}; do' in PARALLEL
     assert 'SOURCES="${source}" OBSERVATION_SOURCES="" publish_snapshot' in PARALLEL

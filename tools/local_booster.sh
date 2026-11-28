@@ -101,6 +101,13 @@ export PACKAGE_BUDGET PUBLISH_LOCK="${PUBLISH_LOCK:-/tmp/global-executables-arti
 
 say() { printf '%s %s\n' "$(date -u +%FT%TZ)" "$*"; }
 lease() { python3 "${ROOT_DIR}/tools/booster.py" "$1" --source "${SOURCE}" --id "${BOOSTER_ID}" --ranges "${BOOSTER_RANGES}" --ttl-hours "${LEASE_TTL_HOURS}" "${@:2}"; }
+lease_failure_text() {
+  if [ "$1" -eq 4 ]; then
+    echo "the lease was refused: another live booster holds part of ${BOOSTER_RANGES}"
+  else
+    echo "could not reach artifact-data (exit $1); will retry"
+  fi
+}
 
 user_agent() {
   [ -n "${CONTACT:-}" ] || { echo "set CONTACT to an e-mail address or URL: it goes into the User-Agent so the registry can reach you" >&2; exit 2; }
@@ -259,11 +266,11 @@ publish_now() {
   if [ -n "${PUBLISH_CMD:-}" ]; then
     bash -c "${PUBLISH_CMD}" || true
   elif command -v flock >/dev/null 2>&1; then
-    bash "${ROOT_DIR}/tools/crawl_parallel.sh" publish 2>&1 | grep -vE '^remote:' | tr '\n' ' ' || true
+    HANDOVER_FORCE="${HANDOVER_FORCE:-0}" bash "${ROOT_DIR}/tools/crawl_parallel.sh" publish 2>&1 | grep -vE '^remote:' | tr '\n' ' ' || true
     echo
   else
     echo "flock is missing (macOS: brew install flock); publishing without the machine-wide lock" >&2
-    bash "${ROOT_DIR}/tools/crawl_parallel.sh" publish_unlocked 2>&1 | grep -vE '^remote:' | tr '\n' ' ' || true
+    HANDOVER_FORCE="${HANDOVER_FORCE:-0}" bash "${ROOT_DIR}/tools/crawl_parallel.sh" publish_unlocked 2>&1 | grep -vE '^remote:' | tr '\n' ' ' || true
     echo
   fi
 }
@@ -289,7 +296,13 @@ case "${COMMAND}" in
       || { echo "cannot reach origin/artifact-data with your git credentials" >&2; exit 1; }
     refuse_double_start
     say "leasing buckets ${BOOSTER_RANGES} of ${SOURCE} as ${BOOSTER_ID}"
-    lease acquire || { echo "the lease was refused: another live booster holds part of ${BOOSTER_RANGES}" >&2; exit 4; }
+    if lease acquire; then
+      :
+    else
+      lease_status=$?
+      lease_failure_text "${lease_status}" >&2
+      exit 4
+    fi
     echo "$$" > "${SUPERVISOR_PID}"
     finish() {
       trap - INT TERM EXIT
@@ -306,7 +319,7 @@ case "${COMMAND}" in
       # Order matters: the crawler must have exited before the final publication, or the
       # publication races with a crawler that is still writing its state.
       if stop_crawler; then
-        publish_now
+        HANDOVER_FORCE=1 publish_now
         lease release || true
       else
         say "crawler still alive: no final publication, the lease stays until it expires"
@@ -381,12 +394,21 @@ case "${COMMAND}" in
         say "retry owners: $(owners_summary)"
         last_publish="$(date +%s)"
         last_heartbeat="${last_publish}"
-        lease renew --progress "$(progress_json)" >/dev/null || say "lease renewal failed; will retry"
+        if lease renew --progress "$(progress_json)" >/dev/null; then
+          :
+        else
+          lease_status=$?
+          say "$(lease_failure_text "${lease_status}")"
+        fi
       elif [ "$((now - last_heartbeat))" -ge "${HEARTBEAT_INTERVAL}" ]; then
         last_heartbeat="${now}"
         # Heartbeat only: commits nothing unless the lease is older than LEASE_MIN_AGE.
-        lease renew --min-age-hours "${LEASE_MIN_AGE}" --progress "$(progress_json)" >/dev/null \
-          || say "lease heartbeat failed; will retry"
+        if lease renew --min-age-hours "${LEASE_MIN_AGE}" --progress "$(progress_json)" >/dev/null; then
+          :
+        else
+          lease_status=$?
+          say "$(lease_failure_text "${lease_status}")"
+        fi
       fi
     done
     [ "${crash_loop:-0}" = 1 ] && exit 1

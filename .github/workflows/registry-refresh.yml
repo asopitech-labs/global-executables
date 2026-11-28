@@ -82,7 +82,8 @@ jobs:
             echo "${SOURCE} is still owned by the local completion booster."
           fi
       # The schedule cache holds when each package was last checked. It is cache, not
-      # history: never committed, and a miss only makes every package due again
+      # history: the Actions copy is never committed, and a miss only makes every package
+      # due again. A throttled booster handover is the disposable exception
       # (docs/OPERATIONS.md "History and cache"). It lives in the workspace so that the
       # runner user owns it; the directory is created here, by the runner, because a
       # directory Docker creates for a bind mount belongs to root. A cache that cannot be
@@ -99,6 +100,37 @@ jobs:
           key: schedule-v1-${{ matrix.source }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             schedule-v1-${{ matrix.source }}-
+      - name: Merge the local booster schedule cache
+        if: steps.restore.outputs.eligible == 'true'
+        continue-on-error: true
+        env:
+          SOURCE: ${{ matrix.source }}
+        run: |
+          if ! python3 tools/cache_handover.py enabled --source "${SOURCE}"; then
+            echo "Schedule-cache handover is disabled for ${SOURCE}."
+            exit 0
+          fi
+          handover_path="data/production/handover/${SOURCE}.cache.gz"
+          metadata_path="data/production/handover/${SOURCE}.json"
+          handover="/tmp/${SOURCE}.handover.cache.gz"
+          metadata="/tmp/${SOURCE}.handover.json"
+          if ! git rev-parse --verify --quiet refs/remotes/origin/artifact-data >/dev/null; then
+            echo "origin/artifact-data is unavailable; keeping the restored Actions cache."
+            exit 0
+          fi
+          if ! git cat-file -e "origin/artifact-data:${handover_path}" 2>/dev/null; then
+            echo "No ${SOURCE} schedule-cache handover exists yet."
+            exit 0
+          fi
+          git show "origin/artifact-data:${handover_path}" > "${handover}"
+          metadata_args=()
+          if git cat-file -e "origin/artifact-data:${metadata_path}" 2>/dev/null; then
+            git show "origin/artifact-data:${metadata_path}" > "${metadata}"
+            metadata_args+=(--metadata "${metadata}")
+          fi
+          python3 tools/cache_handover.py merge \
+            --source "${SOURCE}" --base "data/production/cache/${SOURCE}.cache.gz" \
+            --handover "${handover}" "${metadata_args[@]}"
       # A local booster (tools/local_booster.sh) leases buckets of the catalogue and works
       # through their rotation from the owner's machine. While its heartbeat is alive this
       # run leaves them alone; a lease nobody renewed has expired and this run owns the

@@ -116,6 +116,22 @@ def test_ci_periodically_refreshes_every_completed_registry_in_parallel():
     )
 
 
+def test_registry_refresh_merges_the_booster_handover_after_cache_restore():
+    steps = yaml.safe_load(workflow("registry-refresh.yml"))["jobs"]["refresh"]["steps"]
+    names = [step.get("name", "") for step in steps]
+    restore = names.index("Restore the schedule cache")
+    merge = names.index("Merge the local booster schedule cache")
+    ownership = names.index("Find the buckets a local booster owns")
+    step = steps[merge]
+
+    assert restore < merge < ownership
+    assert step["continue-on-error"] is True
+    assert step["if"] == "steps.restore.outputs.eligible == 'true'"
+    assert "tools/cache_handover.py enabled" in step["run"]
+    assert "tools/cache_handover.py merge" in step["run"]
+    assert "origin/artifact-data" in step["run"]
+
+
 def test_pypi_catalog_refresh_runs_before_eligibility_and_uses_contact():
     refresh = workflow("registry-refresh.yml")
     restore = refresh.split("Restore the completed source checkpoint", 1)[1].split(

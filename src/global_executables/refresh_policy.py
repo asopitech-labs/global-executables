@@ -4,10 +4,10 @@ The latest version of a package is looked up again on a rotation (``refresh_curs
 Without this module every visit re-read the package's artifacts whether or not its
 latest version had changed.  The policy records, per package, the last successful
 check in the *schedule cache* (see "History and cache" in docs/OPERATIONS.md) and uses
-it three ways.  Checks are bookkeeping, not history: they live in a cache file that is
-never committed and may be lost at any time, so an unchanged package never writes to
-the registry state (#66; #65 stored them in the state's ``checked`` map, which is still
-read for one release):
+it three ways.  Checks are bookkeeping, not history: they live in a disposable cache
+file and may be lost at any time, so an unchanged package never writes to the registry
+state. A local booster may publish a throttled handover copy, but it remains cache (#66;
+#65 stored checks in the state's ``checked`` map, which is still read for one release):
 
 * P0, version-equal skip: a visit that finds the recorded latest version keeps the
   stored rows and skips the artifact download.
