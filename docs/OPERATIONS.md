@@ -1002,11 +1002,16 @@ The booster's schedule cache (`<dir>/data/production/cache`) stays on disk betwe
 which makes its own cold starts rare. For enabled sources, publication also copies the
 frozen `.snap/cache.gz` byte-for-byte to
 `artifact-data:data/production/handover/<source>.cache.gz`. Only the booster writes that
-path. It writes when the file is absent, its last commit is older than 24 hours, or a
-graceful stop forces the final publication; a file over 40 MB or for another extraction
-revision is skipped. Deterministic gzip means equal bytes produce no commit. This file is
-still disposable cache, not history; the rows and failure records remain the history and
-follow the delta rules above.
+path. The same staged commit contains
+`artifact-data:data/production/handover/<source>.json`, whose `published_at`, `entries`,
+`extraction_revision`, and cache `sha256` describe that exact copy. It writes both files
+when the cache is absent, the sidecar timestamp is older than 24 hours, or a graceful
+stop forces the final publication. A missing or unreadable sidecar makes an existing
+cache stale without requiring Git history; the shared publisher continues to fetch only
+the `artifact-data` tip with `--depth=1`. A file over 40 MB or for another extraction
+revision is skipped. Deterministic gzip means equal bytes rewrite neither file and
+produce no commit. These files are still disposable cache, not history; the rows and
+failure records remain the history and follow the delta rules above.
 
 ### Running it
 

@@ -1,6 +1,7 @@
 """Schedule-cache handover between a local booster and Actions."""
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
@@ -117,30 +118,60 @@ def test_publish_decision_covers_throttle_force_size_revision_and_equal_bytes(tm
     write_cache(snapshot, {"a": pack(10, 1, "1", "n")}, 5)
     now = 2_000_000
 
-    assert cache_handover.should_publish(snapshot, target, None, now, False) == (True, "missing")
+    metadata = tmp_path / "pypi.json"
+
+    assert cache_handover.should_publish(snapshot, target, now, False) == (True, "missing")
     target.write_bytes(snapshot.read_bytes())
-    assert cache_handover.should_publish(snapshot, target, now - 25 * 3600, now, False) == (False, "unchanged")
+    assert cache_handover.should_publish(snapshot, target, now, False) == (False, "unchanged")
     write_cache(snapshot, {"a": pack(11, 1, "2", "c")}, 6)
-    assert cache_handover.should_publish(snapshot, target, now - 23 * 3600, now, False) == (False, "fresh")
-    assert cache_handover.should_publish(snapshot, target, now - 25 * 3600, now, False) == (True, "stale")
-    assert cache_handover.should_publish(snapshot, target, now - 1, now, True) == (True, "forced")
+    assert cache_handover.should_publish(snapshot, target, now, False) == (True, "stale")
+    metadata.write_text(json.dumps({"published_at": now - 23 * 3600}))
+    assert cache_handover.should_publish(snapshot, target, now, False) == (False, "fresh")
+    metadata.write_text(json.dumps({"published_at": now - 25 * 3600}))
+    assert cache_handover.should_publish(snapshot, target, now, False) == (True, "stale")
+    metadata.write_text("not json")
+    assert cache_handover.should_publish(snapshot, target, now, False) == (True, "stale")
+    assert cache_handover.should_publish(snapshot, target, now, True) == (True, "forced")
 
     write_cache(snapshot, {"wrong": pack(12, 1, "1", "n")}, 1,
                 revision=refresh_policy.EXTRACTION_REVISION + 1)
-    assert cache_handover.should_publish(snapshot, target, 0, now, True) == (False, "cold")
+    assert cache_handover.should_publish(snapshot, target, now, True) == (False, "cold")
     with snapshot.open("wb") as stream:
         stream.truncate(cache_handover.MAX_HANDOVER_BYTES + 1)
-    assert cache_handover.should_publish(snapshot, target, 0, now, True) == (False, "too-large")
+    assert cache_handover.should_publish(snapshot, target, now, True) == (False, "too-large")
 
 
-def test_stage_handover_copies_the_frozen_snapshot_byte_for_byte(tmp_path, capsys):
+def test_stage_handover_copies_the_snapshot_and_writes_sidecar_together(tmp_path, capsys):
     snapshot = tmp_path / "snapshot.cache.gz"
     target = tmp_path / "handover/pypi.cache.gz"
     write_cache(snapshot, {"a": pack(10, 1, "1", "n")}, 5)
 
-    assert cache_handover.stage(snapshot, target, "pypi", None, 100, False)
+    assert cache_handover.stage(snapshot, target, "pypi", 100, False)
     assert target.read_bytes() == snapshot.read_bytes()
+    metadata = target.with_name("pypi.json")
+    assert json.loads(metadata.read_text()) == {
+        "entries": 1,
+        "extraction_revision": refresh_policy.EXTRACTION_REVISION,
+        "published_at": 100,
+        "sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
+    }
     assert "published" in capsys.readouterr().out
+
+    before = metadata.read_bytes()
+    write_cache(snapshot, {"a": pack(11, 1, "2", "c")}, 6)
+    assert not cache_handover.stage(snapshot, target, "pypi", 101, False)
+    assert metadata.read_bytes() == before
+
+
+def test_merge_logs_sidecar_published_at_age_when_present(tmp_path, capsys):
+    base = tmp_path / "base.cache.gz"
+    handover = tmp_path / "pypi.cache.gz"
+    metadata = tmp_path / "pypi.json"
+    write_cache(handover, {"a": pack(12, 1, "1", "n")}, 73)
+    metadata.write_text(json.dumps({"published_at": 100}))
+
+    assert cache_handover.merge(base, handover, "pypi", metadata, now=3700)
+    assert json.loads(capsys.readouterr().out)["published_age_seconds"] == 3600
 
 
 def test_tool_is_called_by_booster_publication_and_ci_only_reads_artifact_data():
@@ -148,12 +179,15 @@ def test_tool_is_called_by_booster_publication_and_ci_only_reads_artifact_data()
     supervisor = (ROOT / "tools/local_booster.sh").read_text()
     workflow = (ROOT / ".github/workflows/registry-refresh.yml").read_text()
     assert 'tools/cache_handover.py" stage' in parallel
-    assert 'log -1 --format=%ct -- "${handover_path}"' in parallel
+    assert "--last-commit" not in parallel
+    assert 'git -C "${worktree}" log' not in parallel
     assert "HANDOVER_FORCE" in parallel
     assert "HANDOVER_FORCE=1 publish_now" in supervisor
     assert supervisor.count('lease_failure_text "${lease_status}"') == 3
     assert "git cat-file -e" in workflow
     assert "git show \"origin/artifact-data:${handover_path}\"" in workflow
+    assert "git show \"origin/artifact-data:${metadata_path}\"" in workflow
+    assert '--metadata "${metadata}"' in workflow
 
 
 def test_merge_cli_never_fails_when_the_handover_is_absent(tmp_path):

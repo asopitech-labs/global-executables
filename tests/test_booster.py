@@ -1,6 +1,7 @@
 """Local booster: ownership, leases, delta publication (docs/OPERATIONS.md "Local booster")."""
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import shutil
@@ -278,6 +279,11 @@ def test_booster_publication_throttles_and_forces_the_byte_identical_cache_hando
     clone, _, _ = origin.published(tmp_path)
     target = clone / "data/production/handover/pypi.cache.gz"
     assert target.read_bytes() == cache.read_bytes(), "the committed handover is the frozen cache byte-for-byte"
+    metadata = json.loads((clone / "data/production/handover/pypi.json").read_text())
+    assert metadata["entries"] == 1
+    assert metadata["extraction_revision"] == 1
+    assert metadata["sha256"] == hashlib.sha256(cache.read_bytes()).hexdigest()
+    assert isinstance(metadata["published_at"], int)
 
     head = origin.head()
     write_cache(cache, {"a": pack(11, 2, "1", "c")}, 8)

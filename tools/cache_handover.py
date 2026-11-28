@@ -8,7 +8,9 @@ than failing a crawl.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import shutil
 import sys
 import time
@@ -18,7 +20,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from global_executables.refresh_policy import read_cache, unpack_full, write_cache  # noqa: E402
+from global_executables.refresh_policy import (  # noqa: E402
+    EXTRACTION_REVISION,
+    read_cache,
+    unpack_full,
+    write_cache,
+)
 
 
 HANDOVER_SOURCES = frozenset({"pypi"})
@@ -31,10 +38,24 @@ def enabled(source: str) -> bool:
     return source in HANDOVER_SOURCES
 
 
+def metadata_path(target: Path) -> Path:
+    """Return the sidecar path beside a handover cache target."""
+    suffix = ".cache.gz"
+    stem = target.name.removesuffix(suffix)
+    return target.with_name(f"{stem}.json")
+
+
+def _published_at(metadata: Path) -> int | None:
+    try:
+        value = json.loads(metadata.read_text()).get("published_at")
+    except (AttributeError, json.JSONDecodeError, OSError):
+        return None
+    return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
+
+
 def should_publish(
     snapshot: Path,
     target: Path,
-    last_commit: int | None,
     now: int,
     force: bool,
 ) -> tuple[bool, str]:
@@ -57,9 +78,8 @@ def should_publish(
         return True, "missing"
     if force:
         return True, "forced"
-    # The publisher fetches 25 hours of history. An existing target with no commit in
-    # that window is necessarily older than the 24-hour throttle.
-    if last_commit is None or now - last_commit > HANDOVER_INTERVAL_SECONDS:
+    published_at = _published_at(metadata_path(target))
+    if published_at is None or now - published_at > HANDOVER_INTERVAL_SECONDS:
         return True, "stale"
     return False, "fresh"
 
@@ -68,7 +88,6 @@ def stage(
     snapshot: Path,
     target: Path,
     source: str,
-    last_commit: int | None,
     now: int,
     force: bool,
 ) -> bool:
@@ -76,17 +95,45 @@ def stage(
     if not enabled(source):
         print(f"handover {source}: skipped (source-disabled)")
         return False
-    publish, reason = should_publish(snapshot, target, last_commit, now, force)
+    publish, reason = should_publish(snapshot, target, now, force)
     if not publish:
         print(f"handover {source}: skipped ({reason})")
         return False
+    checks, _, found = read_cache(snapshot)
+    if not found:
+        print(f"handover {source}: skipped (cold)")
+        return False
     target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(snapshot, target)
+    metadata = metadata_path(target)
+    cache_temp = target.with_name(f".{target.name}.tmp")
+    metadata_temp = metadata.with_name(f".{metadata.name}.tmp")
+    try:
+        shutil.copyfile(snapshot, cache_temp)
+        document = {
+            "published_at": now,
+            "entries": len(checks),
+            "extraction_revision": EXTRACTION_REVISION,
+            "sha256": hashlib.sha256(cache_temp.read_bytes()).hexdigest(),
+        }
+        metadata_temp.write_text(
+            json.dumps(document, sort_keys=True, separators=(",", ":")) + "\n"
+        )
+        os.replace(cache_temp, target)
+        os.replace(metadata_temp, metadata)
+    finally:
+        cache_temp.unlink(missing_ok=True)
+        metadata_temp.unlink(missing_ok=True)
     print(f"handover {source}: published ({reason})")
     return True
 
 
-def merge(base: Path, handover: Path, source: str) -> bool:
+def merge(
+    base: Path,
+    handover: Path,
+    source: str,
+    metadata: Path | None = None,
+    now: int | None = None,
+) -> bool:
     """Merge ``handover`` into ``base`` by newest check day and rewrite ``base``."""
     if not enabled(source):
         print(f"handover {source}: source is not enabled; base left unchanged")
@@ -115,12 +162,11 @@ def merge(base: Path, handover: Path, source: str) -> bool:
         "kept_base": sum(not selected_from_handover.get(name, False) for name in written),
         "total": len(written),
     }
+    published_at = _published_at(metadata) if metadata is not None else None
+    if published_at is not None:
+        summary["published_age_seconds"] = max(0, (int(time.time()) if now is None else now) - published_at)
     print(json.dumps(summary, sort_keys=True, separators=(",", ":")))
     return True
-
-
-def _integer(value: str) -> int | None:
-    return int(value) if value else None
 
 
 def main() -> int:
@@ -131,12 +177,12 @@ def main() -> int:
     merge_parser = subparsers.add_parser("merge")
     merge_parser.add_argument("--base", required=True, type=Path)
     merge_parser.add_argument("--handover", required=True, type=Path)
+    merge_parser.add_argument("--metadata", type=Path)
     merge_parser.add_argument("--source", default="pypi")
     stage_parser = subparsers.add_parser("stage")
     stage_parser.add_argument("--snapshot", required=True, type=Path)
     stage_parser.add_argument("--target", required=True, type=Path)
     stage_parser.add_argument("--source", required=True)
-    stage_parser.add_argument("--last-commit", default="", type=_integer)
     stage_parser.add_argument("--now", type=int, default=None)
     stage_parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
@@ -145,9 +191,9 @@ def main() -> int:
         return 0 if enabled(args.source) else 1
     try:
         if args.command == "merge":
-            merge(args.base, args.handover, args.source)
+            merge(args.base, args.handover, args.source, args.metadata)
         else:
-            stage(args.snapshot, args.target, args.source, args.last_commit,
+            stage(args.snapshot, args.target, args.source,
                   int(time.time()) if args.now is None else args.now, args.force)
     except Exception as error:  # A disposable cache must never stop publication or CI.
         first_line = str(error).splitlines()[0] if str(error) else type(error).__name__
