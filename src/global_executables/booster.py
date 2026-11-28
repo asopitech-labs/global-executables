@@ -489,6 +489,59 @@ def coverage(catalog: list[str], checks: dict[str, Any], unavailable: Iterable[s
             "checked_outside_catalog": sum(1 for name in checks if name not in names)}
 
 
+def progress_summary(directory: Path, source: str, owners: dict[str, Any],
+                     now: datetime | None = None) -> dict[str, Any]:
+    """Return lease progress, retaining the old four-key shape when coverage is unavailable.
+
+    Coverage is informational and must never prevent a heartbeat.  In particular, a missing,
+    damaged or obsolete cache is a cold start and leaves only the pre-coverage progress keys.
+    """
+    from .refresh_policy import read_cache
+
+    production = directory / "data/production"
+    checks, rotation_cursor, found = read_cache(production / "cache" / f"{source}.cache.gz")
+    result = {
+        "checked": len(checks),
+        "cache": found,
+        "orphans": owners.get("orphans"),
+        "duplicates": owners.get("duplicates"),
+    }
+    if not found:
+        return result
+    try:
+        from .registry_state import load_state
+
+        entry = load_state(production / "registry-state").get("sources", {}).get(source, {})
+        if not isinstance(entry, dict):
+            return result
+        catalog_name = next(
+            (entry.get(key) for key in ("projects_file", "names_file", "packages_file")
+             if isinstance(entry.get(key), str) and entry.get(key)),
+            None,
+        )
+        if catalog_name is None:
+            return result
+        with (directory / catalog_name).open(encoding="utf-8") as stream:
+            catalog = [line.split("\t", 1)[0].rstrip("\n") for line in stream if line.strip()]
+        retries = next(
+            (value for key, value in entry.items() if key.startswith("retry_") and isinstance(value, list)),
+            [],
+        )
+        summary = coverage(catalog, checks, entry.get("unavailable") or {}, entry.get("failures") or {},
+                           retries, rotation_cursor)
+    except Exception:
+        # This enhancement is deliberately fail-open: the lease heartbeat is more important
+        # than optional visibility, including for unexpected local filesystem damage.
+        return result
+    keys = (
+        "catalog_size", "has_commands", "no_commands", "unreadable", "unavailable",
+        "unaccounted", "rotation_cursor", "checked_outside_catalog",
+    )
+    result.update({key: summary[key] for key in keys})
+    result["computed_at"] = (now or now_utc()).astimezone(timezone.utc).isoformat()
+    return result
+
+
 # --- retry ownership invariant --------------------------------------------------------------
 
 def failure_owners(entry: dict[str, Any], document: dict[str, Any], published_catalog: set[str],

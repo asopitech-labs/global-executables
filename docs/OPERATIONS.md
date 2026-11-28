@@ -81,9 +81,9 @@ and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
 official API supplies the executable inventory. npm is `exhaustive` for the declared
 ecosyste.ms critical population; crates.io, RubyGems, Packagist, and NuGet are
-exhaustive for their declared catalogs. That snapshot still records PyPI and Go as
-`partial`; PyPI's crawl has since reached its full catalog and carries the exhaustive
-marking into the next publication, while Go stays `partial` until its retry set clears.
+exhaustive for their declared catalogs. PyPI and Go remain `partial`: finishing a walk of
+PyPI's static catalog does not prove that the catalog is current, while Go stays `partial`
+until its retry set clears.
 
 The registry artifact crawler is resumable and budgeted. CI regenerates npm's finite
 critical catalog from ecosyste.ms and reuses the PyPI catalog snapshot, reads the crates.io database dump,
@@ -182,7 +182,7 @@ catalog cursor has now reached its enumerated name list. The row column is the
 | NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
 | RubyGems | `exhaustive` | 196,126 / 196,126 (100%) | 51,383 | CI refresh matrix |
 | Packagist | `exhaustive` | 458,432 / 458,432 (100%) | 13,253 | CI refresh matrix |
-| PyPI | `exhaustive` | 870,264 / 870,264 (100%) | 388,484 | CI refresh matrix |
+| PyPI | `partial` | 870,264 / 870,264 (100%) | 388,484 | CI refresh matrix, local booster |
 | npm critical | `exhaustive` | 2,295 / 2,295 (100%) | 50,309 including retained long-tail evidence | CI daily; verified locally |
 | Go | `partial` | 2,145,565 / 2,145,565 (100%) | 1,188,518 | CI refresh matrix |
 
@@ -934,6 +934,12 @@ Three mechanisms, none of which needs a coordinator:
    its heartbeat; an overlapping request while another lease is alive is refused
    (exit 4). Leases are changed by applying an operation to the freshest branch head
    (rebuild on a non-fast-forward push), so two machines never lose each other's lease.
+   At publication or heartbeat time, `progress` also records the local cache's catalog and
+   outcome totals. Actions copies a live lease into the source report under `booster`; this
+   is separate visibility and does not change the report's canonical `checked`, `outcomes`,
+   `coverage_kind`, `complete`, or status/aggregate semantics. An expired lease removes the
+   overlay from the next report publication. A booster-only change produces at most one
+   report commit for each lease heartbeat.
 3. **What Actions skips.** `registry-refresh.yml` runs `tools/booster.py exclusions` and
    passes `--rotation-exclude <ranges>` to the crawler: the *rotation* entries of leased
    buckets advance the cursor without a request. Feed work, retries, the catalogue walk

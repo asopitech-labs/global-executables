@@ -197,12 +197,13 @@ EFFORT_KEYS = frozenset({
     "feed_queue", "checked", "ttl", "catalog_discovered", "catalog_requests", "budget_exhausted", "refresh_cursor",
     "state",
 })
+REPORT_OVERLAY_KEYS = frozenset({"booster"})
 
 
 def outcome(entry: Any) -> Any:
     if not isinstance(entry, dict):
         return entry
-    return {key: value for key, value in entry.items() if key not in EFFORT_KEYS}
+    return {key: value for key, value in entry.items() if key not in EFFORT_KEYS | REPORT_OVERLAY_KEYS}
 
 
 # An idle run republishes only the report (its last-crawl time) once a day, so the status
@@ -210,8 +211,33 @@ def outcome(entry: Any) -> Any:
 DEFAULT_HEARTBEAT_HOURS = 24.0
 
 
+def booster_overlay(lease_path: Path, now: datetime) -> dict[str, Any] | None:
+    """Return the first live lease as a report-only visibility block."""
+    document = booster.read_document(lease_path)
+    for owner, lease in sorted(document.get("leases", {}).items()):
+        if not booster.is_live(lease, now):
+            continue
+        block = {"owner": owner, "ranges": lease.get("ranges"), "heartbeat": lease.get("heartbeat")}
+        progress = lease.get("progress")
+        if not isinstance(progress, dict):
+            return block
+        outcomes = {
+            key: progress[key]
+            for key in ("has_commands", "no_commands", "unreadable")
+            if key in progress
+        }
+        if outcomes:
+            block["outcomes"] = outcomes
+        for key in ("catalog_size", "unavailable", "unaccounted", "rotation_cursor", "computed_at"):
+            if key in progress:
+                block[key] = progress[key]
+        return block
+    return None
+
+
 def merge_report(source: str, published_path: Path, local_path: Path,
-                 heartbeat_hours: float = DEFAULT_HEARTBEAT_HOURS) -> bool:
+                 heartbeat_hours: float = DEFAULT_HEARTBEAT_HOURS,
+                 now: datetime | None = None, lease_path: Path | None = None) -> bool:
     if not local_path.is_file():
         return False
     published = read_json(published_path, {"sources": {}})
@@ -223,15 +249,27 @@ def merge_report(source: str, published_path: Path, local_path: Path,
     previous = published_sources.get(source)
     if would_regress(previous, local_entry):
         return False
-    if previous is not None and outcome(previous) == outcome(local_entry) and not heartbeat_due(published, heartbeat_hours):
+    now = now or datetime.now(timezone.utc)
+    lease_path = lease_path or published_path.parent.parent / booster.LEASE_PATH.format(source=source)
+    candidate = dict(local_entry)
+    overlay = booster_overlay(lease_path, now)
+    if overlay is None:
+        candidate.pop("booster", None)
+    else:
+        candidate["booster"] = overlay
+    sentinel = object()
+    previous_booster = previous.get("booster", sentinel) if isinstance(previous, dict) else sentinel
+    booster_changed = previous_booster != candidate.get("booster", sentinel)
+    if (previous is not None and outcome(previous) == outcome(candidate) and not booster_changed
+            and not heartbeat_due(published, heartbeat_hours, now)):
         return False  # nothing but effort changed: no commit for a run that found nothing
-    published_sources[source] = local_entry
+    published_sources[source] = candidate
     finished = [
         value
         for value in (published.get("finished_at"),
                       # The Python crawlers' reports carry no time: stamp the publication, so the
                       # heartbeat has an anchor.
-                      local.get("finished_at") or datetime.now(timezone.utc).isoformat())
+                      local.get("finished_at") or now.isoformat())
         if isinstance(value, str) and value
     ]
     if finished:
@@ -241,7 +279,7 @@ def merge_report(source: str, published_path: Path, local_path: Path,
     return True
 
 
-def heartbeat_due(published: dict[str, Any], hours: float) -> bool:
+def heartbeat_due(published: dict[str, Any], hours: float, now: datetime | None = None) -> bool:
     """The report is refreshed at least every ``hours`` even when idle (0 turns it off)."""
     if hours <= 0:
         return False
@@ -252,7 +290,7 @@ def heartbeat_due(published: dict[str, Any], hours: float) -> bool:
         return True
     if last.tzinfo is None:
         last = last.replace(tzinfo=timezone.utc)
-    return datetime.now(timezone.utc) - last >= timedelta(hours=hours)
+    return (now or datetime.now(timezone.utc)) - last >= timedelta(hours=hours)
 
 
 def parse_args() -> argparse.Namespace:
