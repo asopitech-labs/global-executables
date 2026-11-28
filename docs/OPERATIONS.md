@@ -744,7 +744,7 @@ The crawl keeps two kinds of information apart, the way shields.io does:
 | | history | cache |
 | --- | --- | --- |
 | what | the observations (rows), `unavailable`/failure records, catalogue cursors, change-feed cursors and queues, `due_floor`, `extraction_revision` | when each package was last looked at (`<day>:<streak><outcome>:<version>`, one for **every** inspected package, with or without commands), the position of the refresh rotation, anything that only schedules the next look (ETag/Last-Modified validators, TTL class, backoff tier) |
-| where | `artifact-data` (git): the sharded `registry-state/` and the row transport shards | `data/production/cache/<source>.cache.gz`, never committed (`.gitignore`), kept between CI runs by `actions/cache` and between local runs by the file itself |
+| where | `artifact-data` (git): the sharded `registry-state/` and the row transport shards | `data/production/cache/<source>.cache.gz`, normally uncommitted (`.gitignore`), kept between CI runs by `actions/cache` and between local runs by the file itself; an enabled booster also publishes a throttled copy at `artifact-data:data/production/handover/<source>.cache.gz` |
 | written | only when something actually changed: a new version, different extracted commands, an availability change, a feed that advanced | on every look, including "nothing changed" |
 | lost | never: it is the product | at any time: nothing is wrong, the next run is just more expensive |
 
@@ -891,6 +891,13 @@ history and stay cheap). `actions/cache` evicts only entries unused for seven da
 every source runs several times a day, so this is an exception, not the steady state;
 the 2026-10-09 window in which every cache save failed (#67) is the reason the first
 sweep after it still reads mostly unseen packages.
+- Booster handover: for enabled sources (currently PyPI), Actions merges the published
+  handover after restoring `actions/cache` and before deciding which rotation buckets a
+  live booster owns. Per package the later check day wins; an equal day keeps Actions'
+  entry, and Actions keeps its own rotation cursor unless its cache is cold. A missing,
+  unreadable, other-format or other-extraction-revision handover is ignored. The merged
+  cache is saved by the normal `actions/cache` step, so Actions keeps a warm takeover
+  baseline even while the lease is live.
 
 Rollback: revert the PR. Old readers ignore the missing fields and the rotation restarts
 at the cold position; a leftover cache is harmless and can be deleted.
@@ -957,8 +964,13 @@ Three mechanisms, none of which needs a coordinator:
    stay with Actions, so an announced change in a leased bucket is still read there at once.
    When the heartbeat is older than the TTL the exclusion is empty and
    Actions owns the whole rotation again: a laptop that sleeps or loses power returns
-   its buckets within twelve hours without anybody acting. A failed lookup also means "own
-   everything". The booster runs the same crawler with `--rotation-include <ranges>
+   its buckets within twelve hours without anybody acting. Actions has already merged the
+   latest handover on every PyPI leg, whether or not that lease was live. The booster
+   publishes that handover about once every 24 hours when its cache changes (and forces
+   one final copy on a graceful stop), so an ungraceful failure can leave Actions missing
+   at most the booster's final 24 hours of checks when takeover begins; those packages are
+   the remaining worst-case redundant work. A failed lookup also means "own everything".
+   The booster runs the same crawler with `--rotation-include <ranges>
    --no-feed`, so it visits only its buckets and never touches the feed or its cursor.
 
 ### Publication: deltas
@@ -986,9 +998,15 @@ existing rebuild-from-the-latest-branch retry loop, under the machine-wide publi
 lock. Publications are batched: one commit per `PUBLISH_INTERVAL` (hourly), and the lease
 heartbeat adds one tiny commit per hour at most.
 
-History and cache are untouched: the booster's schedule cache (`<dir>/data/production/cache`)
-stays on disk between runs, which is what makes its own cold starts rare, and is never
-published; the rows and failure records are history and follow the delta rules above.
+The booster's schedule cache (`<dir>/data/production/cache`) stays on disk between runs,
+which makes its own cold starts rare. For enabled sources, publication also copies the
+frozen `.snap/cache.gz` byte-for-byte to
+`artifact-data:data/production/handover/<source>.cache.gz`. Only the booster writes that
+path. It writes when the file is absent, its last commit is older than 24 hours, or a
+graceful stop forces the final publication; a file over 40 MB or for another extraction
+revision is skipped. Deterministic gzip means equal bytes produce no commit. This file is
+still disposable cache, not history; the rows and failure records remain the history and
+follow the delta rules above.
 
 ### Running it
 

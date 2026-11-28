@@ -296,7 +296,9 @@ publish_snapshot() (
   local push_status=0
   trap 'git worktree remove "${worktree}" --force >/dev/null 2>&1 || true; rm -rf "${worktree}"' EXIT
   cd "${ROOT_DIR}"
-  git fetch --quiet --depth=1 origin artifact-data
+  # The handover throttle needs to see any change in the last 24 hours. Fetch one
+  # extra hour so `git log -- <path>` can distinguish a fresh handover from an old one.
+  git fetch --quiet --shallow-since='25 hours ago' origin artifact-data
   git worktree prune
   git worktree add --quiet "${worktree}" origin/artifact-data
   mkdir -p "${worktree}/data/production/intermediate" "${worktree}/reports"
@@ -324,6 +326,19 @@ publish_snapshot() (
       [ -f "${dir}/.snap/cache.gz" ] && merge_args+=(--local-cache "${dir}/.snap/cache.gz" --base-cache "${dir}/.base/cache.gz")
       if [ "${BOOSTER}" = 1 ]; then
         merge_args+=(--no-scalars)
+        # Only the booster writes this disposable handover. It is the exact frozen
+        # cache used for this publication, throttled independently of history changes.
+        if [ -f "${dir}/.snap/cache.gz" ] && \
+           python3 "${ROOT_DIR}/tools/cache_handover.py" enabled --source "${source}"; then
+          local handover_path="data/production/handover/${source}.cache.gz"
+          local last_commit force_args=()
+          last_commit="$(git -C "${worktree}" log -1 --format=%ct -- "${handover_path}")"
+          [ "${HANDOVER_FORCE:-0}" = 1 ] && force_args+=(--force)
+          python3 "${ROOT_DIR}/tools/cache_handover.py" stage \
+            --source "${source}" --snapshot "${dir}/.snap/cache.gz" \
+            --target "${worktree}/${handover_path}" --last-commit "${last_commit}" \
+            "${force_args[@]}"
+        fi
         # A booster clears only the failures of packages it owns (its catalogue, its buckets);
         # the rest belong to the feed reader (docs/OPERATIONS.md "Retry ownership").
         if [ -f "${dir}/.snap/cache.gz" ]; then

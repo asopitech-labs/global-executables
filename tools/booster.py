@@ -13,12 +13,17 @@
 ``acquire``/``renew``/``release`` commit to ``artifact-data`` through a throw-away worktree
 and your own git credentials; a non-fast-forward push re-reads the branch and applies the
 operation again.  Only ``data/production/booster/<source>.json`` is written.
+
+Exit 4 means a live lease conflict, exit 5 is reserved for ``owners
+--fail-on-orphans``, and exit 6 means lease publication could not reach or update
+``artifact-data``.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import shlex
 import shutil
 import subprocess
 import sys
@@ -91,12 +96,25 @@ def publish(source: str, operation, remote: str, branch: str, attempts: int, mes
             if pushed.returncode == 0:
                 return document
             if attempt == attempts:
-                raise SystemExit(f"lease publish failed after {attempts} attempts: {pushed.stderr.strip()}")
+                raise subprocess.CalledProcessError(
+                    pushed.returncode, pushed.args, output=pushed.stdout, stderr=pushed.stderr,
+                )
         finally:
             git("worktree", "remove", "--force", str(worktree), check=False)
             shutil.rmtree(worktree, ignore_errors=True)
         time.sleep(min(30, attempt * 3))
     raise SystemExit("unreachable")
+
+
+def publish_error_message(error: Exception) -> str:
+    """A short, stable diagnostic for a failed lease publication."""
+    if isinstance(error, subprocess.CalledProcessError):
+        command = shlex.join(str(part) for part in error.cmd)
+        detail = error.stderr or error.output or ""
+        first_line = detail.strip().splitlines()[0] if detail.strip() else "no error output"
+        return f"lease publish failed: {command} exited {error.returncode}: {first_line}"
+    first_line = str(error).strip().splitlines()[0] if str(error).strip() else type(error).__name__
+    return f"lease publish failed: {first_line}"
 
 
 def main() -> int:
@@ -189,24 +207,30 @@ def main() -> int:
     if not args.id:
         parser.error("--id (or BOOSTER_ID) names this machine's lease")
     progress = json.loads(args.progress) if args.progress else None
-    if args.command == "release":
-        publish(args.source, lambda document: booster.release(document, args.id), args.remote, args.branch,
-                args.attempts, f"Release {args.source} booster lease {args.id}")
-        print(f"released {args.id}")
-        return 0
-    existing = read_remote_document(args.source, args.ref).get("leases", {}).get(args.id)
-    ranges = args.ranges if args.command == "acquire" or not isinstance(existing, dict) else existing.get("ranges", args.ranges)
-    def renew(doc):
-        if args.command == "renew" and args.min_age_hours > 0 and booster.fresh(doc, args.id, ranges, args.min_age_hours):
-            return doc
-        return booster.acquire(doc, args.id, ranges, ttl_hours=args.ttl_hours, progress=progress)
-
     try:
+        if args.command == "release":
+            publish(args.source, lambda document: booster.release(document, args.id), args.remote, args.branch,
+                    args.attempts, f"Release {args.source} booster lease {args.id}")
+            print(f"released {args.id}")
+            return 0
+        existing = read_remote_document(args.source, args.ref).get("leases", {}).get(args.id)
+        ranges = (args.ranges if args.command == "acquire" or not isinstance(existing, dict)
+                  else existing.get("ranges", args.ranges))
+
+        def renew(doc):
+            if (args.command == "renew" and args.min_age_hours > 0
+                    and booster.fresh(doc, args.id, ranges, args.min_age_hours)):
+                return doc
+            return booster.acquire(doc, args.id, ranges, ttl_hours=args.ttl_hours, progress=progress)
+
         document = publish(args.source, renew,
                            args.remote, args.branch, args.attempts, f"Heartbeat for {args.source} booster lease {args.id}")
     except booster.LeaseConflict as error:
         print(f"lease refused: {error}", file=sys.stderr)
         return 4
+    except Exception as error:
+        print(publish_error_message(error), file=sys.stderr)
+        return 6
     print(f"{args.id} holds {document['leases'][args.id]['ranges']} (ttl {args.ttl_hours} h)")
     return 0
 

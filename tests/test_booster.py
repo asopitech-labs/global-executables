@@ -146,7 +146,7 @@ class Origin:
             subprocess.run([*GIT, *args], cwd=seed, check=True)
         self.work = tmp_path / "work"
         for relative in ("tools/crawl_parallel.sh", "tools/merge_observations.py", "tools/merge_registry_publication.py",
-                         "tools/registry_state.py", "tools/transport_shards.py", "tools/booster.py",
+                         "tools/registry_state.py", "tools/transport_shards.py", "tools/booster.py", "tools/cache_handover.py",
                          "src/global_executables/__init__.py", "src/global_executables/registry_state.py",
                          "src/global_executables/booster.py", "src/global_executables/refresh_policy.py",
                          "tools/local_booster.sh"):
@@ -260,6 +260,40 @@ def test_a_failed_publish_is_retried_with_the_same_delta_after_a_crash(tmp_path)
     assert "fresh" in (local / ".base/rows.jsonl").read_text(), "after success the published snapshot is the new base"
 
 
+def test_booster_publication_throttles_and_forces_the_byte_identical_cache_handover(tmp_path):
+    from global_executables.refresh_policy import pack, write_cache
+
+    origin = Origin(tmp_path)
+    baseline_rows = [row("a", "1")]
+    actions, actions_env = origin.writer("actions", booster_mode=False, base_state=source(), base_rows=[])
+    rewrite(actions, {}, baseline_rows)
+    assert origin.publish(actions_env).returncode == 0
+    _, state, _ = origin.published(tmp_path)
+
+    local, environment = origin.writer("booster", booster_mode=True, base_state=state, base_rows=baseline_rows)
+    cache = local / "data/production/cache/pypi.cache.gz"
+    write_cache(cache, {"a": pack(10, 1, "1", "c")}, 7)
+    first = origin.publish(environment)
+    assert first.returncode == 0 and "handover pypi: published (missing)" in first.stdout
+    clone, _, _ = origin.published(tmp_path)
+    target = clone / "data/production/handover/pypi.cache.gz"
+    assert target.read_bytes() == cache.read_bytes(), "the committed handover is the frozen cache byte-for-byte"
+
+    head = origin.head()
+    write_cache(cache, {"a": pack(11, 2, "1", "c")}, 8)
+    fresh = origin.publish(environment)
+    assert fresh.returncode == 0 and "handover pypi: skipped (fresh)" in fresh.stdout
+    assert origin.head() == head, "a fresh handover does not create another commit"
+
+    forced = origin.publish({**environment, "HANDOVER_FORCE": "1"})
+    assert forced.returncode == 0 and "handover pypi: published (forced)" in forced.stdout
+    assert origin.head() != head
+    forced_head = origin.head()
+    equal = origin.publish({**environment, "HANDOVER_FORCE": "1"})
+    assert equal.returncode == 0 and "handover pypi: skipped (unchanged)" in equal.stdout
+    assert origin.head() == forced_head, "force still does not commit equal deterministic bytes"
+
+
 def test_lease_cli_acquire_conflict_exclusion_expiry_and_release(tmp_path):
     origin = Origin(tmp_path)
     environment = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.com",
@@ -289,6 +323,57 @@ def test_lease_cli_acquire_conflict_exclusion_expiry_and_release(tmp_path):
     subprocess.run(["git", "fetch", "-q", "origin", "artifact-data"], cwd=origin.work, check=True)
     assert "0-9" not in cli("exclusions", "--source", "pypi", "--ref", "FETCH_HEAD").stdout
     assert head != ""
+
+
+@pytest.mark.parametrize("command", ["acquire", "renew", "release"])
+def test_lease_cli_distinguishes_publish_failures_from_conflicts(tmp_path, command):
+    origin = Origin(tmp_path)
+    result = subprocess.run(
+        [sys.executable, "tools/booster.py", command, "--source", "pypi", "--id", "laptop",
+         "--remote", "missing-remote", "--attempts", "1"],
+        cwd=origin.work, capture_output=True, text=True,
+    )
+    assert result.returncode == 6
+    assert result.stderr.count("\n") == 1
+    assert result.stderr.startswith("lease publish failed: git fetch")
+    assert "exited" in result.stderr
+
+
+def test_lease_cli_formats_a_rejected_push_as_exit_6(tmp_path):
+    origin = Origin(tmp_path)
+    hook = origin.bare / "hooks/pre-receive"
+    hook.write_text("#!/bin/sh\necho rejected-by-test >&2\nexit 1\n")
+    hook.chmod(0o755)
+    result = subprocess.run(
+        [sys.executable, "tools/booster.py", "acquire", "--source", "pypi", "--id", "laptop",
+         "--attempts", "1"], cwd=origin.work, capture_output=True, text=True,
+    )
+    assert result.returncode == 6
+    assert result.stderr.count("\n") == 1
+    assert result.stderr.startswith("lease publish failed: git push")
+    assert "exited 1:" in result.stderr
+
+
+@pytest.mark.parametrize(
+    ("lease_exit", "message"),
+    [
+        (4, "the lease was refused: another live booster holds part of 0-255"),
+        (6, "could not reach artifact-data (exit 6); will retry"),
+    ],
+)
+def test_local_booster_distinguishes_conflict_from_publish_failure(tmp_path, lease_exit, message):
+    origin = Origin(tmp_path)
+    fake = origin.work / "tools/booster.py"
+    fake.write_text(f"import sys\nsys.exit({lease_exit})\n")
+    result = subprocess.run(
+        ["bash", "tools/local_booster.sh", "pypi", "run"], cwd=origin.work,
+        env={**os.environ, "CONTACT": "t@example.org", "BASE": str(tmp_path / "local")},
+        capture_output=True, text=True,
+    )
+    assert result.returncode == 4
+    assert message in result.stderr
+    if lease_exit != 4:
+        assert "the lease was refused" not in result.stderr
 
 
 def test_registry_refresh_leaves_a_live_boosters_buckets_to_it():
