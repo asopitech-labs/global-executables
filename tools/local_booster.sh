@@ -86,7 +86,12 @@ STALL_TIMEOUT="${STALL_TIMEOUT:-1800}"
 # third of the TTL), so the TTL does not have to follow PUBLISH_INTERVAL.
 HEARTBEAT_INTERVAL="${HEARTBEAT_INTERVAL:-3600}"
 WATCH_INTERVAL="${WATCH_INTERVAL:-${CRASH_CHECK:-60}}"
-for limit in "${HEARTBEAT_INTERVAL}" "${PUBLISH_INTERVAL}"; do
+# A running PyPI crawler re-reads the catalogue at the start of every pass. Keep its
+# atomically replaced file current at least as often as publication, and never wait more
+# than an hour even when publications are less frequent.
+CATALOG_SYNC_INTERVAL=3600
+[ "${PUBLISH_INTERVAL}" -lt "${CATALOG_SYNC_INTERVAL}" ] && CATALOG_SYNC_INTERVAL="${PUBLISH_INTERVAL}"
+for limit in "${HEARTBEAT_INTERVAL}" "${PUBLISH_INTERVAL}" "${CATALOG_SYNC_INTERVAL}"; do
   [ "${WATCH_INTERVAL}" -gt "${limit}" ] && WATCH_INTERVAL="${limit}"
 done
 
@@ -107,6 +112,29 @@ crawler_args() {
 --max-bytes-per-second ${MAX_BYTES_PER_SECOND} --pause ${PAUSE}s --pause-jitter 0.3"
   [ "${VERIFY_STORE:-0}" != 1 ] || echo " --verify-store"
   [ "${MODE}" != native ] || echo " --progress-file ${PROGRESS_FILE}"
+}
+
+# Actions publishes PyPI's catalogue as an append-only file. Import its tail before
+# every crawler start (including supervisor restarts), but never replace a local
+# catalogue whose prefix differs: its cursor and owner buckets describe that order.
+sync_catalog() {
+  [ "${SOURCE}" = pypi ] || return 0
+  local published
+  if ! published="$(mktemp "${TMPDIR:-/tmp}/ge-pypi-catalog.XXXXXX")"; then
+    say "could not create a temporary PyPI catalogue; keeping the local catalogue"
+    return 0
+  fi
+  if git -C "${ROOT_DIR}" fetch --quiet --depth=1 origin artifact-data && \
+     git -C "${ROOT_DIR}" show "FETCH_HEAD:data/production/pypi-projects.txt" > "${published}"; then
+    if ! python3 "${ROOT_DIR}/tools/booster.py" sync-catalog \
+      --published "${published}" --local "${DIR}/data/production/pypi-projects.txt"; then
+      say "could not synchronize the published PyPI catalogue; keeping the local catalogue"
+    fi
+  else
+    say "could not read the published PyPI catalogue; keeping the local catalogue"
+  fi
+  rm -f "${published}" || true
+  return 0
 }
 
 # The progress file's modification time (empty while it does not exist).
@@ -179,6 +207,7 @@ refuse_double_start() {
 }
 
 start_crawler() {
+  sync_catalog
   if [ "${MODE}" = native ]; then
     NO_CONTAINER=1 bash "${ROOT_DIR}/tools/crawl_parallel.sh" start
     local binary="${CRAWLER_BIN:-${BASE}-bin/go-registry-crawler}"
@@ -240,10 +269,11 @@ publish_now() {
 }
 
 # Retry ownership invariant (docs/OPERATIONS.md "Retry ownership"): every failure entry in
-# the published state must have exactly one live owner. `{"orphans": n, "duplicates": n}`.
+# the published state must have exactly one live owner. The summary also reports
+# informational catalogue propagation lag.
 owners_summary() {
   python3 "${ROOT_DIR}/tools/booster.py" owners --source "${SOURCE}" --dir "${DIR}" --summary 2>/dev/null \
-    || echo '{"orphans": null, "duplicates": null}'
+    || echo '{"orphans": null, "duplicates": null, "catalog_lag": null}'
 }
 
 progress_json() {
@@ -293,6 +323,7 @@ case "${COMMAND}" in
     # wall clock, so they are not postponed by a long sleep after the machine was suspended.
     last_publish="$(date +%s)"
     last_heartbeat="${last_publish}"
+    last_catalog_sync="${last_publish}"
     seen_progress="$(progress_mark)"
     stale=0
     while :; do
@@ -335,6 +366,13 @@ case "${COMMAND}" in
         stale=0
       fi
       now="$(date +%s)"
+      if [ "$((now - last_catalog_sync))" -ge "${CATALOG_SYNC_INTERVAL}" ]; then
+        # Record the attempt before running it so a fetch or validation failure is retried
+        # on the normal schedule instead of spinning on every supervisor wake-up.
+        last_catalog_sync="${now}"
+        sync_catalog
+        now="$(date +%s)"
+      fi
       if [ "$((now - last_publish))" -ge "${PUBLISH_INTERVAL}" ]; then
         printf '%s ' "$(date -u +%FT%TZ)"
         publish_now

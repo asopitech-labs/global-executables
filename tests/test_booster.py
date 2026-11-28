@@ -561,7 +561,7 @@ def test_progress_summary_adds_coverage_and_falls_back_for_a_broken_cache(tmp_pa
         "p0": "100:1c:1", "p1": "100:2n:1", "p2": "100:0u:1",
         "outside": "100:1c:1",
     }, 5)
-    owners = {"orphans": 2, "duplicates": 3}
+    owners = {"orphans": 2, "duplicates": 3, "catalog_lag": 4}
 
     progress = booster.progress_summary(directory, "pypi", owners, NOW)
 
@@ -570,6 +570,7 @@ def test_progress_summary_adds_coverage_and_falls_back_for_a_broken_cache(tmp_pa
         "cache": True,
         "orphans": 2,
         "duplicates": 3,
+        "catalog_lag": 4,
         "catalog_size": 6,
         "has_commands": 1,
         "no_commands": 1,
@@ -588,12 +589,12 @@ def test_progress_summary_adds_coverage_and_falls_back_for_a_broken_cache(tmp_pa
     assert json.loads(completed.stdout) == progress, "progress_json's CLI path emits the same fixed-clock coverage"
 
     cache.write_bytes(b"not a gzip cache")
-    fallback = {"checked": 0, "cache": False, "orphans": 2, "duplicates": 3}
+    fallback = {"checked": 0, "cache": False, "orphans": 2, "duplicates": 3, "catalog_lag": 4}
     assert booster.progress_summary(directory, "pypi", owners, NOW) == fallback
     completed = subprocess.run(command, check=True, capture_output=True, text=True)
     assert json.loads(completed.stdout) == fallback
     assert fallback == {
-        "checked": 0, "cache": False, "orphans": 2, "duplicates": 3,
+        "checked": 0, "cache": False, "orphans": 2, "duplicates": 3, "catalog_lag": 4,
     }
     script = (ROOT / "tools/local_booster.sh").read_text()
     assert 'tools/booster.py" progress' in script
@@ -686,6 +687,43 @@ def test_a_progressing_crawler_is_left_alone(tmp_path):
         assert harness.wait_for(lambda: len(harness.lines()) == 1)
         time.sleep(8)
         assert sum(line.startswith("started") for line in harness.lines()) == 1, harness.lines()
+        supervisor.send_signal(signal.SIGTERM)
+        assert supervisor.wait(timeout=60) == 0
+    finally:
+        harness.cleanup()
+
+
+def test_supervisor_syncs_the_pypi_catalog_periodically_without_restarting_the_crawler(tmp_path):
+    harness = Native(tmp_path, crawler_body=PROGRESSING)
+    publisher = tmp_path / "catalog-publisher"
+    subprocess.run(["git", "clone", "-q", "-b", "artifact-data", f"file://{harness.origin.bare}", str(publisher)],
+                   check=True)
+    catalog = publisher / "data/production/pypi-projects.txt"
+    catalog.parent.mkdir(parents=True, exist_ok=True)
+    catalog.write_text("alpha\n", encoding="utf-8")
+    for arguments in (("add", str(catalog.relative_to(publisher))), ("commit", "-qm", "seed catalog"),
+                      ("push", "-q", "origin", "artifact-data")):
+        subprocess.run([*GIT, *arguments], cwd=publisher, check=True)
+
+    harness.env.update({"WATCH_INTERVAL": "1", "PUBLISH_INTERVAL": "4", "HEARTBEAT_INTERVAL": "1000"})
+    local_catalog = harness.dir / "data/production/pypi-projects.txt"
+    try:
+        supervisor = harness.run()
+        assert harness.wait_for(lambda: local_catalog.is_file() and local_catalog.read_text() == "alpha\n")
+
+        subprocess.run([*GIT, "pull", "-q", "--rebase", "origin", "artifact-data"], cwd=publisher, check=True)
+        catalog.write_text("alpha\nbeta\n", encoding="utf-8")
+        for arguments in (("add", str(catalog.relative_to(publisher))), ("commit", "-qm", "append catalog"),
+                          ("push", "-q", "origin", "artifact-data")):
+            subprocess.run([*GIT, *arguments], cwd=publisher, check=True)
+
+        time.sleep(1.5)
+        assert local_catalog.read_text() == "alpha\n", "catalog sync must be throttled, not run every watch tick"
+        assert harness.wait_for(lambda: local_catalog.read_text() == "alpha\nbeta\n", seconds=10), \
+            "the running supervisor never imported the published tail"
+        assert supervisor.poll() is None
+        assert sum(line.startswith("started") for line in harness.lines()) == 1, \
+            "catalog growth must not restart the crawler"
         supervisor.send_signal(signal.SIGTERM)
         assert supervisor.wait(timeout=60) == 0
     finally:
@@ -833,11 +871,43 @@ def test_every_published_failure_has_exactly_one_owner():
     assert report["duplicates"] == 0
     assert report["owners"] == {"actions": 3, "booster:box-owen": 1}  # feed-born + announced + its bucket
     assert report["feed_overlap"] == [in_booster[1]]
-    # A booster whose catalogue lacks a published name orphans it: the check flags that.
+    # A published name that has not reached the booster catalogue yet is reported as lag,
+    # not as a fatal ownership violation: the supervisor's periodic sync closes this gap.
     report = booster.failure_owners(entry, lease, catalog, booster_catalog=catalog - {in_booster[0]}, now=now)
-    assert in_booster[0] in report["orphaned"]
+    assert report["orphans"] == 1 and report["catalog_lag"] == 1 and list(report["lagging"]) == [in_booster[0]]
+    assert in_booster[0] not in report["orphaned"]
     # An expired lease hands everything to Actions.
     expired = {"leases": {"box-owen": {"ranges": "0-127", "heartbeat": (now - timedelta(hours=13)).isoformat(),
                                        "ttl_hours": 12}}}
     report = booster.failure_owners(entry, expired, catalog, now=now)
     assert report["owners"] == {"actions": 4} and report["orphans"] == 1
+
+
+def test_booster_catalog_sync_accepts_only_a_strict_append(tmp_path):
+    local = tmp_path / "local.txt"
+    published = tmp_path / "published.txt"
+    local.write_text("a\nb\n", encoding="utf-8")
+    published.write_text("a\nb\nc\n", encoding="utf-8")
+
+    result = booster.sync_catalog_append(local, published)
+
+    assert result.appended == 1 and result.reason == "appended"
+    assert local.read_text(encoding="utf-8") == "a\nb\nc\n"
+
+    published.write_text("a\nchanged\nc\nd\n", encoding="utf-8")
+    result = booster.sync_catalog_append(local, published)
+    assert result.appended == 0 and result.reason == "not-strict-append"
+    assert local.read_text(encoding="utf-8") == "a\nb\nc\n"
+
+
+def test_booster_catalog_sync_leaves_equal_catalog_untouched(tmp_path):
+    local = tmp_path / "local.txt"
+    published = tmp_path / "published.txt"
+    local.write_text("a\n", encoding="utf-8")
+    published.write_text("a\n", encoding="utf-8")
+    before = local.stat().st_mtime_ns
+
+    result = booster.sync_catalog_append(local, published)
+
+    assert result.appended == 0 and result.reason == "unchanged"
+    assert local.stat().st_mtime_ns == before

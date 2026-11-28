@@ -81,12 +81,13 @@ and Arch core are marked `exhaustive` for their declared x86_64 file indexes;
 Homebrew's complete formula catalog is also marked `exhaustive` because its
 official API supplies the executable inventory. npm is `exhaustive` for the declared
 ecosyste.ms critical population; crates.io, RubyGems, Packagist, and NuGet are
-exhaustive for their declared catalogs. PyPI and Go remain `partial`: finishing a walk of
-PyPI's static catalog does not prove that the catalog is current, while Go stays `partial`
-until its retry set clears.
+exhaustive for their declared catalogs. PyPI and Go remain `partial`: finishing PyPI's
+current catalog walk does not prove that its moving project population or every
+artifact is exhaustive, while Go stays `partial` until its retry set clears.
 
 The registry artifact crawler is resumable and budgeted. CI regenerates npm's finite
-critical catalog from ecosyste.ms and reuses the PyPI catalog snapshot, reads the crates.io database dump,
+critical catalog from ecosyste.ms, conditionally refreshes PyPI's Simple JSON catalog
+at most daily, reads the crates.io database dump,
 distils Go's module index into a module catalog, enumerates RubyGems' compact-index
 names catalog, and enumerates Packagist's package catalog. For
 each selected package it reads authoritative package metadata, or the smallest
@@ -182,14 +183,15 @@ catalog cursor has now reached its enumerated name list. The row column is the
 | NuGet | `exhaustive` | 9,190 / 9,190 queries | 13,143 | local, finished |
 | RubyGems | `exhaustive` | 196,126 / 196,126 (100%) | 51,383 | CI refresh matrix |
 | Packagist | `exhaustive` | 458,432 / 458,432 (100%) | 13,253 | CI refresh matrix |
-| PyPI | `partial` | 870,264 / 870,264 (100%) | 388,484 | CI refresh matrix, local booster |
+| PyPI | `partial` | 870,264 / 870,264 (100%) at this snapshot | 388,484 | CI refresh matrix and local booster |
 | npm critical | `exhaustive` | 2,295 / 2,295 (100%) | 50,309 including retained long-tail evidence | CI daily; verified locally |
 | Go | `partial` | 2,145,565 / 2,145,565 (100%) | 1,188,518 | CI refresh matrix |
 
-Go alone remains `partial` after reaching its cursor: its retry set still holds the
+Go remains `partial` after reaching its cursor: its retry set still holds the
 widest module archives, so no pass has yet finished inside its budget with an empty
-retry set. A source cannot be marked exhaustive while any cursor, artifact, or failure
-remains unresolved.
+retry set. PyPI also remains `partial`: a completed cursor covers the published catalog,
+not all projects or all executable declarations. A source cannot be marked exhaustive
+while any cursor, artifact, catalog-freshness gap, or failure remains unresolved.
 
 CI owns crates.io and the bounded npm critical population; both finish comfortably
 inside one job. The `registry-refresh.yml` matrix owns the steady-state refresh of every
@@ -417,8 +419,15 @@ Each mounted source state directory contains:
 
 The DB and derived index are local operational state and are not published. Go extends
 its catalog from the chronological upstream index, and CI replaces npm's critical
-catalog before each daily sweep. PyPI, RubyGems, and Packagist reuse their sampled
-catalogs until an operator deliberately refreshes them. A stop
+catalog before each daily sweep. The PyPI matrix leg conditionally fetches the Simple
+JSON catalog at most once every 24 hours and appends only new names; disappeared names
+remain in place so cursor positions and ownership buckets do not change. A booster
+imports that published tail only when its local catalog is an exact prefix. Its supervisor
+checks at crawler start and every `min(PUBLISH_INTERVAL, 1 hour)` while the crawler keeps
+running. The Go crawler calls `SyncCatalog` at the start of each pass, reuses the immutable
+prefix index, and indexes the new tail without a restart; fetch, validation, or prefix
+divergence errors are logged and leave the local catalog unchanged. RubyGems and Packagist
+reuse their sampled catalogs until an operator deliberately refreshes them. A stop
 between a Go catalog replacement and DB metadata commit is reconciled from the file
 tail on restart.
 
@@ -942,9 +951,11 @@ Three mechanisms, none of which needs a coordinator:
    report commit for each lease heartbeat.
 3. **What Actions skips.** `registry-refresh.yml` runs `tools/booster.py exclusions` and
    passes `--rotation-exclude <ranges>` to the crawler: the *rotation* entries of leased
-   buckets advance the cursor without a request. Feed work, retries, the catalogue walk
-   and the feed cursor are never skipped, so a change in a leased bucket is still read by
-   Actions at once. When the heartbeat is older than the TTL the exclusion is empty and
+   buckets advance the cursor without a request. The catalogue walk applies the same
+   ownership rule: Actions advances leased positions without requesting them, while the
+   booster reads its owned tail after the periodic catalogue sync. Feed work and its cursor
+   stay with Actions, so an announced change in a leased bucket is still read there at once.
+   When the heartbeat is older than the TTL the exclusion is empty and
    Actions owns the whole rotation again: a laptop that sleeps or loses power returns
    its buckets within twelve hours without anybody acting. A failed lookup also means "own
    everything". The booster runs the same crawler with `--rotation-include <ranges>
@@ -1111,8 +1122,10 @@ live leases). A package missing from the catalogue (created on PyPI after the ca
 taken, so known only from the change feed, e.g. `libcuopt-*`) belongs to the feed reader,
 Actions: the booster reads no feed and walks only its catalogue, so it never sees such a
 package. A package the feed announced this pass is read by Actions as a feed event in any
-bucket. Both writers use the same published catalogue; the check below flags a booster whose
-catalogue differs.
+bucket. Both writers converge on the same published catalogue. If Actions publishes a new
+tail before the booster's next periodic sync, `owners` reports those queued names as
+`catalog_lag` rather than fatal `orphans`; the next successful sync makes the booster their
+active owner. Other catalogue differences remain visible through `catalogs_match`.
 
 A newer result supersedes an older failure, whoever recorded it: a delta publish takes the
 writer's schedule cache together with its base (`.base/cache.gz`), and a package checked
@@ -1134,8 +1147,10 @@ re-reads any package whose latest version differs from its check.
 `tools/booster.py owners --dir <BASE>-pypi` lists the published failure entries with their
 owner; `orphans` (no owner: not queued for retry, or outside both writers' scope) and
 `duplicates` must be 0 (`--fail-on-orphans` exits 5 otherwise). `local_booster.sh status`
-prints it, every publish logs `retry owners: {"duplicates": 0, "orphans": 0}`, and the
-lease progress carries both counts.
+prints it, every publish logs
+`retry owners: {"catalog_lag": 0, "duplicates": 0, "orphans": 0}`, and the lease progress
+carries all three counts alongside its coverage fields. `catalog_lag` is informational
+propagation delay and does not make `--fail-on-orphans` fail.
 
 **Coverage accounting.** `tools/local_booster.sh pypi status` (or `tools/booster.py coverage
 --source pypi --dir <BASE>-pypi`) puts every catalogue position in exactly one category:

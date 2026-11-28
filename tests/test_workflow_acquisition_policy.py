@@ -116,6 +116,19 @@ def test_ci_periodically_refreshes_every_completed_registry_in_parallel():
     )
 
 
+def test_pypi_catalog_refresh_runs_before_eligibility_and_uses_contact():
+    refresh = workflow("registry-refresh.yml")
+    restore = refresh.split("Restore the completed source checkpoint", 1)[1].split(
+        "Prepare the schedule cache", 1
+    )[0]
+
+    assert "tools/pypi_catalog.py" in restore
+    assert restore.index("tools/pypi_catalog.py") < restore.index("eligible=true")
+    assert 'REGISTRY_CONTACT: ${{ vars.REGISTRY_CONTACT }}' in refresh
+    assert 'elif [ "${SOURCE}" = pypi ]; then' in restore
+    assert "PyPI catalog work is always eligible" in restore
+
+
 def test_go_refresh_can_finish_a_catalog_after_the_page_limit_is_reached():
     steps = yaml.safe_load(workflow("registry-refresh.yml"))["jobs"]["refresh"]["steps"]
     restore = next(step for step in steps if step.get("name") == "Restore the completed source checkpoint")

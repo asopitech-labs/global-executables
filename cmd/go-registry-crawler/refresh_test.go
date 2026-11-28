@@ -71,6 +71,30 @@ func TestPlanPassWorksSkipsNotDueEntriesWithoutSpendingBudget(t *testing.T) {
 	}
 }
 
+func TestCatalogWalkSkipsBucketsOwnedByABoosterWithoutSpendingBudget(t *testing.T) {
+	catalog := filepath.Join(t.TempDir(), "names.txt")
+	var names strings.Builder
+	for index := range 100 {
+		fmt.Fprintf(&names, "pkg-%03d\n", index)
+	}
+	if err := os.WriteFile(catalog, []byte(names.String()), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	before := gocrawl.Snapshot{ImportSnapshot: gocrawl.ImportSnapshot{CatalogSize: 100}}
+	works, err := planPassWorks(catalog, before, 10, true, passPolicy{Owns: func(string) bool { return false }})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(works) != 100 {
+		t.Fatalf("walked=%d, want all 100 ownership skips", len(works))
+	}
+	for index, work := range works {
+		if !work.Skip || work.Refresh || work.CatalogIndex != uint64(index) {
+			t.Fatalf("work %d must be a contiguous catalog skip: %+v", index, work)
+		}
+	}
+}
+
 func TestPlanPassWorksKeepsTheRotationBackstopWhenAFeedFloodsTheBudget(t *testing.T) {
 	catalog := filepath.Join(t.TempDir(), "names.txt")
 	var names strings.Builder
@@ -616,6 +640,98 @@ func TestRotationOwnershipSplitsTheCatalogueBetweenBoosterAndActions(t *testing.
 	}
 	if _, err := ownership(crawlConfig{RotationExclude: "9-3"}); err == nil {
 		t.Fatal("a bad range must be an error, not silently ignored")
+	}
+}
+
+func TestRunningProcessWalksAnAtomicallyAppendedCatalogOnTheNextPass(t *testing.T) {
+	fake, server := newFakePyPI(t, 100)
+	names := slices.Sorted(maps.Keys(fake.versions))
+	selected := make([]string, 0, 3)
+	buckets := map[int]bool{}
+	for _, name := range names {
+		bucket := gocrawl.OwnerBucket(name)
+		if buckets[bucket] {
+			continue
+		}
+		buckets[bucket] = true
+		selected = append(selected, name)
+		if len(selected) == cap(selected) {
+			break
+		}
+	}
+	if len(selected) != 3 {
+		t.Fatalf("need three distinct owner buckets, got %v", selected)
+	}
+	initial, appendedOwned, appendedUnowned := selected[0], selected[1], selected[2]
+	directory := t.TempDir()
+	config := crawlConfig{
+		Source: "pypi", StatePath: filepath.Join(directory, "registry-state"),
+		ObservationsPath: filepath.Join(directory, "pypi.jsonl"), ReportPath: filepath.Join(directory, "report.json"),
+		CatalogPath: filepath.Join(directory, "projects.txt"), DatabasePath: filepath.Join(directory, "crawl.db"),
+		RegistryURL: server.URL, FeedURL: server.URL, PackageBudget: 10, ByteBudget: 1 << 30, Workers: 2,
+		MaxInFlight: 4, CommitBatch: 2, RequestTimeout: 2 * time.Second, ModuleTimeout: 5 * time.Second,
+		Continuous: true, NoFeed: true,
+		RotationInclude: fmt.Sprintf("%d,%d", gocrawl.OwnerBucket(initial), gocrawl.OwnerBucket(appendedOwned)),
+	}
+	if err := os.WriteFile(config.CatalogPath, []byte(initial+"\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(config.StatePath+".json", []byte(`{"version":1,"sources":{"pypi":{"cursor":0,"catalog_complete":true}}}`), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := executePass(t.Context(), config); err != nil {
+		t.Fatal(err)
+	}
+	cachePath := gocrawl.DefaultCachePath(config.StatePath, "pypi")
+	before, warm, err := gocrawl.ReadCache(cachePath, gocrawl.ExtractionRevision)
+	if err != nil || !warm || len(before.Checks) != 1 || before.Checks[initial] == "" {
+		t.Fatalf("initial cache: warm=%v checks=%v err=%v", warm, before.Checks, err)
+	}
+	baseIndex, err := os.ReadFile(config.CatalogPath + ".index")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	nextCatalog := config.CatalogPath + ".next"
+	if err := os.WriteFile(nextCatalog, []byte(strings.Join(selected, "\n")+"\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Rename(nextCatalog, config.CatalogPath); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := executePass(t.Context(), config); err != nil {
+		t.Fatal(err)
+	}
+
+	store, err := gocrawl.OpenBoltStore(config.DatabasePath, gocrawl.StoreOptions{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { _ = store.Close() })
+	snapshot, err := store.Snapshot(t.Context())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if snapshot.CatalogSize != 3 || snapshot.Cursor != 3 {
+		t.Fatalf("catalog size=%d cursor=%d, appended tail was not walked", snapshot.CatalogSize, snapshot.Cursor)
+	}
+	after, warm, err := gocrawl.ReadCache(cachePath, gocrawl.ExtractionRevision)
+	if err != nil || !warm {
+		t.Fatalf("appended cache: warm=%v err=%v", warm, err)
+	}
+	if after.Checks[initial] != before.Checks[initial] || after.Checks[appendedOwned] == "" {
+		t.Fatalf("owned checks were not preserved and extended: before=%v after=%v", before.Checks, after.Checks)
+	}
+	if _, checked := after.Checks[appendedUnowned]; checked {
+		t.Fatalf("unowned appended name %q was checked", appendedUnowned)
+	}
+	rows := readRows(t, config.ObservationsPath)
+	if rows[initial] == "" || rows[appendedOwned] == "" || rows[appendedUnowned] != "" {
+		t.Fatalf("rows=%v", rows)
+	}
+	if currentIndex, readErr := os.ReadFile(config.CatalogPath + ".index"); readErr != nil || !bytes.Equal(currentIndex, baseIndex) {
+		t.Fatalf("the immutable prefix index must remain reusable after append: changed=%v err=%v",
+			!bytes.Equal(currentIndex, baseIndex), readErr)
 	}
 }
 

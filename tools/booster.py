@@ -8,6 +8,7 @@
     tools/booster.py release   --source pypi --id my-laptop
     tools/booster.py progress  --source pypi --dir ~/.ge-crawl-pypi
     tools/booster.py rows-delta --published P --local L --base B --output O
+    tools/booster.py sync-catalog --published P --local L
 
 ``acquire``/``renew``/``release`` commit to ``artifact-data`` through a throw-away worktree
 and your own git credentials; a non-fast-forward push re-reads the branch and applies the
@@ -100,7 +101,7 @@ def publish(source: str, operation, remote: str, branch: str, attempts: int, mes
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "coverage", "progress", "owners"])
+    parser.add_argument("command", choices=["show", "exclusions", "acquire", "renew", "release", "rows-delta", "sync-catalog", "coverage", "progress", "owners"])
     parser.add_argument("--source", default="pypi")
     parser.add_argument("--id", default=os.environ.get("BOOSTER_ID", ""))
     parser.add_argument("--ranges", default=os.environ.get("BOOSTER_RANGES", "0-255"))
@@ -117,9 +118,11 @@ def main() -> int:
     parser.add_argument("--base", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--dir", type=Path, help="coverage, owners: the booster working directory (<BASE>-<source>)")
-    parser.add_argument("--owners-summary", default="{}", help="progress: JSON object with orphans and duplicates")
+    parser.add_argument("--owners-summary", default="{}",
+                        help="progress: JSON object with orphans, duplicates, and catalog_lag")
     parser.add_argument("--now", help="progress: UTC ISO timestamp override")
-    parser.add_argument("--summary", action="store_true", help="owners: print only {orphans, duplicates} on one line")
+    parser.add_argument("--summary", action="store_true",
+                        help="owners: print only {orphans, duplicates, catalog_lag} on one line")
     parser.add_argument("--fail-on-orphans", action="store_true",
                         help="owners: exit 5 when a published failure entry has no owner or two")
     args = parser.parse_args()
@@ -129,6 +132,12 @@ def main() -> int:
             parser.error("rows-delta needs --local and --output")
         touched, written = booster.merge_rows_delta(args.published, args.local, args.base, args.output)
         print(f"{touched} packages changed, {written} rows applied")
+        return 0
+    if args.command == "sync-catalog":
+        if not (args.local and args.published):
+            parser.error("sync-catalog needs --local and --published")
+        result = booster.sync_catalog_append(args.local, args.published)
+        print(f"catalog {result.reason}: {result.appended} names appended")
         return 0
     if args.command == "coverage":
         from global_executables.refresh_policy import read_cache
@@ -166,7 +175,7 @@ def main() -> int:
     if args.command == "owners":
         report = owners_report(args.source, args.ref, args.dir)
         if args.summary:
-            print(json.dumps({key: report[key] for key in ("orphans", "duplicates")}, sort_keys=True))
+            print(json.dumps({key: report[key] for key in ("orphans", "duplicates", "catalog_lag")}, sort_keys=True))
         else:
             print(json.dumps(report, indent=2))
         return 5 if args.fail_on_orphans and (report["orphans"] or report["duplicates"]) else 0

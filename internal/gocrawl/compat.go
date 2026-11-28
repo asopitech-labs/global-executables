@@ -429,7 +429,11 @@ func exportCompatibility(
 	if profile.Source == "go" {
 		sourceReport["modules_per_minute"] = packagesPerMinute
 	}
-	for _, key := range []string{"catalog_digest", "catalog_scope", "catalog_source", "catalog_snapshot"} {
+	for _, key := range []string{
+		"catalog_digest", "catalog_etag", "catalog_fetched_at", "catalog_live_size",
+		"catalog_missing", "catalog_refresh_error", "catalog_scope", "catalog_serial",
+		"catalog_source", "catalog_snapshot",
+	} {
 		if value, exists := sourceState[key]; exists {
 			sourceReport[key] = value
 		}

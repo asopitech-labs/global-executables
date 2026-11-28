@@ -28,6 +28,8 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 360
+    env:
+      REGISTRY_CONTACT: ${{ vars.REGISTRY_CONTACT }}
     strategy:
       fail-fast: false
       max-parallel: 5
@@ -50,11 +52,23 @@ jobs:
           BASE="/tmp/ci-refresh-${SOURCE}" SOURCES="${SOURCE}" OBSERVATION_SOURCES=' ' \
             bash tools/crawl_parallel.sh seed
           state="/tmp/ci-refresh-${SOURCE}/data/production/registry-state"
+          if [ "${SOURCE}" = pypi ]; then
+            python3 tools/pypi_catalog.py \
+              --catalog "/tmp/ci-refresh-${SOURCE}/data/production/pypi-projects.txt" \
+              --companion "/tmp/ci-refresh-${SOURCE}/data/production/pypi-projects.txt.gz" \
+              --state "${state}"
+          fi
           # Go continues indexing after the crawl cursor reaches the catalog size.
           if python3 tools/registry_state.py get --state "${state}" --source "${SOURCE}" --scalars | jq -e \
             'select((.catalog_size | type) == "number") | select(.cursor >= .catalog_size) | select(.catalog_complete != false or env.SOURCE == "go")' \
             >/dev/null; then
             echo "eligible=true" >> "$GITHUB_OUTPUT"
+          elif [ "${SOURCE}" = pypi ]; then
+            # PyPI's append-only catalogue can grow after the completion cursor. With
+            # a live lease the bucket exclusion below leaves its tail to the booster;
+            # without one, Actions must walk the tail itself.
+            echo "eligible=true" >> "$GITHUB_OUTPUT"
+            echo "PyPI catalog work is always eligible; lease exclusions decide rotation ownership."
           elif [ "${SOURCE}" = go ] && \
                [ -z "$(python3 tools/booster.py exclusions --source go --ref origin/artifact-data || echo held)" ]; then
             # The Go walk was left to a local container that stopped on 2026-10-22,
